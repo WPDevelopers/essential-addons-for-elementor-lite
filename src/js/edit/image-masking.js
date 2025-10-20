@@ -314,6 +314,22 @@ let ImageMaskingHandler = function ($scope, $) {
                             return;
                         }
 
+                        // Add CSS for proper centering - inject styles directly
+                        if (!$('#eael-morphing-center-fix').length) {
+                            $('head').append(`
+                                <style id="eael-morphing-center-fix">
+                                    .eael-morphing-enabled clipPath,
+                                    .eael-morphing-enabled .clip-path {
+                                        transform-origin: center !important;
+                                        transform-box: view-box !important;
+                                    }
+                                    .eael-morphing-enabled svg {
+                                        overflow: visible !important;
+                                    }
+                                </style>
+                            `);
+                        }
+
                         $images.each(function(index, image) {
                             image = $(image);
                             let image_src = image.attr('src');
@@ -321,12 +337,13 @@ let ImageMaskingHandler = function ($scope, $) {
 
                             // Wrap image in container for proper positioning
                             if (!image.parent()?.hasClass('eael-image-masking-container')) {
-                                image.wrap('<div class="eael-image-masking-container" style="position: relative; display: inline-block; overflow: hidden;"></div>');
+                                image.wrap('<div class="eael-image-masking-container eael-morphing-enabled" style="position: relative; display: inline-block; overflow: hidden;"></div>');
                             }
 
                             // Hide original image and add SVG
                             image.css('visibility', 'hidden');
-                            image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath, image[0], transform));
+                            const initialTransform = svg_items.first().find('path').first().attr('transform') || '';
+                            image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath, image[0], initialTransform));
                         });
 
                         // Check if GSAP and required plugins are available
@@ -340,6 +357,15 @@ let ImageMaskingHandler = function ($scope, $) {
                             // console.warn('EAEL Image Masking: GSAP morphSVG plugin is not available for animation');
                             return;
                         }
+
+                        // Initialize proper centering for all clip paths
+                        const clipPaths = $scope.find('.clip-path');
+
+                        // Set initial transform origin for all clip paths
+                        clipPaths.css({
+                            'transform-origin': 'center !important',
+                            'transform-box': 'view-box !important'
+                        });
 
                         // Store all timelines for cleanup
                         var imageTimelines = [];
@@ -397,17 +423,38 @@ let ImageMaskingHandler = function ($scope, $) {
                                 // Start first animation immediately, others at calculated intervals
                                 const startTime = shapeIndex * durationPerShape;
 
-                                // Apply animation to this specific image's clip-path element
-                                imageTimeline.to(imageClipPath, {
-                                    morphSVG: {
-                                        shape: $path[0]
-                                    },
-                                    duration: durationPerShape,
-                                    ease: settings?.eael_image_morphing_ease || "sine.inOut",
-                                    onStart: function() {
-                                        imageClipPath?.attr('transform', transform);
-                                    }
-                                }, startTime);
+                                // Check if morphSVG is available, otherwise fallback to basic animation
+                                if (typeof gsap.plugins.morphSVG !== 'undefined') {
+                                    imageTimeline.to(imageClipPath, {
+                                        morphSVG: {
+                                            shape: $path[0]
+                                        },
+                                        duration: durationPerShape,
+                                        ease: settings?.eael_image_morphing_ease || "sine.inOut",
+                                        transformOrigin: "center center",
+                                        onStart: function() {
+                                            // Apply any custom transform
+                                            if (transform) {
+                                                imageClipPath.attr('transform', transform);
+                                            }
+                                        }
+                                    }, startTime);
+                                } else {
+                                    // Fallback to basic path morphing
+                                    imageTimeline.to(imageClipPath, {
+                                        attr: {
+                                            d: $path.attr('d')
+                                        },
+                                        duration: durationPerShape,
+                                        ease: settings?.eael_image_morphing_ease || "sine.inOut",
+                                        onStart: function() {
+                                            // Apply any custom transform
+                                            if (transform) {
+                                                imageClipPath.attr('transform', transform);
+                                            }
+                                        }
+                                    }, startTime);
+                                }
                             });
                         });
 
@@ -442,20 +489,53 @@ let ImageMaskingHandler = function ($scope, $) {
 
         // Parse viewBox to get the coordinate system dimensions
         const viewBoxValues = viewBox.split(' ').map(Number);
+        const viewBoxX = viewBoxValues[0] || 0;
+        const viewBoxY = viewBoxValues[1] || 0;
         const viewBoxWidth = viewBoxValues[2];
         const viewBoxHeight = viewBoxValues[3];
 
         // Handle transform attribute if provided
         const transformAttr = transform ? `transform="${transform}"` : '';
 
+        // Calculate proper scaling to ensure the mask shape is never cropped
+        const imageAspectRatio = imgWidth / imgHeight;
+        const viewBoxAspectRatio = viewBoxWidth / viewBoxHeight;
+
+        // Always scale the image to cover the entire viewBox area
+        let imageDisplayWidth, imageDisplayHeight, imageX, imageY;
+
+        if (imageAspectRatio > viewBoxAspectRatio) {
+            imageDisplayWidth = viewBoxWidth;
+            imageDisplayHeight = viewBoxWidth / imageAspectRatio;
+            imageX = viewBoxX;
+            imageY = viewBoxY + (viewBoxHeight - imageDisplayHeight) / 2;
+        } else {
+            imageDisplayHeight = viewBoxHeight;
+            imageDisplayWidth = viewBoxHeight * imageAspectRatio;
+            imageX = viewBoxX + (viewBoxWidth - imageDisplayWidth) / 2;
+            imageY = viewBoxY;
+        }
+
+        // Ensure image covers the entire viewBox to prevent mask cropping
+        if (imageDisplayWidth < viewBoxWidth || imageDisplayHeight < viewBoxHeight) {
+            const scaleX = viewBoxWidth / imageDisplayWidth;
+            const scaleY = viewBoxHeight / imageDisplayHeight;
+            const scale = Math.max(scaleX, scaleY);
+
+            imageDisplayWidth *= scale;
+            imageDisplayHeight *= scale;
+            imageX = viewBoxX + (viewBoxWidth - imageDisplayWidth) / 2;
+            imageY = viewBoxY + (viewBoxHeight - imageDisplayHeight) / 2;
+        }
+
         return `
             <svg id="eael-morphing-svg-${uniqueId}" viewBox="${viewBox}" width="${imgWidth}" height="${imgHeight}" style="position: absolute; top: 0; left: 0; visibility: visible; display: block;">
                 <defs>
-                    <clipPath id="clip-path-${uniqueId}">
+                    <clipPath id="clip-path-${uniqueId}" clipPathUnits="userSpaceOnUse" style="transform-box: view-box; transform-origin: center;">
                         <path class="clip-path" d="${pathD}" ${transformAttr}/>
                     </clipPath>
                 </defs>
-                <image x="0" y="0" width="${viewBoxWidth}" height="${viewBoxHeight}" clip-path="url(#clip-path-${uniqueId})" href="${imageSrc}" preserveAspectRatio="xMidYMid slice"/>
+                <image x="${imageX}" y="${imageY}" width="${imageDisplayWidth}" height="${imageDisplayHeight}" clip-path="url(#clip-path-${uniqueId})" href="${imageSrc}" preserveAspectRatio="none"/>
             </svg>
         `;
     }
