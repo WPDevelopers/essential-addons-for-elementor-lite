@@ -117,8 +117,9 @@ let verticalTextOrientation = function ($scope, $) {
          });
 
          // Only apply gradient if we have valid gradient stops
+         let gradientColorAngle = $scope.data("gradient_color_angle");
          if (gradientStops.length > 0) {
-            let linearGradient = `linear-gradient(90deg, ${gradientStops.join(
+            let linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
                ", "
             )})`;
 
