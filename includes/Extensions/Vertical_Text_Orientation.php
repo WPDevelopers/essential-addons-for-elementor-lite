@@ -340,6 +340,30 @@ class Vertical_Text_Orientation {
 			]
 		);
 
+        $element->add_responsive_control(
+			'eael_vto_writing_gradient_color_angle',
+			[
+				'label'      => esc_html__( 'Angle', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg', 'grad', 'px', '%', 'custom' ],
+				'range' => [
+					'deg' => [
+						'min'  => 0,
+						'max'  => 360,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'deg',
+					'size' => 180,
+				],
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+                    'eael_vto_writing_styling_type' =>  'gradient',
+				],
+			]
+		);
+
         $element->add_control(
 			'eael_vto_writing_styling_text_clip',
 			[
@@ -447,6 +471,7 @@ class Vertical_Text_Orientation {
                 ];
             }
             $element->add_render_attribute( '_wrapper', 'data-gradient_colors', wp_json_encode( $gradient_colors ) );
+            $element->add_render_attribute( '_wrapper', 'data-gradient_color_angle', $settings['eael_vto_writing_gradient_color_angle']['size'] . $settings['eael_vto_writing_gradient_color_angle']['unit'] );
         }
 	}
 }
