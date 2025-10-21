@@ -74,8 +74,9 @@ let verticalTextOrientation = function ($scope, $) {
                      });
 
                      // Only apply gradient if we have valid gradient stops
+                     let gradientColorAngle = eaelEditModeSettings[key]["eael_vto_writing_gradient_color_angle"]["size"] +eaelEditModeSettings[key]["eael_vto_writing_gradient_color_angle"]["unit"];
                      if (gradientStops.length > 0) {
-                        let linearGradient = `linear-gradient(90deg, ${gradientStops.join(
+                        let linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
                            ", "
                         )})`;
 
