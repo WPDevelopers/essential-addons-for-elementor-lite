@@ -64,8 +64,8 @@ class Vertical_Text_Orientation {
 			[
 				'label'        => esc_html__( 'Flip', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'selectors_dictionary' => [
 					'yes' => 'rotate(180deg)',
@@ -115,10 +115,10 @@ class Vertical_Text_Orientation {
         $element->add_control(
 			'eael_vto_writing_text_orientation',
 			[
-				'label'        => esc_html__( 'Text Orientation', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Upright Orientation', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'selectors_dictionary' => [
 					'yes' => 'upright',
