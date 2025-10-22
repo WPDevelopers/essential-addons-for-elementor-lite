@@ -109,6 +109,14 @@ class advancedDataTableEdit {
 			},
 		});
 
+		// Fix default link URL from quilljs.com to example.com
+		setTimeout(() => {
+			const linkInput = quill.theme.tooltip.root.querySelector('input[data-link]');
+			if (linkInput) {
+				linkInput.setAttribute('data-link', 'https://example.com');
+			}
+		}, 100);
+
 		// bind change
 		quill.on("text-change", (delta, oldDelta, source) => {
 			clearTimeout(this.timeout);
