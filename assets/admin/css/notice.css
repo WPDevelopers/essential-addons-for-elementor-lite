@@ -268,3 +268,9 @@ span.coupon-code {
 #elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-embedpress"] {
     display: none;
 }
+
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-woo-product-carousel"] .eaicon-product-carousel:before,
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-woo-product-slider"] .eaicon-product-slider:before,
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-woo-product-list"] .eaicon-woo-product-list:before {
+    font-size: unset;
+}
