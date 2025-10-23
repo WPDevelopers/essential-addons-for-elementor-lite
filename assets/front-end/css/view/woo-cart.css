@@ -496,6 +496,11 @@
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wc-table-header .eael-wct-tr .eael-wct-th.product-name {
   text-align: left;
 }
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wc-table-header .eael-wct-tr .eael-wct-th.product-description {
+  text-align: left;
+  max-width: 200px;
+  word-wrap: break-word;
+}
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-body .eael-wct-tr {
   -webkit-transform: translate(0);
       -ms-transform: translate(0);
@@ -564,6 +569,23 @@
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-body .eael-wct-tr .eael-wct-td.product-name {
   text-align: left;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-body .eael-wct-tr .eael-wct-td.product-description {
+  color: #747C92;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 200px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -ms-hyphens: auto;
+      hyphens: auto;
+  text-align: left;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-body .eael-wct-tr .eael-wct-td.product-description p {
+  margin: 0 0 8px 0;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-body .eael-wct-tr .eael-wct-td.product-description p:last-child {
+  margin-bottom: 0;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-body .eael-wct-tr .eael-wct-td.product-price {
   color: #747C92;
@@ -1002,6 +1024,13 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper .cart-totals-inner {
   .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left .eael-woo-cart-td.product-name,
   .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right .eael-woo-cart-td.product-name {
     width: 100% !important;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left .eael-woo-cart-td.product-description,
+  .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right .eael-woo-cart-td.product-description {
+    width: 100% !important;
+    max-width: none;
+    margin-bottom: 10px;
+    font-size: 13px;
   }
   .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left .eael-woo-cart-td.product-price, .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left .eael-woo-cart-td.product-quantity,
   .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right .eael-woo-cart-td.product-price,
