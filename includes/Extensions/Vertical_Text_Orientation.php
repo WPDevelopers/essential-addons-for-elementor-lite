@@ -528,7 +528,7 @@ class Vertical_Text_Orientation {
                     {{WRAPPER}}.eael_vto-vertical-lr .eael-dual-header, 
                     {{WRAPPER}}.eael_vto-vertical-rl .eael-dual-header, 
                     {{WRAPPER}}.eael_vto-vertical-lr .eael-fancy-text-container, 
-                    {{WRAPPER}}.eael_vto-vertical-rl .eael-fancy-text-container' => 'animation: eaelAnimationVTO 5s linear infinite;',
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-fancy-text-container' => 'animation: eaelAnimationVTOHorizontal 5s linear infinite;',
                 ],
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -552,8 +552,16 @@ class Vertical_Text_Orientation {
                 ];
             }
             $element->add_render_attribute( '_wrapper', 'data-gradient_colors', wp_json_encode( $gradient_colors ) );
-            $eael_gradient_color_angle = $settings['eael_vto_writing_gradient_color_angle']['size'] ? $settings['eael_vto_writing_gradient_color_angle']['size'] . $settings['eael_vto_writing_gradient_color_angle']['unit'] : '0deg';
-            $element->add_render_attribute( '_wrapper', 'data-gradient_color_angle', $eael_gradient_color_angle );
+
+            if ($settings['eael_vto_writing_text_animation_control'] === 'vertical') {
+                $eael_gradient_color_angle = $settings['eael_vto_writing_gradient_color_angle']['size'] ? $settings['eael_vto_writing_gradient_color_angle']['size'] . $settings['eael_vto_writing_gradient_color_angle']['unit'] : '0deg';
+                $element->add_render_attribute( '_wrapper', 'data-gradient_color_angle', $eael_gradient_color_angle );
+                $element->add_render_attribute( '_wrapper', 'data-animation_control', 'vertical' );
+            } else {
+                $eael_gradient_color_angle = $settings['eael_vto_writing_gradient_color_angle_horizontal']['size'] ? $settings['eael_vto_writing_gradient_color_angle_horizontal']['size'] . $settings['eael_vto_writing_gradient_color_angle_horizontal']['unit'] : '0deg';
+                $element->add_render_attribute( '_wrapper', 'data-gradient_color_angle', $eael_gradient_color_angle );
+                $element->add_render_attribute( '_wrapper', 'data-animation_control', 'horizontal' );
+            }
         }
 	}
 }

@@ -75,10 +75,33 @@ let verticalTextOrientation = function ($scope, $) {
 
                      // Only apply gradient if we have valid gradient stops
                      let gradientColorAngle = eaelEditModeSettings[key]["eael_vto_writing_gradient_color_angle"]["size"] ? eaelEditModeSettings[key]["eael_vto_writing_gradient_color_angle"]["size"] + eaelEditModeSettings[key]["eael_vto_writing_gradient_color_angle"]["unit"] : "0deg";
+                     let gradientColorAngleHorizontal = eaelEditModeSettings[
+                        key
+                     ]["eael_vto_writing_gradient_color_angle_horizontal"][
+                        "size"
+                     ]
+                        ? eaelEditModeSettings[key][
+                             "eael_vto_writing_gradient_color_angle_horizontal"
+                          ]["size"] +
+                          eaelEditModeSettings[key][
+                             "eael_vto_writing_gradient_color_angle_horizontal"
+                          ]["unit"]
+                        : "0deg";
+                     let animationControl = eaelEditModeSettings[key]["eael_vto_writing_text_animation_control"];
+
                      if (gradientStops.length > 0) {
-                        let linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
-                           ", "
-                        )})`;
+
+                        if (animationControl === "horizontal") {
+                           linearGradient =
+                              `linear-gradient(${gradientColorAngleHorizontal}, ${gradientStops.join(
+                                 ", "
+                              )})` + " 0% 0% / 100% 200%";
+                        } else {
+                           linearGradient =
+                              `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
+                                 ", "
+                              )})` + " -100% / 200%";
+                        }
 
                         const targetSelectors = [
                            ".elementor-heading-title",
@@ -90,7 +113,7 @@ let verticalTextOrientation = function ($scope, $) {
                         const fullSelectors = targetSelectors.map(selector => `.elementor-element-${$scopeId} ${selector}`).join(', ');
                         
                         $(fullSelectors).css({
-                           background: linearGradient + " -100% / 200%",
+                           background: linearGradient,
                            "-webkit-background-clip": "text",
                            "-webkit-text-fill-color": "transparent",
                            "background-clip": "text",
@@ -119,10 +142,19 @@ let verticalTextOrientation = function ($scope, $) {
 
          // Only apply gradient if we have valid gradient stops
          let gradientColorAngle = $scope.data("gradient_color_angle");
+         let animationControl = $scope.data("animation_control");
+         
          if (gradientStops.length > 0) {
-            let linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
-               ", "
-            )})`;
+
+            if ( animationControl === 'horizontal' ) {
+               linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
+                  ", "
+               )})` + " 0% 0% / 100% 200%";
+            } else {
+               linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
+                  ", "
+               )})` + " -100% / 200%";
+            }
 
             // Define target selectors
             const targetSelectors = [
@@ -136,7 +168,7 @@ let verticalTextOrientation = function ($scope, $) {
             const fullSelector = targetSelectors.map(selector => `.elementor-element-${$scopeId} ${selector}`).join(', ');
 
             $(fullSelector).css({
-               background: linearGradient + " -100% / 200%",
+               background: linearGradient,
                "-webkit-background-clip": "text",
                "-webkit-text-fill-color": "transparent",
                "background-clip": "text",
