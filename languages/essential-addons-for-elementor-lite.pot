@@ -1509,11 +1509,11 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:153, ../includes/Elements/Feature_List.php:274, ../includes/Elements/Filterable_Gallery.php:837, ../includes/Elements/Image_Accordion.php:100, ../includes/Elements/Simple_Menu.php:172, ../includes/Elements/Woo_Product_Gallery.php:220, ../includes/Extensions/Vertical_Text_Orientation.php:418
+#: ../includes/Elements/Adv_Tabs.php:153, ../includes/Elements/Feature_List.php:274, ../includes/Elements/Filterable_Gallery.php:837, ../includes/Elements/Image_Accordion.php:100, ../includes/Elements/Simple_Menu.php:172, ../includes/Elements/Woo_Product_Gallery.php:220, ../includes/Extensions/Vertical_Text_Orientation.php:414
 msgid "Horizontal"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:154, ../includes/Elements/Feature_List.php:273, ../includes/Elements/Filterable_Gallery.php:841, ../includes/Elements/Image_Accordion.php:101, ../includes/Elements/Simple_Menu.php:173, ../includes/Elements/Woo_Product_Gallery.php:224, ../includes/Extensions/Vertical_Text_Orientation.php:414
+#: ../includes/Elements/Adv_Tabs.php:154, ../includes/Elements/Feature_List.php:273, ../includes/Elements/Filterable_Gallery.php:841, ../includes/Elements/Image_Accordion.php:101, ../includes/Elements/Simple_Menu.php:173, ../includes/Elements/Woo_Product_Gallery.php:224, ../includes/Extensions/Vertical_Text_Orientation.php:418
 msgid "Vertical"
 msgstr ""
 

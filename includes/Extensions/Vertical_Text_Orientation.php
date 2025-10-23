@@ -410,20 +410,20 @@ class Vertical_Text_Orientation {
 				'label'   => esc_html__( 'Animation Control', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'vertical' => [
-						'title' => esc_html__( 'Vertical', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-arrow-right',
-					],
 					'horizontal' => [
 						'title' => esc_html__( 'Horizontal', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-arrow-right',
+					],
+					'vertical' => [
+						'title' => esc_html__( 'Vertical', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-arrow-down',
 					],
 				],
-				'default' => 'vertical',
+				'default' => 'horizontal',
 				'toggle'  => false,
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
-                    'eael_vto_writing_styling_type' => ['gradient'],
+                    'eael_vto_writing_styling_type' => 'gradient',
 				],
 			]
 		);
@@ -448,7 +448,7 @@ class Vertical_Text_Orientation {
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
                     'eael_vto_writing_styling_type' =>  'gradient',
-                    'eael_vto_writing_text_animation_control' =>  'vertical',
+                    'eael_vto_writing_text_animation_control' =>  'horizontal',
 				],
 			]
 		);
@@ -478,13 +478,13 @@ class Vertical_Text_Orientation {
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
                     'eael_vto_writing_styling_type' => 'gradient',
-                    'eael_vto_writing_text_animation_control' =>  'vertical',
+                    'eael_vto_writing_text_animation_control' =>  'horizontal',
 				],
 			]
 		);
 
         $element->add_responsive_control(
-			'eael_vto_writing_gradient_color_angle_horizontal',
+			'eael_vto_writing_gradient_color_angle_vertical',
 			[
 				'label'      => esc_html__( 'Angle', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
@@ -503,13 +503,13 @@ class Vertical_Text_Orientation {
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
                     'eael_vto_writing_styling_type' =>  'gradient',
-                    'eael_vto_writing_text_animation_control' =>  'horizontal',
+                    'eael_vto_writing_text_animation_control' =>  'vertical',
 				],
 			]
 		);
 
         $element->add_control(
-			'eael_vto_writing_styling_text_animation_horizontal',
+			'eael_vto_writing_styling_text_animation_vertical',
 			[
 				'label'        => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
@@ -528,12 +528,12 @@ class Vertical_Text_Orientation {
                     {{WRAPPER}}.eael_vto-vertical-lr .eael-dual-header, 
                     {{WRAPPER}}.eael_vto-vertical-rl .eael-dual-header, 
                     {{WRAPPER}}.eael_vto-vertical-lr .eael-fancy-text-container, 
-                    {{WRAPPER}}.eael_vto-vertical-rl .eael-fancy-text-container' => 'animation: eaelAnimationVTOHorizontal 5s linear infinite;',
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-fancy-text-container' => 'animation: eaelAnimationVertical 5s linear infinite;',
                 ],
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
                     'eael_vto_writing_styling_type' => 'gradient',
-                    'eael_vto_writing_text_animation_control' =>  'horizontal',
+                    'eael_vto_writing_text_animation_control' =>  'vertical',
 				],
 			]
 		);
@@ -553,14 +553,14 @@ class Vertical_Text_Orientation {
             }
             $element->add_render_attribute( '_wrapper', 'data-gradient_colors', wp_json_encode( $gradient_colors ) );
 
-            if ($settings['eael_vto_writing_text_animation_control'] === 'vertical') {
+            if ($settings['eael_vto_writing_text_animation_control'] === 'horizontal') {
                 $eael_gradient_color_angle = $settings['eael_vto_writing_gradient_color_angle']['size'] ? $settings['eael_vto_writing_gradient_color_angle']['size'] . $settings['eael_vto_writing_gradient_color_angle']['unit'] : '0deg';
                 $element->add_render_attribute( '_wrapper', 'data-gradient_color_angle', $eael_gradient_color_angle );
-                $element->add_render_attribute( '_wrapper', 'data-animation_control', 'vertical' );
-            } else {
-                $eael_gradient_color_angle = $settings['eael_vto_writing_gradient_color_angle_horizontal']['size'] ? $settings['eael_vto_writing_gradient_color_angle_horizontal']['size'] . $settings['eael_vto_writing_gradient_color_angle_horizontal']['unit'] : '0deg';
-                $element->add_render_attribute( '_wrapper', 'data-gradient_color_angle', $eael_gradient_color_angle );
                 $element->add_render_attribute( '_wrapper', 'data-animation_control', 'horizontal' );
+            } else {
+                $eael_gradient_color_angle = $settings['eael_vto_writing_gradient_color_angle_vertical']['size'] ? $settings['eael_vto_writing_gradient_color_angle_vertical']['size'] . $settings['eael_vto_writing_gradient_color_angle_vertical']['unit'] : '0deg';
+                $element->add_render_attribute( '_wrapper', 'data-gradient_color_angle', $eael_gradient_color_angle );
+                $element->add_render_attribute( '_wrapper', 'data-animation_control', 'vertical' );
             }
         }
 	}

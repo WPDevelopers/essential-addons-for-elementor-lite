@@ -37,7 +37,7 @@
   }
 }
 
-@-webkit-keyframes eaelAnimationVTOHorizontal {
+@-webkit-keyframes eaelAnimationVertical {
   0% {
     background-position: 0% 0%;
   }
@@ -49,7 +49,7 @@
   }
 }
 
-@keyframes eaelAnimationVTOHorizontal {
+@keyframes eaelAnimationVertical {
   0% {
     background-position: 0% 0%;
   }

@@ -75,16 +75,14 @@ let verticalTextOrientation = function ($scope, $) {
 
                      // Only apply gradient if we have valid gradient stops
                      let gradientColorAngle = eaelEditModeSettings[key]["eael_vto_writing_gradient_color_angle"]["size"] ? eaelEditModeSettings[key]["eael_vto_writing_gradient_color_angle"]["size"] + eaelEditModeSettings[key]["eael_vto_writing_gradient_color_angle"]["unit"] : "0deg";
-                     let gradientColorAngleHorizontal = eaelEditModeSettings[
-                        key
-                     ]["eael_vto_writing_gradient_color_angle_horizontal"][
-                        "size"
-                     ]
+                     let gradientColorAngleVertical = eaelEditModeSettings[key][
+                        "eael_vto_writing_gradient_color_angle_vertical"
+                     ]["size"]
                         ? eaelEditModeSettings[key][
-                             "eael_vto_writing_gradient_color_angle_horizontal"
+                             "eael_vto_writing_gradient_color_angle_vertical"
                           ]["size"] +
                           eaelEditModeSettings[key][
-                             "eael_vto_writing_gradient_color_angle_horizontal"
+                             "eael_vto_writing_gradient_color_angle_vertical"
                           ]["unit"]
                         : "0deg";
                      let animationControl = eaelEditModeSettings[key]["eael_vto_writing_text_animation_control"];
@@ -93,14 +91,14 @@ let verticalTextOrientation = function ($scope, $) {
 
                         if (animationControl === "horizontal") {
                            linearGradient =
-                              `linear-gradient(${gradientColorAngleHorizontal}, ${gradientStops.join(
-                                 ", "
-                              )})` + " 0% 0% / 100% 200%";
-                        } else {
-                           linearGradient =
                               `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
                                  ", "
                               )})` + " -100% / 200%";
+                        } else {
+                           linearGradient =
+                              `linear-gradient(${gradientColorAngleVertical}, ${gradientStops.join(
+                                 ", "
+                              )})` + " 0% 0% / 100% 200%";
                         }
 
                         const targetSelectors = [
@@ -143,17 +141,13 @@ let verticalTextOrientation = function ($scope, $) {
          // Only apply gradient if we have valid gradient stops
          let gradientColorAngle = $scope.data("gradient_color_angle");
          let animationControl = $scope.data("animation_control");
-         
+
          if (gradientStops.length > 0) {
 
             if ( animationControl === 'horizontal' ) {
-               linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
-                  ", "
-               )})` + " 0% 0% / 100% 200%";
+               linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(", ")})` + " -100% / 200%";
             } else {
-               linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(
-                  ", "
-               )})` + " -100% / 200%";
+               linearGradient = `linear-gradient(${gradientColorAngle}, ${gradientStops.join(", ")})` + " 0% 0% / 100% 200%";
             }
 
             // Define target selectors
