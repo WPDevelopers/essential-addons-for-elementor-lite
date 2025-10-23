@@ -355,7 +355,7 @@ class Vertical_Text_Orientation {
 				],
 				'default' => [
 					'unit' => 'deg',
-					'size' => 180,
+					'size' => 270,
 				],
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -471,7 +471,8 @@ class Vertical_Text_Orientation {
                 ];
             }
             $element->add_render_attribute( '_wrapper', 'data-gradient_colors', wp_json_encode( $gradient_colors ) );
-            $element->add_render_attribute( '_wrapper', 'data-gradient_color_angle', $settings['eael_vto_writing_gradient_color_angle']['size'] . $settings['eael_vto_writing_gradient_color_angle']['unit'] );
+            $eael_gradient_color_angle = $settings['eael_vto_writing_gradient_color_angle']['size'] ? $settings['eael_vto_writing_gradient_color_angle']['size'] . $settings['eael_vto_writing_gradient_color_angle']['unit'] : '0deg';
+            $element->add_render_attribute( '_wrapper', 'data-gradient_color_angle', $eael_gradient_color_angle );
         }
 	}
 }
