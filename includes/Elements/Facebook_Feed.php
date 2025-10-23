@@ -8,7 +8,6 @@ use \Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
-use \Essential_Addons_Elementor\Classes\Controls;
 use Essential_Addons_Elementor\Classes\Helper;
 
 if (!defined('ABSPATH')) {
