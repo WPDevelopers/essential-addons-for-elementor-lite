@@ -482,6 +482,61 @@ class Vertical_Text_Orientation {
 				],
 			]
 		);
+
+        $element->add_responsive_control(
+			'eael_vto_writing_gradient_color_angle_horizontal',
+			[
+				'label'      => esc_html__( 'Angle', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg', 'grad', 'px', '%', 'custom' ],
+				'range' => [
+					'deg' => [
+						'min'  => 0,
+						'max'  => 360,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'deg',
+					'size' => 2,
+				],
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+                    'eael_vto_writing_styling_type' =>  'gradient',
+                    'eael_vto_writing_text_animation_control' =>  'horizontal',
+				],
+			]
+		);
+
+        $element->add_control(
+			'eael_vto_writing_styling_text_animation_horizontal',
+			[
+				'label'        => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'selectors' => [
+                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .elementor-headline, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-headline, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .elementor-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-lr.elementor-widget-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-rl.elementor-widget-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .eael-dual-header, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-dual-header, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .eael-fancy-text-container, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-fancy-text-container' => 'animation: eaelAnimationVTO 5s linear infinite;',
+                ],
+				'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+                    'eael_vto_writing_styling_type' => 'gradient',
+                    'eael_vto_writing_text_animation_control' =>  'horizontal',
+				],
+			]
+		);
 		
 		$element->end_controls_section();
 	}
