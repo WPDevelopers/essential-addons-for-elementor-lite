@@ -679,6 +679,21 @@ class Event_Calendar extends Widget_Base
 	    );
 
         $this->add_control(
+            'eael_event_location_display',
+            [
+                'label' => __('Show Event Location', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+                'default' => 'no',
+                'description' => __('Display event location information in the popup modal', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_event_calendar_type' => 'google',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_event_limit',
             [
                 'label' => __('Event Limit', 'essential-addons-for-elementor-lite'),
@@ -975,6 +990,19 @@ class Event_Calendar extends Widget_Base
 			    ]
 		    ]
 	    );
+
+        $this->add_control(
+            'eael_ec_search_label',
+            [
+                'label'       => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
+                'ai'          => [ 'active' => false, ],
+                'placeholder' => esc_html__( 'Search', 'essential-addons-for-elementor-lite' ),
+                'condition'   => [
+                    'eael_ec_show_search' => 'yes',
+                ]
+            ]
+        );
 
         $this->add_control(
             'eael_ec_search_align',
@@ -1516,6 +1544,67 @@ class Event_Calendar extends Widget_Base
 			    ],
 		    ]
 	    );
+
+        $this->end_controls_section();
+
+        /**
+         * Table Layout design Search
+         */
+	    $this->start_controls_section(
+		    'eael_event_calendar_search_label_styling',
+		    [
+			    'label'     => __( 'Search Label', 'essential-addons-for-elementor-lite' ),
+			    'tab'       => Controls_Manager::TAB_STYLE,
+			    'condition' => [
+				    'eael_event_display_layout' => 'table',
+				    'eael_ec_show_search'       => 'yes',
+                    'eael_ec_search_label!'     => ''
+			    ]
+		    ]
+	    );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_event_calendar_search_label_typography',
+                'selector' => '{{WRAPPER}} .ea-ec-search-wrap label.ea-ec-search-label:not(.sr-only)',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_search_label_color',
+            [
+                'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .ea-ec-search-wrap label.ea-ec-search-label:not(.sr-only)' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_search_label_padding',
+            [
+                'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-ec-search-wrap label.ea-ec-search-label:not(.sr-only)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_search_label_margin',
+            [
+                'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-ec-search-wrap label.ea-ec-search-label:not(.sr-only)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->end_controls_section();
 
@@ -2990,6 +3079,73 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
+            'event_popup_location_heading',
+            [
+                'label' => __('Location', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'event_popup_location_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location',
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_color',
+            [
+                'label' => __('Location Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_icon',
+            [
+                'label' => __('Location Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_icon_size',
+            [
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location i' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_icon_color',
+            [
+                'label' => __('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location i' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'event_popup_content_heading',
             [
                 'label' => __('Content', 'essential-addons-for-elementor-lite'),
@@ -3268,6 +3424,7 @@ class Event_Calendar extends Widget_Base
             data-weekColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_week'] ) . '"
             data-hideDetailsLink= "' . esc_attr( $settings['eael_event_details_link_hide'] ) . '"
             data-detailsButtonText = "' . wp_kses( $settings['eael_event_details_text'], Helper::eael_allowed_tags() ) . '"
+            data-location-display = "' . esc_attr( $settings['eael_event_location_display'] ) . '"
             data-events="' . esc_attr( htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) ) . '"
             data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>';
 
@@ -3281,9 +3438,11 @@ class Event_Calendar extends Widget_Base
 
 	public function eaelec_display_table($data, $settings){
 		if ( $settings['eael_ec_show_search'] === 'yes' ) {
+            $labeltext = !empty( $settings['eael_ec_search_label'] ) ? $settings['eael_ec_search_label'] : '';
 			?>
 			<div class="ea-ec-search-wrap ea-ec-search-right">
-				<input type="search" placeholder="<?php echo esc_html( $settings['eael_ec_search_placeholder'] )?>" class="eael-event-calendar-table-search">
+                <label for="ea-ec-search-input-<?php echo esc_attr( $this->get_id() ) ?>" class="ea-ec-search-label<?php echo empty( $labeltext ) ? ' sr-only' : '' ?>"><?php echo !empty( $labeltext ) ? esc_html( $labeltext ) : esc_html__( 'Search', 'essential-addons-for-elementor-lite' )?></label>
+				<input type="search" id="ea-ec-search-input-<?php echo esc_attr( $this->get_id() ) ?>" placeholder="<?php echo esc_html( $settings['eael_ec_search_placeholder'] )?>" class="eael-event-calendar-table-search">
 			</div>
 			<?php
 		}
@@ -3447,6 +3606,7 @@ class Event_Calendar extends Widget_Base
                     <h2 class="eael-ec-modal-title"></h2>
                     <span class="eaelec-event-date-start eaelec-event-popup-date"></span>
                     <span class="eaelec-event-date-end eaelec-event-popup-date"></span>
+                    <span class="eaelec-event-location eaelec-event-popup-location" style="display: none;"></span>
                 </div>
                 <div class="eaelec-modal-body">
                     <p></p>
@@ -3738,6 +3898,7 @@ class Event_Calendar extends Widget_Base
                     'id'             => ++$key,
                     'title'          => !empty($item->summary) ? $item->summary                                                                : 'No Title',
                     'description'    => isset($item->description) ? $item->description                                                         : '',
+                    'location'       => isset($item->location) ? $item->location                                                               : '',
                     'start'          => $ev_start_date,
                     'end'            => $ev_end_date,
                     'start_timezone' => $start_timezone,

@@ -775,11 +775,12 @@ class Post_Timeline extends Widget_Base
                 $settings['loadable_file_name'] = $this->get_filename_only($template);
 	            $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 	            $found_posts = 0;
+	            $offset = ! empty( $settings['post_offset'] )  ? intval( $settings['post_offset'] ) : 0;
 
                 if(file_exists($template)){
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {
-	                    $found_posts      = $query->found_posts;
+	                    $found_posts      = $query->found_posts - $offset;
 	                    $ppp              = empty( $args['posts_per_page'] ) ? get_option( 'posts_per_page' ) : $args['posts_per_page'];
 	                    $max_page         = ceil( $found_posts / absint( $ppp ) );
 	                    $args['max_page'] = $max_page;

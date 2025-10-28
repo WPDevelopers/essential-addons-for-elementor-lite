@@ -180,33 +180,33 @@ span.coupon-code {
     display:none;
 }
 
-.notice-essential-addons-for-elementor-lite-holiday_24_notice,
-.notice-essential-addons-for-elementor-lite-holiday_24_notice * {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice,
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice * {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice {
     padding: 0;
     border: 0;
     border-left: 4px solid #1E1E1E;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice .wpnotice-content-wrapper {
     display: flex;
     width: 100%;
     padding: 12px 0;
     align-items: center;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin-logo {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice .wpnotice-content-wrapper .eael-black-friday-optin-logo {
     width: 225px;
     padding: 0;
     text-align: center;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin-logo img {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice .wpnotice-content-wrapper .eael-black-friday-optin-logo img {
     width: auto;
     display: block;
     margin: auto;
     max-width: 175px;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice .wpnotice-content-wrapper .eael-black-friday-optin {
     padding-left: 10px;
     display: flex;
     flex-direction: column;
@@ -214,12 +214,12 @@ span.coupon-code {
     width: calc(100% - 225px);
     align-items: flex-start;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin p {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice .wpnotice-content-wrapper .eael-black-friday-optin p {
     color: #3C434A;
     font-size: 15px;
     margin-top: 0;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin a.button-primary {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice .wpnotice-content-wrapper .eael-black-friday-optin a.button-primary {
     color: #ffffff;
     background: #5626E7;
     font-size: 15px;
@@ -231,15 +231,15 @@ span.coupon-code {
     padding: 0 15px;
 }
 
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin a + a {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice .wpnotice-content-wrapper .eael-black-friday-optin a + a {
     color: #5626E7;
     margin-left: 20px;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin svg {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice .wpnotice-content-wrapper .eael-black-friday-optin svg {
     vertical-align: sub;
     margin-right: 3px;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .notice-dismiss:before {
+.notice-essential-addons-for-elementor-lite-ea8th_birthday_notice .notice-dismiss:before {
     content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTYuOTk5OTcgNS41ODU5MUwxMS45NDk1IDAuNjM2MzY4TDEzLjM2MzYgMi4wNTA1MUw4LjQxNDA5IDcuMDAwMDRMMTMuMzYzNiAxMS45NDk1TDExLjk0OTUgMTMuMzYzNkw2Ljk5OTk3IDguNDE0MThMMi4wNTA1IDEzLjM2MzZMMC42MzYzNTMgMTEuOTQ5NUw1LjU4NTg0IDcuMDAwMDRMMC42MzYzNTMgMi4wNTA1MUwyLjA1MDUgMC42MzYzNjhMNi45OTk5NyA1LjU4NTkxWiIgZmlsbD0iIzNDNDM0QSIvPgo8L3N2Zz4=")
 }
 
@@ -254,7 +254,7 @@ span.coupon-code {
 }
 
 @media screen and (max-width: 767px) {
-    .notice-essential-addons-for-elementor-lite-holiday_24_notice {
+    .notice-essential-addons-for-elementor-lite-ea8th_birthday_notice {
         display: none !important;
     }
 }

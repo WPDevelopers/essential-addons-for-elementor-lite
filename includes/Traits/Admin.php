@@ -201,7 +201,7 @@ trait Admin {
 				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
 				    'content' => __( 'Get more powerful widgets & extensions to elevate your Elementor website', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
@@ -369,7 +369,7 @@ trait Admin {
 				    'top_heading' => __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
 				    'heading'     => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'      => [
-					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'      => [
@@ -522,13 +522,6 @@ trait Admin {
 					    ],
 					    'name'    => 'eael-js-print-method',
 					    'value'   => get_option( 'eael_js_print_method', 'external' )
-				    ],
-				    'box_4' => [
-					    'heading' => __( "Allowed Post Types for Widgets", 'essential-addons-for-elementor-lite' ),
-					    'content' => __( "Widgets or other features are enabled for selected post types only.", 'essential-addons-for-elementor-lite' ),
-					    'methods' => HelperClass::get_post_types(),
-					    'name'    => 'eael-allowed-post-types',
-					    'value'   => get_option( 'eael_allowed_post_types', array_map(fn() => true, HelperClass::get_post_types() ) )
 				    ]
 			    ],
 			    'extensions'              => [
@@ -628,6 +621,15 @@ trait Admin {
 						    'is_pro'      => false,
 						    'is_activate' => boolval( $this->get_settings( 'wrapper-link' ) )
 					    ],
+					    'custom-cursor'          => [
+						    'key'         => 'custom-cursor',
+						    'title'       => __( 'Custom Cursor', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/custom-cursor/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-custom-cursor/',
+						    'is_pro'      => true,
+							'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'custom-cursor' ) )
+					    ],
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
@@ -653,7 +655,15 @@ trait Admin {
 						    'doc_link'    => 'https://essential-addons.com/docs/ea-hover-interaction/',
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'special-hover-effect' ) )
-					    ]
+						 ],
+					    'liquid-glass-effect'  => [
+						    'key'         => 'liquid-glass-effect',
+						    'title'       => __( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/liquid-glass-effects/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-liquid-glass-effects/',
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'liquid-glass-effect' ) )
+						 ],
 				    ]
 			    ],
 			    'widgets'                 => [
@@ -823,6 +833,14 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-breadcrumbs/',
 							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'breadcrumbs' ) )
+						    ],
+							 'code-snippet'		=> [
+							    'key'         => 'code-snippet',
+							    'title'       => __( 'Code Snippet', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/code-snippet/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-code-snippet/',
+							    'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'code-snippet' ) )
 						    ],
 					    ]
 				    ],
@@ -1339,6 +1357,21 @@ trait Admin {
 							    'is_activate' => boolval( $this->get_settings( 'betterdocs-search-form' ) )
 						    ],
 					    ]
+					],
+					'figma-design' => [
+					    'title'    => __( 'Figma Design Elements', 'essential-addons-for-elementor-lite' ),
+					    'icon'     => 'ea-figma-to-elementor',
+					    'elements' => [
+							'figma-to-elementor'   => [
+							    'key'         => 'figma-to-elementor',
+							    'title'       => __( 'Figma to Elementor Converter', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/figma-to-elementor-converter/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-figma-to-elementor-converter/',
+							    'is_pro'      => true,
+								'promotion'   => 'beta',
+							    'is_activate' => boolval( $this->get_settings( 'figma-to-elementor' ) )
+						    ],
+					    ]
 				    ],
 				    'woocommerce-elements'     => [
 					    'title'    => __( 'WooCommerce Elements', 'essential-addons-for-elementor-lite' ),
@@ -1472,7 +1505,7 @@ trait Admin {
 							    'is_activate' => boolval( $this->get_settings( 'woo-account-dashboard' ) )
 						    ]
 					    ]
-				    ]
+					]
 			    ],
 			    'modal'                   => [
 				    'postDuplicatorSetting'  => [
@@ -1498,17 +1531,69 @@ trait Admin {
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
 				    'businessReviewsSetting' => [
-					    'title'      => __( "Google Place API Key", 'essential-addons-for-elementor-lite' ),
-					    'title_icon' => 'images/map.svg',
-					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
-					    'name'       => 'br_google_place_api_key',
-					    'value'      => get_option( 'eael_br_google_place_api_key', '' ),
-					    'image'      => 'images/map2.png',
-					    'link'       => [
+					    'accordion' => [
+						    'googlePlaces' => [
+							    'title'  => __( 'Google Places API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_google_place_api_key',
+									    'value'       => get_option( 'eael_br_google_place_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Google Places API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Google Places API key from Google Cloud Console. This is used for fetching Google Reviews.', 'essential-addons-for-elementor-lite' ),
+						    ],
+						    'trustpilot'   => [
+							    'title'  => __( 'Trustpilot API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_trustpilot_api_key',
+									    'value'       => get_option( 'eael_br_trustpilot_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Trustpilot API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Trustpilot API key from Trustpilot Developer Portal. This is used for fetching Trustpilot Reviews.', 'essential-addons-for-elementor-lite' ),
+							    'isPro'  => true,
+						    ],
+						    'yelp'         => [
+							    'title'  => __( 'Yelp Fusion API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_yelp_api_key',
+									    'value'       => get_option( 'eael_br_yelp_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Yelp Fusion API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Yelp Fusion API key from Yelp Developers. This is used for fetching Yelp Reviews.', 'essential-addons-for-elementor-lite' ),
+							    'isPro'  => true,
+						    ],
+					    ],
+					    'link'      => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-						    'url'  => 'https://developers.google.com/maps/documentation/places/web-service/get-api-key'
+						    'url'  => 'https://essential-addons.com/docs/ea-business-reviews/'
 					    ]
 				    ],
+				    'googleMyBusinessTokenSetting' => [
+					    'title'      => __( "Google My Business Access Token", 'essential-addons-for-elementor-lite' ),
+					    'title_icon' => 'images/map.svg',
+					    'label'      => __( "Set Access Token", 'essential-addons-for-elementor-lite' ),
+					    'name'       => 'br_google_my_business_token',
+					    'type'       => 'textarea',
+					    'placeholder'=> __( "ya29.a0AfH6SMC...", 'essential-addons-for-elementor-lite' ),
+					    'value'      => get_option( 'eael_br_google_my_business_token', '' ),
+					    'image'      => 'images/map2.png',
+					    'link'       => [
+						    'text' => __( 'Get your access token from Google OAuth 2.0 Playground', 'essential-addons-for-elementor-lite' ),
+						    'url'  => 'https://developers.google.com/oauthplayground/'
+					    ]
+				    ],
+
 				    'mailchimpSetting'       => [
 					    'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
 					    'title_icon' => 'images/mc.svg',
@@ -1575,6 +1660,24 @@ trait Admin {
 									    'label' => __( 'Hide Badge', 'essential-addons-for-elementor-lite' ),
 									    'type'  => 'checkbox',
 									    'info'  => __( 'We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow.', 'essential-addons-for-elementor-lite' ),
+								    ]
+							    ]
+						    ],
+						    'cloudflareTurnstile'    => [
+							    'title'  => __( 'Cloudflare Turnstile', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/cloudflare.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'lr_cloudflare_turnstile_sitekey',
+									    'value'       => get_option( 'eael_cloudflare_turnstile_sitekey', '' ),
+									    'label'       => __( 'Site Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+								    [
+									    'name'        => 'lr_cloudflare_turnstile_secretkey',
+									    'value'       => get_option( 'eael_cloudflare_turnstile_secretkey', '' ),
+									    'label'       => __( 'Secret Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Secret Key', 'essential-addons-for-elementor-lite' ),
 								    ]
 							    ]
 						    ],
@@ -1655,7 +1758,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.3 with New & Modern Presets: \"<b>Grid Flow</b>\" & \"<b>Harmonic</b>\". For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.6 with new \"<b><a target='_blank' href='%s'>Custom Cursor</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/custom-cursor' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -1811,42 +1914,55 @@ trait Admin {
 		<div class="eael-black-friday-optin">
 			<p><?php 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo __( '🛍️ This <strong>Black Friday</strong> enjoy up to 30% OFF on PRO plans. Get the best Essential Addons deal of the season now.', 'essential-addons-for-elementor-lite' ); 
+			echo __( 'Join us in celebrating the 8th birthday of Essential Addons and grab up to an exclusive 40% OFF on all the premium plans.', 'essential-addons-for-elementor-lite' );
 			?></p>
-			<a href="https://essential-addons.com/bfcm24-pricing" target="_blank" class="button-primary">
+			<a href="https://essential-addons.com/8thBD-admin-notice" target="_blank" class="button-primary">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M16.7432 11.938L16.904 10.3596C16.9898 9.51748 17.0465 8.96138 17.002 8.61101L17.0176 8.6111C17.7443 8.6111 18.3334 7.98927 18.3334 7.22221C18.3334 6.45515 17.7443 5.83332 17.0176 5.83332C16.2909 5.83332 15.7018 6.45515 15.7018 7.22221C15.7018 7.56912 15.8223 7.88632 16.0215 8.12974C15.7355 8.31607 15.3616 8.70925 14.7987 9.30104L14.7987 9.30105L14.7987 9.30106C14.3651 9.75698 14.1483 9.98494 13.9064 10.0202C13.7724 10.0398 13.6359 10.0197 13.5121 9.96217C13.2888 9.85836 13.1399 9.57655 12.8421 9.01292L11.2723 6.04203C11.0886 5.69432 10.9349 5.4033 10.7962 5.16911C11.365 4.86283 11.7544 4.23868 11.7544 3.51851C11.7544 2.49576 10.9689 1.66666 10 1.66666C9.0311 1.66666 8.24563 2.49576 8.24563 3.51851C8.24563 4.23868 8.63509 4.86283 9.20382 5.16911C9.06517 5.40331 8.91143 5.69429 8.72769 6.04203L7.15797 9.01292C6.86016 9.57654 6.71126 9.85836 6.48792 9.96217C6.36418 10.0197 6.22763 10.0398 6.09362 10.0202C5.85175 9.98494 5.63494 9.75698 5.20133 9.30105C4.6385 8.70926 4.26455 8.31607 3.97856 8.12974C4.17777 7.88632 4.29827 7.56912 4.29827 7.22221C4.29827 6.45515 3.70917 5.83332 2.98248 5.83332C2.25579 5.83332 1.66669 6.45515 1.66669 7.22221C1.66669 7.98927 2.25579 8.6111 2.98248 8.6111L2.99801 8.61101C2.95354 8.96138 3.01021 9.51748 3.09603 10.3596L3.25686 11.938C3.34614 12.8142 3.42038 13.6478 3.51131 14.3981H16.4887C16.5797 13.6478 16.6539 12.8142 16.7432 11.938Z"
 						  fill="white"/>
 					<path d="M9.04569 18.3333H10.9544C13.442 18.3333 14.6858 18.3333 15.5157 17.5492C15.878 17.207 16.1073 16.59 16.2729 15.787H3.72718C3.8927 16.59 4.12207 17.207 4.4843 17.5492C5.3142 18.3333 6.55803 18.3333 9.04569 18.3333Z"
 						  fill="white"/>
 				</svg>
-			    <?php esc_html_e( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ); ?>
+			    <?php esc_html_e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?>
 			</a>
-		</div>
-			<div>
-				<p><?php
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo __( '🎁 <strong>SAVE 25% now</strong> & unlock 100+ advanced elements & 2800+ ready templates to design Elementor websites faster in 2025.', 'essential-addons-for-elementor-lite' ); ?></p>
-			</div>
-			<div>
-				<a href="https://essential-addons.com/holiday24-admin-notice" target="_blank" class="button-primary">
-					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M16.7432 11.938L16.904 10.3596C16.9898 9.51748 17.0465 8.96138 17.002 8.61101L17.0176 8.6111C17.7443 8.6111 18.3334 7.98927 18.3334 7.22221C18.3334 6.45515 17.7443 5.83332 17.0176 5.83332C16.2909 5.83332 15.7018 6.45515 15.7018 7.22221C15.7018 7.56912 15.8223 7.88632 16.0215 8.12974C15.7355 8.31607 15.3616 8.70925 14.7987 9.30104L14.7987 9.30105L14.7987 9.30106C14.3651 9.75698 14.1483 9.98494 13.9064 10.0202C13.7724 10.0398 13.6359 10.0197 13.5121 9.96217C13.2888 9.85836 13.1399 9.57655 12.8421 9.01292L11.2723 6.04203C11.0886 5.69432 10.9349 5.4033 10.7962 5.16911C11.365 4.86283 11.7544 4.23868 11.7544 3.51851C11.7544 2.49576 10.9689 1.66666 10 1.66666C9.0311 1.66666 8.24563 2.49576 8.24563 3.51851C8.24563 4.23868 8.63509 4.86283 9.20382 5.16911C9.06517 5.40331 8.91143 5.69429 8.72769 6.04203L7.15797 9.01292C6.86016 9.57654 6.71126 9.85836 6.48792 9.96217C6.36418 10.0197 6.22763 10.0398 6.09362 10.0202C5.85175 9.98494 5.63494 9.75698 5.20133 9.30105C4.6385 8.70926 4.26455 8.31607 3.97856 8.12974C4.17777 7.88632 4.29827 7.56912 4.29827 7.22221C4.29827 6.45515 3.70917 5.83332 2.98248 5.83332C2.25579 5.83332 1.66669 6.45515 1.66669 7.22221C1.66669 7.98927 2.25579 8.6111 2.98248 8.6111L2.99801 8.61101C2.95354 8.96138 3.01021 9.51748 3.09603 10.3596L3.25686 11.938C3.34614 12.8142 3.42038 13.6478 3.51131 14.3981H16.4887C16.5797 13.6478 16.6539 12.8142 16.7432 11.938Z"
-							  fill="white"/>
-						<path d="M9.04569 18.3333H10.9544C13.442 18.3333 14.6858 18.3333 15.5157 17.5492C15.878 17.207 16.1073 16.59 16.2729 15.787H3.72718C3.8927 16.59 4.12207 17.207 4.4843 17.5492C5.3142 18.3333 6.55803 18.3333 9.04569 18.3333Z"
-							  fill="white"/>
-					</svg>
-				    <?php esc_html_e( 'GET PRO Lifetime Access', 'essential-addons-for-elementor-lite' ); ?>
-				</a>
-				<a href="#" class="eael-holiday-notice-dismiss dismiss-btn"><?php esc_html_e( "No, I'll Pay Full Price Later", 'essential-addons-for-elementor-lite' ); ?></a>
-			</div>
 		</div>
 		<script>
             jQuery(document).ready(function ($) {
-                $('.eael-holiday-notice-dismiss').on('click', function (e) {
-                    e.preventDefault();
-                    $('.notice-essential-addons-for-elementor-lite-holiday_24_notice button.notice-dismiss').trigger('click');
-                });
+                setTimeout(function () {
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-ea8th_birthday_notice .notice-dismiss');
+
+                    function wpNoticeDismissFunc(event) {
+                        event.preventDefault();
+
+                        var httpRequest = new XMLHttpRequest(),
+                            postData = '',
+                            dismiss = event.target.dataset?.hasOwnProperty('dismiss') && event.target.dataset.dismiss || false,
+                            later = event.target.dataset?.hasOwnProperty('later') && event.target.dataset.later || false;
+
+                        if (dismiss || later) {
+                            jQuery(event.target.offsetParent).slideUp(200);
+                        }
+
+                        // Data has to be formatted as a string here.
+                        postData += 'id=ea8th_birthday_notice';
+                        postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
+                        if (dismiss) {
+                            postData += '&dismiss=' + dismiss;
+                        }
+                        if (later) {
+                            postData += '&later=' + later;
+                        }
+
+                        postData += '&nonce=<?php echo wp_create_nonce( 'wpnotice_dismiss_notice_ea8th_birthday_notice' );?>';
+
+                        httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
+                        httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        httpRequest.send(postData);
+                    }
+
+                    // Add an event listener to the dismiss button.
+                    dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
+                }, 1);
             });
 		</script>
 	    <?php
@@ -1856,15 +1972,15 @@ trait Admin {
 	    ];
 
 	    $notices->add(
-			'holiday_24_notice',
+			'ea8th_birthday_notice',
 			$_black_friday_notice,
 			[
 				'start'       => $notices->time(),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				"expire"      => strtotime( '11:59:59pm 10th January, 2025' ),
-				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php',
+				"expire"      => strtotime( '10:00:00pm 3rd August, 2025' ),
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '08:00:00am 3rd August, 2025' ),
 			]
 		);
 
@@ -1912,377 +2028,5 @@ trait Admin {
 	 */
 	public function menu_notice_should_show() {
 		return ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_PROMOTION_FLAG && get_option( 'eael_admin_promotion' ) < self::EAEL_ADMIN_MENU_FLAG );
-	}
-
-	public function essential_block_optin() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
-			return;
-		}
-
-		$screen           = get_current_screen();
-		$is_exclude       = ! empty( $_GET['post_type'] ) && in_array( $_GET['post_type'], [ 'elementor_library', 'product' ] );
-		$ajax_url         = admin_url( 'admin-ajax.php' );
-		$nonce            = wp_create_nonce( 'essential-addons-elementor' );
-		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
-		$action           = $eb_not_installed ? 'install' : 'activate';
-		$button_title     = $eb_not_installed ? esc_html__( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ) : esc_html__( 'Activate', 'essential-addons-for-elementor-lite' );
-
-		if ( $screen->parent_base !== 'edit' || $is_exclude ) {
-			return;
-		}
-		?>
-        <div class="wpnotice-wrapper notice  notice-info is-dismissible eael-eb-optin-notice">
-            <div class="wpnotice-content-wrapper">
-                <div class="eael-eb-optin">
-                    <h3><?php esc_html_e( 'Using Gutenberg? Check out Essential Blocks!', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'Are you using the Gutenberg Editor for your website? Then try out Essential Blocks for Gutenberg, and explore 40+ unique blocks to make your web design experience in WordPress even more powerful. 🚀', 'essential-addons-for-elementor-lite' ); ?></p>
-                    <p><?php 
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo __( 'For more information, <a href="https://essential-blocks.com/demo/" target="_blank">check out the demo here</a>.', 'essential-addons-for-elementor-lite' ); ?></p>
-                    <p>
-                        <a href="#" class="button-primary wpdeveloper-eb-plugin-installer" data-action="<?php echo esc_attr( $action ); ?>"><?php echo esc_html( $button_title ); ?></a>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            // install/activate plugin
-            (function ($) {
-                $(document).on("click", ".wpdeveloper-eb-plugin-installer", function (ev) {
-                    ev.preventDefault();
-
-                    var button = $(this),
-                        action = button.data("action");
-
-                    if ($.active && typeof action != "undefined") {
-                        button.text("Waiting...").attr("disabled", true);
-
-                        setInterval(function () {
-                            if (!$.active) {
-                                button.attr("disabled", false).trigger("click");
-                            }
-                        }, 1000);
-                    }
-
-                    if (action === "install" && !$.active) {
-                        button.text("Installing...").attr("disabled", true);
-
-                        $.ajax({
-                            url: "<?php echo esc_html( $ajax_url ); ?>",
-                            type: "POST",
-                            data: {
-                                action: "wpdeveloper_install_plugin",
-                                security: "<?php echo esc_html( $nonce ); ?>",
-                                slug: "essential-blocks",
-								promotype: "optin"
-                            },
-                            success: function (response) {
-                                if (response.success) {
-                                    button.text("Activated");
-                                    button.data("action", null);
-
-                                    setTimeout(function () {
-                                        location.reload();
-                                    }, 1000);
-                                } else {
-                                    button.text("Install");
-                                }
-
-                                button.attr("disabled", false);
-                            },
-                            error: function (err) {
-                                console.log(err.responseJSON);
-                            },
-                        });
-                    } else if (action === "activate" && !$.active) {
-                        button.text("Activating...").attr("disabled", true);
-
-                        $.ajax({
-                            url: "<?php echo esc_html( $ajax_url ); ?>",
-                            type: "POST",
-                            data: {
-                                action: "wpdeveloper_activate_plugin",
-                                security: "<?php echo esc_html( $nonce ); ?>",
-                                basename: "essential-blocks/essential-blocks.php",
-                            },
-                            success: function (response) {
-                                if (response.success) {
-                                    button.text("Activated");
-                                    button.data("action", null);
-
-                                    setTimeout(function () {
-                                        location.reload();
-                                    }, 1000);
-                                } else {
-                                    button.text("Activate");
-                                }
-
-                                button.attr("disabled", false);
-                            },
-                            error: function (err) {
-                                console.log(err.responseJSON);
-                            },
-                        });
-                    }
-                }).on('click', '.eael-eb-optin-notice button.notice-dismiss', function (e) {
-                    e.preventDefault();
-
-                    var $notice_wrapper = $(this).closest('.eael-eb-optin-notice');
-
-                    $.ajax({
-                        url: "<?php echo esc_html( $ajax_url ); ?>",
-                        type: "POST",
-                        data: {
-                            action: "eael_eb_optin_notice_dismiss",
-                            security: "<?php echo esc_html( $nonce ); ?>",
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                $notice_wrapper.remove();
-                            } else {
-                                console.log(response.data);
-                            }
-                        },
-                        error: function (err) {
-                            console.log(err.responseText);
-                        },
-                    });
-                });
-            })(jQuery);
-        </script>
-		<?php
-	}
-
-	public function essential_block_special_optin() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
-			return;
-		}
-
-		$ajax_url         = admin_url( 'admin-ajax.php' );
-		$nonce            = wp_create_nonce( 'essential-addons-elementor' );
-		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
-		$action           = $eb_not_installed ? 'install' : 'activate';
-		$button_title     = $eb_not_installed ? esc_html__( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ) : esc_html__( 'Activate', 'essential-addons-for-elementor-lite' );
-		?>
-        <style>
-            /* Essential Blocks Special Optin*/
-            .eael-eb-special-optin-notice {
-                border-left-color: #6200ee;
-                padding-top: 0;
-                padding-bottom: 0;
-                padding-left: 0;
-                margin-bottom: 15px;
-            }
-
-            .eael-eb-special-optin-notice h3,
-            .eael-eb-special-optin-notice p,
-            .eael-eb-special-optin-notice a {
-                font-family: -apple-system,BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-            }
-
-            .eael-eb-special-optin-notice a {
-                color: #2271b1;
-            }
-
-            .eael-eb-special-optin-notice .wpnotice-content-wrapper {
-                display: flex;
-            }
-
-            .eael-eb-special-optin-notice .wpnotice-content-wrapper > div {
-                padding-top: 15px;
-            }
-
-            .eael-eb-special-optin-notice .eael-eb-optin-logo {
-                width: 50px;
-                text-align: center;
-                background: rgba(98, 0, 238, .1);
-            }
-
-            .eael-eb-special-optin-notice .eael-eb-optin-logo img {
-                width: 25px;
-            }
-
-            .eael-eb-special-optin-notice .eael-eb-optin {
-                padding-left: 10px;
-            }
-
-            .eael-eb-special-optin-notice .eael-eb-optin a.wpdeveloper-eb-plugin-installer {
-                background: #5E2EFF;
-            }
-        </style>
-        <div class="wpnotice-wrapper notice  notice-info is-dismissible eael-eb-special-optin-notice">
-            <div class="wpnotice-content-wrapper">
-                <div class="eael-eb-optin-logo">
-                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg' ); ?>" alt="">
-                </div>
-                <div class="eael-eb-optin">
-                    <h3><?php esc_html_e( 'Using Gutenberg? Check out Essential Blocks!', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'Are you using the Gutenberg Editor for your website? Then try out Essential Blocks for Gutenberg, and explore 40+ unique blocks to make your web design experience in WordPress even more powerful. 🚀', 'essential-addons-for-elementor-lite' ); ?></p>
-                    <p><?php 
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo __( 'For more information, <a href="https://essential-blocks.com/demo/" target="_blank">check out the demo here</a>.', 'essential-addons-for-elementor-lite' ); ?></p>
-                    <p>
-                        <a href="#" class="button-primary wpdeveloper-eb-plugin-installer" data-action="<?php echo esc_attr( $action ); ?>"><?php echo esc_html( $button_title ); ?></a>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            // install/activate plugin
-            (function ($) {
-                $(document).on("click", ".wpdeveloper-eb-plugin-installer", function (ev) {
-                    ev.preventDefault();
-
-                    var button = $(this),
-                        action = button.data("action");
-
-                    if ($.active && typeof action != "undefined") {
-                        button.text("Waiting...").attr("disabled", true);
-
-                        setInterval(function () {
-                            if (!$.active) {
-                                button.attr("disabled", false).trigger("click");
-                            }
-                        }, 1000);
-                    }
-
-                    if (action === "install" && !$.active) {
-                        button.text("Installing...").attr("disabled", true);
-
-                        $.ajax({
-                            url: "<?php echo esc_html( $ajax_url ); ?>",
-                            type: "POST",
-                            data: {
-                                action: "wpdeveloper_install_plugin",
-                                security: "<?php echo esc_html( $nonce ); ?>",
-                                slug: "essential-blocks",
-								promotype: "optin"
-                            },
-                            success: function (response) {
-                                if (response.success) {
-                                    button.text("Activated");
-                                    button.data("action", null);
-
-                                    setTimeout(function () {
-                                        location.reload();
-                                    }, 1000);
-                                } else {
-                                    button.text("Install");
-                                }
-
-                                button.attr("disabled", false);
-                            },
-                            error: function (err) {
-                                console.log(err.responseJSON);
-                            },
-                        });
-                    } else if (action === "activate" && !$.active) {
-                        button.text("Activating...").attr("disabled", true);
-
-                        $.ajax({
-                            url: "<?php echo esc_html( $ajax_url ); ?>",
-                            type: "POST",
-                            data: {
-                                action: "wpdeveloper_activate_plugin",
-                                security: "<?php echo esc_html( $nonce ); ?>",
-                                basename: "essential-blocks/essential-blocks.php",
-                            },
-                            success: function (response) {
-                                if (response.success) {
-                                    button.text("Activated");
-                                    button.data("action", null);
-
-                                    setTimeout(function () {
-                                        location.reload();
-                                    }, 1000);
-                                } else {
-                                    button.text("Activate");
-                                }
-
-                                button.attr("disabled", false);
-                            },
-                            error: function (err) {
-                                console.log(err.responseJSON);
-                            },
-                        });
-                    }
-                }).on('click', '.eael-eb-special-optin-notice button.notice-dismiss', function (e) {
-                    e.preventDefault();
-
-                    var $notice_wrapper = $(this).closest('.eael-eb-optin-notice');
-
-                    $.ajax({
-                        url: "<?php echo esc_html( $ajax_url ); ?>",
-                        type: "POST",
-                        data: {
-                            action: "eael_eb_optin_notice_dismiss",
-                            security: "<?php echo esc_html( $nonce ); ?>",
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                $notice_wrapper.remove();
-                            } else {
-                                console.log(response.data);
-                            }
-                        },
-                        error: function (err) {
-                            console.log(err.responseText);
-                        },
-                    });
-                });
-            })(jQuery);
-        </script>
-		<?php
-	}
-
-	public function eael_eb_optin_notice_dismiss() {
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
-		}
-
-		set_transient( 'wpdeveloper_eb_optin_hide', true, MONTH_IN_SECONDS * 2 );
-		wp_send_json_success();
-	}
-
-	public function eael_gb_eb_popup_dismiss() {
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
-		}
-
-		set_transient( 'wpdeveloper_gb_eb_popup_hide', true, MONTH_IN_SECONDS * 2 );
-		wp_send_json_success();
-	}
-
-	public function eael_eb_banner_promo_dismiss() {
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
-		}
-
-		set_transient( 'wpdeveloper_eb_banner_promo_hide', true, DAY_IN_SECONDS * 45 );
-		wp_send_json_success();
-	}
-
-	public function eael_eb_banner_promo_init() {
-		add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_banner_promo_enqueue_scripts' ] );
-		add_action( 'wp_ajax_eael_eb_banner_promo_dismiss', [ $this, 'eael_eb_banner_promo_dismiss' ] );
-	}
-
-	public function eael_eb_popup_promo_init() {
-		add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
-		add_action( 'wp_ajax_eael_gb_eb_popup_dismiss', [ $this, 'eael_gb_eb_popup_dismiss' ] );
-	}
-
-	public function eael_eb_optin_promo_init() {
-		add_action( 'admin_notices', [ $this, 'essential_block_optin' ] );
-		add_action( 'eael_admin_notices', [ $this, 'essential_block_special_optin' ], 100 );
-		add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
 	}
 }

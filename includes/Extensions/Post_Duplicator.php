@@ -77,6 +77,10 @@ class Post_Duplicator {
 			return; // Return if nonce is not valid
 		}
 
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_die( __( 'You do not have sufficient permissions to edit this post.', 'essential-addons-for-elementor-lite' ) );
+		}
+
 		$post = sanitize_post( get_post( $post_id ), 'db' );
 
 		if ( is_null( $post ) ) {

@@ -28,8 +28,7 @@ const eaData = localize.eael_dashboard,
         btnLoader: '',
         optinPromo: eaData.admin_screen_promo.display,
         search404: false,
-        licenseFormOpen: true,
-        allowedPostTypes: eaData.tools.box_4.value
+        licenseFormOpen: true
     };
 
 Object.keys(eaData.integration_box.list).map((item) => {
@@ -73,7 +72,7 @@ Object.keys(eaData.modal).map((item) => {
     const key = eaData.modal[item]?.name;
     if (key !== undefined) {
         initValue.modals[key] = eaData.modal[item].value;
-    } else if (item === 'loginRegisterSetting') {
+    } else if (item === 'loginRegisterSetting' || item === 'businessReviewsSetting') {
         const accordion = eaData.modal[item].accordion;
         Object.keys(accordion).map((subItem) => {
             accordion[subItem].fields.map((childItem) => {

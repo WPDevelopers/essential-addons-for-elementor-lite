@@ -170,6 +170,12 @@ trait Elements {
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
+				'name'       => 'eael-figma-to-elementor',
+				'title'      => __( 'Figma to Elementor Converter', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-flip-carousel',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
 				'name'       => 'eael-google-map',
 				'title'      => __( 'Google Map', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-advanced-google-maps',
@@ -432,7 +438,7 @@ trait Elements {
 			$post_id = get_option('page_for_posts');
 		}
 		
-		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) ) {
+		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) || $this->get_settings( 'custom-cursor' ) ) {
 			$html            = '';
 			$global_settings = get_option( 'eael_global_settings' );
 
@@ -682,6 +688,11 @@ trait Elements {
 					$html .= $scroll_to_top_html;
 				}
 			}
+		}
+
+		//Custom Cursor
+		if ( $this->get_settings( 'custom-cursor' ) == true ) {
+			do_action( 'eael/custom_cursor/page_render', $document, $global_settings );
 		}
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		printf( '%1$s', $html );

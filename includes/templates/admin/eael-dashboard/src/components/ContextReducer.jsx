@@ -9,7 +9,7 @@ function ContextReducer() {
 
     const reducer = (state, {type, payload}) => {
         let params, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
-            hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType, search404, allowedPostTypes;
+            hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType, search404;
 
         switch (type) {
             case 'SET_MENU':
@@ -25,9 +25,6 @@ function ContextReducer() {
             case 'ON_CHANGE_ELEMENT':
                 elements = {...state.elements, [payload.key]: payload.value};
                 return {...state, elements};
-            case 'ON_CHANGE_POST_TYPE':
-                allowedPostTypes = {...state.allowedPostTypes, [payload.key]: payload.value};
-                return {...state, allowedPostTypes};
             case 'ON_CHANGE_ALL':
                 if (payload.key === 'extensionAll') {
                     state.extensions.map((item) => {
@@ -115,7 +112,12 @@ function ContextReducer() {
             case 'BUTTON_LOADER':
                 return {...state, btnLoader: payload, licenseError: '', otpError: ''}
             case 'OPEN_MODAL':
-                return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
+                let modalAccordion = state.modalAccordion;
+                // Set default accordion for Business Reviews
+                if (payload.key === 'businessReviewsSetting') {
+                    modalAccordion = Object.keys(eaData.modal.businessReviewsSetting.accordion)[0];
+                }
+                return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title, modalAccordion}
             case 'CLOSE_MODAL':
                 return {...state, modal: 'close', modalGoPremium: 'close'}
             case 'CLOSE_TOAST':

@@ -20,6 +20,13 @@ class Promotion
 			add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'conditional_display' ] );
 			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'smooth_animation' ] );
 			add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'smooth_animation' ] );
+
+            //Custom Cursor
+            add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'custom_cursor' ] );
+            add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'custom_cursor' ] );
+            add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'custom_cursor' ] );
+            add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'custom_cursor' ] );
+            add_action( 'elementor/documents/register_controls', [ $this, 'custom_cursor_page' ] );
 		}
 	}
 
@@ -180,5 +187,35 @@ class Promotion
 
 		$element->end_controls_section();
 	}
+
+    public function custom_cursor($element, $page = false)
+    {
+        $element->start_controls_section(
+            'eael_ext_custom_cursor_section',
+            [
+                'label' => __('<i class="eaicon-logo"></i> Custom Cursor', 'essential-addons-for-elementor-lite'),
+                'tab' => !$page ? Controls_Manager::TAB_ADVANCED : Controls_Manager::TAB_SETTINGS,
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_custom_cursor_section_pro_required',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => $this->teaser_template([
+                    'title'   => __('Meet EA Custom Cursor', 'essential-addons-for-elementor-lite'),
+                    'messages' => __('Personalize your cursor with a unique style to enhance user experience and visual appeal.', 'essential-addons-for-elementor-lite'),
+                ]),
+            ]
+        );
+
+        $element->end_controls_section();
+    }
+
+    public function custom_cursor_page($element)
+    {
+        $this->custom_cursor( $element, true );
+    }
+
 
 }
