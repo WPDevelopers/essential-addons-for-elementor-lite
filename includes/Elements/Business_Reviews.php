@@ -122,7 +122,7 @@ class Business_Reviews extends Widget_Base {
 				'default' => 'places_api',
 				'options' => [
 					'places_api' => __( 'Google Places API (Max 5 reviews)', 'essential-addons-for-elementor-lite' ),
-					'my_business_api' => __( 'Google My Business API (More reviews)', 'essential-addons-for-elementor-lite' ),
+					// 'my_business_api' => __( 'Google My Business API (More reviews)', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
 					'eael_business_reviews_sources' => 'google-reviews',
