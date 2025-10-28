@@ -3768,7 +3768,7 @@ class Business_Reviews extends Widget_Base {
 
 	protected function render() {
 		$business_reviews = $this->get_business_reviews_settings();
-		if( ! $business_reviews['api_key'] ) {
+		if( empty( $business_reviews['api_key'] ) ) {
 			return false;
 		}
 		$business_reviews_items = $this->fetch_business_reviews_from_api();
