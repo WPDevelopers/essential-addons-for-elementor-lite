@@ -122,7 +122,7 @@ class Business_Reviews extends Widget_Base {
 				'default' => 'places_api',
 				'options' => [
 					'places_api' => __( 'Google Places API (Max 5 reviews)', 'essential-addons-for-elementor-lite' ),
-					'my_business_api' => __( 'Google My Business API (More reviews)', 'essential-addons-for-elementor-lite' ),
+					'my_business_api' => __( 'Google Business Profile API (More reviews)', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
 					'eael_business_reviews_sources' => 'google-reviews',
@@ -166,7 +166,7 @@ class Business_Reviews extends Widget_Base {
 		if ( empty( get_option( 'eael_br_google_my_business_token' ) ) ) {
 			$this->add_control( 'eael_br_google_my_business_token_missing', [
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => sprintf( __( 'Google My Business access token is missing. Please add it from EA Dashboard » Elements » <a href="%s" target="_blank">Business Reviews Settings</a>', 'essential-addons-for-elementor-lite' ), esc_attr( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) ),
+				'raw'             => sprintf( __( 'Google Business Profile access token is missing. Please add it from EA Dashboard » Elements » <a href="%s" target="_blank">Business Reviews Settings</a>', 'essential-addons-for-elementor-lite' ), esc_attr( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) ),
 				'content_classes' => 'eael-warning',
 				'condition'       => [
 					'eael_business_reviews_sources' => 'google-reviews',
@@ -2953,7 +2953,7 @@ class Business_Reviews extends Widget_Base {
 		$response = false;
 
 		if ( empty( $business_reviews['access_token'] ) ) {
-			$error_message = esc_html__( 'Google My Business API access token is missing.', 'essential-addons-for-elementor-lite' );
+			$error_message = esc_html__( 'Google Business Profile API access token is missing.', 'essential-addons-for-elementor-lite' );
 		} elseif ( ! $this->validate_access_token( $business_reviews['access_token'] ) ) {
 			$error_message = esc_html__( 'Invalid access token format.', 'essential-addons-for-elementor-lite' );
 		} else {
@@ -2962,7 +2962,7 @@ class Business_Reviews extends Widget_Base {
 			if ( ! empty( $response ) ) {
 				set_transient( $business_reviews['cache_key'], $response, $business_reviews['expiration'] );
 			} else {
-				$error_message = esc_html__( 'Failed to fetch reviews. Please check your access token or try refreshing it.', 'essential-addons-for-elementor-lite' );
+				$error_message = esc_html__( 'Failed to fetch reviews. Please check your access token and ensure it has the required scope: https://www.googleapis.com/auth/business.manage', 'essential-addons-for-elementor-lite' );
 			}
 		}
 
@@ -2979,9 +2979,8 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	private function fetch_reviews_from_google_my_business( $access_token ) {
-		$url = 'https://mybusiness.googleapis.com/v4/accounts/me/locations';
-
-		$locations_response = wp_remote_get( $url, [
+		// Get account ID using Account Management API
+		$accounts_response = wp_remote_get( 'https://mybusinessaccountmanagement.googleapis.com/v1/accounts', [
 			'headers' => [
 				'Authorization' => 'Bearer ' . $access_token,
 				'Content-Type' => 'application/json',
@@ -2989,22 +2988,40 @@ class Business_Reviews extends Widget_Base {
 			'timeout' => 30,
 		] );
 
-		if ( is_wp_error( $locations_response ) ) {
+		if ( is_wp_error( $accounts_response ) || wp_remote_retrieve_response_code( $accounts_response ) !== 200 ) {
+			return false;
+		}
+
+		$accounts_body = json_decode( wp_remote_retrieve_body( $accounts_response ), true );
+		if ( ! isset( $accounts_body['accounts'][0]['name'] ) ) {
+			return false;
+		}
+
+		$account_id = str_replace( 'accounts/', '', $accounts_body['accounts'][0]['name'] );
+
+		// Get locations using Business Information API
+		$locations_response = wp_remote_get( "https://mybusinessbusinessinformation.googleapis.com/v1/accounts/{$account_id}/locations", [
+			'headers' => [
+				'Authorization' => 'Bearer ' . $access_token,
+				'Content-Type' => 'application/json',
+			],
+			'timeout' => 30,
+		] );
+
+		if ( is_wp_error( $locations_response ) || wp_remote_retrieve_response_code( $locations_response ) !== 200 ) {
 			return false;
 		}
 
 		$locations_body = json_decode( wp_remote_retrieve_body( $locations_response ), true );
-
-		if ( ! isset( $locations_body['locations'] ) || empty( $locations_body['locations'] ) ) {
+		if ( ! isset( $locations_body['locations'][0]['name'] ) ) {
 			return false;
 		}
 
 		$location = $locations_body['locations'][0];
 		$location_name = $location['name'];
 
-		$reviews_url = "https://mybusiness.googleapis.com/v4/{$location_name}/reviews";
-
-		$reviews_response = wp_remote_get( $reviews_url, [
+		// Get reviews using v4 API (current standard for reviews)
+		$reviews_response = wp_remote_get( "https://mybusiness.googleapis.com/v4/{$location_name}/reviews", [
 			'headers' => [
 				'Authorization' => 'Bearer ' . $access_token,
 				'Content-Type' => 'application/json',
@@ -3012,7 +3029,7 @@ class Business_Reviews extends Widget_Base {
 			'timeout' => 30,
 		] );
 
-		if ( is_wp_error( $reviews_response ) ) {
+		if ( is_wp_error( $reviews_response ) || wp_remote_retrieve_response_code( $reviews_response ) !== 200 ) {
 			return false;
 		}
 
@@ -3024,6 +3041,8 @@ class Business_Reviews extends Widget_Base {
 
 		return false;
 	}
+
+
 
 	private function transform_google_my_business_data( $data, $location = null ) {
 		$transformed = new \stdClass();
@@ -3045,16 +3064,19 @@ class Business_Reviews extends Widget_Base {
 		}
 
 		if ( $location ) {
-			$transformed->name = isset( $location['locationName'] ) ? $location['locationName'] : '';
-			$transformed->rating = isset( $location['averageRating'] ) ? $location['averageRating'] : 0;
-			$transformed->user_ratings_total = isset( $location['reviewCount'] ) ? $location['reviewCount'] : 0;
-			$transformed->formatted_address = isset( $location['address']['addressLines'] ) ? implode( ', ', $location['address']['addressLines'] ) : '';
-			$transformed->international_phone_number = isset( $location['primaryPhone'] ) ? $location['primaryPhone'] : '';
-			$transformed->url = isset( $location['websiteUrl'] ) ? $location['websiteUrl'] : '';
+			// Use Business Information API format
+			$transformed->name = isset( $location['title'] ) ? $location['title'] : '';
+			$transformed->rating = 0; // Rating not available in location data
+			$transformed->user_ratings_total = 0; // Review count not available in location data
+			$transformed->formatted_address = isset( $location['storefrontAddress']['addressLines'] ) ? implode( ', ', $location['storefrontAddress']['addressLines'] ) : '';
+			$transformed->international_phone_number = isset( $location['phoneNumbers']['primaryPhone'] ) ? $location['phoneNumbers']['primaryPhone'] : '';
+			$transformed->url = isset( $location['websiteUri'] ) ? $location['websiteUri'] : '';
 		}
 
 		return $transformed;
 	}
+
+
 
 	public function print_business_reviews( $business_reviews_items ) {
 		$settings 			= $this->settings_data         = $this->get_settings_for_display();

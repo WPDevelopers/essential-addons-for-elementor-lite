@@ -1546,17 +1546,17 @@ trait Admin {
 							    'info'   => __( 'Get your Google Places API key from Google Cloud Console. This is used for fetching Google Reviews.', 'essential-addons-for-elementor-lite' ),
 						    ],
 							'googleMyBusinessTokenSetting' => [
-							    'title'  => __( 'Google My Business API', 'essential-addons-for-elementor-lite' ),
+							    'title'  => __( 'Google Business Profile API', 'essential-addons-for-elementor-lite' ),
 							    'icon'   => 'images/map.svg',
 							    'fields' => [
 								    [
 									    'name'        => 'br_google_my_business_token',
 									    'value'       => get_option( 'eael_br_google_my_business_token', '' ),
 									    'label'       => __( 'Access Token:', 'essential-addons-for-elementor-lite' ),
-									    'placeholder' => __( 'Enter Google My Business Access Token', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Google Business Profile Access Token', 'essential-addons-for-elementor-lite' ),
 								    ],
 							    ],
-							    'info'   => __( 'Get your access token from Google OAuth 2.0 Playground. This is used for fetching My Business Reviews.', 'essential-addons-for-elementor-lite' ),
+							    'info'   => __( 'Get your access token from Google OAuth 2.0 Playground. Uses Google Business Profile API endpoints. Required scope: https://www.googleapis.com/auth/business.manage', 'essential-addons-for-elementor-lite' ),
 						    ]
 					    ],
 					    'link'      => [
