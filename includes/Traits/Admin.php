@@ -1545,34 +1545,6 @@ trait Admin {
 							    ],
 							    'info'   => __( 'Get your Google Places API key from Google Cloud Console. This is used for fetching Google Reviews.', 'essential-addons-for-elementor-lite' ),
 						    ],
-						    'trustpilot'   => [
-							    'title'  => __( 'Trustpilot API', 'essential-addons-for-elementor-lite' ),
-							    'icon'   => 'images/map.svg',
-							    'fields' => [
-								    [
-									    'name'        => 'br_trustpilot_api_key',
-									    'value'       => get_option( 'eael_br_trustpilot_api_key', '' ),
-									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
-									    'placeholder' => __( 'Enter Trustpilot API Key', 'essential-addons-for-elementor-lite' ),
-								    ],
-							    ],
-							    'info'   => __( 'Get your Trustpilot API key from Trustpilot Developer Portal. This is used for fetching Trustpilot Reviews.', 'essential-addons-for-elementor-lite' ),
-							    'isPro'  => true,
-						    ],
-						    'yelp'         => [
-							    'title'  => __( 'Yelp Fusion API', 'essential-addons-for-elementor-lite' ),
-							    'icon'   => 'images/map.svg',
-							    'fields' => [
-								    [
-									    'name'        => 'br_yelp_api_key',
-									    'value'       => get_option( 'eael_br_yelp_api_key', '' ),
-									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
-									    'placeholder' => __( 'Enter Yelp Fusion API Key', 'essential-addons-for-elementor-lite' ),
-								    ],
-							    ],
-							    'info'   => __( 'Get your Yelp Fusion API key from Yelp Developers. This is used for fetching Yelp Reviews.', 'essential-addons-for-elementor-lite' ),
-							    'isPro'  => true,
-						    ],
 					    ],
 					    'link'      => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
