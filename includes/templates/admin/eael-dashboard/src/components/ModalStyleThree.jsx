@@ -9,6 +9,13 @@ function ModalStyleThree() {
         changeHandler = (e, key) => {
             const value = ['lr_custom_profile_fields', 'lr_recaptcha_badge_hide'].includes(key) ? (e.target.checked ? 'on' : '') : e.target.value;
             eaDispatch({type: 'MODAL_ON_CHANGE', payload: {key, value}});
+        },
+        buttonClickHandler = (functionName) => {
+            if (functionName === 'eaConnectGoogleBusiness') {
+                handleGoogleBusinessConnect();
+            }
+        },
+        handleGoogleBusinessConnect = () => {
         };
 
     return (
@@ -49,6 +56,20 @@ function ModalStyleThree() {
                                            onChange={(e) => changeHandler(e, subItem.name)}/>
                                     <label>{subItem.label} {subItem?.info && <i className="ea-dash-icon ea-info"><span
                                         className='ea__tooltip'>{subItem.info}</span></i>}</label>
+                                </div>);
+                            }
+
+                            if (subItem?.type === 'button') {
+                                return (<div className="flex flex-col gap-2" key={subIndex}>
+                                    <button
+                                        type="button"
+                                        className="primary-btn ea__modal-btn"
+                                        onClick={() => buttonClickHandler(subItem.onClick)}
+                                    >
+                                        {subItem.icon && <i className={`ea-dash-icon ${subItem.icon}`}></i>}
+                                        {subItem.label}
+                                    </button>
+                                    {subItem?.info && <p className="info--text">{subItem.info}</p>}
                                 </div>);
                             }
 
