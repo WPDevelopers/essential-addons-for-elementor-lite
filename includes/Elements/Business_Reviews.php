@@ -2677,16 +2677,13 @@ class Business_Reviews extends Widget_Base {
 		$settings['eael_business_reviews_source_key'] 		= get_option( 'eael_br_google_place_api_key' );
 		$settings['eael_business_reviews_my_business_token'] = get_option( 'eael_br_google_my_business_token' );
 
-		$business_reviews                            		= [];
+		$business_reviews                   				= [];
+		$business_reviews['api_key'] 						= '';
+		$business_reviews['access_token'] 					= '';
+
 		$business_reviews['source']                  		= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
 
-		// Handle Google API type selection (backward compatibility)
 		$business_reviews['google_api_type']         		= ! empty( $settings['eael_business_reviews_google_api_type'] ) ? esc_html( $settings['eael_business_reviews_google_api_type'] ) : 'places_api';
-
-		// Ensure backward compatibility for existing widgets
-		if ( 'google-reviews' === $business_reviews['source'] && ! isset( $settings['eael_business_reviews_google_api_type'] ) ) {
-			$business_reviews['google_api_type'] = 'places_api';
-		}
 
 		if ( 'google-reviews' === $business_reviews['source'] && 'my_business_api' === $business_reviews['google_api_type'] ) {
 			$business_reviews['access_token']        		= ! empty( $settings['eael_business_reviews_my_business_token'] ) ? esc_html( $settings['eael_business_reviews_my_business_token'] ) : '';
@@ -3000,7 +2997,7 @@ class Business_Reviews extends Widget_Base {
 		$account_id = str_replace( 'accounts/', '', $accounts_body['accounts'][0]['name'] );
 
 		// Get locations using Business Information API
-		$locations_response = wp_remote_get( "https://mybusinessbusinessinformation.googleapis.com/v1/accounts/{$account_id}/locations", [
+		$locations_response = wp_remote_get( "https://mybusinessbusinessinformation.googleapis.com/v1/accounts/{$account_id}/locations?readMask=name,title,storeCode", [
 			'headers' => [
 				'Authorization' => 'Bearer ' . $access_token,
 				'Content-Type' => 'application/json',
@@ -3790,9 +3787,7 @@ class Business_Reviews extends Widget_Base {
 
 	protected function render() {
 		$business_reviews = $this->get_business_reviews_settings();
-		if( ! $business_reviews['api_key'] ) {
-			return false;
-		}
+		
 		$business_reviews_items = $this->fetch_business_reviews_from_api();
 		$this->print_business_reviews( $business_reviews_items );
 		$this->print_localbusiness_schema( $business_reviews_items );
