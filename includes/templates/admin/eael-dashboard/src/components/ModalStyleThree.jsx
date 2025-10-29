@@ -15,7 +15,49 @@ function ModalStyleThree() {
                 handleGoogleBusinessConnect();
             }
         },
-        handleGoogleBusinessConnect = () => {
+        handleGoogleBusinessConnect = async () => {
+            try {
+                // Prepare form data for WordPress AJAX
+                const formData = new FormData();
+                formData.append('action', 'eael_google_business_connect');
+                formData.append('nonce', localize.nonce);
+                formData.append('type', 'google_business');
+                formData.append('appId', eaState.modals.br_google_my_business_app_id || '');
+                formData.append('redirectURI', window.location.origin + '/wp-admin/admin.php?page=eael-settings');
+
+                // Show loading state
+                const button = document.querySelector('.ea__modal-btn');
+                if (button) {
+                    button.disabled = true;
+                    button.textContent = 'Connecting...';
+                }
+
+                // Make AJAX request using modern fetch API
+                const response = await fetch(localize.ajaxurl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Redirect to OAuth URL
+                    window.location.href = result.data;
+                } else {
+                    alert('Connection failed: ' + (result.data || 'Unknown error'));
+                    if (button) {
+                        button.disabled = false;
+                        button.textContent = 'Connect Your Account';
+                    }
+                }
+            } catch (error) {
+                alert('Connection request failed. Please try again.');
+                const button = document.querySelector('.ea__modal-btn');
+                if (button) {
+                    button.disabled = false;
+                    button.textContent = 'Connect Your Account';
+                }
+            }
         };
 
     return (
