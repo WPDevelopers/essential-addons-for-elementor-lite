@@ -224,7 +224,7 @@ class Image_Masking {
 
         if ( !apply_filters('eael/pro_enabled', false ) ) {
             $element->add_control(
-                'eael_image_masking_upload_pro_message',
+                'eael_image_masking_upload_pro_message' . $tab,
                 [
                     'label' => '',
                     'type' => Controls_Manager::RAW_HTML,
