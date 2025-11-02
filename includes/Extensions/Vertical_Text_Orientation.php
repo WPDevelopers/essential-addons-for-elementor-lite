@@ -407,7 +407,7 @@ class Vertical_Text_Orientation {
         $element->add_control(
 			'eael_vto_writing_text_animation_control',
 			[
-				'label'   => esc_html__( 'Animation Control', 'essential-addons-for-elementor-lite' ),
+				'label'   => esc_html__( 'Gradient Color Direction', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'horizontal' => [
