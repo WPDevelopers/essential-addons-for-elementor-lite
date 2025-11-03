@@ -103,12 +103,33 @@
   width: 100%;
   border-radius: 10px;
 }
+.eael-event-calendar-wrapper .eaelec-modal-content.eaelec-bg-img {
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.eael-event-calendar-wrapper .eaelec-modal-content .eaelec-modal-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fefefe;
+  z-index: -1;
+  opacity: 0.6;
+}
 .eael-event-calendar-wrapper .eaelec-modal-header {
   padding: 0px 30px;
   color: white;
   border-color: #009900;
   overflow: auto;
   margin-top: 8px;
+}
+.eael-event-calendar-wrapper .eaelec-modal-header.eaelec-img-header {
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
 }
 .eael-event-calendar-wrapper .eaelec-modal-header h2 {
   color: #242424;
@@ -123,6 +144,20 @@
 }
 .eael-event-calendar-wrapper .eaelec-modal-header .eaelec-event-popup-date i {
   color: #5725ff;
+}
+.eael-event-calendar-wrapper .eaelec-img-inside {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+.eael-event-calendar-wrapper .eaelec-img-inside .eaelec-modal-body-content {
+  height: 100%;
+  overflow-y: auto;
+}
+.eael-event-calendar-wrapper .eaelec-img-inside .eaelec-modal-body-img {
+  max-width: 100%;
+  height: auto;
 }
 .eael-event-calendar-wrapper .eaelec-modal-header .eaelec-event-popup-location {
   color: #555;
@@ -181,6 +216,27 @@
   height: 300px;
   overflow-y: auto;
   word-break: break-word;
+}
+.eael-event-calendar-wrapper .eaelec-modal-body.eaelec-bg-img {
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+.eael-event-calendar-wrapper .eaelec-modal-body.eaelec-bg-img .eaelec-modal-body-content {
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+.eael-event-calendar-wrapper .eaelec-modal-body > .eaelec-modal-overlay {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .eael-event-calendar-wrapper .eaelec-modal-body::-webkit-scrollbar {
   width: 6px;

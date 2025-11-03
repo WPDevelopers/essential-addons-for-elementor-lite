@@ -1065,20 +1065,11 @@ trait Ajax_Handler {
 			update_option( 'eael_br_google_place_api_key', sanitize_text_field( $settings['br_google_place_api_key'] ) );
 		}
 
-		// Business Reviews : Saving Google My Business Access Token
-		if ( isset( $settings['br_google_my_business_token'] ) ) {
-			update_option( 'eael_br_google_my_business_token', sanitize_textarea_field( $settings['br_google_my_business_token'] ) );
-		}
 
-		// Business Reviews : Saving Trustpilot Api Key
-		if ( isset( $settings['br_trustpilot_api_key'] ) ) {
-			update_option( 'eael_br_trustpilot_api_key', sanitize_text_field( $settings['br_trustpilot_api_key'] ) );
-		}
 
-		// Business Reviews : Saving Yelp Api Key
-		if ( isset( $settings['br_yelp_api_key'] ) ) {
-			update_option( 'eael_br_yelp_api_key', sanitize_text_field( $settings['br_yelp_api_key'] ) );
-		}
+
+
+
 
 		// Saving Google Map Api Key
 		if ( isset( $settings['google-map-api'] ) ) {

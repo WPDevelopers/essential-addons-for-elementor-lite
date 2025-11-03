@@ -857,7 +857,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'name'      => 'eael_adv_tabs_tab_bgtype_hover',
                 'types'     => ['classic', 'gradient'],
-                'selector'  => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item: hover',
+                'selector'  => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item:hover',
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
                 ],

@@ -1,10 +1,10 @@
 === Essential Addons for Elementor - Popular Elementor Templates & Widgets ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, nhrrob, jakariaistauk, himadree12
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, nhrrob, jakariaistauk, himadree
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.3
+Stable tag: 6.4.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -53,7 +53,7 @@ We have an extraordinary support team ready to help you. Ask your questions in t
 
 ### 60+ FREE ELEMENTOR ADDONS AND COUNTING
 
-We have designed more than 60 useful widgets to enhance your Elementor Page Building experience and allow you to climb the peak of your design capabilities.
+We have designed more than 65+ useful widgets to enhance your Elementor Page Building experience and allow you to climb the peak of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/post-grid/) - Showcase your blog posts in 3 unique styles
 2. [Post Timeline](https://essential-addons.com/post-timeline/) - Create stunning timeline for your posts & pages
@@ -126,6 +126,7 @@ Extensions (Free):
 6. [Wrapper Link](https://essential-addons.com/wrapper-link) - Add custom links into any section, column, or even flexbox
 7. [Hover Interactions](https://essential-addons.com/hover-interaction/) - Create captivating effects on buttons, images, texts and more
 8. [Liquid Glass Effects](https://essential-addons.com/liquid-glass-effects/) - Give your website a sleek, futuristic feel with stunning glass effects
+9. [Image Masking with Morphing](https://essential-addons.com/image-masking-with-morphing/)-  Create seamless transformations and interactive visual effects with smooth masking & morphing
 
 ### More elements (50+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
@@ -316,6 +317,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.4.0 - 30/10/2025 =
+
+- Added: New Extension | Image Masking
+- Fixed: EA Advanced Tabs | Hover background color is not working
+- Fixed: EA Woo Cart | Uncaught TypeError in WooCommerce
+- Fixed: EA Liquid Glass Effects | Effects are not working
+- Fixed: EA Advanced Accordion | Schema problem when used in other than English language
+- Improved: EA Event Calendar | Show event featured image above Title and in details
+- Few minor bug fixes & improvements
 
 = 6.3.3 - 08/10/2025 =
 
