@@ -404,7 +404,8 @@ trait Login_Registration {
 							$field_type_custom_image_filesize_kb 	= $field_type_custom_image_filesize * 1000000;
 
 							if( $custom_field_file_size > $field_type_custom_image_filesize_kb ) {
-                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filesize_error'] ) ? $settings['field_type_custom_image_filesize_error'] : __( 'File size exceeded. Maximum size is ' . floatval( $field_type_custom_image_filesize ) . 'MB' , 'essential-addons-for-elementor-lite' );
+								// translators: %s is the maximum file size
+                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filesize_error'] ) ? $settings['field_type_custom_image_filesize_error'] : sprintf( __( 'File size exceeded. Maximum size is %sMB', 'essential-addons-for-elementor-lite' ), floatval( $field_type_custom_image_filesize ) );
                             }
 						}
 
@@ -412,7 +413,8 @@ trait Login_Registration {
 							$field_type_custom_image_filename_length	= intval( $register_field['field_type_custom_image_filename_length'] );
 
 							if( strlen( $custom_field_file_name ) > $field_type_custom_image_filename_length ) {
-                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filename_length_error'] ) ? $settings['field_type_custom_image_filename_length_error'] : __( 'Filename length exceeded. Maximum length is ' . intval( $field_type_custom_image_filename_length ), 'essential-addons-for-elementor-lite' );
+								// translators: %d is the maximum length of the filename
+                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filename_length_error'] ) ? $settings['field_type_custom_image_filename_length_error'] : sprintf( __( 'Filename length exceeded. Maximum length is %d', 'essential-addons-for-elementor-lite' ), intval( $field_type_custom_image_filename_length ) );
                             }
 						}
 					}
@@ -421,7 +423,8 @@ trait Login_Registration {
 				//Validate HTML tags on input fields; Throw error if found (Although we are sanitizing before saving)
 				if( isset( $register_field['field_type'] ) && !empty( $_POST[$register_field['field_type']] ) ){
 					if( preg_match('/<[^<]+>/', $_POST[ $register_field['field_type'] ] ) ){
-						$errors[ sanitize_text_field( $register_field['field_type'] ) ] = __( sprintf('%s can not contain HTML tags', sanitize_text_field( $register_field['field_label'] ) ), 'essential-addons-for-elementor-lite' );
+						// translators: %s is the field label
+						$errors[ sanitize_text_field( $register_field['field_type'] ) ] = sprintf( __( '%s can not contain HTML tags', 'essential-addons-for-elementor-lite' ), sanitize_text_field( $register_field['field_label'] ) );
 					}
 				}
 			}
@@ -1785,7 +1788,7 @@ trait Login_Registration {
 		if( count( $custom_profile_fields_arr ) ){
 			foreach( $custom_profile_fields_arr as $custom_profile_field_text ){
 				$custom_profile_field_slug = str_replace(' ', '_', trim( strtolower( sanitize_text_field( $custom_profile_field_text ) ), ' ' ));
-				$eael_custom_profile_fields[ sanitize_text_field( $custom_profile_field_slug ) ] = __( esc_html( $custom_profile_field_text ), 'essential-addons-for-elementor-lite' );
+				$eael_custom_profile_fields[ sanitize_text_field( $custom_profile_field_slug ) ] = esc_html( $custom_profile_field_text );
 			}
 		}
 
