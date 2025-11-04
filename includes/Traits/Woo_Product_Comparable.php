@@ -1107,7 +1107,8 @@ trait Woo_Product_Comparable {
 		$img          = "{$img_td} img";
 
 		$this->start_controls_section( 'section_style_' . $pfx, [
-			'label'     => sprintf( __( 'Product Column %d', 'essential-addons-for-elementor-lite' ), $title_number ),
+			// translators: %d is the number of the column
+			'label'     => sprintf( esc_html__( 'Product Column %d', 'essential-addons-for-elementor-lite' ), $title_number ),
 			'tab'       => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'separate_col_style' => 'yes',
