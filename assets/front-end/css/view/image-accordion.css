@@ -136,7 +136,6 @@
   transition: flex 0.4s;
   transition: flex 0.4s, -webkit-box-flex 0.4s, -ms-flex 0.4s;
   overflow: hidden;
-  cursor: pointer;
 }
 .eael-grow-accordion {
   -webkit-box-flex: 3;
