@@ -525,7 +525,7 @@ class Post_Grid extends Widget_Base
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => false,
                 'ai'          => [ 'active' => false ],
-                'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+                'default'     => '',
                 'condition'   => [
                     'eael_show_post_terms'        => 'yes',
                     'eael_post_grid_preset_style' =>  ['two', 'three'],
