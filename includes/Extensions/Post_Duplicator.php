@@ -53,7 +53,16 @@ class Post_Duplicator {
 		if ( current_user_can( 'edit_posts' ) && ( $enabled_on == 'all' || $post->post_type == $enabled_on ) ) {
 			$duplicate_url            = admin_url( 'admin.php?action=eae_duplicate&post=' . $post->ID );
 			$duplicate_url            = wp_nonce_url( $duplicate_url, 'ea_duplicator' );
-			$actions['eae_duplicate'] = sprintf( '<a href="%s" title="%s">%s</a>', $duplicate_url, __( 'Duplicate ' . esc_attr( $post->post_title ), 'essential-addons-for-elementor-lite' ), __( 'EA Duplicator', 'essential-addons-for-elementor-lite' ) );
+			$actions['eae_duplicate'] = sprintf(
+				'<a href="%s" title="%s">%s</a>',
+				esc_url( $duplicate_url ),
+				sprintf(
+					/* translators: %s: Post title being duplicated. */
+					__( 'Duplicate %s', 'essential-addons-for-elementor-lite' ),
+					esc_html( $post->post_title )
+				),
+				__( 'EA Duplicator', 'essential-addons-for-elementor-lite' )
+			);
 		}
 
 		return $actions;
