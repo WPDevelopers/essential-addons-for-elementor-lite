@@ -3238,7 +3238,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             '_heading_thumbnail_style',
             [
-                'label' => esc_html__( 'Thumbnail', 'text-domain' ),
+                'label' => esc_html__( 'Thumbnail', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
