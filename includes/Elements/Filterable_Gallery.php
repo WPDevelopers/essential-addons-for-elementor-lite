@@ -600,25 +600,25 @@ class Filterable_Gallery extends Widget_Base
                 ],
                 'fields' => [
                     [
-                        'name' => 'eael_fg_control',
-                        'label' => esc_html__('Filter Title', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
-                        'dynamic' => ['active' => true],
+                        'name'        => 'eael_fg_control',
+                        'label'       => esc_html__('Filter Title', 'essential-addons-for-elementor-lite'),
+                        'type'        => Controls_Manager::TEXT,
+                        'dynamic'     => ['active'       =>true],
                         'label_block' => true,
-                        'default' => esc_html__('Gallery Filter', 'essential-addons-for-elementor-lite'),
+                        'default'     => esc_html__('Gallery Filter', 'essential-addons-for-elementor-lite'),
                         'ai' => [
                             'active' => false,
                         ],
                     ],
                     [
-                        'name' => 'eael_fg_control_custom_id',
-                        'label' => esc_html__('Custom ID', 'essential-addons-for-elementor-lite'),
-                        'description' => esc_html__('Adding a custom ID will function as an anchor tag. For instance, if you input "test" as your custom ID, the link will change to "https://www.example.com/#test" and it will immediately open the corresponding tab.', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
-                        'dynamic' => ['active' => true],
+                        'name'        => 'eael_fg_control_custom_id',
+                        'label'       => esc_html__('Custom ID', 'essential-addons-for-elementor-lite'),
+                        'description' => esc_html__('Adding a custom ID will function as an anchor tag. For instance, if you input "test" as your custom ID, the link will change to "https: //www.example.com/#test" and it will immediately open the corresponding tab.', 'essential-addons-for-elementor-lite'),
+                        'type'        => Controls_Manager::TEXT,
+                        'dynamic'     => ['active'  => true],
                         'label_block' => true,
-                        'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
-                        'ai' => [
+                        'default'     => '',
+                        'ai'          => [
                             'active' => false,
                         ],
                     ],
@@ -943,9 +943,13 @@ class Filterable_Gallery extends Widget_Base
                 'type'        => Controls_Manager::NOTICE,
                 'notice_type' => 'info',
 				'dismissible' => false,
-                'content'     => sprintf( '<strong>%s</strong> %s',
-                        esc_html__('Price, Ratings and Category', 'essential-addons-for-elementor-lite'),
-                                sprintf( esc_html__('will be visible only on the "%1$sSearch & Filter%2$s" layout.', 'essential-addons-for-elementor-lite'), '<strong>', '</strong>' ) ),
+                'content' => sprintf(
+                    /* translators: 1: Bolded text "Price, Ratings and Category", 2: Bolded layout name "Search & Filter". */
+                    __( '%1$s will be visible only on the %2$s layout.', 'essential-addons-for-elementor-lite' ),
+                    '<strong>' . esc_html__( 'Price, Ratings and Category', 'essential-addons-for-elementor-lite' ) . '</strong>',
+                    '<strong>' . esc_html__( 'Search & Filter', 'essential-addons-for-elementor-lite' ) . '</strong>'
+                ),
+
             ]
         );
 
@@ -3639,7 +3643,7 @@ class Filterable_Gallery extends Widget_Base
                                 if ( $this->default_control_key === $key ){
                                     echo 'active';
                                 }
-                            } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control'], 'essential-addons-for-elementor-lite'); ?></li>
+                            } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $control['eael_fg_control'] ); ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
