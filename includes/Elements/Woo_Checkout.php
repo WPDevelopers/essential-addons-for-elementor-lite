@@ -494,8 +494,11 @@ class Woo_Checkout extends Widget_Base {
                 'ea_section_woo_login_show_warning_text',
                 [
                     'type'            => Controls_Manager::RAW_HTML,
-                    'raw'             => __('Allow customers to log into an existing account during checkout is disabled on your site. Please enable it to use the login form. You can enable it from WooCommerce >> Settings >> Accounts & Privacy >> <a target="_blank" href="'.esc_url(admin_url( 'admin.php?page=wc-settings&tab=account')).'">Guest checkout.</a>',
-                        'essential-addons-for-elementor-lite'),
+					'raw' => sprintf(
+						/* translators: %s: Link to the Guest Checkout settings page. */
+						__('Allow customers to log into an existing account during checkout is disabled on your site. Please enable it to use the login form. You can enable it from WooCommerce >> Settings >> Accounts & Privacy >> %s', 'essential-addons-for-elementor-lite'),
+						'<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=account' ) ) . '">Guest checkout</a>'
+					),
                     'content_classes' => 'eael-warning',
                     'condition' => [
                         'ea_section_woo_login_show' => 'yes',
