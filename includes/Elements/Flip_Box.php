@@ -458,8 +458,8 @@ class Flip_Box extends Widget_Base
                 'label'       => esc_html__('Front Content', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default'     => __('<p>This is front side content.</p>', 'essential-addons-for-elementor-lite'),
-	            'condition'             => [
+                'default'     => '<p>' . esc_html__('This is front side content.', 'essential-addons-for-elementor-lite') . '</p>',
+	            'condition'   => [
 		            'eael_flipbox_front_content_type'      => 'content',
 	            ],
                 'ai' => [
@@ -698,8 +698,8 @@ class Flip_Box extends Widget_Base
                 'label'       => esc_html__('Back Content', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default'     => __('<p>This is back side content.</p>', 'essential-addons-for-elementor-lite'),
-	            'condition'             => [
+                'default'     => '<p>' . esc_html__('This is back side content.', 'essential-addons-for-elementor-lite') . '</p>',
+	            'condition'   => [
 		            'eael_flipbox_back_content_type'      => 'content',
 	            ],
                 'ai' => [
