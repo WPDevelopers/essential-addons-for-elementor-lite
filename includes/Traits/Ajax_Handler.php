@@ -275,7 +275,7 @@ trait Ajax_Handler {
 						$iterator ++;
 					}
 				} else {
-					$html .= __( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+					$html .= '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
 				}
 			}
 		}
