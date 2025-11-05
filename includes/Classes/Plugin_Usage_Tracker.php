@@ -1046,7 +1046,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$(".wpinsights-goodbye-form-wrapper-<?php echo esc_js( $class_plugin_name ); ?> #wpinsights-goodbye-form").fadeIn();
 						$(".wpinsights-goodbye-form-wrapper-<?php echo esc_js( $class_plugin_name ); ?> #wpinsights-goodbye-form").html( '<?php
 						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo $html; ?>' + '<div class="wpinsights-goodbye-form-footer"><div class="wpinsights-goodbye-form-buttons"><a id="wpinsights-submit-form-<?php echo esc_js( $class_plugin_name ); ?>" class="wpinsights-submit-btn" href="#"><?php esc_html_e( 'Submit and Deactivate', 'disable-comments' ); ?></a>&nbsp;<a class="wpsp-put-deactivate-btn" href="'+url+'"><?php esc_html_e( 'Just Deactivate', 'disable-comments' ); ?></a></div></div>');
+						echo $html; ?>' + '<div class="wpinsights-goodbye-form-footer"><div class="wpinsights-goodbye-form-buttons"><a id="wpinsights-submit-form-<?php echo esc_js( $class_plugin_name ); ?>" class="wpinsights-submit-btn" href="#"><?php esc_html_e( 'Submit and Deactivate', 'essential-addons-for-elementor-lite' ); ?></a>&nbsp;<a class="wpsp-put-deactivate-btn" href="'+url+'"><?php esc_html_e( 'Just Deactivate', 'essential-addons-for-elementor-lite' ); ?></a></div></div>');
 						$('#wpinsights-submit-form-<?php echo esc_js( $class_plugin_name ); ?>').on('click', function(e){
 							// As soon as we click, the body of the form should disappear
 							$("#wpinsights-goodbye-form-<?php echo esc_js( $class_plugin_name ); ?> .wpinsights-goodbye-form-body").fadeOut();
