@@ -218,6 +218,7 @@ trait Twitter_Feed
                         </a>';
 
                         if ( $settings['eael_twitter_feed_show_date'] == 'true' && isset( $item['created_at'] )) {
+                            // translators: %s is the time difference
                             $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-for-elementor-lite'), human_time_diff(strtotime($item['created_at']))) . '</span>';
                         }
                     $html .= '</div>
