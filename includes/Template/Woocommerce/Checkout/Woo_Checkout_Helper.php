@@ -267,14 +267,14 @@ trait Woo_Checkout_Helper {
 
                 <form class="checkout_coupon woocommerce-form-coupon" method="post" style="display:none">
 
-                    <p><?php esc_html_e( $settings['ea_woo_checkout_coupon_form_content'], 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p><?php echo esc_html( $settings['ea_woo_checkout_coupon_form_content'] ); ?></p>
 
                     <p class="form-row form-row-first">
-                        <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( $settings['ea_woo_checkout_coupon_placeholder_text'], 'essential-addons-for-elementor-lite' ); ?>" id="coupon_code" value="" />
+                        <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr( $settings['ea_woo_checkout_coupon_placeholder_text'] ); ?>" id="coupon_code" value="" />
                     </p>
 
                     <p class="form-row form-row-last">
-                        <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( $settings['ea_woo_checkout_coupon_button_text'], 'essential-addons-for-elementor-lite' ); ?>"><?php esc_html_e( $settings['ea_woo_checkout_coupon_button_text'], 'essential-addons-for-elementor-lite' ); ?></button>
+                        <button type="submit" class="button" name="apply_coupon" value="<?php echo esc_attr( $settings['ea_woo_checkout_coupon_button_text'] ); ?>"><?php echo esc_html( $settings['ea_woo_checkout_coupon_button_text'] ); ?></button>
                     </p>
 
                     <div class="clear"></div>
