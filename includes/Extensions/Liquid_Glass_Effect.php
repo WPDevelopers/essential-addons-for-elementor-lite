@@ -318,6 +318,8 @@ class Liquid_Glass_Effect {
 		);
 		
 		// Backdrop Filter Controls for Pro
+		do_action( 'eael_liquid_glass_effect_blur_effect3', $element, 'effect3', 0 );
+		do_action( 'eael_liquid_glass_effect_saturate_effect3', $element, 'effect3', 100 );
 		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect4', $element, 'effect4', 5 );
 		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect5', $element, 'effect5', '' );
 		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect6', $element, 'effect6', 7 );
