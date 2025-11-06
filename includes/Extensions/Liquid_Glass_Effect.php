@@ -260,7 +260,7 @@ class Liquid_Glass_Effect {
 					] ),
 					'condition' => [
 						'eael_liquid_glass_effect_switch' => 'yes',
-						'eael_liquid_glass_effect'        => ['effect4', 'effect5', 'effect6'],
+						'eael_liquid_glass_effect'        => ['effect3', 'effect4', 'effect5', 'effect6'],
 					]
 				]
 			);
@@ -320,31 +320,7 @@ class Liquid_Glass_Effect {
 		// Backdrop Filter Controls for Pro
 		do_action( 'eael_liquid_glass_effect_blur_effect3', $element, 'effect3', 0 );
 		do_action( 'eael_liquid_glass_effect_saturate_effect3', $element, 'effect3', 100 );
-
-        //Border Radius Controls
-        $element->add_control(
-			'eael_liquid_glass_effect_border_radius_effect3',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-                    'top'      => 24,
-                    'right'    => 24,
-                    'bottom'   => 24,
-                    'left'     => 24,
-                    'unit'     => 'px',
-                    'isLinked' => true,
-				],
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect3' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-                'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect'        => 'effect3',
-				],
-			]
-		);
+		do_action( 'eael_liquid_glass_effect_border_radius_effect3', $element, 'effect3', '24px' );
 
 		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect4', $element, 'effect4', 5 );
 		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect5', $element, 'effect5', '' );
