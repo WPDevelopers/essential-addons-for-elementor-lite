@@ -68,6 +68,10 @@ class Event_Calendar extends Widget_Base
         ];
     }
 
+    public function get_script_depends() {
+        return [ 'moment' ];
+    }
+
     public function has_widget_inner_wrapper(): bool {
         return ! Helper::eael_e_optimized_markup();
     }

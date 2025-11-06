@@ -1021,11 +1021,6 @@ $config = [
                         'context' => 'view',
                     ],
 	                [
-		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/moment/moment.min.js',
-		                'type' => 'lib',
-		                'context' => 'view',
-	                ],
-	                [
 		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/fancy-table/fancy-table.min.js',
 		                'type' => 'lib',
 		                'context' => 'view',
