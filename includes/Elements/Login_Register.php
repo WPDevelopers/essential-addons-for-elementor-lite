@@ -7155,7 +7155,7 @@ class Login_Register extends Widget_Base {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf(
 					/* translators: %s: Error String */
-					__( 'Error! It is required to use %s field.', 'essential-addons-for-elementor-lite' ),
+					esc_html__( 'Error! It is required to use %s field.', 'essential-addons-for-elementor-lite' ),
 					'<strong>Email</strong>'
 				);
 				?>
@@ -7184,7 +7184,7 @@ class Login_Register extends Widget_Base {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf(
 					/* translators: 1: Password fßield label, 2: Password Confirmation field label. */
-					__( 'Error! It is required to use %1$s field with %2$s Field.', 'essential-addons-for-elementor-lite' ),
+					esc_html__( 'Error! It is required to use %1$s field with %2$s Field.', 'essential-addons-for-elementor-lite' ),
 					'<strong>Password</strong>',
 					'<strong>Password Confirmation</strong>'
 				);
