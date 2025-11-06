@@ -39,10 +39,14 @@ trait Helper
      * @since  4.0.2
      */
     public function typeform_auth_handle() {
-	    if ( isset($_GET[ 'page' ]) && 'eael-settings' == $_GET[ 'page' ] ) {
-		    if ( isset( $_GET[ 'typeform_tk' ] ) && isset( $_GET[ 'pr_code' ] ) ) {
-			    if ( wp_hash( 'eael_typeform' ) === $_GET[ 'pr_code' ] ) {
-				    update_option( 'eael_save_typeform_personal_token', sanitize_text_field( $_GET[ 'typeform_tk' ] ), false );
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	    if ( !empty($_GET[ 'page' ]) && 'eael-settings' === sanitize_text_field( wp_unslash( value: $_GET[ 'page' ] ) ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		    if ( !empty( $_GET[ 'typeform_tk' ] ) && !empty( $_GET[ 'pr_code' ] ) ) {
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			    if ( wp_hash( 'eael_typeform' ) === sanitize_text_field( wp_unslash( $_GET[ 'pr_code' ] ) ) ) {
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				    update_option( 'eael_save_typeform_personal_token', sanitize_text_field( wp_unslash( $_GET[ 'typeform_tk' ] ) ), false );
 			    }
 		    }
 	    }
@@ -266,7 +270,8 @@ trait Helper
 			return;
 		}
 
-		if ( isset( $_GET['empty_cart'] ) && 'yes' === esc_html( $_GET['empty_cart'] ) ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( !empty( $_GET['empty_cart'] ) && 'yes' === sanitize_text_field( wp_unslash( $_GET['empty_cart'] ) ) ) {
 			WC()->cart->empty_cart();
 		}
 	}
@@ -314,13 +319,21 @@ trait Helper
 	 * Update Checkout Cart Quantity via ajax call.
 	 */
 	public function eael_checkout_cart_qty_update() {
-        if ( ! wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
+        if ( !empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'essential-addons-elementor' ) ) {
             die( esc_html__( 'Permission Denied!', 'essential-addons-for-elementor-lite' ) );
         }
 
-        $cart_item_key = $_POST['cart_item_key'];
+        $cart_item_key = !empty( $_POST['cart_item_key'] ) ? sanitize_text_field( wp_unslash( $_POST['cart_item_key'] ) ) : '';
 		$cart_item = WC()->cart->get_cart_item( $cart_item_key );
-		$cart_item_quantity = apply_filters( 'woocommerce_stock_amount_cart_item', apply_filters( 'woocommerce_stock_amount', preg_replace( "/[^0-9\.]/", '', filter_var($_POST['quantity'], FILTER_SANITIZE_NUMBER_INT)) ), $cart_item_key );
+		$cart_item_quantity = !empty( $_POST['quantity']) ? absint( wp_unslash( $_POST['quantity'] ) ) :0;
+		$cart_item_quantity = apply_filters( 'woocommerce_stock_amount_cart_item', 
+		apply_filters( 'woocommerce_stock_amount', 
+		preg_replace( 
+			"/[^0-9\.]/", 
+			'', 
+			filter_var($cart_item_quantity, FILTER_SANITIZE_NUMBER_INT)
+			) 
+		), $cart_item_key );
 
 		$passed_validation  = apply_filters( 'woocommerce_update_cart_validation', true, $cart_item_key, $cart_item, $cart_item_quantity );
 		if ( $passed_validation ) {
@@ -529,12 +542,12 @@ trait Helper
 
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		$ac_name     = sanitize_text_field( $_POST['ac_name'] );
-		$hastag      = sanitize_text_field( $_POST['hastag'] );
-		$c_key       = sanitize_text_field( $_POST['c_key'] );
-		$c_secret    = sanitize_text_field( $_POST['c_secret'] );
-		$widget_id   = sanitize_text_field( $_POST['widget_id'] );
-		$permalink   = sanitize_text_field( $_POST['page_permalink'] );
+		$ac_name     = ! empty( $_POST['ac_name'] ) ? sanitize_text_field( wp_unslash( $_POST['ac_name'] ) ) : '';
+		$hastag      = ! empty( $_POST['hastag'] ) ? sanitize_text_field( wp_unslash( $_POST['hastag'] ) ) : '';
+		$c_key       = ! empty( $_POST['c_key'] ) ? sanitize_text_field( wp_unslash( $_POST['c_key'] ) ) : '';
+		$c_secret    = ! empty( $_POST['c_secret'] ) ? sanitize_text_field( wp_unslash( $_POST['c_secret'] ) ) : '';
+		$widget_id   = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( wp_unslash( $_POST['widget_id'] ) ) : '';
+		$permalink   = ! empty( $_POST['page_permalink'] ) ?  sanitize_text_field( wp_unslash( $_POST['page_permalink'] ) ) : '';
         $page_id     = url_to_postid($permalink);
         
         $settings = $this->eael_get_widget_settings($page_id, $widget_id);
@@ -547,13 +560,13 @@ trait Helper
             $key_pattern = '_transient_' . $ac_name . '%' . md5( $hastag . $c_key . $c_secret . $bearer_token ) . '_tf_cache';
         }
 
-		$sql     = "SELECT `option_name` AS `name`
-            FROM  $wpdb->options
-            WHERE `option_name` LIKE '$key_pattern'
-            ORDER BY `option_name`";
-
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$results = $wpdb->get_results( $sql );
+		$results = $wpdb->get_results( $wpdb->prepare(
+			"SELECT `option_name` AS `name`
+			FROM {$wpdb->options}
+			WHERE `option_name` LIKE %s
+			ORDER BY `option_name`",
+			$key_pattern
+		) );
 
 		foreach ( $results as $transient ) {
 			$cache_key = substr( $transient->name, 11 );
