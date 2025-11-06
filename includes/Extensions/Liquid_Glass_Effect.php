@@ -200,6 +200,7 @@ class Liquid_Glass_Effect {
 					'styles' => [
 						'effect1' => esc_html__( 'Heavy Frost', 'essential-addons-for-elementor-lite' ),
 						'effect2' => esc_html__( 'Soft Mist', 'essential-addons-for-elementor-lite' ),
+						'effect3' => esc_html__( 'Glass Frost', 'essential-addons-for-elementor-lite' ),
 						'effect4' => esc_html__( 'Light Frost', 'essential-addons-for-elementor-lite' ),
 						'effect5' => esc_html__( 'Grain Frost', 'essential-addons-for-elementor-lite' ),
 						'effect6' => esc_html__( 'Fine Frost', 'essential-addons-for-elementor-lite' ),
@@ -221,6 +222,10 @@ class Liquid_Glass_Effect {
 					'effect2' => [
 						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
 						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
+					],
+					'effect3' => [
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect3'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect3'] ) . $this->eael_pro_lock_icon(),
 					],
 					'effect4' => [
 						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' ),
