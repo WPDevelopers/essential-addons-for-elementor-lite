@@ -78,7 +78,8 @@ trait Core
     {
         if (get_transient('eael_do_activation_redirect')) {
             delete_transient('eael_do_activation_redirect');
-
+            
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             if (!isset($_GET['activate-multi'])) {
                 wp_redirect("admin.php?page=eael-settings");
             }
