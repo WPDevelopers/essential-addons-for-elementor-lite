@@ -63,7 +63,13 @@ trait Facebook_Feed {
 			return;
 		}
 
-		$key           = 'eael_facebook_feed_' . md5( str_rot13( str_replace( '.', '', $source . $page_id . $token ) ) . $settings['eael_facebook_feed_cache_limit'] );
+		$key = sprintf(
+			'eael_facebook_feed_%s',
+			md5(
+				sanitize_text_field( $source . $page_id . $token ) .
+				absint( $settings['eael_facebook_feed_cache_limit'] )
+			)
+		);
 		$facebook_data = get_transient( $key );
 
 		if ( $facebook_data == false ) {
@@ -143,7 +149,7 @@ trait Facebook_Feed {
 
 						$html .= '<div class="eael-facebook-feed-url-preview">';
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_host'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_host'] && !empty($item['attachments']['data'][0]['unshimmed_url']) ) {
-							$html .= '<p class="eael-facebook-feed-url-host">' . parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
+							$html .= '<p class="eael-facebook-feed-url-host">' . wp_parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
 						}
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_title'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_title'] ) {
 							$html .= '<h2 class="eael-facebook-feed-url-title">' . esc_html( $item['attachments']['data'][0]['title'] ) . '</h2>';
