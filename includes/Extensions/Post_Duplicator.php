@@ -82,7 +82,7 @@ class Post_Duplicator {
 			return; // Return if action is not eae_duplicate
 		}
 
-		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'ea_duplicator' ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $nonce ) ), 'ea_duplicator' ) ) {
 			return; // Return if nonce is not valid
 		}
 
@@ -176,7 +176,7 @@ class Post_Duplicator {
 					$insert .= $wpdb->prepare( '(%d, %s, %s)', $duplicated_id, $meta_key, $meta_value );
 				}
 
-        		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->query( $duplicate_insert_query . $insert );
 			}
 		}
