@@ -370,7 +370,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
-                'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
+                'default' => gmdate('Y-m-d H:i', current_time('timestamp', 0)),
             ]
         );
 
@@ -379,7 +379,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('End Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
-                'default' => date('Y-m-d H:i', strtotime("+6 months", current_time('timestamp', 0))),
+                'default' => gmdate('Y-m-d H:i', strtotime("+6 months", current_time('timestamp', 0))),
             ]
         );
 
@@ -428,7 +428,7 @@ class Event_Calendar extends Widget_Base
                 [
                     'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DATE_TIME,
-                    'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
+                    'default' => gmdate('Y-m-d H:i', current_time('timestamp', 0)),
                     'condition' => [
                         'eael_the_events_calendar_fetch' => 'date_range',
                     ],
@@ -440,7 +440,7 @@ class Event_Calendar extends Widget_Base
                 [
                     'label' => __('End Date', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DATE_TIME,
-                    'default' => date('Y-m-d H:i', strtotime("+6 months", current_time('timestamp', 0))),
+                    'default' => gmdate('Y-m-d H:i', strtotime("+6 months", current_time('timestamp', 0))),
                     'condition' => [
                         'eael_the_events_calendar_fetch' => 'date_range',
                     ],
@@ -590,7 +590,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $default_date = date('Y-m-d');
+        $default_date = gmdate('Y-m-d');
 	    $this->add_control(
 		    'eael_event_calendar_default_date',
 		    [
@@ -875,10 +875,10 @@ class Event_Calendar extends Widget_Base
 			    'type' => Controls_Manager::SELECT,
 			    'options' => apply_filters( 'eael_calendar_column_heading_week_date_formats', [
 				    '' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
-				    'ddd Do' => date( 'M j' ).'th',
-				    'dddd Do' => date('l j').'th',
-				    'dddd D/Y' => date( 'l j/Y' ),
-				    'ddd D/Y' => date( 'M j/Y' ),
+				    'ddd Do' => gmdate( 'M j' ).'th',
+				    'dddd Do' => gmdate('l j').'th',
+				    'dddd D/Y' => gmdate( 'l j/Y' ),
+				    'ddd D/Y' => gmdate( 'M j/Y' ),
 			    ] ),
 		    ]
 	    );
@@ -899,22 +899,22 @@ class Event_Calendar extends Widget_Base
 				'type' => Controls_Manager::SELECT,
 				'default' => 'MMM Do',
 				'options' => [
-					'MMM Do'      => date('M jS'),     // Sep 29th
-                    'MMMM Do'     => date('F jS'),     // September 29th
-                    'Do MMM'      => date('jS M'),     // 29th Sep
-                    'Do MMMM'     => date('jS F'),     // 29th September
-                    'MM-DD-YYYY'  => date('m-d-Y'),    // 09-29-2024
-                    'YYYY-DD-MM'  => date('Y-d-m'),    // 2024-29-09
-                    'YYYY-MM-DD'  => date('Y-m-d'),    // 2024-09-29
-                    'DD/MM/YYYY'  => date('d/m/Y'),    // 29/09/2024
-                    'MM/DD/YYYY'  => date('m/d/Y'),    // 09/29/2024
-                    'YYYY/MM/DD'  => date('Y/m/d'),    // 2024/09/29
-                    'DD.MM.YYYY'  => date('d.m.Y'),    // 29/09/2024
-                    'MM.DD.YYYY'  => date('m.d.Y'),    // 09/29/2024
-                    'YYYY.MM.DD'  => date('Y.m.d'),    // 2024/09/29
-                    'D-MMM-YYYY'  => date('j-M-Y'),    // 29-Sep-2024
-                    'MMMM YYYY'   => date('F Y'),      // September 2024
-                    'MMM YYYY'    => date('M Y'),      // Sep 2024
+					'MMM Do'      => gmdate('M jS'),     // Sep 29th
+                    'MMMM Do'     => gmdate('F jS'),     // September 29th
+                    'Do MMM'      => gmdate('jS M'),     // 29th Sep
+                    'Do MMMM'     => gmdate('jS F'),     // 29th September
+                    'MM-DD-YYYY'  => gmdate('m-d-Y'),    // 09-29-2024
+                    'YYYY-DD-MM'  => gmdate('Y-d-m'),    // 2024-29-09
+                    'YYYY-MM-DD'  => gmdate('Y-m-d'),    // 2024-09-29
+                    'DD/MM/YYYY'  => gmdate('d/m/Y'),    // 29/09/2024
+                    'MM/DD/YYYY'  => gmdate('m/d/Y'),    // 09/29/2024
+                    'YYYY/MM/DD'  => gmdate('Y/m/d'),    // 2024/09/29
+                    'DD.MM.YYYY'  => gmdate('d.m.Y'),    // 29/09/2024
+                    'MM.DD.YYYY'  => gmdate('m.d.Y'),    // 09/29/2024
+                    'YYYY.MM.DD'  => gmdate('Y.m.d'),    // 2024/09/29
+                    'D-MMM-YYYY'  => gmdate('j-M-Y'),    // 29-Sep-2024
+                    'MMMM YYYY'   => gmdate('F Y'),      // September 2024
+                    'MMM YYYY'    => gmdate('M Y'),      // Sep 2024
 				],
 			]
 		);
@@ -1009,7 +1009,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $default_date = date('Y-m-d');
+        $default_date = gmdate('Y-m-d');
         $this->add_control(
             'eael_table_event_calendar_default_date',
             [
@@ -1333,24 +1333,24 @@ class Event_Calendar extends Widget_Base
 			    'type'      => Controls_Manager::SELECT,
 			    'default'   => 'jS F Y',
 			    'options'   => [
-				    'F j, Y'    => date( 'F j, Y' ),                   // January 1, 2022
-				    'Y-m-d'     => date( 'Y-m-d' ),
-				    "d-m-Y"     => date( "d-m-y" ),
-				    "m-d-Y"     => date( "m-d-y" ),
-				    'Y.m.d'     => date( 'Y.m.d' ),
-				    "d.m.Y"     => date( "d.m.y" ),
-				    "m.d.Y"     => date( "m.d.y" ),
-				    'm/d/Y'     => date( 'm/d/Y' ),                    // 01/01/2022
-				    'd/m/Y'     => date( 'd/m/Y' ),                    // 01/01/2022
-				    'Y/m/d'     => date( 'Y/m/d' ),                    // 2022/01/01
-				    'M j, Y'    => date( 'M j, Y' ),                   // Jan 1, 2022
-				    'jS F Y'    => date( 'jS F Y' ),                   // 1st January 2022
-				    'D, M j, Y' => date( 'D, M j, Y' ),                // Sat, Jan 1, 2022
-				    'l, F j, Y' => date( 'l, F j, Y' ),                // Saturday, January 1, 2022
-				    'j F, Y'    => date( 'j F, Y' ),                   // 1 January, 2022
-				    'l, j F, Y' => date( 'l, j F, Y' ),                // Saturday, 1 January, 2022
-				    'D, d M Y'  => date( 'D, d M Y' ),                 // Sat, 01 Jan 2022
-				    'l, d-M-Y'  => date( 'l, d-M-Y' ),                 // Saturday, 01-Jan-2022
+				    'F j, Y'    => gmdate( 'F j, Y' ),                   // January 1, 2022
+				    'Y-m-d'     => gmdate( 'Y-m-d' ),
+				    "d-m-Y"     => gmdate( "d-m-y" ),
+				    "m-d-Y"     => gmdate( "m-d-y" ),
+				    'Y.m.d'     => gmdate( 'Y.m.d' ),
+				    "d.m.Y"     => gmdate( "d.m.y" ),
+				    "m.d.Y"     => gmdate( "m.d.y" ),
+				    'm/d/Y'     => gmdate( 'm/d/Y' ),                    // 01/01/2022
+				    'd/m/Y'     => gmdate( 'd/m/Y' ),                    // 01/01/2022
+				    'Y/m/d'     => gmdate( 'Y/m/d' ),                    // 2022/01/01
+				    'M j, Y'    => gmdate( 'M j, Y' ),                   // Jan 1, 2022
+				    'jS F Y'    => gmdate( 'jS F Y' ),                   // 1st January 2022
+				    'D, M j, Y' => gmdate( 'D, M j, Y' ),                // Sat, Jan 1, 2022
+				    'l, F j, Y' => gmdate( 'l, F j, Y' ),                // Saturday, January 1, 2022
+				    'j F, Y'    => gmdate( 'j F, Y' ),                   // 1 January, 2022
+				    'l, j F, Y' => gmdate( 'l, j F, Y' ),                // Saturday, 1 January, 2022
+				    'D, d M Y'  => gmdate( 'D, d M Y' ),                 // Sat, 01 Jan 2022
+				    'l, d-M-Y'  => gmdate( 'l, d-M-Y' ),                 // Saturday, 01-Jan-2022
 			    ],
 			    'condition' => [
 				    'eael_ec_show_date'         => 'yes',
@@ -1367,13 +1367,13 @@ class Event_Calendar extends Widget_Base
 			    'type'      => Controls_Manager::SELECT,
 			    'default'   => 'g:i A',
 			    'options'   => [             // 00:00
-				    'g:i a'   => date( 'g:i a' ),            // 12:00 am/pm
-				    'g:i:s a' => date( 'g:i:s a' ),            // 12:00 am/pm
-				    'g:i A'   => date( 'g:i A' ),            // 12:00 AM/PM
-				    'g:i:s A' => date( 'g:i:s A' ),            // 12:00 AM/PM
-				    'g:i:s'   => date( 'g:i:s' ),            // 12:00 AM/PM
-				    'H:i'     => date( 'H:i' ) . esc_html__( ' (24 Hours)', 'essential-addons-for-elementor-lite' ),
-				    'H:i:s'   => date( 'H:i:s' ) . esc_html__( ' (24 Hours)', 'essential-addons-for-elementor-lite' ),
+				    'g:i a'   => gmdate( 'g:i a' ),            // 12:00 am/pm
+				    'g:i:s a' => gmdate( 'g:i:s a' ),            // 12:00 am/pm
+				    'g:i A'   => gmdate( 'g:i A' ),            // 12:00 AM/PM
+				    'g:i:s A' => gmdate( 'g:i:s A' ),            // 12:00 AM/PM
+				    'g:i:s'   => gmdate( 'g:i:s' ),            // 12:00 AM/PM
+				    'H:i'     => gmdate( 'H:i' ) . esc_html__( ' (24 Hours)', 'essential-addons-for-elementor-lite' ),
+				    'H:i:s'   => gmdate( 'H:i:s' ) . esc_html__( ' (24 Hours)', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'condition' => [
 				    'eael_ec_show_date'         => 'yes',
@@ -3505,7 +3505,7 @@ class Event_Calendar extends Widget_Base
 
 	    $local          = $settings['eael_event_calendar_language'];
 	    $default_view   = $settings['eael_event_calendar_default_view'];
-	    $default_date   = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+	    $default_date   = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : gmdate( 'Y-m-d' );
 	    $time_format    = $settings['eael_event_time_format'];
 	    $event_limit    = ! empty( $settings['eael_event_limit'] ) ? intval( $settings['eael_event_limit'] ) : 2;
 	    $multi_days_event_day_count = ! empty( $settings['eael_event_multi_days_event_day_count'] ) && 'yes' ===  $settings['eael_event_multi_days_event_day_count'] ? 1 : 0;
@@ -3607,7 +3607,7 @@ class Event_Calendar extends Widget_Base
 			}
 
 			foreach ( $data as $event ) {
-				$start        = date( 'Y-m-d', strtotime( $event['start'] ) );
+				$start        = gmdate( 'Y-m-d', strtotime( $event['start'] ) );
 				$is_old_event = false;
 				if ( 'current' === $settings["eael_table_ec_default_date_type"] ) {
 					$is_old_event = $this->is_old_event( $start );
@@ -3676,7 +3676,7 @@ class Event_Calendar extends Widget_Base
                     } else{
                         $start    = date_i18n( $date_format, $start_time );
                         $end      = date_i18n( $date_format, $end_time );
-                        $same_day = date( 'Ymd', $start_time ) === date( 'Ymd', $end_time );
+                        $same_day = gmdate( 'Ymd', $start_time ) === gmdate( 'Ymd', $end_time );
                     }
                     
 					if ( $time_format && $same_day ) {
@@ -3825,13 +3825,13 @@ class Event_Calendar extends Widget_Base
             foreach ($events as $event) {
 
                 if ($event['eael_event_all_day'] == 'yes') {
-                    $start = !empty( $event["eael_event_start_date_allday"] ) ? $event["eael_event_start_date_allday"] : date('Y-m-d', current_time('timestamp', 0));
-					$_end  = !empty( $event["eael_event_end_date_allday"] ) ? $event["eael_event_end_date_allday"] : date('Y-m-d', current_time('timestamp', 0));
-                    $end = date('Y-m-d', strtotime("+1 days", strtotime($_end)));
+                    $start = !empty( $event["eael_event_start_date_allday"] ) ? $event["eael_event_start_date_allday"] : gmdate('Y-m-d', current_time('timestamp', 0));
+					$_end  = !empty( $event["eael_event_end_date_allday"] ) ? $event["eael_event_end_date_allday"] : gmdate('Y-m-d', current_time('timestamp', 0));
+                    $end = gmdate('Y-m-d', strtotime("+1 days", strtotime($_end)));
                 } else {
-                    $start = !empty( $event["eael_event_start_date"] ) ? $event["eael_event_start_date"] : date('Y-m-d', current_time('timestamp', 0));
-					$_end  = !empty( $event["eael_event_end_date"] ) ? $event["eael_event_end_date"] : date('Y-m-d', strtotime("+59 minute", current_time('timestamp', 0)) );
-                    $end = date('Y-m-d H:i', strtotime($_end))  . ":01";
+                    $start = !empty( $event["eael_event_start_date"] ) ? $event["eael_event_start_date"] : gmdate('Y-m-d', current_time('timestamp', 0));
+					$_end  = !empty( $event["eael_event_end_date"] ) ? $event["eael_event_end_date"] : gmdate('Y-m-d', strtotime("+59 minute", current_time('timestamp', 0)) );
+                    $end = gmdate('Y-m-d H:i', strtotime($_end))  . ":01";
                 }
 
                 if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
@@ -3842,7 +3842,7 @@ class Event_Calendar extends Widget_Base
                 }
 
                 if( $settings['eael_old_events_hide'] === 'start' ){
-                    $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+                    $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : gmdate( 'Y-m-d' );
                     $should_show  = $this->is_old_event( $start, $default_date );
 
                     if ( $should_show ) {
@@ -3915,7 +3915,7 @@ class Event_Calendar extends Widget_Base
         $arg = [
             'key' => $settings['eael_event_google_api_key'],
             'maxResults' => $settings['eael_google_calendar_max_result'],
-            'timeMin' => urlencode(date('c', $start_date)),
+            'timeMin' => urlencode(gmdate('c', $start_date)),
             'singleEvents' => 'true',
             'calendar_id' => urlencode($settings['eael_event_calendar_id']),
         ];
@@ -3923,15 +3923,15 @@ class Event_Calendar extends Widget_Base
         $transient_args =  [
             'key' => $settings['eael_event_google_api_key'],
             'maxResults' => $settings['eael_google_calendar_max_result'],
-            'timeMin' => urlencode(date('Y-m-d H', $start_date)),
+            'timeMin' => urlencode(gmdate('Y-m-d H', $start_date)),
             'singleEvents' => 'true',
             'calendar_id' => urlencode($settings['eael_event_calendar_id']),
             'cache_time' => $settings['eael_event_calendar_data_cache_limit']
         ];
 
         if (!empty($end_date) && $end_date > $start_date) {
-          $arg['timeMax'] = urlencode(date('c', $end_date));
-          $transient_args['timeMax'] = urlencode(date('Y-m-d H', $end_date));
+          $arg['timeMax'] = urlencode(gmdate('c', $end_date));
+          $transient_args['timeMax'] = urlencode(gmdate('Y-m-d H', $end_date));
         }
 
         $transient_key = 'eael_google_calendar_' . md5(implode('', $transient_args));
@@ -3996,7 +3996,7 @@ class Event_Calendar extends Widget_Base
                 }
 
 	            if( $settings['eael_old_events_hide'] === 'start' ){
-                    $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+                    $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : gmdate( 'Y-m-d' );
                     $should_show  = $this->is_old_event( $ev_start_date, $default_date );
 
                     if ( $should_show ) {
@@ -4080,9 +4080,9 @@ class Event_Calendar extends Widget_Base
 
 
             if (tribe_event_is_all_day($event->ID)) {
-              $end = date('Y-m-d', strtotime("+1 days", strtotime(tribe_get_end_date($event->ID, true, $date_format))));
+              $end = gmdate('Y-m-d', strtotime("+1 days", strtotime(tribe_get_end_date($event->ID, true, $date_format))));
             } else {
-              $end = date('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format))) . ":01";
+              $end = gmdate('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format))) . ":01";
             }
             
             if ( $random_color_enabled ) {
@@ -4106,7 +4106,7 @@ class Event_Calendar extends Widget_Base
             }
 
             if( $settings['eael_old_events_hide'] === 'start' ){
-                $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+                $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : gmdate( 'Y-m-d' );
                 $should_show  = $this->is_old_event( $start, $default_date );
 
                 if ( $should_show ) {
