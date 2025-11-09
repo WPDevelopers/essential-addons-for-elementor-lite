@@ -83,28 +83,66 @@ class Migration
 		}
 
 		global $wpdb;
-		$sql           = "from {$wpdb->options} as options_tb 
-                inner join (SELECT option_id FROM {$wpdb->options} 
-                WHERE ((option_name like '%\_eael_elements' and LENGTH(option_name) = 23 ) 
-                           or (option_name like '%\_eael_custom_js' and LENGTH(option_name) = 24)
-                           or (option_name like '%\_eael_updated_at' and LENGTH(option_name) = 25)
-                           or (option_name = 'eael_reduce_op_table_data')
-                           or (option_name = 'eael_remove_old_cache')
-                           or (option_name = 'eael_editor_updated_at')
-                           or (option_name = 'eael_gb_eb_popup_hide')
-                           or (option_name like 'eael_login_error_%'))
-                  ) AS options_tb2 
-                    ON options_tb2.option_id = options_tb.option_id";
-		$selection_sql = "select count(options_tb.option_id) as total " . $sql;
+    $prepare_args = [
+        '%\_eael_elements',
+        '%\_eael_custom_js',
+        '%\_eael_updated_at',
+        'eael_reduce_op_table_data',
+        'eael_remove_old_cache',
+        'eael_editor_updated_at',
+        'eael_gb_eb_popup_hide',
+        'eael_login_error_%'
+    ];
 
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$results = $wpdb->get_var( $selection_sql );
-		if ( $results > 0 ) {
-			$deletiation_sql = "delete options_tb " . $sql;
+    // Count
+    $total = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT COUNT(options_tb.option_id) AS total
+            FROM {$wpdb->options} AS options_tb
+            INNER JOIN (
+                SELECT option_id
+                FROM {$wpdb->options}
+                WHERE (
+                    (option_name LIKE %s AND LENGTH(option_name) = 23)
+                    OR (option_name LIKE %s AND LENGTH(option_name) = 24)
+                    OR (option_name LIKE %s AND LENGTH(option_name) = 25)
+                    OR (option_name = %s)
+                    OR (option_name = %s)
+                    OR (option_name = %s)
+                    OR (option_name = %s)
+                    OR (option_name LIKE %s)
+                )
+            ) AS options_tb2
+            ON options_tb2.option_id = options_tb.option_id",
+            ...$prepare_args
+        )
+    );
 
-      // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			$wpdb->query( $deletiation_sql );
-		}
+    if ( $total > 0 ) {
+        // Delete
+        $wpdb->query(
+            $wpdb->prepare(
+                "DELETE options_tb
+                FROM {$wpdb->options} AS options_tb
+                INNER JOIN (
+                    SELECT option_id
+                    FROM {$wpdb->options}
+                    WHERE (
+                        (option_name LIKE %s AND LENGTH(option_name) = 23)
+                        OR (option_name LIKE %s AND LENGTH(option_name) = 24)
+                        OR (option_name LIKE %s AND LENGTH(option_name) = 25)
+                        OR (option_name = %s)
+                        OR (option_name = %s)
+                        OR (option_name = %s)
+                        OR (option_name = %s)
+                        OR (option_name LIKE %s)
+                    )
+                ) AS options_tb2
+                ON options_tb2.option_id = options_tb.option_id",
+                ...$prepare_args
+            )
+        );
+    }
 
 		set_transient( 'eael_reduce_op_table_data', 1, DAY_IN_SECONDS );
 		wp_clear_scheduled_hook( 'eael_remove_unused_options_data' );
