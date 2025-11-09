@@ -86,7 +86,7 @@ echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_att
                 if ($settings['eael_show_title']) {
                     echo '<header class="eael-entry-header"><' . esc_attr( $title_tag ) . ' class="eael-entry-title">';
                     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                    echo '<a class="eael-grid-post-link" href="' . esc_url( get_the_permalink() ) . '" title="' . esc_attr( strip_tags( get_the_title() ) ) . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
+                    echo '<a class="eael-grid-post-link" href="' . esc_url( get_the_permalink() ) . '" title="' . esc_attr( wp_strip_all_tags( get_the_title() ) ) . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
 
                     if (empty($settings['eael_title_length'])) {
                         echo wp_kses( get_the_title(), Helper::eael_allowed_tags() );
