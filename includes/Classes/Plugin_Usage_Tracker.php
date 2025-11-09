@@ -177,8 +177,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @return void
 		 */
 		private function redirect_to(){
-			$request_uri  = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
-			$query_string = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY );
+			$request_uri  =  !empty( $_SERVER['REQUEST_URI'] ) ?  wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ) : '';
+			$query_string =  !empty( $_SERVER['REQUEST_URI'] ) ? wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_QUERY ) : '';
 			parse_str( $query_string, $current_url );
 
 			$unset_array = array( 'dismiss', 'plugin', '_wpnonce', 'later', 'plugin_action', 'marketing_optin' );
@@ -363,7 +363,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 			}
 			$body['marketing_method'] = $this->marketing;
-			$body['server'] = isset( $_SERVER['SERVER_SOFTWARE'] ) ? $_SERVER['SERVER_SOFTWARE'] : '';
+			$body['server'] = isset( $_SERVER['SERVER_SOFTWARE'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : '';
 
 			/**
 			 * Collect all active and inactive plugins
@@ -457,7 +457,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			 */
 			if( $site_id == false && $this->item_id !== false ) {
 				if( isset( $_SERVER['REMOTE_ADDR'] ) && ! empty( $_SERVER['REMOTE_ADDR'] && $_SERVER['REMOTE_ADDR'] != '127.0.0.1' ) ) {
-					$country_request = wp_remote_get( 'http://ip-api.com/json/'. $_SERVER['REMOTE_ADDR'] .'?fields=country');
+					$country_request = wp_remote_get( 'http://ip-api.com/json/'. sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) .'?fields=country');
 					if( ! is_wp_error( $country_request ) && $country_request['response']['code'] == 200 ) {
 						$ip_data = json_decode( $country_request["body"] );
 						$body['country'] = isset( $ip_data->country ) ? $ip_data->country : 'NOT SET';
@@ -661,16 +661,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @return void
 		 */
 		public function clicked(){
-			if ( isset( $_GET['_wpnonce'] ) && isset( $_GET['plugin'] ) && trim( $_GET['plugin'] ) === $this->plugin_name && isset( $_GET['plugin_action'] ) ) {
-				if ( ! wp_verify_nonce( $_GET['_wpnonce'], '_wpnonce_optin_' . $this->plugin_name ) ) {
+			if ( isset( $_GET['_wpnonce'] ) && isset( $_GET['plugin'] ) && sanitize_text_field( wp_unslash( $_GET['plugin'] ) ) === $this->plugin_name && isset( $_GET['plugin_action'] ) ) {
+				if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), '_wpnonce_optin_' . $this->plugin_name ) ) {
 					return;
 				}
 
 				if( isset( $_GET['tab'] ) && $_GET['tab'] === 'plugin-information' ) {
                     return;
                 }
-				$plugin = sanitize_text_field( $_GET['plugin'] );
-				$action = sanitize_text_field( $_GET['plugin_action'] );
+				$plugin = sanitize_text_field( wp_unslash( $_GET['plugin'] ) );
+				$action = sanitize_text_field( wp_unslash( $_GET['plugin_action'] ) );
 				if( $action == 'yes' ) {
 					$this->schedule_tracking();
 					$this->set_is_tracking_allowed( true, $plugin );
@@ -711,11 +711,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		public function deactivate_reasons_form_submit() {
 			check_ajax_referer( 'wpins_deactivation_nonce', 'security' );
 			if( isset( $_POST['values'] ) ) {
-				$values = sanitize_text_field( $_POST['values'] );
+				$values = sanitize_text_field( wp_unslash( $_POST['values'] ) );
 				update_option( 'wpins_deactivation_reason_' . $this->plugin_name, $values );
 			}
 			if( isset( $_POST['details'] ) ) {
-				$details = sanitize_text_field( $_POST['details'] );
+				$details = sanitize_text_field( wp_unslash( $_POST['details'] ) );
 				update_option( 'wpins_deactivation_details_' . $this->plugin_name, $details );
 			}
 			echo 'success';
@@ -1189,7 +1189,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             FROM  $wpdb->postmeta
             WHERE `meta_key` = '_eael_widget_elements'";
 
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$post_ids      = $wpdb->get_col( $sql );
 			$used_elements = [];
 
