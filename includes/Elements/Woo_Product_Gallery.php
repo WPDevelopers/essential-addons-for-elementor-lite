@@ -2966,6 +2966,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'include'    => $product_cats,
 			'orderby'    => 'include',
 		);
+		// phpcs:ignore WordPress.WP.DeprecatedParameters.Get_termsParam2Found
 		$product_categories = get_terms( 'product_cat', $cat_args );
 
 		// Tag retrieve
@@ -2975,6 +2976,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'include'    => $product_tags_items,
 			'orderby'    => 'include',
 		);
+		// phpcs:ignore WordPress.WP.DeprecatedParameters.Get_termsParam2Found
 		$product_tags = get_terms( 'product_tag', $tag_args );
 		
 		$args = [
@@ -3206,6 +3208,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'include'    => $product_cats,
 				'orderby'    => 'include',
 			);
+			// phpcs:ignore WordPress.WP.DeprecatedParameters.Get_termsParam2Found
 			$product_categories = get_terms( 'product_cat', $catargs );
 
 			if ( count( $product_categories ) > 0 ) {
@@ -3236,6 +3239,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'include'    => $product_tags_items,
 				'orderby'    => 'include',
 			);
+			// phpcs:ignore WordPress.WP.DeprecatedParameters.Get_termsParam2Found
 			$product_tags = get_terms( 'product_tag', $tagargs );
 
 			if ( count( $product_tags ) > 0 ) {
