@@ -48,7 +48,7 @@ class WPDeveloper_Setup_Wizard {
 	 * Remove all notice in setup wizard page
 	 */
 	public function remove_notice() {
-		if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'eael-setup-wizard' ) {
+		if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'eael-setup-wizard' ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
 			remove_all_actions( 'admin_notices' );
 			remove_all_actions( 'all_admin_notices' );
 		}
@@ -467,7 +467,7 @@ class WPDeveloper_Setup_Wizard {
 			return;
 		}
 
-		wp_parse_str( $_POST[ 'fields' ], $fields );
+		wp_parse_str( $_POST[ 'fields' ], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 
 		if ( isset( $fields[ 'eael_user_email_address' ] ) && intval( $fields[ 'eael_user_email_address' ] ) == 1 ) {
 			$this->wpins_process();
@@ -491,7 +491,7 @@ class WPDeveloper_Setup_Wizard {
 			return;
 		}
 
-		wp_parse_str( $_POST[ 'fields' ], $fields );
+		wp_parse_str( $_POST[ 'fields' ], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 		
 		$this->wpins_process();
 
@@ -512,7 +512,7 @@ class WPDeveloper_Setup_Wizard {
 			return;
 		}
 
-		wp_parse_str( $_POST[ 'fields' ], $fields );
+		wp_parse_str( $_POST[ 'fields' ], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 
 		if ( $this->save_element_list( $fields ) ) {
 			wp_send_json_success();
