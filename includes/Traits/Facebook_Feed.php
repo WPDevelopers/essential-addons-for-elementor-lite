@@ -18,15 +18,15 @@ trait Facebook_Feed {
 	 */
 	public function facebook_feed_render_items( $settings = [] ) {
 		// check if ajax request
-		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) {
+		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$ajax = wp_doing_ajax();
 			// check ajax referer
 			check_ajax_referer( 'essential-addons-elementor', 'security' );
 
 			// init vars
-			$page = isset( $_POST['page'] ) ? intval( $_REQUEST['page'], 10 ) : 0;
+			$page = !empty( $_POST['page'] ) ? intval( wp_unslash( $_POST['page'] ), 10 ) : 0;
 			if ( ! empty( $_POST['post_id'] ) ) {
-				$post_id = intval( $_POST['post_id'], 10 );
+				$post_id = intval( wp_unslash( $_POST['post_id'] ), 10 );
 			} else {
 				$err_msg = __( 'Post ID is missing', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
@@ -36,7 +36,7 @@ trait Facebook_Feed {
 				return false;
 			}
 			if ( ! empty( $_POST['widget_id'] ) ) {
-				$widget_id = sanitize_text_field( $_POST['widget_id'] );
+				$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 			} else {
 				$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
@@ -66,7 +66,7 @@ trait Facebook_Feed {
 		$key = sprintf(
 			'eael_facebook_feed_%s',
 			md5(
-				sanitize_text_field( $source . $page_id . $token ) .
+				sanitize_text_field( wp_unslash( $source . $page_id . $token ) ) .
 				absint( $settings['eael_facebook_feed_cache_limit'] )
 			)
 		);
@@ -226,7 +226,7 @@ trait Facebook_Feed {
 			}
 		}
 
-		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) {
+		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$data = [
 				'num_pages' => ceil( count( $facebook_data ) / $settings['eael_facebook_feed_image_count']['size'] ),
 				'html'      => $html,
