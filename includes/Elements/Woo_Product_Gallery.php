@@ -2794,7 +2794,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		$settings[ 'eael_widget_id' ] = $widget_id;
 		$is_product_archive = is_product_tag() || is_product_category() || is_shop() || is_product_taxonomy();
 
-		if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty( $_REQUEST[ 'post_type' ] ) ) {
+		if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty( $_REQUEST[ 'post_type' ] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$settings[ 'posts_per_page' ] = $settings[ 'eael_product_gallery_products_count' ] ?: 3;
 			$settings[ 'offset' ]         = $settings[ 'product_offset' ];
 			$args                         = HelperClass::get_query_args( $settings );
