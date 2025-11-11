@@ -4026,7 +4026,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list   = $this->woo_product_list_settings  = self::get_woo_product_list_settings( $settings );
         $is_product_archive = is_product_tag() || is_product_category() || is_shop() || is_product_taxonomy();
 
-        if ( 'source_dynamic' === $settings['post_type'] && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
+        if ( 'source_dynamic' === $settings['post_type'] && is_archive() || ! empty( $_REQUEST['post_type'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		    $settings['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
 		    $settings['offset']         = ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0;
 		    $args                       = ClassesHelper::get_query_args( $settings );
