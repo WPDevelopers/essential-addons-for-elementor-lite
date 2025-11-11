@@ -161,6 +161,7 @@ class Login_Register extends Widget_Base {
 		$this->pro_enabled       = apply_filters( 'eael/pro_enabled', false );
 
 		if( ! empty( $this->cloudflare_turnstile_sitekey ) ){
+			//phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent
 			wp_register_script( 'eael-cloudflare', 'https://challenges.cloudflare.com/turnstile/v0/api.js' );
 		}
 
@@ -5924,6 +5925,7 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$default_hide_class = ( 'register' === $this->default_form || 'lostpassword' === $this->default_form || $this->should_print_resetpassword_form_editor || isset($_GET['eael-register']) || isset($_GET['eael-lostpassword']) || isset($_GET['eael-resetpassword']) ) ? 'eael-lr-d-none' : '';
 
 			//Reg link related
@@ -6166,6 +6168,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) {
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$default_hide_class = ( 'login' === $this->default_form || 'lostpassword' === $this->default_form || $this->should_print_resetpassword_form_editor || isset($_GET['eael-lostpassword']) || isset($_GET['eael-resetpassword']) ) && !isset($_GET['eael-register']) ? 'eael-lr-d-none' : ''; //eael-register flag for show error/success message when formal form submit
 			$is_pass_valid      = false; // Does the form has a password field?
 			$is_pass_confirmed  = false;
@@ -6516,12 +6519,14 @@ class Login_Register extends Widget_Base {
 		if ( $this->should_print_lostpassword_form ) {
 			$form_not_enabled = ! ( 'lostpassword' === $this->default_form || ( 'yes' === $this->get_settings_for_display( 'show_lost_password' ) && 'form' === $this->get_settings_for_display( 'lost_password_link_type' ) ) );
 
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if( $form_not_enabled && isset( $_GET['eael-lostpassword'] ) ){
 				wp_safe_redirect( remove_query_arg( array( 'eael-lostpassword' ) ) );
 				exit;
 			}
 
 			// prepare all lostpassword form related vars
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || $this->should_print_resetpassword_form_editor || isset($_GET['eael-register']) || isset($_GET['eael-resetpassword']) ) && !isset($_GET['eael-lostpassword']) ? 'eael-lr-d-none' : '';
 
 			//Login link related
@@ -6667,11 +6672,12 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_resetpassword_form(){
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || 'lostpassword' === $this->default_form || isset($_GET['eael-register']) || isset($_GET['eael-lostpassword']) ) && !isset($_GET['eael-resetpassword']) ? 'eael-lr-d-none' : '';
 		$default_hide_class = $this->should_print_resetpassword_form_editor ? '' : $default_hide_class;
 		$rp_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id ); 
 
-		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
+		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$show_resetpassword_on_form_submit = get_option('eael_show_reset_password_on_form_submit_' . $this->get_id());
 
 			$validation_required = true;
@@ -6679,9 +6685,10 @@ class Login_Register extends Widget_Base {
 				$validation_required = false;
 			}
 
-			$rp_data['rp_login'] = $_GET['eael_login'] ?? '';
-			$rp_data['rp_key']   = $_GET['eael_key'] ?? '';
+			$rp_data['rp_login'] = ! empty( $_GET['eael_login'] ) ? sanitize_text_field( wp_unslash( $_GET['eael_login'] ) ) : ''; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$rp_data['rp_key']   =  ! empty( $_GET['eael_key'] ) ? sanitize_text_field( wp_unslash( $_GET['eael_key'] ) ) : ''; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 			if( $validation_required && ! isset( $_POST['eael-resetpassword-submit'] ) ){
 				$user = check_password_reset_key( $rp_data['rp_key'], $rp_data['rp_login'] );
 
@@ -6934,7 +6941,7 @@ class Login_Register extends Widget_Base {
 			}
 
 			if ( ! empty( $this->ds['login_redirect_url_prev_page'] ) && 'yes' === $this->ds['login_redirect_url_prev_page'] ) {
-				$login_redirect_url_prev_page = ! empty( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( $_SERVER['HTTP_REFERER'] ) : '';
+				$login_redirect_url_prev_page = ! empty( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( $_SERVER['HTTP_REFERER'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				?>
 				<input type="hidden"
 					name="redirect_to_prev_page_login"
@@ -6944,7 +6951,7 @@ class Login_Register extends Widget_Base {
 
 		if ( 'register' === $form_type ) {
 			if ( ! empty( $this->ds['register_redirect_url_prev_page'] ) && 'yes' === $this->ds['register_redirect_url_prev_page'] ) {
-				$register_redirect_url_prev_page = ! empty( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( $_SERVER['HTTP_REFERER'] ) : '';
+				$register_redirect_url_prev_page = ! empty( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( $_SERVER['HTTP_REFERER'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				?>
                 <input type="hidden"
                        name="redirect_to_prev_page"
