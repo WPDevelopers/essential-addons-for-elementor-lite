@@ -371,9 +371,9 @@ trait Controls
                 );
 
                 $wb->add_control(
-                    'eael_dfg_enable_hybrid_mode',
+                    'eael_dfg_enable_combined_query',
                     [
-                        'label' => __('Enable Hybrid Mode', 'essential-addons-for-elementor-lite'),
+                        'label' => __('Enable Combined Query', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::SWITCHER,
                         'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
                         'label_off' => __('No', 'essential-addons-for-elementor-lite'),
