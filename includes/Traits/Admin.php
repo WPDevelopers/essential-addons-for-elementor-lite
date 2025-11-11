@@ -1932,6 +1932,15 @@ trait Admin {
 
                     // Add an event listener to the dismiss button.
                     dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
+
+                    // Handle custom dismiss button clicks
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_2025_notice .eael-action-dismiss-btn');
+                    if (customDismissBtn && dismissBtn) {
+                        customDismissBtn.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            dismissBtn.click();
+                        });
+                    }
                 }, 1);
             });
 		</script>
