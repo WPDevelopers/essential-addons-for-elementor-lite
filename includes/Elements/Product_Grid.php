@@ -3628,6 +3628,7 @@ class Product_Grid extends Widget_Base
 	    $settings['eael_widget_id'] = $widget_id;
         $is_product_archive         = is_product_tag() || is_product_category() || is_shop() || is_product_taxonomy();
 
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	    if ( $settings['post_type'] === 'source_dynamic' && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
 		    $settings['posts_per_page'] = $settings['eael_product_grid_products_count'] ?: 4;
 		    $settings['offset']         = $settings['product_offset'];
