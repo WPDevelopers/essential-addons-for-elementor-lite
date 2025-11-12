@@ -101,6 +101,7 @@ class Liquid_Glass_Effect
                 'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-' . $effect,
                 'condition' => [
                     'eael_liquid_glass_effect_switch'       => 'yes',
+                    'eael_liquid_glass_border_distortion!'  => 'yes',
                     'eael_liquid_glass_shadow_effect'       => $effect,
                     'eael_liquid_glass_effect'              => $condition,
                 ],
@@ -122,6 +123,7 @@ class Liquid_Glass_Effect
                 ],
                 'condition' => [
                     'eael_liquid_glass_effect_switch' => 'yes',
+                    'eael_liquid_glass_border_distortion!'  => 'yes',
                     'eael_liquid_glass_shadow_effect' => $effect,
                     'eael_liquid_glass_effect'        => $condition,
                 ],
@@ -144,6 +146,7 @@ class Liquid_Glass_Effect
                 'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-' . $effect,
                 'condition' => [
                     'eael_liquid_glass_effect_switch'  => 'yes',
+                    'eael_liquid_glass_border_distortion!'  => 'yes',
                     'eael_liquid_glass_shadow_effect' => $effect,
                     'eael_liquid_glass_effect'        => $condition,
                 ],
@@ -400,6 +403,7 @@ class Liquid_Glass_Effect
                     'prefix_class' => 'eael_liquid_glass_shadow-',
                     'condition'    => [
                         'eael_liquid_glass_effect_switch'       => 'yes',
+                        'eael_liquid_glass_border_distortion!'  => 'yes',
                         'eael_liquid_glass_effect'              => ['effect1', 'effect2'],
                     ]
                 ]
@@ -414,6 +418,7 @@ class Liquid_Glass_Effect
                     'condition' => [
                         'eael_liquid_glass_effect_switch'       => 'yes',
                         'eael_liquid_glass_shadow_effect!'      => '',
+                        'eael_liquid_glass_border_distortion!'  => 'yes',
                         'eael_liquid_glass_effect'              => ['effect1', 'effect2'],
                     ],
                 ]
@@ -506,7 +511,7 @@ class Liquid_Glass_Effect
                     'prefix_class' => 'eael_liquid_glass_border_distortion_',
                     'condition'    => [
                         'eael_liquid_glass_effect_switch' => 'yes',
-                        'eael_liquid_glass_effect'        => ['effect1', 'effect2'],
+                        'eael_liquid_glass_effect'        => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
                     ],
                 ]
             );
@@ -531,7 +536,7 @@ class Liquid_Glass_Effect
                     'condition'    => [
                         'eael_liquid_glass_effect_switch'     => 'yes',
                         'eael_liquid_glass_border_distortion' => 'yes',
-                        'eael_liquid_glass_effect'            => ['effect1', 'effect2'],
+                        'eael_liquid_glass_effect'            => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
                     ],
                 ]
             );
@@ -552,8 +557,9 @@ class Liquid_Glass_Effect
                     ],
                     'prefix_class' => 'eael_liquid_glass_shadow-',
                     'condition'    => [
-                        'eael_liquid_glass_effect_switch' => 'yes',
-                        'eael_liquid_glass_effect'        => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
+                        'eael_liquid_glass_effect_switch'      => 'yes',
+                        'eael_liquid_glass_border_distortion!' => 'yes',
+                        'eael_liquid_glass_effect'             => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
                     ]
                 ]
             );
@@ -565,9 +571,10 @@ class Liquid_Glass_Effect
                     'type'      => Controls_Manager::HEADING,
                     'separator' => 'before',
                     'condition' => [
-                        'eael_liquid_glass_effect_switch'  => 'yes',
-                        'eael_liquid_glass_shadow_effect!' => '',
-                        'eael_liquid_glass_effect'         => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
+                        'eael_liquid_glass_effect_switch'      => 'yes',
+                        'eael_liquid_glass_shadow_effect!'     => '',
+                        'eael_liquid_glass_border_distortion!' => 'yes',
+                        'eael_liquid_glass_effect'             => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
                     ],
                 ]
             );
