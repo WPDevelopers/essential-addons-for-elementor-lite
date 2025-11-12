@@ -194,6 +194,11 @@ class Elements_Manager {
 		if ( ! empty( $element['settings']['eael_liquid_glass_effect_switch'] ) ) {
 			$list['liquid-glass-effect'] = 'liquid-glass-effect';
 		}
+        
+        // Vertical Text Orientation
+		if ( ! empty( $element['settings']['eael_vertical_text_orientation_switch'] ) ) {
+			$list['vertical-text-orientation'] = 'vertical-text-orientation';
+		}
 
 		//Image Masking
 		if ( ! empty( $element['settings']['eael_enable_image_masking'] ) ) {
