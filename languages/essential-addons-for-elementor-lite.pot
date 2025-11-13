@@ -11979,7 +11979,7 @@ msgid "File Type Fields:"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1739
-msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.4 with new \"<b><a target='_blank' href='%s'>Image Masking</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
+msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.5 with new \"<b><a target='_blank' href='%s'>Vertical Text Orientation</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1742

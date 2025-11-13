@@ -1736,7 +1736,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.4 with new \"<b><a target='_blank' href='%s'>Image Masking</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/image-masking-with-morphing/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.5 with new \"<b><a target='_blank' href='%s'>Vertical Text Orientation</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/vertical-text-orientation/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
