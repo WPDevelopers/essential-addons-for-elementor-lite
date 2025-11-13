@@ -630,6 +630,15 @@ trait Admin {
 							'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'custom-cursor' ) )
 					    ],
+						'image-masking' => [
+						    'key'         => 'image-masking',
+						    'title'       => __( 'Image Masking', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/image-masking-with-morphing/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-image-masking-with-morphing/',
+						    'is_pro'      => false,
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'image-masking' ) )
+					    ],
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
@@ -1545,54 +1554,15 @@ trait Admin {
 							    ],
 							    'info'   => __( 'Get your Google Places API key from Google Cloud Console. This is used for fetching Google Reviews.', 'essential-addons-for-elementor-lite' ),
 						    ],
-						    'trustpilot'   => [
-							    'title'  => __( 'Trustpilot API', 'essential-addons-for-elementor-lite' ),
-							    'icon'   => 'images/map.svg',
-							    'fields' => [
-								    [
-									    'name'        => 'br_trustpilot_api_key',
-									    'value'       => get_option( 'eael_br_trustpilot_api_key', '' ),
-									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
-									    'placeholder' => __( 'Enter Trustpilot API Key', 'essential-addons-for-elementor-lite' ),
-								    ],
-							    ],
-							    'info'   => __( 'Get your Trustpilot API key from Trustpilot Developer Portal. This is used for fetching Trustpilot Reviews.', 'essential-addons-for-elementor-lite' ),
-							    'isPro'  => true,
-						    ],
-						    'yelp'         => [
-							    'title'  => __( 'Yelp Fusion API', 'essential-addons-for-elementor-lite' ),
-							    'icon'   => 'images/map.svg',
-							    'fields' => [
-								    [
-									    'name'        => 'br_yelp_api_key',
-									    'value'       => get_option( 'eael_br_yelp_api_key', '' ),
-									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
-									    'placeholder' => __( 'Enter Yelp Fusion API Key', 'essential-addons-for-elementor-lite' ),
-								    ],
-							    ],
-							    'info'   => __( 'Get your Yelp Fusion API key from Yelp Developers. This is used for fetching Yelp Reviews.', 'essential-addons-for-elementor-lite' ),
-							    'isPro'  => true,
-						    ],
+
+
 					    ],
 					    'link'      => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
 						    'url'  => 'https://essential-addons.com/docs/ea-business-reviews/'
 					    ]
 				    ],
-				    'googleMyBusinessTokenSetting' => [
-					    'title'      => __( "Google My Business Access Token", 'essential-addons-for-elementor-lite' ),
-					    'title_icon' => 'images/map.svg',
-					    'label'      => __( "Set Access Token", 'essential-addons-for-elementor-lite' ),
-					    'name'       => 'br_google_my_business_token',
-					    'type'       => 'textarea',
-					    'placeholder'=> __( "ya29.a0AfH6SMC...", 'essential-addons-for-elementor-lite' ),
-					    'value'      => get_option( 'eael_br_google_my_business_token', '' ),
-					    'image'      => 'images/map2.png',
-					    'link'       => [
-						    'text' => __( 'Get your access token from Google OAuth 2.0 Playground', 'essential-addons-for-elementor-lite' ),
-						    'url'  => 'https://developers.google.com/oauthplayground/'
-					    ]
-				    ],
+
 
 				    'mailchimpSetting'       => [
 					    'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
@@ -1758,7 +1728,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.6 with new \"<b><a target='_blank' href='%s'>Custom Cursor</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/custom-cursor' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.4 with new \"<b><a target='_blank' href='%s'>Image Masking</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/image-masking-with-morphing/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),

@@ -372,7 +372,7 @@ trait Woo_Cart_Helper {
 	}
 
 	public static function eael_cart_button_proceed_to_checkout( $settings ) {
-		if ( 'yes' === $settings['eael_woo_cart_hide_checkout_btn'] ) {
+		if ( isset( $settings['eael_woo_cart_hide_checkout_btn'] ) && 'yes' === $settings['eael_woo_cart_hide_checkout_btn'] ) {
 			return;
 		}
 		if ( ! empty( $settings['ea_woo_cart_layout'] ) ) {
