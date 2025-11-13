@@ -404,9 +404,10 @@
             position: relative;
             border-block-end: none;
             border-radius: 0;
-            &:last-child {
-               grid-column: 1 / -1;
-               justify-content: center !important;
+            &:nth-child(5n) {
+               border-block-end: var(--e-a-border-bold) !important;
+            }
+            &:nth-child(6n) {
                border-block-end: var(--e-a-border-bold) !important;
             }
             .e-control-motion-effects-promotion__lock-wrapper {
