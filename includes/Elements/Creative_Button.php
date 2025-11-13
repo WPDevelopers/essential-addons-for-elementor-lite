@@ -241,9 +241,6 @@ use HelperTrait;
             );
 
             $this->end_controls_section();
-        } else {
-            do_action('eael_creative_button_pro_controls', $this);
-        }
 
         if ( !apply_filters( 'eael/pro_enabled', false ) ) {
             $this->start_controls_section(
@@ -687,117 +684,8 @@ use HelperTrait;
 
         $this->end_controls_tab();
 
-            $this->end_controls_tabs();
+        $this->end_controls_tabs();
 
-            $this->add_responsive_control(
-                'eael_creative_button_alignment',
-                [
-                    'label'       => esc_html__('Button Alignment', 'essential-addons-for-elementor-lite'),
-                    'type'        => Controls_Manager::CHOOSE,
-                    'label_block' => true,
-                    'options'     => [
-                        'flex-start' => [
-                            'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                            'icon'  => 'eicon-text-align-left',
-                        ],
-                        'center'     => [
-                            'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                            'icon'  => 'eicon-text-align-center',
-                        ],
-                        'flex-end'   => [
-                            'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                            'icon'  => 'eicon-text-align-right',
-                        ],
-                    ],
-                    'default'     => '',
-                    'selectors'   => [
-                        '{{WRAPPER}} .eael-creative-button-wrapper' => 'justify-content: {{VALUE}};',
-                    ],
-                ]
-            );
-
-            $this->add_responsive_control(
-                'eael_creative_button_width',
-                [
-                    'label'      => esc_html__('Width', 'essential-addons-for-elementor-lite'),
-                    'type'       => Controls_Manager::SLIDER,
-                    'size_units' => ['px', '%'],
-                    'range'      => [
-                        'px' => [
-                            'min'  => 0,
-                            'max'  => 500,
-                            'step' => 1,
-                        ],
-                        '%'  => [
-                            'min' => 0,
-                            'max' => 100,
-                        ],
-                    ],
-                    'selectors'  => [
-                        '{{WRAPPER}} .eael-creative-button' => 'width: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->add_group_control(
-                Group_Control_Typography::get_type(),
-                [
-                    'name'     => 'eael_creative_button_typography',
-                    'global' => [
-	                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-                    ],
-                    'selector' => '{{WRAPPER}} .eael-creative-button .cretive-button-text, {{WRAPPER}} .eael-creative-button--winona::after, {{WRAPPER}} .eael-creative-button--rayen::before, {{WRAPPER}} .eael-creative-button--tamaya::after, {{WRAPPER}} .eael-creative-button--tamaya::before',
-                ]
-            );
-
-            $this->add_responsive_control(
-                'eael_creative_button_icon_size',
-                [
-                    'label'      => esc_html__('Icon Size', 'essential-addons-for-elementor-lite'),
-                    'type'       => Controls_Manager::SLIDER,
-                    'size_units' => ['px', '%'],
-                    'default'    => [
-                        'size' => 30,
-                        'unit' => 'px',
-                    ],
-                    'range'      => [
-                        'px' => [
-                            'min'  => 0,
-                            'max'  => 500,
-                            'step' => 1,
-                        ],
-                        '%'  => [
-                            'min' => 0,
-                            'max' => 100,
-                        ],
-                    ],
-                    'selectors'  => [
-                        '{{WRAPPER}} .eael-creative-button i'   => 'font-size: {{SIZE}}{{UNIT}};',
-	                    '{{WRAPPER}} .eael-creative-button svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-                    ],
-	            ]
-            );
-
-            $this->add_responsive_control(
-                'eael_creative_button_padding',
-                [
-                    'label'      => esc_html__('Button Padding', 'essential-addons-for-elementor-lite'),
-                    'type'       => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px', 'em', '%'],
-                    'selectors'  => [
-                        '{{WRAPPER}} .eael-creative-button'                                                       => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--winona::after'                   => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--winona > .creative-button-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya::before'                  => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before'                   => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen > .creative-button-inner'  => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--saqui::after'                    => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
-        } else {
-            do_action('eael_creative_button_style_pro_controls', $this);
-        }
 
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
