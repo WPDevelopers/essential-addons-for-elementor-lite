@@ -1433,6 +1433,58 @@ $config = [
                 ],
             ],
         ],
+        'image-masking' => [
+            'class'      => '\Essential_Addons_Elementor\Extensions\Image_Masking',
+            'dependency' => [
+                'js' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/gsap.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/MorphSVGPlugin.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/blob-animation/polygon-morphing-animation.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/gsap.min.js',
+                        'type'    => 'lib',
+                        'context' => 'edit',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/MorphSVGPlugin.min.js',
+                        'type'    => 'lib',
+                        'context' => 'edit',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/blob-animation/polygon-morphing-animation.min.js',
+                        'type'    => 'lib',
+                        'context' => 'edit',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/dom-purify/purify.min.js',
+                        'type'    => 'lib',
+                        'context' => 'edit',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/image-masking.min.js',
+                        'type'    => 'self',
+                        'context' => 'edit',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/image-masking.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
     ],
 ];
 

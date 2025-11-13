@@ -195,6 +195,11 @@ class Elements_Manager {
 			$list['liquid-glass-effect'] = 'liquid-glass-effect';
 		}
 
+		//Image Masking
+		if ( ! empty( $element['settings']['eael_enable_image_masking'] ) ) {
+			$list['image-masking'] = 'image-masking';
+		}
+
 		return $list;
 	}
 
