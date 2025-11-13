@@ -350,8 +350,8 @@ class Liquid_Glass_Effect
                 [
                     'label'        => esc_html__('Enable Border Distortion', 'essential-addons-for-elementor-lite'),
                     'type'         => Controls_Manager::SWITCHER,
-                    'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
+                    'label_on'     => esc_html__('On', 'essential-addons-for-elementor-lite'),
+                    'label_off'    => esc_html__('Off', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                     'prefix_class' => 'eael_liquid_glass_border_distortion_',
                     'condition'    => [
@@ -505,8 +505,8 @@ class Liquid_Glass_Effect
                 [
                     'label'        => esc_html__('Enable Border Distortion', 'essential-addons-for-elementor-lite'),
                     'type'         => Controls_Manager::SWITCHER,
-                    'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
+                    'label_on'     => esc_html__('On', 'essential-addons-for-elementor-lite'),
+                    'label_off'    => esc_html__('Off', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                     'prefix_class' => 'eael_liquid_glass_border_distortion_',
                     'condition'    => [
