@@ -1887,7 +1887,7 @@ trait Admin {
 			echo __( '<strong>Black Friday Mega Sale:</strong> Elevate web design more than ever with 110+ Elements – now <strong>up to $120 OFF!</strong> 🎁', 'essential-addons-for-elementor-lite' );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
-                <a href="https://essential-addons.com/8thBD-admin-notice" target="_blank" class="button-primary">
+                <a href="https://essential-addons.com/bfcm2025-admin-notice" target="_blank" class="button-primary">
                     <?php esc_html_e( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
                 <span class="eael-action-dismiss-btn">
@@ -1958,8 +1958,8 @@ trait Admin {
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				"expire"      => strtotime( '11:59:59pm 5th December, 2025' ),
-				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '09:59:59pm 5th December, 2025' ),
+				"expire"      => strtotime( '11:59:59pm 4th December, 2025' ),
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '09:59:59pm 4th December, 2025' ),
 			]
 		);
 
