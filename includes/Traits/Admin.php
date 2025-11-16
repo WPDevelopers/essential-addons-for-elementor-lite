@@ -1884,7 +1884,7 @@ trait Admin {
 		<div class="eael-black-friday-optin">
 			<p><?php 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo __( '<strong>Black Friday Mega Sale:</strong> Elevate web design more than ever with 110+ Elements – now <strong>up to $120 OFF!</strong> 🎁', 'essential-addons-for-elementor-lite' );
+			echo __( '<strong>Black Friday Mega Sale:</strong> Elevate Web Design More Than Ever With 110+ Elements – Now <strong>Up To $120 OFF!</strong> 🎁', 'essential-addons-for-elementor-lite' );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
                 <a href="https://essential-addons.com/bfcm2025-admin-notice" target="_blank" class="button-primary">
