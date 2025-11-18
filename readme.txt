@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.4.0
+Stable tag: 6.5.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -318,6 +318,20 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.0 - 18/11/2025 =
+
+- Added: New Extension | Vertical Text Orientation
+- Improved: EA Liquid Glass Effects | Added new effects
+- Improved: Added Popular Theme Compatibility with Woo Widgets
+- Fixed: EA Advanced Tab | Hover and active tab styling issue
+- Fixed: EA Woo Checkout | Shipping options selection issue
+- Few minor bug fixes & improvements
+
+= 6.4.1 - 02/11/2025 =
+
+- Improved: EA Image Comparison | Security Enhancement 
+- Few minor bug fixes & improvements
 
 = 6.4.0 - 30/10/2025 =
 
