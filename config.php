@@ -1480,6 +1480,25 @@ $config = [
                 ],
             ],
         ],
+        'vertical-text-orientation' => [
+            'class'      => '\Essential_Addons_Elementor\Extensions\Vertical_Text_Orientation',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/vertical-text-orientation.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/vertical-text-orientation.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
     ],
 ];
 

@@ -571,10 +571,13 @@ trait Ajax_Handler {
 	 */
 	public function woo_checkout_update_order_review() {
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, 	WordPress.Security.NonceVerification.Missing
-		$setting = $_POST['orderReviewData'];
+		$setting       = $_POST['orderReviewData'];
+        $shipping_data = $_POST['shippingData'] ?? [];
 		
 		//Mondial Relay plugin integration
 		do_action( 'eael_mondialrelay_order_after_shipping' );
+        
+        WC()->session->set( 'chosen_shipping_methods', [$shipping_data] );
 
 		ob_start();
 		AllTraits::checkout_order_review_default( $setting );

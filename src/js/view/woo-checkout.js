@@ -19,20 +19,25 @@ var WooCheckout = function ($scope, $) {
 				});
 
 			$.ajax({
-				type: "POST",
-				url: localize.ajaxurl,
-				data: {
-					action: "woo_checkout_update_order_review",
-					orderReviewData: wooCheckout.data("checkout"),
-				},
-				success: function (data) {
-					$(".ea-checkout-review-order-table").replaceWith(data.order_review);
-					setTimeout(function () {
-						$(".ea-checkout-review-order-table").removeClass("processing").unblock();
-					}, 100000);
-				},
-			});
-		}, 2000);
+            type: "POST",
+            url: localize.ajaxurl,
+            data: {
+               action: "woo_checkout_update_order_review",
+               orderReviewData: wooCheckout.data("checkout"),
+               shippingData: $("#shipping_method input:checked").val(),
+            },
+            success: function (data) {
+               $(".ea-checkout-review-order-table").replaceWith(
+                  data.order_review
+               );
+               setTimeout(function () {
+                  $(".ea-checkout-review-order-table")
+                     .removeClass("processing")
+                     .unblock();
+               }, 100000);
+            },
+         });
+		}, 200);
 	}
 
 	$(document).on("click", ".woocommerce-remove-coupon", function (e) {

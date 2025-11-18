@@ -3,7 +3,8 @@
   line-height: 1.5em;
   font-weight: 400;
 }
-.ea-woo-checkout .woocommerce h3, .ea-woo-checkout .woocommerce #ship-to-different-address span {
+.ea-woo-checkout .woocommerce h3,
+.ea-woo-checkout .woocommerce #ship-to-different-address span {
   font-size: 25px;
   line-height: 1.5em;
   font-weight: 600;
@@ -26,29 +27,46 @@
 .ea-woo-checkout .woocommerce .checkout li.wc_payment_method {
   border-bottom: none;
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login a, .ea-woo-checkout .woocommerce .woo-checkout-coupon a {
+.ea-woo-checkout .woocommerce .woo-checkout-login a,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon a {
   color: #432cf9;
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login a :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon a :hover {
-  color: #443D6D;
+.ea-woo-checkout .woocommerce .woo-checkout-login a :hover,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon a :hover {
+  color: #443d6d;
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login label, .ea-woo-checkout .woocommerce .woo-checkout-coupon label {
+.ea-woo-checkout .woocommerce .woo-checkout-login label,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon label {
   margin-bottom: 10px;
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login .input-text, .ea-woo-checkout .woocommerce .woo-checkout-login select, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text, .ea-woo-checkout .woocommerce .woo-checkout-coupon select {
+.ea-woo-checkout .woocommerce .woo-checkout-login .input-text,
+.ea-woo-checkout .woocommerce .woo-checkout-login select,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon select {
   border-radius: 5px;
   background-color: #ffffff;
   padding: 13px;
   border: 1px solid transparent;
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login .input-text :hover, .ea-woo-checkout .woocommerce .woo-checkout-login .input-text :active, .ea-woo-checkout .woocommerce .woo-checkout-login select :hover, .ea-woo-checkout .woocommerce .woo-checkout-login select :active, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :active, .ea-woo-checkout .woocommerce .woo-checkout-coupon select :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon select :active {
+.ea-woo-checkout .woocommerce .woo-checkout-login .input-text :hover,
+.ea-woo-checkout .woocommerce .woo-checkout-login .input-text :active,
+.ea-woo-checkout .woocommerce .woo-checkout-login select :hover,
+.ea-woo-checkout .woocommerce .woo-checkout-login select :active,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :hover,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :active,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon select :hover,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon select :active {
   border-color: inherit;
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login .input-text :focus, .ea-woo-checkout .woocommerce .woo-checkout-login select :focus, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :focus, .ea-woo-checkout .woocommerce .woo-checkout-coupon select :focus {
+.ea-woo-checkout .woocommerce .woo-checkout-login .input-text :focus,
+.ea-woo-checkout .woocommerce .woo-checkout-login select :focus,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :focus,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon select :focus {
   outline: inherit;
   outline-offset: 0;
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login .button, .ea-woo-checkout .woocommerce .woo-checkout-coupon .button {
+.ea-woo-checkout .woocommerce .woo-checkout-login .button,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .button {
   background-color: #7866ff;
   border-radius: 5px;
   font-size: 16px;
@@ -60,7 +78,8 @@
   border: none;
   text-transform: capitalize !important;
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login .button:hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon .button:hover {
+.ea-woo-checkout .woocommerce .woo-checkout-login .button:hover,
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .button:hover {
   text-decoration: none;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login {
@@ -81,7 +100,8 @@
   left: 20px;
   font-size: 16px;
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon i, .ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon svg {
+.ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon i,
+.ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon svg {
   width: 1em;
   height: 1em;
   position: relative;
@@ -124,7 +144,6 @@
   padding: 20px;
   width: auto;
   text-align: left;
-  border: 1px solid inherit;
   border-radius: 5px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon p:first-child {
@@ -165,7 +184,8 @@
   }
 }
 @media (max-width: 767px) {
-  .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first, .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-last {
+  .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first,
+  .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-last {
     width: 100%;
   }
 }
@@ -211,7 +231,8 @@
   margin-right: 10px;
 }
 @media (max-width: 767px) {
-  .ea-woo-checkout .woocommerce #customer_details.col2-set .col-1, .ea-woo-checkout .woocommerce #customer_details.col2-set .col-2 {
+  .ea-woo-checkout .woocommerce #customer_details.col2-set .col-1,
+  .ea-woo-checkout .woocommerce #customer_details.col2-set .col-2 {
     width: 100% !important;
     float: none !important;
   }
@@ -274,7 +295,8 @@
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-thum-name .product-thumbnail img {
   display: block;
 }
-.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-quantity, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-total {
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-quantity,
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-total {
   padding: 0 10px;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .subscription-price .subscription-details {
@@ -286,7 +308,8 @@
   .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table {
     overflow-y: auto;
   }
-  .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .table-row, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .table-header {
+  .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .table-row,
+  .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .table-header {
     width: 400px;
   }
 }
@@ -336,7 +359,11 @@
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
-.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .order-total, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-subtotal, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-discount, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .tax-rate, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .fee {
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .order-total,
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-subtotal,
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-discount,
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .tax-rate,
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .fee {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -364,7 +391,8 @@
   display: table;
   width: 100%;
 }
-.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .recurring-wrapper th, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .recurring-wrapper td {
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .recurring-wrapper th,
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .recurring-wrapper td {
   border-left: 0;
   border-right: 0;
   border-bottom: 0;
@@ -414,7 +442,9 @@
 .ea-woo-checkout .ea-checkout-review-order-table .recurring-wrapper tbody tr:hover > th {
   background-color: inherit;
 }
-.eael-woo-checkout .woocommerce .woocommerce-error, .eael-woo-checkout .woocommerce .woocommerce-info, .eael-woo-checkout .woocommerce .woocommerce-message {
+.eael-woo-checkout .woocommerce .woocommerce-error,
+.eael-woo-checkout .woocommerce .woocommerce-info,
+.eael-woo-checkout .woocommerce .woocommerce-message {
   border: 0;
   border-radius: 5px;
   text-align: left;
@@ -426,19 +456,23 @@
   font-weight: 400;
   margin-bottom: 30px;
 }
-.eael-woo-checkout .woocommerce .woocommerce-error::before, .eael-woo-checkout .woocommerce .woocommerce-info::before, .eael-woo-checkout .woocommerce .woocommerce-message::before {
+.eael-woo-checkout .woocommerce .woocommerce-error::before,
+.eael-woo-checkout .woocommerce .woocommerce-info::before,
+.eael-woo-checkout .woocommerce .woocommerce-message::before {
   left: 20px;
   top: 20px;
   font-size: 20px;
 }
-.eael-woo-checkout .woocommerce .woocommerce-error a, .eael-woo-checkout .woocommerce .woocommerce-info a, .eael-woo-checkout .woocommerce .woocommerce-message a {
+.eael-woo-checkout .woocommerce .woocommerce-error a,
+.eael-woo-checkout .woocommerce .woocommerce-info a,
+.eael-woo-checkout .woocommerce .woocommerce-message a {
   -webkit-box-shadow: none;
           box-shadow: none;
   text-transform: capitalize;
 }
 .eael-woo-checkout .woocommerce .woocommerce-error {
-  background-color: #FFF3F5;
-  color: #FF7E93;
+  background-color: #fff3f5;
+  color: #ff7e93;
 }
 .eael-woo-checkout .woocommerce .woocommerce-info {
   background-color: #d1ecf1;
@@ -447,9 +481,6 @@
 .eael-woo-checkout .woocommerce .woocommerce-message {
   background-color: #d4edda;
   color: #155724;
-}
-.eael-woo-checkout .woocommerce form.checkout_coupon {
-  border: 1px solid #404040;
 }
 .eael-woo-checkout .woocommerce .eael-reordering {
   opacity: 0.1;
@@ -463,13 +494,17 @@
 .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .wc-block-components-notice-banner .wc-block-components-notice-banner__content {
   margin-left: 25px;
 }
-.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message {
+.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error,
+.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info,
+.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message {
   background-color: transparent !important;
   padding: 0 0 0 40px !important;
   border: none !important;
   margin: 0;
 }
-.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error::before, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info::before, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message::before {
+.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error::before,
+.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info::before,
+.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message::before {
   left: 20px;
   top: 20px;
   font-size: 20px;
@@ -505,13 +540,16 @@
   left: 35px;
   font-size: 20px;
 }
-.eael-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon i, .eael-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon svg {
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon i,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon svg {
   width: 1em;
   height: 1em;
   position: relative;
   display: block;
 }
-.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error {
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error {
   border-width: 1px;
   border-style: solid;
   border-radius: 3px;
@@ -519,12 +557,16 @@
   margin: 20px 0 0;
   color: inherit;
 }
-.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info:before, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message:before, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error:before {
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info:before,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message:before,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error:before {
   left: 10px;
   top: 10px;
   color: inherit;
 }
-.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info li, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message li, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error li {
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info li,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message li,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error li {
   margin-left: 0;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .wc-block-components-notice-banner svg {
@@ -533,13 +575,17 @@
 .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .wc-block-components-notice-banner .wc-block-components-notice-banner__content {
   margin-left: 25px;
 }
-.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-error, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-message {
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-error,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-message {
   background-color: transparent !important;
   padding: 0 0 0 40px !important;
   border: none !important;
   margin: 0;
 }
-.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-error::before, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info::before, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-message::before {
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-error::before,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info::before,
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-message::before {
   left: 20px;
   top: 20px;
   font-size: 20px;
@@ -737,6 +783,36 @@ body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommer
   font-weight: 700 !important;
   font-size: 0.9rem !important;
 }
-body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row input, body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row select, body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row textarea {
+body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row input,
+body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row select,
+body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row textarea {
   padding: 0.9em 0.8em !important;
+}
+/*------------------
+Theme Compatibility
+--------------------*/
+.theme-blocksy .ea-woo-checkout .ct-order-review {
+  top: unset;
+}
+.theme-storefront.eael-woo-checkout .woocommerce #order_review_heading.woo-checkout-section-title {
+  float: unset;
+}
+.theme-storefront.eael-woo-checkout .woocommerce .woocommerce-checkout input[type=text],
+.theme-storefront.eael-woo-checkout .woocommerce .woocommerce-checkout input[type=number],
+.theme-storefront.eael-woo-checkout .woocommerce .woocommerce-checkout input[type=email],
+.theme-storefront.eael-woo-checkout .woocommerce .woocommerce-checkout input[type=tel],
+.theme-storefront.eael-woo-checkout .woocommerce .woocommerce-checkout input[type=url],
+.theme-storefront.eael-woo-checkout .woocommerce .woocommerce-checkout input[type=password],
+.theme-storefront.eael-woo-checkout .woocommerce .woocommerce-checkout input[type=search],
+.theme-storefront.eael-woo-checkout .woocommerce .woocommerce-checkout textarea,
+.theme-storefront.eael-woo-checkout .woocommerce .woocommerce-checkout .input-text {
+  border: 1px solid #ccc;
+}
+.theme-storefront.eael-woo-checkout .woocommerce .woo-checkout-payment #payment .place-order {
+  background-color: unset;
+}
+.theme-oceanwp .ea-woo-checkout .woocommerce .woo-checkout-coupon .button {
+  line-height: 15px;
+  font-size: 13px;
+  padding: 10px 30px;
 }
