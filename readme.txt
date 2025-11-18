@@ -328,11 +328,6 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Woo Checkout | Shipping options selection issue
 - Few minor bug fixes & improvements
 
-= 6.4.1 - 02/11/2025 =
-
-- Improved: EA Image Comparison | Security Enhancement 
-- Few minor bug fixes & improvements
-
 = 6.4.0 - 30/10/2025 =
 
 - Added: New Extension | Image Masking
