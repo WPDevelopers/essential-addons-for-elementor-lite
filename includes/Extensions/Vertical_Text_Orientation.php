@@ -311,24 +311,17 @@ class Vertical_Text_Orientation {
 				'fields'  => $repeater->get_controls(),
 				'default' => [
 					[
-						'eael_vto_writing_gradient_color' => '#F50404',
+						'eael_vto_writing_gradient_color' => '#7C62FF',
                         'eael_vto_writing_gradient_color_location' => [
                             'unit' => '%',
                             'size' => 50,
                         ],
 					],
 					[
-						'eael_vto_writing_gradient_color' => '#0ff',
+						'eael_vto_writing_gradient_color' => '#FF6464',
                         'eael_vto_writing_gradient_color_location' => [
                             'unit' => '%',
-                            'size' => 70,
-                        ],
-					],
-					[
-						'eael_vto_writing_gradient_color' => '#00f',
-                        'eael_vto_writing_gradient_color_location' => [
-                            'unit' => '%',
-                            'size' => 100,
+                            'size' => 90,
                         ],
 					],
 				],
@@ -419,7 +412,7 @@ class Vertical_Text_Orientation {
 						'icon'  => 'eicon-arrow-down',
 					],
 				],
-				'default' => 'horizontal',
+				'default' => 'vertical',
 				'toggle'  => false,
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
