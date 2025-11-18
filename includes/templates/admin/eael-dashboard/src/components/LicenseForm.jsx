@@ -40,6 +40,14 @@ function LicenseForm() {
                     } else {
                         licenseError = true;
                         errorMessage = response.data?.message;
+
+                        if ( ( ! errorMessage ) && ( request.status !== 200 ) ) {
+                            errorMessage = (
+                                <>
+                                    License Activation Request Failed. Please <strong><a href="https://wpdeveloper.com/support" target="_blank" rel="noopener noreferrer">Contact Support</a></strong> for any help.
+                                </>
+                            );
+                        }
                     }
 
                     eaDispatch({
@@ -75,6 +83,14 @@ function LicenseForm() {
                     } else {
                         licenseError = true;
                         errorMessage = response?.data?.message;
+
+                        if ( ( ! errorMessage ) && ( request.status !== 200 ) ) {
+                            errorMessage = (
+                                <>
+                                    License Deactivation Request Failed. Please <strong><a href="https://wpdeveloper.com/support" target="_blank" rel="noopener noreferrer">Contact Support</a></strong> for any help.
+                                </>
+                            );
+                        }
                     }
 
                     eaDispatch({

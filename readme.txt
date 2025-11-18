@@ -4,17 +4,17 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.4.0
+Stable tag: 6.5.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Elementor addon offering 100+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
+Elementor addon offering 110+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
 
 == Description ==
 
-Enhance **[Elementor](https://wordpress.org/plugins/elementor/)** page building experience with 100+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready Elementor templates, which were designed to make your next WordPress website design easier and prettier than ever before.
+Enhance **[Elementor](https://wordpress.org/plugins/elementor/)** page building experience with 110+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready Elementor templates, which were designed to make your next WordPress website design easier and prettier than ever before.
 
-= Essential Addons for Elementor offers 110+ advanced Elementor widgets with kits, 6,000+ ready templates & WooCommerce builder, serving 2 million+ active users. =
+= Essential Addons for Elementor offers 110+ advanced Elementor widgets with kits, 6,500+ ready templates & WooCommerce builder, serving 2 million+ active users. =
 
 [Check the Demos](https://essential-addons.com/demos)
 
@@ -28,7 +28,7 @@ No extra resources or messy code to slow down your website. Optimized for super 
 Enable and disable individual elements adding to make your page load faster and smoother. You can deactivate unnecessary widgets to keep the site light.
 
 
-### 6000+ Ready WordPress Templates & Blocks through **Templately**
+### 6,500+ Ready WordPress Templates & Blocks through **Templately**
 Grab access to 3,000+ pre-made Elementor templates from Templately (a large templates cloud for WordPress), that come with Essential Addons.Unlock stunning Elementor templates, blocks & sections;and design your website to stand out from the crowd.
 
 https://youtu.be/Z73muoczARc
@@ -126,7 +126,8 @@ Extensions (Free):
 6. [Wrapper Link](https://essential-addons.com/wrapper-link) - Add custom links into any section, column, or even flexbox
 7. [Hover Interactions](https://essential-addons.com/hover-interaction/) - Create captivating effects on buttons, images, texts and more
 8. [Liquid Glass Effects](https://essential-addons.com/liquid-glass-effects/) - Give your website a sleek, futuristic feel with stunning glass effects
-9. [Image Masking with Morphing](https://essential-addons.com/image-masking-with-morphing/)-  Create seamless transformations and interactive visual effects with smooth masking & morphing
+9. [Image Masking with Morphing](https://essential-addons.com/image-masking-with-morphing/) -  Create seamless transformations and interactive visual effects with smooth masking & morphing
+10. [Vertical Text Orientation](https://essential-addons.com/vertical-text-orientation/) - Bring style to pages with modern, eye-catching vertical text
 
 ### More elements (50+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
@@ -317,6 +318,20 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.0 - 18/11/2025 =
+
+- Added: New Extension | Vertical Text Orientation
+- Improved: EA Liquid Glass Effects | Added new effects
+- Improved: Added Popular Theme Compatibility with Woo Widgets
+- Fixed: EA Advanced Tab | Hover and active tab styling issue
+- Fixed: EA Woo Checkout | Shipping options selection issue
+- Few minor bug fixes & improvements
+
+= 6.4.1 - 02/11/2025 =
+
+- Improved: EA Image Comparison | Security Enhancement 
+- Few minor bug fixes & improvements
 
 = 6.4.0 - 30/10/2025 =
 
