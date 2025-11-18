@@ -141,6 +141,7 @@ class Adv_Accordion extends Widget_Base
                 'options'     => [
                     'accordion' => esc_html__('Accordion', 'essential-addons-for-elementor-lite'),
                     'toggle'    => esc_html__('Toggle', 'essential-addons-for-elementor-lite'),
+                    'accordion_media'    => esc_html__('Accordion with Media', 'essential-addons-for-elementor-lite'),
                 ],
             ]
         );
@@ -1176,7 +1177,11 @@ class Adv_Accordion extends Widget_Base
         $this->add_render_attribute('eael-adv-accordion', 'data-scroll-on-click', esc_attr( $settings['eael_adv_accordion_scroll_onclick'] ));
         $this->add_render_attribute('eael-adv-accordion', 'data-scroll-speed', esc_attr( $settings['eael_adv_accordion_scroll_speed'] ));
 
-        if( !empty($settings['eael_adv_accordion_custom_id_offset']) ){
+        // Advanced Accordion Media Type
+        if ( 'accordion_media' === $settings['eael_adv_accordion_type'] ) {
+            do_action( 'eael_adv_accordion_media_type', $settings );
+        } else {
+if( !empty($settings['eael_adv_accordion_custom_id_offset']) ){
             $this->add_render_attribute('eael-adv-accordion', 'data-custom-id-offset', esc_attr( $settings['eael_adv_accordion_custom_id_offset'] ) );
         }
 ?>
@@ -1311,7 +1316,8 @@ class Adv_Accordion extends Widget_Base
                 Helper::set_eael_advanced_accordion_faq($faq);
             }	
         }
-
+        }
+        
     }
 
     protected function print_toggle_icon($settings)
