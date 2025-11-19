@@ -558,7 +558,7 @@ class Image_Masking {
                         $hover_mask_url = $svg_url . $hover_image . '.svg';
                     } else if( 'upload' === $hover_image ){
                         $hover_image = $element->get_settings_for_display( 'eael_image_masking_image_hover' );
-                        $hover_mask_url = $hover_image['url'];
+                        $hover_mask_url = $hover_image['url'] ?? '';
                     }
                     if( $hover_mask_url ) {
                         $hover_selector = $element->get_settings_for_display( 'eael_image_masking_hover_selector' );
