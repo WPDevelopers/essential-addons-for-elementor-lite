@@ -92,11 +92,10 @@ let ImageMaskingHandler = function ($scope, $) {
                     }
                 }
             } else if( 'image' === settings?.eael_image_masking_type ){
-                let svg_url = settings?.eael_image_masking_svg_url;
                 let image = settings?.eael_image_masking_svg;
                 let mask_url = '';
                 if( 'upload' !== image ){
-                    mask_url = svg_url + image + '.svg';
+                    mask_url = EAELImageMaskingConfig?.svg_dir_url + image + '.svg';
                 } else if( 'upload' === image ){
                     let image = settings?.eael_image_masking_image;
                     mask_url = image?.url;
@@ -109,8 +108,7 @@ let ImageMaskingHandler = function ($scope, $) {
                     let hover_mask_url = '';
                     let hoverImage = settings?.eael_image_masking_svg_hover;
                     if( 'upload' !== hoverImage ){
-                        let svg_url = settings?.eael_image_masking_svg_url;
-                        hover_mask_url = svg_url + hoverImage + '.svg';
+                        hover_mask_url = EAELImageMaskingConfig?.svg_dir_url + hoverImage + '.svg';
                     } else if( 'upload' === hoverImage ){
                         hover_mask_url = settings?.eael_image_masking_image_hover?.url;
                     }
@@ -244,7 +242,9 @@ let ImageMaskingHandler = function ($scope, $) {
                     } else {
                         // Handle predefined SVG paths (blob, brush, dimond)
                         // Use the pro plugin URL for morphing assets (matches PHP implementation)
-                        let svgPathUrl = settings?.eael_pro_image_masking_svg_url + svgPathsType + '-';
+                        let svgPathUrl = (typeof eaelImageMaskingConfig !== 'undefined' && eaelImageMaskingConfig.svgDirUrl)
+                            ? eaelImageMaskingConfig.svgDirUrl + svgPathsType + '-'
+                            : settings?.eael_pro_image_masking_svg_url + svgPathsType + '-';
 
                         for (let i = 1; i <= 5; i++) {
                             let fetchPromise = fetch(svgPathUrl + i + '.svg')

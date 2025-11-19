@@ -3,9 +3,6 @@
 namespace Essential_Addons_Elementor\Extensions;
 
 use Elementor\Controls_Manager;
-use Elementor\Repeater;
-use Essential_Addons_Elementor\Classes\Helper;
-
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -13,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Image_Masking {
 
+    private static $svg_dir_url = EAEL_PLUGIN_URL . 'assets/front-end/img/image-masking/svg-shapes/';
 	/**
 	 * Initialize hooks
 	 */
@@ -22,7 +20,13 @@ class Image_Masking {
 		add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 	}
+
+    public function enqueue_scripts() {
+        $data = [ 'svg_dir_url' => self::$svg_dir_url ];
+        wp_localize_script( 'elementor-frontend', 'EAELImageMaskingConfig', $data );
+    }
 
     private function clip_paths( $shape ){
         $shapes = [
@@ -464,15 +468,6 @@ class Image_Masking {
             do_action( 'eael/image_masking/morphing_controls', $element );
         }
 
-        $svg_url = EAEL_PLUGIN_URL . 'assets/front-end/img/image-masking/svg-shapes/';
-        $element->add_control(
-            'eael_image_masking_svg_url',
-            [
-                'label' => '',
-                'type' => Controls_Manager::HIDDEN,
-                'default' => $svg_url,
-            ]
-        );
 		$element->end_controls_section();
 	}
 
@@ -543,7 +538,7 @@ class Image_Masking {
                 $svg = $element->get_settings_for_display( 'eael_image_masking_svg' );
                 $mask_url = '';
                 if( 'upload' !== $svg ){
-                    $svg_url = $element->get_settings_for_display( 'eael_image_masking_svg_url' );
+                    $svg_url = self::$svg_dir_url;
                     $mask_url = $svg_url . $svg . '.svg';
                 } else if( 'upload' === $svg ){
                     $image = $element->get_settings_for_display( 'eael_image_masking_image' );
@@ -559,7 +554,7 @@ class Image_Masking {
                     $hover_mask_url = '';
                     if( 'upload' !== $hover_image ){
                         $svg = $element->get_settings_for_display( 'eael_image_masking_svg' );
-                        $svg_url = $element->get_settings_for_display( 'eael_image_masking_svg_url' );
+                        $svg_url = self::$svg_dir_url;
                         $hover_mask_url = $svg_url . $hover_image . '.svg';
                     } else if( 'upload' === $hover_image ){
                         $hover_image = $element->get_settings_for_display( 'eael_image_masking_image_hover' );
