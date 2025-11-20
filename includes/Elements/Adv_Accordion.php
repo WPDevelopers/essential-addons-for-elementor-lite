@@ -1179,7 +1179,7 @@ class Adv_Accordion extends Widget_Base
 
         // Advanced Accordion Media Type
         if ( 'accordion_media' === $settings['eael_adv_accordion_type'] ) {
-            do_action( 'eael_adv_accordion_media_type', $settings );
+            do_action( 'eael_adv_accordion_media_type', $settings, $this );
         } else {
             if( !empty($settings['eael_adv_accordion_custom_id_offset']) ){
                         $this->add_render_attribute('eael-adv-accordion', 'data-custom-id-offset', esc_attr( $settings['eael_adv_accordion_custom_id_offset'] ) );
