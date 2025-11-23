@@ -136,6 +136,8 @@ function ea_conditional_logic_type_title(value) {
         query_string: eael_select2_localize.cl_query_string,
         url_contains: eael_select2_localize.cl_url_contains,
         archive: eael_select2_localize.cl_archive,
+        country: eael_select2_localize.cl_country,
+        city: eael_select2_localize.cl_city,
         visit_count: eael_select2_localize.cl_visit_count,
         woo_products: eael_select2_localize.cl_woo_products,
         woo_cart: eael_select2_localize.cl_woo_cart,

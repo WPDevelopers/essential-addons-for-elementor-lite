@@ -41,6 +41,8 @@ class Select2 extends Base_Data_Control
                 'cl_visit_count'  => __( 'Visit Count', 'essential-addons-for-elementor-lite' ),
 				'cl_url_contains' => __( 'URL Contains', 'essential-addons-for-elementor-lite' ),
 				'cl_archive'      => __( 'Archive', 'essential-addons-for-elementor-lite' ),
+				'cl_country'      => __( 'Country', 'essential-addons-for-elementor-lite' ),
+				'cl_city'         => __( 'City', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_products' => __( 'Woo Products', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_cart'     => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_orders'   => __( 'Woo Orders', 'essential-addons-for-elementor-lite' ),
