@@ -112,6 +112,7 @@ class Adv_Accordion extends Widget_Base
          */
         $this->init_content_general_controls();
         $this->init_content_content_controls();
+        do_action( 'eael_adv_accordion_media_type_controls', $this );
         $this->init_content_promotion_controls();
 
         /**
