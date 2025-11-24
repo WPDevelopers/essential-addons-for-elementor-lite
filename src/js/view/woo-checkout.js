@@ -24,7 +24,7 @@ var WooCheckout = function ($scope, $) {
             data: {
                action: "woo_checkout_update_order_review",
                orderReviewData: wooCheckout.data("checkout"),
-               shippingData: $("#shipping_method input:checked").val(),
+               shippingData: $(".ea-woo-checkout-order-review #shipping_method input:checked").val(),
             },
             success: function (data) {
                $(".ea-checkout-review-order-table").replaceWith(
