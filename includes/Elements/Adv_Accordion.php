@@ -267,6 +267,9 @@ class Adv_Accordion extends Widget_Base
             'eael_section_adv_accordion_content_settings',
             [
                 'label' => esc_html__('Content Settings', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
             ]
         );
 
@@ -466,6 +469,9 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'fields' => $repeater->get_controls(),
                 'title_field' => '{{eael_adv_accordion_tab_title}}',
+                'condition' => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
             ]
         );
 
