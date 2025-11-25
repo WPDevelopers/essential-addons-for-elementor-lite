@@ -560,12 +560,11 @@ trait Ajax_Handler {
 	 */
 	public function woo_checkout_update_order_review() {
 		$setting       = $_POST['orderReviewData'];
-        $shipping_data = $_POST['shippingData'] ?? [];
-		
+        $shipping_data = empty ( $_POST['shippingData'] ) ? WC()->session->get('chosen_shipping_methods') : [wc_clean( $_POST['shippingData'] )];
 		//Mondial Relay plugin integration
 		do_action( 'eael_mondialrelay_order_after_shipping' );
         
-        WC()->session->set( 'chosen_shipping_methods', [$shipping_data] );
+        WC()->session->set( 'chosen_shipping_methods', $shipping_data );
 
 		ob_start();
 		AllTraits::checkout_order_review_default( $setting );
