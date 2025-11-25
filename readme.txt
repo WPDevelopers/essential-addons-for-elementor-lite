@@ -319,7 +319,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 6.5.2 -25/11/2025 =
+= 6.5.2 - 25/11/2025 =
 
 - Fixed: Fixed checkout WooCommerce issues where shipping methods weren't updating correctly and prevented crashes when using the Mondial Relay shipping plugin
 - Few minor bug fixes & improvements
