@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.5.0
+Stable tag: 6.5.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -318,6 +318,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.1 - 19/11/2025 =
+
+- Fixed: EA Image Masking | mask-image URL not updating
+- Fixed: EA Image Masking | Throwing warning message if Debug log is enabled
+- Few minor bug fixes & improvements
 
 = 6.5.0 - 18/11/2025 =
 
