@@ -2080,12 +2080,12 @@ section.ea__modal-wrapper {
   margin-top: 10px;
 }
 
-.ea__modal-body .ea__auth-link {
+.ea__modal-body .ea__auth-action .ea__auth-link {
   padding: 10px 20px;
   border-radius: 4px;
   text-decoration: none;
-  background-color: '#61ce70';
-  color: '#fff';
+  background-color: var(--base-color-75);
+  color: #fff;
 }
 
 .ea__modal-body .ea__auth-status {
