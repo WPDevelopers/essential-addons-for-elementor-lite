@@ -1134,6 +1134,8 @@ trait Ajax_Handler {
 			$this->empty_dir( EAEL_ASSET_PATH );
 		}
 
+		do_action( 'eael/admin/after_save_settings', $settings );
+
 		wp_send_json_success( true );
 	}
 

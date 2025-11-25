@@ -59,6 +59,17 @@ function ModalStyleThree() {
                                        type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
+                        {eaData.accordion[item]?.auth_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                            <a href={eaData.accordion[item].auth_button.url} target="_blank" rel="noopener noreferrer"
+                               className="ea__btn ea__btn-primary ea__auth-link">
+                                {eaData.accordion[item].auth_button.text}
+                            </a>
+                        </div>}
+                        {eaData.accordion[item]?.auth_status !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                            <div className={ eaData.accordion[item].auth_status.status === 'success' ? 'ea__auth-status ea__auth-status--success' : 'ea__auth-status ea__auth-status--error' }>
+                                <strong>{eaData.accordion[item].auth_status.status === 'success' ? '✓ ' : ''}{eaData.accordion[item].auth_status.text}</strong>
+                            </div>
+                        </div>}
                     </div>
                 </div>
             })}
