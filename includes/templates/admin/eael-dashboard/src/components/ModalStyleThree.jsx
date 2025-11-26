@@ -78,7 +78,7 @@ function ModalStyleThree() {
                                 </a>
                             </div>} 
                             {eaData.accordion[item]?.refresh_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
-                                | <a href={eaData.accordion[item].refresh_button.url} rel="noopener noreferrer"
+                                <a href={eaData.accordion[item].refresh_button.url} rel="noopener noreferrer"
                                 className="ea__btn ea__btn-primary ea__auth-link">
                                     {eaData.accordion[item].refresh_button.text}
                                 </a>
