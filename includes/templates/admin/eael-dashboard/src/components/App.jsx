@@ -23,6 +23,40 @@ function App() {
         eaDispatch({type: 'SET_OFFSET_TOP', payload: wrapperRef.current.offsetTop});
     }, [eaState.isDark]);
 
+    // Auto-open Business Reviews modal after OAuth callback or actions
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const shouldOpenModal = urlParams.get('eael_business_profile_success') === '1' ||
+                                urlParams.get('eael_business_profile_locations_refreshed') === '1' ||
+                                urlParams.get('eael_business_profile_disconnected') === '1';
+
+        if (shouldOpenModal && localize.eael_dashboard.modal.businessReviewsSetting) {
+            // Get the first accordion key (Business Profile API)
+            const firstAccordionKey = Object.keys(localize.eael_dashboard.modal.businessReviewsSetting.accordion)[0];
+
+            // Open the modal
+            eaDispatch({
+                type: 'OPEN_MODAL',
+                payload: {
+                    key: 'businessReviewsSetting',
+                    title: 'Business Reviews'
+                }
+            });
+
+            // Set the accordion to Business Profile API
+            if (firstAccordionKey) {
+                eaDispatch({
+                    type: 'MODAL_ACCORDION',
+                    payload: { key: firstAccordionKey }
+                });
+            }
+
+            // Clean up URL parameters
+            const newUrl = window.location.pathname + '?page=eael-settings';
+            window.history.replaceState({}, '', newUrl);
+        }
+    }, []);
+
     return (
         <>
             {eaState.optinPromo && <Optin/>}
