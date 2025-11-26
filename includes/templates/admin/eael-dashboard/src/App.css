@@ -2076,6 +2076,11 @@ section.ea__modal-wrapper {
   position: relative;
 }
 
+.ea__modal-body .ea__auth-action-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
 .ea__modal-body .ea__auth-action {
   margin-top: 10px;
 }
