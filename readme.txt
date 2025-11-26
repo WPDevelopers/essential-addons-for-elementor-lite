@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.5.1
+Stable tag: 6.5.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -318,6 +318,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.2 - 25/11/2025 =
+
+- Fixed: Fixed checkout WooCommerce issues where shipping methods weren't updating correctly and prevented crashes when using the Mondial Relay shipping plugin
+- Few minor bug fixes & improvements
 
 = 6.5.1 - 19/11/2025 =
 
