@@ -72,13 +72,13 @@ function ModalStyleThree() {
                                 </div>
                             </div>}
                             {eaData.accordion[item]?.disconnect_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
-                                <a href={eaData.accordion[item].disconnect_button.url} target="_blank" rel="noopener noreferrer"
+                                <a href={eaData.accordion[item].disconnect_button.url} rel="noopener noreferrer"
                                 className="ea__btn ea__btn-secondary ea__auth-link">
                                     {eaData.accordion[item].disconnect_button.text}
                                 </a>
                             </div>} 
                             {eaData.accordion[item]?.refresh_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
-                                | <a href={eaData.accordion[item].refresh_button.url} target="_blank" rel="noopener noreferrer"
+                                | <a href={eaData.accordion[item].refresh_button.url} rel="noopener noreferrer"
                                 className="ea__btn ea__btn-primary ea__auth-link">
                                     {eaData.accordion[item].refresh_button.text}
                                 </a>
