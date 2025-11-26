@@ -28,7 +28,8 @@ function App() {
         const urlParams = new URLSearchParams(window.location.search);
         const shouldOpenModal = urlParams.get('eael_business_profile_success') === '1' ||
                                 urlParams.get('eael_business_profile_locations_refreshed') === '1' ||
-                                urlParams.get('eael_business_profile_disconnected') === '1';
+                                urlParams.get('eael_business_profile_disconnected') === '1' ||
+                                urlParams.get('eael_business_profile_error') === '1';
 
         if (shouldOpenModal && localize.eael_dashboard.modal.businessReviewsSetting) {
             // Get the first accordion key (Business Profile API)

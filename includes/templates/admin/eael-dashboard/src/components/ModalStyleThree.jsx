@@ -76,14 +76,30 @@ function ModalStyleThree() {
                                 className="ea__btn ea__btn-secondary ea__auth-link">
                                     {eaData.accordion[item].disconnect_button.text}
                                 </a>
-                            </div>} 
+                            </div>}
                             {eaData.accordion[item]?.refresh_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
                                 <a href={eaData.accordion[item].refresh_button.url} rel="noopener noreferrer"
                                 className="ea__btn ea__btn-primary ea__auth-link">
                                     {eaData.accordion[item].refresh_button.text}
                                 </a>
                             </div>}
+                            {eaData.accordion[item]?.status_message !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                                <div className={ eaData.accordion[item].status_message.type === 'success' ? 'ea__status-message ea__status-message--success' : 'ea__status-message ea__status-message--error' }>
+                                    <span>{eaData.accordion[item].status_message.type === 'success' ? '✓ ' : '⚠ '}{eaData.accordion[item].status_message.text}</span>
+                                </div>
+                            </div>}
                         </div>
+                        {eaData.accordion[item]?.locations !== undefined && <div className="ea__locations-list">
+                            <h5 className="ea__locations-title">{eaData.accordion[item].locations.title} ({eaData.accordion[item].locations.count})</h5>
+                            {eaData.accordion[item].locations.updated && <p className="ea__locations-updated">Last updated: {eaData.accordion[item].locations.updated}</p>}
+                            <ul className="ea__locations-items">
+                                {eaData.accordion[item].locations.items.map((location, locationIndex) => (
+                                    <li key={locationIndex} className="ea__location-item">
+                                        <span className="ea__location-name">{location.name}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>}
                     </div>
                 </div>
             })}
