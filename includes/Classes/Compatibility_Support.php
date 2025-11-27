@@ -28,7 +28,11 @@ class Compatibility_Support {
 
 		// Parse shipping method details
 		$method_string = $chosen_shipping_methods[0];
-		list($method_id, $instance_id) = explode(':', $method_string);
+        // Ensure method_string is a string and contains a colon
+        if ( !is_string($method_string) || strpos($method_string, ':') === false ) {
+            return;
+        }
+        list($method_id, $instance_id) = explode(':', $method_string, 2);
 
 		// Add shipping form if Mondial Relay is selected
 		if ($method_id === 'mondialrelay_official_shipping') {
