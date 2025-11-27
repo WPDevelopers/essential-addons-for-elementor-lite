@@ -172,6 +172,9 @@ class Adv_Accordion extends Widget_Base
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => 'yes',
                 'return_value' => 'yes',
+                'condition'    => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
             ]
         );
         $this->add_control(
@@ -185,6 +188,7 @@ class Adv_Accordion extends Widget_Base
                 'return_value' => 'right',
                 'condition'    => [
                     'eael_adv_accordion_icon_show' => 'yes',
+                    'eael_adv_accordion_type!' => 'accordion_media',
                 ],
             ]
         );
@@ -201,6 +205,7 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'condition'        => [
                     'eael_adv_accordion_icon_show' => 'yes',
+                    'eael_adv_accordion_type!' => 'accordion_media',
                 ],
             ]
         );
@@ -211,6 +216,9 @@ class Adv_Accordion extends Widget_Base
                 'type'        => Controls_Manager::NUMBER,
                 'label_block' => false,
                 'default'     => 300,
+                'condition'    => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
             ]
         );
 
@@ -223,6 +231,9 @@ class Adv_Accordion extends Widget_Base
                 'label_block' => false,
                 'default'     => 0,
                 'min'         => 0,
+                'condition'    => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
             ]
         );
 
@@ -233,6 +244,9 @@ class Adv_Accordion extends Widget_Base
 			    'type'        => Controls_Manager::NUMBER,
 			    'label_block' => false,
 			    'default'     => 300,
+                'condition'    => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
 		    ]
 	    );
 
@@ -243,6 +257,9 @@ class Adv_Accordion extends Widget_Base
 			    'type'         => Controls_Manager::SWITCHER,
 			    'default'      => 'no',
 			    'return_value' => 'yes',
+                'condition'    => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
 		    ]
 	    );
 
