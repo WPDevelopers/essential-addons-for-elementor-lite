@@ -622,6 +622,8 @@ class Adv_Accordion extends Widget_Base
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon'   => 'font-size: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header svg.fa-accordion-icon'   => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-list .eael-accordion_media-icon i'   => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-list .eael-accordion_media-icon svg'   => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -673,6 +675,33 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'condition'  => [
                     'eael_adv_accordion_toggle_icon_postion' => '',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'eael_adv_accordion_media_tab_border_hover',
+                'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-accordion_media-lists .eael-accordion_media-icon',
+                'condition'=> [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_adv_accordion_media_tab_border_radius_hover',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'rem', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-accordion_media-lists .eael-accordion_media-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition'    => [
+                    'eael_adv_accordion_type' => 'accordion_media',
                 ],
             ]
         );
@@ -812,6 +841,8 @@ class Adv_Accordion extends Widget_Base
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .fa-accordion-icon' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .fa-accordion-icon svg' => 'color: {{VALUE}}; fill: {{VALUE}}',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover svg.fa-accordion-icon' => 'fill: {{VALUE}}',
+                    '{{WRAPPER}} .eael-accordion_media-list:hover .eael-accordion_media-icon i'   => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-accordion_media-list:hover .eael-accordion_media-icon i svg'   => 'fill: {{VALUE}}',
                 ]
             ]
         );
@@ -875,6 +906,8 @@ class Adv_Accordion extends Widget_Base
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-accordion-icon' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-accordion-icon svg' => 'color: {{VALUE}};fill: {{VALUE}}',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active svg.fa-accordion-icon' => 'fill: {{VALUE}}',
+                    '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-icon i'   => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-icon svg'   => 'fill: {{VALUE}}',
                 ],
             ]
         );
