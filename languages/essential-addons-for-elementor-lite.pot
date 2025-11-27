@@ -213,7 +213,7 @@ msgstr ""
 msgid "Argument should not be empty."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:186, ../includes/Classes/WPDeveloper_Plugin_Installer.php:205, ../includes/Classes/WPDeveloper_Plugin_Installer.php:226, ../includes/Classes/WPDeveloper_Setup_Wizard.php:463, ../includes/Classes/WPDeveloper_Setup_Wizard.php:487, ../includes/Classes/WPDeveloper_Setup_Wizard.php:508, ../includes/Traits/Ajax_Handler.php:962, ../includes/Traits/Ajax_Handler.php:1151, ../includes/Traits/Ajax_Handler.php:1181, ../includes/Traits/Ajax_Handler.php:1198, ../includes/Traits/Helper.php:427
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:186, ../includes/Classes/WPDeveloper_Plugin_Installer.php:205, ../includes/Classes/WPDeveloper_Plugin_Installer.php:226, ../includes/Classes/WPDeveloper_Setup_Wizard.php:463, ../includes/Classes/WPDeveloper_Setup_Wizard.php:487, ../includes/Classes/WPDeveloper_Setup_Wizard.php:508, ../includes/Traits/Ajax_Handler.php:1177, ../includes/Traits/Ajax_Handler.php:1366, ../includes/Traits/Ajax_Handler.php:1396, ../includes/Traits/Ajax_Handler.php:1413, ../includes/Traits/Helper.php:427
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -12022,31 +12022,31 @@ msgstr ""
 msgid "I’ll Grab It Later"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:94, ../includes/Traits/Ajax_Handler.php:634, ../includes/Traits/Login_Registration.php:96, ../includes/Traits/Login_Registration.php:263, ../includes/Traits/Login_Registration.php:786, ../includes/Traits/Login_Registration.php:998
+#: ../includes/Traits/Ajax_Handler.php:94, ../includes/Traits/Ajax_Handler.php:849, ../includes/Traits/Login_Registration.php:96, ../includes/Traits/Login_Registration.php:263, ../includes/Traits/Login_Registration.php:786, ../includes/Traits/Login_Registration.php:998
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:103, ../includes/Traits/Ajax_Handler.php:643, ../includes/Traits/Login_Registration.php:108, ../includes/Traits/Login_Registration.php:273, ../includes/Traits/Login_Registration.php:798, ../includes/Traits/Login_Registration.php:1010, ../includes/Traits/Woo_Product_Comparable.php:2174
+#: ../includes/Traits/Ajax_Handler.php:103, ../includes/Traits/Ajax_Handler.php:858, ../includes/Traits/Login_Registration.php:108, ../includes/Traits/Login_Registration.php:273, ../includes/Traits/Login_Registration.php:798, ../includes/Traits/Login_Registration.php:1010, ../includes/Traits/Woo_Product_Comparable.php:2174
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:114, ../includes/Traits/Ajax_Handler.php:321, ../includes/Traits/Ajax_Handler.php:403, ../includes/Traits/Ajax_Handler.php:654, ../includes/Traits/Login_Registration.php:72, ../includes/Traits/Login_Registration.php:288, ../includes/Traits/Login_Registration.php:762, ../includes/Traits/Login_Registration.php:973, ../includes/Traits/Woo_Product_Comparable.php:2132
+#: ../includes/Traits/Ajax_Handler.php:114, ../includes/Traits/Ajax_Handler.php:536, ../includes/Traits/Ajax_Handler.php:618, ../includes/Traits/Ajax_Handler.php:869, ../includes/Traits/Login_Registration.php:72, ../includes/Traits/Login_Registration.php:288, ../includes/Traits/Login_Registration.php:762, ../includes/Traits/Login_Registration.php:973, ../includes/Traits/Woo_Product_Comparable.php:2132
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:125, ../includes/Traits/Ajax_Handler.php:328, ../includes/Traits/Ajax_Handler.php:410, ../includes/Traits/Ajax_Handler.php:665, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:293, ../includes/Traits/Login_Registration.php:769, ../includes/Traits/Login_Registration.php:980, ../includes/Traits/Woo_Product_Comparable.php:2137
+#: ../includes/Traits/Ajax_Handler.php:125, ../includes/Traits/Ajax_Handler.php:543, ../includes/Traits/Ajax_Handler.php:625, ../includes/Traits/Ajax_Handler.php:880, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:293, ../includes/Traits/Login_Registration.php:769, ../includes/Traits/Login_Registration.php:980, ../includes/Traits/Woo_Product_Comparable.php:2137
 msgid "Widget ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:136, ../includes/Traits/Ajax_Handler.php:334, ../includes/Traits/Ajax_Handler.php:417, ../includes/Traits/Ajax_Handler.php:675
+#: ../includes/Traits/Ajax_Handler.php:136, ../includes/Traits/Ajax_Handler.php:549, ../includes/Traits/Ajax_Handler.php:632, ../includes/Traits/Ajax_Handler.php:890
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:278
+#: ../includes/Traits/Ajax_Handler.php:307
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:1005
+#: ../includes/Traits/Ajax_Handler.php:1220
 msgid "Login | Register Settings updated"
 msgstr ""
 
