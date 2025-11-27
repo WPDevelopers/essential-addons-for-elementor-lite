@@ -7,7 +7,7 @@ add_action(
 	'in_admin_header',
 	function () {
 
-		if ( $this->pro_enabled || time() > strtotime( '09:59:59pm 4th December, 2025' ) || ( $GLOBALS["pagenow"] !== 'index.php' && get_current_screen()->id !== 'toplevel_page_eael-settings' ) ) {
+		if ( $this->pro_enabled || time() > strtotime( '09:59:59pm 4th December, 2025' ) || ( $GLOBALS["pagenow"] !== 'index.php' && get_current_screen()->id !== 'toplevel_page_eael-settings' ) || get_transient( 'eael_bfcm25_pointer_dismiss' ) ) {
 			return;
 		}
 
@@ -21,7 +21,7 @@ add_action(
 			$pointer_pririty = 1;
 		}
 
-		if ( absint( $pointer_pririty ) === 1 && ! get_transient( 'eael_bfcm25_pointer_dismiss' ) ) {
+		if ( absint( $pointer_pririty ) === 1 ) {
 			?>
 			<script>
                 jQuery(
@@ -67,6 +67,7 @@ add_action(
 	function () {
 		if ( isset( $_POST['action'] ) && 'dismiss-wp-pointer' == $_POST['action'] && isset( $_POST['pointer'] ) && 'eael' == $_POST['pointer'] ) {
 			set_transient( 'eael_bfcm25_pointer_dismiss', true, DAY_IN_SECONDS * 30 );
+			delete_option( '_wpdeveloper_plugin_pointer_priority' );
 		}
 	}
 );
