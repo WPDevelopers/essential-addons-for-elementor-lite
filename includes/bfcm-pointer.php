@@ -6,6 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action(
 	'in_admin_header',
 	function () {
+
+		if ( $this->pro_enabled || time() > strtotime( '09:59:59pm 4th December, 2025' ) || ( $GLOBALS["pagenow"] !== 'index.php' && get_current_screen()->id !== 'toplevel_page_eael-settings' ) ) {
+			return;
+		}
+
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_style( 'wp-pointer' );
 		wp_enqueue_script( 'wp-pointer' );
@@ -25,7 +30,7 @@ add_action(
                             {
                                 content:
                                     "<h3 style='font-weight: 600;'>Essential Addons: Black Friday Sale<\/h3>" +
-                                    "<p style='margin: 1em 0;'>Unlock the full power of Elementor with 100+ advanced elements. Build faster, design smarter.</p>" +
+                                    "<p style='margin: 1em 0;'>Unlock the full power of Elementor with 110+ advanced elements. Build faster, design smarter.</p>" +
                                     "<p><a class='button button-primary' href='https://essential-addons.com/bfcm-wp-admin-pointer' target='_blank'>Save $120</a></p>",
 
 
