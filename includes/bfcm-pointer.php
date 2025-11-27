@@ -29,10 +29,9 @@ add_action(
                         jQuery('#toplevel_page_eael-settings').pointer(
                             {
                                 content:
-                                    "<h3 style='font-weight: 600;'>Essential Addons: Black Friday Sale<\/h3>" +
+                                    "<h3 style='font-weight: 600;'>Essential Addons: Black Friday Sale</h3>" +
                                     "<p style='margin: 1em 0;'>Unlock the full power of Elementor with 110+ advanced elements. Build faster, design smarter.</p>" +
                                     "<p><a class='button button-primary' href='https://essential-addons.com/bfcm-wp-admin-pointer' target='_blank'>Save $120</a></p>",
-
 
                                 position:
                                     {
@@ -41,9 +40,7 @@ add_action(
                                     },
 
                                 pointerClass:
-                                    'wp-pointer arrow-top',
-
-                                pointerWidth: 420,
+                                    'wp-pointer',
 
                                 close: function () {
                                     jQuery.post(
