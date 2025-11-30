@@ -585,6 +585,33 @@ class Adv_Accordion extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-adv-accordion, {{WRAPPER}} .eael-accordion_media-wrapper',
             ]
         );
+
+        $this->add_responsive_control(
+			'eael_adv_accordion_media_gap',
+			[
+				'label'      => esc_html__( 'Media Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 30,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
         $this->end_controls_section();
     }
 
