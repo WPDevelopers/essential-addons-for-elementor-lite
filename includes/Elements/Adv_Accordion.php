@@ -612,6 +612,32 @@ class Adv_Accordion extends Widget_Base
 			]
 		);
 
+        $this->add_control(
+			'text_align',
+			[
+				'label'   => esc_html__( 'Media Direction', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'row' => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-align-end-h',
+					],
+					'row-reverse' => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-align-start-h',
+					],
+				],
+				'default'   => '$rowindex',
+				'toggle'    => false,
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper' => 'flex-direction: {{VALUE}};',
+				],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
         $this->end_controls_section();
     }
 
