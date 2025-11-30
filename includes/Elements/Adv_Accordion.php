@@ -613,7 +613,7 @@ class Adv_Accordion extends Widget_Base
 		);
 
         $this->add_control(
-			'text_align',
+			'eael_adv_accordion_media_direction',
 			[
 				'label'   => esc_html__( 'Media Direction', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
@@ -631,6 +631,57 @@ class Adv_Accordion extends Widget_Base
 				'toggle'    => false,
 				'selectors' => [
 					'{{WRAPPER}} .eael-accordion_media-wrapper' => 'flex-direction: {{VALUE}};',
+				],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
+        $this->add_control(
+			'eael_adv_accordion_media_content_width',
+			[
+				'label'      => esc_html__( 'Content Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range'      => [
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => '%',
+					'size' => 50,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists' => 'width: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_adv_accordion_media_content_gap',
+			[
+				'label'      => esc_html__( 'Content Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 12,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists' => 'gap: {{SIZE}}{{UNIT}};',
 				],
                 'condition' => [
                     'eael_adv_accordion_type' => 'accordion_media',
@@ -770,7 +821,9 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list' => 'margin-bottom: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
                 ],
             ]
         );
