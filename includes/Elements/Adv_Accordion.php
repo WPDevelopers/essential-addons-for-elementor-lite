@@ -1029,6 +1029,9 @@ class Adv_Accordion extends Widget_Base
             [
                 'label' => esc_html__('Toggle Caret Style', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'=> [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
             ]
         );
 
