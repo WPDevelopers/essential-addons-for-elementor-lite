@@ -45,7 +45,7 @@ trait Core
 
         // go pro
         if (!$this->pro_enabled) {
-            $links[] = sprintf('<a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" target="_blank" style="color: #524cff; font-weight: bold;">' . __('Go Pro', 'essential-addons-for-elementor-lite') . '</a>');
+            $links[] = sprintf('<a href="https://essential-addons.com/bfcm-2025-plugins-wp" target="_blank" style="color: #000; font-weight: bold;">' . __('Save 40%% Today', 'essential-addons-for-elementor-lite') . '</a>');
         }
 
         return $links;
