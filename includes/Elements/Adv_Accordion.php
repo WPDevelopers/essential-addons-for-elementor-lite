@@ -542,6 +542,7 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -553,6 +554,7 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -561,7 +563,7 @@ class Adv_Accordion extends Widget_Base
             [
                 'name'     => 'eael_adv_accordion_border',
                 'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-adv-accordion',
+                'selector' => '{{WRAPPER}} .eael-adv-accordion, {{WRAPPER}} .eael-accordion_media-wrapper',
             ]
         );
         $this->add_responsive_control(
@@ -572,6 +574,7 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -579,7 +582,7 @@ class Adv_Accordion extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'eael_adv_accordion_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-adv-accordion',
+                'selector' => '{{WRAPPER}} .eael-adv-accordion, {{WRAPPER}} .eael-accordion_media-wrapper',
             ]
         );
         $this->end_controls_section();
