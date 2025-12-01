@@ -645,7 +645,7 @@ class Adv_Accordion extends Widget_Base
 			]
 		);
 
-        $this->add_control(
+        $this->add_responsive_control(
 			'eael_adv_accordion_media_direction',
 			[
 				'label'   => esc_html__( 'Media Direction', 'essential-addons-for-elementor-lite' ),
@@ -660,7 +660,7 @@ class Adv_Accordion extends Widget_Base
 						'icon'  => 'eicon-align-start-h',
 					],
 				],
-				'default'   => '$rowindex',
+				'default'   => 'row',
 				'toggle'    => false,
 				'selectors' => [
 					'{{WRAPPER}} .eael-accordion_media-wrapper' => 'flex-direction: {{VALUE}};',
@@ -671,7 +671,7 @@ class Adv_Accordion extends Widget_Base
 			]
 		);
 
-        $this->add_control(
+        $this->add_responsive_control(
 			'eael_adv_accordion_media_content_width',
 			[
 				'label'      => esc_html__( 'Content Width', 'essential-addons-for-elementor-lite' ),
