@@ -132,20 +132,53 @@ class Adv_Accordion extends Widget_Base
                 'label' => esc_html__('General Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/accordion-';
+        $eael_accordion_layout = apply_filters(
+            'eael_adv_accordion_styles',
+            [
+                'styles' => [
+                    'accordion' => [
+                        'title' => esc_html__( 'Accordion', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'default.png'
+                    ],
+                    'toggle' => [
+                        'title' => esc_html__( 'Toggle', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'toggle.png'
+                    ],
+                    'accordion_media' => [
+                        'title' => esc_html__( 'Accordion with Media (Pro)', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'media.png'
+                    ],
+                ],
+                'conditions' => ['accordion_media'],
+            ]
+        );
+
         $this->add_control(
             'eael_adv_accordion_type',
             [
                 'label'       => esc_html__('Accordion Type', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::SELECT,
+                'type'        => Controls_Manager::CHOOSE,
                 'default'     => 'accordion',
-                'label_block' => false,
-                'options'     => [
-                    'accordion' => esc_html__('Accordion', 'essential-addons-for-elementor-lite'),
-                    'toggle'    => esc_html__('Toggle', 'essential-addons-for-elementor-lite'),
-                    'accordion_media'    => esc_html__('Accordion with Media', 'essential-addons-for-elementor-lite'),
+                'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
+                'options'     => $eael_accordion_layout['styles'],
+            ]
+        );
+
+        $this->add_control(
+            'eael_adv_accordion_type_pro_alert',
+            [
+                'label'     => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+                'type'      => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_adv_accordion_type' => $eael_accordion_layout['conditions'],
                 ],
             ]
         );
+
         $this->add_control(
             'eael_adv_accordion_title_tag',
             [
