@@ -897,7 +897,8 @@ class Adv_Accordion extends Widget_Base
             [
                 'name'     => 'eael_adv_accordion_tab_border',
                 'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header',
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header,
+                {{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists .eael-accordion_media-list',
             ]
         );
         $this->add_responsive_control(
@@ -908,6 +909,7 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists .eael-accordion_media-list' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -960,7 +962,8 @@ class Adv_Accordion extends Widget_Base
             [
                 'name'     => 'eael_adv_accordion_tab_border_hover',
                 'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover',
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover,
+                {{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists .eael-accordion_media-list:hover',
             ]
         );
         $this->add_responsive_control(
@@ -971,6 +974,7 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists .eael-accordion_media-list:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1025,7 +1029,8 @@ class Adv_Accordion extends Widget_Base
             [
                 'name'     => 'eael_adv_accordion_tab_border_active',
                 'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active',
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active,
+                {{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists .eael-accordion_media-list.active',
             ]
         );
         $this->add_responsive_control(
@@ -1036,6 +1041,7 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists .eael-accordion_media-list.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
