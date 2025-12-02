@@ -382,10 +382,11 @@ trait Helper
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg' ); ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
-                            <li><?php esc_html_e('5,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('6500+ Ready Templates','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php esc_html_e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
-                            <li><?php esc_html_e('Powering up 300,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('Powering up 400,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php esc_html_e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('1-Click Full Site Import','essential-addons-for-elementor-lite'); ?></li>
                         </ul>
                         <form class="eael-promo-temp__form">
                             <label>
