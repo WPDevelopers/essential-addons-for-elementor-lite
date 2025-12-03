@@ -122,7 +122,7 @@ trait Admin {
 				    ]
 			    ],
 			    'templately_promo'        => [
-				    'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( 'Unlock 6500+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
 					    __( 'Stunning Templates For All', 'essential-addons-for-elementor-lite' ),
 					    __( 'One-Click Full Site Import', 'essential-addons-for-elementor-lite' ),
