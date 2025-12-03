@@ -384,7 +384,7 @@ trait Helper
                         <ul class="eael-promo-temp__feature__list">
                             <li><?php esc_html_e('6500+ Ready Templates','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php esc_html_e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
-                            <li><?php esc_html_e('Powering up 400,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('Powering up 4,00,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php esc_html_e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php esc_html_e('1-Click Full Site Import','essential-addons-for-elementor-lite'); ?></li>
                         </ul>
