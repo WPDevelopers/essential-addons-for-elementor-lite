@@ -285,12 +285,12 @@ trait Facebook_Feed {
 		// -----------------------------
 		$post_fields =
 			"status_type,created_time,from,message,story,permalink_url," .
-			"attachments.limit(1){type,media_type,unshimmed_url}" .
+			"attachments.limit(1){type,media_type,unshimmed_url,media{image}}" .
 			"{$comment_count},reactions.summary(total_count)";
 
 		$feed_fields =
 			"id,message,status_type,created_time,from,permalink_url,privacy," .
-			"attachments.limit(1){type,media_type,unshimmed_url}" .
+			"attachments.limit(1){type,media_type,unshimmed_url,media{image}}" .
 			"{$comment_count},reactions.summary(total_count)";
 
 		// -----------------------------
