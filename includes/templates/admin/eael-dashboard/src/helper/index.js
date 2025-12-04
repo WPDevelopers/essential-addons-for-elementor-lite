@@ -140,7 +140,7 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args = {}) {
             return;
         case 'REGENERATE_ASSETS':
             params = {
-                action: 'clear_cache_files_with_ajax',
+                action: 'eael_clear_cache_files_with_ajax',
                 security: localize.nonce
             };
 
