@@ -1147,7 +1147,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         echo ob_get_clean();
                     }
                 } else {
-                    echo '<p class="no-posts-found">' . esc_html_e( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
+                    echo '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
                 }
 
                 wp_reset_postdata();
@@ -1175,7 +1175,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         echo ob_get_clean();
                     }
                 } else {
-                    echo '<p class="no-posts-found">' . esc_html_e( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
+                    echo '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
                 }
 
                 wp_reset_postdata();
