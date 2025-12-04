@@ -56,7 +56,7 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
 
 		if ( is_admin() ) {
-			add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'save_settings' ) );
+			add_action( 'wp_ajax_eael_save_settings_with_ajax', array( $this, 'save_settings' ) );
 			add_action( 'wp_ajax_clear_cache_files_with_ajax', array( $this, 'clear_cache_files' ) );
 			add_action( 'wp_ajax_eael_admin_promotion', array( $this, 'eael_admin_promotion' ) );
 		}
