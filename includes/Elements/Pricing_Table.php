@@ -168,6 +168,55 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_pricing_table_title_tag',
+            [
+                'label'       => __('HTML Tag', 'essential-addons-for-elementor-lite'),
+				'label_block' => true,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'h1' => [
+						'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h1',
+					],
+					'h2' => [
+						'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h2',
+					],
+					'h3' => [
+						'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h3',
+					],
+					'h4' => [
+						'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h4',
+					],
+					'h5' => [
+						'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h5',
+					],
+					'h6' => [
+						'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h6',
+					],
+					'div' => [
+						'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'div',
+					],
+					'span' => [
+						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'span',
+					],
+					'p' => [
+						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'P',
+					],
+				],
+                'default'   => 'h2',
+				'toggle'    => false,
+			]
+		);
+
         /**
          * Condition: 'eael_pricing_table_style' => 'style-2'
          */
@@ -2502,7 +2551,7 @@ class Pricing_Table extends Widget_Base
             <div <?php $this->print_render_attribute_string('eael_pricing'); ?>>
                 <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
                     <div class="header">
-                        <h2 class="title"><?php echo wp_kses( $settings['eael_pricing_table_title'], HelperClass::eael_allowed_tags() ); ?></h2>
+                        <<?php echo esc_html($settings['eael_pricing_table_title_tag']); ?> class="title"><?php echo wp_kses( $settings['eael_pricing_table_title'], HelperClass::eael_allowed_tags() ); ?></<?php echo esc_html($settings['eael_pricing_table_title_tag']); ?>>
                     </div>
                     <div class="eael-pricing-tag">
                         <?php 
@@ -2553,7 +2602,7 @@ class Pricing_Table extends Widget_Base
                     </div>
                     <div class="header">
                         <?php 
-                        $header_html = '<h2 class="title">' . $settings['eael_pricing_table_title'] . '</h2>';
+                        $header_html = '<' . $settings['eael_pricing_table_title_tag'] . ' class="title">' . $settings['eael_pricing_table_title'] . '</' . $settings['eael_pricing_table_title_tag'] . '>';
                         $header_html .= '<span class="subtitle">' . $settings['eael_pricing_table_sub_title'] . '</span>';
                         echo wp_kses( $header_html, HelperClass::eael_allowed_tags() );
                         ?>
