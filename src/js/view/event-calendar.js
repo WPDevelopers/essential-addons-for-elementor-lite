@@ -33,8 +33,6 @@ var EventCalendar = function ($scope, $) {
 					},
 					week: {
 						dayHeaderContent: (args) => {
-							console.log('weekColumnHeaderFormat', weekColumnHeaderFormat)
-
 							if (weekColumnHeaderFormat) {
 								return moment(args.date).format(weekColumnHeaderFormat);
 							}
@@ -113,6 +111,13 @@ var EventCalendar = function ($scope, $) {
 							element.removeClass("fc-has-url");
 							element.css('cursor', 'default');
 						}
+
+						$.each(element[0].attributes, function () {
+							if (this.name.toLowerCase().startsWith('on')) {
+								element.removeAttr(this.name);
+							}
+						});
+
 					}
 					else {
 						element.attr("href", "javascript:void(0);");
@@ -312,6 +317,13 @@ var EventCalendar = function ($scope, $) {
 								"border-left",
 								"5px solid " + event.borderColor
 							);
+
+							$.each(modalFooterLink[0].attributes, function () {
+								if (this.name.toLowerCase().startsWith('on')) {
+									modalFooterLink.removeAttr(this.name);
+								}
+							});
+
 						});
 					}
 				},
