@@ -584,7 +584,7 @@ class Image_Masking {
             
 		
             if( $style ){
-                echo '<style id="eael-image-masking-'.$element_id.'">'.$style.'</style>';
+                echo '<style id="eael-image-masking-'. esc_attr( $element_id ) .'">'. esc_html( $style ) .'</style>';
             }
         }
 	}
