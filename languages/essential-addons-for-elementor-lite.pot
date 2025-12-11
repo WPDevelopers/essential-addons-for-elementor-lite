@@ -1741,7 +1741,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1178, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1691, ../includes/Elements/Betterdocs_Category_Grid.php:1661, ../includes/Elements/Post_Grid.php:1850, ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3754
+#: ../includes/Elements/Betterdocs_Category_Box.php:1178, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1691, ../includes/Elements/Betterdocs_Category_Grid.php:1661, ../includes/Elements/Post_Grid.php:1850, ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3753
 msgid "No posts found!"
 msgstr ""
 
@@ -7713,7 +7713,7 @@ msgstr ""
 msgid "Timeline Vertical Line Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:796, ../includes/Elements/Product_Grid.php:3758, ../includes/Elements/Woo_Product_Carousel.php:3285, ../includes/Elements/Woo_Product_List.php:4103
+#: ../includes/Elements/Post_Timeline.php:796, ../includes/Elements/Product_Grid.php:3757, ../includes/Elements/Woo_Product_Carousel.php:3285, ../includes/Elements/Woo_Product_List.php:4103
 msgid "No layout found!"
 msgstr ""
 
@@ -8381,19 +8381,19 @@ msgstr ""
 msgid "Cart Button"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3967, ../includes/Elements/Woo_Product_Carousel.php:153, ../includes/Elements/Woo_Product_List.php:3724
+#: ../includes/Elements/Product_Grid.php:3966, ../includes/Elements/Woo_Product_Carousel.php:153, ../includes/Elements/Woo_Product_List.php:3724
 msgid "Publish"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3968, ../includes/Elements/Woo_Product_Carousel.php:154, ../includes/Elements/Woo_Product_List.php:3725
+#: ../includes/Elements/Product_Grid.php:3967, ../includes/Elements/Woo_Product_Carousel.php:154, ../includes/Elements/Woo_Product_List.php:3725
 msgid "Draft"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3969, ../includes/Elements/Woo_Product_Carousel.php:155, ../includes/Elements/Woo_Product_List.php:3726
+#: ../includes/Elements/Product_Grid.php:3968, ../includes/Elements/Woo_Product_Carousel.php:155, ../includes/Elements/Woo_Product_List.php:3726
 msgid "Pending Review"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3970, ../includes/Elements/Woo_Product_Carousel.php:156, ../includes/Elements/Woo_Product_List.php:3727
+#: ../includes/Elements/Product_Grid.php:3969, ../includes/Elements/Woo_Product_Carousel.php:156, ../includes/Elements/Woo_Product_List.php:3727
 msgid "Schedule"
 msgstr ""
 
