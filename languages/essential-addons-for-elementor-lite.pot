@@ -12311,7 +12311,7 @@ msgid "Style the message when no posts are found."
 msgstr ""
 
 #: ../includes/Traits/Core.php:48
-msgid "Save 40%% Today"
+msgid "Go Pro"
 msgstr ""
 
 #: ../includes/Traits/Core.php:63
