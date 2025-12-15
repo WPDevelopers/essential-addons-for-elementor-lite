@@ -48,6 +48,10 @@ trait Admin {
             wp_enqueue_style( 'essential_addons_elementor-template-cloud-css', EAEL_PLUGIN_URL . 'assets/admin/css/cloud.css', false, EAEL_PLUGIN_VERSION );
         }
 
+        if ( isset( $hook ) && $hook == 'elementor_page_elementor-element-manager' ) {
+		    wp_enqueue_style( 'ea-icon-admin', EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css', array(), EAEL_PLUGIN_VERSION );
+        }
+
 	    if ( isset( $hook ) && $hook == 'toplevel_page_eael-settings' ) {
 		    wp_enqueue_style( 'eael-admin-icon-css', EAEL_PLUGIN_URL . 'includes/templates/admin/icons/style.css', array(), EAEL_PLUGIN_VERSION );
 		    wp_enqueue_style( 'eael-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', array(), EAEL_PLUGIN_VERSION );
@@ -122,7 +126,7 @@ trait Admin {
 				    ]
 			    ],
 			    'templately_promo'        => [
-				    'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( 'Unlock 6500+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
 					    __( 'Stunning Templates For All', 'essential-addons-for-elementor-lite' ),
 					    __( 'One-Click Full Site Import', 'essential-addons-for-elementor-lite' ),
@@ -1940,7 +1944,7 @@ trait Admin {
                             postData += '&later=' + later;
                         }
 
-                        postData += '&nonce=<?php echo wp_create_nonce( 'wpnotice_dismiss_notice_bfcm_2025_notice' );?>';
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_bfcm_2025_notice' ) );?>';
 
                         httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
                         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

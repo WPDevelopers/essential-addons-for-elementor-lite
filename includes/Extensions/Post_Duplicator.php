@@ -78,7 +78,7 @@ class Post_Duplicator {
 		}
 
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			wp_die( __( 'You do not have sufficient permissions to edit this post.', 'essential-addons-for-elementor-lite' ) );
+			wp_die( esc_html__( 'You do not have permissions to edit this post.', 'essential-addons-for-elementor-lite' ) );
 		}
 
 		$post = sanitize_post( get_post( $post_id ), 'db' );
