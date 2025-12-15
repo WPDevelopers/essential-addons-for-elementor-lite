@@ -272,7 +272,7 @@ class WPDeveloper_Setup_Wizard {
 				'local_plugin_data' => $this->get_local_plugin_data( 'templately/templately.php' ),
 				'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-qs-img.png',
 				'titles'            => [
-					__("5000+", "essential-addons-for-elementor-lite"),
+					__("6500+", "essential-addons-for-elementor-lite"),
 					__("Ready Templates", "essential-addons-for-elementor-lite")
 				],
 				'features' => [

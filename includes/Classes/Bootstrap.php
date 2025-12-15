@@ -131,6 +131,8 @@ class Bootstrap
         // Compatibility Support
         new Compatibility_Support();
 
+		include_once(EAEL_PLUGIN_PATH . 'includes/bfcm-pointer.php');
+
     }
 
     protected function register_hooks() {
