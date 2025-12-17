@@ -8,6 +8,9 @@
                 <field type="Advance Accordion: Title" editor_type="LINE">eael_adv_accordion_tab_title</field>
                 <field type="Advance Accordion: Content" editor_type="VISUAL">eael_adv_accordion_tab_content</field>
             </fields-in-item>
+            <fields>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
         </widget>
         <widget name="eael-adv-tabs">
             <conditions>
@@ -17,6 +20,9 @@
                 <field type="Advance Tab: Title" editor_type="LINE">eael_adv_tabs_tab_title</field>
                 <field type="Advance Tab: Content" editor_type="VISUAL">eael_adv_tabs_tab_content</field>
             </fields-in-item>
+            <fields>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
         </widget>
         <widget name="eael-creative-button">
             <conditions>
@@ -26,6 +32,7 @@
                 <field type="Creative Button: Text" editor_type="LINE">creative_button_text</field>
                 <field type="Creative Button: Secondary Text" editor_type="LINE">creative_button_secondary_text</field>
                 <field type="Creative Button: Link" editor_type="LINE" key_of="creative_button_link_url">url</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-cta-box">
@@ -40,6 +47,7 @@
                 <field type="Call to Action: Primary Button Link" key_of="eael_cta_btn_link" editor_type="LINE" >url</field>
                 <field type="Call to Action: Button Text Two" editor_type="LINE">eael_cta_secondary_btn_text</field>
                 <field type="Call to Action: Secondary Button Link" key_of="eael_cta_secondary_btn_link" editor_type="LINE">url</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-data-table">
@@ -54,6 +62,9 @@
                 <field type="Data Table: Cell Content" editor_type="VISUAL">eael_data_table_content_row_content</field>
                 <field type="Data Table: Link" editor_type="LINE" key_of="eael_data_table_content_row_title_link">url</field>
             </fields-in-item>
+            <fields>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
         </widget>
         <widget name="eael-dual-color-header">
             <conditions>
@@ -63,6 +74,7 @@
                 <field type="Dual Color Heading: Title ( First Part )" editor_type="LINE">eael_dch_first_title</field>
                 <field type="Dual Color Heading: Title ( Last Part )" editor_type="LINE">eael_dch_last_title</field>
                 <field type="Dual Color Heading: Sub Text" editor_type="VISUAL">eael_dch_subtext</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-fancy-text">
@@ -72,6 +84,7 @@
             <fields>
                 <field type="Fancy Text: Prefix Text" editor_type="LINE">eael_fancy_text_prefix</field>
                 <field type="Fancy Text: Suffix Text" editor_type="LINE">eael_fancy_text_suffix</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
             <fields-in-item items_of="eael_fancy_text_strings">
                 <field type="Fancy Text: String" editor_type="LINE">eael_fancy_text_strings_text_field</field>
@@ -85,6 +98,7 @@
                 <field type="Filterable Gallery: Label" editor_type="LINE">eael_fg_all_label_text</field>
                 <field type="Filterable Gallery: Load More" editor_type="LINE">load_more_text</field>
                 <field type="Filterable Gallery: No More Text" editor_type="LINE">nomore_items_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
             <fields-in-item items_of="eael_fg_controls">
                 <field type="Filterable Gallery: Control" editor_type="LINE">eael_fg_control</field>
@@ -109,6 +123,9 @@
                 <field type="Image Accordion: Content" editor_type="VISUAL">eael_accordion_content</field>
                 <field type="Image Accordion: Link" key_of="eael_accordion_title_link" editor_type="LINE">url</field>
             </fields-in-item>
+            <fields>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
         </widget>
         <widget name="eael-flip-box">
             <conditions>
@@ -121,6 +138,7 @@
                 <field type="Flip Box: Back Content" editor_type="LINE">eael_flipbox_back_text</field>
                 <field type="Flip Box: Button Text" editor_type="VISUAL">flipbox_button_text</field>
                 <field type="Flip Box: Button Link" key_of="flipbox_link" editor_type="LINE">url</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-info-box">
@@ -134,6 +152,7 @@
                 <field type="Info Box: Sub Title Text" editor_type="LINE">eael_infobox_number</field>
                 <field type="Info Box: Button Link" key_of="infobox_button_link_url" editor_type="LINE">url</field>
                 <field type="Info Box: Link" key_of="eael_show_infobox_clickable_link" editor_type="LINE">url</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-post-grid">
@@ -143,6 +162,7 @@
             <fields>
                 <field type="Post Grid: Load More" editor_type="LINE">show_load_more_text</field>
                 <field type="Post Grid: Button Text" editor_type="LINE">read_more_button_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-post-timeline">
@@ -151,6 +171,7 @@
             </conditions>
             <fields>
                 <field type="Post Timeline: Load More" editor_type="LINE">show_load_more_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-pricing-table">
@@ -167,6 +188,7 @@
                 <field type="Pricing Table: Price Button Link" key_of="eael_pricing_table_btn_link" editor_type="LINE">url</field>
                 <field type="Pricing Table: Price Period" editor_type="LINE">eael_pricing_table_price_period</field>
                 <field type="Pricing Table: Price Tag Text" editor_type="LINE">eael_pricing_table_featured_tag_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
             <fields-in-item items_of="eael_pricing_table_items">
                 <field type="Pricing Table: Feature" editor_type="LINE">eael_pricing_table_item</field>
@@ -179,6 +201,7 @@
             </conditions>
             <fields>
                 <field type="Progressbar: Title" editor_type="LINE">progress_bar_title</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eicon-woocommerce">
@@ -194,6 +217,7 @@
                 <field type="Product Grid: Load More Button Text" editor_type="LINE">show_load_more_text</field>
                 <field type="Product Grid: Sale Text" editor_type="LINE">eael_product_sale_text</field>
                 <field type="Product Grid: Stock Out Text" editor_type="LINE">eael_product_stockout_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-team-member">
@@ -204,6 +228,7 @@
                 <field type="Team Member: Name" editor_type="LINE">eael_team_member_name</field>
                 <field type="Team Member: Title" editor_type="LINE">eael_team_member_job_title</field>
                 <field type="Team Member: Description" editor_type="AREA">eael_team_member_description</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
             <fields-in-item items_of="eael_team_member_social_profile_links">
                 <field type="Team Member: Social Link" key_of="link" editor_type="LINE">url</field>
@@ -217,6 +242,7 @@
                 <field type="Testimonial: User Name" editor_type="LINE">eael_testimonial_name</field>
                 <field type="Testimonial: Company Name" editor_type="LINE">eael_testimonial_company_title</field>
                 <field type="Testimonial: Description" editor_type="VISUAL">eael_testimonial_description</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-tooltip">
@@ -229,6 +255,7 @@
                 <field type="Tooltip: Hover Description" editor_type="VISUAL">eael_tooltip_hover_content</field>
                 <field type="Tooltip: Image" key_of="eael_tooltip_img_content" editor_type="MEDIA">id</field>
                 <field type="Tooltip: Icon Image" key_of="eael_tooltip_icon_content_new" editor_type="MEDIA">value.id</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-feature-list">
@@ -240,6 +267,9 @@
                 <field type="Feature List: Content" editor_type="AREA">eael_feature_list_content</field>
                 <field type="Feature List: Link" key_of="eael_feature_list_link" editor_type="LINE">url</field>
             </fields-in-item>
+            <fields>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
         </widget>
         <widget name="eael-caldera-form">
             <conditions>
@@ -248,6 +278,7 @@
             <fields>
                 <field type="Caldera Form: Title" editor_type="LINE">form_title_custom</field>
                 <field type="Caldera Form: Description" editor_type="AREA">form_description_custom</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-contact-form-7">
@@ -257,6 +288,7 @@
             <fields>
                 <field type="Contact Form-7: Title" editor_type="LINE">form_title_custom</field>
                 <field type="Contact Form-7: Description" editor_type="AREA">form_description_custom</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-gravity-form">
@@ -266,6 +298,7 @@
             <fields>
                 <field type="Gravity Form: Title" editor_type="LINE">form_title_custom</field>
                 <field type="Gravity Form: Description" editor_type="AREA">form_description_custom</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-wpforms">
@@ -275,6 +308,7 @@
             <fields>
                 <field type="WPForms: Title" editor_type="LINE">form_title_custom</field>
                 <field type="WPForms: Description" editor_type="AREA">form_description_custom</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-ninja">
@@ -284,6 +318,7 @@
             <fields>
                 <field type="NinjaForm: Title" editor_type="LINE">form_title_custom</field>
                 <field type="NinjaForm: Description" editor_type="AREA">form_description_custom</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-event-calendar">
@@ -295,6 +330,9 @@
                 <field type="Event: Description" editor_type="AREA">eael_event_description</field>
                 <field type="Event : Link" key_of="eael_event_link" editor_type="LINE">url</field>
             </fields-in-item>
+            <fields>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
         </widget>
         <widget name="eael-advanced-data-table">
             <conditions>
@@ -303,6 +341,7 @@
             <fields>
                 <field type="Adv Data Table: Table Content" editor_type="LINE">ea_adv_data_table_static_html</field>
                 <field type="Adv Data Table: Search Placeholder" editor_type="LINE">ea_adv_data_table_search_placeholder</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-formstack">
@@ -312,6 +351,7 @@
             <fields>
                 <field type="Formstack: Title" editor_type="LINE">eael_formstack_form_title_custom</field>
                 <field type="Formstack: Description" editor_type="AREA">eael_formstack_form_description_custom</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-fluentform">
@@ -321,6 +361,7 @@
             <fields>
                 <field type="Fluent Form: Title" editor_type="LINE">form_title_custom</field>
                 <field type="Fluent Form: Description" editor_type="AREA">form_description_custom</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-betterdocs-category-box">
@@ -330,6 +371,7 @@
             <fields>
                 <field type="BetterDocs Category Box: Count Prefix" editor_type="LINE">count_prefix</field>
                 <field type="BetterDocs Category Box: Count Suffix" editor_type="LINE">count_suffix</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-betterdocs-category-grid">
@@ -338,6 +380,7 @@
             </conditions>
             <fields>
                 <field type="BetterDocs Category Grid: Button Text" editor_type="LINE">button_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-content-ticker">
@@ -346,6 +389,7 @@
             </conditions>
             <fields>
                 <field type="Content Ticker: Tag Text" editor_type="LINE">eael_ticker_tag_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-countdown">
@@ -357,6 +401,7 @@
                 <field type="Countdown: Hours Text" editor_type="LINE">eael_countdown_hours_label</field>
                 <field type="Countdown: Minute Text" editor_type="LINE">eael_countdown_minutes_label</field>
                 <field type="Countdown: Seconds Text" editor_type="LINE">eael_countdown_seconds_label</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-login-register">
@@ -399,6 +444,7 @@
                 <field type="Login | Register Form: Redirect URL" editor_type="LINK">redirect_url>url</field>
                 <field type="Login | Register Form: Register Link" editor_type="LINK">custom_register_url>url</field>
                 <field type="Login | Register Form: Sign in Link Text" editor_type="AREA">login_link_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
             <fields-in-item items_of="register_fields">
                 <field type="Login | Register Form: Field Label" editor_type="LINE">field_label</field>
@@ -414,6 +460,9 @@
                 <field type="Interactive Circle List: Title" editor_type="LINE">eael_interactive_circle_btn_title</field>
                 <field type="Interactive Circle List: Content" editor_type="AREA">eael_interactive_circle_item_content</field>
             </fields-in-item>
+            <fields>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
         </widget>
         <widget name="eael-woo-cart">
             <conditions>
@@ -428,6 +477,7 @@
                 <field type="Woo Cart: Placeholder Text" editor_type="LINE">eael_woo_cart_components_cart_coupon_placeholder</field>
                 <field type="Woo Cart: Button Text" editor_type="LINE">eael_woo_cart_components_cart_checkout_button_text</field>
                 <field type="Woo Cart: Checkout Button Text" editor_type="AREA">eael_woo_cart_components_cart_checkout_button_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-woo-checkout">
@@ -462,6 +512,7 @@
                 <field type="Woo Checkout: Tab Payment Text" editor_type="LINE">ea_woo_checkout_tab_payment_text</field>
                 <field type="Woo Checkout: Tab Button Next Text" editor_type="LINE">ea_woo_checkout_tabs_btn_next_text</field>
                 <field type="Woo Checkout: Tab Button Previous Text" editor_type="LINE">ea_woo_checkout_tabs_btn_prev_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-nft-gallery">
@@ -473,6 +524,7 @@
                 <field type="NFT Gallery: Label | No Items" editor_type="LINE">eael_nft_gallery_content_no_items_label</field>
                 <field type="NFT Gallery: Label | Last Sale" editor_type="LINE">eael_nft_gallery_content_last_sale_label</field>
                 <field type="NFT Gallery: Label | Ends In" editor_type="LINE">eael_nft_gallery_content_ends_in_label</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-business-reviews">
@@ -482,6 +534,7 @@
             <fields>
                 <field type="Business Reviews: Label | Business Name" editor_type="LINE">eael_business_reviews_business_name_label</field>
                 <field type="Business Reviews: Label | Google Reviews Text" editor_type="LINE">eael_business_reviews_google_reviews_label</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-woo-product-compare">
@@ -490,6 +543,7 @@
             </conditions>
             <fields>
                 <field type="Woo Product Compare: Table Title" editor_type="LINE">table_title</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
             <fields-in-item items_of="fields">
                 <field type="Woo Product Compare: Field Type" editor_type="LINE">field_type</field>
@@ -505,6 +559,7 @@
                 <field type="Woo Product Gallery: Sale Text" editor_type="LINE">eael_product_gallery_sale_text</field>
                 <field type="Woo Product Gallery: Stock Out Text" editor_type="LINE">eael_product_gallery_stockout_text</field>
                 <field type="Woo Product Gallery: Label Text" editor_type="LINE">show_load_more_text</field>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
     </elementor-widgets>
