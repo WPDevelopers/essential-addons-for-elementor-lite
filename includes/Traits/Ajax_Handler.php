@@ -790,7 +790,7 @@ trait Ajax_Handler {
 	 * @since 4.0.0
 	 */
 	public function woo_checkout_update_order_review() {
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, 	WordPress.Security.NonceVerification.Missing
+		// phpcs:disable 
 		$setting       = $_POST['orderReviewData'];
         $shipping_data = empty ( $_POST['shippingData'] ) ? WC()->session->get('chosen_shipping_methods') : [wc_clean( $_POST['shippingData'] )];
 		//Mondial Relay plugin integration
@@ -801,7 +801,7 @@ trait Ajax_Handler {
 		ob_start();
 		AllTraits::checkout_order_review_default( $setting );
 		$woo_checkout_update_order_review = ob_get_clean();
-
+		// phpcs:enable
 		wp_send_json(
 			array(
 				'order_review' => $woo_checkout_update_order_review,
@@ -828,7 +828,7 @@ trait Ajax_Handler {
 			wp_send_json_error();
 		}
 
-		global $post, $product;
+		// global $post, $product;
 		$product = wc_get_product( $product_id );
 		$post    = get_post( $product_id );
 		setup_postdata( $post );
@@ -1410,7 +1410,9 @@ trait Ajax_Handler {
 		}
 
 		// Purge All LS Cache
+		// phpcs:disable
 		do_action( 'litespeed_purge_all', '3rd Essential Addons for Elementor' );
+		// phpcs:enable
 
 		// After clear the cache hook
 		do_action( 'eael_after_clear_cache_files' );

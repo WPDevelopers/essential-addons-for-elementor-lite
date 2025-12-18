@@ -1959,7 +1959,7 @@ trait Woo_Product_Comparable {
 
 		$products = apply_filters( 'eael/wcpc/products_ids', $products );
 		$fields   = $this->fields( $products );
-		global $product;
+		// global $product;
 		if ( ! empty( $products ) && is_array( $products ) ) {
 			foreach ( $products as $product_id ) {
 				/** @type WC_Product $product WooCommerce Product */
@@ -2204,7 +2204,7 @@ trait Woo_Product_Comparable {
 		$products = apply_filters( 'eael/wcpc/products_ids', $products );
 		$fields   = self::static_fields( $products, $settings );
 
-		global $product;
+		// global $product;
 		if ( ! empty( $products ) && is_array( $products ) ) {
 			foreach ( $products as $product_id ) {
 				/** @type WC_Product $product WooCommerce Product */

@@ -222,6 +222,7 @@ trait Login_Registration {
 				}
 			}
 
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
 
@@ -693,6 +694,7 @@ trait Login_Registration {
 		 *
 		 * @since 4.4.0
 		 */
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
 		do_action( 'register_new_user', $user_id );
 

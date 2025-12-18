@@ -494,6 +494,7 @@ trait Helper
     public function eael_wpml_template_translation($id){
 	    $postType = get_post_type( $id );
 	    if ( 'elementor_library' === $postType ) {
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		    return apply_filters( 'wpml_object_id', $id, $postType, true );
 	    }
 	    return $id;

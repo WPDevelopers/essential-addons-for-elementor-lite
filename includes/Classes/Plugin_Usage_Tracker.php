@@ -765,6 +765,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'type' => 'textarea'
 				]
 			);
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			return apply_filters( 'wpins_form_text_' . $this->plugin_name, $form );
 		}
 		/**

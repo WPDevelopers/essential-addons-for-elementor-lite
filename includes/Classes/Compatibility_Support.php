@@ -52,6 +52,7 @@ class Compatibility_Support {
 		}
 
 		$plugin_path = 'mondialrelay-wordpress/mondialrelay-wordpress.php';
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		return in_array( $plugin_path, apply_filters('active_plugins', get_option('active_plugins' ) ) ) || is_plugin_active_for_network( $plugin_path );
 	}
 
