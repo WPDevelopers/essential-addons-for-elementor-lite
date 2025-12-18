@@ -33,8 +33,6 @@ var EventCalendar = function ($scope, $) {
 					},
 					week: {
 						dayHeaderContent: (args) => {
-							console.log('weekColumnHeaderFormat', weekColumnHeaderFormat)
-
 							if (weekColumnHeaderFormat) {
 								return moment(args.date).format(weekColumnHeaderFormat);
 							}
@@ -113,6 +111,19 @@ var EventCalendar = function ($scope, $) {
 							element.removeClass("fc-has-url");
 							element.css('cursor', 'default');
 						}
+
+						$.each(element[0].attributes, function () {
+							var name = this.name.toLowerCase();
+							// Remove all on* event handlers
+							if (name.startsWith('on')) {
+								element.removeAttr(this.name);
+							}
+							// Sanitize href starting with javascript:
+							else if (name === 'href' && this.value.trim().toLowerCase().startsWith('javascript:')) {
+								element.attr('href', '#');
+							}
+						});
+
 					}
 					else {
 						element.attr("href", "javascript:void(0);");
@@ -312,6 +323,17 @@ var EventCalendar = function ($scope, $) {
 								"border-left",
 								"5px solid " + event.borderColor
 							);
+
+							$.each(modalFooterLink[0].attributes, function () {
+								var name = this.name.toLowerCase();
+								if (name.startsWith('on')) {
+									modalFooterLink.removeAttr(this.name);
+								}
+								else if (name === 'href' && this.value.trim().toLowerCase().startsWith('javascript:')) {
+									modalFooterLink.attr('href', '#');
+								}
+							});
+
 						});
 					}
 				},

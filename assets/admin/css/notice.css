@@ -266,3 +266,15 @@ span.coupon-code {
 .notice-essential-addons-for-elementor-lite-review ul.essential-addons-for-elementor-lite-notice-links li a span {
     text-decoration: none;
 }
+
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-better-payment"],
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-career-page"],
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-embedpress"] {
+    display: none;
+}
+
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-woo-product-carousel"] .eaicon-product-carousel:before,
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-woo-product-slider"] .eaicon-product-slider:before,
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-woo-product-list"] .eaicon-woo-product-list:before {
+    font-size: unset;
+}
