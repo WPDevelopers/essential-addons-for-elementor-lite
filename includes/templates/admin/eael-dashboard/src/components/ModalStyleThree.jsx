@@ -15,6 +15,10 @@ function ModalStyleThree() {
                 return;
             }
 
+            const copyButton = document.querySelector('.ea__copy-redirect-uri');
+            if (copyButton) {
+                copyButton.classList.add('is-copied');
+            }
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(uri).catch(() => {
                     const tempInput = document.createElement('input');

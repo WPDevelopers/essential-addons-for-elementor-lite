@@ -2865,6 +2865,10 @@ input.input-api:disabled {
   color: var(--base-color-50);
 }
 
+.ea__copy-redirect-uri.eael-copy-to-clipboard.is-copied {
+  color: #00C567;
+}
+
 @keyframes slide {
   from{
     transform: translateX(-100%);
