@@ -876,7 +876,7 @@ class WPDeveloper_Setup_Wizard {
 		}
 
 		update_option( 'eael_setup_wizard', 'init' );
-		wp_redirect( admin_url( 'admin.php?page=eael-setup-wizard' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=eael-setup-wizard' ) );
 	}
 
 	public function change_site_title() {

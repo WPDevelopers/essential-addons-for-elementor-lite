@@ -81,7 +81,7 @@ trait Core
             
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             if (!isset($_GET['activate-multi'])) {
-                wp_redirect("admin.php?page=eael-settings");
+                wp_safe_redirect("admin.php?page=eael-settings");
             }
         }
     }

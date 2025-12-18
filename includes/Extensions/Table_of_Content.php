@@ -100,8 +100,8 @@ class Table_of_Content
 			        $post_obj = get_post_type_object( $post_type );
 
 			        if ( ! in_array( $post_type, [ 'post', 'page' ] ) && is_a( $post_obj, 'WP_Post_Type' ) && $post_obj->labels ) {
-				        $post_type_labels         = get_post_type_labels( $post_obj );
-				        $plural_name              = $post_type_labels->name;
+				        $plural_name = ! empty( $post_obj->labels->name ) ? $post_obj->labels->name : '';
+
                         // Translators: %s: Post type name.
 				        $display_on[ $post_type ] = sprintf( __( 'All %s', 'essential-addons-for-elementor-lite' ), $plural_name );
 			        }

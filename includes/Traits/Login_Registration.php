@@ -241,7 +241,7 @@ trait Login_Registration {
 			}
 
 			if ( ! empty( $custom_redirect_url ) ) {
-				wp_redirect( esc_url_raw( $custom_redirect_url ) );
+				wp_safe_redirect( esc_url_raw( $custom_redirect_url ) );
 				exit();
 			}
 		}
@@ -1160,18 +1160,18 @@ trait Login_Registration {
 			update_option( 'eael_lostpassword_error_' . esc_attr( $this->widget_id ) . '_show', 1, false );
 
 			if ( $user && $user->get_error_code() === 'expired_key' ) {
-				wp_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
+				wp_safe_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
 			} else {
-				wp_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
+				wp_safe_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
 			}
 
 			exit;
 		}
 
 		if( $this->resetpassword_in_popup_selector ){
-			wp_redirect( $rp_page_url . '&eael-resetpassword=1&popup-selector=' . $this->resetpassword_in_popup_selector );
+			wp_safe_redirect( $rp_page_url . '&eael-resetpassword=1&popup-selector=' . $this->resetpassword_in_popup_selector );
 		} else {
-			wp_redirect( $rp_page_url . '&eael-resetpassword=1' );
+			wp_safe_redirect( $rp_page_url . '&eael-resetpassword=1' );
 		}
 
 		exit;
