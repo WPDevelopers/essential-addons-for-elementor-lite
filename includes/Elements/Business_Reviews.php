@@ -2643,8 +2643,6 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['reviews_sort']            		= ! empty( $settings['eael_business_reviews_sort_by'] ) ? esc_html( $settings['eael_business_reviews_sort_by'] ) : 'most_relevant';
 		$business_reviews['review_text_translation'] 		= ! empty( $settings['eael_business_reviews_review_text_translation'] ) && 'yes' === $settings['eael_business_reviews_review_text_translation'] ? 1 : 0;
 
-		$business_reviews = apply_filters('eael/business_reviews/settings', $business_reviews, $settings);
-
 		$business_reviews['expiration'] 					= ! empty( $settings['eael_business_reviews_data_cache_time'] ) ? absint( $settings['eael_business_reviews_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
 
 		$cache_key_parts = [ $business_reviews['reviews_sort'], $business_reviews['review_text_translation'], $this->get_id() ];
@@ -2735,6 +2733,8 @@ class Business_Reviews extends Widget_Base {
 		if ( $business_reviews['accessibility_enabled'] ) {
 			$business_reviews['accessibility_link_in_same_tab'] = ! empty( $settings['eael_business_reviews_link_in_same_tab'] ) && 'yes' === $settings['eael_business_reviews_link_in_same_tab'];
 		}
+
+		$business_reviews = apply_filters('eael/business_reviews/settings', $business_reviews, $settings);
 
 		return $business_reviews;
 	}

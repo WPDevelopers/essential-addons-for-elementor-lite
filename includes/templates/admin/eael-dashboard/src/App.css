@@ -2857,6 +2857,14 @@ input.input-api:disabled {
   animation-fill-mode: forwards;
 }
 
+.ea__copy-redirect-uri.eael-copy-to-clipboard {
+  cursor: pointer;
+  padding-left: 5px;
+  vertical-align: middle;
+  font-size: 16px;
+  color: var(--base-color-50);
+}
+
 @keyframes slide {
   from{
     transform: translateX(-100%);

@@ -9,6 +9,29 @@ function ModalStyleThree() {
         changeHandler = (e, key) => {
             const value = ['lr_custom_profile_fields', 'lr_recaptcha_badge_hide'].includes(key) ? (e.target.checked ? 'on' : '') : e.target.value;
             eaDispatch({type: 'MODAL_ON_CHANGE', payload: {key, value}});
+        },
+        copyRedirectUri = (uri) => {
+            if (!uri) {
+                return;
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(uri).catch(() => {
+                    const tempInput = document.createElement('input');
+                    tempInput.value = uri;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                });
+            } else {
+                const tempInput = document.createElement('input');
+                tempInput.value = uri;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+            }
         };
 
     return (
@@ -38,8 +61,19 @@ function ModalStyleThree() {
                     </div>
                     <div
                         className={item === eaState.modalAccordion ? 'ea__according-content flex flex-col gap-2 accordion-show' : 'ea__according-content flex flex-col gap-2'}>
-                        {eaData.accordion[item]?.info !== undefined && <div className="flex gap-4 items-center">
-                            <p className="info--text">{eaData.accordion[item].info}</p>
+                        {eaData.accordion[item]?.info !== undefined && <div className="flex flex-col gap-2">
+                            <p className="info--text">
+                                {eaData.accordion[item].info}
+                                
+                                {eaData.accordion[item]?.redirect_uri && (
+                                    <span
+                                        className="ea__btn ea__btn-secondary ea__copy-redirect-uri eael-copy-to-clipboard"
+                                        onClick={() => copyRedirectUri(eaData.accordion[item].redirect_uri)}
+                                    >
+                                        <i className="eicon-copy"></i>
+                                    </span>
+                                )}
+                            </p>
                         </div>}
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
                             if (subItem?.type === 'checkbox') {
