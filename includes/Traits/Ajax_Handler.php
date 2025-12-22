@@ -183,27 +183,56 @@ trait Ajax_Handler {
 			$settings['show_load_more_text']       = $settings['eael_fg_loadmore_btn_text'];
 			$settings['layout_mode']               = isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : 'masonry';
 
-			if ( ! empty( $args['fetch_acf_image'] ) && 'yes' === $args['fetch_acf_image'] && ! empty( $args['post__in'] ) ) {
-				$args['post_status'] = 'any';
-				$args['post_type'] = 'any';
-			}
-
 			$exclude_ids = json_decode( html_entity_decode( stripslashes ( $_POST['exclude_ids'] ) ) );
 			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique($exclude_ids) ) : array();
 			$active_term_id = ( !empty( $_POST['active_term_id'] ) ) ? intval( $_POST['active_term_id'] ) : 0;
 			$active_taxonomy = ( !empty( $_POST['active_taxonomy'] ) ) ? sanitize_text_field( $_POST['active_taxonomy'] ) : '';
 
-			if ( ! empty( $args['post__not_in'] ) && ! empty( $args['post__in'] ) ) {
-				$args['post__in'] = array_diff( $args['post__in'], array_unique( $args['post__not_in'] ) );
-			}
+			// Check if this is a hybrid/combined query with ACF gallery
+			// Also check settings for hybrid query flag as backup (in case args encoding failed)
+			$is_hybrid_query = ( ! empty( $args['eael_dfg_enable_combined_query'] ) && 'yes' === $args['eael_dfg_enable_combined_query'] )
+				|| ( ! empty( $settings['eael_dfg_enable_combined_query'] ) && 'yes' === $settings['eael_dfg_enable_combined_query'] && 'yes' === $settings['fetch_acf_image_gallery'] );
 
-			if( 0 < $active_term_id &&
-				!empty( $active_taxonomy ) &&
-				!empty($args['tax_query'])
-			) {
-				foreach ($args['tax_query'] as $key => $taxonomy) {
-					if (isset($taxonomy['taxonomy']) && $taxonomy['taxonomy'] === $active_taxonomy) {
-						$args['tax_query'][$key]['terms'] = [$active_term_id];
+			if ( $is_hybrid_query && class_exists( 'ACF' ) && ! empty( $settings['eael_acf_gallery_keys'] ) ) {
+				// Build taxonomy map for ACF gallery attachments
+				$taxonomy_map = $this->build_dfg_acf_taxonomy_map( $args, $settings, $active_term_id, $active_taxonomy );
+
+				// Store globally for templates
+				global $eael_dfg_attachment_taxonomy_map;
+				$eael_dfg_attachment_taxonomy_map = $taxonomy_map['taxonomy_map'];
+
+				// Update args with the filtered post IDs
+				if ( ! empty( $taxonomy_map['post_ids'] ) ) {
+					$args['post__in'] = $taxonomy_map['post_ids'];
+					$args['post_type'] = 'any';
+					$args['post_status'] = 'any';
+					$args['tax_query'] = [];
+					$args['orderby'] = 'post__in';
+				}
+
+				// Apply exclusions
+				if ( ! empty( $args['post__not_in'] ) && ! empty( $args['post__in'] ) ) {
+					$args['post__in'] = array_values( array_diff( $args['post__in'], array_unique( $args['post__not_in'] ) ) );
+				}
+			} else {
+				// Standard ACF gallery handling (non-hybrid)
+				if ( ! empty( $args['fetch_acf_image'] ) && 'yes' === $args['fetch_acf_image'] && ! empty( $args['post__in'] ) ) {
+					$args['post_status'] = 'any';
+					$args['post_type'] = 'any';
+				}
+
+				if ( ! empty( $args['post__not_in'] ) && ! empty( $args['post__in'] ) ) {
+					$args['post__in'] = array_diff( $args['post__in'], array_unique( $args['post__not_in'] ) );
+				}
+
+				if( 0 < $active_term_id &&
+					!empty( $active_taxonomy ) &&
+					!empty($args['tax_query'])
+				) {
+					foreach ($args['tax_query'] as $key => $taxonomy) {
+						if (isset($taxonomy['taxonomy']) && $taxonomy['taxonomy'] === $active_taxonomy) {
+							$args['tax_query'][$key]['terms'] = [$active_term_id];
+						}
 					}
 				}
 			}
@@ -299,6 +328,192 @@ trait Ajax_Handler {
 			echo wp_kses_post( $html );
 		}
 		wp_die();
+	}
+
+	/**
+	 * Build taxonomy map for Dynamic Filterable Gallery ACF attachments
+	 * Maps attachment IDs to their parent post's taxonomy classes for filtering
+	 *
+	 * @param array $args Query args
+	 * @param array $settings Widget settings
+	 * @param int $active_term_id Active filter term ID
+	 * @param string $active_taxonomy Active filter taxonomy
+	 * @return array Array with 'post_ids' and 'taxonomy_map'
+	 */
+	protected function build_dfg_acf_taxonomy_map( $args, $settings, $active_term_id = 0, $active_taxonomy = '' ) {
+		$_args = $args;
+		$_args['posts_per_page'] = -1;
+		$_args['fields'] = 'ids';
+
+		// Restore original post_type from settings (args may have 'any' from hybrid query encoding)
+		if ( ! empty( $settings['post_type'] ) && $settings['post_type'] !== 'by_id' ) {
+			$_args['post_type'] = $settings['post_type'];
+			$_args['post_status'] = 'publish';
+		}
+
+		// Remove post__in constraint to get all matching parent posts
+		unset( $_args['post__in'] );
+
+		// If filtering by a specific term, apply the filter to parent posts
+		if ( $active_term_id > 0 && ! empty( $active_taxonomy ) ) {
+			$_args['tax_query'] = [
+				[
+					'taxonomy' => $active_taxonomy,
+					'field' => 'term_id',
+					'terms' => [ $active_term_id ],
+				]
+			];
+		}
+
+		$query = new \WP_Query( $_args );
+
+		$post_ids = [];
+		$taxonomy_map = [];
+
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				$parent_post_id = get_the_ID();
+
+				// Get parent post's taxonomy classes
+				$parent_taxonomy_classes = $this->get_dfg_post_taxonomy_classes( $parent_post_id, $settings );
+
+				// Include parent posts unless hidden
+				if ( ! isset( $settings['eael_gf_hide_parent_items'] ) || 'yes' !== $settings['eael_gf_hide_parent_items'] ) {
+					$post_ids[] = $parent_post_id;
+				}
+
+				// Get ACF gallery items
+				$acf_gallery = [];
+				if ( ! empty( $settings['eael_acf_gallery_keys'] ) ) {
+					foreach ( $settings['eael_acf_gallery_keys'] as $key ) {
+						$_acf_gallery = get_field( $key, $parent_post_id );
+						if ( ! empty( $_acf_gallery ) ) {
+							$acf_gallery = array_merge( $_acf_gallery, $acf_gallery );
+						}
+					}
+				}
+
+				if ( ! empty( $acf_gallery ) ) {
+					foreach ( $acf_gallery as $item ) {
+						$attachment_id = false;
+
+						if ( empty( $item['ID'] ) ) {
+							if ( 'integer' === gettype( $item ) ) {
+								$attachment_id = $item;
+							} else if ( 'string' === gettype( $item ) ) {
+								$attachment_id = HelperClass::eael_get_attachment_id_from_url( $item );
+							}
+
+							if ( ! $attachment_id ) {
+								continue;
+							}
+
+							$attachment = get_post( $attachment_id );
+							if ( ! is_object( $attachment ) || ! isset( $attachment->ID ) ) {
+								continue;
+							}
+						} else {
+							$attachment_id = $item['ID'];
+						}
+
+						$post_ids[] = $attachment_id;
+
+						// Map this attachment to its parent's taxonomy classes
+						if ( ! isset( $taxonomy_map[ $attachment_id ] ) ) {
+							$taxonomy_map[ $attachment_id ] = $parent_taxonomy_classes;
+						} else {
+							$taxonomy_map[ $attachment_id ] = array_unique(
+								array_merge( $taxonomy_map[ $attachment_id ], $parent_taxonomy_classes )
+							);
+						}
+					}
+				}
+			}
+		}
+		wp_reset_postdata();
+
+		return [
+			'post_ids' => array_unique( $post_ids ),
+			'taxonomy_map' => $taxonomy_map
+		];
+	}
+
+	/**
+	 * Get taxonomy classes for a post (for DFG ACF gallery parent posts)
+	 *
+	 * @param int $post_id Post ID
+	 * @param array $settings Widget settings
+	 * @return array Array of taxonomy slug classes
+	 */
+	protected function get_dfg_post_taxonomy_classes( $post_id, $settings ) {
+		$classes = [];
+		$post_type = get_post_type( $post_id );
+
+		// Get all taxonomies for this post type
+		$get_object_taxonomies = get_object_taxonomies( $post_type );
+		$taxonomies = wp_get_object_terms( $post_id, $get_object_taxonomies, array( "fields" => "slugs" ) );
+
+		if ( $taxonomies && ! is_wp_error( $taxonomies ) ) {
+			foreach ( $taxonomies as $taxonomy ) {
+				$classes[] = $taxonomy;
+			}
+		}
+
+		// Handle category child items
+		$show_category_child_items = ! empty( $settings['category_show_child_items'] ) && 'yes' === $settings['category_show_child_items'] ? 1 : 0;
+		$show_product_cat_child_items = ! empty( $settings['product_cat_show_child_items'] ) && 'yes' === $settings['product_cat_show_child_items'] ? 1 : 0;
+
+		$category_or_product_cat = '';
+		if ( 1 === $show_category_child_items && ! empty( $get_object_taxonomies ) && in_array( 'category', $get_object_taxonomies ) ) {
+			$category_or_product_cat = 'category';
+		}
+
+		if ( 1 === $show_product_cat_child_items && ! empty( $get_object_taxonomies ) && in_array( 'product_cat', $get_object_taxonomies ) ) {
+			$category_or_product_cat = 'product_cat';
+		}
+
+		if ( $category_or_product_cat ) {
+			$terms = get_the_terms( $post_id, $category_or_product_cat );
+			if ( $terms && ! is_wp_error( $terms ) ) {
+				foreach ( $terms as $term ) {
+					$parent_list = get_term_parents_list( $term->term_id, $category_or_product_cat, array( "format" => "slug", 'separator' => '/', "link" => 0, "inclusive" => 0 ) );
+					$parent_list = explode( '/', $parent_list );
+					$classes = array_merge( $classes, array_filter( $parent_list ) );
+				}
+			}
+		}
+
+		// Get categories
+		$categories = get_the_category( $post_id );
+		if ( $categories ) {
+			foreach ( $categories as $category ) {
+				$classes[] = $category->slug;
+			}
+		}
+
+		// Get tags
+		$tags = wp_get_post_tags( $post_id );
+		if ( $tags ) {
+			foreach ( $tags as $tag ) {
+				$classes[] = $tag->slug;
+			}
+		}
+
+		// Get product categories
+		$product_cats = get_the_terms( $post_id, 'product_cat' );
+		if ( $product_cats && ! is_wp_error( $product_cats ) ) {
+			foreach ( $product_cats as $cat ) {
+				if ( is_object( $cat ) ) {
+					$classes[] = $cat->slug;
+				}
+			}
+		}
+
+		// Add post name/slug
+		$classes[] = get_post_field( 'post_name', $post_id );
+
+		return array_unique( array_filter( $classes ) );
 	}
 
 	/**
