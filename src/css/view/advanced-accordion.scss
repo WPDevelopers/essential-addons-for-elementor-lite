@@ -2,91 +2,98 @@
     width: auto;
     height: auto;
     transition: all 0.3s ease-in-out;
-}
 
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
-    padding: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.02);
-    background-color: #f1f1f1;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1;
-    transition: all 0.3s ease-in-out;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    > .eael-accordion-tab-title {
-        flex-grow: 1;
-        margin: 0;
-    }
-    > i, span{
-        margin-right: 10px;
-    }
-    .eaa-svg {
-        font-size: 32px;
-        svg {
-            width: 1em;
-            height: 1em
+    .eael-accordion-list {
+        .eael-accordion-header {
+            padding: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            background-color: #f1f1f1;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            > .eael-accordion-tab-title {
+                flex-grow: 1;
+                margin: 0;
+            }
+            > i, span{
+                margin-right: 10px;
+            }
+            .eaa-svg {
+                font-size: 32px;
+                svg {
+                    width: 1em;
+                    height: 1em
+                }
+            }
+            &:hover{
+               background-color: #414141;
+            }
+            &.active{
+                background-color: #444444;
+
+                .eael-advanced-accordion-icon-closed {
+                    display: none;
+                }
+
+                .eael-advanced-accordion-icon-opened {
+                    display: block;
+                }
+
+                .fa-toggle {
+                    transform: rotate(90deg);
+                    z-index: 10;
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+
+            .fa-toggle {
+                transform: rotate(0deg);
+                z-index: 10;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .eael-advanced-accordion-icon-closed {
+                display: block;
+            }
+
+            .eael-advanced-accordion-icon-opened {
+                display: none;
+            }
+        }
+
+        .eael-accordion-content {
+            display: none;
+            border: 1px solid #eee;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            line-height: 1.7;
+        
+            .eael-accordion-gutenberg-content {
+                .alignfull {
+                    width: 100%;
+                    margin-left: 0;
+                    margin-right: 0;
+                    max-width: 100%;
+                }
+            }
+
+            &.active {
+                display: block;
+            }
         }
     }
-    &:hover{
-       background-color: #414141;
+
+    .fa-accordion-icon {
+        display: inline-block;
+        margin-right: 10px;
     }
-    &.active{
-        background-color: #444444;
-    }
 }
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
-    transform: rotate(0deg);
-    z-index: 10;
-    transition: all 0.3s ease-in-out;
-}
-
-.eael-accordion-header .eael-advanced-accordion-icon-closed {
-    display: block;
-}
-
-.eael-accordion-header .eael-advanced-accordion-icon-opened {
-    display: none;
-}
-
-.eael-accordion-header.active .eael-advanced-accordion-icon-closed {
-    display: none;
-}
-
-.eael-accordion-header.active .eael-advanced-accordion-icon-opened {
-    display: block;
-}
-
-.eael-adv-accordion
-    .eael-accordion-list
-    .eael-accordion-header.active
-    .fa-toggle {
-    transform: rotate(90deg);
-    z-index: 10;
-    transition: all 0.3s ease-in-out;
-}
-
-.fa-accordion-icon {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
-    display: none;
-    border: 1px solid #eee;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
-    display: block;
-}
-
 .rtl {
     .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
         transform: rotate(-90deg);

@@ -27,7 +27,7 @@ trait Controls
         $post_types = ControlsHelper::get_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
 
-        if ($wb->get_name() !== 'eael-dynamic-filterable-gallery' && $wb->get_name() !== 'eael-post-list') {
+        if ( ! in_array( $wb->get_name(), [ 'eael-dynamic-filterable-gallery', 'eael-post-list', 'eael-adv-accordion' ] ) ) {
             $post_types['source_dynamic'] = __('Dynamic', 'essential-addons-for-elementor-lite');
         }
 
@@ -50,6 +50,16 @@ trait Controls
                     'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_content_timeline_choose' => 'dynamic',
+                    ],
+                ]
+            );
+        } else if ('eael-adv-accordion' === $wb->get_name()) {
+            $wb->start_controls_section(
+                'eael_adv_accordion_content_section',
+                [
+                    'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
+                    'condition' => [
+                        'eael_adv_accordion_content_source' => 'dynamic',
                     ],
                 ]
             );
