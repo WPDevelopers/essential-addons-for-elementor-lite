@@ -369,6 +369,22 @@ trait Controls
                         ]
                     ]
                 );
+
+                $wb->add_control(
+                    'eael_dfg_enable_combined_query',
+                    [
+                        'label' => __('Enable Combined Query', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SWITCHER,
+                        'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                        'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                        'return_value' => 'yes',
+                        'default' => '',
+                        'description' => __('Combine filtered items with ACF gallery items.', 'essential-addons-for-elementor-lite'),
+                        'condition' => [
+                            'fetch_acf_image_gallery' => 'yes',
+                        ],
+                    ]
+                );
             } else {
                 $wb->add_control(
                     'eael_scf_gallery_warnig_text',
