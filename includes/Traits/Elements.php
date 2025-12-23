@@ -1020,7 +1020,7 @@ trait Elements {
         if( count( Helper::get_eael_advanced_accordion_faq() )) : ?>
             <!-- EA FAQ Schema : Starts-->
             <script type="application/ld+json">
-                <?php echo json_encode( Helper::get_eael_advanced_accordion_faq() ); ?>
+                <?php echo wp_json_encode( Helper::get_eael_advanced_accordion_faq(), JSON_UNESCAPED_UNICODE ); ?>
             </script>
             <!-- EA FAQ Schema : Ends-->
         <?php endif;
