@@ -3730,20 +3730,21 @@ class Product_Grid extends Widget_Base
 		                $args['total_post'] = $found_posts;
 
 		                // Add secondary image data attributes
-		                $secondary_image_data = '';
-		                if ( isset( $settings['eael_product_grid_show_secondary_image'] ) ) {
-		                    $secondary_image_data .= sprintf( ' data-ssi-desktop="%s"', esc_attr( $settings['eael_product_grid_show_secondary_image'] ) );
-		                    $secondary_image_data .= sprintf( ' data-ssi-tablet="%s"', esc_attr( $settings['eael_product_grid_show_secondary_image_tablet'] ?? $settings['eael_product_grid_show_secondary_image'] ) );
-		                    $secondary_image_data .= sprintf( ' data-ssi-mobile="%s"', esc_attr( $settings['eael_product_grid_show_secondary_image_mobile'] ?? $settings['eael_product_grid_show_secondary_image'] ) );
-		                }
+                        $this->add_render_attribute( 'eael-post-appender', 'class', [ 'products', 'eael-post-appender', 'eael-post-appender-' . $this->get_id() ] );
+                        if ( isset( $settings['eael_product_grid_show_secondary_image'] ) ) {
+                            $this->add_render_attribute( 'eael-post-appender', 'data-ssi-desktop' , esc_attr( $settings['eael_product_grid_show_secondary_image'] ) );
+                            $this->add_render_attribute( 'eael-post-appender', 'data-ssi-tablet' , esc_attr( $settings['eael_product_grid_show_secondary_image_tablet'] ?? $settings['eael_product_grid_show_secondary_image'] ) );
+                            $this->add_render_attribute( 'eael-post-appender', 'data-ssi-mobile' , esc_attr( $settings['eael_product_grid_show_secondary_image_mobile'] ?? $settings['eael_product_grid_show_secondary_image'] ) );
+                        }
 
-		                printf( '<ul class="products eael-post-appender" data-layout-mode="%s"%s>', esc_attr( $settings["eael_product_grid_layout"] ), $secondary_image_data );
+                        $this->add_render_attribute( 'eael-post-appender', 'data-layout-mode' , esc_attr( $settings['eael_product_grid_layout'] ) );
+                        echo '<ul '; $this->print_render_attribute_string( 'eael-post-appender' ); echo '>';
 
-                            while ( $query->have_posts() ) {
-                                $query->the_post();
-                                include( realpath( $template ) );
-                            }
-                            wp_reset_postdata();
+                        while ( $query->have_posts() ) {
+                            $query->the_post();
+                            include( realpath( $template ) );
+                        }
+                        wp_reset_postdata();
 
 		                echo '</ul>';
                         do_action( 'eael_woo_after_product_loop' );
