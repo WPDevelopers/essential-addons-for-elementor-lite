@@ -1409,7 +1409,8 @@ class Helper
             'title' => [ 'title' => [] ],
             'path'     => [
                 'd'    => [], 
-                'fill' => [] 
+                'fill' => [],
+                'transform' => [] 
             ],
 			'i'      => [
 				'class' => [],
