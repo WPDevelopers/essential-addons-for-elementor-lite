@@ -1055,8 +1055,28 @@ class Adv_Accordion extends Widget_Base
                     '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-icon i'   => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-icon svg'   => 'fill: {{VALUE}}',
                 ],
+                'condition' => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
             ]
         );
+
+        $this->add_control(
+            'eael_adv_accordion_tab_icon_color_active_media',
+            [
+                'label'     => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#333',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-icon i'   => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-icon svg'   => 'fill: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
