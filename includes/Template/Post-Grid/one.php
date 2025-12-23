@@ -53,8 +53,21 @@ if ( is_object( $authordata ) ) {
 $enable_ratio = $settings['enable_postgrid_image_ratio'] == 'yes' ? 'eael-image-ratio':'';
 $is_show_meta = 'yes' === $settings['eael_show_meta'];
 $title_tag    = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($settings['title_tag']) : 'h2';
+$css_classes  = ' eael-post-grid-column eael-pg-post-'.get_the_ID();
+$category_list= get_the_category();
+$tags_list    = get_the_tags();
 
-echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
+if ( ! empty( $category_list )  ) {
+    $slugs = wp_list_pluck( $category_list, 'slug' );
+    $css_classes .= ' category-'.implode( '-', $slugs );
+}
+
+if ( ! empty( $tags_list )  ) {
+    $slugs = wp_list_pluck( $tags_list, 'slug' );
+    $css_classes .= ' tags-'.implode( '-', $slugs );
+}
+
+echo '<article class="eael-grid-post '. esc_attr( $css_classes ) .'" data-id="' . esc_attr( get_the_ID() ) . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
             
