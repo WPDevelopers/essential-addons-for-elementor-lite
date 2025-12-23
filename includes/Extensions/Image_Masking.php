@@ -3,9 +3,6 @@
 namespace Essential_Addons_Elementor\Extensions;
 
 use Elementor\Controls_Manager;
-use Elementor\Repeater;
-use Essential_Addons_Elementor\Classes\Helper;
-
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -13,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Image_Masking {
 
+    private static $svg_dir_url = EAEL_PLUGIN_URL . 'assets/front-end/img/image-masking/svg-shapes/';
 	/**
 	 * Initialize hooks
 	 */
@@ -22,7 +20,13 @@ class Image_Masking {
 		add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 	}
+
+    public function enqueue_scripts() {
+        $data = [ 'svg_dir_url' => self::$svg_dir_url ];
+        wp_localize_script( 'elementor-frontend', 'EAELImageMaskingConfig', $data );
+    }
 
     private function clip_paths( $shape ){
         $shapes = [
@@ -224,7 +228,7 @@ class Image_Masking {
 
         if ( !apply_filters('eael/pro_enabled', false ) ) {
             $element->add_control(
-                'eael_image_masking_upload_pro_message',
+                'eael_image_masking_upload_pro_message' . $tab,
                 [
                     'label' => '',
                     'type' => Controls_Manager::RAW_HTML,
@@ -464,15 +468,6 @@ class Image_Masking {
             do_action( 'eael/image_masking/morphing_controls', $element );
         }
 
-        $svg_url = EAEL_PLUGIN_URL . 'assets/front-end/img/image-masking/svg-shapes/';
-        $element->add_control(
-            'eael_image_masking_svg_url',
-            [
-                'label' => '',
-                'type' => Controls_Manager::HIDDEN,
-                'default' => $svg_url,
-            ]
-        );
 		$element->end_controls_section();
 	}
 
@@ -502,7 +497,7 @@ class Image_Masking {
 			$type = $settings['eael_image_masking_type'];
             $element_id = $element->get_id();
             $style = '';
-            $element->add_render_attribute( '_wrapper', 'class', 'eael-image-masking-' . $element_id );
+            $element->add_render_attribute( '_wrapper', 'class', 'eael-image-masking-' . esc_attr( $element_id ) );
 			if( 'clip' === $type ){
                 $clip_path_value = '';
                 if( 'yes' === $settings['eael_image_masking_enable_custom_clip_path'] ){
@@ -513,7 +508,7 @@ class Image_Masking {
                     $clip_path_value = $this->clip_paths( $clip_path );
                 }
                 if( $clip_path_value ) {
-                    $style .= '.eael-image-masking-'.$element_id.' img {clip-path: '.$clip_path_value.'}';
+                    $style .= '.eael-image-masking-'. esc_html( $element_id ) .' img {clip-path: '.$clip_path_value.'}';
                 }
     
                 if( 'yes' === $settings['eael_image_masking_hover_effect'] ){
@@ -530,20 +525,20 @@ class Image_Masking {
                         if( $hover_selector ){
                             $hover_selector = ' ' . trim( $hover_selector );
                         }
-                        $style .= '.eael-image-masking-'.$element_id.$hover_selector.':hover img {clip-path: '.$hover_clip_path_value.'}';
+                        $style .= '.eael-image-masking-'. esc_html( $element_id ) . $hover_selector . ':hover img {clip-path: '.$hover_clip_path_value.'}';
                     }
                     
                     $hover_selector = $settings['eael_image_masking_hover_selector'];
                     if( $hover_selector ){
                         $hover_selector = ' ' . trim( $hover_selector );
                     }
-                    $style .= '.eael-image-masking-'.$element_id.$hover_selector.':hover img {clip-path: '.$hover_clip_path_value.'}';
+                    $style .= '.eael-image-masking-'. esc_html( $element_id ) . $hover_selector . ':hover img {clip-path: '.$hover_clip_path_value.'}';
                 }
 			} else if( 'image' === $type ) {
                 $svg = $element->get_settings_for_display( 'eael_image_masking_svg' );
                 $mask_url = '';
                 if( 'upload' !== $svg ){
-                    $svg_url = $element->get_settings_for_display( 'eael_image_masking_svg_url' );
+                    $svg_url = self::$svg_dir_url;
                     $mask_url = $svg_url . $svg . '.svg';
                 } else if( 'upload' === $svg ){
                     $image = $element->get_settings_for_display( 'eael_image_masking_image' );
@@ -551,7 +546,7 @@ class Image_Masking {
                 }
 
                 if( $mask_url ) {
-                    $style .= '.eael-image-masking-'.$element_id.' img {mask-image: url('.$mask_url.'); -webkit-mask-image: url('.$mask_url.');}';
+                    $style .= '.eael-image-masking-'. esc_html( $element_id ) .' img {mask-image: url('.$mask_url.'); -webkit-mask-image: url('.$mask_url.');}';
                 }
 
                 if( 'yes' === $settings['eael_image_masking_hover_effect'] ){
@@ -559,18 +554,18 @@ class Image_Masking {
                     $hover_mask_url = '';
                     if( 'upload' !== $hover_image ){
                         $svg = $element->get_settings_for_display( 'eael_image_masking_svg' );
-                        $svg_url = $element->get_settings_for_display( 'eael_image_masking_svg_url' );
+                        $svg_url = self::$svg_dir_url;
                         $hover_mask_url = $svg_url . $hover_image . '.svg';
                     } else if( 'upload' === $hover_image ){
                         $hover_image = $element->get_settings_for_display( 'eael_image_masking_image_hover' );
-                        $hover_mask_url = $hover_image['url'];
+                        $hover_mask_url = $hover_image['url'] ?? '';
                     }
                     if( $hover_mask_url ) {
                         $hover_selector = $element->get_settings_for_display( 'eael_image_masking_hover_selector' );
                         if( $hover_selector ){
                             $hover_selector = ' ' . trim( $hover_selector );
                         }
-                        $style .= '.eael-image-masking-'.$element_id. $hover_selector .':hover img {mask-image: url('.$hover_mask_url.'); -webkit-mask-image: url('.$hover_mask_url.');}';
+                        $style .= '.eael-image-masking-'. esc_html( $element_id ) . $hover_selector .':hover img {mask-image: url('.$hover_mask_url.'); -webkit-mask-image: url('.$hover_mask_url.');}';
                     }
                 }
 
@@ -589,7 +584,7 @@ class Image_Masking {
             
 		
             if( $style ){
-                echo '<style id="eael-image-masking-'.$element_id.'">'.$style.'</style>';
+                echo '<style id="eael-image-masking-'. esc_attr( $element_id ) .'">'. esc_html( $style ) .'</style>';
             }
         }
 	}
