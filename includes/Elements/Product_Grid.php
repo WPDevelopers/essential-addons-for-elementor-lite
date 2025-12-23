@@ -657,7 +657,11 @@ class Product_Grid extends Widget_Base
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
-                'description'  => __( 'Uncheck the WooCommerce Settings <a href="' . $wc_settings_url . '" target="_blank">Out of stock visibility</a> option. This will not work otherwise' )
+                'description' => sprintf(
+                    /* translators: %s: Link to WooCommerce "Out of stock visibility" settings. */
+                    __( 'Uncheck the WooCommerce Settings %s option. This will not work otherwise.', 'essential-addons-for-elementor-lite' ),
+                    '<a href="' . esc_url( $wc_settings_url ) . '" target="_blank">' . esc_html__( 'Out of stock visibility', 'essential-addons-for-elementor-lite' ) . '</a>'
+                ),
 			]
 		);
 
@@ -3624,6 +3628,7 @@ class Product_Grid extends Widget_Base
 	    $settings['eael_widget_id'] = $widget_id;
         $is_product_archive         = is_product_tag() || is_product_category() || is_shop() || is_product_taxonomy();
 
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	    if ( $settings['post_type'] === 'source_dynamic' && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
 		    $settings['posts_per_page'] = $settings['eael_product_grid_products_count'] ?: 4;
 		    $settings['offset']         = $settings['product_offset'];

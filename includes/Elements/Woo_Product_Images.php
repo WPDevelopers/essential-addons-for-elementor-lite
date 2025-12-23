@@ -1095,7 +1095,7 @@ class Woo_Product_Images extends Widget_Base {
 				<?php if( 'yes' == $thumb_settings['thumbnail'] ) {
 					$single_thumb_img = ( count($img_links) > 1 ) ? '' : 'single-thumb-img';
 					$thumb_size = $thumb_settings['thumbnail_size']; ?>
-					<div class="swiper-wrapper <?php esc_attr_e( $single_thumb_img ); ?>">
+					<div class="swiper-wrapper <?php echo esc_attr( $single_thumb_img ); ?>">
 						<?php
 							foreach ( $img_links as $img_link ) {
 								$this->render_slide( $img_link, 'product_image_slider__thumbs__image', $thumb_size );
@@ -1104,8 +1104,8 @@ class Woo_Product_Images extends Widget_Base {
 					</div>
 					<?php $print_left_right = in_array( $thumb_settings['thumb_position'], $thumb_position ) ? 'left-right-prev' : ''; ?>
 						<?php if ( 'yes' == $thumb_settings['thumb_navigation'] && count( $img_links ) > $thumb_settings['desktop'] ) { ?>
-							<span class="swiper-button-prev <?php esc_attr_e( $print_left_right ); ?>"></span>
-							<span class="swiper-button-next <?php esc_attr_e( $print_left_right ); ?>"></span>
+							<span class="swiper-button-prev <?php echo esc_attr( $print_left_right ); ?>"></span>
+							<span class="swiper-button-next <?php echo esc_attr( $print_left_right ); ?>"></span>
 						<?php } ?>
 					<?php } ?>
 				</div>

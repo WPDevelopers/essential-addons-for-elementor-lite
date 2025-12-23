@@ -413,7 +413,7 @@ class Woo_Cart extends Widget_Base {
 				'default'     => [
 					[
 						'column_type'          => 'remove',
-						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+						'column_heading_title' => '',
 					],
 					[
 						'column_type'          => 'thumbnail',
@@ -421,7 +421,7 @@ class Woo_Cart extends Widget_Base {
 					],
 					[
 						'column_type'          => 'name',
-						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+						'column_heading_title' => '',
 					],
 					[
 						'column_type'          => 'price',

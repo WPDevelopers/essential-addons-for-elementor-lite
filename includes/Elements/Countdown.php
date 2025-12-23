@@ -150,7 +150,7 @@ class Countdown extends Widget_Base {
 		    [
 			    'label'       => esc_html__( 'Recurring Countdown End Date', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::DATE_TIME,
-			    'default'     => date( "Y-m-d", strtotime( "+ 7 day" ) ),
+			    'default'     => gmdate( "Y-m-d", strtotime( "+ 7 day" ) ),
 			    'description' => esc_html__( 'Set the countdown end time', 'essential-addons-for-elementor-lite' ),
 			    'condition'   => [
 				    'eael_countdown_type'              => 'evergreen',
@@ -164,7 +164,7 @@ class Countdown extends Widget_Base {
             [
                 'label'       => esc_html__( 'Countdown Due Date', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::DATE_TIME,
-                'default'     => date( "Y-m-d", strtotime( "+ 1 day" ) ),
+                'default'     => gmdate( "Y-m-d", strtotime( "+ 1 day" ) ),
                 'description' => esc_html__( 'Set the due date and time', 'essential-addons-for-elementor-lite' ),
                 'condition' => [
 	                'eael_countdown_type' => 'due_date',
@@ -1278,7 +1278,7 @@ class Countdown extends Widget_Base {
         $settings = $this->get_settings_for_display();
 
         $get_due_date = esc_attr( $settings['eael_countdown_due_time'] );
-        $due_date = date( "M d Y G:i:s", strtotime( $get_due_date ) );
+        $due_date = gmdate( "M d Y G:i:s", strtotime( $get_due_date ) );
 	    $gmt_offset = str_replace( array( '.25', '.5', '.75' ), array( ':15', ':30', ':45' ), ( get_option( 'gmt_offset' ) < 0 ? '' : '+' ) . get_option( 'gmt_offset' ) );
 
         $this->add_render_attribute( 'eael-countdown', 'class', 'eael-countdown-wrapper' );
@@ -1293,7 +1293,7 @@ class Countdown extends Widget_Base {
 
 		    if ( $settings['eael_evergreen_counter_recurring'] === 'yes' ) {
 			    $this->add_render_attribute( 'eael-countdown', 'data-evergreen-recurring', $settings['eael_evergreen_counter_recurring_restart_after'] ? $settings['eael_evergreen_counter_recurring_restart_after'] : 0 );
-			    $this->add_render_attribute( 'eael-countdown', 'data-evergreen-recurring-stop', date( "M d Y G:i:s", strtotime( $settings['eael_evergreen_counter_recurring_stop_time'] ) ) . " {$gmt_offset}" );
+			    $this->add_render_attribute( 'eael-countdown', 'data-evergreen-recurring-stop', gmdate( "M d Y G:i:s", strtotime( $settings['eael_evergreen_counter_recurring_stop_time'] ) ) . " {$gmt_offset}" );
 		    }
 	    }
 

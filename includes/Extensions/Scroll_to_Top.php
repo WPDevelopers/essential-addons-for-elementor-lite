@@ -59,7 +59,11 @@ class Scroll_to_Top
                 'eael_ext_scroll_to_top_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('You can modify the Global Scroll to Top by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['eael_ext_scroll_to_top']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
+                    'raw' => sprintf(
+                        /* translators: %s: Edit link to the Global Scroll to Top settings. */
+                        __('You can modify the Global Scroll to Top by <strong><a href="%s">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
+                        esc_url( get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['eael_ext_scroll_to_top']['post_id'] . '&action=elementor' )
+                    ),
                     'content_classes' => 'eael-warning',
                     'separator' => 'before',
                     'condition' => [

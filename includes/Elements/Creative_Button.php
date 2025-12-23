@@ -773,24 +773,24 @@ use HelperTrait;
 				'label_block' => true,
 				'options'     => [
 					'effect1' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect1'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect1'] ),
 					],
 					'effect2' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect2'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect2'] ),
 					],
 					'effect4' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect4'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect4'] )  . $this->eael_pro_lock_icon(),
 					],
 					'effect5' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect5'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect5'] )  . $this->eael_pro_lock_icon(),
 					],
 					'effect6' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect6'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect6'] )  . $this->eael_pro_lock_icon(),
 					],
 				],
 				'prefix_class' => 'eael_wd_liquid_glass-',

@@ -533,7 +533,8 @@ class Cta_Box extends Widget_Base
                 'label'       => '',
                 'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default'     => __('<p>Add a strong one liner supporting the heading above and giving users a reason to click on the button below.</p>', 'essential-addons-for-elementor-lite'),
+                /* translators: Default description text. HTML <p> tag added outside for styling. */
+                'default'     => '<p>' . esc_html__( 'Add a strong one liner supporting the heading above and giving users a reason to click on the button below.', 'essential-addons-for-elementor-lite' ) . '</p>',
                 'condition'   =>  [
                     'eael_cta_title_content_type' => 'content',
                 ],

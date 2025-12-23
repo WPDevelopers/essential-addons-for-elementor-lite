@@ -61,7 +61,11 @@ class Table_of_Content
                 'eael_ext_toc_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('You can modify the Global Table of Contents by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['eael_ext_table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
+                    'raw' => sprintf(
+                        /* translators: %s: Edit link to the Global Table of Contents settings. */
+                        __('You can modify the Global Table of Contents by <strong><a href="%s">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
+                        esc_url( get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['eael_ext_table_of_content']['post_id'] . '&action=elementor' )
+                    ),
                     'content_classes' => 'eael-warning',
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
@@ -96,8 +100,9 @@ class Table_of_Content
 			        $post_obj = get_post_type_object( $post_type );
 
 			        if ( ! in_array( $post_type, [ 'post', 'page' ] ) && is_a( $post_obj, 'WP_Post_Type' ) && $post_obj->labels ) {
-				        $post_type_labels         = get_post_type_labels( $post_obj );
-				        $plural_name              = $post_type_labels->name;
+				        $plural_name = ! empty( $post_obj->labels->name ) ? $post_obj->labels->name : '';
+
+                        // Translators: %s: Post type name.
 				        $display_on[ $post_type ] = sprintf( __( 'All %s', 'essential-addons-for-elementor-lite' ), $plural_name );
 			        }
 		        }

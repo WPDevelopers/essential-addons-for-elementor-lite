@@ -14,6 +14,7 @@
                             post_type: obj.data.source_type,
                             source_name: obj.data.source_name,
                             term: params.term,
+                            nonce: eael_select2_localize.nonce,
                         }
                     },
                 },
@@ -42,7 +43,8 @@
                                 action: 'eael_select2_get_title',
                                 post_type: obj.data.source_type, 
                                 source_name: obj.data.source_name, 
-                                id: ids
+                                id: ids,
+                                nonce: eael_select2_localize.nonce,
                             }
                         }).done(function (response) {
                             if (response.success && typeof response.data.results != 'undefined') {

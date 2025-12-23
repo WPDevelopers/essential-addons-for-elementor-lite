@@ -116,7 +116,7 @@ trait Library
 		foreach ( $ext as $e ) {
 			$path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael' . ( $post_id ? '-' . $post_id : '' ) . '.' . $e;
 			if ( file_exists( $path ) ) {
-				unlink( $path );
+				wp_delete_file( $path );
 			}
 		}
 		do_action( 'eael_remove_assets', $post_id, $ext );
@@ -127,7 +127,7 @@ trait Library
      *
      * @since 3.0.0
      */
-    public function empty_dir($path)
+    public function empty_dir( $path )
     {
         if (!is_dir($path) || !file_exists($path)) {
             return;
@@ -138,7 +138,7 @@ trait Library
                 continue;
             }
 
-            unlink($this->safe_path($path . DIRECTORY_SEPARATOR . $item));
+            wp_delete_file( $this->safe_path( $path . DIRECTORY_SEPARATOR . $item ) );
         }
     }
 
@@ -164,7 +164,8 @@ trait Library
             return true;
         }
         
-        if (!empty($_REQUEST['action']) && !$this->check_background_action( sanitize_text_field( $_REQUEST['action'] ) )) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if (!empty($_REQUEST['action']) && !$this->check_background_action( sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) )) {
             return true;
         }
 
@@ -178,6 +179,7 @@ trait Library
      */
     public function is_edit_mode()
     {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (isset($_REQUEST['elementor-preview'])) {
             return true;
         }
@@ -192,14 +194,15 @@ trait Library
      */
     public function is_preview_mode()
     {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (isset($_REQUEST['elementor-preview'])) {
             return false;
         }
 
-        if (!empty($_REQUEST['action']) && !$this->check_background_action( sanitize_text_field( $_REQUEST['action'] ) )) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if (!empty($_REQUEST['action']) && !$this->check_background_action( sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) )) {
             return false;
         }
-
 
         return true;
     }
@@ -320,13 +323,27 @@ trait Library
 	 *
 	 * @return bool
 	 */
-	public function check_protected_content_status(){
-		if(!empty($_POST['eael_protected_content_id'])){
-			if(!empty($_POST['protection_password_'.$_POST['eael_protected_content_id']])){
-				return true;
-			}
-		}
-		return false;
-	}
+    public function check_protected_content_status() {
+        if ( empty( $_POST['eael_protected_content_id'] ) ) {
+            return false;
+        }
 
+        $content_id = sanitize_text_field( wp_unslash( $_POST['eael_protected_content_id'] ) );
+
+        $nonce_key = "eael_protected_content_nonce_{$content_id}";
+
+        if ( ! isset( $_POST[ $nonce_key ] ) ) {
+            return false;
+        }
+
+        if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $nonce_key ] ) ), 'eael_protected_nonce' ) ) {
+            return false;
+        }
+
+        if ( ! empty( $_POST[ "protection_password_{$content_id}" ] ) ) {
+            return true;
+        }
+
+        return false;
+    }
 }

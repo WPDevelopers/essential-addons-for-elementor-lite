@@ -304,7 +304,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
-                'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
+                'default' => gmdate('Y-m-d H:i', current_time('timestamp', 0)),
                 'picker_options' => [
                     'enableTime' => true,
                     'altInput' => true,

@@ -80,9 +80,10 @@ trait Ajax_Handler {
 	 */
 	public function ajax_load_more() {
 		$ajax = wp_doing_ajax();
-
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
 		do_action( 'eael_before_ajax_load_more', $_REQUEST );
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
 		wp_parse_str( $_POST['args'], $args );
 		$args['post_status'] = 'publish';
 
@@ -99,7 +100,7 @@ trait Ajax_Handler {
 			return false;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'load_more' ) && ! wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'load_more' ) && ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'essential-addons-elementor' ) ) {
 			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -120,7 +121,7 @@ trait Ajax_Handler {
 		}
 
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 		} else {
 			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -139,11 +140,13 @@ trait Ajax_Handler {
 		$settings['eael_widget_id'] = $widget_id;
 		$settings['eael_page_id']   = $page_id;
 		$html                       = '';
-		$class                      = '\\' . str_replace( '\\\\', '\\', $_REQUEST['class'] );
-		$args['offset']             = (int) $args['offset'] + ( ( (int) $_REQUEST['page'] - 1 ) * (int) $args['posts_per_page'] );
+		$class                      = !empty( $_REQUEST['class'] ) ? '\\' . str_replace( '\\\\', '\\', sanitize_text_field( wp_unslash( $_REQUEST['class'] ) ) ) : '';
+		$page = !empty(  $_REQUEST['page'] ) ? absint( $_REQUEST['page'] ) : 1;
+		$args['offset']             = (int) $args['offset'] + ( ( (int) $page - 1 ) * (int) $args['posts_per_page'] );
 
 		if ( isset( $_REQUEST['taxonomy'] ) && isset( $_REQUEST['taxonomy']['taxonomy'] ) && $_REQUEST['taxonomy']['taxonomy'] != 'all' ) {
 			$args['tax_query'] = [
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
@@ -156,6 +159,7 @@ trait Ajax_Handler {
 			$settings['excerpt_expanison_indicator'] = get_transient( 'eael_post_grid_excerpt_expanison_indicator_' . $widget_id );
 
 			if ( $settings['orderby'] === 'rand' && ! empty( $_REQUEST['post__not_in'] ) ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$post__not_in = $_REQUEST['post__not_in'];
 				if ( ! empty( $args['post__not_in'] ) ) {
 					$post__not_in = array_merge( $post__not_in, $args['post__not_in'] );
@@ -183,10 +187,16 @@ trait Ajax_Handler {
 			$settings['show_load_more_text']       = $settings['eael_fg_loadmore_btn_text'];
 			$settings['layout_mode']               = isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : 'masonry';
 
+			if ( ! empty( $args['fetch_acf_image'] ) && 'yes' === $args['fetch_acf_image'] && ! empty( $args['post__in'] ) ) {
+				$args['post_status'] = 'any';
+				$args['post_type'] = 'any';
+			}
+
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			$exclude_ids = json_decode( html_entity_decode( stripslashes ( $_POST['exclude_ids'] ) ) );
 			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique($exclude_ids) ) : array();
 			$active_term_id = ( !empty( $_POST['active_term_id'] ) ) ? intval( $_POST['active_term_id'] ) : 0;
-			$active_taxonomy = ( !empty( $_POST['active_taxonomy'] ) ) ? sanitize_text_field( $_POST['active_taxonomy'] ) : '';
+			$active_taxonomy = ( !empty( $_POST['active_taxonomy'] ) ) ? sanitize_text_field( wp_unslash( $_POST['active_taxonomy'] ) ) : '';
 
 			// Check if this is a hybrid/combined query with ACF gallery
 			// Also check settings for hybrid query flag as backup (in case args encoding failed)
@@ -247,6 +257,7 @@ trait Ajax_Handler {
 			'read_more_link_target_blank' => ! empty( $settings['read_more_link_target_blank'] ) ? 'target="_blank"' : '',
 		];
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
 
 		if ( $template_info ) {
@@ -304,7 +315,7 @@ trait Ajax_Handler {
 						$iterator ++;
 					}
 				} else {
-					$html .= __( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+					$html .= '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
 				}
 			}
 		}
@@ -538,7 +549,7 @@ trait Ajax_Handler {
 		}
 
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 		} else {
 			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 			wp_send_json_error( $err_msg );
@@ -550,6 +561,7 @@ trait Ajax_Handler {
 		}
 		$settings['eael_page_id']   = $page_id;
 		$settings['eael_widget_id'] = $widget_id;
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		wp_parse_str( $_REQUEST['args'], $args );
 		$args['post_status'] = array_intersect( (array) $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
 
@@ -557,8 +569,8 @@ trait Ajax_Handler {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
 		}
 
-		$paginationNumber = absint( $_POST['number'] );
-		$paginationLimit  = absint( $_POST['limit'] );
+		$paginationNumber = ! empty( $_POST['number'] ) ? absint( $_POST['number'] ) : 1;
+		$paginationLimit  = ! empty( $_POST['limit'] ) ? absint( $_POST['limit'] ) : 10;
 
 		$args['posts_per_page'] = $paginationLimit;
 
@@ -569,7 +581,7 @@ trait Ajax_Handler {
 			$args['offset']        = $paginationOffsetValue;
 		}
 
-
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['templateInfo'] );
 
 		$this->set_widget_name( $template_info['name'] );
@@ -620,7 +632,7 @@ trait Ajax_Handler {
 		}
 
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 		} else {
 			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 			wp_send_json_error( $err_msg );
@@ -633,14 +645,15 @@ trait Ajax_Handler {
 		}
 
 		$settings['eael_page_id'] = $page_id;
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		wp_parse_str( $_REQUEST['args'], $args );
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
 		}
 
-		$paginationNumber          = absint( $_POST['number'] );
-		$paginationLimit           = absint( $_POST['limit'] );
+		$paginationNumber          = ! empty( $_POST['number'] ) ? absint( $_POST['number'] ) : 1;
+		$paginationLimit           = ! empty( $_POST['limit'] ) ? absint( $_POST['limit'] ) : 10;
 		$pagination_Count          = intval( $args['total_post'] );
 		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
 		$last                      = ceil( $pagination_Paginationlist );
@@ -657,7 +670,7 @@ trait Ajax_Handler {
 		$adjacents                    = "2";
 		$next_label                   = sanitize_text_field( $settings['pagination_next_label'] );
 		$prev_label                   = sanitize_text_field( $settings['pagination_prev_label'] );
-		$settings['eael_widget_name'] = realpath( sanitize_file_name( $_REQUEST['template_name'] ) );
+		$settings['eael_widget_name'] = ! empty( $_REQUEST['template_name'] ) ? realpath( sanitize_file_name( wp_unslash( $_REQUEST['template_name'] ) ) ) : '';
 		$setPagination                = "";
 
 		if ( $pagination_Paginationlist > 0 ) {
@@ -739,21 +752,24 @@ trait Ajax_Handler {
 	public function eael_product_add_to_cart() {
 
 		$ajax       = wp_doing_ajax();
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, 	WordPress.Security.NonceVerification.Missing
 		$cart_items = isset( $_POST['cart_item_data'] ) ? $_POST['cart_item_data'] : [];
 		$variation  = [];
 		if ( ! empty( $cart_items ) ) {
 			foreach ( $cart_items as $key => $value ) {
 				if ( preg_match( "/^attribute*/", $value['name'] ) ) {
-					$variation[ $value['name'] ] = sanitize_text_field( $value['value'] );
+					$variation[ $value['name'] ] = sanitize_text_field( wp_unslash( $value['value'] ) );
 				}
 			}
 		}
 
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['product_data'] ) ) {
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
 			foreach ( $_POST['product_data'] as $item ) {
-				$product_id   = isset( $item['product_id'] ) ? sanitize_text_field( $item['product_id'] ) : 0;
-				$variation_id = isset( $item['variation_id'] ) ? sanitize_text_field( $item['variation_id'] ) : 0;
-				$quantity     = isset( $item['quantity'] ) ? sanitize_text_field( $item['quantity'] ) : 0;
+				$product_id   = isset( $item['product_id'] ) ? sanitize_text_field( wp_unslash( $item['product_id'] ) ) : 0;
+				$variation_id = isset( $item['variation_id'] ) ? sanitize_text_field( wp_unslash( $item['variation_id'] ) ) : 0;
+				$quantity     = isset( $item['quantity'] ) ? sanitize_text_field( wp_unslash( $item['quantity'] ) ) : 0;
 
 				if ( $variation_id ) {
 					WC()->cart->add_to_cart( $product_id, $quantity, $variation_id, $variation );
@@ -774,6 +790,7 @@ trait Ajax_Handler {
 	 * @since 4.0.0
 	 */
 	public function woo_checkout_update_order_review() {
+		// phpcs:disable 
 		$setting       = $_POST['orderReviewData'];
         $shipping_data = empty ( $_POST['shippingData'] ) ? WC()->session->get('chosen_shipping_methods') : [wc_clean( $_POST['shippingData'] )];
 		//Mondial Relay plugin integration
@@ -784,7 +801,7 @@ trait Ajax_Handler {
 		ob_start();
 		AllTraits::checkout_order_review_default( $setting );
 		$woo_checkout_update_order_review = ob_get_clean();
-
+		// phpcs:enable
 		wp_send_json(
 			array(
 				'order_review' => $woo_checkout_update_order_review,
@@ -803,15 +820,15 @@ trait Ajax_Handler {
 	public function eael_product_quickview_popup() {
 		//check nonce
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
-		$widget_id  = sanitize_key( $_POST['widget_id'] );
-		$product_id = absint( $_POST['product_id'] );
-		$page_id    = absint( $_POST['page_id'] );
+		$widget_id  = ! empty( $_POST['widget_id'] ) ? sanitize_key( wp_unslash( $_POST['widget_id'] ) ) : '';
+		$product_id = ! empty( $_POST['product_id'] ) ? absint( $_POST['product_id'] ) : 0;
+		$page_id    = ! empty( $_POST['page_id'] ) ? absint( $_POST['page_id'] ) : 0;
 
 		if ( $widget_id == '' && $product_id == '' && $page_id == '' ) {
 			wp_send_json_error();
 		}
 
-		global $post, $product;
+		// global $post, $product;
 		$product = wc_get_product( $product_id );
 		$post    = get_post( $product_id );
 		setup_postdata( $post );
@@ -837,6 +854,7 @@ trait Ajax_Handler {
 
 		$ajax = wp_doing_ajax();
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
 		wp_parse_str( $_POST['args'], $args );
 		$args['post_status'] = 'publish';
 		$args['offset']      = $args['offset'] ?? 0;
@@ -854,7 +872,7 @@ trait Ajax_Handler {
 			return false;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'eael_product_gallery' ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'eael_product_gallery' ) ) {
 			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -875,7 +893,7 @@ trait Ajax_Handler {
 		}
 
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 		} else {
 			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -896,10 +914,12 @@ trait Ajax_Handler {
 
 		$settings['eael_widget_id'] = $widget_id;
 		$settings['eael_page_id']   = $page_id;
-		$args['offset']             = (int) $args['offset'] + ( ( (int) $_REQUEST['page'] - 1 ) * (int) $args['posts_per_page'] );
+		$page = !empty(  $_REQUEST['page'] ) ? absint( $_REQUEST['page'] ) : 1;
+		$args['offset']             = (int) $args['offset'] + ( ( (int) $page - 1 ) * (int) $args['posts_per_page'] );
 
 		if ( isset( $_REQUEST['taxonomy'] ) && isset( $_REQUEST['taxonomy']['taxonomy'] ) && $_REQUEST['taxonomy']['taxonomy'] != 'all' ) {
 			$args['tax_query'] = [
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
@@ -945,6 +965,7 @@ trait Ajax_Handler {
 
 		}
 
+		//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitize, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, 	WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
 
 		if ( $template_info ) {
@@ -1044,18 +1065,21 @@ trait Ajax_Handler {
 	 * @since 4.0.0
 	 */
 	public function select2_ajax_posts_filter_autocomplete() {
+		if ( empty( $_POST['nonce'] ) ||  ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'eael_select2' ) ) {
+			wp_send_json_error( ['error'=> esc_html__( 'Unauthorized', 'essential-addons-for-elementor-lite' )] );
+		}
 		$post_type   = 'post';
 		$source_name = 'post_type';
 
 		if ( ! empty( $_POST['post_type'] ) ) {
-			$post_type = sanitize_text_field( $_POST['post_type'] );
+			$post_type = sanitize_text_field( wp_unslash( $_POST['post_type'] ) );
 		}
 
 		if ( ! empty( $_POST['source_name'] ) ) {
-			$source_name = sanitize_text_field( $_POST['source_name'] );
+			$source_name = sanitize_text_field( wp_unslash( $_POST['source_name'] ) );
 		}
 
-		$search  = ! empty( $_POST['term'] ) ? sanitize_text_field( $_POST['term'] ) : '';
+		$search  = ! empty( $_POST['term'] ) ? sanitize_text_field( wp_unslash( $_POST['term'] ) ) : '';
 		$results = $post_list = [];
 		switch ( $source_name ) {
 			case 'taxonomy':
@@ -1111,15 +1135,20 @@ trait Ajax_Handler {
 	 */
 	public function select2_ajax_get_posts_value_titles() {
 
+		if ( empty( $_POST['nonce'] ) ||  ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'eael_select2' ) ) {
+			wp_send_json_error( ['error'=> esc_html__( 'Unauthorized', 'essential-addons-for-elementor-lite' )] );
+		}
+
 		if ( empty( $_POST['id'] ) ) {
 			wp_send_json_error( [] );
 		}
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 		if ( empty( array_filter( $_POST['id'] ) ) ) {
 			wp_send_json_error( [] );
 		}
 		$ids         = array_map( 'intval', $_POST['id'] );
-		$source_name = ! empty( $_POST['source_name'] ) ? sanitize_text_field( $_POST['source_name'] ) : '';
+		$source_name = ! empty( $_POST['source_name'] ) ? sanitize_text_field( wp_unslash( $_POST['source_name'] ) ) : '';
 
 		switch ( $source_name ) {
 			case 'taxonomy':
@@ -1130,8 +1159,8 @@ trait Ajax_Handler {
 					'include'    => implode( ',', $ids ),
 				];
 
-				if ( $_POST['post_type'] !== 'all' ) {
-					$args['taxonomy'] = sanitize_text_field( $_POST['post_type'] );
+				if ( ! empty( $_POST['post_type'] ) && $_POST['post_type'] !== 'all' ) {
+					$args['taxonomy'] = sanitize_text_field( wp_unslash( $_POST['post_type'] ) );
 				}
 
 				$response = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
@@ -1149,7 +1178,7 @@ trait Ajax_Handler {
 				break;
 			default:
 				$post_info = get_posts( [
-					'post_type' => sanitize_text_field( $_POST['post_type'] ),
+					'post_type' => ! empty( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : 'post',
 					'include'   => implode( ',', $ids )
 				] );
 				$response  = wp_list_pluck( $post_info, 'post_title', 'ID' );
@@ -1368,7 +1397,7 @@ trait Ajax_Handler {
 
 		if ( isset( $_REQUEST['posts'] ) ) {
 			if ( ! empty( $_POST['posts'] ) ) {
-				foreach ( json_decode( $_POST['posts'] ) as $post ) {
+				foreach ( json_decode( sanitize_text_field( wp_unslash( $_POST['posts'] ) ) ) as $post ) {
 					$this->remove_files( 'post-' . $post );
 				}
 			}
@@ -1381,7 +1410,9 @@ trait Ajax_Handler {
 		}
 
 		// Purge All LS Cache
+		// phpcs:disable
 		do_action( 'litespeed_purge_all', '3rd Essential Addons for Elementor' );
+		// phpcs:enable
 
 		// After clear the cache hook
 		do_action( 'eael_after_clear_cache_files' );

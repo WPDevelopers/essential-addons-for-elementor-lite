@@ -108,9 +108,12 @@ class TypeForm extends Widget_Base {
         $this->add_control(
             'eael_global_warning_text',
             [
-                'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => __('Whoops! It seems like you haven\'t connected your Typeform account. To do this, navigate to <b>WordPress Dashboard -> Essential Addons -> Elements -> Typeform</b> (<a target="_blank" href="'.esc_url(admin_url( 'admin.php?page=eael-settings')).'">Get Access</a>).',
-                    'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => sprintf(
+                    /* translators: %s: Link to Typeform settings page. */
+                    __( 'Whoops! It seems like you haven\'t connected your Typeform account. To do this, navigate to <b>WordPress Dashboard → Essential Addons → Elements → Typeform</b> (%s).', 'essential-addons-for-elementor-lite' ),
+                    '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=eael-settings' ) ) . '">' . esc_html__( 'Get Access', 'essential-addons-for-elementor-lite' ) . '</a>'
+                ),
                 'content_classes' => 'eael-warning',
             ]
         );
