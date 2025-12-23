@@ -1,20 +1,20 @@
 === Essential Addons for Elementor - Popular Elementor Templates & Widgets ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, nhrrob, jakariaistauk, himadree12
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, nhrrob, jakariaistauk, himadree
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
 Requires at least: 5.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.3.3
+Stable tag: 6.5.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Elementor addon offering 100+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
+Elementor addon offering 110+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
 
 == Description ==
 
-Enhance **[Elementor](https://wordpress.org/plugins/elementor/)** page building experience with 100+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready Elementor templates, which were designed to make your next WordPress website design easier and prettier than ever before.
+Enhance **[Elementor](https://wordpress.org/plugins/elementor/)** page building experience with 110+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready Elementor templates, which were designed to make your next WordPress website design easier and prettier than ever before.
 
-= Essential Addons for Elementor offers 110+ advanced Elementor widgets with kits, 6,000+ ready templates & WooCommerce builder, serving 2 million+ active users. =
+= Essential Addons for Elementor offers 110+ advanced Elementor widgets with kits, 6,500+ ready templates & WooCommerce builder, serving 2 million+ active users. =
 
 [Check the Demos](https://essential-addons.com/demos)
 
@@ -28,7 +28,7 @@ No extra resources or messy code to slow down your website. Optimized for super 
 Enable and disable individual elements adding to make your page load faster and smoother. You can deactivate unnecessary widgets to keep the site light.
 
 
-### 6000+ Ready WordPress Templates & Blocks through **Templately**
+### 6,500+ Ready WordPress Templates & Blocks through **Templately**
 Grab access to 3,000+ pre-made Elementor templates from Templately (a large templates cloud for WordPress), that come with Essential Addons.Unlock stunning Elementor templates, blocks & sections;and design your website to stand out from the crowd.
 
 https://youtu.be/Z73muoczARc
@@ -53,7 +53,7 @@ We have an extraordinary support team ready to help you. Ask your questions in t
 
 ### 60+ FREE ELEMENTOR ADDONS AND COUNTING
 
-We have designed more than 60 useful widgets to enhance your Elementor Page Building experience and allow you to climb the peak of your design capabilities.
+We have designed more than 65+ useful widgets to enhance your Elementor Page Building experience and allow you to climb the peak of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/post-grid/) - Showcase your blog posts in 3 unique styles
 2. [Post Timeline](https://essential-addons.com/post-timeline/) - Create stunning timeline for your posts & pages
@@ -126,6 +126,8 @@ Extensions (Free):
 6. [Wrapper Link](https://essential-addons.com/wrapper-link) - Add custom links into any section, column, or even flexbox
 7. [Hover Interactions](https://essential-addons.com/hover-interaction/) - Create captivating effects on buttons, images, texts and more
 8. [Liquid Glass Effects](https://essential-addons.com/liquid-glass-effects/) - Give your website a sleek, futuristic feel with stunning glass effects
+9. [Image Masking with Morphing](https://essential-addons.com/image-masking-with-morphing/) -  Create seamless transformations and interactive visual effects with smooth masking & morphing
+10. [Vertical Text Orientation](https://essential-addons.com/vertical-text-orientation/) - Bring style to pages with modern, eye-catching vertical text
 
 ### More elements (50+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
@@ -316,6 +318,46 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.4 - 14/12/2025 =
+
+- Improved: Security Enhancement
+- Fixed: Plugin Check (PCP) warnings 
+- Few minor bug fixes & improvements
+
+= 6.5.3 - 27/11/2025 =
+
+- Few minor bug fixes & improvements
+
+= 6.5.2 - 25/11/2025 =
+
+- Fixed: Fixed checkout WooCommerce issues where shipping methods weren't updating correctly and prevented crashes when using the Mondial Relay shipping plugin
+- Few minor bug fixes & improvements
+
+= 6.5.1 - 19/11/2025 =
+
+- Fixed: EA Image Masking | mask-image URL not updating
+- Fixed: EA Image Masking | Throwing warning message if Debug log is enabled
+- Few minor bug fixes & improvements
+
+= 6.5.0 - 18/11/2025 =
+
+- Added: New Extension | Vertical Text Orientation
+- Improved: EA Liquid Glass Effects | Added new effects
+- Improved: Added Popular Theme Compatibility with Woo Widgets
+- Fixed: EA Advanced Tab | Hover and active tab styling issue
+- Fixed: EA Woo Checkout | Shipping options selection issue
+- Few minor bug fixes & improvements
+
+= 6.4.0 - 30/10/2025 =
+
+- Added: New Extension | Image Masking
+- Fixed: EA Advanced Tabs | Hover background color is not working
+- Fixed: EA Woo Cart | Uncaught TypeError in WooCommerce
+- Fixed: EA Liquid Glass Effects | Effects are not working
+- Fixed: EA Advanced Accordion | Schema problem when used in other than English language
+- Improved: EA Event Calendar | Show event featured image above Title and in details
+- Few minor bug fixes & improvements
 
 = 6.3.3 - 08/10/2025 =
 

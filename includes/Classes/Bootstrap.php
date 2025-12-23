@@ -75,8 +75,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 17;
-    const EAEL_ADMIN_MENU_FLAG = 17;
+    const EAEL_PROMOTION_FLAG = 19;
+    const EAEL_ADMIN_MENU_FLAG = 19;
     /**
      * Singleton instance
      *
@@ -130,6 +130,8 @@ class Bootstrap
 
         // Compatibility Support
         new Compatibility_Support();
+
+		include_once(EAEL_PLUGIN_PATH . 'includes/bfcm-pointer.php');
 
     }
 

@@ -842,9 +842,8 @@ class Adv_Tabs extends Widget_Base
             [
                 'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HIDDEN,
-                'default' => '#333',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover:not(.active)' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
@@ -857,7 +856,15 @@ class Adv_Tabs extends Widget_Base
             [
                 'name'      => 'eael_adv_tabs_tab_bgtype_hover',
                 'types'     => ['classic', 'gradient'],
-                'selector'  => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item: hover',
+                'fields_options' => [
+                    'background' => [
+                        'default' => 'classic',
+                    ],
+                    'color' => [
+                        'default' => '#333',
+                    ],
+                ],
+                'selector'  => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item:hover:not(.active)',
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
                 ],
