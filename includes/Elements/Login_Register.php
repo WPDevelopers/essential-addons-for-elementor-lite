@@ -1192,7 +1192,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'login_button_text', [
-			'label'       => __( 'Button Text', 'essential-addons-for-elementor-lite' ),
+			'label'       => __( 'Text', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'dynamic'     => [ 'active' => true, ],
 			'default'     => __( 'Log In', 'essential-addons-for-elementor-lite' ),
@@ -1201,6 +1201,34 @@ class Login_Register extends Widget_Base {
 				'active' => false,
 			],
 		] );
+
+		$this->add_control(
+			'login_button_icon',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::ICONS,
+			]
+		);
+
+		$this->add_control(
+			'login_button_icon_position',
+			[
+				'label'   => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'default'   => 'left',
+				'toggle'    => false,
+			]
+		);
 
 		$this->end_controls_section();
 	}
@@ -1332,6 +1360,34 @@ class Login_Register extends Widget_Base {
 				'active' => false,
 			],
 		] );
+
+		$this->add_control(
+			'lost_pass_button_icon',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::ICONS,
+			]
+		);
+
+		$this->add_control(
+			'lost_pass_button_icon_position',
+			[
+				'label'   => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'default'   => 'left',
+				'toggle'    => false,
+			]
+		);
 
 		$this->end_controls_section();
 	}
@@ -2398,6 +2454,33 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		$this->add_control(
+			'reg_button_icon',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::ICONS,
+			]
+		);
+
+		$this->add_control(
+			'reg_button_icon_position',
+			[
+				'label'   => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'default'   => 'left',
+				'toggle'    => false,
+			]
+		);
 
 		$this->end_controls_section();
 	}
@@ -5131,14 +5214,18 @@ class Login_Register extends Widget_Base {
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		
-		$this->add_control( "{$button_type}_btn_pot", [
+		$this->add_control( 
+			"{$button_type}_btn_pot",
+			[
 			'label'        => __( 'Spacing', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
 			'return_value' => 'yes',
 		] );
+		
 		$this->start_popover();
+
 		$this->add_responsive_control( "{$button_type}_btn_margin", [
 			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -5170,10 +5257,42 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->end_popover();
+
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "{$button_type}_btn_typography",
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
+
+		$this->add_control(
+			"{$button_type}_btn_icon_size",
+			[
+				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 1,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 1,
+					],
+					'rem' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn .eael-lr-btn-icon" => 'font-size: {{SIZE}}{{UNIT}};',
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn svg.eael-lr-btn-icon" => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_responsive_control( "{$button_type}_btn_d_type", [
 			'label'     => __( 'Display as', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SELECT,
@@ -5237,17 +5356,35 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->start_controls_tabs( "tabs_{$button_type}_btn_style" );
+
 		/*-----Login Button NORMAL state------ */
 		$this->start_controls_tab( "tab_{$button_type}_btn_normal", [
 			'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
 		] );
-		$this->add_control( "{$button_type}_btn_color", [
-			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'color: {{VALUE}};',
-			],
-		] );
+
+		$this->add_control( 
+			"{$button_type}_btn_color", 
+			[
+				'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'color: {{VALUE}};',
+				],
+			] 
+		);
+
+		$this->add_control( 
+			"{$button_type}_btn_icon_color", 
+			[
+				'label'     => __( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn .eael-lr-btn-icon" => 'color: {{VALUE}};',
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn svg.eael-lr-btn-icon" => 'fill: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'     => "{$button_type}_btn_bg_color",
 			'label'    => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
@@ -5257,10 +5394,12 @@ class Login_Register extends Widget_Base {
 			],
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
+
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$button_type}_btn_border",
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
+
 		$this->add_control( "{$button_type}_btn_border_radius", [
 			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -5278,13 +5417,30 @@ class Login_Register extends Widget_Base {
 		$this->start_controls_tab( "tab_{$button_type}_button_hover", [
 			'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 		] );
-		$this->add_control( "{$button_type}_button_color_hover", [
-			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover" => 'color: {{VALUE}};',
-			],
-		] );
+
+		$this->add_control( 
+			"{$button_type}_button_color_hover", 
+			[
+				'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover" => 'color: {{VALUE}};',
+				],
+			] 
+		);
+
+		$this->add_control( 
+			"{$button_type}_btn_icon_color_hover", 
+			[
+				'label'     => __( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover .eael-lr-btn-icon" => 'color: {{VALUE}};',
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover svg.eael-lr-btn-icon" => 'fill: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'     => "{$button_type}_btn_bg_color_hover",
 			'label'    => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
@@ -5294,6 +5450,7 @@ class Login_Register extends Widget_Base {
 			],
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover",
 		] );
+
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$button_type}_btn_border_hover",
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover",
@@ -5970,6 +6127,8 @@ class Login_Register extends Widget_Base {
 
 
 			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? sanitize_text_field( $this->ds['login_button_text'] ) : '';
+			$btn_icon         = ! empty( $this->ds['login_button_icon'] ) ? $this->ds['login_button_icon'] : '';
+			$btn_icon_position= ! empty( $this->ds['login_button_icon_position'] ) ? sanitize_text_field( $this->ds['login_button_icon_position'] ) : 'left';
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
 			$remember_text    = isset( $this->ds['remember_text'] ) ? $this->ds['remember_text'] : esc_html__( 'Remember Me', 'essential-addons-for-elementor-lite');
@@ -6102,11 +6261,17 @@ class Login_Register extends Widget_Base {
 
                                 <div class="eael-lr-footer">
 									<div class="eael-lr-form-loader-wrapper">
-                                    	<input type="submit"
-                                           name="eael-login-submit"
-                                           id="eael-login-submit"
-                                           class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
-                                           value="<?php echo esc_attr( $btn_text ); ?>"/>
+										<button type="submit" name="eael-login-submit" id="eael-login-submit" class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>">
+											<?php
+											if ( $btn_icon && 'left' === $btn_icon_position ) {
+												Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+											}
+											echo esc_html( $btn_text );
+											if ( $btn_icon && 'right' === $btn_icon_position ) {
+												Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+											}
+											?>
+										</button>
 										
 										<?php if( !empty( $show_login_spinner ) && 'true' === $show_login_spinner ): ?>
 										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none<?php echo esc_attr($this->in_editor ? '-editor' : '') ?>">
@@ -6209,10 +6374,12 @@ class Login_Register extends Widget_Base {
 			$repeated_f_labels   = [];
 
 			//Login link related
-			$lgn_link_action = ! empty( $this->ds['login_link_action'] ) ? sanitize_text_field( $this->ds['login_link_action'] ) : 'form';
-			$show_lgn_link   = 'yes' === $this->get_settings( 'show_login_link' );
-			$lgn_link_text   = ! empty( $this->get_settings( 'login_link_text' ) ) ? HelperCLass::eael_wp_kses($this->get_settings( 'login_link_text' )) : __( 'Login', 'essential-addons-for-elementor-lite' );
-			$btn_text        = ! empty( $this->ds['reg_button_text'] ) ? sanitize_text_field( $this->ds['reg_button_text'] ) : '';
+			$lgn_link_action  = ! empty( $this->ds['login_link_action'] ) ? sanitize_text_field( $this->ds['login_link_action'] ) : 'form';
+			$show_lgn_link    = 'yes' === $this->get_settings( 'show_login_link' );
+			$lgn_link_text    = ! empty( $this->get_settings( 'login_link_text' ) ) ? HelperCLass::eael_wp_kses($this->get_settings( 'login_link_text' )) : __( 'Login', 'essential-addons-for-elementor-lite' );
+			$btn_text         = ! empty( $this->ds['reg_button_text'] ) ? sanitize_text_field( $this->ds['reg_button_text'] ) : '';
+			$btn_icon         = ! empty( $this->ds['reg_button_icon'] ) ? $this->ds['reg_button_icon'] : '';
+			$btn_icon_position= ! empty( $this->ds['reg_button_icon_position'] ) ? sanitize_text_field( $this->ds['reg_button_icon_position'] ) : 'left';
 
 			$parts                = explode( "\n", $lgn_link_text );
 			$lgn_link_text        = array_pop( $parts );
@@ -6459,11 +6626,17 @@ class Login_Register extends Widget_Base {
 
                             <div class="eael-lr-footer">
 								<div class="eael-lr-form-loader-wrapper">
-                                	<input type="submit"
-                                       name="eael-register-submit"
-                                       id="eael-register-submit"
-                                       class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>"
-                                       value="<?php echo esc_attr( $btn_text ); ?>"/>
+									<button type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>">
+										<?php
+										if ( $btn_icon && 'left' === $btn_icon_position ) {
+											Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+										}
+										echo esc_html( $btn_text );
+										if ( $btn_icon && 'right' === $btn_icon_position ) {
+											Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+										}
+										?>
+									</button>
 										
 									<?php if( !empty( $show_register_spinner ) && 'true' === $show_register_spinner ): ?>
 									<span class="eael-lr-form-loader eael-lr-register-form-loader d-none<?php echo esc_attr($this->in_editor ? '-editor' : ''); ?>">
@@ -6584,6 +6757,8 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_lostpassword_icon'] ) && 'yes' === esc_html( $this->ds['show_lostpassword_icon'] ) );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
+			$btn_icon         = ! empty( $this->ds['lost_pass_button_icon'] ) ? $this->ds['lost_pass_button_icon'] : '';
+			$btn_icon_position= ! empty( $this->ds['lost_pass_button_icon_position'] ) ? sanitize_text_field( $this->ds['lost_pass_button_icon_position'] ) : 'left';
 			?>
             <section
                     id="eael-lostpassword-form-wrapper"
@@ -6632,11 +6807,15 @@ class Login_Register extends Widget_Base {
 							?>
 
 							<div class="eael-lr-footer">
-								<input type="submit"
-									   name="eael-lostpassword-submit"
-									   id="eael-lostpassword-submit"
-									   class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>  <?php echo esc_attr( $hide_class_after_submission ); ?>"
-									   value="<?php echo esc_attr( $btn_text ); ?>"/>
+								<button type="submit" name="eael-lostpassword-submit" id="eael-lostpassword-submit" class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>  <?php echo esc_attr( $hide_class_after_submission ); ?>"><?php
+									if ( $btn_icon && 'left' === $btn_icon_position ) {
+										Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+									}
+									echo esc_html( $btn_text );
+									if ( $btn_icon && 'right' === $btn_icon_position ) {
+										Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+									}
+								?></button>
 								<?php if ( $show_login_link_lostpassword ) { ?>
 									<div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
 										<?php echo wp_kses( $login_link_lostpassword, HelperCLass::eael_allowed_tags( [ 'a' => [ 'data-action' => [] ] ] ) ); ?>

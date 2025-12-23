@@ -222,10 +222,29 @@
   width: 130px;
 }
 .eael-lr-form-wrapper .eael-lr-btn.eael-lr-btn-block {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
 }
 .eael-lr-form-wrapper .eael-lr-btn.eael-lr-btn-inline {
   display: inline-block;
+}
+.eael-lr-form-wrapper .eael-lr-btn .eael-lr-btn-icon {
+  font-size: 1rem;
+  color: #fff;
+}
+.eael-lr-form-wrapper .eael-lr-btn svg.eael-lr-btn-icon {
+  height: 1rem;
+  width: 1rem;
+  line-height: 1rem;
+  fill: #fff;
 }
 .eael-lr-form-wrapper .eael-lr-link {
   display: inline-block;
