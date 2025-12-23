@@ -62,7 +62,7 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args = {}) {
     switch ($type) {
         case 'SAVE_MODAL_DATA':
             params = {
-                action: 'save_settings_with_ajax',
+                action: 'eael_save_settings_with_ajax',
                 security: localize.nonce,
                 ...$args
             };
@@ -87,7 +87,7 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args = {}) {
             return;
         case 'SAVE_ELEMENTS_DATA':
             params = {
-                action: 'save_settings_with_ajax',
+                action: 'eael_save_settings_with_ajax',
                 security: localize.nonce,
                 elements: true
             };
@@ -117,7 +117,7 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args = {}) {
             return;
         case 'SAVE_TOOLS':
             params = {
-                action: 'save_settings_with_ajax',
+                action: 'eael_save_settings_with_ajax',
                 security: localize.nonce,
                 [$args.key]: $args.value,
             };
@@ -140,7 +140,7 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args = {}) {
             return;
         case 'REGENERATE_ASSETS':
             params = {
-                action: 'clear_cache_files_with_ajax',
+                action: 'eael_clear_cache_files_with_ajax',
                 security: localize.nonce
             };
 
