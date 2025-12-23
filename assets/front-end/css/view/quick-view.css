@@ -294,13 +294,17 @@
   font-size: 16px;
   line-height: 18px;
 }
-.eael-product-popup.woocommerce div.product table tbody tr {
+.eael-product-popup.woocommerce div.product table.variations tbody .label {
+  padding: 15px;
+  line-height: 0;
+}
+.eael-product-popup.woocommerce div.product table.variations tbody tr {
   border-bottom: 1px solid #ccc;
 }
-.eael-product-popup.woocommerce div.product table tbody tr td {
+.eael-product-popup.woocommerce div.product table.variations tbody tr td {
   background: transparent;
   vertical-align: middle !important;
-  padding: 15px 15px 15px 0 !important;
+  line-height: 0;
 }
 .eael-product-popup.woocommerce div.product .product_meta {
   font-size: 14px;
@@ -528,6 +532,22 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+.theme-storefront .eael-product-popup form.cart.variations_form .variations td select {
+  padding: 8px;
+  border: 1px solid #121212;
+}
+.theme-storefront .eael-product-popup .woocommerce-product-gallery {
+  position: relative;
+}
+.theme-storefront .eael-product-popup .woocommerce-product-gallery .woocommerce-product-gallery__trigger {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+}
+.theme-storefront .eael-product-popup .eael-product-popup.woocommerce div.product table tbody tr td {
+  padding: 5px 15px 15px 0 !important;
 }
 .theme-oceanwp.elementor-editor-active .eael-product-popup.woocommerce div.product form.cart div.quantity .qty {
   max-width: 150px;
