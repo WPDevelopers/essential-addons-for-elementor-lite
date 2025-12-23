@@ -7057,7 +7057,7 @@ class Login_Register extends Widget_Base {
 		if ( ! empty( $this->cloudflare_turnstile_sitekey ) && 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile" ) && ( 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile_on_{$form_type}" ) ) ) {
 			$id = "eael-{$form_type}-cloudflare-turnstile-" . esc_attr( $this->get_id() );
 			wp_enqueue_script( 'eael-cloudflare' );
-			echo "<div class='cf-turnstile' data-theme='{$this->ds['cloudflare_turnstile_theme']}' data-sitekey='{$this->cloudflare_turnstile_sitekey}'></div>";
+			echo "<div class='cf-turnstile' data-theme='" . esc_attr( $this->ds['cloudflare_turnstile_theme'] ) . "' data-sitekey='" . esc_attr( $this->cloudflare_turnstile_sitekey ) . "'></div>";
 		}
 	}
 
