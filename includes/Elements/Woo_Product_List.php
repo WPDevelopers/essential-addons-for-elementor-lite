@@ -554,6 +554,20 @@ class Woo_Product_List extends Widget_Base
             ],
         ]);
 
+        $wc_settings_url = admin_url( 'admin.php?page=wc-settings&tab=products&section=inventory' );
+        $this->add_control(
+			'eael_product_show_stockout',
+			[
+				'label'        => esc_html__( 'Out of Stock', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+                'description'  => __( 'Uncheck the WooCommerce Settings <a href="' . $wc_settings_url . '" target="_blank">Out of stock visibility</a> option. This will not work otherwise' )
+			]
+		);
+
         $this->add_control(
             'eael_product_list_products_status',
             [
@@ -3973,7 +3987,7 @@ class Woo_Product_List extends Widget_Base
         ];
 
         // Stock settings
-        if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ) {
+        if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) || 'yes' !== $settings['eael_product_show_stockout'] ) {
             $args['meta_query'][] = [
                 'key' => '_stock_status',
                 'value' => 'instock'
