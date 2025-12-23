@@ -278,14 +278,71 @@ trait Facebook_Feed {
 	 * @return string
 	 */
 	public function get_url( $page_id = '', $token = '', $source = 'posts', $display_comment = '' ) {
-        $comment_count = $display_comment == 'yes' ? ',comments.summary(total_count)' : '';
-        $post_limit =  apply_filters( 'eael_facebook_feed_post_limit', 99 );
-		$post_url = "https://graph.facebook.com/v18.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url,media}{$comment_count},reactions.summary(total_count)&limit={$post_limit}&access_token={$token}";
-		$feed_url = "https://graph.facebook.com/v18.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action{$comment_count},reactions.summary(total_count),privacy&access_token={$token}&limit={$post_limit}&locale=en_US";
+		// Comments yes/no
+		$comment_count = $display_comment === 'yes'
+			? ',comments.summary(total_count)'
+			: '';
 
-		if ( 'posts' === $source ) {
-			return $post_url;
+		// Safe limit
+		$post_limit = apply_filters( 'eael_facebook_feed_post_limit', value: 80 );
+
+		// -----------------------------
+		// 1. Lightweight field sets
+		// -----------------------------
+		$post_fields =
+			"status_type,created_time,from,message,story,permalink_url," .
+			"attachments.limit(1){type,media_type,unshimmed_url,media{image}}" .
+			"{$comment_count},reactions.summary(total_count)";
+
+		$feed_fields =
+			"id,message,status_type,created_time,from,permalink_url,privacy," .
+			"attachments.limit(1){type,media_type,unshimmed_url,media{image}}" .
+			"{$comment_count},reactions.summary(total_count)";
+
+		// -----------------------------
+		// 2. Build URLs
+		// -----------------------------
+		$post_url =
+			"https://graph.facebook.com/v18.0/{$page_id}/posts" .
+			"?fields={$post_fields}" .
+			"&limit={$post_limit}" .
+			"&access_token={$token}";
+
+		$feed_url =
+			"https://graph.facebook.com/v18.0/{$page_id}/feed" .
+			"?fields={$feed_fields}" .
+			"&limit={$post_limit}" .
+			"&locale=en_US" .
+			"&access_token={$token}";
+
+		// -----------------------------
+		// 3. If feed is requested → return feed
+		// -----------------------------
+		if ( $source !== 'posts' ) {
+			return $feed_url;
 		}
-		return $feed_url;
+
+		// -----------------------------
+		// 4. Source = posts → test if /posts works
+		// -----------------------------
+		$test = wp_remote_get(
+			"https://graph.facebook.com/v18.0/{$page_id}/posts?limit=1&access_token={$token}",
+			[ 'timeout' => 6 ]
+		);
+
+		// If request failed (network timeout) → fallback to feed
+		if ( is_wp_error( $test ) ) {
+			return $feed_url;
+		}
+
+		$body = json_decode( wp_remote_retrieve_body( $test ), true );
+
+		// If /posts is invalid (Facebook code 2500) → return feed
+		if ( isset( $body['error']['code'] ) && (int) $body['error']['code'] === 2500 ) {
+			return $feed_url;
+		}
+
+		// Otherwise /posts is allowed
+		return $post_url;
 	}
 }
