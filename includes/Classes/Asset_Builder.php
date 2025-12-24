@@ -384,6 +384,9 @@ class Asset_Builder {
 			EAEL_PLUGIN_VERSION
 		);
 
+		// register custom cursor assets
+		do_action( 'eael/register_custom_cursor_assets' );
+
 		// localize object
 		$this->localize_objects = apply_filters( 'eael/localize_objects', [
 			'ajaxurl'            => admin_url( 'admin-ajax.php' ),

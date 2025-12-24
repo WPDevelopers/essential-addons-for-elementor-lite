@@ -679,6 +679,21 @@ class Event_Calendar extends Widget_Base
 	    );
 
         $this->add_control(
+            'eael_event_location_display',
+            [
+                'label' => __('Show Event Location', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+                'default' => 'no',
+                'description' => __('Display event location information in the popup modal', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_event_calendar_type' => 'google',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_event_limit',
             [
                 'label' => __('Event Limit', 'essential-addons-for-elementor-lite'),
@@ -688,33 +703,6 @@ class Event_Calendar extends Widget_Base
                 'description' => __('Limit the number of events displayed on a day. The rest will show up in a popover.', 'essential-addons-for-elementor-lite'),
             ]
         );
-
-        $this->add_control(
-			'eael_event_popup_date_format',
-			[
-				'label' => esc_html__( 'Popup Date Format', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'MMM Do',
-				'options' => [
-					'MMM Do'      => date('M jS'),     // Sep 29th
-                    'MMMM Do'     => date('F jS'),     // September 29th
-                    'Do MMM'      => date('jS M'),     // 29th Sep
-                    'Do MMMM'     => date('jS F'),     // 29th September
-                    'MM-DD-YYYY'  => date('m-d-Y'),    // 09-29-2024
-                    'YYYY-DD-MM'  => date('Y-d-m'),    // 2024-29-09
-                    'YYYY-MM-DD'  => date('Y-m-d'),    // 2024-09-29
-                    'DD/MM/YYYY'  => date('d/m/Y'),    // 29/09/2024
-                    'MM/DD/YYYY'  => date('m/d/Y'),    // 09/29/2024
-                    'YYYY/MM/DD'  => date('Y/m/d'),    // 2024/09/29
-                    'DD.MM.YYYY'  => date('d.m.Y'),    // 29/09/2024
-                    'MM.DD.YYYY'  => date('m.d.Y'),    // 09/29/2024
-                    'YYYY.MM.DD'  => date('Y.m.d'),    // 2024/09/29
-                    'D-MMM-YYYY'  => date('j-M-Y'),    // 29-Sep-2024
-                    'MMMM YYYY'   => date('F Y'),      // September 2024
-                    'MMM YYYY'    => date('M Y'),      // Sep 2024
-				],
-			]
-		);
 
         if (apply_filters('eael/is_plugin_active', 'eventON/eventon.php') && apply_filters('eael/pro_enabled', false)) {
             $this->add_control(
@@ -854,17 +842,6 @@ class Event_Calendar extends Widget_Base
                 ]
             ]
         );
-        $this->add_control(
-            'eael_event_global_popup_ribbon_color',
-            [
-                'label' => __('Popup Ribbon Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#10ecab',
-                'condition' => [
-                    'eael_event_calendar_type!' => 'manual',
-                ],
-            ]
-        );
 
 	    $this->add_control(
 		    'eael_calendar_column_heading_formats',
@@ -901,6 +878,103 @@ class Event_Calendar extends Widget_Base
 			    ] ),
 		    ]
 	    );
+
+        $this->add_control(
+            '_heading_popup_settings',
+            [
+                'label' => esc_html__( 'Popup', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+			'eael_event_popup_date_format',
+			[
+				'label' => esc_html__( 'Date Format', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'MMM Do',
+				'options' => [
+					'MMM Do'      => date('M jS'),     // Sep 29th
+                    'MMMM Do'     => date('F jS'),     // September 29th
+                    'Do MMM'      => date('jS M'),     // 29th Sep
+                    'Do MMMM'     => date('jS F'),     // 29th September
+                    'MM-DD-YYYY'  => date('m-d-Y'),    // 09-29-2024
+                    'YYYY-DD-MM'  => date('Y-d-m'),    // 2024-29-09
+                    'YYYY-MM-DD'  => date('Y-m-d'),    // 2024-09-29
+                    'DD/MM/YYYY'  => date('d/m/Y'),    // 29/09/2024
+                    'MM/DD/YYYY'  => date('m/d/Y'),    // 09/29/2024
+                    'YYYY/MM/DD'  => date('Y/m/d'),    // 2024/09/29
+                    'DD.MM.YYYY'  => date('d.m.Y'),    // 29/09/2024
+                    'MM.DD.YYYY'  => date('m.d.Y'),    // 09/29/2024
+                    'YYYY.MM.DD'  => date('Y.m.d'),    // 2024/09/29
+                    'D-MMM-YYYY'  => date('j-M-Y'),    // 29-Sep-2024
+                    'MMMM YYYY'   => date('F Y'),      // September 2024
+                    'MMM YYYY'    => date('M Y'),      // Sep 2024
+				],
+			]
+		);
+        
+        $this->add_control(
+            'eael_event_global_popup_ribbon_color',
+            [
+                'label'   => __('Ribbon Color', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::COLOR,
+                'default' => '#10ecab',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_show_thumbnail',
+            [
+                'label'        => esc_html__( 'Thumbnail', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default'      => 'no',
+                'condition' => [
+                    'eael_event_calendar_type' => 'the_events_calendar'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_thumbnail_position',
+            [
+                'label'   => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::CHOOSE,
+                'options' => [
+                    'header' => [
+                        'title' => esc_html__( 'Header', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-v-align-top',
+                    ],
+                    'body-left' => [
+                        'title' => esc_html__( 'Body Left', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'body-right' => [
+                        'title' => esc_html__( 'Body Right', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                    'body-bg' => [
+                        'title' => esc_html__( 'Body Background', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-v-align-middle',
+                    ],
+                    'background' => [
+                        'title' => esc_html__( 'Full Background', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-v-align-stretch',
+                    ],
+                ],
+                'default'   => 'body-right',
+                'toggle'    => false,
+                'condition' => [
+                    'eael_event_show_thumbnail' => 'yes',
+                    'eael_event_calendar_type' => 'the_events_calendar'
+                ]
+            ]
+        );
+
 
         $this->end_controls_section();
 
@@ -3064,6 +3138,73 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
+            'event_popup_location_heading',
+            [
+                'label' => __('Location', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'event_popup_location_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location',
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_color',
+            [
+                'label' => __('Location Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_icon',
+            [
+                'label' => __('Location Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_icon_size',
+            [
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location i' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_icon_color',
+            [
+                'label' => __('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location i' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'event_popup_content_heading',
             [
                 'label' => __('Content', 'essential-addons-for-elementor-lite'),
@@ -3084,13 +3225,57 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'event_popup_content_color',
             [
-                'label' => __('Content Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eaelec-modal-body' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eaelec-modal-body *' => 'color: {{VALUE}};',
                 ],
                 'default' => '#555'
+            ]
+        );
+
+        $this->add_control(
+            '_heading_thumbnail_style',
+            [
+                'label' => esc_html__( 'Thumbnail', 'text-domain' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'eael_event_show_thumbnail' => 'yes',
+                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ],
+                    'eael_event_calendar_type' => 'the_events_calendar'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'event_popup_thumbnail_border',
+                'selector' => '{{WRAPPER}} .eaelec-modal-body-img',
+                'condition' => [
+                    'eael_event_show_thumbnail' => 'yes',
+                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ],
+                    'eael_event_calendar_type' => 'the_events_calendar'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'event_popup_thumbnail_border_radius',
+            [
+                'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eaelec-modal-body-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_event_show_thumbnail' => 'yes',
+                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ],
+                    'eael_event_calendar_type' => 'the_events_calendar'
+                ]
             ]
         );
 
@@ -3270,6 +3455,7 @@ class Event_Calendar extends Widget_Base
                 'size_units' => ['px', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .eaelec-modal .eaelec-modal-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eaelec-modal .eaelec-modal-content .eaelec-modal-overlay' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -3281,7 +3467,7 @@ class Event_Calendar extends Widget_Base
                 'name' => 'event_popup_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eaelec-modal .eaelec-modal-content',
+                'selector' => '{{WRAPPER}} .eaelec-modal .eaelec-modal-content, {{WRAPPER}} .eaelec-modal .eaelec-modal-content .eaelec-modal-overlay',
                 'exclude' => [
                     'image',
                 ],
@@ -3341,8 +3527,10 @@ class Event_Calendar extends Widget_Base
             data-monthColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_month'] ) . '"
             data-weekColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_week'] ) . '"
             data-hideDetailsLink= "' . esc_attr( $settings['eael_event_details_link_hide'] ) . '"
-            data-detailsButtonText = "' . wp_kses( $settings['eael_event_details_text'], Helper::eael_allowed_tags() ) . '"
+            data-detailsButtonText = "' . esc_attr( wp_kses( $settings['eael_event_details_text'], Helper::eael_allowed_tags() ) ) . '"
+            data-location-display = "' . esc_attr( $settings['eael_event_location_display'] ) . '"
             data-events="' . esc_attr( htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) ) . '"
+            data-thumbnail_position = "' . ( !empty( $settings['eael_event_show_thumbnail'] ) ? esc_attr( $settings['eael_event_thumbnail_position'] ) : '') . '"
             data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>';
 
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -3515,14 +3703,14 @@ class Event_Calendar extends Widget_Base
     protected function eaelec_load_event_details()
     {
     	$event_details_text = $this->get_settings('eael_event_details_text');
-        return '<div id="eaelecModal" class="eaelec-modal eael-zoom-in">
-            <div class="eael-ec-modal-bg"></div>
+        $html = '<div id="eaelecModal" class="eaelec-modal eael-zoom-in">
             <div class="eaelec-modal-content">
                 <div class="eaelec-modal-header">
                     <div class="eaelec-modal-close"><span><i class="fas fa-times"></i></span></div>
                     <h2 class="eael-ec-modal-title"></h2>
                     <span class="eaelec-event-date-start eaelec-event-popup-date"></span>
                     <span class="eaelec-event-date-end eaelec-event-popup-date"></span>
+                    <span class="eaelec-event-location eaelec-event-popup-location" style="display: none;"></span>
                 </div>
                 <div class="eaelec-modal-body">
                     <p></p>
@@ -3532,6 +3720,8 @@ class Event_Calendar extends Widget_Base
                 </div>
             </div>
         </div>';
+
+        return $html;
     }
 
 	public function xssAttributes() {
@@ -3814,6 +4004,7 @@ class Event_Calendar extends Widget_Base
                     'id'             => ++$key,
                     'title'          => !empty($item->summary) ? $item->summary                                                                : 'No Title',
                     'description'    => isset($item->description) ? $item->description                                                         : '',
+                    'location'       => isset($item->location) ? $item->location                                                               : '',
                     'start'          => $ev_start_date,
                     'end'            => $ev_end_date,
                     'start_timezone' => $start_timezone,
@@ -3935,8 +4126,10 @@ class Event_Calendar extends Widget_Base
                 'allDay' => $all_day,
                 'external' => 'on',
                 'nofollow' => 'on',
+                'imageUrl' => get_the_post_thumbnail_url($event->ID, 'full'),
             ];
         }
+        
         return $calendar_data;
     }
 

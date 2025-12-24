@@ -48,6 +48,10 @@ trait Admin {
             wp_enqueue_style( 'essential_addons_elementor-template-cloud-css', EAEL_PLUGIN_URL . 'assets/admin/css/cloud.css', false, EAEL_PLUGIN_VERSION );
         }
 
+        if ( isset( $hook ) && $hook == 'elementor_page_elementor-element-manager' ) {
+		    wp_enqueue_style( 'ea-icon-admin', EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css', array(), EAEL_PLUGIN_VERSION );
+        }
+
 	    if ( isset( $hook ) && $hook == 'toplevel_page_eael-settings' ) {
 		    wp_enqueue_style( 'eael-admin-icon-css', EAEL_PLUGIN_URL . 'includes/templates/admin/icons/style.css', array(), EAEL_PLUGIN_VERSION );
 		    wp_enqueue_style( 'eael-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', array(), EAEL_PLUGIN_VERSION );
@@ -122,7 +126,7 @@ trait Admin {
 				    ]
 			    ],
 			    'templately_promo'        => [
-				    'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( 'Unlock 6500+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
 					    __( 'Stunning Templates For All', 'essential-addons-for-elementor-lite' ),
 					    __( 'One-Click Full Site Import', 'essential-addons-for-elementor-lite' ),
@@ -201,7 +205,7 @@ trait Admin {
 				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
 				    'content' => __( 'Get more powerful widgets & extensions to elevate your Elementor website', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
@@ -369,7 +373,7 @@ trait Admin {
 				    'top_heading' => __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
 				    'heading'     => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'      => [
-					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'      => [
@@ -621,6 +625,24 @@ trait Admin {
 						    'is_pro'      => false,
 						    'is_activate' => boolval( $this->get_settings( 'wrapper-link' ) )
 					    ],
+					    'custom-cursor'          => [
+						    'key'         => 'custom-cursor',
+						    'title'       => __( 'Custom Cursor', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/custom-cursor/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-custom-cursor/',
+						    'is_pro'      => true,
+							'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'custom-cursor' ) )
+					    ],
+						'image-masking' => [
+						    'key'         => 'image-masking',
+						    'title'       => __( 'Image Masking', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/image-masking-with-morphing/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-image-masking-with-morphing/',
+						    'is_pro'      => false,
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'image-masking' ) )
+					    ],
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
@@ -646,7 +668,23 @@ trait Admin {
 						    'doc_link'    => 'https://essential-addons.com/docs/ea-hover-interaction/',
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'special-hover-effect' ) )
-					    ]
+						 ],
+					    'liquid-glass-effect'  => [
+						    'key'         => 'liquid-glass-effect',
+						    'title'       => __( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/liquid-glass-effects/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-liquid-glass-effects/',
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'liquid-glass-effect' ) )
+						 ],
+					    'vertical-text-orientation'  => [
+						    'key'         => 'vertical-text-orientation',
+						    'title'       => __( 'Vertical Text Orientation', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/vertical-text-orientation/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-vertical-text-orientation/',
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'vertical-text-orientation' ) )
+						 ],
 				    ]
 			    ],
 			    'widgets'                 => [
@@ -1514,17 +1552,30 @@ trait Admin {
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
 				    'businessReviewsSetting' => [
-					    'title'      => __( "Google Place API Key", 'essential-addons-for-elementor-lite' ),
-					    'title_icon' => 'images/map.svg',
-					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
-					    'name'       => 'br_google_place_api_key',
-					    'value'      => get_option( 'eael_br_google_place_api_key', '' ),
-					    'image'      => 'images/map2.png',
-					    'link'       => [
+					    'accordion' => [
+						    'googlePlaces' => [
+							    'title'  => __( 'Google Places API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_google_place_api_key',
+									    'value'       => get_option( 'eael_br_google_place_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Google Places API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Google Places API key from Google Cloud Console. This is used for fetching Google Reviews.', 'essential-addons-for-elementor-lite' ),
+						    ],
+
+
+					    ],
+					    'link'      => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-						    'url'  => 'https://developers.google.com/maps/documentation/places/web-service/get-api-key'
+						    'url'  => 'https://essential-addons.com/docs/ea-business-reviews/'
 					    ]
 				    ],
+
+
 				    'mailchimpSetting'       => [
 					    'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
 					    'title_icon' => 'images/mc.svg',
@@ -1689,7 +1740,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.4 with new \"<b><a target='_blank' href='%s'>Figma to Elementor Converter (Beta)</a></b>\" widget. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/figma-to-elementor-converter/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.5 with new \"<b><a target='_blank' href='%s'>Vertical Text Orientation</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/vertical-text-orientation/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -1845,22 +1896,22 @@ trait Admin {
 		<div class="eael-black-friday-optin">
 			<p><?php 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo __( 'Join us in celebrating the 8th birthday of Essential Addons and grab up to an exclusive 40% OFF on all the premium plans.', 'essential-addons-for-elementor-lite' );
+			echo __( '<strong>Black Friday Mega Sale:</strong> Elevate Web Design More Than Ever With 110+ Elements – Now <strong>Up To $120 OFF!</strong> 🎁', 'essential-addons-for-elementor-lite' );
 			?></p>
-			<a href="https://essential-addons.com/8thBD-admin-notice" target="_blank" class="button-primary">
-				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M16.7432 11.938L16.904 10.3596C16.9898 9.51748 17.0465 8.96138 17.002 8.61101L17.0176 8.6111C17.7443 8.6111 18.3334 7.98927 18.3334 7.22221C18.3334 6.45515 17.7443 5.83332 17.0176 5.83332C16.2909 5.83332 15.7018 6.45515 15.7018 7.22221C15.7018 7.56912 15.8223 7.88632 16.0215 8.12974C15.7355 8.31607 15.3616 8.70925 14.7987 9.30104L14.7987 9.30105L14.7987 9.30106C14.3651 9.75698 14.1483 9.98494 13.9064 10.0202C13.7724 10.0398 13.6359 10.0197 13.5121 9.96217C13.2888 9.85836 13.1399 9.57655 12.8421 9.01292L11.2723 6.04203C11.0886 5.69432 10.9349 5.4033 10.7962 5.16911C11.365 4.86283 11.7544 4.23868 11.7544 3.51851C11.7544 2.49576 10.9689 1.66666 10 1.66666C9.0311 1.66666 8.24563 2.49576 8.24563 3.51851C8.24563 4.23868 8.63509 4.86283 9.20382 5.16911C9.06517 5.40331 8.91143 5.69429 8.72769 6.04203L7.15797 9.01292C6.86016 9.57654 6.71126 9.85836 6.48792 9.96217C6.36418 10.0197 6.22763 10.0398 6.09362 10.0202C5.85175 9.98494 5.63494 9.75698 5.20133 9.30105C4.6385 8.70926 4.26455 8.31607 3.97856 8.12974C4.17777 7.88632 4.29827 7.56912 4.29827 7.22221C4.29827 6.45515 3.70917 5.83332 2.98248 5.83332C2.25579 5.83332 1.66669 6.45515 1.66669 7.22221C1.66669 7.98927 2.25579 8.6111 2.98248 8.6111L2.99801 8.61101C2.95354 8.96138 3.01021 9.51748 3.09603 10.3596L3.25686 11.938C3.34614 12.8142 3.42038 13.6478 3.51131 14.3981H16.4887C16.5797 13.6478 16.6539 12.8142 16.7432 11.938Z"
-						  fill="white"/>
-					<path d="M9.04569 18.3333H10.9544C13.442 18.3333 14.6858 18.3333 15.5157 17.5492C15.878 17.207 16.1073 16.59 16.2729 15.787H3.72718C3.8927 16.59 4.12207 17.207 4.4843 17.5492C5.3142 18.3333 6.55803 18.3333 9.04569 18.3333Z"
-						  fill="white"/>
-				</svg>
-			    <?php esc_html_e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?>
-			</a>
+            <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
+                <a href="https://essential-addons.com/bfcm2025-admin-notice" target="_blank" class="button-primary">
+                    <?php esc_html_e( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ); ?>
+                </a>
+                <span class="eael-action-dismiss-btn">
+                    <?php esc_html_e( 'I’ll Grab It Later', 'essential-addons-for-elementor-lite' ); ?>
+                </span>
+            </div>
 		</div>
+
 		<script>
             jQuery(document).ready(function ($) {
                 setTimeout(function () {
-                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-ea8th_birthday_notice .notice-dismiss');
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_2025_notice .notice-dismiss');
 
                     function wpNoticeDismissFunc(event) {
                         event.preventDefault();
@@ -1875,7 +1926,7 @@ trait Admin {
                         }
 
                         // Data has to be formatted as a string here.
-                        postData += 'id=ea8th_birthday_notice';
+                        postData += 'id=bfcm_2025_notice';
                         postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
                         if (dismiss) {
                             postData += '&dismiss=' + dismiss;
@@ -1884,7 +1935,7 @@ trait Admin {
                             postData += '&later=' + later;
                         }
 
-                        postData += '&nonce=<?php echo wp_create_nonce( 'wpnotice_dismiss_notice_ea8th_birthday_notice' );?>';
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_bfcm_2025_notice' ) );?>';
 
                         httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
                         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -1893,6 +1944,15 @@ trait Admin {
 
                     // Add an event listener to the dismiss button.
                     dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
+
+                    // Handle custom dismiss button clicks
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_2025_notice .eael-action-dismiss-btn');
+                    if (customDismissBtn && dismissBtn) {
+                        customDismissBtn.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            dismissBtn.click();
+                        });
+                    }
                 }, 1);
             });
 		</script>
@@ -1903,15 +1963,15 @@ trait Admin {
 	    ];
 
 	    $notices->add(
-			'ea8th_birthday_notice',
+			'bfcm_2025_notice',
 			$_black_friday_notice,
 			[
 				'start'       => $notices->time(),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				"expire"      => strtotime( '10:00:00pm 3rd August, 2025' ),
-				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '08:00:00am 3rd August, 2025' ),
+				"expire"      => strtotime( '11:59:59pm 4th December, 2025' ),
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '09:59:59pm 4th December, 2025' ),
 			]
 		);
 

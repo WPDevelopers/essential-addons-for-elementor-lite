@@ -274,19 +274,19 @@
   background: var(--first-btn-bg);
 }
 .eael-wcpc-wrapper.custom.theme-5 table td:nth-of-type(3n+1) .button:hover {
-  background: #5827e5;
+  background: rgb(88.4097222222, 39.2152777778, 229.2847222222);
 }
 .eael-wcpc-wrapper.custom.theme-5 table td:nth-of-type(3n+2) .button {
   background: var(--second-btn-bg);
 }
 .eael-wcpc-wrapper.custom.theme-5 table td:nth-of-type(3n+2) .button:hover {
-  background: #2747e5;
+  background: rgb(39.2152777778, 70.5208333333, 229.2847222222);
 }
 .eael-wcpc-wrapper.custom.theme-5 table td:nth-of-type(3n+3) .button {
   background: var(--third-btn-bg);
 }
 .eael-wcpc-wrapper.custom.theme-5 table td:nth-of-type(3n+3) .button:hover {
-  background: #13d2b5;
+  background: rgb(18.8917322835, 209.6082677165, 180.8208661417);
 }
 .eael-wcpc-wrapper.custom.theme-5 table tr.title th, .eael-wcpc-wrapper.custom.theme-5 table tr.title td {
   font-size: 20px;
@@ -388,19 +388,19 @@
   color: var(--first-col-bg);
 }
 .eael-wcpc-wrapper.custom.theme-6 table td:nth-of-type(3n+1) .button:hover {
-  color: #fb3c17;
+  color: rgb(251.4776119403, 59.5074626866, 22.5223880597);
 }
 .eael-wcpc-wrapper.custom.theme-6 table td:nth-of-type(3n+2) .button {
   color: var(--second-col-bg);
 }
 .eael-wcpc-wrapper.custom.theme-6 table td:nth-of-type(3n+2) .button:hover {
-  color: #2f11e9;
+  color: rgb(47.4683544304, 17.4050632911, 232.5949367089);
 }
 .eael-wcpc-wrapper.custom.theme-6 table td:nth-of-type(3n+3) .button {
   color: var(--third-col-bg);
 }
 .eael-wcpc-wrapper.custom.theme-6 table td:nth-of-type(3n+3) .button:hover {
-  color: #179f51;
+  color: rgb(23.3539823009, 158.6460176991, 80.5309734513);
 }
 .eael-wcpc-wrapper.custom.theme-6 .img-inner {
   display: block;
@@ -441,7 +441,7 @@
 }
 .eael-product-grid .woocommerce ul.products .product .eael-product-sold-count-progress-bar,
 .eael-post-grid .woocommerce ul.products .product .eael-product-sold-count-progress-bar {
-  background-color: #2196F3;
+  background-color: #2196f3;
   height: 10px;
   border-radius: 0 10px 10px 0;
 }
@@ -496,6 +496,21 @@
   content: "\f005\f005\f005\f005\f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
+}
+.eael-product-grid .woocommerce ul.products .product .eael-product-wrap,
+.eael-post-grid .woocommerce ul.products .product .eael-product-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.eael-product-grid .woocommerce ul.products .product .eael-product-wrap img,
+.eael-post-grid .woocommerce ul.products .product .eael-product-wrap img {
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 .eael-product-grid .woocommerce ul.products .ast-on-card-button.ast-onsale-card,
 .eael-post-grid .woocommerce ul.products .ast-on-card-button.ast-onsale-card {
@@ -1652,7 +1667,8 @@
   background: rgba(0, 0, 0, 0.5);
   pointer-events: none;
 }
-.wcpc-overlay, .eael-wcpc-modal {
+.wcpc-overlay,
+.eael-wcpc-modal {
   visibility: hidden;
   opacity: 0;
   -webkit-transition: all 0.5s ease;
@@ -1702,7 +1718,8 @@
 .eael-wcpc-wrapper.custom .remove-row {
   border: none;
 }
-.eael-wcpc-wrapper .remove-row th, .eael-wcpc-wrapper .remove-row td,
+.eael-wcpc-wrapper .remove-row th,
+.eael-wcpc-wrapper .remove-row td,
 .eael-wcpc-wrapper.custom .remove-row th,
 .eael-wcpc-wrapper.custom .remove-row td {
   border: none;
@@ -1719,6 +1736,7 @@
   letter-spacing: normal;
   font-weight: 700;
   text-transform: capitalize;
+  font-size: 1rem;
 }
 .eael-product-grid .woocommerce ul.products li.product ins {
   background: transparent;
@@ -1729,6 +1747,7 @@
   letter-spacing: normal;
   -webkit-box-shadow: none;
           box-shadow: none;
+  color: #fff;
 }
 .eael-product-grid .woocommerce ul.products li.product .button:hover, .eael-product-grid .woocommerce ul.products li.product .button:visited {
   text-decoration: none;
@@ -3193,4 +3212,16 @@
 .buddyboss-theme #content .elementor-widget-eicon-woocommerce .eael-product-grid.masonry.eael-product-preset-7 li.product .add-to-cart .add_to_cart_button,
 .buddyboss-theme #content .elementor-widget-eicon-woocommerce .eael-post-grid.masonry.eael-product-preset-7 li.product .add-to-cart .add_to_cart_button {
   margin: 10px 2px 0;
+}
+.theme-kadence .eael-product-grid .woocommerce ul.products li.product .button {
+  text-transform: capitalize;
+  border: none;
+  letter-spacing: normal;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  padding: 10px 25px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }

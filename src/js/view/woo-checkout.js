@@ -19,20 +19,25 @@ var WooCheckout = function ($scope, $) {
 				});
 
 			$.ajax({
-				type: "POST",
-				url: localize.ajaxurl,
-				data: {
-					action: "woo_checkout_update_order_review",
-					orderReviewData: wooCheckout.data("checkout"),
-				},
-				success: function (data) {
-					$(".ea-checkout-review-order-table").replaceWith(data.order_review);
-					setTimeout(function () {
-						$(".ea-checkout-review-order-table").removeClass("processing").unblock();
-					}, 100000);
-				},
-			});
-		}, 2000);
+            type: "POST",
+            url: localize.ajaxurl,
+            data: {
+               action: "woo_checkout_update_order_review",
+               orderReviewData: wooCheckout.data("checkout"),
+               shippingData: $(".ea-woo-checkout-order-review #shipping_method input:checked").val(),
+            },
+            success: function (data) {
+               $(".ea-checkout-review-order-table").replaceWith(
+                  data.order_review
+               );
+               setTimeout(function () {
+                  $(".ea-checkout-review-order-table")
+                     .removeClass("processing")
+                     .unblock();
+               }, 100000);
+            },
+         });
+		}, 200);
 	}
 
 	$(document).on("click", ".woocommerce-remove-coupon", function (e) {
@@ -99,7 +104,9 @@ if ( jQuery('.ea-woo-checkout').hasClass('checkout-reorder-enabled') ) {
 			field_wrapper = $('.ea-woo-checkout .woocommerce-billing-fields__field-wrapper, .ea-woo-checkout .woocommerce-shipping-fields__field-wrapper');
 		field_wrapper.addClass('eael-reordering');
 		let reorder_fields = function (type, _wrapper) {
-			let $selector = $(`.woocommerce-${type}-fields__field-wrapper`);
+			let $selector = $(
+            `.eael-${type}-fields .woocommerce-${type}-fields__field-wrapper`
+         );
 			_wrapper = typeof _wrapper !== 'undefined' ? _wrapper : wrapper;
 			$.each(checkout_keys[type], function (field_key, form_class) {
 				let $fieldHtml = _wrapper.find(`#${field_key}_field`);
@@ -112,18 +119,19 @@ if ( jQuery('.ea-woo-checkout').hasClass('checkout-reorder-enabled') ) {
 			$selector.replaceWith($(`#eael-wc-${type}-reordered-fields`).contents());
 			$(`.eael-woo-${type}-fields`).toggleClass(`eael-woo-${type}-fields woocommerce-${type}-fields__field-wrapper`);
 			$(`#eael-wc-${type}-reordered-fields`).html(`<div class="eael-woo-${type}-fields"></div>`);
-		};
+      };
+      
 		setTimeout(function () {
-			if (wrapper.hasClass(`woocommerce-billing-fields`)) {
-				reorder_fields('billing');
-				reorder_fields('shipping', $('.woocommerce-shipping-fields'));
-			}
-			if (wrapper.hasClass(`woocommerce-shipping-fields`)) {
-				reorder_fields('shipping');
-				reorder_fields('billing', $('.woocommerce-billing-fields'));
-			}
-			field_wrapper.removeClass('eael-reordering');
-		}, 500);
+         if (wrapper.hasClass(`eael-billing-fields`)) {
+            reorder_fields("billing");
+            reorder_fields("shipping", $(".eael-shipping-fields"));
+         }
+         if (wrapper.hasClass(`eael-shipping-fields`)) {
+            reorder_fields("shipping");
+            reorder_fields("billing", $(".eael-billing-fields"));
+         }
+         field_wrapper.removeClass("eael-reordering");
+      }, 500);
 	});
 }
 let change_button_text = function (){

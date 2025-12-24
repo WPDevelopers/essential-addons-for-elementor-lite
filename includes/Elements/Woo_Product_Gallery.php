@@ -2863,6 +2863,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				$settings[ 'loadable_file_name' ] = $this->get_filename_only( $template );
 				$dir_name                         = $this->get_temp_dir_name( $settings[ 'loadable_file_name' ] );
 				$found_posts                      = 0;
+				$offset                           = ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0;
 
 				if ( file_exists( $template ) ) {
 					$settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();

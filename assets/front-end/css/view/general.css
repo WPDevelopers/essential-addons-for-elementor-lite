@@ -292,3 +292,11 @@
 .eael-onpage-edit-template-wrapper .eael-onpage-edit-template > i {
   margin-right: 8px;
 }
+
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect1,
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect2,
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect3,
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect4 {
+  -webkit-box-shadow: inherit !important;
+          box-shadow: inherit !important;
+}

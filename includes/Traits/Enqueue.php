@@ -22,7 +22,7 @@ trait Enqueue
         }
 
 		// Compatibility: Gravity Forms
-		if ( class_exists( 'GFForms' ) && class_exists( 'GFCommon' ) ) {
+		if ( in_array( 'gravity-form', $widgets ) && class_exists( 'GFForms' ) && class_exists( 'GFCommon' ) ) {
 			wp_register_style( 'gravity_forms_theme_reset', \GFCommon::get_base_url() . "/assets/css/dist/gravity-forms-theme-reset.min.css", array(), \GFForms::$version );
 			wp_register_style( 'gravity_forms_theme_foundation', \GFCommon::get_base_url() . "/assets/css/dist/gravity-forms-theme-foundation.min.css", array(), \GFForms::$version );
 
@@ -110,7 +110,7 @@ trait Enqueue
         $src = EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo-icon.svg';
         $css = "
 		.elementor-add-new-section .elementor-add-templately-promo-button{
-            background-color: #5d4fff;
+            background-color: #5d4fff !important;
             background-image: url({$src});
             background-repeat: no-repeat;
             background-position: center center;

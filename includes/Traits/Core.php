@@ -45,7 +45,7 @@ trait Core
 
         // go pro
         if (!$this->pro_enabled) {
-            $links[] = sprintf('<a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" target="_blank" style="color: #524cff; font-weight: bold;">' . __('Go Pro', 'essential-addons-for-elementor-lite') . '</a>');
+	        $links[] = sprintf('<a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" target="_blank" style="color: #524cff; font-weight: bold;">' . __('Go Pro', 'essential-addons-for-elementor-lite') . '</a>');
         }
 
         return $links;
@@ -289,6 +289,8 @@ trait Core
 
         //Scroll to Top global settings : updated on elementor/editor/after_save action
         $global_settings['eael_ext_scroll_to_top'] = $this->get_ext_scroll_to_top_global_settings($post_id, $document, $global_settings);
+
+        $global_settings = apply_filters('eael/extentions/global_settings', $global_settings, $document, $post_id);
         
         // set editor time
         update_option('eael_editor_updated_at', strtotime('now'));

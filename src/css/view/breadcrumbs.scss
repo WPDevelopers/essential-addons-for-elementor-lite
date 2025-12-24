@@ -3,6 +3,11 @@
    &__prefix {
       display: flex;
       align-items: center;
+
+      &-link {
+         display: flex;
+         align-items: center;
+      }
    }
    &__content {
       display: flex;

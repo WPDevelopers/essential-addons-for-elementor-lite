@@ -176,6 +176,7 @@ class Product_Grid extends Widget_Base
         // Content Controls
         $this->init_content_layout_controls();
         $this->init_content_product_settings_controls();
+        $this->init_content_image_controls();
         $this->eael_product_badges();
         $this->init_content_addtocart_controls();
         $this->init_content_load_more_controls();
@@ -661,6 +662,18 @@ class Product_Grid extends Widget_Base
 			]
 		);
 
+        $this->add_control(
+            'eael_product_grid_show_onsale',
+            [
+                'label' => esc_html__( 'On Sale', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
         $this->add_control('product_type_logged_users', [
             'label' => __('Product Type', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SELECT,
@@ -995,6 +1008,31 @@ class Product_Grid extends Widget_Base
 			    ]
 		    );
 	    }
+
+        $this->end_controls_section();
+    }
+
+    protected function init_content_image_controls()
+    {
+        $this->start_controls_section(
+            'eael_section_product_grid_image_settings',
+            [
+                'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_grid_show_secondary_image',
+            [
+                'label'        => __( 'Secondary Image on Hover', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'no',
+                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'description'  => __( 'Enable to show a secondary image from the product gallery on hover.', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
 
         $this->end_controls_section();
     }
@@ -3723,7 +3761,16 @@ class Product_Grid extends Widget_Base
 		                $args['max_page']   = $max_page;
 		                $args['total_post'] = $found_posts;
 
-		                printf( '<ul class="products" data-layout-mode="%s">', esc_attr( $settings["eael_product_grid_layout"] ) );
+		                // Add secondary image data attributes
+                        $this->add_render_attribute( 'eael-post-appender', 'class', [ 'products', 'eael-post-appender', 'eael-post-appender-' . $this->get_id() ] );
+                        if ( isset( $settings['eael_product_grid_show_secondary_image'] ) ) {
+                            $this->add_render_attribute( 'eael-post-appender', 'data-ssi-desktop' , esc_attr( $settings['eael_product_grid_show_secondary_image'] ) );
+                            $this->add_render_attribute( 'eael-post-appender', 'data-ssi-tablet' , esc_attr( $settings['eael_product_grid_show_secondary_image_tablet'] ?? $settings['eael_product_grid_show_secondary_image'] ) );
+                            $this->add_render_attribute( 'eael-post-appender', 'data-ssi-mobile' , esc_attr( $settings['eael_product_grid_show_secondary_image_mobile'] ?? $settings['eael_product_grid_show_secondary_image'] ) );
+                        }
+
+                        $this->add_render_attribute( 'eael-post-appender', 'data-layout-mode' , esc_attr( $settings['eael_product_grid_layout'] ) );
+                        echo '<ul '; $this->print_render_attribute_string( 'eael-post-appender' ); echo '>';
 
                             if ( $products !== null ) {
                                 // Handle WC_Product_Query results
@@ -3735,12 +3782,12 @@ class Product_Grid extends Widget_Base
                                 }
                             } else {
                                 // Handle WP_Query results (archive case)
-                                while ( $query->have_posts() ) {
-                                    $query->the_post();
-                                    include( realpath( $template ) );
+                            while ( $query->have_posts() ) {
+                                $query->the_post();
+                                include( realpath( $template ) );
                                 }
-                            }
-                            wp_reset_postdata();
+                        }
+                        wp_reset_postdata();
 
 		                echo '</ul>';
                         do_action( 'eael_woo_after_product_loop' );
@@ -3856,6 +3903,16 @@ class Product_Grid extends Widget_Base
 
         if ( get_option('woocommerce_hide_out_of_stock_items') == 'yes' || 'yes' !== $settings['eael_product_show_stockout'] ) {
             $args['stock_status'] = 'instock';
+        }
+
+        // Handle on sale products exclusion
+        if ( 'yes' !== $settings['eael_product_grid_show_onsale'] ) {
+            $on_sale_ids = wc_get_product_ids_on_sale();
+            if ( ! empty( $on_sale_ids ) ) {
+                $args['post__not_in'] = isset( $args['post__not_in'] ) ?
+                    array_merge( $args['post__not_in'], $on_sale_ids ) :
+                    $on_sale_ids;
+            }
         }
 
         if( function_exists('whols_lite') ){
