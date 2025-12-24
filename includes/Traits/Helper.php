@@ -40,7 +40,7 @@ trait Helper
      */
     public function typeform_auth_handle() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	    if ( !empty($_GET[ 'page' ]) && 'eael-settings' === sanitize_text_field( wp_unslash( value: $_GET[ 'page' ] ) ) ) {
+	    if ( !empty($_GET[ 'page' ]) && 'eael-settings' === sanitize_text_field( wp_unslash( $_GET[ 'page' ] ) ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		    if ( !empty( $_GET[ 'typeform_tk' ] ) && !empty( $_GET[ 'pr_code' ] ) ) {
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
