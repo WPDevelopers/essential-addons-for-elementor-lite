@@ -92,6 +92,22 @@ class advancedDataTableEdit {
 
 		return tableHTML;
 	}
+	
+	cleanQuillHTML(html) {
+		const wrapper = document.createElement('div');
+		wrapper.innerHTML = html;
+
+		wrapper.querySelectorAll('p').forEach(p => {
+			const clone = p.cloneNode(true);
+			clone.querySelectorAll('br').forEach(br => br.remove());
+
+			if (!clone.textContent.trim()) {
+				p.remove();
+			}
+		});
+
+		return wrapper.innerHTML;
+	}
 
 	// init editor
 	initEditor(cell) {
@@ -99,7 +115,7 @@ class advancedDataTableEdit {
 		cell.dataset.quill = encodeURI(cell.innerHTML);
 
 		// insert editor dom
-		cell.innerHTML = `<div class="inline-editor">${cell.innerHTML}</div>`;
+		cell.innerHTML = `<div class="inline-editor">${this.cleanQuillHTML(cell.innerHTML)}</div>`;
 
 		// init quill
 		let quill = new Quill(cell.querySelector(".inline-editor"), {
@@ -119,11 +135,21 @@ class advancedDataTableEdit {
 			// parse table html
 			let origTable = this.parseHTML(this.table.cloneNode(true));
 			this.tableInnerHTML = origTable.innerHTML;
+			
 			// update table
 			this.updateFromView(this.view, {
 				ea_adv_data_table_static_html: origTable.innerHTML,
 			});
 		});
+
+		$tableWrapper = jQuery('.ea-advanced-data-table-' + this.view?.container?.args?.id );
+		let cleanQuillHTML = this.cleanQuillHTML;
+		setTimeout(() => {
+			$editors = $tableWrapper.find('.inline-editor .ql-editor');
+			$editors.each(function() {
+				jQuery(this).html(cleanQuillHTML(jQuery(this).html()));
+			});
+		}, 1000);
 	}
 
 	// init inline editing features
@@ -625,7 +651,7 @@ class advancedDataTableEdit {
 				cellSelector = cellSelector.length ? cellSelector : jQuery('tbody tr:first-child td:first-child .ql-editor p', table),
 				cellData = cellSelector.html();
 			cellSelector.html(cellData + ' ');
-
+			
 			setTimeout(() => {
 				cellSelector.html(cellData);
 			}, 1100);
@@ -634,5 +660,8 @@ class advancedDataTableEdit {
 }
 
 eael.hooks.addAction("editMode.init", "ea", () => {
+	if( eael.elementStatusCheck('eaelAdvancedDataTableEditor') ) {
+		return false;
+	}
 	new advancedDataTableEdit();
 });
