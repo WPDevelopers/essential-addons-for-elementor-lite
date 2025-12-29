@@ -284,7 +284,7 @@ trait Facebook_Feed {
 			: '';
 
 		// Safe limit
-		$post_limit = apply_filters( 'eael_facebook_feed_post_limit', value: 80 );
+		$post_limit = apply_filters( 'eael_facebook_feed_post_limit', 80 );
 
 		// -----------------------------
 		// 1. Lightweight field sets
