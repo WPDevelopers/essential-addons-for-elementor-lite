@@ -400,6 +400,20 @@ trait Controls
             }
         }
 
+        if ( 'eael-post-list' === $wb->get_name() ) {
+            $wb->add_control(
+                'query_id',
+                [
+                    'label' => esc_html__('Query ID', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::TEXT,
+                    'default' => '',
+                    'ai' => ['active' => false],
+                    'description' => esc_html__('Give your Query a custom unique id to allow server side filtering using the hook "eael/query/{query_id}"', 'essential-addons-for-elementor-lite'),
+                    'separator' => 'before',
+                ]
+            );
+        }
+
         $wb->end_controls_section();
     }
 
