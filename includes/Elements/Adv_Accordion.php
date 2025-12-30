@@ -198,6 +198,55 @@ class Adv_Accordion extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+			'eael_accordion_media_custom_animation',
+			[
+				'label'  => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
+				'type'   => Controls_Manager::SELECT,
+				'groups' => [
+					[
+						'label' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+						'options' => [
+							'' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+						],
+					],
+					[
+						'label' => esc_html__( 'Slide', 'essential-addons-for-elementor-lite' ),
+						'options' => [
+							'slide-top'    => esc_html__( 'Slide In Up', 'essential-addons-for-elementor-lite' ),
+							'slide-bottom' => esc_html__( 'Slide In Down', 'essential-addons-for-elementor-lite' ),
+							'slide-left'   => esc_html__( 'Slide In Left', 'essential-addons-for-elementor-lite' ),
+							'slide-right'  => esc_html__( 'Slide In Right', 'essential-addons-for-elementor-lite' ),
+						],
+					],
+					[
+						'label' => esc_html__( 'Zoom', 'essential-addons-for-elementor-lite' ),
+						'options' => [
+							'zoom-in'  => esc_html__( 'Zoom In', 'essential-addons-for-elementor-lite' ),
+							'zoom-out' => esc_html__( 'Zoom Out', 'essential-addons-for-elementor-lite' ),
+						],
+					],
+                    [
+						'label' => esc_html__( 'Fade', 'essential-addons-for-elementor-lite' ),
+						'options' => [
+							'fade-top' => esc_html__( 'Fade Slide Up', 'essential-addons-for-elementor-lite' ),
+						],
+					],
+                    [
+						'label' => esc_html__( 'Rotate', 'essential-addons-for-elementor-lite' ),
+						'options' => [
+							'rotate-zoom' => esc_html__( 'Rotate Zoom', 'essential-addons-for-elementor-lite' ),
+						],
+					],
+				],
+				'prefix_class' => 'eael-accordion_animation-',
+                'condition'    => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
         $this->add_control(
             'eael_adv_accordion_icon_show',
             [
