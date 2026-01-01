@@ -669,6 +669,69 @@ class Adv_Accordion extends Widget_Base
         );
 
         $this->add_responsive_control(
+			'eael_adv_accordion_media_content_width',
+			[
+				'label'      => esc_html__( 'Content Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range'      => [
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => '%',
+					'size' => 50,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists' => 'width: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_adv_accordion_media_content_gap',
+			[
+				'label'      => esc_html__( 'Content Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 12,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
+        $this->add_control(
+			'eael_adv_accordion_media_more_options',
+			[
+				'label'     => esc_html__( 'Media Options', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
+        $this->add_responsive_control(
 			'eael_adv_accordion_media_gap',
 			[
 				'label'      => esc_html__( 'Media Gap', 'essential-addons-for-elementor-lite' ),
@@ -720,54 +783,50 @@ class Adv_Accordion extends Widget_Base
 			]
 		);
 
-        $this->add_responsive_control(
-			'eael_adv_accordion_media_content_width',
+        $this->add_control(
+			'eael_adv_accordion_media_image_height',
 			[
-				'label'      => esc_html__( 'Content Width', 'essential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Hight', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-				'range'      => [
+				'size_units' => [ 'vh', 'pc', '%', 'rem', 'custom' ],
+				'range' => [
+					'vh' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
 					'%' => [
 						'min' => 0,
 						'max' => 100,
 					],
 				],
 				'default' => [
-					'unit' => '%',
+					'unit' => 'vh',
 					'size' => 50,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists' => 'width: {{SIZE}}{{UNIT}};',
 				],
                 'condition' => [
                     'eael_adv_accordion_type' => 'accordion_media',
                 ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-images' => 'height: {{SIZE}}{{UNIT}};',
+				],
 			]
 		);
 
-        $this->add_responsive_control(
-			'eael_adv_accordion_media_content_gap',
+        $this->add_control(
+			'eael_adv_accordion_media_image_border_radius',
 			[
-				'label'      => esc_html__( 'Content Gap', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::SLIDER,
+				'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-				'range'      => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 1000,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 12,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists' => 'gap: {{SIZE}}{{UNIT}};',
-				],
                 'condition' => [
                     'eael_adv_accordion_type' => 'accordion_media',
                 ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-images,
+                    {{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-image.active,
+                    {{WRAPPER}} .eael-accordion_media-wrapper img.eael-accordion_media-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
