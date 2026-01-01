@@ -319,7 +319,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 6.5.5 - 30/12/2025 =
+= 6.5.5 - 01/01/2026 =
 
 - Fixed: EA Image Accordion | Image appears fully clickable but only text responds
 - Fixed: EA Feature List | Feature list items are not aligned properly
