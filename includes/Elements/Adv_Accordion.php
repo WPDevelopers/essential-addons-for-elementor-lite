@@ -988,6 +988,21 @@ class Adv_Accordion extends Widget_Base
                 ]
             ]
         );
+
+        $this->add_control(
+            'eael_adv_accordion_tab_icon_border_color',
+            [
+                'label'     => esc_html__('Icon Border Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-accordion_media-list .eael-accordion_media-icon' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1035,10 +1050,12 @@ class Adv_Accordion extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .eael-accordion-tab-title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .eael-accordion-tab-title,
+                    {{WRAPPER}} .eael-accordion_media-list:not(.active):hover .eael-accordion_media-title' => 'color: {{VALUE}};',
                 ],
             ]
         );
+
         $this->add_control(
             'eael_adv_accordion_tab_icon_color_hover',
             [
@@ -1054,6 +1071,22 @@ class Adv_Accordion extends Widget_Base
                 ]
             ]
         );
+
+        $this->add_control(
+            'eael_adv_accordion_tab_icon_border_color_hover',
+            [
+                'label'     => esc_html__('Icon Border Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#fff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-accordion_media-list:not(.active):hover .eael-accordion_media-icon' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1134,6 +1167,20 @@ class Adv_Accordion extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-icon i'   => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-icon svg'   => 'fill: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_adv_accordion_tab_icon_border_color_active',
+            [
+                'label'     => esc_html__('Icon Border Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-icon' => 'border-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_accordion_type' => 'accordion_media',
