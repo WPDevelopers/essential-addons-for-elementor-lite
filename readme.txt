@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.5.4
+Stable tag: 6.5.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -318,6 +318,23 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.5 - 30/12/2025 =
+
+- Fixed: EA Image Accordion | Image appears fully clickable but only text responds
+- Fixed: EA Feature List | Feature list items are not aligned properly
+- Fixed: EA Advanced Tabs | Advanced Tabs lose background color after updating from v6.3.1
+- Fixed: EA Facebook Feed | Access token doesn't work
+- Fixed: EA conflicts with Animation Addons
+- Fixed: EA Content Ticker | Tags not working properly with The Events Calendar events
+- Fixed: Plugin Check (PCP) warnings
+- Improved: EA Login/Register Form | Add icon on button
+- Improved: EA Creative Button | Duplicate code revamp
+- Improved: EA Woo Product List | Exclude out of stock products
+- Improved: EA Post Grid | Add unique category and tag classes to HTML structure
+- Improved: EA Woo Cart | Add product description as a custom item
+- Improved: EA Advanced Accordion | Add dynamic content settings
+- Few minor bug fixes & improvements
 
 = 6.5.4 - 14/12/2025 =
 
