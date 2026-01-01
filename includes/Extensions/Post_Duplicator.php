@@ -53,7 +53,16 @@ class Post_Duplicator {
 		if ( current_user_can( 'edit_posts' ) && ( $enabled_on == 'all' || $post->post_type == $enabled_on ) ) {
 			$duplicate_url            = admin_url( 'admin.php?action=eae_duplicate&post=' . $post->ID );
 			$duplicate_url            = wp_nonce_url( $duplicate_url, 'ea_duplicator' );
-			$actions['eae_duplicate'] = sprintf( '<a href="%s" title="%s">%s</a>', $duplicate_url, __( 'Duplicate ' . esc_attr( $post->post_title ), 'essential-addons-for-elementor-lite' ), __( 'EA Duplicator', 'essential-addons-for-elementor-lite' ) );
+			$actions['eae_duplicate'] = sprintf(
+				'<a href="%s" title="%s">%s</a>',
+				esc_url( $duplicate_url ),
+				sprintf(
+					/* translators: %s: Post title being duplicated. */
+					__( 'Duplicate %s', 'essential-addons-for-elementor-lite' ),
+					esc_html( $post->post_title )
+				),
+				__( 'EA Duplicator', 'essential-addons-for-elementor-lite' )
+			);
 		}
 
 		return $actions;
@@ -65,20 +74,20 @@ class Post_Duplicator {
 	 */
 	public function duplicate() {
 
-		$nonce   = isset( $_REQUEST['_wpnonce'] ) && ! empty( $_REQUEST['_wpnonce'] ) ? $_REQUEST['_wpnonce'] : null;
+		$nonce   = isset( $_REQUEST['_wpnonce'] ) && ! empty( $_REQUEST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) : null;
 		$post_id = isset( $_REQUEST['post'] ) && ! empty( $_REQUEST['post'] ) ? intval( $_REQUEST['post'] ) : null;
-		$action  = isset( $_REQUEST['action'] ) && ! empty( $_REQUEST['action'] ) ? trim( sanitize_text_field( $_REQUEST['action'] ) ) : null;
+		$action  = isset( $_REQUEST['action'] ) && ! empty( $_REQUEST['action'] ) ? trim( sanitize_text_field( wp_unslash( $_REQUEST['action']) ) ) : null;
 
 		if ( is_null( $nonce ) || is_null( $post_id ) || $action !== 'eae_duplicate' ) {
 			return; // Return if action is not eae_duplicate
 		}
 
-		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'ea_duplicator' ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $nonce ) ), 'ea_duplicator' ) ) {
 			return; // Return if nonce is not valid
 		}
 
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			wp_die( esc_html__( 'You do not have permissions to edit this post.', 'essential-addons-for-elementor-lite' ) );
+			wp_die( esc_html__( 'You do not have sufficient permissions to edit this post.', 'essential-addons-for-elementor-lite' ) );
 		}
 
 		$post = sanitize_post( get_post( $post_id ), 'db' );
@@ -167,7 +176,7 @@ class Post_Duplicator {
 					$insert .= $wpdb->prepare( '(%d, %s, %s)', $duplicated_id, $meta_key, $meta_value );
 				}
 
-        		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->query( $duplicate_insert_query . $insert );
 			}
 		}

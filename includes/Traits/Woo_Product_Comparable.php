@@ -1107,7 +1107,8 @@ trait Woo_Product_Comparable {
 		$img          = "{$img_td} img";
 
 		$this->start_controls_section( 'section_style_' . $pfx, [
-			'label'     => sprintf( __( 'Product Column %d', 'essential-addons-for-elementor-lite' ), $title_number ),
+			// translators: %d is the number of the column
+			'label'     => sprintf( esc_html__( 'Product Column %d', 'essential-addons-for-elementor-lite' ), $title_number ),
 			'tab'       => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'separate_col_style' => 'yes',
@@ -2132,18 +2133,18 @@ trait Woo_Product_Comparable {
 			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 		} else {
 			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 		if ( ! empty( $_POST['product_id'] ) ) {
-			$product_id = sanitize_text_field( $_POST['product_id'] );
+			$product_id = sanitize_text_field( wp_unslash( $_POST['product_id'] ) );
 		} else {
 			$err_msg = __( 'Product ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 
         if (!empty($_POST['product_ids'])) {
-            $product_ids = wp_unslash(json_decode($_POST['product_ids']));
+            $product_ids = json_decode(sanitize_text_field( wp_unslash($_POST['product_ids']) ));
 		}
 
         if (empty($product_ids)) {
@@ -2169,7 +2170,7 @@ trait Woo_Product_Comparable {
 
 			return false;
 		}
-		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'eael_product_grid' ) ) {
+		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'eael_product_grid' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
 			}
