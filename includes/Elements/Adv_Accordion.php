@@ -783,10 +783,10 @@ class Adv_Accordion extends Widget_Base
 			]
 		);
 
-        $this->add_control(
+        $this->add_responsive_control(
 			'eael_adv_accordion_media_image_height',
 			[
-				'label'      => esc_html__( 'Hight', 'essential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'vh', 'pc', '%', 'rem', 'custom' ],
 				'range' => [
@@ -813,7 +813,7 @@ class Adv_Accordion extends Widget_Base
 			]
 		);
 
-        $this->add_control(
+        $this->add_responsive_control(
 			'eael_adv_accordion_media_image_border_radius',
 			[
 				'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
