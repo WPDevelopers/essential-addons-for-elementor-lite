@@ -248,6 +248,27 @@ class Adv_Accordion extends Widget_Base
 		);
 
         $this->add_control(
+			'eael_accordion_media_custom_animation_duration',
+			[
+				'label' => esc_html__( 'Transition Duration', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 10,
+						'step' => 0.1,
+					],
+				],
+				'default' => [
+					'size' => 0.6,
+				],
+                'condition'    => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
+        $this->add_control(
             'eael_adv_accordion_icon_show',
             [
                 'label'        => esc_html__('Enable Toggle Icon', 'essential-addons-for-elementor-lite'),
@@ -788,7 +809,7 @@ class Adv_Accordion extends Widget_Base
 			[
 				'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'vh', 'pc', '%', 'rem', 'custom' ],
+				'size_units' => [ 'vh', 'px', '%', 'rem', 'custom' ],
 				'range' => [
 					'vh' => [
 						'min' => 0,
@@ -825,7 +846,7 @@ class Adv_Accordion extends Widget_Base
 				'selectors' => [
 					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-images,
                     {{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-image.active,
-                    {{WRAPPER}} .eael-accordion_media-wrapper img.eael-accordion_media-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    {{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
