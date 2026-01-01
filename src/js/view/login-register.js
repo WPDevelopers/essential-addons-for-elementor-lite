@@ -289,4 +289,13 @@ eael.hooks.addAction("init", "ea", () => {
         }
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-login-register.default", EALoginRegister);
+    jQuery(document).on('elementor/popup/show', function (event, id, instance) {
+        let $scope = instance.$element;
+        if ($scope.find('.eael-login-registration-wrapper').length) {
+            let $turnstile = $scope.find('.cf-turnstile');
+            if ($turnstile.length && typeof turnstile !== 'undefined') {
+                turnstile.render($turnstile[0]);
+            }
+        }
+    });
 });
