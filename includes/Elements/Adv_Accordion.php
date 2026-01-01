@@ -791,6 +791,19 @@ class Adv_Accordion extends Widget_Base
                 {{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-list .eael-accordion_media-content .eael-accordion_media-title',
             ]
         );
+
+        $this->add_control(
+			'eael_adv_accordion_tab_icon_style_hading',
+			[
+				'label'     => esc_html__( 'Icon Style', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+			]
+		);
+
         $this->add_responsive_control(
             'eael_adv_accordion_tab_icon_size',
             [
@@ -834,7 +847,8 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon'   => 'margin-left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon,
+                    {{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists .eael-accordion_media-list'   => 'gap: {{SIZE}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'eael_adv_accordion_toggle_icon_postion' => 'right',
@@ -1010,7 +1024,8 @@ class Adv_Accordion extends Widget_Base
             [
                 'name'     => 'eael_adv_accordion_tab_bgtype_hover',
                 'types'    => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover',
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover, 
+                {{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists .eael-accordion_media-list:not(.active):hover',
             ]
         );
         $this->add_control(
@@ -1202,7 +1217,7 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-accordion_media-list .eael-accordion_media-content .eael-accordion_media-description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-content .eael-accordion_media-description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1214,7 +1229,7 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-accordion_media-list .eael-accordion_media-content .eael-accordion_media-description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-accordion_media-list.active .eael-accordion_media-content .eael-accordion_media-description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
