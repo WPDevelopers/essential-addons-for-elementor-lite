@@ -1217,8 +1217,26 @@ class Adv_Accordion extends Widget_Base
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active'                           => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .eael-accordion-tab-title' => 'color: {{VALUE}};',
                 ],
+                'condition' => [
+                    'eael_adv_accordion_type!' => 'accordion_media',
+                ],
             ]
         );
+
+        $this->add_control(
+            'eael_accordion_media_tab_text_color_active',
+            [
+                'label'     => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-lists .eael-accordion_media-list.active .eael-accordion_media-title' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_adv_accordion_tab_icon_color_active',
             [
