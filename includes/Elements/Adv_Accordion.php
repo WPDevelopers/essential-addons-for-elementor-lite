@@ -809,16 +809,17 @@ class Adv_Accordion extends Widget_Base
 			[
 				'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'vh', 'px', '%', 'rem', 'custom' ],
+				'size_units' => [ 'vh', 'px', 'rem', 'custom' ],
 				'range' => [
 					'vh' => [
 						'min' => 0,
 						'max' => 100,
 						'step' => 1,
 					],
-					'%' => [
+					'px' => [
 						'min' => 0,
-						'max' => 100,
+						'max' => 1000,
+						'step' => 1,
 					],
 				],
 				'default' => [
