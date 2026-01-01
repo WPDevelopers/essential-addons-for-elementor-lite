@@ -31,7 +31,7 @@ class Team_Member extends Widget_Base {
 	}
 
    	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return [ 'essential-addons-for-elementor-lite' ];
 	}
 
 	public function get_keywords()
@@ -200,44 +200,44 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
             'eael_team_member_name_tag',
             [
-                'label'       => __('HTML Tag', 'essential-addons-elementor'),
+                'label'       => __('HTML Tag', 'essential-addons-for-elementor-lite'),
 				'label_block' => true,
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => [
 					'h1' => [
-						'title' => esc_html__( 'H1', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h1',
 					],
 					'h2' => [
-						'title' => esc_html__( 'H2', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h2',
 					],
 					'h3' => [
-						'title' => esc_html__( 'H3', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h3',
 					],
 					'h4' => [
-						'title' => esc_html__( 'H4', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h4',
 					],
 					'h5' => [
-						'title' => esc_html__( 'H5', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h5',
 					],
 					'h6' => [
-						'title' => esc_html__( 'H6', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h6',
 					],
 					'div' => [
-						'title' => esc_html__( 'Div', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
 						'text'  => 'div',
 					],
 					'span' => [
-						'title' => esc_html__( 'Span', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
 						'text'  => 'span',
 					],
 					'p' => [
-						'title' => esc_html__( 'P', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
 						'text'  => 'P',
 					],
 				],
@@ -274,44 +274,44 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
             'eael_team_member_job_title_tag',
             [
-                'label'       => __('HTML Tag', 'essential-addons-elementor'),
+                'label'       => __('HTML Tag', 'essential-addons-for-elementor-lite'),
 				'label_block' => true,
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => [
 					'h1' => [
-						'title' => esc_html__( 'H1', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h1',
 					],
 					'h2' => [
-						'title' => esc_html__( 'H2', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h2',
 					],
 					'h3' => [
-						'title' => esc_html__( 'H3', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h3',
 					],
 					'h4' => [
-						'title' => esc_html__( 'H4', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h4',
 					],
 					'h5' => [
-						'title' => esc_html__( 'H5', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h5',
 					],
 					'h6' => [
-						'title' => esc_html__( 'H6', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-editor-h6',
 					],
 					'div' => [
-						'title' => esc_html__( 'Div', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
 						'text'  => 'div',
 					],
 					'span' => [
-						'title' => esc_html__( 'Span', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
 						'text'  => 'span',
 					],
 					'p' => [
-						'title' => esc_html__( 'P', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
 						'text'  => 'P',
 					],
 				],
