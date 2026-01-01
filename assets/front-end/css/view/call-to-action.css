@@ -6,9 +6,6 @@
   font-weight: 400;
   line-height: 27px;
   margin: 0 auto;
-  /*--- Cta Flex ---*/
-  /*--- Cta Button ---*/
-  /*--- Media Queries ---*/
 }
 .eael-call-to-action .eael-cta-heading {
   font-size: 36px;
@@ -48,6 +45,9 @@
 }
 .eael-call-to-action.bg-img .eael-cta-heading {
   color: rgba(255, 255, 255, 0.9);
+}
+.eael-call-to-action {
+  /*--- Cta Flex ---*/
 }
 .eael-call-to-action.cta-flex {
   display: -webkit-box;
@@ -119,6 +119,9 @@
           flex-grow: 1;
   padding: 0px 30px;
 }
+.eael-call-to-action {
+  /*--- Cta Button ---*/
+}
 .eael-call-to-action .cta-button {
   position: relative;
   display: inline-block;
@@ -135,14 +138,15 @@
   margin-top: 10px;
   z-index: 0;
   overflow: hidden;
-  /*--- Hover ---*/
-  /*--- Cta Button effect 2 ---*/
 }
 .eael-call-to-action .cta-button:last-child {
   margin-right: 0px;
 }
 .eael-call-to-action .cta-button:focus {
   outline: none;
+}
+.eael-call-to-action .cta-button {
+  /*--- Hover ---*/
 }
 .eael-call-to-action .cta-button:hover {
   color: #fff;
@@ -186,6 +190,9 @@
       -ms-transform: translateY(0);
           transform: translateY(0);
 }
+.eael-call-to-action .cta-button {
+  /*--- Cta Button effect 2 ---*/
+}
 .eael-call-to-action .cta-button.effect-2 :after {
   content: "";
   position: absolute;
@@ -206,6 +213,9 @@
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
           transform: translateX(0);
+}
+.eael-call-to-action {
+  /*--- Media Queries ---*/
 }
 @media only screen and (max-width: 768px) {
   .eael-call-to-action.cta-flex, .eael-call-to-action.cta-icon-flex {

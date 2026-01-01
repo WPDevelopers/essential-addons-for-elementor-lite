@@ -476,7 +476,10 @@
 .elementor-control-skin_six_eael_advanced_menu_item_padding
    .elementor-control-content,
 .elementor-control-skin_seven_eael_advanced_menu_item_padding
-   .elementor-control-content {
+   .elementor-control-content,
+.elementor-control.elementor-control-eael_adv_tabs_tab_color,
+.elementor-control.elementor-control-eael_adv_tabs_tab_color_hover,
+.elementor-control.elementor-control-eael_adv_tabs_tab_color_active {
    background: var(--e-a-bg-warning);
    border-inline-start: 3px solid var(--e-a-color-warning);
    border-end-end-radius: 3px;

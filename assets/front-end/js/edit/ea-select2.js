@@ -14,6 +14,7 @@
                             post_type: obj.data.source_type,
                             source_name: obj.data.source_name,
                             term: params.term,
+                            nonce: eael_select2_localize.nonce,
                         }
                     },
                 },
@@ -42,7 +43,8 @@
                                 action: 'eael_select2_get_title',
                                 post_type: obj.data.source_type, 
                                 source_name: obj.data.source_name, 
-                                id: ids
+                                id: ids,
+                                nonce: eael_select2_localize.nonce,
                             }
                         }).done(function (response) {
                             if (response.success && typeof response.data.results != 'undefined') {
@@ -115,6 +117,7 @@ function ea_woo_cart_column_type_title(value) {
         remove: eael_select2_localize.remove,
         thumbnail: eael_select2_localize.thumbnail,
         name: eael_select2_localize.name,
+        description: eael_select2_localize.description,
         price: eael_select2_localize.price,
         quantity: eael_select2_localize.quantity,
         subtotal: eael_select2_localize.subtotal,

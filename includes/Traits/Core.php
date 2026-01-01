@@ -78,9 +78,10 @@ trait Core
     {
         if (get_transient('eael_do_activation_redirect')) {
             delete_transient('eael_do_activation_redirect');
-
+            
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             if (!isset($_GET['activate-multi'])) {
-                wp_redirect("admin.php?page=eael-settings");
+                wp_safe_redirect("admin.php?page=eael-settings");
             }
         }
     }
@@ -101,12 +102,14 @@ trait Core
         if ($this->is_plugin_installed($elementor)) {
             $activation_url = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $elementor . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $elementor);
 
+            // translators: %1$s and %2$s are the strong tags
             $message = sprintf(__('%1$sEssential Addons for Elementor%2$s requires %1$sElementor%2$s plugin to be active. Please activate Elementor to continue.', 'essential-addons-for-elementor-lite'), "<strong>", "</strong>");
 
             $button_text = __('Activate Elementor', 'essential-addons-for-elementor-lite');
         } else {
             $activation_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=elementor'), 'install-plugin_elementor');
 
+            // translators: %1$s and %2$s are the strong tags
             $message = sprintf(__('%1$sEssential Addons for Elementor%2$s requires %1$sElementor%2$s plugin to be installed and activated. Please install Elementor to continue.', 'essential-addons-for-elementor-lite'), '<strong>', '</strong>');
             $button_text = __('Install Elementor', 'essential-addons-for-elementor-lite');
         }
