@@ -292,9 +292,12 @@ eael.hooks.addAction("init", "ea", () => {
     jQuery(document).on('elementor/popup/show', function (event, id, instance) {
         let $scope = instance.$element;
         if ($scope.find('.eael-login-registration-wrapper').length) {
-            let $turnstile = $scope.find('.cf-turnstile');
-            if ($turnstile.length && typeof turnstile !== 'undefined') {
-                turnstile.render($turnstile[0]);
+            let $turnstiles = $scope.find('.cf-turnstile');
+            
+            if ($turnstiles.length && typeof turnstile !== 'undefined') {
+                $turnstiles.each(function() {
+                    turnstile.render(this);
+                });
             }
         }
     });
