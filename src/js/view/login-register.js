@@ -289,8 +289,8 @@ eael.hooks.addAction("init", "ea", () => {
         }
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-login-register.default", EALoginRegister);
-    jQuery(document).on('elementor/popup/show', function (event, id, instance) {
-        let $scope = instance.$element;
+
+    function renderTurnstile($scope) {
         if ($scope.find('.eael-login-registration-wrapper').length) {
             let $turnstiles = $scope.find('.cf-turnstile');
             
@@ -300,5 +300,13 @@ eael.hooks.addAction("init", "ea", () => {
                 });
             }
         }
+    }
+    jQuery(document).on('elementor/popup/show', function (event, id, instance) {
+        renderTurnstile(instance.$element);
+    });
+    eael.hooks.addAction("ea-lightbox-triggered", "ea", function($selector) {
+        let $scope = jQuery($selector);
+        $scope.find('.cf-turnstile').html('');
+        renderTurnstile($scope);
     });
 });
