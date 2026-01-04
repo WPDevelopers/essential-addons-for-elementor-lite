@@ -1223,7 +1223,7 @@ class Adv_Accordion extends Widget_Base
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .fa-accordion-icon svg' => 'color: {{VALUE}}; fill: {{VALUE}}',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover svg.fa-accordion-icon' => 'fill: {{VALUE}}',
                     '{{WRAPPER}} .eael-accordion_media-list:hover .eael-accordion_media-icon i'   => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-accordion_media-list:hover .eael-accordion_media-icon i svg'   => 'fill: {{VALUE}}',
+                    '{{WRAPPER}} .eael-accordion_media-list:hover .eael-accordion_media-icon svg'   => 'fill: {{VALUE}}',
                 ]
             ]
         );
