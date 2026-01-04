@@ -96,6 +96,21 @@
    color: #f54;
 }
 
+/* START: Section Slider Autoplay tab style in editor panel */
+.elementor-control-eael_section_slider_autoplay_tabs{
+    padding-bottom: 0 !important;
+}
+.elementor-control-eael_section_slider_autoplay_tab {
+    background: transparent !important;
+    border: none !important;
+    text-align: left !important;
+    font-weight: 700 !important;
+}
+.elementor-control-eael_section_slider_autoplay_tab:first-child{
+    border: none !important;
+}
+/* END: Section Slider Autoplay tab style in editor panel */
+
 .ea-dialog-buttons-action {
    display: block;
    text-align: center;
