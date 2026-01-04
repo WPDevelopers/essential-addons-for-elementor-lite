@@ -226,11 +226,27 @@ class Interactive_Circle extends Widget_Base {
 		] );
 
 		$repeater->add_control(
+			'eael_interactive_circle_btn_link_type',
+			[
+				'label'       => esc_html__( 'Link Type', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'url',
+				'options'     => [
+					'url'   => esc_html__( 'URL', 'essential-addons-for-elementor-lite' ),
+					'popup' => esc_html__( 'Popup', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_interactive_circle_btn_link_on' => 'yes',
+				]
+			]
+		);
+
+		$repeater->add_control(
             'eael_interactive_circle_btn_link',
             [
                 'label'           => esc_html__('Link', 'essential-addons-for-elementor-lite'),
                 'type'            => Controls_Manager::URL,
-                'dynamic'         => ['active' => false],
+                'dynamic'         => ['active' => true],
                 'label_block'     => true,
                 'default'         => [
                     'url'		  => '#',
@@ -239,9 +255,29 @@ class Interactive_Circle extends Widget_Base {
                 'show_external'   => true,
 				'condition' => [
 	                'eael_interactive_circle_btn_link_on' => 'yes',
+					'eael_interactive_circle_btn_link_type' => 'url',
                 ]
             ]
         );
+
+		$repeater->add_control(
+			'eael_interactive_circle_btn_popup',
+			[
+				'label'       => esc_html__( 'Popup', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => ['active' => true],
+				'label_block' => true,
+				'placeholder' => esc_html__( 'Enter popup ID or use dynamic tags', 'essential-addons-for-elementor-lite' ),
+				'description' => esc_html__( 'Enter the Elementor Popup ID or use dynamic tags to select a popup', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_interactive_circle_btn_link_on' => 'yes',
+					'eael_interactive_circle_btn_link_type' => 'popup',
+				],
+				'ai' => [
+					'active' => false,
+				],
+			]
+		);
 
 		$repeater->end_controls_tab();
 
@@ -1091,9 +1127,21 @@ class Interactive_Circle extends Widget_Base {
 										<?php } ?>
 
 										<!-- Start URL support -->
-										<?php 
+										<?php
 											if( 'yes' == $item['eael_interactive_circle_btn_link_on'] ) {
-												if ( ! empty( $item['eael_interactive_circle_btn_link']['url'] ) ) {
+												$link_type = isset( $item['eael_interactive_circle_btn_link_type'] ) ? $item['eael_interactive_circle_btn_link_type'] : 'url';
+
+												if ( 'popup' === $link_type && ! empty( $item['eael_interactive_circle_btn_popup'] ) ) {
+													// Popup link
+													$popup_id = $item['eael_interactive_circle_btn_popup'];
+													if ( class_exists( '\Elementor\Plugin' ) ) {
+														$link_url = \Elementor\Plugin::$instance->frontend->create_action_hash( 'popup:open', [ 'id' => $popup_id ] );
+													} else {
+														$link_url = '#';
+													}
+													$this->add_render_attribute( 'interactive_circle_link_' . $index, 'href', $link_url );
+												} elseif ( ! empty( $item['eael_interactive_circle_btn_link']['url'] ) ) {
+													// Regular URL link
 													$this->add_link_attributes( 'interactive_circle_link_' . $index, $item['eael_interactive_circle_btn_link'] );
 												}
 											?>
@@ -1164,13 +1212,25 @@ class Interactive_Circle extends Widget_Base {
                                         </div>
 
 										<!-- Start URL support -->
-										<?php 
+										<?php
 										if( 'yes' == $item['eael_interactive_circle_btn_link_on'] ) {
-											if ( ! empty( $item['eael_interactive_circle_btn_link']['url'] ) ) {
-												$this->add_link_attributes( 'interactive_circle_link_' . $index, $item['eael_interactive_circle_btn_link'] );
+											$link_type = isset( $item['eael_interactive_circle_btn_link_type'] ) ? $item['eael_interactive_circle_btn_link_type'] : 'url';
+
+											if ( 'popup' === $link_type && ! empty( $item['eael_interactive_circle_btn_popup'] ) ) {
+												// Popup link
+												$popup_id = $item['eael_interactive_circle_btn_popup'];
+												if ( class_exists( '\Elementor\Plugin' ) ) {
+													$link_url = \Elementor\Plugin::$instance->frontend->create_action_hash( 'popup:open', [ 'id' => $popup_id ] );
+												} else {
+													$link_url = '#';
+												}
+												$this->add_render_attribute( 'interactive_circle_link_preset2_' . $index, 'href', $link_url );
+											} elseif ( ! empty( $item['eael_interactive_circle_btn_link']['url'] ) ) {
+												// Regular URL link
+												$this->add_link_attributes( 'interactive_circle_link_preset2_' . $index, $item['eael_interactive_circle_btn_link'] );
 											}
 											?>
-											<a <?php $this->print_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
+											<a <?php $this->print_render_attribute_string( 'interactive_circle_link_preset2_' . $index ); ?>>
 												<div class="eael-circle-btn-icon">
 													<div class="eael-circle-btn-icon-inner">
 														<?php
