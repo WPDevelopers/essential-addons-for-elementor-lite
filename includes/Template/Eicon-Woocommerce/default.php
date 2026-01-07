@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $product = wc_get_product( get_the_ID() );
 if ( ! $product ) {
-	error_log( '$product not found in ' . __FILE__ );
 	return;
 }
 

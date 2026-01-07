@@ -59,7 +59,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
 
                 echo '</ul>';
             }
-            wp_reset_query();
+            wp_reset_postdata();
 
             // Nested category query
             if ($settings['nested_subcategory'] === 'true') {
@@ -69,7 +69,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                     'order' => $settings['order'],
                     'orderby' => $settings['orderby'],
                 );
-
+                //phpcs:ignore WordPress.WP.DeprecatedParameters.Get_termsParam2Found
                 $sub_categories = get_terms('doc_category', $args);
 
                 if ($sub_categories) {
@@ -118,7 +118,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                                 echo '<a href="' . esc_url( get_the_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></li>';
                             endwhile;
                         endif;
-                        wp_reset_query();
+                        wp_reset_postdata();
                         echo '</ul>';
                     }
                 }

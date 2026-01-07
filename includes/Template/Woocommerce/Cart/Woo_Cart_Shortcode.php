@@ -25,6 +25,7 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 			wc_maybe_define_constant( 'WOOCOMMERCE_CART', true );
 
 			$atts        = shortcode_atts( [], $atts, 'woocommerce_cart' );
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			$nonce_value = wc_get_var( $_REQUEST['woocommerce-shipping-calculator-nonce'],
 				wc_get_var( $_REQUEST['_wpnonce'], '' ) ); // @codingStandardsIgnoreLine.
 
