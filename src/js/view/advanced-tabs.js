@@ -2,6 +2,46 @@ eael.hooks.addAction("init", "ea", () => {
 	if (eael.elementStatusCheck('eaelAdvancedTabs')) {
 		return false;
 	}
+	function eaelFixSwiperHover($container) {
+		if (!$container || !$container.length) {
+			return;
+		}
+
+		const $swipers = $container.find('.swiper, .swiper-container');
+
+		if (!$swipers.length) {
+			return;
+		}
+
+		$swipers.each(function () {
+			const swiperInstance = this.swiper;
+
+			if (!swiperInstance) {
+				return;
+			}
+
+			// Full recalculation (what drag eventually causes)
+			swiperInstance.update();
+			swiperInstance.updateSize();
+			swiperInstance.updateSlides();
+			swiperInstance.updateProgress();
+			swiperInstance.updateSlidesClasses();
+
+			// 🔴 Critical: remove interaction blockers
+			swiperInstance.slides.forEach(slide => {
+				slide.removeAttribute('inert');
+				slide.removeAttribute('aria-hidden');
+				slide.style.pointerEvents = 'auto';
+			});
+
+			// Force active slide re-activation
+			swiperInstance.slideTo(swiperInstance.activeIndex, 0, false);
+
+			// Safety repaint (fixes Safari + Chromium edge cases)
+			swiperInstance.el.offsetHeight;
+		});
+	}
+
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-adv-tabs.default",
 		function ($scope, $) {
@@ -158,7 +198,9 @@ eael.hooks.addAction("init", "ea", () => {
 				// Trigger hook with a small delay to ensure content is fully rendered
 				setTimeout(function() {
 					window.eaelPreventResizeOnClick = true; // disabling resize event to prevent browser unresponsiveness behavior
-					eael.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
+					const $activeTabContent = $(tabsContent).eq(currentTabIndex);
+					eaelFixSwiperHover($activeTabContent);
+					eael.hooks.doAction("ea-advanced-tabs-triggered", $activeTabContent);
 				}, 50);
 				
 				$(tabsContent).each(function (index) {
