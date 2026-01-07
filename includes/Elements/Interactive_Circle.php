@@ -14,6 +14,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Icons_Manager;
 use \Elementor\Repeater;
+use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -230,7 +231,13 @@ class Interactive_Circle extends Widget_Base {
             [
                 'label'           => esc_html__('Link', 'essential-addons-for-elementor-lite'),
                 'type'            => Controls_Manager::URL,
-                'dynamic'         => ['active' => false],
+                'dynamic'         => [
+					'active' => true,
+					'categories' => [
+						TagsModule::POST_META_CATEGORY,
+						TagsModule::URL_CATEGORY,
+					],
+				],
                 'label_block'     => true,
                 'default'         => [
                     'url'		  => '#',
