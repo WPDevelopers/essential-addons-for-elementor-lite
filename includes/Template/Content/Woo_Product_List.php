@@ -9,12 +9,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 trait Woo_Product_List {
 	public static function render_template_( $args, $settings ) {
-		$query = new \WP_Query( $args );
 		ob_start();
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				$product = wc_get_product( get_the_ID() );
+
+		// Check if args are already WC_Product_Query compatible or need conversion
+		if ( isset( $args['post_type'] ) && $args['post_type'] === 'product' ) {
+			// Convert WP_Query args to WC_Product_Query args for backward compatibility
+			$wc_args = self::convert_wp_query_args_to_wc_product_query( $args, $settings );
+		} else {
+			// Assume args are already WC_Product_Query compatible
+			$wc_args = $args;
+		}
+
+		// Use WC_Product_Query for better performance
+		$wc_query = new \WC_Product_Query( $wc_args );
+		$products = $wc_query->get_products();
+
+		// Handle WC_Product_Query results
+		if ( is_object( $products ) && isset( $products->products ) ) {
+			$product_objects = $products->products;
+		} else {
+			$product_objects = $products;
+		}
+
+		if ( ! empty( $product_objects ) ) {
+			foreach ( $product_objects as $product_obj ) {
+				global $post;
+				$post = get_post( $product_obj->get_id() );
+				setup_postdata( $post );
+				$product = $product_obj;
 				if ( $settings['eael_woo_product_list_style_preset'] == 'eael-product-simple' || $settings['eael_woo_product_list_style_preset'] == 'eael-product-reveal' ) { ?>
                     <li class="product">
                         <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
@@ -99,14 +121,87 @@ trait Woo_Product_List {
 					wc_get_template_part( 'content', 'product' );
 				}
 			}
+			wp_reset_postdata();
 		} else {
-			printf( '<p class="no-posts-found">%</p>', esc_html__( 'No products found!', 'essential-addons-for-elementor-lite' ) );
-
+			printf( '<p class="no-posts-found">%s</p>', esc_html__( 'No products found!', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		wp_reset_postdata();
-		?>
-		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * Convert WP_Query arguments to WC_Product_Query arguments
+	 * @param array $wp_args Original WP_Query arguments
+	 * @param array $settings Widget settings
+	 * @return array WC_Product_Query compatible arguments
+	 */
+	private static function convert_wp_query_args_to_wc_product_query($wp_args, $settings = []) {
+		$wc_args = [
+			'paginate' => true,
+			'return' => 'objects',
+			'visibility' => 'visible'
+		];
+
+		// Parameter mapping
+		$arg_mapping = [
+			'posts_per_page' => 'limit',
+			'post_status' => 'status',
+			'post__in' => 'include',
+			'post__not_in' => 'exclude',
+			'author__in' => 'author',
+			'paged' => 'page',
+		];
+
+		foreach ($arg_mapping as $wp_key => $wc_key) {
+			if (isset($wp_args[$wp_key])) {
+				$wc_args[$wc_key] = $wp_args[$wp_key];
+			}
+		}
+
+		// Handle other parameters
+		$direct_copy = ['orderby', 'order', 'offset'];
+		foreach ($direct_copy as $key) {
+			if (isset($wp_args[$key])) {
+				$wc_args[$key] = $wp_args[$key];
+			}
+		}
+
+		// Handle search
+		if (isset($wp_args['s'])) {
+			$wc_args['search'] = $wp_args['s'];
+		}
+
+		// Preserve complex queries
+		if (isset($wp_args['meta_query'])) {
+			$wc_args['meta_query'] = $wp_args['meta_query'];
+		}
+		if (isset($wp_args['tax_query'])) {
+			$wc_args['tax_query'] = $wp_args['tax_query'];
+		}
+
+		// Handle meta_key/meta_value
+		if (isset($wp_args['meta_key'])) {
+			if (!isset($wc_args['meta_query'])) {
+				$wc_args['meta_query'] = ['relation' => 'AND'];
+			}
+			$meta_query = ['key' => $wp_args['meta_key']];
+			if (isset($wp_args['meta_value'])) {
+				$meta_query['value'] = $wp_args['meta_value'];
+			}
+			if (isset($wp_args['meta_compare'])) {
+				$meta_query['compare'] = $wp_args['meta_compare'];
+			}
+			$wc_args['meta_query'][] = $meta_query;
+		}
+
+		// Apply settings-based parameters
+		if (!empty($settings['eael_product_list_products_status'])) {
+			$wc_args['status'] = array_intersect(
+				(array) $settings['eael_product_list_products_status'],
+				['publish', 'draft', 'pending', 'future']
+			);
+		}
+
+		return $wc_args;
 	}
 }
