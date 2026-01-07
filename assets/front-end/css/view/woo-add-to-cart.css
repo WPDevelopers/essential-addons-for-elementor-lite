@@ -113,6 +113,9 @@
       -ms-flex: 1;
           flex: 1;
 }
+.eael-grouped-product-edit .grouped-product-variation .single-product-variation.product-edit-odd {
+  background-color: #ebebeb;
+}
 .eael-grouped-product-edit .grouped-product-variation .single-product-variation {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -126,9 +129,6 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 5px 15px;
-}
-.eael-grouped-product-edit .grouped-product-variation .single-product-variation.product-edit-odd {
-  background-color: #ebebeb;
 }
 .eael-grouped-product-edit .grouped-product-variation .single-product-variation .product-variation-title {
   color: #434347;
