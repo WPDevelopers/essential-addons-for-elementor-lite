@@ -185,11 +185,25 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         width: 130px;
 
         &.eael-lr-btn-block {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         &.eael-lr-btn-inline {
             display: inline-block;
+        }
+
+        .eael-lr-btn-icon {
+            font-size: 1rem;
+            color: #fff;
+        }
+        svg.eael-lr-btn-icon {
+            height: 1rem;
+            width: 1rem;
+            line-height: 1rem;
+            fill: #fff;
         }
     }
 
