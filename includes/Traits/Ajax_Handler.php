@@ -828,9 +828,21 @@ trait Ajax_Handler {
 			wp_send_json_error();
 		}
 
-		// global $post, $product;
+		global $post, $product;
 		$product = wc_get_product( $product_id );
 		$post    = get_post( $product_id );
+
+		// SECURITY FIX: Verify product exists and is visible
+		if ( ! $product || ! $product->is_visible() ) {
+			wp_send_json_error( __( 'Product not found or not accessible', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		// Also verify post status for non-admin users
+		$post = get_post( $product_id );
+		if ( ! current_user_can( 'edit_post', $product_id ) && $post->post_status !== 'publish' ) {
+			wp_send_json_error( __( 'Product not found or not accessible', 'essential-addons-for-elementor-lite' ) );
+		}
+
 		setup_postdata( $post );
 
 		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
