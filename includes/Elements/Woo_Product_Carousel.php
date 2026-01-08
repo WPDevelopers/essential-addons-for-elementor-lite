@@ -3108,6 +3108,7 @@ class Woo_Product_Carousel extends Widget_Base {
         $settings[ 'eael_widget_id' ] = $widget_id;
 
         $args = $this->product_query_builder();
+        $is_marquee = isset( $settings['enable_marquee'] ) && 'yes' === $settings['enable_marquee'];
         if ( Plugin::$instance->documents->get_current() ) {
             $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
         }
@@ -3115,7 +3116,7 @@ class Woo_Product_Carousel extends Widget_Base {
         // render dom
         $this->add_render_attribute( 'container', [
             'class'          => [
-                'swiper-container-wrap',
+                $is_marquee ? '' : 'swiper-container-wrap',
                 'eael-woo-product-carousel-container',
                 $settings[ 'eael_dynamic_template_layout' ],
             ],
@@ -3133,33 +3134,42 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'class'           => [
                     'woocommerce',
-	                'swiper',
-	                'swiper-8',
                     'eael-woo-product-carousel',
-                    'swiper-container-' . esc_attr( $this->get_id() ),
                     'eael-product-appender-' . esc_attr( $this->get_id() ),
                     $settings['eael_product_button_appearance'] ? 'eael-'.esc_attr( $settings['eael_product_button_appearance'] ).'-buttons' : ''
+                ],
+            ]
+        );
+
+        if( $is_marquee ){
+            $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'eael-marquee-carousel' );
+        } else {
+            $this->add_render_attribute( 'eael-woo-product-carousel-wrap', [
+                'class' => [
+                    'swiper',
+	                'swiper-8',
+                    'swiper-container-' . esc_attr( $this->get_id() ),
                 ],
                 'data-pagination' => '.swiper-pagination-' . esc_attr( $this->get_id() ),
                 'data-arrow-next' => '.swiper-button-next-' . esc_attr( $this->get_id() ),
                 'data-arrow-prev' => '.swiper-button-prev-' . esc_attr( $this->get_id() ),
-            ]
-        );
+            ] );
+        }
 
         if ( $settings[ 'eael_dynamic_template_layout' ] ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-type',
                 $settings[ 'eael_dynamic_template_layout' ] );
         }
 
-        if ( $settings[ 'eael_woo_product_carousel_image_stretch' ] ) {
+        if ( !$is_marquee && $settings[ 'eael_woo_product_carousel_image_stretch' ] ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'swiper-image-stretch' );
         }
 
-	    if ($settings['carousel_effect']) {
+	    if ( $settings['carousel_effect'] ) {
 		    $this->add_render_attribute('eael-woo-product-carousel-wrap', 'data-effect', $settings['carousel_effect']);
 	    }
 
-	    if($settings['carousel_effect'] == 'slide'){
+	    if( $settings['carousel_effect'] == 'slide' ){
 		    if ( !empty( $settings[ 'items' ] ) ) {
 			    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items', $settings[ 'items' ] );
 		    }
@@ -3208,11 +3218,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 $settings[ 'slider_speed' ][ 'size' ] );
         }
 
-        if( 'yes' === $settings['enable_marquee'] ){
-			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', '0.001' );
-			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'eael-marquee-carousel' );
-		}
-		else if ( $settings[ 'autoplay' ] == 'yes' && !empty( $settings[ 'autoplay_speed' ][ 'size' ] ) ) {
+        if ( $settings[ 'autoplay' ] == 'yes' && !empty( $settings[ 'autoplay_speed' ][ 'size' ] ) ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', $settings[ 'autoplay_speed' ][ 'size' ] );
         } else {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', '0' );
@@ -3261,6 +3267,12 @@ class Woo_Product_Carousel extends Widget_Base {
             }
         }
 
+        $this->add_render_attribute( 'wrapper', 'class', 'products' );
+        if( $is_marquee ){
+            $this->add_render_attribute( 'wrapper', 'class', 'eael-marquee-wrapper' );
+        } else {
+            $this->add_render_attribute( 'wrapper', 'class', 'swiper-wrapper' );
+        }
         ?>
 
         <div <?php $this->print_render_attribute_string( 'container' ); ?> >
@@ -3273,7 +3285,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	                if ( $query->have_posts() ):
                         echo '<div '; $this->print_render_attribute_string( 'eael-woo-product-carousel-wrap' ); echo '>';
 		                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-                            echo '<div class="swiper-wrapper products">';
+                            echo '<div '; $this->print_render_attribute_string( 'wrapper' ); echo '>';
                             while ( $query->have_posts() ) {
                                 $query->the_post();
                                 include( $template );
@@ -3292,7 +3304,7 @@ class Woo_Product_Carousel extends Widget_Base {
              * Render Slider Dots!
              */
 
-            if( 'yes' !== $settings['enable_marquee'] ){
+            if( !$is_marquee ){
                 if ( file_exists( $template ) && $settings['image_dots'] === 'yes') {
                     $this->render_image_dots($query);
                 } else {
@@ -3306,7 +3318,7 @@ class Woo_Product_Carousel extends Widget_Base {
              * Render Slider Navigations!
              */
 
-            if( 'yes' !== $settings['enable_marquee'] ){ 
+            if( !$is_marquee ){ 
                 $this->render_arrows();
             }
             ?>

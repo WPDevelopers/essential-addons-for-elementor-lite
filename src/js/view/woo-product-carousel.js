@@ -1,7 +1,6 @@
 eael.hooks.addAction("init", "ea", () => {
-
 	const wooProductCarousel = function ($scope, $) {
-		eael.hooks.doAction("quickViewAddMarkup",$scope,$);
+		eael.hooks.doAction("quickViewAddMarkup", $scope, $);
 		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0),
 			$type = $wooProductCarousel.data("type"),
 			$autoplay =
@@ -83,6 +82,17 @@ eael.hooks.addAction("init", "ea", () => {
 					? $wooProductCarousel.data("stretch")
 					: 10;
 
+					
+		if ( $wooProductCarousel.hasClass('eael-marquee-carousel') ) {
+			$wooProductCarousel.find(".eael-marquee-wrapper").eaelmarque({
+				speed: 1,
+				direction: 'left',
+				pauseOnHover: true,
+				draggable: true
+			});
+			return;
+		}
+
 		const $carouselOptions = {
 			direction: "horizontal",
 			speed: $speed,
@@ -106,7 +116,7 @@ eael.hooks.addAction("init", "ea", () => {
 			slidesPerView: $items,
 			on: {
 				init: function () {
-					setTimeout(function (){
+					setTimeout(function () {
 						window.dispatchEvent(new Event('resize'));
 					}, 200);
 				},
@@ -154,15 +164,15 @@ eael.hooks.addAction("init", "ea", () => {
 							_margin = $wooProductCarousel.data('margin-' + device);
 						$margin = _margin !== undefined ? _margin : (device === 'desktop' ? $margin : 10);
 						$itemsPerView = _items !== undefined && _items !== "" ? _items : (device === 'desktop' ? $items : 3);
-						$slidePerGroup = _slideItems !== undefined && _slideItems !== "" ? _slideItems : (device === 'desktop' ? $slideItems : 1 );
-						
+						$slidePerGroup = _slideItems !== undefined && _slideItems !== "" ? _slideItems : (device === 'desktop' ? $slideItems : 1);
 
-						if( device === 'mobile' && _items === undefined ){
+
+						if (device === 'mobile' && _items === undefined) {
 							$itemsPerView = 1;
-						} else if ( device === 'tablet' && _items === undefined ){
+						} else if (device === 'tablet' && _items === undefined) {
 							$itemsPerView = 2;
-						} 
-						
+						}
+
 						el_breakpoints[bp_index] = {
 							breakpoint: breakpoint.value,
 							slidesPerView: $itemsPerView,
@@ -172,7 +182,7 @@ eael.hooks.addAction("init", "ea", () => {
 						bp_index++;
 					}
 				});
-	
+
 				$.each(el_breakpoints, function (index, breakpoint) {
 					let _index = parseInt(index);
 					if (typeof el_breakpoints[_index + 1] !== 'undefined') {
@@ -183,7 +193,7 @@ eael.hooks.addAction("init", "ea", () => {
 						}
 					}
 				});
-				
+
 				$carouselOptions.breakpoints = breakpoints;
 			}
 		}
@@ -231,8 +241,8 @@ eael.hooks.addAction("init", "ea", () => {
 
 			//gallery pagination
 			const $paginationGallerySelector = $scope
-			.find('.eael-woo-product-carousel-container .eael-woo-product-carousel-gallary-pagination')
-			.eq(0)
+				.find('.eael-woo-product-carousel-container .eael-woo-product-carousel-gallary-pagination')
+				.eq(0)
 			if ($paginationGallerySelector.length > 0) {
 				swiperLoader($paginationGallerySelector, {
 					spaceBetween: 20,
@@ -250,7 +260,7 @@ eael.hooks.addAction("init", "ea", () => {
 			}
 		});
 
-		eael.hooks.doAction("quickViewPopupViewInit",$scope,$);
+		eael.hooks.doAction("quickViewPopupViewInit", $scope, $);
 
 		if (isEditMode) {
 			$(".eael-product-image-wrap .woocommerce-product-gallery").css(
@@ -260,7 +270,7 @@ eael.hooks.addAction("init", "ea", () => {
 		}
 
 		const eael_popup = $(document).find(".eael-woocommerce-popup-view");
-		if(eael_popup.length<1){
+		if (eael_popup.length < 1) {
 			eael_add_popup();
 		}
 
@@ -307,7 +317,7 @@ eael.hooks.addAction("init", "ea", () => {
 		});
 	}
 
-	if ( eael.elementStatusCheck('eaelWooProductSliderLoad') && window.forceFullyRun === undefined ) {
+	if (eael.elementStatusCheck('eaelWooProductSliderLoad') && window.forceFullyRun === undefined) {
 		return;
 	}
 
