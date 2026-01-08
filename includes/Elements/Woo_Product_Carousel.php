@@ -580,14 +580,34 @@ class Woo_Product_Carousel extends Widget_Base {
 		    'items',
 		    [
 			    'label'   => __( 'Visible Product', 'essential-addons-for-elementor-lite' ),
-			    'type'    => Controls_Manager::SELECT,
+                'label_block' => true,
+			    'type'    => Controls_Manager::CHOOSE,
+                'toggle'  => false,
 			    'options' => [
-				    '1' => __( '1', 'essential-addons-for-elementor-lite' ),
-				    '2' => __( '2', 'essential-addons-for-elementor-lite' ),
-				    '3' => __( '3', 'essential-addons-for-elementor-lite' ),
-				    '4' => __( '4', 'essential-addons-for-elementor-lite' ),
-				    '5' => __( '5', 'essential-addons-for-elementor-lite' ),
-				    '6' => __( '6', 'essential-addons-for-elementor-lite' ),
+                    '1' => [
+					    'title' => __( '1', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '1',
+				    ],
+				    '2' => [
+					    'title' => __( '2', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '2',
+				    ],
+				    '3' => [
+					    'title' => __( '3', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '3',
+				    ],
+				    '4' => [
+					    'title' => __( '4', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '4',
+				    ],
+				    '5' => [
+					    'title' => __( '5', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '5',
+				    ],
+				    '6' => [
+					    'title' => __( '6', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '6',
+				    ],
 			    ],
 			    'default' => 3,
 			    'tablet_default' => 2,
@@ -723,21 +743,19 @@ class Woo_Product_Carousel extends Widget_Base {
         );
 
         $this->add_control(
-			'enable_marquee',
-			[
-				'label'        => __( 'Enable Marquee', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-				'default'      => 'no',
-				'return_value' => 'yes',
-				'condition'    => [
-					'autoplay' => 'yes',
-					'carousel_effect' => [ 'slide', 'coverflow' ],
-				],
-			]
-		);
-        
+            'autoplay_notice',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __( 'Autoplay is not available on Marquee mode.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'elementor-control-field-description',
+                'condition' => [
+                    'autoplay' => 'yes',
+                    'carousel_effect' => 'slide',
+                    'enable_marquee' => 'yes',
+                ],
+            ]
+        );
+     
         $this->add_control(
             'autoplay_speed',
             [
@@ -754,10 +772,25 @@ class Woo_Product_Carousel extends Widget_Base {
                 'size_units' => '',
 				'condition'  => [
 					'autoplay' => 'yes',
-					'enable_marquee!' => 'yes',
 				],
             ]
         );
+
+        $this->add_control(
+			'enable_marquee',
+			[
+				'label'        => __( 'Enable Marquee', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'default'      => 'no',
+				'return_value' => 'yes',
+				'condition'    => [
+					'autoplay' => 'yes',
+					'carousel_effect' => 'slide',
+				],
+			]
+		);
         
         $this->add_control(
             'pause_on_hover',
@@ -770,7 +803,6 @@ class Woo_Product_Carousel extends Widget_Base {
                 'return_value' => 'yes',
                 'condition'    => [
                     'autoplay' => 'yes',
-					'enable_marquee!' => 'yes',
                 ],
             ]
         );
@@ -784,6 +816,19 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
                 'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
+            ]
+        );
+        $this->add_control(
+            'infinite_loop_notice',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __( 'Infinite Loop is not available on Marquee mode.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'elementor-control-field-description',
+                'condition' => [
+                    'infinite_loop' => 'yes',
+                    'carousel_effect' => 'slide',
+                    'enable_marquee' => 'yes',
+                ],
             ]
         );
         
@@ -3108,7 +3153,7 @@ class Woo_Product_Carousel extends Widget_Base {
         $settings[ 'eael_widget_id' ] = $widget_id;
 
         $args = $this->product_query_builder();
-        $is_marquee = isset( $settings['enable_marquee'] ) && 'yes' === $settings['enable_marquee'];
+        $is_marquee = 'slide' === $settings['carousel_effect'] && isset( $settings['enable_marquee'] ) && 'yes' === $settings['enable_marquee'];
         if ( Plugin::$instance->documents->get_current() ) {
             $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
         }
@@ -3241,8 +3286,10 @@ class Woo_Product_Carousel extends Widget_Base {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-dots', '1' );
         }
 
-	    if ( $settings['direction'] == 'right' ) {
+	    if ( $settings['direction'] == 'right' && !$is_marquee ) {
 		    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'dir', 'rtl' );
+	    } else if ( $settings['direction'] == 'right' && $is_marquee ) {
+		    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-direction', 'right' );
 	    }
 	    $settings['eael_product_carousel_title_tag'] = HelperClass::eael_validate_html_tag($settings['eael_product_carousel_title_tag']);
 	    $settings['eael_product_carousel_sale_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_sale_text']);
