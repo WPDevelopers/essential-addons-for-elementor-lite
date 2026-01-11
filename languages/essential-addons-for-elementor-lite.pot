@@ -7867,7 +7867,7 @@ msgstr ""
 msgid "Timeline Vertical Line Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:796, ../includes/Elements/Product_Grid.php:3805, ../includes/Elements/Woo_Product_Carousel.php:3304, ../includes/Elements/Woo_Product_List.php:4204
+#: ../includes/Elements/Post_Timeline.php:796, ../includes/Elements/Product_Grid.php:3805, ../includes/Elements/Woo_Product_Carousel.php:3289, ../includes/Elements/Woo_Product_List.php:4204
 msgid "No layout found!"
 msgstr ""
 
