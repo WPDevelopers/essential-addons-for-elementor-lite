@@ -3269,28 +3269,13 @@ class Woo_Product_Carousel extends Widget_Base {
 
                 $template = $this->get_template( $settings[ 'eael_dynamic_template_layout' ] );
                 if ( file_exists( $template ) ):
-	                $wc_query = new \WC_Product_Query( $args );
-	                $products = $wc_query->get_products();
-
-	                // Handle paginated results
-	                if ( is_object( $products ) && isset( $products->products ) ) {
-		                $product_objects = $products->products;
-		                $total = $products->total;
-		                $max_pages = $products->max_num_pages;
-	                } else {
-		                $product_objects = $products;
-		                $total = count( $products );
-		                $max_pages = 1;
-	                }
-
-	                if ( ! empty( $product_objects ) ):
+	                $query = new \WP_Query( $args );
+	                if ( $query->have_posts() ):
                         echo '<div '; $this->print_render_attribute_string( 'eael-woo-product-carousel-wrap' ); echo '>';
 		                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
                             echo '<div class="swiper-wrapper products">';
-                            foreach ( $product_objects as $product ) {
-	                            global $post;
-	                            $post = get_post( $product->get_id() );
-	                            setup_postdata( $post );
+                            while ( $query->have_posts() ) {
+                                $query->the_post();
                                 include( $template );
                             }
                             wp_reset_postdata();
@@ -3309,7 +3294,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
             if( 'yes' !== $settings['enable_marquee'] ){
                 if ( file_exists( $template ) && $settings['image_dots'] === 'yes') {
-                    $this->render_image_dots($product_objects);
+                    $this->render_image_dots( $query );
                 } else {
                     $this->render_dots();
                 }
@@ -3340,7 +3325,7 @@ class Woo_Product_Carousel extends Widget_Base {
         <?php }
     }
 
-	protected function render_image_dots($product_objects)
+	protected function render_image_dots( $query )
 	{
 		$settings = $this->get_settings_for_display();
 
@@ -3371,13 +3356,10 @@ class Woo_Product_Carousel extends Widget_Base {
             <div <?php $this->print_render_attribute_string('eael_gallery_pagination_wrapper'); ?>>
 
             <?php
-			if ( ! empty( $product_objects ) ) {
+			if ( $query->have_posts() ) {
 				echo '<div class="swiper-wrapper">';
-				foreach ( $product_objects as $product ) {
-					global $post;
-					$post = get_post( $product->get_id() );
-					setup_postdata( $post );
-
+				while ( $query->have_posts() ) {
+					$query->the_post();
 					$image_arr = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ),'full');
 					if(empty($image_arr)){
 						$image_arr[0] = wc_placeholder_img_src( 'full' );
@@ -3432,7 +3414,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	 * Build proper query to fetch product data from WC_Product_Query
 	 * @return array
 	 */
-    public function product_query_builder(){
+    public function product_wc_query_builder(){
 	    $settings                     = $this->get_settings_for_display();
 	    $widget_id                    = esc_attr( $this->get_id() );
 	    $settings[ 'eael_widget_id' ] = $widget_id;
@@ -3520,25 +3502,170 @@ class Woo_Product_Carousel extends Widget_Base {
 	    // Handle taxonomy filters
 	    $taxonomies = get_taxonomies( [ 'object_type' => [ 'product' ] ], 'objects' );
 	    foreach ( $taxonomies as $object ) {
+            echo_pre( $object );
+            $setting_key = $object->name . '_ids';
+
+            if ( empty( $settings[ $setting_key ] ) ) {
+                continue;
+            }
+
+            $terms = get_terms( [
+                'taxonomy'   => $object->name,
+                'include'    => $settings[ $setting_key ],
+                'hide_empty' => false,
+            ] );
+
+            if ( empty( $terms ) || is_wp_error( $terms ) ) {
+                continue;
+            }
+
+            $slugs = wp_list_pluck( $terms, 'slug' );
+
+            // Categories
+            if ( $object->name === 'product_cat' ) {
+                $args['category'] = $slugs;
+                continue;
+            }
+
+            // Tags
+            if ( $object->name === 'product_tag' ) {
+                $args['tag'] = $slugs;
+                continue;
+            }
+
+            // Attributes
+            if ( strpos( $object->name, 'pa_' ) === 0 ) {
+                $args['attribute']      = substr( $object->name, 3 );
+                $args['attribute_term'] = $slugs;
+                continue;
+            }
+        }
+
+	    return $args;
+    }
+
+    /**
+	 * Build proper query to fetch product data from wp_query
+	 * @return array
+	 */
+    public function product_query_builder(){
+	    $settings                     = $this->get_settings_for_display();
+	    $widget_id                    = esc_attr( $this->get_id() );
+	    $settings[ 'eael_widget_id' ] = $widget_id;
+	    $order_by                     = $settings[ 'orderby' ];
+	    $filter                        = $settings[ 'eael_product_carousel_product_filter' ];
+	    $args                         = [
+		    'post_type'      => 'product',
+		    'post_status'    => !empty( $settings['eael_product_carousel_products_status'] ) ? $settings['eael_product_carousel_products_status'] : ['publish'],
+		    'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
+		    'order'          => $settings[ 'order' ],
+		    'offset'         => $settings[ 'product_offset' ],
+            'post__not_in'   => array( get_the_ID() ),
+		    'tax_query'      => [
+			    'relation' => 'AND',
+			    [
+				    'taxonomy' => 'product_visibility',
+				    'field'     => 'name',
+				    'terms'    => [ 'exclude-from-search', 'exclude-from-catalog' ],
+				    'operator' => 'NOT IN',
+			    ],
+		    ],
+	    ];
+
+	    if ( $order_by == '_price' || $order_by == '_sku' ) {
+		    $args[ 'orderby' ]  = 'meta_value meta_value_num';
+		    $args[ 'meta_key' ] = $order_by;
+	    } else {
+		    $args[ 'orderby' ] = $order_by;
+	    }
+
+	    if ( $filter == 'featured-products' ) {
+		    $count                         = isset( $args[ 'tax_query' ] ) ? count( $args[ 'tax_query' ] ) : 0;
+		    $args[ 'tax_query' ][ $count ] =
+			    [
+				    'taxonomy' => 'product_visibility',
+				    'field'     => 'name',
+				    'terms'    => 'featured',
+			    ];
+	    }
+
+	    if ( $filter == 'best-selling-products' ) {
+		    $args[ 'meta_key' ] = 'total_sales';
+		    $args[ 'orderby' ]  = 'meta_value_num';
+		    $args[ 'order' ]    = 'DESC';
+	    }
+
+	    if ( $filter == 'top-products' ) {
+		    $args[ 'meta_key' ] = '_wc_average_rating';
+		    $args[ 'orderby' ]  = 'meta_value_num';
+		    $args[ 'order' ]    = 'DESC';
+	    }
+
+        if ( $filter == 'related-products' ) {
+		    $current_product_id = get_the_ID();
+            $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
+            $product_tags       = wp_get_post_terms( $current_product_id, 'product_tag', array('fields' => 'names' ) );
+            $args['tax_query'] = array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'term_id',
+                    'terms'    => $product_categories,
+                    'operator' => 'IN',
+                ),
+                array(
+                    'taxonomy' => 'product_tag',
+                    'field'    => 'name',
+                    'terms'    => $product_tags,
+                    'operator' => 'IN',
+                ),
+            );
+	    }
+
+	    // Initialize meta_query if not already set
+	    if ( ! isset( $args['meta_query'] ) ) {
+		    $args['meta_query'] = [ 'relation' => 'AND' ];
+	    }
+
+	    // Handle out of stock products exclusion
+	    if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' || 'yes' !== $settings['eael_product_carousel_show_stockout'] ) {
+		    $args['meta_query'][] = [
+			    'key'   => '_stock_status',
+			    'value' => 'instock'
+		    ];
+	    }
+
+	    // Handle on sale products exclusion
+	    if ( 'yes' !== $settings['eael_product_carousel_show_onsale'] ) {
+		    $on_sale_ids = wc_get_product_ids_on_sale();
+		    if ( ! empty( $on_sale_ids ) ) {
+			    $args['post__not_in'] = isset( $args['post__not_in'] ) ?
+				    array_merge( $args['post__not_in'], $on_sale_ids ) :
+				    $on_sale_ids;
+		    }
+	    }
+
+	    if ( $filter == 'sale-products' ) {
+		    $args['post__in'] = array_merge( [ 0 ], wc_get_product_ids_on_sale() );
+	    }
+
+        if ( $filter == 'manual' ) {
+            $args['post__in'] = ! empty( $settings['eael_product_carousel_products_in'] ) ? $settings['eael_product_carousel_products_in'] : [ 0 ];
+        }
+
+
+	    $taxonomies      = get_taxonomies( [ 'object_type' => [ 'product' ] ], 'objects' );
+	    $tax_query_count = isset( $args[ 'meta_query' ] ) ? count( $args[ 'meta_query' ] ) : 0;
+	    foreach ( $taxonomies as $object ) {
 		    $setting_key = $object->name . '_ids';
 		    if ( !empty( $settings[ $setting_key ] ) ) {
-			    // Use native WC_Product_Query parameters for common taxonomies
-			    if ( $object->name === 'product_cat' ) {
-				    $args[ 'category' ] = $settings[ $setting_key ];
-			    } elseif ( $object->name === 'product_tag' ) {
-				    $args[ 'tag' ] = $settings[ $setting_key ];
-			    } else {
-				    // Use tax_query for other taxonomies
-				    if ( !isset( $args[ 'tax_query' ] ) ) {
-					    $args[ 'tax_query' ] = [ 'relation' => 'AND' ];
-				    }
-				    $args[ 'tax_query' ][] = [
-					    'taxonomy' => $object->name,
-					    'field'     => 'term_id',
-					    'terms'    => $settings[ $setting_key ],
-				    ];
-			    }
+			    $args[ 'tax_query' ][ $tax_query_count ] = [
+				    'taxonomy' => $object->name,
+				    'field'     => 'term_id',
+				    'terms'    => $settings[ $setting_key ],
+			    ];
 		    }
+		    $tax_query_count++;
 	    }
 
 	    return $args;
