@@ -3492,6 +3492,7 @@ class Event_Calendar extends Widget_Base
 
     protected function render() {
 	    $settings = $this->get_settings_for_display();
+        $settings = apply_filters( 'eael/event-calendar/settings', $settings );
 
 	    if ( in_array( $settings['eael_event_calendar_type'], [ 'eventon' ] ) ) {
 		    $data = apply_filters( 'eael/event-calendar/integration', [], $settings );
@@ -3502,6 +3503,8 @@ class Event_Calendar extends Widget_Base
 	    } else {
 		    $data = $this->get_manual_calendar_events( $settings );
 	    }
+
+        $data = apply_filters( 'eael/event-calendar/events', $data, $settings );
 
 	    $local          = $settings['eael_event_calendar_language'];
 	    $default_view   = $settings['eael_event_calendar_default_view'];
