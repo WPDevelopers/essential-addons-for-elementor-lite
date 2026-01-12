@@ -3739,6 +3739,7 @@ class Product_Grid extends Widget_Base
                         $products = null;
                         $found_posts = $query->found_posts;
                     } else {
+                        $args = apply_filters( 'eael_wc_product_query_args', $args, $this->get_name() );
                         $wc_query = new \WC_Product_Query( $args );
                         $products = $wc_query->get_products();
 
