@@ -1174,7 +1174,7 @@ class Advanced_Data_Table extends Widget_Base
                 'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
-                'desktop_default' => [
+                'default' => [
                     'unit' => 'px',
                     'top' => '5',
                     'right' => '15',
