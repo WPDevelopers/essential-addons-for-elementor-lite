@@ -87,6 +87,8 @@ eael.hooks.addAction("init", "ea", () => {
                 setTimeout(function () {
                     $this.addClass('triggered');
                     eael.hooks.doAction("widgets.reinit", $this.parent());
+					
+					window.eaelPreventResizeOnClick = true; // disabling resize event to prevent browser unresponsiveness behavior
                     eael.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
                 }, 50);
 			});
