@@ -177,8 +177,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @return void
 		 */
 		private function redirect_to(){
-			$request_uri  = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
-			$query_string = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY );
+			$request_uri  =  !empty( $_SERVER['REQUEST_URI'] ) ?  wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ) : '';
+			$query_string =  !empty( $_SERVER['REQUEST_URI'] ) ? wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_QUERY ) : '';
 			parse_str( $query_string, $current_url );
 
 			$unset_array = array( 'dismiss', 'plugin', '_wpnonce', 'later', 'plugin_action', 'marketing_optin' );
@@ -363,7 +363,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 			}
 			$body['marketing_method'] = $this->marketing;
-			$body['server'] = isset( $_SERVER['SERVER_SOFTWARE'] ) ? $_SERVER['SERVER_SOFTWARE'] : '';
+			$body['server'] = isset( $_SERVER['SERVER_SOFTWARE'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : '';
 
 			/**
 			 * Collect all active and inactive plugins
@@ -457,7 +457,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			 */
 			if( $site_id == false && $this->item_id !== false ) {
 				if( isset( $_SERVER['REMOTE_ADDR'] ) && ! empty( $_SERVER['REMOTE_ADDR'] && $_SERVER['REMOTE_ADDR'] != '127.0.0.1' ) ) {
-					$country_request = wp_remote_get( 'http://ip-api.com/json/'. $_SERVER['REMOTE_ADDR'] .'?fields=country');
+					$country_request = wp_remote_get( 'http://ip-api.com/json/'. sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) .'?fields=country');
 					if( ! is_wp_error( $country_request ) && $country_request['response']['code'] == 200 ) {
 						$ip_data = json_decode( $country_request["body"] );
 						$body['country'] = isset( $ip_data->country ) ? $ip_data->country : 'NOT SET';
@@ -661,16 +661,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @return void
 		 */
 		public function clicked(){
-			if ( isset( $_GET['_wpnonce'] ) && isset( $_GET['plugin'] ) && trim( $_GET['plugin'] ) === $this->plugin_name && isset( $_GET['plugin_action'] ) ) {
-				if ( ! wp_verify_nonce( $_GET['_wpnonce'], '_wpnonce_optin_' . $this->plugin_name ) ) {
+			if ( isset( $_GET['_wpnonce'] ) && isset( $_GET['plugin'] ) && sanitize_text_field( wp_unslash( $_GET['plugin'] ) ) === $this->plugin_name && isset( $_GET['plugin_action'] ) ) {
+				if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), '_wpnonce_optin_' . $this->plugin_name ) ) {
 					return;
 				}
 
 				if( isset( $_GET['tab'] ) && $_GET['tab'] === 'plugin-information' ) {
                     return;
                 }
-				$plugin = sanitize_text_field( $_GET['plugin'] );
-				$action = sanitize_text_field( $_GET['plugin_action'] );
+				$plugin = sanitize_text_field( wp_unslash( $_GET['plugin'] ) );
+				$action = sanitize_text_field( wp_unslash( $_GET['plugin_action'] ) );
 				if( $action == 'yes' ) {
 					$this->schedule_tracking();
 					$this->set_is_tracking_allowed( true, $plugin );
@@ -711,11 +711,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		public function deactivate_reasons_form_submit() {
 			check_ajax_referer( 'wpins_deactivation_nonce', 'security' );
 			if( isset( $_POST['values'] ) ) {
-				$values = sanitize_text_field( $_POST['values'] );
+				$values = sanitize_text_field( wp_unslash( $_POST['values'] ) );
 				update_option( 'wpins_deactivation_reason_' . $this->plugin_name, $values );
 			}
 			if( isset( $_POST['details'] ) ) {
-				$details = sanitize_text_field( $_POST['details'] );
+				$details = sanitize_text_field( wp_unslash( $_POST['details'] ) );
 				update_option( 'wpins_deactivation_details_' . $this->plugin_name, $details );
 			}
 			echo 'success';
@@ -765,6 +765,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'type' => 'textarea'
 				]
 			);
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			return apply_filters( 'wpins_form_text_' . $this->plugin_name, $form );
 		}
 		/**
@@ -1046,7 +1047,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$(".wpinsights-goodbye-form-wrapper-<?php echo esc_js( $class_plugin_name ); ?> #wpinsights-goodbye-form").fadeIn();
 						$(".wpinsights-goodbye-form-wrapper-<?php echo esc_js( $class_plugin_name ); ?> #wpinsights-goodbye-form").html( '<?php
 						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo $html; ?>' + '<div class="wpinsights-goodbye-form-footer"><div class="wpinsights-goodbye-form-buttons"><a id="wpinsights-submit-form-<?php echo esc_js( $class_plugin_name ); ?>" class="wpinsights-submit-btn" href="#"><?php esc_html_e( 'Submit and Deactivate', 'disable-comments' ); ?></a>&nbsp;<a class="wpsp-put-deactivate-btn" href="'+url+'"><?php esc_html_e( 'Just Deactivate', 'disable-comments' ); ?></a></div></div>');
+						echo $html; ?>' + '<div class="wpinsights-goodbye-form-footer"><div class="wpinsights-goodbye-form-buttons"><a id="wpinsights-submit-form-<?php echo esc_js( $class_plugin_name ); ?>" class="wpinsights-submit-btn" href="#"><?php esc_html_e( 'Submit and Deactivate', 'essential-addons-for-elementor-lite' ); ?></a>&nbsp;<a class="wpsp-put-deactivate-btn" href="'+url+'"><?php esc_html_e( 'Just Deactivate', 'essential-addons-for-elementor-lite' ); ?></a></div></div>');
 						$('#wpinsights-submit-form-<?php echo esc_js( $class_plugin_name ); ?>').on('click', function(e){
 							// As soon as we click, the body of the form should disappear
 							$("#wpinsights-goodbye-form-<?php echo esc_js( $class_plugin_name ); ?> .wpinsights-goodbye-form-body").fadeOut();
@@ -1110,27 +1111,102 @@ if ( ! defined( 'ABSPATH' ) ) {
          * @since 3.7.0
 		 */
 		public static function get_used_elements_count() {
+			$used_elements = [];
+
+			// First, try to get data from the new Elementor options table (prioritized)
+			$global_usage = get_option( 'elementor_controls_usage', [] );
+			if ( ! empty( $global_usage ) && is_array( $global_usage ) ) {
+				$used_elements = self::extract_elements_from_global_usage( $global_usage );
+			}
+
+			// If no data from options table or for backward compatibility, check post meta
+			if ( empty( $used_elements ) ) {
+				$used_elements = self::extract_elements_from_post_meta();
+			}
+
+			return $used_elements;
+		}
+
+		/**
+		 * Extract elements from new global usage data structure
+		 *
+		 * @param array $global_usage Global usage data from elementor_controls_usage option
+		 * @return array Used elements count
+		 *
+		 * @since 6.3.3
+		 */
+		private static function extract_elements_from_global_usage( $global_usage ) {
+			$used_elements       = [];
+			$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
+
+			// Iterate through document types (wp-post, wp-page, etc.)
+			foreach ( $global_usage as $doc_type => $elements ) {
+				if ( ! is_array( $elements ) ) {
+					continue;
+				}
+
+				// Iterate through element types within each document type
+				foreach ( $elements as $element_type => $element_data ) {
+					if ( ! is_array( $element_data ) || ! isset( $element_data['count'] ) ) {
+						continue;
+					}
+
+					$element_name = $element_type;
+					$count        = (int) $element_data['count'];
+
+					// Handle widget name replacements
+					if ( isset( $replace_widget_name[ $element_name ] ) ) {
+						$element_name = $replace_widget_name[ $element_name ];
+					}
+
+					// Only count Essential Addons elements
+					if ( strpos( $element_name, 'eael-' ) === 0 ) {
+						$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] )
+								? $used_elements[ $element_name ] + $count
+								: $count;
+					}
+
+					// Check for extension usage in controls data
+					if ( isset( $element_data['controls'] ) && is_array( $element_data['controls'] ) ) {
+						self::extract_extension_usage_from_controls( $element_data['controls'], $used_elements );
+					}
+				}
+			}
+
+			return $used_elements;
+		}
+
+		/**
+		 * Extract elements from legacy post meta approach (backward compatibility)
+		 *
+		 * @return array Used elements count
+		 *
+		 * @since 6.3.3
+		 */
+		private static function extract_elements_from_post_meta() {
 			global $wpdb;
 
-			$sql           = "SELECT `post_id`
+			$sql = "SELECT `post_id`
             FROM  $wpdb->postmeta
             WHERE `meta_key` = '_eael_widget_elements'";
-			
-        	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$post_ids      = $wpdb->get_col( $sql );
 			$used_elements = [];
 
 			foreach ( $post_ids as $post_id ) {
 				$ea_elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
 				$el_controls = get_post_meta( (int) $post_id, '_elementor_controls_usage', true );
+
 				if ( empty( $ea_elements ) || empty( $el_controls ) || ! is_array( $ea_elements ) || ! is_array( $el_controls ) ) {
 					continue;
 				}
 
+				$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
+
 				foreach ( $ea_elements as $element ) {
-					$element_name        = "eael-{$element}";
-					$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
-					$count               = 0;
+					$element_name = "eael-{$element}";
+					$count        = 0;
 
 					if ( isset( $replace_widget_name[ $element_name ] ) ) {
 						$element_name = $replace_widget_name[ $element_name ];
@@ -1140,34 +1216,59 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$count = $el_controls[ $element_name ]['count'];
 					}
 
-					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $count : $count;
+					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] )
+							? $used_elements[ $element_name ] + $count
+							: $count;
 				}
 
-				array_walk_recursive( $el_controls, function ( $value, $key ) use ( &$used_elements ) {
-					$element_name = '';
-
-					if ( $key === 'eael_particle_switch' ) {
-						$element_name = 'eael-section-particles';
-					} elseif ( $key === 'eael_parallax_switcher' ) {
-						$element_name = 'eael-section-parallax';
-					} elseif ( $key === 'eael_tooltip_section_enable' ) {
-						$element_name = 'eael-tooltip-section';
-					} elseif ( $key === 'eael_ext_content_protection' ) {
-						$element_name = 'eael-content-protection';
-					} elseif ( $key === 'eael_cl_enable' ) {
-						$element_name = 'eael-conditional-display';
-					} elseif ( $key === 'eael_ext_advanced_dynamic_tags' ) {
-						$element_name = 'eael-advanced-dynamic-tags';
-					} elseif ( $key === 'eael_custom_cursor_switch' ) {
-						$element_name = 'eael-custom-cursor';
-					} 
-
-					if ( ! empty( $element_name ) ) {
-						$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $value : $value;
-					}
-				} );
+				// Extract extension usage from controls
+				self::extract_extension_usage_from_controls( $el_controls, $used_elements );
 			}
 
 			return $used_elements;
+		}
+
+		/**
+		 * Extract extension usage from controls data
+		 *
+		 * @param array $controls Controls data
+		 * @param array &$used_elements Reference to used elements array
+		 *
+		 * @since 6.3.3
+		 */
+		private static function extract_extension_usage_from_controls( $controls, &$used_elements ) {
+			array_walk_recursive( $controls, function ( $value, $key ) use ( &$used_elements ) {
+				$element_name = '';
+
+				if ( $key === 'eael_particle_switch' ) {
+					$element_name = 'eael-section-particles';
+				} elseif ( $key === 'eael_parallax_switcher' ) {
+					$element_name = 'eael-section-parallax';
+				} elseif ( $key === 'eael_tooltip_section_enable' ) {
+					$element_name = 'eael-tooltip-section';
+				} elseif ( $key === 'eael_ext_content_protection' ) {
+					$element_name = 'eael-content-protection';
+				} elseif ( $key === 'eael_cl_enable' ) {
+					$element_name = 'eael-conditional-display';
+				} elseif ( $key === 'eael_ext_advanced_dynamic_tags' ) {
+					$element_name = 'eael-advanced-dynamic-tags';
+				} elseif ( $key === 'eael_enable_custom_cursor' ) {
+					$element_name = 'eael-custom-cursor';
+				} elseif ( $key === 'eael_liquid_glass_effect_switch' ) {
+					$element_name = 'eael-liquid-glass-effect';
+				} elseif ( $key === 'eael_wrapper_link_switch' ) {
+					$element_name = 'eael-wrapper-link';
+				} elseif ( $key === 'eael_smooth_animation_section' ) {
+					$element_name = 'eael-smooth-animation';
+				} elseif ( $key === 'eael_hover_effect_switch' ) {
+					$element_name = 'eael-special-hover-effect';
+				}
+
+				if ( ! empty( $element_name ) ) {
+					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] )
+							? $used_elements[ $element_name ] + $value
+							: $value;
+				}
+			} );
 		}
 	}

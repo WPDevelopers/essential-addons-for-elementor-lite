@@ -110,7 +110,7 @@ trait Enqueue
         $src = EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo-icon.svg';
         $css = "
 		.elementor-add-new-section .elementor-add-templately-promo-button{
-            background-color: #5d4fff;
+            background-color: #5d4fff !important;
             background-image: url({$src});
             background-repeat: no-repeat;
             background-position: center center;
