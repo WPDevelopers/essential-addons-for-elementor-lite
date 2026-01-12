@@ -6,6 +6,7 @@
 
       .eael-cat-tab {
          margin: 0 0 50px 0;
+         display: block;
 
          li:first-child a {
             margin-left: 0;
@@ -429,6 +430,7 @@
          letter-spacing: normal;
          font-weight: 700;
          text-transform: capitalize;
+         font-size: 1em;
       }
 
       ins {
@@ -617,7 +619,6 @@
       }
 
       .eael-product-title * {
-         font-size: 20px;
          line-height: 1.2em;
          color: #252525;
          font-weight: 500;
