@@ -9,9 +9,6 @@ eael.hooks.addAction("init", "ea", () => {
 				$wooProductCarousel.data("speed") !== undefined
 					? $wooProductCarousel.data("speed")
 					: 400,
-			$direction = $wooProductCarousel.data("direction") !== undefined
-					? $wooProductCarousel.data("direction")
-					: "left",
 			$dragable = $wooProductCarousel.data("grab-cursor") !== undefined
 					? $wooProductCarousel.data("grab-cursor")
 					: false;	
@@ -23,7 +20,7 @@ eael.hooks.addAction("init", "ea", () => {
 
 			$wooProductCarousel.find(".eael-marquee-wrapper").eaelmarque({
 				speed: $speed / 1000,
-				direction: $direction,
+				direction: 'left',
 				pauseOnHover: $pause_on_hover,
 				draggable: $dragable
 			});

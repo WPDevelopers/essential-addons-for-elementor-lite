@@ -622,15 +622,35 @@ class Woo_Product_Carousel extends Widget_Base {
 		    'slide_items',
 		    [
 			    'label'   => __( 'Slide to Scroll', 'essential-addons-for-elementor-lite' ),
-			    'type'    => Controls_Manager::SELECT,
+			    'type'    => Controls_Manager::CHOOSE,
+                'label_block' => true,
 			    'options' => [
-				    '1' => __( '1', 'essential-addons-for-elementor-lite' ),
-				    '2' => __( '2', 'essential-addons-for-elementor-lite' ),
-				    '3' => __( '3', 'essential-addons-for-elementor-lite' ),
-				    '4' => __( '4', 'essential-addons-for-elementor-lite' ),
-				    '5' => __( '5', 'essential-addons-for-elementor-lite' ),
-				    '6' => __( '6', 'essential-addons-for-elementor-lite' ),
+				    '1' => [
+					    'title' => __( '1', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '1',
+				    ],
+				    '2' => [
+					    'title' => __( '2', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '2',
+				    ],
+				    '3' => [
+					    'title' => __( '3', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '3',
+				    ],
+				    '4' => [
+					    'title' => __( '4', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '4',
+				    ],
+				    '5' => [
+					    'title' => __( '5', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '5',
+				    ],
+				    '6' => [
+					    'title' => __( '6', 'essential-addons-for-elementor-lite' ),
+					    'text'  => '6',
+				    ],
 			    ],
+                'toggle'  => false,
 			    'default' => 1,
                 'condition' => [
                     'carousel_effect' => 'slide',
@@ -727,6 +747,10 @@ class Woo_Product_Carousel extends Widget_Base {
                     ],
                 ],
                 'size_units'  => '',
+                'condition' => [
+                    'enable_marquee!' => 'yes',
+                    'autoplay' => 'yes',
+                ]
             ]
         );
         
@@ -739,20 +763,6 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
                 'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
-            ]
-        );
-
-        $this->add_control(
-            'autoplay_notice',
-            [
-                'type' => Controls_Manager::RAW_HTML,
-                'raw' => __( 'Autoplay is not available on Marquee mode.', 'essential-addons-for-elementor-lite' ),
-                'content_classes' => 'elementor-control-field-description',
-                'condition' => [
-                    'autoplay' => 'yes',
-                    'carousel_effect' => 'slide',
-                    'enable_marquee' => 'yes',
-                ],
             ]
         );
      
@@ -935,6 +945,9 @@ class Woo_Product_Carousel extends Widget_Base {
 				    'right' => __( 'Right', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'separator' => 'before',
+                'condition' => [
+                    'enable_marquee!' => 'yes',
+                ],
 		    ]
 	    );
 
