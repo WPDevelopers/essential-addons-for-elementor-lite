@@ -130,6 +130,16 @@
     .eael-google-review-rating {
         text-align: center;
         margin-top: 20px;
+
+        &.eael-rating-position-top {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        &.eael-rating-position-bottom {
+            margin-top: 20px;
+            margin-bottom: 0;
+        }
     }
 
     // Swiper Dots
