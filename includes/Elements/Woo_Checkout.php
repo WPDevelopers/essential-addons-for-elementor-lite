@@ -89,7 +89,7 @@ class Woo_Checkout extends Widget_Base {
 	}
 
 	protected function register_controls() {
-		if ( is_admin() && ! empty( $_GET['elementor_updater'] ) ) {
+		if ( is_admin() && ! empty( $_GET['elementor_updater'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 
@@ -494,8 +494,11 @@ class Woo_Checkout extends Widget_Base {
                 'ea_section_woo_login_show_warning_text',
                 [
                     'type'            => Controls_Manager::RAW_HTML,
-                    'raw'             => __('Allow customers to log into an existing account during checkout is disabled on your site. Please enable it to use the login form. You can enable it from WooCommerce >> Settings >> Accounts & Privacy >> <a target="_blank" href="'.esc_url(admin_url( 'admin.php?page=wc-settings&tab=account')).'">Guest checkout.</a>',
-                        'essential-addons-for-elementor-lite'),
+					'raw' => sprintf(
+						/* translators: %s: Link to the Guest Checkout settings page. */
+						__('Allow customers to log into an existing account during checkout is disabled on your site. Please enable it to use the login form. You can enable it from WooCommerce >> Settings >> Accounts & Privacy >> %s', 'essential-addons-for-elementor-lite'),
+						'<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=account' ) ) . '">Guest checkout</a>'
+					),
                     'content_classes' => 'eael-warning',
                     'condition' => [
                         'ea_section_woo_login_show' => 'yes',
@@ -3306,16 +3309,20 @@ class Woo_Checkout extends Widget_Base {
 				<?php
 
 				// Backwards compatibility with old pay and thanks link arguments.
-				if ( isset( $_GET['order'] ) && isset( $_GET['key'] ) ) { // WPCS: input var ok, CSRF ok.
+				//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				if ( isset( $_GET['order'] ) && isset( $_GET['key'] ) ) { // WPCS: input var ok.
 					wc_deprecated_argument( __CLASS__ . '->' . __FUNCTION__, '2.1', '"order" is no longer used to pass an order ID. Use the order-pay or order-received endpoint instead.' );
 
 					// Get the order to work out what we are showing.
+					//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					$order_id = absint( $_GET['order'] ); // WPCS: input var ok.
 					$order    = wc_get_order( $order_id );
 
 					if ( $order && $order->has_status( 'pending' ) ) {
-						$wp->query_vars['order-pay'] = absint( $_GET['order'] ); // WPCS: input var ok.
+						//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						$wp->query_vars['order-pay'] = absint( $_GET['order'] );// WPCS: input var ok.
 					} else {
+						//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						$wp->query_vars['order-received'] = absint( $_GET['order'] ); // WPCS: input var ok.
 					}
 				}
