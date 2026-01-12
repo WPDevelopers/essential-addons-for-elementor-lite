@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Image_Size;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
@@ -256,6 +257,16 @@ class Filterable_Gallery extends Widget_Base
                 'ai' => [
 					'active' => false,
 				],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Image_Size::get_type(),
+            [
+                'name' => 'eael_fg_image_resolution',
+                'exclude' => ['custom'],
+                'default' => 'medium',
+                'label_block' => true,
             ]
         );
 
@@ -3829,9 +3840,17 @@ class Filterable_Gallery extends Widget_Base
         $caption_style  = $settings['eael_fg_caption_style'] == 'card' ? 'caption-style-card' : 'caption-style-hoverer';
         $image_alt = get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true );
         $alt_text = $image_alt ? $image_alt : $item['title'];
-
-        $html = '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( $alt_text ) . '" class="gallery-item-thumbnail">';
-
+        
+        if( isset( $item['image_id'] ) && "" !== $item['image_id'] ){
+            $settings[ 'eael_image_size_customize' ] = [
+                'id' => $item['image_id'],
+            ];
+            $settings['eael_image_size_customize_size'] = $settings['eael_fg_image_resolution_size'];
+            $html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'eael_image_size_customize' );
+        } else {
+            $html = '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( $alt_text ) . '" class="gallery-item-thumbnail">';
+        }
+        
         if ( empty($settings['eael_section_fg_full_image_clickable']) && $item['video_gallery_switch'] !== 'true' ) {
             if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
                 $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . esc_attr( $settings['eael_fg_grid_hover_style'] ) . '">
@@ -4054,7 +4073,16 @@ class Filterable_Gallery extends Widget_Base
             
             $alt_text = get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true );
             $alt_text = ! empty( $alt_text ) ? $alt_text : $item['title'];
-            $html .= '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( $alt_text ) . '" class="gallery-item-thumbnail">';
+            
+            if( isset( $item['image_id'] ) && "" !== $item['image_id'] ){
+                $settings[ 'eael_image_size_customize' ] = [
+                    'id' => $item['image_id'],
+                ];
+                $settings['eael_image_size_customize_size'] = $settings['eael_fg_image_resolution_size'];
+                $html .= Group_Control_Image_Size::get_attachment_image_html( $settings, 'eael_image_size_customize' );
+            } else {
+                $html .= '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( $alt_text ) . '" class="gallery-item-thumbnail">';
+            }
             
             $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer">';
             $html .= '<div class="fg-caption-head">';
@@ -4270,7 +4298,7 @@ class Filterable_Gallery extends Widget_Base
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-
+        
         if (!empty($settings['eael_fg_filter_duration'])) {
             $filter_duration = $settings['eael_fg_filter_duration'];
         } else {
