@@ -6320,7 +6320,7 @@ class Login_Register extends Widget_Base {
                                            placeholder="<?php if ( $display_label && $u_ph ) {
 										       echo esc_attr( $u_ph );
 									       } ?>"
-                                           required>
+                                           required autocomplete="username email">
 									<?php
 									if ( $show_icon ) {
 										echo '<i class="fas fa-user"></i>';
@@ -6338,7 +6338,7 @@ class Login_Register extends Widget_Base {
                                                placeholder="<?php if ( $display_label && $p_ph ) {
 											       echo esc_attr( $p_ph );
 										       } ?>"
-                                               required>
+                                               required autocomplete="current-password">
 										<?php if ( $show_pv_icon ) { ?>
                                             <button type="button"
                                                     id="wp-hide-pw"
