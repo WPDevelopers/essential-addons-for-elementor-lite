@@ -304,7 +304,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
-                'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
+                'default' => gmdate('Y-m-d H:i', current_time('timestamp', 0)),
                 'picker_options' => [
                     'enableTime' => true,
                     'altInput' => true,
@@ -748,11 +748,12 @@ class Adv_Tabs extends Widget_Base
             'eael_adv_tabs_tab_color',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HIDDEN,
+                'type' => Controls_Manager::COLOR,
                 'default' => '#f1f1f1',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
                 ],
+                'description' => __('This controller is depricated. use Background Type controller.', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
                 ],
@@ -840,12 +841,12 @@ class Adv_Tabs extends Widget_Base
         $this->add_control(
             'eael_adv_tabs_tab_color_hover',
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HIDDEN,
-                'default' => '#333',
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover:not(.active)' => 'background-color: {{VALUE}};',
                 ],
+                'description' => __('This controller is depricated. use Background Type controller.', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
                 ],
@@ -857,7 +858,15 @@ class Adv_Tabs extends Widget_Base
             [
                 'name'      => 'eael_adv_tabs_tab_bgtype_hover',
                 'types'     => ['classic', 'gradient'],
-                'selector'  => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item: hover',
+                'fields_options' => [
+                    'background' => [
+                        'default' => 'classic',
+                    ],
+                    'color' => [
+                        'default' => '#333',
+                    ],
+                ],
+                'selector'  => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item:hover:not(.active)',
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
                 ],
@@ -928,12 +937,13 @@ class Adv_Tabs extends Widget_Base
         $this->add_control(
             'eael_adv_tabs_tab_color_active',
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HIDDEN,
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
                 'default' => '#444',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul .active' => 'background-color: {{VALUE}};',
                 ],
+                'description' => __('This controller is depricated. use Background Type controller.', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
                 ],

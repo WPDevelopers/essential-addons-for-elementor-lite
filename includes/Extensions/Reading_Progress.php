@@ -58,7 +58,11 @@ class Reading_Progress
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('You can modify the Global Reading Progress Bar by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['reading_progress']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
+                    'raw' => sprintf(
+                        /* translators: %s: Edit link to the Reading Progress Bar settings. */
+                        __('You can modify the Global Reading Progress Bar by <strong><a href="%s">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
+                        esc_url( get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['reading_progress']['post_id'] . '&action=elementor' )
+                    ), 
                     'content_classes' => 'eael-warning',
                     'separator' => 'before',
                     'condition' => [

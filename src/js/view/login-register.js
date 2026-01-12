@@ -289,4 +289,24 @@ eael.hooks.addAction("init", "ea", () => {
         }
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-login-register.default", EALoginRegister);
+
+    function renderTurnstile($scope) {
+        if ($scope.find('.eael-login-registration-wrapper').length) {
+            let $turnstiles = $scope.find('.cf-turnstile');
+            
+            if ($turnstiles.length && typeof turnstile !== 'undefined') {
+                $turnstiles.each(function() {
+                    turnstile.render(this);
+                });
+            }
+        }
+    }
+    jQuery(document).on('elementor/popup/show', function (event, id, instance) {
+        renderTurnstile(instance.$element);
+    });
+    eael.hooks.addAction("ea-lightbox-triggered", "ea", function($selector) {
+        let $scope = jQuery($selector);
+        $scope.find('.cf-turnstile').html('');
+        renderTurnstile($scope);
+    });
 });
