@@ -213,7 +213,7 @@ class Helper
 		    }
 
 		    if ( ! empty( $args['tax_query'] ) ) {
-			    $args['tax_query']['relation'] = 'AND';
+			    $args['tax_query']['relation'] = isset( $settings['tax_query_relation'] ) ? $settings['tax_query_relation'] : 'AND';
 		    }
 	    }
 
@@ -246,7 +246,9 @@ class Helper
 		    }
 	    }
 
-	    if ( ! empty( $settings['authors'] ) ) {
+        if ( ! empty( $settings['posts_by_current_user'] ) && 'yes' === $settings['posts_by_current_user'] ) {
+		    $args['author__in'] = [ get_current_user_id() ];
+	    } elseif ( ! empty( $settings['authors'] ) ) {
 		    $args['author__in'] = $settings['authors'];
 	    }
 
@@ -743,7 +745,10 @@ class Helper
      */
     public static function get_doc_post_count($term_count = 0, $term_id = 0)
     {
-        $tax_terms = get_terms('doc_category', ['child_of' => $term_id]);
+        $tax_terms = get_terms([
+            'taxonomy' => 'doc_category',
+            'child_of' => $term_id
+        ]);
 
         foreach ($tax_terms as $tax_term) {
             $term_count += $tax_term->count;
@@ -890,7 +895,7 @@ class Helper
 
         $query = "select post_title,ID  from $wpdb->posts where post_status = 'publish' $where $limit";
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $results = $wpdb->get_results($query);
         if (!empty($results)) {
             foreach ($results as $row) {
@@ -1407,7 +1412,8 @@ class Helper
             'title' => [ 'title' => [] ],
             'path'     => [
                 'd'    => [], 
-                'fill' => [] 
+                'fill' => [],
+                'transform' => [] 
             ],
 			'i'      => [
 				'class' => [],
@@ -1711,7 +1717,8 @@ class Helper
 		}
 
 		if ( Plugin::$instance->editor->is_edit_mode() ) {
-			$active_doc = $_GET['active-document'] ?? 0;
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$active_doc = !empty( $_GET['active-document'] ) ? sanitize_text_field( wp_unslash( $_GET['active-document'] ) ) : 0;
 			$mode       = $active_doc === $template_id ? 'save' : 'edit';
 			?>
 			<div class='eael-onpage-edit-template-wrapper'>

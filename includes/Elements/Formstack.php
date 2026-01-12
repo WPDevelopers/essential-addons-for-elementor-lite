@@ -184,9 +184,15 @@ class Formstack extends Widget_Base {
                 'label_block' => true,
                 'options'     => $this->get_forms(),
                 'default'     => '',
-                'description' => __('To sync latest created forms make sure you have <a href="'.add_query_arg(['clear_formstack_cache' => 'true'],
-                        admin_url('admin.php?page=Formstack')).'">Refresh Formstack form cache</a>',
-                    'essential-addons-for-elementor-lite'),
+                'description' => sprintf(
+                    /* translators: %s: Link to refresh Formstack form cache. */
+                    esc_html__( 'To sync the latest created forms, make sure you have %s.', 'essential-addons-for-elementor-lite' ),
+                    sprintf(
+                        '<a href="%s">%s</a>',
+                        esc_url( add_query_arg( [ 'clear_formstack_cache' => 'true' ], admin_url( 'admin.php?page=Formstack' ) ) ),
+                        esc_html__( 'refreshed the Formstack form cache', 'essential-addons-for-elementor-lite' )
+                    )
+                ),
             ]
         );
 
