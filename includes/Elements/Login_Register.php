@@ -6190,7 +6190,12 @@ class Login_Register extends Widget_Base {
                             <form class="eael-login-form eael-lr-form"
                                   id="eael-login-form"
                                   method="post">
-								<?php do_action( 'eael/login-register/after-login-form-open', $this ); ?>
+								<?php
+								if ( 'top' === $this->ds['position_for_login_form'] ) {
+									do_action( 'eael/login-register/render_social_login_for_login_form', $this );
+								}
+								do_action( 'eael/login-register/after-login-form-open', $this );
+								?>
                                 <div class="eael-lr-form-group eael-user-login">
 									<?php if ( $display_label && $u_label ) {
 										echo '<label for="eael-user-login" class="eael-field-label">' . wp_kses( $u_label, HelperCLass::eael_allowed_tags() ) . '</label>';
@@ -6293,7 +6298,12 @@ class Login_Register extends Widget_Base {
 									<?php } ?>
 
                                 </div>
-								<?php do_action( 'eael/login-register/after-login-footer', $this );
+								<?php
+								do_action( 'eael/login-register/after-login-footer', $this );
+								$position = $this->ds['position_for_login_form'];
+								if ( !$position || 'bottom' === $this->ds['position_for_login_form'] ) {
+									do_action( 'eael/login-register/render_social_login_for_login_form', $this );
+								}
 								?>
                                 <div class="eael-form-validation-container">
 									<?php $this->print_login_validation_errors(); ?>
@@ -6469,7 +6479,12 @@ class Login_Register extends Widget_Base {
 								enctype="multipart/form-data"
 							  <?php endif; ?>
 							  >
-							<?php do_action( 'eael/login-register/after-register-form-open', $this ); ?>
+							<?php
+							do_action( 'eael/login-register/after-register-form-open', $this );
+							if ( 'top' === $this->ds['position_for_register_form'] ) {
+								do_action( 'eael/login-register/render_social_login_for_register_form', $this );
+							}
+							?>
 							<?php // Print all dynamic fields
 							foreach ( $this->ds['register_fields'] as $f_index => $field ) :
 								$field_type = $field['field_type'];
@@ -6658,13 +6673,18 @@ class Login_Register extends Widget_Base {
 								<?php } ?>
                             </div>
 
-							<?php do_action( 'eael/login-register/after-register-footer', $this ); ?>
+							<?php
+							do_action( 'eael/login-register/after-register-footer', $this );
+							$position = $this->ds['position_for_register_form'];
+							if ( ! $position || 'bottom' === $position ) {
+								do_action( 'eael/login-register/render_social_login_for_register_form', $this );
+							}
+							?>
 
                             <div class="eael-form-validation-container">
 								<?php $this->print_validation_message(); ?>
                             </div>
 							<?php
-
 							do_action( 'eael/login-register/before-register-form-close', $this );
 							?>
                         </form>
