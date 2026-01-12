@@ -303,6 +303,7 @@ class Login_Register extends Widget_Base {
 		$this->init_content_terms_controls();
 		// Error Messages
 		$this->init_content_validation_messages_controls();
+		do_action( 'eael/login-register/animated-character-controls', $this );
 		do_action( 'eael/login-register/after-content-controls', $this );
 
 		if(!$this->pro_enabled){
@@ -327,6 +328,7 @@ class Login_Register extends Widget_Base {
 		$this->init_style_login_recaptcha_controls();
 		$this->init_style_register_recaptcha_controls();
 		$this->init_style_lostpassword_recaptcha_controls();
+		do_action( 'eael/login-register/animated-character-style-controls', $this );
 		do_action( 'eael/login-register/after-style-controls', $this );
 
 	}
