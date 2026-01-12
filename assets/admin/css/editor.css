@@ -373,6 +373,27 @@
    border-inline-end: none;
 }
 
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose.col-3{
+   grid-template-columns: repeat(3, 1fr);
+}
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose.col-4{
+   grid-template-columns: repeat(4, 1fr);
+}
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose.col-5{
+   grid-template-columns: repeat(5, 1fr);
+}
+
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose .elementor-choices-label{
+   border: 1px solid #5F6367;
+}
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose .elementor-choices-label.fullwidth{
+   grid-column: 1 / -1;
+   height: 47px;
+}
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose .elementor-choices-label.fullwidth img{
+   max-height: 100%;
+   width: auto;
+}
 /* Liquid Glass Effect */
 .elementor-control-eael_wd_liquid_glass_effect,
 .elementor-control-eael_wd_liquid_glass_effect_rear,
@@ -383,9 +404,10 @@
             position: relative;
             border-block-end: none;
             border-radius: 0;
-            &:last-child {
-               grid-column: 1 / -1;
-               justify-content: center !important;
+            &:nth-child(5n) {
+               border-block-end: var(--e-a-border-bold) !important;
+            }
+            &:nth-child(6n) {
                border-block-end: var(--e-a-border-bold) !important;
             }
             .e-control-motion-effects-promotion__lock-wrapper {
@@ -454,7 +476,10 @@
 .elementor-control-skin_six_eael_advanced_menu_item_padding
    .elementor-control-content,
 .elementor-control-skin_seven_eael_advanced_menu_item_padding
-   .elementor-control-content {
+   .elementor-control-content,
+.elementor-control.elementor-control-eael_adv_tabs_tab_color,
+.elementor-control.elementor-control-eael_adv_tabs_tab_color_hover,
+.elementor-control.elementor-control-eael_adv_tabs_tab_color_active {
    background: var(--e-a-bg-warning);
    border-inline-start: 3px solid var(--e-a-color-warning);
    border-end-end-radius: 3px;

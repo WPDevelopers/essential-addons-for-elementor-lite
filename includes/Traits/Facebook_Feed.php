@@ -18,15 +18,15 @@ trait Facebook_Feed {
 	 */
 	public function facebook_feed_render_items( $settings = [] ) {
 		// check if ajax request
-		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) {
+		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$ajax = wp_doing_ajax();
 			// check ajax referer
 			check_ajax_referer( 'essential-addons-elementor', 'security' );
 
 			// init vars
-			$page = isset( $_POST['page'] ) ? intval( $_REQUEST['page'], 10 ) : 0;
+			$page = !empty( $_POST['page'] ) ? intval( wp_unslash( $_POST['page'] ), 10 ) : 0;
 			if ( ! empty( $_POST['post_id'] ) ) {
-				$post_id = intval( $_POST['post_id'], 10 );
+				$post_id = intval( wp_unslash( $_POST['post_id'] ), 10 );
 			} else {
 				$err_msg = __( 'Post ID is missing', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
@@ -36,7 +36,7 @@ trait Facebook_Feed {
 				return false;
 			}
 			if ( ! empty( $_POST['widget_id'] ) ) {
-				$widget_id = sanitize_text_field( $_POST['widget_id'] );
+				$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 			} else {
 				$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
@@ -63,7 +63,13 @@ trait Facebook_Feed {
 			return;
 		}
 
-		$key           = 'eael_facebook_feed_' . md5( str_rot13( str_replace( '.', '', $source . $page_id . $token ) ) . $settings['eael_facebook_feed_cache_limit'] );
+		$key = sprintf(
+			'eael_facebook_feed_%s',
+			md5(
+				sanitize_text_field( wp_unslash( $source . $page_id . $token ) ) .
+				absint( $settings['eael_facebook_feed_cache_limit'] )
+			)
+		);
 		$facebook_data = get_transient( $key );
 
 		if ( $facebook_data == false ) {
@@ -143,7 +149,7 @@ trait Facebook_Feed {
 
 						$html .= '<div class="eael-facebook-feed-url-preview">';
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_host'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_host'] && !empty($item['attachments']['data'][0]['unshimmed_url']) ) {
-							$html .= '<p class="eael-facebook-feed-url-host">' . parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
+							$html .= '<p class="eael-facebook-feed-url-host">' . wp_parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
 						}
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_title'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_title'] ) {
 							$html .= '<h2 class="eael-facebook-feed-url-title">' . esc_html( $item['attachments']['data'][0]['title'] ) . '</h2>';
@@ -220,7 +226,7 @@ trait Facebook_Feed {
 			}
 		}
 
-		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) {
+		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$data = [
 				'num_pages' => ceil( count( $facebook_data ) / $settings['eael_facebook_feed_image_count']['size'] ),
 				'html'      => $html,
@@ -272,14 +278,71 @@ trait Facebook_Feed {
 	 * @return string
 	 */
 	public function get_url( $page_id = '', $token = '', $source = 'posts', $display_comment = '' ) {
-        $comment_count = $display_comment == 'yes' ? ',comments.summary(total_count)' : '';
-        $post_limit =  apply_filters( 'eael_facebook_feed_post_limit', 99 );
-		$post_url = "https://graph.facebook.com/v18.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url,media}{$comment_count},reactions.summary(total_count)&limit={$post_limit}&access_token={$token}";
-		$feed_url = "https://graph.facebook.com/v18.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action{$comment_count},reactions.summary(total_count),privacy&access_token={$token}&limit={$post_limit}&locale=en_US";
+		// Comments yes/no
+		$comment_count = $display_comment === 'yes'
+			? ',comments.summary(total_count)'
+			: '';
 
-		if ( 'posts' === $source ) {
-			return $post_url;
+		// Safe limit
+		$post_limit = apply_filters( 'eael_facebook_feed_post_limit', 80 );
+
+		// -----------------------------
+		// 1. Lightweight field sets
+		// -----------------------------
+		$post_fields =
+			"status_type,created_time,from,message,story,permalink_url," .
+			"attachments.limit(1){type,media_type,unshimmed_url,media{image}}" .
+			"{$comment_count},reactions.summary(total_count)";
+
+		$feed_fields =
+			"id,message,status_type,created_time,from,permalink_url,privacy," .
+			"attachments.limit(1){type,media_type,unshimmed_url,media{image}}" .
+			"{$comment_count},reactions.summary(total_count)";
+
+		// -----------------------------
+		// 2. Build URLs
+		// -----------------------------
+		$post_url =
+			"https://graph.facebook.com/v18.0/{$page_id}/posts" .
+			"?fields={$post_fields}" .
+			"&limit={$post_limit}" .
+			"&access_token={$token}";
+
+		$feed_url =
+			"https://graph.facebook.com/v18.0/{$page_id}/feed" .
+			"?fields={$feed_fields}" .
+			"&limit={$post_limit}" .
+			"&locale=en_US" .
+			"&access_token={$token}";
+
+		// -----------------------------
+		// 3. If feed is requested → return feed
+		// -----------------------------
+		if ( $source !== 'posts' ) {
+			return $feed_url;
 		}
-		return $feed_url;
+
+		// -----------------------------
+		// 4. Source = posts → test if /posts works
+		// -----------------------------
+		$test = wp_remote_get(
+			"https://graph.facebook.com/v18.0/{$page_id}/posts?limit=1&access_token={$token}",
+			[ 'timeout' => 6 ]
+		);
+
+		// If request failed (network timeout) → fallback to feed
+		if ( is_wp_error( $test ) ) {
+			return $feed_url;
+		}
+
+		$body = json_decode( wp_remote_retrieve_body( $test ), true );
+
+		// If /posts is invalid (Facebook code 2500) → return feed
+		if ( isset( $body['error']['code'] ) && (int) $body['error']['code'] === 2500 ) {
+			return $feed_url;
+		}
+
+		// Otherwise /posts is allowed
+		return $post_url;
 	}
 }
