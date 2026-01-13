@@ -6411,14 +6411,12 @@ class Login_Register extends Widget_Base {
 								if ( !$position || 'bottom' === $this->ds['position_for_login_form'] ) {
 									do_action( 'eael/login-register/render_social_login_for_login_form', $this );
 								}
-								?>
 
                                 if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
 									echo '<div class="eael-form-validation-container">';
 										$this->print_login_validation_errors();
 									echo '</div>';
 								}
-								<?php
 								$this->print_necessary_hidden_fields( 'login' );
 
 								do_action( 'eael/login-register/before-login-form-close', $this );
