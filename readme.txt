@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.5.5
+Stable tag: 6.5.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -318,6 +318,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.6 - 12/01/2026 =
+
+- Fixed: EA Advanced Data Table | Extra spaces appear when editing table cells
+- Fixed: EA Advanced Tabs | Issue with Loop Carousels
+- Fixed: EA Login/Register Form | Cloudflare Turnstile is not working in popup
+- Fixed: EA Event Calendar | All-day Google Calendar event for current day not visible with "Hide Old Events – Till Current Date" in UTC-1
+- Improved: Security Enhancement
+- Improved: EA Advanced Accordion | Add a New Preset
+- Few minor bug fixes & improvements
 
 = 6.5.5 - 01/01/2026 =
 

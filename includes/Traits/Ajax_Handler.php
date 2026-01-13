@@ -171,6 +171,9 @@ trait Ajax_Handler {
 		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
 			do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
 		}
+		if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
+			do_action( 'eael/woo-product-list/before-product-loop' );
+		}
 		// ensure control name compatibility to old code if it is post block
 		if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_Block' ) {
 			$settings ['post_block_hover_animation']    = $settings['eael_post_block_hover_animation'];
@@ -283,45 +286,99 @@ trait Ajax_Handler {
 
 			if ( $file_path ) {
 				// wp_send_json( $args );
-				$query = new \WP_Query( $args );
-				$found_posts = $query->found_posts;
-				$iterator = 0;
+				// Use WC_Product_Query for Product_Grid and Woo_Product_List, WP_Query for others
+				if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' || $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
+					// Convert args to WC_Product_Query format
+					$wc_args = $this->convert_pagination_args_to_wc_product_query( $args, $settings );
+					$wc_query = new \WC_Product_Query( $wc_args );
+					$products = $wc_query->get_products();
 
-				if ( $query->have_posts() ) {
-					if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' && boolval( $settings['show_add_to_cart_custom_text'] ) ) {
-
-						$add_to_cart_text = [
-							'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
-							'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
-							'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
-							'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
-							'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
-						];
-						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+					// Handle WC_Product_Query results
+					if ( is_object( $products ) && isset( $products->products ) ) {
+						$product_objects = $products->products;
+						$found_posts = $products->total;
+					} else {
+						$product_objects = $products;
+						$found_posts = count( $products );
 					}
 
-					if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
-						$html .= "<div class='found_posts' style='display: none;'>{$found_posts}</div>";
-					}
+					$iterator = 0;
 
-					while ( $query->have_posts() ) {
-						$query->the_post();
+					if ( ! empty( $product_objects ) ) {
+						// Handle custom add to cart text for Product_Grid
+						if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' && boolval( $settings['show_add_to_cart_custom_text'] ) ) {
+							$add_to_cart_text = [
+								'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
+								'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
+								'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
+								'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
+								'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
+							];
+							$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+						}
 
-						$html .= HelperClass::include_with_variable( $file_path, [
-							'settings'      => $settings,
-							'link_settings' => $link_settings,
-							'iterator'      => $iterator
-						] );
-						$iterator ++;
+						// Handle custom add to cart text for Woo_Product_List
+						if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' && boolval( $settings['eael_product_list_content_footer_add_to_cart_custom_text_show'] ) ) {
+							$add_to_cart_text = [
+								'add_to_cart_simple_product_button_text'   => $settings['eael_product_list_content_footer_add_to_cart_simple_text'],
+								'add_to_cart_variable_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_variable_text'],
+								'add_to_cart_grouped_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_grouped_text'],
+								'add_to_cart_external_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_external_text'],
+								'add_to_cart_default_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_default_text'],
+							];
+							$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+						}
+
+						// Iterate through WC_Product objects
+						foreach ( $product_objects as $product ) {
+							global $post;
+							$post = get_post( $product->get_id() );
+							setup_postdata( $post );
+
+							$html .= HelperClass::include_with_variable( $file_path, [
+								'settings'      => $settings,
+								'link_settings' => $link_settings,
+								'iterator'      => $iterator
+							] );
+							$iterator ++;
+						}
+						wp_reset_postdata();
+					} else {
+						$html .= __( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
 					}
 				} else {
-					$html .= '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
+					// Use WP_Query for non-product widgets
+					$query = new \WP_Query( $args );
+					$found_posts = $query->found_posts;
+					$iterator = 0;
+
+					if ( $query->have_posts() ) {
+						if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
+							$html .= "<div class='found_posts' style='display: none;'>{$found_posts}</div>";
+						}
+
+						while ( $query->have_posts() ) {
+							$query->the_post();
+
+							$html .= HelperClass::include_with_variable( $file_path, [
+								'settings'      => $settings,
+								'link_settings' => $link_settings,
+								'iterator'      => $iterator
+							] );
+							$iterator ++;
+						}
+					} else {
+						$html .= '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
+					}
 				}
 			}
 		}
 
 		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
 			do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
+		if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
+			do_action( 'eael/woo-product-list/after-product-loop' );
 		}
 		while ( ob_get_status() ) {
 			ob_end_clean();
@@ -563,22 +620,26 @@ trait Ajax_Handler {
 		$settings['eael_widget_id'] = $widget_id;
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		wp_parse_str( $_REQUEST['args'], $args );
-		$args['post_status'] = array_intersect( (array) $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
 
-		if ( isset( $args['date_query']['relation'] ) ) {
-			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
+		// Convert WP_Query args to WC_Product_Query args if needed
+		$wc_args = $this->convert_pagination_args_to_wc_product_query( $args, $settings );
+
+		if ( isset( $wc_args['date_query']['relation'] ) ) {
+			$wc_args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $wc_args['date_query']['relation'] );
 		}
 
 		$paginationNumber = ! empty( $_POST['number'] ) ? absint( $_POST['number'] ) : 1;
 		$paginationLimit  = ! empty( $_POST['limit'] ) ? absint( $_POST['limit'] ) : 10;
 
-		$args['posts_per_page'] = $paginationLimit;
+		$wc_args['limit'] = $paginationLimit;
+		$wc_args['page'] = $paginationNumber;
 
+		// Calculate offset for WC_Product_Query
 		if ( $paginationNumber == "1" ) {
 			$paginationOffsetValue = "0";
 		} else {
 			$paginationOffsetValue = ( $paginationNumber - 1 ) * $paginationLimit;
-			$args['offset']        = $paginationOffsetValue;
+			$wc_args['offset'] = $paginationOffsetValue;
 		}
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
@@ -588,8 +649,19 @@ trait Ajax_Handler {
 		$template = realpath( $this->get_template( $template_info['file_name'] ) );
 
 		ob_start();
-		$query = new \WP_Query( $args );
-		if ( $query->have_posts() ) {
+
+		// Use WC_Product_Query for product queries
+		$wc_query = new \WC_Product_Query( $wc_args );
+		$products = $wc_query->get_products();
+
+		// Handle WC_Product_Query results
+		if ( is_object( $products ) && isset( $products->products ) ) {
+			$product_objects = $products->products;
+		} else {
+			$product_objects = $products;
+		}
+
+		if ( ! empty( $product_objects ) ) {
 			if ( isset( $template_info['name'] ) && $template_info['name'] === 'eicon-woocommerce' && boolval( $settings['show_add_to_cart_custom_text'] ) ){
 				$add_to_cart_text = [
 					'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
@@ -601,8 +673,11 @@ trait Ajax_Handler {
 				$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
 			}
 
-			while ( $query->have_posts() ) {
-				$query->the_post();
+			// Iterate through WC_Product objects
+			foreach ( $product_objects as $product ) {
+				global $post;
+				$post = get_post( $product->get_id() );
+				setup_postdata( $post );
 				include( $template );
 			}
 			wp_reset_postdata();
@@ -610,6 +685,86 @@ trait Ajax_Handler {
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo ob_get_clean();
 		wp_die();
+	}
+
+	/**
+	 * Convert pagination arguments to WC_Product_Query arguments
+	 * @param array $args Original arguments from pagination
+	 * @param array $settings Widget settings
+	 * @return array WC_Product_Query compatible arguments
+	 */
+	private function convert_pagination_args_to_wc_product_query( $args, $settings ) {
+		$wc_args = [
+			'paginate' => true,
+			'return' => 'objects',
+		];
+
+		// Map common WP_Query args to WC_Product_Query args
+		$arg_mapping = [
+			'posts_per_page' => 'limit',
+			'post_status' => 'status',
+			'post__in' => 'include',
+			'post__not_in' => 'exclude',
+			'author__in' => 'author',
+			'paged' => 'page',
+		];
+
+		foreach ( $arg_mapping as $wp_key => $wc_key ) {
+			if ( isset( $args[ $wp_key ] ) ) {
+				$wc_args[ $wc_key ] = $args[ $wp_key ];
+			}
+		}
+
+		// Handle other common args
+		if ( isset( $args['orderby'] ) ) {
+			$wc_args['orderby'] = $args['orderby'];
+		}
+		if ( isset( $args['order'] ) ) {
+			$wc_args['order'] = $args['order'];
+		}
+		if ( isset( $args['offset'] ) ) {
+			$wc_args['offset'] = $args['offset'];
+		}
+		if ( isset( $args['s'] ) ) {
+			$wc_args['search'] = $args['s'];
+		}
+
+		// Handle meta_query and tax_query
+		if ( isset( $args['meta_query'] ) ) {
+			$wc_args['meta_query'] = $args['meta_query'];
+		}
+		if ( isset( $args['tax_query'] ) ) {
+			$wc_args['tax_query'] = $args['tax_query'];
+		}
+
+		// Handle meta_key and meta_value
+		if ( isset( $args['meta_key'] ) ) {
+			if ( ! isset( $wc_args['meta_query'] ) ) {
+				$wc_args['meta_query'] = ['relation' => 'AND'];
+			}
+			$meta_query = [
+				'key' => $args['meta_key'],
+			];
+			if ( isset( $args['meta_value'] ) ) {
+				$meta_query['value'] = $args['meta_value'];
+			}
+			if ( isset( $args['meta_compare'] ) ) {
+				$meta_query['compare'] = $args['meta_compare'];
+			}
+			$wc_args['meta_query'][] = $meta_query;
+		}
+
+		// Set product status from settings (handle both Product_Grid and Woo_Product_List)
+		if ( ! empty( $settings['eael_product_grid_products_status'] ) ) {
+			$wc_args['status'] = array_intersect( (array) $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
+		} elseif ( ! empty( $settings['eael_product_list_products_status'] ) ) {
+			$wc_args['status'] = array_intersect( (array) $settings['eael_product_list_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
+		}
+
+		// Set visibility
+		$wc_args['visibility'] = 'visible';
+
+		return $wc_args;
 	}
 
 	/**
@@ -828,9 +983,21 @@ trait Ajax_Handler {
 			wp_send_json_error();
 		}
 
-		// global $post, $product;
+		global $post, $product;
 		$product = wc_get_product( $product_id );
 		$post    = get_post( $product_id );
+
+		// SECURITY FIX: Verify product exists and is visible
+		if ( ! $product || ! $product->is_visible() ) {
+			wp_send_json_error( __( 'Product not found or not accessible', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		// Also verify post status for non-admin users
+		$post = get_post( $product_id );
+		if ( ! current_user_can( 'edit_post', $product_id ) && $post->post_status !== 'publish' ) {
+			wp_send_json_error( __( 'Product not found or not accessible', 'essential-addons-for-elementor-lite' ) );
+		}
+
 		setup_postdata( $post );
 
 		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
@@ -986,25 +1153,42 @@ trait Ajax_Handler {
 			) );
 
 			if ( ! $file_path || 0 !== strpos( $file_path, realpath( $dir_path ) ) ) {
-				wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
+				wp_send_json_error( 'Invalid template', 'invalid_template', '400' );
 			}
 
 			$html = '';
 			if ( $file_path ) {
-				$query = new \WP_Query( $args );
+				// Convert args to WC_Product_Query format for product gallery
+				$wc_args = $this->convert_pagination_args_to_wc_product_query( $args, $settings );
+				$wc_query = new \WC_Product_Query( $wc_args );
+				$products = $wc_query->get_products();
 
-				if ( $query->have_posts() ) {
+				// Handle WC_Product_Query results
+				if ( is_object( $products ) && isset( $products->products ) ) {
+					$product_objects = $products->products;
+					$found_posts = $products->total;
+					$max_num_pages = $products->max_num_pages;
+				} else {
+					$product_objects = $products;
+					$found_posts = count( $products );
+					$max_num_pages = 1;
+				}
+
+				if ( ! empty( $product_objects ) ) {
 
 					do_action( 'eael_woo_before_product_loop' );
 
-					while ( $query->have_posts() ) {
-						$query->the_post();
+					// Iterate through WC_Product objects
+					foreach ( $product_objects as $product ) {
+						global $post;
+						$post = get_post( $product->get_id() );
+						setup_postdata( $post );
 						$html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
 					}
-					
+
 					do_action( 'eael_woo_after_product_loop' );
 
-					$html .= '<div class="eael-max-page" style="display:none;">'. ceil($query->found_posts / absint( $args['posts_per_page'] ) ) . '</div>';
+					$html .= '<div class="eael-max-page" style="display:none;">'. $max_num_pages . '</div>';
 
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo $html;

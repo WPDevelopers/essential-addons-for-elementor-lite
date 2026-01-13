@@ -3989,7 +3989,8 @@ class Event_Calendar extends Widget_Base
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
 
                 if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
-                    $is_old_event = $this->is_old_event($ev_start_date);
+                    $is_old_event = $this->is_old_event($ev_start_date, '', 'yes' === $all_day);
+                    
                     if($is_old_event) {
                         continue;
                     }
@@ -3997,7 +3998,7 @@ class Event_Calendar extends Widget_Base
 
 	            if( $settings['eael_old_events_hide'] === 'start' ){
                     $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : gmdate( 'Y-m-d' );
-                    $should_show  = $this->is_old_event( $ev_start_date, $default_date );
+                    $should_show  = $this->is_old_event( $ev_start_date, $default_date, 'yes' === $all_day );
 
                     if ( $should_show ) {
                         continue;
@@ -4137,17 +4138,28 @@ class Event_Calendar extends Widget_Base
         return $calendar_data;
     }
 
-	public function is_old_event( $start_date, $date_to_comp = '' ) {
-		$date_to_comp         = $date_to_comp === '' ? current_time( 'Y-m-d' ) : $date_to_comp;
-		$date_to_comp         = strtotime( $date_to_comp . wp_timezone_string() );
-		$start_date_timestamp = strtotime( $start_date );
+	public function is_old_event( $start_date, $date_to_comp = '', $is_all_day = false ) {
 
-		if ( $start_date_timestamp < $date_to_comp ) {
-			return true;
-		}
+        // Use WP timezone correctly
+        $tz = wp_timezone();
 
-		return false;
-	}
+        // Default comparison date = today (site timezone)
+        if ( $date_to_comp === '' ) {
+            $date_to_comp = current_time( 'Y-m-d' );
+        }
+
+        // ✅ All-day event: compare dates only
+        if ( $is_all_day ) {
+            return strtotime( $start_date ) < strtotime( $date_to_comp );
+        }
+
+        // ✅ Timed event: compare full datetime with timezone
+        $start = new \DateTime( $start_date, $tz );
+        $now   = new \DateTime( 'now', $tz );
+
+        return $start < $now;
+    }
+
 
     public function fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
