@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Essential_Addons_Elementor\Classes\Helper;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -46,6 +48,10 @@ class TypeForm extends Widget_Base {
             'ea',
             'essential addons'
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url () {
@@ -102,9 +108,12 @@ class TypeForm extends Widget_Base {
         $this->add_control(
             'eael_global_warning_text',
             [
-                'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => __('Whoops! It seems like you haven\'t connected your Typeform account. To do this, navigate to <b>WordPress Dashboard -> Essential Addons -> Elements -> Typeform</b> (<a target="_blank" href="'.esc_url(admin_url( 'admin.php?page=eael-settings')).'">Get Access</a>).',
-                    'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => sprintf(
+                    /* translators: %s: Link to Typeform settings page. */
+                    __( 'Whoops! It seems like you haven\'t connected your Typeform account. To do this, navigate to <b>WordPress Dashboard → Essential Addons → Elements → Typeform</b> (%s).', 'essential-addons-for-elementor-lite' ),
+                    '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=eael-settings' ) ) . '">' . esc_html__( 'Get Access', 'essential-addons-for-elementor-lite' ) . '</a>'
+                ),
                 'content_classes' => 'eael-warning',
             ]
         );
@@ -365,8 +374,8 @@ class TypeForm extends Widget_Base {
             'hideHeaders' => ($this->get_settings('eael_typeform_hideheaders') == 'yes'),
             'opacity'     => $this->get_settings('eael_typeform_opacity')['size']
         ];
-        echo '<div data-typeform="'.htmlspecialchars(json_encode($data), ENT_QUOTES,
-                'UTF-8').'" '.$this->get_render_attribute_string('eael_typeform_wrapper').'></div>';
+        echo '<div data-typeform="'. esc_attr( htmlspecialchars(json_encode($data), ENT_QUOTES,
+                'UTF-8') ) .'" '; $this->print_render_attribute_string('eael_typeform_wrapper'); echo'></div>';
     }
 
 }

@@ -28,6 +28,7 @@ class Select2 extends Base_Data_Control
 				'remove'          => __( 'Remove', 'essential-addons-for-elementor-lite' ),
 				'thumbnail'       => __( 'Image', 'essential-addons-for-elementor-lite' ),
 				'name'            => __( 'Title', 'essential-addons-for-elementor-lite' ),
+                'description'     => __( 'Product Description', 'essential-addons-for-elementor-lite' ),
 				'price'           => __( 'Price', 'essential-addons-for-elementor-lite' ),
 				'quantity'        => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
 				'subtotal'        => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
@@ -44,6 +45,7 @@ class Select2 extends Base_Data_Control
 				'cl_woo_products' => __( 'Woo Products', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_cart'     => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_orders'   => __( 'Woo Orders', 'essential-addons-for-elementor-lite' ),
+				'nonce'           => wp_create_nonce( 'eael_select2' ),
 			]
 		);
 		wp_enqueue_script( 'eael-select2' );
@@ -73,7 +75,9 @@ class Select2 extends Base_Data_Control
                 <select id="<?php echo esc_attr( $control_uid ); ?>" {{ multiple }} class="ea-select2" data-setting="{{ data.name }}"></select>
             </div>
         </div>
-        <#
+		<# if ( data.source_type === 'elementor_library' ) { #>
+		<a href="#" target="_blank" class="elementor-button elementor-edit-template" style="margin-top:0px;"><i class="eicon-pencil" style="margin-left:10px;"></i>Edit Template</a>
+		<# }
         ( function( $ ) {
         $( document.body ).trigger( 'eael_select2_init',{currentID:data.controlValue,data:data,controlUID:controlUID,multiple:data.multiple} );
         }( jQuery ) );

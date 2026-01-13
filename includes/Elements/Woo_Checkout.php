@@ -8,14 +8,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 use Essential_Addons_Elementor\Traits\Helper;
+use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 class Woo_Checkout extends Widget_Base {
 	
@@ -81,12 +80,16 @@ class Woo_Checkout extends Widget_Base {
         ];
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/woo-checkout/';
 	}
 
 	protected function register_controls() {
-		if ( is_admin() && ! empty( $_GET['elementor_updater'] ) ) {
+		if ( is_admin() && ! empty( $_GET['elementor_updater'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 
@@ -383,7 +386,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_woo_checkout_coupon_icon',
 			[
-				'label' => __( 'Icon', 'elementor' ),
+				'label' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-percent',
@@ -491,8 +494,11 @@ class Woo_Checkout extends Widget_Base {
                 'ea_section_woo_login_show_warning_text',
                 [
                     'type'            => Controls_Manager::RAW_HTML,
-                    'raw'             => __('Allow customers to log into an existing account during checkout is disabled on your site. Please enable it to use the login form. You can enable it from WooCommerce >> Settings >> Accounts & Privacy >> <a target="_blank" href="'.esc_url(admin_url( 'admin.php?page=wc-settings&tab=account')).'">Guest checkout.</a>',
-                        'essential-addons-for-elementor-lite'),
+					'raw' => sprintf(
+						/* translators: %s: Link to the Guest Checkout settings page. */
+						__('Allow customers to log into an existing account during checkout is disabled on your site. Please enable it to use the login form. You can enable it from WooCommerce >> Settings >> Accounts & Privacy >> %s', 'essential-addons-for-elementor-lite'),
+						'<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=account' ) ) . '">Guest checkout</a>'
+					),
                     'content_classes' => 'eael-warning',
                     'condition' => [
                         'ea_section_woo_login_show' => 'yes',
@@ -505,7 +511,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_woo_checkout_login_icon',
 			[
-				'label' => __( 'Icon', 'elementor' ),
+				'label' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-user',
@@ -2614,10 +2620,10 @@ class Woo_Checkout extends Widget_Base {
 			);
 
 			$this->start_controls_tabs('ea_woo_checkout_pickup_point_tabs');
-			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_normal', ['label' => __('Normal', 'essential-addons-for-elementor')]);
+			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_normal', ['label' => __('Normal', 'essential-addons-for-elementor-lite')]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_bg_color', [
-				'label' => __('Background Color', 'essential-addons-for-elementor'),
+				'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
@@ -2626,7 +2632,7 @@ class Woo_Checkout extends Widget_Base {
 			]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_color', [
-				'label' => __('Color', 'essential-addons-for-elementor'),
+				'label' => __('Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
@@ -2641,10 +2647,10 @@ class Woo_Checkout extends Widget_Base {
 
 			$this->end_controls_tab();
 
-			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_hover', ['label' => __('Hover', 'essential-addons-for-elementor')]);
+			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_hover', ['label' => __('Hover', 'essential-addons-for-elementor-lite')]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_bg_color_hover', [
-				'label' => __('Background Color', 'essential-addons-for-elementor'),
+				'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
@@ -2653,7 +2659,7 @@ class Woo_Checkout extends Widget_Base {
 			]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_color_hover', [
-				'label' => __('Color', 'essential-addons-for-elementor'),
+				'label' => __('Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
@@ -2662,7 +2668,7 @@ class Woo_Checkout extends Widget_Base {
 			]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_border_color_hover', [
-				'label' => __('Border Color', 'essential-addons-for-elementor'),
+				'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper #woo-carrier-agents-search-button:hover' => 'border-color: {{VALUE}};',
@@ -3287,7 +3293,7 @@ class Woo_Checkout extends Widget_Base {
         $this->ea_woo_checkout_add_actions($settings);
 
 		?>
-        <div data-checkout="<?php echo htmlspecialchars(json_encode($order_review_change_data), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $this->get_render_attribute_string( 'container' ); ?>>
+        <div data-checkout="<?php echo esc_attr( htmlspecialchars(json_encode($order_review_change_data), ENT_QUOTES, 'UTF-8') ); ?>" <?php $this->print_render_attribute_string( 'container' ); ?>>
             <div type="text/template" id="eael-wc-billing-reordered-fields">
                 <div class="eael-woo-billing-fields"></div>
             </div>
@@ -3297,22 +3303,26 @@ class Woo_Checkout extends Widget_Base {
             <div class="woocommerce">
                 <style>
                     .woocommerce .blockUI.blockOverlay:before {
-                        background-image: url('<?php echo WC_ABSPATH . 'assets/images/icons/loader.svg' ?>') center center !important;
+                        background-image: url('<?php echo esc_url( WC_ABSPATH . 'assets/images/icons/loader.svg' ); ?>') center center !important;
                     }
                 </style>
 				<?php
 
 				// Backwards compatibility with old pay and thanks link arguments.
-				if ( isset( $_GET['order'] ) && isset( $_GET['key'] ) ) { // WPCS: input var ok, CSRF ok.
+				//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				if ( isset( $_GET['order'] ) && isset( $_GET['key'] ) ) { // WPCS: input var ok.
 					wc_deprecated_argument( __CLASS__ . '->' . __FUNCTION__, '2.1', '"order" is no longer used to pass an order ID. Use the order-pay or order-received endpoint instead.' );
 
 					// Get the order to work out what we are showing.
+					//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					$order_id = absint( $_GET['order'] ); // WPCS: input var ok.
 					$order    = wc_get_order( $order_id );
 
 					if ( $order && $order->has_status( 'pending' ) ) {
-						$wp->query_vars['order-pay'] = absint( $_GET['order'] ); // WPCS: input var ok.
+						//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						$wp->query_vars['order-pay'] = absint( $_GET['order'] );// WPCS: input var ok.
 					} else {
+						//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						$wp->query_vars['order-received'] = absint( $_GET['order'] ); // WPCS: input var ok.
 					}
 				}

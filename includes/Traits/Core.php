@@ -45,7 +45,7 @@ trait Core
 
         // go pro
         if (!$this->pro_enabled) {
-            $links[] = sprintf('<a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" target="_blank" style="color: #524cff; font-weight: bold;">' . __('Go Pro', 'essential-addons-for-elementor-lite') . '</a>');
+	        $links[] = sprintf('<a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" target="_blank" style="color: #524cff; font-weight: bold;">' . __('Go Pro', 'essential-addons-for-elementor-lite') . '</a>');
         }
 
         return $links;
@@ -78,9 +78,10 @@ trait Core
     {
         if (get_transient('eael_do_activation_redirect')) {
             delete_transient('eael_do_activation_redirect');
-
+            
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             if (!isset($_GET['activate-multi'])) {
-                wp_redirect("admin.php?page=eael-settings");
+                wp_safe_redirect("admin.php?page=eael-settings");
             }
         }
     }
@@ -101,19 +102,22 @@ trait Core
         if ($this->is_plugin_installed($elementor)) {
             $activation_url = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $elementor . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $elementor);
 
+            // translators: %1$s and %2$s are the strong tags
             $message = sprintf(__('%1$sEssential Addons for Elementor%2$s requires %1$sElementor%2$s plugin to be active. Please activate Elementor to continue.', 'essential-addons-for-elementor-lite'), "<strong>", "</strong>");
 
             $button_text = __('Activate Elementor', 'essential-addons-for-elementor-lite');
         } else {
             $activation_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=elementor'), 'install-plugin_elementor');
 
+            // translators: %1$s and %2$s are the strong tags
             $message = sprintf(__('%1$sEssential Addons for Elementor%2$s requires %1$sElementor%2$s plugin to be installed and activated. Please install Elementor to continue.', 'essential-addons-for-elementor-lite'), '<strong>', '</strong>');
             $button_text = __('Install Elementor', 'essential-addons-for-elementor-lite');
         }
 
         $button = '<p><a href="' . esc_url( $activation_url ) . '" class="button-primary">' . esc_html( $button_text ) . '</a></p>';
 
-        printf('<div class="error"><p>%1$s</p>%2$s</div>', __($message), $button);
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        printf('<div class="error"><p>%1$s</p>%2$s</div>', $message, $button);
     }
 
     /**
@@ -288,6 +292,8 @@ trait Core
 
         //Scroll to Top global settings : updated on elementor/editor/after_save action
         $global_settings['eael_ext_scroll_to_top'] = $this->get_ext_scroll_to_top_global_settings($post_id, $document, $global_settings);
+
+        $global_settings = apply_filters('eael/extentions/global_settings', $global_settings, $document, $post_id);
         
         // set editor time
         update_option('eael_editor_updated_at', strtotime('now'));

@@ -37,6 +37,14 @@ class WpForms extends Widget_Base {
         return 'eaicon-wpforms';
     }
 
+    public function get_script_depends(): array {
+        if ( ! class_exists( '\WPForms\WPForms' ) ) {
+            return [];
+        }
+        
+		return [ 'wpforms-elementor' ];
+	}
+
     public function get_keywords()
     {
         return [
@@ -52,6 +60,10 @@ class WpForms extends Widget_Base {
             'ea',
             'essential addons'
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url()
@@ -259,7 +271,7 @@ class WpForms extends Widget_Base {
             ]
         );
 
-        $this->add_responsive_control(
+        $this->add_control(
             'eael_contact_form_alignment',
             [
                 'label' => esc_html__('Form Alignment', 'essential-addons-for-elementor-lite'),
@@ -304,7 +316,7 @@ class WpForms extends Widget_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form' => 'max-width: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .wpforms-container' => 'max-width: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1400,6 +1412,7 @@ class WpForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
+                    '{{WRAPPER}} .eael-wpforms .wpforms-error' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-wpforms label.wpforms-error' => 'color: {{VALUE}}',
                 ],
                 'condition'             => [
@@ -1415,7 +1428,8 @@ class WpForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-wpforms input.wpforms-error, {{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms input.wpforms-error' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'error_messages' => 'show',
@@ -1433,7 +1447,8 @@ class WpForms extends Widget_Base {
                 'max'                   => 10,
                 'step'                  => 1,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-wpforms input.wpforms-error, {{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-width: {{VALUE}}px',
+                    '{{WRAPPER}} .eael-wpforms input.wpforms-error' => 'border-width: {{VALUE}}px',
+                    '{{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-width: {{VALUE}}px',
                 ],
                 'condition'             => [
                     'error_messages' => 'show',
@@ -1471,10 +1486,10 @@ class WpForms extends Widget_Base {
 
         $alignment = '' !== $settings['eael_contact_form_alignment'] ? $settings['eael_contact_form_alignment'] : 'default';
 
-        $this->add_render_attribute('contact-form', 'class', 'eael-contact-form-align-' . $alignment );
+        $this->add_render_attribute('contact-form', 'class', 'eael-wpforms-align-' . $alignment );
 
         if (!empty($settings['contact_form_list'])) { ?>
-            <div <?php echo $this->get_render_attribute_string('contact-form'); ?>>
+            <div <?php $this->print_render_attribute_string('contact-form'); ?>>
                 <?php if ($settings['custom_title_description'] == 'yes') { ?>
                     <div class="eael-wpforms-heading">
                         <?php if ($settings['form_title_custom'] != '') { ?>
@@ -1484,20 +1499,23 @@ class WpForms extends Widget_Base {
                         <?php } ?>
                         <?php if ($settings['form_description_custom'] != '') { ?>
                             <div class="eael-contact-form-description eael-wpforms-description">
-                                <?php echo $this->parse_text_editor($settings['form_description_custom']); ?>
+                                <?php 
+		                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo $this->parse_text_editor($settings['form_description_custom']); ?>
                             </div>
                         <?php } ?>
                     </div>
                 <?php } ?>
                 <?php
-                $eael_form_title = $settings['form_title'];
-                $eael_form_description = $settings['form_description'];
+                $eael_form_title = isset( $settings['form_title'] ) && 'yes' === $settings['form_title'];
+                $eael_form_description = isset( $settings['form_description'] ) && 'yes' === $settings['form_description'];
 
                 if ($settings['custom_title_description'] == 'yes') {
                     $eael_form_title = false;
                     $eael_form_description = false;
                 }
 
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo wpforms_display($settings['contact_form_list'], $eael_form_title, $eael_form_description);
                 ?>
             </div>

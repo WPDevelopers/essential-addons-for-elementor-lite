@@ -5598,7 +5598,6 @@ button.button__greyBg:hover:disabled {
 
 /* Setup Wizard V2 Starts */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-
 :root {
     $mode-base: #ffffff;
     --page-background: #F5F6FC;
@@ -6111,10 +6110,9 @@ img {
     line-height: 1.2em;
 }
 
-/* .templates-img img {
-    border-radius: 0 8px 8px 0;
-    max-width: 430px;
-} */
+.eael-qs-plugin-promo-img img {
+    width: 100%;
+}
 
 .toggle-wrapper h5 {
     font-size: 14px;
@@ -6684,8 +6682,14 @@ span.eael-tooltip:after {
     opacity: 0;
 }
 
-.eael-onboard-content-wrapper.eael-onboard-templately {
+.eael-onboard-content-wrapper.eael-qs-plugin-promo {
     padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+.eael-setup-content.eael-plugins-promo-content .eael-onboard-content-wrapper:not(:first-child){
+    border-radius: 8px;
 }
 
 .eael-onboard--wrapper .eael-general-content-item h2 {
@@ -6696,42 +6700,42 @@ span.eael-tooltip:after {
     margin-bottom: 8px;
 }
 
-.eael-onboard-content-wrapper.eael-onboard-templately .eael-general-content-item.templates {
-    padding: 0;
-    background-image: none;
-    background-color: transparent;
-    border: none;
-    margin-bottom: 0;
-}
-
-.eael-onboard-content-wrapper.eael-onboard-templately .templates-content {
+.eael-onboard-content-wrapper.eael-qs-plugin-promo .eael-plugin-promo-content {
     padding: 0;
     max-width: 485px;
+    display: flex;
+    gap: 10px;
 }
-
-span.title-color-2 {
-    color: #FF7B8E;
+.eael-onboard-content-wrapper.eael-qs-plugin-promo .eael-plugin-promo-content .eael-promo-plugin-checkbox {
+    margin-top: 10px;
+    height: 24px;
+    width: 24px;
+    border: 2px solid #760EF4;
 }
-
-.eael-templately-details .eael-content-details {
-    padding: 16px;
+.eael-onboard-content-wrapper.eael-qs-plugin-promo .eael-plugin-promo-content .eael-promo-plugin-checkbox:focus{
+    border-color: #760EF4;
+    box-shadow: 0 0 0 1px #760EF4;
+}
+.eael-onboard-content-wrapper.eael-qs-plugin-promo .eael-plugin-promo-content .eael-promo-plugin-checkbox:checked::before{
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M14.83 4.89l1.34.94-5.81 8.38H9.02L5.78 9.67l1.34-1.25 2.57 2.4z' fill='%23ffffff'/></svg>");
+    background: #760EF4;
+    border: 1px solid #760EF4;
+    margin: -2px;
     border-radius: 4px;
 }
 
-.eael-templately-details .eael-content-details:nth-child(1) {
-    background: #F7F4FF;
+.eael-onboard-content-wrapper.eael-qs-plugin-promo .eael-plugin-promo-content .eael-plugin-promo-title  {
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-weight: 500;
 }
 
-.eael-templately-details .eael-content-details:nth-child(2) {
-    background: #FFFAFA;
+span.title-color-1 {
+    color: #FF7B8E;
 }
 
-.eael-templately-details .eael-content-details:nth-child(3) {
-    background: #FFF8F0;
-}
-
-.eael-templately-details .eael-content-details:nth-child(4) {
-    background: #F1FAFF;
+.eael-plugin-details .eael-content-details {
+    padding: 8px;
 }
 
 .eael-onboard-content-wrapper.eael-onboard-integrations {
@@ -6877,11 +6881,7 @@ span.title-color-2 {
         padding: 50px 20px !important;
     }
 
-    .eael-onboard-content-wrapper .eael-general-content-item.templates {
-        flex-wrap: nowrap;
-    }
-
-    .eael-onboard-content-wrapper .templates-img {
+    .eael-onboard-content-wrapper .eael-qs-plugin-promo-img {
         display: block;
     }
 
@@ -6965,7 +6965,7 @@ span.title-color-2 {
         padding: 18px;
     }
 
-    .eael-templately-details .eael-content-details {
+    .eael-plugin-details .eael-content-details {
         padding: 12px;
     }
 
@@ -7159,26 +7159,20 @@ span.title-color-2 {
         margin-bottom: 10px;
     }
 
-    .eael-onboard-content-wrapper.eael-onboard-templately {
+    .eael-onboard-content-wrapper.eael-qs-plugin-promo {
         padding: 30px;
     }
 
-    .eael-onboard-content-wrapper.eael-onboard-templately .eael-general-content-item.templates {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 30px;
-    }
-
-    .eael-onboard-content-wrapper.eael-onboard-templately .templates-content {
+    .eael-onboard-content-wrapper.eael-qs-plugin-promo .eael-plugin-promo-content {
         max-width: 100%;
     }
 
-    .eael-onboard-content-wrapper .templates-img {
+    .eael-onboard-content-wrapper .eael-qs-plugin-promo-img {
         display: block;
         width: 100%;
     }
 
-    .eael-onboard-content-wrapper .templates-img img {
+    .eael-onboard-content-wrapper .eael-qs-plugin-promo-img img {
         width: 100%;
     }
 

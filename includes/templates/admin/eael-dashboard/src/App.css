@@ -26,6 +26,7 @@
   --background-15: #FFFCF5;
   --background-16: #FFF1F3;
   --background-17: #FFF6ED;
+  --background-18: #FD853A;
   --toggle-color: #EAECF0;
   --label-color: #EAECF0;
   --label-color-fill: #7F56D9;
@@ -586,6 +587,10 @@ input:focus {
   padding-right: 36px;
   width: 220px;
   background: transparent;
+}
+
+#ea__dashboard--wrapper input.input-name::placeholder {
+  opacity: .7;
 }
 
 .ea__input-search-wrapper:after {
@@ -1597,6 +1602,10 @@ span.ea__tooltip {
   background: var(--background-7);
 }
 
+.content-btn.beta {
+  background: var(--background-18);
+}
+
 .content-icons {
   display: flex;
   gap: 10px;
@@ -1635,6 +1644,13 @@ span.ea__tooltip {
 
 #ea__dashboard--wrapper .select-option-external .form-select {
   min-width: 100%;
+}
+
+.select-post-type-options{
+  margin-top: 20px;
+}
+.select-post-type-options li label:hover{
+  cursor: pointer;
 }
 
 span.select-details {
@@ -2023,6 +2039,7 @@ section.ea__modal-wrapper {
 .ea__modal-body label {
   font-size: 14px;
   line-height: 1.3em;
+  color: var(--text-color-100);
   display: block;
   margin-bottom: 6px;
 }
@@ -2107,6 +2124,20 @@ section.ea__modal-wrapper {
   color: var(--text-color-200);
   text-decoration: underline;
   margin-top: 6px;
+}
+
+.ea__api-field-group {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--label-color);
+}
+
+.ea__api-field-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.ea__api-field-group:first-child {
+  padding-top: 0;
 }
 
 .ea__modal-body .regenerated-wrapper {
@@ -2303,7 +2334,7 @@ section.ea__modal-wrapper {
 
 /*-------- Onboard ------------*/
 
-span.title-color-2 {
+span.title-color-1 {
   color: #FF7B8E;
 }
 

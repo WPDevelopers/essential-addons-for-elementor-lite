@@ -76,6 +76,10 @@ class Woo_Product_List extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! ClassesHelper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/ea-woo-product-list/';
@@ -549,6 +553,20 @@ class Woo_Product_List extends Widget_Base
                 'post_type!' => 'source_archive'
             ],
         ]);
+
+        $wc_settings_url = admin_url( 'admin.php?page=wc-settings&tab=products&section=inventory' );
+        $this->add_control(
+			'eael_product_show_stockout',
+			[
+				'label'        => esc_html__( 'Out of Stock', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+                'description'  => __( 'Uncheck the WooCommerce Settings <a href="' . $wc_settings_url . '" target="_blank">Out of stock visibility</a> option. This will not work otherwise' )
+			]
+		);
 
         $this->add_control(
             'eael_product_list_products_status',
@@ -3034,6 +3052,151 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
+        //Title
+        $this->add_control(
+            'eael_product_popup_title',
+            [
+                'label' => __('Title', 'essential-addons-for-elementor-lite'),
+                'type'  => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_popup_title_typography',
+                'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '.eael-popup-details-render .elementor-element-{{ID}} div.product .product_title',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_popup_title_color',
+            [
+                'label'     => __('Title Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#252525',
+                'selectors' => [
+                    '.eael-popup-details-render .elementor-element-{{ID}} div.product .product_title' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Price
+        $this->add_control(
+            'eael_product_popup_price',
+            [
+                'label'     => __('Price', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_popup_price_typography',
+                'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '.eael-popup-details-render .elementor-element-{{ID}} div.product .price',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_popup_price_color',
+            [
+                'label'     => __('Price Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#343434',
+                'selectors' => [
+                    '.eael-popup-details-render .elementor-element-{{ID}} div.product .price' => 'color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_popup_sale_price_color',
+            [
+                'label'     => __('Sale Price Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#757C86',
+                'selectors' => [
+                    '.eael-popup-details-render .elementor-element-{{ID}} div.product .price ins' => 'color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+
+        // Content
+        $this->add_control(
+            'eael_product_popup_content',
+            [
+                'label'     => __('Content', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_popup_content_typography',
+                'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '.eael-popup-details-render .elementor-element-{{ID}} div.product .woocommerce-product-details__short-description',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_popup_content_color',
+            [
+                'label'     => __('Content Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#5F6368',
+                'selectors' => [
+                    '.eael-popup-details-render .elementor-element-{{ID}} .woocommerce-product-details__short-description' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Sale
+        $this->add_control(
+            'eael_product_popup_sale_style',
+            [
+                'label' => __('Sale', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_popup_sale_typo',
+                'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+                'selector' => '.eael-popup-details-render .elementor-element-{{ID}} .eael-onsale',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_popup_sale_color',
+            [
+                'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-popup-details-render .elementor-element-{{ID}} .eael-onsale' => 'color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_product_popup_sale_bg_color',
+            [
+                'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-popup-details-render .elementor-element-{{ID}} .eael-onsale' => 'background-color: {{VALUE}}!important;',
+                    '.eael-popup-details-render .elementor-element-{{ID}} .eael-onsale:not(.outofstock).sale-preset-4:after'        => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+                ],
+            ]
+        );
+
 	    // Quantity
 	    $this->add_control(
 		    'eael_product_popup_quantity',
@@ -3049,7 +3212,7 @@ class Woo_Product_List extends Widget_Base
 		    [
 			    'name'     => 'eael_product_popup_quantity_typo',
 			    'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-			    'selector' => '.eael-popup-details-render{{WRAPPER}} div.product form.cart div.quantity .qty, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > a',
+			    'selector' => '.eael-popup-details-render div.product form.cart div.quantity .qty, .eael-product-popup.woocommerce div.product form.cart div.quantity > a',
 		    ]
 	    );
 
@@ -3060,7 +3223,7 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#000',
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} div.product form.cart div.quantity .qty, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > a, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > .button' => 'color: {{VALUE}};',
+				    '.eael-popup-details-render div.product form.cart div.quantity .qty, .eael-product-popup.woocommerce div.product form.cart div.quantity > a, .eael-product-popup.woocommerce div.product form.cart div.quantity > .button' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3072,7 +3235,7 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#fff',
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} div.product form.cart div.quantity .qty, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > a, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > .button' => 'background-color: {{VALUE}};',
+				    '.eael-popup-details-render div.product form.cart div.quantity .qty, .eael-product-popup.woocommerce div.product form.cart div.quantity > a, .eael-product-popup.woocommerce div.product form.cart div.quantity > .button' => 'background-color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3084,9 +3247,9 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#000',
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} div.product form.cart div.quantity .qty, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > a, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > .button' => 'border-color: {{VALUE}};',
+				    '.eael-popup-details-render div.product form.cart div.quantity .qty, .eael-product-popup.woocommerce div.product form.cart div.quantity > a, .eael-product-popup.woocommerce div.product form.cart div.quantity > .button' => 'border-color: {{VALUE}} !important;',
 				    // OceanWP
-				    '.eael-popup-details-render{{WRAPPER}} div.product form.cart div.quantity .qty:focus' => 'border-color: {{VALUE}};',
+				    '.eael-popup-details-render div.product form.cart div.quantity .qty:focus' => 'border-color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3112,7 +3275,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#fff',
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .button, .eael-popup-details-render{{WRAPPER}} button.button.alt' => 'color: {{VALUE}};',
+				    '.eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3124,7 +3288,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#758F4D',
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .button, .eael-popup-details-render{{WRAPPER}} button.button.alt' => 'background-color: {{VALUE}};',
+				    '.eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'background-color: {{VALUE}};',
 			    ],
                 'condition'     => [
                     'eael_dynamic_template_layout' => 'preset-1',
@@ -3139,7 +3304,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#BC5C5C',
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .button, .eael-popup-details-render{{WRAPPER}} button.button.alt' => 'background-color: {{VALUE}};',
+				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'background-color: {{VALUE}};',
 			    ],
                 'condition'     => [
                     'eael_dynamic_template_layout' => 'preset-2',
@@ -3154,7 +3320,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#A66C46',
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .button, .eael-popup-details-render{{WRAPPER}} button.button.alt' => 'background-color: {{VALUE}};',
+				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'background-color: {{VALUE}};',
 			    ],
                 'condition'     => [
                     'eael_dynamic_template_layout' => 'preset-3',
@@ -3166,7 +3333,8 @@ class Woo_Product_List extends Widget_Base
 		    Group_Control_Border::get_type(),
 		    [
 			    'name'     => 'eael_product_popup_cart_button_border',
-			    'selector' => '.eael-popup-details-render{{WRAPPER}} .button, .eael-popup-details-render{{WRAPPER}} button.button.alt',
+			    'selector' => '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt, 
+                .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled',
 		    ]
 	    );
 	    $this->add_control(
@@ -3180,7 +3348,8 @@ class Woo_Product_List extends Widget_Base
 				    ],
 			    ],
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .button, .eael-popup-details-render{{WRAPPER}} button.button.alt' => 'border-radius: {{SIZE}}px;',
+				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'border-radius: {{SIZE}}px;',
 			    ],
 		    ]
 	    );
@@ -3195,7 +3364,8 @@ class Woo_Product_List extends Widget_Base
 			    'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .button:hover, .eael-popup-details-render{{WRAPPER}} button.button.alt:hover' => 'color: {{VALUE}};',
+				    '.eael-popup-details-render .button:hover, .eael-popup-details-render button.button.alt:hover,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled:hover' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3207,7 +3377,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#000',
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .button:hover, .eael-popup-details-render{{WRAPPER}} button.button.alt:hover' => 'background-color: {{VALUE}};',
+				    '.eael-popup-details-render .button:hover, .eael-popup-details-render button.button.alt:hover,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled:hover' => 'background-color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3219,7 +3390,7 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '',
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .button:hover, .eael-popup-details-render{{WRAPPER}} button.button.alt:hover' => 'border-color: {{VALUE}};',
+				    '.eael-popup-details-render .button:hover, .eael-popup-details-render button.button.alt:hover' => 'border-color: {{VALUE}};',
 			    ],
 			    'condition' => [
 				    'eael_product_popup_cart_button_border_border!' => '',
@@ -3246,7 +3417,7 @@ class Woo_Product_List extends Widget_Base
 		    [
 			    'name'     => 'eael_product_popup_sku_typo',
 			    'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-			    'selector' => '.eael-popup-details-render{{WRAPPER}} .product_meta',
+			    'selector' => '.eael-product-popup.woocommerce .eael-popup-details-render .elementor-element-{{ID}} div.product .product_meta',
 		    ]
 	    );
 
@@ -3257,7 +3428,7 @@ class Woo_Product_List extends Widget_Base
 			    'label'     => __( 'Title Color', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .product_meta' => 'color: {{VALUE}};',
+				    '.eael-popup-details-render .product_meta' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3268,7 +3439,7 @@ class Woo_Product_List extends Widget_Base
 			    'label'     => __( 'Content Color', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .product_meta .sku, .eael-popup-details-render{{WRAPPER}} .product_meta a' => 'color: {{VALUE}};',
+				    '.eael-popup-details-render .product_meta .sku, .eael-popup-details-render .product_meta a' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3279,7 +3450,7 @@ class Woo_Product_List extends Widget_Base
 			    'label'     => __( 'Hover Color', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} .product_meta a:hover' => 'color: {{VALUE}};',
+				    '.eael-popup-details-render .product_meta a:hover' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3314,7 +3485,7 @@ class Woo_Product_List extends Widget_Base
 				    ],
 			    ],
 			    'selectors'  => [
-				    '.eael-popup-details-render{{WRAPPER}} button.eael-product-popup-close' => 'font-size: {{SIZE}}{{UNIT}};',
+				    '.eael-popup-details-render button.eael-product-popup-close' => 'font-size: {{SIZE}}{{UNIT}};',
 			    ],
 		    ]
 	    );
@@ -3340,7 +3511,7 @@ class Woo_Product_List extends Widget_Base
 				    ],
 			    ],
 			    'selectors'  => [
-				    '.eael-popup-details-render{{WRAPPER}} button.eael-product-popup-close' => 'max-width: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}}',
+				    '.eael-popup-details-render button.eael-product-popup-close' => 'max-width: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}}',
 			    ],
 		    ]
 	    );
@@ -3351,7 +3522,7 @@ class Woo_Product_List extends Widget_Base
 			    'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} button.eael-product-popup-close' => 'color: {{VALUE}}!important;',
+				    '.eael-popup-details-render button.eael-product-popup-close' => 'color: {{VALUE}}!important;',
 			    ],
 		    ]
 	    );
@@ -3362,7 +3533,7 @@ class Woo_Product_List extends Widget_Base
 			    'label'     => __( 'Background', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '.eael-popup-details-render{{WRAPPER}} button.eael-product-popup-close' => 'background-color: {{VALUE}}!important;',
+				    '.eael-popup-details-render button.eael-product-popup-close' => 'background-color: {{VALUE}}!important;',
 			    ],
 		    ]
 	    );
@@ -3385,7 +3556,7 @@ class Woo_Product_List extends Widget_Base
 				    ],
 			    ],
 			    'selectors'  => [
-				    '.eael-popup-details-render{{WRAPPER}} button.eael-product-popup-close' => 'border-radius: {{SIZE}}{{UNIT}};',
+				    '.eael-popup-details-render button.eael-product-popup-close' => 'border-radius: {{SIZE}}{{UNIT}};',
 			    ],
 		    ]
 	    );
@@ -3395,7 +3566,7 @@ class Woo_Product_List extends Widget_Base
 		    [
 			    'name'     => 'eael_product_popup_close_button_box_shadow',
 			    'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
-			    'selector' => '.eael-popup-details-render{{WRAPPER}} button.eael-product-popup-close',
+			    'selector' => '.eael-popup-details-render button.eael-product-popup-close',
 		    ]
 	    );
 
@@ -3406,7 +3577,7 @@ class Woo_Product_List extends Widget_Base
 			    'type'       => Controls_Manager::DIMENSIONS,
 			    'size_units' => ['px', '%'],
 			    'selectors'  => [
-				    '.eael-popup-details-render{{WRAPPER}}.eael-product-popup-details' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '.eael-popup-details-render .eael-product-popup-details' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			    ],
 			    'separator'  => 'before',
 		    ]
@@ -3418,7 +3589,7 @@ class Woo_Product_List extends Widget_Base
 			    'name'     => 'eael_product_popup_background',
 			    'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
 			    'types'    => ['classic', 'gradient'],
-			    'selector' => '.eael-popup-details-render{{WRAPPER}}.eael-product-popup-details',
+			    'selector' => '.eael-popup-details-render .eael-product-popup-details',
 			    'exclude'  => [
 				    'image',
 			    ],
@@ -3430,7 +3601,7 @@ class Woo_Product_List extends Widget_Base
             [
                 'name' => 'eael_product_popup_box_shadow',
                 'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-product-popup .eael-product-popup-details',
+                'selector' => '.eael-product-popup .eael-product-popup-details',
             ]
         );
 
@@ -3583,7 +3754,7 @@ class Woo_Product_List extends Widget_Base
 			    if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
 				    wp_enqueue_script( 'photoswipe-ui-default' );
 				    wp_enqueue_style( 'photoswipe-default-skin' );
-				    if ( has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
+				    if ( ! Plugin::$instance->editor->is_edit_mode() && has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
 					    add_action( 'wp_footer', 'woocommerce_photoswipe', 15 );
 				    }
 			    }
@@ -3656,16 +3827,17 @@ class Woo_Product_List extends Widget_Base
 
     public static function eael_print_product_title_html( $woo_product_list, $product ){
         if ( $woo_product_list['title_show'] ) : 
+            $title_tag = ClassesHelper::eael_validate_html_tag( $woo_product_list['title_tag'] );
         ?>
-            <<?php echo $woo_product_list['title_tag'];  ?> class="eael-product-list-title">
+            <<?php echo esc_html( $title_tag );  ?> class="eael-product-list-title">
                 <?php if ( $woo_product_list['title_clickable'] ) : ?>
-                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                    <?php echo ClassesHelper::eael_wp_kses( $product->get_title() ); ?>
+                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" target="_blank">
+                    <?php echo wp_kses( $product->get_title(), ClassesHelper::eael_allowed_tags() ); ?>
                 </a>
                 <?php else : ?>
-                    <?php echo ClassesHelper::eael_wp_kses( $product->get_title() ); ?>
+                    <?php echo wp_kses( $product->get_title(), ClassesHelper::eael_allowed_tags() ); ?>
                 <?php endif; ?>
-            </<?php echo $woo_product_list['title_tag'];  ?>>
+            </<?php echo esc_html( $title_tag );  ?>>
         <?php 
         endif;
     }
@@ -3767,96 +3939,146 @@ class Woo_Product_List extends Widget_Base
 	}
 
     /**
-     * Prepare product query
+     * Convert WP_Query arguments to WC_Product_Query arguments
+     * @param array $wp_args Original WP_Query arguments
+     * @param array $settings Widget settings
+     * @return array WC_Product_Query compatible arguments
+     */
+    public function convert_wp_query_args_to_wc_product_query($wp_args, $settings = []) {
+        $wc_args = [
+            'paginate' => true,
+            'return' => 'objects',
+            'visibility' => 'visible'
+        ];
+
+        // Parameter mapping
+        $arg_mapping = [
+            'posts_per_page' => 'limit',
+            'post_status' => 'status',
+            'post__in' => 'include',
+            'post__not_in' => 'exclude',
+            'author__in' => 'author',
+            'paged' => 'page',
+        ];
+
+        foreach ($arg_mapping as $wp_key => $wc_key) {
+            if (isset($wp_args[$wp_key])) {
+                $wc_args[$wc_key] = $wp_args[$wp_key];
+            }
+        }
+
+        // Handle other parameters
+        $direct_copy = ['orderby', 'order', 'offset'];
+        foreach ($direct_copy as $key) {
+            if (isset($wp_args[$key])) {
+                $wc_args[$key] = $wp_args[$key];
+            }
+        }
+
+        // Handle search
+        if (isset($wp_args['s'])) {
+            $wc_args['search'] = $wp_args['s'];
+        }
+
+        // Preserve complex queries
+        if (isset($wp_args['meta_query'])) {
+            $wc_args['meta_query'] = $wp_args['meta_query'];
+        }
+        if (isset($wp_args['tax_query'])) {
+            $wc_args['tax_query'] = $wp_args['tax_query'];
+        }
+
+        // Handle meta_key/meta_value
+        if (isset($wp_args['meta_key'])) {
+            if (!isset($wc_args['meta_query'])) {
+                $wc_args['meta_query'] = ['relation' => 'AND'];
+            }
+            $meta_query = ['key' => $wp_args['meta_key']];
+            if (isset($wp_args['meta_value'])) {
+                $meta_query['value'] = $wp_args['meta_value'];
+            }
+            if (isset($wp_args['meta_compare'])) {
+                $meta_query['compare'] = $wp_args['meta_compare'];
+            }
+            $wc_args['meta_query'][] = $meta_query;
+        }
+
+        // Apply settings-based parameters
+        if (!empty($settings['eael_product_list_products_status'])) {
+            $wc_args['status'] = array_intersect(
+                (array) $settings['eael_product_list_products_status'],
+                ['publish', 'draft', 'pending', 'future']
+            );
+        }
+
+        return $wc_args;
+    }
+
+    /**
+     * Prepare product query using WC_Product_Query
      * @param $settings
      * @return array
      */
     public function eael_prepare_product_query( $settings ) {
-        $args = [
-            'post_type'         => 'product',
+        $wc_args = [
             'order'             => ! empty( $settings['order'] )  ? sanitize_text_field( $settings['order'] ) : 'desc',
-            'post_status'       => ! empty( $settings['eael_product_list_products_status'] ) ? $settings['eael_product_list_products_status'] : [ 'publish', 'pending', 'future' ],
-            'posts_per_page'    => ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4,
+            'status'            => ! empty( $settings['eael_product_list_products_status'] ) ? $settings['eael_product_list_products_status'] : [ 'publish', 'pending', 'future' ],
+            'limit'             => ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4,
             'offset'            => ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0,
-            'tax_query' => [
-                'relation' => 'AND',
-                [
-                    'taxonomy' => 'product_visibility',
-                    'field' => 'name',
-                    'terms' => ['exclude-from-search', 'exclude-from-catalog'],
-                    'operator' => 'NOT IN',
-                ],
-            ],
+            'paginate'          => true,
+            'return'            => 'objects',
+            'visibility'        => 'visible',
         ];
 
-        // Order by
+        // Order by - use WC_Product_Query native parameters when possible
         if ( '_price' === $settings['orderby'] ) {
-            $args['orderby'] = 'meta_value_num';
-            $args['meta_key'] = '_price';
+            $wc_args['orderby'] = 'price';
         } else if ( '_sku' === $settings['orderby'] ) {
-            $args['orderby'] = 'meta_value meta_value_num';
-            $args['meta_key'] = '_sku';
+            $wc_args['orderby'] = 'sku';
         } else {
-            $args['orderby'] = ! empty( $settings['orderby'] ) ? sanitize_text_field( $settings['orderby'] ) : 'date';
+            $wc_args['orderby'] = ! empty( $settings['orderby'] ) ? sanitize_text_field( $settings['orderby'] ) : 'date';
         }
 
-        // Categories
+        // Categories - use native WC parameter when possible
         if ( ! empty( $settings['eael_product_list_categories'] ) && is_array( $settings['eael_product_list_categories'] ) ) {
-            $args['tax_query'][] = [
-                'taxonomy' => 'product_cat',
-                'field' => 'slug',
-                'terms' => $settings['eael_product_list_categories'],
-                'operator' => 'IN',
-            ];
+            $wc_args['category'] = $settings['eael_product_list_categories'];
         }
 
-        $args['meta_query'] = [
-            'relation' => 'AND',
-        ];
-
-        // Stock settings
-        if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ) {
-            $args['meta_query'][] = [
-                'key' => '_stock_status',
-                'value' => 'instock'
-            ];
+        // Stock settings - use native WC parameter
+        if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) || 'yes' !== $settings['eael_product_show_stockout'] ) {
+            $wc_args['stock_status'] = 'instock';
         }
 
-        // Filter by
+        // Filter by - use WC_Product_Query native parameters when possible
         switch( $settings['eael_product_list_product_filter'] ){
             case 'featured-products':
-                $args['tax_query'][] = [
-                    'taxonomy' => 'product_visibility',
-                    'field' => 'name',
-                    'terms' => 'featured',
-                ];
+                $wc_args['featured'] = true;
                 break;
 
             case 'best-selling-products':
-                $args['meta_key'] = 'total_sales';
-                $args['orderby'] = 'meta_value_num';
-                $args['order'] = 'desc';
+                $wc_args['orderby'] = 'total_sales';
+                $wc_args['order'] = 'desc';
                 break;
-                
+
             case 'sale-products':
-                $args['post__in']  = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
+                $sale_ids = wc_get_product_ids_on_sale();
+                $wc_args['include'] = !empty($sale_ids) ? $sale_ids : [0];
                 break;
-                
+
             case 'top-products':
-                $args['meta_key'] = '_wc_average_rating';
-                $args['orderby'] = 'meta_value_num';
-                $args['order'] = 'desc';
+                $wc_args['orderby'] = 'average_rating';
+                $wc_args['order'] = 'desc';
                 break;
-            
+
             case 'manual':
-                $args['post__in'] = ! empty( $settings['eael_product_list_products_in'] ) ? $settings['eael_product_list_products_in'] : [ 0 ];
+                $wc_args['include'] = ! empty( $settings['eael_product_list_products_in'] ) ? $settings['eael_product_list_products_in'] : [ 0 ];
                 break;
 
             default:
                 break;
         }
 
-        return $args;
+        return $wc_args;
     }
 
     protected function render() {
@@ -3868,11 +4090,12 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list   = $this->woo_product_list_settings  = self::get_woo_product_list_settings( $settings );
         $is_product_archive = is_product_tag() || is_product_category() || is_shop() || is_product_taxonomy();
 
-        if ( 'source_dynamic' === $settings['post_type'] && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
+        if ( 'source_dynamic' === $settings['post_type'] && is_archive() || ! empty( $_REQUEST['post_type'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		    $settings['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
 		    $settings['offset']         = ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0;
-		    $args                       = ClassesHelper::get_query_args( $settings );
-		    $args                       = ClassesHelper::get_dynamic_args( $settings, $args );
+		    $wp_args                    = ClassesHelper::get_query_args( $settings );
+		    $wp_args                    = ClassesHelper::get_dynamic_args( $settings, $wp_args );
+		    $args                       = $this->convert_wp_query_args_to_wc_product_query( $wp_args, $settings );
 	    } else {
             $args = $this->eael_prepare_product_query( $settings );
 	    }
@@ -3887,11 +4110,14 @@ class Woo_Product_List extends Widget_Base
                 $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
  
                 if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
-                    $args['post__in'] = $user_ordered_products;
+                    $args['include'] = $user_ordered_products;
                 }
 
                 if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
-                    $args['post__not_in'] = $user_ordered_products;
+                    $args['exclude'] = array_merge(
+                        $args['exclude'] ?? [],
+                        $user_ordered_products
+                    );
                 }
             }
         }
@@ -3914,42 +4140,81 @@ class Woo_Product_List extends Widget_Base
                         $settings['loadable_file_name']     = $this->get_filename_only( $template );
                         $dir_name                           = $this->get_temp_dir_name( $settings['loadable_file_name'] );
                         $found_posts                        = 0;
+                        $offset                             = ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0;
                         
 
                         if ( file_exists( $template ) ) {
                             if( $settings['post_type'] === 'source_archive' && is_archive() && $is_product_archive ){
                                 global $wp_query;
                                 $query = $wp_query;
-                                $args  = $wp_query->query_vars;
+                                $wp_args = $wp_query->query_vars;
+                                $found_posts = $query->found_posts;
+                                $max_page = $query->max_num_pages;
                             } else {
-                                $query = new \WP_Query( $args );
-                            }
-                            
-                            if ( $query->have_posts() ) {
-                                // Load more data
-                                $found_posts                        = $query->found_posts;
-                                $max_page                           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
-                                $args['max_page']                   = $max_page;
-                                $args['total_post']                 = $found_posts;
+                                // Use WC_Product_Query for custom queries
+                                $wc_query = new \WC_Product_Query( $args );
+                                $products = $wc_query->get_products();
 
-                                while ( $query->have_posts() ) {
-                                    $query->the_post();
-                                    include( realpath( $template ) );
+                                // Handle WC_Product_Query results
+                                if ( is_object( $products ) && isset( $products->products ) ) {
+                                    $product_objects = $products->products;
+                                    $found_posts = $products->total;
+                                    $max_page = $products->max_num_pages;
+                                } else {
+                                    $product_objects = $products;
+                                    $found_posts = count( $products );
+                                    $max_page = 1;
                                 }
-                                wp_reset_postdata();
+                            }
+
+                            // Handle archive queries with WP_Query
+                            if( $settings['post_type'] === 'source_archive' && is_archive() && $is_product_archive ){
+                                if ( $query->have_posts() ) {
+                                    // Load more data
+                                    $args['max_page']                   = $max_page;
+                                    $args['total_post']                 = $found_posts;
+
+                                    while ( $query->have_posts() ) {
+                                        $query->the_post();
+                                        include( realpath( $template ) );
+                                    }
+                                    wp_reset_postdata();
+                                } else {
+                                    printf( '<p class="no-posts-found">%s</p>', esc_html( $woo_product_list['products_not_found_text'] ) );
+                                }
                             } else {
-                                printf( '<p class="no-posts-found">%s</p>', __( $woo_product_list['products_not_found_text'], 'essential-addons-for-elementor-lite' ) );
+                                // Handle WC_Product_Query results
+                                if ( ! empty( $product_objects ) ) {
+                                    // Load more data
+                                    $args['max_page']                   = $max_page;
+                                    $args['total_post']                 = $found_posts;
+
+                                    foreach ( $product_objects as $product ) {
+                                        global $post;
+                                        $post = get_post( $product->get_id() );
+                                        setup_postdata( $post );
+                                        include( realpath( $template ) );
+                                    }
+                                    wp_reset_postdata();
+                                } else {
+                                    printf( '<p class="no-posts-found">%s</p>', esc_html( $woo_product_list['products_not_found_text'] ) );
+                                }
                             }
                         } else {
-                            _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+                            echo '<p class="eael-no-posts-found">' . esc_html__( 'No layout found!', 'essential-addons-for-elementor-lite' ) . '</p>';
                         }
 
                         do_action( 'eael/woo-product-list/after-product-loop' );
                         ?>
                     </div>
 
-                    <?php 
-                    if ( ! empty( $args['posts_per_page'] ) && $found_posts > $args['posts_per_page'] ) {
+                    <?php
+                    $limit = $args['limit'] ?? $args['posts_per_page'] ?? 4;
+                    if ( $found_posts > $limit ) {
+                        // Ensure args has posts_per_page for load more compatibility
+                        if ( ! isset( $args['posts_per_page'] ) ) {
+                            $args['posts_per_page'] = $limit;
+                        }
                         $this->print_load_more_button( $settings, $args, $dir_name );
                     }
                     ?>

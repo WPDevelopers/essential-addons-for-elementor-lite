@@ -2,6 +2,46 @@ eael.hooks.addAction("init", "ea", () => {
 	if (eael.elementStatusCheck('eaelAdvancedTabs')) {
 		return false;
 	}
+	function eaelFixSwiperHover($container) {
+		if (!$container || !$container.length) {
+			return;
+		}
+
+		const $swipers = $container.find('.swiper, .swiper-container');
+
+		if (!$swipers.length) {
+			return;
+		}
+
+		$swipers.each(function () {
+			const swiperInstance = this.swiper;
+
+			if (!swiperInstance) {
+				return;
+			}
+
+			// Full recalculation (what drag eventually causes)
+			swiperInstance.update();
+			swiperInstance.updateSize();
+			swiperInstance.updateSlides();
+			swiperInstance.updateProgress();
+			swiperInstance.updateSlidesClasses();
+
+			// 🔴 Critical: remove interaction blockers
+			swiperInstance.slides.forEach(slide => {
+				slide.removeAttribute('inert');
+				slide.removeAttribute('aria-hidden');
+				slide.style.pointerEvents = 'auto';
+			});
+
+			// Force active slide re-activation
+			swiperInstance.slideTo(swiperInstance.activeIndex, 0, false);
+
+			// Safety repaint (fixes Safari + Chromium edge cases)
+			swiperInstance.el.offsetHeight;
+		});
+	}
+
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-adv-tabs.default",
 		function ($scope, $) {
@@ -101,7 +141,19 @@ eael.hooks.addAction("init", "ea", () => {
 					//Scroll on click
 					if ( $scrollOnClick === 'yes' ) {
 						let $eaelContainerSelect = $(this).attr('aria-controls');
-						$(this).attr('data-scroll', $('#'+$eaelContainerSelect).offset().top)
+						let $scrollTarget = $('#'+$eaelContainerSelect);
+						let scrollPosition = $scrollTarget.offset().top;
+
+						// For vertical layout, adjust scroll position to account for content area positioning
+						if (tabsContainer.hasClass('eael-tabs-vertical')) {
+							// In vertical layout, use the content container's position instead of individual tab content
+							let $contentContainer = tabsContainer.find('.eael-tabs-content');
+							if ($contentContainer.length) {
+								scrollPosition = $contentContainer.offset().top;
+							}
+						}
+
+						$(this).attr('data-scroll', scrollPosition);
 					}
 					if ($scrollOnClick === 'yes' && $(this).hasClass("active") ) {
 						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
@@ -121,7 +173,19 @@ eael.hooks.addAction("init", "ea", () => {
 					//Scroll on click
 					if ($scrollOnClick === 'yes') {
 						let $eaelContainerSelect = $(this).attr('aria-controls');
-						$(this).attr('data-scroll', $('#'+$eaelContainerSelect).offset().top)
+						let $scrollTarget = $('#'+$eaelContainerSelect);
+						let scrollPosition = $scrollTarget.offset().top;
+
+						// For vertical layout, adjust scroll position to account for content area positioning
+						if (tabsContainer.hasClass('eael-tabs-vertical')) {
+							// In vertical layout, use the content container's position instead of individual tab content
+							let $contentContainer = tabsContainer.find('.eael-tabs-content');
+							if ($contentContainer.length) {
+								scrollPosition = $contentContainer.offset().top;
+							}
+						}
+
+						$(this).attr('data-scroll', scrollPosition);
 					}
 					if ($scrollOnClick === 'yes' && $(this).hasClass("active")) {
 						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
@@ -130,7 +194,14 @@ eael.hooks.addAction("init", "ea", () => {
 						}, $scrollSpeed);
 					}
 				}
-				eael.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
+
+				// Trigger hook with a small delay to ensure content is fully rendered
+				setTimeout(function() {
+					window.eaelPreventResizeOnClick = true; // disabling resize event to prevent browser unresponsiveness behavior
+					const $activeTabContent = $(tabsContent).eq(currentTabIndex);
+					eaelFixSwiperHover($activeTabContent);
+					eael.hooks.doAction("ea-advanced-tabs-triggered", $activeTabContent);
+				}, 50);
 				
 				$(tabsContent).each(function (index) {
 					$(this).removeClass("active-default");
@@ -190,9 +261,20 @@ eael.hooks.addAction("init", "ea", () => {
 			// If hashTag is not null then scroll to that hashTag smoothly
 			if( typeof hashTag !== 'undefined' && hashTag && !eael.elementStatusCheck('eaelAdvancedTabScroll')){
 				let $customIdOffsetValTab = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
-					$('html, body').animate({
-						scrollTop: $("#"+hashTag).offset().top - $customIdOffsetValTab,
-					}, 300);
+				let scrollPosition = $("#"+hashTag).offset().top;
+
+				// For vertical layout, adjust scroll position to account for content area positioning
+				if ($currentTab.hasClass('eael-tabs-vertical')) {
+					// In vertical layout, use the content container's position instead of individual tab content
+					let $contentContainer = $currentTab.find('.eael-tabs-content');
+					if ($contentContainer.length) {
+						scrollPosition = $contentContainer.offset().top;
+					}
+				}
+
+				$('html, body').animate({
+					scrollTop: scrollPosition - $customIdOffsetValTab,
+				}, 300);
 			}
 		}
 	);

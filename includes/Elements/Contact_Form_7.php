@@ -85,6 +85,10 @@ class Contact_Form_7 extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/contact-form-7/';

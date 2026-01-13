@@ -43,5 +43,8 @@ var qtyIncDecButton = function ($scope) {
 jQuery(document).on('updated_wc_div', qtyIncDecButton);
 
 jQuery(window).on("elementor/frontend/init", function () {
+    if ( eael.elementStatusCheck('eaelWooCart') ) {
+		return false;
+	}
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-woo-cart.default", WooCart);
 });

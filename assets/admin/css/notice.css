@@ -179,19 +179,72 @@ span.coupon-code {
     z-index: 26;
     display:none;
 }
-
-.notice-essential-addons-for-elementor-black_friday_notice {
-    border-left-color: #3557FF;
-    padding: 10px;
+/* notice-essential-addons-for-elementor-lite-bfcm_2025_notice */
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice,
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice {
+    padding: 0;
+    border: 0;
+    border-left: 3px solid #B083F4;
+}
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .wpnotice-content-wrapper {
+    display: flex;
+    width: 100%;
+    padding: 12px 0;
+    align-items: center;
+}
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .wpnotice-content-wrapper .eael-black-friday-optin-logo {
+    width: 245px;
+    padding: 0;
+    text-align: center;
+}
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .wpnotice-content-wrapper .eael-black-friday-optin-logo img {
+    width: auto;
+    display: block;
+    margin: auto 34px auto 55px;
+    max-width: 163px;
+}
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .wpnotice-content-wrapper .eael-black-friday-optin {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(100% - 225px);
+    align-items: flex-start;
+}
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .wpnotice-content-wrapper .eael-black-friday-optin p {
+    color: #3C434A;
+    font-size: 15px;
+    margin-top: 0;
 }
 
-.notice-essential-addons-for-elementor-black_friday_notice .button {
-    margin-right: 10px;
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .eael-notice-action-button .eael-action-dismiss-btn {
+   text-decoration: underline;
+   color: #424242;
+   cursor: pointer;
 }
 
-.notice-essential-addons-for-elementor-black_friday_notice .gift-icon {
-    font-size: 20px;
-    vertical-align: middle;
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .wpnotice-content-wrapper .eael-black-friday-optin a.button-primary {
+      background-color: #3B4045;
+      color: #fff;
+      box-shadow: 0px 1px 0px 0px #000000;
+      border: none;
+      border-radius: 6px;
+      padding: 2px 16px;
+}
+
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .wpnotice-content-wrapper .eael-black-friday-optin a + a {
+    color: #5626E7;
+    margin-left: 20px;
+}
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .wpnotice-content-wrapper .eael-black-friday-optin svg {
+    vertical-align: sub;
+    margin-right: 3px;
+}
+.notice-essential-addons-for-elementor-lite-bfcm_2025_notice .notice-dismiss:before {
+    content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTYuOTk5OTcgNS41ODU5MUwxMS45NDk1IDAuNjM2MzY4TDEzLjM2MzYgMi4wNTA1MUw4LjQxNDA5IDcuMDAwMDRMMTMuMzYzNiAxMS45NDk1TDExLjk0OTUgMTMuMzYzNkw2Ljk5OTk3IDguNDE0MThMMi4wNTA1IDEzLjM2MzZMMC42MzYzNTMgMTEuOTQ5NUw1LjU4NTg0IDcuMDAwMDRMMC42MzYzNTMgMi4wNTA1MUwyLjA1MDUgMC42MzYzNjhMNi45OTk5NyA1LjU4NTkxWiIgZmlsbD0iIzNDNDM0QSIvPgo8L3N2Zz4=")
 }
 
 #wpnotice-essential-addons-for-elementor-review {
@@ -202,4 +255,26 @@ span.coupon-code {
 
 #wpnotice-essential-addons-for-elementor-review a {
     text-decoration: none;
+}
+
+@media screen and (max-width: 767px) {
+    .notice-essential-addons-for-elementor-lite-bfcm_2025_notice {
+        display: none !important;
+    }
+}
+
+.notice-essential-addons-for-elementor-lite-review ul.essential-addons-for-elementor-lite-notice-links li a span {
+    text-decoration: none;
+}
+
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-better-payment"],
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-career-page"],
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-embedpress"] {
+    display: none;
+}
+
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-woo-product-carousel"] .eaicon-product-carousel:before,
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-woo-product-slider"] .eaicon-product-slider:before,
+#elementor-element-manager-wrap .wp-list-table tr[data-key-id="eael-woo-product-list"] .eaicon-woo-product-list:before {
+    font-size: unset;
 }

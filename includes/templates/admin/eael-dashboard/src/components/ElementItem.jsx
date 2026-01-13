@@ -18,7 +18,7 @@ function ElementItem(props) {
 
     return (
         <>
-            <div className="ea__content-items">
+            <div className={eaData.is_pro ? "ea__content-items eael--pro-elements" : "ea__content-items "}>
                 <div className="ea__content-head">
                     <h5 className="eael-toggle-label">{eaData.title}</h5>
                     <label className="toggle-wrap" onClick={eaData.is_pro && !isProActivated ? goProModal : undefined}>

@@ -129,7 +129,14 @@ module.exports = (env, argv) => {
 						MiniCssExtractPlugin.loader,
 						{ loader: "css-loader", options: { url: false } },
 						"postcss-loader",
-						"sass-loader",
+						{
+							loader: "sass-loader",
+							options: {
+								sassOptions: {
+									silenceDeprecations: ["legacy-js-api", "import", "global-builtin", "mixed-decls", "color-functions"]
+								}
+							}
+						},
 					],
 				},
 			],

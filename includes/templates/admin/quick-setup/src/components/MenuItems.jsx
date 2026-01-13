@@ -1,15 +1,17 @@
 import { __ } from "@wordpress/i18n";
+import { hasDisplayablePlugins, getPluginPromoCount } from "../utils/pluginPromoUtils";
 
 function MenuItems({ activeTab, handleTabChange }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let menu_items = eaelQuickSetup?.menu_items;
-  let wizard_column = menu_items?.wizard_column;
-  let templately_status = menu_items?.templately_status;
   let items = menu_items?.items;
-  let templately_local_plugin_data = menu_items?.templately_local_plugin_data;
   let ea_pro_local_plugin_data = menu_items?.ea_pro_local_plugin_data;
   let i = 0;
   let itemClass = "";
+  let hasPluginPromo = getPluginPromoCount();
+
+  // Check if there are any non-installed plugins to display
+  const shouldShowPluginsPromo = hasDisplayablePlugins();
 
   return (
     <>
@@ -17,15 +19,14 @@ function MenuItems({ activeTab, handleTabChange }) {
         className={`eael-onboard-nav-list flex justify-between ${eaelQuickSetup.menu_items.wizard_column}`}
         data-step="1"
       >
-        {items.map((item, index) => {
+        {Object.keys(items).map((item, index) => {
           // Conditional logic to skip certain items
-          if (
-            (item === "Templately" && templately_status) ||
-            (templately_local_plugin_data !== false && item === "Templately")
-          ) {
+
+          if ('pluginspromo' === item && (!hasPluginPromo || !shouldShowPluginsPromo)) {
             return null;
           }
-          if ( ea_pro_local_plugin_data && item === "Go PRO") {
+
+          if ( 'go_pro' === item && ea_pro_local_plugin_data ) {
             return null;
           }
 
@@ -39,7 +40,7 @@ function MenuItems({ activeTab, handleTabChange }) {
               key={index}
             >
               <span className="eael-nav-count">{++i}</span>
-              <span className="eael-nav-text">{item}</span>
+              <span className="eael-nav-text">{items[item]}</span>
             </div>
           );
         })}

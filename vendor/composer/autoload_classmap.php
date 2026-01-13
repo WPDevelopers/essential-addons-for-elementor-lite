@@ -7,12 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'PriyoMukul\\WPNotice\\Dismiss' => $vendorDir . '/priyomukul/wp-notice/src/Dismiss.php',
-    'PriyoMukul\\WPNotice\\Notice' => $vendorDir . '/priyomukul/wp-notice/src/Notice.php',
-    'PriyoMukul\\WPNotice\\Notices' => $vendorDir . '/priyomukul/wp-notice/src/Notices.php',
-    'PriyoMukul\\WPNotice\\Utils\\Base' => $vendorDir . '/priyomukul/wp-notice/src/Utils/Base.php',
-    'PriyoMukul\\WPNotice\\Utils\\CacheBank' => $vendorDir . '/priyomukul/wp-notice/src/Utils/CacheBank.php',
-    'PriyoMukul\\WPNotice\\Utils\\Helper' => $vendorDir . '/priyomukul/wp-notice/src/Utils/Helper.php',
-    'PriyoMukul\\WPNotice\\Utils\\NoticeRemover' => $vendorDir . '/priyomukul/wp-notice/src/Utils/NoticeRemover.php',
-    'PriyoMukul\\WPNotice\\Utils\\Storage' => $vendorDir . '/priyomukul/wp-notice/src/Utils/Storage.php',
 );

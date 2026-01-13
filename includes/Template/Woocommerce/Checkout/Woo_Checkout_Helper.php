@@ -41,13 +41,14 @@ trait Woo_Checkout_Helper {
 		// Get checkout object.
 		$checkout = WC()->checkout();
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 		if ( empty( $_POST ) && wc_notice_count( 'error' ) > 0 ) { // WPCS: input var ok, CSRF ok.
 
 			wc_get_template( 'checkout/cart-errors.php', array( 'checkout' => $checkout ) );
 			wc_clear_notices();
 
 		} else {
-
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$non_js_checkout = ! empty( $_POST['woocommerce_checkout_update_totals'] ); // WPCS: input var ok, CSRF ok.
 
 			if ( wc_notice_count( 'error' ) === 0 && $non_js_checkout ) {
@@ -55,6 +56,7 @@ trait Woo_Checkout_Helper {
 			}
 
 			if($settings['ea_woo_checkout_layout'] == 'default'){
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo self::render_default_template_($checkout, $settings);
 			}else {
 				do_action('eael_add_woo_checkout_pro_layout', $checkout, $settings);
@@ -71,6 +73,7 @@ trait Woo_Checkout_Helper {
 
 		// Get the order.
 		$order_id  = apply_filters( 'woocommerce_thankyou_order_id', absint( $order_id ) );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 		$order_key = apply_filters( 'woocommerce_thankyou_order_key', empty( $_GET['key'] ) ? '' : wc_clean( wp_unslash( $_GET['key'] ) ) ); // WPCS: input var ok, CSRF ok.
 
 		if ( $order_id > 0 ) {
@@ -106,8 +109,10 @@ trait Woo_Checkout_Helper {
 		$order_id = absint( $order_id );
 
 		// Pay for existing order.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_GET['pay_for_order'], $_GET['key'] ) && $order_id ) { // WPCS: input var ok, CSRF ok.
 			try {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 				$order_key          = isset( $_GET['key'] ) ? wc_clean( wp_unslash( $_GET['key'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 				$order              = wc_get_order( $order_id );
 				$hold_stock_minutes = (int) get_option( 'woocommerce_hold_stock_minutes', 0 );
@@ -223,6 +228,7 @@ trait Woo_Checkout_Helper {
 		} elseif ( $order_id ) {
 
 			// Pay for order after checkout step.
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 			$order_key = isset( $_GET['key'] ) ? wc_clean( wp_unslash( $_GET['key'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 			$order     = wc_get_order( $order_id );
 
@@ -266,14 +272,14 @@ trait Woo_Checkout_Helper {
 
                 <form class="checkout_coupon woocommerce-form-coupon" method="post" style="display:none">
 
-                    <p><?php esc_html_e( $settings['ea_woo_checkout_coupon_form_content'], 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p><?php echo esc_html( $settings['ea_woo_checkout_coupon_form_content'] ); ?></p>
 
                     <p class="form-row form-row-first">
-                        <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( $settings['ea_woo_checkout_coupon_placeholder_text'], 'essential-addons-for-elementor-lite' ); ?>" id="coupon_code" value="" />
+                        <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr( $settings['ea_woo_checkout_coupon_placeholder_text'] ); ?>" id="coupon_code" value="" />
                     </p>
 
                     <p class="form-row form-row-last">
-                        <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( $settings['ea_woo_checkout_coupon_button_text'], 'essential-addons-for-elementor-lite' ); ?>"><?php esc_html_e( $settings['ea_woo_checkout_coupon_button_text'], 'essential-addons-for-elementor-lite' ); ?></button>
+                        <button type="submit" class="button" name="apply_coupon" value="<?php echo esc_attr( $settings['ea_woo_checkout_coupon_button_text'] ); ?>"><?php echo esc_html( $settings['ea_woo_checkout_coupon_button_text'] ); ?></button>
                     </p>
 
                     <div class="clear"></div>
@@ -300,7 +306,7 @@ trait Woo_Checkout_Helper {
         }
         ob_start();
 		?>
-        <div class="woo-checkout-login <?php echo $class; ?>">
+        <div class="woo-checkout-login <?php echo esc_attr( $class ); ?>">
             <div class="woocommerce-form-login-toggle">
 				<div class="ea-login-icon">
 					<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_login_icon'], [ 'aria-hidden' => 'true' ] ); ?>
@@ -354,6 +360,7 @@ trait Woo_Checkout_Helper {
 		<?php
         $content  = ob_get_clean();
         if($status){
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo $content;
         }
 	}
@@ -366,7 +373,7 @@ trait Woo_Checkout_Helper {
 		?>
 		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 		<h2 id="order_review_heading" class="woo-checkout-section-title">
-			<?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_order_details_title']); ?>
+			<?php echo wp_kses( $settings['ea_woo_checkout_order_details_title'], CheckoutHelperCLass::eael_allowed_tags() ); ?>
         </h2>
 
 		<?php do_action('woocommerce_checkout_before_order_review'); ?>
@@ -393,9 +400,12 @@ trait Woo_Checkout_Helper {
                 <?php
                 if( $settings['ea_woo_checkout_layout'] == 'default' ) { ?>
                     <li class="table-header">
-                        <div class="table-col-1"><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_product_text']); ?></div>
-                        <div class="table-col-2"><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_quantity_text']); ?></div>
-                        <div class="table-col-3"><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_price_text']); ?></div>
+						<?php
+						$table_html = '<div class="table-col-1">' . $settings['ea_woo_checkout_table_product_text'] . '</div>';
+						$table_html .= '<div class="table-col-2">' . $settings['ea_woo_checkout_table_quantity_text'] . '</div>';
+						$table_html .= '<div class="table-col-3">' . $settings['ea_woo_checkout_table_price_text'] . '</div>';
+						echo wp_kses( $table_html, CheckoutHelperCLass::eael_allowed_tags() );
+						?>
                     </li>
                 <?php }
                 ?>
@@ -412,22 +422,25 @@ trait Woo_Checkout_Helper {
 							<div class="table-col-1 product-thum-name">
 								<div class="product-thumbnail">
 									<?php
-									$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
-									echo $thumbnail; // PHPCS: XSS ok.
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									echo apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 									?>
 								</div>
 								<div class="product-name">
 									<?php $name = apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
-									echo CheckoutHelperCLass::eael_wp_kses( $name );
+									echo wp_kses( $name, CheckoutHelperCLass::eael_allowed_tags() );
 									?>
 									<?php if( $settings['ea_woo_checkout_layout'] == 'split' || $settings['ea_woo_checkout_layout'] == 'multi-steps' ) {
 										if( !empty( $settings['ea_woo_checkout_cart_update_enable'] ) && 'yes' === $settings['ea_woo_checkout_cart_update_enable'] ) {
 											static::eael_checkout_cart_quantity_input_print( $_product, $cart_item_key, $cart_item ); 
 										}else {
+											// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key );
 										}
-									} // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-									<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+									} 
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									echo wc_get_formatted_cart_item_data( $cart_item );
+									?>
 								</div>
 							</div>
                             <?php if( $settings['ea_woo_checkout_layout'] == 'default' ) { ?>
@@ -466,7 +479,7 @@ trait Woo_Checkout_Helper {
                             <?php //else : ?>
 <!--                                <i class="fas fa-long-arrow-alt-left"></i>--><?php //esc_html_e( 'Continue Shopping', 'essential-addons-for-elementor-lite' ); ?>
                             <?php //endif; ?>
-                            <i class="fas fa-long-arrow-alt-left"></i><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_shop_link_text']); ?>
+                            <i class="fas fa-long-arrow-alt-left"></i><?php echo wp_kses( $settings['ea_woo_checkout_shop_link_text'], CheckoutHelperCLass::eael_allowed_tags() ); ?>
 						</a>
 					</div>
 				<?php } ?>
@@ -474,7 +487,7 @@ trait Woo_Checkout_Helper {
 				<div class="footer-content">
 					<div class="cart-subtotal">
                         <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
-                            <div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_subtotal_text']); ?></div>
+                            <div><?php echo wp_kses( $settings['ea_woo_checkout_table_subtotal_text'], CheckoutHelperCLass::eael_allowed_tags() ); ?></div>
                         <?php else : ?>
                             <?php esc_html_e( 'Subtotal', 'essential-addons-for-elementor-lite' ); ?>
                         <?php endif; ?>
@@ -529,7 +542,7 @@ trait Woo_Checkout_Helper {
 
 					<div class="order-total">
                         <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
-                            <div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_total_text']); ?></div>
+                            <div><?php echo wp_kses( $settings['ea_woo_checkout_table_total_text'], CheckoutHelperCLass::eael_allowed_tags() ); ?></div>
                         <?php else : ?>
                             <?php esc_html_e( 'Total', 'essential-addons-for-elementor-lite' ); ?>
                         <?php endif; ?>
@@ -538,13 +551,16 @@ trait Woo_Checkout_Helper {
 					</div>
 
                     <?php
-                    if( class_exists('WC_Subscriptions_Cart') && (\WC_Subscriptions_Cart::cart_contains_subscription())) {
+					$has_subscription = class_exists('WC_Subscriptions_Cart') && (\WC_Subscriptions_Cart::cart_contains_subscription());
+                    if( $has_subscription ) {
                         echo '<table class="recurring-wrapper">';
                         do_action( 'eael_display_recurring_total_total' );
-                        echo '</table>';
                     }
+					do_action( 'woocommerce_review_order_after_order_total' );
+					if( $has_subscription ){
+						echo '</table>';
+					}
                     ?>
-					<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
 				</div>
 			</div>
 		</div>
@@ -603,14 +619,14 @@ trait Woo_Checkout_Helper {
 		$checkout = WC()->checkout();
 		$settings = self::ea_get_woo_checkout_settings();
 	    ?>
-		<div class="woocommerce-billing-fields">
+		<div class="woocommerce-billing-fields eael-billing-fields">
             <?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 
                 <h3><?php esc_html_e( 'Billing &amp; Shipping', 'essential-addons-for-elementor-lite' ); ?></h3>
 
             <?php else : ?>
 
-                <h3><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_billing_title']); ?></h3>
+                <h3><?php echo wp_kses( $settings['ea_woo_checkout_billing_title'], CheckoutHelperCLass::eael_allowed_tags() ); ?></h3>
 
             <?php endif; ?>
 
@@ -667,12 +683,12 @@ trait Woo_Checkout_Helper {
         $checkout = WC()->checkout();
 		$settings = self::ea_get_woo_checkout_settings();
         ?>
-        <div class="woocommerce-shipping-fields">
+        <div class="woocommerce-shipping-fields eael-shipping-fields">
 			<?php if ( true === WC()->cart->needs_shipping_address() ) : ?>
 
                 <h3 id="ship-to-different-address">
                     <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-                        <input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" <?php checked( apply_filters( 'woocommerce_ship_to_different_address_checked', 'shipping' === get_option( 'woocommerce_ship_to_destination' ) ? 1 : 0 ), 1 ); ?> type="checkbox" name="ship_to_different_address" value="1" /> <span><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_shipping_title']); ?></span>
+                        <input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" <?php checked( apply_filters( 'woocommerce_ship_to_different_address_checked', 'shipping' === get_option( 'woocommerce_ship_to_destination' ) ? 1 : 0 ), 1 ); ?> type="checkbox" name="ship_to_different_address" value="1" /> <span><?php echo wp_kses( $settings['ea_woo_checkout_shipping_title'], CheckoutHelperCLass::eael_allowed_tags() ); ?></span>
                     </label>
                 </h3>
 
@@ -703,7 +719,7 @@ trait Woo_Checkout_Helper {
 
 				<?php if ( ! WC()->cart->needs_shipping() || wc_ship_to_billing_address_only() ) : ?>
 
-                    <h3><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_additional_info_title']); ?></h3>
+                    <h3><?php echo wp_kses( $settings['ea_woo_checkout_additional_info_title'], CheckoutHelperCLass::eael_allowed_tags() ); ?></h3>
 
 				<?php endif; ?>
 
@@ -736,7 +752,7 @@ trait Woo_Checkout_Helper {
         <div class="woo-checkout-payment">
 	        <?php do_action('eael_wc_multistep_checkout_after_shipping'); ?>
             <h3 id="payment-title" class="woo-checkout-section-title">
-				<?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_payment_title']); ?>
+				<?php echo wp_kses( $settings['ea_woo_checkout_payment_title'], CheckoutHelperCLass::eael_allowed_tags() ); ?>
             </h3>
 
 			<?php wc_get_template(
@@ -823,6 +839,7 @@ trait Woo_Checkout_Helper {
 			);
 		}
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity,
 			$cart_item_key, $cart_item ); // PHPCS: XSS ok.
 	}

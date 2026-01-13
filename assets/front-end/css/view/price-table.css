@@ -28,6 +28,16 @@
   -webkit-transition: 0.3s;
   transition: 0.3s;
   border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 4px;
 }
 
 .eael-pricing .eael-pricing-button:hover {
@@ -38,6 +48,18 @@
   padding: 0px;
   margin: 0px;
   list-style: none;
+}
+
+.eael-pricing .eael-pricing-item ul li.eael-pricing-item-feature {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .eael-pricing .eael-pricing-item ul li.disable-item {
@@ -176,7 +198,7 @@
   margin-bottom: 15px;
 }
 
-.eael-pricing.style-1 .eael-pricing-item .header:after {
+.eael-pricing.style-1.eael-header-devider .eael-pricing-item .header:after {
   content: "";
   position: absolute;
   width: 140px;
@@ -239,7 +261,6 @@
 }
 
 .eael-pricing.style-1 .eael-pricing-item .body ul li {
-  display: block;
   width: 100%;
   height: auto;
   padding: 10px 0px;
@@ -452,7 +473,6 @@
 }
 
 .eael-pricing.style-2 .eael-pricing-item .body ul li {
-  display: block;
   width: 100%;
   height: auto;
   padding: 10px 15px;
@@ -562,7 +582,7 @@
   padding-right: 30px;
 }
 
-.eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item .header:after {
+.eael-pricing-content-align-left .eael-pricing.style-3.eael-header-devider .eael-pricing-item .header:after {
   -webkit-transform: translateX(-80%);
   -ms-transform: translateX(-80%);
       transform: translateX(-80%);

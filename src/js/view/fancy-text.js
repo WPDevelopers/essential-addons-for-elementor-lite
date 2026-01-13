@@ -1,58 +1,84 @@
 var FancyText = function ($scope, $) {
-    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
-        $id = $fancyText.data("fancy-text-id") !== undefined ? $fancyText.data("fancy-text-id") : "",
-        $fancy_text = $fancyText.data("fancy-text") !== undefined ? $fancyText.data("fancy-text") : "",
-        $transition_type = $fancyText.data("fancy-text-transition-type") !== undefined ? $fancyText.data("fancy-text-transition-type") : "",
-        $fancy_text_speed = $fancyText.data("fancy-text-speed") !== undefined ? $fancyText.data("fancy-text-speed") : "",
-        $fancy_text_delay = $fancyText.data("fancy-text-delay") !== undefined ? $fancyText.data("fancy-text-delay") : "",
-        $fancy_text_cursor = $fancyText.data("fancy-text-cursor") === "yes",
-        $fancy_text_loop = $fancyText.data("fancy-text-loop") !== undefined ? ($fancyText.data("fancy-text-loop") === "yes") : false;
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0);
+    var config = {
+        id: $fancyText.data("fancy-text-id"),
+        text: DOMPurify.sanitize($fancyText.data("fancy-text") || "").split("|"),
+        transitionType: $fancyText.data("fancy-text-transition-type"),
+        speed: $fancyText.data("fancy-text-speed"),
+        delay: $fancyText.data("fancy-text-delay"),
+        showCursor: $fancyText.data("fancy-text-cursor") === "yes",
+        loop: $fancyText.data("fancy-text-loop") === "yes",
+        action: $fancyText.data("fancy-text-action")
+    };
 
-    $fancy_text = DOMPurify.sanitize($fancy_text).split("|");
-
-    if ($transition_type === "typing") {
-        new Typed("#eael-fancy-text-" + $id, {
-            strings: $fancy_text,
-            typeSpeed: $fancy_text_speed,
+    function initTyped() {
+        var typedConfig = {
+            strings: config.text,
+            typeSpeed: config.speed,
             backSpeed: 0,
             startDelay: 300,
-            backDelay: $fancy_text_delay,
-            showCursor: $fancy_text_cursor,
-            loop: $fancy_text_loop,
-        });
+            backDelay: config.delay,
+            showCursor: config.showCursor,
+            loop: config.loop
+        };
+
+        return new Typed("#eael-fancy-text-" + config.id, typedConfig);
     }
 
-    if ($transition_type !== "typing") {
-        $("#eael-fancy-text-" + $id).Morphext({
-            animation: $transition_type,
+    function initMorphext() {
+        $("#eael-fancy-text-" + config.id).Morphext({
+            animation: config.transitionType,
             separator: ", ",
-            speed: $fancy_text_delay,
+            speed: config.delay,
             complete: function () {
-                if (!$fancy_text_loop && ($(this)[0].index + 1) === $(this)[0].phrases.length) {
+                if (!config.loop && ($(this)[0].index + 1) === $(this)[0].phrases.length) {
                     $(this)[0].stop();
                 }
             }
         });
     }
 
+    if (config.transitionType === "typing") {
+        if ( 'page_load' === config.action ) {
+            initTyped();
+        } else {
+            $(window).on('scroll', function() {
+                if ($fancyText.isInViewport(1) && !$fancyText.hasClass('eael-animated')) {
+                    initTyped();
+                    $fancyText.addClass('eael-animated');
+                }
+            });
+        }
+    } else {
+        if ( 'page_load' === config.action ) {
+            initMorphext();
+        } else {
+            $(window).on('scroll', function() {
+                if ($fancyText.isInViewport(1) && !$fancyText.hasClass('eael-animated')) {
+                    initMorphext();
+                    $fancyText.addClass('eael-animated');
+                }
+            });
+        }
+    }
+
+    // Show fancy text after initialization
+    function showFancyText() {
+        $(".eael-fancy-text-strings", $scope).css("display", "inline-block");
+    }
+
     $(document).ready(function () {
-        setTimeout(function () {
-            $(".eael-fancy-text-strings", $scope).css("display", "inline-block");
-        }, 500);
+        setTimeout(showFancyText, 500);
     });
 
-
     if (isEditMode) {
-        setTimeout(function () {
-            $(".eael-fancy-text-strings", $scope).css("display", "inline-block");
-        }, 800);
+        setTimeout(showFancyText, 800);
     }
 };
-jQuery(window).on("elementor/frontend/init", function () {
 
+jQuery(window).on("elementor/frontend/init", function () {
     if (eael.elementStatusCheck('eaelFancyTextLoad')) {
         return false;
     }
-
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-fancy-text.default", FancyText);
 });

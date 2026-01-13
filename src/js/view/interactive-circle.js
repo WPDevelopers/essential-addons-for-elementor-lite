@@ -3,7 +3,7 @@ eael.hooks.addAction( "init", "ea", () => {
 
 		let $circleWrap = $scope.find(".eael-circle-wrapper"),
 			$eventType = "mouseenter",
-			$animation = $circleWrap.data('animation'),
+			$animation = $circleWrap.data('appearance'),
 			$autoplay = $circleWrap.data('autoplay'),
 			$autoplayInterval = parseInt($circleWrap.data('autoplay-interval')),
 			$autoplayPause = 0,

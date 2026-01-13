@@ -6511,3 +6511,12 @@
         }
     }
 }
+
+// whiskers compatibilty
+.theme-whiskers {
+    .eael-circle-wrapper {
+        div{
+            text-align: inherit;
+        }
+    }
+}

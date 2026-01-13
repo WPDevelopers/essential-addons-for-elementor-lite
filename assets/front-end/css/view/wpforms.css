@@ -1,3 +1,29 @@
+.eael-wpforms.eael-contact-form {
+  width: 100%;
+}
+.eael-wpforms.eael-contact-form:not(.eael-wpforms-align-default) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.eael-wpforms.eael-contact-form.eael-wpforms-align-left {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+}
+.eael-wpforms.eael-contact-form.eael-wpforms-align-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.eael-wpforms.eael-contact-form.eael-wpforms-align-right {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+}
+.eael-wpforms.eael-contact-form.eael-wpforms-align-left .wpforms-container-full, .eael-wpforms.eael-contact-form.eael-wpforms-align-center .wpforms-container-full, .eael-wpforms.eael-contact-form.eael-wpforms-align-right .wpforms-container-full {
+  margin: 0;
+}
 .eael-wpforms .wpforms-container .wpforms-form input[type=submit],
 .eael-wpforms .wpforms-container .wpforms-form button[type=submit],
 .eael-wpforms .wpforms-container .wpforms-form .wpforms-page-button {

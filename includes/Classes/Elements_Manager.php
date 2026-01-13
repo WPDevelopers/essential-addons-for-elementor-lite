@@ -172,6 +172,9 @@ class Elements_Manager {
 		if ( ! empty( $element['settings']['eael_wrapper_link_switch'] ) ) {
 			$list['wrapper-link'] = 'wrapper-link';
 		}
+		if ( ! empty( $element['settings']['eael_enable_custom_cursor'] ) || ! empty( $element['settings']['eael_cursor_trail_show'] ) ) {
+			$list['custom-cursor'] = 'custom-cursor';
+		}
 		
 		if ( ! empty( $element['settings']['eael_ext_advanced_dynamic_tags'] ) ) {
 			$list['advanced-dynamic-tags'] = 'advanced-dynamic-tags';
@@ -185,6 +188,21 @@ class Elements_Manager {
 		//Hover Interactions
 		if ( ! empty( $element['settings']['eael_hover_effect_switch'] ) ) {
 			$list['special-hover-effect'] = 'special-hover-effect';
+		}
+
+		//Liquid Glass Effects
+		if ( ! empty( $element['settings']['eael_liquid_glass_effect_switch'] ) ) {
+			$list['liquid-glass-effect'] = 'liquid-glass-effect';
+		}
+        
+        // Vertical Text Orientation
+		if ( ! empty( $element['settings']['eael_vertical_text_orientation_switch'] ) ) {
+			$list['vertical-text-orientation'] = 'vertical-text-orientation';
+		}
+
+		//Image Masking
+		if ( ! empty( $element['settings']['eael_enable_image_masking'] ) ) {
+			$list['image-masking'] = 'image-masking';
 		}
 
 		return $list;

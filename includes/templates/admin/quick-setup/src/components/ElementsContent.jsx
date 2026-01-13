@@ -1,15 +1,25 @@
 import { __ } from "@wordpress/i18n";
+import { hasDisplayablePlugins, getPluginPromoCount } from "../utils/pluginPromoUtils";
 
-function ElementsContent({ activeTab, handleTabChange, showElements, handleShowElements }) {
+function ElementsContent({ 
+  activeTab, 
+  handleTabChange, 
+  showElements, 
+  handleShowElements, 
+  selectedPreference,
+  checkedElements,
+  handleElementCheck 
+}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let elements_content = eaelQuickSetup?.elements_content;
   let elements_list = elements_content?.elements_list;
   let init = 0;
   let disable = "";
-  let ea_pro_local_plugin_data =
-  eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
-  let templately_local_plugin_data =
-  eaelQuickSetup?.menu_items?.templately_local_plugin_data;
+  let ea_pro_local_plugin_data = eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
+  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
+
+  // Check if there are any non-installed plugins to display
+    const shouldShowPluginsPromo = hasDisplayablePlugins();
 
   elements_list =
     typeof elements_list === "object"
@@ -77,7 +87,7 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
                   >
                     {item[1]?.elements.map((element) => {
                       const preferences = element.preferences || "";
-                      const checked = preferences === "basic" ? "checked" : "";
+                      const isChecked = checkedElements[element.key] || false;
 
                       return (
                         <div
@@ -91,7 +101,8 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
                                 type="checkbox"
                                 data-preferences={preferences}
                                 name={`eael_element[${element.key}]`}
-                                defaultChecked={checked}
+                                checked={isChecked}
+                                onChange={(e) => handleElementCheck(element.key, e.target.checked)}
                               />
                               <span className="slider"></span>
                             </label>
@@ -120,13 +131,7 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={
-            ! ea_pro_local_plugin_data
-              ? "go-pro"
-              : ( ! templately_local_plugin_data
-                ? "templately"
-                : "integrations" )
-          }
+          data-next={ ! ea_pro_local_plugin_data ? "go-pro" : ( hasPluginPromo && shouldShowPluginsPromo ? "pluginspromo" : "integrations" ) }
           onClick={handleTabChange}
         >
           {__("Next", "essential-addons-for-elementor-lite")}

@@ -112,7 +112,12 @@ function ContextReducer() {
             case 'BUTTON_LOADER':
                 return {...state, btnLoader: payload, licenseError: '', otpError: ''}
             case 'OPEN_MODAL':
-                return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
+                let modalAccordion = state.modalAccordion;
+                // Set default accordion for Business Reviews
+                if (payload.key === 'businessReviewsSetting') {
+                    modalAccordion = Object.keys(eaData.modal.businessReviewsSetting.accordion)[0];
+                }
+                return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title, modalAccordion}
             case 'CLOSE_MODAL':
                 return {...state, modal: 'close', modalGoPremium: 'close'}
             case 'CLOSE_TOAST':

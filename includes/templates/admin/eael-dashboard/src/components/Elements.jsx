@@ -48,7 +48,9 @@ function Elements() {
                 subCatChildren = subCatRef.current.children;
             let currentActivateCatIndex = 0;
 
-            if (newScrollY > subCatChildren[8]?.offsetTop) {
+            if (newScrollY > subCatChildren[9]?.offsetTop) {
+                currentActivateCatIndex = 9;
+            }else if (newScrollY > subCatChildren[8]?.offsetTop) {
                 currentActivateCatIndex = 8;
             } else if (newScrollY > subCatChildren[7]?.offsetTop) {
                 currentActivateCatIndex = 7;

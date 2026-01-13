@@ -22,23 +22,26 @@ $title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($set
 echo '<article class="eael-timeline-post eael-timeline-column">
     <div class="eael-timeline-bullet"></div>
     <div class="eael-timeline-post-inner">
-        <a class="eael-timeline-post-link" href="' . get_the_permalink() . '" title="' . esc_attr(get_the_title()) . '"' . ($settings['timeline_link_nofollow'] ? 'rel="nofollow"' : '') .'' . ($settings['timeline_link_target_blank'] ? 'target="_blank"' : '') . '>
+        <a class="eael-timeline-post-link" href="' . esc_url( get_the_permalink() ) . '" title="' . esc_attr(get_the_title()) . '"' . ($settings['timeline_link_nofollow'] ? 'rel="nofollow"' : '') .'' . ($settings['timeline_link_target_blank'] ? 'target="_blank"' : '') . '>
             <time datetime="' . get_the_date() . '">' . get_the_date() . '</time>
-            <div class="eael-timeline-post-image'.$image_class.'" ' . ($settings['eael_show_image'] == 'yes' ? 'style="background-image: url('.esc_url( $post_timeline_image_url ).');"' : null) . '></div>';
+            <div class="eael-timeline-post-image ' . esc_attr( $image_class ) . '" ' . ($settings['eael_show_image'] == 'yes' ? 'style="background-image: url('.esc_url( $post_timeline_image_url ).');"' : null) . '></div>';
             if ($settings['eael_show_excerpt']) {
                 echo '<div class="eael-timeline-post-excerpt">';
                     if(empty($settings['eael_excerpt_length'])) {
-                        echo '<p>'.strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()).'</p>';
+                        $content = strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content());
+                        echo '<p>'. wp_kses( $content, Helper::eael_allowed_tags() ) .'</p>';
                     }else {
-                        echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), intval( $settings['eael_excerpt_length'] ), sanitize_text_field( $settings['expanison_indicator'] )) . '</p>';
+                        $content = wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), intval( $settings['eael_excerpt_length'] ), sanitize_text_field( $settings['expanison_indicator'] ));
+                        echo '<p>' . esc_html( $content ) . '</p>';
                     }
                 echo '</div>';
             }
 
             if ($settings['eael_show_title']) {
-                echo '<div class="eael-timeline-post-title">
-                    <' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . ' class="eael-timeline-post-title-text">' . get_the_title() . '</' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . '>
+                $title_html = '<div class="eael-timeline-post-title">
+                    <' .  $settings['title_tag'] . ' class="eael-timeline-post-title-text">' . get_the_title() . '</' . $settings['title_tag'] . '>
                 </div>';
+                echo wp_kses( $title_html, Helper::eael_allowed_tags() );
             }
         echo '</a>
     </div>

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ea-dash-icon';
-  src:  url('fonts/ea-dash-icon.eot?xukppy');
-  src:  url('fonts/ea-dash-icon.eot?xukppy#iefix') format('embedded-opentype'),
-    url('fonts/ea-dash-icon.ttf?xukppy') format('truetype'),
-    url('fonts/ea-dash-icon.woff?xukppy') format('woff'),
-    url('fonts/ea-dash-icon.svg?xukppy#ea-dash-icon') format('svg');
+  src:  url('fonts/ea-dash-icon.eot?g7g8jp');
+  src:  url('fonts/ea-dash-icon.eot?g7g8jp#iefix') format('embedded-opentype'),
+    url('fonts/ea-dash-icon.ttf?g7g8jp') format('truetype'),
+    url('fonts/ea-dash-icon.woff?g7g8jp') format('woff'),
+    url('fonts/ea-dash-icon.svg?g7g8jp#ea-dash-icon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -174,4 +174,7 @@
 }
 .ea-star-lite:before {
   content: "\e931";
+}
+.ea-figma-to-elementor:before {
+  content: "\e932";
 }

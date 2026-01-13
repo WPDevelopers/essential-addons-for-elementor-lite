@@ -72,7 +72,7 @@ Object.keys(eaData.modal).map((item) => {
     const key = eaData.modal[item]?.name;
     if (key !== undefined) {
         initValue.modals[key] = eaData.modal[item].value;
-    } else if (item === 'loginRegisterSetting') {
+    } else if (item === 'loginRegisterSetting' || item === 'businessReviewsSetting') {
         const accordion = eaData.modal[item].accordion;
         Object.keys(accordion).map((subItem) => {
             accordion[subItem].fields.map((childItem) => {

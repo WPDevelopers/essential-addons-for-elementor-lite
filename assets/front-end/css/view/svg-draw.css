@@ -7,11 +7,13 @@
   overflow: visible;
 }
 .eael-svg-draw-container svg path, .eael-svg-draw-container svg circle, .eael-svg-draw-container svg rect, .eael-svg-draw-container svg polygon {
-  stroke: #c36;
-  stroke-width: 3;
-  fill: transparent;
-  stroke-dasharray: 0, 9999px;
-  fill-opacity: 0;
+  fill: none;
+  stroke: #2c3e50;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 4000000;
+  stroke-dashoffset: 4000000;
 }
 .eael-svg-draw-container.fill-svg svg path, .eael-svg-draw-container.fill-svg svg circle, .eael-svg-draw-container.fill-svg svg rect, .eael-svg-draw-container.fill-svg svg polygon {
   -webkit-animation-name: eaelFillIn;

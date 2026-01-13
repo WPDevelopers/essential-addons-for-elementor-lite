@@ -51,7 +51,7 @@ class WPDeveloper_Plugin_Installer
     public function get_remote_plugin_data($slug = '')
     {
         if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
+            return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
         $response = wp_remote_post(
@@ -86,7 +86,7 @@ class WPDeveloper_Plugin_Installer
     public function install_plugin($slug = '', $active = true)
     {
         if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
+            return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
         include_once ABSPATH . 'wp-admin/includes/file.php';
@@ -131,7 +131,7 @@ class WPDeveloper_Plugin_Installer
     public function upgrade_plugin($basename = '')
     {
         if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
+            return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
         include_once ABSPATH . 'wp-admin/includes/file.php';
@@ -152,8 +152,24 @@ class WPDeveloper_Plugin_Installer
             wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
         }
 
-	    $slug   = isset( $_POST['slug'] ) ? sanitize_text_field( $_POST['slug'] ) : '';
+	    $slug   = isset( $_POST['slug'] ) ? sanitize_text_field( wp_unslash( $_POST['slug'] ) ) : '';
 	    $result = $this->install_plugin( $slug );
+
+        if ( isset( $_POST['promotype'], $_POST['slug'] ) ) {
+            $promotype = sanitize_text_field( wp_unslash( $_POST['promotype'] ) );
+            $slug      = sanitize_text_field( wp_unslash( $_POST['slug'] ) );
+        
+            $remote_urls = [
+                'quick-setup' => [
+                    'essential-blocks' => 'https://essential-addons.com/essential-blocks-install-quick-setup',
+                    'templately'       => 'https://essential-addons.com/templately-install-quick-setup',
+                ]
+            ];
+        
+            if ( isset( $remote_urls[ $promotype ][ $slug ] ) ) {
+                wp_remote_get( $remote_urls[ $promotype ][ $slug ] );
+            }
+        }
 
 	    if ( is_wp_error( $result ) ) {
 		    wp_send_json_error( $result->get_error_message() );
@@ -170,7 +186,7 @@ class WPDeveloper_Plugin_Installer
             wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
         }
 
-	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
+	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( wp_unslash( $_POST['basename'] ) ) : '';
 	    $result   = $this->upgrade_plugin( $basename );
 
         if (is_wp_error($result)) {
@@ -189,7 +205,7 @@ class WPDeveloper_Plugin_Installer
             wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
         }
 
-	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
+	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( wp_unslash( $_POST['basename'] ) ) : '';
 	    $result   = activate_plugin( $basename, '', false, true );
 
 	    if ( is_wp_error( $result ) ) {
@@ -210,7 +226,7 @@ class WPDeveloper_Plugin_Installer
 			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		$basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
+		$basename = isset( $_POST['basename'] ) ? sanitize_text_field( wp_unslash( $_POST['basename'] ) ) : '';
 		deactivate_plugins( $basename, true );
 
 		wp_send_json_success( __( 'Plugin is deactivated successfully!', 'essential-addons-for-elementor-lite' ) );
@@ -219,7 +235,7 @@ class WPDeveloper_Plugin_Installer
 	public function ajax_auto_active_even_not_installed() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		if ( $this->get_local_plugin_data( $_POST['basename'] ) === false ) {
+		if ( !empty( $_POST['basename'] ) && $this->get_local_plugin_data( sanitize_text_field( wp_unslash( $_POST['basename'] ) ) ) === false ) {
 			$this->ajax_install_plugin();
 		} else {
 			$this->ajax_activate_plugin();
