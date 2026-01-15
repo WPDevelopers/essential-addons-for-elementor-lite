@@ -1200,6 +1200,15 @@ trait Admin {
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'price-menu' ) )
 						    ],
+                            'pricing-slider'         => [
+                                'key'         => 'pricing-slider',
+                                'title'       => __( 'Pricing Slider', 'essential-addons-for-elementor-lite' ),
+                                'demo_link'   => 'https://essential-addons.com/pricing-slider/',
+                                'doc_link'    => 'https://essential-addons.com/docs/ea-pricing-slider/',
+                                'is_pro'      => true,
+                                'promotion'   => 'new',
+                                'is_activate' => boolval( $this->get_settings( 'pricing-slider' ) )
+                            ],
 					    ]
 				    ],
 				    'form-styler-elements'     => [

@@ -703,6 +703,11 @@ class WPDeveloper_Setup_Wizard {
 						'preferences' => 'advance',
 					],
 					[
+						'key'         => 'pricing-slider',
+						'title'       => __( 'Pricing Slider', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
 						'key'         => 'sphere-photo-viewer',
 						'title'       => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
