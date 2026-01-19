@@ -3818,7 +3818,8 @@ class Product_Grid extends Widget_Base
                     echo "</div>";
                 }
 
-                if ( $found_posts > ( $args['limit'] ?? $args['posts_per_page'] ?? 4 ) && 'source_archive' !== $settings['post_type'] ) {
+                $args['posts_per_page'] = $args['limit'] ?? $args['posts_per_page'] ?? 4;
+                if ( $found_posts > $args['posts_per_page'] && 'source_archive' !== $settings['post_type'] ) {
 	                $this->print_load_more_button( $settings, $args, $dir_name );
                 }
 
