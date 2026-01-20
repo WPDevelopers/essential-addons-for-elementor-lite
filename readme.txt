@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.5.7
+Stable tag: 6.5.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -317,6 +317,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.8 - 20/01/2026 =
+
+- Fixed: EA Woo Widgets | Load More button not working properly
+- Few minor bug fixes & improvements
 
 = 6.5.7 - 13/01/2026 =
 
