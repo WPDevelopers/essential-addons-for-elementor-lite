@@ -303,6 +303,18 @@ trait Ajax_Handler {
 						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
 					}
 
+					// Handle custom add to cart text for Woo_Product_List
+					if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' && boolval( $settings['eael_product_list_content_footer_add_to_cart_custom_text_show'] ) ) {
+						$add_to_cart_text = [
+							'add_to_cart_simple_product_button_text'   => $settings['eael_product_list_content_footer_add_to_cart_simple_text'],
+							'add_to_cart_variable_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_variable_text'],
+							'add_to_cart_grouped_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_grouped_text'],
+							'add_to_cart_external_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_external_text'],
+							'add_to_cart_default_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_default_text'],
+						];
+						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+					}
+
 					if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
 						$html .= "<div class='found_posts' style='display: none;'>{$found_posts}</div>";
 					}
