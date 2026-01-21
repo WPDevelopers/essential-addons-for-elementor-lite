@@ -873,6 +873,18 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+			'eael_pricing_table_hover_box_shadow',
+			[
+				'label'        => esc_html__( 'Hover Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'ON', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'OFF', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -2432,7 +2444,6 @@ class Pricing_Table extends Widget_Base
         $settings = $this->get_settings_for_display();
         $featured_class = ('yes' === $settings['eael_pricing_table_featured'] ? 'featured ' . $settings['eael_pricing_table_featured_styles'] : '');
         $featured_class .= ($settings['eael_pricing_table_ribbon_alignment'] === 'left' ? ' ribbon-left' : '');
-        $inline_style = $settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'];
         $icon_position = $this->get_settings('eael_pricing_table_button_icon_alignment');
 	    $settings['eael_pricing_table_price'] = ( $settings['eael_pricing_table_price'] === '0' ) ? '0' : HelperClass::eael_wp_kses( $settings[ 'eael_pricing_table_price' ] );
 	    $settings['eael_pricing_table_onsale_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_onsale_price']);
@@ -2443,15 +2454,21 @@ class Pricing_Table extends Widget_Base
 
         $this->add_render_attribute('eael_pricing', [ 'class' => [ 'eael-pricing', $settings['eael_pricing_table_style'] ] ]);
 
-        if( $inline_style ){
-            $this->add_render_attribute('eael_pricing', [ 'style' => 'overflow: hidden;' ]);
-        }
-
         if( ( 'style-1' === $settings['eael_pricing_table_style'] || 'style-3' === $settings['eael_pricing_table_style'] ) && $has_devider ){
             $this->add_render_attribute('eael_pricing', [ 'class' => [ 'eael-header-devider' ] ]);
         }
 
         
+        $this->add_render_attribute('eael_pricing_wrapper', 'class', [ 'eael-pricing' , $settings['eael_pricing_table_style'] ] );
+
+        if( 'yes' === $settings['eael_pricing_table_hover_box_shadow'] ){
+            $this->add_render_attribute('eael_pricing_wrapper', 'class', 'eael-pricing-box-shadow' );
+        }
+
+        if( $settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'] ){
+            $this->add_render_attribute('eael_pricing_wrapper', 'style', 'overflow: hidden;' );
+        }
+
         $this->add_render_attribute('eael_pricing_button', [ 'class' => [ 'eael-pricing-button' ] ]);
 
         if ( ! empty( $settings['eael_pricing_table_btn_link']['url'] ) ) {
