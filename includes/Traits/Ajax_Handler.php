@@ -286,90 +286,51 @@ trait Ajax_Handler {
 
 			if ( $file_path ) {
 				// wp_send_json( $args );
-				// Use WC_Product_Query for Product_Grid and Woo_Product_List, WP_Query for others
-				if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' || $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
-					// Convert args to WC_Product_Query format
-					$wc_args = $this->convert_pagination_args_to_wc_product_query( $args, $settings );
-					$wc_query = new \WC_Product_Query( $wc_args );
-					$products = $wc_query->get_products();
+				$query = new \WP_Query( $args );
+				$found_posts = $query->found_posts;
+				$iterator = 0;
 
-					// Handle WC_Product_Query results
-					if ( is_object( $products ) && isset( $products->products ) ) {
-						$product_objects = $products->products;
-						$found_posts = $products->total;
-					} else {
-						$product_objects = $products;
-						$found_posts = count( $products );
+				if ( $query->have_posts() ) {
+					if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' && boolval( $settings['show_add_to_cart_custom_text'] ) ) {
+
+						$add_to_cart_text = [
+							'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
+							'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
+							'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
+							'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
+							'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
+						];
+						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
 					}
 
-					$iterator = 0;
+					// Handle custom add to cart text for Woo_Product_List
+					if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' && boolval( $settings['eael_product_list_content_footer_add_to_cart_custom_text_show'] ) ) {
+						$add_to_cart_text = [
+							'add_to_cart_simple_product_button_text'   => $settings['eael_product_list_content_footer_add_to_cart_simple_text'],
+							'add_to_cart_variable_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_variable_text'],
+							'add_to_cart_grouped_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_grouped_text'],
+							'add_to_cart_external_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_external_text'],
+							'add_to_cart_default_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_default_text'],
+						];
+						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+					}
 
-					if ( ! empty( $product_objects ) ) {
-						// Handle custom add to cart text for Product_Grid
-						if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' && boolval( $settings['show_add_to_cart_custom_text'] ) ) {
-							$add_to_cart_text = [
-								'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
-								'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
-								'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
-								'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
-								'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
-							];
-							$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
-						}
+					if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
+						$html .= "<div class='found_posts' style='display: none;'>{$found_posts}</div>";
+					}
 
-						// Handle custom add to cart text for Woo_Product_List
-						if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' && boolval( $settings['eael_product_list_content_footer_add_to_cart_custom_text_show'] ) ) {
-							$add_to_cart_text = [
-								'add_to_cart_simple_product_button_text'   => $settings['eael_product_list_content_footer_add_to_cart_simple_text'],
-								'add_to_cart_variable_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_variable_text'],
-								'add_to_cart_grouped_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_grouped_text'],
-								'add_to_cart_external_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_external_text'],
-								'add_to_cart_default_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_default_text'],
-							];
-							$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
-						}
+					while ( $query->have_posts() ) {
+						$query->the_post();
 
-						// Iterate through WC_Product objects
-						foreach ( $product_objects as $product ) {
-							global $post;
-							$post = get_post( $product->get_id() );
-							setup_postdata( $post );
-
-							$html .= HelperClass::include_with_variable( $file_path, [
-								'settings'      => $settings,
-								'link_settings' => $link_settings,
-								'iterator'      => $iterator
-							] );
-							$iterator ++;
-						}
-						wp_reset_postdata();
-					} else {
-						$html .= __( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+						$html .= HelperClass::include_with_variable( $file_path, [
+							'settings'      => $settings,
+							'link_settings' => $link_settings,
+							'iterator'      => $iterator
+						] );
+						$iterator ++;
 					}
 				} else {
-					// Use WP_Query for non-product widgets
-					$query = new \WP_Query( $args );
-					$found_posts = $query->found_posts;
-					$iterator = 0;
-
-					if ( $query->have_posts() ) {
-						if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
-							$html .= "<div class='found_posts' style='display: none;'>{$found_posts}</div>";
-						}
-
-						while ( $query->have_posts() ) {
-							$query->the_post();
-
-							$html .= HelperClass::include_with_variable( $file_path, [
-								'settings'      => $settings,
-								'link_settings' => $link_settings,
-								'iterator'      => $iterator
-							] );
-							$iterator ++;
-						}
-					} else {
-						$html .= '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
-					}
+					$html .= '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
 				}
 			}
 		}
