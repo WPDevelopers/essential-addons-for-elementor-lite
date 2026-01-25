@@ -1,3 +1,7 @@
+/**
+ * @todo
+ * Code modified to prevent overriding. 
+ */
 ( function( window, factory ) {
   // universal module definition
   /*jshint strict: false */ /* globals define, module, require */
@@ -2250,7 +2254,7 @@ return Outlayer;
  * Isotope Item
 **/
 
-( function( window, factory ) {
+( window.Isotope || function( window, factory ) {
   // universal module definition
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
@@ -2328,7 +2332,7 @@ return Item;
  * Isotope LayoutMode
  */
 
-( function( window, factory ) {
+( window.Isotope || function( window, factory ) {
   // universal module definition
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
@@ -2931,7 +2935,7 @@ return Vertical;
  * Copyright 2010-2018 Metafizzy
  */
 
-( function( window, factory ) {
+( window.Isotope || function( window, factory ) {
   // universal module definition
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
@@ -3542,4 +3546,3 @@ var trim = String.prototype.trim ?
   return Isotope;
 
 }));
-
