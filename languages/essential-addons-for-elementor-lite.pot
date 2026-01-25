@@ -11694,7 +11694,7 @@ msgid "Get more powerful widgets & extensions to elevate your Elementor website"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:209, ../includes/Traits/Admin.php:377
-msgid "3700+"
+msgid "3800+"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:210, ../includes/Traits/Admin.php:378
