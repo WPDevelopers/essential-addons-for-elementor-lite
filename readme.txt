@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.5.8
+Stable tag: 6.5.9
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -42,7 +42,6 @@ Ready Elementor Templates From Templately:
 - [Textivy AI - AI SaaS Template](https://templately.com/pack/textivy-ai-elementor-ai-sass)
 - [KetoFlow - Keto Diet Website Template](https://templately.com/pack/ketoflow-elementor-keto-diet-template)
 - [IllustrateAI - AI Photo Creation Website Template](https://templately.com/pack/illustrateai-elementor-ai-photo-creation)
-- [HeartBloom - Valentine Gift Store Template](https://templately.com/pack/heartbloom-elementor-valentine-gift-store)
 
 
 ### Expert Support
@@ -204,7 +203,7 @@ With Essential Addons, we bring you seamless compatibility with WooCommerce, enh
 
 [EA Woo Add to Cart](https://essential-addons.com/docs/ea-woo-add-to-cart/): Simplify the shopping experience by displaying an easy-to-access ‘Add to Cart’ button for all your WooCommerce products.
 
-[EA Woo Product Slider (PRO)](https://essential-addons.com/docs/woo-product-slider/): Present your WooCommerce products in a stunning slider format with this advanced Elementor addon. You can also easily customize the entire slider appearance with fantastic pre-designed layouts, effects, and other advanced options.
+[EA Woo Product Slider (PRO)](https://essential-addons.com/docs/woo-product-slider/): Present your WooCommerce products in a stunning slider format with this advanced Elementor addon. 
 
 [EA Woo Product Collection (PRO)](https://essential-addons.com/docs/ea-woo-product-collections/): Exhibit your WooCommerce product collections on any section of your Elementor website to showcase items based on categories, tags, or attributes, and add engaging hover effects.
 
@@ -317,6 +316,21 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.9 - 26/01/2026 =
+
+- Improved: Sort templates in ascending order in “Choose Template” dropdown
+- Improved: EA Business Reviews | Fixed height and scrollbar options moved to content tab
+- Improved: EA Login/Register Form | Added webhook support similar to Stripe webhooks
+- Improved: EA Gravity Forms | Sort form names by title in the widget
+- Improved: EA Woo Product Grid | Added additional filter support
+- Improved: EA Login/Register Form | Validation message position control added
+- Improved: EA Login/Register Form | Added email field autocomplete support
+- Improved: EA Feature List | Icon shape background control & shape view behavior
+- Improved: EA Advanced Data Table | Positioning fixes & default link update
+- Improved: EA Filterable Gallery | Added option to set thumbnail image size in filterable gallery
+- Few minor bug fixes & improvements
+
 
 = 6.5.8 - 20/01/2026 =
 
