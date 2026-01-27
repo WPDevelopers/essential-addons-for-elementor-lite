@@ -224,7 +224,7 @@ trait Login_Registration {
 
 			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			do_action( 'wp_login', $user_data->user_login, $user_data );
-			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
+			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data, $settings );
 
 			$custom_redirect_url = $redirect_to;
 			$previous_page_url   = ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -669,7 +669,7 @@ trait Login_Registration {
 			}
 		}
 
-		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
+		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data, $settings );
 
 		if ( is_wp_error( $user_id ) ) {
 			// error happened during user creation
@@ -683,6 +683,7 @@ trait Login_Registration {
 			exit();
 		}
 
+		$user_data['eael_lrmuc'] = $_POST['eael_lrmuc'] ?? '';
 		do_action( 'eael/login-register/mailchimp-integration-action', $user_id, $user_data, $settings );
 	
 		$admin_or_both = $is_pass_auto_generated || in_array( 'send_email', $register_actions ) ? 'both' : 'admin';

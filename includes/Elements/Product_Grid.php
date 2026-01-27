@@ -3737,6 +3737,7 @@ class Product_Grid extends Widget_Base
                         $args  = $wp_query->query;
                         $found_posts = $query->found_posts;
                     } else {
+                        $args = apply_filters( 'eael_wc_product_query_args', $args, $this->get_name() );
                         $query = new \WP_Query( $args );
                         $found_posts = $query->found_posts;
                     }
