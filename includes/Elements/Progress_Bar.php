@@ -135,7 +135,7 @@ class Progress_Bar extends Widget_Base
                 'default' => __('Progress Bar', 'essential-addons-for-elementor-lite'),
                 'separator' => 'before',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -190,7 +190,7 @@ class Progress_Bar extends Widget_Base
                     'progress_bar_title_inner_show' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -292,7 +292,7 @@ class Progress_Bar extends Widget_Base
                 ],
                 'separator' => 'before',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -309,7 +309,7 @@ class Progress_Bar extends Widget_Base
                 ],
                 'separator' => 'before',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );

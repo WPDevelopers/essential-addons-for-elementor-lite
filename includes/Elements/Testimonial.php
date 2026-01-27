@@ -202,7 +202,7 @@ class Testimonial extends Widget_Base {
 				'default' => esc_html__( 'John Doe', 'essential-addons-for-elementor-lite'),
 				'dynamic' => [ 'active' => true ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -215,7 +215,7 @@ class Testimonial extends Widget_Base {
 				'default' => esc_html__( 'Codetic', 'essential-addons-for-elementor-lite'),
 				'dynamic' => [ 'active' => true ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);

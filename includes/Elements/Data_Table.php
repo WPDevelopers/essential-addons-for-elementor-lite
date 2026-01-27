@@ -138,7 +138,7 @@ class Data_Table extends Widget_Base {
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -152,7 +152,7 @@ class Data_Table extends Widget_Base {
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -251,7 +251,7 @@ class Data_Table extends Widget_Base {
                 'dynamic'     => [ 'active' => true ],
 				'label_block' 	=> false,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -264,7 +264,7 @@ class Data_Table extends Widget_Base {
                 'dynamic'     => [ 'active' => true ],
 				'label_block'	=> false,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -461,7 +461,7 @@ class Data_Table extends Widget_Base {
 					'eael_data_table_content_row_type' => 'col'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -477,7 +477,7 @@ class Data_Table extends Widget_Base {
 					'eael_data_table_content_row_type' => 'col'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);

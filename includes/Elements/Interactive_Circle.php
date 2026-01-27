@@ -200,7 +200,7 @@ class Interactive_Circle extends Widget_Base {
 				'default' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
 				'dynamic' => [ 'active' => true ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);

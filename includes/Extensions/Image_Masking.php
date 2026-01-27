@@ -257,7 +257,7 @@ class Image_Masking {
                         'active' => false,
                     ],
                     'ai' => [
-                        'active' => false,
+                        'active' => true,
                     ],
                     'placeholder' => '.not-masked-element, #not-masked-element',
                     'description' => __( 'Enter the selector for the element you want to apply the hover effect on. If you leave this field empty, the hover effect will be applied on hover for full section.', 'essential-addons-for-elementor-lite' ),

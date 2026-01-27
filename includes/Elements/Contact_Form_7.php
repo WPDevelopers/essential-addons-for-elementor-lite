@@ -172,7 +172,7 @@ class Contact_Form_7 extends Widget_Base
                         'form_title' => 'yes',
                     ],
                     'ai' => [
-                        'active' => false,
+                        'active' => true,
                     ],
                 ]
             );

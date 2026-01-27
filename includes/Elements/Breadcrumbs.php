@@ -66,8 +66,8 @@ class Breadcrumbs extends Widget_Base {
 				'label'       => esc_html__( 'Label For Home', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'Home', 'essential-addons-for-elementor-lite' ),
-            'ai'  => [
-					'active' => false,
+            	'ai'  => [
+					'active' => true,
 				],
 			]
 		);
@@ -134,7 +134,7 @@ class Breadcrumbs extends Widget_Base {
 					'breadcrumb_prefix_switch'    => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -187,7 +187,7 @@ class Breadcrumbs extends Widget_Base {
 					'eael_separator_type' => 'text',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
