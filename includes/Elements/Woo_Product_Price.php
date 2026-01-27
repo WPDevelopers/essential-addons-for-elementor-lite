@@ -840,12 +840,12 @@ class Woo_Product_Price extends Widget_Base {
 					<p class="price">
 						<del aria-hidden="true">
 							<span class="woocommerce-Price-amount amount">
-								<bdi><span class="woocommerce-Price-currencySymbol"><?php esc_html_e( '$', 'essential-addons-for-elementor-lite' ); ?></span><?php esc_html_e( '80.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
+								<bdi><span class="woocommerce-Price-currencySymbol"><?php echo esc_html( get_woocommerce_currency_symbol() ); ?></span><?php esc_html_e( '80.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
 							</span>
 						</del>
 						<ins aria-hidden="true">
 							<span class="woocommerce-Price-amount amount">
-								<bdi><span class="woocommerce-Price-currencySymbol"><?php esc_html_e( '$', 'essential-addons-for-elementor-lite' ); ?></span><?php esc_html_e( '50.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
+								<bdi><span class="woocommerce-Price-currencySymbol"><?php echo esc_html( get_woocommerce_currency_symbol() ); ?></span><?php esc_html_e( '50.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
 							</span>
 						</ins>
 					</p>
