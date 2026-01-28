@@ -2606,8 +2606,7 @@ class Info_Box extends Widget_Base
                 if ('content' === $settings['eael_infobox_text_type']){
                     if (!empty($settings['eael_infobox_text'])) {
                         echo '<div>';
-                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        echo $this->parse_text_editor( $settings['eael_infobox_text'] );
+                        echo wp_kses( $this->parse_text_editor( $settings['eael_infobox_text'] ), Helper::eael_allowed_tags() );
                         echo '</div>';
                     }
                     $this->render_infobox_button();
@@ -2623,7 +2622,7 @@ class Info_Box extends Widget_Base
                         }
 
 	                    Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['eael_primary_templates'] );
-                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        
                         echo Plugin::$instance->frontend->get_builder_content( $settings['eael_primary_templates'], true );
 	                    if ( Plugin::$instance->editor->is_edit_mode() ) {
 		                    echo '</div>';
