@@ -6300,7 +6300,7 @@ class Login_Register extends Widget_Base {
                                   id="eael-login-form"
                                   method="post">
 								<?php
-								if ( 'top' === $this->ds['position_for_login_form'] ) {
+								if ( ! empty( $this->ds['position_for_login_form'] ) && 'top' === $this->ds['position_for_login_form'] ) {
 									do_action( 'eael/login-register/render_social_login_for_login_form', $this );
 								}
 								do_action( 'eael/login-register/after-login-form-open', $this );
@@ -6407,8 +6407,8 @@ class Login_Register extends Widget_Base {
                                 </div>
 								<?php
 								do_action( 'eael/login-register/after-login-footer', $this );
-								$position = $this->ds['position_for_login_form'];
-								if ( !$position || 'bottom' === $this->ds['position_for_login_form'] ) {
+								$position = ! empty( $this->ds['position_for_login_form'] ) ? $this->ds['position_for_login_form'] : '';
+								if ( !$position || ( ! empty( $this->ds['position_for_login_form'] ) && 'bottom' === $this->ds['position_for_login_form'] ) ) {
 									do_action( 'eael/login-register/render_social_login_for_login_form', $this );
 								}
 
