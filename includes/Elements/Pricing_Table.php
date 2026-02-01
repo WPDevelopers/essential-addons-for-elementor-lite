@@ -2458,15 +2458,12 @@ class Pricing_Table extends Widget_Base
             $this->add_render_attribute('eael_pricing', [ 'class' => [ 'eael-header-devider' ] ]);
         }
 
-        
-        $this->add_render_attribute('eael_pricing_wrapper', 'class', [ 'eael-pricing' , $settings['eael_pricing_table_style'] ] );
-
         if( 'yes' === $settings['eael_pricing_table_hover_box_shadow'] ){
-            $this->add_render_attribute('eael_pricing_wrapper', 'class', 'eael-pricing-box-shadow' );
+            $this->add_render_attribute('eael_pricing', 'class', 'eael-pricing-box-shadow' );
         }
 
         if( $settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'] ){
-            $this->add_render_attribute('eael_pricing_wrapper', 'style', 'overflow: hidden;' );
+            $this->add_render_attribute('eael_pricing', 'style', 'overflow: hidden;' );
         }
 
         $this->add_render_attribute('eael_pricing_button', [ 'class' => [ 'eael-pricing-button' ] ]);
