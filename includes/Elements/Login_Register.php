@@ -6803,9 +6803,6 @@ class Login_Register extends Widget_Base {
 							}
 							?>
 
-                            <div class="eael-form-validation-container">
-								<?php $this->print_validation_message(); ?>
-                            </div>
 							<?php
 							do_action( 'eael/login-register/before-register-form-close', $this );
 							?>
@@ -6975,7 +6972,6 @@ class Login_Register extends Widget_Base {
 								echo '<div class="eael-form-validation-container">';
 									$this->print_lostpassword_validation_errors();
 								echo '</div>';
-								$this->print_lostpassword_validation_errors();
 							}
 							$this->print_necessary_hidden_fields( 'lostpassword' );
 
@@ -7091,7 +7087,6 @@ class Login_Register extends Widget_Base {
 								echo '<div class="eael-form-validation-container">';
 									$this->print_resetpassword_validation_errors();
 								echo '</div>';
-								$this->print_resetpassword_validation_errors();
 							}
 							?>
 							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">
