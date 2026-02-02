@@ -27,7 +27,7 @@ trait Controls
         $post_types = ControlsHelper::get_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
 
-        if ($wb->get_name() !== 'eael-dynamic-filterable-gallery' && $wb->get_name() !== 'eael-post-list') {
+        if ( ! in_array( $wb->get_name(), [ 'eael-dynamic-filterable-gallery', 'eael-post-list', 'eael-adv-accordion' ] ) ) {
             $post_types['source_dynamic'] = __('Dynamic', 'essential-addons-for-elementor-lite');
         }
 
@@ -50,6 +50,16 @@ trait Controls
                     'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_content_timeline_choose' => 'dynamic',
+                    ],
+                ]
+            );
+        } else if ('eael-adv-accordion' === $wb->get_name()) {
+            $wb->start_controls_section(
+                'eael_adv_accordion_content_section',
+                [
+                    'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
+                    'condition' => [
+                        'eael_adv_accordion_content_source' => 'dynamic',
                     ],
                 ]
             );
@@ -114,6 +124,7 @@ trait Controls
             ]
         );
 
+        $is_element_dynamic_gallery = 'eael-dynamic-filterable-gallery' === $wb->get_name() ? 1 : 0;
         foreach ($taxonomies as $taxonomy => $object) {
             if (!isset($object->object_type[0]) || !in_array($object->object_type[0], array_keys($post_types))) {
                 continue;
@@ -135,7 +146,6 @@ trait Controls
             );
 
             $show_child_cat_control = ('category' === $taxonomy || 'product_cat' === $taxonomy) ? 1 : 0;
-            $is_element_dynamic_gallery = 'eael-dynamic-filterable-gallery' === $wb->get_name() ? 1 : 0;
             
             if($show_child_cat_control && $is_element_dynamic_gallery){
                 $wb->add_control(
@@ -155,6 +165,31 @@ trait Controls
                 );
             }
 
+        }
+
+        if( $is_element_dynamic_gallery ){
+            $wb->add_control(
+                'tax_query_relation',
+                [
+                    'label' => esc_html__( 'Taxonomy Query Relation', 'text-domain' ),
+                    'type' => Controls_Manager::CHOOSE,
+                    'options' => [
+                        'AND' => [
+                            'title' => esc_html__( 'AND', 'text-domain' ),
+                            'text' => 'AND',
+                        ],
+                        'OR' => [
+                            'title' => esc_html__( 'OR', 'text-domain' ),
+                            'text' => 'OR',
+                        ],
+                    ],
+                    'default' => 'AND',
+                    'toggle' => false,
+                    'condition' => [
+                        'post_type!' => ['by_id', 'source_dynamic', 'page'],
+                    ],
+                ]
+            );
         }
 
 	    $wb->add_control(
