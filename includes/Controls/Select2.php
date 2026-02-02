@@ -28,6 +28,7 @@ class Select2 extends Base_Data_Control
 				'remove'          => __( 'Remove', 'essential-addons-for-elementor-lite' ),
 				'thumbnail'       => __( 'Image', 'essential-addons-for-elementor-lite' ),
 				'name'            => __( 'Title', 'essential-addons-for-elementor-lite' ),
+                'description'     => __( 'Product Description', 'essential-addons-for-elementor-lite' ),
 				'price'           => __( 'Price', 'essential-addons-for-elementor-lite' ),
 				'quantity'        => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
 				'subtotal'        => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
@@ -44,6 +45,7 @@ class Select2 extends Base_Data_Control
 				'cl_woo_products' => __( 'Woo Products', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_cart'     => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_orders'   => __( 'Woo Orders', 'essential-addons-for-elementor-lite' ),
+				'nonce'           => wp_create_nonce( 'eael_select2' ),
 			]
 		);
 		wp_enqueue_script( 'eael-select2' );
