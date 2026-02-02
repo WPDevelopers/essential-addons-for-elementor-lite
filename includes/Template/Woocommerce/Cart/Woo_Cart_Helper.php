@@ -199,6 +199,33 @@ trait Woo_Cart_Helper {
                                                 </div>
 										        <?php
 										        break;
+											case 'description': ?>
+												<div class="eael-wct-td product-description <?php echo esc_attr( $item_class ); ?>">
+													<?php
+													// Get word limit from settings with fallback to 20
+											        $word_limit = isset( $column_data['description_word_limit'] ) && is_numeric( $column_data['description_word_limit'] )
+												        ? max( 5, min( 100, intval( $column_data['description_word_limit'] ) ) )
+												        : 20;
+
+											        $description = $_product->get_short_description();
+											        if ( empty( $description ) ) {
+												        $description = $_product->get_description();
+												        if ( ! empty( $description ) ) {
+													        $description = wp_trim_words( $description, $word_limit, '...' );
+												        }
+											        } else {
+												        $description = wp_trim_words( $description, $word_limit, '...' );
+											        }
+													
+											        if ( ! empty( $description ) ) {
+												        echo wp_kses_post( apply_filters( 'eael_woo_cart_item_description', $description, $cart_item, $cart_item_key, $word_limit ) );
+											        } else {
+												        echo esc_html__( 'No description available', 'essential-addons-for-elementor-lite' );
+											        }
+											        ?>
+												</div>
+												<?php
+												break;
 									        case 'subtotal': ?>
                                                 <div class="eael-wct-td product-subtotal <?php echo esc_attr( $item_class ); ?>">
 											        <?php

@@ -16,7 +16,6 @@ if ( empty( $woo_product_list ) ) {
 
 $product = wc_get_product( get_the_ID() );
 if ( ! $product ) {
-    error_log( '$product not found in ' . __FILE__ );
     return;
 }
 
@@ -88,7 +87,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                     ?>
                     
                     <?php if ( $woo_product_list['review_count_show'] && $woo_product_list_loop['review_count'] > 0 ) : ?>
-                        <a href="<?php echo esc_url( get_permalink() ) ?>#reviews" class="woocommerce-review-link eael-product-list-review-count" rel="nofollow">(<?php printf( '%s', esc_html__( $woo_product_list_loop['review_count'], 'essential-addons-for-elementor-lite' ) ); ?>)</a>
+                        <a href="<?php echo esc_url( get_permalink() ) ?>#reviews" class="woocommerce-review-link eael-product-list-review-count" rel="nofollow">(<?php printf( '%s', esc_html( $woo_product_list_loop['review_count'] ) ); ?>)</a>
                     <?php endif; ?>
                 </div>
                 <?php endif; ?>
@@ -132,10 +131,10 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                 <?php if ( $woo_product_list['total_sold_show'] ) : ?>
                 <div class="eael-product-list-progress">
                     <div class="eael-product-list-progress-info">
-                        <h4 class="eael-product-list-progress-count"><?php esc_html_e( $woo_product_list['total_sold_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['total_sales_count'] ); ?></span></h4>
+                        <h4 class="eael-product-list-progress-count"><?php echo esc_html( $woo_product_list['total_sold_text'] ); ?> <span><?php echo esc_html( $woo_product_list_loop['total_sales_count'] ); ?></span></h4>
 
                         <?php if( $product->managing_stock() && $woo_product_list['total_sold_remaining_show'] ) : ?>
-                        <h4 class="eael-product-list-progress-remaining"><?php esc_html_e( $woo_product_list['total_sold_remaining_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['stock_quantity_count'] ); ?></span></h4>
+                        <h4 class="eael-product-list-progress-remaining"><?php echo esc_html( $woo_product_list['total_sold_remaining_text'] ); ?> <span><?php echo esc_html( $woo_product_list_loop['stock_quantity_count'] ); ?></span></h4>
                         <?php endif; ?>
                     </div>
                     <div class="eael-product-list-progress-bar-outer">
@@ -153,7 +152,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                     <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
                     <p class="eael-product-list-quick-view-button eael-m-0">
                         <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ) ); ?>" class="open-popup-link">
-                            <?php esc_html_e( $woo_product_list['quick_view_text'], 'essential-addons-for-elementor-lite' ); ?>
+                            <?php echo esc_html( $woo_product_list['quick_view_text'] ); ?>
                         </a>
                     </p>
                     <?php endif; ?>
