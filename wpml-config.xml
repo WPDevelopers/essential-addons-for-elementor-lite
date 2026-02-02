@@ -563,4 +563,35 @@
             </fields>
         </widget>
     </elementor-widgets>
+
+    <elementor-objects>
+
+        <object type="container">
+            <fields>
+                <field key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
+        </object>
+
+        <object type="section">
+            <fields>
+                <field key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
+        </object>
+
+        <object type="column">
+            <fields>
+                <field key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
+        </object>
+
+        <widget name="icon-box">
+            <conditions>
+                <condition key="widgetType">icon-box</condition>
+            </conditions>
+            <fields>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
+        </widget>
+
+    </elementor-objects>
 </wpml-config>
