@@ -21,6 +21,50 @@ class Image_Masking {
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		add_filter( 'elementor/document/element/replace_id', [ $this, 'cleanup_settings_data' ] );
+	}
+
+	public function cleanup_settings_data( $element_data ) {
+
+		$prefixes = [
+			'eael_image_masking_',
+			'eael_clip_',
+			'eael_svg_paths_',
+			'eael_image_morphing_'
+		];
+
+		$clean_settings = function ( &$settings ) use ( $prefixes ) {
+			if ( empty( $settings[ 'eael_enable_image_masking' ] ) || 'yes' !== $settings[ 'eael_enable_image_masking' ] ) {
+				foreach ( array_keys( $settings ) as $key ) {
+					foreach ( $prefixes as $prefix ) {
+						if ( str_starts_with( $key, $prefix ) ) {
+							unset( $settings[ $key ] );
+						}
+					}
+				}
+			}
+		};
+
+		$walk = function ( &$element ) use ( &$walk, $clean_settings ) {
+
+			if ( isset( $element['settings'] ) ) {
+				$clean_settings( $element['settings'] );
+			}
+
+			if ( isset( $element['page_settings'] ) ) {
+				$clean_settings( $element['page_settings'] );
+			}
+
+			if ( ! empty( $element['elements'] ) ) {
+				foreach ( $element['elements'] as &$child ) {
+					$walk( $child );
+				}
+			}
+		};
+
+		$walk( $element_data );
+
+		return $element_data;
 	}
 
     public function enqueue_scripts() {
