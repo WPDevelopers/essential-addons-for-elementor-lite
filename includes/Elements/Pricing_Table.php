@@ -2444,6 +2444,7 @@ class Pricing_Table extends Widget_Base
         $settings = $this->get_settings_for_display();
         $featured_class = ('yes' === $settings['eael_pricing_table_featured'] ? 'featured ' . $settings['eael_pricing_table_featured_styles'] : '');
         $featured_class .= ($settings['eael_pricing_table_ribbon_alignment'] === 'left' ? ' ribbon-left' : '');
+        $inline_style = $settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'];
         $icon_position = $this->get_settings('eael_pricing_table_button_icon_alignment');
 	    $settings['eael_pricing_table_price'] = ( $settings['eael_pricing_table_price'] === '0' ) ? '0' : HelperClass::eael_wp_kses( $settings[ 'eael_pricing_table_price' ] );
 	    $settings['eael_pricing_table_onsale_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_onsale_price']);
@@ -2453,6 +2454,10 @@ class Pricing_Table extends Widget_Base
         $has_devider = isset( $settings['eael_pricing_table_devider_show'] ) && 'yes' === $settings['eael_pricing_table_devider_show'];
 
         $this->add_render_attribute('eael_pricing', [ 'class' => [ 'eael-pricing', $settings['eael_pricing_table_style'] ] ]);
+
+        if( $inline_style ){
+            $this->add_render_attribute('eael_pricing', [ 'style' => 'overflow: hidden;' ]);
+        }
 
         if( ( 'style-1' === $settings['eael_pricing_table_style'] || 'style-3' === $settings['eael_pricing_table_style'] ) && $has_devider ){
             $this->add_render_attribute('eael_pricing', [ 'class' => [ 'eael-header-devider' ] ]);
