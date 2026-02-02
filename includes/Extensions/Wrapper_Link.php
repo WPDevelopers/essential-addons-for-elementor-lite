@@ -112,12 +112,30 @@ class Wrapper_Link {
 	}
 
 	public function wpml_widgets_to_translate_filter( $widgets ) {
-		foreach ( $widgets as $widget_name => $widget ) {
-			$widgets[ $widget_name ]['fields'][] = [
-				'field'       => 'url',
-				'type'        => __( 'Wrapper Link', 'essential-addons-for-elementor-lite' ),
-				'editor_type' => 'LINE',
-				'key_of'      => 'eael_wrapper_link',
+		$new_field = [
+			'field'       => 'url',
+			'field_id'    => 'eael_wrapper_link',
+			'type'        => __( 'Wrapper Link', 'essential-addons-for-elementor-lite' ),
+			'editor_type' => 'LINK',
+		];
+
+		foreach ( $widgets as &$widget ) {
+			if ( ! isset( $widget['fields'] ) ) {
+				$widget['fields'] = [];
+			}
+			$widget['fields']['eael_wrapper_link'] = $new_field;
+		}
+
+		if ( ! isset( $widgets['section'] ) ) {
+			$widgets['section'] = [
+				'conditions' => [ 'elType' => 'section' ],
+				'fields'     => [ 'eael_wrapper_link' => $new_field ],
+			];
+		}
+		if ( ! isset( $widgets['column'] ) ) {
+			$widgets['column'] = [
+				'conditions' => [ 'elType' => 'column' ],
+				'fields'     => [ 'eael_wrapper_link' => $new_field ],
 			];
 		}
 
