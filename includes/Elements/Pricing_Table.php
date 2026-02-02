@@ -873,6 +873,18 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+			'eael_pricing_table_hover_box_shadow',
+			[
+				'label'        => esc_html__( 'Hover Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'ON', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'OFF', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -2432,7 +2444,6 @@ class Pricing_Table extends Widget_Base
         $settings = $this->get_settings_for_display();
         $featured_class = ('yes' === $settings['eael_pricing_table_featured'] ? 'featured ' . $settings['eael_pricing_table_featured_styles'] : '');
         $featured_class .= ($settings['eael_pricing_table_ribbon_alignment'] === 'left' ? ' ribbon-left' : '');
-        $inline_style = $settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'];
         $icon_position = $this->get_settings('eael_pricing_table_button_icon_alignment');
 	    $settings['eael_pricing_table_price'] = ( $settings['eael_pricing_table_price'] === '0' ) ? '0' : HelperClass::eael_wp_kses( $settings[ 'eael_pricing_table_price' ] );
 	    $settings['eael_pricing_table_onsale_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_onsale_price']);
@@ -2443,15 +2454,21 @@ class Pricing_Table extends Widget_Base
 
         $this->add_render_attribute('eael_pricing', [ 'class' => [ 'eael-pricing', $settings['eael_pricing_table_style'] ] ]);
 
-        if( $inline_style ){
-            $this->add_render_attribute('eael_pricing', [ 'style' => 'overflow: hidden;' ]);
-        }
-
         if( ( 'style-1' === $settings['eael_pricing_table_style'] || 'style-3' === $settings['eael_pricing_table_style'] ) && $has_devider ){
             $this->add_render_attribute('eael_pricing', [ 'class' => [ 'eael-header-devider' ] ]);
         }
 
         
+        $this->add_render_attribute('eael_pricing_wrapper', 'class', [ 'eael-pricing' , $settings['eael_pricing_table_style'] ] );
+
+        if( 'yes' === $settings['eael_pricing_table_hover_box_shadow'] ){
+            $this->add_render_attribute('eael_pricing_wrapper', 'class', 'eael-pricing-box-shadow' );
+        }
+
+        if( $settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'] ){
+            $this->add_render_attribute('eael_pricing_wrapper', 'style', 'overflow: hidden;' );
+        }
+
         $this->add_render_attribute('eael_pricing_button', [ 'class' => [ 'eael-pricing-button' ] ]);
 
         if ( ! empty( $settings['eael_pricing_table_btn_link']['url'] ) ) {
@@ -2498,102 +2515,101 @@ class Pricing_Table extends Widget_Base
             }
         }
     ?>
+    <div <?php $this->print_render_attribute_string('eael_pricing'); ?>>
         <?php if ('style-1' === $settings['eael_pricing_table_style']) : ?>
-            <div <?php $this->print_render_attribute_string('eael_pricing'); ?>>
-                <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
-                    <div class="header">
-                        <h2 class="title"><?php echo wp_kses( $settings['eael_pricing_table_title'], HelperClass::eael_allowed_tags() ); ?></h2>
-                    </div>
-                    <div class="eael-pricing-tag">
-                        <?php 
-                            $html = '<span class="price-tag">' . $pricing . '</span>';
-                            $html .= '<span class="price-period">' . $settings['eael_pricing_table_period_separator'] . $settings['eael_pricing_table_price_period'] . '</span>';
-                            echo wp_kses( $html, HelperClass::eael_allowed_tags() );
-                        ?>
-                    </div>
-                    <div class="body">
-                        <?php $this->render_feature_list($settings, $this); ?>
-                    </div>
-	                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
-                    <div class="footer">
-                        <a <?php $this->print_render_attribute_string('eael_pricing_button'); ?> >
-                            <?php if ('left' == $icon_position) : ?>
-                                <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
-                                    Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-left' ] );
-                                   } else { ?>
-                                    <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon']); ?> fa-icon-left"></i>
-                                <?php } ?>
-                                <?php echo wp_kses( $settings['eael_pricing_table_btn'], HelperClass::eael_allowed_tags() ); ?>
-                            <?php elseif ('right' == $icon_position) : ?>
-                                <?php echo wp_kses( $settings['eael_pricing_table_btn'], HelperClass::eael_allowed_tags() ); ?>
-                                <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
-                                    Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-right' ] );
-                                    } else { ?>
-                                    <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon']); ?> fa-icon-right"></i>
-                                <?php } ?>
-                            <?php endif; ?>
-                        </a>
-                    </div>
-                    <?php endif; ?>
+            <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
+                <div class="header">
+                    <h2 class="title"><?php echo wp_kses( $settings['eael_pricing_table_title'], HelperClass::eael_allowed_tags() ); ?></h2>
                 </div>
-            </div>
-        <?php endif; ?>
-        <?php if ('style-2' === $settings['eael_pricing_table_style']) : ?>
-            <div <?php $this->print_render_attribute_string('eael_pricing'); ?>>
-                <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
-                    <div class="eael-pricing-icon">
-                        <span class="icon" style="background:<?php if ('yes' != $settings['eael_pricing_table_icon_bg_show']) : echo 'none';
-                                                                endif; ?>;">
-                            <?php if (empty($settings['eael_pricing_table_style_2_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_style_2_icon_new'])) {
-                                Icons_Manager::render_icon( $settings['eael_pricing_table_style_2_icon_new'] );
+                <div class="eael-pricing-tag">
+                    <?php 
+                        $html = '<span class="price-tag">' . $pricing . '</span>';
+                        $html .= '<span class="price-period">' . $settings['eael_pricing_table_period_separator'] . $settings['eael_pricing_table_price_period'] . '</span>';
+                        echo wp_kses( $html, HelperClass::eael_allowed_tags() );
+                    ?>
+                </div>
+                <div class="body">
+                    <?php $this->render_feature_list($settings, $this); ?>
+                </div>
+                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
+                <div class="footer">
+                    <a <?php $this->print_render_attribute_string('eael_pricing_button'); ?> >
+                        <?php if ('left' == $icon_position) : ?>
+                            <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
+                                Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-left' ] );
                                 } else { ?>
-                                <i class="<?php echo esc_attr($settings['eael_pricing_table_style_2_icon']); ?>"></i>
+                                <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon']); ?> fa-icon-left"></i>
                             <?php } ?>
-                        </span>
-                    </div>
-                    <div class="header">
-                        <?php 
-                        $header_html = '<h2 class="title">' . $settings['eael_pricing_table_title'] . '</h2>';
-                        $header_html .= '<span class="subtitle">' . $settings['eael_pricing_table_sub_title'] . '</span>';
-                        echo wp_kses( $header_html, HelperClass::eael_allowed_tags() );
-                        ?>
-                    </div>
-                    <div class="eael-pricing-tag">
-                        <?php 
-                            $html = '<span class="price-tag">' . $pricing . '</span>';
-                            $html .= '<span class="price-period">' . $settings['eael_pricing_table_period_separator'] . $settings['eael_pricing_table_price_period'] . '</span>';
-                            echo wp_kses( $html, HelperClass::eael_allowed_tags() );
-                        ?>
-                    </div>
-                    <div class="body">
-                        <?php $this->render_feature_list($settings, $this); ?>
-                    </div>
-	                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
-                    <div class="footer">
-                        <a <?php $this->print_render_attribute_string('eael_pricing_button'); ?> >
-                            <?php if ('left' == $icon_position) : ?>
-                                <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
-                                    Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-left'] );
+                            <?php echo wp_kses( $settings['eael_pricing_table_btn'], HelperClass::eael_allowed_tags() ); ?>
+                        <?php elseif ('right' == $icon_position) : ?>
+                            <?php echo wp_kses( $settings['eael_pricing_table_btn'], HelperClass::eael_allowed_tags() ); ?>
+                            <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
+                                Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-right' ] );
                                 } else { ?>
-                                    <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon']); ?> fa-icon-left"></i>
-                                <?php } ?>
-                                <?php echo wp_kses( $settings['eael_pricing_table_btn'], HelperClass::eael_allowed_tags() ); ?>
-                            <?php elseif ('right' == $icon_position) : ?>
-                                <?php echo wp_kses( $settings['eael_pricing_table_btn'], HelperClass::eael_allowed_tags() ); ?>
-                                <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
-                                    Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-right'] );
-                                } else { ?>
-                                    <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon']); ?> fa-icon-right"></i>
-                                <?php } ?>
-                            <?php endif; ?>
-                        </a>
-                    </div>
-                    <?php endif; ?>
+                                <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon']); ?> fa-icon-right"></i>
+                            <?php } ?>
+                        <?php endif; ?>
+                    </a>
                 </div>
+                <?php endif; ?>
+            </div>
+        <?php elseif ('style-2' === $settings['eael_pricing_table_style']) : ?>
+            <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
+                <div class="eael-pricing-icon">
+                    <span class="icon" style="background:<?php if ('yes' != $settings['eael_pricing_table_icon_bg_show']) : echo 'none';
+                                                            endif; ?>;">
+                        <?php if (empty($settings['eael_pricing_table_style_2_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_style_2_icon_new'])) {
+                            Icons_Manager::render_icon( $settings['eael_pricing_table_style_2_icon_new'] );
+                            } else { ?>
+                            <i class="<?php echo esc_attr($settings['eael_pricing_table_style_2_icon']); ?>"></i>
+                        <?php } ?>
+                    </span>
+                </div>
+                <div class="header">
+                    <?php 
+                    $header_html = '<h2 class="title">' . $settings['eael_pricing_table_title'] . '</h2>';
+                    $header_html .= '<span class="subtitle">' . $settings['eael_pricing_table_sub_title'] . '</span>';
+                    echo wp_kses( $header_html, HelperClass::eael_allowed_tags() );
+                    ?>
+                </div>
+                <div class="eael-pricing-tag">
+                    <?php 
+                        $html = '<span class="price-tag">' . $pricing . '</span>';
+                        $html .= '<span class="price-period">' . $settings['eael_pricing_table_period_separator'] . $settings['eael_pricing_table_price_period'] . '</span>';
+                        echo wp_kses( $html, HelperClass::eael_allowed_tags() );
+                    ?>
+                </div>
+                <div class="body">
+                    <?php $this->render_feature_list($settings, $this); ?>
+                </div>
+                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
+                <div class="footer">
+                    <a <?php $this->print_render_attribute_string('eael_pricing_button'); ?> >
+                        <?php if ('left' == $icon_position) : ?>
+                            <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
+                                Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-left'] );
+                            } else { ?>
+                                <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon']); ?> fa-icon-left"></i>
+                            <?php } ?>
+                            <?php echo wp_kses( $settings['eael_pricing_table_btn'], HelperClass::eael_allowed_tags() ); ?>
+                        <?php elseif ('right' == $icon_position) : ?>
+                            <?php echo wp_kses( $settings['eael_pricing_table_btn'], HelperClass::eael_allowed_tags() ); ?>
+                            <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
+                                Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-right'] );
+                            } else { ?>
+                                <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon']); ?> fa-icon-right"></i>
+                            <?php } ?>
+                        <?php endif; ?>
+                    </a>
+                </div>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
-    <?php
+        <?php
         $depricated_param = $featured_class;
         do_action('add_pricing_table_style_block', $settings, $this, $pricing, $button_url, $featured_class, $depricated_param );
+        ?>
+    </div>
+    <?php
     }
 }
