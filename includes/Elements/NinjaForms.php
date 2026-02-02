@@ -1759,9 +1759,7 @@ class NinjaForms extends Widget_Base
                         <?php }?>
                         <?php if ($settings['form_description_custom'] != '') {?>
                             <div class="eael-contact-form-description eael-ninja-form-description">
-                                <?php
-                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
+                                <?php echo wp_kses( $this->parse_text_editor( $settings['form_description_custom'] ), Helper::eael_allowed_tags() ); ?>
                             </div>
                         <?php }?>
                     </div>

@@ -1295,11 +1295,6 @@ class Helper
 				'id'    => [],
 				'style' => [],
 			],
-			'button'  => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
 			'center'  => [
 				'class' => [],
 				'id'    => [],
@@ -1379,8 +1374,73 @@ class Helper
 				'title'  => [],
 				'width'  => [],
 				'height' => [],
-				'src'    => []
-			]
+				'src'    => [],
+                'allowfullscreen' => []
+			],
+            'blockquote' => [
+                'cite'  => true, // URL of the source (HTML spec)
+                'class' => true,
+                'id'    => true,
+                'style' => true, // only if you intentionally allow inline styles
+            ],
+            'form' => [
+                'action' => true,
+                'method' => true,
+                'id'     => true,
+                'class'  => true,
+                'name'   => true,
+                'novalidate' => true,
+            ],
+            'input' => [
+                'type'        => true,
+                'name'        => true,
+                'value'       => true,
+                'placeholder' => true,
+                'id'          => true,
+                'class'       => true,
+                'checked'     => true,
+                'disabled'    => true,
+                'required'    => true,
+                'readonly'    => true,
+                'min'         => true,
+                'max'         => true,
+                'step'        => true,
+                'maxlength'   => true,
+                'pattern'     => true,
+                'autocomplete'=> true,
+            ],
+            'textarea' => [
+                'name'        => true,
+                'rows'        => true,
+                'cols'        => true,
+                'placeholder' => true,
+                'id'          => true,
+                'class'       => true,
+                'required'    => true,
+                'readonly'    => true,
+            ],
+            'select' => [
+                'name'     => true,
+                'id'       => true,
+                'class'    => true,
+                'required' => true,
+                'multiple' => true,
+            ],
+            'option' => [
+                'value'    => true,
+                'selected' => true,
+                'disabled' => true,
+            ],
+            'label' => [
+                'for'   => true,
+                'class'=> true,
+            ],
+            'button' => [
+                'type'     => true,
+                'id'       => true,
+                'class'    => true,
+                'disabled' => true,
+            ],
 		];
 
 		if ( count( $extra ) > 0 ) {
