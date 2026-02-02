@@ -424,7 +424,7 @@ class Flip_Box extends Widget_Base
 		            'eael_flipbox_front_content_type'      => 'content',
 	            ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -664,7 +664,7 @@ class Flip_Box extends Widget_Base
 		            'eael_flipbox_back_content_type'      => 'content',
 	            ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -843,7 +843,7 @@ class Flip_Box extends Widget_Base
                     'flipbox_link_type' => 'button',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );

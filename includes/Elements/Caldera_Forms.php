@@ -130,7 +130,7 @@ class Caldera_Forms extends Widget_Base
                         'custom_title_description' => 'yes',
                     ],
                     'ai' => [
-                        'active' => false,
+                        'active' => true,
                     ],
                 ]
             );

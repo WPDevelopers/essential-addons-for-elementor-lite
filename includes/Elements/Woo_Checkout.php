@@ -193,7 +193,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -235,7 +235,7 @@ class Woo_Checkout extends Widget_Base {
 					'ea_woo_checkout_table_header_text' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -255,7 +255,7 @@ class Woo_Checkout extends Widget_Base {
 					'ea_woo_checkout_table_header_text' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -275,7 +275,7 @@ class Woo_Checkout extends Widget_Base {
 					'ea_woo_checkout_table_header_text' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -292,7 +292,7 @@ class Woo_Checkout extends Widget_Base {
                     'ea_woo_checkout_table_header_text' => 'yes',
                 ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -309,7 +309,7 @@ class Woo_Checkout extends Widget_Base {
                     'ea_woo_checkout_table_header_text' => 'yes',
                 ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -326,7 +326,7 @@ class Woo_Checkout extends Widget_Base {
                     'ea_woo_checkout_table_header_text' => 'yes',
                 ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -357,7 +357,7 @@ class Woo_Checkout extends Widget_Base {
 					'ea_woo_checkout_shop_link' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -404,7 +404,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -418,7 +418,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -445,7 +445,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -460,7 +460,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -529,7 +529,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
     );
@@ -556,7 +556,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -583,7 +583,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -597,7 +597,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -611,7 +611,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -701,7 +701,7 @@ class Woo_Checkout extends Widget_Base {
 				'default' => esc_html__( 'List Title' , 'essential-addons-for-elementor-lite' ),
 				'label_block' => true,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -734,7 +734,7 @@ class Woo_Checkout extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
 				'ai'          => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -803,7 +803,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -817,7 +817,7 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);

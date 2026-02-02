@@ -401,7 +401,7 @@ class Adv_Tabs extends Widget_Base
                 'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
                 'dynamic' => ['active' => true],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -476,7 +476,7 @@ class Adv_Tabs extends Widget_Base
                 'description' => esc_html__( 'Custom ID will be added as an anchor tag. For example, if you add ‘test’ as your custom ID, the link will become like the following: https://www.example.com/#test and it will open the respective tab directly.', 'essential-addons-for-elementor-lite' ),
                 'default' => '',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );

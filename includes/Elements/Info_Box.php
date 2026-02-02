@@ -256,7 +256,7 @@ class Info_Box extends Widget_Base
                     'eael_infobox_img_or_icon' => 'number',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -283,7 +283,7 @@ class Info_Box extends Widget_Base
                 ],
                 'default' => esc_html__('This is an icon box', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -354,7 +354,7 @@ class Info_Box extends Widget_Base
                 ],
                 'default' => esc_html__('This is a sub title', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
                 'condition' => [
                     'eael_infobox_show_sub_title' => 'yes',
@@ -602,7 +602,7 @@ class Info_Box extends Widget_Base
                     'eael_show_infobox_button' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );

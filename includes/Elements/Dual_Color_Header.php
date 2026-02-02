@@ -164,7 +164,7 @@ class Dual_Color_Header extends Widget_Base
 				'default' => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
 				'dynamic' => ['action' => true],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 				'condition' => [
 					'eael_dch_enable_multiple_titles!' => 'yes',
@@ -181,7 +181,7 @@ class Dual_Color_Header extends Widget_Base
 				'default' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
 				'dynamic' => ['action' => true],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 				'condition' => [
 					'eael_dch_enable_multiple_titles!' => 'yes',
@@ -199,7 +199,7 @@ class Dual_Color_Header extends Widget_Base
 				'label_block' => true,
 				'default'     => esc_html__('Title', 'essential-addons-for-elementor-lite'),
 				'dynamic'     => [ 'action' =>true ],
-				'ai'          => [ 'active' => false ],
+				'ai'          => [ 'active' => true ],
 			]
 		);
 		

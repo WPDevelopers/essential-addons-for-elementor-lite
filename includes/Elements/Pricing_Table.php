@@ -163,7 +163,7 @@ class Pricing_Table extends Widget_Base
                 'label_block' => false,
                 'default'     => esc_html__('Startup', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -186,7 +186,7 @@ class Pricing_Table extends Widget_Base
                     'eael_pricing_table_style' => $subtitles_fields,
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -235,7 +235,7 @@ class Pricing_Table extends Widget_Base
                 'label_block' => false,
                 'default'     => esc_html__('99', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -264,7 +264,7 @@ class Pricing_Table extends Widget_Base
                     'eael_pricing_table_onsale' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -277,7 +277,7 @@ class Pricing_Table extends Widget_Base
                 'label_block' => false,
                 'default'     => esc_html__('$', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -307,7 +307,7 @@ class Pricing_Table extends Widget_Base
                 'label_block' => false,
                 'default'     => esc_html__('month', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -321,7 +321,7 @@ class Pricing_Table extends Widget_Base
                 'label_block' => false,
                 'default'     => esc_html__('/', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -349,7 +349,7 @@ class Pricing_Table extends Widget_Base
                 'label_block' => true,
                 'default'     => esc_html__( 'Pricing table list item', 'essential-addons-for-elementor-lite' ),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -507,7 +507,7 @@ class Pricing_Table extends Widget_Base
                     'eael_pricing_item_tooltip' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -650,7 +650,7 @@ class Pricing_Table extends Widget_Base
                     'eael_pricing_table_button_show' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -737,7 +737,7 @@ class Pricing_Table extends Widget_Base
                     'eael_pricing_table_featured'        => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );

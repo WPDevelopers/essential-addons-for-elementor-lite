@@ -221,7 +221,7 @@ class Formstack extends Widget_Base {
                     'eael_formstack_custom_title_description' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
