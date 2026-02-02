@@ -562,5 +562,10 @@
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
+        <widget name="icon-box">
+            <fields>
+                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
+        </widget>
     </elementor-widgets>
 </wpml-config>
