@@ -3939,7 +3939,7 @@ class Woo_Product_List extends Widget_Base
 	}
 
     /**
-     * Prepare product query
+     * Prepare product query using WC_Product_Query
      * @param $settings
      * @return array
      */
@@ -4043,8 +4043,8 @@ class Woo_Product_List extends Widget_Base
         if ( 'source_dynamic' === $settings['post_type'] && is_archive() || ! empty( $_REQUEST['post_type'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		    $settings['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
 		    $settings['offset']         = ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0;
-		    $args                       = ClassesHelper::get_query_args( $settings );
-		    $args                       = ClassesHelper::get_dynamic_args( $settings, $args );
+		    $args                    = ClassesHelper::get_query_args( $settings );
+		    $args                    = ClassesHelper::get_dynamic_args( $settings, $args );
 	    } else {
             $args = $this->eael_prepare_product_query( $settings );
 	    }
@@ -4063,7 +4063,10 @@ class Woo_Product_List extends Widget_Base
                 }
 
                 if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
-                    $args['post__not_in'] = $user_ordered_products;
+                    $args['post__not_in'] = array_merge(
+                        $args['post__not_in'] ?? [],
+                        $user_ordered_products
+                    );
                 }
             }
         }
@@ -4093,15 +4096,16 @@ class Woo_Product_List extends Widget_Base
                             if( $settings['post_type'] === 'source_archive' && is_archive() && $is_product_archive ){
                                 global $wp_query;
                                 $query = $wp_query;
-                                $args  = $wp_query->query_vars;
+                                $found_posts = $query->found_posts;
+                                $max_page = $query->max_num_pages;
                             } else {
                                 $query = new \WP_Query( $args );
+                                $found_posts = $query->found_posts;
+                                $max_page = $query->max_num_pages;
                             }
-                            
+
                             if ( $query->have_posts() ) {
                                 // Load more data
-                                $found_posts                        = $query->found_posts - $offset;
-                                $max_page                           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
                                 $args['max_page']                   = $max_page;
                                 $args['total_post']                 = $found_posts;
 
@@ -4121,8 +4125,13 @@ class Woo_Product_List extends Widget_Base
                         ?>
                     </div>
 
-                    <?php 
-                    if ( ! empty( $args['posts_per_page'] ) && $found_posts > $args['posts_per_page'] ) {
+                    <?php
+                    $limit = $args['limit'] ?? $args['posts_per_page'] ?? 4;
+                    if ( $found_posts > $limit ) {
+                        // Ensure args has posts_per_page for load more compatibility
+                        if ( ! isset( $args['posts_per_page'] ) ) {
+                            $args['posts_per_page'] = $limit;
+                        }
                         $this->print_load_more_button( $settings, $args, $dir_name );
                     }
                     ?>
