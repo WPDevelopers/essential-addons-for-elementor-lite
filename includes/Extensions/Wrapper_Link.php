@@ -20,6 +20,7 @@ class Wrapper_Link {
 		add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
+		add_filter( 'wpml_elementor_widgets_to_translate', [ $this, 'wpml_widgets_to_translate_filter' ] );
 	}
 
 	public function register_controls( $element ) {
@@ -108,5 +109,18 @@ class Wrapper_Link {
 				$element->add_render_attribute( '_wrapper', 'data-eael-wrapper-link', $link_id );
 			}
 		}
+	}
+
+	public function wpml_widgets_to_translate_filter( $widgets ) {
+		foreach ( $widgets as $widget_name => $widget ) {
+			$widgets[ $widget_name ]['fields'][] = [
+				'field'       => 'url',
+				'type'        => __( 'Wrapper Link', 'essential-addons-for-elementor-lite' ),
+				'editor_type' => 'LINE',
+				'key_of'      => 'eael_wrapper_link',
+			];
+		}
+
+		return $widgets;
 	}
 }
