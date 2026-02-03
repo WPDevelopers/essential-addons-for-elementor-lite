@@ -1393,7 +1393,8 @@ trait Login_Registration {
 					);
 				}
 
-				$password_reset_link = '<a href="' . $password_reset_link . '" target="_blank">' . __( 'Click here to reset your password', 'essential-addons-for-elementor-lite' ) . '</a>';
+				$link_text = !empty( $custom_reset_password_info['link_text'] ) ? $custom_reset_password_info['link_text'] : __( 'Click here to reset your password', 'essential-addons-for-elementor-lite' );
+				$password_reset_link = '<a href="' . $password_reset_link . '" target="_blank">' . $link_text . '</a>';
 				self::$email_options_lostpassword['password_reset_link'] = $password_reset_link;
 				self::$email_options['password_reset_link'] = $password_reset_link . "\r\n\r\n";
 			}

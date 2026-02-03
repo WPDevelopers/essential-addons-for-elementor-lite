@@ -7005,7 +7005,8 @@ class Login_Register extends Widget_Base {
 		if( isset( $this->ds['enable_reset_password'] ) && 'yes' === $this->ds['enable_reset_password'] ){
 			update_option( 'eael_lr_resetpassword_form_info', [
 				'page_id'   => get_the_ID(),
-				'widget_id' => $this->get_id()
+				'widget_id' => $this->get_id(),
+				'link_text' => !empty( $this->ds['lostpassword_email_message_reset_link_text'] ) ? HelperCLass::eael_wp_kses( $this->ds['lostpassword_email_message_reset_link_text'] ) : __( 'Click here to reset your password', 'essential-addons-for-elementor-lite' )
 			] );
 		} else {
 			delete_option( 'eael_lr_resetpassword_form_info' );
