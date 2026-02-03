@@ -7000,7 +7000,16 @@ class Login_Register extends Widget_Base {
 		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || 'lostpassword' === $this->default_form || isset($_GET['eael-register']) || isset($_GET['eael-lostpassword']) ) && !isset($_GET['eael-resetpassword']) ? 'eael-lr-d-none' : '';
 		$default_hide_class = $this->should_print_resetpassword_form_editor ? '' : $default_hide_class;
-		$rp_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id ); 
+		$rp_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id );
+
+		if( isset( $this->ds['enable_reset_password'] ) && 'yes' === $this->ds['enable_reset_password'] ){
+			update_option( 'eael_lr_resetpassword_form_info', [
+				'page_id'   => get_the_ID(),
+				'widget_id' => $this->get_id()
+			] );
+		} else {
+			delete_option( 'eael_lr_resetpassword_form_info' );
+		}
 
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$show_resetpassword_on_form_submit = get_option('eael_show_reset_password_on_form_submit_' . $this->get_id());
