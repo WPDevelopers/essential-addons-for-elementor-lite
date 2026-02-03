@@ -564,6 +564,9 @@
         </widget>
         <widget name="icon-box">
             <fields>
+                <field type="Icon Box: Title text" editor_type="LINE">title_text</field>
+                <field type="Icon Box: Description text" editor_type="AREA">description_text</field>
+                <field type="Icon Box: Link" key_of="link" editor_type="LINE">url</field>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
