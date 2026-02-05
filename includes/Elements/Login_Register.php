@@ -7101,7 +7101,6 @@ class Login_Register extends Widget_Base {
 								echo '<div class="eael-form-validation-container">';
 									$this->print_resetpassword_validation_errors();
 								echo '</div>';
-								$this->print_resetpassword_validation_errors();
 							}
 							?>
 							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">
@@ -7181,7 +7180,6 @@ class Login_Register extends Widget_Base {
 								echo '<div class="eael-form-validation-container">';
 									$this->print_resetpassword_validation_errors();
 								echo '</div>';
-								$this->print_resetpassword_validation_errors();
 							}
 
 							$this->print_necessary_hidden_fields( 'resetpassword' );
