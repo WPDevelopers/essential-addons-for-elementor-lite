@@ -578,6 +578,29 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
+            'eael_event_calendar_show_search',
+            [
+                'label' => __('Enable Event Search', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_search_placeholder',
+            [
+                'label' => __('Search Placeholder', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'default' => __('Search Event...', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_event_calendar_show_search' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_event_default_date_type',
             [
                 'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
@@ -3518,6 +3541,12 @@ class Event_Calendar extends Widget_Base
 	    echo '<div class="eael-event-calendar-wrapper layout-' . esc_attr( $settings['eael_event_display_layout'] ) . '">';
 
 	    if ( $settings['eael_event_display_layout'] === 'calendar' ) {
+            if ($settings['eael_event_calendar_show_search'] === 'yes') {
+                echo '<div class="eael-event-calendar-search-wrap">
+                    <input type="text" class="eael-event-calendar-search-input" placeholder="' . esc_attr($settings['eael_event_calendar_search_placeholder']) . '">
+                </div>';
+            }
+
 		    echo '<div id="eael-event-calendar-' . esc_attr( $this->get_id() ) . '" class="eael-event-calendar-cls"
             data-cal_id = "' . esc_attr( $this->get_id() ) . '"
             data-locale = "' . esc_attr( $local ) . '"

@@ -21,6 +21,7 @@ var EventCalendar = function ($scope, $) {
 		time_format = element.data("time_format") == "yes" ? true : false;
 
 	if ( wrapper.hasClass( 'layout-calendar' ) ){
+		var searchInput = wrapper.find('.eael-event-calendar-search-input');
 		var calendar = new Calendar(
 			$scope[0].querySelector(".eael-event-calendar-cls"), {
 				views: {
@@ -364,6 +365,17 @@ var EventCalendar = function ($scope, $) {
 				refreshPopUpDetailsLink();
 			}
 		});
+
+		if (searchInput.length) {
+			searchInput.on('keyup', function () {
+				var value = $(this).val().toLowerCase();
+				var filteredEvents = eventAll.filter(function (event) {
+					return event.title.toLowerCase().indexOf(value) > -1;
+				});
+				calendar.removeAllEvents();
+				calendar.addEventSource(filteredEvents);
+			});
+		}
 
 		calendar.render();
 		setTimeout( function() {
