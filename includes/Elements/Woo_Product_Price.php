@@ -247,7 +247,7 @@ class Woo_Product_Price extends Widget_Base {
 					'prefix_content' => 'text',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -314,7 +314,7 @@ class Woo_Product_Price extends Widget_Base {
 					'suffix_content' => 'text',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);

@@ -221,7 +221,7 @@ class Formstack extends Widget_Base {
                     'eael_formstack_custom_title_description' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -2139,17 +2139,13 @@ class Formstack extends Widget_Base {
                     <?php } ?>
                     <?php if ($settings['eael_formstack_form_description_custom'] != '') { ?>
                         <div class="eael-contact-form-description eael-formstack-description">
-                            <?php 
-                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                            echo $this->parse_text_editor( $settings['eael_formstack_form_description_custom'] ); ?>
+                            <?php echo wp_kses( $this->parse_text_editor( $settings['eael_formstack_form_description_custom'] ), Helper::eael_allowed_tags() ); ?>
                         </div>
                     <?php } ?>
                 </div>
             <?php } ?>
             <div class="fsForm">
-                <?php
-                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                echo $this->parse_text_editor( $form_data ); ?>
+                <?php echo wp_kses( $this->parse_text_editor( $form_data ), Helper::eael_allowed_tags() ); ?>
             </div>
         </div>
         <?php

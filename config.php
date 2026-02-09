@@ -1302,16 +1302,6 @@ $config = [
                 ],
                 'js' => [
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/gsap.min.js',
-                        'type' => 'lib',
-                        'context' => 'view',
-                    ],
-                    [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/scroll-trigger.min.js',
-                        'type' => 'lib',
-                        'context' => 'view',
-                    ],
-                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/svg-draw.min.js',
                         'type' => 'self',
                         'context' => 'view',
@@ -1433,29 +1423,9 @@ $config = [
             'dependency' => [
                 'js' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/gsap.min.js',
-                        'type'    => 'lib',
-                        'context' => 'view',
-                    ],
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/MorphSVGPlugin.min.js',
-                        'type'    => 'lib',
-                        'context' => 'view',
-                    ],
-                    [
                         'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/blob-animation/polygon-morphing-animation.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
-                    ],
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/gsap.min.js',
-                        'type'    => 'lib',
-                        'context' => 'edit',
-                    ],
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/MorphSVGPlugin.min.js',
-                        'type'    => 'lib',
-                        'context' => 'edit',
                     ],
                     [
                         'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/blob-animation/polygon-morphing-animation.min.js',
@@ -1471,11 +1441,6 @@ $config = [
                         'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/image-masking.min.js',
                         'type'    => 'self',
                         'context' => 'edit',
-                    ],
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/image-masking.min.js',
-                        'type'    => 'self',
-                        'context' => 'view',
                     ],
                 ],
             ],

@@ -172,7 +172,7 @@ class Contact_Form_7 extends Widget_Base
                         'form_title' => 'yes',
                     ],
                     'ai' => [
-                        'active' => false,
+                        'active' => true,
                     ],
                 ]
             );
@@ -1758,10 +1758,9 @@ class Contact_Form_7 extends Widget_Base
                                 </h3>';
                 }
                 if ($settings['form_description'] == 'yes' && $settings['form_description_text'] != '') {
-                    echo '<div class="eael-contact-form-description eael-contact-form-7-description"> ';
-                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        echo $this->parse_text_editor($settings['form_description_text']) . '
-                            </div>';
+                    echo '<div class="eael-contact-form-description eael-contact-form-7-description"> ' . 
+                        wp_kses( $this->parse_text_editor($settings['form_description_text']), Helper::eael_allowed_tags() ) . '
+                        </div>';
                 }
                 echo '</div>';
             }
