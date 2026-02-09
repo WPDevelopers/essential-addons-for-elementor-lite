@@ -6590,6 +6590,8 @@ class Login_Register extends Widget_Base {
 							  >
 							<?php
 							do_action( 'eael/login-register/after-register-form-open', $this );
+										
+							$position = isset( $this->ds['position_for_register_form'] ) ?$this->ds['position_for_register_form'] : 'bottom';
 							if ( 'top' === $position ) {
 								do_action( 'eael/login-register/render_social_login_for_register_form', $this );
 							}
