@@ -1367,7 +1367,7 @@ class Helper
 				'id'    => [],
 				'style' => [],
 			],
-			'iframe' => [
+            'iframe' => [
 				'class'  => [],
 				'id'     => [],
 				'style'  => [],
@@ -1377,6 +1377,11 @@ class Helper
 				'src'    => [],
                 'allowfullscreen' => []
 			],
+            'pre' => [
+                'class' => [],
+                'id'    => [],
+                'style' => [],
+            ],
             'blockquote' => [
                 'cite'  => true, // URL of the source (HTML spec)
                 'class' => true,
