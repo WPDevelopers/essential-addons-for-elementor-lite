@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.5.10
+Stable tag: 6.5.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -316,6 +316,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.11 - 10/02/2026 =
+
+- Fixed: EA Advanced Accordion | Added pre tag support
+- Few minor bug fixes & improvements
 
 = 6.5.10 - 09/02/2026 =
 
