@@ -6903,7 +6903,7 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_lostpassword_icon'] ) && 'yes' === esc_html( $this->ds['show_lostpassword_icon'] ) );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
-			$err_msg_position = ! empty( $this->ds['err_message_position_lostpassword'] ) ? : 'top';
+			$err_msg_position = ! empty( $this->ds['err_message_position_lostpassword'] ) ? $this->ds['err_message_position_lostpassword'] : 'top';
 			$btn_icon         = ! empty( $this->ds['lost_pass_button_icon'] ) ? $this->ds['lost_pass_button_icon'] : '';
 			$btn_icon_position= ! empty( $this->ds['lost_pass_button_icon_position'] ) ? sanitize_text_field( $this->ds['lost_pass_button_icon_position'] ) : 'left';
 			?>
@@ -6918,6 +6918,7 @@ class Login_Register extends Widget_Base {
 					if ( 'left' === $this->form_illustration_pos ) {
 						$this->print_form_illustration('lostpassword');
 					}
+					
 					?>
 					<div class="lr-form-wrapper">
 						<?php $this->print_form_header( 'lostpassword' ); ?>
