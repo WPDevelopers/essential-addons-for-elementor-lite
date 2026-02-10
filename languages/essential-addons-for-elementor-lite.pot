@@ -12234,7 +12234,7 @@ msgid "Never show again"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1900
-msgid "<strong>Black Friday Mega Sale:</strong> Elevate Web Design More Than Ever With 110+ Elements – Now <strong>Up To $120 OFF!</strong> 🎁"
+msgid "Elevate web design more than ever with 110+ Elements – now <strong>Flat 20% OFF! 🎁</strong>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1907
