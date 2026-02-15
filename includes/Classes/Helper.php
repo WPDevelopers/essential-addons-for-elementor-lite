@@ -19,7 +19,11 @@ class Helper
 	const EAEL_ALLOWED_HTML_TAGS = [
 		'article',
 		'aside',
+		'details',
+		'dialog',
 		'div',
+		'figcaption',
+		'figure',
 		'footer',
 		'h1',
 		'h2',
@@ -28,11 +32,13 @@ class Helper
 		'h5',
 		'h6',
 		'header',
+		'hgroup',
 		'main',
 		'nav',
 		'p',
 		'section',
 		'span',
+		'summary',
 	];
 
     /**
@@ -1445,6 +1451,223 @@ class Helper
                 'id'       => true,
                 'class'    => true,
                 'disabled' => true,
+            ],
+            // Semantic Layout Tags
+            'main' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'section' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'article' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'aside' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'nav' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'footer' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'hgroup' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Rich Media Tags
+            'video' => [
+                'src'      => true,
+                'poster'   => true,
+                'controls' => true,
+                'autoplay' => true,
+                'loop'     => true,
+                'muted'    => true,
+                'preload'  => true,
+                'width'    => true,
+                'height'   => true,
+                'class'    => true,
+                'id'       => true,
+                'style'    => true,
+            ],
+            'audio' => [
+                'src'      => true,
+                'controls' => true,
+                'autoplay' => true,
+                'loop'     => true,
+                'muted'    => true,
+                'preload'  => true,
+                'class'    => true,
+                'id'       => true,
+                'style'    => true,
+            ],
+            'source' => [
+                'src'   => true,
+                'type'  => true,
+                'media' => true,
+            ],
+            'track' => [
+                'src'     => true,
+                'kind'    => true,
+                'srclang' => true,
+                'label'   => true,
+                'default' => true,
+            ],
+            // Advanced Lists
+            'dl' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'dt' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'dd' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Figures
+            'figure' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'figcaption' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Advanced Table Tags
+            'caption' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'colgroup' => [
+                'span'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'col' => [
+                'span'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Interactive Elements
+            'details' => [
+                'open'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'summary' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'dialog' => [
+                'open'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Extended Form Tags
+            'fieldset' => [
+                'disabled' => true,
+                'form'     => true,
+                'name'     => true,
+                'class'    => true,
+                'id'       => true,
+                'style'    => true,
+            ],
+            'legend' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'optgroup' => [
+                'label'    => true,
+                'disabled' => true,
+            ],
+            'datalist' => [
+                'id'    => true,
+                'class' => true,
+            ],
+            'output' => [
+                'for'   => true,
+                'form'  => true,
+                'name'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'progress' => [
+                'value' => true,
+                'max'   => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'meter' => [
+                'value'   => true,
+                'min'     => true,
+                'max'     => true,
+                'low'     => true,
+                'high'    => true,
+                'optimum' => true,
+                'class'   => true,
+                'id'      => true,
+                'style'   => true,
+            ],
+            // Text Semantics
+            'kbd' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'samp' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'var' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // International Typography
+            'ruby' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'rt' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'rp' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
             ],
 		];
 
