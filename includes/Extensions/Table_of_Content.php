@@ -135,7 +135,7 @@ class Table_of_Content
                     'eael_ext_table_of_content' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -230,7 +230,7 @@ class Table_of_Content
                     'eael_ext_table_of_content' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -259,7 +259,7 @@ class Table_of_Content
                     'eael_ext_table_of_content' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );

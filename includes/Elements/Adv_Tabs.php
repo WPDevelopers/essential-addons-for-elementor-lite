@@ -401,7 +401,7 @@ class Adv_Tabs extends Widget_Base
                 'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
                 'dynamic' => ['active' => true],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -476,7 +476,7 @@ class Adv_Tabs extends Widget_Base
                 'description' => esc_html__( 'Custom ID will be added as an anchor tag. For example, if you add ‘test’ as your custom ID, the link will become like the following: https://www.example.com/#test and it will open the respective tab directly.', 'essential-addons-for-elementor-lite' ),
                 'default' => '',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1368,7 +1368,7 @@ class Adv_Tabs extends Widget_Base
 
                                 echo '<' . esc_attr( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( $repeater_tab_title );
+                                echo wp_kses( $this->parse_text_editor( $repeater_tab_title ), Helper::eael_allowed_tags() );
                                 echo '</' . esc_attr( $repeater_html_tag ) . '>';
                                 ?>
                             <?php endif; ?>
@@ -1393,7 +1393,7 @@ class Adv_Tabs extends Widget_Base
 
                                 echo '<' . esc_attr( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( $repeater_tab_title );
+                                echo wp_kses( $this->parse_text_editor( $repeater_tab_title ), Helper::eael_allowed_tags() );
                                 echo '</' . esc_attr( $repeater_html_tag ) . '>';
                                 ?>
                             <?php endif; ?>
@@ -1406,7 +1406,7 @@ class Adv_Tabs extends Widget_Base
 
                                 echo '<' . esc_attr( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( $repeater_tab_title );
+                                echo wp_kses( $this->parse_text_editor( $repeater_tab_title ) , Helper::eael_allowed_tags() );
                                 echo '</' . esc_attr( $repeater_html_tag ) . '>'; 
                                 ?>
                             <?php endif; ?>
@@ -1450,7 +1450,7 @@ class Adv_Tabs extends Widget_Base
 				        <?php
                         if ('content' == $tab['eael_adv_tabs_text_type']) :
                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                            echo $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] );
+                            echo wp_kses( $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] ) , Helper::eael_allowed_tags() );
 
 				        elseif ('template' == $tab['eael_adv_tabs_text_type']) :
 					        if ( ! empty( $tab['eael_primary_templates'] ) ) {

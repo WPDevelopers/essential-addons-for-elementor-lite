@@ -202,7 +202,7 @@ class Testimonial extends Widget_Base {
 				'default' => esc_html__( 'John Doe', 'essential-addons-for-elementor-lite'),
 				'dynamic' => [ 'active' => true ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -215,7 +215,7 @@ class Testimonial extends Widget_Base {
 				'default' => esc_html__( 'Codetic', 'essential-addons-for-elementor-lite'),
 				'dynamic' => [ 'active' => true ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -943,8 +943,7 @@ class Testimonial extends Widget_Base {
 
 	protected function testimonial_desc() {
 		$settings = $this->get_settings_for_display();
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo '<div class="eael-testimonial-text">'. $this->parse_text_editor( $settings['eael_testimonial_description'] ) .'</div>';
+		echo '<div class="eael-testimonial-text">'. wp_kses( $this->parse_text_editor( $settings['eael_testimonial_description'] ), HelperClass::eael_allowed_tags() ) .'</div>';
 	}
 
 

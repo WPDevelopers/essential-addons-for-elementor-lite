@@ -618,7 +618,9 @@ class SVG_Draw extends Widget_Base {
 			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] ),
 			'transition'   => esc_attr( $settings['eael_svg_fill_transition'] ),
 			'stroke_length' => $settings['eael_svg_stroke_dash_adjustment']['size'] ?? '100',
-			'ease_type'    => $settings['eael_svg_animation_type'] ?? 'none'
+			'ease_type'    => $settings['eael_svg_animation_type'] ?? 'none',
+			'has_pro' 	   => apply_filters( 'eael/pro_enabled', false )
+
 		];
 
 		if ( ! empty( $settings['eael_svg_drawing_speed'] ) ) {
