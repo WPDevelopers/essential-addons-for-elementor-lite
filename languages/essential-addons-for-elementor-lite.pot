@@ -641,7 +641,7 @@ msgstr ""
 msgid "Woo Checkout"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:856, ../includes/Controls/Select2.php:46, ../includes/Elements/Woo_Cart.php:77, ../includes/Traits/Admin.php:1484
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:856, ../includes/Controls/Select2.php:48, ../includes/Elements/Woo_Cart.php:77, ../includes/Traits/Admin.php:1484
 msgid "Woo Cart"
 msgstr ""
 
@@ -1030,10 +1030,18 @@ msgid "Archive"
 msgstr ""
 
 #: ../includes/Controls/Select2.php:45
-msgid "Woo Products"
+msgid "Country"
+msgstr ""
+
+#: ../includes/Controls/Select2.php:46
+msgid "City"
 msgstr ""
 
 #: ../includes/Controls/Select2.php:47
+msgid "Woo Products"
+msgstr ""
+
+#: ../includes/Controls/Select2.php:49
 msgid "Woo Orders"
 msgstr ""
 
