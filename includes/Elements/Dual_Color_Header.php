@@ -1133,7 +1133,7 @@ class Dual_Color_Header extends Widget_Base
 				echo ( $settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : '');
 
 				if( ! empty( $settings['eael_dch_subtext'] ) ) : ?>
-					<span class="subtext"><?php echo wp_kses( $this->parse_text_editor( $settings['eael_dch_subtext'] ), Helper::eael_allowed_tags() ); ?></span>
+					<span class="subtext"><?php echo $this->parse_text_editor( wp_kses( $settings['eael_dch_subtext'], Helper::eael_allowed_tags() ) ); ?></span>
 				<?php endif;
 
 				if ('yes' == $settings['eael_show_dch_icon_content']) : ?>

@@ -7353,7 +7353,7 @@ class Login_Register extends Widget_Base {
 
 		<?php
 		$tc = '<div class="eael-lr-tnc-wrap">';
-		$tc .= $this->parse_text_editor( $tc_text );
+		$tc .= $this->parse_text_editor( wp_kses( $tc_text, HelperCLass::eael_allowed_tags() ) );
 		$tc .= '</div>';
 		echo wp_kses( $tc, HelperCLass::eael_allowed_tags() );
 
