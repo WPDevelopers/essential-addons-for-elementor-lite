@@ -4,7 +4,6 @@
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header {
   padding: 15px;
   border: 1px solid rgba(0, 0, 0, 0.02);
@@ -25,60 +24,34 @@
           align-items: center;
   cursor: pointer;
 }
-
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header > .eael-accordion-tab-title {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   margin: 0;
 }
-
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header > i, .eael-adv-accordion .eael-accordion-list .eael-accordion-header span {
   margin-right: 10px;
 }
-
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header .eaa-svg {
   font-size: 32px;
 }
-
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header .eaa-svg svg {
   width: 1em;
   height: 1em;
 }
-
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover {
   background-color: #414141;
 }
-
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active {
   background-color: #444444;
 }
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
-  -webkit-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-          transform: rotate(0deg);
-  z-index: 10;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-accordion-header .eael-advanced-accordion-icon-closed {
-  display: block;
-}
-
-.eael-accordion-header .eael-advanced-accordion-icon-opened {
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .eael-advanced-accordion-icon-closed {
   display: none;
 }
-
-.eael-accordion-header.active .eael-advanced-accordion-icon-closed {
-  display: none;
-}
-
-.eael-accordion-header.active .eael-advanced-accordion-icon-opened {
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .eael-advanced-accordion-icon-opened {
   display: block;
 }
-
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
   -webkit-transform: rotate(90deg);
       -ms-transform: rotate(90deg);
@@ -87,12 +60,20 @@
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-
-.fa-accordion-icon {
-  display: inline-block;
-  margin-right: 10px;
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
+  -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+  z-index: 10;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .eael-advanced-accordion-icon-closed {
+  display: block;
+}
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .eael-advanced-accordion-icon-opened {
+  display: none;
+}
 .eael-adv-accordion .eael-accordion-list .eael-accordion-content {
   display: none;
   border: 1px solid #eee;
@@ -102,11 +83,19 @@
   font-size: 1rem;
   line-height: 1.7;
 }
-
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content .eael-accordion-gutenberg-content .alignfull {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
+}
 .eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
   display: block;
 }
-
+.eael-adv-accordion .fa-accordion-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
 .rtl .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
   -webkit-transform: rotate(-90deg);
       -ms-transform: rotate(-90deg);
