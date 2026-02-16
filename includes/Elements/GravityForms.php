@@ -1,6 +1,8 @@
 <?php
 namespace Essential_Addons_Elementor\Elements;
 
+use GFCommon;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -2974,6 +2976,11 @@ class GravityForms extends Widget_Base {
 		        gravity_form( $eael_form_id, $eael_form_title, $eael_form_description, $display_inactive = false, $field_values = null, $eael_form_ajax, '', $echo = true );
 		        ?>
 			</div>
+
+            <script type="text/javascript">
+                <?php GFCommon::gf_global() ?>
+				<?php GFCommon::gf_vars() ?>
+			</script>
             <?php
         }
     }
