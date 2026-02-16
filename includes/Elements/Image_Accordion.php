@@ -216,7 +216,7 @@ class Image_Accordion extends Widget_Base {
                 'default'     => esc_html__( 'Accordion item title', 'essential-addons-for-elementor-lite' ),
                 'dynamic'     => [ 'active' => true ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -336,7 +336,7 @@ class Image_Accordion extends Widget_Base {
                     '{{WRAPPER}} .eael-img-accordion ' => 'height: {{VALUE}}px;',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );

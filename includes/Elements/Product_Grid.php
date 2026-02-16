@@ -964,7 +964,7 @@ class Product_Grid extends Widget_Base
                     'eael_product_grid_layout' => 'list',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1072,7 +1072,7 @@ class Product_Grid extends Widget_Base
                     'show_add_to_cart_custom_text' => 'true',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1088,7 +1088,7 @@ class Product_Grid extends Widget_Base
                     'show_add_to_cart_custom_text' => 'true',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1104,7 +1104,7 @@ class Product_Grid extends Widget_Base
                     'show_add_to_cart_custom_text' => 'true',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1120,7 +1120,7 @@ class Product_Grid extends Widget_Base
                     'show_add_to_cart_custom_text' => 'true',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1136,7 +1136,7 @@ class Product_Grid extends Widget_Base
                     'show_add_to_cart_custom_text' => 'true',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1219,7 +1219,7 @@ class Product_Grid extends Widget_Base
             'type'        => Controls_Manager::TEXT,
             'label_block' => false,
             'default'     => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
-            'ai'          => [ 'active' => false ],
+            'ai'          => [ 'active' => true ],
             'condition'   => [
                 'show_load_more' => 'true',
             ],
@@ -2291,7 +2291,7 @@ class Product_Grid extends Widget_Base
 			    'type'        => Controls_Manager::TEXT,
 			    'separator' => 'before',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 		    ]
 	    );
@@ -2302,7 +2302,7 @@ class Product_Grid extends Widget_Base
 			    'label'   => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 			    'type'    => Controls_Manager::TEXT,
                 'default' => esc_html__( 'Out of stock', 'essential-addons-for-elementor-lite' ),
-                'ai'      => [ 'active' => false ],
+                'ai'      => [ 'active' => true ],
 		    ]
 	    );
 

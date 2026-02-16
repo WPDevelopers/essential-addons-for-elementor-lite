@@ -289,7 +289,7 @@ trait Controls
                 'label' => __('Meta Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'ai' => [
-                    'active' => false,
+                    'active' => true,
                 ],
                 'placeholder' => __('_event_start_date', 'essential-addons-for-elementor-lite'),
                 'description' => __('Enter the meta key name for custom field sorting (e.g., _event_start_date, custom_price)', 'essential-addons-for-elementor-lite'),
@@ -1276,7 +1276,7 @@ trait Controls
                     'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'dynamic'     => [ 'active' => true ],
-                    'ai' => [ 'active' => false ],
+                    'ai' => [ 'active' => true ],
                     'label_block' => false,
                     'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition' => [
@@ -1303,8 +1303,8 @@ trait Controls
                 [
                     'label'       => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type'        => Controls_Manager::TEXT,
-                    'dynamic'     => [ 'active'      =>true ],
-                    'ai'          => [ 'active'      =>false ],
+                    'dynamic'     => [ 'active'      => true ],
+                    'ai'          => [ 'active'      => true ],
                     'label_block' => false,
                     'default'     => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition'   => [

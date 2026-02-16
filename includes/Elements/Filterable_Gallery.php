@@ -319,7 +319,7 @@ class Filterable_Gallery extends Widget_Base
                         'eael_fg_caption_style' =>  'layout_3'
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -533,7 +533,7 @@ class Filterable_Gallery extends Widget_Base
                     'filter_enable' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -618,7 +618,7 @@ class Filterable_Gallery extends Widget_Base
                         'label_block' => true,
                         'default'     => esc_html__('Gallery Filter', 'essential-addons-for-elementor-lite'),
                         'ai' => [
-                            'active' => false,
+                            'active' => true,
                         ],
                     ],
                     [
@@ -630,7 +630,7 @@ class Filterable_Gallery extends Widget_Base
                         'label_block' => true,
                         'default'     => '',
                         'ai'          => [
-                            'active' => false,
+                            'active' => true,
                         ],
                     ],
                     [
@@ -651,7 +651,7 @@ class Filterable_Gallery extends Widget_Base
                             'eael_fg_custom_label' => 'yes',
                         ],
                         'ai' => [
-                            'active' => false,
+                            'active' => true,
                         ],
                     ],
                     [
@@ -733,7 +733,7 @@ class Filterable_Gallery extends Widget_Base
 			[
 				'label'       => esc_html__( 'Privacy Notice', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
-                'ai'          => [ 'active' => false, ],
+                'ai'          => [ 'active' => true, ],
                 'condition'   => ['eael_privacy_notice_control' => 'yes' ],
                 'condition'   => [
                     'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
@@ -766,7 +766,7 @@ class Filterable_Gallery extends Widget_Base
                 'label_block' => true,
                 'default'     => esc_html__('Gallery item name', 'essential-addons-for-elementor-lite'),
                 'ai'          => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -781,7 +781,7 @@ class Filterable_Gallery extends Widget_Base
                 'default'     => '',
                 'description' => __('Use the gallery filter title from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Filter, Gallery Filter 2</strong>)', 'essential-addons-for-elementor-lite'),
                 'ai'          => [
-					'active' => false,
+					'active' => true,
 				],
                 'separator' => 'before',
             ]
@@ -833,7 +833,7 @@ class Filterable_Gallery extends Widget_Base
                     'fg_video_gallery_switch' => 'true',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -886,7 +886,7 @@ class Filterable_Gallery extends Widget_Base
                     'fg_item_price_switch' => 'true'
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -915,7 +915,7 @@ class Filterable_Gallery extends Widget_Base
                     'fg_item_ratings_switch' => 'true'
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -943,7 +943,7 @@ class Filterable_Gallery extends Widget_Base
                     'fg_item_cat_switch' => 'true'
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1105,7 +1105,7 @@ class Filterable_Gallery extends Widget_Base
                     'pagination' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1121,7 +1121,7 @@ class Filterable_Gallery extends Widget_Base
                     'pagination' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1137,7 +1137,7 @@ class Filterable_Gallery extends Widget_Base
                     'pagination' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -2043,7 +2043,7 @@ class Filterable_Gallery extends Widget_Base
                     '{{WRAPPER}} .video-popup:hover > img' => 'transform: scale({{VALUE}});',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -2984,7 +2984,7 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'default'   => __('Search Gallery Item...', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -3724,7 +3724,7 @@ class Filterable_Gallery extends Widget_Base
         
         foreach ($gallery_items as $gallery) {
             $gallery_store[$counter]['title']        = Helper::eael_wp_kses($gallery['eael_fg_gallery_item_name']);
-            $gallery_store[$counter]['content']      = $this->parse_text_editor( $gallery['eael_fg_gallery_item_content'] );
+            $gallery_store[$counter]['content']      = wp_kses( $this->parse_text_editor( $gallery['eael_fg_gallery_item_content'] ), Helper::eael_allowed_tags() );
             $gallery_store[$counter]['id']           = $gallery['_id'];
             $gallery_store[$counter]['image']        = $gallery['eael_fg_gallery_img'];
             $gallery_store[$counter]['image']        = sanitize_url( $gallery['eael_fg_gallery_img']['url'] );

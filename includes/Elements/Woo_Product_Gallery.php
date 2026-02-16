@@ -311,7 +311,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					'eael_woo_product_gallery_terms_show_all' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -900,7 +900,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'show_load_more' => [ 'yes', '1', 'true' ],
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1924,7 +1924,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'type'      => Controls_Manager::TEXT,
 				'separator' => 'before',
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -1934,7 +1934,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label' => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::TEXT,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
