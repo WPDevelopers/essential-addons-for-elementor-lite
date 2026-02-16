@@ -5,11 +5,42 @@
 .eael-woo-product-carousel-container ins {
   background: transparent;
 }
+.eael-woo-product-carousel-container .woocommerce.eael-marquee-carousel {
+  overflow: hidden;
+}
+.eael-woo-product-carousel-container .woocommerce.eael-marquee-carousel[data-items="1"] .products .product {
+  width: calc(100% / 1);
+}
+.eael-woo-product-carousel-container .woocommerce.eael-marquee-carousel[data-items="2"] .products .product {
+  width: calc(100% / 2);
+}
+.eael-woo-product-carousel-container .woocommerce.eael-marquee-carousel[data-items="3"] .products .product {
+  width: calc(100% / 3);
+}
+.eael-woo-product-carousel-container .woocommerce.eael-marquee-carousel[data-items="4"] .products .product {
+  width: calc(100% / 4);
+}
+.eael-woo-product-carousel-container .woocommerce.eael-marquee-carousel[data-items="5"] .products .product {
+  width: calc(100% / 5);
+}
+.eael-woo-product-carousel-container .woocommerce.eael-marquee-carousel[data-items="6"] .products .product {
+  width: calc(100% / 6);
+}
 .eael-woo-product-carousel-container .woocommerce .products {
   padding: 0 !important;
 }
 .eael-woo-product-carousel-container .woocommerce .products:before, .eael-woo-product-carousel-container .woocommerce .products:after {
   display: none;
+}
+.eael-woo-product-carousel-container .woocommerce .products.eael-marquee-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.eael-woo-product-carousel-container .woocommerce .products.eael-marquee-wrapper .product img {
+  width: 100%;
 }
 .eael-woo-product-carousel-container .woocommerce .products .product {
   width: 100%;

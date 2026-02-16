@@ -16,6 +16,19 @@ $theme-preset4: #ec3b75;
     }
 
     .woocommerce {
+        &.eael-marquee-carousel{
+            overflow: hidden;
+            @for $i from 1 through 6 {
+                &[data-items="#{$i}"] {
+                    .products {
+                        .product {
+                            width: calc(100% / #{$i});
+                        }
+                    }
+                }
+            }
+        }
+
         .products {
             //display: grid;
             //grid-gap: 25px;
@@ -25,6 +38,18 @@ $theme-preset4: #ec3b75;
             &:before,
             &:after {
                 display: none;
+            }
+
+            &.eael-marquee-wrapper{
+                display: flex;
+                overflow: hidden;
+                white-space: nowrap;
+
+                .product {
+                    img{
+                        width: 100%;
+                    }
+                }
             }
 
             .product {
