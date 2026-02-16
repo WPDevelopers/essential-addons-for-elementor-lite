@@ -1445,7 +1445,6 @@
 
          .product-image-wrap {
             position: relative;
-            overflow: hidden;
          }
 
          .icons-wrap {
@@ -2038,6 +2037,12 @@
             padding: 10px;
          }
       }
+
+      &:not(.eael-product-preset-8) {
+         .product-image-wrap {
+            overflow: hidden;
+         }
+      }
    }
 
    &.masonry {
@@ -2069,10 +2074,6 @@
 
    &.grid.eael-product-preset-8,
    &.masonry.eael-product-preset-8 {
-      .product-image-wrap {
-         overflow: inherit;
-      }
-
       .product-details-wrap {
          & > div:first-child {
             margin-top: 20px;

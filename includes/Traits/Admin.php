@@ -27,6 +27,7 @@ trait Admin {
 		$menu_notice = ( $this->menu_notice_should_show() ) ? '<span class="eael-menu-notice">1</span>' : '';
 		add_menu_page(
 			__( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
+			// translators: %s is the number of the menu notice
 			sprintf( __( 'Essential Addons %s', 'essential-addons-for-elementor-lite' ), $menu_notice ),
 			'manage_options',
 			'eael-settings',
@@ -205,7 +206,7 @@ trait Admin {
 				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
 				    'content' => __( 'Get more powerful widgets & extensions to elevate your Elementor website', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3800+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
@@ -373,7 +374,7 @@ trait Admin {
 				    'top_heading' => __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
 				    'heading'     => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'      => [
-					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3800+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'      => [
@@ -1740,7 +1741,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.5 with new \"<b><a target='_blank' href='%s'>Vertical Text Orientation</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/vertical-text-orientation/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.5 with new \"<b><a target='_blank' href='%1\$s'>Vertical Text Orientation</a></b>\" extension. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/vertical-text-orientation/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -1893,13 +1894,13 @@ trait Admin {
 		<div class="eael-black-friday-optin-logo">
 			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" width="25" alt="">
 		</div>
-		<div class="eael-black-friday-optin">
+		<div class="eael-february-deal-content">
 			<p><?php 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo __( '<strong>Black Friday Mega Sale:</strong> Elevate Web Design More Than Ever With 110+ Elements – Now <strong>Up To $120 OFF!</strong> 🎁', 'essential-addons-for-elementor-lite' );
+			echo __( 'Elevate web design more than ever with 110+ Elements – now <strong>Flat 20% OFF! 🎁</strong>', 'essential-addons-for-elementor-lite' );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
-                <a href="https://essential-addons.com/bfcm2025-admin-notice" target="_blank" class="button-primary">
+                <a href="https://essential-addons.com/feb2026-admin-notice" target="_blank" class="button-primary">
                     <?php esc_html_e( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
                 <span class="eael-action-dismiss-btn">
@@ -1911,7 +1912,7 @@ trait Admin {
 		<script>
             jQuery(document).ready(function ($) {
                 setTimeout(function () {
-                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_2025_notice .notice-dismiss');
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-february_deal_2026_notice .notice-dismiss');
 
                     function wpNoticeDismissFunc(event) {
                         event.preventDefault();
@@ -1926,7 +1927,7 @@ trait Admin {
                         }
 
                         // Data has to be formatted as a string here.
-                        postData += 'id=bfcm_2025_notice';
+                        postData += 'id=february_deal_2026_notice';
                         postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
                         if (dismiss) {
                             postData += '&dismiss=' + dismiss;
@@ -1935,7 +1936,7 @@ trait Admin {
                             postData += '&later=' + later;
                         }
 
-                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_bfcm_2025_notice' ) );?>';
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_february_deal_2026_notice' ) );?>';
 
                         httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
                         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -1946,7 +1947,7 @@ trait Admin {
                     dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
 
                     // Handle custom dismiss button clicks
-                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_2025_notice .eael-action-dismiss-btn');
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-february_deal_2026_notice .eael-action-dismiss-btn');
                     if (customDismissBtn && dismissBtn) {
                         customDismissBtn.addEventListener('click', function(event) {
                             event.preventDefault();
@@ -1958,20 +1959,20 @@ trait Admin {
 		</script>
 	    <?php
 	    $b_message            = ob_get_clean();
-	    $_black_friday_notice = [
+	    $_february_deal_notice = [
 		    'html' => $b_message,
 	    ];
 
 	    $notices->add(
-			'bfcm_2025_notice',
-			$_black_friday_notice,
+			'february_deal_2026_notice',
+			$_february_deal_notice,
 			[
-				'start'       => $notices->time(),
+				'start'       => strtotime('11:59:59pm 9th February, 2026'),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				"expire"      => strtotime( '11:59:59pm 4th December, 2025' ),
-				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '09:59:59pm 4th December, 2025' ),
+				"expire"      => strtotime( '11:59:59pm 7th March, 2026' ),
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '11:59:59pm 7th March, 2026' ),
 			]
 		);
 

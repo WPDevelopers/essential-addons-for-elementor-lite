@@ -113,12 +113,14 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
-
-
 		if ( empty( get_option( 'eael_br_google_place_api_key' ) ) ) {
 			$this->add_control( 'eael_br_google_place_api_key_missing', [
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => sprintf( __( 'Google Place API key is missing. Please add it from EA Dashboard » Elements » <a href="%s" target="_blank">Business Reviews Settings</a>', 'essential-addons-for-elementor-lite' ), esc_attr( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) ),
+				'raw' => sprintf(
+					/* translators: %s: Link to Business Reviews Settings page. */
+					__( 'Google Place API key is missing. Please add it from EA Dashboard » Elements » %s', 'essential-addons-for-elementor-lite' ),
+					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) . '" target="_blank">' . esc_html__( 'Business Reviews Settings', 'essential-addons-for-elementor-lite' ) . '</a>'
+				),
 				'content_classes' => 'eael-warning',
 				'condition'       => [
 					'eael_business_reviews_sources' => 'google-reviews',
@@ -127,11 +129,18 @@ class Business_Reviews extends Widget_Base {
 		}
 
 
-
 		$this->add_control( 'eael_business_reviews_business_place_id', [
 			'label'       => esc_html__( 'Place ID', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
-			'description' => sprintf( __( 'Get Place ID from <a href="%s" target="_blank">here</a>', 'essential-addons-for-elementor-lite' ), esc_url( 'https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder' ) ),
+			'description' => sprintf(
+				/* translators: %s: Link to Google Place ID finder. */
+				esc_html__( 'Get Place ID from %s', 'essential-addons-for-elementor-lite' ),
+				sprintf(
+					'<a href="%s" target="_blank">%s</a>',
+					esc_url( 'https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder' ),
+					esc_html__( 'here', 'essential-addons-for-elementor-lite' )
+				)
+			),
 			'placeholder' => esc_html__( 'Place ID', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
 			'default'     => '',
@@ -142,7 +151,7 @@ class Business_Reviews extends Widget_Base {
 				'eael_business_reviews_sources' => 'google-reviews',
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -358,6 +367,28 @@ class Business_Reviews extends Widget_Base {
 				'frontend_available' => true,
                 'condition'          => [
 					'eael_business_reviews_items_layout' => 'grid',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_review_text_height',
+			[
+				'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => [
+					'px' => [
+						'min'  => 15,
+						'max'  => 500,
+						'step' => 1,
+					],
+				],
+				'size_units' => [ 'px' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text' => 'height: {{SIZE}}{{UNIT}}; overflow-y: auto;',
+				],
+				'condition'  => [
+					'eael_business_reviews_review_text' => 'yes',
 				],
 			]
 		);
@@ -655,7 +686,7 @@ class Business_Reviews extends Widget_Base {
 				'eael_business_reviews_business_name' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -682,7 +713,7 @@ class Business_Reviews extends Widget_Base {
 				'eael_business_reviews_business_rating' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 

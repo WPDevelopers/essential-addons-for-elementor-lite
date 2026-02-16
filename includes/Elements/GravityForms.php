@@ -136,18 +136,18 @@ class GravityForms extends Widget_Base {
             $this->start_controls_section(
                 'section_info_box',
                 [
-                    'label'                 => __( 'Gravity Forms', 'essential-addons-for-elementor-lite'),
+                    'label' => __( 'Gravity Forms', 'essential-addons-for-elementor-lite'),
                 ]
             );
             
             $this->add_control(
                 'contact_form_list',
                 [
-                    'label'                 => esc_html__( 'Select Form', 'essential-addons-for-elementor-lite'),
-                    'type'                  => Controls_Manager::SELECT,
-                    'label_block'           => true,
-                    'options'               => Helper::get_gravity_form_list(),
-                    'default'               => '0',
+                    'label'       => esc_html__( 'Select Form', 'essential-addons-for-elementor-lite'),
+                    'type'        => Controls_Manager::SELECT2,
+                    'label_block' => true,
+                    'options'     => Helper::get_gravity_form_list(),
+                    'default'     => '0',
                 ]
             );
             
@@ -206,7 +206,7 @@ class GravityForms extends Widget_Base {
                         'custom_title_description'   => 'yes',
                     ],
                     'ai' => [
-                        'active' => false,
+                        'active' => true,
                     ],
                 ]
             );
@@ -2961,9 +2961,7 @@ class GravityForms extends Widget_Base {
 				        <?php } ?>
 				        <?php if ( $settings['form_description_custom'] != '' ) { ?>
 							<div class="eael-contact-form-description eael-gravity-form-description">
-						        <?php
-						        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						        echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
+						        <?php echo wp_kses( $this->parse_text_editor( $settings['form_description_custom'] ), Helper::eael_allowed_tags() ); ?>
 							</div>
 				        <?php } ?>
 					</div>

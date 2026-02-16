@@ -184,9 +184,15 @@ class Formstack extends Widget_Base {
                 'label_block' => true,
                 'options'     => $this->get_forms(),
                 'default'     => '',
-                'description' => __('To sync latest created forms make sure you have <a href="'.add_query_arg(['clear_formstack_cache' => 'true'],
-                        admin_url('admin.php?page=Formstack')).'">Refresh Formstack form cache</a>',
-                    'essential-addons-for-elementor-lite'),
+                'description' => sprintf(
+                    /* translators: %s: Link to refresh Formstack form cache. */
+                    esc_html__( 'To sync the latest created forms, make sure you have %s.', 'essential-addons-for-elementor-lite' ),
+                    sprintf(
+                        '<a href="%s">%s</a>',
+                        esc_url( add_query_arg( [ 'clear_formstack_cache' => 'true' ], admin_url( 'admin.php?page=Formstack' ) ) ),
+                        esc_html__( 'refreshed the Formstack form cache', 'essential-addons-for-elementor-lite' )
+                    )
+                ),
             ]
         );
 
@@ -215,7 +221,7 @@ class Formstack extends Widget_Base {
                     'eael_formstack_custom_title_description' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -2133,17 +2139,13 @@ class Formstack extends Widget_Base {
                     <?php } ?>
                     <?php if ($settings['eael_formstack_form_description_custom'] != '') { ?>
                         <div class="eael-contact-form-description eael-formstack-description">
-                            <?php 
-                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                            echo $this->parse_text_editor( $settings['eael_formstack_form_description_custom'] ); ?>
+                            <?php echo wp_kses( $this->parse_text_editor( $settings['eael_formstack_form_description_custom'] ), Helper::eael_allowed_tags() ); ?>
                         </div>
                     <?php } ?>
                 </div>
             <?php } ?>
             <div class="fsForm">
-                <?php
-                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                echo $this->parse_text_editor( $form_data ); ?>
+                <?php echo wp_kses( $this->parse_text_editor( $form_data ), Helper::eael_allowed_tags() ); ?>
             </div>
         </div>
         <?php
