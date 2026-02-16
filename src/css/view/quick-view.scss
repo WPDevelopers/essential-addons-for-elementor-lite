@@ -325,15 +325,19 @@
          }
       }
 
-      table {
+      table.variations {
          tbody {
+            .label {
+               padding: 15px;
+               line-height: 0;
+            }
             tr {
                border-bottom: 1px solid #ccc;
 
                td {
                   background: transparent;
                   vertical-align: middle !important;
-                  padding: 15px 15px 15px 0 !important;
+                  line-height: 0;
                }
             }
          }
@@ -581,6 +585,33 @@
             align-items: center;
             justify-content: center;
          }
+      }
+   }
+}
+
+//Theme Compatibility
+
+//Storefront Theme
+.theme-storefront {
+   .eael-product-popup {
+      form.cart.variations_form .variations td select {
+         padding: 8px;
+         border: 1px solid #121212;
+      }
+
+      .woocommerce-product-gallery {
+         position: relative;
+
+         .woocommerce-product-gallery__trigger {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            z-index: 1;
+         }
+      }
+
+      .eael-product-popup.woocommerce div.product table tbody tr td {
+         padding: 5px 15px 15px 0 !important;
       }
    }
 }

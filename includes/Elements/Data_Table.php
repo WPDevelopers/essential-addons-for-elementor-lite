@@ -106,6 +106,7 @@ class Data_Table extends Widget_Base {
 
 	        $this->add_control(
 		        'eael_section_data_table_enabled', [
+				// translators: %s: Pro icon.
 		        'label'        => sprintf( __( 'Enable Table Sorting %s', 'essential-addons-for-elementor-lite' ), __( '<i class="eael-pro-labe eicon-pro-icon"></i>', 'essential-addons-for-elementor-lite' ) ),
 		        'type'         => Controls_Manager::SWITCHER,
 		        'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
@@ -137,7 +138,7 @@ class Data_Table extends Widget_Base {
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -151,7 +152,7 @@ class Data_Table extends Widget_Base {
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -250,7 +251,7 @@ class Data_Table extends Widget_Base {
                 'dynamic'     => [ 'active' => true ],
 				'label_block' 	=> false,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -263,7 +264,7 @@ class Data_Table extends Widget_Base {
                 'dynamic'     => [ 'active' => true ],
 				'label_block'	=> false,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -460,7 +461,7 @@ class Data_Table extends Widget_Base {
 					'eael_data_table_content_row_type' => 'col'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -476,7 +477,7 @@ class Data_Table extends Widget_Base {
 					'eael_data_table_content_row_type' => 'col'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -1480,9 +1481,7 @@ class Data_Table extends Widget_Base {
 										<?php else: ?>
 											<td <?php $this->print_render_attribute_string('table_inside_td'.$i.$j); ?>>
 												<div class="td-content-wrapper"><div <?php $this->print_render_attribute_string('td_content'); ?>>
-													<?php
-													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-													echo $this->parse_text_editor( $table_td[$j]['title'] ); ?>
+													<?php echo wp_kses( $this->parse_text_editor( $table_td[$j]['title'] ), Helper::eael_allowed_tags() ); ?>
 												</div></div>
 											</td>
 										<?php endif; ?>

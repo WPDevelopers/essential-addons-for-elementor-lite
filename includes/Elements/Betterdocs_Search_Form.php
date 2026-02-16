@@ -161,7 +161,7 @@ class Betterdocs_Search_Form extends Widget_Base
                     'type'    => Controls_Manager::TEXT,
                     'default' => esc_html__('Search', 'essential-addons-for-elementor-lite'),
                     'ai' => [
-                        'active' => false,
+                        'active' => true,
                     ],
                 ]
             );

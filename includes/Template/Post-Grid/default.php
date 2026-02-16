@@ -53,16 +53,29 @@ if ( is_object( $authordata ) ) {
 $enable_ratio = $settings['enable_postgrid_image_ratio'] == 'yes' ? 'eael-image-ratio':'';
 $is_show_meta = 'yes' === $settings['eael_show_meta'];
 $title_tag    = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($settings['title_tag']) : 'h2';
+$css_classes  = ' eael-post-grid-column eael-pg-post-'.get_the_ID();
+$category_list= get_the_category();
+$tags_list    = get_the_tags();
+
+if ( ! empty( $category_list )  ) {
+    $slugs = wp_list_pluck( $category_list, 'slug' );
+    $css_classes .= ' category-'.implode( '-', $slugs );
+}
+
+if ( ! empty( $tags_list )  ) {
+    $slugs = wp_list_pluck( $tags_list, 'slug' );
+    $css_classes .= ' tags-'.implode( '-', $slugs );
+}
 
 if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
-    echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
+    echo '<article class="eael-grid-post' . esc_attr( $css_classes ) . '" data-id="' . esc_attr( get_the_ID() ) . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
                 if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
                     echo '<div class="eael-entry-wrapper">';
                     if ($settings['eael_show_title']) {
                         echo '<header class="eael-entry-header"><' . esc_html( $title_tag ) . ' class="eael-entry-title">';
-                        echo '<a class="eael-grid-post-link" href="' . esc_url( get_the_permalink() ) . '" title="' . esc_attr( strip_tags( get_the_title() ) ) . '"' . ( $settings['title_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['title_link_target_blank'] ? 'target="_blank"' : '' ) . '>';
+                        echo '<a class="eael-grid-post-link" href="' . esc_url( get_the_permalink() ) . '" title="' . esc_attr( wp_strip_all_tags( get_the_title() ) ) . '"' . ( $settings['title_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['title_link_target_blank'] ? 'target="_blank"' : '' ) . '>';
 
                         if (empty($settings['eael_title_length'])) {
                             echo wp_kses( get_the_title(), Helper::eael_allowed_tags() );
@@ -214,7 +227,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
         </div>
     </article>';
 } else if ($settings['eael_post_grid_preset_style'] === 'three' ) {
-    echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
+    echo '<article class="eael-grid-post' . esc_attr( $css_classes ) . '" data-id="' . esc_attr( get_the_ID() ) . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
     if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
@@ -225,7 +238,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
             echo '<a
                         class="eael-grid-post-link"
                         href="' . esc_url( get_the_permalink() ) . '"
-                        title="' . esc_attr( strip_tags( get_the_title() ) ) . '"' . ( $settings['title_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['title_link_target_blank'] ? 'target="_blank"' : '' ) . '>';
+                        title="' . esc_attr( wp_strip_all_tags( get_the_title() ) ) . '"' . ( $settings['title_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['title_link_target_blank'] ? 'target="_blank"' : '' ) . '>';
 
             if (empty($settings['eael_title_length'])) {
                 echo wp_kses( get_the_title(), Helper::eael_allowed_tags() );
@@ -307,7 +320,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
         </div>
     </article>';
 } else {
-    echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
+    echo '<article class="eael-grid-post' . esc_attr( $css_classes ) . '" data-id="' . esc_attr( get_the_ID() ) . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
     if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
@@ -317,7 +330,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
             echo '<a
                         class="eael-grid-post-link"
                         href="' . esc_url( get_the_permalink() ) . '"
-                        title="' . esc_attr( strip_tags( get_the_title() ) ) . '"' . ( $settings['title_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['title_link_target_blank'] ? 'target="_blank"' : '' ) . '>';
+                        title="' . esc_attr( wp_strip_all_tags( get_the_title() ) ) . '"' . ( $settings['title_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['title_link_target_blank'] ? 'target="_blank"' : '' ) . '>';
 
             if (empty($settings['eael_title_length'])) {
                 echo wp_kses( get_the_title(), Helper::eael_allowed_tags() );
