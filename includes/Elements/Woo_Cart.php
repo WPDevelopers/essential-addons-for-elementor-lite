@@ -204,12 +204,13 @@ class Woo_Cart extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'name',
 				'options' => [
-					'remove'    => __( 'Remove', 'essential-addons-for-elementor-lite' ),
-					'thumbnail' => __( 'Image', 'essential-addons-for-elementor-lite' ),
-					'name'      => __( 'Title', 'essential-addons-for-elementor-lite' ),
-					'price'     => __( 'Price', 'essential-addons-for-elementor-lite' ),
-					'quantity'  => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
-					'subtotal'  => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+					'remove'      => __( 'Remove', 'essential-addons-for-elementor-lite' ),
+					'thumbnail'   => __( 'Image', 'essential-addons-for-elementor-lite' ),
+					'name'        => __( 'Title', 'essential-addons-for-elementor-lite' ),
+					'description' => __( 'Product Description', 'essential-addons-for-elementor-lite' ),
+					'price'       => __( 'Price', 'essential-addons-for-elementor-lite' ),
+					'quantity'    => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
+					'subtotal'    => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -222,7 +223,7 @@ class Woo_Cart extends Widget_Base {
 				'default'     => esc_html__( 'Product Title', 'essential-addons-for-elementor-lite' ),
 				'label_block' => true,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -387,6 +388,22 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$repeater->add_control(
+			'description_word_limit',
+			[
+				'label'       => __( 'Description Word Limit', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 5,
+				'max'         => 100,
+				'step'        => 1,
+				'default'     => 20,
+				'description' => __( 'Maximum number of words to display in the product description.', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'column_type' => 'description'
+				]
+			]
+		);
+
 		$this->add_control(
 			'table_items',
 			[
@@ -396,7 +413,7 @@ class Woo_Cart extends Widget_Base {
 				'default'     => [
 					[
 						'column_type'          => 'remove',
-						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+						'column_heading_title' => '',
 					],
 					[
 						'column_type'          => 'thumbnail',
@@ -404,7 +421,7 @@ class Woo_Cart extends Widget_Base {
 					],
 					[
 						'column_type'          => 'name',
-						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+						'column_heading_title' => '',
 					],
 					[
 						'column_type'          => 'price',
@@ -460,7 +477,7 @@ class Woo_Cart extends Widget_Base {
 					'eael_woo_cart_table_components_thumbnail' => 'yes'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -594,7 +611,7 @@ class Woo_Cart extends Widget_Base {
 					'eael_woo_cart_table_components_price' => 'yes'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -668,7 +685,7 @@ class Woo_Cart extends Widget_Base {
 					'eael_woo_cart_table_components_qty' => 'yes'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -749,7 +766,7 @@ class Woo_Cart extends Widget_Base {
 					'eael_woo_cart_table_components_subtotal' => 'yes'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -971,7 +988,7 @@ class Woo_Cart extends Widget_Base {
 					'eael_woo_cart_components_cart_clear_button' => 'yes'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -998,7 +1015,7 @@ class Woo_Cart extends Widget_Base {
 					'eael_woo_cart_components_cart_update_button' => 'yes'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -1026,7 +1043,7 @@ class Woo_Cart extends Widget_Base {
 					'eael_woo_cart_components_cart_coupon' => 'yes'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -1041,7 +1058,7 @@ class Woo_Cart extends Widget_Base {
 					'eael_woo_cart_components_cart_coupon' => 'yes'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -1069,7 +1086,7 @@ class Woo_Cart extends Widget_Base {
 					'eael_woo_cart_components_continue_shopping' => 'yes'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -1203,7 +1220,7 @@ class Woo_Cart extends Widget_Base {
 				'type'    => Controls_Manager::TEXT,
 				'default' => esc_html__( 'Your cart is currently empty.', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -1234,7 +1251,7 @@ class Woo_Cart extends Widget_Base {
 				'type'    => Controls_Manager::TEXT,
 				'default' => esc_html__( 'Proceed to Checkout', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 				'condition' => [
 					'eael_woo_cart_hide_checkout_btn!' => 'yes'

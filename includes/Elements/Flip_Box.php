@@ -424,7 +424,7 @@ class Flip_Box extends Widget_Base
 		            'eael_flipbox_front_content_type'      => 'content',
 	            ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -458,8 +458,8 @@ class Flip_Box extends Widget_Base
                 'label'       => esc_html__('Front Content', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default'     => __('<p>This is front side content.</p>', 'essential-addons-for-elementor-lite'),
-	            'condition'             => [
+                'default'     => '<p>' . esc_html__('This is front side content.', 'essential-addons-for-elementor-lite') . '</p>',
+	            'condition'   => [
 		            'eael_flipbox_front_content_type'      => 'content',
 	            ],
                 'ai' => [
@@ -664,7 +664,7 @@ class Flip_Box extends Widget_Base
 		            'eael_flipbox_back_content_type'      => 'content',
 	            ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -698,8 +698,8 @@ class Flip_Box extends Widget_Base
                 'label'       => esc_html__('Back Content', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default'     => __('<p>This is back side content.</p>', 'essential-addons-for-elementor-lite'),
-	            'condition'             => [
+                'default'     => '<p>' . esc_html__('This is back side content.', 'essential-addons-for-elementor-lite') . '</p>',
+	            'condition'   => [
 		            'eael_flipbox_back_content_type'      => 'content',
 	            ],
                 'ai' => [
@@ -843,7 +843,7 @@ class Flip_Box extends Widget_Base
                     'flipbox_link_type' => 'button',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1733,24 +1733,24 @@ class Flip_Box extends Widget_Base
 				'label_block' => true,
 				'options'     => [
 					'effect1' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect1'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect1'] ),
 					],
 					'effect2' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect2'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect2'] ),
 					],
 					'effect4' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect4'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect4'] )  . $this->eael_pro_lock_icon(),
 					],
 					'effect5' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect5'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect5'] )  . $this->eael_pro_lock_icon(),
 					],
 					'effect6' => [
-						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+						'title' => esc_html( $eael_liquid_glass_effect['styles']['effect6'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect['styles']['effect6'] )  . $this->eael_pro_lock_icon(),
 					],
 				],
 				'prefix_class' => 'eael_wd_liquid_glass-',
@@ -2152,24 +2152,24 @@ class Flip_Box extends Widget_Base
 				'label_block' => true,
 				'options'     => [
 					'effect1' => [
-						'title' => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html( $eael_liquid_glass_effect_rear['styles']['effect1'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect_rear['styles']['effect1'] ),
 					],
 					'effect2' => [
-						'title' => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html( $eael_liquid_glass_effect_rear['styles']['effect2'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect_rear['styles']['effect2'] ),
 					],
 					'effect4' => [
-						'title' => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect4'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect4'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+						'title' => esc_html( $eael_liquid_glass_effect_rear['styles']['effect4'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect_rear['styles']['effect4'] )  . $this->eael_pro_lock_icon(),
 					],
 					'effect5' => [
-						'title' => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect5'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect5'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+						'title' => esc_html( $eael_liquid_glass_effect_rear['styles']['effect5'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect_rear['styles']['effect5'] )  . $this->eael_pro_lock_icon(),
 					],
 					'effect6' => [
-						'title' => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect6'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect_rear['styles']['effect6'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+						'title' => esc_html( $eael_liquid_glass_effect_rear['styles']['effect6'] ),
+						'text'  => esc_html( $eael_liquid_glass_effect_rear['styles']['effect6'] )  . $this->eael_pro_lock_icon(),
 					],
 				],
 				'prefix_class' => 'eael_wd_liquid_glass_rear-',
@@ -2733,9 +2733,7 @@ class Flip_Box extends Widget_Base
                                     }
                                     ?>
                                     <div class="eael-elements-flip-box-content">
-	                                    <?php 
-                                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                        echo $this->parse_text_editor( $settings['eael_flipbox_front_text'] );?>
+	                                    <?php echo wp_kses( $this->parse_text_editor( $settings['eael_flipbox_front_text'] ), Helper::eael_allowed_tags() );?>
                                     </div>
                                 </div>
                             </div>
@@ -2772,10 +2770,7 @@ class Flip_Box extends Widget_Base
                                     <<?php echo esc_html( $flipbox_if_html_title_tag ), ' '; $this->print_render_attribute_string('flipbox-title-container'); ?>><?php echo wp_kses( $settings['eael_flipbox_back_title'], Helper::eael_allowed_tags() ); ?></<?php echo esc_html( $flipbox_if_html_title_tag ); ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
-                                        <?php
-                                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                        echo $this->parse_text_editor( $settings['eael_flipbox_back_text'] );
-                                        ?>
+                                        <?php echo wp_kses( $this->parse_text_editor( $settings['eael_flipbox_back_text'] ), Helper::eael_allowed_tags() ); ?>
                                     </div>
 
                                     <?php if ($settings['flipbox_link_type'] == 'button' && !empty($settings['flipbox_button_text'])) : ?>
