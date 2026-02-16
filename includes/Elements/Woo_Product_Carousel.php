@@ -394,7 +394,7 @@ class Woo_Product_Carousel extends Widget_Base {
                     'eael_product_carousel_excerpt' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -545,7 +545,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'default'   => __( 'Products Not Found', 'essential-addons-for-elementor-lite' ),
                 'separator' => 'before',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1115,7 +1115,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'type'        => Controls_Manager::TEXT,
                 'separator' => 'before',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 		    ]
 	    );
@@ -1125,7 +1125,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 		    ]
 	    );

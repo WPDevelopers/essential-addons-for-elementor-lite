@@ -256,7 +256,7 @@ class Info_Box extends Widget_Base
                     'eael_infobox_img_or_icon' => 'number',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -283,7 +283,7 @@ class Info_Box extends Widget_Base
                 ],
                 'default' => esc_html__('This is an icon box', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -354,7 +354,7 @@ class Info_Box extends Widget_Base
                 ],
                 'default' => esc_html__('This is a sub title', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
                 'condition' => [
                     'eael_infobox_show_sub_title' => 'yes',
@@ -602,7 +602,7 @@ class Info_Box extends Widget_Base
                     'eael_show_infobox_button' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -2606,8 +2606,7 @@ class Info_Box extends Widget_Base
                 if ('content' === $settings['eael_infobox_text_type']){
                     if (!empty($settings['eael_infobox_text'])) {
                         echo '<div>';
-                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        echo $this->parse_text_editor( $settings['eael_infobox_text'] );
+                        echo wp_kses( $this->parse_text_editor( $settings['eael_infobox_text'] ), Helper::eael_allowed_tags() );
                         echo '</div>';
                     }
                     $this->render_infobox_button();
@@ -2623,7 +2622,7 @@ class Info_Box extends Widget_Base
                         }
 
 	                    Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['eael_primary_templates'] );
-                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        
                         echo Plugin::$instance->frontend->get_builder_content( $settings['eael_primary_templates'], true );
 	                    if ( Plugin::$instance->editor->is_edit_mode() ) {
 		                    echo '</div>';

@@ -475,7 +475,7 @@ class Login_Register extends Widget_Base {
 				'show_lost_password' => 'yes',
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'lost_password_link_type', [
@@ -532,7 +532,7 @@ class Login_Register extends Widget_Base {
 				'login_show_remember_me' => 'yes',
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		if ( $this->user_can_register ) {
@@ -1084,7 +1084,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'login_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1097,7 +1097,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'login_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1117,7 +1117,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'login_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1130,7 +1130,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'login_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1206,7 +1206,7 @@ class Login_Register extends Widget_Base {
 			'default'     => __( 'Log In', 'essential-addons-for-elementor-lite' ),
 			'placeholder' => __( 'Log In', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1299,7 +1299,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'lostpassword_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1319,7 +1319,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'lostpassword_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1365,7 +1365,7 @@ class Login_Register extends Widget_Base {
 			'default'     => __( 'Reset Password', 'essential-addons-for-elementor-lite' ),
 			'placeholder' => __( 'Reset Password', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1457,7 +1457,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'resetpassword_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1470,7 +1470,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'resetpassword_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1490,7 +1490,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'resetpassword_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1503,7 +1503,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'condition'   => [ 'resetpassword_label_types' => 'custom', ],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1557,7 +1557,7 @@ class Login_Register extends Widget_Base {
 			'default'     => __( 'Save Password', 'essential-addons-for-elementor-lite' ),
 			'placeholder' => __( 'Save Password', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -1721,7 +1721,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Welcome Back!', 'essential-addons-for-elementor-lite' ),
 			'separator'   => 'before',
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'login_form_subtitle', [
@@ -1738,7 +1738,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Create a New Account', 'essential-addons-for-elementor-lite' ),
 			'separator'   => 'before',
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'register_form_subtitle', [
@@ -1755,7 +1755,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Get New Password', 'essential-addons-for-elementor-lite' ),
 			'separator'   => 'before',
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'lostpassword_form_subtitle', [
@@ -1772,7 +1772,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Reset Password', 'essential-addons-for-elementor-lite' ),
 			'separator'   => 'before',
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'resetpassword_form_subtitle', [
@@ -2006,7 +2006,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Your email is invalid.', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "You have used an invalid email", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'err_email_missing', [
@@ -2016,7 +2016,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Email is missing or Invalid', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( 'Email is missing or Invalid', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'err_email_used', [
@@ -2026,7 +2026,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Your email is already in use..', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( 'The provided email is already registered with other account. Please login or reset password or use another email.', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'err_username', [
@@ -2036,7 +2036,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Your username is invalid.', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "You have used an invalid username", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'err_username_used', [
@@ -2046,7 +2046,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Your username is already registered.', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( 'Invalid username provided or the username already registered.', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'err_pass', [
@@ -2056,7 +2056,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Your password is invalid', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "Your password is invalid.", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2067,7 +2067,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Password did not matched', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "Your confirmed password did not match", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2078,7 +2078,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. You are already logged in', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "You are already logged in", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2089,7 +2089,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. reCAPTCHA Validation Failed', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "You did not pass reCAPTCHA challenge.", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 			'condition'   => [
 				'enable_recaptcha' => 'yes',
@@ -2103,7 +2103,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Cloudflare Turnstile Validation Failed', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "You did not pass Cloudflare Turnstile challenge.", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 			'condition'   => [
 				'enable_cloudflare_turnstile' => 'yes',
@@ -2117,7 +2117,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		
@@ -2128,7 +2128,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. You must accept the Terms & Conditions', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2139,7 +2139,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. Something went wrong', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "Something went wrong!", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2150,7 +2150,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Phone number is missing', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( 'Phone number is missing', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2161,7 +2161,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Invalid phone number provided', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( 'Invalid phone number provided', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2178,7 +2178,7 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Eg. You have logged in successfully', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "You have logged in successfully", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( 'success_register', [
@@ -2375,7 +2375,7 @@ class Login_Register extends Widget_Base {
 				'active' => true,
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2442,7 +2442,7 @@ class Login_Register extends Widget_Base {
 				'field_type!' => array_merge( $custom_fields_image, ['honeypot'] ),
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2568,7 +2568,7 @@ class Login_Register extends Widget_Base {
 			'dynamic' => [ 'active' => true, ],
 			'default' => __( 'Register', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2738,7 +2738,7 @@ class Login_Register extends Widget_Base {
 				'reg_email_template_type' => 'custom',
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2847,7 +2847,7 @@ class Login_Register extends Widget_Base {
 				'reg_admin_email_template_type' => 'custom',
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2916,7 +2916,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'render_type' => 'none',
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2944,7 +2944,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => false,
 			'render_type' => 'none',
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -2972,7 +2972,7 @@ class Login_Register extends Widget_Base {
 				'lostpassword_email_message_reset_link_in_popup' => 'yes',
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -4405,7 +4405,7 @@ class Login_Register extends Widget_Base {
 				'rmark_po_toggle' => 'yes',
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 		$this->add_control( "rmark_size", [
@@ -6300,7 +6300,7 @@ class Login_Register extends Widget_Base {
                                   id="eael-login-form"
                                   method="post">
 								<?php
-								if ( 'top' === $this->ds['position_for_login_form'] ) {
+								if ( isset( $this->ds['position_for_login_form'] ) && 'top' === $this->ds['position_for_login_form'] ) {
 									do_action( 'eael/login-register/render_social_login_for_login_form', $this );
 								}
 								do_action( 'eael/login-register/after-login-form-open', $this );
@@ -6407,7 +6407,7 @@ class Login_Register extends Widget_Base {
                                 </div>
 								<?php
 								do_action( 'eael/login-register/after-login-footer', $this );
-								$position = $this->ds['position_for_login_form'];
+								$position = isset( $this->ds['position_for_login_form'] ) ? $this->ds['position_for_login_form'] : '';
 								if ( !$position || 'bottom' === $this->ds['position_for_login_form'] ) {
 									do_action( 'eael/login-register/render_social_login_for_login_form', $this );
 								}
@@ -6803,9 +6803,6 @@ class Login_Register extends Widget_Base {
 							}
 							?>
 
-                            <div class="eael-form-validation-container">
-								<?php $this->print_validation_message(); ?>
-                            </div>
 							<?php
 							do_action( 'eael/login-register/before-register-form-close', $this );
 							?>
@@ -6975,7 +6972,6 @@ class Login_Register extends Widget_Base {
 								echo '<div class="eael-form-validation-container">';
 									$this->print_lostpassword_validation_errors();
 								echo '</div>';
-								$this->print_lostpassword_validation_errors();
 							}
 							$this->print_necessary_hidden_fields( 'lostpassword' );
 
@@ -7091,7 +7087,6 @@ class Login_Register extends Widget_Base {
 								echo '<div class="eael-form-validation-container">';
 									$this->print_resetpassword_validation_errors();
 								echo '</div>';
-								$this->print_resetpassword_validation_errors();
 							}
 							?>
 							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">

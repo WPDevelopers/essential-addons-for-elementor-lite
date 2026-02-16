@@ -902,7 +902,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 				'type'    => \Elementor\Controls_Manager::TEXT,
 				'default' => esc_html__( 'Add to cart', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);

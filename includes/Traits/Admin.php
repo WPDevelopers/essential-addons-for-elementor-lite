@@ -1894,13 +1894,13 @@ trait Admin {
 		<div class="eael-black-friday-optin-logo">
 			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" width="25" alt="">
 		</div>
-		<div class="eael-black-friday-optin">
+		<div class="eael-february-deal-content">
 			<p><?php 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo __( '<strong>Black Friday Mega Sale:</strong> Elevate Web Design More Than Ever With 110+ Elements – Now <strong>Up To $120 OFF!</strong> 🎁', 'essential-addons-for-elementor-lite' );
+			echo __( 'Elevate web design more than ever with 110+ Elements – now <strong>Flat 20% OFF! 🎁</strong>', 'essential-addons-for-elementor-lite' );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
-                <a href="https://essential-addons.com/bfcm2025-admin-notice" target="_blank" class="button-primary">
+                <a href="https://essential-addons.com/feb2026-admin-notice" target="_blank" class="button-primary">
                     <?php esc_html_e( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
                 <span class="eael-action-dismiss-btn">
@@ -1912,7 +1912,7 @@ trait Admin {
 		<script>
             jQuery(document).ready(function ($) {
                 setTimeout(function () {
-                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_2025_notice .notice-dismiss');
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-february_deal_2026_notice .notice-dismiss');
 
                     function wpNoticeDismissFunc(event) {
                         event.preventDefault();
@@ -1927,7 +1927,7 @@ trait Admin {
                         }
 
                         // Data has to be formatted as a string here.
-                        postData += 'id=bfcm_2025_notice';
+                        postData += 'id=february_deal_2026_notice';
                         postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
                         if (dismiss) {
                             postData += '&dismiss=' + dismiss;
@@ -1936,7 +1936,7 @@ trait Admin {
                             postData += '&later=' + later;
                         }
 
-                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_bfcm_2025_notice' ) );?>';
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_february_deal_2026_notice' ) );?>';
 
                         httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
                         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -1947,7 +1947,7 @@ trait Admin {
                     dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
 
                     // Handle custom dismiss button clicks
-                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_2025_notice .eael-action-dismiss-btn');
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-february_deal_2026_notice .eael-action-dismiss-btn');
                     if (customDismissBtn && dismissBtn) {
                         customDismissBtn.addEventListener('click', function(event) {
                             event.preventDefault();
@@ -1959,20 +1959,20 @@ trait Admin {
 		</script>
 	    <?php
 	    $b_message            = ob_get_clean();
-	    $_black_friday_notice = [
+	    $_february_deal_notice = [
 		    'html' => $b_message,
 	    ];
 
 	    $notices->add(
-			'bfcm_2025_notice',
-			$_black_friday_notice,
+			'february_deal_2026_notice',
+			$_february_deal_notice,
 			[
-				'start'       => $notices->time(),
+				'start'       => strtotime('11:59:59pm 9th February, 2026'),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				"expire"      => strtotime( '11:59:59pm 4th December, 2025' ),
-				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '09:59:59pm 4th December, 2025' ),
+				"expire"      => strtotime( '11:59:59pm 7th March, 2026' ),
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '11:59:59pm 7th March, 2026' ),
 			]
 		);
 

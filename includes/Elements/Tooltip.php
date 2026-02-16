@@ -320,7 +320,7 @@ class Tooltip extends Widget_Base {
 		            '{{WRAPPER}} .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right' => 'animation-duration: {{SIZE}}ms;',
 		        ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
