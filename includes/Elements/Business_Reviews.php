@@ -151,7 +151,7 @@ class Business_Reviews extends Widget_Base {
 				'eael_business_reviews_sources' => 'google-reviews',
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -367,6 +367,28 @@ class Business_Reviews extends Widget_Base {
 				'frontend_available' => true,
                 'condition'          => [
 					'eael_business_reviews_items_layout' => 'grid',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_review_text_height',
+			[
+				'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => [
+					'px' => [
+						'min'  => 15,
+						'max'  => 500,
+						'step' => 1,
+					],
+				],
+				'size_units' => [ 'px' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text' => 'height: {{SIZE}}{{UNIT}}; overflow-y: auto;',
+				],
+				'condition'  => [
+					'eael_business_reviews_review_text' => 'yes',
 				],
 			]
 		);
@@ -664,7 +686,7 @@ class Business_Reviews extends Widget_Base {
 				'eael_business_reviews_business_name' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -691,7 +713,7 @@ class Business_Reviews extends Widget_Base {
 				'eael_business_reviews_business_rating' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 

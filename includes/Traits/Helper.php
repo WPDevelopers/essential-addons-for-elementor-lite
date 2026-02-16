@@ -319,7 +319,7 @@ trait Helper
 	 * Update Checkout Cart Quantity via ajax call.
 	 */
 	public function eael_checkout_cart_qty_update() {
-        if ( !empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'essential-addons-elementor' ) ) {
+        if ( empty( $_POST['nonce'] ) || ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'essential-addons-elementor' ) ) ) {
             die( esc_html__( 'Permission Denied!', 'essential-addons-for-elementor-lite' ) );
         }
 
