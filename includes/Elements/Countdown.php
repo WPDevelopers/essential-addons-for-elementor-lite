@@ -286,7 +286,7 @@ class Countdown extends Widget_Base {
                     'eael_countdown_days' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -315,7 +315,7 @@ class Countdown extends Widget_Base {
                     'eael_countdown_hours' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -344,7 +344,7 @@ class Countdown extends Widget_Base {
                     'eael_countdown_minutes' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -373,7 +373,7 @@ class Countdown extends Widget_Base {
                     'eael_countdown_seconds' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -556,7 +556,7 @@ class Countdown extends Widget_Base {
                 ],
                 'default'   => '#',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );

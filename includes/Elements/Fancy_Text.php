@@ -89,7 +89,7 @@ class Fancy_Text extends Widget_Base {
 				'default'     => esc_html__( 'This is the ', 'essential-addons-for-elementor-lite'),
 				'dynamic'     => [ 'active' => true ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -104,7 +104,7 @@ class Fancy_Text extends Widget_Base {
 				'label_block'	=> true,
 				'dynamic'		=> [ 'active' => true ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -140,7 +140,7 @@ class Fancy_Text extends Widget_Base {
 				'default'     => esc_html__( ' of the sentence.', 'essential-addons-for-elementor-lite'),
 				'dynamic'     => [ 'active' => true ],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);

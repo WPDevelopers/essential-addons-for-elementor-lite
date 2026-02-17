@@ -222,7 +222,7 @@ class Advanced_Data_Table extends Widget_Base
                     'ea_adv_data_table_search' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );

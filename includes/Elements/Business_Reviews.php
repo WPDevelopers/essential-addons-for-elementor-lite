@@ -151,7 +151,7 @@ class Business_Reviews extends Widget_Base {
 				'eael_business_reviews_sources' => 'google-reviews',
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -686,7 +686,7 @@ class Business_Reviews extends Widget_Base {
 				'eael_business_reviews_business_name' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -713,7 +713,7 @@ class Business_Reviews extends Widget_Base {
 				'eael_business_reviews_business_rating' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 

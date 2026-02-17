@@ -571,7 +571,7 @@ class Adv_Accordion extends Widget_Base
                 'dynamic' => ['active' => true],
                 'separator' => 'before',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -627,7 +627,7 @@ class Adv_Accordion extends Widget_Base
 			    'description' => esc_html__( 'Custom ID will be added as an anchor tag. For example, if you add ‘test’ as your custom ID, the link will become like the following: https://www.example.com/#test and it will open the respective tab directly.', 'essential-addons-for-elementor-lite' ),
 			    'default' => '',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 		    ]
 	    );
@@ -641,7 +641,7 @@ class Adv_Accordion extends Widget_Base
                 'dynamic' => ['active' => true],
                 'separator' => 'before',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
                 'condition' => [
                     'eael_adv_accordion_text_type' => 'template',
@@ -1814,7 +1814,7 @@ class Adv_Accordion extends Widget_Base
 				echo '<div ';  $this->print_render_attribute_string($tab_content_setting_key); echo '>';
 				if ('content' == $tab['eael_adv_accordion_text_type']) {
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo $this->parse_text_editor( $tab['eael_adv_accordion_tab_content'] );
+					echo  wp_kses( $this->parse_text_editor( $tab['eael_adv_accordion_tab_content'] ), Helper::eael_allowed_tags() );
 				} elseif ('template' == $tab['eael_adv_accordion_text_type']) {
 					if ( ! empty( $tab['eael_primary_templates'] ) && Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
 						// WPML Compatibility
