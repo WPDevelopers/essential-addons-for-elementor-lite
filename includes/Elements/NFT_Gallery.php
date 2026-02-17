@@ -90,13 +90,14 @@ class NFT_Gallery extends Widget_Base {
 				'label'       => __( 'API Key', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'Enter API key',
+				// Translators: %s: Documentation URL
 				'description' => sprintf( __( 'Get your API key from <a href="https://docs.opensea.io/reference/api-keys" class="eael-btn" target="_blank">%s</a>',
 					'essential-addons-for-elementor-lite' ), esc_html__( 'here', 'essential-addons-for-elementor-lite' ) ),
 				'condition' => [
 					'eael_nft_gallery_sources' => 'opensea'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -137,6 +138,7 @@ class NFT_Gallery extends Widget_Base {
 			'eael_nft_gallery_opensea_filterby_slug',
 			[
 				'label'       => __( 'Collection Slug', 'essential-addons-for-elementor-lite' ),
+				// Translators: %s: Documentation URL
 				'description' => sprintf( __( 'Checkout this <a target="_blank" href="%s">document</a> to learn how to obtain a collection slug.', 'essential-addons-for-elementor-lite' ), esc_url( $this->nft_documentation_url ) ),
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'Collection slug',
@@ -145,7 +147,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_opensea_filterby' => 'collection-slug',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -154,6 +156,7 @@ class NFT_Gallery extends Widget_Base {
 			'eael_nft_gallery_opensea_filterby_wallet',
 			[
 				'label'       => __( 'Collection Slug', 'essential-addons-for-elementor-lite' ),
+				// Translators: %s: Documentation URL
 				'description' => sprintf( __( 'Checkout this <a target="_blank" href="%s">document</a> to learn how to obtain a wallet address.', 'essential-addons-for-elementor-lite' ), esc_url( $this->nft_documentation_url ) ),
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'collection_slug',
@@ -186,7 +189,7 @@ class NFT_Gallery extends Widget_Base {
 					],
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -261,7 +264,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_magiceden_type' => 'collections',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -278,7 +281,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_magiceden_type' => 'wallet',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -634,7 +637,7 @@ class NFT_Gallery extends Widget_Base {
 				'eael_nft_gallery_show_owner' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -647,7 +650,7 @@ class NFT_Gallery extends Widget_Base {
 				'eael_nft_gallery_show_creator' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -657,7 +660,7 @@ class NFT_Gallery extends Widget_Base {
 			'label_block' => false,
 			'default'     => esc_html__( 'View Details', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -667,7 +670,7 @@ class NFT_Gallery extends Widget_Base {
 			'label_block' => false,
 			'default'     => esc_html__( 'No Items Found!', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -677,7 +680,7 @@ class NFT_Gallery extends Widget_Base {
 			'label_block' => false,
 			'default'     => esc_html__( 'Last sale:', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -687,7 +690,7 @@ class NFT_Gallery extends Widget_Base {
 			'label_block' => false,
 			'default'     => esc_html__( 'Ends in:', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -724,7 +727,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_pagination' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -740,7 +743,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_pagination' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -756,7 +759,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_pagination' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -2570,9 +2573,9 @@ class NFT_Gallery extends Widget_Base {
                     <?php if( ! empty( $nft_gallery['show_last_sale_ends_in'] ) ) : ?>
                     <div class="eael-nft-last-sale-wrapper">
                         <?php if( intval($item_formatted['last_sale']) > 0 ): ?>
-                            <p class="eael-nft-last-sale"><?php printf('<span class="eael-nft-last-sale-text">%s</span> <span class="eael-nft-last-sale-price">%s %s</span>', esc_html__($nft_gallery['last_sale_label'], 'essential-addons-for-elementor-lite'), floatval($item_formatted['last_sale'] / $unit_convert ), esc_html( $item_formatted['currency'] )); ?></p>
+                            <p class="eael-nft-last-sale"><?php printf('<span class="eael-nft-last-sale-text">%s</span> <span class="eael-nft-last-sale-price">%s %s</span>', esc_html($nft_gallery['last_sale_label'] ), floatval($item_formatted['last_sale'] / $unit_convert ), esc_html( $item_formatted['currency'] )); ?></p>
                         <?php elseif( ! empty($item_formatted['ends_in']) ): ?>
-                            <p class="eael-nft-ends-in"><?php printf('<span class="eael-nft-ends-in-text">%s</span> <span class="eael-nft-ends-in-time">%s</span>' , esc_html__($nft_gallery['ends_in_label'], 'essential-addons-for-elementor-lite'), esc_html( $item_formatted['ends_in'] ) ); ?></p>
+                            <p class="eael-nft-ends-in"><?php printf('<span class="eael-nft-ends-in-text">%s</span> <span class="eael-nft-ends-in-time">%s</span>' , esc_html($nft_gallery['ends_in_label'] ), esc_html( $item_formatted['ends_in'] ) ); ?></p>
                         <?php endif; ?>
                     </div>
                     <?php endif; ?>
@@ -2646,9 +2649,9 @@ class NFT_Gallery extends Widget_Base {
                     <?php if( ! empty( $nft_gallery['show_last_sale_ends_in'] ) ) : ?>
                     <div class="eael-nft-last-sale-wrapper eael-nft-grid-item">
                         <?php if( intval($item_formatted['last_sale']) > 0 ): ?>
-                            <p class="eael-nft-last-sale"><?php printf('<span class="eael-nft-last-sale-text">%s</span> <span class="eael-nft-last-sale-price">%s %s</span>' , esc_html__($nft_gallery['last_sale_label'], 'essential-addons-for-elementor-lite'), floatval($item_formatted['last_sale'] / $unit_convert ), esc_html( $item_formatted['currency'] )); ?></p>
+                            <p class="eael-nft-last-sale"><?php printf('<span class="eael-nft-last-sale-text">%s</span> <span class="eael-nft-last-sale-price">%s %s</span>' , esc_html($nft_gallery['last_sale_label'] ), floatval($item_formatted['last_sale'] / $unit_convert ), esc_html( $item_formatted['currency'] )); ?></p>
                         <?php elseif( ! empty($item_formatted['ends_in']) ): ?>
-                            <p class="eael-nft-ends-in"><?php printf('<span class="eael-nft-ends-in-text">%s</span> <span class="eael-nft-ends-in-time">%s</span>' , esc_html__($nft_gallery['ends_in_label'], 'essential-addons-for-elementor-lite'), esc_html( $item_formatted['ends_in'] ) ); ?></p>
+                            <p class="eael-nft-ends-in"><?php printf('<span class="eael-nft-ends-in-text">%s</span> <span class="eael-nft-ends-in-time">%s</span>' , esc_html($nft_gallery['ends_in_label'] ), esc_html( $item_formatted['ends_in'] ) ); ?></p>
                         <?php endif; ?>
                     </div>
                     <?php endif; ?>
