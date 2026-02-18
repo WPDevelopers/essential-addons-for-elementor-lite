@@ -3166,7 +3166,9 @@ class Woo_Product_Carousel extends Widget_Base {
         $settings[ 'eael_widget_id' ] = $widget_id;
 
         $args = $this->product_query_builder();
+        $has_pro = apply_filters( 'eael/pro_enabled', false );
         $is_marquee = 'slide' === $settings['carousel_effect'] && isset( $settings['enable_marquee'] ) && 'yes' === $settings['enable_marquee'];
+
         if ( Plugin::$instance->documents->get_current() ) {
             $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
         }
@@ -3174,7 +3176,7 @@ class Woo_Product_Carousel extends Widget_Base {
         // render dom
         $this->add_render_attribute( 'container', [
             'class'          => [
-                $is_marquee ? '' : 'swiper-container-wrap',
+                $is_marquee && $has_pro ? '' : 'swiper-container-wrap',
                 'eael-woo-product-carousel-container',
                 $settings[ 'eael_dynamic_template_layout' ],
             ],
@@ -3199,7 +3201,7 @@ class Woo_Product_Carousel extends Widget_Base {
             ]
         );
 
-        if( $is_marquee ){
+        if( $is_marquee && $has_pro ){
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'eael-marquee-carousel' );
         } else {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', [
@@ -3219,7 +3221,11 @@ class Woo_Product_Carousel extends Widget_Base {
                 $settings[ 'eael_dynamic_template_layout' ] );
         }
 
-        if ( !$is_marquee && $settings[ 'eael_woo_product_carousel_image_stretch' ] ) {
+        if( $is_marquee && !$has_pro ){
+			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', '1' );
+			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'eael-marquee-carousel no-gsap' );
+		}
+        if ( !$is_marquee  && $settings[ 'eael_woo_product_carousel_image_stretch' ] ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'swiper-image-stretch' );
         }
 
@@ -3277,6 +3283,9 @@ class Woo_Product_Carousel extends Widget_Base {
         }
 
         if ( $settings[ 'autoplay' ] == 'yes' && !empty( $settings[ 'autoplay_speed' ][ 'size' ] ) ) {
+            if( $is_marquee && !$has_pro ){
+                $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-speed', $settings[ 'autoplay_speed' ][ 'size' ] );
+            }
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', $settings[ 'autoplay_speed' ][ 'size' ] );
         } else {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', '0' );
@@ -3328,10 +3337,13 @@ class Woo_Product_Carousel extends Widget_Base {
         }
 
         $this->add_render_attribute( 'wrapper', 'class', 'products' );
-        if( $is_marquee ){
+        if( $is_marquee && $has_pro ){
             $this->add_render_attribute( 'wrapper', 'class', 'eael-marquee-wrapper' );
         } else {
             $this->add_render_attribute( 'wrapper', 'class', 'swiper-wrapper' );
+            if ( $is_marquee ) {
+                $this->add_render_attribute( 'wrapper', 'class', 'eael-marquee-wrapper-lite' );
+            }
         }
         ?>
 
