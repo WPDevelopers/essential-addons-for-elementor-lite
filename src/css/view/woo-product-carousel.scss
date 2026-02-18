@@ -126,6 +126,9 @@ $theme-preset4: #ec3b75;
         &:not(.swiper-initialized) .eael-product-carousel {
             height: 450px
         }
+        .product-image-wrap img{
+            width: 100%;
+        }
     }
 
     .eael-woo-product-carousel.swiper-8-lower {
