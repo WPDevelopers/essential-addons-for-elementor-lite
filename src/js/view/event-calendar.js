@@ -371,27 +371,30 @@ var EventCalendar = function ($scope, $) {
 		var searchInput = $scope.find('.eael-event-calendar-search-input');
 		var suggestionsContainer = $scope.find('.eael-event-calendar-search-suggestions');
 
+		function getFilteredEvents(searchTerm) {
+			return eventAll.filter(function(event) {
+				var title = (event.title || '').toLowerCase();
+				var location = (event.location || '').toLowerCase();
+				var category = (event.category || '').toLowerCase();
+				
+				return title.indexOf(searchTerm) > -1 || 
+					   location.indexOf(searchTerm) > -1 || 
+					   category.indexOf(searchTerm) > -1;
+			});
+		}
+
 		if (searchInput.length > 0) {
-			searchInput.on('keyup', function() {
+			searchInput.on('keyup input search', function() {
 				var searchTerm = $(this).val().toLowerCase();
+				var filteredEvents = getFilteredEvents(searchTerm);
 				
 				// Suggestions logic
 				suggestionsContainer.empty().removeClass('active');
 				
 				if (searchTerm.length > 0) {
-					var matches = eventAll.filter(function(event) {
-						var title = (event.title || '').toLowerCase();
-						var location = (event.location || '').toLowerCase();
-						var category = (event.category || '').toLowerCase();
-						
-						return title.indexOf(searchTerm) > -1 || 
-							   location.indexOf(searchTerm) > -1 || 
-							   category.indexOf(searchTerm) > -1;
-					});
-
-					if (matches.length > 0) {
+					if (filteredEvents.length > 0) {
 						suggestionsContainer.addClass('active');
-						matches.forEach(function(match) {
+						filteredEvents.forEach(function(match) {
 							var dateStr = moment(match.start).format('MMM Do, YYYY');
 							var suggestionItem = $('<div class="suggestion-item">' +
 								'<div class="suggestion-title">' + match.title + '</div>' +
@@ -409,18 +412,11 @@ var EventCalendar = function ($scope, $) {
 							suggestionsContainer.append(suggestionItem);
 						});
 					}
+				} else {
+					// Reset calendar to today if search is cleared
+					calendar.today();
 				}
 
-				var filteredEvents = eventAll.filter(function(event) {
-					var title = (event.title || '').toLowerCase();
-					var location = (event.location || '').toLowerCase();
-					var category = (event.category || '').toLowerCase();
-					
-					return title.indexOf(searchTerm) > -1 || 
-						   location.indexOf(searchTerm) > -1 || 
-						   category.indexOf(searchTerm) > -1;
-				});
-				
 				// Remove existing events and add filtered ones
 				calendar.removeAllEvents();
 				calendar.addEventSource(filteredEvents);
