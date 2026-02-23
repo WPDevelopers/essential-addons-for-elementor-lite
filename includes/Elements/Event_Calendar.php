@@ -3536,6 +3536,271 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        /**
+         * Calendar Layout design Search
+         */
+	    $this->start_controls_section(
+		    'eael_event_calendar_search_calendar_input_styling',
+		    [
+			    'label'     => __( 'Search Input', 'essential-addons-for-elementor-lite' ),
+			    'tab'       => Controls_Manager::TAB_STYLE,
+			    'condition' => [
+				    'eael_event_display_layout' => 'calendar',
+				    'eael_event_calendar_show_search' => 'yes'
+			    ]
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'eael_event_calendar_search_calendar_input_width',
+		    [
+			    'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+			    'type'       => Controls_Manager::SLIDER,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'range'      => [
+				    'px' => [
+					    'min'  => 0,
+					    'max'  => 1000,
+					    'step' => 5,
+				    ],
+				    '%'  => [
+					    'min' => 0,
+					    'max' => 100,
+				    ],
+			    ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-input' => 'width: {{SIZE}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name'     => 'eael_event_calendar_search_calendar_input_typography',
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-search-input',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_search_calendar_input_text_color',
+		    [
+			    'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-event-calendar-search-input' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_search_calendar_input_placeholder_color',
+		    [
+			    'label'     => esc_html__( 'Placeholder Color', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-event-calendar-search-input::placeholder' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Background::get_type(),
+		    [
+			    'name'     => 'eael_event_calendar_search_calendar_input_background',
+			    'types'    => [ 'classic', 'gradient' ],
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-search-input',
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Border::get_type(),
+		    [
+			    'name'     => 'eael_event_calendar_search_calendar_input_border',
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-search-input',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_search_calendar_input_border_radius',
+		    [
+			    'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			    'type'       => Controls_Manager::DIMENSIONS,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-event-calendar-search-input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Box_Shadow::get_type(),
+		    [
+			    'name'     => 'eael_event_calendar_search_calendar_input_box_shadow',
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-search-input',
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'eael_event_calendar_search_calendar_input_padding',
+		    [
+			    'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+			    'type'       => Controls_Manager::DIMENSIONS,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-event-calendar-search-input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'eael_event_calendar_search_calendar_input_margin',
+		    [
+			    'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+			    'type'       => Controls_Manager::DIMENSIONS,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-event-calendar-search' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+        $this->end_controls_section();
+
+        /**
+         * Search Suggestions design Search
+         */
+	    $this->start_controls_section(
+		    'eael_event_calendar_search_suggestions_styling',
+		    [
+			    'label'     => __( 'Search Suggestions', 'essential-addons-for-elementor-lite' ),
+			    'tab'       => Controls_Manager::TAB_STYLE,
+			    'condition' => [
+				    'eael_event_display_layout' => 'calendar',
+				    'eael_event_calendar_show_search' => 'yes'
+			    ]
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_suggestions_container_heading',
+		    [
+			    'label'     => esc_html__( 'Container', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::HEADING,
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Background::get_type(),
+		    [
+			    'name'     => 'eael_event_calendar_suggestions_background',
+			    'types'    => [ 'classic', 'gradient' ],
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-search-suggestions',
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Border::get_type(),
+		    [
+			    'name'     => 'eael_event_calendar_suggestions_border',
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-search-suggestions',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_suggestions_border_radius',
+		    [
+			    'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			    'type'       => Controls_Manager::DIMENSIONS,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-event-calendar-search-suggestions' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Box_Shadow::get_type(),
+		    [
+			    'name'     => 'eael_event_calendar_suggestions_box_shadow',
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-search-suggestions',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_suggestion_item_heading',
+		    [
+			    'label'     => esc_html__( 'Suggestion Item', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::HEADING,
+			    'separator' => 'before',
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name'     => 'eael_event_calendar_suggestion_title_typography',
+			    'label'    => esc_html__( 'Title Typography', 'essential-addons-for-elementor-lite' ),
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-search-suggestions .suggestion-item .suggestion-title',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_suggestion_title_color',
+		    [
+			    'label'     => esc_html__( 'Title Color', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-event-calendar-search-suggestions .suggestion-item .suggestion-title' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name'     => 'eael_event_calendar_suggestion_meta_typography',
+			    'label'    => esc_html__( 'Meta Typography', 'essential-addons-for-elementor-lite' ),
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-search-suggestions .suggestion-item .suggestion-meta',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_suggestion_meta_color',
+		    [
+			    'label'     => esc_html__( 'Meta Color', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-event-calendar-search-suggestions .suggestion-item .suggestion-meta' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_suggestion_item_hover_bg',
+		    [
+			    'label'     => esc_html__( 'Hover Background color', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-event-calendar-search-suggestions .suggestion-item:hover' => 'background: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_suggestion_item_padding',
+		    [
+			    'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+			    'type'       => Controls_Manager::DIMENSIONS,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-event-calendar-search-suggestions .suggestion-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+        $this->end_controls_section();
     }
 
     protected function render() {
