@@ -366,6 +366,28 @@ var EventCalendar = function ($scope, $) {
 		});
 
 		calendar.render();
+
+		// Search filtering logic
+		var searchInput = $scope.find('.eael-event-calendar-search-input');
+		if (searchInput.length > 0) {
+			searchInput.on('keyup', function() {
+				var searchTerm = $(this).val().toLowerCase();
+				var filteredEvents = eventAll.filter(function(event) {
+					var title = (event.title || '').toLowerCase();
+					var location = (event.location || '').toLowerCase();
+					var category = (event.category || '').toLowerCase();
+					
+					return title.indexOf(searchTerm) > -1 || 
+						   location.indexOf(searchTerm) > -1 || 
+						   category.indexOf(searchTerm) > -1;
+				});
+				
+				// Remove existing events and add filtered ones
+				calendar.removeAllEvents();
+				calendar.addEventSource(filteredEvents);
+			});
+		}
+
 		setTimeout( function() {
 			calendar.setOption( 'locale', locale );
 		}, 100);

@@ -622,3 +622,20 @@ span.fc-day-number {
     height: 100px;
   }
 }
+.eael-event-calendar-wrapper .eael-event-calendar-search {
+  margin-bottom: 20px;
+  text-align: right;
+}
+.eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-input {
+  padding: 10px 15px;
+  border: 1px solid #dfdfe9;
+  border-radius: 5px;
+  width: 250px;
+  font-size: 14px;
+  outline: none;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+}
+.eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-input:focus {
+  border-color: #5725ff;
+}

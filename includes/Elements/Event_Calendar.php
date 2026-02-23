@@ -286,6 +286,27 @@ class Event_Calendar extends Widget_Base
 		    ]
 	    );
 
+        $repeater->add_control(
+            'eael_event_location',
+            [
+                'label' => __('Location', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
+                'label_block' => true,
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_event_category',
+            [
+                'label' => __('Category', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
+                'label_block' => true,
+            ]
+        );
+
+
         $repeater->end_controls_tab();
 
         $repeater->start_controls_tab(
@@ -707,6 +728,33 @@ class Event_Calendar extends Widget_Base
                 'description' => __('Limit the number of events displayed on a day. The rest will show up in a popover.', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        $this->add_control(
+            'eael_event_calendar_show_search',
+            [
+                'label' => esc_html__( 'Show Search', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_search_placeholder',
+            [
+                'label'       => esc_html__( 'Search Placeholder', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
+                'placeholder' => esc_html__( 'Search', 'essential-addons-for-elementor-lite' ),
+                'default'     => esc_html__( 'Search', 'essential-addons-for-elementor-lite' ),
+                'condition'   => [
+                    'eael_event_calendar_show_search' => 'yes'
+                ]
+            ]
+        );
+
 
         if (apply_filters('eael/is_plugin_active', 'eventON/eventon.php') && apply_filters('eael/pro_enabled', false)) {
             $this->add_control(
@@ -3519,6 +3567,15 @@ class Event_Calendar extends Widget_Base
 	    ];
 
 	    echo '<div class="eael-event-calendar-wrapper layout-' . esc_attr( $settings['eael_event_display_layout'] ) . '">';
+        
+        if ( $settings['eael_event_display_layout'] === 'calendar' && $settings['eael_event_calendar_show_search'] === 'yes' ) {
+            ?>
+            <div class="eael-event-calendar-search-wrap eael-event-calendar-search">
+                <input type="search" id="eael-event-calendar-search-input-<?php echo esc_attr( $this->get_id() ) ?>" placeholder="<?php echo esc_html( $settings['eael_event_calendar_search_placeholder'] )?>" class="eael-event-calendar-search-input">
+            </div>
+            <?php
+        }
+
 
 	    if ( $settings['eael_event_display_layout'] === 'calendar' ) {
 		    echo '<div id="eael-event-calendar-' . esc_attr( $this->get_id() ) . '" class="eael-event-calendar-cls"
@@ -3886,6 +3943,8 @@ class Event_Calendar extends Widget_Base
 		            'nofollow'          => $event['eael_event_link']['nofollow'],
 		            'is_redirect'       => $event['eael_event_redirection'],
 		            'custom_attributes' => $custom_attributes,
+                    'location'          => sanitize_text_field( $event['eael_event_location'] ),
+                    'category'          => sanitize_text_field( $event['eael_event_category'] ),
                     'event_link'        => $event['eael_event_link']
 	            ];
 
@@ -4135,6 +4194,8 @@ class Event_Calendar extends Widget_Base
                 'external' => 'on',
                 'nofollow' => 'on',
                 'imageUrl' => get_the_post_thumbnail_url($event->ID, 'full'),
+                'location' => function_exists('tribe_get_venue') ? tribe_get_venue($event->ID) : '',
+                'category' => function_exists('tribe_get_event_categories') ? wp_strip_all_tags(tribe_get_event_categories($event->ID, ['label' => '', 'label_before' => '', 'label_after' => ''])) : '',
             ];
         }
         

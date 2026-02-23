@@ -737,3 +737,24 @@ span.fc-day-number {
 		}
 	}
 }
+
+.eael-event-calendar-wrapper {
+	.eael-event-calendar-search {
+		margin-bottom: 20px;
+		text-align: right;
+
+		.eael-event-calendar-search-input {
+			padding: 10px 15px;
+			border: 1px solid #dfdfe9;
+			border-radius: 5px;
+			width: 250px;
+			font-size: 14px;
+			outline: none;
+			transition: border-color 0.3s;
+
+			&:focus {
+				border-color: #5725ff;
+			}
+		}
+	}
+}
