@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.5.11
+Stable tag: 6.5.12
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -316,6 +316,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.12 - 22/02/2026 =
+
+- Fixed: EA Advanced Tabs | Shortcodes getting escaped and not working
+- Fixed: EA Ninja Forms | Required field <span> tag gets escaped when multiple forms are used on the same page
+- Fixed: EA Woo Product Price | Use the site’s active currency in the widget
+- Fixed: EA Advanced Data Table | Horizontal scrollbar issue on mobile devices
+- Fixed: EA Login/Register Form | Password reset link redirecting to default WP reset page
+- Fixed: EA Gravity Forms | Gravity Forms not working when used via EA widget
+- Improved: Added support for a Query ID option for all post-related elements.
+- Improved: EA Woo Product Gallery | Added option to hide categories and quantity input in the “Quick View” popup 
+- Improved: EA Woo Product Carousel | Pause on hover for the Marquee style
+- Few minor bug fixes & improvements
 
 = 6.5.11 - 10/02/2026 =
 

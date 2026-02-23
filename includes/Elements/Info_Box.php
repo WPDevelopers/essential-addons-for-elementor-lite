@@ -2606,7 +2606,7 @@ class Info_Box extends Widget_Base
                 if ('content' === $settings['eael_infobox_text_type']){
                     if (!empty($settings['eael_infobox_text'])) {
                         echo '<div>';
-                        echo wp_kses( $this->parse_text_editor( $settings['eael_infobox_text'] ), Helper::eael_allowed_tags() );
+                        echo $this->parse_text_editor( wp_kses( $settings['eael_infobox_text'], Helper::eael_allowed_tags() ) );
                         echo '</div>';
                     }
                     $this->render_infobox_button();
