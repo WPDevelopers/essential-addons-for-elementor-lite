@@ -1637,7 +1637,7 @@ class Simple_Menu extends Widget_Base
 	    }
 
         $menu_classes      = ['eael-simple-menu', $settings['eael_simple_menu_dropdown_animation'], 'eael-simple-menu-indicator', $settings['eael_hamburger_menu_item_alignment']];
-        $container_classes = ['eael-simple-menu-container', $align, $fullWidth, $settings['eael_simple_menu_dropdown_item_alignment'], $settings['eael_simple_menu_preset']];
+        $container_classes = ['eael-simple-menu-container', 'eael-simple-menu--loading', $align, $fullWidth, $settings['eael_simple_menu_dropdown_item_alignment'], $settings['eael_simple_menu_preset']];
 
         if ($settings['eael_simple_menu_layout'] == 'horizontal') {
             $menu_classes[] = 'eael-simple-menu-horizontal';
@@ -1703,6 +1703,16 @@ class Simple_Menu extends Widget_Base
                                     display: block;
                                 }
                             }
+                        }
+                        .eael-simple-menu-container.eael-simple-menu--loading > ul {
+                            display: -webkit-box !important;
+                            display: -ms-flexbox !important;
+                            display: flex !important;
+                            list-style: none !important;
+                        }
+                        .eael-simple-menu-container.eael-simple-menu--loading li ul {
+                            visibility: hidden !important;
+                            opacity: 0 !important;
                         }
                     </style>";
 	        }

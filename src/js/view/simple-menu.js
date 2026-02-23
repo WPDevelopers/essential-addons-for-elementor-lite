@@ -90,6 +90,7 @@ var SimpleMenu = function ($scope, $) {
 
     // clear responsive props
     $(window).on('resize load', function () {
+        $('.eael-simple-menu-container').removeClass('eael-simple-menu--loading');
         eael_menu_resize( $hamburger_max_width );
     });
     
