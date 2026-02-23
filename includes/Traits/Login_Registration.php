@@ -1366,15 +1366,35 @@ trait Login_Registration {
 			$key = get_password_reset_key( $user );
 			if ( ! empty( $key ) ) {
 				update_user_option( $user->ID, 'default_password_nag', true, true ); // Set up the password change nag.
-				$password_reset_link = add_query_arg(
-					[
-						'action' => 'rp',
-						'key'	 => $key,
-						'login'	 => rawurlencode( $user->user_login ),
-					],
-					esc_url_raw( $this->eael_wp_login_url() )
-				);
+				$custom_reset_password_info = get_option( 'eael_lr_resetpassword_form_info' );
 
+				if( is_array( $custom_reset_password_info ) ){
+					$locale = get_user_locale( $user );
+					$password_reset_link = add_query_arg(
+						array(
+							'action'				=> 'rp',
+							'eael-resetpassword'	=> '1',
+							'key'					=> $key,
+							'login'					=> rawurlencode( $user->user_login ),
+							'page_id'				=> !empty( $custom_reset_password_info['page_id'] ) ? $custom_reset_password_info['page_id'] : 0,
+							'widget_id'				=> !empty( $custom_reset_password_info['widget_id'] ) ? $custom_reset_password_info['widget_id'] : '',
+							'wp_lang'				=> $locale,
+						),
+						esc_url_raw( $this->eael_wp_login_url() )
+					);
+				} else {
+					$password_reset_link = add_query_arg(
+						[
+							'action' => 'rp',
+							'key'	 => $key,
+							'login'	 => rawurlencode( $user->user_login ),
+						],
+						esc_url_raw( $this->eael_wp_login_url() )
+					);
+				}
+
+				$link_text = !empty( $custom_reset_password_info['link_text'] ) ? $custom_reset_password_info['link_text'] : __( 'Click here to reset your password', 'essential-addons-for-elementor-lite' );
+				$password_reset_link = '<a href="' . $password_reset_link . '" target="_blank">' . $link_text . '</a>';
 				self::$email_options_lostpassword['password_reset_link'] = $password_reset_link;
 				self::$email_options['password_reset_link'] = $password_reset_link . "\r\n\r\n";
 			}

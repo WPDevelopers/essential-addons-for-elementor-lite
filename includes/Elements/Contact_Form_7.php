@@ -1759,7 +1759,7 @@ class Contact_Form_7 extends Widget_Base
                 }
                 if ($settings['form_description'] == 'yes' && $settings['form_description_text'] != '') {
                     echo '<div class="eael-contact-form-description eael-contact-form-7-description"> ' . 
-                        wp_kses( $this->parse_text_editor($settings['form_description_text']), Helper::eael_allowed_tags() ) . '
+                        $this->parse_text_editor( wp_kses( $settings['form_description_text'], Helper::eael_allowed_tags() ) ) . '
                         </div>';
                 }
                 echo '</div>';

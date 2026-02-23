@@ -943,7 +943,7 @@ class Testimonial extends Widget_Base {
 
 	protected function testimonial_desc() {
 		$settings = $this->get_settings_for_display();
-		echo '<div class="eael-testimonial-text">'. wp_kses( $this->parse_text_editor( $settings['eael_testimonial_description'] ), HelperClass::eael_allowed_tags() ) .'</div>';
+		echo '<div class="eael-testimonial-text">'. $this->parse_text_editor( wp_kses( $settings['eael_testimonial_description'], HelperClass::eael_allowed_tags() ) ) .'</div>';
 	}
 
 
