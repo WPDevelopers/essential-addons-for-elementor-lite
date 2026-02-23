@@ -738,7 +738,6 @@ class Event_Calendar extends Widget_Base
                 'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
                 'default' => 'no',
-                'separator' => 'before'
             ]
         );
 
