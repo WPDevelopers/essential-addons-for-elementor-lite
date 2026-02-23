@@ -3572,6 +3572,7 @@ class Event_Calendar extends Widget_Base
             ?>
             <div class="eael-event-calendar-search-wrap eael-event-calendar-search">
                 <input type="search" id="eael-event-calendar-search-input-<?php echo esc_attr( $this->get_id() ) ?>" placeholder="<?php echo esc_html( $settings['eael_event_calendar_search_placeholder'] )?>" class="eael-event-calendar-search-input">
+                <div class="eael-event-calendar-search-suggestions"></div>
             </div>
             <?php
         }

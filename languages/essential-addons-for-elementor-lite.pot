@@ -961,7 +961,7 @@ msgstr ""
 msgid "Out"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:27, ../includes/Elements/Advanced_Data_Table.php:205, ../includes/Elements/Advanced_Data_Table.php:220, ../includes/Elements/Advanced_Data_Table.php:894, ../includes/Elements/Betterdocs_Search_Form.php:162, ../includes/Elements/Event_Calendar.php:750, ../includes/Elements/Event_Calendar.php:751, ../includes/Elements/Event_Calendar.php:1081, ../includes/Elements/Event_Calendar.php:1097, ../includes/Elements/Event_Calendar.php:1098, ../includes/Elements/Event_Calendar.php:1111, ../includes/Elements/Event_Calendar.php:3613
+#: ../includes/Controls/Select2.php:27, ../includes/Elements/Advanced_Data_Table.php:205, ../includes/Elements/Advanced_Data_Table.php:220, ../includes/Elements/Advanced_Data_Table.php:894, ../includes/Elements/Betterdocs_Search_Form.php:162, ../includes/Elements/Event_Calendar.php:750, ../includes/Elements/Event_Calendar.php:751, ../includes/Elements/Event_Calendar.php:1081, ../includes/Elements/Event_Calendar.php:1097, ../includes/Elements/Event_Calendar.php:1098, ../includes/Elements/Event_Calendar.php:1111, ../includes/Elements/Event_Calendar.php:3614
 msgid "Search"
 msgstr ""
 
@@ -4509,7 +4509,7 @@ msgstr ""
 msgid "Tomorrow"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:4184
+#: ../includes/Elements/Event_Calendar.php:4185
 msgid "No Title"
 msgstr ""
 

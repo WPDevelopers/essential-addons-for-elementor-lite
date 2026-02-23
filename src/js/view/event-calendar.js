@@ -369,9 +369,48 @@ var EventCalendar = function ($scope, $) {
 
 		// Search filtering logic
 		var searchInput = $scope.find('.eael-event-calendar-search-input');
+		var suggestionsContainer = $scope.find('.eael-event-calendar-search-suggestions');
+
 		if (searchInput.length > 0) {
 			searchInput.on('keyup', function() {
 				var searchTerm = $(this).val().toLowerCase();
+				
+				// Suggestions logic
+				suggestionsContainer.empty().removeClass('active');
+				
+				if (searchTerm.length > 0) {
+					var matches = eventAll.filter(function(event) {
+						var title = (event.title || '').toLowerCase();
+						var location = (event.location || '').toLowerCase();
+						var category = (event.category || '').toLowerCase();
+						
+						return title.indexOf(searchTerm) > -1 || 
+							   location.indexOf(searchTerm) > -1 || 
+							   category.indexOf(searchTerm) > -1;
+					});
+
+					if (matches.length > 0) {
+						suggestionsContainer.addClass('active');
+						matches.forEach(function(match) {
+							var dateStr = moment(match.start).format('MMM Do, YYYY');
+							var suggestionItem = $('<div class="suggestion-item">' +
+								'<div class="suggestion-title">' + match.title + '</div>' +
+								'<div class="suggestion-meta">' + (match.location ? match.location + ' | ' : '') + dateStr + '</div>' +
+							'</div>');
+
+							suggestionItem.on('click', function() {
+								calendar.gotoDate(match.start);
+								
+								// Hide suggestions
+								suggestionsContainer.removeClass('active');
+								searchInput.val(match.title);
+							});
+
+							suggestionsContainer.append(suggestionItem);
+						});
+					}
+				}
+
 				var filteredEvents = eventAll.filter(function(event) {
 					var title = (event.title || '').toLowerCase();
 					var location = (event.location || '').toLowerCase();
@@ -385,6 +424,13 @@ var EventCalendar = function ($scope, $) {
 				// Remove existing events and add filtered ones
 				calendar.removeAllEvents();
 				calendar.addEventSource(filteredEvents);
+			});
+
+			// Close suggestions when clicking elsewhere
+			$(document).on('click', function(e) {
+				if (!$(e.target).closest('.eael-event-calendar-search').length) {
+					suggestionsContainer.removeClass('active');
+				}
 			});
 		}
 

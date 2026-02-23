@@ -625,6 +625,7 @@ span.fc-day-number {
 .eael-event-calendar-wrapper .eael-event-calendar-search {
   margin-bottom: 20px;
   text-align: right;
+  position: relative;
 }
 .eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-input {
   padding: 10px 15px;
@@ -638,4 +639,87 @@ span.fc-day-number {
 }
 .eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-input:focus {
   border-color: #5725ff;
+}
+.eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-suggestions {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin-top: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  display: none;
+  text-align: left;
+}
+.eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-suggestions.active {
+  display: block;
+  -webkit-animation: eaelSuggestFadeIn 0.3s ease-out;
+          animation: eaelSuggestFadeIn 0.3s ease-out;
+}
+.eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-suggestions .suggestion-item {
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-transition: background 0.3s, -webkit-transform 0.2s;
+  transition: background 0.3s, -webkit-transform 0.2s;
+  transition: background 0.3s, transform 0.2s;
+  transition: background 0.3s, transform 0.2s, -webkit-transform 0.2s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-suggestions .suggestion-item:last-child {
+  border-bottom: none;
+}
+.eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-suggestions .suggestion-item:hover {
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-transform: translateX(5px);
+      -ms-transform: translateX(5px);
+          transform: translateX(5px);
+}
+.eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-suggestions .suggestion-item .suggestion-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111;
+  margin-bottom: 4px;
+}
+.eael-event-calendar-wrapper .eael-event-calendar-search .eael-event-calendar-search-suggestions .suggestion-item .suggestion-meta {
+  font-size: 12px;
+  color: #666;
+}
+@-webkit-keyframes eaelSuggestFadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+@keyframes eaelSuggestFadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
