@@ -8828,7 +8828,7 @@ msgstr ""
 msgid "Desktop (> 2400px)"
 msgstr ""
 
-#: ../includes/Elements/Simple_Menu.php:1713
+#: ../includes/Elements/Simple_Menu.php:1723
 msgid "Hamburger Toggle Menu"
 msgstr ""
 
