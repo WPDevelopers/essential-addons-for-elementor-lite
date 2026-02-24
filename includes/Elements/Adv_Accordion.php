@@ -78,7 +78,14 @@ class Adv_Accordion extends Widget_Base
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
         }
-        $accordion_tabs     = $this->get_settings('eael_adv_accordion_tab');
+
+        $settings = $this->get_data( 'settings' );
+
+        if ( empty( $settings ) || ! is_array( $settings ) ) {
+            return false;
+        }
+
+        $accordion_tabs     = $settings['eael_adv_accordion_tab'] ?? [];
         $is_dynamic_content = false;
         if( ! empty( $accordion_tabs ) ){
             foreach( $accordion_tabs as $accordion_tab ){
@@ -90,7 +97,7 @@ class Adv_Accordion extends Widget_Base
         }
 
         if( ! $is_dynamic_content ) {
-            $is_dynamic_content = 'yes' === $this->get_settings( 'eael_adv_accordion_faq_schema_show' );
+            $is_dynamic_content = 'yes' === sanitize_text_field( $settings['eael_adv_accordion_faq_schema_show'] ?? '' );
         }
 
         return $is_dynamic_content;

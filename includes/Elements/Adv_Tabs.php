@@ -65,7 +65,14 @@ class Adv_Tabs extends Widget_Base
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
         }
-        $tabs     = $this->get_settings('eael_adv_tabs_tab');
+
+        $settings = $this->get_data( 'settings' );
+
+        if ( empty( $settings ) || ! is_array( $settings ) ) {
+            return false;
+        }
+
+        $tabs               = $settings['eael_adv_tabs_tab'] ?? [];
         $is_dynamic_content = false;
         if( ! empty( $tabs ) ){
             foreach( $tabs as $tab ){
