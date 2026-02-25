@@ -3508,7 +3508,7 @@ class Event_Calendar extends Widget_Base
 
 	    $local          = $settings['eael_event_calendar_language'];
 	    $default_view   = $settings['eael_event_calendar_default_view'];
-	    $default_date   = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : gmdate( 'Y-m-d' );
+	    $default_date   = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : wp_date( 'Y-m-d' );
 	    $time_format    = $settings['eael_event_time_format'];
 	    $event_limit    = ! empty( $settings['eael_event_limit'] ) ? intval( $settings['eael_event_limit'] ) : 2;
 	    $multi_days_event_day_count = ! empty( $settings['eael_event_multi_days_event_day_count'] ) && 'yes' ===  $settings['eael_event_multi_days_event_day_count'] ? 1 : 0;
