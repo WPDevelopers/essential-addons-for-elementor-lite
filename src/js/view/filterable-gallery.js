@@ -71,7 +71,22 @@ jQuery(window).on("elementor/frontend/init", function () {
             ? parseInt(default_control_key)
             : 0;
 
+      var scrollToTop = function () {
+         if (
+            $settings.mobile_scroll_to_top === "yes" &&
+            window.innerWidth <= 767
+         ) {
+            $("html, body").animate(
+               {
+                  scrollTop: $scope.offset().top - 100,
+               },
+               600
+            );
+         }
+      };
+
       if (form.length) {
+
          form.on("submit", function (e) {
             e.preventDefault();
          });
@@ -362,6 +377,7 @@ jQuery(window).on("elementor/frontend/init", function () {
                $(buttonFilter + " .eael-magnific-link").addClass("active");
             }
             manageNotFoundDiv($isotope_gallery, $scope, $);
+            scrollToTop();
          });
 
          //key board accesibilty
