@@ -397,8 +397,12 @@ var EventCalendar = function ($scope, $) {
 						filteredEvents.forEach(function(match) {
 							var dateStr = moment(match.start).format('MMM Do, YYYY');
 							var suggestionItem = $('<div class="suggestion-item">' +
-								'<div class="suggestion-title">' + match.title + '</div>' +
-								'<div class="suggestion-meta">' + (match.location ? match.location + ' | ' : '') + dateStr + '</div>' +
+								'<div class="suggestion-title">' + DOMPurify.sanitize(match.title) + '</div>' +
+								'<div class="suggestion-meta">' + 
+									(match.category ? '<span class="suggestion-category">' + DOMPurify.sanitize(match.category) + '</span> | ' : '') + 
+									(match.location ? DOMPurify.sanitize(match.location) + ' | ' : '') + 
+									dateStr + 
+								'</div>' +
 							'</div>');
 
 							suggestionItem.on('click', function() {
@@ -407,6 +411,23 @@ var EventCalendar = function ($scope, $) {
 								// Hide suggestions
 								suggestionsContainer.removeClass('active');
 								searchInput.val(match.title);
+
+								// Proactively trigger the popup after navigation
+								setTimeout(function() {
+									var eventElement = $scope.find('.fc-event-title').filter(function() {
+										return $(this).text() === match.title;
+									}).closest('.fc-event');
+
+									if (eventElement.length === 0) {
+										eventElement = $scope.find('.fc-list-event-title').filter(function() {
+											return $(this).text() === match.title;
+										}).closest('.fc-list-event');
+									}
+
+									if (eventElement.length > 0) {
+										eventElement.trigger('click');
+									}
+								}, 300);
 							});
 
 							suggestionsContainer.append(suggestionItem);
