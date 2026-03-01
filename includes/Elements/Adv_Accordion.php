@@ -417,7 +417,7 @@ class Adv_Accordion extends Widget_Base
         $this->add_control(
 			'eael_adv_accordion_show_full_content',
 			[
-				'label'        => esc_html__( 'Show Full Content', 'textdomain' ),
+				'label'        => esc_html__( 'Show Full Content', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
@@ -1949,7 +1949,7 @@ class Adv_Accordion extends Widget_Base
                 echo '</div>';
             }
         } else {
-            echo '<p class="no-posts-found">'. esc_html__('No posts found!', 'essential-addons-elementor') .'</p>';
+            echo '<p class="no-posts-found">'. esc_html__('No posts found!', 'essential-addons-for-elementor-lite') .'</p>';
         }
         wp_reset_postdata();
 
