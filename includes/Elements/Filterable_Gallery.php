@@ -828,7 +828,7 @@ class Filterable_Gallery extends Widget_Base
                 'label'       => esc_html__('Link', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default'     => 'https://www.youtube.com/watch?v = kB4U67tiQLA',
+                'default'     => 'https://www.youtube.com/watch?v=kB4U67tiQLA',
                 'condition'   => [
                     'fg_video_gallery_switch' => 'true',
                 ],
