@@ -76,12 +76,19 @@ jQuery(window).on("elementor/frontend/init", function () {
             $settings.mobile_scroll_to_top === "yes" &&
             window.innerWidth <= 767
          ) {
-            $("html, body").animate(
-               {
-                  scrollTop: $scope.offset().top - 100,
-               },
-               600
-            );
+            var $container = $(".eael-filter-gallery-container", $scope);
+            if ($container.length) {
+               var offset =
+                  typeof $settings.mobile_scroll_offset === "number"
+                     ? $settings.mobile_scroll_offset
+                     : 0;
+               $("html, body").animate(
+                  {
+                     scrollTop: $container.offset().top - offset,
+                  },
+                  600
+               );
+            }
          }
       };
 
