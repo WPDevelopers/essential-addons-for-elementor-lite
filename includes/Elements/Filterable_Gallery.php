@@ -769,6 +769,20 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_fg_use_video_tag',
+            [
+                'label'        => __( 'Use Video Tag', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default'      => '',
+                'description'  => __( 'Enable this to use an HTML5 video tag instead of iframe for self-hosted videos. Recommended for iOS devices.', 'essential-addons-for-elementor-lite' ),
+                'condition'    => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ],
+                ],
+            ]
+        );
+
         $repeater = new Repeater();
 
         $repeater->add_control(
@@ -4373,6 +4387,10 @@ class Filterable_Gallery extends Widget_Base
 
         if( 'yes' === $settings['eael_privacy_notice_control'] && !empty( $settings['eael_privacy_notice'] ) ) {
             $this->add_render_attribute( 'gallery-items-wrap', 'data-privacy-notice', esc_html( $settings['eael_privacy_notice'] ) );
+        }
+
+        if ( 'yes' === $settings['eael_fg_use_video_tag'] ) {
+            $this->add_render_attribute( 'gallery-items-wrap', 'data-use-video-tag', 'yes' );
         }
 
         $html_json   = wp_json_encode( $gallery_items );
