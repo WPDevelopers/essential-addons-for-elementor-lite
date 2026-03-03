@@ -31,17 +31,25 @@ function Modal() {
             eaDispatch({type: 'BUTTON_LOADER', payload: 'modal'});
             asyncDispatch({eaState, eaDispatch}, 'SAVE_MODAL_DATA', inputData);
         },
-        eaData = localize.eael_dashboard.modal;
+        eaData = localize.eael_dashboard.modal,
+        isAccordionModal = ['businessReviewsSetting'].includes(eaState.modalID),
+        modalWrapperClasses = ['ea__modal-content-wrapper'],
+        modalBodyClasses = ['ea__modal-body'];
+
+    if (isAccordionModal) {
+        modalWrapperClasses.push('ea__modal-content-wrapper--accordion');
+        modalBodyClasses.push('ea__modal-body--accordion');
+    }
 
     return (
         <>
             <section className="ea__modal-wrapper">
                 <form action="#" method="post" ref={formRef} onSubmit={submitHandler}
-                      className="ea__modal-content-wrapper">
+                      className={modalWrapperClasses.join(' ')}>
                     <div className="ea__modal-header">
                         <h5>{eaState.modalTitle}</h5>
                     </div>
-                    <div className="ea__modal-body">
+                    <div className={modalBodyClasses.join(' ')}>
                         {eaState.modalID === 'loginRegisterSetting' && <ModalStyleThree/>}
                         {eaState.modalID === 'businessReviewsSetting' && <ModalStyleThree/>}
                         {eaState.modalID === 'postDuplicatorSetting' && <ModalStyleTwo/>}
