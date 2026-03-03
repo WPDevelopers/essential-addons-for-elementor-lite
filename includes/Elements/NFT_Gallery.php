@@ -97,7 +97,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_sources' => 'opensea'
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -147,7 +147,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_opensea_filterby' => 'collection-slug',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -189,7 +189,7 @@ class NFT_Gallery extends Widget_Base {
 					],
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -264,7 +264,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_magiceden_type' => 'collections',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -281,7 +281,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_magiceden_type' => 'wallet',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -637,7 +637,7 @@ class NFT_Gallery extends Widget_Base {
 				'eael_nft_gallery_show_owner' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -650,7 +650,7 @@ class NFT_Gallery extends Widget_Base {
 				'eael_nft_gallery_show_creator' => 'yes'
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -660,7 +660,7 @@ class NFT_Gallery extends Widget_Base {
 			'label_block' => false,
 			'default'     => esc_html__( 'View Details', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -670,7 +670,7 @@ class NFT_Gallery extends Widget_Base {
 			'label_block' => false,
 			'default'     => esc_html__( 'No Items Found!', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -680,7 +680,7 @@ class NFT_Gallery extends Widget_Base {
 			'label_block' => false,
 			'default'     => esc_html__( 'Last sale:', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -690,7 +690,7 @@ class NFT_Gallery extends Widget_Base {
 			'label_block' => false,
 			'default'     => esc_html__( 'Ends in:', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
@@ -727,7 +727,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_pagination' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -743,7 +743,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_pagination' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -759,7 +759,7 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_pagination' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);

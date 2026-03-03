@@ -152,7 +152,7 @@ trait Facebook_Feed {
 							$html .= '<p class="eael-facebook-feed-url-host">' . wp_parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
 						}
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_title'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_title'] ) {
-							$html .= '<h2 class="eael-facebook-feed-url-title">' . esc_html( $item['attachments']['data'][0]['title'] ) . '</h2>';
+							$html .= '<h2 class="eael-facebook-feed-url-title">' . esc_html( $item['attachments']['data'][0]['title'] ?? '' ) . '</h2>';
 						}
 
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_description'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_description'] ) {

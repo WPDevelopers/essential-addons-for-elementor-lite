@@ -330,7 +330,7 @@ class Cta_Box extends Widget_Base
                 'label_block' => true,
                 'default'     => esc_html__('Sample Call to Action Heading', 'essential-addons-for-elementor-lite'),
                 'dynamic'     => ['active' => true],
-                'ai'          => [ 'active' => false ],
+                'ai'          => [ 'active' => true ],
                 'condition'   => [
                     'eael_cta_enable_multi_color_title!' => 'yes',
                 ]
@@ -347,7 +347,7 @@ class Cta_Box extends Widget_Base
 				'label_block' => true,
 				'default'     => esc_html__('Title', 'essential-addons-for-elementor-lite'),
 				'dynamic'     => [ 'action' =>true ],
-				'ai'          => [ 'active' => false ],
+				'ai'          => [ 'active' => true ],
 			]
 		);
 
@@ -447,7 +447,7 @@ class Cta_Box extends Widget_Base
                     ],
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -662,7 +662,7 @@ class Cta_Box extends Widget_Base
                 'label_block' => true,
                 'default'     => esc_html__('Click Here', 'essential-addons-for-elementor-lite'),
                 'ai'          => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -771,7 +771,7 @@ class Cta_Box extends Widget_Base
                     'eael_cta_secondary_btn_is_show' => 'yes'
                 ),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
