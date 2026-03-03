@@ -1,6 +1,6 @@
 {
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
-  "landingPage": "/wp-admin/admin.php?page=eael-settings",
+  "landingPage": "/wp-admin/post.php?post={{lastCreatedPageID}}&action=elementor",
   "preferredVersions": {
     "wp": "latest",
     "php": "8.2"
@@ -27,6 +27,22 @@
       "pluginData": {
         "resource": "wordpress.org/plugins",
         "slug": "essential-addons-for-elementor-lite"
+      }
+    },
+    {
+      "step": "createPage",
+      "pageData": {
+        "title": "EA Demo Page",
+        "content": "",
+        "status": "publish"
+      }
+    },
+    {
+      "step": "setPageMeta",
+      "pageSelector": { "title": "EA Demo Page" },
+      "meta": {
+        "_elementor_template_type": "elementor_canvas",
+        "_wp_page_template": "elementor_canvas"
       }
     }
   ]
