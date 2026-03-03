@@ -315,8 +315,9 @@ eael.hooks.addAction("init", "ea", () => {
 			if (productCarousels.length) {
 				productCarousels.each(function () {
 					if ($(this)[0].swiper) {
+						let savedParams = $(this)[0].swiper.params;
 						$(this)[0].swiper.destroy(true, true);
-						swiperLoader($(this)[0], $carouselOptions);
+						swiperLoader($(this)[0], savedParams);
 					}
 				});
 			}
@@ -324,6 +325,8 @@ eael.hooks.addAction("init", "ea", () => {
 
 		eael.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
 		eael.hooks.addAction("ea-toggle-triggered", "ea", WooProductCarouselLoader);
+		eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", WooProductCarouselLoader);
+		eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", WooProductCarouselLoader);
 	};
 
 	const updateMarquee = function ($wooProductCarousel, $) {
