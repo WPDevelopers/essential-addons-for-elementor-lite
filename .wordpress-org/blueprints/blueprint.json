@@ -1,12 +1,22 @@
 {
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
-  "landingPage": "/wp-admin/admin.php?page=eael-settings",
+  "landingPage": "/wp-admin/post.php?post=2&action=elementor",
   "preferredVersions": {
     "wp": "latest",
     "php": "8.2"
   },
   "login": true,
   "steps": [
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "wordpress.org/themes",
+        "slug": "hello-elementor"
+      },
+      "options": { 
+        "activate": true 
+      }
+    },
     {
       "step": "installPlugin",
       "pluginData": {
