@@ -12,14 +12,15 @@
       "pluginData": {
         "resource": "wordpress.org/plugins",
         "slug": "elementor"
+      },
+      "options": {
+        "activate": true
       }
     },
     {
       "step": "setSiteOptions",
       "options": {
-        "elementor_onboarding_complete": "yes",
-        "elementor_friendly_localize": "yes",
-        "elementor_hello_theme_migrated": "yes"
+        "elementor_onboarded": "1"
       }
     },
     {
@@ -27,6 +28,9 @@
       "pluginData": {
         "resource": "wordpress.org/plugins",
         "slug": "essential-addons-for-elementor-lite"
+      },
+      "options": {
+        "activate": true
       }
     }
   ]
