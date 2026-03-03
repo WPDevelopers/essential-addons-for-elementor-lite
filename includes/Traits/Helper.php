@@ -16,6 +16,75 @@ trait Helper
 {
     use Template_Query;
 
+	public function eael_sanitize_elementor_document_save_data( $data ) {
+		$eael_can_use_unsafe_html = is_multisite() ? is_super_admin() : current_user_can( 'unfiltered_html' );
+		if ( $eael_can_use_unsafe_html || empty( $data['elements'] ) ) {
+			return $data;
+		}
+
+		$data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
+			if ( empty( $element['widgetType'] ) || empty( $element['settings'] ) || ! is_array( $element['settings'] ) ) {
+				return $element;
+			}
+
+			if ( 'eael-adv-tabs' === $element['widgetType'] ) {
+				$element = $this->eael_sanitize_adv_tabs_element( $element );
+			}
+
+			if ( 'eael-adv-accordion' === $element['widgetType'] ) {
+				$element = $this->eael_sanitize_adv_accordion_element( $element );
+			}
+
+			return $element;
+		} );
+
+		return $data;
+	}
+
+	private function eael_sanitize_adv_tabs_element( array $element ): array {
+		if ( ! empty( $element['settings']['eael_adv_tabs_allow_unsafe_html'] ) ) {
+			$element['settings']['eael_adv_tabs_allow_unsafe_html'] = '';
+		}
+
+		if ( empty( $element['settings']['eael_adv_tabs_tab'] ) || ! is_array( $element['settings']['eael_adv_tabs_tab'] ) ) {
+			return $element;
+		}
+
+		foreach ( $element['settings']['eael_adv_tabs_tab'] as $index => $tab ) {
+			if ( isset( $tab['eael_adv_tabs_tab_content'] ) && is_string( $tab['eael_adv_tabs_tab_content'] ) ) {
+				$element['settings']['eael_adv_tabs_tab'][ $index ]['eael_adv_tabs_tab_content'] = wp_kses(
+					$tab['eael_adv_tabs_tab_content'],
+					HelperClass::eael_allowed_tags(),
+					HelperClass::eael_allowed_protocols()
+				);
+			}
+		}
+
+		return $element;
+	}
+
+	private function eael_sanitize_adv_accordion_element( array $element ): array {
+		if ( ! empty( $element['settings']['eael_adv_accordion_allow_unsafe_html'] ) ) {
+			$element['settings']['eael_adv_accordion_allow_unsafe_html'] = '';
+		}
+
+		if ( empty( $element['settings']['eael_adv_accordion_tab'] ) || ! is_array( $element['settings']['eael_adv_accordion_tab'] ) ) {
+			return $element;
+		}
+
+		foreach ( $element['settings']['eael_adv_accordion_tab'] as $index => $tab ) {
+			if ( isset( $tab['eael_adv_accordion_tab_content'] ) && is_string( $tab['eael_adv_accordion_tab_content'] ) ) {
+				$element['settings']['eael_adv_accordion_tab'][ $index ]['eael_adv_accordion_tab_content'] = wp_kses(
+					$tab['eael_adv_accordion_tab_content'],
+					HelperClass::eael_allowed_tags(),
+					HelperClass::eael_allowed_protocols()
+				);
+			}
+		}
+
+		return $element;
+	}
+
     /**
      * Woo Checkout
      */
@@ -607,9 +676,15 @@ trait Helper
      * @since 5.1.0
 	 */
 	public function eael_show_admin_menu_notice() {
-		if ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_ADMIN_MENU_FLAG ) {
-            update_option( 'eael_admin_menu_notice',self::EAEL_ADMIN_MENU_FLAG,'no' );
+		$flag = $this->eael_get_admin_menu_notice_flag();
+		if ( get_option( 'eael_admin_menu_notice' ) < $flag ) {
+            update_option( 'eael_admin_menu_notice', $flag, 'no' );
 		}
+	}
+
+	private function eael_get_admin_menu_notice_flag(): int {
+		$const = static::class . '::EAEL_ADMIN_MENU_FLAG';
+		return defined( $const ) ? (int) constant( $const ) : 19;
 	}
 
 	/**

@@ -274,6 +274,21 @@ class Adv_Tabs extends Widget_Base
             ]
         );
 
+        $eael_can_use_unsafe_html = is_multisite() ? is_super_admin() : current_user_can( 'unfiltered_html' );
+        if ( $eael_can_use_unsafe_html ) {
+            $this->add_control(
+                'eael_adv_tabs_allow_unsafe_html',
+                [
+                    'label'        => esc_html__( 'Allow Unsafe HTML', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'default'      => 'no',
+                    'return_value' => 'yes',
+                    'separator'    => 'after',
+                    'description'  => esc_html__( 'Allows script tags and other potentially dangerous HTML inside tab content. Only enable this if you trust the source.', 'essential-addons-for-elementor-lite' ),
+                ]
+            );
+        }
+
         $repeater = new Repeater();
 
         $repeater->add_control(
@@ -1449,8 +1464,14 @@ class Adv_Tabs extends Widget_Base
                     <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($content_active_class); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
 				        <?php
                         if ('content' == $tab['eael_adv_tabs_text_type']) :
-                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                            echo $this->parse_text_editor( wp_kses( $tab['eael_adv_tabs_tab_content'] , Helper::eael_allowed_tags() ) );
+                            $eael_allow_unsafe_html = ! empty( $settings['eael_adv_tabs_allow_unsafe_html'] ) && 'yes' === $settings['eael_adv_tabs_allow_unsafe_html'];
+                            if ( $eael_allow_unsafe_html ) {
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] );
+                            } else {
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo $this->parse_text_editor( wp_kses( $tab['eael_adv_tabs_tab_content'] , Helper::eael_allowed_tags() ) );
+                            }
 
 				        elseif ('template' == $tab['eael_adv_tabs_text_type']) :
 					        if ( ! empty( $tab['eael_primary_templates'] ) ) {

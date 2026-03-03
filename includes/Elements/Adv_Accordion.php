@@ -414,6 +414,24 @@ class Adv_Accordion extends Widget_Base
 			]
 		);
 
+        $eael_can_use_unsafe_html = is_multisite() ? is_super_admin() : current_user_can( 'unfiltered_html' );
+        if ( $eael_can_use_unsafe_html ) {
+            $this->add_control(
+                'eael_adv_accordion_allow_unsafe_html',
+                [
+                    'label'        => esc_html__( 'Allow Unsafe HTML', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'default'      => 'no',
+                    'return_value' => 'yes',
+                    'separator'    => 'after',
+                    'description'  => esc_html__( 'Allows script tags and other potentially dangerous HTML inside accordion tab content. Only enable this if you trust the source.', 'essential-addons-for-elementor-lite' ),
+                    'condition'    => [
+                        'eael_adv_accordion_content_source' => 'custom',
+                    ],
+                ]
+            );
+        }
+
         $this->add_control(
 			'eael_adv_accordion_show_full_content',
 			[
@@ -1813,8 +1831,14 @@ class Adv_Accordion extends Widget_Base
 
 				echo '<div ';  $this->print_render_attribute_string($tab_content_setting_key); echo '>';
 				if ('content' == $tab['eael_adv_accordion_text_type']) {
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo $this->parse_text_editor( wp_kses( $tab['eael_adv_accordion_tab_content'], Helper::eael_allowed_tags() ) );
+                    $eael_allow_unsafe_html = ! empty( $settings['eael_adv_accordion_allow_unsafe_html'] ) && 'yes' === $settings['eael_adv_accordion_allow_unsafe_html'];
+                    if ( $eael_allow_unsafe_html ) {
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo $this->parse_text_editor( $tab['eael_adv_accordion_tab_content'] );
+                    } else {
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo $this->parse_text_editor( wp_kses( $tab['eael_adv_accordion_tab_content'], Helper::eael_allowed_tags() ) );
+                    }
 				} elseif ('template' == $tab['eael_adv_accordion_text_type']) {
 					if ( ! empty( $tab['eael_primary_templates'] ) && Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
 						// WPML Compatibility
@@ -1836,13 +1860,19 @@ class Adv_Accordion extends Widget_Base
 				if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
 					foreach ( $settings['eael_adv_accordion_tab'] as $index => $tab ) {
 						$faq_schema_text = ! empty( $tab['eael_adv_accordion_tab_faq_schema_text'] ) ? $tab['eael_adv_accordion_tab_faq_schema_text'] : '';
+                        $faq_answer_text = '';
+                        if ( 'content' === $tab['eael_adv_accordion_text_type'] ) {
+                            $faq_answer_text = wp_strip_all_tags( do_shortcode( $tab['eael_adv_accordion_tab_content'] ) );
+                        } else {
+                            $faq_answer_text = wp_strip_all_tags( $faq_schema_text );
+                        }
 
 						$faq = [
 							'@type' => 'Question',
 							'name' => Helper::eael_wp_kses( $tab['eael_adv_accordion_tab_title'] ),
 							'acceptedAnswer' => [
 								'@type' => 'Answer',
-								'text' => ('content' === $tab['eael_adv_accordion_text_type']) ? do_shortcode( $tab['eael_adv_accordion_tab_content'] ) : Helper::eael_wp_kses( $faq_schema_text ),
+								'text' => $faq_answer_text,
 							],
 						];
 
