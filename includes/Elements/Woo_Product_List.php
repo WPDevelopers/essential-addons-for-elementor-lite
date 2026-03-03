@@ -855,7 +855,7 @@ class Woo_Product_List extends Widget_Base
 			    'default'     => esc_html__( 'Sale', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
                 'condition'     => [
                     'eael_woo_product_list_badge_show' => 'yes',
@@ -870,7 +870,7 @@ class Woo_Product_List extends Widget_Base
 			    'default'     => esc_html__( 'Stock Out', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
                 'condition'     => [
                     'eael_woo_product_list_badge_show' => 'yes',
@@ -991,7 +991,7 @@ class Woo_Product_List extends Widget_Base
                     'eael_woo_product_list_excerpt_show' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1036,7 +1036,7 @@ class Woo_Product_List extends Widget_Base
                 'default'       => esc_html__('Total Sold:', 'essential-addons-for-elementor-lite'),
                 'conditions'    => $this->total_sold_conditions(),
                 'ai'            => [
-                    'active' => false,
+                    'active' => true,
                 ],
             ]
         );
@@ -1050,7 +1050,7 @@ class Woo_Product_List extends Widget_Base
                 'default'       => esc_html__('Remaining:', 'essential-addons-for-elementor-lite'),
                 'conditions'    => $this->total_sold_conditions(),
                 'ai'            => [
-                    'active' => false,
+                    'active' => true,
                 ],
             ]
         );
@@ -1091,7 +1091,7 @@ class Woo_Product_List extends Widget_Base
                     'eael_product_list_content_footer_add_to_cart_custom_text_show' => 'yes',
                 ],
                 'ai'            => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1108,7 +1108,7 @@ class Woo_Product_List extends Widget_Base
                     'eael_product_list_content_footer_add_to_cart_custom_text_show' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1125,7 +1125,7 @@ class Woo_Product_List extends Widget_Base
                     'eael_product_list_content_footer_add_to_cart_custom_text_show' => 'yes',
                 ],
                 'ai'            => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1142,7 +1142,7 @@ class Woo_Product_List extends Widget_Base
                     'eael_product_list_content_footer_add_to_cart_custom_text_show' => 'yes',
                 ],
                 'ai'            => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1159,7 +1159,7 @@ class Woo_Product_List extends Widget_Base
                     'eael_product_list_content_footer_add_to_cart_custom_text_show' => 'yes',
                 ],
                 'ai'            => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -1238,7 +1238,7 @@ class Woo_Product_List extends Widget_Base
                     'eael_woo_product_list_quick_view_button_show' => 'yes',
                 ],
                 'ai'            => [
-                    'active' => false,
+                    'active' => true,
                 ],
             ]
         );
@@ -1265,7 +1265,7 @@ class Woo_Product_List extends Widget_Base
                     'eael_woo_product_list_quick_view_button_show' => 'yes',
                 ],
                 'ai'            => [
-                    'active' => false,
+                    'active' => true,
                 ],
             ]
         );
@@ -1290,7 +1290,7 @@ class Woo_Product_List extends Widget_Base
                 'show_load_more' => 'yes',
             ],
             'ai'            => [
-                'active' => false,
+                'active' => true,
             ],
         ]);
 

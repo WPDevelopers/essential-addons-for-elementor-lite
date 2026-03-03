@@ -370,8 +370,8 @@ class Post_Grid extends Widget_Base
             [
                 'label'       => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
-                'dynamic'     => [ 'active'      =>true ],
-                'ai'          => [ 'active'      =>false ],
+                'dynamic'     => [ 'active'      => true ],
+                'ai'          => [ 'active'      => true ],
                 'label_block' => false,
                 'default'     => esc_html__('...', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -406,7 +406,7 @@ class Post_Grid extends Widget_Base
             [
                 'label'       => esc_html__('Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
-                'ai'          => [ 'active' => false ],
+                'ai'          => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -524,7 +524,7 @@ class Post_Grid extends Widget_Base
                 'label'       => esc_html__( 'Terms Separator', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => false,
-                'ai'          => [ 'active' => false ],
+                'ai'          => [ 'active' => true ],
                 'default'     => '',
                 'condition'   => [
                     'eael_show_post_terms'        => 'yes',

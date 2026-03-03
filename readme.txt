@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.5.9
+Stable tag: 6.5.12
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -316,6 +316,42 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.12 - 22/02/2026 =
+
+- Fixed: EA Advanced Tabs | Shortcodes getting escaped and not working
+- Fixed: EA Ninja Forms | Required field <span> tag gets escaped when multiple forms are used on the same page
+- Fixed: EA Woo Product Price | Use the site’s active currency in the widget
+- Fixed: EA Advanced Data Table | Horizontal scrollbar issue on mobile devices
+- Fixed: EA Login/Register Form | Password reset link redirecting to default WP reset page
+- Fixed: EA Gravity Forms | Gravity Forms not working when used via EA widget
+- Improved: Added support for a Query ID option for all post-related elements.
+- Improved: EA Woo Product Gallery | Added option to hide categories and quantity input in the “Quick View” popup 
+- Improved: EA Woo Product Carousel | Pause on hover for the Marquee style
+- Few minor bug fixes & improvements
+
+= 6.5.11 - 10/02/2026 =
+
+- Fixed: EA Advanced Accordion | Added pre tag support
+- Few minor bug fixes & improvements
+
+= 6.5.10 - 09/02/2026 =
+
+- Fixed: EA Login/Register Form | Form validation message is duplicated after updating to the latest EA version
+- Fixed: EA Woo Product Grid | Buttons are getting cropped on style preset 8
+- Fixed: Compatibility issues with the QI Elements masonry image gallery widget
+- Fixed: EA Info Box | Security Enhancement
+- Fixed: EA Login/Register Form | Undefined array key “position_for_login_form” warning
+- Fixed: EA Pricing Table | Ribbon style 4 gets broken after updating the EA plugin to version 6.5.9
+- Fixed: EA Facebook Feed | Undefined array key “title” warning
+- Fixed: EA Wrapper Link | WPML does not translate “Wrapper Link” URLs in multilingual pages
+- Improved: EA Woo Checkout| Enhanced compatibility with AvaTax
+- Improved: Added “Write with AI” support for Woo single product widgets
+- Improved: Garbage extension values in the Elementor object
+- Improved: EA Event Calendar | Added filter support for custom events
+- Improved: All widgets and extensions are included in the EA quick setup
+- Few minor bug fixes & improvements
+
 
 = 6.5.9 - 26/01/2026 =
 

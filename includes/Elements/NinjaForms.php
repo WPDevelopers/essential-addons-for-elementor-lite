@@ -151,7 +151,7 @@ class NinjaForms extends Widget_Base
                         'custom_title_description'   => 'yes',
                     ],
                     'ai' => [
-                        'active' => false,
+                        'active' => true,
                     ],
                 ]
             );
@@ -1759,16 +1759,22 @@ class NinjaForms extends Widget_Base
                         <?php }?>
                         <?php if ($settings['form_description_custom'] != '') {?>
                             <div class="eael-contact-form-description eael-ninja-form-description">
-                                <?php
-                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
+                                <?php echo $this->parse_text_editor( wp_kses( $settings['form_description_custom'], Helper::eael_allowed_tags() ) ); ?>
                             </div>
                         <?php }?>
                     </div>
                 <?php }?>
                 <?php 
                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                echo Ninja_Forms()->display($settings['contact_form_list']); ?>
+                // Fix for Required Field span tag is getting escaped for more than one form in a single page
+                ob_start();
+                Ninja_Forms()->display($settings['contact_form_list']);
+                $form_html = ob_get_clean();
+
+                $form_html = preg_replace( '/&lt;span\s+class=(?:&quot;|"|\'|&#039;)ninja-forms-req-symbol(?:&quot;|"|\'|&#039;)\s*&gt;\*&lt;(?:\\\\)?\/span&gt;/', '<span class=\"ninja-forms-req-symbol\">*</span>', $form_html );
+                
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $form_html; ?>
             </div>
             <?php
         }

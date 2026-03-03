@@ -147,6 +147,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->init_content_product_settings_controls();
 		$this->eael_product_badges();
 		$this->init_content_load_more_controls();
+		$this->eael_product_view_popup_controls();
 
 		// Style Controls---------------
 		$this->init_style_gallery_controls();
@@ -311,7 +312,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					'eael_woo_product_gallery_terms_show_all' => 'yes',
 				],
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -900,11 +901,50 @@ class Woo_Product_Gallery extends Widget_Base {
 				'show_load_more' => [ 'yes', '1', 'true' ],
 			],
 			'ai' => [
-				'active' => false,
+				'active' => true,
 			],
 		] );
 
 		$this->end_controls_section(); # end of section 'Load More'
+	}
+
+	protected function eael_product_view_popup_controls() {
+		$this->start_controls_section(
+			'eael_product_quick_view_popup_controls',
+			[
+				'label'     => __( 'Popup', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_product_gallery_quick_view'    => 'yes',
+					'eael_product_gallery_style_preset!' => [
+						'eael-product-preset-4',
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_quick_view_hide_categories',
+			[
+				'label'        => esc_html__( 'Category', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_product_quick_view_hide_quantity',
+			[
+				'label'        => esc_html__( 'Quantity Input', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	protected function init_style_product_controls() {
@@ -1924,7 +1964,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'type'      => Controls_Manager::TEXT,
 				'separator' => 'before',
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -1934,7 +1974,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label' => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::TEXT,
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);

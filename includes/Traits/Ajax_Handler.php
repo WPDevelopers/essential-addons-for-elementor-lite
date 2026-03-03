@@ -914,6 +914,14 @@ trait Ajax_Handler {
         
         WC()->session->set( 'chosen_shipping_methods', $shipping_data );
 
+        // Required for Avatax (and standard WC) to trigger calculation
+		if ( isset( $_POST['post_data'] ) ) {
+			$_POST['woocommerce_checkout_update_totals'] = 1;
+			do_action( 'woocommerce_checkout_update_order_review', $_POST['post_data'] );
+		}
+        // Force is_checkout() to be true so plugins like Avatax display the correct message
+        add_filter( 'woocommerce_is_checkout', '__return_true' );
+
 		ob_start();
 		AllTraits::checkout_order_review_default( $setting );
 		$woo_checkout_update_order_review = ob_get_clean();
@@ -1521,6 +1529,8 @@ trait Ajax_Handler {
 			// clear assets files
 			$this->empty_dir( EAEL_ASSET_PATH );
 		}
+
+		do_action( 'eael/admin/after_save_settings', $settings );
 
 		wp_send_json_success( true );
 	}
