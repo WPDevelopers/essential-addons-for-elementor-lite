@@ -6,8 +6,32 @@
     "php": "8.2"
   },
   "login": true,
-  "plugins": [
-    "elementor",
-    "essential-addons-for-elementor-lite"
+  "steps": [
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "elementor"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "elementor_onboarded": "1"
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "essential-addons-for-elementor-lite"
+      },
+      "options": {
+        "activate": true
+      }
+    }
   ]
 }
