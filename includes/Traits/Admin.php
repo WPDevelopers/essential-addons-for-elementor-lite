@@ -1552,7 +1552,7 @@ trait Admin {
 					    'placeholder'=> __( "Custom Tab 1, Custom Tab 2, Custom Tab 3", 'essential-addons-for-elementor-lite' ),
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
-				    'businessReviewsSetting' => [
+				    'businessReviewsSetting' => apply_filters( 'eael/admin/modal/businessReviewsSetting', [
 					    'accordion' => [
 						    'googlePlaces' => [
 							    'title'  => __( 'Google Places API', 'essential-addons-for-elementor-lite' ),
@@ -1574,7 +1574,7 @@ trait Admin {
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
 						    'url'  => 'https://essential-addons.com/docs/ea-business-reviews/'
 					    ]
-				    ],
+				    ] ),
 
 
 				    'mailchimpSetting'       => [
