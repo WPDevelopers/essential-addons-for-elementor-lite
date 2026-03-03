@@ -2293,7 +2293,7 @@ class FluentForm extends Widget_Base
                     <?php } ?>
                     <?php if ( $settings['form_description_custom'] != '' ) { ?>
                         <div class="eael-contact-form-description eael-fluentform-description">
-                            <?php echo wp_kses( $this->parse_text_editor( $settings['form_description_custom'] ), Helper::eael_allowed_tags() ); ?>
+                            <?php echo $this->parse_text_editor( wp_kses( $settings['form_description_custom'], Helper::eael_allowed_tags() ) ); ?>
                         </div>
                     <?php } ?>
                 </div>

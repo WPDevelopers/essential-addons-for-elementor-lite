@@ -1814,7 +1814,7 @@ class Adv_Accordion extends Widget_Base
 				echo '<div ';  $this->print_render_attribute_string($tab_content_setting_key); echo '>';
 				if ('content' == $tab['eael_adv_accordion_text_type']) {
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo  wp_kses( $this->parse_text_editor( $tab['eael_adv_accordion_tab_content'] ), Helper::eael_allowed_tags() );
+					echo $this->parse_text_editor( wp_kses( $tab['eael_adv_accordion_tab_content'], Helper::eael_allowed_tags() ) );
 				} elseif ('template' == $tab['eael_adv_accordion_text_type']) {
 					if ( ! empty( $tab['eael_primary_templates'] ) && Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
 						// WPML Compatibility

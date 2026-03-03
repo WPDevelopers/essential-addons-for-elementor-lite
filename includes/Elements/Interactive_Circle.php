@@ -1133,7 +1133,7 @@ class Interactive_Circle extends Widget_Base {
                                     </div>
                                     <div id="eael-interactive-<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-btn-content eael-circle-item-<?php echo esc_attr( $item_count . ' ' . $is_active ); ?>">
                                         <div class="eael-circle-content">
-											<?php echo wp_kses( $this->parse_text_editor( $item['eael_interactive_circle_item_content'] ), Helper::eael_allowed_tags() ); ?>
+											<?php echo $this->parse_text_editor( wp_kses( $item['eael_interactive_circle_item_content'], Helper::eael_allowed_tags() ) ); ?>
                                         </div>
                                     </div>
                                 </div>
