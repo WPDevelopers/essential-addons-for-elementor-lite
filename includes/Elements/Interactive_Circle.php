@@ -280,7 +280,7 @@ class Interactive_Circle extends Widget_Base {
 		$repeater->start_controls_tab( 'interactive_circle_item_style_tab', [ 'label' => __( 'Style', 'essential-addons-for-elementor-lite' ) ] );
 
 		$repeater->add_group_control(
-			Group_Control_Background::get_type(),
+			'eael-background',
 			[
 				'name'     => 'eael_interactive_circle_tab_bgtype',
 				'types'    => [ 'gradient', 'classic' ],
