@@ -41,6 +41,41 @@ trait Helper
 		return $data;
 	}
 
+    public function eael_sanitize_elementor_meta_value( $meta_value ) {
+        $eael_can_use_unsafe_html = is_multisite() ? is_super_admin() : current_user_can( 'unfiltered_html' );
+        if ( $eael_can_use_unsafe_html ) {
+            return $meta_value;
+        }
+
+        if ( empty( $meta_value ) || ! is_string( $meta_value ) ) {
+            return $meta_value;
+        }
+
+        $elementor_data = json_decode( $meta_value, true );
+        if ( ! is_array( $elementor_data ) ) {
+            return $meta_value;
+        }
+
+        $sanitized = $this->eael_sanitize_elementor_document_save_data( [ 'elements' => $elementor_data ] );
+
+        return wp_json_encode( $sanitized['elements'] );
+    }
+
+    /**
+     * REST hook: sanitize unsafe HTML flags before insertion.
+     */
+    public function eael_rest_sanitize_elementor_meta( $prepared_post, $request ) {
+        $meta = $request->get_param( 'meta' );
+        if ( empty( $meta ) || empty( $meta['_elementor_data'] ) ) {
+            return $prepared_post;
+        }
+
+        $meta['_elementor_data'] = $this->eael_sanitize_elementor_meta_value( $meta['_elementor_data'] );
+        $request->set_param( 'meta', $meta );
+
+        return $prepared_post;
+    }
+
 	private function eael_sanitize_adv_tabs_element( array $element ): array {
 		if ( ! empty( $element['settings']['eael_adv_tabs_allow_unsafe_html'] ) ) {
 			$element['settings']['eael_adv_tabs_allow_unsafe_html'] = '';
@@ -883,4 +918,3 @@ trait Helper
 	}
 	
 }
-

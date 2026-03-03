@@ -322,6 +322,9 @@ class Bootstrap
 	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
             add_filter( 'elementor/document/save/data', [ $this, 'eael_sanitize_elementor_document_save_data' ], 5 );
+            add_filter( 'rest_pre_insert_post', [ $this, 'eael_rest_sanitize_elementor_meta' ], 5, 2 );
+            add_filter( 'rest_pre_insert_page', [ $this, 'eael_rest_sanitize_elementor_meta' ], 5, 2 );
+            add_filter( 'sanitize_post_meta__elementor_data', [ $this, 'eael_sanitize_elementor_meta_value' ], 5, 3 );
 
 		    if ( ! current_user_can( 'administrator' ) ) {
 			    add_filter( 'elementor/document/save/data', function ( $data ) {
