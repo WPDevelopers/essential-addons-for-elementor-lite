@@ -9,6 +9,33 @@ function ModalStyleThree() {
         changeHandler = (e, key) => {
             const value = ['lr_custom_profile_fields', 'lr_recaptcha_badge_hide'].includes(key) ? (e.target.checked ? 'on' : '') : e.target.value;
             eaDispatch({type: 'MODAL_ON_CHANGE', payload: {key, value}});
+        },
+        copyRedirectUri = (uri) => {
+            if (!uri) {
+                return;
+            }
+
+            const copyButton = document.querySelector('.ea__copy-redirect-uri');
+            if (copyButton) {
+                copyButton.classList.add('is-copied');
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(uri).catch(() => {
+                    const tempInput = document.createElement('input');
+                    tempInput.value = uri;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                });
+            } else {
+                const tempInput = document.createElement('input');
+                tempInput.value = uri;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+            }
         };
 
     return (
@@ -38,8 +65,19 @@ function ModalStyleThree() {
                     </div>
                     <div
                         className={item === eaState.modalAccordion ? 'ea__according-content flex flex-col gap-2 accordion-show' : 'ea__according-content flex flex-col gap-2'}>
-                        {eaData.accordion[item]?.info !== undefined && <div className="flex gap-4 items-center">
-                            <p className="info--text">{eaData.accordion[item].info}</p>
+                        {eaData.accordion[item]?.info !== undefined && <div className="flex flex-col gap-2">
+                            <p className="info--text">
+                                {eaData.accordion[item].info}
+                                
+                                {eaData.accordion[item]?.redirect_uri && (
+                                    <span
+                                        className="ea__btn ea__btn-secondary ea__copy-redirect-uri eael-copy-to-clipboard"
+                                        onClick={() => copyRedirectUri(eaData.accordion[item].redirect_uri)}
+                                    >
+                                        <i className="eicon-copy"></i>
+                                    </span>
+                                )}
+                            </p>
                         </div>}
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
                             if (subItem?.type === 'checkbox') {
@@ -59,6 +97,47 @@ function ModalStyleThree() {
                                        type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
+                        <div className="flex flex-col gap-2 ea__auth-action-wrapper">
+                            {eaData.accordion[item]?.auth_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                                <a href={eaData.accordion[item].auth_button.url} target="_blank" rel="noopener noreferrer"
+                                className="ea__btn ea__btn-primary ea__auth-link">
+                                    {eaData.accordion[item].auth_button.text}
+                                </a>
+                            </div>}
+                            {eaData.accordion[item]?.auth_status !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                                <div className={ eaData.accordion[item].auth_status.status === 'success' ? 'ea__auth-status ea__auth-status--success' : 'ea__auth-status ea__auth-status--error' }>
+                                    <strong>{eaData.accordion[item].auth_status.status === 'success' ? '✓ ' : ''}{eaData.accordion[item].auth_status.text}</strong>
+                                </div>
+                            </div>}
+                            {eaData.accordion[item]?.disconnect_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                                <a href={eaData.accordion[item].disconnect_button.url} rel="noopener noreferrer"
+                                className="ea__btn ea__btn-secondary ea__auth-link">
+                                    {eaData.accordion[item].disconnect_button.text}
+                                </a>
+                            </div>}
+                            {eaData.accordion[item]?.refresh_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                                <a href={eaData.accordion[item].refresh_button.url} rel="noopener noreferrer"
+                                className="ea__btn ea__btn-primary ea__auth-link">
+                                    {eaData.accordion[item].refresh_button.text}
+                                </a>
+                            </div>}
+                            {eaData.accordion[item]?.status_message !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                                <div className={ eaData.accordion[item].status_message.type === 'success' ? 'ea__status-message ea__status-message--success' : 'ea__status-message ea__status-message--error' }>
+                                    <span>{eaData.accordion[item].status_message.type === 'success' ? '✓ ' : '⚠ '}{eaData.accordion[item].status_message.text}</span>
+                                </div>
+                            </div>}
+                        </div>
+                        {eaData.accordion[item]?.locations !== undefined && <div className="ea__locations-list">
+                            <h5 className="ea__locations-title">{eaData.accordion[item].locations.title} ({eaData.accordion[item].locations.count})</h5>
+                            {eaData.accordion[item].locations.updated && <p className="ea__locations-updated">Last updated: {eaData.accordion[item].locations.updated}</p>}
+                            <ul className="ea__locations-items">
+                                {eaData.accordion[item].locations.items.map((location, locationIndex) => (
+                                    <li key={locationIndex} className="ea__location-item">
+                                        <span className="ea__location-name">{location.name}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>}
                     </div>
                 </div>
             })}
