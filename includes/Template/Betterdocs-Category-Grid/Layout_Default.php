@@ -6,6 +6,10 @@ use \Essential_Addons_Elementor\Classes\Helper;
  *
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
+
 echo '<article class="eael-better-docs-category-grid-post" data-id="' . esc_attr( get_the_ID() ) . '">
     <div class="eael-bd-cg-inner">';
         if ($settings['show_header'] === 'true') {
