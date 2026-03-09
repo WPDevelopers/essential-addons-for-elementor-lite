@@ -2624,6 +2624,7 @@ class Info_Box extends Widget_Base
 
 	                    Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['eael_primary_templates'] );
                         
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo Plugin::$instance->frontend->get_builder_content( $settings['eael_primary_templates'], true );
 	                    if ( Plugin::$instance->editor->is_edit_mode() ) {
 		                    echo '</div>';
