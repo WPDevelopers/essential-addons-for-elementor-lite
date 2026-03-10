@@ -62,11 +62,11 @@ $image_sources = [
     'src' => '',
     'src_hover' => ''
 ];
-// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 if( $show_secondary_image ){
     $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_grid_image_size_size'] );
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
 ?>
