@@ -701,7 +701,7 @@ trait Login_Registration {
 			exit();
 		}
 
-		$user_data['eael_lrmuc'] = $_POST['eael_lrmuc'] ?? '';
+		$user_data['eael_lrmuc'] = sanitize_text_field( wp_unslash( $_POST['eael_lrmuc'] ?? '' ) );
 		do_action( 'eael/login-register/mailchimp-integration-action', $user_id, $user_data, $settings );
 	
 		$admin_or_both = $is_pass_auto_generated || in_array( 'send_email', $register_actions ) ? 'both' : 'admin';
