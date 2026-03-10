@@ -973,7 +973,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 		
       global $product;
 
-      $product = Helper::get_product();
+      $product = Helper::get_product(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 		$settings = $this->get_settings_for_display();
 

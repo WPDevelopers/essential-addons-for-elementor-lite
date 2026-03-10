@@ -85,8 +85,8 @@ class Progress_Bar extends Widget_Base
         );
 
         // Progressbar Layout Options
-        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-        $options = apply_filters(
+        $options = apply_filters( 
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
             'add_eael_progressbar_layout',
             [
                 'layouts' => [

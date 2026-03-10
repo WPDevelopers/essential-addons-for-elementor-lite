@@ -155,8 +155,8 @@ class Fancy_Text extends Widget_Base {
   			]
 		);
 
-		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-		$style_options = apply_filters(
+		$style_options = apply_filters( 
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			'fancy_text_style_types',
 			[
 				'styles'	=> [
