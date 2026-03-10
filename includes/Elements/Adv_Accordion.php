@@ -1950,7 +1950,7 @@ class Adv_Accordion extends Widget_Base
                 echo '</div>';
             }
         } else {
-            echo '<p class="no-posts-found">'. esc_html__('No posts found!', 'essential-addons-elementor') .'</p>';
+            echo '<p class="no-posts-found">'. esc_html__('No posts found!', 'essential-addons-for-elementor-lite') .'</p>';
         }
         wp_reset_postdata();
 
