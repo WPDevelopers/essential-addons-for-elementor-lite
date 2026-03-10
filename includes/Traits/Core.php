@@ -12,16 +12,6 @@ use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker;
 trait Core
 {
     /**
-     * Extending plugin links
-     *
-     * @since 3.0.0
-     */
-    public function i18n()
-    {
-        load_plugin_textdomain('essential-addons-for-elementor-lite');
-    }
-
-    /**
      * Check if a plugin is active
      *
      * @since 3.0.0
