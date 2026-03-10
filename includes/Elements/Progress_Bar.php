@@ -85,6 +85,7 @@ class Progress_Bar extends Widget_Base
         );
 
         // Progressbar Layout Options
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
         $options = apply_filters(
             'add_eael_progressbar_layout',
             [
@@ -770,7 +771,7 @@ class Progress_Bar extends Widget_Base
         $this->end_controls_section();
 
         // Import progress bar style controlls
-        do_action('add_progress_bar_control', $this);
+        do_action('add_progress_bar_control', $this); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
         /**
          * Style Tab: Typography
@@ -1040,6 +1041,6 @@ class Progress_Bar extends Widget_Base
                 </div>
             </div>';
         }
-        do_action('add_eael_progressbar_block', $settings, $this, $wrap_classes);
+        do_action('add_eael_progressbar_block', $settings, $this, $wrap_classes); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
     }
 }

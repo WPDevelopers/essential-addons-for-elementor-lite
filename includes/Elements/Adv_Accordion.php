@@ -1819,7 +1819,7 @@ class Adv_Accordion extends Widget_Base
 					if ( ! empty( $tab['eael_primary_templates'] ) && Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
 						// WPML Compatibility
 						if ( ! is_array( $tab['eael_primary_templates'] ) ) {
-							$tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
+							$tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 						}
 
 						Helper::eael_onpage_edit_template_markup( get_the_ID(), $tab['eael_primary_templates'] );
