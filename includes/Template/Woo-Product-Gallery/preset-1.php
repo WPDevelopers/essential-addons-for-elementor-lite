@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $product = wc_get_product( get_the_ID() );
 if ( ! $product ) {
 	return;
@@ -51,11 +52,13 @@ $image_sources = [
 ];
 //if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
 $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_class', [], $product->get_id(), 'eael-woo-product-gallery' ) );
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 
 <li <?php post_class( "product {$product_wrapper_classes}" ); ?>>
 <?php 
 if( $show_secondary_image ){
+    // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
     $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_gallery_image_size_size'] );
 }
 ?>

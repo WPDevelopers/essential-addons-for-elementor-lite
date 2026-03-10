@@ -953,6 +953,7 @@ trait Ajax_Handler {
 		}
 
 		global $post, $product;
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 		$product = wc_get_product( $product_id );
 		$post    = get_post( $product_id );
 

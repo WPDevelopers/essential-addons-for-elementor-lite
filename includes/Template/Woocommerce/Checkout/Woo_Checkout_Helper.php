@@ -104,6 +104,7 @@ trait Woo_Checkout_Helper {
 	 */
 	public static function ea_order_pay( $order_id ) {
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		do_action( 'before_woocommerce_pay' );
 
 		$order_id = absint( $order_id );
@@ -249,6 +250,7 @@ trait Woo_Checkout_Helper {
 			wc_print_notice( __( 'Invalid order.', 'essential-addons-for-elementor-lite' ), 'error' );
 		}
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		do_action( 'after_woocommerce_pay' );
 	}
 

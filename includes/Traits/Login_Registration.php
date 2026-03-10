@@ -715,6 +715,7 @@ trait Login_Registration {
 		 */
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		do_action( 'register_new_user', $user_id );
 
 		wp_new_user_notification( $user_id, null, $admin_or_both );
