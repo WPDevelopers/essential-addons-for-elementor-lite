@@ -114,7 +114,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                             ),
                         );
 
-                        $sub_args['posts_per_page'] = -1;
+                        $sub_args['posts_per_page'] = -1; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
                         // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
                         $sub_post_query = new \WP_Query($sub_args);
                         if ($sub_post_query->have_posts()):

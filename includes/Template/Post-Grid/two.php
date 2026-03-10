@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariable
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $thumbnail_html = '';
 if ( $settings['eael_show_image'] == 'yes' ) {
 	$settings[ 'eael_image_size_customize' ] = [

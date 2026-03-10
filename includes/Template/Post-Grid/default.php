@@ -438,4 +438,4 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
         </div>
     </article>';
 }
-// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariable
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
