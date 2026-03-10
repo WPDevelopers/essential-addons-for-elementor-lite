@@ -1138,7 +1138,7 @@ class Woo_Product_Images extends Widget_Base {
 		
 		global $product;
 		$eael_product_id = apply_filters( 'eael_product_image_product_id', false, $this );
-		$product  = Helper::get_product( $eael_product_id );
+		$product  = Helper::get_product( $eael_product_id ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$settings = $this->get_settings_for_display();
 		$widget_id = $this->get_id();
 

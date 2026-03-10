@@ -1467,7 +1467,7 @@ class Data_Table extends Widget_Base {
 													if ( Helper::is_elementor_publish_template( $table_td[ $j ]['template'] ) ) {
 														// WPML Compatibility
 														if ( ! is_array( $table_td[ $j ]['template'] ) ) {
-															$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
+															$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 														}
 
 														Helper::eael_onpage_edit_template_markup( get_the_ID(), $table_td[ $j ]['template'] );
