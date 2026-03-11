@@ -485,6 +485,16 @@ trait Login_Registration {
 			$errors['email'] = isset( $settings['err_email_missing'] ) ? Helper::eael_wp_kses( $settings['err_email_missing'] ) : __( 'Email is missing or Invalid', 'essential-addons-for-elementor-lite' );
 		}
 
+		if ( isset( $_POST['confirm_email'] ) ) {
+			$confirm_email_raw = wp_unslash( $_POST['confirm_email'] );
+			$confirm_email = sanitize_email( $confirm_email_raw );
+			if ( empty( $confirm_email ) || ! is_email( $confirm_email_raw ) ) {
+				$errors['confirm_email'] = isset( $settings['err_conf_email'] ) ? Helper::eael_wp_kses( $settings['err_conf_email'] ) : __( 'Your confirmed email did not match', 'essential-addons-for-elementor-lite' );
+			} elseif ( empty( $errors['email'] ) && isset( $email ) && $confirm_email !== $email ) {
+				$errors['confirm_email'] = isset( $settings['err_conf_email'] ) ? Helper::eael_wp_kses( $settings['err_conf_email'] ) : __( 'Your confirmed email did not match', 'essential-addons-for-elementor-lite' );
+			}
+		}
+
 		// if user provided user name, validate & sanitize it
 		if ( !empty( $_POST['user_name'] ) ) {
 			$username = sanitize_user( wp_unslash( $_POST['user_name'] ) );
@@ -722,12 +732,19 @@ trait Login_Registration {
 		// success & handle after registration action as defined by user in the widget
 		if ( ! $ajax && !in_array( 'redirect', $register_actions ) ) {
 			update_option( 'eael_register_success_' . $widget_id, 1, false );
+			if ( ! empty( $email ) ) {
+				update_option( 'eael_register_success_email_' . $widget_id, $email, false );
+			}
 		}
 
 
 		// Handle after registration action
+		$success_message = isset( $settings['success_register'] ) ? Helper::eael_wp_kses( $settings['success_register'] ) : __( 'Your registration completed successfully.', 'essential-addons-for-elementor-lite' );
+		if ( ! empty( $email ) ) {
+			$success_message = str_replace( '[user_email]', $email, $success_message );
+		}
 		$data = [
-			'message' => isset( $settings['success_register'] ) ? Helper::eael_wp_kses( $settings['success_register'] ) : __( 'Your registration completed successfully.', 'essential-addons-for-elementor-lite' ),
+			'message' => $success_message,
 		];
 		// should user be auto logged in?
 		if ( in_array( 'auto_login', $register_actions ) && ! is_user_logged_in() ) {
@@ -1684,6 +1701,7 @@ trait Login_Registration {
     public function delete_registration_options($widget_id)
     {
         delete_option('eael_register_success_' . $widget_id);
+        delete_option('eael_register_success_email_' . $widget_id);
         delete_option('eael_register_errors_' . $widget_id);
 	}
 

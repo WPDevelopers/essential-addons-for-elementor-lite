@@ -250,6 +250,7 @@ class Login_Register extends Widget_Base {
 		$eael_form_field_types = [
 			'user_name'    => __( 'Username', 'essential-addons-for-elementor-lite' ),
 			'email'        => __( 'Email', 'essential-addons-for-elementor-lite' ),
+			'confirm_email' => __( 'Confirm Email', 'essential-addons-for-elementor-lite' ),
 			'password'     => __( 'Password', 'essential-addons-for-elementor-lite' ),
 			'confirm_pass' => __( 'Confirm Password', 'essential-addons-for-elementor-lite' ),
 			'first_name'   => __( 'First Name', 'essential-addons-for-elementor-lite' ),
@@ -2080,6 +2081,16 @@ class Login_Register extends Widget_Base {
 				'active' => true,
 			],
 		] );
+		$this->add_control( 'err_conf_email', [
+			'label'       => __( 'Invalid Email Confirmed', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Email did not match', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Your confirmed email did not match', 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => true,
+			],
+		] );
 
 		$this->add_control( 'err_loggedin', [
 			'label'       => __( 'Already Logged In', 'essential-addons-for-elementor-lite' ),
@@ -2473,6 +2484,7 @@ class Login_Register extends Widget_Base {
 			'condition' => [
 				'field_type!' => [
 					'email',
+					'confirm_email',
 					'password',
 					'confirm_pass',
 					'honeypot'
@@ -2486,6 +2498,7 @@ class Login_Register extends Widget_Base {
 			'condition'       => [
 				'field_type' => [
 					'email',
+					'confirm_email',
 					'password',
 					'confirm_pass',
 				],
@@ -6484,6 +6497,7 @@ class Login_Register extends Widget_Base {
 			$is_pass_confirmed  = false;
 			// placeholders to flag if user use one type of field more than once.
 			$email_exists        = 0;
+			$confirm_email_exists = 0;
 			$user_name_exists    = 0;
 			$password_exists     = 0;
 			$confirm_pass_exists = 0;
@@ -6495,6 +6509,7 @@ class Login_Register extends Widget_Base {
 			
 			$f_labels            = [
 				'email'            	=> __( 'Email', 'essential-addons-for-elementor-lite' ),
+				'confirm_email'    	=> __( 'Confirm Email', 'essential-addons-for-elementor-lite' ),
 				'password'         	=> __( 'Password', 'essential-addons-for-elementor-lite' ),
 				'confirm_password' 	=> __( 'Confirm Password', 'essential-addons-for-elementor-lite' ),
 				'user_name'        	=> __( 'Username', 'essential-addons-for-elementor-lite' ),
@@ -6643,6 +6658,7 @@ class Login_Register extends Widget_Base {
 										'password',
 										'confirm_pass',
 										'email',
+										'confirm_email',
 									] ) );
 
 								//keys for attribute binding
@@ -6661,6 +6677,9 @@ class Login_Register extends Widget_Base {
 										break;
 									case 'confirm_pass':
 										$field_input_type = 'password';
+										break;
+									case 'confirm_email':
+										$field_input_type = 'email';
 										break;
 									case 'website':
 										$field_input_type = 'url';
@@ -6842,8 +6861,9 @@ class Login_Register extends Widget_Base {
 			if ( $this->in_editor ) {
 				$repeated            = $this->print_error_for_repeated_fields( $repeated_f_labels );
 				$email_field_missing = $this->print_error_for_missing_email_field( $email_exists );
+				$confirm_email_missing = $this->print_error_for_missing_confirm_email_field( $email_exists, $confirm_email_exists );
 				$pass_missing        = $this->print_error_for_missing_password_field( $password_exists, $confirm_pass_exists );
-				if ( $repeated || $email_field_missing || $pass_missing ) {
+				if ( $repeated || $email_field_missing || $confirm_email_missing || $pass_missing ) {
 					return false; // error found, exit, dont show form.
 				}
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -7532,6 +7552,28 @@ class Login_Register extends Widget_Base {
 		return false;
 	}
 
+	protected function print_error_for_missing_confirm_email_field( $email_exist, $confirm_email_exist ) {
+		if ( empty( $email_exist ) && ! empty( $confirm_email_exist ) ) {
+			?>
+            <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
+				<?php
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				printf(
+					/* translators: 1: Email field label, 2: Email Confirmation field label. */
+					esc_html__( 'Error! It is required to use %1$s field with %2$s Field.', 'essential-addons-for-elementor-lite' ),
+					'<strong>Email</strong>',
+					'<strong>Email Confirmation</strong>'
+				);
+				?>
+
+            </p>
+			<?php
+			return true;
+		}
+
+		return false;
+	}
+
 	/**
 	 * It shows error if Confirm Password Field is used without using Password Field.
 	 *
@@ -7602,11 +7644,17 @@ class Login_Register extends Widget_Base {
 	protected function print_registration_success_message( $success ) {
 
 		if ( $success ) {
-			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'success_register' ) ) . '</p>';
+			$success_message = $this->get_settings_for_display( 'success_register' );
+			$success_email = get_option( 'eael_register_success_email_' . $this->get_id() );
+			if ( ! empty( $success_email ) ) {
+				$success_message = str_replace( '[user_email]', sanitize_email( $success_email ), $success_message );
+			}
+			$message = '<p class="eael-form-msg valid">' . esc_html( $success_message ) . '</p>';
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
 
 			delete_option( 'eael_register_success_' . $this->get_id() );
+			delete_option( 'eael_register_success_email_' . $this->get_id() );
 
 			return true; // it will help in case we wanna know if error is printed.
 		}
