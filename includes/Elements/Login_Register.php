@@ -996,6 +996,7 @@ class Login_Register extends Widget_Base {
 			] );
 
 			$this->add_control( 'enable_webhook', [
+				/* translators: %s: Opening HTML link tag, %s: Closing HTML link tag. */
 				'label'   => sprintf( __( 'Enable Webhook %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'classes' => 'eael-pro-control',
