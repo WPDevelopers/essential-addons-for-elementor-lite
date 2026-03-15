@@ -140,6 +140,7 @@ jQuery(window).on("elementor/frontend/init", function () {
       $(".eaelsv-sticky-player-close").on("click", function () {
         element.removeClass("out").addClass("in");
         $(".eael-sticky-video-player2").removeAttr("style");
+        playerAbc.pause();
         videoIsActive = "off";
       });
 
