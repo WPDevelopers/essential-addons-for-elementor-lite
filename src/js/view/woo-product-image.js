@@ -45,10 +45,27 @@ var WooProdectImage = function ($scope, $) {
 
    //Toggle slider autoplay
    function toggleSliderAutoplay(action) {
-      const sliders = $(".swiper-container", $scope);
-      sliders.each((index, slider) => {
-         slider.swiper.autoplay[action]();
-         slider.swiper.slideTo(0);
+      const $sliders = $(".swiper-container", $scope);
+      $sliders.each((index, sliderEl) => {
+         const swiperInstance = sliderEl.swiper;
+         if (swiperInstance && !swiperInstance.destroyed) {
+            if (swiperInstance.autoplay && typeof swiperInstance.autoplay[action] === 'function') {
+               swiperInstance.autoplay[action]();
+            }
+            
+            if (typeof swiperInstance.slideTo === 'function') {
+               try {
+                  if (swiperInstance.params && swiperInstance.params.loop) {
+                     swiperInstance.slideToLoop(0);
+                  } else {
+                     swiperInstance.slideTo(0);
+                  }
+               } catch (e) {
+                  // Fallback or silent fail if slideTo fails
+                  console.warn("Swiper slideTo failed:", e);
+               }
+            }
+         }
       });
    }
 
@@ -157,7 +174,44 @@ var WooProdectImage = function ($scope, $) {
 
    // Image slider options
    let $sliderImagesOptions = $(".product_image_slider__container", $scope);
-   let $sliderImagesData = $sliderImagesOptions.data("pi_image");
+   let $sliderImagesData = $sliderImagesOptions.data("pi_image") || {};
+   const zoomEffect = $sliderImagesData.zoomEffect;
+
+   const zoomOptions = {
+      lensWidth: zoomEffect?.lensSize || 100,
+      lensHeight: zoomEffect?.lensSize || 100,
+      borderRadius: zoomEffect?.lensBorderRadius || '8px',
+      lensBorder: zoomEffect?.lensBorder,
+      autoResize: true
+   };
+
+   // Initialize zoom lens for image(s)
+   function initializeZoomLens($images) {
+      if (zoomEffect?.enabled !== 'yes' || zoomEffect?.type !== 'lense') {
+         return;
+      }
+
+      if (!$images) {
+         $images = $(".image_slider__image img", $scope);
+      }
+
+      $images.each(function() {
+         const $img = $(this);
+
+         // Clean up existing zoom lens
+         $img.off('.zoom');
+         $('.eael-lens-zoom, .eael-result-zoom').remove();
+
+         // Initialize when image is ready
+         if (this.complete && this.naturalHeight !== 0) {
+            $img.eaelZoomLense(zoomOptions);
+         } else {
+            $img.on('load.zoom', function() {
+               $(this).eaelZoomLense(zoomOptions);
+            });
+         }
+      });
+   }
 
    // Set slider height dynamically
    $(window).on("load", function () {
@@ -252,38 +306,6 @@ var WooProdectImage = function ($scope, $) {
    });
 
    function zoomLenseEffect(){
-      const zoomOptions = {
-         lensWidth: zoomEffect?.lensSize || 100,
-         lensHeight: zoomEffect?.lensSize || 100,
-         borderRadius: zoomEffect?.lensBorderRadius || '8px',
-         lensBorder: zoomEffect?.lensBorder,
-         autoResize: true
-      };
-
-      // Initialize zoom lens for image(s)
-      function initializeZoomLens($images) {
-            if (!$images) {
-               $images = $(".image_slider__image img", $scope);
-            }
-
-         $images.each(function() {
-            const $img = $(this);
-
-            // Clean up existing zoom lens
-            $img.off('.zoom');
-            $('.eael-lens-zoom, .eael-result-zoom').remove();
-
-            // Initialize when image is ready
-            if (this.complete && this.naturalHeight !== 0) {
-               $img.eaelZoomLense(zoomOptions);
-            } else {
-               $img.on('load.zoom', function() {
-                  $(this).eaelZoomLense(zoomOptions);
-               });
-            }
-         });
-      }
-
       // Initialize zoom lens with multiple fallbacks
       function setupZoomLens() {
          // Try immediate initialization
@@ -316,7 +338,6 @@ var WooProdectImage = function ($scope, $) {
    function zoomInsideEffect(){
 
    }
-   const zoomEffect = $sliderImagesData.zoomEffect;
    
    if( window.isEditMode ){
       $('.eael-magnify-lens').remove();
