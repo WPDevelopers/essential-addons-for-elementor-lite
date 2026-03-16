@@ -240,6 +240,23 @@ class Simple_Menu extends Widget_Base
         );
 
         $this->add_control(
+            'eael_simple_menu_link_width',
+            [
+                'label'        => __('Link Width', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SELECT,
+                'options'      => [
+                    'full-width' => __('Full Width', 'essential-addons-for-elementor-lite'),
+                    'auto'       => __('Auto', 'essential-addons-for-elementor-lite'),
+                ],
+                'default'      => 'full-width',
+                'prefix_class' => 'eael-simple-menu-link-',
+                'selectors' => [
+                    '{{WRAPPER}}.eael-simple-menu-link-auto.eael-hamburger--responsive .eael-simple-menu.eael-simple-menu-responsive li a' => 'display: inline-block; width: auto;',
+                ],
+            ]
+        );
+
+        $this->add_control(
 	       'eael_simple_menu_hamburger_icon',
 	       [
 	           'label'       => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
@@ -1637,7 +1654,7 @@ class Simple_Menu extends Widget_Base
 	    }
 
         $menu_classes      = ['eael-simple-menu', $settings['eael_simple_menu_dropdown_animation'], 'eael-simple-menu-indicator', $settings['eael_hamburger_menu_item_alignment']];
-        $container_classes = ['eael-simple-menu-container', $align, $fullWidth, $settings['eael_simple_menu_dropdown_item_alignment'], $settings['eael_simple_menu_preset']];
+        $container_classes = ['eael-simple-menu-container', $align, $fullWidth, $settings['eael_simple_menu_dropdown_item_alignment'], $settings['eael_simple_menu_preset'], 'eael-simple-menu-link-' . esc_html($settings['eael_simple_menu_link_width'])];
 
         if ($settings['eael_simple_menu_layout'] == 'horizontal') {
             $menu_classes[] = 'eael-simple-menu-horizontal';
