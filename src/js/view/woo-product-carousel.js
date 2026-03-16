@@ -296,6 +296,74 @@ eael.hooks.addAction("init", "ea", () => {
 			);
 		}
 
+		const getBuyNowAjaxUrl = () => {
+			if (typeof wc_add_to_cart_params !== "undefined" && wc_add_to_cart_params.wc_ajax_url) {
+				return wc_add_to_cart_params.wc_ajax_url.replace("%%endpoint%%", "add_to_cart");
+			}
+
+			if (typeof woocommerce_params !== "undefined" && woocommerce_params.wc_ajax_url) {
+				return woocommerce_params.wc_ajax_url.replace("%%endpoint%%", "add_to_cart");
+			}
+
+			return null;
+		};
+
+		$scope.on("click", ".eael-buy-now-button", function (event) {
+			const $button = $(this);
+			const productId = parseInt($button.data("product-id"), 10);
+			const quantity = parseInt($button.data("quantity"), 10) || 1;
+			const checkoutUrl = $button.data("checkout-url") || $button.attr("href");
+
+			if (typeof elementorFrontend !== "undefined" && elementorFrontend.isEditMode()) {
+				event.preventDefault();
+				return;
+			}
+
+			if (!productId) {
+				return;
+			}
+
+			event.preventDefault();
+
+			if ($button.hasClass("loading")) {
+				return;
+			}
+
+			const ajaxUrl = getBuyNowAjaxUrl();
+			if (!ajaxUrl) {
+				window.location = $button.attr("href");
+				return;
+			}
+
+			$button.addClass("loading");
+
+			$.post(ajaxUrl, { product_id: productId, quantity: quantity })
+				.done(function (response) {
+					if (response && response.error && response.product_url) {
+						window.location = response.product_url;
+						return;
+					}
+
+					if (response && response.fragments) {
+						$(document.body).trigger("added_to_cart", [
+							response.fragments,
+							response.cart_hash,
+							$button
+						]);
+					}
+
+					if (checkoutUrl) {
+						window.location = checkoutUrl;
+					}
+				})
+				.fail(function () {
+					window.location = $button.attr("href");
+				})
+				.always(function () {
+					$button.removeClass("loading");
+				});
+		});
+
 		const eael_popup = $(document).find(".eael-woocommerce-popup-view");
 		if (eael_popup.length < 1) {
 			eael_add_popup();

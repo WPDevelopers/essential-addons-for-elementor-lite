@@ -29,6 +29,9 @@ $should_print_image_clickable = isset( $settings['eael_product_carousel_image_cl
 $should_print_title_clickable = isset( $settings['eael_product_carousel_title_clickable'] ) && 'yes' === $settings['eael_product_carousel_title_clickable'];
 $should_print_price = isset( $settings['eael_product_carousel_price'] ) && 'yes' === $settings['eael_product_carousel_price'];
 $should_print_excerpt = isset( $settings['eael_product_carousel_excerpt'] ) && ('yes' === $settings['eael_product_carousel_excerpt'] && has_excerpt());
+$buy_now_enabled = isset( $settings['eael_product_carousel_buy_now'] ) && 'yes' === $settings['eael_product_carousel_buy_now'];
+$buy_now_text = ! empty( $settings['eael_product_carousel_buy_now_text'] ) ? $settings['eael_product_carousel_buy_now_text'] : '';
+$should_print_buy_now = $buy_now_enabled && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock();
 $widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : null;
 $quick_view_setting = [
 	'widget_id' => $widget_id,
@@ -125,6 +128,18 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                         <?php
                     		}
                         ?>
+                        <?php if ( $should_print_buy_now ) { ?>
+                            <li class="buy-now">
+                                <a class="eael-buy-now-button<?php echo ! empty( $buy_now_text ) ? ' has-text' : ''; ?>" href="<?php echo esc_url( add_query_arg( 'add-to-cart', $product->get_id(), wc_get_checkout_url() ) ); ?>" data-product-id="<?php echo esc_attr( $product->get_id() ); ?>" data-quantity="1" data-checkout-url="<?php echo esc_url( wc_get_checkout_url() ); ?>" aria-label="<?php echo esc_attr( $buy_now_text ? $buy_now_text : __( 'Buy Now', 'essential-addons-for-elementor-lite' ) ); ?>">
+                                    <?php if ( ! empty( $settings['eael_product_carousel_buy_now_icon']['value'] ) ) { ?>
+                                        <?php \Elementor\Icons_Manager::render_icon( $settings['eael_product_carousel_buy_now_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                                    <?php } ?>
+                                    <?php if ( ! empty( $buy_now_text ) ) { ?>
+                                        <span class="eael-buy-now-text"><?php echo esc_html( $buy_now_text ); ?></span>
+                                    <?php } ?>
+                                </a>
+                            </li>
+                        <?php } ?>
 			                <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
                                     <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES) ); ?>"

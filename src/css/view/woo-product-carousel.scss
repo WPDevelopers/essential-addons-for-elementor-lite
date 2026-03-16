@@ -1156,6 +1156,27 @@ $theme-preset4: #ec3b75;
         margin: 0 auto;
         transition: all ease 0.4s;
 
+        .eael-buy-now-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            &.has-text {
+                flex-direction: column;
+                width: auto;
+                height: auto;
+                min-width: 35px;
+                min-height: 35px;
+                padding: 6px 8px;
+                text-align: center;
+            }
+        }
+
+        .eael-buy-now-text {
+            font-size: 12px;
+            line-height: 1.2;
+        }
 
         &.box-style {
             display: flex;
@@ -1429,6 +1450,18 @@ $theme-preset4: #ec3b75;
                         }
                     }
                 }
+            }
+        }
+
+        &.box-style,
+        &.box-style-list,
+        &.block-style {
+            .eael-buy-now-button.has-text {
+                width: auto;
+                height: auto;
+                min-width: 35px;
+                min-height: 35px;
+                padding: 6px 8px;
             }
         }
 
