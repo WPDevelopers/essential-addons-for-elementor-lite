@@ -211,6 +211,24 @@ trait Login_Registration {
 			}
 			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 		} else {
+			$user_roles = (array) $user_data->roles;
+			$allow_login_roles = ! empty( $settings['allow_login_roles'] ) ? (array) $settings['allow_login_roles'] : [];
+
+			if ( ! empty( $allow_login_roles ) && empty( array_intersect( $user_roles, $allow_login_roles ) ) ) {
+				wp_logout();
+				$err_msg = isset( $settings['err_restricted_role'] ) ? Helper::eael_wp_kses( $settings['err_restricted_role'] ) : __( 'You are not allowed to login from here.', 'essential-addons-for-elementor-lite' );
+
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+
+				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+					exit();
+				}
+			}
+
 			wp_set_current_user( $user_data->ID, $user_login );
 			$current_user_role = ! empty( $user_data->roles[0] ) ? $user_data->roles[0] : '';
 
@@ -224,7 +242,7 @@ trait Login_Registration {
 
 			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			do_action( 'wp_login', $user_data->user_login, $user_data );
-			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
+			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data, $settings );
 
 			$custom_redirect_url = $redirect_to;
 			$previous_page_url   = ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -669,7 +687,7 @@ trait Login_Registration {
 			}
 		}
 
-		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
+		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data, $settings );
 
 		if ( is_wp_error( $user_id ) ) {
 			// error happened during user creation
@@ -683,6 +701,7 @@ trait Login_Registration {
 			exit();
 		}
 
+		$user_data['eael_lrmuc'] = $_POST['eael_lrmuc'] ?? '';
 		do_action( 'eael/login-register/mailchimp-integration-action', $user_id, $user_data, $settings );
 	
 		$admin_or_both = $is_pass_auto_generated || in_array( 'send_email', $register_actions ) ? 'both' : 'admin';
@@ -1365,15 +1384,35 @@ trait Login_Registration {
 			$key = get_password_reset_key( $user );
 			if ( ! empty( $key ) ) {
 				update_user_option( $user->ID, 'default_password_nag', true, true ); // Set up the password change nag.
-				$password_reset_link = add_query_arg(
-					[
-						'action' => 'rp',
-						'key'	 => $key,
-						'login'	 => rawurlencode( $user->user_login ),
-					],
-					esc_url_raw( $this->eael_wp_login_url() )
-				);
+				$custom_reset_password_info = get_option( 'eael_lr_resetpassword_form_info' );
 
+				if( is_array( $custom_reset_password_info ) ){
+					$locale = get_user_locale( $user );
+					$password_reset_link = add_query_arg(
+						array(
+							'action'				=> 'rp',
+							'eael-resetpassword'	=> '1',
+							'key'					=> $key,
+							'login'					=> rawurlencode( $user->user_login ),
+							'page_id'				=> !empty( $custom_reset_password_info['page_id'] ) ? $custom_reset_password_info['page_id'] : 0,
+							'widget_id'				=> !empty( $custom_reset_password_info['widget_id'] ) ? $custom_reset_password_info['widget_id'] : '',
+							'wp_lang'				=> $locale,
+						),
+						esc_url_raw( $this->eael_wp_login_url() )
+					);
+				} else {
+					$password_reset_link = add_query_arg(
+						[
+							'action' => 'rp',
+							'key'	 => $key,
+							'login'	 => rawurlencode( $user->user_login ),
+						],
+						esc_url_raw( $this->eael_wp_login_url() )
+					);
+				}
+
+				$link_text = !empty( $custom_reset_password_info['link_text'] ) ? $custom_reset_password_info['link_text'] : __( 'Click here to reset your password', 'essential-addons-for-elementor-lite' );
+				$password_reset_link = '<a href="' . $password_reset_link . '" target="_blank">' . $link_text . '</a>';
 				self::$email_options_lostpassword['password_reset_link'] = $password_reset_link;
 				self::$email_options['password_reset_link'] = $password_reset_link . "\r\n\r\n";
 			}

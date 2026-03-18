@@ -1,9 +1,64 @@
 eael.hooks.addAction("init", "ea", () => {
+	const initMarquee = function ($scope, $) {
+		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0);
+		var $pause_on_hover =
+			$wooProductCarousel.data("pause-on-hover") !== undefined
+				? $wooProductCarousel.data("pause-on-hover")
+				: false,
+			$speed =
+				$wooProductCarousel.data("speed") !== undefined
+					? $wooProductCarousel.data("speed")
+					: 400,
+			$dragable = $wooProductCarousel.data("grab-cursor") !== undefined
+				? $wooProductCarousel.data("grab-cursor")
+				: false;
 
+		if ($wooProductCarousel.hasClass('eael-marquee-carousel') && !$wooProductCarousel.hasClass('no-gsap')) {
+			$(window).on('resize', function () {
+				updateMarquee($wooProductCarousel, $);
+			});
+
+			$wooProductCarousel.find(".eael-marquee-wrapper").eaelmarque({
+				speed: $speed / 1000,
+				direction: 'left',
+				pauseOnHover: $pause_on_hover,
+				draggable: $dragable
+			});
+
+			updateMarquee($wooProductCarousel, $);
+		}
+	}
 	const wooProductCarousel = function ($scope, $) {
-		eael.hooks.doAction("quickViewAddMarkup",$scope,$);
-		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0),
-			$type = $wooProductCarousel.data("type"),
+		eael.hooks.doAction("quickViewAddMarkup", $scope, $);
+		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0);
+
+		if ($wooProductCarousel.hasClass('eael-marquee-carousel') && !$wooProductCarousel.hasClass('no-gsap')) {
+			initMarquee($scope, $);
+			return;
+		}
+
+		var $isMarqueeLite = $wooProductCarousel.hasClass('no-gsap');
+
+		var $pause_on_hover =
+			$wooProductCarousel.data("pause-on-hover") !== undefined
+				? $wooProductCarousel.data("pause-on-hover")
+				: false,
+			$speed =
+				$wooProductCarousel.data("speed") !== undefined
+					? $wooProductCarousel.data("speed")
+					: 400,
+			$margin =
+				$wooProductCarousel.data("margin") !== undefined
+					? $wooProductCarousel.data("margin")
+					: 10,
+			$margin_tablet =
+				$wooProductCarousel.data("margin-tablet") !== undefined
+					? $wooProductCarousel.data("margin-tablet")
+					: 10,
+			$margin_mobile =
+				$wooProductCarousel.data("margin-mobile") !== undefined
+					? $wooProductCarousel.data("margin-mobile")
+					: 0,
 			$autoplay =
 				$wooProductCarousel.data("autoplay") !== undefined
 					? $wooProductCarousel.data("autoplay")
@@ -37,26 +92,10 @@ eael.hooks.addAction("init", "ea", () => {
 					? $wooProductCarousel.data("slide-items")
 					: 1,
 			$slideItems = '' === $slideItems ? 1 : $slideItems,
-			$margin =
-				$wooProductCarousel.data("margin") !== undefined
-					? $wooProductCarousel.data("margin")
-					: 10,
-			$margin_tablet =
-				$wooProductCarousel.data("margin-tablet") !== undefined
-					? $wooProductCarousel.data("margin-tablet")
-					: 10,
-			$margin_mobile =
-				$wooProductCarousel.data("margin-mobile") !== undefined
-					? $wooProductCarousel.data("margin-mobile")
-					: 0,
 			$effect =
 				$wooProductCarousel.data("effect") !== undefined
 					? $wooProductCarousel.data("effect")
 					: "slide",
-			$speed =
-				$wooProductCarousel.data("speed") !== undefined
-					? $wooProductCarousel.data("speed")
-					: 400,
 			$loop =
 				$wooProductCarousel.data("loop") !== undefined
 					? $wooProductCarousel.data("loop")
@@ -65,10 +104,6 @@ eael.hooks.addAction("init", "ea", () => {
 				$wooProductCarousel.data("grab-cursor") !== undefined
 					? $wooProductCarousel.data("grab-cursor")
 					: 0,
-			$pause_on_hover =
-				$wooProductCarousel.data("pause-on-hover") !== undefined
-					? $wooProductCarousel.data("pause-on-hover")
-					: "",
 			$centeredSlides = $effect == "coverflow" ? true : false,
 			$depth =
 				$wooProductCarousel.data("depth") !== undefined
@@ -90,9 +125,9 @@ eael.hooks.addAction("init", "ea", () => {
 			centeredSlides: $centeredSlides,
 			grabCursor: $grab_cursor,
 			autoHeight: true,
-			loop: $loop,
+			loop: $isMarqueeLite ? true : $loop,
 			autoplay: {
-				delay: $autoplay,
+				delay: $isMarqueeLite ? 0 : $autoplay,
 				disableOnInteraction: false
 			},
 			pagination: {
@@ -103,10 +138,12 @@ eael.hooks.addAction("init", "ea", () => {
 				nextEl: $arrow_next,
 				prevEl: $arrow_prev
 			},
+			freeMode: false,
+			allowTouchMove: !$isMarqueeLite,
 			slidesPerView: $items,
 			on: {
 				init: function () {
-					setTimeout(function (){
+					setTimeout(function () {
 						window.dispatchEvent(new Event('resize'));
 					}, 200);
 				},
@@ -154,15 +191,15 @@ eael.hooks.addAction("init", "ea", () => {
 							_margin = $wooProductCarousel.data('margin-' + device);
 						$margin = _margin !== undefined ? _margin : (device === 'desktop' ? $margin : 10);
 						$itemsPerView = _items !== undefined && _items !== "" ? _items : (device === 'desktop' ? $items : 3);
-						$slidePerGroup = _slideItems !== undefined && _slideItems !== "" ? _slideItems : (device === 'desktop' ? $slideItems : 1 );
-						
+						$slidePerGroup = _slideItems !== undefined && _slideItems !== "" ? _slideItems : (device === 'desktop' ? $slideItems : 1);
 
-						if( device === 'mobile' && _items === undefined ){
+
+						if (device === 'mobile' && _items === undefined) {
 							$itemsPerView = 1;
-						} else if ( device === 'tablet' && _items === undefined ){
+						} else if (device === 'tablet' && _items === undefined) {
 							$itemsPerView = 2;
-						} 
-						
+						}
+
 						el_breakpoints[bp_index] = {
 							breakpoint: breakpoint.value,
 							slidesPerView: $itemsPerView,
@@ -172,7 +209,7 @@ eael.hooks.addAction("init", "ea", () => {
 						bp_index++;
 					}
 				});
-	
+
 				$.each(el_breakpoints, function (index, breakpoint) {
 					let _index = parseInt(index);
 					if (typeof el_breakpoints[_index + 1] !== 'undefined') {
@@ -183,7 +220,7 @@ eael.hooks.addAction("init", "ea", () => {
 						}
 					}
 				});
-				
+
 				$carouselOptions.breakpoints = breakpoints;
 			}
 		}
@@ -231,8 +268,8 @@ eael.hooks.addAction("init", "ea", () => {
 
 			//gallery pagination
 			const $paginationGallerySelector = $scope
-			.find('.eael-woo-product-carousel-container .eael-woo-product-carousel-gallary-pagination')
-			.eq(0)
+				.find('.eael-woo-product-carousel-container .eael-woo-product-carousel-gallary-pagination')
+				.eq(0)
 			if ($paginationGallerySelector.length > 0) {
 				swiperLoader($paginationGallerySelector, {
 					spaceBetween: 20,
@@ -250,7 +287,7 @@ eael.hooks.addAction("init", "ea", () => {
 			}
 		});
 
-		eael.hooks.doAction("quickViewPopupViewInit",$scope,$);
+		eael.hooks.doAction("quickViewPopupViewInit", $scope, $);
 
 		if (isEditMode) {
 			$(".eael-product-image-wrap .woocommerce-product-gallery").css(
@@ -260,7 +297,7 @@ eael.hooks.addAction("init", "ea", () => {
 		}
 
 		const eael_popup = $(document).find(".eael-woocommerce-popup-view");
-		if(eael_popup.length<1){
+		if (eael_popup.length < 1) {
 			eael_add_popup();
 		}
 
@@ -278,8 +315,9 @@ eael.hooks.addAction("init", "ea", () => {
 			if (productCarousels.length) {
 				productCarousels.each(function () {
 					if ($(this)[0].swiper) {
+						let savedParams = $(this)[0].swiper.params;
 						$(this)[0].swiper.destroy(true, true);
-						swiperLoader($(this)[0], $carouselOptions);
+						swiperLoader($(this)[0], savedParams);
 					}
 				});
 			}
@@ -287,8 +325,34 @@ eael.hooks.addAction("init", "ea", () => {
 
 		eael.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
 		eael.hooks.addAction("ea-toggle-triggered", "ea", WooProductCarouselLoader);
+		eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", WooProductCarouselLoader);
+		eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", WooProductCarouselLoader);
 	};
 
+	const updateMarquee = function ($wooProductCarousel, $) {
+		let currentDevice = $('body').attr('data-elementor-device-mode');
+		currentDevice = 'desktop' === currentDevice ? '' : '-' + currentDevice;
+
+		let itemsGap = $wooProductCarousel.data('margin' + currentDevice);
+		// itemsGap = itemszGap !== undefined ? itemsGap : 10;
+		let itemsPerView = $wooProductCarousel.data('items' + currentDevice);
+
+		if ((currentDevice === 'mobile' || currentDevice === 'mobile_extra') && itemsPerView === undefined) {
+			itemsPerView = 1;
+		} else if ((currentDevice === 'tablet' || currentDevice === 'tablet_extra') && itemsPerView === undefined) {
+			itemsPerView = 2;
+		} else if (currentDevice === '' && itemsPerView === undefined) {
+			itemsPerView = 3;
+		}
+
+		$wooProductCarousel.find(".eael-marquee-wrapper:not(.no-gsap) .product").css({
+			'width': (100 / itemsPerView) + '%',
+		});
+
+		$wooProductCarousel.find(".eael-marquee-wrapper:not(.no-gsap)").css({
+			'gap': itemsGap + 'px',
+		});
+	}
 	const swiperLoader = (swiperElement, swiperConfig) => {
 		if ('undefined' === typeof Swiper || 'function' === typeof Swiper) {
 			const asyncSwiper = elementorFrontend.utils.swiper;
@@ -307,7 +371,7 @@ eael.hooks.addAction("init", "ea", () => {
 		});
 	}
 
-	if ( eael.elementStatusCheck('eaelWooProductSliderLoad') && window.forceFullyRun === undefined ) {
+	if (eael.elementStatusCheck('eaelWooProductSliderLoad') && window.forceFullyRun === undefined) {
 		return;
 	}
 

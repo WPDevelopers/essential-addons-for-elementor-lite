@@ -97,7 +97,7 @@ use HelperTrait;
                 'placeholder' => __('Enter button text', 'essential-addons-for-elementor-lite'),
                 'title'       => __('Enter button text here', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-                    'active' => false,
+                    'active' => true,
                 ],
             ]
         );
@@ -115,7 +115,7 @@ use HelperTrait;
                 'placeholder' => __('Enter button secondary text', 'essential-addons-for-elementor-lite'),
                 'title'       => __('Enter button secondary text here', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-                    'active' => false,
+                    'active' => true,
                 ],
             ]
         );

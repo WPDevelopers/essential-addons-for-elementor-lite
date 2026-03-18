@@ -171,15 +171,15 @@ trait Controls
             $wb->add_control(
                 'tax_query_relation',
                 [
-                    'label' => esc_html__( 'Taxonomy Query Relation', 'text-domain' ),
+                    'label' => esc_html__( 'Taxonomy Query Relation', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         'AND' => [
-                            'title' => esc_html__( 'AND', 'text-domain' ),
+                            'title' => esc_html__( 'AND', 'essential-addons-for-elementor-lite' ),
                             'text' => 'AND',
                         ],
                         'OR' => [
-                            'title' => esc_html__( 'OR', 'text-domain' ),
+                            'title' => esc_html__( 'OR', 'essential-addons-for-elementor-lite' ),
                             'text' => 'OR',
                         ],
                     ],
@@ -289,7 +289,7 @@ trait Controls
                 'label' => __('Meta Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'ai' => [
-                    'active' => false,
+                    'active' => true,
                 ],
                 'placeholder' => __('_event_start_date', 'essential-addons-for-elementor-lite'),
                 'description' => __('Enter the meta key name for custom field sorting (e.g., _event_start_date, custom_price)', 'essential-addons-for-elementor-lite'),
@@ -433,6 +433,20 @@ trait Controls
                     ]
                 );
             }
+        }
+
+        if ( 'eael-post-list' === $wb->get_name() ) {
+            $wb->add_control(
+                'query_id',
+                [
+                    'label' => esc_html__('Query ID', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::TEXT,
+                    'default' => '',
+                    'ai' => ['active' => false],
+                    'description' => esc_html__('Give your Query a custom unique id to allow server side filtering using the hook "eael/query/{query_id}"', 'essential-addons-for-elementor-lite'),
+                    'separator' => 'before',
+                ]
+            );
         }
 
         $wb->end_controls_section();
@@ -1276,7 +1290,7 @@ trait Controls
                     'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'dynamic'     => [ 'active' => true ],
-                    'ai' => [ 'active' => false ],
+                    'ai' => [ 'active' => true ],
                     'label_block' => false,
                     'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition' => [
@@ -1303,8 +1317,8 @@ trait Controls
                 [
                     'label'       => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type'        => Controls_Manager::TEXT,
-                    'dynamic'     => [ 'active'      =>true ],
-                    'ai'          => [ 'active'      =>false ],
+                    'dynamic'     => [ 'active'      => true ],
+                    'ai'          => [ 'active'      => true ],
                     'label_block' => false,
                     'default'     => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition'   => [

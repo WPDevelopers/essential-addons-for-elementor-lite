@@ -192,7 +192,7 @@ class Team_Member extends Widget_Base {
                 ],
 				'default' => esc_html__( 'John Doe', 'essential-addons-for-elementor-lite'),
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
@@ -266,7 +266,7 @@ class Team_Member extends Widget_Base {
                 ],
 				'default' => esc_html__( 'Software Engineer', 'essential-addons-for-elementor-lite'),
 				'ai' => [
-					'active' => false,
+					'active' => true,
 				],
 			]
 		);
