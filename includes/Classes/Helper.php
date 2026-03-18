@@ -1024,6 +1024,27 @@ class Helper
             printf('<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>',esc_html( $tag ), wp_kses( get_the_title(), Helper::eael_allowed_tags() ));
         }, 5 );
 
+        // Quick View Buy Now button — rendered inside form.cart via woocommerce_after_add_to_cart_button hook
+        $qv_buy_now_enabled = isset( $settings['eael_product_carousel_qv_buy_now'] ) && 'yes' === $settings['eael_product_carousel_qv_buy_now'];
+        if ( $qv_buy_now_enabled && $product->is_purchasable() && $product->is_in_stock() ) {
+            $qv_buy_now_text = ! empty( $settings['eael_product_carousel_qv_buy_now_text'] ) ? $settings['eael_product_carousel_qv_buy_now_text'] : '';
+            $qv_buy_now_icon = ! empty( $settings['eael_product_carousel_qv_buy_now_icon'] ) ? $settings['eael_product_carousel_qv_buy_now_icon'] : [];
+            $qv_checkout_url = wc_get_checkout_url();
+
+            add_action( 'woocommerce_after_add_to_cart_button', function () use ( $qv_buy_now_text, $qv_buy_now_icon, $qv_checkout_url ) {
+                ?>
+                <button type="button" class="eael-popup-buy-now-button" data-checkout-url="<?php echo esc_url( $qv_checkout_url ); ?>" aria-label="<?php echo esc_attr( $qv_buy_now_text ? $qv_buy_now_text : __( 'Buy Now', 'essential-addons-for-elementor-lite' ) ); ?>">
+                    <?php if ( ! empty( $qv_buy_now_icon['value'] ) ) {
+                        Icons_Manager::render_icon( $qv_buy_now_icon, [ 'aria-hidden' => 'true' ] );
+                    } ?>
+                    <?php if ( ! empty( $qv_buy_now_text ) ) { ?>
+                        <span class="eael-buy-now-text"><?php echo esc_html( $qv_buy_now_text ); ?></span>
+                    <?php } ?>
+                </button>
+                <?php
+            } );
+        }
+
         $popup_classes = array();
 
         if ( isset( $settings['eael_product_quick_view_hide_categories'] ) && 'yes' === $settings['eael_product_quick_view_hide_categories'] ) {

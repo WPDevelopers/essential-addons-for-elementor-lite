@@ -1156,6 +1156,12 @@ $theme-preset4: #ec3b75;
         margin: 0 auto;
         transition: all ease 0.4s;
 
+        .buy-now{
+            .added_to_cart.wc-forward{
+                display: none !important;
+            }
+        }
+
         .eael-buy-now-button {
             display: inline-flex;
             align-items: center;
@@ -2063,4 +2069,59 @@ $theme-preset4: #ec3b75;
 
 .theme-botiga .row {
     justify-content: center;
+}
+
+// Quick View Popup Buy Now Button
+.eael-popup-details-render {
+    .eael-product-details-wrap {
+        form.cart {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 8px;
+
+            .quantity {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .eael-popup-buy-now-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.4;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        background-color: #8040FF;
+
+        i,
+        svg {
+            font-size: inherit;
+            width: 1em;
+            height: 1em;
+        }
+
+        &.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        &.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(.disabled):not(.loading) {
+            opacity: 0.9;
+        }
+    }
 }
