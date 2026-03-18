@@ -175,7 +175,7 @@ let change_button_text = function () {
    let $ = jQuery,
       button_texts = $(".ea-woo-checkout").data("button_texts");
    setTimeout(function () {
-      if (button_texts.place_order !== "") {
+      if (typeof button_texts !== 'undefined' && button_texts.place_order !== "") {
          $("#place_order").text(button_texts.place_order);
       }
    }, 500);
