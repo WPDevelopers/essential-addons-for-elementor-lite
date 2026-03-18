@@ -1848,6 +1848,16 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		$this->add_control( 'allow_login_roles', [
+			'label'       => __( 'Allowed User Roles', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Select user roles that are allowed to login. Leave empty to allow all.', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SELECT2,
+			'multiple'    => true,
+			'options'     => $this->eael_get_role_names(),
+			'label_block' => true,
+			'separator'   => 'before',
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -2138,6 +2148,17 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'placeholder' => __( 'Eg. Something went wrong', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( "Something went wrong!", 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => true,
+			],
+		] );
+
+		$this->add_control( 'err_restricted_role', [
+			'label'       => __( 'Restricted Role Error', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. You are not allowed to login from here.', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( "You are not allowed to login from here.", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
 				'active' => true,
 			],

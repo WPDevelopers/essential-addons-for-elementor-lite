@@ -591,6 +591,8 @@ trait Helper
 
 			remove_all_actions( 'user_admin_notices' );
 			remove_all_actions( 'admin_notices' );
+			remove_all_actions( 'all_admin_notices' );
+			remove_all_actions( 'network_admin_notices' );
 
             // To showing notice in EA settings page we have to use 'eael_admin_notices' action hook
 			add_action( 'admin_notices', function () {
