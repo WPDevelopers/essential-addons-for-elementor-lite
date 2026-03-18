@@ -211,6 +211,24 @@ trait Login_Registration {
 			}
 			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 		} else {
+			$user_roles = (array) $user_data->roles;
+			$allow_login_roles = ! empty( $settings['allow_login_roles'] ) ? (array) $settings['allow_login_roles'] : [];
+
+			if ( ! empty( $allow_login_roles ) && empty( array_intersect( $user_roles, $allow_login_roles ) ) ) {
+				wp_logout();
+				$err_msg = isset( $settings['err_restricted_role'] ) ? Helper::eael_wp_kses( $settings['err_restricted_role'] ) : __( 'You are not allowed to login from here.', 'essential-addons-for-elementor-lite' );
+
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+
+				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+					exit();
+				}
+			}
+
 			wp_set_current_user( $user_data->ID, $user_login );
 			$current_user_role = ! empty( $user_data->roles[0] ) ? $user_data->roles[0] : '';
 
