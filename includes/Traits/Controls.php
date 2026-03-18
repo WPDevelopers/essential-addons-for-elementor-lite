@@ -171,15 +171,15 @@ trait Controls
             $wb->add_control(
                 'tax_query_relation',
                 [
-                    'label' => esc_html__( 'Taxonomy Query Relation', 'text-domain' ),
+                    'label' => esc_html__( 'Taxonomy Query Relation', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         'AND' => [
-                            'title' => esc_html__( 'AND', 'text-domain' ),
+                            'title' => esc_html__( 'AND', 'essential-addons-for-elementor-lite' ),
                             'text' => 'AND',
                         ],
                         'OR' => [
-                            'title' => esc_html__( 'OR', 'text-domain' ),
+                            'title' => esc_html__( 'OR', 'essential-addons-for-elementor-lite' ),
                             'text' => 'OR',
                         ],
                     ],
