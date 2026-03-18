@@ -3841,7 +3841,7 @@ class Filterable_Gallery extends Widget_Base
         $image_alt = get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true );
         $alt_text = $image_alt ? $image_alt : $item['title'];
         
-        if( isset( $item['image_id'] ) && "" !== $item['image_id'] ){
+        if( isset( $item['image_id'] ) && "" !== $item['image_id'] && wp_attachment_is_image( $item['image_id'] ) ){
             $settings[ 'eael_image_size_customize' ] = [
                 'id' => $item['image_id'],
             ];
@@ -4074,7 +4074,7 @@ class Filterable_Gallery extends Widget_Base
             $alt_text = get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true );
             $alt_text = ! empty( $alt_text ) ? $alt_text : $item['title'];
             
-            if( isset( $item['image_id'] ) && "" !== $item['image_id'] ){
+            if( isset( $item['image_id'] ) && "" !== $item['image_id'] && wp_attachment_is_image( $item['image_id'] ) ){
                 $settings[ 'eael_image_size_customize' ] = [
                     'id' => $item['image_id'],
                 ];
