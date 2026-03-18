@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.5.12
+Stable tag: 6.5.13
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -316,6 +316,20 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.5.13 - 08/03/2026 =
+
+- Fixed: Duplicate tax_query argument
+- Fixed: Mismatched text domains across multiple files
+- Fixed: PHP fatal error when importing templates without EA Pro installed
+- Fixed: EA Filterable Gallery | Tags missing in DOM after update
+- Fixed: EA Interactive Circle | Styling not applying correctly
+- Fixed: EA Woo Product Carousel | Size increases when toggling
+- Fixed: EA Business Reviews | Query Monitor warning for eael_business_reviews_review_text_height
+- Improved: EA Interactive Circle | Added popup option for icons
+- Improved: EA Pricing Table | Added option to change the heading tag for the header title
+- Improved: EA Login/Register Form | Added option to restrict user roles for login
+- Few minor bug fixes & improvements
 
 = 6.5.12 - 22/02/2026 =
 
