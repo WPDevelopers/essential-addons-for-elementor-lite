@@ -6,6 +6,7 @@
 .eslintignore
 .eslintrc
 .eslintrc.cjs
+.eslintrc.json
 .git
 .github
 .gitattributes
@@ -47,6 +48,9 @@ node_modules
 build
 postcss.config.js
 .wordpress-org
+.prettierrc.json
+.prettierignore
+.stylelintrc.json
 
 vendor/priyomukul/wp-notice/.editorconfig
 vendor/priyomukul/wp-notice/.gitignore

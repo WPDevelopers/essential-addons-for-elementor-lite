@@ -1,0 +1,51 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jquery": true
+  },
+  "globals": {
+    "eael": "readonly",
+    "elementorFrontend": "readonly",
+    "elementor": "readonly",
+    "wp": "readonly",
+    "ajaxurl": "readonly",
+    "localize": "readonly",
+    "eaelDrops": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-undef": "error",
+    "no-unused-vars": ["warn", { "args": "none", "varsIgnorePattern": "^_" }],
+    "no-dupe-keys": "error",
+    "no-duplicate-case": "error",
+    "no-empty": ["warn", { "allowEmptyCatch": true }],
+    "no-extra-semi": "warn",
+    "no-unreachable": "error",
+    "no-constant-condition": "warn",
+    "no-debugger": "warn",
+    "no-irregular-whitespace": "warn",
+    "use-isnan": "error",
+    "valid-typeof": "error",
+    "no-redeclare": "warn",
+    "no-self-assign": "error",
+    "eqeqeq": ["warn", "smart"],
+    "no-implicit-globals": "warn"
+
+    // "no-var": "warn",
+    // "prefer-const": "warn",
+    // "prefer-template": "warn",
+    // "no-shadow": "warn",
+    // "no-use-before-define": ["warn", { "functions": false }],
+    // "curly": ["warn", "all"],
+    // "no-alert": "warn",
+    // "no-console": ["warn", { "allow": ["warn", "error"] }],
+    // "no-eval": "error",
+    // "no-implied-eval": "error",
+    // "no-new-func": "error",
+    // "no-extend-native": "error"
+  }
+}

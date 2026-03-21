@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<ruleset name="Essential Addons Coding Standards">
+	<description>PHP Coding Standards for Essential Addons for Elementor.</description>
+
+	<!-- Scan these files -->
+	<file>.</file>
+
+	<!-- Exclude paths -->
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+	<exclude-pattern>/assets/*</exclude-pattern>
+	<exclude-pattern>/languages/*</exclude-pattern>
+	<exclude-pattern>/tests/*</exclude-pattern>
+	<exclude-pattern>/docs/*</exclude-pattern>
+	<exclude-pattern>*.min.js</exclude-pattern>
+	<exclude-pattern>*.min.css</exclude-pattern>
+
+	<!-- Show file path in output -->
+	<arg value="sp"/>
+	<!-- Show sniff codes in all reports -->
+	<arg name="report-width" value="120"/>
+	<!-- Strip the filepaths down to the relevant bit. -->
+	<arg name="basepath" value="."/>
+	<!-- Check up to 8 files simultaneously. -->
+	<arg name="parallel" value="8"/>
+	<!-- Only check PHP files. -->
+	<arg name="extensions" value="php"/>
+	<!-- Use colors -->
+	<arg name="colors"/>
+
+	<!-- WordPress Coding Standards - Core rules only (formatting & naming) -->
+	<rule ref="WordPress-Core">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+		<exclude name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase"/>
+		<exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase"/>
+		<exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid"/>
+		<exclude name="WordPress.NamingConventions.ValidHookName.UseUnderscores"/>
+		<exclude name="WordPress.PHP.DisallowShortTernary"/>
+	</rule>
+
+	<!-- Text domain for i18n -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="essential-addons-for-elementor-lite"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Minimum PHP version support -->
+	<config name="testVersion" value="7.4-"/>
+
+	<!-- Minimum WordPress version -->
+	<config name="minimum_wp_version" value="5.6"/>
+
+	<!-- WordPress Extra rules - covers common mistakes & best practices -->
+	<!-- <rule ref="WordPress-Extra"/> -->
+
+	<!-- Full WordPress ruleset including docs -->
+	<!-- <rule ref="WordPress-Docs"/> -->
+
+	<!-- Security-focused rules -->
+	<rule ref="WordPress.Security.EscapeOutput"/>
+	<rule ref="WordPress.Security.NonceVerification"/>
+	<rule ref="WordPress.Security.ValidatedSanitizedInput"/>
+
+	<!-- Database query rules -->
+	<!-- <rule ref="WordPress.DB.PreparedSQL"/> -->
+	<!-- <rule ref="WordPress.DB.DirectDatabaseQuery"/> -->
+
+</ruleset>

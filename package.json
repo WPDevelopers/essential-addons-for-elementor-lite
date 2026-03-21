@@ -4,7 +4,15 @@
 	"description": "=== Essential Addons for Elementor ===\r Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz\r Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form\r Requires at least: 4.0\r Tested up to: 5.2\r Requires PHP: 5.4\r Stable tag: 3.3.0\r License: GPLv3\r License URI: https://opensource.org/licenses/GPL-3.0",
 	"scripts": {
 		"dev": "webpack --mode production --watch",
-		"build": "webpack --mode production && webpack --mode development"
+		"build": "webpack --mode production && webpack --mode development",
+		"lint:js": "eslint 'src/js/**/*.js'",
+		"lint:css": "stylelint 'src/css/**/*.scss'",
+		"lint": "npm run lint:js && npm run lint:css",
+		"fix:js": "eslint 'src/js/**/*.js' --fix",
+		"fix:css": "stylelint 'src/css/**/*.scss' --fix",
+		"fix": "npm run fix:js && npm run fix:css",
+		"format": "prettier --write 'src/**/*.{js,scss,css,json}'",
+		"format:check": "prettier --check 'src/**/*.{js,scss,css,json}'"
 	},
 	"repository": {
 		"type": "git",
@@ -32,7 +40,11 @@
 		"sass-loader": "^8.0.2",
 		"webpack": "^4.42.1",
 		"webpack-cli": "^3.3.10",
-		"wp-pot": "^1.9.3"
+		"wp-pot": "^1.9.3",
+		"eslint": "^8.56.0",
+		"stylelint": "^16.2.0",
+		"stylelint-config-standard-scss": "^13.0.0",
+		"prettier": "^3.2.0"
 	},
 	"dependencies": {
 		"@wordpress/hooks": "^2.6.0",

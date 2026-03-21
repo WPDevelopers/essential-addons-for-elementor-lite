@@ -5,6 +5,7 @@
 .eslintignore           export-ignore
 .eslintrc               export-ignore
 .eslintrc.cjs           export-ignore
+.eslintrc.json          export-ignore
 .git                    export-ignore
 .github                 export-ignore
 .gitattributes          export-ignore
@@ -46,6 +47,9 @@ node_modules/           export-ignore
 /src/                   export-ignore
 build/                  export-ignore
 postcss.config.js       export-ignore
+.prettierrc.json        export-ignore
+.prettierignore         export-ignore
+.stylelintrc.json       export-ignore
 
 includes/templates/admin/eael-dashboard/src             export-ignore
 includes/templates/admin/eael-dashboard/public          export-ignore
