@@ -58,8 +58,8 @@
 	},
 	"lint-staged": {
 		"*.php": [
-			"vendor/bin/phpcs --standard=phpcs.xml",
-			"vendor/bin/phpcbf --standard=phpcs.xml"
+			"vendor/bin/phpcbf --standard=phpcs.xml --ignore=vendor/*",
+			"vendor/bin/phpcs --standard=phpcs.xml --ignore=vendor/* --max-warnings=0"
 		],
 		"*.{js,jsx}": [
 			"prettier --write",
