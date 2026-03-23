@@ -15,7 +15,8 @@
 		"fix:css": "stylelint 'src/css/**/*.scss' --fix",
 		"fix": "npm run fix:js && npm run fix:css",
 		"format": "prettier --write 'src/**/*.{js,scss,css,json}'",
-		"format:check": "prettier --check 'src/**/*.{js,scss,css,json}'"
+		"format:check": "prettier --check 'src/**/*.{js,scss,css,json}'",
+		"prepare": "husky"
 	},
 	"repository": {
 		"type": "git",
@@ -35,22 +36,41 @@
 		"autoprefixer": "^9.7.6",
 		"babel-loader": "^8.0.6",
 		"css-loader": "^3.5.2",
+		"eslint": "^8.56.0",
 		"glob": "^7.1.6",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.4.0",
 		"mini-css-extract-plugin": "^0.9.0",
 		"postcss-import": "^12.0.1",
 		"postcss-loader": "^3.0.0",
+		"prettier": "^3.2.0",
 		"sass": "^1.26.3",
 		"sass-loader": "^8.0.2",
-		"webpack": "^4.42.1",
-		"webpack-cli": "^3.3.10",
-		"wp-pot": "^1.9.3",
-		"eslint": "^8.56.0",
 		"stylelint": "^16.2.0",
 		"stylelint-config-standard-scss": "^13.0.0",
-		"prettier": "^3.2.0"
+		"webpack": "^4.42.1",
+		"webpack-cli": "^3.3.10",
+		"wp-pot": "^1.9.3"
 	},
 	"dependencies": {
 		"@wordpress/hooks": "^2.6.0",
 		"axios": "^1.7.2"
+	},
+	"lint-staged": {
+		"*.php": [
+			"vendor/bin/phpcs --standard=phpcs.xml",
+			"vendor/bin/phpcbf --standard=phpcs.xml"
+		],
+		"*.{js,jsx}": [
+			"prettier --write",
+			"eslint --fix --max-warnings=0"
+		],
+		"*.{css,scss}": [
+			"prettier --write",
+			"stylelint --fix"
+		],
+		"*.{json,md}": [
+			"prettier --write"
+		]
 	}
 }
