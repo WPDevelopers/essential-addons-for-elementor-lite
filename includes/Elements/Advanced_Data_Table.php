@@ -200,6 +200,38 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
+            'ea_adv_data_table_default_sort_column',
+            [
+                'label' => esc_html__('Default Sort Column', 'essential-addons-for-elementor-lite'),
+                'description' => esc_html__('Enter the column number to sort by on initial load. Leave empty for no default sorting.', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::NUMBER,
+                'min' => 1,
+                'step' => 1,
+                'default' => '',
+                'condition' => [
+                    'ea_adv_data_table_sort' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_default_sort_order',
+            [
+                'label' => esc_html__('Default Sort Order', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'asc' => esc_html__('Ascending', 'essential-addons-for-elementor-lite'),
+                    'desc' => esc_html__('Descending', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'asc',
+                'condition' => [
+                    'ea_adv_data_table_sort' => 'yes',
+                    'ea_adv_data_table_default_sort_column!' => '',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'ea_adv_data_table_search',
             [
                 'label' => esc_html__('Search', 'essential-addons-for-elementor-lite'),
@@ -1537,9 +1569,16 @@ class Advanced_Data_Table extends Widget_Base
         ]);
 
         if ($settings['ea_adv_data_table_sort'] == 'yes') {
-            $this->add_render_attribute('ea-adv-data-table', [
+            $sort_attrs = [
                 'class' => "ea-advanced-data-table-sortable",
-            ]);
+            ];
+
+            if (!empty($settings['ea_adv_data_table_default_sort_column'])) {
+                $sort_attrs['data-default-sort-column'] = intval($settings['ea_adv_data_table_default_sort_column']);
+                $sort_attrs['data-default-sort-order'] = !empty($settings['ea_adv_data_table_default_sort_order']) ? sanitize_text_field($settings['ea_adv_data_table_default_sort_order']) : 'asc';
+            }
+
+            $this->add_render_attribute('ea-adv-data-table', $sort_attrs);
         }
 
         if ($settings['ea_adv_data_table_pagination'] == 'yes') {

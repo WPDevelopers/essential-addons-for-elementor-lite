@@ -23,6 +23,9 @@ class advancedDataTable {
       // sort
       this.initTableSort(table, pagination, classCollection);
 
+      // default sort on initial load
+      // this.initDefaultSort(table, pagination);
+
       // paginated table
       this.initTablePagination(table, pagination, classCollection);
 
@@ -261,6 +264,29 @@ class advancedDataTable {
         tbody.empty().append(rows);
       });
     }
+  }
+
+  // frontend - default sort on initial load
+  initDefaultSort(table, pagination) {
+    if (!jQuery(table).hasClass('ea-advanced-data-table-sortable')) return;
+
+    var defaultColumn = table.dataset.defaultSortColumn;
+    var defaultOrder = table.dataset.defaultSortOrder || 'asc';
+
+    if (!defaultColumn) return;
+
+    var colIndex = parseInt(defaultColumn) - 1; // convert 1-based to 0-based
+    var th = jQuery(table).find('th').eq(colIndex);
+
+    if (!th.length) return;
+
+    // For descending: we need to pre-set "asc" so the click handler toggles to "desc"
+    // For ascending: the click handler defaults to "asc" when no class is present
+    if (defaultOrder === 'desc') {
+      th.addClass('asc');
+    }
+
+    th.trigger('click');
   }
 
   // frontend - pagination
