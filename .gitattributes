@@ -36,10 +36,12 @@ phpcs.xml               export-ignore
 .phpcs.xml.dist         export-ignore
 phpcs.xml.dist          export-ignore
 README.md               export-ignore
+CLAUDE.md               export-ignore
 webpack.config.js       export-ignore
 wp-cli.local.yml        export-ignore
 yarn.lock               export-ignore
 tests/                  export-ignore
+.wp-env.json            export-ignore
 node_modules/           export-ignore
 *.sql                   export-ignore
 *.tar.gz                export-ignore

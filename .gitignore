@@ -12,3 +12,7 @@ composer.lock
 /vendor/phpcompatibility/
 /vendor/dealerdirect/
 /vendor/phpcsstandards/
+
+# E2E testing
+test-results/
+playwright-report/

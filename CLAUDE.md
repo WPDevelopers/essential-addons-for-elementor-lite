@@ -72,3 +72,40 @@ The Bootstrap class uses traits in `includes/Traits/` to organize functionality:
 ## Text Domain
 
 The plugin text domain is `essential-addons-for-elementor-lite`. All user-facing strings must use this domain for i18n.
+
+## E2E Testing
+
+### Test environment
+
+| | |
+|---|---|
+| Site | http://localhost:8888 |
+| Admin | http://localhost:8888/wp-admin |
+| Credentials | `admin` / `password` |
+
+Powered by `@wordpress/env` (Docker). Config in `.wp-env.json`. External HTTP requests are blocked via `WP_HTTP_BLOCK_EXTERNAL`. Elementor onboarding and analytics are suppressed via `tests/e2e/mu-plugins/e2e-setup.php`.
+
+### Commands
+
+```bash
+npm run test:setup   # Start wp-env and seed test data (first time)
+npm run test:reset   # Destroy and recreate the environment from scratch
+npm run test:e2e     # Run Playwright tests
+```
+
+### Test pages
+
+| Page | URL |
+|------|-----|
+| Info Box | http://localhost:8888/info-box-test/ |
+
+### Workflow rule
+
+**Before marking any implementation or bug fix as done, verify it visually on the test site.** Open the relevant page in the browser, confirm the widget renders correctly and the fix works as expected. Only declare the task complete after visual confirmation.
+
+### Adding tests for a new widget
+
+1. Add a JSON template in `tests/e2e/templates/<widget>.json` (export from Elementor)
+2. Register the page in `seed.sh` via `create_elementor_page`
+3. Add the URL to the Test pages table above
+4. Write the spec in `tests/e2e/specs/<widget>.spec.ts`

@@ -36,10 +36,12 @@ phpcs.xml
 .phpcs.xml.dist
 phpcs.xml.dist
 README.md
+CLAUDE.md
 webpack.config.js
 wp-cli.local.yml
 yarn.lock
 tests
+.wp-env.json
 node_modules
 *.sql
 *.tar.gz
