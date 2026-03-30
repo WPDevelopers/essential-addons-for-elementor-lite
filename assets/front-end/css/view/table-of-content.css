@@ -187,7 +187,7 @@ html {
   list-style: none;
 }
 
-.eael-toc .eael-toc-body ul.eael-toc-list .eael-toc-link.eael-highlight-active:first-child {
+.eael-toc .eael-toc-body ul.eael-toc-list .eael-toc-link.eael-highlight-active {
   color: #ff7d50;
 }
 
@@ -260,7 +260,7 @@ html {
 }
 
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a span {
-  width: 140px !important;
+  max-width: 260px;
   display: block;
   white-space: nowrap;
   overflow: hidden;

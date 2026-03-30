@@ -232,16 +232,33 @@
 			var allHeadings = document.querySelectorAll("#eael-toc-list .eael-toc-link");
 			$('#eael-toc-list .eael-toc-link').removeClass('eael-highlight-active');
 			let showSinlgeHeadingOnly = $('#eael-toc').hasClass('eael-toc-auto-highlight.eael-toc-highlight-single-item') ? true : false;
+			let activeLink = null;
 
 			for(let i=0; i < allHeadings.length; i++) {
 				let headingElement = allHeadings[i];
 				let headingTarget = headingElement.getAttribute("href");
 				let headingTargettedElement = document.getElementById( headingTarget.substring(1) ); //removes # and fetch element
-				
+
 				if(isElementInViewport(headingTargettedElement)){
 					$(headingElement).addClass("eael-highlight-active");
+					if(!activeLink) {
+						activeLink = headingElement;
+					}
 					if(showSinlgeHeadingOnly){
 						break;
+					}
+				}
+			}
+
+			// Scroll TOC body to keep active heading visible
+			if(activeLink && $('#eael-toc-list').hasClass('eael-toc-scroll-sync')) {
+				var tocBody = document.querySelector('#eael-toc .eael-toc-body');
+				if(tocBody) {
+					var linkTop = activeLink.offsetTop;
+					var bodyScrollTop = tocBody.scrollTop;
+					var bodyHeight = tocBody.clientHeight;
+					if(linkTop < bodyScrollTop || linkTop > bodyScrollTop + bodyHeight) {
+						tocBody.scrollTop = linkTop - bodyHeight / 2;
 					}
 				}
 			}
@@ -355,6 +372,10 @@
 				pageSetting.eael_ext_toc_list_icon === "number"
 					? " eael-toc-number"
 					: " eael-toc-bullet";
+			toc_style_class +=
+				pageSetting.eael_ext_toc_scroll_sync === "yes"
+					? " eael-toc-scroll-sync"
+					: " ";
 
 			return (
 				'<div id="eael-toc" class="eael-toc eael-toc-disable ' +

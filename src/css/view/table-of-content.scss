@@ -169,7 +169,7 @@ html {
 				}
 			}
 
-			.eael-toc-link.eael-highlight-active:first-child{
+			.eael-toc-link.eael-highlight-active{
 				color: #ff7d50;
 			}
 
@@ -262,7 +262,7 @@ html {
 					a {
 						display: inline-flex;
 						span {
-							width: 140px !important;
+							max-width: 260px;
 							display: block;
 							white-space: nowrap;
 							overflow: hidden;

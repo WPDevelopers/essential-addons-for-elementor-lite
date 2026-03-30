@@ -314,6 +314,27 @@ class Table_of_Content
         );
 
         $element->add_control(
+            'eael_ext_toc_word_wrap_max_width',
+            [
+                'label'      => __('Max Line Width', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => ['min' => 100, 'max' => 1000, 'step' => 10],
+                    '%'  => ['min' => 10, 'max' => 100],
+                ],
+                'default'    => ['unit' => 'px', 'size' => 260],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a span' => 'max-width: {{SIZE}}{{UNIT}};',
+                ],
+                'condition'  => [
+                    'eael_ext_table_of_content' => 'yes',
+                    'eael_ext_toc_word_wrap'    => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
             'eael_ext_toc_auto_collapse',
             [
                 'label' => __('TOC Auto Collapse', 'essential-addons-for-elementor-lite'),
@@ -355,6 +376,41 @@ class Table_of_Content
                 'description' => __('If you select "Single", only the first visible heading will be highlighted. If you select "All", all visible headings will be highlighted.', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
+                    'eael_ext_toc_auto_highlight' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_toc_auto_highlight_color',
+            [
+                'label'     => __('Highlight Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#ff7d50',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list .eael-toc-link.eael-highlight-active' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-bullet li:has(.eael-toc-link.eael-highlight-active):before' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-number li:has(.eael-toc-link.eael-highlight-active):before' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content'  => 'yes',
+                    'eael_ext_toc_auto_highlight' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_toc_scroll_sync',
+            [
+                'label'        => __('TOC Scroll Sync', 'essential-addons-for-elementor-lite'),
+                'description'  => __('Automatically scroll the TOC list to keep the active heading visible.', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'no',
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'condition'    => [
+                    'eael_ext_table_of_content'  => 'yes',
                     'eael_ext_toc_auto_highlight' => 'yes',
                 ],
             ]
