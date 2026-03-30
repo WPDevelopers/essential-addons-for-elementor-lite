@@ -2571,6 +2571,14 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
+                'default'    => [
+                    'top'    => '0',
+                    'right'  => '0',
+                    'bottom' => '0',
+                    'left'   => '10',
+                    'unit'   => 'px',
+                    'linked' => false,
+                ],
                 'selectors'  => [
                     '.eael-popup-details-render .elementor-element-{{ID}} .eael-popup-buy-now-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
