@@ -525,13 +525,31 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_mobile_scroll_to_top',
             [
-                'label'        => __('Scroll to Top on Mobile', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Scroll to Items on Mobile', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
                 'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => '',
-                'description'  => __('Enable this to automatically scroll to the top of the gallery on mobile devices after selecting a filter or search result.', 'essential-addons-for-elementor-lite'),
+                'description'  => __('Enable this to automatically scroll to the items of the gallery on mobile devices after selecting a filter.', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_mobile_scroll_offset',
+            [
+                'label'     => __('Scroll Offset (px)', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::NUMBER,
+                'default'   => 0,
+                'min'       => -500,
+                'max'       => 500,
+                'step'      => 1,
+                'condition' => [
+                    'eael_fg_mobile_scroll_to_top' => 'yes',
+                ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -4350,6 +4368,7 @@ class Filterable_Gallery extends Widget_Base
             'video_gallery_yt_privacy' => $settings['video_gallery_yt_privacy'],
             'control_all_text' => $settings['eael_fg_all_label_text'],
             'mobile_scroll_to_top' => $settings['eael_fg_mobile_scroll_to_top'],
+            'mobile_scroll_offset' => isset( $settings['eael_fg_mobile_scroll_offset'] ) ? (int) $settings['eael_fg_mobile_scroll_offset'] : 0,
         ];
         
         if ( Plugin::$instance->editor->is_edit_mode()) {
