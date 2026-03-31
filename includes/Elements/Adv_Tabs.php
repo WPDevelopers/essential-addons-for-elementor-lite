@@ -1456,8 +1456,12 @@ class Adv_Tabs extends Widget_Base
                     <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($content_active_class); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
 				        <?php
                         if ('content' == $tab['eael_adv_tabs_text_type']) :
+                            $tab_content = $tab['eael_adv_tabs_tab_content'];
+                            if ( ! apply_filters( 'eael/advanced_tabs/allow_dangerous_html', false ) ) {
+                                $tab_content = wp_kses( $tab_content, Helper::eael_allowed_tags() );
+                            }
                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                            echo $this->parse_text_editor( wp_kses( $tab['eael_adv_tabs_tab_content'] , Helper::eael_allowed_tags() ) );
+                            echo $this->parse_text_editor( $tab_content );
 
 				        elseif ('template' == $tab['eael_adv_tabs_text_type']) :
 					        if ( ! empty( $tab['eael_primary_templates'] ) ) {

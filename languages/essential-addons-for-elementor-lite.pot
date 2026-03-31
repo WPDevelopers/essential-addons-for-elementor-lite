@@ -1781,7 +1781,7 @@ msgstr ""
 msgid "Vertical Layout"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:1469
+#: ../includes/Elements/Adv_Tabs.php:1473
 msgid "The provided Template matches the current page or one of its revisions!"
 msgstr ""
 
