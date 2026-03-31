@@ -2494,9 +2494,13 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$repeater->add_control( 'show_on_my_account', [
-			'label'     => __( 'Show on My Account Dashboard', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::SWITCHER,
-			'default'   => 'no',
+			'label'       => __( 'On My Account Dashboard', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SWITCHER,
+			'default'     => 'no',
+			'description' => __( 'When enabled, this field will appear on the WooCommerce "Account Details" page so users can view and update their submitted data after registration.', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				'field_type!' => [ ...$custom_fields_image, 'password', 'confirm_pass' ],
+			],
 		] );
 
 		$repeater->add_responsive_control( 'width', [
