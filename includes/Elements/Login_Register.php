@@ -2493,6 +2493,12 @@ class Login_Register extends Widget_Base {
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 
+		$repeater->add_control( 'show_on_my_account', [
+			'label'     => __( 'Show on My Account Dashboard', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => 'no',
+		] );
+
 		$repeater->add_responsive_control( 'width', [
 			'label'   => __( 'Field Width', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SLIDER,
@@ -6136,6 +6142,29 @@ class Login_Register extends Widget_Base {
 		
 		if ( Plugin::$instance->documents->get_current() ) {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+		}
+
+		// Sync "Show on My Account" fields to option — only writes when something changed.
+		if ( ! $this->in_editor && $this->page_id ) {
+			$enabled = [];
+			
+			foreach ( (array) $this->ds['register_fields'] as $field ) {
+				if ( ! empty( $field['show_on_my_account'] ) && 'yes' === $field['show_on_my_account'] ) {
+					$field_type = sanitize_key( $field['field_type'] ?? '' );
+					if ( $field_type ) {
+						$enabled[ $field_type ] = wp_strip_all_tags( $field['field_label'] ?? $field_type );
+					}
+				}
+			}
+			$all = get_option( 'eael_lr_my_account_fields', [] );
+			if ( ( $all[ $this->page_id ] ?? [] ) !== $enabled ) {
+				if ( empty( $enabled ) ) {
+					unset( $all[ $this->page_id ] );
+				} else {
+					$all[ $this->page_id ] = $enabled;
+				}
+				update_option( 'eael_lr_my_account_fields', $all, false );
+			}
 		}
 
 		$this->page_id_for_popup = get_queried_object_id();

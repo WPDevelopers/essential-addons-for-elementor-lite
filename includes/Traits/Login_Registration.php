@@ -1840,4 +1840,82 @@ trait Login_Registration {
 
 		return $eael_custom_profile_fields;
 	}
+
+	/**
+	 * Read "Show on My Account" fields from option.
+	 * Stored as [ post_id => [ field_type => field_label ] ] — merged across all posts.
+	 *
+	 * @return array  [ field_type => field_label ]
+	 */
+	protected function eael_get_lr_my_account_fields() {
+		$merged = [];
+		foreach ( (array) get_option( 'eael_lr_my_account_fields', [] ) as $post_fields ) {
+			$merged = array_merge( $merged, (array) $post_fields );
+		}
+		return $merged;
+	}
+
+	/**
+	 * Render "Show on My Account" fields inside the WooCommerce edit-account form.
+	 * Hooked to woocommerce_edit_account_form.
+	 */
+	public function eael_wc_account_form_fields() {
+		$fields = $this->eael_get_lr_my_account_fields();
+		
+		if ( empty( $fields ) ) {
+			return;
+		}
+
+		$user_id = get_current_user_id();
+		
+		foreach ( $fields as $type => $label ) {
+			if ( 'website' === $type ) {
+				$value = esc_attr( get_userdata( $user_id )->user_url ?? '' );
+			} elseif ( 'eael_phone_number' === $type ) {
+				$value = esc_attr( get_user_meta( $user_id, 'eael_phone_number', true ) );
+			} else {
+				$value = esc_attr( get_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, true ) );
+			}
+			?>
+			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+				<label for="eael_mya_<?php echo esc_attr( $type ); ?>"><?php echo esc_html( $label ); ?></label>
+				<input type="text"
+				       class="woocommerce-Input woocommerce-Input--text input-text"
+				       name="eael_mya_<?php echo esc_attr( $type ); ?>"
+				       id="eael_mya_<?php echo esc_attr( $type ); ?>"
+				       value="<?php echo $value; ?>">
+			</p>
+			<?php
+		}
+	}
+
+	/**
+	 * Save "Show on My Account" fields submitted from the WooCommerce edit-account form.
+	 * Hooked to woocommerce_save_account_details.
+	 *
+	 * @param int $user_id
+	 */
+	public function eael_wc_save_account_fields( $user_id ) {
+		$fields = $this->eael_get_lr_my_account_fields();
+		if ( empty( $fields ) ) {
+			return;
+		}
+
+		foreach ( array_keys( $fields ) as $type ) {
+			$post_key = 'eael_mya_' . $type;
+			if ( ! isset( $_POST[ $post_key ] ) ) {
+				continue;
+			}
+
+			$value = sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) );
+
+			if ( 'website' === $type ) {
+				wp_update_user( [ 'ID' => $user_id, 'user_url' => esc_url_raw( $value ) ] );
+			} elseif ( 'eael_phone_number' === $type ) {
+				update_user_meta( $user_id, 'eael_phone_number', $value );
+			} else {
+				update_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, $value );
+			}
+		}
+	}
 }
