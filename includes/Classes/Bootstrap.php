@@ -224,7 +224,7 @@ class Bootstrap
 
 	    if( class_exists( 'woocommerce' ) ) {
 		    // Login|Register custom fields on WooCommerce My Account edit-account page
-		    add_action( 'woocommerce_edit_account_form', [ $this, 'eael_wc_account_form_fields' ] );
+		    add_action( 'woocommerce_edit_account_form_fields', [ $this, 'eael_wc_account_form_fields' ] );
 		    add_action( 'woocommerce_save_account_details', [ $this, 'eael_wc_save_account_fields' ] );
 
 		    // quick view
