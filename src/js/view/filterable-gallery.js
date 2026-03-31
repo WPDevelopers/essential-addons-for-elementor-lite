@@ -107,8 +107,9 @@ jQuery(window).on("elementor/frontend/init", function () {
          filterControls.removeClass("open-filters");
       });
 
-      $(".video-popup.eael-magnific-video-link.playout-vertical", $scope).on(
+      $scope.on(
          "click",
+         ".video-popup.eael-magnific-video-link.playout-vertical",
          function () {
             setTimeout(function () {
                $(".mfp-iframe-holder").addClass("eael-gf-vertical-video-popup");
