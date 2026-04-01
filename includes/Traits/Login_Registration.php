@@ -595,24 +595,40 @@ trait Login_Registration {
 			$custom_redirect_url 	= ! empty( $settings['register_redirect_url_prev_page'] ) && $settings['register_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
 
 			if ( ! empty( $settings['register_user_role'] ) ) {
-				$user_data['role'] 	= sanitize_text_field( $settings['register_user_role'] );
-			}
+				$requested_role = sanitize_text_field( $settings['register_user_role'] );
 
-			if ( ! empty( $user_data['role'] ) && strtolower( $user_data['role'] ) === 'administrator' ) {
-				$err_msg = __( 'Invalid Role!', 'essential-addons-for-elementor-lite' );
-
-				if ( $ajax ) {
-					wp_send_json_error( $err_msg );
+				// Verify the post was last saved by an administrator before trusting
+				// the register_user_role setting. This prevents REST API bypass attacks
+				// where non-admin users modify _elementor_data to inject a privileged role.
+				$last_editor_id = (int) get_post_meta( $page_id, '_edit_last', true );
+				if ( ! $last_editor_id ) {
+					$last_editor_id = (int) get_post_field( 'post_author', $page_id );
 				}
-				
-				setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
+				$last_editor    = $last_editor_id ? get_userdata( $last_editor_id ) : false;
+				$saved_by_admin = $last_editor && in_array( 'administrator', (array) $last_editor->roles, true );
 
-				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-					exit();
+				if ( $saved_by_admin ) {
+					// Role allowlist: reject any role that carries privileged capabilities,
+					// not just 'administrator'. This closes the blocklist bypass.
+					$wp_role         = get_role( $requested_role );
+					$privileged_caps = [ 'manage_options', 'edit_users', 'delete_users', 'promote_users' ];
+					$is_safe_role    = ( $wp_role !== null );
+
+					if ( $is_safe_role ) {
+						foreach ( $privileged_caps as $cap ) {
+							if ( ! empty( $wp_role->capabilities[ $cap ] ) ) {
+								$is_safe_role = false;
+								break;
+							}
+						}
+					}
+
+					if ( $is_safe_role ) {
+						$user_data['role'] = $requested_role;
+					}
 				}
-
-				return false;
+				// If the post was not last saved by an admin, or the role carries
+				// privileged capabilities, silently fall through to the site default role.
 			}
 
 			// set email related stuff
