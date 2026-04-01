@@ -598,8 +598,6 @@ trait Login_Registration {
 				$requested_role = sanitize_text_field( $settings['register_user_role'] );
 
 				// Verify the post was last saved by an administrator before trusting
-				// the register_user_role setting. This prevents REST API bypass attacks
-				// where non-admin users modify _elementor_data to inject a privileged role.
 				$last_editor_id = (int) get_post_meta( $page_id, '_edit_last', true );
 				if ( ! $last_editor_id ) {
 					$last_editor_id = (int) get_post_field( 'post_author', $page_id );
@@ -608,8 +606,7 @@ trait Login_Registration {
 				$saved_by_admin = $last_editor && in_array( 'administrator', (array) $last_editor->roles, true );
 
 				if ( $saved_by_admin ) {
-					// Role allowlist: reject any role that carries privileged capabilities,
-					// not just 'administrator'. This closes the blocklist bypass.
+					// Reject any role that carries privileged capabilities,
 					$wp_role         = get_role( $requested_role );
 					$privileged_caps = [ 'manage_options', 'edit_users', 'delete_users', 'promote_users' ];
 					$is_safe_role    = ( $wp_role !== null );
@@ -627,8 +624,6 @@ trait Login_Registration {
 						$user_data['role'] = $requested_role;
 					}
 				}
-				// If the post was not last saved by an admin, or the role carries
-				// privileged capabilities, silently fall through to the site default role.
 			}
 
 			// set email related stuff
