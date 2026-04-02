@@ -938,6 +938,21 @@ class Woo_Add_To_Cart extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_ajax_add_to_cart',
+			[
+				'label'        => esc_html__( 'AJAX Add to Cart', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'description'  => esc_html__( 'Enable to add products to cart without a full page reload. Works with simple products.', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'separator'    => 'before',
+				'condition'    => [
+					'add_to_cart_product_type!' => 'external_product',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -1073,9 +1088,13 @@ class Woo_Add_To_Cart extends Widget_Base {
 					return;
 				}
 				?>
-				<div class="eael-add-to-cart-wrapper eael-product-<?php echo esc_attr( $product->get_type() ); ?>">
-               <?php 
-					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'eael_add_to_cart_text_single'] ); 
+				<div class="eael-add-to-cart-wrapper eael-product-<?php echo esc_attr( $product->get_type() ); ?>"
+					<?php if ( 'yes' === $settings['eael_ajax_add_to_cart'] ) : ?>
+						data-eael-ajax-add-to-cart="yes"
+						data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
+					<?php endif; ?>>
+               <?php
+					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'eael_add_to_cart_text_single'] );
 					woocommerce_template_single_add_to_cart();
 					?>
             </div>

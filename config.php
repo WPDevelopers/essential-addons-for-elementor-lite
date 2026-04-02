@@ -787,6 +787,13 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-add-to-cart.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
             ],
         ],
         'contact-form-7' => [
