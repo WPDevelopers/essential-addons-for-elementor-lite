@@ -254,6 +254,15 @@ class Woo_Add_To_Cart extends Widget_Base {
 			]
 		);
 
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_add_to_cart_button_border_hover',
+				'exclude'  => [ 'color' ],
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .cart .button:hover, {{WRAPPER}} .eael-add-to-cart-wrapper .eael-add-to-cart:hover',
+			]
+		);
+
 		$this->add_control(
 			'eael_add_to_cart_button_border_color_hover',
 			[
@@ -805,6 +814,15 @@ class Woo_Add_To_Cart extends Widget_Base {
 			]
 		);
 
+		$this->start_controls_tabs( 'eael_add_to_cart_icon_style_tabs' );
+
+		$this->start_controls_tab(
+			'eael_add_to_cart_icon_style_normal',
+			[
+				'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
 		$this->add_control(
 			'eael_add_to_icon_color',
 			[
@@ -819,6 +837,33 @@ class Woo_Add_To_Cart extends Widget_Base {
 				],
 			]
 		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'eael_add_to_cart_icon_style_hover',
+			[
+				'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_add_to_icon_color_hover',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .single_add_to_cart_button:hover svg path' => 'fill: {{VALUE}}',
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .single_add_to_cart_button:hover i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eael-single-product-add-to-cart .eael-add-to-cart:hover svg path' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .eael-single-product-add-to-cart .eael-add-to-cart:hover i' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->add_responsive_control(
 			'eael_add_to_icon_margin',
