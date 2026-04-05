@@ -37,7 +37,7 @@ class Image_Masking {
 			if ( empty( $settings[ 'eael_enable_image_masking' ] ) || 'yes' !== $settings[ 'eael_enable_image_masking' ] ) {
 				foreach ( array_keys( $settings ) as $key ) {
 					foreach ( $prefixes as $prefix ) {
-						if ( str_starts_with( $key, $prefix ) ) {
+						if ( strncmp( $key, $prefix, \strlen( $prefix ) ) === 0 ) {
 							unset( $settings[ $key ] );
 						}
 					}
@@ -571,12 +571,6 @@ class Image_Masking {
                         }
                         $style .= '.eael-image-masking-'. esc_html( $element_id ) . $hover_selector . ':hover img {clip-path: '.$hover_clip_path_value.'}';
                     }
-                    
-                    $hover_selector = $settings['eael_image_masking_hover_selector'];
-                    if( $hover_selector ){
-                        $hover_selector = ' ' . trim( $hover_selector );
-                    }
-                    $style .= '.eael-image-masking-'. esc_html( $element_id ) . $hover_selector . ':hover img {clip-path: '.$hover_clip_path_value.'}';
                 }
 			} else if( 'image' === $type ) {
                 $svg = $element->get_settings_for_display( 'eael_image_masking_svg' );
@@ -628,7 +622,8 @@ class Image_Masking {
             
 		
             if( $style ){
-                echo '<style id="eael-image-masking-'. esc_attr( $element_id ) .'">'.esc_html( $style ) .'</style>';
+                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo '<style id="eael-image-masking-'. esc_attr( $element_id ) .'">'. $style .'</style>';
             }
         }
 	}
