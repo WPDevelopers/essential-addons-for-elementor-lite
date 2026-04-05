@@ -43,6 +43,9 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_eael_product_add_to_cart', array( $this, 'eael_product_add_to_cart' ) );
 		add_action( 'wp_ajax_nopriv_eael_product_add_to_cart', array( $this, 'eael_product_add_to_cart' ) );
 
+		add_action( 'wp_ajax_eael_ajax_add_to_cart',        [ $this, 'eael_ajax_add_to_cart' ] );
+		add_action( 'wp_ajax_nopriv_eael_ajax_add_to_cart', [ $this, 'eael_ajax_add_to_cart' ] );
+
 		add_action( 'wp_ajax_woo_checkout_update_order_review', [ $this, 'woo_checkout_update_order_review' ] );
 		add_action( 'wp_ajax_nopriv_woo_checkout_update_order_review', [ $this, 'woo_checkout_update_order_review' ] );
 
@@ -1603,6 +1606,77 @@ trait Ajax_Handler {
 		add_filter( 'option_yith_wcwl_ajax_enable', function ( $data ) {
 			return 'no';
 		} );
+	}
+
+	public function eael_ajax_add_to_cart() {
+		check_ajax_referer( 'eael-ajax-add-to-cart', 'nonce' );
+
+		if ( ! function_exists( 'WC' ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'WooCommerce is not active.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- nonce already checked above
+		$product_id   = isset( $_POST['product_id'] )   ? absint( $_POST['product_id'] )   : 0;
+		$product_type = isset( $_POST['product_type'] ) ? sanitize_key( $_POST['product_type'] ) : 'simple';
+		// phpcs:enable
+
+		if ( ! $product_id ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Invalid product.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		$added = false;
+
+		if ( 'grouped' === $product_type ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$quantities = isset( $_POST['quantity'] ) && is_array( $_POST['quantity'] ) ? $_POST['quantity'] : [];
+			foreach ( $quantities as $child_id => $qty ) {
+				$child_id = absint( $child_id );
+				$qty      = absint( $qty );
+				if ( $child_id > 0 && $qty > 0 ) {
+					WC()->cart->add_to_cart( $child_id, $qty );
+					$added = true;
+				}
+			}
+		} elseif ( 'variable' === $product_type ) {
+			// phpcs:disable WordPress.Security.NonceVerification.Missing
+			$variation_id = isset( $_POST['variation_id'] ) ? absint( $_POST['variation_id'] ) : 0;
+			$quantity     = isset( $_POST['quantity'] )     ? absint( $_POST['quantity'] )     : 1;
+			$attributes   = [];
+			foreach ( $_POST as $key => $value ) {
+				if ( strpos( $key, 'attribute_' ) === 0 ) {
+					$attributes[ sanitize_key( $key ) ] = sanitize_text_field( wp_unslash( $value ) );
+				}
+			}
+			// phpcs:enable
+			if ( $variation_id ) {
+				$added = WC()->cart->add_to_cart( $product_id, $quantity, $variation_id, $attributes );
+			}
+		} else {
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$quantity = isset( $_POST['quantity'] ) ? absint( $_POST['quantity'] ) : 1;
+			$added    = WC()->cart->add_to_cart( $product_id, $quantity );
+		}
+
+		if ( false === $added ) {
+			ob_start();
+			wc_print_notices();
+			$notices_html = ob_get_clean();
+			wp_send_json_error( [ 'notices' => $notices_html ] );
+		}
+
+		WC()->cart->calculate_totals();
+		$fragments = apply_filters( 'woocommerce_add_to_cart_fragments', [] );
+
+		ob_start();
+		wc_print_notices();
+		$notices_html = ob_get_clean();
+
+		wp_send_json_success( [
+			'fragments'  => $fragments,
+			'cart_hash'  => WC()->cart->get_cart_hash(),
+			'cart_count' => WC()->cart->get_cart_contents_count(),
+			'notices'    => $notices_html,
+		] );
 	}
 
 }

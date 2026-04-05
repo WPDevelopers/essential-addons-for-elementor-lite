@@ -10,70 +10,104 @@ eael.hooks.addAction("init", "ea", () => {
 				return;
 			}
 
-			var productId = $wrapper.data("product-id");
+			var productId   = $wrapper.data("product-id");
+			var productType = $wrapper.data("product-type");
+			var nonce       = $wrapper.data("nonce");
+			var ajaxUrl     = localize.ajaxurl;
+			var $notices    = $wrapper.find(".woocommerce-notices-wrapper");
 
-			$wrapper.on("submit", "form.cart", function (e) {
-				e.preventDefault();
+			$wrapper.off("click.eael-atc").on(
+				"click.eael-atc",
+				".single_add_to_cart_button",
+				function (e) {
+					var $button = $(this);
 
-				var $form = $(this);
-				var $button = $form.find(".single_add_to_cart_button");
+					// Let WooCommerce handle disabled state (e.g. no variation selected).
+					if ($button.hasClass("disabled") || $button.hasClass("loading")) {
+						return;
+					}
 
-				if ($button.hasClass("loading") || $button.hasClass("disabled")) {
-					return;
-				}
+					var $form = $button.closest("form");
+					if (!$form.length) {
+						return;
+					}
 
-				var quantity = $form.find("input.qty").val() || 1;
+					e.preventDefault();
 
-				$button.addClass("loading").prop("disabled", true);
+					// Variable product: require a resolved variation_id before going async.
+					if (productType === "variable") {
+						var variationId = parseInt(
+							$form.find('input[name="variation_id"]').val() || 0,
+							10
+						);
+						if (variationId <= 0) {
+							$form.find(".variations select").first().trigger("change");
+							return;
+						}
+					}
 
-				var data = {
-					"add-to-cart": productId,
-					product_id: productId,
-					quantity: quantity,
-				};
+					$button.addClass("loading").prop("disabled", true);
+					$notices.empty();
 
-				// Include variation data when present (variable products)
-				$form
-					.find('input[name^="attribute_"], input[name="variation_id"]')
-					.each(function () {
-						data[$(this).attr("name")] = $(this).val();
+					var data = {
+						action:       "eael_ajax_add_to_cart",
+						nonce:        nonce,
+						product_id:   productId,
+						product_type: productType,
+					};
+
+					if (productType === "variable") {
+						data.variation_id = parseInt(
+							$form.find('input[name="variation_id"]').val() || 0,
+							10
+						);
+						data.quantity = parseInt($form.find("input.qty").val() || 1, 10);
+						// Collect variation attribute selects.
+						$form.find('[name^="attribute_"]').each(function () {
+							data[$(this).attr("name")] = $(this).val();
+						});
+					} else if (productType === "grouped") {
+						// Grouped: WooCommerce renders qty inputs as quantity[child_id].
+						$form.find('input[name^="quantity["]').each(function () {
+							var name = $(this).attr("name"); // e.g. quantity[371]
+							data[name] = parseInt($(this).val() || 0, 10);
+						});
+					} else {
+						data.quantity = parseInt($form.find("input.qty").val() || 1, 10);
+					}
+
+					$.post(ajaxUrl, data, function (response) {
+						$button.removeClass("loading").prop("disabled", false);
+
+						if (!response.success) {
+							if (response.data && response.data.notices) {
+								$notices.html(response.data.notices);
+							}
+							return;
+						}
+
+						// Refresh mini-cart fragments.
+						$(document.body).trigger("wc_fragment_refresh");
+						$(document.body).trigger("added_to_cart", [
+							response.data.fragments,
+							response.data.cart_hash,
+							$button,
+						]);
+
+						// Show the success notice returned by WooCommerce.
+						if (response.data.notices) {
+							$notices.html(response.data.notices);
+						}
+
+						$button.addClass("added");
+						setTimeout(function () {
+							$button.removeClass("added");
+						}, 2000);
+					}).fail(function () {
+						$button.removeClass("loading").prop("disabled", false);
 					});
-
-				var ajaxUrl =
-					typeof wc_add_to_cart_params !== "undefined"
-						? wc_add_to_cart_params.wc_ajax_url
-								.toString()
-								.replace("%%endpoint%%", "add_to_cart")
-						: "/?wc-ajax=add_to_cart";
-
-				$.post(ajaxUrl, data, function (response) {
-					$button.removeClass("loading").prop("disabled", false);
-
-					if (!response) {
-						return;
-					}
-
-					if (response.error && response.product_url) {
-						window.location = response.product_url;
-						return;
-					}
-
-					// Refresh WooCommerce cart fragments (updates mini-cart counts, etc.)
-					$(document.body).trigger("wc_fragment_refresh");
-					$(document.body).trigger("added_to_cart", [
-						response.fragments,
-						response.cart_hash,
-						$button,
-					]);
-
-					$button.addClass("added");
-					setTimeout(function () {
-						$button.removeClass("added");
-					}, 2000);
-				}).fail(function () {
-					$button.removeClass("loading").prop("disabled", false);
-				});
-			});
+				}
+			);
 		}
 	);
 });
