@@ -24,7 +24,7 @@ class advancedDataTable {
       this.initTableSort(table, pagination, classCollection);
 
       // default sort on initial load
-      // this.initDefaultSort(table, pagination);
+      this.initDefaultSort(table, pagination);
 
       // paginated table
       this.initTablePagination(table, pagination, classCollection);
