@@ -34,6 +34,15 @@ eael.hooks.addAction("init", "ea", () => {
 
 					e.preventDefault();
 
+					// External products: WooCommerce puts the URL in the form's action attribute.
+					if (productType === "external") {
+						var externalUrl = $form.attr("action");
+						if (externalUrl) {
+							window.open(externalUrl, $form.attr("target") || "_self");
+						}
+						return;
+					}
+
 					// Variable product: require a resolved variation_id before going async.
 					if (productType === "variable") {
 						var variationId = parseInt(
