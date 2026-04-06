@@ -1335,6 +1335,14 @@ trait Admin {
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'facebook-feed' ) )
 						    ],
+						    'pinterest-feed'        => [
+							    'key'         => 'pinterest-feed',
+							    'title'       => __( 'Pinterest Feed', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/pinterest-feed/',
+							    'doc_link'    => 'https://essential-addons.com/elementor/docs/pinterest-feed/',
+							    'is_pro'      => true,
+							    'is_activate' => boolval( $this->get_settings( 'pinterest-feed' ) )
+						    ],
 					    ]
 				    ],
 				    'learn-dash-elements'      => [
