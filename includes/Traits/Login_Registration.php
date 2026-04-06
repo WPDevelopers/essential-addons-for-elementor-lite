@@ -449,6 +449,15 @@ trait Login_Registration {
 						$errors[ sanitize_text_field( $register_field['field_type'] ) ] = sprintf( __( '%s can not contain HTML tags', 'essential-addons-for-elementor-lite' ), sanitize_text_field( $register_field['field_label'] ) );
 					}
 				}
+
+				// Allow developers to add custom server-side validation for custom profile fields.
+				if ( isset( $register_field['field_type'] ) && array_key_exists( $register_field['field_type'], $eael_custom_profile_fields ) ) {
+					$field_value       = isset( $_POST[ $register_field['field_type'] ] ) ? sanitize_text_field( wp_unslash( $_POST[ $register_field['field_type'] ] ) ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+					$validation_result = apply_filters( 'eael_custom_registration_field_validation', true, $field_value, $register_field );
+					if ( is_string( $validation_result ) && ! empty( $validation_result ) ) {
+						$errors[ sanitize_key( $register_field['field_type'] ) ] = wp_kses_post( $validation_result );
+					}
+				}
 			}
 		}
 
