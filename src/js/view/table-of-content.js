@@ -228,62 +228,59 @@
 			}
 		}
 
+		var eaelTocActiveHref = null;
+
 		function highlightCurrentHeading(){
-			var allHeadings = document.querySelectorAll("#eael-toc-list .eael-toc-link");
-			$('#eael-toc-list .eael-toc-link').removeClass('eael-highlight-active');
-			let showSinlgeHeadingOnly = $('#eael-toc').hasClass('eael-toc-auto-highlight.eael-toc-highlight-single-item') ? true : false;
-			let activeLink = null;
+			var allTocLinks = document.querySelectorAll("#eael-toc-list .eael-toc-link");
+			if(!allTocLinks.length) return;
 
-			for(let i=0; i < allHeadings.length; i++) {
-				let headingElement = allHeadings[i];
-				let headingTarget = headingElement.getAttribute("href");
-				let headingTargettedElement = document.getElementById( headingTarget.substring(1) ); //removes # and fetch element
+			var currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			var threshold = currentScrollTop + offsetSpan + 10;
 
-				if(isElementInViewport(headingTargettedElement)){
-					$(headingElement).addClass("eael-highlight-active");
-					if(!activeLink) {
-						activeLink = headingElement;
-					}
-					if(showSinlgeHeadingOnly){
-						break;
-					}
+			// Find active link: the last heading whose absolute top is at or above scroll threshold
+			var activeLink = null;
+			for(var i = 0; i < allTocLinks.length; i++) {
+				var headingTarget = allTocLinks[i].getAttribute("href");
+				var headingEl = document.getElementById(headingTarget.substring(1));
+				if(!headingEl) continue;
+
+				var headingAbsTop = headingEl.getBoundingClientRect().top + currentScrollTop;
+				if(headingAbsTop <= threshold) {
+					activeLink = allTocLinks[i];
+				} else {
+					break;
 				}
 			}
 
-			// Scroll TOC body to keep active heading visible
-			if(activeLink && $('#eael-toc-list').hasClass('eael-toc-scroll-sync')) {
+			// Clear all active/parent classes
+			var $tocList = $('#eael-toc-list');
+			$tocList.find('.eael-toc-link').removeClass('eael-highlight-active');
+			$tocList.find('li').removeClass('eael-highlight-active eael-highlight-parent');
+
+			if(!activeLink) return;
+
+			// Mark active link
+			$(activeLink).addClass('eael-highlight-active');
+
+			// Mark active li and all ancestor lis for collapse expansion
+			var $activeLi = $(activeLink).closest('li');
+			$activeLi.addClass('eael-highlight-active eael-highlight-parent');
+			$activeLi.parents('#eael-toc-list li').addClass('eael-highlight-parent');
+
+			// Scroll TOC body so active item is at the top (only when active heading changes)
+			var newActiveHref = activeLink.getAttribute('href');
+			if(newActiveHref !== eaelTocActiveHref && $tocList.hasClass('eael-toc-scroll-sync')) {
+				eaelTocActiveHref = newActiveHref;
 				var tocBody = document.querySelector('#eael-toc .eael-toc-body');
 				if(tocBody) {
-					var linkTop = activeLink.offsetTop;
-					var bodyScrollTop = tocBody.scrollTop;
-					var bodyHeight = tocBody.clientHeight;
-					if(linkTop < bodyScrollTop || linkTop > bodyScrollTop + bodyHeight) {
-						tocBody.scrollTop = linkTop - bodyHeight / 2;
-					}
+					var linkRect     = activeLink.getBoundingClientRect();
+					var bodyRect     = tocBody.getBoundingClientRect();
+					var targetScroll = linkRect.top - bodyRect.top + tocBody.scrollTop;
+					tocBody.scrollTo({ top: targetScroll-10, behavior: 'smooth' });
 				}
+			} else {
+				eaelTocActiveHref = newActiveHref;
 			}
-		}
-
-		/**
-		 * Determine if the element is in the viewport.
-		 * @param {*} el 
-		 * @returns 
-		 */
-		function isElementInViewport (el) {
-
-			// Special bonus for those using jQuery
-			if (typeof jQuery === "function" && el instanceof jQuery) {
-				el = el[0];
-			}
-		
-			var rect = el.getBoundingClientRect();
-		
-			return (
-				rect.top >= 0 &&
-				rect.left >= 0 &&
-				rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
-				rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
-			);
 		}
 
 		/**

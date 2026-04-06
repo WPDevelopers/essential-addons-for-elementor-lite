@@ -573,12 +573,15 @@ trait Elements {
 					$el_class .= ( 'top' === $mobile_position ) ? ' eael-toc-top' : ' eael-toc-bottom';
 				}
 
+				$scroll_sync                     = ! empty( $settings_data['eael_ext_toc_scroll_sync'] ) ? $settings_data['eael_ext_toc_scroll_sync'] : '';
+
 				$toc_style_class = ' eael-toc-list-' . $toc_style;
 				$toc_style_class .= ( $toc_collapse == 'yes' ) ? ' eael-toc-collapse' : ' ';
 				$toc_style_class .= ( $list_icon == 'number' ) ? ' eael-toc-number' : ' eael-toc-bullet';
 				$toc_style_class .= ( $toc_word_wrap == 'yes' ) ? ' eael-toc-word-wrap' : ' ';
 				$toc_style_class .= ( $auto_highlight == 'yes' ) ? ' eael-toc-auto-highlight' : ' ';
 				$toc_style_class .= ( $auto_highlight == 'yes' && $auto_highlight_single_item_only == 'yes' ) ? ' eael-toc-highlight-single-item' : ' ';
+				$toc_style_class .= ( $auto_highlight == 'yes' && $scroll_sync == 'yes' ) ? ' eael-toc-scroll-sync' : ' ';
 				$title_url       = ( $title_to_url == 'yes' ) ? 'true' : 'false';
 				$icon_html       = ! empty( $icon_check['value'] ) ? "<i class='" . esc_attr( $icon_check['value'] ) . "'></i>" : '';
 
