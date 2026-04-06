@@ -546,7 +546,7 @@ trait Elements {
 				$position                        = $settings_data['eael_ext_toc_position'];
 				$is_mobile_on                    = isset( $settings_data['eael_ext_toc_position_mobile'] ) ? $settings_data['eael_ext_toc_position_mobile'] : 'no';
 				$mobile_position                 = isset( $settings_data['eael_ext_toc_position_mobile_top_bottom'] ) ? $settings_data['eael_ext_toc_position_mobile_top_bottom'] : $position;
-				$page_offset                     = ! empty( $settings_data['eael_ext_toc_main_page_offset'] ) ? $settings_data['eael_ext_toc_main_page_offset']['size'] : 0;
+				$page_offset                     = ! empty( $settings_data['eael_ext_toc_main_page_offset'] ) ? $settings_data['eael_ext_toc_main_page_offset']['size'] : 120;
 				$close_bt_text_style             = $settings_data['eael_ext_toc_close_button_text_style'];
 				$auto_collapse                   = $settings_data['eael_ext_toc_auto_collapse'];
 				$auto_highlight                  = ! empty( $settings_data['eael_ext_toc_auto_highlight'] ) ? $settings_data['eael_ext_toc_auto_highlight'] : '';
