@@ -737,3 +737,85 @@ span.fc-day-number {
 		}
 	}
 }
+
+.eael-event-calendar-wrapper {
+	.eael-event-calendar-search {
+		margin-bottom: 20px;
+		text-align: right;
+		position: relative; // For positioning suggestions
+
+		.eael-event-calendar-search-input {
+			padding: 10px 15px;
+			border: 1px solid #dfdfe9;
+			border-radius: 5px;
+			width: 250px;
+			font-size: 14px;
+			outline: none;
+			transition: border-color 0.3s;
+
+			&:focus {
+				border-color: #5725ff;
+			}
+		}
+
+		.eael-event-calendar-search-suggestions {
+			position: absolute;
+			top: 100%;
+			right: 0;
+			width: 320px;
+			background: rgba(255, 255, 255, 0.7);
+			backdrop-filter: blur(15px);
+			-webkit-backdrop-filter: blur(15px);
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			border-radius: 12px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			z-index: 1000;
+			margin-top: 10px;
+			max-height: 400px;
+			overflow-y: auto;
+			display: none;
+			text-align: left;
+
+			&.active {
+				display: block;
+				animation: eaelSuggestFadeIn 0.3s ease-out;
+			}
+
+			.suggestion-item {
+				padding: 15px;
+				cursor: pointer;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+				transition: background 0.3s, transform 0.2s;
+				display: flex;
+				flex-direction: column;
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				&:hover {
+					background: rgba(255, 255, 255, 0.5);
+					transform: translateX(5px);
+				}
+
+				.suggestion-title {
+					font-weight: 600;
+					font-size: 14px;
+					color: #111;
+					margin-bottom: 4px;
+				}
+
+				.suggestion-meta {
+					font-size: 12px;
+					color: #666;
+				}
+			}
+		}
+	}
+}
+
+@keyframes eaelSuggestFadeIn {
+	from { opacity: 0; transform: translateY(-10px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
