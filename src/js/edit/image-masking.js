@@ -107,9 +107,27 @@ let ImageMaskingHandler = function ($scope, $) {
     }
 }
 
+function cleanLegacySvgPath(elements) {
+    if (!elements) return;
+    elements.forEach(function (element) {
+        var custom = element?.settings?.eael_svg_paths_custom;
+        if (Array.isArray(custom)) {
+            custom.forEach(function (item) {
+                delete item.eael_svg_path;
+            });
+        }
+        cleanLegacySvgPath(element.elements);
+    });
+}
+
 jQuery(window).on("elementor/frontend/init", function () {
     if (eael.elementStatusCheck('eaelImageMaskingEditor')) {
         return false;
     }
     elementorFrontend.hooks.addAction("frontend/element_ready/widget", ImageMaskingHandler);
+
+    elementor.hooks.addFilter('elementor/documents/save/data', function (data) {
+        cleanLegacySvgPath(data?.elements);
+        return data;
+    });
 });

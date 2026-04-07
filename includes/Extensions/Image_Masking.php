@@ -22,6 +22,7 @@ class Image_Masking {
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_filter( 'elementor/document/element/replace_id', [ $this, 'cleanup_settings_data' ] );
+		add_filter( 'elementor/document/save/data', [ $this, 'cleanup_settings_data' ] );
 	}
 
 	public function cleanup_settings_data( $element_data ) {
@@ -42,6 +43,14 @@ class Image_Masking {
 						}
 					}
 				}
+			}
+
+			// Strip legacy eael_svg_path key from repeater items (replaced by eael_svg_code)
+			if ( ! empty( $settings['eael_svg_paths_custom'] ) && \is_array( $settings['eael_svg_paths_custom'] ) ) {
+				foreach ( $settings['eael_svg_paths_custom'] as &$item ) {
+					unset( $item['eael_svg_path'] );
+				}
+				unset( $item );
 			}
 		};
 
