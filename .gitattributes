@@ -36,6 +36,7 @@ phpcs.xml               export-ignore
 .phpcs.xml.dist         export-ignore
 phpcs.xml.dist          export-ignore
 README.md               export-ignore
+.claude                 export-ignore
 CLAUDE.md               export-ignore
 webpack.config.js       export-ignore
 wp-cli.local.yml        export-ignore
