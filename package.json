@@ -1,81 +1,63 @@
 {
-	"name": "essential-addons-for-elementor",
-	"version": "1.0.0",
-	"description": "=== Essential Addons for Elementor ===\r Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz\r Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form\r Requires at least: 4.0\r Tested up to: 5.2\r Requires PHP: 5.4\r Stable tag: 3.3.0\r License: GPLv3\r License URI: https://opensource.org/licenses/GPL-3.0",
-	"engines": {
-		"node": "^20.20.0"
-	},
-	"scripts": {
-		"dev": "webpack --mode production --watch",
-		"build": "webpack --mode production && webpack --mode development",
-		"lint:js": "eslint 'src/js/**/*.js'",
-		"lint:css": "stylelint 'src/css/**/*.scss'",
-		"lint": "npm run lint:js && npm run lint:css",
-		"fix:js": "eslint 'src/js/**/*.js' --fix",
-		"fix:css": "stylelint 'src/css/**/*.scss' --fix",
-		"fix": "npm run fix:js && npm run fix:css",
-		"format": "prettier --write 'src/**/*.{js,scss,css,json}'",
-		"format:check": "prettier --check 'src/**/*.{js,scss,css,json}'",
-		"prepare": "husky",
-		"test:setup": "wp-env start && wp-env run cli bash /var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/tests/e2e/utils/seed.sh",
-		"test:reset": "echo y | wp-env destroy && npm run test:setup",
-		"test:e2e": "playwright test --config=tests/e2e/playwright.config.ts"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/rupok/essential-addons-for-elementor-lite.git"
-	},
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/rupok/essential-addons-for-elementor-lite/issues"
-	},
-	"homepage": "https://github.com/rupok/essential-addons-for-elementor-lite#readme",
-	"devDependencies": {
-		"@babel/cli": "^7.7.7",
-		"@babel/core": "^7.8.6",
-		"@babel/plugin-proposal-class-properties": "^7.8.3",
-		"@babel/preset-env": "^7.8.6",
-		"@playwright/test": "^1.58.2",
-		"@wordpress/env": "^11.2.0",
-		"autoprefixer": "^9.7.6",
-		"babel-loader": "^8.0.6",
-		"css-loader": "^3.5.2",
-		"eslint": "^8.56.0",
-		"glob": "^7.1.6",
-		"husky": "^9.1.7",
-		"lint-staged": "^16.4.0",
-		"mini-css-extract-plugin": "^0.9.0",
-		"postcss-import": "^12.0.1",
-		"postcss-loader": "^3.0.0",
-		"prettier": "^3.2.0",
-		"sass": "^1.26.3",
-		"sass-loader": "^8.0.2",
-		"stylelint": "^16.2.0",
-		"stylelint-config-standard-scss": "^13.0.0",
-		"webpack": "^4.42.1",
-		"webpack-cli": "^3.3.10",
-		"wp-pot": "^1.9.3"
-	},
-	"dependencies": {
-		"@wordpress/hooks": "^2.6.0",
-		"axios": "^1.7.2"
-	},
-	"lint-staged": {
-		"*.php": [
-			"vendor/bin/phpcbf --standard=phpcs.xml --ignore=vendor/*",
-			"vendor/bin/phpcs --standard=phpcs.xml --ignore=vendor/* --max-warnings=0"
-		],
-		"*.{js,jsx}": [
-			"prettier --write",
-			"eslint --fix --max-warnings=0"
-		],
-		"*.{css,scss}": [
-			"prettier --write",
-			"stylelint --fix"
-		],
-		"*.{json,md}": [
-			"prettier --write"
-		]
-	}
+  "name": "essential-addons-for-elementor",
+  "version": "1.0.0",
+  "description": "=== Essential Addons for Elementor ===\r Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz\r Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form\r Requires at least: 4.0\r Tested up to: 5.2\r Requires PHP: 5.4\r Stable tag: 3.3.0\r License: GPLv3\r License URI: https://opensource.org/licenses/GPL-3.0",
+  "engines": {
+    "node": "^20.20.0"
+  },
+  "scripts": {
+    "dev": "webpack --mode production --watch",
+    "build": "webpack --mode production && webpack --mode development",
+    "lint:js": "eslint 'src/js/**/*.js'",
+    "lint:css": "stylelint 'src/css/**/*.scss'",
+    "lint": "npm run lint:js && npm run lint:css",
+    "fix:js": "eslint 'src/js/**/*.js' --fix",
+    "fix:css": "stylelint 'src/css/**/*.scss' --fix",
+    "fix": "npm run fix:js && npm run fix:css",
+    "format": "prettier --write 'src/**/*.{js,scss,css,json}'",
+    "format:check": "prettier --check 'src/**/*.{js,scss,css,json}'",
+    "prepare": "husky",
+    "test:setup": "wp-env start && wp-env run cli bash /var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/tests/e2e/utils/seed.sh",
+    "test:reset": "echo y | wp-env destroy && npm run test:setup",
+    "test:e2e": "playwright test --config=tests/e2e/playwright.config.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rupok/essential-addons-for-elementor-lite.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rupok/essential-addons-for-elementor-lite/issues"
+  },
+  "homepage": "https://github.com/rupok/essential-addons-for-elementor-lite#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.8.6",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.6",
+    "@playwright/test": "^1.58.2",
+    "@wordpress/env": "^11.2.0",
+    "autoprefixer": "^9.7.6",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.5.2",
+    "eslint": "^8.56.0",
+    "glob": "^7.1.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^3.2.0",
+    "sass": "^1.26.3",
+    "sass-loader": "^8.0.2",
+    "stylelint": "^16.2.0",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.10",
+    "wp-pot": "^1.9.3"
+  },
+  "dependencies": {
+    "@wordpress/hooks": "^2.6.0"
+  }
 }
