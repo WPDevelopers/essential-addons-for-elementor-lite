@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.5.13
+Stable tag: 6.6.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -316,6 +316,23 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.6.0 - 06/04/2026 =
+
+- Added: Compatibility with Elementor v4.0 Atomic Editor
+- Fixed: sanitize_settings fatal error
+- Fixed: Authenticated author level privilege escalation via register_user
+- Fixed: EA Advanced Tabs | Conflict with TidyCal
+- Fixed: EA Filterable Gallery | iOS fullscreen video triggering unintended back navigation
+- Fixed: EA Filterable Gallery | Updated default video link behavior for video gallery
+- Fixed: EA Filterable Gallery | Vertical video ratio changing to 16:9 after clicking Load More
+- Fixed: EA Creative Button | Icon spacing not working for secondary text in Winona effect
+- Fixed: EA Simple Menu | Conflict with Element Pack Pro megamenu feature
+- Improved: EA Business Reviews | Updated integration to support new Places API and replaced legacy API usage
+- Improved: EA Filterable Gallery | Added mobile scroll to filtered items and search selection support
+- Improved: EA Event Calendar | Added search option to filter events by location, title, and category
+- Improved: Compatibility for PHP 8.4
+- Few minor bug fixes & improvements
 
 = 6.5.13 - 08/03/2026 =
 
