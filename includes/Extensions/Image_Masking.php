@@ -45,6 +45,7 @@ class Image_Masking {
 				}
 			}
 
+			// TODO: Remove this block after several versions once existing sites have re-saved and eael_svg_path is no longer present in the DB.
 			// Strip legacy eael_svg_path key from repeater items (replaced by eael_svg_code)
 			if ( ! empty( $settings['eael_svg_paths_custom'] ) && \is_array( $settings['eael_svg_paths_custom'] ) ) {
 				foreach ( $settings['eael_svg_paths_custom'] as &$item ) {

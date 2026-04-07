@@ -107,6 +107,7 @@ let ImageMaskingHandler = function ($scope, $) {
     }
 }
 
+// TODO: Remove this function after several versions once existing sites have re-saved and eael_svg_path is no longer present in saved data.
 function cleanLegacySvgPath(elements) {
     if (!elements) return;
     elements.forEach(function (element) {
