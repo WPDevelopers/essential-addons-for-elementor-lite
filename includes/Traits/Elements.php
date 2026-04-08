@@ -383,6 +383,10 @@ trait Elements {
 
 		$config['promotionWidgets'] = $combine_array;
 
+		if ( isset( $config['promotion']['elements']['action_button'] ) && empty( $config['promotion']['elements']['action_button']['url'] ) ) {
+			$config['promotion']['elements']['action_button']['url'] = 'https://wpdeveloper.com/upgrade/ea-pro';
+		}
+
 		return $config;
 	}
 
