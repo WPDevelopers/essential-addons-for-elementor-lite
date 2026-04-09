@@ -722,19 +722,21 @@ class Breadcrumbs extends Widget_Base {
 	}
 
    protected function render() {
-		$product = false;
+		$product     = false;
+		$is_wc_page  = false;
 
 		if ( class_exists( 'WooCommerce' ) ) {
-			$product = wc_get_product( get_the_ID() );
+			$product    = wc_get_product( get_the_ID() );
+			$is_wc_page = is_tax( 'product_cat' ) || is_tax( 'product_tag' );
 		}
 
 		?>
 		<div class="eael-breadcrumbs">
 			<?php
-			if ( ! $product ) {
-				$this->eael_breadcrumbs();
-			} else {
+			if ( $product || $is_wc_page ) {
 				$this->eael_wc_breadcrumb();
+			} else {
+				$this->eael_breadcrumbs();
 			}
 			?>
 		</div>
