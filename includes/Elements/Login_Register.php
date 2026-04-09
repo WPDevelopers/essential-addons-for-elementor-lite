@@ -2015,29 +2015,6 @@ class Login_Register extends Widget_Base {
 				"enable_{$prefix}_otp" => 'yes',
 			],
 		] );
-
-		/*
-		 * Editor-only preview switcher.
-		 *
-		 * `render_type => 'template'` re-renders the widget when toggled, but the value
-		 * is still saved by Elementor. We deliberately ignore the value on the live frontend
-		 * (see eael_otp_should_force_show() — `$this->in_editor` gate) so it has no effect
-		 * outside the editor regardless of what is stored.
-		 */
-		$this->add_control( "{$prefix}_otp_preview", [
-			'label'        => __( 'Preview OTP Field', 'essential-addons-for-elementor-lite' ),
-			'description'  => __( 'Editor only — force the OTP verification field to be visible while you style it. This setting has no effect on the live site.', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'On', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'Off', 'essential-addons-for-elementor-lite' ),
-			'return_value' => 'yes',
-			'default'      => '',
-			'render_type'  => 'template',
-			'separator'    => 'before',
-			'condition'    => [
-				"enable_{$prefix}_otp" => 'yes',
-			],
-		] );
 	}
 
 	/**
@@ -2055,16 +2032,25 @@ class Login_Register extends Widget_Base {
 	 * @return string '' | 'login' | 'register'
 	 */
 	protected function eael_otp_active_flow() {
-		// Editor preview — only inside the editor canvas.
-		if ( $this->in_editor ) {
-			$register_preview = ! empty( $this->ds['register_otp_preview'] ) && 'yes' === $this->ds['register_otp_preview']
-				&& ! empty( $this->ds['enable_register_otp'] ) && 'yes' === $this->ds['enable_register_otp'];
-			$login_preview = ! empty( $this->ds['login_otp_preview'] ) && 'yes' === $this->ds['login_otp_preview']
-				&& ! empty( $this->ds['enable_login_otp'] ) && 'yes' === $this->ds['enable_login_otp'];
-			if ( $register_preview ) {
+		// Editor preview — only honored inside the editor canvas. Single global switcher
+		// (`otp_preview`) drives both login and register; we resolve which form's OTP UI to
+		// reveal by picking the currently-visible form (default form first, then any form
+		// with OTP enabled).
+		if ( $this->in_editor && ! empty( $this->ds['otp_preview'] ) && 'yes' === $this->ds['otp_preview'] ) {
+			$default          = isset( $this->ds['default_form_type'] ) ? $this->ds['default_form_type'] : '';
+			$login_enabled    = ! empty( $this->ds['enable_login_otp'] ) && 'yes' === $this->ds['enable_login_otp'];
+			$register_enabled = ! empty( $this->ds['enable_register_otp'] ) && 'yes' === $this->ds['enable_register_otp'];
+
+			if ( 'register' === $default && $register_enabled ) {
 				return 'register';
 			}
-			if ( $login_preview ) {
+			if ( 'login' === $default && $login_enabled ) {
+				return 'login';
+			}
+			if ( $register_enabled ) {
+				return 'register';
+			}
+			if ( $login_enabled ) {
 				return 'login';
 			}
 		}
@@ -5604,6 +5590,30 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		/*
+		 * Editor-only preview switcher.
+		 *
+		 * Login and register share the same OTP UI component, so one switcher drives both.
+		 * `render_type => 'template'` re-renders the widget when toggled. The value is
+		 * persisted by Elementor but deliberately ignored on the live frontend
+		 * (see eael_otp_active_flow() — gated by `$this->in_editor`), so even though it's
+		 * saved to the database it has zero effect outside the editor canvas.
+		 *
+		 * In the editor canvas, when this is on, the OTP UI is revealed for whichever form
+		 * is currently visible: the configured default form first, then any form that has
+		 * its own OTP toggle on.
+		 */
+		$this->add_control( 'otp_preview', [
+			'label'        => __( 'Preview OTP Field', 'essential-addons-for-elementor-lite' ),
+			'description'  => __( 'Editor only — force the OTP verification field to be visible so you can style it without triggering a real email. Reveals the OTP UI on whichever form is currently visible. Has no effect on the live site.', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'On', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'Off', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'default'      => '',
+			'render_type'  => 'template',
+		] );
+
 		$this->add_responsive_control( 'otp_container_padding', [
 			'label'      => __( 'Container Padding', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -7804,11 +7814,26 @@ class Login_Register extends Widget_Base {
 			}
 		}
 
-		$auto_show     = ( $cookie_token && $cookie_flow === $form_type );
-		$editor_preview = ( $this->in_editor && ! empty( $this->ds[ "{$prefix}_otp_preview" ] ) && 'yes' === $this->ds[ "{$prefix}_otp_preview" ] );
+		$auto_show      = ( $cookie_token && $cookie_flow === $form_type );
+		$editor_preview = ( $this->in_editor && ! empty( $this->ds['otp_preview'] ) && 'yes' === $this->ds['otp_preview'] && $this->eael_otp_active_flow() === $form_type );
 		$visible        = ( $auto_show || $editor_preview );
+
+		// Compute the remaining resend cooldown server-side from the OTP transient so the
+		// countdown survives page reloads. The transient (eael_lr_otp_<token>) is the canonical
+		// store and is deleted on verify-success or on expiry, so we don't need any usermeta.
+		$initial_remaining_cooldown = 0;
+		if ( $cookie_token ) {
+			// Hardcoded prefix mirrors Login_Registration::$otp_transient_prefix to avoid pulling
+			// the trait into the widget class.
+			$session = get_transient( 'eael_lr_otp_' . $cookie_token );
+			if ( is_array( $session ) && ! empty( $session['last_sent'] ) && ! empty( $session['cooldown'] ) ) {
+				$elapsed                    = time() - (int) $session['last_sent'];
+				$initial_remaining_cooldown = max( 0, (int) $session['cooldown'] - $elapsed );
+			}
+		}
 		?>
 		<div class="eael-lr-otp-wrapper<?php echo $visible ? '' : ' eael-d-none'; ?><?php echo $editor_preview ? ' eael-lr-otp-editor-preview' : ''; ?>"
+			 data-remaining-cooldown="<?php echo esc_attr( $initial_remaining_cooldown ); ?>"
 			 data-flow="<?php echo esc_attr( $form_type ); ?>"
 			 data-widget-id="<?php echo esc_attr( $widget_id ); ?>"
 			 data-cooldown="<?php echo esc_attr( $cooldown ); ?>"

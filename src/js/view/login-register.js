@@ -313,11 +313,25 @@ eael.hooks.addAction("init", "ea", () => {
             $otpEl.find('.eael-lr-otp-input').val('').trigger('focus');
         }
 
-        function eaelOtpStartCooldown($otpEl) {
-            const cooldown = parseInt($otpEl.attr('data-cooldown'), 10) || 60;
-            const $resend  = $otpEl.find('.eael-lr-otp-resend');
-            const $cdText  = $otpEl.find('.eael-lr-otp-cooldown-text');
-            let remaining  = cooldown;
+        function eaelOtpStartCooldown($otpEl, overrideRemaining) {
+            const fullCooldown = parseInt($otpEl.attr('data-cooldown'), 10) || 60;
+            const $resend      = $otpEl.find('.eael-lr-otp-resend');
+            const $cdText      = $otpEl.find('.eael-lr-otp-cooldown-text');
+            let remaining      = (typeof overrideRemaining === 'number' && !isNaN(overrideRemaining))
+                ? overrideRemaining
+                : fullCooldown;
+
+            // Bust any previous countdown so resend → restart works without piling up intervals.
+            const prevInterval = $otpEl.data('cooldown-interval');
+            if (prevInterval) {
+                clearInterval(prevInterval);
+            }
+
+            if (remaining <= 0) {
+                $resend.removeClass('eael-lr-otp-disabled').removeAttr('aria-disabled');
+                $cdText.text('');
+                return;
+            }
 
             $resend.addClass('eael-lr-otp-disabled').attr('aria-disabled', 'true');
             $cdText.text(' (' + remaining + 's)');
@@ -326,12 +340,14 @@ eael.hooks.addAction("init", "ea", () => {
                 remaining--;
                 if (remaining <= 0) {
                     clearInterval(interval);
+                    $otpEl.removeData('cooldown-interval');
                     $resend.removeClass('eael-lr-otp-disabled').removeAttr('aria-disabled');
                     $cdText.text('');
                     return;
                 }
                 $cdText.text(' (' + remaining + 's)');
             }, 1000);
+            $otpEl.data('cooldown-interval', interval);
         }
 
         function eaelOtpVerify($otpEl) {
@@ -446,7 +462,12 @@ eael.hooks.addAction("init", "ea", () => {
                     const widgetId   = $otpEl.data('widget-id');
                     const cookiePath = (typeof eaelLR !== 'undefined' && eaelLR.cookiePath) ? eaelLR.cookiePath : '/';
                     document.cookie = 'eael_lr_otp_token_' + widgetId + '=; Max-Age=0; path=' + cookiePath;
-                    eaelOtpStartCooldown($otpEl);
+
+                    // Resume the cooldown from where it left off across page reloads.
+                    // PHP computes the remaining seconds from the OTP transient (`last_sent` + `cooldown`)
+                    // and ships it via data-remaining-cooldown. If 0, the resend link is immediately enabled.
+                    const remaining = parseInt($otpEl.attr('data-remaining-cooldown'), 10);
+                    eaelOtpStartCooldown($otpEl, isNaN(remaining) ? undefined : remaining);
                 }
             }
 
