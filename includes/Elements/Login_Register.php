@@ -2118,12 +2118,9 @@ class Login_Register extends Widget_Base {
 	 * @return bool
 	 */
 	protected function eael_otp_should_force_show( $form_type ) {
-		$prefix = ( 'login' === $form_type ) ? 'login' : 'register';
-
-		if ( empty( $this->ds[ "enable_{$prefix}_otp" ] ) || 'yes' !== $this->ds[ "enable_{$prefix}_otp" ] ) {
-			return false;
-		}
-
+		// The pending-registration intercept in log_user_in() sets an OTP cookie using flow='login'
+		// even when enable_login_otp is off. We must honour that cookie so the page-reload path
+		// (non-AJAX) also shows the OTP UI and prevents a flash of the login form.
 		return $this->eael_otp_active_flow() === $form_type;
 	}
 
@@ -7804,12 +7801,14 @@ class Login_Register extends Widget_Base {
 	 * @param string $form_type 'login' or 'register'
 	 */
 	protected function print_otp_form( $form_type = 'login' ) {
-		$prefix     = ( 'login' === $form_type ) ? 'login' : 'register';
-		$enabled    = ! empty( $this->ds[ "enable_{$prefix}_otp" ] ) && 'yes' === $this->ds[ "enable_{$prefix}_otp" ];
+		$prefix  = ( 'login' === $form_type ) ? 'login' : 'register';
+		$enabled = ! empty( $this->ds[ "enable_{$prefix}_otp" ] ) && 'yes' === $this->ds[ "enable_{$prefix}_otp" ];
 
-		if ( ! $enabled ) {
-			return;
-		}
+		// Always render the OTP wrapper — even when the OTP toggle is off — so the DOM anchor
+		// exists for the pending-registration intercept: if a user registered with OTP required
+		// but never verified, `log_user_in()` blocks the login and returns `otp_required: true`.
+		// Without the wrapper the JS has nowhere to inject the OTP screen and silently does nothing.
+		// The wrapper starts `eael-d-none` and is only revealed by JS on demand.
 
 		$title       = ! empty( $this->ds[ "{$prefix}_otp_title_text" ] ) ? $this->ds[ "{$prefix}_otp_title_text" ] : __( 'Verify Your Email', 'essential-addons-for-elementor-lite' );
 		$subtitle    = ! empty( $this->ds[ "{$prefix}_otp_subtitle_text" ] ) ? $this->ds[ "{$prefix}_otp_subtitle_text" ] : __( 'We have sent a 6-digit verification code to your email. Please enter it below to continue.', 'essential-addons-for-elementor-lite' );
@@ -7841,7 +7840,7 @@ class Login_Register extends Widget_Base {
 		}
 
 		$auto_show      = ( $cookie_token && $cookie_flow === $form_type );
-		$editor_preview = ( $this->in_editor && ! empty( $this->ds['otp_preview'] ) && 'yes' === $this->ds['otp_preview'] && $this->eael_otp_active_flow() === $form_type );
+		$editor_preview = ( $enabled && $this->in_editor && ! empty( $this->ds['otp_preview'] ) && 'yes' === $this->ds['otp_preview'] && $this->eael_otp_active_flow() === $form_type );
 		$visible        = ( $auto_show || $editor_preview );
 
 		// Compute the remaining resend cooldown server-side from the OTP transient so the

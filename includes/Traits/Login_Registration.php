@@ -240,6 +240,78 @@ trait Login_Registration {
 				}
 			}
 
+			// ============================================================
+			// Pending OTP verification gate (Registration completion)
+			// If this user registered with OTP required but never completed
+			// verification, block login and prompt them to verify now.
+			// This check is independent of the login-specific OTP toggle.
+			// ============================================================
+			if ( '1' === get_user_meta( $user_data->ID, '_eael_otp_pending', true ) ) {
+				// Undo auth state set by wp_signon() (used when login OTP is disabled).
+				if ( ! $login_otp_enabled ) {
+					wp_clear_auth_cookie();
+				}
+
+				if ( empty( $user_data->user_email ) ) {
+					$err_msg = __( 'No email is associated with this account.', 'essential-addons-for-elementor-lite' );
+					if ( $ajax ) {
+						wp_send_json_error( $err_msg );
+					}
+					setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+						exit();
+					}
+				}
+
+				$pending_redirect_to = ! empty( $_POST['redirect_to'] ) ? sanitize_url( wp_unslash( $_POST['redirect_to'] ) ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				$previous_page_url   = ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( wp_unslash( $_POST['redirect_to_prev_page_login'] ) ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				$custom_redirect_url = ! empty( $settings['login_redirect_url_prev_page'] ) && 'yes' === $settings['login_redirect_url_prev_page'] ? $previous_page_url : $pending_redirect_to;
+
+				$otp_payload = [
+					'user_id'                 => (int) $user_data->ID,
+					'remember'                => ( 'forever' === $rememberme ),
+					'redirect_url'            => $custom_redirect_url,
+					'is_pending_registration' => true,
+				];
+
+				$session = $this->eael_otp_create_session( 'login', $otp_payload, $user_data->user_email, $widget_id, $page_id, $settings );
+
+				if ( is_wp_error( $session ) ) {
+					if ( $ajax ) {
+						wp_send_json_error( $session->get_error_message() );
+					}
+					setcookie( 'eael_login_error_' . $widget_id, $session->get_error_message() );
+					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+						exit();
+					}
+				}
+
+				if ( $ajax ) {
+					wp_send_json_success( [
+						'otp_required' => true,
+						'otp_token'    => $session['token'],
+						'otp_expiry'   => $session['expiry'],
+						'otp_cooldown' => $session['cooldown'],
+						'otp_email'    => $session['email'],
+						'message'      => __( 'Please complete your email verification to proceed.', 'essential-addons-for-elementor-lite' ),
+					] );
+				}
+
+				setcookie(
+					'eael_lr_otp_token_' . $widget_id,
+					$session['token'] . '|login',
+					time() + ( $session['expiry'] * MINUTE_IN_SECONDS ),
+					COOKIEPATH ? COOKIEPATH : '/',
+					COOKIE_DOMAIN
+				);
+				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+					exit();
+				}
+			}
+
 			wp_set_current_user( $user_data->ID, $user_login );
 			$current_user_role = ! empty( $user_data->roles[0] ) ? $user_data->roles[0] : '';
 
@@ -2318,6 +2390,12 @@ trait Login_Registration {
 		$user = get_user_by( 'id', $user_id );
 		if ( ! $user ) {
 			return new \WP_Error( 'eael_otp_user', __( 'User no longer exists.', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		// If this login OTP was triggered to complete a pending registration, clear the flag now.
+		if ( ! empty( $payload['is_pending_registration'] ) ) {
+			delete_user_meta( $user_id, '_eael_otp_pending' );
+			delete_user_meta( $user_id, '_eael_otp_pending_since' );
 		}
 
 		$remember = ! empty( $payload['remember'] );
