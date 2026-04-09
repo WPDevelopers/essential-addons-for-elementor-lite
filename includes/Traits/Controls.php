@@ -391,6 +391,23 @@ trait Controls
                 );
 
                 $wb->add_control(
+                    'eael_acf_gallery_source',
+                    [
+                        'label'       => esc_html__( 'ACF Gallery Source', 'essential-addons-for-elementor-lite' ),
+                        'type'        => Controls_Manager::SELECT,
+                        'default'     => 'all',
+                        'options'     => [
+                            'all'           => esc_html__( 'All', 'essential-addons-for-elementor-lite' ),
+                            'current_query' => esc_html__( 'Current Query', 'essential-addons-for-elementor-lite' ),
+                        ],
+                        'description' => esc_html__( 'Choose "Current Query" to fetch ACF gallery images only from the current post/page.', 'essential-addons-for-elementor-lite' ),
+                        'condition'   => [
+                            'fetch_acf_image_gallery' => 'yes',
+                        ],
+                    ]
+                );
+
+                $wb->add_control(
                     'eael_gf_hide_parent_items',
                     [
                         'label'        => esc_html__( 'Hide Featured Image', 'essential-addons-for-elementor-lite' ),
