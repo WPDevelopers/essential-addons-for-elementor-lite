@@ -93,6 +93,8 @@ var SimpleMenu = function ($scope, $) {
         eael_menu_resize( $hamburger_max_width );
     });
     
+    $('.eael-simple-menu-container').removeClass('eael-simple-menu--loading');
+
     function eael_menu_resize( max_width_value = 0 ) {
         if (window.matchMedia('(max-width: '+ max_width_value +'px)').matches) {
             $('.eael-simple-menu-container', $scope).addClass(
