@@ -55,6 +55,8 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_eael_select2_search_post', [ $this, 'select2_ajax_posts_filter_autocomplete' ] );
 		add_action( 'wp_ajax_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
 
+		add_action( 'wp_ajax_eael_lr_search_redirect_post', [ $this, 'lr_search_redirect_post' ] );
+
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_eael_save_settings_with_ajax', array( $this, 'save_settings' ) );
 			add_action( 'wp_ajax_eael_clear_cache_files_with_ajax', array( $this, 'clear_cache_files' ) );
@@ -1207,6 +1209,67 @@ trait Ajax_Handler {
 		}
 
 		return $args_tax_query;
+	}
+
+	/**
+	 * Login/Register Widget — AJAX Redirect Post Search
+	 * Searches posts, pages, and products for the registration redirect URL control.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function lr_search_redirect_post() {
+		if ( empty( $_POST['nonce'] ) || ! check_ajax_referer( 'eael_lr_redirect_search', 'nonce', false ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Unauthorized', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Permission denied', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		$search = ! empty( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : '';
+
+		if ( strlen( $search ) < 3 ) {
+			wp_send_json( [] );
+		}
+
+		// Accept an explicit post_types array from the control; fall back to sensible defaults.
+		$allowed_types = [ 'post', 'page', 'product' ];
+		$requested     = ! empty( $_POST['post_types'] ) && is_array( $_POST['post_types'] ) //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			? array_map( 'sanitize_key', wp_unslash( $_POST['post_types'] ) )
+			: $allowed_types;
+
+		// Only allow registered, published-capable post types from the safe list.
+		$post_types = array_filter(
+			$requested,
+			function ( $pt ) use ( $allowed_types ) {
+				return in_array( $pt, $allowed_types, true ) && post_type_exists( $pt );
+			}
+		);
+
+		if ( empty( $post_types ) ) {
+			$post_types = array_filter( [ 'post', 'page' ], 'post_type_exists' );
+		}
+
+		$query = new \WP_Query( [
+			'post_type'      => $post_types,
+			'post_status'    => 'publish',
+			's'              => $search,
+			'posts_per_page' => 20,
+			'no_found_rows'  => true,
+		] );
+
+		$results = [];
+		if ( $query->have_posts() ) {
+			foreach ( $query->posts as $post ) {
+				$results[] = [
+					'id'   => get_permalink( $post->ID ),
+					'text' => wp_strip_all_tags( $post->post_title ) . ' (' . esc_html( $post->post_type ) . ')',
+				];
+			}
+		}
+
+		wp_send_json( $results );
 	}
 
 	/**
