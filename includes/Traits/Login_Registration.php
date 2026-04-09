@@ -183,7 +183,18 @@ trait Login_Registration {
 			'user_password' => $password,
 			'remember'      => ( 'forever' === $rememberme ),
 		];
-		$user_data   = wp_signon( $credentials );
+
+		// If OTP is enabled for this form, validate credentials WITHOUT actually signing the user in.
+		// wp_signon() sets auth cookies as a side effect; that conflicts with the OTP gate (the user
+		// would briefly be authenticated, and on the redirect-back to show the OTP UI a widget configured
+		// with `hide_for_logged_in_user` would render nothing). wp_authenticate() validates the same
+		// credentials but never touches cookies, so the OTP redirect lands cleanly.
+		$login_otp_enabled = ! empty( $settings['enable_login_otp'] ) && 'yes' === $settings['enable_login_otp'];
+		if ( $login_otp_enabled ) {
+			$user_data = wp_authenticate( $user_login, $password );
+		} else {
+			$user_data = wp_signon( $credentials );
+		}
 
 		if ( is_wp_error( $user_data ) ) {
 			$err_msg = '';
@@ -243,9 +254,9 @@ trait Login_Registration {
 			// ============================================================
 			// Email OTP Verification gate (Login)
 			// ============================================================
-			if ( ! empty( $settings['enable_login_otp'] ) && 'yes' === $settings['enable_login_otp'] ) {
-				// Roll back the auth that wp_signon just established.
-				wp_clear_auth_cookie();
+			if ( $login_otp_enabled ) {
+				// We used wp_authenticate() above (no auth cookies were set), so the only thing to
+				// roll back is the global $current_user that wp_set_current_user() just bound.
 				wp_set_current_user( 0 );
 
 				if ( empty( $user_data->user_email ) ) {

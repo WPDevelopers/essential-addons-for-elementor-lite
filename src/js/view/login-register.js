@@ -275,6 +275,21 @@ eael.hooks.addAction("init", "ea", () => {
         const $loginOtp    = $loginFormWrapper.find('.eael-lr-otp-wrapper');
         const $registerOtp = $regFormWrapper.find('.eael-lr-otp-wrapper');
 
+        // The Pro plugin renders an animated character (`.eael-animated-character-wrapper`) above
+        // the login form via the `eael/login-register/before-login-form` action. When the OTP UI
+        // takes over the form area we need to hide that character too, otherwise it floats over
+        // an empty space above the OTP input. We resolve it relative to the OTP wrapper so multiple
+        // widgets on the same page are correctly scoped.
+        function eaelOtpHideCharacter($otpEl) {
+            const $formContainer = $otpEl.closest('.lr-form-wrapper');
+            const $character = $formContainer.length
+                ? $formContainer.find('.eael-animated-character-wrapper')
+                : $otpEl.closest('section').find('.eael-animated-character-wrapper');
+            if ($character.length) {
+                $character.hide();
+            }
+        }
+
         function eaelOtpShow($otpEl, $formEl, response) {
             if (!$otpEl || !$otpEl.length) { return; }
             if (response && response.otp_token) {
@@ -287,6 +302,7 @@ eael.hooks.addAction("init", "ea", () => {
             if ($formEl && $formEl.length) {
                 $formEl.hide();
             }
+            eaelOtpHideCharacter($otpEl);
             eaelOtpStartCooldown($otpEl);
             const $msg = $otpEl.find('.eael-lr-otp-message');
             if (response && response.message) {
@@ -422,6 +438,9 @@ eael.hooks.addAction("init", "ea", () => {
                     $regFormWrapper.removeClass('eael-lr-d-none');
                 }
 
+                // Also hide the Pro animated character if it's present.
+                eaelOtpHideCharacter($otpEl);
+
                 if (isAutoShow) {
                     // One-shot cookie — drop it now so a refresh after success doesn't replay.
                     const widgetId   = $otpEl.data('widget-id');
@@ -461,9 +480,13 @@ eael.hooks.addAction("init", "ea", () => {
             }
 
             // Identify which form fired the request by sniffing the serialized POST body.
+            // We deliberately key off the per-form nonce fields (`eael-login-nonce` /
+            // `eael-register-nonce`) rather than the submit-button names — jQuery's $form.serialize()
+            // does NOT include <input type="submit"> values, so the previous sniff was always false
+            // for the Pro AJAX path. The nonce fields are guaranteed hidden inputs and always serialize.
             const body = (typeof settings.data === 'string') ? settings.data : '';
-            const isRegister = body.indexOf('eael-register-submit') !== -1;
-            const isLogin    = body.indexOf('eael-login-submit') !== -1;
+            const isRegister = body.indexOf('eael-register-nonce') !== -1;
+            const isLogin    = body.indexOf('eael-login-nonce') !== -1 && !isRegister;
 
             // Make sure the response is for *this* widget instance (not another on the same page).
             if (body.indexOf('widget_id=' + encodeURIComponent(widgetId)) === -1
