@@ -94,7 +94,7 @@ class EAEL_URL extends Control_URL {
 	public function enqueue() {
 		wp_register_script(
 			'eael-url-search',
-			EAEL_PLUGIN_URL . 'assets/admin/js/eael-url-search.js',
+			EAEL_PLUGIN_URL . 'assets/front-end/js/edit/eael-url-search.min.js',
 			[ 'jquery', 'jquery-elementor-select2' ],
 			EAEL_PLUGIN_VERSION,
 			true
