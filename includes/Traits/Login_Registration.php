@@ -2214,6 +2214,14 @@ trait Login_Registration {
 				: __( 'Your registration completed successfully.', 'essential-addons-for-elementor-lite' ),
 		];
 
+		// Persist the success flag the same way the standard (non-OTP) register flow does, so
+		// that when the JS reloads the page after the verify-success delay, the form's
+		// existing print_validation_message() / print_registration_success_message() picks it up
+		// and the user lands on the standard success banner instead of an empty register form.
+		if ( ! in_array( 'redirect', $register_actions, true ) && ! empty( $session['widget_id'] ) ) {
+			update_option( 'eael_register_success_' . $session['widget_id'], 1, false );
+		}
+
 		// Optional auto-login.
 		if ( in_array( 'auto_login', $register_actions, true ) && ! is_user_logged_in() ) {
 			wp_signon( [

@@ -378,19 +378,31 @@ eael.hooks.addAction("init", "ea", () => {
                 }
             }).done(function (response) {
                 if (response && response.success) {
-                    $msg.removeClass('invalid').addClass('valid').text(response.data.message || 'Verified.');
-                    if (response.data.redirect_to) {
-                        window.location.href = response.data.redirect_to;
-                    } else {
-                        window.location.reload();
-                    }
+                    // 1) Show the success message in the OTP message slot, in a clearly successful state.
+                    // 2) Disable the input/resend so the user can't keep poking at a verified session.
+                    // 3) Hold for ~4s so the user actually reads the message.
+                    // 4) Then either redirect (if the server provided a URL) or reload to land them on
+                    //    the post-success state of the page.
+                    $msg.removeClass('invalid').addClass('valid')
+                        .text(response.data.message || 'Verified successfully.');
+                    $otpEl.find('.eael-lr-otp-input').prop('disabled', true);
+                    $otpEl.find('.eael-lr-otp-resend').addClass('eael-lr-otp-disabled').attr('aria-disabled', 'true');
+                    $btn.prop('disabled', true);
+
+                    setTimeout(function () {
+                        if (response.data.redirect_to) {
+                            window.location.href = response.data.redirect_to;
+                        } else {
+                            window.location.reload();
+                        }
+                    }, 4000);
                 } else {
                     const m = (response && response.data && response.data.message) ? response.data.message : 'Verification failed.';
                     $msg.removeClass('valid').addClass('invalid').text(m);
+                    $btn.prop('disabled', false);
                 }
             }).fail(function () {
                 $msg.removeClass('valid').addClass('invalid').text('Network error. Please try again.');
-            }).always(function () {
                 $btn.prop('disabled', false);
             });
         }
