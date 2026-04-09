@@ -766,6 +766,47 @@ trait Login_Registration {
 				}
 			}
 
+			// Optional "Show Flag on User list" mode: create the user immediately, mark them
+			// as pending verification via the `_eael_otp_pending` user meta, and store only the
+			// user_id on the OTP session payload. The eael_otp_finalize_register() helper detects
+			// the pre-created user and just clears the meta on a successful verify. If the user
+			// never verifies, the account stays in the WP Users list with the pending flag for
+			// the admin to triage.
+			$show_user_flag = ! empty( $settings['register_otp_show_user_flag'] ) && 'yes' === $settings['register_otp_show_user_flag'];
+			if ( $show_user_flag ) {
+				do_action( 'eael/login-register/before-insert-user', $user_data );
+				$pending_user_id = wp_insert_user( $user_data );
+
+				if ( is_wp_error( $pending_user_id ) ) {
+					$err_msg = isset( $settings['err_unknown'] )
+						? Helper::eael_wp_kses( $settings['err_unknown'] )
+						: __( 'Sorry, something went wrong. User could not be registered.', 'essential-addons-for-elementor-lite' );
+					if ( $ajax ) {
+						wp_send_json_error( $err_msg );
+					}
+					setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
+					wp_safe_redirect( esc_url_raw( $url ) );
+					exit();
+				}
+
+				if ( ! empty( $user_data['eael_phone_number'] ) ) {
+					update_user_meta( $pending_user_id, 'eael_phone_number', $user_data['eael_phone_number'] );
+				}
+				foreach ( $otp_payload['custom_profile_fields'] as $cpf_key => $cpf_value ) {
+					update_user_meta( $pending_user_id, self::$eael_custom_profile_field_prefix . $cpf_key, $cpf_value );
+				}
+
+				// The flag itself.
+				update_user_meta( $pending_user_id, '_eael_otp_pending', '1' );
+				update_user_meta( $pending_user_id, '_eael_otp_pending_since', time() );
+
+				do_action( 'eael/login-register/after-insert-user', $pending_user_id, $user_data, $settings );
+
+				// On verify we only need the id; clear the heavy data so the transient stays small.
+				$otp_payload['pre_created_user_id'] = (int) $pending_user_id;
+				unset( $otp_payload['user_data'] );
+			}
+
 			$session = $this->eael_otp_create_session( 'register', $otp_payload, $email, $widget_id, $page_id, $settings );
 
 			if ( is_wp_error( $session ) ) {
@@ -2163,41 +2204,62 @@ trait Login_Registration {
 	 * @return array|\WP_Error
 	 */
 	protected function eael_otp_finalize_register( $session, $settings ) {
-		$payload   = isset( $session['payload'] ) ? (array) $session['payload'] : [];
-		$user_data = isset( $payload['user_data'] ) ? (array) $payload['user_data'] : [];
-
-		if ( empty( $user_data['user_email'] ) || empty( $user_data['user_login'] ) ) {
-			return new \WP_Error( 'eael_otp_payload', __( 'Stored registration data is incomplete.', 'essential-addons-for-elementor-lite' ) );
-		}
+		$payload = isset( $session['payload'] ) ? (array) $session['payload'] : [];
 
 		// Repopulate static email options for the email filter.
 		self::$email_options              = isset( $payload['email_options'] ) ? (array) $payload['email_options'] : [];
 		self::$send_custom_email          = ! empty( $payload['send_custom_email'] );
 		self::$send_custom_email_admin    = ! empty( $payload['send_custom_email_admin'] );
 
-		do_action( 'eael/login-register/before-insert-user', $user_data );
+		// Two paths converge here:
+		//   A) "Show Flag on User list" was OFF: nothing exists yet → wp_insert_user now.
+		//   B) "Show Flag on User list" was ON:  the user already exists with `_eael_otp_pending=1`
+		//      → just clear the flag and run the post-create hooks.
+		if ( ! empty( $payload['pre_created_user_id'] ) ) {
+			$user_id = (int) $payload['pre_created_user_id'];
+			$user    = get_user_by( 'id', $user_id );
+			if ( ! $user ) {
+				return new \WP_Error( 'eael_otp_user', __( 'The pending user no longer exists.', 'essential-addons-for-elementor-lite' ) );
+			}
 
-		$user_id = wp_insert_user( $user_data );
+			delete_user_meta( $user_id, '_eael_otp_pending' );
+			delete_user_meta( $user_id, '_eael_otp_pending_since' );
 
-		if ( is_wp_error( $user_id ) ) {
-			return new \WP_Error(
-				'eael_otp_create_user',
-				isset( $settings['err_unknown'] )
-					? Helper::eael_wp_kses( $settings['err_unknown'] )
-					: __( 'Sorry, something went wrong. User could not be registered.', 'essential-addons-for-elementor-lite' )
-			);
+			$user_data = [
+				'user_login' => $user->user_login,
+				'user_email' => $user->user_email,
+			];
+		} else {
+			$user_data = isset( $payload['user_data'] ) ? (array) $payload['user_data'] : [];
+
+			if ( empty( $user_data['user_email'] ) || empty( $user_data['user_login'] ) ) {
+				return new \WP_Error( 'eael_otp_payload', __( 'Stored registration data is incomplete.', 'essential-addons-for-elementor-lite' ) );
+			}
+
+			do_action( 'eael/login-register/before-insert-user', $user_data );
+
+			$user_id = wp_insert_user( $user_data );
+
+			if ( is_wp_error( $user_id ) ) {
+				return new \WP_Error(
+					'eael_otp_create_user',
+					isset( $settings['err_unknown'] )
+						? Helper::eael_wp_kses( $settings['err_unknown'] )
+						: __( 'Sorry, something went wrong. User could not be registered.', 'essential-addons-for-elementor-lite' )
+				);
+			}
+
+			if ( ! empty( $user_data['eael_phone_number'] ) ) {
+				update_user_meta( $user_id, 'eael_phone_number', $user_data['eael_phone_number'] );
+			}
+
+			$custom_profile_fields = isset( $payload['custom_profile_fields'] ) ? (array) $payload['custom_profile_fields'] : [];
+			foreach ( $custom_profile_fields as $key => $value ) {
+				update_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $key, $value );
+			}
+
+			do_action( 'eael/login-register/after-insert-user', $user_id, $user_data, $settings );
 		}
-
-		if ( ! empty( $user_data['eael_phone_number'] ) ) {
-			update_user_meta( $user_id, 'eael_phone_number', $user_data['eael_phone_number'] );
-		}
-
-		$custom_profile_fields = isset( $payload['custom_profile_fields'] ) ? (array) $payload['custom_profile_fields'] : [];
-		foreach ( $custom_profile_fields as $key => $value ) {
-			update_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $key, $value );
-		}
-
-		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data, $settings );
 
 		$register_actions = isset( $payload['register_actions'] ) ? (array) $payload['register_actions'] : [];
 		$is_pass_auto    = ! empty( $payload['is_pass_auto_generated'] );
@@ -2277,6 +2339,79 @@ trait Login_Registration {
 		}
 
 		return $response;
+	}
+
+	/**
+	 * Decorate the WP Users list rows for users that are still pending OTP verification.
+	 *
+	 * Renders inline in the wp-admin Users page footer (no new column added). For each user
+	 * carrying the `_eael_otp_pending=1` meta we inject a small dashicon flag next to the
+	 * username, with `title` and `aria-label` attributes describing the state.
+	 *
+	 * Wired to the `admin_footer-users.php` action so it only loads on the Users screen.
+	 */
+	public function eael_lr_otp_pending_user_flag() {
+		if ( ! current_user_can( 'list_users' ) ) {
+			return;
+		}
+
+		$pending_users = get_users( [
+			'meta_key'   => '_eael_otp_pending',
+			'meta_value' => '1',
+			'fields'     => 'ID',
+			'number'     => -1,
+		] );
+
+		if ( empty( $pending_users ) ) {
+			return;
+		}
+
+		$pending_users = array_map( 'intval', $pending_users );
+		$tooltip       = esc_html__( 'Email verification pending — this user has not completed OTP verification.', 'essential-addons-for-elementor-lite' );
+		?>
+		<style>
+			.eael-otp-pending-flag {
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				margin-left: 6px;
+				color: #d63638;
+				font-size: 16px;
+				line-height: 1;
+				vertical-align: middle;
+				cursor: help;
+				text-decoration: none;
+			}
+			.eael-otp-pending-flag:before {
+				content: "\f534"; /* dashicons-warning */
+				font-family: dashicons;
+			}
+		</style>
+		<script>
+		(function ($) {
+			var pendingIds = <?php echo wp_json_encode( array_values( $pending_users ) ); ?>;
+			var tooltip    = <?php echo wp_json_encode( $tooltip ); ?>;
+			$(function () {
+				pendingIds.forEach(function (uid) {
+					var $row = $('tr#user-' + uid);
+					if (!$row.length) {
+						return;
+					}
+					// Append the flag inside the username cell, after the <strong>username</strong>.
+					var $username = $row.find('td.username strong, td.column-username strong').first();
+					if (!$username.length) {
+						$username = $row.find('td.username, td.column-username').first();
+					}
+					if ($username.length && !$username.find('.eael-otp-pending-flag').length) {
+						$username.append(
+							' <span class="eael-otp-pending-flag" title="' + tooltip + '" aria-label="' + tooltip + '"></span>'
+						);
+					}
+				});
+			});
+		})(jQuery);
+		</script>
+		<?php
 	}
 
 	public function lr_get_widget_settings( $page_id, $widget_id ) {

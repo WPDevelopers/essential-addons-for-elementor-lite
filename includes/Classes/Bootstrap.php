@@ -203,6 +203,9 @@ class Bootstrap
         add_action('wp_ajax_nopriv_eael_lr_send_otp', [$this, 'eael_ajax_send_otp']);
         add_action('wp_ajax_eael_lr_verify_otp',        [$this, 'eael_ajax_verify_otp']);
         add_action('wp_ajax_nopriv_eael_lr_verify_otp', [$this, 'eael_ajax_verify_otp']);
+
+        // Flag unverified OTP register users in wp-admin → Users.
+        add_action('admin_footer-users.php', [$this, 'eael_lr_otp_pending_user_flag']);
         add_action( 'init', [$this, 'eael_redirect_to_reset_password'] );
 
         if( 'on' === get_option( 'eael_custom_profile_fields' ) ){

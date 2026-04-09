@@ -2015,6 +2015,32 @@ class Login_Register extends Widget_Base {
 				"enable_{$prefix}_otp" => 'yes',
 			],
 		] );
+
+		// Register-only: an admin-side switcher that flips OTP register behavior to
+		// "create user immediately + mark as pending until verified", and surfaces the
+		// flag in wp-admin → Users.
+		if ( 'register' === $prefix ) {
+			$users_list_link  = esc_url( admin_url( 'users.php' ) );
+			$flag_description = sprintf(
+				/* translators: %1$s: link to wp-admin users.php */
+				__( 'When enabled, new sign-ups are created immediately and marked as <em>email verification pending</em>. Pending users appear with a flag at <a href="%1$s" target="_blank" rel="noopener">%1$s</a>. The flag is removed automatically on successful OTP verification.', 'essential-addons-for-elementor-lite' ),
+				$users_list_link
+			);
+
+			$this->add_control( 'register_otp_show_user_flag', [
+				'label'        => __( 'Show Flag on User list', 'essential-addons-for-elementor-lite' ),
+				'description'  => $flag_description,
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'separator'    => 'before',
+				'condition'    => [
+					"enable_{$prefix}_otp" => 'yes',
+				],
+			] );
+		}
 	}
 
 	/**
