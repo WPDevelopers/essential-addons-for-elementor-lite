@@ -269,6 +269,229 @@ eael.hooks.addAction("init", "ea", () => {
             }
         }
 
+        // ============================================================
+        // Email OTP Verification
+        // ============================================================
+        const $loginOtp    = $loginFormWrapper.find('.eael-lr-otp-wrapper');
+        const $registerOtp = $regFormWrapper.find('.eael-lr-otp-wrapper');
+
+        function eaelOtpShow($otpEl, $formEl, response) {
+            if (!$otpEl || !$otpEl.length) { return; }
+            if (response && response.otp_token) {
+                $otpEl.find('.eael-lr-otp-token').val(response.otp_token);
+            }
+            if (response && response.otp_cooldown) {
+                $otpEl.attr('data-cooldown', response.otp_cooldown);
+            }
+            $otpEl.removeClass('eael-d-none');
+            if ($formEl && $formEl.length) {
+                $formEl.hide();
+            }
+            eaelOtpStartCooldown($otpEl);
+            const $msg = $otpEl.find('.eael-lr-otp-message');
+            if (response && response.message) {
+                $msg.removeClass('invalid').addClass('valid').text(response.message);
+            } else {
+                $msg.removeClass('invalid valid').text('');
+            }
+            $otpEl.find('.eael-lr-otp-input').val('').trigger('focus');
+        }
+
+        function eaelOtpStartCooldown($otpEl) {
+            const cooldown = parseInt($otpEl.attr('data-cooldown'), 10) || 60;
+            const $resend  = $otpEl.find('.eael-lr-otp-resend');
+            const $cdText  = $otpEl.find('.eael-lr-otp-cooldown-text');
+            let remaining  = cooldown;
+
+            $resend.addClass('eael-lr-otp-disabled').attr('aria-disabled', 'true');
+            $cdText.text(' (' + remaining + 's)');
+
+            const interval = setInterval(function () {
+                remaining--;
+                if (remaining <= 0) {
+                    clearInterval(interval);
+                    $resend.removeClass('eael-lr-otp-disabled').removeAttr('aria-disabled');
+                    $cdText.text('');
+                    return;
+                }
+                $cdText.text(' (' + remaining + 's)');
+            }, 1000);
+        }
+
+        function eaelOtpVerify($otpEl) {
+            const token = $otpEl.find('.eael-lr-otp-token').val();
+            const code  = $otpEl.find('.eael-lr-otp-input').val();
+            const $msg  = $otpEl.find('.eael-lr-otp-message');
+            const $btn  = $otpEl.find('.eael-lr-otp-verify-btn');
+
+            if (!token) {
+                $msg.removeClass('valid').addClass('invalid').text('Verification session expired. Please start over.');
+                return;
+            }
+            if (!/^\d{6}$/.test(code)) {
+                $msg.removeClass('valid').addClass('invalid').text('Please enter the 6-digit code.');
+                return;
+            }
+
+            $btn.prop('disabled', true);
+            $.ajax({
+                url: $otpEl.data('ajax-url'),
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    action: 'eael_lr_verify_otp',
+                    _eael_otp_nonce: $otpEl.data('otp-nonce'),
+                    otp_token: token,
+                    otp_code: code
+                }
+            }).done(function (response) {
+                if (response && response.success) {
+                    $msg.removeClass('invalid').addClass('valid').text(response.data.message || 'Verified.');
+                    if (response.data.redirect_to) {
+                        window.location.href = response.data.redirect_to;
+                    } else {
+                        window.location.reload();
+                    }
+                } else {
+                    const m = (response && response.data && response.data.message) ? response.data.message : 'Verification failed.';
+                    $msg.removeClass('valid').addClass('invalid').text(m);
+                }
+            }).fail(function () {
+                $msg.removeClass('valid').addClass('invalid').text('Network error. Please try again.');
+            }).always(function () {
+                $btn.prop('disabled', false);
+            });
+        }
+
+        function eaelOtpResend($otpEl) {
+            const token = $otpEl.find('.eael-lr-otp-token').val();
+            const $msg  = $otpEl.find('.eael-lr-otp-message');
+            const $resend = $otpEl.find('.eael-lr-otp-resend');
+
+            if ($resend.hasClass('eael-lr-otp-disabled')) { return; }
+            if (!token) {
+                $msg.removeClass('valid').addClass('invalid').text('Verification session expired. Please start over.');
+                return;
+            }
+
+            $.ajax({
+                url: $otpEl.data('ajax-url'),
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    action: 'eael_lr_send_otp',
+                    _eael_otp_nonce: $otpEl.data('otp-nonce'),
+                    otp_token: token
+                }
+            }).done(function (response) {
+                if (response && response.success) {
+                    if (response.data.cooldown) {
+                        $otpEl.attr('data-cooldown', response.data.cooldown);
+                    }
+                    $msg.removeClass('invalid').addClass('valid').text(response.data.message || 'A new code has been sent.');
+                    eaelOtpStartCooldown($otpEl);
+                } else {
+                    const m = (response && response.data && response.data.message) ? response.data.message : 'Could not resend code.';
+                    $msg.removeClass('valid').addClass('invalid').text(m);
+                }
+            }).fail(function () {
+                $msg.removeClass('valid').addClass('invalid').text('Network error. Please try again.');
+            });
+        }
+
+        // Bind verify and resend handlers.
+        $scope.find('.eael-lr-otp-wrapper').each(function () {
+            const $otpEl     = $(this);
+            const isPreview  = $otpEl.hasClass('eael-lr-otp-editor-preview');
+            const hasToken   = !!$otpEl.find('.eael-lr-otp-token').val();
+            const isAutoShow = !$otpEl.hasClass('eael-d-none') && hasToken;
+
+            // If the OTP UI was rendered visible (cookie-based reload after non-AJAX submission)
+            // OR an editor-only preview is active, surface the wrapper and ensure the parent
+            // section isn't being suppressed by the form's default-hide class.
+            if (isAutoShow || isPreview) {
+                $otpEl.removeClass('eael-d-none');
+                $otpEl.closest('section').removeClass('eael-lr-d-none');
+
+                // Hide the corresponding form so only the OTP UI is visible.
+                if ($otpEl.data('flow') === 'login') {
+                    $loginFormWrapper.find('form#eael-login-form').hide();
+                    $loginFormWrapper.removeClass('eael-lr-d-none');
+                } else if ($otpEl.data('flow') === 'register') {
+                    $regFormWrapper.find('form#eael-register-form').hide();
+                    $regFormWrapper.removeClass('eael-lr-d-none');
+                }
+
+                if (isAutoShow) {
+                    // One-shot cookie — drop it now so a refresh after success doesn't replay.
+                    const widgetId   = $otpEl.data('widget-id');
+                    const cookiePath = (typeof eaelLR !== 'undefined' && eaelLR.cookiePath) ? eaelLR.cookiePath : '/';
+                    document.cookie = 'eael_lr_otp_token_' + widgetId + '=; Max-Age=0; path=' + cookiePath;
+                    eaelOtpStartCooldown($otpEl);
+                }
+            }
+
+            $otpEl.on('click', '.eael-lr-otp-verify-btn', function (e) {
+                e.preventDefault();
+                eaelOtpVerify($otpEl);
+            });
+            $otpEl.on('keydown', '.eael-lr-otp-input', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    eaelOtpVerify($otpEl);
+                }
+            });
+            $otpEl.on('click', '.eael-lr-otp-resend', function (e) {
+                e.preventDefault();
+                eaelOtpResend($otpEl);
+            });
+        });
+
+        // Global AJAX listener: catches any login/register submission (Pro AJAX path or otherwise)
+        // whose response carries `otp_required: true`, regardless of which JS layer fired the request.
+        // Scoped via .eaelOtp namespace and rebound per-widget so multiple widgets on a page each get
+        // routed to their own OTP wrapper.
+        $(document).off('ajaxSuccess.eaelOtp_' + widgetId).on('ajaxSuccess.eaelOtp_' + widgetId, function (event, xhr, settings) {
+            let response = xhr.responseJSON;
+            if (typeof response === 'undefined') {
+                try { response = JSON.parse(xhr.responseText); } catch (e) { return; }
+            }
+            if (!response || !response.success || !response.data || !response.data.otp_required) {
+                return;
+            }
+
+            // Identify which form fired the request by sniffing the serialized POST body.
+            const body = (typeof settings.data === 'string') ? settings.data : '';
+            const isRegister = body.indexOf('eael-register-submit') !== -1;
+            const isLogin    = body.indexOf('eael-login-submit') !== -1;
+
+            // Make sure the response is for *this* widget instance (not another on the same page).
+            if (body.indexOf('widget_id=' + encodeURIComponent(widgetId)) === -1
+                && body.indexOf('widget_id=' + widgetId) === -1) {
+                return;
+            }
+
+            if (isRegister && $registerOtp.length) {
+                eaelOtpShow($registerOtp, $regFormWrapper.find('form#eael-register-form'), response.data);
+            } else if (isLogin && $loginOtp.length) {
+                eaelOtpShow($loginOtp, $loginFormWrapper.find('form#eael-login-form'), response.data);
+            }
+        });
+
+        // Also expose the legacy hook for any custom integrations that explicitly fire it.
+        if (typeof eael !== 'undefined' && eael.hooks && eael.hooks.addAction) {
+            eael.hooks.addAction('eael/lr/ajax-response', 'ea_' + widgetId, function (response, $form) {
+                if (!response || !response.success || !response.data || !response.data.otp_required) {
+                    return;
+                }
+                if ($form && $form.attr('id') === 'eael-login-form') {
+                    eaelOtpShow($loginOtp, $loginFormWrapper.find('form#eael-login-form'), response.data);
+                } else if ($form && $form.attr('id') === 'eael-register-form') {
+                    eaelOtpShow($registerOtp, $regFormWrapper.find('form#eael-register-form'), response.data);
+                }
+            });
+        }
+
         if (recaptchaAvailable && isEditMode){
             // on elementor editor, window load event already fired, so run recaptcha
             onloadLRcb();

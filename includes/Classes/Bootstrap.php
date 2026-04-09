@@ -197,6 +197,12 @@ class Bootstrap
         add_action('init', [$this, 'login_or_register_user']);
         add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);
         add_filter('wp_new_user_notification_email_admin', array($this, 'new_user_notification_email_admin'), 10, 3);
+
+        // Email OTP Verification (Login | Register)
+        add_action('wp_ajax_eael_lr_send_otp',        [$this, 'eael_ajax_send_otp']);
+        add_action('wp_ajax_nopriv_eael_lr_send_otp', [$this, 'eael_ajax_send_otp']);
+        add_action('wp_ajax_eael_lr_verify_otp',        [$this, 'eael_ajax_verify_otp']);
+        add_action('wp_ajax_nopriv_eael_lr_verify_otp', [$this, 'eael_ajax_verify_otp']);
         add_action( 'init', [$this, 'eael_redirect_to_reset_password'] );
 
         if( 'on' === get_option( 'eael_custom_profile_fields' ) ){

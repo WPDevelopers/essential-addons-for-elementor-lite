@@ -487,3 +487,117 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
 .eael-list-style-none-wrap li {
     list-style: none;
 }
+
+/*-----Email OTP Verification-----*/
+.eael-lr-otp-wrapper {
+    margin-top: 20px;
+    padding: 24px;
+    background-color: #f7f8fa;
+    border: 1px solid #e3e6eb;
+    border-radius: 8px;
+    text-align: center;
+
+    .eael-lr-otp-title {
+        margin: 0 0 8px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .eael-lr-otp-subtitle {
+        margin: 0 0 18px;
+        font-size: 14px;
+        color: #5b6577;
+        line-height: 1.5;
+    }
+
+    .eael-lr-otp-input-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 18px;
+    }
+
+    .eael-lr-otp-input {
+        width: 100%;
+        max-width: 240px;
+        padding: 12px 16px;
+        font-size: 22px;
+        letter-spacing: 8px;
+        text-align: center;
+        border: 1px solid #c8ccd5;
+        border-radius: 6px;
+        background-color: #fff;
+        font-variant-numeric: tabular-nums;
+
+        &:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, .15);
+        }
+    }
+
+    .eael-lr-otp-verify-btn {
+        display: inline-block;
+        width: 100%;
+        max-width: 240px;
+        padding: 12px 20px;
+        background-color: #4a90e2;
+        color: #fff;
+        border: 0;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color .2s ease;
+
+        &:hover {
+            background-color: #3a7bc8;
+        }
+
+        &:disabled {
+            opacity: .65;
+            cursor: not-allowed;
+        }
+    }
+
+    .eael-lr-otp-resend-row {
+        margin-top: 14px;
+        font-size: 13px;
+        color: #5b6577;
+    }
+
+    .eael-lr-otp-resend {
+        color: #4a90e2;
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &.eael-lr-otp-disabled {
+            color: #9aa1ad;
+            pointer-events: none;
+            cursor: not-allowed;
+            text-decoration: none;
+        }
+    }
+
+    .eael-lr-otp-cooldown-text {
+        margin-left: 4px;
+        color: #9aa1ad;
+    }
+
+    .eael-lr-otp-message {
+        margin-top: 14px;
+        min-height: 1.4em;
+        font-size: 13px;
+
+        &.valid {
+            color: #2e7d32;
+        }
+
+        &.invalid {
+            color: #c62828;
+        }
+    }
+}
