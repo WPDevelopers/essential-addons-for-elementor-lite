@@ -2041,6 +2041,58 @@ class Login_Register extends Widget_Base {
 	}
 
 	/**
+	 * Returns the active OTP flow ('login' | 'register') for this widget on the current request,
+	 * or empty string if no OTP challenge is in flight.
+	 *
+	 * Sources, in priority order:
+	 *   1. Editor "Preview OTP Field" switcher (editor only) — register wins if both are on.
+	 *   2. ?eael_otp=<token>&eael_otp_flow=<login|register> URL params (clicked email link).
+	 *   3. eael_lr_otp_token_<wid> cookie (same-device fallback).
+	 *
+	 * When this returns non-empty, EVERY form section other than the matching one must be
+	 * suppressed so the user only sees the OTP wrapper.
+	 *
+	 * @return string '' | 'login' | 'register'
+	 */
+	protected function eael_otp_active_flow() {
+		// Editor preview — only inside the editor canvas.
+		if ( $this->in_editor ) {
+			$register_preview = ! empty( $this->ds['register_otp_preview'] ) && 'yes' === $this->ds['register_otp_preview']
+				&& ! empty( $this->ds['enable_register_otp'] ) && 'yes' === $this->ds['enable_register_otp'];
+			$login_preview = ! empty( $this->ds['login_otp_preview'] ) && 'yes' === $this->ds['login_otp_preview']
+				&& ! empty( $this->ds['enable_login_otp'] ) && 'yes' === $this->ds['enable_login_otp'];
+			if ( $register_preview ) {
+				return 'register';
+			}
+			if ( $login_preview ) {
+				return 'login';
+			}
+		}
+
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_GET['eael_otp'] ) && ! empty( $_GET['eael_otp_flow'] ) ) {
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$flow = sanitize_text_field( wp_unslash( $_GET['eael_otp_flow'] ) );
+			if ( 'login' === $flow || 'register' === $flow ) {
+				return $flow;
+			}
+		}
+
+		$cookie_name = 'eael_lr_otp_token_' . $this->get_id();
+		if ( ! empty( $_COOKIE[ $cookie_name ] ) ) {
+			$cookie_value = sanitize_text_field( wp_unslash( $_COOKIE[ $cookie_name ] ) );
+			if ( strpos( $cookie_value, '|' ) !== false ) {
+				list( , $cookie_flow ) = array_map( 'sanitize_text_field', explode( '|', $cookie_value, 2 ) );
+				if ( 'login' === $cookie_flow || 'register' === $cookie_flow ) {
+					return $cookie_flow;
+				}
+			}
+		}
+
+		return '';
+	}
+
+	/**
 	 * Should the OTP UI be force-shown for this form on the current request?
 	 *
 	 * Returns true when:
@@ -2060,34 +2112,7 @@ class Login_Register extends Widget_Base {
 			return false;
 		}
 
-		// Editor preview — never honored on the live frontend.
-		if ( $this->in_editor && ! empty( $this->ds[ "{$prefix}_otp_preview" ] ) && 'yes' === $this->ds[ "{$prefix}_otp_preview" ] ) {
-			return true;
-		}
-
-		// Live frontend: ?eael_otp=<token>&eael_otp_flow=<login|register> coming from an email link.
-		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( ! empty( $_GET['eael_otp'] ) && ! empty( $_GET['eael_otp_flow'] ) ) {
-			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$query_flow = sanitize_text_field( wp_unslash( $_GET['eael_otp_flow'] ) );
-			if ( $query_flow === $form_type ) {
-				return true;
-			}
-		}
-
-		// Live frontend: in-flight OTP challenge stored in a cookie (same-device fallback).
-		$cookie_name = 'eael_lr_otp_token_' . $this->get_id();
-		if ( ! empty( $_COOKIE[ $cookie_name ] ) ) {
-			$cookie_value = sanitize_text_field( wp_unslash( $_COOKIE[ $cookie_name ] ) );
-			if ( strpos( $cookie_value, '|' ) !== false ) {
-				list( , $cookie_flow ) = array_map( 'sanitize_text_field', explode( '|', $cookie_value, 2 ) );
-				if ( $cookie_flow === $form_type ) {
-					return true;
-				}
-			}
-		}
-
-		return false;
+		return $this->eael_otp_active_flow() === $form_type;
 	}
 
 	public function eael_get_role_names() {
@@ -6638,6 +6663,13 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_login_form() {
+		// If an OTP challenge is in flight for a DIFFERENT form (e.g. ?eael_otp_flow=register),
+		// suppress the entire login section so only the OTP UI is visible on the page.
+		$otp_active_flow = $this->eael_otp_active_flow();
+		if ( $otp_active_flow && 'login' !== $otp_active_flow ) {
+			return;
+		}
+
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -6725,7 +6757,8 @@ class Login_Register extends Widget_Base {
 			$show_login_spinner  = !empty( $this->ds['login_btn_show_spinner'] ) ? $this->ds['login_btn_show_spinner'] : '';
 			$err_msg_position = $this->ds['err_message_position_login'];
 			?>
-            <section id="eael-login-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>" data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>" data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
+            <?php $otp_active_class = $this->eael_otp_should_force_show( 'login' ) ? ' eael-lr-otp-active' : ''; ?>
+            <section id="eael-login-form-wrapper" class="<?php echo esc_attr( trim( $default_hide_class . $otp_active_class ) ); ?>" data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>" data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
                 <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
 					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
@@ -6904,6 +6937,13 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_register_form() {
+		// If an OTP challenge is in flight for a DIFFERENT form (e.g. ?eael_otp_flow=login),
+		// suppress the entire register section so only the OTP UI is visible on the page.
+		$otp_active_flow = $this->eael_otp_active_flow();
+		if ( $otp_active_flow && 'register' !== $otp_active_flow ) {
+			return;
+		}
+
 		if ( $this->should_print_register_form ) {
 			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$default_hide_class = ( 'login' === $this->default_form || 'lostpassword' === $this->default_form || $this->should_print_resetpassword_form_editor || isset($_GET['eael-lostpassword']) || isset($_GET['eael-resetpassword']) ) && !isset($_GET['eael-register']) ? 'eael-lr-d-none' : ''; //eael-register flag for show error/success message when formal form submit
@@ -7001,11 +7041,13 @@ class Login_Register extends Widget_Base {
 			$password_one_special = !empty( $this->ds['weak_pass_one_special'] ) ? true : false;
 			$err_msg_position = $this->ds['err_message_position_registration'];
 
+			$otp_active_class = $this->eael_otp_should_force_show( 'register' ) ? ' eael-lr-otp-active' : '';
+
 			ob_start();
 			?>
             <section
                     id="eael-register-form-wrapper"
-                    class="<?php echo esc_attr( $default_hide_class ); ?>"
+                    class="<?php echo esc_attr( trim( $default_hide_class . $otp_active_class ) ); ?>"
                     data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
                     data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>"
                     data-use-weak-password="<?php echo esc_attr( $use_weak_password ); ?>"
@@ -7292,6 +7334,11 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_lostpassword_form(){
+		// Suppress this section entirely while any OTP challenge is in flight.
+		if ( $this->eael_otp_active_flow() ) {
+			return;
+		}
+
 		if ( $this->should_print_lostpassword_form ) {
 			$form_not_enabled = ! ( 'lostpassword' === $this->default_form || ( 'yes' === $this->get_settings_for_display( 'show_lost_password' ) && 'form' === $this->get_settings_for_display( 'lost_password_link_type' ) ) );
 
@@ -7452,6 +7499,11 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_resetpassword_form(){
+		// Suppress this section entirely while any OTP challenge is in flight.
+		if ( $this->eael_otp_active_flow() ) {
+			return;
+		}
+
 		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || 'lostpassword' === $this->default_form || isset($_GET['eael-register']) || isset($_GET['eael-lostpassword']) ) && !isset($_GET['eael-resetpassword']) ? 'eael-lr-d-none' : '';
 		$default_hide_class = $this->should_print_resetpassword_form_editor ? '' : $default_hide_class;

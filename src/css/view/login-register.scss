@@ -489,6 +489,25 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
 }
 
 /*-----Email OTP Verification-----*/
+/*
+ * When an OTP challenge is in flight (PHP adds .eael-lr-otp-active to the form section),
+ * hide the regular form, the Pro animated character, and any other ancillary UI inside that
+ * section from first paint. This prevents a flash of the original form before JS hides it.
+ */
+section.eael-lr-otp-active {
+    > .eael-lr-form-wrapper > .lr-form-wrapper > form#eael-login-form,
+    > .eael-lr-form-wrapper > .lr-form-wrapper > form#eael-register-form,
+    .eael-login-form,
+    .eael-register-form,
+    .eael-animated-character-wrapper {
+        display: none !important;
+    }
+
+    .eael-lr-otp-wrapper {
+        display: block !important;
+    }
+}
+
 .eael-lr-otp-wrapper {
     margin-top: 20px;
     padding: 24px;
