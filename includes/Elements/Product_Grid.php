@@ -973,6 +973,7 @@ class Product_Grid extends Widget_Base
             Group_Control_Image_Size::get_type(),
             [
                 'name' => 'eael_product_grid_image_size',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => ['custom'],
                 'default' => 'medium',
                 'label_block' => true,
@@ -3597,6 +3598,7 @@ class Product_Grid extends Widget_Base
 			    'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
 			    'types'    => ['classic', 'gradient'],
 			    'selector' => '.eael-popup-details-render .elementor-element-{{ID}}.eael-product-popup-details',
+			    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			    'exclude'  => [
 				    'image',
 			    ],
@@ -3660,8 +3662,10 @@ class Product_Grid extends Widget_Base
 
                 if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
                     if ( ! empty( $args['post__not_in'] ) ) {
+                        // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
                         $args['post__not_in'] = array_merge( $args['post__not_in'], $user_ordered_products );
                     } else {
+                        // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
                         $args['post__not_in'] = $user_ordered_products;
                     }
                 }
@@ -3671,8 +3675,10 @@ class Product_Grid extends Widget_Base
         if ( ! empty( $settings['eael_product_not_in'] ) ) {
             if ( ! empty( $args['post__not_in'] ) ) {
                 $exclude = array_merge( $args['post__not_in'], $settings['eael_product_not_in'] );
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
                 $args['post__not_in'] = $exclude;
             } else {
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
                 $args['post__not_in'] = $settings['eael_product_not_in'];
             }
         }
@@ -3843,6 +3849,7 @@ class Product_Grid extends Widget_Base
                 : 4,
             'order'          => isset( $settings['order'] ) ? $settings['order'] : 'DESC',
             'offset'         => ! empty( $settings['product_offset'] ) ? (int) $settings['product_offset'] : 0,
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
             'tax_query'      => [
                 'relation' => 'AND',
                 [
@@ -3852,11 +3859,13 @@ class Product_Grid extends Widget_Base
                     'operator' => 'NOT IN',
                 ],
             ],
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             'meta_query'     => [ 'relation' => 'AND' ],
         ];
 
         // Exclude current product
         if ( is_singular( 'product' ) ) {
+            // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
             $args['post__not_in'] = [ get_the_ID() ];
         }
 
@@ -3867,9 +3876,11 @@ class Product_Grid extends Widget_Base
         */
         if ( isset( $settings['orderby'] ) && '_price' === $settings['orderby'] ) {
             $args['orderby']  = 'meta_value_num';
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
             $args['meta_key'] = '_price';
         } elseif ( isset( $settings['orderby'] ) && '_sku' === $settings['orderby'] ) {
             $args['orderby']  = 'meta_value';
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
             $args['meta_key'] = '_sku';
         } else {
             $args['orderby'] = isset( $settings['orderby'] ) ? $settings['orderby'] : 'date';
@@ -3935,6 +3946,7 @@ class Product_Grid extends Widget_Base
         if ( 'yes' !== $settings['eael_product_grid_show_onsale'] ) {
             $on_sale_ids = wc_get_product_ids_on_sale();
             if ( ! empty( $on_sale_ids ) ) {
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
                 $args['post__not_in'] = array_merge(
                     $args['post__not_in'] ?? [],
                     $on_sale_ids
@@ -3958,6 +3970,7 @@ class Product_Grid extends Widget_Base
                 break;
 
             case 'best-selling-products':
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
                 $args['meta_key'] = 'total_sales';
                 $args['orderby']  = 'meta_value_num';
                 $args['order']    = 'DESC';
@@ -3968,6 +3981,7 @@ class Product_Grid extends Widget_Base
                 break;
 
             case 'top-products':
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
                 $args['meta_key'] = '_wc_average_rating';
                 $args['orderby']  = 'meta_value_num';
                 $args['order']    = 'DESC';
@@ -4017,6 +4031,7 @@ class Product_Grid extends Widget_Base
         * ----------------------------------------
         */
         if ( function_exists( 'whols_lite' ) ) {
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             $args['meta_query'] = array_filter(
                 apply_filters(
                     'woocommerce_product_query_meta_query',

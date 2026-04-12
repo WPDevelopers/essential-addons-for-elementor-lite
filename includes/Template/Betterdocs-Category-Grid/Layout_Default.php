@@ -62,6 +62,7 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . esc_attr
                     'posts_per_page' => $settings['post_per_page'],
                     'orderby' => $settings['post_orderby'],
                     'order' => $settings['post_order'],
+                    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
                     'tax_query' => array(
                         'relation' => 'AND',
                         array(
@@ -89,6 +90,7 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . esc_attr
                     'posts_per_page' => $settings['post_per_page'],
                     'orderby' => $settings['post_orderby'],
                     'order' => $settings['post_order'],
+                    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
                     'tax_query' => array(
                         array(
                             'taxonomy' => 'doc_category',
@@ -155,6 +157,7 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . esc_attr
                         $sub_args = array(
                             'post_type' => 'docs',
                             'post_status' => 'publish',
+                            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
                             'tax_query' => array(
                                 array(
                                     'taxonomy' => 'doc_category',

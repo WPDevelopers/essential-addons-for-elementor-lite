@@ -147,6 +147,7 @@ trait Woo_Product_List {
 			'posts_per_page' => 'limit',
 			'post_status' => 'status',
 			'post__in' => 'include',
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 			'post__not_in' => 'exclude',
 			'author__in' => 'author',
 			'paged' => 'page',
@@ -173,15 +174,18 @@ trait Woo_Product_List {
 
 		// Preserve complex queries
 		if (isset($wp_args['meta_query'])) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$wc_args['meta_query'] = $wp_args['meta_query'];
 		}
 		if (isset($wp_args['tax_query'])) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$wc_args['tax_query'] = $wp_args['tax_query'];
 		}
 
 		// Handle meta_key/meta_value
 		if (isset($wp_args['meta_key'])) {
 			if (!isset($wc_args['meta_query'])) {
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				$wc_args['meta_query'] = ['relation' => 'AND'];
 			}
 			$meta_query = ['key' => $wp_args['meta_key']];

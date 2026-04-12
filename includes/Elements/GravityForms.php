@@ -667,6 +667,7 @@ class GravityForms extends Widget_Base {
 		    [
 			    'name'           => 'eael_gform_progressbar_color',
 			    'types'          => [ 'classic', 'gradient' ],
+			    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			    'exclude'        => [ 'image' ],
 			    'fields_options' => [
 				    'background' => [
@@ -682,6 +683,7 @@ class GravityForms extends Widget_Base {
 		    [
 			    'name'           => 'eael_gform_progressbar_background_color',
 			    'types'          => [ 'classic', 'gradient' ],
+			    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			    'exclude'        => [ 'image' ],
 			    'separator'      => 'before',
 			    'fields_options' => [

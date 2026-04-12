@@ -637,6 +637,7 @@ class Woo_Product_List extends Widget_Base
             Group_Control_Image_Size::get_type(),
             [
                 'name'        => 'eael_product_list_image_size',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude'     => ['custom'],
                 'default'     => 'medium',
                 'label_block' => true,
@@ -3590,6 +3591,7 @@ class Woo_Product_List extends Widget_Base
 			    'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
 			    'types'    => ['classic', 'gradient'],
 			    'selector' => '.eael-popup-details-render .eael-product-popup-details',
+			    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			    'exclude'  => [
 				    'image',
 			    ],
@@ -3950,6 +3952,7 @@ class Woo_Product_List extends Widget_Base
             'post_status'       => ! empty( $settings['eael_product_list_products_status'] ) ? $settings['eael_product_list_products_status'] : [ 'publish', 'pending', 'future' ],
             'posts_per_page'    => ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4,
             'offset'            => ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0,
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
             'tax_query' => [
                 'relation' => 'AND',
                 [
@@ -3964,9 +3967,11 @@ class Woo_Product_List extends Widget_Base
         // Order by
         if ( '_price' === $settings['orderby'] ) {
             $args['orderby'] = 'meta_value_num';
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
             $args['meta_key'] = '_price';
         } else if ( '_sku' === $settings['orderby'] ) {
             $args['orderby'] = 'meta_value meta_value_num';
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
             $args['meta_key'] = '_sku';
         } else {
             $args['orderby'] = ! empty( $settings['orderby'] ) ? sanitize_text_field( $settings['orderby'] ) : 'date';
@@ -3982,6 +3987,7 @@ class Woo_Product_List extends Widget_Base
             ];
         }
 
+        // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
         $args['meta_query'] = [
             'relation' => 'AND',
         ];
@@ -4005,6 +4011,7 @@ class Woo_Product_List extends Widget_Base
                 break;
 
             case 'best-selling-products':
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
                 $args['meta_key'] = 'total_sales';
                 $args['orderby'] = 'meta_value_num';
                 $args['order'] = 'desc';
@@ -4015,6 +4022,7 @@ class Woo_Product_List extends Widget_Base
                 break;
                 
             case 'top-products':
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
                 $args['meta_key'] = '_wc_average_rating';
                 $args['orderby'] = 'meta_value_num';
                 $args['order'] = 'desc';
@@ -4063,6 +4071,7 @@ class Woo_Product_List extends Widget_Base
                 }
 
                 if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
                     $args['post__not_in'] = array_merge(
                         $args['post__not_in'] ?? [],
                         $user_ordered_products

@@ -264,6 +264,7 @@ class Filterable_Gallery extends Widget_Base
             Group_Control_Image_Size::get_type(),
             [
                 'name' => 'eael_fg_image_resolution',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => ['custom'],
                 'default' => 'medium',
                 'label_block' => true,
@@ -3127,6 +3128,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name'    => 'fg_sf_dropdown_bg',
                 'types'   => ['classic', 'gradient'],
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [
                     'image',
                 ],
@@ -3423,6 +3425,7 @@ class Filterable_Gallery extends Widget_Base
                 'placeholder' => '1px',
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .eael-gallery-load-more',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude'  => [ 'color' ],
             ]
         );

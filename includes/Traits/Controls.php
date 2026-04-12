@@ -1023,6 +1023,7 @@ trait Controls
                 Group_Control_Image_Size::get_type(),
                 [
                     'name' => 'image',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude' => ['custom'],
                     'default' => 'medium',
                     'condition' => [
@@ -1232,6 +1233,7 @@ trait Controls
 			    Group_Control_Image_Size::get_type(),
 			    [
 				    'name'      => 'image',
+				    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				    'exclude'   => [ 'custom' ],
 				    'default'   => 'medium',
 				    'condition' => [
@@ -1657,6 +1659,7 @@ trait Controls
                     'label' => __('Background', 'essential-addons-for-elementor-lite'),
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude' => [
                         'image',
                     ],
@@ -1715,6 +1718,7 @@ trait Controls
                         'label' => __('Background', 'essential-addons-for-elementor-lite'),
                         'types' => ['classic', 'gradient'],
                         'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
+                        // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                         'exclude' => [
                             'image',
                         ],
@@ -1769,6 +1773,7 @@ trait Controls
                         'label' => __('Background', 'essential-addons-for-elementor-lite'),
                         'types' => ['classic', 'gradient'],
                         'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
+                        // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                         'exclude' => [
                             'image',
                         ],

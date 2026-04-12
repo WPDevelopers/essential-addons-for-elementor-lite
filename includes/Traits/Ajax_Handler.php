@@ -145,12 +145,14 @@ trait Ajax_Handler {
 		$args['offset']             = (int) $args['offset'] + ( ( (int) $page - 1 ) * (int) $args['posts_per_page'] );
 
 		if ( isset( $_REQUEST['taxonomy'] ) && isset( $_REQUEST['taxonomy']['taxonomy'] ) && $_REQUEST['taxonomy']['taxonomy'] != 'all' ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = [
 				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
 			$relation = isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR';
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'], $relation );
 		}
 
@@ -164,6 +166,7 @@ trait Ajax_Handler {
 				if ( ! empty( $args['post__not_in'] ) ) {
 					$post__not_in = array_merge( $post__not_in, $args['post__not_in'] );
 				}
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 				$args['post__not_in'] = array_map( 'intval', array_unique( $post__not_in ) );
 				unset( $args['offset'] );
 			}
@@ -197,6 +200,7 @@ trait Ajax_Handler {
 
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			$exclude_ids = json_decode( html_entity_decode( stripslashes ( $_POST['exclude_ids'] ) ) );
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique($exclude_ids) ) : array();
 			$active_term_id = ( !empty( $_POST['active_term_id'] ) ) ? intval( $_POST['active_term_id'] ) : 0;
 			$active_taxonomy = ( !empty( $_POST['active_taxonomy'] ) ) ? sanitize_text_field( wp_unslash( $_POST['active_taxonomy'] ) ) : '';
@@ -219,6 +223,7 @@ trait Ajax_Handler {
 					$args['post__in'] = $taxonomy_map['post_ids'];
 					$args['post_type'] = 'any';
 					$args['post_status'] = 'any';
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					$args['tax_query'] = [];
 					$args['orderby'] = 'post__in';
 				}
@@ -385,6 +390,7 @@ trait Ajax_Handler {
 
 		// If filtering by a specific term, apply the filter to parent posts
 		if ( $active_term_id > 0 && ! empty( $active_taxonomy ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$_args['tax_query'] = [
 				[
 					'taxonomy' => $active_taxonomy,
@@ -665,6 +671,7 @@ trait Ajax_Handler {
 			'posts_per_page' => 'limit',
 			'post_status' => 'status',
 			'post__in' => 'include',
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 			'post__not_in' => 'exclude',
 			'author__in' => 'author',
 			'paged' => 'page',
@@ -692,15 +699,18 @@ trait Ajax_Handler {
 
 		// Handle meta_query and tax_query
 		if ( isset( $args['meta_query'] ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$wc_args['meta_query'] = $args['meta_query'];
 		}
 		if ( isset( $args['tax_query'] ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$wc_args['tax_query'] = $args['tax_query'];
 		}
 
 		// Handle meta_key and meta_value
 		if ( isset( $args['meta_key'] ) ) {
 			if ( ! isset( $wc_args['meta_query'] ) ) {
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				$wc_args['meta_query'] = ['relation' => 'AND'];
 			}
 			$meta_query = [
@@ -1054,6 +1064,7 @@ trait Ajax_Handler {
 		$args['offset']             = (int) $args['offset'] + ( ( (int) $page - 1 ) * (int) $args['posts_per_page'] );
 
 		if ( isset( $_REQUEST['taxonomy'] ) && isset( $_REQUEST['taxonomy']['taxonomy'] ) && $_REQUEST['taxonomy']['taxonomy'] != 'all' ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = [
 				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
@@ -1079,6 +1090,7 @@ trait Ajax_Handler {
 				}
 			}
 
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'], $relation );
 
 			if ( $settings[ 'eael_product_gallery_product_filter' ] == 'featured-products' ) {
@@ -1173,6 +1185,7 @@ trait Ajax_Handler {
 			$args_tax_query_item = $args_tax_query[0];
 
 			//Query for category and tag
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args_multiple['tax_query'] = [];
 
 			if( isset( $args_tax_query_item['terms'] ) ){

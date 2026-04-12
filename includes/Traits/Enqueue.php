@@ -84,6 +84,7 @@ trait Enqueue
     // templately promo enqueue scripts
     public function templately_promo_enqueue_scripts(){
         // enqueue
+        // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
         wp_register_script(
             'templately-promo',
             EAEL_PLUGIN_URL . 'assets/admin/js/eael-templately-promo.js',
@@ -97,6 +98,7 @@ trait Enqueue
         ]);
         wp_enqueue_script('templately-promo');
         // enqueue
+        // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
         wp_enqueue_style(
             'templately-promo',
             EAEL_PLUGIN_URL . 'assets/admin/css/eael-templately-promo.css',

@@ -547,6 +547,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name'        => 'eael_product_gallery_image_size',
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude'     => [ 'custom' ],
 				'default'     => 'medium',
 				'label_block' => true,
@@ -2803,6 +2804,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
 				'types'    => [ 'classic', 'gradient' ],
 				'selector' => '.eael-popup-details-render{{WRAPPER}}.eael-product-popup-details',
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude'  => [
 					'image',
 				],
@@ -2875,6 +2877,7 @@ class Woo_Product_Gallery extends Widget_Base {
                 }
 
                 if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
                     $args['post__not_in'] = $user_ordered_products;
                 }
             }
@@ -3004,6 +3007,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'posts_per_page' => 'limit',
 			'post_status' => 'status',
 			'post__in' => 'include',
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 			'post__not_in' => 'exclude',
 			'author__in' => 'author',
 			'paged' => 'page',
@@ -3030,15 +3034,18 @@ class Woo_Product_Gallery extends Widget_Base {
 
 		// Preserve complex queries
 		if ( isset( $wp_args['meta_query'] ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$wc_args['meta_query'] = $wp_args['meta_query'];
 		}
 		if ( isset( $wp_args['tax_query'] ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$wc_args['tax_query'] = $wp_args['tax_query'];
 		}
 
 		// Handle meta_key/meta_value
 		if ( isset( $wp_args['meta_key'] ) ) {
 			if ( ! isset( $wc_args['meta_query'] ) ) {
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				$wc_args['meta_query'] = [ 'relation' => 'AND' ];
 			}
 			$meta_query = [ 'key' => $wp_args['meta_key'] ];
@@ -3087,6 +3094,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'posts_per_page' => $settings[ 'eael_product_gallery_products_count' ] ?: 4,
 			'order'          => ( isset( $settings[ 'order' ] ) ? $settings[ 'order' ] : 'desc' ),
 			'offset'         => $settings[ 'product_offset' ],
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			'tax_query'      => [
 				'relation' => 'AND',
 				[
@@ -3100,9 +3108,11 @@ class Woo_Product_Gallery extends Widget_Base {
 		// price & sku filter
 		if ( $settings[ 'orderby' ] == '_price' ) {
 			$args[ 'orderby' ]  = 'meta_value_num';
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			$args[ 'meta_key' ] = '_price';
 		} else if ( $settings[ 'orderby' ] == '_sku' ) {
 			$args[ 'orderby' ]  = 'meta_value_num';
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			$args[ 'meta_key' ] = '_sku';
 		} else {
 			$args[ 'orderby' ] = ( isset( $settings[ 'orderby' ] ) ? $settings[ 'orderby' ] : 'date' );
@@ -3152,6 +3162,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			}
 		}
 
+		// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		$args[ 'meta_query' ] = [ 'relation' => 'AND' ];
 		$show_stock_out_products = isset( $settings['eael_product_out_of_stock_show'] ) ? $settings['eael_product_out_of_stock_show'] : 'yes';
 
@@ -3163,6 +3174,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		}
 
 		if ( $settings[ 'eael_product_gallery_product_filter' ] == 'featured-products' ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args[ 'tax_query' ] = [
 				'relation' => 'AND',
 				[
@@ -3178,12 +3190,14 @@ class Woo_Product_Gallery extends Widget_Base {
 				],
 			];
 		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'best-selling-products' ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			$args[ 'meta_key' ] = 'total_sales';
 			$args[ 'orderby' ]  = 'meta_value_num';
 			$args[ 'order' ]    = 'DESC';
 		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'sale-products' ) {
 			$args[ 'post__in' ] = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
 		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'top-products' ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			$args[ 'meta_key' ] = '_wc_average_rating';
 			$args[ 'orderby' ]  = 'meta_value_num';
 			$args[ 'order' ]    = 'DESC';
@@ -3193,6 +3207,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		    $current_product_id = get_the_ID();
             $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
             $product_tags       = wp_get_post_terms( $current_product_id, 'product_tag', array( 'fields' => 'names' ) );
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
             $args['tax_query'] = array(
                 'relation' => isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR',
                 array(

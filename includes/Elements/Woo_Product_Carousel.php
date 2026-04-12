@@ -403,6 +403,7 @@ class Woo_Product_Carousel extends Widget_Base {
             Group_Control_Image_Size::get_type(),
             [
                 'name'        => 'eael_product_carousel_image_size',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude'     => ['custom'],
                 'default'     => 'medium',
                 'label_block' => true,
@@ -2458,6 +2459,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
                 'types'    => ['classic', 'gradient'],
                 'selector' => '.eael-popup-details-render .elementor-element-{{ID}}.eael-product-popup-details',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude'  => [
                     'image',
                 ],
@@ -3331,6 +3333,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 }
 
                 if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     $args['exclude'] = array_merge( $args['exclude'] ?? [], $user_ordered_products );
                 }
             }
@@ -3509,6 +3512,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		    'limit'          => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
 		    'order'          => $settings[ 'order' ],
 		    'offset'         => $settings[ 'product_offset' ],
+            // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
             'exclude'        => array( get_the_ID() ),
 		    'paginate'       => true,
 		    'return'         => 'objects',
@@ -3542,6 +3546,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		    $current_product_id = get_the_ID();
             $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
             $product_tags       = wp_get_post_terms( $current_product_id, 'product_tag', array('fields' => 'names' ) );
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
             $args['tax_query'] = array(
                 'relation' => 'OR',
                 array(
@@ -3567,6 +3572,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    if ( 'yes' !== $settings['eael_product_carousel_show_onsale'] ) {
 		    $on_sale_ids = wc_get_product_ids_on_sale();
 		    if ( ! empty( $on_sale_ids ) ) {
+			    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 			    $args['post__not_in'] = isset( $args['post__not_in'] ) ?
 				    array_merge( $args['post__not_in'], $on_sale_ids ) :
 				    $on_sale_ids;
@@ -3644,7 +3650,9 @@ class Woo_Product_Carousel extends Widget_Base {
 		    'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
 		    'order'          => $settings[ 'order' ],
 		    'offset'         => $settings[ 'product_offset' ],
+            // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
             'post__not_in'   => array( get_the_ID() ),
+		    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		    'tax_query'      => [
 			    'relation' => 'AND',
 			    [
@@ -3658,6 +3666,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
 	    if ( $order_by == '_price' || $order_by == '_sku' ) {
 		    $args[ 'orderby' ]  = 'meta_value meta_value_num';
+		    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 		    $args[ 'meta_key' ] = $order_by;
 	    } else {
 		    $args[ 'orderby' ] = $order_by;
@@ -3674,12 +3683,14 @@ class Woo_Product_Carousel extends Widget_Base {
 	    }
 
 	    if ( $filter == 'best-selling-products' ) {
+		    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 		    $args[ 'meta_key' ] = 'total_sales';
 		    $args[ 'orderby' ]  = 'meta_value_num';
 		    $args[ 'order' ]    = 'DESC';
 	    }
 
 	    if ( $filter == 'top-products' ) {
+		    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 		    $args[ 'meta_key' ] = '_wc_average_rating';
 		    $args[ 'orderby' ]  = 'meta_value_num';
 		    $args[ 'order' ]    = 'DESC';
@@ -3689,6 +3700,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		    $current_product_id = get_the_ID();
             $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
             $product_tags       = wp_get_post_terms( $current_product_id, 'product_tag', array('fields' => 'names' ) );
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
             $args['tax_query'] = array(
                 'relation' => 'OR',
                 array(
@@ -3708,6 +3720,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
 	    // Initialize meta_query if not already set
 	    if ( ! isset( $args['meta_query'] ) ) {
+		    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		    $args['meta_query'] = [ 'relation' => 'AND' ];
 	    }
 
@@ -3723,6 +3736,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    if ( 'yes' !== $settings['eael_product_carousel_show_onsale'] ) {
 		    $on_sale_ids = wc_get_product_ids_on_sale();
 		    if ( ! empty( $on_sale_ids ) ) {
+			    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 			    $args['post__not_in'] = isset( $args['post__not_in'] ) ?
 				    array_merge( $args['post__not_in'], $on_sale_ids ) :
 				    $on_sale_ids;
@@ -3773,6 +3787,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			'posts_per_page' => 'limit',
 			'post_status' => 'status',
 			'post__in' => 'include',
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 			'post__not_in' => 'exclude',
 			'author__in' => 'author',
 			'paged' => 'page',
@@ -3799,15 +3814,18 @@ class Woo_Product_Carousel extends Widget_Base {
 
 		// Preserve complex queries
 		if ( isset( $wp_args['meta_query'] ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$wc_args['meta_query'] = $wp_args['meta_query'];
 		}
 		if ( isset( $wp_args['tax_query'] ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$wc_args['tax_query'] = $wp_args['tax_query'];
 		}
 
 		// Handle meta_key/meta_value
 		if ( isset( $wp_args['meta_key'] ) ) {
 			if ( ! isset( $wc_args['meta_query'] ) ) {
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				$wc_args['meta_query'] = [ 'relation' => 'AND' ];
 			}
 			$meta_query = [ 'key' => $wp_args['meta_key'] ];

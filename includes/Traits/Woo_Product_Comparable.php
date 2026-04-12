@@ -388,6 +388,7 @@ trait Woo_Product_Comparable {
 			'label'    => __( 'Container Box Shadow', 'essential-addons-for-elementor-lite' ),
 			'name'     => 'eael_container_shadow',
 			'selector' => $container_class,
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			'exclude'  => [
 				'box_shadow_position',
 			],
@@ -488,6 +489,7 @@ trait Woo_Product_Comparable {
 				'classic',
 				'gradient',
 			],
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			'exclude'   => [ 'image' ],
 			'selector'  => $table,
 			'condition' => [
@@ -1232,6 +1234,7 @@ trait Woo_Product_Comparable {
 				'gradient',
 			],
 			'selector' => $img_td,
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			'exclude'  => [ 'image' ],
 		] );
 		$this->add_control( "{$pfx}_title_bg", [

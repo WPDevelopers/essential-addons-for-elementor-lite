@@ -467,6 +467,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'header_icon_bg',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude'   => [
                         'image'
                     ]
@@ -508,6 +509,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'header_icon_bg_hover',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon:hover',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude'   => [
                         'image'
                     ]
@@ -633,6 +635,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'cat_title_bg',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-post:not(.layout-2) .eael-bd-cg-header, {{WRAPPER}} .eael-better-docs-category-grid-post.layout-2 .eael-docs-cat-title',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude'   => [
                         'image'
                     ]
@@ -687,6 +690,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'cat_title_bg_hover',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-post:not(.layout-2) .eael-bd-cg-header:hover, {{WRAPPER}} .eael-better-docs-category-grid-post.layout-2 .eael-docs-cat-title:hover',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude'   => [
                         'image'
                     ]
@@ -773,6 +777,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                 [
                     'name' => 'count_font_size',
                     'selector' => '{{WRAPPER}} .eael-docs-item-count',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude' => [ 'line_height' ],
                 ]
             );
@@ -823,6 +828,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'count_bg',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-docs-item-count, {{WRAPPER}} .layout-2 .eael-docs-item-count:before',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude' => [
                         'image',
                     ],
@@ -920,6 +926,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'count_bg_hover',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-docs-item-count:hover, {{WRAPPER}} .layout-2 .eael-docs-item-count:hover:before',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude' => [
                         'image',
                     ],
@@ -1046,6 +1053,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'list_bg',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-bd-cg-body',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude' => [
                         'image',
                     ],
@@ -1179,6 +1187,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'nested_list_title_background',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-bd-grid-sub-cat-title',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude' => [
                         'image',
                     ],
@@ -1379,6 +1388,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'button_background_normal',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-bd-cg-button',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude' => [
                         'image',
                     ],
@@ -1478,6 +1488,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'button_background_hover',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-bd-cg-button:hover',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude' => [
                         'image',
                     ],
@@ -1609,10 +1620,12 @@ class Betterdocs_Category_Grid extends Widget_Base
         }
 
         if($settings['exclude']) {
+            // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
             $terms_object['exclude'] =  $settings['exclude'];
         }
 
         if ($settings['orderby'] == 'betterdocs_order') {
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
             $terms_object['meta_key'] = 'doc_category_order';
             $terms_object['orderby'] = 'meta_value_num';
             $terms_object['order'] = 'ASC';
@@ -1633,6 +1646,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $meta_query = '';
 
             if(!empty($settings['selected_knowledge_base'])){
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                 $terms_object['meta_query'] =  array(
                     array(
                         'relation' => 'OR',

@@ -1380,6 +1380,7 @@ class Cta_Box extends Widget_Base
 				'name' => 'eael_cta_btn_normal_gradient_bg_color',
 				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
                 'types' => [ 'classic', 'gradient' ],
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [ 'image' ],
                 'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)',
                 'condition' => [

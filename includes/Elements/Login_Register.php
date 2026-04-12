@@ -161,7 +161,7 @@ class Login_Register extends Widget_Base {
 		$this->pro_enabled       = apply_filters( 'eael/pro_enabled', false );
 
 		if( ! empty( $this->cloudflare_turnstile_sitekey ) ){
-			//phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent
+			//phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent, WordPress.WP.EnqueuedResourceParameters.MissingVersion, WordPress.WP.EnqueuedResourceParameters.NotInFooter
 			wp_register_script( 'eael-cloudflare', 'https://challenges.cloudflare.com/turnstile/v0/api.js' );
 		}
 
@@ -3197,6 +3197,7 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Container Box Shadow', 'essential-addons-for-elementor-lite' ),
 			'name'     => 'eael_form_wrap_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper",
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			'exclude'  => [
 				'box_shadow_position',
 			],
@@ -3430,6 +3431,7 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Form Wrapper Shadow', 'essential-addons-for-elementor-lite' ),
 			'name'     => 'eael_form_shadow',
 			'selector' => "{{WRAPPER}} .lr-form-wrapper",
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			'exclude'  => [
 				'box_shadow_position',
 			],
@@ -3439,6 +3441,7 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Form Shadow', 'essential-addons-for-elementor-lite' ),
 			'name'     => 'eael_form_ic_shadow',
 			'selector' => "{{WRAPPER}} .lr-form-wrapper form",
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			'exclude'  => [
 				'box_shadow_position',
 			],
@@ -3758,6 +3761,7 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Illustration Shadow', 'essential-addons-for-elementor-lite' ),
 			'name'     => "{$form_type}_form_img_shadow",
 			'selector' => $illustration_selector,
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			'exclude'  => [
 				'box_shadow_position',
 			],
@@ -3898,6 +3902,7 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Logo Shadow', 'essential-addons-for-elementor-lite' ),
 			'name'     => "{$form_type}_form_logo_shadow",
 			'selector' => $logo_selector,
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			'exclude'  => [
 				'box_shadow_position',
 			],

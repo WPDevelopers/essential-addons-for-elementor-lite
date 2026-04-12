@@ -481,6 +481,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'name'     => 'icon_background_normal',
                     'types'    => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon, {{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon__layout-2',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude'  => [
                         'image'
                     ]
@@ -1096,10 +1097,12 @@ class Betterdocs_Category_Box extends Widget_Base {
         }
 
         if ($settings['exclude']) {
+            // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
             $terms_object['exclude'] = $settings['exclude'];
         }
 
         if ($settings['orderby'] == 'betterdocs_order') {
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
             $terms_object['meta_key'] = 'doc_category_order';
             $terms_object['orderby'] = 'meta_value_num';
             $terms_object['order'] = 'ASC';
@@ -1121,6 +1124,7 @@ class Betterdocs_Category_Box extends Widget_Base {
             $meta_query = '';
 
             if(!empty($settings['selected_knowledge_base'])){
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                 $terms_object['meta_query'] =  array(
                     array(
                         'relation' => 'OR',

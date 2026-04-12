@@ -939,6 +939,7 @@ class Code_Snippet extends Widget_Base {
          [
             'name' => 'code_content_collapsed_indicator_background',
             'types' => [ 'classic', 'gradient' ],
+            // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
             'exclude' => [ 'image' ],
             'selector' => '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator',
          ]

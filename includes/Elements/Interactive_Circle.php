@@ -284,6 +284,7 @@ class Interactive_Circle extends Widget_Base {
 			[
 				'name'     => 'eael_interactive_circle_tab_bgtype',
 				'types'    => [ 'gradient', 'classic' ],
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude'  => [ 'image' ],
 				'selector' => '{{WRAPPER}} .eael-circle-wrapper:not(.eael-interactive-circle-preset-4) .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-icon-shapes',
 			]
@@ -578,6 +579,7 @@ class Interactive_Circle extends Widget_Base {
 				'name'     => 'eael_interactive_circle_border',
 				'label'    => esc_html__( 'Border', 'essential-addons-for-elementor-lite' ),
 				'selector' => '{{WRAPPER}} .eael-circle-inner, {{WRAPPER}} .eael-circle-responsive-view .eael-circle-inner .eael-circle-item',
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude'  => [ 'color' ],
 			]
 		);

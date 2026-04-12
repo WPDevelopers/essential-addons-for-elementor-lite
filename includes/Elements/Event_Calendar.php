@@ -1795,6 +1795,7 @@ class Event_Calendar extends Widget_Base
 		    [
 			    'name'     => 'eael_ec_table_header_background',
 			    'types'    => [ 'classic', 'gradient' ],
+			    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			    'exclude'  => [ 'image' ],
 			    'selector' => '{{WRAPPER}} .eael-event-calendar-table thead tr th',
 		    ]
@@ -1912,6 +1913,7 @@ class Event_Calendar extends Widget_Base
 	        [
 		        'name'     => 'eael_ec_table_body_background_even',
 		        'types'    => [ 'classic', 'gradient' ],
+		        // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 		        'exclude'  => [ 'image' ],
 		        'selector' => '{{WRAPPER}} .eael-event-calendar-table tbody tr:nth-child(even) td',
 	        ]
@@ -1971,6 +1973,7 @@ class Event_Calendar extends Widget_Base
 		    [
 			    'name'     => 'eael_ec_table_body_background_odd',
 			    'types'    => [ 'classic', 'gradient' ],
+			    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 			    'exclude'  => [ 'image' ],
 			    'selector' => '{{WRAPPER}} .eael-event-calendar-table tbody tr:nth-child(odd) td',
 		    ]
@@ -2104,6 +2107,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'eael_event_calendar_table_pagination_border',
                 'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a, {{WRAPPER}} .eael-event-calendar-pagination span',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => ['color']
             ]
         );
@@ -2151,6 +2155,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'eael_event_calendar_table_pagination_background',
                 'types' => [ 'classic', 'gradient' ],
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [ 'image' ],
                 'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a, {{WRAPPER}} .eael-event-calendar-pagination span',
             ]
@@ -2196,6 +2201,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'eael_event_calendar_table_pagination_background_hover',
                 'types' => [ 'classic', 'gradient' ],
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [ 'image' ],
                 'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a:hover',
             ]
@@ -2241,6 +2247,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'eael_event_calendar_table_pagination_background_active',
                 'types' => [ 'classic', 'gradient' ],
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [ 'image' ],
                 'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a.active',
             ]
@@ -2688,6 +2695,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .fc-col-header-cell, {{WRAPPER}} table thead .fc-timegrid-axis',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [
                     'image',
                 ],
@@ -3412,6 +3420,7 @@ class Event_Calendar extends Widget_Base
                     'gradient',
                 ],
                 'selector' => '{{WRAPPER}} .eael-event-calendar-wrapper .eaelec-modal-close',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [
                     'image',
                 ],
@@ -3519,6 +3528,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .eaelec-modal .eaelec-modal-content, {{WRAPPER}} .eaelec-modal .eaelec-modal-content .eaelec-modal-overlay',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [
                     'image',
                 ],
@@ -4381,6 +4391,7 @@ class Event_Calendar extends Widget_Base
 	    }
 
         if (!empty($settings['eael_the_events_calendar_category'])) {
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
             $arg['tax_query'] = [
                 [
                     'taxonomy' => 'tribe_events_cat', 'field' => 'id',

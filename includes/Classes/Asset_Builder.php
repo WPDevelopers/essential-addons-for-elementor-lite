@@ -332,6 +332,7 @@ class Asset_Builder {
 			EAEL_PLUGIN_VERSION
 		);
 
+		// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
 		wp_register_script(
 			'font-awesome-4-shim',
 			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
@@ -347,6 +348,7 @@ class Asset_Builder {
 			EAEL_PLUGIN_VERSION
 		);
 
+		// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
 		wp_register_script(
 			'eael-reading-progress',
 			EAEL_PLUGIN_URL . 'assets/front-end/js/view/reading-progress.min.js',
@@ -362,6 +364,7 @@ class Asset_Builder {
 			EAEL_PLUGIN_VERSION
 		);
 
+		// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
 		wp_register_script(
 			'eael-table-of-content',
 			EAEL_PLUGIN_URL . 'assets/front-end/js/view/table-of-content.min.js',
@@ -377,6 +380,7 @@ class Asset_Builder {
 			EAEL_PLUGIN_VERSION
 		);
 
+		// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
 		wp_register_script(
 			'eael-scroll-to-top',
 			EAEL_PLUGIN_URL . 'assets/front-end/js/view/scroll-to-top.min.js',

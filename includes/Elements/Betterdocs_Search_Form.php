@@ -526,6 +526,7 @@ class Betterdocs_Search_Form extends Widget_Base
                     'name' => 'result_box_item_hover_bg',
                     'types' => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .betterdocs-live-search .docs-search-result li:hover',
+                    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                     'exclude'   => [
                         'image'
                     ]

@@ -160,6 +160,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name'     => 'eael_add_to_cart_button_border',
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude'  => [ 'color' ],
 				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .cart .button, {{WRAPPER}} .eael-add-to-cart-wrapper .eael-add-to-cart',
 			]
@@ -417,6 +418,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name'                 => 'eael_add_to_cart_qt_border',
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude'              => [ 'color' ],
                'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .quantity .qty, {{WRAPPER}} .eael-single-product-add-to-cart .eael-add-to-cart-wrapper .quantity-input',
 			]

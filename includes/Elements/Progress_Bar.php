@@ -575,6 +575,7 @@ class Progress_Bar extends Widget_Base
                 'name' => 'progress_bar_line_fill_color',
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [
                     'image',
                 ],

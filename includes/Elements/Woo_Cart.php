@@ -1394,6 +1394,7 @@ class Woo_Cart extends Widget_Base {
 					],
 				],
 				'types'          => [ 'classic', 'gradient' ],
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude'        => [ 'image' ],
 				'selector'       => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .eael-wc-table-header .eael-wct-tr',
 				'condition'      => [
@@ -1442,6 +1443,7 @@ class Woo_Cart extends Widget_Base {
 					],
 				],
 				'types'          => [ 'classic', 'gradient' ],
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude'        => [ 'image' ],
 				'selector'       => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .eael-wc-table-body .eael-wct-tr',
 				'condition'      => [

@@ -164,10 +164,12 @@ class Helper
             $wpdb->update(
                 $wpdb->postmeta,
                 [
+                    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
                     'meta_value' => $data,
                 ],
                 [
                     'post_id' => $post_id,
+                    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
                     'meta_key' => '_elementor_data',
                 ]
             );
@@ -185,6 +187,7 @@ class Helper
 		    'order'          => 'desc',
 		    'posts_per_page' => 3,
 		    'offset'         => 0,
+		    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 		    'post__not_in'   => [],
 	    ] );
 
@@ -202,6 +205,7 @@ class Helper
 		    $args['post__in']  = empty( $settings['posts_ids'] ) ? [ 0 ] : $settings['posts_ids'];
 	    } else {
 		    $args['post_type'] = $settings['post_type'];
+		    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		    $args['tax_query'] = [];
 
 		    $taxonomies = get_object_taxonomies( $settings['post_type'], 'objects' );
@@ -225,11 +229,13 @@ class Helper
 
 	    if ( $args['orderby'] === 'most_viewed' ) {
 		    $args['orderby']  = 'meta_value_num';
+		    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 		    $args['meta_key'] = '_eael_post_view_count';
 	    }
 
 	    // Handle custom field sorting
 	    if ( $args['orderby'] === 'meta_value' && ! empty( $settings['meta_key'] ) ) {
+		    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 		    $args['meta_key'] = sanitize_text_field( $settings['meta_key'] );
 
 		    // Set the appropriate orderby based on meta_type
@@ -259,10 +265,12 @@ class Helper
 	    }
 
 	    if ( ! empty( $settings['post__not_in'] ) ) {
+		    // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 		    $args['post__not_in'] = $settings['post__not_in'];
 	    }
 
         if( 'product' === $post_type && function_exists('whols_lite') ){
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
         }
 
@@ -354,6 +362,7 @@ class Helper
 		    'comment_count' => __( 'Comment Count', 'essential-addons-for-elementor-lite' ),
 		    'most_viewed'   => __( 'Most Viewed', 'essential-addons-for-elementor-lite' ),
 		    'menu_order'    => __( 'Menu Order', 'essential-addons-for-elementor-lite' ),
+		    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 		    'meta_value'    => __( 'Custom Field', 'essential-addons-for-elementor-lite' )
 	    );
 
@@ -398,6 +407,7 @@ class Helper
                 'post_type' => 'elementor_library',
                 'posts_per_page' => -1,
             ];
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
             $args['tax_query'] = [
                 [
                     'taxonomy' => 'elementor_library_type',
@@ -770,6 +780,7 @@ class Helper
 
             if (isset($data->post_type)) {
                 $args['post_type'] = $data->post_type;
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
                 $args['tax_query'] = [];
             } else {
                 global $wp_query;
@@ -808,6 +819,7 @@ class Helper
                 $args['tax_query']['relation'] = 'AND';
             }
 
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             $args[ 'meta_query' ] = [ 'relation' => 'AND' ];
             $show_stock_out_products = isset( $settings['eael_product_out_of_stock_show'] ) ? $settings['eael_product_out_of_stock_show'] : 'yes';
 
@@ -818,6 +830,7 @@ class Helper
                 ];
             }
             if( 'product' === $args['post_type'] && function_exists('whols_lite') ){
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                 $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
             }
         }

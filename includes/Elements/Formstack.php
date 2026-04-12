@@ -1732,6 +1732,7 @@ class Formstack extends Widget_Base {
                 'condition' => [
                     'eael_formstack_show_progressbar' => 'yes'
                 ],
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude'   => [
                     'image'
                 ]
@@ -1757,6 +1758,7 @@ class Formstack extends Widget_Base {
                 'condition' => [
                     'eael_formstack_show_progressbar' => 'yes'
                 ],
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude'   => [
                     'image'
                 ]

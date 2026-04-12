@@ -619,6 +619,7 @@ class Feature_List extends Widget_Base {
             [
                 'name'     => 'eael_feature_list_icon_background',
                 'types'    => ['classic', 'gradient'],
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude'  => [ 'image' ],
                 'fields_options'    => [
                     'background' => [

@@ -577,6 +577,7 @@ class Woo_Product_Images extends Widget_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name'           => 'thumb_image_resolution',
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude'        => [ 'custom' ],
 				'default'        => 'thumbnail',
 				'condition'      => [
