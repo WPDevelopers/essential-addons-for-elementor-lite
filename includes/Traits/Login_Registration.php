@@ -668,6 +668,11 @@ trait Login_Registration {
 
 		$user_id = wp_insert_user( $user_data );
 
+		// Admin Approval: mark newly registered user as pending
+		if ( 'on' === get_option( 'eael_lr_admin_approval' ) && ! is_wp_error( $user_id ) ) {
+			update_user_meta( $user_id, 'eael_registration_status', 'pending' );
+		}
+
 		if( count( $eael_custom_profile_fields_image ) ){
 			require_once( ABSPATH . 'wp-admin/includes/image.php' );
 			require_once( ABSPATH . 'wp-admin/includes/file.php' );
@@ -741,6 +746,22 @@ trait Login_Registration {
 			'message' => isset( $settings['success_register'] ) ? Helper::eael_wp_kses( $settings['success_register'] ) : __( 'Your registration completed successfully.', 'essential-addons-for-elementor-lite' ),
 		];
 		// should user be auto logged in?
+		// Skip auto-login entirely when Admin Approval is enabled – user must wait for approval.
+		if ( 'on' === get_option( 'eael_lr_admin_approval' ) ) {
+			$data['message'] = __( 'Your registration is complete. Your account is pending administrator approval.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_success( $data );
+			}
+			if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
+				wp_safe_redirect( $custom_redirect_url );
+				exit();
+			}
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+		}
+
 		if ( in_array( 'auto_login', $register_actions ) && ! is_user_logged_in() ) {
 			wp_signon( [
 				'user_login'    => $username,
@@ -1850,5 +1871,226 @@ trait Login_Registration {
 		}
 
 		return $eael_custom_profile_fields;
+	}
+
+	// -------------------------------------------------------------------------
+	// Admin Approval feature
+	// -------------------------------------------------------------------------
+
+	/**
+	 * Block login for users whose registration is pending admin approval.
+	 *
+	 * Hooked to `wp_authenticate_user`.
+	 *
+	 * @param \WP_User|\WP_Error $user     Authenticated user object or error.
+	 * @param string             $password Submitted password (unused here).
+	 * @return \WP_User|\WP_Error
+	 */
+	public function eael_block_pending_user_login( $user, $password ) {
+		if ( is_wp_error( $user ) ) {
+			return $user;
+		}
+
+		if ( 'pending' === get_user_meta( $user->ID, 'eael_registration_status', true ) ) {
+			return new \WP_Error(
+				'eael_pending_approval',
+				__( 'Your account is awaiting administrator approval.', 'essential-addons-for-elementor-lite' )
+			);
+		}
+
+		return $user;
+	}
+
+	/**
+	 * Add a "Status" column to the WP-Admin users list table.
+	 *
+	 * Hooked to `manage_users_columns`.
+	 *
+	 * @param array $columns Existing columns.
+	 * @return array
+	 */
+	public function eael_add_user_status_column( $columns ) {
+		$columns['eael_status'] = __( 'Status', 'essential-addons-for-elementor-lite' );
+		return $columns;
+	}
+
+	/**
+	 * Render the "Status" column value for each user row.
+	 *
+	 * Hooked to `manage_users_custom_column`.
+	 *
+	 * @param string $output      Current column output.
+	 * @param string $column_name Column slug.
+	 * @param int    $user_id     User ID.
+	 * @return string
+	 */
+	public function eael_render_user_status_column( $output, $column_name, $user_id ) {
+		if ( 'eael_status' !== $column_name ) {
+			return $output;
+		}
+
+		$status = get_user_meta( $user_id, 'eael_registration_status', true );
+
+		if ( 'pending' === $status ) {
+			return '<span style="display:inline-block;background:#f0a500;color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">'
+				. esc_html__( 'Pending', 'essential-addons-for-elementor-lite' )
+				. '</span>';
+		}
+
+		return '<span style="display:inline-block;background:#46b450;color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">'
+			. esc_html__( 'Approved', 'essential-addons-for-elementor-lite' )
+			. '</span>';
+	}
+
+	/**
+	 * Show an "Approve User" button on the profile edit screen when the user is pending.
+	 *
+	 * Hooked to `show_user_profile` and `edit_user_profile`.
+	 *
+	 * @param \WP_User $user Profile user object.
+	 */
+	public function eael_show_approve_user_button( $user ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$status = get_user_meta( $user->ID, 'eael_registration_status', true );
+		?>
+		<table class="form-table" id="eael-admin-approval">
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Account Status', 'essential-addons-for-elementor-lite' ); ?></th>
+				<td>
+					<?php if ( 'pending' === $status ) : ?>
+						<span style="color:#f0a500;font-weight:bold;">
+							<?php esc_html_e( 'Pending Approval', 'essential-addons-for-elementor-lite' ); ?>
+						</span>
+						<?php wp_nonce_field( 'eael_approve_user_' . $user->ID, 'eael_approve_user_nonce' ); ?>
+						<input type="submit"
+							   name="eael_approve_user"
+							   class="button button-primary"
+							   value="<?php esc_attr_e( 'Approve User', 'essential-addons-for-elementor-lite' ); ?>"
+							   style="margin-left:10px;">
+					<?php else : ?>
+						<span style="color:#46b450;font-weight:bold;">
+							<?php esc_html_e( 'Approved', 'essential-addons-for-elementor-lite' ); ?>
+						</span>
+					<?php endif; ?>
+				</td>
+			</tr>
+		</table>
+		<?php
+	}
+
+	/**
+	 * Handle the "Approve User" button submission on the profile page.
+	 *
+	 * Hooked to `personal_options_update` and `edit_user_profile_update`.
+	 *
+	 * @param int $user_id Profile user ID.
+	 */
+	public function eael_handle_approve_user( $user_id ) {
+		if ( ! isset( $_POST['eael_approve_user'], $_POST['eael_approve_user_nonce'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce(
+			sanitize_text_field( wp_unslash( $_POST['eael_approve_user_nonce'] ) ),
+			'eael_approve_user_' . $user_id
+		) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		update_user_meta( $user_id, 'eael_registration_status', 'approved' );
+
+		// Optional: notify the user by email.
+		$user = get_userdata( $user_id );
+		if ( $user ) {
+			$subject = __( 'Your account has been approved', 'essential-addons-for-elementor-lite' );
+			/* translators: %s: user display name */
+			$message = sprintf(
+				__( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ),
+				$user->display_name
+			);
+			wp_mail( $user->user_email, $subject, $message );
+		}
+	}
+
+	/**
+	 * Register the "Approve" bulk action on the users list table.
+	 *
+	 * Hooked to `bulk_actions-users`.
+	 *
+	 * @param array $actions Existing bulk actions.
+	 * @return array
+	 */
+	public function eael_register_bulk_approve_action( $actions ) {
+		$actions['eael_approve_users'] = __( 'Approve', 'essential-addons-for-elementor-lite' );
+		return $actions;
+	}
+
+	/**
+	 * Handle the "Approve" bulk action and approve selected pending users.
+	 *
+	 * Hooked to `handle_bulk_actions-users`.
+	 *
+	 * @param string $redirect_url URL to redirect to after processing.
+	 * @param string $action       The bulk action being taken.
+	 * @param int[]  $user_ids     Array of selected user IDs.
+	 * @return string
+	 */
+	public function eael_handle_bulk_approve_action( $redirect_url, $action, $user_ids ) {
+		if ( 'eael_approve_users' !== $action || ! current_user_can( 'manage_options' ) ) {
+			return $redirect_url;
+		}
+
+		$approved_count = 0;
+
+		foreach ( $user_ids as $user_id ) {
+			if ( 'pending' !== get_user_meta( $user_id, 'eael_registration_status', true ) ) {
+				continue;
+			}
+
+			update_user_meta( $user_id, 'eael_registration_status', 'approved' );
+			$approved_count++;
+
+			// Optional: notify each approved user.
+			$user = get_userdata( $user_id );
+			if ( $user ) {
+				$subject = __( 'Your account has been approved', 'essential-addons-for-elementor-lite' );
+				/* translators: %s: user display name */
+				$message = sprintf(
+					__( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ),
+					$user->display_name
+				);
+				wp_mail( $user->user_email, $subject, $message );
+			}
+		}
+
+		return add_query_arg( 'eael_approved_count', $approved_count, $redirect_url );
+	}
+
+	/**
+	 * Display an admin notice after a bulk approve action.
+	 *
+	 * Hooked to `admin_notices`.
+	 */
+	public function eael_bulk_approve_admin_notice() {
+		if ( ! isset( $_GET['eael_approved_count'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return;
+		}
+
+		$count = intval( $_GET['eael_approved_count'] ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		printf(
+			'<div class="notice notice-success is-dismissible"><p>%s</p></div>',
+			esc_html(
+				/* translators: %d: number of approved users */
+				sprintf( _n( '%d user approved.', '%d users approved.', $count, 'essential-addons-for-elementor-lite' ), $count )
+			)
+		);
 	}
 }

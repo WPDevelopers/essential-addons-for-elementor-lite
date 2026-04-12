@@ -1440,6 +1440,9 @@ trait Ajax_Handler {
 			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
 		}
 
+		// Always save so that unchecking (absent key) correctly clears the option.
+		update_option( 'eael_lr_admin_approval', isset( $settings['lr_admin_approval'] ) ? sanitize_text_field( $settings['lr_admin_approval'] ) : '' );
+
 		if ( isset( $settings['lr_custom_profile_fields_text'] ) ) {
 			update_option( 'eael_custom_profile_fields_text', sanitize_text_field( $settings['lr_custom_profile_fields_text'] ) );
 		}

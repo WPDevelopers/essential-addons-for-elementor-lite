@@ -1732,6 +1732,16 @@ trait Admin {
 								    'value' => get_option( 'eael_custom_profile_fields', '' ),
 							    ]
 						    ],
+						    'adminApproval'   => [
+							    'title'  => __( 'Admin Approval', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/customfield.svg',
+							    'info'   => __( 'When enabled, new registrants are placed in a "Pending" state and cannot log in until an administrator manually approves them.', 'essential-addons-for-elementor-lite' ),
+							    'fields' => [],
+							    'status' => [
+								    'name'  => 'lr_admin_approval',
+								    'value' => get_option( 'eael_lr_admin_approval', '' ),
+							    ]
+						    ],
 					    ],
 					    'link'      => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
