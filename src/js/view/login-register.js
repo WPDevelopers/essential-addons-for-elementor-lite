@@ -534,6 +534,36 @@ eael.hooks.addAction("init", "ea", () => {
             }
         });
 
+        // ============================================================
+        // Prevent Pro AJAX handler from reloading when OTP is required
+        // ============================================================
+        // Pro's eaelAjaxCall() treats any { success: true } response as "done" and schedules
+        // location.reload() after 1 s for login forms, regardless of content.
+        // When OTP is required the PHP returns wp_send_json_success({ otp_required: true }),
+        // so Pro's timer fires and wipes the OTP form off the screen.
+        //
+        // We intercept via $.ajaxPrefilter — scoped to this widget's login/register
+        // submissions — and skip Pro's success callback when otp_required is set.
+        // Our ajaxSuccess listener above handles the OTP display, so nothing is lost.
+        $.ajaxPrefilter(function (filterOptions) {
+            const reqData = typeof filterOptions.data === 'string' ? filterOptions.data : '';
+            const isThisWidget = reqData.indexOf('widget_id=' + encodeURIComponent(widgetId)) !== -1
+                              || reqData.indexOf('widget_id=' + widgetId) !== -1;
+            const isLoginOrRegister = reqData.indexOf('eael-login-nonce') !== -1
+                                   || reqData.indexOf('eael-register-nonce') !== -1;
+            if (!isThisWidget || !isLoginOrRegister || !filterOptions.success) { return; }
+
+            const origSuccess = filterOptions.success;
+            filterOptions.success = function (data) {
+                if (data && data.success && data.data && data.data.otp_required) {
+                    // OTP response: bail out of Pro's handler so no reload is scheduled.
+                    // The ajaxSuccess listener scoped to this widget will show the OTP form.
+                    return;
+                }
+                origSuccess.apply(this, arguments);
+            };
+        });
+
         // Also expose the legacy hook for any custom integrations that explicitly fire it.
         if (typeof eael !== 'undefined' && eael.hooks && eael.hooks.addAction) {
             eael.hooks.addAction('eael/lr/ajax-response', 'ea_' + widgetId, function (response, $form) {
