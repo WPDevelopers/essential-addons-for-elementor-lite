@@ -1938,6 +1938,7 @@ class Adv_Accordion extends Widget_Base
                         }
                     echo '</div>';
 
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
                         if( isset( $settings['eael_adv_accordion_show_full_content'] ) && 'yes' === $settings['eael_adv_accordion_show_full_content'] ) {
                             $document = Plugin::instance()->documents->get( $tab_id );
@@ -1960,7 +1961,7 @@ class Adv_Accordion extends Widget_Base
                 echo '</div>';
             }
         } else {
-            echo '<p class="no-posts-found">'. esc_html__('No posts found!', 'essential-addons-elementor') .'</p>';
+            echo '<p class="no-posts-found">'. esc_html__('No posts found!', 'essential-addons-for-elementor-lite') .'</p>';
         }
         wp_reset_postdata();
 
