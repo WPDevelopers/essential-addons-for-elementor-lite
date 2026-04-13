@@ -228,6 +228,8 @@ use HelperTrait;
                         '{{WRAPPER}} .eael-creative-button-icon-right' => 'margin-left: {{SIZE}}px;',
                         '{{WRAPPER}} .eael-creative-button-icon-left'  => 'margin-right: {{SIZE}}px;',
                         '{{WRAPPER}} .eael-creative-button--shikoba i' => 'left: {{SIZE}}%;',
+                        '{{WRAPPER}} .eael-creative-button--winona.eael-cb-icon-position-left::after' => 'left: {{SIZE}}px;',
+                        '{{WRAPPER}} .eael-creative-button--winona.eael-cb-icon-position-right::after' => 'left: -{{SIZE}}px;',
                     ],
                 ]
             );
@@ -1164,7 +1166,7 @@ use HelperTrait;
         $icon_is_new = empty($settings['eael_creative_button_icon']);
 
         $this->add_render_attribute('eael_creative_button', [
-            'class' => ['eael-creative-button', esc_attr($settings['creative_button_effect'])],
+            'class' => ['eael-creative-button', esc_attr($settings['creative_button_effect']) , 'eael-cb-icon-position-' . $settings['eael_creative_button_icon_alignment'] ],
         ]);
 
         if ( ! empty( $settings['creative_button_link_url']['url'] ) ) {
