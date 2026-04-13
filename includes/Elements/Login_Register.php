@@ -1858,6 +1858,15 @@ class Login_Register extends Widget_Base {
 			'separator'   => 'before',
 		] );
 
+		$this->add_control( 'logout_redirect_url', [
+			'type'          => Controls_Manager::URL,
+			'label'         => __( 'Redirect After Logout', 'essential-addons-for-elementor-lite' ),
+			'description'   => __( 'Leave empty to redirect back to the current page.', 'essential-addons-for-elementor-lite' ),
+			'show_external' => false,
+			'separator'     => 'before',
+			'options'       => false
+		] );
+
 		$this->end_controls_section();
 	}
 

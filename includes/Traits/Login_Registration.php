@@ -1610,8 +1610,17 @@ trait Login_Registration {
 	 * @return null|string|string[]
 	 */
 	public function replace_placeholders_logout_link_text( $text ) {
-		$current_user   = wp_get_current_user()->display_name;
-		$logout_link 	= sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_logout_url() ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
+		$current_user = wp_get_current_user()->display_name;
+
+		$logout_redirect_url = ! empty( $this->ds['logout_redirect_url']['url'] )
+			? esc_url_raw( $this->ds['logout_redirect_url']['url'] )
+			: get_permalink( ! empty( $this->page_id ) ? $this->page_id : get_queried_object_id() );
+
+		if ( ! $logout_redirect_url ) {
+			$logout_redirect_url = home_url( '/' );
+		}
+
+		$logout_link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_logout_url( $logout_redirect_url ) ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
 
 		$placeholders = [
 			'/\[username\]/',
