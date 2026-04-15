@@ -1200,6 +1200,15 @@ trait Admin {
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'price-menu' ) )
 						    ],
+                            'pricing-slider'         => [
+                                'key'         => 'pricing-slider',
+                                'title'       => __( 'Pricing Slider', 'essential-addons-for-elementor-lite' ),
+                                'demo_link'   => 'https://essential-addons.com/pricing-slider/',
+                                'doc_link'    => 'https://essential-addons.com/docs/ea-pricing-slider/',
+                                'is_pro'      => true,
+                                'promotion'   => 'new',
+                                'is_activate' => boolval( $this->get_settings( 'pricing-slider' ) )
+                            ],
 					    ]
 				    ],
 				    'form-styler-elements'     => [
@@ -1751,7 +1760,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.5 with new \"<b><a target='_blank' href='%1\$s'>Vertical Text Orientation</a></b>\" extension. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/vertical-text-orientation/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.8 with new \"<b><a target='_blank' href='%1\$s'>Pricing Slider</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/pricing-slider/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
