@@ -744,7 +744,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_group_control(
 			EAEL_Gradient_Text::get_type(),
 			[
-				'name'     => 'eael_dch_subtext_color',
+				'name'     => 'eael_dch_subtext',
 				'selector' => '{{WRAPPER}} .eael-dual-header .subtext',
 				'default'  => '#4d4d4d',
 			]
