@@ -741,53 +741,12 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 
-		$this->add_control(
-			'eael_dch_subtext_color_type',
-			[
-				'label'       => esc_html__( 'Color Type', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::CHOOSE,
-				'options'     => [
-					'classic'  => [
-						'title' => esc_html__( 'Classic', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-paint-brush',
-					],
-					'gradient' => [
-						'title' => esc_html__( 'Gradient', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-barcode',
-					],
-				],
-				'default'     => 'classic',
-				'render_type' => 'ui',
-			]
-		);
-
-		$this->add_control(
-			'eael_dch_subtext_color',
-			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#4d4d4d',
-				'selectors' => [
-					'{{WRAPPER}} .eael-dual-header .subtext' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_dch_subtext_color_type' => 'classic',
-				],
-			]
-		);
-
 		$this->add_group_control(
 			EAEL_Gradient_Text::get_type(),
 			[
-				'name'           => 'eael_dch_subtext_gradient_color',
-				'selector'       => '{{WRAPPER}} .eael-dual-header .subtext',
-				'condition'      => [
-					'eael_dch_subtext_color_type' => 'gradient',
-				],
-				'fields_options' => [
-					'color'   => [ 'default' => '#4d4d4d' ],
-					'color_b' => [ 'default' => '#4d4d4d' ],
-				],
+				'name'     => 'eael_dch_subtext_color',
+				'selector' => '{{WRAPPER}} .eael-dual-header .subtext',
+				'default'  => '#4d4d4d',
 			]
 		);
 

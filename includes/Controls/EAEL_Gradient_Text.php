@@ -12,22 +12,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * EAEL Gradient Text group control.
  *
- * Applies a CSS gradient to text via background-clip: text + color: transparent.
- * Outputs background-image (linear or radial gradient), -webkit-background-clip,
- * background-clip, and color: transparent to the target selector.
+ * A self-contained group control that provides both a classic single-color
+ * picker and a full gradient builder for text, selected via an internal
+ * `color_type` CHOOSE field.
  *
- * Fallback: A solid "Fallback Color" field sets `color` on the same selector.
- * Since the gradient rules appear after it in the stylesheet, browsers that
- * fully support background-clip:text will display the gradient; all modern
- * browsers (Chrome 4+, Firefox 3.5+, Safari 3.1+, Edge 12+) do.
+ * Classic mode  → outputs `color: {{VALUE}}` only.
+ * Gradient mode → outputs `background-image`, `-webkit-background-clip`,
+ *                 `background-clip: text`, and `color: transparent`.
+ *                 The first color (`color`) also emits `color: {{VALUE}}`
+ *                 as the automatic browser fallback (no separate field needed).
  *
- * Usage in a widget:
+ * Default behaviour (nothing passed in `fields_options`):
+ *   classic mode, single color picker only.
  *
+ * To default to gradient mode pass via `fields_options`:
+ *   'color_type' => [ 'default' => 'gradient' ]
+ *
+ * Usage:
+ *
+ *   // Classic default (single color)
  *   $this->add_group_control(
  *       \Essential_Addons_Elementor\Controls\EAEL_Gradient_Text::get_type(),
  *       [
- *           'name'     => 'heading_gradient',
- *           'selector' => '{{WRAPPER}} .my-heading',
+ *           'name'           => 'my_text',
+ *           'selector'       => '{{WRAPPER}} .my-el',
+ *           'fields_options' => [
+ *               'color' => [ 'default' => '#4d4d4d' ],
+ *           ],
+ *       ]
+ *   );
+ *
+ *   // Gradient default
+ *   $this->add_group_control(
+ *       \Essential_Addons_Elementor\Controls\EAEL_Gradient_Text::get_type(),
+ *       [
+ *           'name'           => 'my_text',
+ *           'selector'       => '{{WRAPPER}} .my-el',
+ *           'fields_options' => [
+ *               'color_type' => [ 'default' => 'gradient' ],
+ *               'color'      => [ 'default' => '#4d4d4d' ],
+ *               'color_b'    => [ 'default' => '#4d4d4d' ],
+ *           ],
  *       ]
  *   );
  *
@@ -70,10 +95,32 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 	public function init_fields() {
 		$fields = [];
 
-		// ── First gradient color ──────────────────────────────────────────────
-		// Also outputs `color: {{VALUE}}` so it doubles as the automatic fallback
-		// for browsers that do not support background-clip: text — no separate
-		// Fallback Color field is needed.
+		// ── Color type picker ─────────────────────────────────────────────────
+		// Drives classic/gradient visibility. Default is 'classic' so the control
+		// behaves as a plain color picker unless opted into gradient mode.
+		$fields['color_type'] = [
+			'label'       => esc_html__( 'Color Type', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::CHOOSE,
+			'options'     => [
+				'classic'  => [
+					'title' => esc_html__( 'Classic', 'essential-addons-for-elementor-lite' ),
+					'icon'  => 'eicon-paint-brush',
+				],
+				'gradient' => [
+					'title' => esc_html__( 'Gradient', 'essential-addons-for-elementor-lite' ),
+					'icon'  => 'eicon-barcode',
+				],
+			],
+			'default'     => 'classic',
+			'render_type' => 'ui',
+		];
+
+		// ── First / only color ────────────────────────────────────────────────
+		// Shown in both modes.
+		// - Classic: its `color: {{VALUE}}` selector is the sole CSS output.
+		// - Gradient: acts as the first gradient stop AND as the automatic
+		//   browser fallback (overridden by `color: transparent` in modern
+		//   browsers that support background-clip: text).
 		$fields['color'] = [
 			'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
@@ -82,6 +129,8 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 				'{{SELECTOR}}' => 'color: {{VALUE}};',
 			],
 		];
+
+		// ── Gradient-only fields ──────────────────────────────────────────────
 
 		$fields['color_stop'] = [
 			'label'       => esc_html__( 'Location', 'essential-addons-for-elementor-lite' ),
@@ -92,14 +141,19 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 				'size' => 0,
 			],
 			'render_type' => 'ui',
+			'condition'   => [
+				'color_type' => 'gradient',
+			],
 		];
 
-		// ── Second gradient color ─────────────────────────────────────────────
 		$fields['color_b'] = [
 			'label'       => esc_html__( 'Second Color', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::COLOR,
 			'default'     => '#f2295b',
 			'render_type' => 'ui',
+			'condition'   => [
+				'color_type' => 'gradient',
+			],
 		];
 
 		$fields['color_b_stop'] = [
@@ -111,9 +165,11 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 				'size' => 100,
 			],
 			'render_type' => 'ui',
+			'condition'   => [
+				'color_type' => 'gradient',
+			],
 		];
 
-		// ── Gradient type ─────────────────────────────────────────────────────
 		$fields['gradient_type'] = [
 			'label'       => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::SELECT,
@@ -123,11 +179,12 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 			],
 			'default'     => 'linear',
 			'render_type' => 'ui',
+			'condition'   => [
+				'color_type' => 'gradient',
+			],
 		];
 
-		// ── Linear: angle ─────────────────────────────────────────────────────
-		// Outputs all four text-clip CSS properties so the gradient is visible
-		// on the text in every modern browser.
+		// Linear gradient — outputs full text-clip CSS.
 		$fields['gradient_angle'] = [
 			'label'      => esc_html__( 'Angle', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,
@@ -145,11 +202,12 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 				] ),
 			],
 			'condition'  => [
+				'color_type'    => 'gradient',
 				'gradient_type' => 'linear',
 			],
 		];
 
-		// ── Radial: origin position ───────────────────────────────────────────
+		// Radial gradient — outputs full text-clip CSS.
 		$fields['gradient_position'] = [
 			'label'     => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SELECT,
@@ -174,6 +232,7 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 				] ),
 			],
 			'condition' => [
+				'color_type'    => 'gradient',
 				'gradient_type' => 'radial',
 			],
 		];
@@ -184,8 +243,7 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 	/**
 	 * Default options for this group control.
 	 *
-	 * Disables the popover wrapper so all fields render inline in the
-	 * Elementor panel without an extra toggle button.
+	 * Renders fields inline in the panel (no popover toggle button).
 	 *
 	 * @since 6.6.0
 	 * @access protected
