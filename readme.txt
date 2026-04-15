@@ -318,7 +318,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 6.6.1 - 16/04/2026 =
+= 6.6.1 - 15/04/2026 =
 
 - Few minor bug fixes & improvements
 
