@@ -124,7 +124,7 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 		$fields['color'] = [
 			'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6d3be4',
+			'default'   => '',
 			'selectors' => [
 				'{{SELECTOR}}' => 'color: {{VALUE}};',
 			],
@@ -238,6 +238,48 @@ class EAEL_Gradient_Text extends Group_Control_Base {
 		];
 
 		return $fields;
+	}
+
+	/**
+	 * Apply defaults from the `default` arg passed to add_group_control().
+	 *
+	 * - string  → classic mode; value becomes color default.
+	 * - array   → gradient mode; keys 'color' and 'color_b' set respective defaults.
+	 * - omitted → no change (controller field defaults apply as-is).
+	 *
+	 * @since 6.6.0
+	 * @access protected
+	 *
+	 * @param array $fields Prepared fields array.
+	 * @return array
+	 */
+	protected function prepare_fields( $fields ) {
+		$args    = $this->get_args();
+		$default = isset( $args['default'] ) ? $args['default'] : null;
+
+		if ( \is_string( $default ) && '' !== $default ) {
+			// Classic mode — single color default.
+			$fields['color']['default'] = $default;
+		} elseif ( \is_array( $default ) ) {
+			// Gradient mode.
+			$fields['color_type']['default'] = 'gradient';
+
+			if ( isset( $default['color'] ) ) {
+				$fields['color']['default'] = $default['color'];
+			}
+			if ( isset( $default['color_b'] ) ) {
+				$fields['color_b']['default'] = $default['color_b'];
+			}
+			if ( isset( $default['color_stop'] ) ) {
+				$fields['color_stop']['default'] = $default['color_stop'];
+			}
+			if ( isset( $default['color_b_stop'] ) ) {
+				$fields['color_b_stop']['default'] = $default['color_b_stop'];
+			}
+			
+		}
+
+		return parent::prepare_fields( $fields );
 	}
 
 	/**
