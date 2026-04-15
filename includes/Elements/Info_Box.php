@@ -18,6 +18,7 @@ use \Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 use Essential_Addons_Elementor\Traits\Helper as HelperTrait;
+use Essential_Addons_Elementor\Controls\EAEL_Gradient_Text;
 
 class Info_Box extends Widget_Base
 {
@@ -1744,15 +1745,12 @@ class Info_Box extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_infobox_title_color',
+        $this->add_group_control(
+            EAEL_Gradient_Text::get_type(),
             [
-                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#4d4d4d',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .infobox-content .title' => 'color: {{VALUE}};',
-                ],
+                'name'     => 'eael_infobox_title',
+                'selector' => '{{WRAPPER}} .eael-infobox .infobox-content .title',
+                'default'  => '#4d4d4d',
             ]
         );
 
@@ -1788,15 +1786,12 @@ class Info_Box extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_infobox_sub_title_color',
+        $this->add_group_control(
+            EAEL_Gradient_Text::get_type(),
             [
-                'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
+                'name'      => 'eael_infobox_sub_title',
+                'selector'  => '{{WRAPPER}} .eael-infobox .infobox-content .sub_title',
                 'default'   => '#4d4d4d',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .infobox-content .sub_title' => 'color: {{VALUE}};',
-                ],
                 'condition' => [
                     'eael_infobox_show_sub_title' => 'yes',
                 ],
@@ -1915,26 +1910,21 @@ class Info_Box extends Widget_Base
             'label' => esc_html__('Hover', 'essential-addons-for-elementor-lite'),
         ]);
 
-        $this->add_control(
-            'eael_infobox_title_hover_color',
+        $this->add_group_control(
+            EAEL_Gradient_Text::get_type(),
             [
-                'label' => esc_html__('Title Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-infobox:hover .infobox-content .title' => 'color: {{VALUE}};',
-                ],
+                'name'     => 'eael_infobox_title_hover',
+                'selector' => '{{WRAPPER}} .eael-infobox:hover .infobox-content .title',
+                'default'  => '',
             ]
         );
 
-        $this->add_control(
-            'eael_infobox_sub_title_hover_color',
+        $this->add_group_control(
+            EAEL_Gradient_Text::get_type(),
             [
-                'label'     => esc_html__('Sub Title Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .eael-infobox:hover .infobox-content .sub_title' => 'color: {{VALUE}};',
-                ],
+                'name'      => 'eael_infobox_sub_title_hover',
+                'selector'  => '{{WRAPPER}} .eael-infobox:hover .infobox-content .sub_title',
+                'default'   => '',
                 'condition' => [
                     'eael_infobox_show_sub_title' => 'yes',
                 ],
