@@ -866,9 +866,12 @@ trait Ajax_Handler {
 	 * @since unknown
 	 */
 	public function eael_product_add_to_cart() {
+		if ( ! isset( $_POST['eael_add_to_cart_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael_add_to_cart_nonce'] ) ), 'essential-addons-elementor' ) ) {
+			wp_send_json_error( __( 'Security verification failed.', 'essential-addons-for-elementor-lite' ) );
+		}
 
 		$ajax       = wp_doing_ajax();
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, 	WordPress.Security.NonceVerification.Missing
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		$cart_items = isset( $_POST['cart_item_data'] ) ? $_POST['cart_item_data'] : [];
 		$variation  = [];
 		if ( ! empty( $cart_items ) ) {
@@ -879,9 +882,8 @@ trait Ajax_Handler {
 			}
 		}
 
-		//phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['product_data'] ) ) {
-			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			foreach ( $_POST['product_data'] as $item ) {
 				$product_id   = isset( $item['product_id'] ) ? sanitize_text_field( wp_unslash( $item['product_id'] ) ) : 0;
 				$variation_id = isset( $item['variation_id'] ) ? sanitize_text_field( wp_unslash( $item['variation_id'] ) ) : 0;
