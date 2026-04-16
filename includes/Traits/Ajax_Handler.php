@@ -866,9 +866,7 @@ trait Ajax_Handler {
 	 * @since unknown
 	 */
 	public function eael_product_add_to_cart() {
-		if ( ! isset( $_POST['eael_add_to_cart_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael_add_to_cart_nonce'] ) ), 'essential-addons-elementor' ) ) {
-			wp_send_json_error( __( 'Security verification failed.', 'essential-addons-for-elementor-lite' ) );
-		}
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
 		$ajax       = wp_doing_ajax();
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
@@ -908,7 +906,9 @@ trait Ajax_Handler {
 	 * @since 4.0.0
 	 */
 	public function woo_checkout_update_order_review() {
-		// phpcs:disable 
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		// phpcs:disable
 		$setting       = $_POST['orderReviewData'];
         $shipping_data = empty ( $_POST['shippingData'] ) ? WC()->session->get('chosen_shipping_methods') : [wc_clean( $_POST['shippingData'] )];
 		//Mondial Relay plugin integration
