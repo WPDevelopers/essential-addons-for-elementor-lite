@@ -3,13 +3,15 @@ import ModalStyleOne from "./ModalStyleOne.jsx";
 import ModalStyleTwo from "./ModalStyleTwo.jsx";
 import ModalStyleThree from "./ModalStyleThree.jsx";
 import {useRef} from "react";
+import {useNavigate} from "react-router-dom";
 import {asyncDispatch} from "../helper/index.js";
 
 function Modal() {
     const {eaState, eaDispatch} = consumer(),
         formRef = useRef(),
+        navigate = useNavigate(),
         clickHandler = () => {
-            eaDispatch({type: 'CLOSE_MODAL'});
+            navigate('/');
         },
         submitHandler = (e) => {
             e.preventDefault();

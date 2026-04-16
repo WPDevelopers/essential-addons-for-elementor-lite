@@ -12,16 +12,53 @@ import ModalGoPremium from "./ModalGoPremium.jsx";
 import Toasts from "./Toasts.jsx";
 import Optin from "./Optin.jsx";
 import {useEffect, useRef} from "react";
+import {useLocation} from "react-router-dom";
 import '../App.css'
 
 function App() {
     const {eaState, eaDispatch} = consumer(),
-    wrapperRef = useRef();
+    wrapperRef = useRef(),
+    location = useLocation();
 
     useEffect(() => {
         eaState.isDark ? document.body.classList.add('eael_dash_dark_mode') : document.body.classList.remove('eael_dash_dark_mode');
         eaDispatch({type: 'SET_OFFSET_TOP', payload: wrapperRef.current.offsetTop});
     }, [eaState.isDark]);
+
+    // Deep link: sync hash route → menu/modal state (handles page load, back/forward)
+    useEffect(() => {
+        const validTabs = ['general', 'elements', 'extensions', 'tools', 'integrations', 'go-premium'];
+        const modalMatch = location.pathname.match(/^\/(elements|extensions)\/(.+)$/);
+        const tabMatch = location.pathname.match(/^\/([^/]+)$/);
+
+        if (modalMatch) {
+            const [, type, slug] = modalMatch;
+            let found = null;
+            if (type === 'elements') {
+                const widgets = localize.eael_dashboard.widgets;
+                for (const cat of Object.keys(widgets)) {
+                    if (widgets[cat].elements && widgets[cat].elements[slug]) {
+                        found = {data: widgets[cat].elements[slug]};
+                        break;
+                    }
+                }
+            } else {
+                const ext = localize.eael_dashboard.extensions.list;
+                if (ext[slug]) {
+                    found = {data: ext[slug]};
+                }
+            }
+            if (found && found.data.setting?.id) {
+                eaDispatch({type: 'SET_MENU', payload: type});
+                eaDispatch({type: 'OPEN_MODAL', payload: {key: found.data.setting.id, title: found.data.title}});
+            }
+        } else if (tabMatch && validTabs.includes(tabMatch[1])) {
+            eaDispatch({type: 'SET_MENU', payload: tabMatch[1]});
+            eaDispatch({type: 'CLOSE_MODAL'});
+        } else if (location.pathname === '/') {
+            eaDispatch({type: 'CLOSE_MODAL'});
+        }
+    }, [location]);
 
     // Auto-open Business Reviews modal after OAuth callback or actions
     useEffect(() => {

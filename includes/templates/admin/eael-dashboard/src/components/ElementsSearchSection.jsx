@@ -27,7 +27,7 @@ function ElementsSearchSection(props) {
                 </div>
                 <div className="ea__content-wrapper">
                     {Object.keys(eaState.search).map((item, index) => {
-                        return <ElementItem source={eaState.search} index={item} key={index}/>
+                        return <ElementItem source={eaState.search} index={item} key={index} urlType="elements"/>
                     })}
                 </div>
             </div>)}

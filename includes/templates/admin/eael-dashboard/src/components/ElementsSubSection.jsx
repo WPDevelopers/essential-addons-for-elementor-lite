@@ -27,7 +27,7 @@ function ElementsSubSection(props) {
                 </div>
                 <div className="ea__content-wrapper">
                     {Object.keys(eaData.elements).map((item, index) => {
-                        return <ElementItem source={eaData.elements} index={item} key={index}/>
+                        return <ElementItem source={eaData.elements} index={item} key={index} urlType="elements"/>
                     })}
                 </div>
             </div>
