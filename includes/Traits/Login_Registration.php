@@ -54,9 +54,35 @@ trait Login_Registration {
 			$this->send_password_reset();
 		} else if ( isset( $_POST['eael-resetpassword-submit'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$this->reset_password();
+		} else if ( isset( $_GET['eael-lr-action'] ) && 'logout' === $_GET['eael-lr-action'] ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$this->handle_eael_lr_logout();
 		}
 		do_action( 'eael/login-register/after-processing-login-register', $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
+	}
+
+	/**
+	 * Handles the custom EAEL logout action.
+	 * Uses wp_redirect() (not wp_safe_redirect()) to support external redirect URLs
+	 * configured in the widget. The nonce is tied to the exact redirect URL, so
+	 * the redirect_to parameter cannot be tampered with without invalidating the nonce.
+	 */
+	public function handle_eael_lr_logout() {
+		$redirect_to = ! empty( $_GET['redirect_to'] ) ? esc_url_raw( wp_unslash( $_GET['redirect_to'] ) ) : home_url( '/' ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		$nonce = ! empty( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+		if ( ! wp_verify_nonce( $nonce, 'eael-lr-logout|' . $redirect_to ) ) {
+			wp_die( esc_html__( 'Invalid logout request.', 'essential-addons-for-elementor-lite' ), 403 );
+		}
+
+		if ( ! is_user_logged_in() ) {
+			wp_redirect( $redirect_to );
+			exit;
+		}
+
+		wp_logout();
+		wp_redirect( $redirect_to );
+		exit;
 	}
 
 	/**
@@ -1620,7 +1646,18 @@ trait Login_Registration {
 			$logout_redirect_url = home_url( '/' );
 		}
 
-		$logout_link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_logout_url( $logout_redirect_url ) ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
+		// Use a custom logout handler URL so external redirects work.
+		// The nonce is bound to the exact redirect URL, preventing redirect_to tampering.
+		$logout_url = add_query_arg(
+			[
+				'eael-lr-action' => 'logout',
+				'redirect_to'    => rawurlencode( $logout_redirect_url ),
+				'_wpnonce'       => wp_create_nonce( 'eael-lr-logout|' . $logout_redirect_url ),
+			],
+			home_url( '/' )
+		);
+
+		$logout_link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $logout_url ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
 
 		$placeholders = [
 			'/\[username\]/',
