@@ -866,7 +866,7 @@ class Login_Register extends Widget_Base {
 				'content' 		  => sprintf(
 					/* translators: %1$s: Opening HTML link tag, %2$s: Closing HTML link tag. */
 					__( 'Please add them from %1$sDashboard >> Essential Addons >> Elements >> Login | Register Form%2$s Settings', 'essential-addons-for-elementor-lite' ),
-					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) . '" target="_blank"><strong>',
+					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings#/elements/login-register' ) ) . '" target="_blank"><strong>',
 					'</strong></a>'
 				),
 				'condition'       => [
@@ -885,7 +885,7 @@ class Login_Register extends Widget_Base {
 				'content' 		  => sprintf(
 					/* translators: %1$s: Opening HTML link tag, %2$s: Closing HTML link tag. */
 					__( 'Please add them from %1$sDashboard >> Essential Addons >> Elements >> Login | Register Form%2$s Settings', 'essential-addons-for-elementor-lite' ),
-					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) . '" target="_blank"><strong>',
+					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings#/elements/login-register' ) ) . '" target="_blank"><strong>',
 					'</strong></a>'
 				),
 				'condition'       => [
@@ -986,7 +986,7 @@ class Login_Register extends Widget_Base {
 				'content' 	  => sprintf(
 					/* translators: %1$s: Opening HTML link tag, %2$s: Closing HTML link tag. */
 					__( 'Please add it from %1$sDashboard >> Essential Addons >> Elements >> Login | Register Form%2$s Settings', 'essential-addons-for-elementor-lite' ),
-					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) . '" target="_blank"><strong>',
+					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings#/elements/login-register' ) ) . '" target="_blank"><strong>',
 					'</strong></a>'
 				),
 				'condition'       => [
@@ -2366,7 +2366,7 @@ class Login_Register extends Widget_Base {
 			'raw'  => sprintf(
 				/* translators: %s: Link to the Login Register Form Settings page. */
 				__( 'Select the type of fields you want to show in the registration form. You can enable custom fields from EA Dashboard » Elements » %s.', 'essential-addons-for-elementor-lite' ),
-				'<a href="' . esc_url( site_url('/wp-admin/admin.php?page=eael-settings') ) . '" target="_blank">Login Register Form Settings</a>'
+				'<a href="' . esc_url( site_url('/wp-admin/admin.php?page=eael-settings#/elements/login-register') ) . '" target="_blank">Login Register Form Settings</a>'
 			),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
