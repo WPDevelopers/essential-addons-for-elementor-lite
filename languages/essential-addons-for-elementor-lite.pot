@@ -221,7 +221,7 @@ msgstr ""
 msgid "Argument should not be empty."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:186, ../includes/Classes/WPDeveloper_Plugin_Installer.php:205, ../includes/Classes/WPDeveloper_Plugin_Installer.php:226, ../includes/Classes/WPDeveloper_Setup_Wizard.php:463, ../includes/Classes/WPDeveloper_Setup_Wizard.php:487, ../includes/Classes/WPDeveloper_Setup_Wizard.php:508, ../includes/Traits/Ajax_Handler.php:1359, ../includes/Traits/Ajax_Handler.php:1550, ../includes/Traits/Ajax_Handler.php:1582, ../includes/Traits/Ajax_Handler.php:1599, ../includes/Traits/Helper.php:441
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:186, ../includes/Classes/WPDeveloper_Plugin_Installer.php:205, ../includes/Classes/WPDeveloper_Plugin_Installer.php:226, ../includes/Classes/WPDeveloper_Setup_Wizard.php:463, ../includes/Classes/WPDeveloper_Setup_Wizard.php:487, ../includes/Classes/WPDeveloper_Setup_Wizard.php:508, ../includes/Traits/Ajax_Handler.php:1361, ../includes/Traits/Ajax_Handler.php:1552, ../includes/Traits/Ajax_Handler.php:1584, ../includes/Traits/Ajax_Handler.php:1601, ../includes/Traits/Helper.php:441
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -11897,7 +11897,7 @@ msgstr ""
 msgid "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:381, ../includes/Traits/Admin.php:1913
+#: ../includes/Traits/Admin.php:381
 msgid "Upgrade To PRO"
 msgstr ""
 
@@ -12321,7 +12321,7 @@ msgstr ""
 msgid "I already did"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1870
+#: ../includes/Traits/Admin.php:1870, ../includes/Traits/Admin.php:1916
 msgid "Maybe Later"
 msgstr ""
 
@@ -12334,42 +12334,42 @@ msgid "Never show again"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1909
-msgid "Elevate web design more than ever with 110+ Elements – now <strong>Flat 20% OFF! 🎁</strong>"
+msgid "<strong>🌸 Spring Savings:</strong> Design Elementor website faster and smoother with 110+ advanced elements – now <strong>Flat 25% OFF</strong>! ⚡️"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1916
-msgid "I’ll Grab It Later"
+#: ../includes/Traits/Admin.php:1913
+msgid "Upgrade To Pro Now"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:95, ../includes/Traits/Ajax_Handler.php:1003, ../includes/Traits/Login_Registration.php:96, ../includes/Traits/Login_Registration.php:282, ../includes/Traits/Login_Registration.php:824, ../includes/Traits/Login_Registration.php:1036
+#: ../includes/Traits/Ajax_Handler.php:95, ../includes/Traits/Ajax_Handler.php:1005, ../includes/Traits/Login_Registration.php:96, ../includes/Traits/Login_Registration.php:282, ../includes/Traits/Login_Registration.php:824, ../includes/Traits/Login_Registration.php:1036
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:104, ../includes/Traits/Ajax_Handler.php:1012, ../includes/Traits/Login_Registration.php:108, ../includes/Traits/Login_Registration.php:292, ../includes/Traits/Login_Registration.php:836, ../includes/Traits/Login_Registration.php:1048, ../includes/Traits/Woo_Product_Comparable.php:2175
+#: ../includes/Traits/Ajax_Handler.php:104, ../includes/Traits/Ajax_Handler.php:1014, ../includes/Traits/Login_Registration.php:108, ../includes/Traits/Login_Registration.php:292, ../includes/Traits/Login_Registration.php:836, ../includes/Traits/Login_Registration.php:1048, ../includes/Traits/Woo_Product_Comparable.php:2175
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:115, ../includes/Traits/Ajax_Handler.php:565, ../includes/Traits/Ajax_Handler.php:746, ../includes/Traits/Ajax_Handler.php:1023, ../includes/Traits/Login_Registration.php:72, ../includes/Traits/Login_Registration.php:307, ../includes/Traits/Login_Registration.php:800, ../includes/Traits/Login_Registration.php:1011, ../includes/Traits/Woo_Product_Comparable.php:2133
+#: ../includes/Traits/Ajax_Handler.php:115, ../includes/Traits/Ajax_Handler.php:565, ../includes/Traits/Ajax_Handler.php:746, ../includes/Traits/Ajax_Handler.php:1025, ../includes/Traits/Login_Registration.php:72, ../includes/Traits/Login_Registration.php:307, ../includes/Traits/Login_Registration.php:800, ../includes/Traits/Login_Registration.php:1011, ../includes/Traits/Woo_Product_Comparable.php:2133
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:126, ../includes/Traits/Ajax_Handler.php:572, ../includes/Traits/Ajax_Handler.php:753, ../includes/Traits/Ajax_Handler.php:1034, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:312, ../includes/Traits/Login_Registration.php:807, ../includes/Traits/Login_Registration.php:1018, ../includes/Traits/Woo_Product_Comparable.php:2138
+#: ../includes/Traits/Ajax_Handler.php:126, ../includes/Traits/Ajax_Handler.php:572, ../includes/Traits/Ajax_Handler.php:753, ../includes/Traits/Ajax_Handler.php:1036, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:312, ../includes/Traits/Login_Registration.php:807, ../includes/Traits/Login_Registration.php:1018, ../includes/Traits/Woo_Product_Comparable.php:2138
 msgid "Widget ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:137, ../includes/Traits/Ajax_Handler.php:578, ../includes/Traits/Ajax_Handler.php:760, ../includes/Traits/Ajax_Handler.php:1044
+#: ../includes/Traits/Ajax_Handler.php:137, ../includes/Traits/Ajax_Handler.php:578, ../includes/Traits/Ajax_Handler.php:760, ../includes/Traits/Ajax_Handler.php:1046
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:961, ../includes/Traits/Ajax_Handler.php:967
+#: ../includes/Traits/Ajax_Handler.php:963, ../includes/Traits/Ajax_Handler.php:969
 msgid "Product not found or not accessible"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:1222, ../includes/Traits/Ajax_Handler.php:1292
+#: ../includes/Traits/Ajax_Handler.php:1224, ../includes/Traits/Ajax_Handler.php:1294
 msgid "Unauthorized"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:1402
+#: ../includes/Traits/Ajax_Handler.php:1404
 msgid "Login | Register Settings updated"
 msgstr ""
 
