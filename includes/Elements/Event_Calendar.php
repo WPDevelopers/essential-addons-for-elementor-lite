@@ -4446,7 +4446,7 @@ class Event_Calendar extends Widget_Base
 
             $calendar_data[] = [
                 'id' => ++$key,
-                'title' => !empty($event->post_title) ? $event->post_title : __('No Title',
+                'title' => !empty($event->post_title) ? esc_html($event->post_title) : __('No Title',
                     'essential-addons-for-elementor-lite'),
                 'description' => do_shortcode($event->post_content),
                 'start' => $start,
