@@ -2101,7 +2101,11 @@ trait Login_Registration {
 	 * @return array
 	 */
 	public function eael_register_bulk_approve_action( $actions ) {
-		$actions['eael_approve_users'] = __( 'Approve', 'essential-addons-for-elementor-lite' );
+		if ( ! $this->eael_is_admin_approval_active() ) {
+			return $actions;
+		}
+		$actions['eael_approve_users'] = __( 'EA: Approve', 'essential-addons-for-elementor-lite' );
+		$actions['eael_reject_users']  = __( 'EA: Reject', 'essential-addons-for-elementor-lite' );
 		return $actions;
 	}
 
@@ -2116,7 +2120,7 @@ trait Login_Registration {
 	 * @return string
 	 */
 	public function eael_handle_bulk_approve_action( $redirect_url, $action, $user_ids ) {
-		if ( 'eael_approve_users' !== $action || ! current_user_can( 'manage_options' ) ) {
+		if ( 'eael_approve_users' !== $action || ! current_user_can( 'manage_options' ) || ! $this->eael_is_admin_approval_active() ) {
 			return $redirect_url;
 		}
 
@@ -2151,19 +2155,48 @@ trait Login_Registration {
 	 *
 	 * Hooked to `admin_notices`.
 	 */
-	public function eael_bulk_approve_admin_notice() {
-		if ( ! isset( $_GET['eael_approved_count'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			return;
+	public function eael_handle_bulk_reject_action( $redirect_url, $action, $user_ids ) {
+		if ( 'eael_reject_users' !== $action || ! current_user_can( 'manage_options' ) || ! $this->eael_is_admin_approval_active() ) {
+			return $redirect_url;
 		}
 
-		$count = intval( $_GET['eael_approved_count'] ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$rejected_count = 0;
 
-		printf(
-			'<div class="notice notice-success is-dismissible"><p>%s</p></div>',
-			esc_html(
-				/* translators: %d: number of approved users */
-				sprintf( _n( '%d user approved.', '%d users approved.', $count, 'essential-addons-for-elementor-lite' ), $count )
-			)
-		);
+		foreach ( $user_ids as $user_id ) {
+			$status = get_user_meta( $user_id, 'eael_registration_status', true );
+			if ( 'approved' === $status ) {
+				continue;
+			}
+			update_user_meta( $user_id, 'eael_registration_status', 'rejected' );
+			$rejected_count++;
+		}
+
+		return add_query_arg( 'eael_rejected_count', $rejected_count, $redirect_url );
+	}
+
+	public function eael_bulk_approve_admin_notice() {
+		//phpcs:disable WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['eael_approved_count'] ) ) {
+			$count = intval( $_GET['eael_approved_count'] );
+			printf(
+				'<div class="notice notice-success is-dismissible"><p>%s</p></div>',
+				esc_html(
+					/* translators: %d: number of approved users */
+					sprintf( _n( '%d user approved.', '%d users approved.', $count, 'essential-addons-for-elementor-lite' ), $count )
+				)
+			);
+		}
+
+		if ( isset( $_GET['eael_rejected_count'] ) ) {
+			$count = intval( $_GET['eael_rejected_count'] );
+			printf(
+				'<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+				esc_html(
+					/* translators: %d: number of rejected users */
+					sprintf( _n( '%d user rejected.', '%d users rejected.', $count, 'essential-addons-for-elementor-lite' ), $count )
+				)
+			);
+		}
+		//phpcs:enable WordPress.Security.NonceVerification.Recommended
 	}
 }

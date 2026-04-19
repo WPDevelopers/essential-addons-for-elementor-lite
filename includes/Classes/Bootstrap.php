@@ -218,6 +218,7 @@ class Bootstrap
         add_action( 'edit_user_profile_update', [ $this, 'eael_handle_approve_user' ] );
         add_filter( 'bulk_actions-users', [ $this, 'eael_register_bulk_approve_action' ] );
         add_filter( 'handle_bulk_actions-users', [ $this, 'eael_handle_bulk_approve_action' ], 10, 3 );
+        add_filter( 'handle_bulk_actions-users', [ $this, 'eael_handle_bulk_reject_action' ], 10, 3 );
         add_action( 'admin_notices', [ $this, 'eael_bulk_approve_admin_notice' ] );
 
         //rank math support
