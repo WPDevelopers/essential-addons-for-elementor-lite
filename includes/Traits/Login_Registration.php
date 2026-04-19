@@ -1891,10 +1891,19 @@ trait Login_Registration {
 			return $user;
 		}
 
-		if ( 'pending' === get_user_meta( $user->ID, 'eael_registration_status', true ) ) {
+		$status = get_user_meta( $user->ID, 'eael_registration_status', true );
+
+		if ( 'pending' === $status ) {
 			return new \WP_Error(
 				'eael_pending_approval',
 				__( 'Your account is awaiting administrator approval.', 'essential-addons-for-elementor-lite' )
+			);
+		}
+
+		if ( 'rejected' === $status ) {
+			return new \WP_Error(
+				'eael_registration_rejected',
+				__( 'Your registration request has been rejected. Please contact the site administrator.', 'essential-addons-for-elementor-lite' )
 			);
 		}
 
@@ -1937,6 +1946,12 @@ trait Login_Registration {
 				. '</span>';
 		}
 
+		if ( 'rejected' === $status ) {
+			return '<span style="display:inline-block;background:#dc3232;color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">'
+				. esc_html__( 'Rejected', 'essential-addons-for-elementor-lite' )
+				. '</span>';
+		}
+
 		return '<span style="display:inline-block;background:#46b450;color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">'
 			. esc_html__( 'Approved', 'essential-addons-for-elementor-lite' )
 			. '</span>';
@@ -1955,21 +1970,45 @@ trait Login_Registration {
 		}
 
 		$status = get_user_meta( $user->ID, 'eael_registration_status', true );
+		wp_nonce_field( 'eael_approve_user_' . $user->ID, 'eael_approve_user_nonce' );
 		?>
 		<table class="form-table" id="eael-admin-approval">
 			<tr>
 				<th scope="row"><?php esc_html_e( 'Account Status', 'essential-addons-for-elementor-lite' ); ?></th>
-				<td>
+				<td style="display: flex;align-items: center;gap:10px;">
 					<?php if ( 'pending' === $status ) : ?>
 						<span style="color:#f0a500;font-weight:bold;">
 							<?php esc_html_e( 'Pending Approval', 'essential-addons-for-elementor-lite' ); ?>
 						</span>
-						<?php wp_nonce_field( 'eael_approve_user_' . $user->ID, 'eael_approve_user_nonce' ); ?>
 						<input type="submit"
 							   name="eael_approve_user"
 							   class="button button-primary"
-							   value="<?php esc_attr_e( 'Approve User', 'essential-addons-for-elementor-lite' ); ?>"
-							   style="margin-left:10px;">
+							   value="<?php esc_attr_e( 'Approve', 'essential-addons-for-elementor-lite' ); ?>" >
+						<input type="submit"
+							   name="eael_reject_user"
+							   class="button button-secondary"
+							   value="<?php esc_attr_e( 'Reject', 'essential-addons-for-elementor-lite' ); ?>"
+							   onclick="return confirm('<?php esc_attr_e( 'Reject this user? They will be marked as rejected and unable to log in.', 'essential-addons-for-elementor-lite' ); ?>');">
+						<input type="submit"
+							   name="eael_delete_user"
+							   class="button button-link-delete"
+							   value="<?php esc_attr_e( 'Delete', 'essential-addons-for-elementor-lite' ); ?>"
+							   onclick="return confirm('<?php esc_attr_e( 'Permanently delete this user? This cannot be undone.', 'essential-addons-for-elementor-lite' ); ?>');">
+
+					<?php elseif ( 'rejected' === $status ) : ?>
+						<span style="color:#dc3232;font-weight:bold;">
+							<?php esc_html_e( 'Rejected', 'essential-addons-for-elementor-lite' ); ?>
+						</span>
+						<input type="submit"
+							   name="eael_approve_user"
+							   class="button button-primary"
+							   value="<?php esc_attr_e( 'Approve', 'essential-addons-for-elementor-lite' ); ?>">
+						<input type="submit"
+							   name="eael_delete_user"
+							   class="button button-link-delete"
+							   value="<?php esc_attr_e( 'Delete', 'essential-addons-for-elementor-lite' ); ?>"
+							   onclick="return confirm('<?php esc_attr_e( 'Permanently delete this user? This cannot be undone.', 'essential-addons-for-elementor-lite' ); ?>');">
+
 					<?php else : ?>
 						<span style="color:#46b450;font-weight:bold;">
 							<?php esc_html_e( 'Approved', 'essential-addons-for-elementor-lite' ); ?>
@@ -1989,7 +2028,16 @@ trait Login_Registration {
 	 * @param int $user_id Profile user ID.
 	 */
 	public function eael_handle_approve_user( $user_id ) {
-		if ( ! isset( $_POST['eael_approve_user'], $_POST['eael_approve_user_nonce'] ) ) {
+		$actions = [ 'eael_approve_user', 'eael_reject_user', 'eael_delete_user' ];
+		$action  = '';
+		foreach ( $actions as $a ) {
+			if ( isset( $_POST[ $a ] ) ) {
+				$action = $a;
+				break;
+			}
+		}
+
+		if ( ! $action || ! isset( $_POST['eael_approve_user_nonce'] ) ) {
 			return;
 		}
 
@@ -2004,18 +2052,31 @@ trait Login_Registration {
 			return;
 		}
 
-		update_user_meta( $user_id, 'eael_registration_status', 'approved' );
-
-		// Optional: notify the user by email.
 		$user = get_userdata( $user_id );
-		if ( $user ) {
-			$subject = __( 'Your account has been approved', 'essential-addons-for-elementor-lite' );
-			/* translators: %s: user display name */
-			$message = sprintf(
-				__( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ),
-				$user->display_name
-			);
-			wp_mail( $user->user_email, $subject, $message );
+
+		if ( 'eael_approve_user' === $action ) {
+			update_user_meta( $user_id, 'eael_registration_status', 'approved' );
+			if ( $user ) {
+				/* translators: %s: user display name */
+				wp_mail(
+					$user->user_email,
+					__( 'Your account has been approved', 'essential-addons-for-elementor-lite' ),
+					sprintf( __( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ), $user->display_name )
+				);
+			}
+			return;
+		}
+
+		if ( 'eael_reject_user' === $action ) {
+			update_user_meta( $user_id, 'eael_registration_status', 'rejected' );
+			return;
+		}
+
+		if ( 'eael_delete_user' === $action ) {
+			require_once ABSPATH . 'wp-admin/includes/user.php';
+			wp_delete_user( $user_id );
+			wp_safe_redirect( admin_url( 'users.php?eael_user_deleted=1' ) );
+			exit();
 		}
 	}
 
