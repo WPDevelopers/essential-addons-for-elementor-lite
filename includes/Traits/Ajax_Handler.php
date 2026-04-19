@@ -1440,8 +1440,11 @@ trait Ajax_Handler {
 			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
 		}
 
-		// Always save so that unchecking (absent key) correctly clears the option.
-		update_option( 'eael_lr_admin_approval', isset( $settings['lr_admin_approval'] ) ? sanitize_text_field( $settings['lr_admin_approval'] ) : '' );
+		// Only save when request is from LR modal (lr_recaptcha_sitekey always present).
+		// Without this guard the main "Save Settings" POST (no lr_* keys) would wipe the option.
+		if ( array_key_exists( 'lr_recaptcha_sitekey', $settings ) ) {
+			update_option( 'eael_lr_admin_approval', isset( $settings['lr_admin_approval'] ) ? sanitize_text_field( $settings['lr_admin_approval'] ) : '' );
+		}
 
 		if ( isset( $settings['lr_custom_profile_fields_text'] ) ) {
 			update_option( 'eael_custom_profile_fields_text', sanitize_text_field( $settings['lr_custom_profile_fields_text'] ) );
