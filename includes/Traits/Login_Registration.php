@@ -1886,8 +1886,20 @@ trait Login_Registration {
 	 * @param string             $password Submitted password (unused here).
 	 * @return \WP_User|\WP_Error
 	 */
+	private function eael_is_admin_approval_active(): bool {
+		if ( 'on' !== get_option( 'eael_lr_admin_approval' ) ) {
+			return false;
+		}
+		$eael_elements = get_option( 'eael_save_settings', [] );
+		return ! empty( $eael_elements['login-register'] );
+	}
+
 	public function eael_block_pending_user_login( $user, $password ) {
 		if ( is_wp_error( $user ) ) {
+			return $user;
+		}
+
+		if ( ! $this->eael_is_admin_approval_active() ) {
 			return $user;
 		}
 
