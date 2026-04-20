@@ -118,6 +118,22 @@ trait Login_Registration {
 		}
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
+		// Reject spoofed page_id / widget_id. Empty settings means the target isn't an
+		// EA Login/Register widget; proceeding would disable OTP, reCAPTCHA, Turnstile.
+		if ( empty( $settings ) ) {
+			$err_msg = __( 'Invalid form submission.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+			return;
+		}
+
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : __( 'You are already logged in', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -476,6 +492,22 @@ trait Login_Registration {
         }
 
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
+
+		// Reject spoofed page_id / widget_id. Empty settings means the target isn't an
+		// EA Login/Register widget; proceeding would disable OTP, reCAPTCHA, Turnstile.
+		if ( empty( $settings ) ) {
+			$err_msg = __( 'Invalid form submission.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
+
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+			return false;
+		}
 
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : __( 'You are already logged in.', 'essential-addons-for-elementor-lite' );
@@ -1096,6 +1128,22 @@ trait Login_Registration {
 
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
+		// Reject spoofed page_id / widget_id. Empty settings means the target isn't an
+		// EA Login/Register widget; proceeding would disable reCAPTCHA / Turnstile.
+		if ( empty( $settings ) ) {
+			$err_msg = __( 'Invalid form submission.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+			return;
+		}
+
 		if( ! empty( $settings['enable_cloudflare_turnstile'] ) && 'yes' === $settings['enable_cloudflare_turnstile'] && ! empty( $settings['enable_cloudflare_turnstile_on_lostpassword'] ) && 'yes' === $settings['enable_cloudflare_turnstile_on_lostpassword'] ){
 			if( ! $this->lr_validate_cloudflare_turnstile( $settings ) ) { // pass only sanitized data
 				$err_msg = isset( $settings['err_cloudflare_turnstile'] ) ? Helper::eael_wp_kses( $settings['err_cloudflare_turnstile'] ) : __( 'You did not pass Cloudflare Turnstile challenge.', 'essential-addons-for-elementor-lite' );
@@ -1306,6 +1354,22 @@ trait Login_Registration {
             }
 		}
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
+
+		// Reject spoofed page_id / widget_id. Empty settings means the target isn't an
+		// EA Login/Register widget; proceeding would disable reCAPTCHA / Turnstile.
+		if ( empty( $settings ) ) {
+			$err_msg = __( 'Invalid form submission.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
+
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+			return;
+		}
 
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );
@@ -2499,7 +2563,10 @@ trait Login_Registration {
 			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
 			$widget_data = $this->find_element_recursive( $elements, $widget_id );
 
-			if(!empty($widget_data)) {
+			// Enforce widget type. Without this check, a spoofed page_id / widget_id
+			// returns an empty settings array, causing OTP, reCAPTCHA, and Cloudflare
+			// Turnstile gates to be silently skipped in the login/register handlers.
+			if ( ! empty( $widget_data ) && isset( $widget_data['widgetType'] ) && 'eael-login-register' === $widget_data['widgetType'] ) {
                 $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
                 if ( $widget ) {
                     $settings    = $widget->get_settings_for_display();
