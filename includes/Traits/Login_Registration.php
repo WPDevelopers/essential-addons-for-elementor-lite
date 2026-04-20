@@ -2127,7 +2127,8 @@ trait Login_Registration {
 		$approved_count = 0;
 
 		foreach ( $user_ids as $user_id ) {
-			if ( 'pending' !== get_user_meta( $user_id, 'eael_registration_status', true ) ) {
+			$status = get_user_meta( $user_id, 'eael_registration_status', true );
+			if ( 'approved' === $status ) {
 				continue;
 			}
 
