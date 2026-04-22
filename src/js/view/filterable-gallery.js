@@ -71,7 +71,29 @@ jQuery(window).on("elementor/frontend/init", function () {
             ? parseInt(default_control_key)
             : 0;
 
+      var scrollToTop = function () {
+         if (
+            $settings.mobile_scroll_to_top === "yes" &&
+            window.innerWidth <= 767
+         ) {
+            var $container = $(".eael-filter-gallery-container", $scope);
+            if ($container.length) {
+               var offset =
+                  typeof $settings.mobile_scroll_offset === "number"
+                     ? $settings.mobile_scroll_offset
+                     : 0;
+               $("html, body").animate(
+                  {
+                     scrollTop: $container.offset().top - offset,
+                  },
+                  600
+               );
+            }
+         }
+      };
+
       if (form.length) {
+
          form.on("submit", function (e) {
             e.preventDefault();
          });
@@ -85,8 +107,9 @@ jQuery(window).on("elementor/frontend/init", function () {
          filterControls.removeClass("open-filters");
       });
 
-      $(".video-popup.eael-magnific-video-link.playout-vertical", $scope).on(
+      $scope.on(
          "click",
+         ".video-popup.eael-magnific-video-link.playout-vertical",
          function () {
             setTimeout(function () {
                $(".mfp-iframe-holder").addClass("eael-gf-vertical-video-popup");
@@ -107,7 +130,7 @@ jQuery(window).on("elementor/frontend/init", function () {
             setTimeout(function () {
                var container = $(".eael-gf-mfp-popup .mfp-container");
                if (container.hasClass("mfp-iframe-holder")) {
-                  var src = $("iframe", container).attr("src"),
+                  var src = $("iframe", container).length ? $("iframe", container).attr("src") : $("video", container).attr("src"),
                      plyBtn = $('a[href="' + src + '"]');
 
                   if (plyBtn.length < 1) {
@@ -215,6 +238,20 @@ jQuery(window).on("elementor/frontend/init", function () {
 								}, 100);
 							}
 						}
+
+                  var useVideoTag = $scope.find('.eael-filter-gallery-container').attr('data-use-video-tag');
+                  var isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+                  if (useVideoTag === 'yes' && isMobile && item.src && item.src.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+                     var iframeHtml = template.html();
+                     if (iframeHtml && iframeHtml.indexOf('<iframe') > -1) {
+                         var videoHtml = iframeHtml.replace(
+                             /<iframe([^>]*)><\/iframe>/,
+                             '<video$1 autoplay controls playsinline style="position:absolute; top:0; left:0; width:100%; height:100%;"></video>'
+                         );
+                         template.html(videoHtml);
+                         template.find('video').attr('src', item.src);
+                     }
+                  }
                },
                open: function () {
 						let privacyNotice = $scope.find('.eael-filter-gallery-container').attr('data-privacy-notice');
@@ -362,6 +399,7 @@ jQuery(window).on("elementor/frontend/init", function () {
                $(buttonFilter + " .eael-magnific-link").addClass("active");
             }
             manageNotFoundDiv($isotope_gallery, $scope, $);
+            scrollToTop();
          });
 
          //key board accesibilty
