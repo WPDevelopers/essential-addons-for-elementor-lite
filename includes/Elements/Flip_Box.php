@@ -2622,6 +2622,15 @@ class Flip_Box extends Widget_Base
 
         $settings = $this->get_settings_for_display();
         $flipbox_image = $this->get_settings('eael_flipbox_image');
+
+        // WPML Media Translation compatibility
+        if ( ! empty( $flipbox_image['id'] ) ) {
+            $flipbox_image['id'] = apply_filters( 'wpml_object_id', $flipbox_image['id'], 'attachment', true );
+            if ( $flipbox_image['id'] ) {
+                $flipbox_image['url'] = wp_get_attachment_url( $flipbox_image['id'] );
+            }
+        }
+
         $flipbox_image_url = Group_Control_Image_Size::get_attachment_image_src($flipbox_image['id'], 'thumbnail', $settings);
 
         if (empty($flipbox_image_url) && !empty($flipbox_image['url'])) {
@@ -2668,8 +2677,19 @@ class Flip_Box extends Widget_Base
         }
 
         $flipbox_image_back = $this->get_settings('eael_flipbox_image_back');
+
+        // WPML Media Translation compatibility
+        if ( ! empty( $flipbox_image_back['id'] ) ) {
+            $flipbox_image_back['id'] = apply_filters( 'wpml_object_id', $flipbox_image_back['id'], 'attachment', true );
+            if ( $flipbox_image_back['id'] ) {
+                $flipbox_image_back['url'] = wp_get_attachment_url( $flipbox_image_back['id'] );
+            }
+        }
+
         $flipbox_back_image_url = Group_Control_Image_Size::get_attachment_image_src($flipbox_image_back['id'], 'thumbnail_back', $settings);
-        $flipbox_back_image_url = empty($flipbox_back_image_url) ? $flipbox_back_image_url : $flipbox_back_image_url;
+        if (empty($flipbox_back_image_url) && !empty($flipbox_image_back['url'])) {
+            $flipbox_back_image_url = $flipbox_image_back['url'];
+        }
         if ('img' == $settings['eael_flipbox_img_or_icon_back']) {
             $this->add_render_attribute(
                 'flipbox-back-icon-image-container',
