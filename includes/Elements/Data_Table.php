@@ -62,8 +62,14 @@ class Data_Table extends Widget_Base {
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
         }
-		
-        $table_rows = $this->get_settings('eael_data_table_content_rows');
+
+        $settings = $this->get_data( 'settings' );
+
+        if ( empty( $settings ) || ! is_array( $settings ) ) {
+            return false;
+        }
+
+        $table_rows         = $settings['eael_data_table_content_rows'] ?? [];
 		$is_dynamic_content = false;
 
 		if( ! empty( $table_rows ) ){
