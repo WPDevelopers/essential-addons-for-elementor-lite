@@ -64,7 +64,14 @@ class Cta_Box extends Widget_Base
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
         }
-        $content_type       = $this->get_settings('eael_cta_title_content_type');
+
+        $settings = $this->get_data( 'settings' );
+
+        if ( empty( $settings ) || ! is_array( $settings ) ) {
+            return false;
+        }
+
+        $content_type       = sanitize_text_field( $settings['eael_cta_title_content_type'] ?? '' );
         $is_dynamic_content = 'template' === $content_type;
 
         return $is_dynamic_content;
