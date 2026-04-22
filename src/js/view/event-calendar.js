@@ -482,7 +482,7 @@ var EventCalendar = function ($scope, $) {
 			pagination: pagination,
 			perPage:itemPerPage,
 			globalSearch:true,
-			searchInput:$(".ea-ec-search-wrap", wrapper),
+			searchInput:$(".eael-event-calendar-table-search", wrapper),
 			paginationElement:$(".eael-event-calendar-pagination", wrapper),
 		});
 	}
