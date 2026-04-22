@@ -6628,12 +6628,13 @@ class Login_Register extends Widget_Base {
 							foreach ( $this->ds['register_fields'] as $f_index => $field ) :
 								$field_type = $field['field_type'];
 								$dynamic_field_name = "{$field_type}_exists";
+								if( ! isset( $$dynamic_field_name ) ){
+									$$dynamic_field_name = 0;
+								}
 								$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
 								// is same field repeated?
-								if( isset( $$dynamic_field_name ) ){
-									if ( $$dynamic_field_name > 1 ) {
-										$repeated_f_labels[] = $f_labels[ $field_type ];
-									}
+								if ( $$dynamic_field_name > 1 ) {
+									$repeated_f_labels[] = $f_labels[ $field_type ];
 								}
 
 								if ( 'password' === $field_type ) {

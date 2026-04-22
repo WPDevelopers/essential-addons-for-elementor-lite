@@ -1,5 +1,18 @@
 .eael-simple-menu-container {
     min-height: 50px;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+    &.eael-simple-menu--loading {
+        >ul {
+            display: flex !important;
+            list-style: none !important;
+        }
+
+        li ul {
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+    }
 }
 
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive,
@@ -9,11 +22,12 @@
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive,
 .elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive {
-    .eael-simple-menu-container{
+    .eael-simple-menu-container {
         min-height: 50px;
         overflow: visible;
 
         .eael-simple-menu {
+
             &.eael-simple-menu-horizontal,
             &.eael-simple-menu-vertical {
                 position: absolute;
@@ -32,9 +46,10 @@
                         text-align: inherit;
 
                         span {
-                            &.eael-simple-menu-indicator{
+                            &.eael-simple-menu-indicator {
                                 display: none;
                             }
+
                             display: none;
                         }
                     }
@@ -65,7 +80,7 @@
 
                                 li {
                                     &:last-child {
-                                        > a {
+                                        >a {
                                             border-bottom-width: 1px;
                                         }
                                     }
@@ -80,8 +95,8 @@
 
         &.eael-simple-menu-align-center {
             .eael-simple-menu {
-                > li {
-                    > a {
+                >li {
+                    >a {
                         text-align: center;
                     }
                 }
@@ -91,8 +106,8 @@
         &.eael-simple-menu-align-right {
             .eael-simple-menu {
                 &.eael-simple-menu-horizontal {
-                    > li {
-                        > a {
+                    >li {
+                        >a {
                             text-align: right;
                         }
                     }
@@ -102,6 +117,7 @@
 
         &.preset-1 {
             .eael-simple-menu {
+
                 &.eael-simple-menu-horizontal,
                 &.eael-simple-menu-vertical {
                     background-color: #4E36A3;
@@ -111,6 +127,7 @@
 
         &.preset-3 {
             .eael-simple-menu {
+
                 &.eael-simple-menu-horizontal,
                 &.eael-simple-menu-vertical {
                     background-color: #15DBD5;
@@ -120,13 +137,14 @@
 
         &.preset-2 {
             .eael-simple-menu {
+
                 &.eael-simple-menu-horizontal,
                 &.eael-simple-menu-vertical {
                     background-color: #1BC1FF;
 
                     li.current-menu-ancestor>a.eael-item-active,
-                    li:hover > a,
-                    li.current-menu-item > a.eael-item-active {
+                    li:hover>a,
+                    li.current-menu-item>a.eael-item-active {
                         color: #fff;
                     }
                 }
@@ -175,7 +193,7 @@
     }
 }
 
-.elementor-widget-eael-simple-menu.eael-hamburger--none, 
+.elementor-widget-eael-simple-menu.eael-hamburger--none,
 .elementor-widget-eael-simple-menu.eael-hamburger--not-responsive {
     .eael-simple-menu-container {
         .eael-simple-menu-toggle {
@@ -204,7 +222,7 @@
                         }
 
                         &:hover {
-                            > ul {
+                            >ul {
                                 transform: translateY(0);
                             }
                         }
@@ -219,7 +237,7 @@
                         }
 
                         &:hover {
-                            > ul {
+                            >ul {
                                 transform: scale(1);
                             }
                         }
@@ -234,7 +252,7 @@
                         }
 
                         &:hover {
-                            > ul {
+                            >ul {
                                 transform: scale(1);
                             }
                         }
@@ -289,7 +307,7 @@
         border-radius: 0;
         outline: none;
         display: block;
-        border-color:#333;
+        border-color: #333;
 
         .eael-simple-menu-toggle-text {
             display: none;
@@ -353,7 +371,7 @@
 
                     &:hover,
                     &.current-menu-item {
-                        > a {
+                        >a {
                             color: #ee355f;
                             background-color: #ffffff;
                         }
@@ -363,7 +381,7 @@
 
             &:hover,
             &.current-menu-item {
-                > a {
+                >a {
                     color: #ffffff;
                     //background-color: #ee355f;
                 }
@@ -385,7 +403,9 @@
             //transform: translateY(-50%);
             cursor: pointer;
 
-            &:before, svg, i {
+            &:before,
+            svg,
+            i {
                 display: block;
                 font-weight: 900;
                 line-height: 26px;
@@ -394,7 +414,10 @@
             }
 
             &.eael-simple-menu-indicator-open {
-                &:before, svg, i {
+
+                &:before,
+                svg,
+                i {
                     transform: rotate(180deg);
                 }
             }
@@ -446,7 +469,7 @@
                         }
 
                         &:last-child {
-                            > a {
+                            >a {
                                 border-bottom-width: 0;
                             }
                         }
@@ -459,7 +482,7 @@
                 }
 
                 &:hover {
-                    > ul {
+                    >ul {
                         visibility: visible;
                         opacity: 1;
                     }
@@ -491,7 +514,7 @@
                         }
 
                         &:last-child {
-                            > a {
+                            >a {
                                 border-bottom-width: 0;
                             }
                         }
@@ -499,7 +522,9 @@
                         .eael-simple-menu-indicator {
                             border: 1px solid #00000080;
 
-                            &:before, svg, i {
+                            &:before,
+                            svg,
+                            i {
                                 color: #000000;
                                 fill: #000000;
                             }
@@ -508,7 +533,7 @@
                         ul {
                             li {
                                 &:last-child {
-                                    > a {
+                                    >a {
                                         border-bottom-width: 1px;
                                     }
                                 }
@@ -524,8 +549,8 @@
     &.eael-simple-menu-align-center {
         .eael-simple-menu {
             &.eael-simple-menu-vertical {
-                > li {
-                    > a {
+                >li {
+                    >a {
                         text-align: center;
                     }
                 }
@@ -536,8 +561,8 @@
     &.eael-simple-menu-align-right {
         .eael-simple-menu {
             &.eael-simple-menu-horizontal {
-                > li {
-                    > .eael-simple-menu-indicator {
+                >li {
+                    >.eael-simple-menu-indicator {
                         right: initial;
                         left: 10px;
                     }
@@ -551,12 +576,12 @@
             }
 
             &.eael-simple-menu-vertical {
-                > li {
-                    > a {
+                >li {
+                    >a {
                         text-align: right;
                     }
 
-                    > .eael-simple-menu-indicator {
+                    >.eael-simple-menu-indicator {
                         right: initial;
                         left: 10px;
                     }
@@ -580,7 +605,7 @@
                     text-align: right;
                 }
 
-                > .eael-simple-menu-indicator {
+                >.eael-simple-menu-indicator {
                     right: initial;
                     left: 10px;
                 }
@@ -593,13 +618,13 @@
         background-color: #4E36A3;
 
         .eael-simple-menu {
-            li > a {
+            li>a {
                 color: #fff;
             }
-            
+
             li.current-menu-ancestor>a.eael-item-active,
-            li:hover > a,
-            li.current-menu-item > a.eael-item-active {
+            li:hover>a,
+            li.current-menu-item>a.eael-item-active {
                 background-color: #743EFF;
             }
 
@@ -607,8 +632,8 @@
                 background-color: #743EFF;
 
                 li.current-menu-ancestor>a.eael-item-active,
-                li:hover > a,
-                li.current-menu-item > a.eael-item-active {
+                li:hover>a,
+                li.current-menu-item>a.eael-item-active {
                     background-color: #4E36A3;
                 }
             }
@@ -620,13 +645,13 @@
         background-color: #15DBD5;
 
         .eael-simple-menu {
-            li > a {
+            li>a {
                 color: #2A1A6C;
             }
 
             li.current-menu-ancestor>a.eael-item-active,
-            li:hover > a,
-            li.current-menu-item > a.eael-item-active {
+            li:hover>a,
+            li.current-menu-item>a.eael-item-active {
                 color: #fff;
                 background-color: #F72C8A;
             }
@@ -634,14 +659,14 @@
             li ul {
                 background-color: #F72C8A;
 
-                li > a {
+                li>a {
                     color: #fff;
                     border-bottom: 1px solid #F72C8A;
                 }
 
                 li.current-menu-ancestor>a.eael-item-active,
-                li:hover > a,
-                li.current-menu-item > a.eael-item-active {
+                li:hover>a,
+                li.current-menu-item>a.eael-item-active {
                     background-color: #f30875;
                 }
             }
@@ -653,11 +678,12 @@
         background-color: #fff;
         border: 1px solid #1BC1FF;
         //text-align: right;
-        
+
         .eael-simple-menu {
-            li > a {
+            li>a {
                 color: #5D5E61;
             }
+
             &.eael-simple-menu-horizontal:not(.eael-simple-menu-responsive)>li:first-child>a {
                 border-left: 1px solid #1BC1FF;
             }
@@ -667,8 +693,8 @@
             }
 
             li.current-menu-ancestor>a.eael-item-active,
-            li:hover > a,
-            li.current-menu-item > a.eael-item-active {
+            li:hover>a,
+            li.current-menu-item>a.eael-item-active {
                 color: #1BC1FF;
             }
 
@@ -676,14 +702,14 @@
                 background-color: #fff;
                 border: 1px solid #1BC1FF;
 
-                li > a {
+                li>a {
                     color: #5f5d5d;
                     border-bottom: 1px solid #1BC1FF;
                 }
 
                 li.current-menu-ancestor>a.eael-item-active,
-                li:hover > a,
-                li.current-menu-item > a.eael-item-active {
+                li:hover>a,
+                li.current-menu-item>a.eael-item-active {
                     color: #1BC1FF;
                 }
             }
@@ -710,7 +736,7 @@
     .eael-simple-menu.eael-simple-menu-responsive {
         left: 50%;
         transform: translateX(-50%);
-        transition: max-height .3s,transform .3s,-webkit-transform .3s;
+        transition: max-height .3s, transform .3s, -webkit-transform .3s;
         transform-origin: top;
         overflow: auto;
         z-index: 9999;
@@ -721,6 +747,7 @@
 .eael-simple-menu-container {
     .eael-simple-menu-toggle {
         display: none;
+
         svg {
             width: 35px;
             height: auto;
@@ -735,29 +762,34 @@
                 left: initial !important;
                 right: 10px !important;
             }
+
             a {
                 text-align: center !important;
             }
         }
     }
+
     &.eael-hamburger-left {
         li {
             .eael-simple-menu-indicator {
                 left: initial !important;
                 right: 10px !important;
             }
+
             a {
                 text-align: left !important;
             }
         }
 
     }
+
     &.eael-hamburger-right {
         li {
             .eael-simple-menu-indicator {
                 right: initial !important;
                 left: 10px !important;
             }
+
             a {
                 text-align: right !important;
             }

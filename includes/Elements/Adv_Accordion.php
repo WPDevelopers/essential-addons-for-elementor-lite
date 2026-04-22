@@ -78,7 +78,14 @@ class Adv_Accordion extends Widget_Base
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
         }
-        $accordion_tabs     = $this->get_settings('eael_adv_accordion_tab');
+
+        $settings = $this->get_data( 'settings' );
+
+        if ( empty( $settings ) || ! is_array( $settings ) ) {
+            return false;
+        }
+
+        $accordion_tabs     = $settings['eael_adv_accordion_tab'] ?? [];
         $is_dynamic_content = false;
         if( ! empty( $accordion_tabs ) ){
             foreach( $accordion_tabs as $accordion_tab ){
@@ -90,7 +97,7 @@ class Adv_Accordion extends Widget_Base
         }
 
         if( ! $is_dynamic_content ) {
-            $is_dynamic_content = 'yes' === $this->get_settings( 'eael_adv_accordion_faq_schema_show' );
+            $is_dynamic_content = 'yes' === sanitize_text_field( $settings['eael_adv_accordion_faq_schema_show'] ?? '' );
         }
 
         return $is_dynamic_content;
@@ -1813,8 +1820,12 @@ class Adv_Accordion extends Widget_Base
 
 				echo '<div ';  $this->print_render_attribute_string($tab_content_setting_key); echo '>';
 				if ('content' == $tab['eael_adv_accordion_text_type']) {
+					$tab_content = $tab['eael_adv_accordion_tab_content'];
+					if ( ! apply_filters( 'eael/advanced_accordion/allow_dangerous_html', false ) ) {
+						$tab_content = wp_kses( $tab_content, Helper::eael_allowed_tags() );
+					}
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo $this->parse_text_editor( wp_kses( $tab['eael_adv_accordion_tab_content'], Helper::eael_allowed_tags() ) );
+					echo $this->parse_text_editor( $tab_content );
 				} elseif ('template' == $tab['eael_adv_accordion_text_type']) {
 					if ( ! empty( $tab['eael_primary_templates'] ) && Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
 						// WPML Compatibility

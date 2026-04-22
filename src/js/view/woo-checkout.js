@@ -23,6 +23,7 @@ var WooCheckout = function ($scope, $) {
             url: localize.ajaxurl,
             data: {
                action: "woo_checkout_update_order_review",
+               security: localize.nonce,
                orderReviewData: wooCheckout.data("checkout"),
                shippingData: $(
                   ".ea-woo-checkout-order-review #shipping_method input:checked",
