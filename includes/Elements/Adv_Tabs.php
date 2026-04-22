@@ -1375,7 +1375,7 @@ class Adv_Tabs extends Widget_Base
 
                                 echo '<' . esc_attr( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( wp_kses( $repeater_tab_title , Helper::eael_allowed_tags() ) );
+                                echo wp_kses_post( $repeater_tab_title );
                                 echo '</' . esc_attr( $repeater_html_tag ) . '>';
                                 ?>
                             <?php endif; ?>
@@ -1400,7 +1400,7 @@ class Adv_Tabs extends Widget_Base
 
                                 echo '<' . esc_attr( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( wp_kses( $repeater_tab_title , Helper::eael_allowed_tags() ) );
+                                echo wp_kses_post( $repeater_tab_title );
                                 echo '</' . esc_attr( $repeater_html_tag ) . '>';
                                 ?>
                             <?php endif; ?>
@@ -1413,7 +1413,7 @@ class Adv_Tabs extends Widget_Base
 
                                 echo '<' . esc_attr( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( wp_kses( $repeater_tab_title , Helper::eael_allowed_tags() ) );
+                                echo wp_kses_post( $repeater_tab_title );
                                 echo '</' . esc_attr( $repeater_html_tag ) . '>'; 
                                 ?>
                             <?php endif; ?>
