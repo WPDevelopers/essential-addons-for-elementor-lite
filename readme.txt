@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, rudlinkon, nhrrob, jakariaistauk, himadree
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.0
+Stable tag: 6.6.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -171,6 +171,7 @@ Extensions (Free):
 38. [360 Degree Photo Viewer](https://essential-addons.com/360-degree-photo-viewer)- Make your website image visible from every angle with adjustable controls
 39. [Multicolumn Pricing Table](https://essential-addons.com/multicolumn-pricing-table/)- Display pricing plans in multiple columns to compare features and choose the right option
 40. [Figma to Elementor Converter](https://essential-addons.com/figma-to-elementor-converter/)- Turn Figma designs into fully customizable Elementor Pages
+41. [Pricing Slider](https://essential-addons.com/pricing-slider/)- Showcase dynamic pricing plans with interactive slider control
 
 
 Extensions (Pro):
@@ -316,6 +317,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.6.2 - 16/04/2026 =
+
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+= 6.6.1 - 15/04/2026 =
+
+- Few minor bug fixes & improvements
 
 = 6.6.0 - 06/04/2026 =
 
