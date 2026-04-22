@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $product = wc_get_product( get_the_ID() );
 if ( ! $product ) {
 	return;
@@ -64,7 +65,7 @@ $image_sources = [
 if( $show_secondary_image ){
     $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_grid_image_size_size'] );
 }
-
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
     ?>
     <li class="product <?php echo esc_attr( "{$product_wrapper_classes} {$list_style_preset}" ) ?>">
@@ -97,7 +98,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                 }
 
                 if ( $should_print_rating ) {
-                    $avg_rating = $product->get_average_rating();
+                    $avg_rating = $product->get_average_rating(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
                     if( $avg_rating > 0 ){
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());

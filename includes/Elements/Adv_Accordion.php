@@ -1830,7 +1830,7 @@ class Adv_Accordion extends Widget_Base
 					if ( ! empty( $tab['eael_primary_templates'] ) && Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
 						// WPML Compatibility
 						if ( ! is_array( $tab['eael_primary_templates'] ) ) {
-							$tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
+							$tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 						}
 
 						Helper::eael_onpage_edit_template_markup( get_the_ID(), $tab['eael_primary_templates'] );
@@ -1938,10 +1938,11 @@ class Adv_Accordion extends Widget_Base
                         }
                     echo '</div>';
 
-                    echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
+                    echo '<div '; $this->print_render_attribute_string($tab_content_setting_key); echo '>';
                         if( isset( $settings['eael_adv_accordion_show_full_content'] ) && 'yes' === $settings['eael_adv_accordion_show_full_content'] ) {
                             $document = Plugin::instance()->documents->get( $tab_id );
                             if( $document && $document->is_built_with_elementor() ) {
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 echo Plugin::$instance->frontend->get_builder_content( $tab_id, true );
                             }
                             else if ( has_blocks( get_the_content() ) ) {
@@ -1960,7 +1961,7 @@ class Adv_Accordion extends Widget_Base
                 echo '</div>';
             }
         } else {
-            echo '<p class="no-posts-found">'. esc_html__('No posts found!', 'essential-addons-elementor') .'</p>';
+            echo '<p class="no-posts-found">'. esc_html__('No posts found!', 'essential-addons-for-elementor-lite') .'</p>';
         }
         wp_reset_postdata();
 

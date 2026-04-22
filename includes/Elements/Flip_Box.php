@@ -2730,7 +2730,7 @@ class Flip_Box extends Widget_Base
 	                    if ( ! empty( $settings['eael_flipbox_front_templates'] ) && Helper::is_elementor_publish_template( $settings['eael_flipbox_front_templates'] ) ) {
 		                    // WPML Compatibility
 		                    if ( ! is_array( $settings['eael_flipbox_front_templates'] ) ) {
-			                    $settings['eael_flipbox_front_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_front_templates'], 'wp_template', true );
+			                    $settings['eael_flipbox_front_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_front_templates'], 'wp_template', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		                    }
                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		                    echo Plugin::$instance->frontend->get_builder_content( $settings['eael_flipbox_front_templates'], true );
@@ -2759,7 +2759,10 @@ class Flip_Box extends Widget_Base
                                     }
                                     ?>
                                     <div class="eael-elements-flip-box-content">
-	                                    <?php echo $this->parse_text_editor( wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) );?>
+	                                    <?php
+                                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.EscapeOutput.OutputNotEscaped
+                                        echo $this->parse_text_editor( wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) );
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -2774,7 +2777,7 @@ class Flip_Box extends Widget_Base
 	                    if ( ! empty( $settings['eael_flipbox_back_templates'] ) && Helper::is_elementor_publish_template( $settings['eael_flipbox_back_templates'] ) ) {
 		                    // WPML Compatibility
 		                    if ( ! is_array( $settings['eael_flipbox_back_templates'] ) ) {
-			                    $settings['eael_flipbox_back_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_back_templates'], 'wp_template', true );
+			                    $settings['eael_flipbox_back_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_back_templates'], 'wp_template', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		                    }
                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		                    echo Plugin::$instance->frontend->get_builder_content( $settings['eael_flipbox_back_templates'], true );
@@ -2796,7 +2799,10 @@ class Flip_Box extends Widget_Base
                                     <<?php echo esc_html( $flipbox_if_html_title_tag ), ' '; $this->print_render_attribute_string('flipbox-title-container'); ?>><?php echo wp_kses( $settings['eael_flipbox_back_title'], Helper::eael_allowed_tags() ); ?></<?php echo esc_html( $flipbox_if_html_title_tag ); ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
-                                        <?php echo $this->parse_text_editor( wp_kses( $settings['eael_flipbox_back_text'], Helper::eael_allowed_tags() ) ); ?>
+                                        <?php
+                                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.EscapeOutput.OutputNotEscaped
+                                        echo $this->parse_text_editor( wp_kses( $settings['eael_flipbox_back_text'], Helper::eael_allowed_tags() ) ); 
+                                        ?>
                                     </div>
 
                                     <?php if ($settings['flipbox_link_type'] == 'button' && !empty($settings['flipbox_button_text'])) : ?>

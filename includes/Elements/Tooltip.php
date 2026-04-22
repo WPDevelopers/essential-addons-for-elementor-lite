@@ -730,14 +730,14 @@ class Tooltip extends Widget_Base {
 
         // WPML Media Translation compatibility
         if ( ! empty( $settings['eael_tooltip_img_content']['id'] ) ) {
-            $settings['eael_tooltip_img_content']['id'] = apply_filters( 'wpml_object_id', $settings['eael_tooltip_img_content']['id'], 'attachment', true );
+            $settings['eael_tooltip_img_content']['id'] = apply_filters( 'wpml_object_id', $settings['eael_tooltip_img_content']['id'], 'attachment', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
             if ( $settings['eael_tooltip_img_content']['id'] ) {
                 $settings['eael_tooltip_img_content']['url'] = wp_get_attachment_url( $settings['eael_tooltip_img_content']['id'] );
             }
         }
 
         if ( ! empty( $settings['eael_tooltip_icon_content_new']['value']['id'] ) ) {
-            $settings['eael_tooltip_icon_content_new']['value']['id'] = apply_filters( 'wpml_object_id', $settings['eael_tooltip_icon_content_new']['value']['id'], 'attachment', true );
+            $settings['eael_tooltip_icon_content_new']['value']['id'] = apply_filters( 'wpml_object_id', $settings['eael_tooltip_icon_content_new']['value']['id'], 'attachment', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
             if ( $settings['eael_tooltip_icon_content_new']['value']['id'] ) {
                 $settings['eael_tooltip_icon_content_new']['value']['url'] = wp_get_attachment_url( $settings['eael_tooltip_icon_content_new']['value']['id'] );
             }

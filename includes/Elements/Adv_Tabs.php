@@ -1478,7 +1478,7 @@ class Adv_Tabs extends Widget_Base
 
 							        // WPML Compatibility
 							        if ( ! is_array( $tab['eael_primary_templates'] ) ) {
-								        $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
+								        $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 							        }
 
 							        Helper::eael_onpage_edit_template_markup( $page_id, $tab['eael_primary_templates'] );

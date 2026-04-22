@@ -564,7 +564,8 @@ class Woo_Product_List extends Widget_Base
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
-                'description'  => __( 'Uncheck the WooCommerce Settings <a href="' . $wc_settings_url . '" target="_blank">Out of stock visibility</a> option. This will not work otherwise' )
+                /* translators: %s: WooCommerce Out of Stock visibility settings URL */
+                'description'  => sprintf( __( 'Uncheck the WooCommerce Settings <a href="%s" target="_blank">Out of stock visibility</a> option. This will not work otherwise', 'essential-addons-for-elementor-lite' ), esc_url_raw($wc_settings_url) )
 			]
 		);
 
