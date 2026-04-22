@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Essential Addons for Elementor (Lite) — a WordPress plugin providing 110+ widgets and extensions for the Elementor page builder. Main plugin file: `essential_adons_elementor.php`. Current version: 6.6.0. Requires PHP 7.0+, WordPress 5.0+, Elementor.
+Essential Addons for Elementor (Lite) — a WordPress plugin providing 110+ widgets and extensions for the Elementor page builder. Main plugin file: `essential_adons_elementor.php`. Current version: 6.x.x. Requires PHP 7.0+, WordPress 5.0+, Elementor.
 
 ## Build Commands
 
@@ -25,29 +25,58 @@ Sources in `src/` compile to `assets/front-end/`. Webpack discovers entries by g
 
 ### Element/Widget System
 
-- **Config registry** (`config.php`): slug → PHP class path + CSS/JS deps. Single source of truth for asset dependencies.
-- **Widget classes** (`includes/Elements/`): ~65 widgets extending Elementor's base. Structure: `register_controls()` + `render()`.
-- **Extensions** (`includes/Extensions/`): Features that augment Elementor (Table of Content, Hover Effect, Image Masking, …).
+- **Config registry** (`config.php`): Central map of every element — maps slug → PHP class path, and declares CSS/JS dependencies per widget. This is the single source of truth for what assets each widget needs.
+- **Widget classes** (`includes/Elements/`): ~65 widgets, each extending Elementor's base widget class. Standard Elementor widget structure: metadata, `register_controls()`, `render()`.
+- **Extensions** (`includes/Extensions/`): Supplementary features (Table of Content, Hover Effect, Post Duplicator, Image Masking, etc.) that augment Elementor rather than adding standalone widgets.
+
+### Trait-Based Composition
+
+The Bootstrap class uses traits in `includes/Traits/` to organize functionality: `Admin`, `Ajax_Handler`, `Elements`, `Controls`, `Helper`, `Core`, `Enqueue`, `Login_Registration`, `Woo_Hooks`, etc. When adding cross-cutting functionality, add or extend a trait rather than bloating Bootstrap directly.
+
+### Asset Pipeline
+
+- **Source**: `src/css/view/*.scss` (SCSS), `src/js/view/*.js` and `src/js/edit/*.js` (ES6+)
+- **Output**: `assets/front-end/css/view/`, `assets/front-end/js/view/`, `assets/front-end/js/edit/`
+- **Build**: Webpack 4 with Babel (preset-env), Sass, PostCSS (autoprefixer), MiniCssExtractPlugin
+- **Asset loading**: `Asset_Builder` class (`includes/Classes/`) dynamically enqueues only the CSS/JS needed for widgets present on a page, driven by `config.php`
+- Third-party libraries live in `assets/front-end/js/lib-view/` (not built by webpack)
+
+### Elementor-Provided Assets — Do NOT Re-bundle
+
+Elementor registers several libraries as WordPress handles. Always depend on those handles rather than bundling duplicate files.
+
+| Library | Handle | Notes |
+|---------|--------|-------|
+| Swiper v8 | `swiper` (CSS), lazy JS via `elementorFrontend.utils.swiper` | Container class is `.swiper` not `.swiper-container` |
+| Font Awesome 5 | `font-awesome-5-all` | Already enqueued by Elementor |
+
+**Rules:**
+- CSS: declare the handle in the widget's `get_style_depends()`. Do **not** add a duplicate `file` entry in `config.php`.
+- JS: use `elementorFrontend.utils.swiper` async loader. Do **not** enqueue `swiper.min.js` manually.
+- Lite's own `swiper-bundle.min.css` in `assets/front-end/css/lib-view/swiper/` is a standalone fallback for contexts where Elementor may not load it. Pro widgets should use the `swiper` handle instead.
 
 ### Adding a New Widget
 
-See detailed steps in `.claude/rules/widget-development.md`, or run `/new-widget WidgetName`.
+1. Create the widget class in `includes/Elements/YourWidget.php` under namespace `Essential_Addons_Elementor\Elements`
+2. Add source SCSS in `src/css/view/` and JS in `src/js/view/` if needed
+3. Register the widget and its asset dependencies in `config.php`
+4. Run `npm run build`
 
 ## Key Files
 
-| File                                 | Purpose                                              |
-| ------------------------------------ | ---------------------------------------------------- |
-| `config.php`                         | Element registry — all widgets, classes, CSS/JS deps |
-| `essential_adons_elementor.php`      | Plugin entry point, constants                        |
-| `includes/Classes/Bootstrap.php`     | Main controller (singleton + traits)                 |
-| `includes/Classes/Asset_Builder.php` | Dynamic per-page asset loading                       |
-| `autoload.php`                       | PSR-4 autoloader                                     |
-| `webpack.config.js`                  | Build configuration                                  |
+| File | Purpose |
+|------|---------|
+| `config.php` | Element registry — all widgets, their classes, CSS/JS deps |
+| `essential_adons_elementor.php` | Plugin entry point, constants |
+| `includes/Classes/Bootstrap.php` | Main controller (singleton + traits) |
+| `includes/Classes/Asset_Builder.php` | Dynamic per-page asset loading |
+| `autoload.php` | PSR-4 autoloader |
+| `webpack.config.js` | Build configuration |
 
 ## Dependencies
 
-- **PHP**: `priyomukul/wp-notice` (Composer)
-- **JS**: `@wordpress/hooks`, `axios` (npm)
+- **PHP**: `priyomukul/wp-notice` (via Composer)
+- **JS**: `@wordpress/hooks`, `axios` (via npm)
 
 ## Text Domain
 
