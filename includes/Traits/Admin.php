@@ -1350,6 +1350,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/pinterest-feed/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/pinterest-feed/',
 							    'is_pro'      => true,
+							    'setting'     => [ 'id' => 'pinterestFeedSetting' ],
 							    'is_activate' => boolval( $this->get_settings( 'pinterest-feed' ) )
 						    ],
 					    ]
@@ -1569,6 +1570,14 @@ trait Admin {
 					    'placeholder'=> __( "Custom Tab 1, Custom Tab 2, Custom Tab 3", 'essential-addons-for-elementor-lite' ),
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
+				    'pinterestFeedSetting'   => apply_filters( 'eael/admin/modal/pinterestFeedSetting', [
+					    'accordion' => [],
+					    'link'      => [
+						    'text' => __( 'How to connect your Pinterest account', 'essential-addons-for-elementor-lite' ),
+						    'url'  => 'https://essential-addons.com/elementor/docs/pinterest-feed/'
+					    ]
+				    ] ),
+
 				    'businessReviewsSetting' => apply_filters( 'eael/admin/modal/businessReviewsSetting', [
 					    'accordion' => [
 						    'googlePlaces' => [
