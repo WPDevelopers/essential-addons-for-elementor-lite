@@ -23,36 +23,57 @@ function App() {
         eaDispatch({type: 'SET_OFFSET_TOP', payload: wrapperRef.current.offsetTop});
     }, [eaState.isDark]);
 
-    // Auto-open Business Reviews modal after OAuth callback or actions
+    // Auto-open the relevant API settings modal after an OAuth callback.
+    // Each integration lands the admin back on ?page=eael-settings with a
+    // status flag; we match on that flag and re-open its modal so the user
+    // sees the success/error message and connection status inline.
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
-        const shouldOpenModal = urlParams.get('eael_business_profile_success') === '1' ||
-                                urlParams.get('eael_business_profile_locations_refreshed') === '1' ||
-                                urlParams.get('eael_business_profile_disconnected') === '1' ||
-                                urlParams.get('eael_business_profile_error') === '1';
 
-        if (shouldOpenModal && localize.eael_dashboard.modal.businessReviewsSetting) {
-            // Get the first accordion key (Business Profile API)
-            const firstAccordionKey = Object.keys(localize.eael_dashboard.modal.businessReviewsSetting.accordion)[0];
+        const flagMap = [
+            {
+                flags: [
+                    'eael_business_profile_success',
+                    'eael_business_profile_locations_refreshed',
+                    'eael_business_profile_disconnected',
+                    'eael_business_profile_error',
+                ],
+                modalID: 'businessReviewsSetting',
+                title: 'Business Reviews',
+            },
+            {
+                flags: [
+                    'eael_pinterest_success',
+                    'eael_pinterest_disconnected',
+                    'eael_pinterest_error',
+                ],
+                modalID: 'pinterestFeedSetting',
+                title: 'Pinterest Feed',
+            },
+        ];
 
-            // Open the modal
+        const match = flagMap.find(entry =>
+            entry.flags.some(flag => urlParams.get(flag) === '1')
+        );
+
+        if (match && localize.eael_dashboard.modal[match.modalID]) {
+            const accordion = localize.eael_dashboard.modal[match.modalID].accordion || {};
+            const firstAccordionKey = Object.keys(accordion)[0];
+
             eaDispatch({
                 type: 'OPEN_MODAL',
-                payload: {
-                    key: 'businessReviewsSetting',
-                    title: 'Business Reviews'
-                }
+                payload: { key: match.modalID, title: match.title },
             });
 
-            // Set the accordion to Business Profile API
             if (firstAccordionKey) {
                 eaDispatch({
                     type: 'MODAL_ACCORDION',
-                    payload: { key: firstAccordionKey }
+                    payload: { key: firstAccordionKey },
                 });
             }
 
-            // Clean up URL parameters
+            // Strip the flag from the address bar so a reload doesn't
+            // reopen the modal with a stale success/error message.
             const newUrl = window.location.pathname + '?page=eael-settings';
             window.history.replaceState({}, '', newUrl);
         }
