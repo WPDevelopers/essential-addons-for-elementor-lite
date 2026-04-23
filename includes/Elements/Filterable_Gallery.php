@@ -521,6 +521,38 @@ class Filterable_Gallery extends Widget_Base
                 'default' => 'yes',
             ]
         );
+
+        $this->add_control(
+            'eael_fg_mobile_scroll_to_top',
+            [
+                'label'        => __('Scroll to Items on Mobile', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => '',
+                'description'  => __('Enable this to automatically scroll to the items of the gallery on mobile devices after selecting a filter.', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_mobile_scroll_offset',
+            [
+                'label'     => __('Scroll Offset (px)', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::NUMBER,
+                'default'   => 0,
+                'min'       => -500,
+                'max'       => 500,
+                'step'      => 1,
+                'condition' => [
+                    'eael_fg_mobile_scroll_to_top' => 'yes',
+                ],
+                'ai' => [
+                    'active' => false,
+                ],
+            ]
+        );
+
         
         $this->add_control(
             'eael_fg_all_label_text',
@@ -755,6 +787,20 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_fg_use_video_tag',
+            [
+                'label'        => __( 'Use Video Tag', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default'      => '',
+                'description'  => __( 'Enable this to use an HTML5 video tag instead of iframe for self-hosted videos. Recommended for iOS devices.', 'essential-addons-for-elementor-lite' ),
+                'condition'    => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ],
+                ],
+            ]
+        );
+
         $repeater = new Repeater();
 
         $repeater->add_control(
@@ -828,7 +874,7 @@ class Filterable_Gallery extends Widget_Base
                 'label'       => esc_html__('Link', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default'     => 'https://www.youtube.com/watch?v = kB4U67tiQLA',
+                'default'     => 'https://www.youtube.com/watch?v=kB4U67tiQLA',
                 'condition'   => [
                     'fg_video_gallery_switch' => 'true',
                 ],
@@ -3841,7 +3887,7 @@ class Filterable_Gallery extends Widget_Base
         $image_alt = get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true );
         $alt_text = $image_alt ? $image_alt : $item['title'];
         
-        if( isset( $item['image_id'] ) && "" !== $item['image_id'] ){
+        if( isset( $item['image_id'] ) && "" !== $item['image_id'] && wp_attachment_is_image( $item['image_id'] ) ){
             $settings[ 'eael_image_size_customize' ] = [
                 'id' => $item['image_id'],
             ];
@@ -4074,7 +4120,7 @@ class Filterable_Gallery extends Widget_Base
             $alt_text = get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true );
             $alt_text = ! empty( $alt_text ) ? $alt_text : $item['title'];
             
-            if( isset( $item['image_id'] ) && "" !== $item['image_id'] ){
+            if( isset( $item['image_id'] ) && "" !== $item['image_id'] && wp_attachment_is_image( $item['image_id'] ) ){
                 $settings[ 'eael_image_size_customize' ] = [
                     'id' => $item['image_id'],
                 ];
@@ -4321,6 +4367,8 @@ class Filterable_Gallery extends Widget_Base
             'gallery_enabled' => $settings['photo_gallery'],
             'video_gallery_yt_privacy' => $settings['video_gallery_yt_privacy'],
             'control_all_text' => $settings['eael_fg_all_label_text'],
+            'mobile_scroll_to_top' => $settings['eael_fg_mobile_scroll_to_top'],
+            'mobile_scroll_offset' => isset( $settings['eael_fg_mobile_scroll_offset'] ) ? (int) $settings['eael_fg_mobile_scroll_offset'] : 0,
         ];
         
         if ( Plugin::$instance->editor->is_edit_mode()) {
@@ -4358,6 +4406,10 @@ class Filterable_Gallery extends Widget_Base
 
         if( 'yes' === $settings['eael_privacy_notice_control'] && !empty( $settings['eael_privacy_notice'] ) ) {
             $this->add_render_attribute( 'gallery-items-wrap', 'data-privacy-notice', esc_html( $settings['eael_privacy_notice'] ) );
+        }
+
+        if ( 'yes' === $settings['eael_fg_use_video_tag'] ) {
+            $this->add_render_attribute( 'gallery-items-wrap', 'data-use-video-tag', 'yes' );
         }
 
         $html_json   = wp_json_encode( $gallery_items );

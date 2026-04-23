@@ -8,6 +8,16 @@
   "login": true,
   "steps": [
     {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "wordpress.org/themes",
+        "slug": "hello-elementor"
+      },
+      "options": { 
+        "activate": true 
+      }
+    },
+    {
       "step": "installPlugin",
       "pluginData": {
         "resource": "wordpress.org/plugins",
