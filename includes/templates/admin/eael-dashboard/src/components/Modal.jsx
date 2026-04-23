@@ -32,7 +32,7 @@ function Modal() {
             asyncDispatch({eaState, eaDispatch}, 'SAVE_MODAL_DATA', inputData);
         },
         eaData = localize.eael_dashboard.modal,
-        isAccordionModal = ['businessReviewsSetting'].includes(eaState.modalID),
+        isAccordionModal = ['businessReviewsSetting', 'pinterestFeedSetting'].includes(eaState.modalID),
         modalWrapperClasses = ['ea__modal-content-wrapper'],
         modalBodyClasses = ['ea__modal-body'];
 
@@ -52,12 +52,13 @@ function Modal() {
                     <div className={modalBodyClasses.join(' ')}>
                         {eaState.modalID === 'loginRegisterSetting' && <ModalStyleThree/>}
                         {eaState.modalID === 'businessReviewsSetting' && <ModalStyleThree/>}
+                        {eaState.modalID === 'pinterestFeedSetting' && <ModalStyleThree/>}
                         {eaState.modalID === 'postDuplicatorSetting' && <ModalStyleTwo/>}
-                        {['loginRegisterSetting', 'businessReviewsSetting', 'postDuplicatorSetting'].includes(eaState.modalID) ||
+                        {['loginRegisterSetting', 'businessReviewsSetting', 'pinterestFeedSetting', 'postDuplicatorSetting'].includes(eaState.modalID) ||
                             <ModalStyleOne/>}
                     </div>
                     <div className="ea__modal-footer flex items-center">
-                        {(eaState.modalID === 'loginRegisterSetting' || eaState.modalID === 'businessReviewsSetting') &&
+                        {['loginRegisterSetting', 'businessReviewsSetting', 'pinterestFeedSetting'].includes(eaState.modalID) &&
                             <a className="ea__api-link" target="_blank"
                                href={eaData[eaState.modalID].link.url}>{eaData[eaState.modalID].link.text}</a>}
                         <div className='flex flex-end flex-1'>
