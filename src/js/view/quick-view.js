@@ -136,8 +136,8 @@ const QuickView = {
 					       type: "post",
 					       data: {
 						       action: "eael_product_add_to_cart",
+						       security: localize.nonce,
 						       product_data: product_data,
-						       eael_add_to_cart_nonce: localize.nonce,
 						       cart_item_data: form.serializeArray(),
 					       },
 					       success: function (response) {
