@@ -1350,6 +1350,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/pinterest-feed/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/pinterest-feed/',
 							    'is_pro'      => true,
+							    'promotion'   => 'new',
 							    'setting'     => [ 'id' => 'pinterestFeedSetting' ],
 							    'is_activate' => boolval( $this->get_settings( 'pinterest-feed' ) )
 						    ],
