@@ -222,7 +222,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         'layout_template' => 'default'
                     ],
                     'ai' => [
-                        'active' => false,
+                        'active' => true,
                     ],
                 ]
             );

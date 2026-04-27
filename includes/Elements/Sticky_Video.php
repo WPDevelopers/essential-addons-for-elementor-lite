@@ -169,7 +169,7 @@ class Sticky_Video extends Widget_Base
                     'eael_video_source' => 'youtube',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -187,7 +187,7 @@ class Sticky_Video extends Widget_Base
                     'eael_video_source' => 'vimeo',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -204,7 +204,7 @@ class Sticky_Video extends Widget_Base
                     'eael_video_source' => 'dailymotion',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -257,7 +257,7 @@ class Sticky_Video extends Widget_Base
                     'eaelsv_link_external' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -905,7 +905,7 @@ class Sticky_Video extends Widget_Base
 
 	    if ( 'youtube' === $settings['eael_video_source'] ) {
 		    $url        = $settings['eaelsv_link_youtube'];
-		    $link       = explode( '=', parse_url( $url, PHP_URL_QUERY ) );
+		    $link       = explode( '=', wp_parse_url( $url, PHP_URL_QUERY ) );
 		    $short_link = explode( '/', $url );
 		    $id         = isset( $link[1] ) ? $link[1] : ( isset( $short_link[3] ) ? $short_link[3] : '' );
 	    }

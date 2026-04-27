@@ -27,6 +27,7 @@ trait Admin {
 		$menu_notice = ( $this->menu_notice_should_show() ) ? '<span class="eael-menu-notice">1</span>' : '';
 		add_menu_page(
 			__( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
+			// translators: %s is the number of the menu notice
 			sprintf( __( 'Essential Addons %s', 'essential-addons-for-elementor-lite' ), $menu_notice ),
 			'manage_options',
 			'eael-settings',
@@ -46,6 +47,10 @@ trait Admin {
 
         if ( $hook == 'essential-addons_page_template-cloud' ) {
             wp_enqueue_style( 'essential_addons_elementor-template-cloud-css', EAEL_PLUGIN_URL . 'assets/admin/css/cloud.css', false, EAEL_PLUGIN_VERSION );
+        }
+
+        if ( isset( $hook ) && $hook == 'elementor_page_elementor-element-manager' ) {
+		    wp_enqueue_style( 'ea-icon-admin', EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css', array(), EAEL_PLUGIN_VERSION );
         }
 
 	    if ( isset( $hook ) && $hook == 'toplevel_page_eael-settings' ) {
@@ -122,7 +127,7 @@ trait Admin {
 				    ]
 			    ],
 			    'templately_promo'        => [
-				    'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( 'Unlock 6500+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
 					    __( 'Stunning Templates For All', 'essential-addons-for-elementor-lite' ),
 					    __( 'One-Click Full Site Import', 'essential-addons-for-elementor-lite' ),
@@ -201,7 +206,7 @@ trait Admin {
 				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
 				    'content' => __( 'Get more powerful widgets & extensions to elevate your Elementor website', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3800+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
@@ -369,7 +374,7 @@ trait Admin {
 				    'top_heading' => __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
 				    'heading'     => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'      => [
-					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3800+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'      => [
@@ -1195,6 +1200,15 @@ trait Admin {
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'price-menu' ) )
 						    ],
+                            'pricing-slider'         => [
+                                'key'         => 'pricing-slider',
+                                'title'       => __( 'Pricing Slider', 'essential-addons-for-elementor-lite' ),
+                                'demo_link'   => 'https://essential-addons.com/pricing-slider/',
+                                'doc_link'    => 'https://essential-addons.com/docs/ea-pricing-slider/',
+                                'is_pro'      => true,
+                                'promotion'   => 'new',
+                                'is_activate' => boolval( $this->get_settings( 'pricing-slider' ) )
+                            ],
 					    ]
 				    ],
 				    'form-styler-elements'     => [
@@ -1547,7 +1561,7 @@ trait Admin {
 					    'placeholder'=> __( "Custom Tab 1, Custom Tab 2, Custom Tab 3", 'essential-addons-for-elementor-lite' ),
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
-				    'businessReviewsSetting' => [
+				    'businessReviewsSetting' => apply_filters( 'eael/admin/modal/businessReviewsSetting', [
 					    'accordion' => [
 						    'googlePlaces' => [
 							    'title'  => __( 'Google Places API', 'essential-addons-for-elementor-lite' ),
@@ -1569,7 +1583,7 @@ trait Admin {
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
 						    'url'  => 'https://essential-addons.com/docs/ea-business-reviews/'
 					    ]
-				    ],
+				    ] ),
 
 
 				    'mailchimpSetting'       => [
@@ -1736,7 +1750,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.5 with new \"<b><a target='_blank' href='%s'>Vertical Text Orientation</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/vertical-text-orientation/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.8 with new \"<b><a target='_blank' href='%1\$s'>Pricing Slider</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/pricing-slider/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -1886,20 +1900,20 @@ trait Admin {
 	    );
 
 	    ob_start(); ?>
-		<div class="eael-black-friday-optin-logo">
+		<div class="eael-spring-campaign-logo">
 			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" width="25" alt="">
 		</div>
-		<div class="eael-black-friday-optin">
-			<p><?php 
+		<div class="eael-spring-campaign-content">
+			<p><?php
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo __( '<strong>Black Friday Mega Sale:</strong> Elevate Web Design More Than Ever With 110+ Elements – Now <strong>Up To $120 OFF!</strong> 🎁', 'essential-addons-for-elementor-lite' );
+			echo __( '<strong>🌸 Spring Savings:</strong> Design Elementor website faster and smoother with 110+ advanced elements – now <strong>Flat 25% OFF</strong>! ⚡️', 'essential-addons-for-elementor-lite' );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
-                <a href="https://essential-addons.com/bfcm2025-admin-notice" target="_blank" class="button-primary">
-                    <?php esc_html_e( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ); ?>
+                <a href="https://essential-addons.com/spring2026-admin-notice" target="_blank" class="button-primary">
+                    <?php esc_html_e( 'Upgrade To Pro Now', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
                 <span class="eael-action-dismiss-btn">
-                    <?php esc_html_e( 'I’ll Grab It Later', 'essential-addons-for-elementor-lite' ); ?>
+                    <?php esc_html_e( 'Maybe Later', 'essential-addons-for-elementor-lite' ); ?>
                 </span>
             </div>
 		</div>
@@ -1907,7 +1921,7 @@ trait Admin {
 		<script>
             jQuery(document).ready(function ($) {
                 setTimeout(function () {
-                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_2025_notice .notice-dismiss');
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-spring_campaign_2026_notice .notice-dismiss');
 
                     function wpNoticeDismissFunc(event) {
                         event.preventDefault();
@@ -1921,8 +1935,7 @@ trait Admin {
                             jQuery(event.target.offsetParent).slideUp(200);
                         }
 
-                        // Data has to be formatted as a string here.
-                        postData += 'id=bfcm_2025_notice';
+                        postData += 'id=spring_campaign_2026_notice';
                         postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
                         if (dismiss) {
                             postData += '&dismiss=' + dismiss;
@@ -1931,18 +1944,16 @@ trait Admin {
                             postData += '&later=' + later;
                         }
 
-                        postData += '&nonce=<?php echo wp_create_nonce( 'wpnotice_dismiss_notice_bfcm_2025_notice' );?>';
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_spring_campaign_2026_notice' ) );?>';
 
                         httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
                         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                         httpRequest.send(postData);
                     }
 
-                    // Add an event listener to the dismiss button.
                     dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
 
-                    // Handle custom dismiss button clicks
-                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_2025_notice .eael-action-dismiss-btn');
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-spring_campaign_2026_notice .eael-action-dismiss-btn');
                     if (customDismissBtn && dismissBtn) {
                         customDismissBtn.addEventListener('click', function(event) {
                             event.preventDefault();
@@ -1953,21 +1964,21 @@ trait Admin {
             });
 		</script>
 	    <?php
-	    $b_message            = ob_get_clean();
-	    $_black_friday_notice = [
+	    $b_message                     = ob_get_clean();
+	    $_spring_campaign_2026_notice  = [
 		    'html' => $b_message,
 	    ];
 
 	    $notices->add(
-			'bfcm_2025_notice',
-			$_black_friday_notice,
+			'spring_campaign_2026_notice',
+			$_spring_campaign_2026_notice,
 			[
-				'start'       => $notices->time(),
+				'start'       => strtotime( '12:00:00am 15th April, 2026' ),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				"expire"      => strtotime( '11:59:59pm 4th December, 2025' ),
-				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '09:59:59pm 4th December, 2025' ),
+				'expire'      => strtotime( '11:59:59pm 10th May, 2026' ),
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '11:59:59pm 10th May, 2026' ),
 			]
 		);
 

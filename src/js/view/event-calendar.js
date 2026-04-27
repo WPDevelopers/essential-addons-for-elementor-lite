@@ -33,8 +33,6 @@ var EventCalendar = function ($scope, $) {
 					},
 					week: {
 						dayHeaderContent: (args) => {
-							console.log('weekColumnHeaderFormat', weekColumnHeaderFormat)
-
 							if (weekColumnHeaderFormat) {
 								return moment(args.date).format(weekColumnHeaderFormat);
 							}
@@ -113,6 +111,19 @@ var EventCalendar = function ($scope, $) {
 							element.removeClass("fc-has-url");
 							element.css('cursor', 'default');
 						}
+
+						$.each(element[0].attributes, function () {
+							var name = this.name.toLowerCase();
+							// Remove all on* event handlers
+							if (name.startsWith('on')) {
+								element.removeAttr(this.name);
+							}
+							// Sanitize href starting with javascript:
+							else if (name === 'href' && this.value.trim().toLowerCase().startsWith('javascript:')) {
+								element.attr('href', '#');
+							}
+						});
+
 					}
 					else {
 						element.attr("href", "javascript:void(0);");
@@ -312,6 +323,17 @@ var EventCalendar = function ($scope, $) {
 								"border-left",
 								"5px solid " + event.borderColor
 							);
+
+							$.each(modalFooterLink[0].attributes, function () {
+								var name = this.name.toLowerCase();
+								if (name.startsWith('on')) {
+									modalFooterLink.removeAttr(this.name);
+								}
+								else if (name === 'href' && this.value.trim().toLowerCase().startsWith('javascript:')) {
+									modalFooterLink.attr('href', '#');
+								}
+							});
+
 						});
 					}
 				},
@@ -344,6 +366,91 @@ var EventCalendar = function ($scope, $) {
 		});
 
 		calendar.render();
+
+		// Search filtering logic
+		var searchInput = $scope.find('.eael-event-calendar-search-input');
+		var suggestionsContainer = $scope.find('.eael-event-calendar-search-suggestions');
+
+		function getFilteredEvents(searchTerm) {
+			return eventAll.filter(function(event) {
+				var title = (event.title || '').toLowerCase();
+				var location = (event.location || '').toLowerCase();
+				var category = (event.category || '').toLowerCase();
+				
+				return title.indexOf(searchTerm) > -1 || 
+					   location.indexOf(searchTerm) > -1 || 
+					   category.indexOf(searchTerm) > -1;
+			});
+		}
+
+		if (searchInput.length > 0) {
+			searchInput.on('keyup input search', function() {
+				var searchTerm = $(this).val().toLowerCase();
+				var filteredEvents = getFilteredEvents(searchTerm);
+				
+				// Suggestions logic
+				suggestionsContainer.empty().removeClass('active');
+				
+				if (searchTerm.length > 0) {
+					if (filteredEvents.length > 0) {
+						suggestionsContainer.addClass('active');
+						filteredEvents.forEach(function(match) {
+							var dateStr = moment(match.start).format('MMM Do, YYYY');
+							var suggestionItem = $('<div class="suggestion-item">' +
+								'<div class="suggestion-title">' + DOMPurify.sanitize(match.title) + '</div>' +
+								'<div class="suggestion-meta">' + 
+									(match.category ? '<span class="suggestion-category">' + DOMPurify.sanitize(match.category) + '</span> | ' : '') + 
+									(match.location ? DOMPurify.sanitize(match.location) + ' | ' : '') + 
+									dateStr + 
+								'</div>' +
+							'</div>');
+
+							suggestionItem.on('click', function() {
+								calendar.gotoDate(match.start);
+								
+								// Hide suggestions
+								suggestionsContainer.removeClass('active');
+								searchInput.val(match.title);
+
+								// Proactively trigger the popup after navigation
+								setTimeout(function() {
+									var eventElement = $scope.find('.fc-event-title').filter(function() {
+										return $(this).text() === match.title;
+									}).closest('.fc-event');
+
+									if (eventElement.length === 0) {
+										eventElement = $scope.find('.fc-list-event-title').filter(function() {
+											return $(this).text() === match.title;
+										}).closest('.fc-list-event');
+									}
+
+									if (eventElement.length > 0) {
+										eventElement.trigger('click');
+									}
+								}, 300);
+							});
+
+							suggestionsContainer.append(suggestionItem);
+						});
+					}
+				} else {
+					// Reset calendar to today if search is cleared
+					calendar.today();
+				}
+
+				// Remove existing events and add filtered ones
+				calendar.removeAllEvents();
+				calendar.addEventSource(filteredEvents);
+			});
+
+			// Close suggestions when clicking elsewhere
+			$(document).on('click', function(e) {
+				if (!$(e.target).closest('.eael-event-calendar-search').length) {
+					suggestionsContainer.removeClass('active');
+				}
+			});
+		}
+
 		setTimeout( function() {
 			calendar.setOption( 'locale', locale );
 		}, 100);

@@ -27,7 +27,7 @@ trait Controls
         $post_types = ControlsHelper::get_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
 
-        if ($wb->get_name() !== 'eael-dynamic-filterable-gallery' && $wb->get_name() !== 'eael-post-list') {
+        if ( ! in_array( $wb->get_name(), [ 'eael-dynamic-filterable-gallery', 'eael-post-list', 'eael-adv-accordion' ] ) ) {
             $post_types['source_dynamic'] = __('Dynamic', 'essential-addons-for-elementor-lite');
         }
 
@@ -50,6 +50,16 @@ trait Controls
                     'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_content_timeline_choose' => 'dynamic',
+                    ],
+                ]
+            );
+        } else if ('eael-adv-accordion' === $wb->get_name()) {
+            $wb->start_controls_section(
+                'eael_adv_accordion_content_section',
+                [
+                    'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
+                    'condition' => [
+                        'eael_adv_accordion_content_source' => 'dynamic',
                     ],
                 ]
             );
@@ -114,6 +124,7 @@ trait Controls
             ]
         );
 
+        $is_element_dynamic_gallery = 'eael-dynamic-filterable-gallery' === $wb->get_name() ? 1 : 0;
         foreach ($taxonomies as $taxonomy => $object) {
             if (!isset($object->object_type[0]) || !in_array($object->object_type[0], array_keys($post_types))) {
                 continue;
@@ -135,7 +146,6 @@ trait Controls
             );
 
             $show_child_cat_control = ('category' === $taxonomy || 'product_cat' === $taxonomy) ? 1 : 0;
-            $is_element_dynamic_gallery = 'eael-dynamic-filterable-gallery' === $wb->get_name() ? 1 : 0;
             
             if($show_child_cat_control && $is_element_dynamic_gallery){
                 $wb->add_control(
@@ -155,6 +165,31 @@ trait Controls
                 );
             }
 
+        }
+
+        if( $is_element_dynamic_gallery ){
+            $wb->add_control(
+                'tax_query_relation',
+                [
+                    'label' => esc_html__( 'Taxonomy Query Relation', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::CHOOSE,
+                    'options' => [
+                        'AND' => [
+                            'title' => esc_html__( 'AND', 'essential-addons-for-elementor-lite' ),
+                            'text' => 'AND',
+                        ],
+                        'OR' => [
+                            'title' => esc_html__( 'OR', 'essential-addons-for-elementor-lite' ),
+                            'text' => 'OR',
+                        ],
+                    ],
+                    'default' => 'AND',
+                    'toggle' => false,
+                    'condition' => [
+                        'post_type!' => ['by_id', 'source_dynamic', 'page'],
+                    ],
+                ]
+            );
         }
 
 	    $wb->add_control(
@@ -254,7 +289,7 @@ trait Controls
                 'label' => __('Meta Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'ai' => [
-                    'active' => false,
+                    'active' => true,
                 ],
                 'placeholder' => __('_event_start_date', 'essential-addons-for-elementor-lite'),
                 'description' => __('Enter the meta key name for custom field sorting (e.g., _event_start_date, custom_price)', 'essential-addons-for-elementor-lite'),
@@ -369,6 +404,22 @@ trait Controls
                         ]
                     ]
                 );
+
+                $wb->add_control(
+                    'eael_dfg_enable_combined_query',
+                    [
+                        'label' => __('Enable Combined Query', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SWITCHER,
+                        'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                        'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                        'return_value' => 'yes',
+                        'default' => '',
+                        'description' => __('Combine filtered items with ACF gallery items.', 'essential-addons-for-elementor-lite'),
+                        'condition' => [
+                            'fetch_acf_image_gallery' => 'yes',
+                        ],
+                    ]
+                );
             } else {
                 $wb->add_control(
                     'eael_scf_gallery_warnig_text',
@@ -382,6 +433,20 @@ trait Controls
                     ]
                 );
             }
+        }
+
+        if ( 'eael-post-list' === $wb->get_name() ) {
+            $wb->add_control(
+                'query_id',
+                [
+                    'label' => esc_html__('Query ID', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::TEXT,
+                    'default' => '',
+                    'ai' => ['active' => false],
+                    'description' => esc_html__('Give your Query a custom unique id to allow server side filtering using the hook "eael/query/{query_id}"', 'essential-addons-for-elementor-lite'),
+                    'separator' => 'before',
+                ]
+            );
         }
 
         $wb->end_controls_section();
@@ -1225,7 +1290,7 @@ trait Controls
                     'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'dynamic'     => [ 'active' => true ],
-                    'ai' => [ 'active' => false ],
+                    'ai' => [ 'active' => true ],
                     'label_block' => false,
                     'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition' => [
@@ -1252,8 +1317,8 @@ trait Controls
                 [
                     'label'       => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type'        => Controls_Manager::TEXT,
-                    'dynamic'     => [ 'active'      =>true ],
-                    'ai'          => [ 'active'      =>false ],
+                    'dynamic'     => [ 'active'      => true ],
+                    'ai'          => [ 'active'      => true ],
                     'label_block' => false,
                     'default'     => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition'   => [

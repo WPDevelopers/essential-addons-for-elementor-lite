@@ -65,7 +65,14 @@ class Adv_Tabs extends Widget_Base
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
         }
-        $tabs     = $this->get_settings('eael_adv_tabs_tab');
+
+        $settings = $this->get_data( 'settings' );
+
+        if ( empty( $settings ) || ! is_array( $settings ) ) {
+            return false;
+        }
+
+        $tabs               = $settings['eael_adv_tabs_tab'] ?? [];
         $is_dynamic_content = false;
         if( ! empty( $tabs ) ){
             foreach( $tabs as $tab ){
@@ -304,7 +311,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
-                'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
+                'default' => gmdate('Y-m-d H:i', current_time('timestamp', 0)),
                 'picker_options' => [
                     'enableTime' => true,
                     'altInput' => true,
@@ -401,7 +408,7 @@ class Adv_Tabs extends Widget_Base
                 'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
                 'dynamic' => ['active' => true],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -476,7 +483,7 @@ class Adv_Tabs extends Widget_Base
                 'description' => esc_html__( 'Custom ID will be added as an anchor tag. For example, if you add ‘test’ as your custom ID, the link will become like the following: https://www.example.com/#test and it will open the respective tab directly.', 'essential-addons-for-elementor-lite' ),
                 'default' => '',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -748,11 +755,12 @@ class Adv_Tabs extends Widget_Base
             'eael_adv_tabs_tab_color',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HIDDEN,
+                'type' => Controls_Manager::COLOR,
                 'default' => '#f1f1f1',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
                 ],
+                'description' => __('This controller is depricated. use Background Type controller.', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
                 ],
@@ -840,11 +848,12 @@ class Adv_Tabs extends Widget_Base
         $this->add_control(
             'eael_adv_tabs_tab_color_hover',
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HIDDEN,
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover:not(.active)' => 'background-color: {{VALUE}};',
                 ],
+                'description' => __('This controller is depricated. use Background Type controller.', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
                 ],
@@ -935,12 +944,13 @@ class Adv_Tabs extends Widget_Base
         $this->add_control(
             'eael_adv_tabs_tab_color_active',
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HIDDEN,
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
                 'default' => '#444',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul .active' => 'background-color: {{VALUE}};',
                 ],
+                'description' => __('This controller is depricated. use Background Type controller.', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_adv_tab_new_style' => 'default',
                 ],
@@ -1365,7 +1375,7 @@ class Adv_Tabs extends Widget_Base
 
                                 echo '<' . esc_attr( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( $repeater_tab_title );
+                                echo $this->parse_text_editor( wp_kses( $repeater_tab_title , Helper::eael_allowed_tags() ) );
                                 echo '</' . esc_attr( $repeater_html_tag ) . '>';
                                 ?>
                             <?php endif; ?>
@@ -1390,7 +1400,7 @@ class Adv_Tabs extends Widget_Base
 
                                 echo '<' . esc_attr( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( $repeater_tab_title );
+                                echo $this->parse_text_editor( wp_kses( $repeater_tab_title , Helper::eael_allowed_tags() ) );
                                 echo '</' . esc_attr( $repeater_html_tag ) . '>';
                                 ?>
                             <?php endif; ?>
@@ -1403,7 +1413,7 @@ class Adv_Tabs extends Widget_Base
 
                                 echo '<' . esc_attr( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( $repeater_tab_title );
+                                echo $this->parse_text_editor( wp_kses( $repeater_tab_title , Helper::eael_allowed_tags() ) );
                                 echo '</' . esc_attr( $repeater_html_tag ) . '>'; 
                                 ?>
                             <?php endif; ?>
@@ -1446,8 +1456,12 @@ class Adv_Tabs extends Widget_Base
                     <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($content_active_class); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
 				        <?php
                         if ('content' == $tab['eael_adv_tabs_text_type']) :
+                            $tab_content = $tab['eael_adv_tabs_tab_content'];
+                            if ( ! apply_filters( 'eael/advanced_tabs/allow_dangerous_html', false ) ) {
+                                $tab_content = wp_kses( $tab_content, Helper::eael_allowed_tags() );
+                            }
                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                            echo $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] );
+                            echo $this->parse_text_editor( $tab_content );
 
 				        elseif ('template' == $tab['eael_adv_tabs_text_type']) :
 					        if ( ! empty( $tab['eael_primary_templates'] ) ) {

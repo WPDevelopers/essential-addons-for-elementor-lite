@@ -19,7 +19,11 @@ class Helper
 	const EAEL_ALLOWED_HTML_TAGS = [
 		'article',
 		'aside',
+		'details',
+		'dialog',
 		'div',
+		'figcaption',
+		'figure',
 		'footer',
 		'h1',
 		'h2',
@@ -28,11 +32,13 @@ class Helper
 		'h5',
 		'h6',
 		'header',
+		'hgroup',
 		'main',
 		'nav',
 		'p',
 		'section',
 		'span',
+		'summary',
 	];
 
     /**
@@ -213,7 +219,7 @@ class Helper
 		    }
 
 		    if ( ! empty( $args['tax_query'] ) ) {
-			    $args['tax_query']['relation'] = 'AND';
+			    $args['tax_query']['relation'] = isset( $settings['tax_query_relation'] ) ? $settings['tax_query_relation'] : 'AND';
 		    }
 	    }
 
@@ -745,7 +751,10 @@ class Helper
      */
     public static function get_doc_post_count($term_count = 0, $term_id = 0)
     {
-        $tax_terms = get_terms('doc_category', ['child_of' => $term_id]);
+        $tax_terms = get_terms([
+            'taxonomy' => 'doc_category',
+            'child_of' => $term_id
+        ]);
 
         foreach ($tax_terms as $tax_term) {
             $term_count += $tax_term->count;
@@ -772,14 +781,6 @@ class Helper
             }
 
             if ( isset( $data->taxonomy ) ) {
-                $args[ 'tax_query' ][] = [
-                    'taxonomy' => $data->taxonomy,
-                    'field'    => 'term_id',
-                    'terms'    => $data->term_id,
-                ];
-            }
-
-            if ( isset($data->taxonomy) ) {
                 $args[ 'tax_query' ][] = [
                     'taxonomy' => $data->taxonomy,
                     'field'    => 'term_id',
@@ -892,7 +893,7 @@ class Helper
 
         $query = "select post_title,ID  from $wpdb->posts where post_status = 'publish' $where $limit";
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $results = $wpdb->get_results($query);
         if (!empty($results)) {
             foreach ($results as $row) {
@@ -1023,12 +1024,20 @@ class Helper
             printf('<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>',esc_html( $tag ), wp_kses( get_the_title(), Helper::eael_allowed_tags() ));
         }, 5 );
 
+        $popup_classes = array();
+
+        if ( isset( $settings['eael_product_quick_view_hide_categories'] ) && 'yes' === $settings['eael_product_quick_view_hide_categories'] ) {
+            $popup_classes[] = 'eael-quick-view-hide-categories';
+        }
+        if ( isset( $settings['eael_product_quick_view_hide_quantity'] ) && 'yes' === $settings['eael_product_quick_view_hide_quantity'] ) {
+            $popup_classes[] = 'eael-quick-view-hide-quantity';
+        }
 	    ?>
 
 		<div id="eaproduct<?php echo esc_attr( $widget_id . $product->get_id() ); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
 			<div class="eael-product-modal-bg"></div>
-			<div class="eael-product-popup-details">
+			<div class="eael-product-popup-details <?php echo esc_attr( implode( ' ', $popup_classes ) ); ?>">
 				<div id="product-<?php esc_attr( get_the_ID() ); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
@@ -1138,15 +1147,22 @@ class Helper
 				'id'    => [],
 			],
 			'img'     => [
-				'src'    => [],
-				'alt'    => [],
-				'title'  => [],
-				'height' => [],
-				'width'  => [],
-				'class'  => [],
-				'id'     => [],
-				'style'  => []
-			],
+                'src'            => [],
+                'alt'            => [],
+                'title'          => [],
+                'height'         => [],
+                'width'          => [],
+                'class'          => [],
+                'id'             => [],
+                'data-lazy-src'  => [],
+                'data-src'       => [],
+                'data-srcset'    => [],
+                'loading'        => [],
+                'srcset'         => [],
+                'sizes'          => [],
+                'decoding'       => [],
+                'fetchpriority'  => [],
+            ],
 			'span'    => [
 				'class' => [],
 				'id'    => [],
@@ -1292,11 +1308,6 @@ class Helper
 				'id'    => [],
 				'style' => [],
 			],
-			'button'  => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
 			'center'  => [
 				'class' => [],
 				'id'    => [],
@@ -1369,15 +1380,302 @@ class Helper
 				'id'    => [],
 				'style' => [],
 			],
-			'iframe' => [
+            'iframe' => [
 				'class'  => [],
 				'id'     => [],
 				'style'  => [],
 				'title'  => [],
 				'width'  => [],
 				'height' => [],
-				'src'    => []
-			]
+				'src'    => [],
+                'allowfullscreen' => []
+			],
+            'pre' => [
+                'class' => [],
+                'id'    => [],
+                'style' => [],
+            ],
+            'blockquote' => [
+                'cite'  => true, // URL of the source (HTML spec)
+                'class' => true,
+                'id'    => true,
+                'style' => true, // only if you intentionally allow inline styles
+            ],
+            'form' => [
+                'action' => true,
+                'method' => true,
+                'id'     => true,
+                'class'  => true,
+                'name'   => true,
+                'novalidate' => true,
+            ],
+            'input' => [
+                'type'        => true,
+                'name'        => true,
+                'value'       => true,
+                'placeholder' => true,
+                'id'          => true,
+                'class'       => true,
+                'checked'     => true,
+                'disabled'    => true,
+                'required'    => true,
+                'readonly'    => true,
+                'min'         => true,
+                'max'         => true,
+                'step'        => true,
+                'maxlength'   => true,
+                'pattern'     => true,
+                'autocomplete'=> true,
+            ],
+            'textarea' => [
+                'name'        => true,
+                'rows'        => true,
+                'cols'        => true,
+                'placeholder' => true,
+                'id'          => true,
+                'class'       => true,
+                'required'    => true,
+                'readonly'    => true,
+            ],
+            'select' => [
+                'name'     => true,
+                'id'       => true,
+                'class'    => true,
+                'required' => true,
+                'multiple' => true,
+            ],
+            'option' => [
+                'value'    => true,
+                'selected' => true,
+                'disabled' => true,
+            ],
+            'label' => [
+                'for'   => true,
+                'class'=> true,
+            ],
+            'button' => [
+                'type'     => true,
+                'id'       => true,
+                'class'    => true,
+                'disabled' => true,
+            ],
+            // Semantic Layout Tags
+            'main' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'section' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'article' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'aside' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'nav' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'footer' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'hgroup' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Rich Media Tags
+            'video' => [
+                'src'      => true,
+                'poster'   => true,
+                'controls' => true,
+                'autoplay' => true,
+                'loop'     => true,
+                'muted'    => true,
+                'preload'  => true,
+                'width'    => true,
+                'height'   => true,
+                'class'    => true,
+                'id'       => true,
+                'style'    => true,
+            ],
+            'audio' => [
+                'src'      => true,
+                'controls' => true,
+                'autoplay' => true,
+                'loop'     => true,
+                'muted'    => true,
+                'preload'  => true,
+                'class'    => true,
+                'id'       => true,
+                'style'    => true,
+            ],
+            'source' => [
+                'src'   => true,
+                'type'  => true,
+                'media' => true,
+            ],
+            'track' => [
+                'src'     => true,
+                'kind'    => true,
+                'srclang' => true,
+                'label'   => true,
+                'default' => true,
+            ],
+            // Advanced Lists
+            'dl' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'dt' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'dd' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Figures
+            'figure' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'figcaption' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Advanced Table Tags
+            'caption' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'colgroup' => [
+                'span'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'col' => [
+                'span'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Interactive Elements
+            'details' => [
+                'open'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'summary' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'dialog' => [
+                'open'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // Extended Form Tags
+            'fieldset' => [
+                'disabled' => true,
+                'form'     => true,
+                'name'     => true,
+                'class'    => true,
+                'id'       => true,
+                'style'    => true,
+            ],
+            'legend' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'optgroup' => [
+                'label'    => true,
+                'disabled' => true,
+            ],
+            'datalist' => [
+                'id'    => true,
+                'class' => true,
+            ],
+            'output' => [
+                'for'   => true,
+                'form'  => true,
+                'name'  => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'progress' => [
+                'value' => true,
+                'max'   => true,
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'meter' => [
+                'value'   => true,
+                'min'     => true,
+                'max'     => true,
+                'low'     => true,
+                'high'    => true,
+                'optimum' => true,
+                'class'   => true,
+                'id'      => true,
+                'style'   => true,
+            ],
+            // Text Semantics
+            'kbd' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'samp' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'var' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            // International Typography
+            'ruby' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'rt' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
+            'rp' => [
+                'class' => true,
+                'id'    => true,
+                'style' => true,
+            ],
 		];
 
 		if ( count( $extra ) > 0 ) {
@@ -1714,7 +2012,8 @@ class Helper
 		}
 
 		if ( Plugin::$instance->editor->is_edit_mode() ) {
-			$active_doc = $_GET['active-document'] ?? 0;
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$active_doc = !empty( $_GET['active-document'] ) ? sanitize_text_field( wp_unslash( $_GET['active-document'] ) ) : 0;
 			$mode       = $active_doc === $template_id ? 'save' : 'edit';
 			?>
 			<div class='eael-onpage-edit-template-wrapper'>

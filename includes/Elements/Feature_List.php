@@ -195,7 +195,7 @@ class Feature_List extends Widget_Base {
                 'default' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
                 'dynamic' => ['active' => true],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -504,10 +504,8 @@ class Feature_List extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal' => 'gap: {{SIZE}}{{UNIT}}',
-                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal[data-layout-tablet="vertical"] .eael-feature-list-item:not(:last-child)' => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
-                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal[data-layout-tablet="vertical"] .eael-feature-list-item:not(:first-child)' => 'padding-top: calc({{SIZE}}{{UNIT}}/2)',
-                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:not(:last-child)'  => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
-                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:not(:first-child)' => 'padding-top: calc({{SIZE}}{{UNIT}}/2)',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal[data-layout-tablet="vertical"] .eael-feature-list-item' => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item'  => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
                     'body.rtl {{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:after'    => 'left: calc(-{{SIZE}}{{UNIT}}/2)',
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical.connector-type-modern .eael-feature-list-item:not(:last-child):before' => 'height: calc(100% + {{SIZE}}{{UNIT}})',
                 ],
@@ -621,11 +619,14 @@ class Feature_List extends Widget_Base {
             [
                 'name'     => 'eael_feature_list_icon_background',
                 'types'    => ['classic', 'gradient'],
-                'exclude'  => [
-                    'image',
-                ],
-                'color'    => [
-                    'default' => '#3858f4',
+                'exclude'  => [ 'image' ],
+                'fields_options'    => [
+                    'background' => [
+                        'default' => 'classic', // Default to classic background
+                    ],
+                    'color' => [
+                        'default' => '#37368e', // Default background color (red)
+                    ],
                 ],
                 'selector' => '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-icon-box .eael-feature-list-icon-inner',
             ]

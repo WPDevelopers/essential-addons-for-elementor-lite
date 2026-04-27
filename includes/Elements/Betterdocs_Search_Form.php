@@ -161,7 +161,7 @@ class Betterdocs_Search_Form extends Widget_Base
                     'type'    => Controls_Manager::TEXT,
                     'default' => esc_html__('Search', 'essential-addons-for-elementor-lite'),
                     'ai' => [
-                        'active' => false,
+                        'active' => true,
                     ],
                 ]
             );
@@ -583,14 +583,16 @@ class Betterdocs_Search_Form extends Widget_Base
     {
         if (!defined('BETTERDOCS_URL')) return;
         $settings = $this->get_settings_for_display();
-        $shortcode  = sprintf('[betterdocs_search_form placeholder="' . esc_html( $settings['section_search_field_placeholder'] ) . '"]', apply_filters('eael_betterdocs_search_form_params', []));
+        $placeholder = isset( $settings['section_search_field_placeholder'] ) ? $settings['section_search_field_placeholder'] : '';
+        $shortcode  = sprintf('[betterdocs_search_form placeholder="' . esc_html( $placeholder ) . '"]', apply_filters('eael_betterdocs_search_form_params', []));
         echo do_shortcode(shortcode_unautop($shortcode));
     }
 
     public function render_plain_content()
     {
         $settings = $this->get_settings_for_display();
+        $placeholder = isset( $settings['section_search_field_placeholder'] ) ? $settings['section_search_field_placeholder'] : '';
         // In plain mode, render without shortcode
-        echo '[betterdocs_search_form placeholder="' . esc_html( $settings['section_search_field_placeholder'] ) . '"]';
+        echo '[betterdocs_search_form placeholder="' . esc_html( $placeholder ) . '"]';
     }
 }

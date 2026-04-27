@@ -75,8 +75,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 19;
-    const EAEL_ADMIN_MENU_FLAG = 19;
+    const EAEL_PROMOTION_FLAG = 20;
+    const EAEL_ADMIN_MENU_FLAG = 20;
     /**
      * Singleton instance
      *
@@ -314,7 +314,7 @@ class Bootstrap
 
 	        // On Editor - Register WooCommerce frontend hooks before the Editor init.
 	        // Priority = 5, in order to allow plugins remove/add their wc hooks on init.
-	        if ( ! empty( $_REQUEST['action'] ) && 'elementor' === $_REQUEST['action'] ) {
+	        if ( ! empty( $_REQUEST['action'] ) && 'elementor' === $_REQUEST['action'] ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
 	        }
 

@@ -357,7 +357,7 @@ class Code_Snippet extends Widget_Base {
             'type' => Controls_Manager::TEXT,
             'default' => esc_html__( 'Show more', 'essential-addons-for-elementor-lite' ),
             'ai' => [
-               'active' => false,
+               'active' => true,
             ],
             'condition' => [
                'code_view_mode' => 'collapsed',
@@ -372,7 +372,7 @@ class Code_Snippet extends Widget_Base {
             'type' => Controls_Manager::TEXT,
             'default' => esc_html__( 'Show less', 'essential-addons-for-elementor-lite' ),
             'ai' => [
-               'active' => false,
+               'active' => true,
             ],
             'condition' => [
                'code_view_mode' => 'collapsed',
@@ -434,7 +434,7 @@ class Code_Snippet extends Widget_Base {
                'default'     => 'filename',
                'placeholder' => __( 'Enter filename with extension', 'essential-addons-for-elementor-lite' ),
                'description' => __( 'Enter the filename to display in the header (e.g., hero-section.tsx)', 'essential-addons-for-elementor-lite' ),
-               'ai'          => [ 'active' => false ],
+               'ai'          => [ 'active' => true ],
                'dynamic'     => [ 'active' => true ],
          ]
       );

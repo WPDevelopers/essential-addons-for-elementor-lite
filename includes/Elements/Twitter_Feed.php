@@ -118,7 +118,7 @@ class Twitter_Feed extends Widget_Base
                 'label_block' => false,
                 'description' => esc_html__('Use @ sign with your account name.', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -132,7 +132,7 @@ class Twitter_Feed extends Widget_Base
                 'label_block' => false,
                 'description' => esc_html__('Remove # sign from your hashtag name.', 'essential-addons-for-elementor-lite'),
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -146,7 +146,7 @@ class Twitter_Feed extends Widget_Base
                 'default' => '',
                 'description' => '<a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">Get Consumer Key.</a> Create a new app or select existing app and grab the <b>consumer key.</b>',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
                 'condition'   => [
 				    'eael_twitter_api_v2' => ''
@@ -163,7 +163,7 @@ class Twitter_Feed extends Widget_Base
                 'default' => '',
                 'description' => '<a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">Get Consumer Secret.</a> Create a new app or select existing app and grab the <b>consumer secret.</b>',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
                 'condition'   => [
 				    'eael_twitter_api_v2' => ''
@@ -180,7 +180,7 @@ class Twitter_Feed extends Widget_Base
                 'default' => '',
                 'description' => '<a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">Get Bearer Token.</a> Create a new app or select existing app within a project and grab the <b>bearer token.</b>',
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
                 'condition'   => [
 				    'eael_twitter_api_v2' => 'yes'
@@ -374,7 +374,7 @@ class Twitter_Feed extends Widget_Base
 	            	'eael_twitter_feed_show_read_more' => 'true',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -469,7 +469,7 @@ class Twitter_Feed extends Widget_Base
                     'pagination' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -485,7 +485,7 @@ class Twitter_Feed extends Widget_Base
                     'pagination' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
@@ -501,7 +501,7 @@ class Twitter_Feed extends Widget_Base
                     'pagination' => 'yes',
                 ],
                 'ai' => [
-					'active' => false,
+					'active' => true,
 				],
             ]
         );
