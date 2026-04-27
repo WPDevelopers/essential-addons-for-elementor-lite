@@ -73,17 +73,6 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args = {}) {
                 toastMessage: eaData.i18n.toaster_error_msg,
                 btnLoader: ''
             };
-            // Pinterest connection state is rendered server-side from saved
-            // credentials, so the modal can't reflect a fresh save without a
-            // page reload. After a successful Pinterest save we reload with
-            // the success flag — App.jsx already auto-opens the modal on it.
-            const pinterestKeys = [
-                'pf_pinterest_client_id',
-                'pf_pinterest_client_secret',
-                'pf_pinterest_manual_access_token',
-                'pf_pinterest_manual_refresh_token',
-            ];
-            const isPinterestSave = pinterestKeys.some(k => k in $args);
             eaAjaxFetch(params).then((response) => {
                 if (response?.success) {
                     $payload = {
@@ -94,11 +83,6 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args = {}) {
                     };
                 }
                 eaDispatch({type: $type, payload: $payload});
-                if (response?.success && isPinterestSave) {
-                    const url = new URL(window.location.href);
-                    url.searchParams.set('eael_pinterest_success', '1');
-                    setTimeout(() => { window.location.href = url.toString(); }, 600);
-                }
             });
             return;
         case 'SAVE_ELEMENTS_DATA':
