@@ -211,6 +211,24 @@ trait Login_Registration {
 			}
 			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 		} else {
+			$user_roles = (array) $user_data->roles;
+			$allow_login_roles = ! empty( $settings['allow_login_roles'] ) ? (array) $settings['allow_login_roles'] : [];
+
+			if ( ! empty( $allow_login_roles ) && empty( array_intersect( $user_roles, $allow_login_roles ) ) ) {
+				wp_logout();
+				$err_msg = isset( $settings['err_restricted_role'] ) ? Helper::eael_wp_kses( $settings['err_restricted_role'] ) : __( 'You are not allowed to login from here.', 'essential-addons-for-elementor-lite' );
+
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+
+				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+					exit();
+				}
+			}
+
 			wp_set_current_user( $user_data->ID, $user_login );
 			$current_user_role = ! empty( $user_data->roles[0] ) ? $user_data->roles[0] : '';
 
@@ -577,24 +595,35 @@ trait Login_Registration {
 			$custom_redirect_url 	= ! empty( $settings['register_redirect_url_prev_page'] ) && $settings['register_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
 
 			if ( ! empty( $settings['register_user_role'] ) ) {
-				$user_data['role'] 	= sanitize_text_field( $settings['register_user_role'] );
-			}
+				$requested_role = sanitize_text_field( $settings['register_user_role'] );
 
-			if ( ! empty( $user_data['role'] ) && strtolower( $user_data['role'] ) === 'administrator' ) {
-				$err_msg = __( 'Invalid Role!', 'essential-addons-for-elementor-lite' );
-
-				if ( $ajax ) {
-					wp_send_json_error( $err_msg );
+				// Verify the post was last saved by an administrator before trusting
+				$last_editor_id = (int) get_post_meta( $page_id, '_edit_last', true );
+				if ( ! $last_editor_id ) {
+					$last_editor_id = (int) get_post_field( 'post_author', $page_id );
 				}
-				
-				setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
+				$last_editor    = $last_editor_id ? get_userdata( $last_editor_id ) : false;
+				$saved_by_admin = $last_editor && in_array( 'administrator', (array) $last_editor->roles, true );
 
-				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-					exit();
+				if ( $saved_by_admin ) {
+					// Reject any role that carries privileged capabilities,
+					$wp_role         = get_role( $requested_role );
+					$privileged_caps = [ 'manage_options', 'edit_users', 'delete_users', 'promote_users' ];
+					$is_safe_role    = ( $wp_role !== null );
+
+					if ( $is_safe_role ) {
+						foreach ( $privileged_caps as $cap ) {
+							if ( ! empty( $wp_role->capabilities[ $cap ] ) ) {
+								$is_safe_role = false;
+								break;
+							}
+						}
+					}
+
+					if ( $is_safe_role ) {
+						$user_data['role'] = $requested_role;
+					}
 				}
-
-				return false;
 			}
 
 			// set email related stuff
