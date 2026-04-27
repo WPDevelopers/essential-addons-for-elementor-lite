@@ -35,7 +35,6 @@
 		"wp-pot": "^1.9.3"
 	},
 	"dependencies": {
-		"@wordpress/hooks": "^2.6.0",
-		"axios": "^1.7.2"
+		"@wordpress/hooks": "^2.6.0"
 	}
 }
