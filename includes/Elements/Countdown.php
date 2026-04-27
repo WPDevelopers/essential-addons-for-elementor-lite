@@ -59,7 +59,14 @@ class Countdown extends Widget_Base {
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
         }
-        $expire_type        = $this->get_settings('countdown_expire_type');
+
+        $settings = $this->get_data( 'settings' );
+
+        if ( empty( $settings ) || ! is_array( $settings ) ) {
+            return false;
+        }
+
+        $expire_type        = sanitize_text_field( $settings['countdown_expire_type'] ?? '' );
         $is_dynamic_content = 'template' === $expire_type;
 
         return $is_dynamic_content;
