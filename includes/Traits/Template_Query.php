@@ -103,6 +103,10 @@ trait Template_Query {
             return false;
         }
 
+        if (!defined('EAEL_PRO_PLUGIN_PATH')) {
+            return false;
+        }
+
         return \sprintf(
             '%sincludes/Template/%s',
             EAEL_PRO_PLUGIN_PATH, $this->process_directory_name()

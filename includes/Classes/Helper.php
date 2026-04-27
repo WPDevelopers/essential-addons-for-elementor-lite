@@ -788,14 +788,6 @@ class Helper
                 ];
             }
 
-            if ( isset($data->taxonomy) ) {
-                $args[ 'tax_query' ][] = [
-                    'taxonomy' => $data->taxonomy,
-                    'field'    => 'term_id',
-                    'terms'    => $data->term_id,
-                ];
-            }
-
             if (get_query_var('author') > 0) {
                 $args['author__in'] = get_query_var('author');
             }
