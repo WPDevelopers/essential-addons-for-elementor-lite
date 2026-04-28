@@ -23,10 +23,7 @@ function App() {
         eaDispatch({type: 'SET_OFFSET_TOP', payload: wrapperRef.current.offsetTop});
     }, [eaState.isDark]);
 
-    // Auto-open the relevant API settings modal after an OAuth callback.
-    // Each integration lands the admin back on ?page=eael-settings with a
-    // status flag; we match on that flag and re-open its modal so the user
-    // sees the success/error message and connection status inline.
+    // Re-open the matching settings modal when an OAuth callback adds a status flag.
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
 
@@ -72,8 +69,7 @@ function App() {
                 });
             }
 
-            // Strip the flag from the address bar so a reload doesn't
-            // reopen the modal with a stale success/error message.
+            // Drop the flag so a reload doesn't reopen the modal with a stale message.
             const newUrl = window.location.pathname + '?page=eael-settings';
             window.history.replaceState({}, '', newUrl);
         }

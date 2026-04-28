@@ -1348,7 +1348,7 @@ trait Admin {
 							    'key'         => 'pinterest-feed',
 							    'title'       => __( 'Pinterest Feed', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/pinterest-feed/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/pinterest-feed/',
+							    'doc_link'    => 'https://essential-addons.com/docs/pinterest-feed/',
 							    'is_pro'      => true,
 							    'promotion'   => 'new',
 							    'setting'     => [ 'id' => 'pinterestFeedSetting' ],
@@ -1575,7 +1575,7 @@ trait Admin {
 					    'accordion' => [],
 					    'link'      => [
 						    'text' => __( 'How to connect your Pinterest account', 'essential-addons-for-elementor-lite' ),
-						    'url'  => 'https://essential-addons.com/elementor/docs/pinterest-feed/'
+						    'url'  => 'https://essential-addons.com/docs/pinterest-feed/'
 					    ]
 				    ] ),
 
