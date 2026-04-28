@@ -2094,6 +2094,18 @@ section.ea__modal-wrapper {
   color: #fff;
 }
 
+.ea__modal-body .ea__auth-action .ea__auth-link.ea__btn-secondary {
+  background-color: transparent;
+  color: #d63638;
+  border: 1px solid #d63638;
+  padding: 9px 19px;
+}
+
+.ea__modal-body .ea__auth-action .ea__auth-link.ea__btn-secondary:hover {
+  background-color: #d63638;
+  color: #fff;
+}
+
 .ea__modal-body .ea__auth-status {
   padding: 10px;
   border-radius: 3px;
