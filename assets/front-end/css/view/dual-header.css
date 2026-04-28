@@ -33,6 +33,10 @@
 .eael-dual-header .eael-dch-title .eael-dch-title-text.eael-dch-title-lead {
   color: #1abc9c;
 }
+.eael-dual-header .eael-dch-title .gradient-color {
+  background: -webkit-gradient(linear, left top, left bottom, from(var(--eael-dch-gradient-1, #062aca)), to(var(--eael-dch-gradient-2, #9401d9)));
+  background: linear-gradient(var(--eael-dch-gradient-1, #062aca), var(--eael-dch-gradient-2, #9401d9));
+}
 .eael-dual-header .eael-dch-title .gradient-color,
 .eael-dual-header .eael-dch-title .eael-dch-title-gradient {
   -webkit-background-clip: text !important;
