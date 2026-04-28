@@ -4103,7 +4103,7 @@ class Filterable_Gallery extends Widget_Base
         $gallery_markup = [];
         
         foreach ($gallery as $item) {
-            $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . esc_attr( $item['controls'] ) . '" data-search-key="' . esc_attr( strtolower(str_replace(" ", "-", $item['title'])) ) . '">';
+            $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . esc_attr( $item['controls'] ) . '" data-search-key="' . esc_attr( strtolower(str_replace(" ", "-", $item['title'])) ) . '" data-search-categories="' . esc_attr( strtolower( $item['controls_name'] ) ) . '">';
             $html .= '<div class="fg-layout-3-item eael-gallery-grid-item">';
             
             if ( $settings['eael_section_fg_full_image_clickable'] && 'true' !== $item['video_gallery_switch'] ) {
@@ -4209,10 +4209,10 @@ class Filterable_Gallery extends Widget_Base
             }
 
             if ($item['controls'] != '') {
-                $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . $item['controls'] . '">
+                $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . $item['controls'] . '"' . ( ! empty( $item['controls_name'] ) ? ' data-search-categories="' . esc_attr( strtolower( $item['controls_name'] ) ) . '"' : '' ) . '>
 				<div class="eael-gallery-grid-item">';
             } else {
-                $html = '<div class="eael-filterable-gallery-item-wrap">
+                $html = '<div class="eael-filterable-gallery-item-wrap"' . ( ! empty( $item['controls_name'] ) ? ' data-search-categories="' . esc_attr( strtolower( $item['controls_name'] ) ) . '"' : '' ) . '>
 				<div class="eael-gallery-grid-item">';
             }
             
