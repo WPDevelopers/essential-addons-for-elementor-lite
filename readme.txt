@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.2
+Stable tag: 6.6.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -317,6 +317,22 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.6.3 - 30/04/2026 =
+
+- Fixed: Certain pages are returning a 404 server error when EA is active
+- Fixed: Elementor editor not loading when Essential Addons is enabled
+- Fixed: EA Flip Box | WPML media translation not working for Flipbox images
+- Fixed: EA Breadcrumb | WooCommerce products empty category breadcrumb display error
+- Fixed: EA Event Calendar | Conflict with Contact Form 7 causing calendar filtering on form input
+- Fixed: EA Woo Checkout | Uncaught TypeError causing checkout script failure on WooCommerce pages
+- Fixed: EA Wrapper Link | Container wrapper links were not translated properly
+- Fixed: EA Dual Color Heading | Multiple heading not working with WPML
+- Improved: EA Woo Add to Cart | Added option to customize hover style for icon and border
+- Improved: EA Woo Add to Cart | Products can now be added to cart without page reload
+- Improved: Enhanced plugin compliance with WordPress Plugin Check (PCP) standards including performance, accessibility, and code quality improvements
+- Improved: Improved overall security and stability across the plugin
+- Few minor bug fixes & improvements
 
 = 6.6.2 - 16/04/2026 =
 
