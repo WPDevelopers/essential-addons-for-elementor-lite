@@ -88,7 +88,23 @@ trait Ajax_Handler {
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
 		wp_parse_str( $_POST['args'], $args );
+
+		// $args is fully client-controlled (parsed from $_POST['args']). Strip any
+		// caller-supplied visibility overrides; we re-derive these server-side below.
+		// Without this, an unauthenticated visitor could pass post_status=private/draft
+		// (or post_type=any) and exfiltrate non-public content via this nopriv endpoint.
+		unset( $args['post_status'], $args['author'], $args['author__in'], $args['author__not_in'] );
 		$args['post_status'] = 'publish';
+
+		if ( isset( $args['post__in'] ) ) {
+			$args['post__in'] = array_values( array_filter( array_map( 'absint', (array) $args['post__in'] ) ) );
+			// Cap to a sane bound to prevent abuse.
+			$args['post__in'] = array_slice( $args['post__in'], 0, 1000 );
+		}
+		if ( isset( $args['post__not_in'] ) ) {
+			$args['post__not_in'] = array_values( array_filter( array_map( 'absint', (array) $args['post__not_in'] ) ) );
+			$args['post__not_in'] = array_slice( $args['post__not_in'], 0, 1000 );
+		}
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
@@ -193,14 +209,27 @@ trait Ajax_Handler {
 			$settings['show_load_more_text']       = $settings['eael_fg_loadmore_btn_text'];
 			$settings['layout_mode']               = isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : 'masonry';
 
+			// Whitelists derived from server-trusted widget settings. The ACF gallery
+			// branch has to widen post_status/post_type because gallery items are
+			// attachments (status=inherit) while parents may be the configured
+			// post type. We must NOT use 'any' here — that would expose private/
+			// draft posts to unauthenticated visitors. See SECURITY note below.
+			$dfg_safe_post_status = [ 'publish', 'inherit' ];
+			$dfg_safe_post_types  = [ 'attachment' ];
+			if ( ! empty( $settings['post_type'] ) && is_string( $settings['post_type'] ) && 'by_id' !== $settings['post_type'] ) {
+				$dfg_safe_post_types[] = sanitize_key( $settings['post_type'] );
+			}
+
 			if ( ! empty( $args['fetch_acf_image'] ) && 'yes' === $args['fetch_acf_image'] && ! empty( $args['post__in'] ) ) {
-				$args['post_status'] = 'any';
-				$args['post_type'] = 'any';
+				// SECURITY: previously set to 'any'/'any' which let unauthenticated
+				// callers read drafts/private posts by passing arbitrary post__in IDs.
+				$args['post_status'] = $dfg_safe_post_status;
+				$args['post_type']   = $dfg_safe_post_types;
 			}
 
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			$exclude_ids = json_decode( html_entity_decode( stripslashes ( $_POST['exclude_ids'] ) ) );
-			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique($exclude_ids) ) : array();
+			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique( (array) $exclude_ids ) ) : array();
 			$active_term_id = ( !empty( $_POST['active_term_id'] ) ) ? intval( $_POST['active_term_id'] ) : 0;
 			$active_taxonomy = ( !empty( $_POST['active_taxonomy'] ) ) ? sanitize_text_field( wp_unslash( $_POST['active_taxonomy'] ) ) : '';
 
@@ -219,11 +248,15 @@ trait Ajax_Handler {
 
 				// Update args with the filtered post IDs
 				if ( ! empty( $taxonomy_map['post_ids'] ) ) {
-					$args['post__in'] = $taxonomy_map['post_ids'];
-					$args['post_type'] = 'any';
-					$args['post_status'] = 'any';
-					$args['tax_query'] = [];
-					$args['orderby'] = 'post__in';
+					// post_ids here are server-derived (parent post IDs + their ACF
+					// attachment IDs from build_dfg_acf_taxonomy_map), so they are
+					// trustworthy. Still constrain post_type/post_status to the
+					// whitelist so a stale entry can't leak non-public content.
+					$args['post__in']    = $taxonomy_map['post_ids'];
+					$args['post_type']   = $dfg_safe_post_types;
+					$args['post_status'] = $dfg_safe_post_status;
+					$args['tax_query']   = [];
+					$args['orderby']     = 'post__in';
 				}
 
 				// Apply exclusions
@@ -233,8 +266,9 @@ trait Ajax_Handler {
 			} else {
 				// Standard ACF gallery handling (non-hybrid)
 				if ( ! empty( $args['fetch_acf_image'] ) && 'yes' === $args['fetch_acf_image'] && ! empty( $args['post__in'] ) ) {
-					$args['post_status'] = 'any';
-					$args['post_type'] = 'any';
+					// SECURITY: same rationale as above — never use 'any'.
+					$args['post_status'] = $dfg_safe_post_status;
+					$args['post_type']   = $dfg_safe_post_types;
 				}
 
 				if ( ! empty( $args['post__not_in'] ) && ! empty( $args['post__in'] ) ) {
