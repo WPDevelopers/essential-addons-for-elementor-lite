@@ -18,6 +18,7 @@ trait Core
      */
     public function i18n()
     {
+        // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
         load_plugin_textdomain('essential-addons-for-elementor-lite');
     }
 

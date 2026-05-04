@@ -1,6 +1,10 @@
 <?php
 namespace Essential_Addons_Elementor\Classes;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
+
 class Compatibility_Support {
 	public function __construct() {
 		if ( $this->is_mondialrelay_plugin_active() ) {

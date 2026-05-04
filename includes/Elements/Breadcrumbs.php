@@ -663,17 +663,19 @@ class Breadcrumbs extends Widget_Base {
 			} elseif ( is_single() && ! is_attachment() ) {
 				if ( 'post' !== get_post_type() ) {
 					$post_type = get_post_type_object( get_post_type() );
-					$get_slug = $post_type->rewrite ?? false;
-					
-					if ($get_slug && is_array($get_slug) && isset($get_slug['slug'])) {
-						$slug = $get_slug['slug'];
-					} else {
-						$slug = '';
-					}
-					$output .= '<a href="' . $home_link . '/' . $slug . '/">' . $post_type->labels->singular_name . '</a>';
-					
-					if ( $show_current == 1 ) {
-						$output .= ' ' . $delimiter . ' ' . $before . get_the_title() . $after;
+					if ( $post_type ) {
+						$get_slug = $post_type->rewrite ?? false;
+
+						if ($get_slug && is_array($get_slug) && isset($get_slug['slug'])) {
+							$slug = $get_slug['slug'];
+						} else {
+							$slug = '';
+						}
+						$output .= '<a href="' . $home_link . '/' . $slug . '/">' . $post_type->labels->singular_name . '</a>';
+
+						if ( $show_current == 1 ) {
+							$output .= ' ' . $delimiter . ' ' . $before . get_the_title() . $after;
+						}
 					}
 				} else {
 					$cat  = get_the_category();
@@ -689,7 +691,9 @@ class Breadcrumbs extends Widget_Base {
 				}
 			} elseif ( ! is_single() && ! is_page() && get_post_type() !== 'post' && ! is_404() ) {
 				$post_type = get_post_type_object( get_post_type() );
-				$output .= $before . $post_type->labels->singular_name . $after;
+				if ( $post_type ) {
+					$output .= $before . $post_type->labels->singular_name . $after;
+				}
 			} elseif ( is_search() ) {
 				$output .= $before . esc_html__( 'Search results for', 'essential-addons-for-elementor-lite' ) . ' "' . get_search_query() . '"' . $after;
 			} elseif ( is_day() ) {
@@ -718,19 +722,21 @@ class Breadcrumbs extends Widget_Base {
 	}
 
    protected function render() {
-		$product = false;
+		$product     = false;
+		$is_wc_page  = false;
 
 		if ( class_exists( 'WooCommerce' ) ) {
-			$product = wc_get_product( get_the_ID() );
+			$product    = wc_get_product( get_the_ID() );
+			$is_wc_page = is_tax( 'product_cat' ) || is_tax( 'product_tag' );
 		}
 
 		?>
 		<div class="eael-breadcrumbs">
 			<?php
-			if ( ! $product ) {
-				$this->eael_breadcrumbs();
-			} else {
+			if ( $product || $is_wc_page ) {
 				$this->eael_wc_breadcrumb();
+			} else {
+				$this->eael_breadcrumbs();
 			}
 			?>
 		</div>

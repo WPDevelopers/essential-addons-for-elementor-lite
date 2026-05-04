@@ -65,6 +65,7 @@ add_action(
 add_action(
 	'admin_init',
 	function () {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['action'] ) && 'dismiss-wp-pointer' == $_POST['action'] && isset( $_POST['pointer'] ) && 'eael' == $_POST['pointer'] ) {
 			set_transient( 'eael_bfcm25_pointer_dismiss', true, DAY_IN_SECONDS * 30 );
 			delete_option( '_wpdeveloper_plugin_pointer_priority' );

@@ -4438,7 +4438,7 @@ class Filterable_Gallery extends Widget_Base
             if ( in_array( $settings['eael_fg_caption_style'], ['grid_flow_gallery', 'harmonic_gallery'] ) ) {
                 $gallery_items_pro = $this->gallery_item_store();
                 $this->render_filters();
-                do_action( 'add_filterable_gallery_style_block', $settings, $this, $gallery_items_pro );
+                do_action( 'add_filterable_gallery_style_block', $settings, $this, $gallery_items_pro ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
             } elseif ('layout_3' == $settings['eael_fg_caption_style']) {
                 $this->render_layout_3_filters();
                 $this->eael_render_gallery_item_wrap( $settings, $gallery_items );
