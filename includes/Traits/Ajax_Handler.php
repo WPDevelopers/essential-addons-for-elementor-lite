@@ -89,11 +89,20 @@ trait Ajax_Handler {
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
 		wp_parse_str( $_POST['args'], $args );
 
-		// $args is fully client-controlled (parsed from $_POST['args']). Strip any
-		// caller-supplied visibility overrides; we re-derive these server-side below.
-		// Without this, an unauthenticated visitor could pass post_status=private/draft
-		// (or post_type=any) and exfiltrate non-public content via this nopriv endpoint.
-		unset( $args['post_status'], $args['author'], $args['author__in'], $args['author__not_in'] );
+		// $args is fully client-controlled (parsed from $_POST['args']). Strip the
+		// keys that can WIDEN visibility — these are never legitimate from the
+		// client. Without this, an unauthenticated visitor could pass
+		// post_status=private/draft (or perm=editable) and exfiltrate non-public
+		// content via this nopriv endpoint.
+		//
+		// NOTE: author / author__in / author__not_in are intentionally NOT stripped.
+		// print_load_more_button() in includes/Traits/Helper.php serializes them
+		// into the data-args attribute when "Filter by Author" or "Posts by Current
+		// User" is enabled, so the legitimate Load More flow round-trips them.
+		// They are safe to keep because post_status is forced to 'publish' below,
+		// so a malicious author__in only narrows results to that author's already-
+		// public posts (equivalent to visiting /author/<slug>/).
+		unset( $args['post_status'], $args['perm'], $args['suppress_filters'] );
 		$args['post_status'] = 'publish';
 
 		if ( isset( $args['post__in'] ) ) {
