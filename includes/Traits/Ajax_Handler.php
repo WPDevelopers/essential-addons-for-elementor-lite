@@ -224,9 +224,21 @@ trait Ajax_Handler {
 			// post type. We must NOT use 'any' here — that would expose private/
 			// draft posts to unauthenticated visitors. See SECURITY note below.
 			$dfg_safe_post_status = [ 'publish', 'inherit' ];
-			$dfg_safe_post_types  = [ 'attachment' ];
-			if ( ! empty( $settings['post_type'] ) && is_string( $settings['post_type'] ) && 'by_id' !== $settings['post_type'] ) {
-				$dfg_safe_post_types[] = sanitize_key( $settings['post_type'] );
+			$dfg_safe_post_types = [ 'attachment' ];
+			if ( ! empty( $settings['post_type'] ) && is_string( $settings['post_type'] ) ) {
+				if ( 'by_id' === $settings['post_type'] ) {
+					// Manual Selection: the admin handpicked specific posts which
+					// can be of any public post type. Allow all public types so
+					// parent posts in the ACF gallery aren't filtered out, but
+					// still exclude internal types ('revision', 'oembed_cache',
+					// 'nav_menu_item', etc.) that 'any' would have leaked.
+					$dfg_safe_post_types = array_values( array_unique( array_merge(
+						$dfg_safe_post_types,
+						(array) get_post_types( [ 'public' => true ] )
+					) ) );
+				} else {
+					$dfg_safe_post_types[] = sanitize_key( $settings['post_type'] );
+				}
 			}
 
 			if ( ! empty( $args['fetch_acf_image'] ) && 'yes' === $args['fetch_acf_image'] && ! empty( $args['post__in'] ) ) {
