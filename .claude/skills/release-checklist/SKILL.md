@@ -71,7 +71,7 @@ Rules:
 
 **`.distignore` audit** — re-read [.distignore](../../../.distignore) and confirm:
 
-- All dev configs excluded: `.babelrc`, `.eslintrc*`, `phpcs.xml*`, `webpack.config.js`, `.prettier*`, `.stylelintrc*`
+- All dev configs excluded: `.babelrc`, `phpcs.xml*`, `webpack.config.js`, `.prettier*`
 - Source folders excluded: `src`, `tests`, `node_modules`, `.git`, `.github`, `.husky`
 - Lock files excluded: `package-lock.json`, `pnpm-lock.yaml`, `composer.lock`
 - Internal folders excluded: `.claude`

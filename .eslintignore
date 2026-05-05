@@ -1,7 +1,0 @@
-node_modules/
-vendor/
-assets/front-end/
-assets/**/*.min.js
-*.min.js
-webpack.config.js
-postcss.config.js
