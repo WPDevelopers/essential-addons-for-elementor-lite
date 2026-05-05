@@ -27,7 +27,6 @@ Target version (semver) · release type (patch / minor / major) · summary of wh
 
 | Command | Checks | Fail action |
 |---------|--------|-------------|
-| `npm run lint` | ESLint + Stylelint on `src/` | `npm run fix` then re-run; investigate any remaining errors |
 | `composer run phpcs` | WPCS + PHP Compatibility WP on PHP | `composer run phpcbf` for auto-fixable; manually fix the rest |
 | `npm run build` | Production + dev assets + `.pot` regeneration | Read webpack error; do not ship if exit code ≠ 0 |
 | `npm run test:e2e` | Playwright suite — see [.claude/rules/testing.md](../../rules/testing.md) | All specs green; flake → re-run; consistent failure → block release |
