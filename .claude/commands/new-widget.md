@@ -1,6 +1,13 @@
+---
+description: Scaffold a new EA widget — PHP class, SCSS, optional JS, config.php registration, and build.
+argument-hint: <Widget_Class_Name>
+---
+
 # New Widget Scaffold
 
 Create a new Essential Addons widget named **$ARGUMENTS**.
+
+If `$ARGUMENTS` is empty, ask for the widget class name (PascalCase with underscores, e.g. `Marquee_Text`).
 
 Follow these steps exactly:
 
