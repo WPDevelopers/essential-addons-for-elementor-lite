@@ -21,7 +21,7 @@ Target version (semver) · release type (patch / minor / major) · summary of wh
 - Confirm branch state: clean working tree, up to date with main.
 - Freeze: no new feature commits past this point — only fixes from QA findings.
 - Decide version per semver: breaking → major; new widget/extension → minor; bug fixes only → patch.
-- Pull latest Pro repo state if any shared code changed (run `pro-lite-sync` skill first if drift suspected).
+- If any shared code (traits, classes, hooks) changed, coordinate with the Pro team — note the Lite PR in Pro's tracking and ensure Pro's matching PR is ready to land before Lite ships.
 
 ## Phase 2 — Quality Gates (must all be green)
 
