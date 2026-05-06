@@ -1,28 +1,24 @@
 ---
-description: Scaffold a new EA widget — PHP class, SCSS, optional JS, config.php registration, and build.
+description: Scaffold a new EA widget end-to-end via the new-widget skill — PHP class, SCSS, optional JS, config.php, build, verify.
 argument-hint: <Widget_Class_Name>
 ---
 
-# New Widget Scaffold
+# New Widget — $ARGUMENTS
 
-Create a new Essential Addons widget named **$ARGUMENTS**.
+Use the `new-widget` skill at `.claude/skills/new-widget/SKILL.md` to scaffold the widget.
 
-If `$ARGUMENTS` is empty, ask for the widget class name (PascalCase with underscores, e.g. `Marquee_Text`).
+**Class name:** `$ARGUMENTS` (PascalCase with underscores, e.g. `Marquee_Text`)
 
-Follow these steps exactly:
+If `$ARGUMENTS` is empty, ask the user for the widget class name before doing anything.
 
-1. **PHP class**: Create `includes/Elements/$ARGUMENTS.php`
-    - Namespace `Essential_Addons_Elementor\Elements`
-    - Extend `\Elementor\Widget_Base`
-    - Implement `get_name()` → kebab-case slug, `get_title()` → human name, `get_icon()` → eicon-\*, `get_categories()` → `['essential-addons-elementor']`
-    - Add a starter `register_controls()` section and a `render()` method with a root div `.eael-{slug}`
+Before scaffolding any file, complete Phase 1 (Gather Requirements) — the skill needs answers to:
 
-2. **SCSS**: Create `src/css/view/{slug}.scss` with a root `.eael-{slug}` block
+- Frontend interactivity (JS at view time)?
+- Edit-mode JS?
+- Pro-shared (will Pro inject options)?
+- Vendor libraries needed (prefer Elementor's `swiper` handle over bundled)?
+- Initial controls — minimum set to make the widget render?
 
-3. **JS** (only if the widget needs frontend interactivity): Create `src/js/view/{slug}.js`
+Then follow Phases 2–9 in order: PHP class → SCSS → JS (if needed) → edit JS (if needed) → `config.php` → Pro upsell (if shared) → build & verify → optional Playwright spec.
 
-4. **Register in `config.php`**: Add the widget entry with slug, class path, and asset deps
-
-5. Run `npm run build` and confirm there are no errors
-
-6. Report: list all files created/modified and their full paths
+Return a list of every file created/modified and the build status.
