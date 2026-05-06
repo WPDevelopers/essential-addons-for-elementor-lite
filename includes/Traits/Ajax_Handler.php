@@ -89,19 +89,8 @@ trait Ajax_Handler {
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
 		wp_parse_str( $_POST['args'], $args );
 
-		// $args is fully client-controlled (parsed from $_POST['args']). Strip the
-		// keys that can WIDEN visibility — these are never legitimate from the
-		// client. Without this, an unauthenticated visitor could pass
-		// post_status=private/draft (or perm=editable) and exfiltrate non-public
-		// content via this nopriv endpoint.
-		//
-		// NOTE: author / author__in / author__not_in are intentionally NOT stripped.
-		// print_load_more_button() in includes/Traits/Helper.php serializes them
-		// into the data-args attribute when "Filter by Author" or "Posts by Current
-		// User" is enabled, so the legitimate Load More flow round-trips them.
-		// They are safe to keep because post_status is forced to 'publish' below,
-		// so a malicious author__in only narrows results to that author's already-
-		// public posts (equivalent to visiting /author/<slug>/).
+		// NOTE: $args comes from client ($_POST['args']); strip visibility-widening keys (e.g., post_status, perm) to prevent nopriv access to non-public content.
+		// NOTE: Keep author / author__in / author__not_in—used in Load More data-args; safe since post_status='publish' limits results to already-public posts.
 		unset( $args['post_status'], $args['perm'], $args['suppress_filters'] );
 		$args['post_status'] = 'publish';
 
@@ -218,20 +207,13 @@ trait Ajax_Handler {
 			$settings['show_load_more_text']       = $settings['eael_fg_loadmore_btn_text'];
 			$settings['layout_mode']               = isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : 'masonry';
 
-			// Whitelists derived from server-trusted widget settings. The ACF gallery
-			// branch has to widen post_status/post_type because gallery items are
-			// attachments (status=inherit) while parents may be the configured
-			// post type. We must NOT use 'any' here — that would expose private/
-			// draft posts to unauthenticated visitors. See SECURITY note below.
+			// NOTE: Use server-trusted whitelists; ACF gallery needs broader post_status/type for attachments (inherit), but never 'any'—it would expose private/draft posts to unauthenticated users.
+			//NOTE: The inherit status is intentionally allowed to ensure access to attachments, since the same attachment may be associated with both private and public pages.
 			$dfg_safe_post_status = [ 'publish', 'inherit' ];
 			$dfg_safe_post_types = [ 'attachment' ];
 			if ( ! empty( $settings['post_type'] ) && is_string( $settings['post_type'] ) ) {
 				if ( 'by_id' === $settings['post_type'] ) {
-					// Manual Selection: the admin handpicked specific posts which
-					// can be of any public post type. Allow all public types so
-					// parent posts in the ACF gallery aren't filtered out, but
-					// still exclude internal types ('revision', 'oembed_cache',
-					// 'nav_menu_item', etc.) that 'any' would have leaked.
+					// NOTE: Manual selection allows all public post types (to include ACF gallery parents) but excludes internal types (e.g., revision, oembed_cache, nav_menu_item) that 'any' would expose.
 					$dfg_safe_post_types = array_values( array_unique( array_merge(
 						$dfg_safe_post_types,
 						(array) get_post_types( [ 'public' => true ] )
