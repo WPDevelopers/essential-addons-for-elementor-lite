@@ -19,6 +19,8 @@ These docs answer questions that span the whole plugin, not a single widget:
 - "What's the hook timing for asset enqueue?" → **asset-loading § Hook timing table**
 - "Where does admin campaign copy come from? How do dismissals work?" → **admin-notices**
 - "How do I add a new BFCM-style admin pointer?" → **admin-notices § Adding a New Campaign Notice**
+- "How does the Quick Setup Wizard work? Where is the React source? How is it built?" → **quick-setup**
+- "How do I add a new step to the wizard?" → **quick-setup § Adding a New Wizard Step**
 
 ## System Map
 
@@ -77,6 +79,7 @@ If you're tracing a bug, identify which phase / flow the failure lives in first 
 | [`asset-loading.md`](asset-loading.md) | ✅ | `Asset_Builder` lifecycle, `config.php` registry, detection in popups/templates/shortcodes, hook timing, caching, CSS print modes |
 | [`editor-data-flow.md`](editor-data-flow.md) | ✅ | Settings persistence, `$settings` shape, `get_settings_for_display()`, Repeater / Group / Responsive control data, `condition` vs `conditions`, dynamic tags, `eael_e_optimized_markup()` |
 | [`admin-notices.md`](admin-notices.md) | ✅ | Active `bfcm-pointer.php` campaign + dormant `WPDeveloper_Notice` class infrastructure, dismissal lifecycle, how to add a new campaign |
+| [`quick-setup.md`](quick-setup.md) | ✅ | React-based onboarding wizard (`eael-setup-wizard`), Vite build pipeline separate from root webpack, three AJAX endpoints, lifecycle option states, how to add a new wizard step |
 | [`dynamic-data/`](dynamic-data/) | ✅ | AJAX, WP_Query, load-more, login, WooCommerce, third-party integrations — folder of seven docs |
 | └─ [`README.md`](dynamic-data/README.md) | ✅ | Subsystem index + the five dynamic-data flows |
 | └─ [`ajax-endpoints.md`](dynamic-data/ajax-endpoints.md) | ✅ | Inventory of 18+ frontend `wp_ajax_*` actions + security triad |

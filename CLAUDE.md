@@ -81,6 +81,7 @@ Deep-dive subsystem documentation lives in [`docs/architecture/`](docs/architect
 - [`docs/architecture/asset-loading.md`](docs/architecture/asset-loading.md) — `Asset_Builder` lifecycle, `config.php` registry, popup/template/shortcode detection, caching, CSS print modes
 - [`docs/architecture/editor-data-flow.md`](docs/architecture/editor-data-flow.md) — settings persistence, `$settings` shape (Repeater / Group / Responsive), `condition` vs `conditions`, dynamic tags, `eael_e_optimized_markup()`
 - [`docs/architecture/admin-notices.md`](docs/architecture/admin-notices.md) — active `bfcm-pointer.php` campaign and dormant `WPDeveloper_Notice` class infrastructure, dismissal lifecycle, how to add a new campaign notice
+- [`docs/architecture/quick-setup.md`](docs/architecture/quick-setup.md) — React-based onboarding wizard (`eael-setup-wizard`), Vite build pipeline, three AJAX endpoints, lifecycle option states, how to add a new wizard step
 - [`docs/architecture/dynamic-data/`](docs/architecture/dynamic-data/) — folder of seven docs: AJAX endpoint inventory, WP_Query construction, load-more / pagination, Login & Registration, WooCommerce integration, third-party integrations
 
 For per-widget documentation, see [`docs/widgets/`](docs/widgets/) ([`fancy-text.md`](docs/widgets/fancy-text.md) is the canonical example).
