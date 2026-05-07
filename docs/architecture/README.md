@@ -72,16 +72,16 @@ If you're tracing a bug, identify which phase / flow the failure lives in first 
 
 | Doc | Status | Covers |
 | --- | ------ | ------ |
-| [`asset-loading.md`](asset-loading.md) | ⬜ Planned (Phase 1B) | `Asset_Builder` lifecycle, `config.php` registry, detection in popups/templates/shortcodes, hook timing, caching, CSS print modes |
-| [`editor-data-flow.md`](editor-data-flow.md) | ⬜ Planned (Phase 1C) | Settings persistence, `$settings` shape, `get_settings_for_display()`, Repeater / Group / Responsive control data, `condition` vs `conditions`, dynamic tags, `eael_e_optimized_markup()` |
-| [`dynamic-data/`](dynamic-data/) | ⬜ Planned (Phase 2) | AJAX, WP_Query, load-more, login, WooCommerce, ACF — folder, not single file |
-| └─ [`README.md`](dynamic-data/) | ⬜ | Subsystem index + entry diagram |
-| └─ [`ajax-endpoints.md`](dynamic-data/) | ⬜ | Inventory of 22+ `wp_ajax_*` actions + security triad |
-| └─ [`wp-query-construction.md`](dynamic-data/) | ⬜ | Shared query helpers + `Template_Query` trait |
-| └─ [`load-more-and-pagination.md`](dynamic-data/) | ⬜ | Infinite scroll mechanics, page state |
-| └─ [`login-register.md`](dynamic-data/) | ⬜ | The 1855-line `Login_Registration` trait |
-| └─ [`woocommerce-integration.md`](dynamic-data/) | ⬜ | `Woo_Product_Comparable`, `Woo_Hooks`, shared helpers |
-| └─ [`third-party-integrations.md`](dynamic-data/) | ⬜ | ACF, custom fields, EmbedPress |
+| [`asset-loading.md`](asset-loading.md) | ✅ | `Asset_Builder` lifecycle, `config.php` registry, detection in popups/templates/shortcodes, hook timing, caching, CSS print modes |
+| [`editor-data-flow.md`](editor-data-flow.md) | ✅ | Settings persistence, `$settings` shape, `get_settings_for_display()`, Repeater / Group / Responsive control data, `condition` vs `conditions`, dynamic tags, `eael_e_optimized_markup()` |
+| [`dynamic-data/`](dynamic-data/) | ✅ | AJAX, WP_Query, load-more, login, WooCommerce, third-party integrations — folder of seven docs |
+| └─ [`README.md`](dynamic-data/README.md) | ✅ | Subsystem index + the five dynamic-data flows |
+| └─ [`ajax-endpoints.md`](dynamic-data/ajax-endpoints.md) | ✅ | Inventory of 18+ frontend `wp_ajax_*` actions + security triad |
+| └─ [`wp-query-construction.md`](dynamic-data/wp-query-construction.md) | ✅ | Shared `Helper::get_query_args` query builder used by 8+ list widgets |
+| └─ [`load-more-and-pagination.md`](dynamic-data/load-more-and-pagination.md) | ✅ | Click + infinite scroll mechanics, page state, isotope re-layout |
+| └─ [`login-register.md`](dynamic-data/login-register.md) | ✅ | The 1,855-line `Login_Registration` trait — login / register / lost / reset flows |
+| └─ [`woocommerce-integration.md`](dynamic-data/woocommerce-integration.md) | ✅ | EA-prefixed action mirrors, theme compat, eleven WC widgets, compare table |
+| └─ [`third-party-integrations.md`](dynamic-data/third-party-integrations.md) | ✅ | ACF, EmbedPress, ten form plugins, compat shims, custom-meta integration |
 
 ## How These Docs Relate To Other Docs
 
