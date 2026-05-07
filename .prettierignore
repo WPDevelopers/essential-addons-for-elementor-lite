@@ -1,0 +1,8 @@
+node_modules/
+vendor/
+assets/front-end/
+*.min.js
+*.min.css
+languages/
+composer.lock
+package-lock.json

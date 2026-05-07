@@ -5,6 +5,7 @@
 .eslintignore           export-ignore
 .eslintrc               export-ignore
 .eslintrc.cjs           export-ignore
+.eslintrc.json          export-ignore
 .git                    export-ignore
 .github                 export-ignore
 .gitattributes          export-ignore
@@ -35,10 +36,13 @@ phpcs.xml               export-ignore
 .phpcs.xml.dist         export-ignore
 phpcs.xml.dist          export-ignore
 README.md               export-ignore
+.claude                 export-ignore
+CLAUDE.md               export-ignore
 webpack.config.js       export-ignore
 wp-cli.local.yml        export-ignore
 yarn.lock               export-ignore
 tests/                  export-ignore
+.wp-env.json            export-ignore
 node_modules/           export-ignore
 *.sql                   export-ignore
 *.tar.gz                export-ignore
@@ -46,6 +50,9 @@ node_modules/           export-ignore
 /src/                   export-ignore
 build/                  export-ignore
 postcss.config.js       export-ignore
+.prettierrc.json        export-ignore
+.prettierignore         export-ignore
+.stylelintrc.json       export-ignore
 
 includes/templates/admin/eael-dashboard/src             export-ignore
 includes/templates/admin/eael-dashboard/public          export-ignore
