@@ -736,6 +736,13 @@ class Login_Register extends Widget_Base {
 				'type'    => Controls_Manager::SWITCHER,
 				'classes' => 'eael-pro-control',
 			] );
+
+			$this->add_control( 'enable_webhook', [
+				/* translators: %s: Pro icon */
+					'label'   => sprintf( __( 'Enable Webhook %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+					'type'    => Controls_Manager::SWITCHER,
+					'classes' => 'eael-pro-control',
+			] );
 		}
 
 		$this->end_controls_section();
@@ -992,13 +999,6 @@ class Login_Register extends Widget_Base {
 				'condition'       => [
 					'enable_cloudflare_turnstile' => 'yes',
 				],
-			] );
-
-			$this->add_control( 'enable_webhook', [
-				/* translators: %s: Pro icon */
-				'label'   => sprintf( __( 'Enable Webhook %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'classes' => 'eael-pro-control',
 			] );
 		}
 
