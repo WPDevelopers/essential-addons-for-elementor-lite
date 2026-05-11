@@ -15,62 +15,79 @@ These docs answer specific questions without making the reader open source files
 
 End-user "how to use this widget on my site" content lives at <https://essential-addons.com/docs/> — don't duplicate it here.
 
-## Required Sections (Checklist)
+## Required Sections (Compressed format — current standard)
 
-Every widget doc has these 19 sections in this order. If a section genuinely doesn't apply, keep the heading and write `N/A — <reason>` rather than deleting it — predictable structure across all docs is the value.
+Every NEW widget doc has these 12 sections in this order. Target length: ~200 lines. The first 12 widget docs in this folder (fancy-text → svg-draw) use an older 19-section format; both coexist.
 
 ### Orientation
 
-- [ ] **Overview** — one or two short paragraphs in plain language; what the widget shows and what problem it solves
-- [ ] **Features** — bullet list from a site-builder's perspective; no jargon
+- [ ] **Overview** — one short paragraph in plain language; what the widget shows and what problem it solves
 - [ ] **Pro vs Lite** — capability matrix table
-- [ ] **Use Cases** — three to five real scenarios where the widget fits
 
 ### Code Map
 
 - [ ] **File Map** — table of files (PHP class, SCSS, JS, `config.php` entry, vendor libs) and their roles
-- [ ] **Architecture** — the *why* behind non-obvious design choices; one paragraph per decision
+- [ ] **Architecture** — three to five bullets covering non-obvious design choices; if the widget uses one of the shared patterns, reference [`_patterns.md`](_patterns.md) instead of re-explaining
 - [ ] **Render Output** — annotated DOM tree; mark which classes are styling hooks, which attributes JS reads, which elements are conditional
 
 ### Reference
 
 - [ ] **Controls Reference** — table of meaningful controls (id, type, default, tab → section, what they affect on output)
-- [ ] **Conditional Dependencies** — `text` block mapping which controls hide / show based on others; the "why isn't option X showing?" answer
-- [ ] **Behavior Flow** — numbered sequence from "user drops widget" to "user sees the rendered result"
+- [ ] **Conditional Dependencies** — `text` block mapping which controls hide / show based on others
 - [ ] **JavaScript Lifecycle** — init trigger, guard, reads, branches, runtime state; or `N/A — pure CSS widget`
-- [ ] **Asset Dependencies** — separate CSS and JS tables; source, when loaded, why
 
 ### Extension
 
-- [ ] **Hooks & Filters** — the public contract; mark any un-prefixed legacy hooks clearly with the dual-emit migration note
-- [ ] **Customization Recipes** — two to four copy-paste-ready snippets for common extension needs
+- [ ] **Hooks & Filters** — the public contract; reference [`_patterns.md`](_patterns.md) for the standard Liquid Glass / FA4 / WPML / `has_pro` / upsell patterns
 
 ### Operations
 
-- [ ] **Common Issues** — FAQ format: symptom → likely cause → diagnose → fix
-- [ ] **Testing Checklist** — manual verification steps to walk after any change
+- [ ] **Common Issues** — FAQ format: symptom → likely cause → diagnose → fix; 3-5 entries
+- [ ] **Known Limitations** — edge cases, perf nits, browser quirks, WPML / RTL caveats; 3-5 bullets
 
-### History
+## Shared patterns
 
-- [ ] **Architecture Decisions** — ADR-style records: context, decision, alternatives rejected, consequences
-- [ ] **Known Limitations** — edge cases, perf nits, browser quirks, WPML / RTL caveats
-- [ ] **Recent Significant Changes** — micro-changelog of meaningful changes only (public hook / control id / rendered class / vendor lib / major refactor)
+Five common patterns are documented once in [`_patterns.md`](_patterns.md):
+
+1. **Liquid Glass injection chain** — Pro extends visual effects via fixed `do_action` hooks (Info_Box, Flip_Box, Creative_Button, Image_Accordion, Cta_Box via Pro)
+2. **FA4 → FA5 icon migration shim** — legacy FA4 string + new ICONS picker coexistence (most widgets with icon controls)
+3. **WPML media translation** — `wpml_object_id` filter for image / attachment / template IDs (Cta_Box, Info_Box, Flip_Box, Tooltip)
+4. **`has_pro` runtime handoff** — Lite and Pro both register handlers; Lite cedes when Pro is active (SVG_Draw)
+5. **`eael_section_pro` standard upsell panel** — the generic "Go Premium" section that appears when Pro is not active
+
+Per-widget docs reference these instead of re-explaining the mechanics each time. This saves 30-50 lines per widget.
+
+## Legacy 19-section format (first 12 widgets)
+
+The first 12 docs in this folder use the original 19-section structure:
+
+```text
+fancy-text, dual-header, creative-btn, call-to-action, info-box, flip-box,
+price-table, feature-list, image-accordion, tooltip, code-snippet, svg-draw
+```
+
+Original 19 sections were: Overview, Features, Pro vs Lite, Use Cases, File Map, Architecture, Render Output, Controls Reference, Conditional Dependencies, Behavior Flow, JavaScript Lifecycle, Asset Dependencies, Hooks & Filters, Customization Recipes, Common Issues, Testing Checklist, Architecture Decisions, Known Limitations, Recent Significant Changes.
+
+These docs are not being retro-compressed — they remain valuable as-is. Sections dropped in the compressed format that the legacy docs still have:
+
+- **Features** — duplicated Controls Reference
+- **Use Cases** — generic, low-value
+- **Behavior Flow** — derivable from Architecture + Render Output
+- **Asset Dependencies** — one-line table; `config.php` is the truth
+- **Customization Recipes** — moved to [`_patterns.md`](_patterns.md) for cross-widget patterns
+- **Testing Checklist** — predictable per widget type
+- **Architecture Decisions** — merged into Architecture
+- **Recent Significant Changes** — empty placeholder, populated only when a public-contract change happens
 
 ## How to write a new widget doc
 
-1. **Start from the reference example.** Copy [`fancy-text.md`](fancy-text.md) as your starter — it follows the full structure with real content you can adapt:
+1. **Survey first.** Read the PHP class, SCSS, JS source, and `config.php` entry. Identify which shared patterns ([`_patterns.md`](_patterns.md)) apply.
 
-   ```bash
-   cp docs/widgets/fancy-text.md docs/widgets/<your-slug>.md
-   ```
+2. **Use the 12-section structure** above. Target ~200 lines. If the widget is unusually complex (10+ controls sections, multi-engine JS, large Pro extension surface), longer is fine.
 
-2. **Replace the header block** — class file path, slug, public docs URL, Pro-shared flag.
+3. **Reference [`_patterns.md`](_patterns.md)** for any shared pattern. Don't re-explain Liquid Glass / FA4 / WPML / `has_pro` / upsell — just document what's unique to this widget (selector target, default value, engine flag name, etc.).
 
-3. **Walk the checklist top to bottom**, replacing each section's content with your widget's specifics. For sections that don't apply, keep the heading and write `N/A — <reason>` (e.g. `N/A — pure CSS widget, no JS`).
-
-4. **Keep the structure** even when content shrinks. A short doc that follows the same headings is more useful than a long doc with custom organisation — readers can predict where to find each piece of information.
-
-5. **Run the [conventions](#conventions)** before opening the PR — bare URLs in angle brackets, language specifier on every code block, blank lines around tables, `### Heading` not `**Bold**` for subsections.
+4. **Run the [conventions](#conventions)** before opening the PR — bare URLs in angle brackets, language specifier on every code block, blank lines around tables, `### Heading` not `**Bold**` for subsections.
 
 ## How this folder grows
 
@@ -80,7 +97,7 @@ Lazy fill, not big-bang. We don't pre-write 61 widget docs — that would burn a
 2. On every subsequent change to that widget, update the doc in the same PR
 3. The `pr-workflow` skill includes a "Widget Doc Updated?" checkbox in the PR template (when wired up)
 
-Comprehensive docs run 200–400 lines for complex widgets like Fancy Text. Simpler widgets fill fewer sections — sections that don't apply get a one-line `N/A — <reason>` note rather than being deleted, so the structure remains predictable across all docs.
+Compressed docs target ~200 lines per widget. Complex widgets (large Pro extension surface, multi-engine JS, 10+ control sections) may run longer. Simpler widgets that don't use any shared patterns may run shorter. Sections that genuinely don't apply get a one-line `N/A — <reason>` note rather than being deleted, so the structure remains predictable across all docs.
 
 ## File naming
 
