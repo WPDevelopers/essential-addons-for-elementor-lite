@@ -83,11 +83,19 @@ These docs are not being retro-compressed — they remain valuable as-is. Sectio
 
 1. **Survey first.** Read the PHP class, SCSS, JS source, and `config.php` entry. Identify which shared patterns ([`_patterns.md`](_patterns.md)) apply.
 
-2. **Use the 12-section structure** above. Target ~200 lines. If the widget is unusually complex (10+ controls sections, multi-engine JS, large Pro extension surface), longer is fine.
+2. **Copy the template** as a starter:
 
-3. **Reference [`_patterns.md`](_patterns.md)** for any shared pattern. Don't re-explain Liquid Glass / FA4 / WPML / `has_pro` / upsell — just document what's unique to this widget (selector target, default value, engine flag name, etc.).
+   ```bash
+   cp docs/widgets/_template.md docs/widgets/<your-slug>.md
+   ```
 
-4. **Run the [conventions](#conventions)** before opening the PR — bare URLs in angle brackets, language specifier on every code block, blank lines around tables, `### Heading` not `**Bold**` for subsections.
+   [`_template.md`](_template.md) follows the 11 `##` sections (12 with the implicit Header block) with placeholder content and inline guidance per section.
+
+3. **Use the 12-section structure** above. Target ~200 lines. If the widget is unusually complex (10+ controls sections, multi-engine JS, large Pro extension surface), longer is fine.
+
+4. **Reference [`_patterns.md`](_patterns.md)** for any shared pattern. Don't re-explain Liquid Glass / FA4 / WPML / `has_pro` / upsell — just document what's unique to this widget (selector target, default value, engine flag name, etc.).
+
+5. **Run the [conventions](#conventions)** before opening the PR — bare URLs in angle brackets, language specifier on every code block, blank lines around tables, `### Heading` not `**Bold**` for subsections.
 
 ## How this folder grows
 
