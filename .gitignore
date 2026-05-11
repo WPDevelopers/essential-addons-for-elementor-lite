@@ -7,11 +7,8 @@ pnpm-lock.yaml
 composer.lock
 /node_modules
 .idea/*
-/vendor/squizlabs/
-/vendor/wp-coding-standards/
-/vendor/phpcompatibility/
-/vendor/dealerdirect/
-/vendor/phpcsstandards/
+/tools/vendor/
+/tools/composer.lock
 
 # E2E testing
 test-results/
