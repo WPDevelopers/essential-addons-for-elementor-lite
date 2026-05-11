@@ -16,21 +16,21 @@ The two concepts are easy to confuse:
 
 If you're documenting something that ships with its own visible "drop me on the canvas" widget, it's a widget. If it's a behavior layered onto existing content (a hover effect, scroll-to-top button, table of content, custom JS field), it's an extension.
 
-## Inventory (11 extensions)
+## Inventory (11 extensions — all docs ✅)
 
-| File | Role |
-| ---- | ---- |
-| `Custom_JS.php` | Per-page custom JavaScript injection |
-| `Hover_Effect.php` | Hover-state animations on any element |
-| `Image_Masking.php` | SVG-based image masking |
-| `Liquid_Glass_Effect.php` | Glassmorphism / liquid-glass visual effect |
-| `Post_Duplicator.php` | Admin-side "duplicate this post" link |
-| `Promotion.php` | Internal promotion / upsell rendering |
-| `Reading_Progress.php` | Reading-progress bar at top of post |
-| `Scroll_to_Top.php` | Scroll-to-top floating button |
-| `Table_of_Content.php` | Auto-generated table of contents from headings |
-| `Vertical_Text_Orientation.php` | Vertical text writing-mode helpers |
-| `Wrapper_Link.php` | Make a whole section / column a clickable link |
+| Slug | Class | Doc | Role |
+| ---- | ----- | --- | ---- |
+| `custom-js` | `Custom_JS.php` | [custom-js.md](custom-js.md) | Per-page custom JavaScript injection |
+| `special-hover-effect` ⚠️ | `Hover_Effect.php` | [special-hover-effect.md](special-hover-effect.md) | Hover-state animations on any element (slug ≠ classname) |
+| `image-masking` | `Image_Masking.php` | [image-masking.md](image-masking.md) | SVG-based image masking |
+| `liquid-glass-effect` | `Liquid_Glass_Effect.php` | [liquid-glass-effect.md](liquid-glass-effect.md) | Glassmorphism / liquid-glass visual effect |
+| `post-duplicator` | `Post_Duplicator.php` | [post-duplicator.md](post-duplicator.md) | Admin-side "duplicate this post" link |
+| `promotion` | `Promotion.php` | [promotion.md](promotion.md) | Internal promotion / upsell rendering (canonical example) |
+| `reading-progress` | `Reading_Progress.php` | [reading-progress.md](reading-progress.md) | Reading-progress bar at top of post |
+| `scroll-to-top` | `Scroll_to_Top.php` | [scroll-to-top.md](scroll-to-top.md) | Scroll-to-top floating button |
+| `table-of-content` | `Table_of_Content.php` | [table-of-content.md](table-of-content.md) | Auto-generated table of contents from headings |
+| `vertical-text-orientation` | `Vertical_Text_Orientation.php` | [vertical-text-orientation.md](vertical-text-orientation.md) | Vertical text writing-mode helpers |
+| `wrapper-link` | `Wrapper_Link.php` | [wrapper-link.md](wrapper-link.md) | Make a whole section / column a clickable link |
 
 ## Required Sections (Checklist)
 
@@ -76,13 +76,12 @@ Each extension doc has the same 12-section structure as the architecture docs (c
 
 ## How this folder grows
 
-Lazy fill, not big-bang. Don't pre-write all 11 extension docs — that would burn time and decay fast. Instead:
+All 11 extensions now have docs (filled 2026-05-11 in a single batch — see [`project_widget_docs_progress`](../../../.claude/) memory record). Subsequent work follows update-with-change discipline:
 
-1. The first time an extension is touched after this folder launches, create its doc using the checklist above.
-2. On every subsequent change to that extension, update the doc in the same PR.
-3. The `pr-workflow` skill includes an "Extension Doc Updated?" mental check (when wired up in the PR template).
+1. On every change to an extension, update its doc in the same PR.
+2. The `pr-workflow` skill includes an "Extension Doc Updated?" mental check (when wired up in the PR template).
 
-Comprehensive docs run 200–400 lines for complex extensions like Table of Content. Simpler extensions (Wrapper_Link, Post_Duplicator) might fit in 100 lines — that's fine, just keep the section structure consistent.
+Doc lengths run 220–460 lines depending on extension complexity — Hover_Effect / Image_Masking / Table_of_Content are the largest; Custom_JS is the smallest. Match the per-extension complexity rather than padding to a length target.
 
 ## File naming
 
