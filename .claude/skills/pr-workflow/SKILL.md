@@ -1,6 +1,6 @@
 ---
 name: pr-workflow
-description: Ship a change via a feature branch and pull request — never directly to the default branch. Use after any code change, fix, refactor, or docs update that needs to land on main. Branches are named `<card-number>-<specific-slug>` from the FluentBoards card. Commits go through the husky pre-commit hook (lint-staged); pushes go to the feature branch only; the PR body links back to the card. Hard refuses any push to main / master / trunk.
+description: Ship a change via a feature branch and pull request — never directly to the default branch. Use after any code change, fix, refactor, or docs update that needs to land on main. Branches are named `<card-number>` from the FluentBoards card. Commits go through the husky pre-commit hook (lint-staged); pushes go to the feature branch only; the PR body links back to the card. Hard refuses any push to main / master / trunk.
 ---
 
 # PR Workflow
@@ -29,22 +29,18 @@ If working tree is dirty with unrelated changes → stop, list them, ask: stash 
 
 ## Phase 2 — Branch Setup
 
-**Naming:** `<card-number>-<specific-slug>` — number first for fast `grep ^N` and tab-complete; slug as specific as possible.
+**Naming:** `<card-number>` — only the FluentBoards card number, nothing else. No slug, no type prefix.
 
-| Slug quality | Example |
-|--------------|---------|
-| ❌ Generic — avoid | `1234-fix`, `5678-update`, `9012-bug` |
-| ❌ Action-only — avoid | `1234-refactor`, `5678-improve` |
-| ✅ Widget + specific change | `1234-fancy-text-pro-description-i18n` |
-| ✅ Area + behavior | `5678-asset-builder-template-detection` |
-| ✅ Feature + scope | `9012-marquee-text-widget-vertical-mode` |
-
-**Slug rules:** kebab-case · widget or area name first · specific change second · ≤60 chars total branch name · no issue/type prefix (the card already has the type).
+| Example     | Valid?                |
+|-------------|-----------------------|
+| `1234`      | ✅                    |
+| `1234-fix`  | ❌ slug not allowed   |
+| `fix/1234`  | ❌ prefix not allowed |
 
 **Branch creation:**
 ```bash
 # If currently on default branch → create feature branch
-git checkout -b <number>-<specific-slug>
+git checkout -b <number>
 
 # If already on a feature branch matching the card → continue
 # If on a different feature branch → stop, ask the user which branch this work belongs to
@@ -95,8 +91,8 @@ Refs: #<card-number>
 ## Phase 6 — Push the Branch
 
 ```bash
-git push -u origin <number>-<specific-slug>     # first push
-git push                                         # subsequent pushes
+git push -u origin <number>     # first push
+git push                        # subsequent pushes
 ```
 
 **Hard refusal:** if the resolved branch name equals the default branch (main / master / trunk), do not push. Output:
@@ -165,4 +161,4 @@ After creation: return the PR URL to the user. Do not auto-assign reviewers, do 
 2. **Card number required.** Every branch name and PR `Related` section ties back to FluentBoards. No card → no branch.
 3. **Pre-commit hooks honored.** Failure means fix the issue, not skip the hook.
 4. **One PR, one logical change.** Mixed concerns → split before pushing.
-5. **Slug must be specific.** "fix" or "update" alone is rejected — name the widget / area / behavior.
+5. **Branch name is card-number-only.** Slugs, prefixes, or any extra suffix are rejected.
