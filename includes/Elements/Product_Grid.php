@@ -974,7 +974,7 @@ class Product_Grid extends Widget_Base
             [
                 'name' => 'eael_product_grid_image_size',
                 'exclude' => ['custom'],
-                'default' => 'medium',
+                'default' => 'large',
                 'label_block' => true,
             ]
         );
