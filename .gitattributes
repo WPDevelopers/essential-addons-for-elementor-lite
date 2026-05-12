@@ -53,6 +53,9 @@ postcss.config.js       export-ignore
 .prettierrc.json        export-ignore
 .prettierignore         export-ignore
 .stylelintrc.json       export-ignore
+.husky					export-ignore
+.nvmrc					export-ignore
+docs/					export-ignore
 
 includes/templates/admin/eael-dashboard/src             export-ignore
 includes/templates/admin/eael-dashboard/public          export-ignore
