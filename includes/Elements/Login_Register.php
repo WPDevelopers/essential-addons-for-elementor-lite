@@ -2385,10 +2385,7 @@ class Login_Register extends Widget_Base {
 			]
 		);
 
-		$icon_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
-
 		$promo  = '<div class="eael-bit-integrations-promo">';
-		$promo .= '<div class="eael-bit-integrations-promo__icon">' . $icon_svg . '</div>';
 		$promo .= '<div class="eael-bit-integrations-promo__title">' . esc_html__( 'Connect Your Login/Register Form to 174+ Platforms with Bit Integrations', 'essential-addons-for-elementor-lite' ) . '</div>';
 		$promo .= '<div class="eael-bit-integrations-promo__message">' . esc_html__( 'Send Login/Register submissions to Google Sheets, ActiveCampaign, HubSpot, CRMs, and beyond. Bit Integrations turns every form submission into an automation trigger with conditional logic and custom field mapping.', 'essential-addons-for-elementor-lite' ) . '</div>';
 		$promo .= '<a class="eael-bit-integrations-promo__cta" href="' . esc_url( 'https://bitapps.pro/?r=12133&target_site=https%3A%2F%2Fbit-integrations.com' ) . '" target="_blank" rel="noopener noreferrer nofollow">' . esc_html__( 'Explore Bit Integrations', 'essential-addons-for-elementor-lite' ) . ' &rarr;</a>';
