@@ -2374,7 +2374,10 @@ class Login_Register extends Widget_Base {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
-		if ( is_plugin_active( 'bit-integrations/bit-integrations.php' ) ) {
+		// Bit Integrations main file is `bitwpfi.php` (not `bit-integrations.php` despite the slug).
+		// Class-exists fallback guards against future file renames upstream.
+		if ( is_plugin_active( 'bit-integrations/bitwpfi.php' )
+			|| class_exists( 'BitApps\\Integrations\\Config', false ) ) {
 			return;
 		}
 
