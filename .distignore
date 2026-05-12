@@ -38,6 +38,8 @@ phpcs.xml
 phpcs.xml.dist
 README.md
 .claude
+.husky
+.nvmrc
 CLAUDE.md
 webpack.config.js
 wp-cli.local.yml
@@ -50,6 +52,7 @@ node_modules
 \*.zip
 /src
 /tools
+/docs
 build
 postcss.config.js
 .wordpress-org
