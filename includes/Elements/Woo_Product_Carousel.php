@@ -3353,6 +3353,10 @@ class Woo_Product_Carousel extends Widget_Base {
 
                 $template = $this->get_template( $settings[ 'eael_dynamic_template_layout' ] );
                 if ( file_exists( $template ) ):
+                    // Exclude password-protected products for users who cannot edit them
+                    if ( ! current_user_can( 'edit_others_posts' ) ) {
+                        $args['has_password'] = false;
+                    }
 	                $query = new \WP_Query( $args );
 	                if ( $query->have_posts() ):
                         echo '<div '; $this->print_render_attribute_string( 'eael-woo-product-carousel-wrap' ); echo '>';
