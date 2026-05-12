@@ -2843,6 +2843,11 @@ class Woo_Product_Gallery extends Widget_Base {
 			$args = $this->build_product_query( $settings );
 		}
 
+		// Exclude password-protected products from listing for users who cannot edit them
+		if ( ! current_user_can( 'edit_others_posts' ) ) {
+			$args['has_password'] = false;
+		}
+
 		if ( Plugin::$instance->documents->get_current() ) {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
