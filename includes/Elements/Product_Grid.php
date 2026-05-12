@@ -3742,8 +3742,6 @@ class Product_Grid extends Widget_Base
                         if ( ! current_user_can( 'edit_others_posts' ) ) {
                             $args['has_password'] = false;
                         }
-						echo '<pre>';
-						var_dump(current_user_can( 'edit_others_posts' ));
                         $query = new \WP_Query( $args );
                         $found_posts = $query->found_posts;
                     }
