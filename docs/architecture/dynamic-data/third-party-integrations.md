@@ -35,6 +35,7 @@ Beyond widget wrappers, EA also reads custom post meta from third-party plugins 
 | **YITH WCWL** (wishlist) | Compat shim only | EA disables YITH AJAX during EA's own AJAX paths | [`Ajax_Handler.php:70-71`](../../../includes/Traits/Ajax_Handler.php#L70) |
 | **Whols Lite** (wholesale / B2B) | Compat shim only | `function_exists('whols_lite')` | [`Helper.php:266`](../../../includes/Classes/Helper.php#L266) — see [`woocommerce-integration.md`](woocommerce-integration.md) |
 | **reCAPTCHA / Cloudflare Turnstile** | Login | Register Form widget | site-key option | [`Login_Registration.php:1629-1654`](../../../includes/Traits/Login_Registration.php#L1629) — see [`login-register.md`](login-register.md) |
+| **Bit Integrations** (cross-promo only — no widget wraps it) | Login | Register Form widget panel | `is_plugin_active('bit-integrations/bitwpfi.php')` | [`Login_Register.php:2358`](../../../includes/Elements/Login_Register.php#L2358) (`bit_integrations_promo()`) — see § Cross-Promo Detection |
 
 ## Architecture Diagram
 
@@ -149,6 +150,34 @@ The widget's `get_custom_help_url` returns `https://embedpress.com/documentation
 | Beehive theme swiper | Replace Beehive theme's bundled swiper with Elementor's. [`Enqueue.php:131`](../../../includes/Traits/Enqueue.php#L131). |
 | Astra theme WC loop | Restore standard WC loop wrappers when Astra is active and EA Product_Grid is on the page. See [`woocommerce-integration.md`](woocommerce-integration.md). |
 | reCAPTCHA / Turnstile | Conditional script registration when Login | Register widget is on page. See [`login-register.md`](login-register.md). |
+
+### Cross-Promo Detection (no widget wraps the third-party)
+
+Some integrations exist purely to drive a user to install a complementary third-party plugin — no widget wraps the plugin's API, no asset compat shim runs. The detection is inverted: the EA panel section is rendered **only when the plugin is NOT installed**, and disappears once the user installs it.
+
+Current cross-promos:
+
+| Promo | Where | Conditional | Source |
+| ----- | ----- | ----------- | ------ |
+| **Bit Integrations** | Login | Register Form widget → "Connect & Automate" section at the bottom of the Content tab | Hidden when Bit Integrations is active | [`Login_Register.php:2358`](../../../includes/Elements/Login_Register.php#L2358) (`bit_integrations_promo()`) |
+
+The detection is a single `is_plugin_active()` call against the plugin's main file path:
+
+```php
+if ( is_plugin_active( 'bit-integrations/bitwpfi.php' ) ) {
+    return; // do not register the section
+}
+```
+
+WP.org folder slug + main file name are stable contracts for any published plugin — once a plugin ships, they don't change. So a single `is_plugin_active()` is enough; no class-exists fallback is needed.
+
+#### ⚠️ The WP.org slug ≠ main file name gotcha
+
+Bit Integrations is the canonical example: its WP.org folder slug is `bit-integrations` but the main PHP file inside that folder is `bitwpfi.php`, **not** `bit-integrations.php`. Verified against [trunk on WP.org SVN](https://plugins.svn.wordpress.org/bit-integrations/trunk/bitwpfi.php). Assuming the conventional `{slug}/{slug}.php` produces a silent false-negative — the plugin is active but EA thinks it isn't, and the cross-promo keeps rendering. **Always verify the actual main file by reading the plugin's `Plugin Name:` header**, either locally or via:
+
+```bash
+curl -s "https://plugins.svn.wordpress.org/{slug}/trunk/" | grep -oE 'href="[^"]+\.php"'
+```
 
 ### Custom post meta read by EA
 
