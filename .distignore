@@ -14,7 +14,7 @@
 .gitignore
 .gitlab-ci.yml
 .travis.yml
-.DS*Store
+.DS_Store
 Thumbs.db
 behat.yml
 bitbucket-pipelines.yml
@@ -48,8 +48,8 @@ tests
 .wp-env.json
 node_modules
 *.sql
-\_.tar.gz
-\*.zip
+*.tar.gz
+*.zip
 /src
 /tools
 /docs
