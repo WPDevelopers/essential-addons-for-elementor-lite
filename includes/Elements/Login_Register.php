@@ -2375,9 +2375,7 @@ class Login_Register extends Widget_Base {
 		}
 
 		// Bit Integrations main file is `bitwpfi.php` (not `bit-integrations.php` despite the slug).
-		// Class-exists fallback guards against future file renames upstream.
-		if ( is_plugin_active( 'bit-integrations/bitwpfi.php' )
-			|| class_exists( 'BitApps\\Integrations\\Config', false ) ) {
+		if ( is_plugin_active( 'bit-integrations/bitwpfi.php' ) ) {
 			return;
 		}
 
