@@ -1,10 +1,10 @@
 === Essential Addons for Elementor - Popular Elementor Templates & Widgets ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, rudlinkon, nhrrob, jakariaistauk, himadree
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, rudlinkon, jakariaistauk, himadree
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.3
+Stable tag: 6.6.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -317,6 +317,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.6.4 - 13/05/2026 =
+
+- Fixed: Duplicate control registration for enable_webhook causes Elementor warning
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
 
 = 6.6.3 - 30/04/2026 =
 

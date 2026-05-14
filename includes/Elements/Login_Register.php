@@ -306,6 +306,9 @@ class Login_Register extends Widget_Base {
 		do_action( 'eael/login-register/animated-character-controls', $this );
 		do_action( 'eael/login-register/after-content-controls', $this );
 
+		// Bit Integrations cross-promo (renders only when the plugin is not active).
+		$this->bit_integrations_promo();
+
 		if(!$this->pro_enabled){
 			$this->show_pro_promotion();
 		}
@@ -736,6 +739,13 @@ class Login_Register extends Widget_Base {
 				'type'    => Controls_Manager::SWITCHER,
 				'classes' => 'eael-pro-control',
 			] );
+
+			$this->add_control( 'enable_webhook', [
+				/* translators: %s: Pro icon */
+					'label'   => sprintf( __( 'Enable Webhook %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+					'type'    => Controls_Manager::SWITCHER,
+					'classes' => 'eael-pro-control',
+			] );
 		}
 
 		$this->end_controls_section();
@@ -992,13 +1002,6 @@ class Login_Register extends Widget_Base {
 				'condition'       => [
 					'enable_cloudflare_turnstile' => 'yes',
 				],
-			] );
-
-			$this->add_control( 'enable_webhook', [
-				/* translators: %s: Pro icon */
-				'label'   => sprintf( __( 'Enable Webhook %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'classes' => 'eael-pro-control',
 			] );
 		}
 
@@ -2353,6 +2356,51 @@ class Login_Register extends Widget_Base {
 
 		$this->end_controls_section();
 
+	}
+
+	/**
+	 * Renders a cross-promo section for the Bit Integrations plugin.
+	 *
+	 * Only registered when Bit Integrations is NOT active on the site
+	 * (detected via WP.org slug `bit-integrations/bit-integrations.php`).
+	 *
+	 * @see https://wordpress.org/plugins/bit-integrations/
+	 * @see https://bit-integrations.com/wp-docs/trigger/essential-addons-for-elementor-integration/
+	 *
+	 * @return void
+	 */
+	protected function bit_integrations_promo() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		// Bit Integrations main file is `bitwpfi.php` (not `bit-integrations.php` despite the slug).
+		if ( is_plugin_active( 'bit-integrations/bitwpfi.php' ) ) {
+			return;
+		}
+
+		$this->start_controls_section(
+			'eael_section_bit_integrations_promo',
+			[
+				'label' => __( 'Connect & Automate', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$promo  = '<div class="eael-bit-integrations-promo">';
+		$promo .= '<div class="eael-bit-integrations-promo__title">' . esc_html__( 'Connect Your Login/Register Form to 174+ Platforms with Bit Integrations', 'essential-addons-for-elementor-lite' ) . '</div>';
+		$promo .= '<div class="eael-bit-integrations-promo__message">' . esc_html__( 'Send Login/Register submissions to Google Sheets, ActiveCampaign, HubSpot, CRMs, and beyond. Bit Integrations turns every form submission into an automation trigger with conditional logic and custom field mapping.', 'essential-addons-for-elementor-lite' ) . '</div>';
+		$promo .= '<a class="eael-bit-integrations-promo__cta" href="' . esc_url( 'https://bitapps.pro/?r=12133&target_site=https%3A%2F%2Fbit-integrations.com' ) . '" target="_blank" rel="noopener noreferrer nofollow">' . esc_html__( 'Explore Bit Integrations', 'essential-addons-for-elementor-lite' ) . ' &rarr;</a>';
+		$promo .= '</div>';
+
+		$this->add_control(
+			'eael_bit_integrations_promo_notice',
+			[
+				'type' => Controls_Manager::RAW_HTML,
+				'raw'  => $promo,
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	protected function init_content_register_fields_controls() {
