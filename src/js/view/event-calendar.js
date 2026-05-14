@@ -268,10 +268,12 @@ var EventCalendar = function ($scope, $) {
 											.html('<div class="eaelec-modal-body-content">' + bodyContent + '</div><div class="eaelec-modal-overlay"></div>');
 									} else if (thumbnailPosition === 'body-left') {
 										var bodyContent = '<div class="eaelec-modal-body-content">' + $(".eaelec-modal-body").html() + '</div>';
-										$(".eaelec-modal-body").addClass('eaelec-img-inside').html('<img class="eaelec-modal-body-img" src="' + event.extendedProps.imageUrl + '" alt="' + event.title + '">' + bodyContent);
+										var $img = $('<img>').addClass('eaelec-modal-body-img').attr('src', event.extendedProps.imageUrl).attr('alt', event.title);
+										$(".eaelec-modal-body").addClass('eaelec-img-inside').html('').append($img).append(bodyContent);
 									} else if (thumbnailPosition === 'body-right') {
 										var bodyContent = '<div class="eaelec-modal-body-content">' + $(".eaelec-modal-body").html() + '</div>';
-										$(".eaelec-modal-body").addClass('eaelec-img-inside').html(bodyContent +'<img class="eaelec-modal-body-img" src="' + event.extendedProps.imageUrl + '" alt="' + event.title + '">');
+										var $img = $('<img>').addClass('eaelec-modal-body-img').attr('src', event.extendedProps.imageUrl).attr('alt', event.title);
+										$(".eaelec-modal-body").addClass('eaelec-img-inside').html('').append(bodyContent).append($img);
 									}
 								} else {
 									$(".eaelec-modal-header").removeClass('eaelec-img-header').css('background-image', 'none');
@@ -480,7 +482,7 @@ var EventCalendar = function ($scope, $) {
 			pagination: pagination,
 			perPage:itemPerPage,
 			globalSearch:true,
-			searchInput:$(".ea-ec-search-wrap", wrapper),
+			searchInput:$(".eael-event-calendar-table-search", wrapper),
 			paginationElement:$(".eael-event-calendar-pagination", wrapper),
 		});
 	}
