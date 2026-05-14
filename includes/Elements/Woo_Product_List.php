@@ -4100,10 +4100,6 @@ class Woo_Product_List extends Widget_Base
                                 $found_posts = $query->found_posts;
                                 $max_page = $query->max_num_pages;
                             } else {
-                                // Exclude password-protected products for users who cannot edit them
-                                if ( ! current_user_can( 'edit_others_posts' ) ) {
-                                    $args['has_password'] = false;
-                                }
                                 $query = new \WP_Query( $args );
                                 $found_posts = $query->found_posts;
                                 $max_page = $query->max_num_pages;

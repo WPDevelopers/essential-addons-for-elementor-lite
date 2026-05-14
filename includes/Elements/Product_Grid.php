@@ -3738,10 +3738,6 @@ class Product_Grid extends Widget_Base
                         $found_posts = $query->found_posts;
                     } else {
                         $args = apply_filters( 'eael_wc_product_query_args', $args, $this->get_name() );
-                        // Exclude password-protected products for users who cannot edit them
-                        if ( ! current_user_can( 'edit_others_posts' ) ) {
-                            $args['has_password'] = false;
-                        }
                         $query = new \WP_Query( $args );
                         $found_posts = $query->found_posts;
                     }
