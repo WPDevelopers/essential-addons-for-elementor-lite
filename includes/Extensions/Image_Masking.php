@@ -23,6 +23,7 @@ class Image_Masking {
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_filter( 'elementor/document/element/replace_id', [ $this, 'cleanup_settings_data' ] );
 		add_filter( 'elementor/document/save/data', [ $this, 'cleanup_settings_data' ] );
+		add_filter( 'elementor/document/load/data', [ $this, 'cleanup_settings_data' ] );
 	}
 
 	public function cleanup_settings_data( $element_data ) {
@@ -72,7 +73,22 @@ class Image_Masking {
 			}
 		};
 
-		$walk( $element_data );
+		// The save filter passes `{ elements: [...], settings: {...} }`,
+		// while the load filter passes a bare list of top-level elements.
+		if ( is_array( $element_data ) && (
+			isset( $element_data['elements'] )
+			|| isset( $element_data['settings'] )
+			|| isset( $element_data['page_settings'] )
+		) ) {
+			$walk( $element_data );
+		} elseif ( is_array( $element_data ) ) {
+			foreach ( $element_data as &$top_element ) {
+				if ( is_array( $top_element ) ) {
+					$walk( $top_element );
+				}
+			}
+			unset( $top_element );
+		}
 
 		return $element_data;
 	}
