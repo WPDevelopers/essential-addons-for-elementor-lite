@@ -1,0 +1,50 @@
+# EditorConfig - Consistent coding styles across editors & IDEs
+# https://editorconfig.org
+#
+# Should have EditorConfig support enabled in editor.
+# VS Code: install "EditorConfig for VS Code" extension
+# PhpStorm: built-in support
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = tab
+indent_size = 4
+
+# WordPress PHP follows tab indentation
+[*.php]
+indent_style = tab
+indent_size = 4
+
+# JavaScript
+[*.js]
+indent_style = tab
+indent_size = 4
+
+# SCSS / CSS
+[*.{css,scss}]
+indent_style = tab
+indent_size = 4
+
+# JSON files (2-space is standard for JSON configs)
+[*.json]
+indent_style = space
+indent_size = 2
+
+# YAML
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# Markdown
+[*.md]
+trim_trailing_whitespace = false
+
+# Composer & npm configs
+[{composer.json,package.json}]
+indent_style = space
+indent_size = 2

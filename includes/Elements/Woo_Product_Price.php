@@ -811,7 +811,7 @@ class Woo_Product_Price extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 		$prefix_content = $settings['prefix_content'];
 		$suffix_content = $settings['suffix_content'];
-		$product = Helper::get_product();
+		$product = Helper::get_product(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 		
 		if ( Plugin::$instance->editor->is_edit_mode() ||  get_post_type( get_the_ID() ) === 'templately_library' ) {
 			?>

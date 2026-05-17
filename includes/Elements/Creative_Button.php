@@ -329,7 +329,7 @@ use HelperTrait;
         $this->add_responsive_control(
             'eael_creative_button_icon_size', 
             [
-                'label' => esc_html__('Icon Size', 'essential-addons-elementor'),
+                'label' => esc_html__('Icon Size', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [
                     'px',
@@ -362,7 +362,7 @@ use HelperTrait;
         $this->start_controls_tab(
             'button_primary_typography', 
             [
-                'label' => __('Primary', 'essential-addons-elementor'),
+                'label' => __('Primary', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -382,7 +382,7 @@ use HelperTrait;
         $this->start_controls_tab(
             'button_secondary_typography', 
             [
-                'label' => __('Secondary', 'essential-addons-elementor'),
+                'label' => __('Secondary', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -407,20 +407,20 @@ use HelperTrait;
         $this->add_responsive_control(
             'eael_creative_button_alignment', 
             [
-                'label' => esc_html__('Button Alignment', 'essential-addons-elementor'),
+                'label' => esc_html__('Button Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'label_block' => true,
                 'options' => [
                     'flex-start' => [
-                        'title' => esc_html__('Left', 'essential-addons-elementor'),
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-elementor'),
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'flex-end' => [
-                        'title' => esc_html__('Right', 'essential-addons-elementor'),
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -434,7 +434,7 @@ use HelperTrait;
         $this->add_responsive_control(
             'eael_creative_button_width', 
             [
-                'label' => esc_html__('Width', 'essential-addons-elementor'),
+                'label' => esc_html__('Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [
                     'px',
@@ -460,7 +460,7 @@ use HelperTrait;
         $this->add_responsive_control(
             'eael_creative_button_padding', 
             [
-                'label' => esc_html__('Button Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Button Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [
                     'px',
@@ -482,10 +482,10 @@ use HelperTrait;
         $this->add_control(
             'use_gradient_background', 
             [
-                'label' => __('Use Gradient Background', 'essential-addons-elementor'),
+                'label' => __('Use Gradient Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'essential-addons-elementor'),
-                'label_off' => __('Hide', 'essential-addons-elementor'),
+                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => '',
             ]
@@ -614,7 +614,7 @@ use HelperTrait;
         $this->add_control(
             'eael_creative_button_hover_text_color', 
             [
-                'label'     => esc_html__('Text Color', 'essential-addons-elementor'),
+                'label'     => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#ffffff',
                 'selectors' => [

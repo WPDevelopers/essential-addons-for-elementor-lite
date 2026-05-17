@@ -1090,7 +1090,9 @@ class Image_Accordion extends Widget_Base {
 
                         if ( !empty( $img_accordion[ 'eael_accordion_content' ] ) ):
                             ?>
-                            <p><?php echo $this->parse_text_editor( wp_kses( $img_accordion[ 'eael_accordion_content' ], Helper::eael_allowed_tags() ) ); ?></p>
+                            <p><?php 
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo $this->parse_text_editor( wp_kses( $img_accordion[ 'eael_accordion_content' ], Helper::eael_allowed_tags() ) ); ?></p>
                         <?php endif; ?>
                     </div>
                 </div>

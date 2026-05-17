@@ -14,5 +14,13 @@
     ],
     "require": {
         "priyomukul/wp-notice": "v2.x-dev"
+    },
+    "scripts": {
+        "tools:install": "composer install --working-dir=tools",
+        "tools:update": "composer update --working-dir=tools",
+        "phpcs": "tools/vendor/bin/phpcs --standard=phpcs.xml.dist",
+        "phpcbf": "tools/vendor/bin/phpcbf --standard=phpcs.xml.dist",
+        "lint:php": "tools/vendor/bin/phpcs --standard=phpcs.xml.dist",
+        "fix:php": "tools/vendor/bin/phpcbf --standard=phpcs.xml.dist"
     }
 }

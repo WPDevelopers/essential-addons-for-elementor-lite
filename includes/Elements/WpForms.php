@@ -1499,7 +1499,10 @@ class WpForms extends Widget_Base {
                         <?php } ?>
                         <?php if ($settings['form_description_custom'] != '') { ?>
                             <div class="eael-contact-form-description eael-wpforms-description">
-                                <?php echo $this->parse_text_editor( wp_kses( $settings['form_description_custom'], Helper::eael_allowed_tags() ) ); ?>
+                                <?php
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo $this->parse_text_editor( wp_kses( $settings['form_description_custom'], Helper::eael_allowed_tags() ) );
+                                ?>
                             </div>
                         <?php } ?>
                     </div>

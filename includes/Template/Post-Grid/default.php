@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $thumbnail_html = '';
 if ( $settings['eael_show_image'] == 'yes' ) {
 	$settings[ 'eael_image_size_customize' ] = [
@@ -437,3 +438,4 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
         </div>
     </article>';
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
