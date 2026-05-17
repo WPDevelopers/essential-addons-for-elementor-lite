@@ -2163,10 +2163,24 @@ trait Login_Registration {
 		}
 
 		$rejected_count = 0;
+        $current_user_id = get_current_user_id();
 
 		foreach ( $user_ids as $user_id ) {
+            $user_id = absint( $user_id );
+            
+            //Never reject administrator and self
+            if ( $user_id === $current_user_id ) {
+                continue;
+            }
+
+            if ( user_can( $user_id, 'manage_options' ) ) {
+                continue;
+            }
+
 			$status = get_user_meta( $user_id, 'eael_registration_status', true );
-			if ( 'approved' === $status ) {
+			
+            //Only reject users explicitly in pending state
+            if ( 'pending' !== $status ) {
 				continue;
 			}
 			update_user_meta( $user_id, 'eael_registration_status', 'rejected' );
