@@ -170,7 +170,7 @@ class Image_Masking {
                 'ai' => [
 					'active' => false,
 				],
-                'default'     => 'clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);',
+                'default'     => '',
                 'placeholder' => 'clip-path: polygon(50% 0%, 0% 100%, 100% 100%);',
                 'description' => __( 'Enter your custom clip path value. You can use <a href = "https://bennettfeely.com/clippy/" target = "_blank">Clippy</a> to generate your custom clip path.', 'essential-addons-for-elementor-lite' ),
                 'condition'   => array_merge( $condition, [ 'eael_image_masking_enable_custom_clip_path' . $tab => 'yes' ] ),
