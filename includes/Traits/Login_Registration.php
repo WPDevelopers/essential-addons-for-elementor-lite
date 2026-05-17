@@ -2215,4 +2215,62 @@ trait Login_Registration {
 		}
 		//phpcs:enable WordPress.Security.NonceVerification.Recommended
 	}
+
+    /**
+     * Add EA Status filter links above the users list table.
+     * Hooked to `views_users`.
+     */
+    public function eael_register_status_views( $views ) {
+        if ( ! $this->eael_is_admin_approval_active() ) {
+            return $views;
+        }
+
+        $statuses = [
+            'pending'  => __( 'Pending',  'essential-addons-for-elementor-lite' ),
+            'approved' => __( 'Approved', 'essential-addons-for-elementor-lite' ),
+            'rejected' => __( 'Rejected', 'essential-addons-for-elementor-lite' ),
+        ];
+
+        $current = isset( $_GET['eael_status'] ) ? sanitize_key( $_GET['eael_status'] ) : '';
+
+        foreach ( $statuses as $key => $label ) {
+            $count = count( get_users( [
+                'meta_key'   => 'eael_registration_status',
+                'meta_value' => $key,
+                'fields'     => 'ID',
+            ] ) );
+
+            $url   = add_query_arg( 'eael_status', $key, admin_url( 'users.php' ) );
+            $class = ( $current === $key ) ? ' class="current"' : '';
+
+            $views['eael_' . $key] = sprintf(
+                '<a href="%s"%s>%s <span class="count">(%d)</span></a>',
+                esc_url( $url ),
+                $class,
+                esc_html( $label ),
+                $count
+            );
+        }
+
+        return $views;
+    }
+
+    /**
+     * Filter the users query by EA status.
+     * Hooked to `pre_get_users`.
+     */
+    public function eael_filter_users_by_status( $query ) {
+        if ( ! is_admin() || ! $this->eael_is_admin_approval_active() ) {
+            return;
+        }
+        if ( empty( $_GET['eael_status'] ) ) {
+            return;
+        }
+        $status = sanitize_key( wp_unslash( $_GET['eael_status'] ) );
+        if ( ! in_array( $status, [ 'pending', 'approved', 'rejected' ], true ) ) {
+            return;
+        }
+        $query->set( 'meta_key',   'eael_registration_status' );
+        $query->set( 'meta_value', $status );
+    }
 }
