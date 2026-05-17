@@ -2125,11 +2125,24 @@ trait Login_Registration {
 			return $redirect_url;
 		}
 
-		$approved_count = 0;
+		$approved_count  = 0;
+		$current_user_id = get_current_user_id();
 
 		foreach ( $user_ids as $user_id ) {
+			$user_id = absint( $user_id );
+
+			// Never re-flag self or any administrator.
+			if ( $user_id === $current_user_id ) {
+				continue;
+			}
+			if ( user_can( $user_id, 'manage_options' ) ) {
+				continue;
+			}
+
+			// Whitelist: only approve users explicitly in 'pending' or 'rejected' state.
+			// Empty meta = pre-existing user (not part of approval flow) — skip.
 			$status = get_user_meta( $user_id, 'eael_registration_status', true );
-			if ( 'approved' === $status ) {
+			if ( ! in_array( $status, [ 'pending', 'rejected' ], true ) ) {
 				continue;
 			}
 
@@ -2162,27 +2175,27 @@ trait Login_Registration {
 			return $redirect_url;
 		}
 
-		$rejected_count = 0;
-        $current_user_id = get_current_user_id();
+		$rejected_count  = 0;
+		$current_user_id = get_current_user_id();
 
 		foreach ( $user_ids as $user_id ) {
-            $user_id = absint( $user_id );
-            
-            //Never reject administrator and self
-            if ( $user_id === $current_user_id ) {
-                continue;
-            }
+			$user_id = absint( $user_id );
 
-            if ( user_can( $user_id, 'manage_options' ) ) {
-                continue;
-            }
-
-			$status = get_user_meta( $user_id, 'eael_registration_status', true );
-			
-            //Only reject users explicitly in pending state
-            if ( 'pending' !== $status ) {
+			// Never reject self or any administrator.
+			if ( $user_id === $current_user_id ) {
 				continue;
 			}
+			if ( user_can( $user_id, 'manage_options' ) ) {
+				continue;
+			}
+
+			// Whitelist: only reject users explicitly in 'pending' state.
+			// Empty meta = pre-existing user (not part of approval flow) — skip.
+			$status = get_user_meta( $user_id, 'eael_registration_status', true );
+			if ( 'pending' !== $status ) {
+				continue;
+			}
+
 			update_user_meta( $user_id, 'eael_registration_status', 'rejected' );
 			$rejected_count++;
 		}
@@ -2191,6 +2204,15 @@ trait Login_Registration {
 	}
 
 	public function eael_bulk_approve_admin_notice() {
+		if ( ! current_user_can( 'list_users' ) ) {
+			return;
+		}
+
+		global $pagenow;
+		if ( 'users.php' !== $pagenow ) {
+			return;
+		}
+
 		//phpcs:disable WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_GET['eael_approved_count'] ) ) {
 			$count = intval( $_GET['eael_approved_count'] );
@@ -2216,61 +2238,105 @@ trait Login_Registration {
 		//phpcs:enable WordPress.Security.NonceVerification.Recommended
 	}
 
-    /**
-     * Add EA Status filter links above the users list table.
-     * Hooked to `views_users`.
-     */
-    public function eael_register_status_views( $views ) {
-        if ( ! $this->eael_is_admin_approval_active() ) {
-            return $views;
-        }
+	/**
+	 * Add EA Status filter links above the users list table.
+	 *
+	 * Hooked to `views_users`.
+	 *
+	 * @param array $views Existing view links.
+	 * @return array
+	 */
+	public function eael_register_status_views( $views ) {
+		if ( ! $this->eael_is_admin_approval_active() ) {
+			return $views;
+		}
 
-        $statuses = [
-            'pending'  => __( 'Pending',  'essential-addons-for-elementor-lite' ),
-            'approved' => __( 'Approved', 'essential-addons-for-elementor-lite' ),
-            'rejected' => __( 'Rejected', 'essential-addons-for-elementor-lite' ),
-        ];
+		global $wpdb;
 
-        $current = isset( $_GET['eael_status'] ) ? sanitize_key( $_GET['eael_status'] ) : '';
+		// One direct SQL query gives all three counts and bypasses pre_get_users entirely.
+		// meta_key is hardcoded literal — passed through prepare() for WPCS compliance only.
+		$rows = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT meta_value AS status, COUNT(*) AS total
+				 FROM {$wpdb->usermeta}
+				 WHERE meta_key = %s
+				 GROUP BY meta_value",
+				'eael_registration_status'
+			),
+			OBJECT_K
+		);
 
-        foreach ( $statuses as $key => $label ) {
-            $count = count( get_users( [
-                'meta_key'   => 'eael_registration_status',
-                'meta_value' => $key,
-                'fields'     => 'ID',
-            ] ) );
+		$counts = [
+			'pending'  => isset( $rows['pending'] )  ? (int) $rows['pending']->total  : 0,
+			'approved' => isset( $rows['approved'] ) ? (int) $rows['approved']->total : 0,
+			'rejected' => isset( $rows['rejected'] ) ? (int) $rows['rejected']->total : 0,
+		];
 
-            $url   = add_query_arg( 'eael_status', $key, admin_url( 'users.php' ) );
-            $class = ( $current === $key ) ? ' class="current"' : '';
+		$statuses = [
+			'pending'  => __( 'Pending',  'essential-addons-for-elementor-lite' ),
+			'approved' => __( 'Approved', 'essential-addons-for-elementor-lite' ),
+			'rejected' => __( 'Rejected', 'essential-addons-for-elementor-lite' ),
+		];
 
-            $views['eael_' . $key] = sprintf(
-                '<a href="%s"%s>%s <span class="count">(%d)</span></a>',
-                esc_url( $url ),
-                $class,
-                esc_html( $label ),
-                $count
-            );
-        }
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$current = isset( $_GET['eael_status'] ) ? sanitize_key( wp_unslash( $_GET['eael_status'] ) ) : '';
 
-        return $views;
-    }
+		foreach ( $statuses as $key => $label ) {
+			$url   = add_query_arg( 'eael_status', $key, admin_url( 'users.php' ) );
+			$class = ( $current === $key ) ? ' class="current"' : '';
 
-    /**
-     * Filter the users query by EA status.
-     * Hooked to `pre_get_users`.
-     */
-    public function eael_filter_users_by_status( $query ) {
-        if ( ! is_admin() || ! $this->eael_is_admin_approval_active() ) {
-            return;
-        }
-        if ( empty( $_GET['eael_status'] ) ) {
-            return;
-        }
-        $status = sanitize_key( wp_unslash( $_GET['eael_status'] ) );
-        if ( ! in_array( $status, [ 'pending', 'approved', 'rejected' ], true ) ) {
-            return;
-        }
-        $query->set( 'meta_key',   'eael_registration_status' );
-        $query->set( 'meta_value', $status );
-    }
+			$views[ 'eael_' . $key ] = sprintf(
+				'<a href="%s"%s>%s <span class="count">(%d)</span></a>',
+				esc_url( $url ),
+				$class,
+				esc_html( $label ),
+				$counts[ $key ]
+			);
+		}
+
+		return $views;
+	}
+
+	/**
+	 * Filter the users list-table query by EA registration status.
+	 *
+	 * Hooked to `pre_get_users`. Scoped to the main WP_User_Query on users.php only
+	 * to avoid hijacking unrelated user queries (other plugins, dashboard widgets, etc.).
+	 *
+	 * @param \WP_User_Query $query
+	 * @return void
+	 */
+	public function eael_filter_users_by_status( $query ) {
+		if ( ! is_admin() || ! $this->eael_is_admin_approval_active() ) {
+			return;
+		}
+
+		// Restrict to capable admin viewing the users list.
+		if ( ! current_user_can( 'list_users' ) ) {
+			return;
+		}
+
+		global $pagenow;
+		if ( 'users.php' !== $pagenow ) {
+			return;
+		}
+
+		if ( ! $query instanceof \WP_User_Query ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( empty( $_GET['eael_status'] ) ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$status = sanitize_key( wp_unslash( $_GET['eael_status'] ) );
+		if ( ! in_array( $status, [ 'pending', 'approved', 'rejected' ], true ) ) {
+			return;
+		}
+
+		$query->set( 'meta_key',   'eael_registration_status' );
+		$query->set( 'meta_value', $status );
+	}
 }
