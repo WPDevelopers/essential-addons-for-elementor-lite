@@ -22,6 +22,7 @@ class Image_Masking {
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_filter( 'elementor/document/element/replace_id', [ $this, 'cleanup_settings_data' ] );
+		add_filter( 'elementor/document/save/data', [ $this, 'cleanup_settings_data' ] );
 	}
 
 	public function cleanup_settings_data( $element_data ) {
@@ -37,11 +38,20 @@ class Image_Masking {
 			if ( empty( $settings[ 'eael_enable_image_masking' ] ) || 'yes' !== $settings[ 'eael_enable_image_masking' ] ) {
 				foreach ( array_keys( $settings ) as $key ) {
 					foreach ( $prefixes as $prefix ) {
-						if ( str_starts_with( $key, $prefix ) ) {
+						if ( strncmp( $key, $prefix, \strlen( $prefix ) ) === 0 ) {
 							unset( $settings[ $key ] );
 						}
 					}
 				}
+			}
+
+			// TODO: Remove this block after several versions once existing sites have re-saved and eael_svg_path is no longer present in the DB.
+			// Strip legacy eael_svg_path key from repeater items (replaced by eael_svg_code)
+			if ( ! empty( $settings['eael_svg_paths_custom'] ) && \is_array( $settings['eael_svg_paths_custom'] ) ) {
+				foreach ( $settings['eael_svg_paths_custom'] as &$item ) {
+					unset( $item['eael_svg_path'] );
+				}
+				unset( $item );
 			}
 		};
 
@@ -571,12 +581,6 @@ class Image_Masking {
                         }
                         $style .= '.eael-image-masking-'. esc_html( $element_id ) . $hover_selector . ':hover img {clip-path: '.$hover_clip_path_value.'}';
                     }
-                    
-                    $hover_selector = $settings['eael_image_masking_hover_selector'];
-                    if( $hover_selector ){
-                        $hover_selector = ' ' . trim( $hover_selector );
-                    }
-                    $style .= '.eael-image-masking-'. esc_html( $element_id ) . $hover_selector . ':hover img {clip-path: '.$hover_clip_path_value.'}';
                 }
 			} else if( 'image' === $type ) {
                 $svg = $element->get_settings_for_display( 'eael_image_masking_svg' );
@@ -628,7 +632,8 @@ class Image_Masking {
             
 		
             if( $style ){
-                echo '<style id="eael-image-masking-'. esc_attr( $element_id ) .'">'.esc_html( $style ) .'</style>';
+                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo '<style id="eael-image-masking-'. esc_attr( $element_id ) .'">'. $style .'</style>';
             }
         }
 	}

@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $product = wc_get_product( get_the_ID() );
 if ( ! $product ) {
     return;
@@ -136,3 +137,4 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
 	</div>
     <?php
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

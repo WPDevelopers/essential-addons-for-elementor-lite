@@ -712,7 +712,7 @@ trait Login_Registration {
 			exit();
 		}
 
-		$user_data['eael_lrmuc'] = $_POST['eael_lrmuc'] ?? '';
+		$user_data['eael_lrmuc'] = sanitize_text_field( wp_unslash( $_POST['eael_lrmuc'] ?? '' ) );
 		do_action( 'eael/login-register/mailchimp-integration-action', $user_id, $user_data, $settings );
 	
 		$admin_or_both = $is_pass_auto_generated || in_array( 'send_email', $register_actions ) ? 'both' : 'admin';
@@ -726,6 +726,7 @@ trait Login_Registration {
 		 */
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		do_action( 'register_new_user', $user_id );
 
 		wp_new_user_notification( $user_id, null, $admin_or_both );
