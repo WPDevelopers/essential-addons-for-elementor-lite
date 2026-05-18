@@ -296,6 +296,162 @@ eael.hooks.addAction("init", "ea", () => {
 			);
 		}
 
+		const getBuyNowAjaxUrl = () => {
+			if (typeof wc_add_to_cart_params !== "undefined" && wc_add_to_cart_params.wc_ajax_url) {
+				return wc_add_to_cart_params.wc_ajax_url.replace("%%endpoint%%", "add_to_cart");
+			}
+
+			if (typeof woocommerce_params !== "undefined" && woocommerce_params.wc_ajax_url) {
+				return woocommerce_params.wc_ajax_url.replace("%%endpoint%%", "add_to_cart");
+			}
+
+			return null;
+		};
+
+		$scope.on("click", ".eael-buy-now-button", function (event) {
+			event.preventDefault();
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+
+			const $button = $(this);
+			const productId = parseInt($button.data("product-id"), 10);
+			const quantity = parseInt($button.data("quantity"), 10) || 1;
+			const checkoutUrl = $button.data("checkout-url") || $button.attr("href");
+
+			if (typeof elementorFrontend !== "undefined" && elementorFrontend.isEditMode()) {
+				return;
+			}
+
+			if (!productId) {
+				return;
+			}
+
+			if ($button.hasClass("loading")) {
+				return;
+			}
+
+			const ajaxUrl = getBuyNowAjaxUrl();
+			if (!ajaxUrl) {
+				window.location = $button.attr("href");
+				return;
+			}
+
+			$button.addClass("loading");
+
+			$.post(ajaxUrl, { product_id: productId, quantity: quantity })
+				.done(function (response) {
+					if (response && response.error && response.product_url) {
+						window.location = response.product_url;
+						return;
+					}
+
+					if (response && response.fragments) {
+						$(document.body).trigger("added_to_cart", [
+							response.fragments,
+							response.cart_hash,
+							$button
+						]);
+					}
+
+					if (checkoutUrl) {
+						window.location = checkoutUrl;
+					}
+				})
+				.fail(function () {
+					window.location = $button.attr("href");
+				})
+				.always(function () {
+					$button.removeClass("loading");
+				});
+		});
+
+		// Buy Now button inside Quick View popup — triggers Add to Cart then redirects to checkout
+		$(document).on("click", ".eael-popup-details-render .eael-popup-buy-now-button", function (event) {
+			event.preventDefault();
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+
+			const $button = $(this);
+			const $form = $button.closest("form.cart");
+			const $addToCartBtn = $form.find(".single_add_to_cart_button");
+			const checkoutUrl = $button.data("checkout-url");
+
+			// Mirror Add to Cart disabled state
+			if ($addToCartBtn.hasClass("disabled") || $addToCartBtn.hasClass("wc-variation-selection-needed")) {
+				// Trigger the Add to Cart click so WooCommerce shows its validation notice
+				$addToCartBtn.trigger("click");
+				return;
+			}
+
+			if ($button.hasClass("loading")) {
+				return;
+			}
+
+			$button.addClass("loading");
+
+			// Build product data the same way as singlePageAddToCartButton
+			var product_id = $addToCartBtn.val(),
+				variation_id = $form.find('input[name="variation_id"]').val() || "",
+				quantity = $form.find('input[name="quantity"]').val() || 1,
+				items = $form.hasClass("grouped_form") ? $form.serializeArray() : [],
+				product_data = [];
+
+			if ($form.hasClass("variations_form")) {
+				product_id = $form.find('input[name="product_id"]').val();
+			}
+
+			if (items.length > 0) {
+				items.forEach(function (item) {
+					var p_id = parseInt(item.name.replace(/[^\d.]/g, ""), 10);
+					if (item.name.indexOf("quantity[") >= 0 && item.value != "" && p_id > 0) {
+						product_data.push({
+							product_id: p_id,
+							quantity: item.value,
+							variation_id: 0,
+						});
+					}
+				});
+			} else {
+				product_data.push({
+					product_id: product_id,
+					quantity: quantity,
+					variation_id: variation_id,
+				});
+			}
+
+			$.ajax({
+				url: localize.ajaxurl,
+				type: "post",
+				data: {
+					action: "eael_product_add_to_cart",
+					product_data: product_data,
+					eael_add_to_cart_nonce: localize.nonce,
+					cart_item_data: $form.serializeArray(),
+				},
+				success: function (response) {
+					if (response.success) {
+						$(document.body).trigger("wc_fragment_refresh");
+						window.location.href = checkoutUrl;
+					}
+				},
+				error: function () {
+					$button.removeClass("loading");
+				},
+			});
+		});
+
+		// Sync Buy Now button disabled state with Add to Cart for variable products
+		$(document).on("show_variation reset_data", ".eael-popup-details-render .variations_form", function () {
+			const $form = $(this);
+			const $addToCartBtn = $form.find(".single_add_to_cart_button");
+			const $buyNowBtn = $form.find(".eael-popup-buy-now-button");
+			if ($addToCartBtn.hasClass("disabled") || $addToCartBtn.hasClass("wc-variation-selection-needed")) {
+				$buyNowBtn.addClass("disabled");
+			} else {
+				$buyNowBtn.removeClass("disabled");
+			}
+		});
+
 		const eael_popup = $(document).find(".eael-woocommerce-popup-view");
 		if (eael_popup.length < 1) {
 			eael_add_popup();
