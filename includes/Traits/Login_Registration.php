@@ -898,7 +898,9 @@ trait Login_Registration {
 
 		do_action( 'eael/login-register/before-lostpassword-email' );
 
-		if( $_POST['eael-user-lostpassword'] != wp_strip_all_tags( $_POST['eael-user-lostpassword'] ) ){ //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated 
+		$raw_user_login = isset( $_POST['eael-user-lostpassword'] ) ? wp_unslash( $_POST['eael-user-lostpassword'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+
+		if ( $raw_user_login !== wp_strip_all_tags( $raw_user_login ) ) {
 			// contains html tag
 			$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -912,10 +914,7 @@ trait Login_Registration {
             }
 		}
 
-		$user_login = ! empty( $_POST['eael-user-lostpassword'] ) ? sanitize_text_field( $_POST['eael-user-lostpassword'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		if ( is_email( $user_login ) ) {
-			$user_login = sanitize_email( $user_login );
-		}
+		$user_login = is_email( $raw_user_login ) ? sanitize_email( $raw_user_login ) : sanitize_user( $raw_user_login, false );
 
 		// set email related stuff
 		if ( ! empty( $settings['enable_reset_password'] ) && 'yes' === $settings['enable_reset_password'] ) {
@@ -931,7 +930,10 @@ trait Login_Registration {
 			self::$email_options_lostpassword['message'] = $settings['lostpassword_email_message'];
 		}
 		if ( isset( $settings['lostpassword_email_content_type'] ) ) {
-			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . Helper::eael_wp_kses( $settings['lostpassword_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
+			$content_type = in_array( $settings['lostpassword_email_content_type'], array( 'plain', 'html' ), true )
+				? $settings['lostpassword_email_content_type']
+				: 'plain';
+			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . $content_type . '; charset=UTF-8' . "\r\n";
 		}
 
 		if ( isset($_SERVER['HTTP_REFERER']) ) {
@@ -955,7 +957,8 @@ trait Login_Registration {
 		}
 
 		add_filter( 'retrieve_password_notification_email', [ $this, 'eael_retrieve_password_notification_email' ], 10, 4 );
-		
+		add_action( 'wp_mail_failed', [ $this, 'eael_capture_mail_failure' ] );
+
 		$results = retrieve_password( $user_login );
 		
 		if ( is_wp_error( $results ) ) {
@@ -1219,39 +1222,32 @@ trait Login_Registration {
 			$defaults['subject'] = self::$email_options_lostpassword['subject'];
 		}
 
-		$page_id = self::$email_options_lostpassword['page_id'] ? self::$email_options_lostpassword['page_id'] : 0;
-		$widget_id = self::$email_options_lostpassword['widget_id'] ? self::$email_options_lostpassword['widget_id'] : '';
+		$page_id = ! empty( self::$email_options_lostpassword['page_id'] ) ? self::$email_options_lostpassword['page_id'] : 0;
+		$widget_id = ! empty( self::$email_options_lostpassword['widget_id'] ) ? self::$email_options_lostpassword['widget_id'] : '';
 		$resetpassword_in_popup_selector = isset( self::$email_options_lostpassword['resetpassword_in_popup_selector'] ) ? str_replace(' ', '_', self::$email_options_lostpassword['resetpassword_in_popup_selector']) : '';
 
 		if ( ! empty( self::$email_options_lostpassword['message'] ) ) {
 			if ( ! empty( $key ) ) {
 				$locale = get_user_locale( $user_data );
+
+				$reset_url_args = array(
+					'action'             => 'rp',
+					'eael-resetpassword' => '1',
+					'key'                => $key,
+					'login'              => rawurlencode( $user_login ),
+					'page_id'            => $page_id,
+					'widget_id'          => $widget_id,
+					'wp_lang'            => $locale,
+				);
+
+				if ( ! empty( $resetpassword_in_popup_selector ) ) {
+					$reset_url_args['popup-selector'] = $resetpassword_in_popup_selector;
+				}
+
 				self::$email_options_lostpassword['password_reset_link'] = add_query_arg(
-					array(
-						'action'				=> 'rp',
-						'eael-resetpassword'	=> 1,
-						'key'					=> $key,
-						'login'					=> rawurlencode( $user_login ),
-					),
+					$reset_url_args,
 					esc_url_raw( $this->eael_wp_login_url() )
 				);
-				self::$email_options_lostpassword['password_reset_link'] = self::$email_options_lostpassword['password_reset_link'] . '&page_id='. $page_id . '&widget_id='. $widget_id .'&wp_lang=' . $locale . "\r\n\r\n";
-
-                if( ! empty( $resetpassword_in_popup_selector ) ){
-					self::$email_options_lostpassword['password_reset_link'] = add_query_arg(
-						array(
-							'action'				=> 'rp',
-							'eael-resetpassword'	=> '1',
-							'key'					=> $key,
-							'login'					=> rawurlencode( $user_login ),
-							'page_id'				=> $page_id,
-							'widget_id'				=> $widget_id,
-							'popup-selector'		=> $resetpassword_in_popup_selector,
-							'wp_lang'				=> $locale,
-						),
-						esc_url_raw( $this->eael_wp_login_url() )
-					);
-				}
 			}
 
 			if( is_object($user_data) ) {
@@ -1260,7 +1256,7 @@ trait Login_Registration {
 				self::$email_options_lostpassword['firstname'] = !empty( $user_meta['first_name'][0] ) ? $user_meta['first_name'][0] : '';
 				self::$email_options_lostpassword['lastname'] = !empty( $user_meta['last_name'][0] ) ? $user_meta['last_name'][0] : '';
 				self::$email_options_lostpassword['email'] = $user_data->user_email;
-				self::$email_options_lostpassword['website'] = $user_data->user_url;				
+				self::$email_options_lostpassword['website'] = $user_data->user_url;
 			}
 			$defaults['message'] = $this->replace_placeholders_lostpassword( self::$email_options_lostpassword['message'] );
 		}
@@ -1269,9 +1265,30 @@ trait Login_Registration {
 			$defaults['headers'] = self::$email_options_lostpassword['headers'];
 		}
 
-		$defaults['message'] = wpautop( $defaults['message'] );
-		
+		$is_html_email = ! empty( $defaults['headers'] )
+			&& false !== stripos( (string) $defaults['headers'], 'text/html' );
+
+		if ( $is_html_email ) {
+			$defaults['message'] = wpautop( $defaults['message'] );
+		}
+
 		return $defaults;
+	}
+
+	/**
+	 * Log SMTP / wp_mail failures triggered during EA lost-password flow.
+	 *
+	 * Lets WP Mail SMTP and similar plugins surface delivery issues that
+	 * retrieve_password() swallows when wp_mail() returns true but the
+	 * transport drops the message later.
+	 */
+	public function eael_capture_mail_failure( $wp_error ) {
+		if ( is_wp_error( $wp_error ) ) {
+			error_log( sprintf(
+				'EAEL Login Register lost-password mail failed: %s',
+				$wp_error->get_error_message()
+			) );
+		}
 	}
 
 	public function generate_username_from_email( $email, $suffix = '' ) {
