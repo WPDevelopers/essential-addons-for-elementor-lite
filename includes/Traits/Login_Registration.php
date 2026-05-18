@@ -118,6 +118,22 @@ trait Login_Registration {
 		}
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
+		// Reject spoofed page_id / widget_id. Empty settings means the target isn't an
+		// EA Login/Register widget; proceeding would disable OTP, reCAPTCHA, Turnstile.
+		if ( empty( $settings ) ) {
+			$err_msg = __( 'Invalid form submission.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+			return;
+		}
+
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : __( 'You are already logged in', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -183,7 +199,18 @@ trait Login_Registration {
 			'user_password' => $password,
 			'remember'      => ( 'forever' === $rememberme ),
 		];
-		$user_data   = wp_signon( $credentials );
+
+		// If OTP is enabled for this form, validate credentials WITHOUT actually signing the user in.
+		// wp_signon() sets auth cookies as a side effect; that conflicts with the OTP gate (the user
+		// would briefly be authenticated, and on the redirect-back to show the OTP UI a widget configured
+		// with `hide_for_logged_in_user` would render nothing). wp_authenticate() validates the same
+		// credentials but never touches cookies, so the OTP redirect lands cleanly.
+		$login_otp_enabled = ! empty( $settings['enable_login_otp'] ) && 'yes' === $settings['enable_login_otp'];
+		if ( $login_otp_enabled ) {
+			$user_data = wp_authenticate( $user_login, $password );
+		} else {
+			$user_data = wp_signon( $credentials );
+		}
 
 		if ( is_wp_error( $user_data ) ) {
 			$err_msg = '';
@@ -229,6 +256,78 @@ trait Login_Registration {
 				}
 			}
 
+			// ============================================================
+			// Pending OTP verification gate (Registration completion)
+			// If this user registered with OTP required but never completed
+			// verification, block login and prompt them to verify now.
+			// This check is independent of the login-specific OTP toggle.
+			// ============================================================
+			if ( '1' === get_user_meta( $user_data->ID, '_eael_otp_pending', true ) ) {
+				// Undo auth state set by wp_signon() (used when login OTP is disabled).
+				if ( ! $login_otp_enabled ) {
+					wp_clear_auth_cookie();
+				}
+
+				if ( empty( $user_data->user_email ) ) {
+					$err_msg = __( 'No email is associated with this account.', 'essential-addons-for-elementor-lite' );
+					if ( $ajax ) {
+						wp_send_json_error( $err_msg );
+					}
+					setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+						exit();
+					}
+				}
+
+				$pending_redirect_to = ! empty( $_POST['redirect_to'] ) ? sanitize_url( wp_unslash( $_POST['redirect_to'] ) ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				$previous_page_url   = ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( wp_unslash( $_POST['redirect_to_prev_page_login'] ) ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				$custom_redirect_url = ! empty( $settings['login_redirect_url_prev_page'] ) && 'yes' === $settings['login_redirect_url_prev_page'] ? $previous_page_url : $pending_redirect_to;
+
+				$otp_payload = [
+					'user_id'                 => (int) $user_data->ID,
+					'remember'                => ( 'forever' === $rememberme ),
+					'redirect_url'            => $custom_redirect_url,
+					'is_pending_registration' => true,
+				];
+
+				$session = $this->eael_otp_create_session( 'login', $otp_payload, $user_data->user_email, $widget_id, $page_id, $settings );
+
+				if ( is_wp_error( $session ) ) {
+					if ( $ajax ) {
+						wp_send_json_error( $session->get_error_message() );
+					}
+					setcookie( 'eael_login_error_' . $widget_id, $session->get_error_message() );
+					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+						exit();
+					}
+				}
+
+				if ( $ajax ) {
+					wp_send_json_success( [
+						'otp_required' => true,
+						'otp_token'    => $session['token'],
+						'otp_expiry'   => $session['expiry'],
+						'otp_cooldown' => $session['cooldown'],
+						'otp_email'    => $session['email'],
+						'message'      => __( 'Please complete your email verification to proceed.', 'essential-addons-for-elementor-lite' ),
+					] );
+				}
+
+				setcookie(
+					'eael_lr_otp_token_' . $widget_id,
+					$session['token'] . '|login',
+					time() + ( $session['expiry'] * MINUTE_IN_SECONDS ),
+					COOKIEPATH ? COOKIEPATH : '/',
+					COOKIE_DOMAIN
+				);
+				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+					exit();
+				}
+			}
+
 			wp_set_current_user( $user_data->ID, $user_login );
 			$current_user_role = ! empty( $user_data->roles[0] ) ? $user_data->roles[0] : '';
 
@@ -237,6 +336,72 @@ trait Login_Registration {
 				$redirect_to = sanitize_url( $_POST['redirect_to'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				if ( ! empty( $current_user_role ) ) {
 					$redirect_to = ! empty( $_POST[ 'redirect_to_' . esc_html( $current_user_role ) ] ) ? sanitize_url( $_POST[ 'redirect_to_' . esc_html( $current_user_role ) ] ) : $redirect_to; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				}
+			}
+
+			// ============================================================
+			// Email OTP Verification gate (Login)
+			// ============================================================
+			if ( $login_otp_enabled ) {
+				// We used wp_authenticate() above (no auth cookies were set), so the only thing to
+				// roll back is the global $current_user that wp_set_current_user() just bound.
+				wp_set_current_user( 0 );
+
+				if ( empty( $user_data->user_email ) ) {
+					$err_msg = __( 'No email is associated with this account.', 'essential-addons-for-elementor-lite' );
+					if ( $ajax ) {
+						wp_send_json_error( $err_msg );
+					}
+					setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+						exit();
+					}
+				}
+
+				$previous_page_url   = ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				$custom_redirect_url = ! empty( $settings['login_redirect_url_prev_page'] ) && 'yes' === $settings['login_redirect_url_prev_page'] ? $previous_page_url : $redirect_to;
+
+				$otp_payload = [
+					'user_id'      => (int) $user_data->ID,
+					'remember'     => ( 'forever' === $rememberme ),
+					'redirect_url' => $custom_redirect_url,
+				];
+
+				$session = $this->eael_otp_create_session( 'login', $otp_payload, $user_data->user_email, $widget_id, $page_id, $settings );
+
+				if ( is_wp_error( $session ) ) {
+					if ( $ajax ) {
+						wp_send_json_error( $session->get_error_message() );
+					}
+					setcookie( 'eael_login_error_' . $widget_id, $session->get_error_message() );
+					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+						exit();
+					}
+				}
+
+				if ( $ajax ) {
+					wp_send_json_success( [
+						'otp_required' => true,
+						'otp_token'    => $session['token'],
+						'otp_expiry'   => $session['expiry'],
+						'otp_cooldown' => $session['cooldown'],
+						'otp_email'    => $session['email'],
+						'message'      => __( 'A verification code has been sent to your email.', 'essential-addons-for-elementor-lite' ),
+					] );
+				}
+
+				setcookie(
+					'eael_lr_otp_token_' . $widget_id,
+					$session['token'] . '|login',
+					time() + ( $session['expiry'] * MINUTE_IN_SECONDS ),
+					COOKIEPATH ? COOKIEPATH : '/',
+					COOKIE_DOMAIN
+				);
+				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+					exit();
 				}
 			}
 
@@ -327,6 +492,22 @@ trait Login_Registration {
         }
 
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
+
+		// Reject spoofed page_id / widget_id. Empty settings means the target isn't an
+		// EA Login/Register widget; proceeding would disable OTP, reCAPTCHA, Turnstile.
+		if ( empty( $settings ) ) {
+			$err_msg = __( 'Invalid form submission.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
+
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+			return false;
+		}
 
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : __( 'You are already logged in.', 'essential-addons-for-elementor-lite' );
@@ -659,12 +840,112 @@ trait Login_Registration {
 
 		$user_data = apply_filters( 'eael/login-register/new-user-data', $user_data );
 
-		do_action( 'eael/login-register/before-insert-user', $user_data );
 		$user_default_role = get_option( 'default_role' );
 
 		if ( ! empty( $user_default_role ) && empty( $user_data['role'] ) ) {
 			$user_data['role'] = $user_default_role;
 		}
+
+		// ============================================================
+		// Email OTP Verification gate (Registration)
+		// ============================================================
+		if ( ! empty( $settings['enable_register_otp'] ) && 'yes' === $settings['enable_register_otp'] ) {
+			$otp_payload = [
+				'user_data'              => $user_data,
+				'plain_password'         => $password,
+				'email_options'          => self::$email_options,
+				'send_custom_email'      => self::$send_custom_email,
+				'send_custom_email_admin'=> self::$send_custom_email_admin,
+				'register_actions'       => $register_actions,
+				'is_pass_auto_generated' => $is_pass_auto_generated,
+				'redirect_url'           => $custom_redirect_url,
+				'custom_profile_fields'  => [],
+			];
+
+			if ( count( $eael_custom_profile_fields_text ) ) {
+				foreach ( $eael_custom_profile_fields_text as $key => $_ ) {
+					if ( ! empty( $user_data[ $key ] ) ) {
+						$otp_payload['custom_profile_fields'][ $key ] = $user_data[ $key ];
+					}
+				}
+			}
+
+			// Optional "Show Flag on User list" mode: create the user immediately, mark them
+			// as pending verification via the `_eael_otp_pending` user meta, and store only the
+			// user_id on the OTP session payload. The eael_otp_finalize_register() helper detects
+			// the pre-created user and just clears the meta on a successful verify. If the user
+			// never verifies, the account stays in the WP Users list with the pending flag for
+			// the admin to triage.
+			$show_user_flag = ! empty( $settings['register_otp_show_user_flag'] ) && 'yes' === $settings['register_otp_show_user_flag'];
+			if ( $show_user_flag ) {
+				do_action( 'eael/login-register/before-insert-user', $user_data );
+				$pending_user_id = wp_insert_user( $user_data );
+
+				if ( is_wp_error( $pending_user_id ) ) {
+					$err_msg = isset( $settings['err_unknown'] )
+						? Helper::eael_wp_kses( $settings['err_unknown'] )
+						: __( 'Sorry, something went wrong. User could not be registered.', 'essential-addons-for-elementor-lite' );
+					if ( $ajax ) {
+						wp_send_json_error( $err_msg );
+					}
+					setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
+					wp_safe_redirect( esc_url_raw( $url ) );
+					exit();
+				}
+
+				if ( ! empty( $user_data['eael_phone_number'] ) ) {
+					update_user_meta( $pending_user_id, 'eael_phone_number', $user_data['eael_phone_number'] );
+				}
+				foreach ( $otp_payload['custom_profile_fields'] as $cpf_key => $cpf_value ) {
+					update_user_meta( $pending_user_id, self::$eael_custom_profile_field_prefix . $cpf_key, $cpf_value );
+				}
+
+				// The flag itself.
+				update_user_meta( $pending_user_id, '_eael_otp_pending', '1' );
+				update_user_meta( $pending_user_id, '_eael_otp_pending_since', time() );
+
+				do_action( 'eael/login-register/after-insert-user', $pending_user_id, $user_data, $settings );
+
+				// On verify we only need the id; clear the heavy data so the transient stays small.
+				$otp_payload['pre_created_user_id'] = (int) $pending_user_id;
+				unset( $otp_payload['user_data'] );
+			}
+
+			$session = $this->eael_otp_create_session( 'register', $otp_payload, $email, $widget_id, $page_id, $settings );
+
+			if ( is_wp_error( $session ) ) {
+				if ( $ajax ) {
+					wp_send_json_error( $session->get_error_message() );
+				}
+				setcookie( 'eael_register_errors_' . $widget_id, $session->get_error_message() );
+				wp_safe_redirect( esc_url_raw( $url ) );
+				exit();
+			}
+
+			if ( $ajax ) {
+				wp_send_json_success( [
+					'otp_required' => true,
+					'otp_token'    => $session['token'],
+					'otp_expiry'   => $session['expiry'],
+					'otp_cooldown' => $session['cooldown'],
+					'otp_email'    => $session['email'],
+					'message'      => __( 'A verification code has been sent to your email.', 'essential-addons-for-elementor-lite' ),
+				] );
+			}
+
+			// Non-AJAX: drop a short-lived cookie carrying the token so the page can show the OTP UI on reload.
+			setcookie(
+				'eael_lr_otp_token_' . $widget_id,
+				$session['token'] . '|register',
+				time() + ( $session['expiry'] * MINUTE_IN_SECONDS ),
+				COOKIEPATH ? COOKIEPATH : '/',
+				COOKIE_DOMAIN
+			);
+			wp_safe_redirect( esc_url_raw( $url ) );
+			exit();
+		}
+
+		do_action( 'eael/login-register/before-insert-user', $user_data );
 
 		$user_id = wp_insert_user( $user_data );
 
@@ -847,6 +1128,22 @@ trait Login_Registration {
 		}
 
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
+
+		// Reject spoofed page_id / widget_id. Empty settings means the target isn't an
+		// EA Login/Register widget; proceeding would disable reCAPTCHA / Turnstile.
+		if ( empty( $settings ) ) {
+			$err_msg = __( 'Invalid form submission.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+			return;
+		}
 
 		if( ! empty( $settings['enable_cloudflare_turnstile'] ) && 'yes' === $settings['enable_cloudflare_turnstile'] && ! empty( $settings['enable_cloudflare_turnstile_on_lostpassword'] ) && 'yes' === $settings['enable_cloudflare_turnstile_on_lostpassword'] ){
 			if( ! $this->lr_validate_cloudflare_turnstile( $settings ) ) { // pass only sanitized data
@@ -1058,6 +1355,22 @@ trait Login_Registration {
             }
 		}
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
+
+		// Reject spoofed page_id / widget_id. Empty settings means the target isn't an
+		// EA Login/Register widget; proceeding would disable reCAPTCHA / Turnstile.
+		if ( empty( $settings ) ) {
+			$err_msg = __( 'Invalid form submission.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
+
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+			return;
+		}
 
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );
@@ -1675,6 +1988,575 @@ trait Login_Registration {
 		return false;
 	}
 
+	/* ============================================================================
+	 * Email OTP Verification
+	 * ============================================================================ */
+
+	/**
+	 * Transient key prefix for OTP sessions.
+	 */
+	public static $otp_transient_prefix = 'eael_lr_otp_';
+
+	/**
+	 * Generate a 6-digit numeric OTP.
+	 *
+	 * @return string
+	 */
+	protected function eael_otp_generate_code() {
+		return str_pad( (string) wp_rand( 0, 999999 ), 6, '0', STR_PAD_LEFT );
+	}
+
+	/**
+	 * Hash an OTP code for safe storage. We bind it to the token to prevent
+	 * cross-session reuse.
+	 *
+	 * @param string $code
+	 * @param string $token
+	 * @return string
+	 */
+	protected function eael_otp_hash_code( $code, $token ) {
+		return hash_hmac( 'sha256', $code, wp_salt( 'auth' ) . '|' . $token );
+	}
+
+	/**
+	 * Render an OTP email body, replacing placeholders.
+	 *
+	 * For HTML emails the [direct_login_url] placeholder expands into a real <a>
+	 * anchor; for plain-text emails it expands into the bare URL.
+	 *
+	 * @param string $template
+	 * @param string $code
+	 * @param int    $expiry_minutes
+	 * @param string $email
+	 * @param string $direct_url   Absolute URL to the page hosting the login/register widget.
+	 * @param string $content_type 'html' or 'plain'.
+	 * @return string
+	 */
+	protected function eael_otp_render_email( $template, $code, $expiry_minutes, $email, $direct_url = '', $content_type = 'plain' ) {
+		$direct_url      = $direct_url ? esc_url_raw( $direct_url ) : '';
+		$url_replacement = $direct_url;
+
+		if ( 'html' === $content_type && ! empty( $direct_url ) ) {
+			$url_replacement = sprintf(
+				'<a href="%1$s" target="_blank" rel="noopener">%2$s</a>',
+				esc_url( $direct_url ),
+				esc_html__( 'Verify your email', 'essential-addons-for-elementor-lite' )
+			);
+		}
+
+		$replacements = [
+			'[otp_code]'         => $code,
+			'[otp_expiry]'       => (int) $expiry_minutes,
+			'[email]'            => $email,
+			'[sitetitle]'        => get_option( 'blogname' ),
+			'[direct_login_url]' => $url_replacement,
+		];
+
+		return strtr( $template, $replacements );
+	}
+
+	/**
+	 * Send the OTP email using widget settings for subject/message/content-type.
+	 *
+	 * @param array  $settings  Widget settings.
+	 * @param string $email     Recipient email address.
+	 * @param string $form_type  'login' or 'register'.
+	 * @param string $code       The plain OTP code.
+	 * @param string $direct_url Absolute URL to the page hosting the widget.
+	 * @return bool
+	 */
+	protected function eael_otp_send_email( $settings, $email, $form_type, $code, $direct_url = '' ) {
+		$prefix         = ( 'login' === $form_type ) ? 'login' : 'register';
+		$expiry_minutes = ! empty( $settings[ "{$prefix}_otp_expiry" ] ) ? (int) $settings[ "{$prefix}_otp_expiry" ] : 5;
+
+		$default_subject = sprintf(
+			/* translators: %s: site name */
+			__( 'Your verification code for %s', 'essential-addons-for-elementor-lite' ),
+			get_option( 'blogname' )
+		);
+
+		$subject = ! empty( $settings[ "{$prefix}_otp_email_subject" ] )
+			? Helper::eael_wp_kses( $settings[ "{$prefix}_otp_email_subject" ] )
+			: $default_subject;
+
+		$default_message = __( 'Your one-time verification code is: [otp_code]', 'essential-addons-for-elementor-lite' )
+			. "\r\n\r\n"
+			. __( 'This code will expire in [otp_expiry] minutes.', 'essential-addons-for-elementor-lite' );
+
+		$message = ! empty( $settings[ "{$prefix}_otp_email_message" ] )
+			? $settings[ "{$prefix}_otp_email_message" ]
+			: $default_message;
+
+		$content_type = ! empty( $settings[ "{$prefix}_otp_email_content_type" ] )
+			? wp_strip_all_tags( $settings[ "{$prefix}_otp_email_content_type" ] )
+			: 'html';
+
+		// Fall back to the home URL if the caller did not pass an explicit direct URL.
+		if ( empty( $direct_url ) ) {
+			$direct_url = home_url( '/' );
+		}
+
+		// Subject lines are always plain text — never inject anchors there.
+		$subject = $this->eael_otp_render_email( $subject, $code, $expiry_minutes, $email, $direct_url, 'plain' );
+		$message = $this->eael_otp_render_email( $message, $code, $expiry_minutes, $email, $direct_url, $content_type );
+
+		// If the placeholder wasn't used in the body, auto-append a "Direct Access" line so the
+		// link is always present. We render an <a> for HTML emails and a bare URL for plain.
+		if ( ! empty( $direct_url ) && false === stripos( $message, $direct_url ) ) {
+			if ( 'html' === $content_type ) {
+				$direct_line = sprintf(
+					/* translators: %s: HTML anchor pointing at the verification screen. */
+					__( 'Direct access to the verification screen: %s', 'essential-addons-for-elementor-lite' ),
+					sprintf(
+						'<a href="%1$s" target="_blank" rel="noopener">%2$s</a>',
+						esc_url( $direct_url ),
+						esc_html__( 'Verify your email', 'essential-addons-for-elementor-lite' )
+					)
+				);
+			} else {
+				$direct_line = sprintf(
+					/* translators: %s: Absolute URL to the verification screen. */
+					__( 'Direct access to the verification screen: %s', 'essential-addons-for-elementor-lite' ),
+					$direct_url
+				);
+			}
+			$message .= "\r\n\r\n" . $direct_line;
+		}
+
+		if ( 'html' === $content_type ) {
+			$message = wpautop( $message );
+		}
+
+		$headers = 'Content-Type: text/' . $content_type . '; charset=UTF-8' . "\r\n";
+
+		return wp_mail( $email, $subject, $message, $headers );
+	}
+
+	/**
+	 * Create a new OTP session: stores data + hashed code in a transient and emails the user.
+	 *
+	 * @param string $flow      'register' or 'login'.
+	 * @param array  $payload   Sanitized form data needed to finalize the action.
+	 * @param string $email     Recipient address.
+	 * @param string $widget_id Widget ID.
+	 * @param int    $page_id   Page ID.
+	 * @param array  $settings   Widget settings.
+	 * @param string $direct_url Absolute URL of the page hosting the widget.
+	 * @return array { token, expiry, cooldown } or WP_Error on failure.
+	 */
+	protected function eael_otp_create_session( $flow, $payload, $email, $widget_id, $page_id, $settings, $direct_url = '' ) {
+		$prefix         = ( 'login' === $flow ) ? 'login' : 'register';
+		$expiry_minutes = ! empty( $settings[ "{$prefix}_otp_expiry" ] ) ? max( 1, (int) $settings[ "{$prefix}_otp_expiry" ] ) : 5;
+		$cooldown       = ! empty( $settings[ "{$prefix}_otp_resend_cooldown" ] ) ? max( 15, (int) $settings[ "{$prefix}_otp_resend_cooldown" ] ) : 60;
+
+		$token = wp_generate_password( 32, false, false );
+		$code  = $this->eael_otp_generate_code();
+
+		// Capture the page URL hosting the widget so it can be embedded in the OTP email.
+		if ( empty( $direct_url ) ) {
+			if ( $page_id ) {
+				$direct_url = get_permalink( $page_id );
+			}
+			if ( empty( $direct_url ) && ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+				$direct_url = esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ) ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+			}
+			if ( empty( $direct_url ) ) {
+				$direct_url = home_url( '/' );
+			}
+		}
+
+		// Stamp the direct URL with query args so a click from email — even on a different
+		// browser/device where the cookie is absent — lands the user straight on the OTP screen.
+		$direct_url = add_query_arg(
+			[
+				'eael_otp'      => $token,
+				'eael_otp_flow' => $flow,
+			],
+			$direct_url
+		);
+
+		$session = [
+			'flow'       => $flow,
+			'email'      => $email,
+			'widget_id'  => $widget_id,
+			'page_id'    => (int) $page_id,
+			'payload'    => $payload,
+			'code_hash'  => $this->eael_otp_hash_code( $code, $token ),
+			'attempts'   => 0,
+			'last_sent'  => time(),
+			'created'    => time(),
+			'expiry'     => $expiry_minutes * MINUTE_IN_SECONDS,
+			'cooldown'   => $cooldown,
+			'direct_url' => esc_url_raw( $direct_url ),
+		];
+
+		set_transient( self::$otp_transient_prefix . $token, $session, $expiry_minutes * MINUTE_IN_SECONDS );
+
+		$sent = $this->eael_otp_send_email( $settings, $email, $flow, $code, $direct_url );
+
+		if ( ! $sent ) {
+			delete_transient( self::$otp_transient_prefix . $token );
+			return new \WP_Error(
+				'eael_otp_email_failed',
+				__( 'We could not send the verification email. Please try again later.', 'essential-addons-for-elementor-lite' )
+			);
+		}
+
+		return [
+			'token'    => $token,
+			'expiry'   => $expiry_minutes,
+			'cooldown' => $cooldown,
+			'email'    => $this->eael_otp_mask_email( $email ),
+		];
+	}
+
+	/**
+	 * Mask an email address for display, e.g. j***@example.com.
+	 *
+	 * @param string $email
+	 * @return string
+	 */
+	protected function eael_otp_mask_email( $email ) {
+		$parts = explode( '@', $email );
+		if ( count( $parts ) !== 2 ) {
+			return $email;
+		}
+		$local  = $parts[0];
+		$masked = substr( $local, 0, 1 ) . str_repeat( '*', max( 1, strlen( $local ) - 1 ) );
+		return $masked . '@' . $parts[1];
+	}
+
+	/**
+	 * AJAX: send / resend OTP.
+	 */
+	public function eael_ajax_send_otp() {
+		check_ajax_referer( 'eael_lr_otp', '_eael_otp_nonce' );
+
+		$token = ! empty( $_POST['otp_token'] ) ? sanitize_text_field( wp_unslash( $_POST['otp_token'] ) ) : '';
+		if ( empty( $token ) ) {
+			wp_send_json_error( [ 'message' => __( 'Invalid OTP session.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		$session = get_transient( self::$otp_transient_prefix . $token );
+		if ( empty( $session ) || ! is_array( $session ) ) {
+			wp_send_json_error( [ 'message' => __( 'Your verification session has expired. Please start over.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		$elapsed = time() - (int) $session['last_sent'];
+		if ( $elapsed < (int) $session['cooldown'] ) {
+			wp_send_json_error( [
+				'message'   => sprintf(
+					/* translators: %d seconds remaining */
+					__( 'Please wait %d seconds before requesting a new code.', 'essential-addons-for-elementor-lite' ),
+					(int) $session['cooldown'] - $elapsed
+				),
+				'cooldown' => (int) $session['cooldown'] - $elapsed,
+			] );
+		}
+
+		$settings = $this->lr_get_widget_settings( (int) $session['page_id'], $session['widget_id'] );
+		if ( empty( $settings ) ) {
+			wp_send_json_error( [ 'message' => __( 'Widget settings could not be loaded.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		$code                  = $this->eael_otp_generate_code();
+		$session['code_hash']  = $this->eael_otp_hash_code( $code, $token );
+		$session['last_sent']  = time();
+		$session['attempts']   = 0;
+
+		set_transient( self::$otp_transient_prefix . $token, $session, (int) $session['expiry'] );
+
+		$direct_url = ! empty( $session['direct_url'] ) ? $session['direct_url'] : '';
+		$sent       = $this->eael_otp_send_email( $settings, $session['email'], $session['flow'], $code, $direct_url );
+
+		if ( ! $sent ) {
+			wp_send_json_error( [ 'message' => __( 'We could not send the verification email. Please try again later.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		wp_send_json_success( [
+			'message'  => __( 'A new verification code has been sent.', 'essential-addons-for-elementor-lite' ),
+			'cooldown' => (int) $session['cooldown'],
+		] );
+	}
+
+	/**
+	 * AJAX: verify OTP and finalize the gated action.
+	 */
+	public function eael_ajax_verify_otp() {
+		check_ajax_referer( 'eael_lr_otp', '_eael_otp_nonce' );
+
+		$token = ! empty( $_POST['otp_token'] ) ? sanitize_text_field( wp_unslash( $_POST['otp_token'] ) ) : '';
+		$code  = ! empty( $_POST['otp_code'] ) ? preg_replace( '/[^0-9]/', '', wp_unslash( $_POST['otp_code'] ) ) : '';
+
+		if ( empty( $token ) || empty( $code ) ) {
+			wp_send_json_error( [ 'message' => __( 'Please enter the verification code.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		$session = get_transient( self::$otp_transient_prefix . $token );
+		if ( empty( $session ) || ! is_array( $session ) ) {
+			wp_send_json_error( [ 'message' => __( 'Your verification code has expired. Please request a new one.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		if ( (int) $session['attempts'] >= 5 ) {
+			delete_transient( self::$otp_transient_prefix . $token );
+			wp_send_json_error( [ 'message' => __( 'Too many invalid attempts. Please request a new code.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		$expected = $this->eael_otp_hash_code( $code, $token );
+		if ( ! hash_equals( (string) $session['code_hash'], $expected ) ) {
+			$session['attempts'] = (int) $session['attempts'] + 1;
+			set_transient( self::$otp_transient_prefix . $token, $session, (int) $session['expiry'] );
+			wp_send_json_error( [
+				'message'  => __( 'Invalid verification code. Please try again.', 'essential-addons-for-elementor-lite' ),
+				'attempts' => $session['attempts'],
+			] );
+		}
+
+		// Code valid: consume the session immediately.
+		delete_transient( self::$otp_transient_prefix . $token );
+
+		$settings = $this->lr_get_widget_settings( (int) $session['page_id'], $session['widget_id'] );
+		if ( empty( $settings ) ) {
+			wp_send_json_error( [ 'message' => __( 'Widget settings could not be loaded.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		if ( 'register' === $session['flow'] ) {
+			$result = $this->eael_otp_finalize_register( $session, $settings );
+		} else {
+			$result = $this->eael_otp_finalize_login( $session, $settings );
+		}
+
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( [ 'message' => $result->get_error_message() ] );
+		}
+
+		wp_send_json_success( $result );
+	}
+
+	/**
+	 * Finalize a registration after a successful OTP verification.
+	 *
+	 * @param array $session
+	 * @param array $settings
+	 * @return array|\WP_Error
+	 */
+	protected function eael_otp_finalize_register( $session, $settings ) {
+		$payload = isset( $session['payload'] ) ? (array) $session['payload'] : [];
+
+		// Repopulate static email options for the email filter.
+		self::$email_options              = isset( $payload['email_options'] ) ? (array) $payload['email_options'] : [];
+		self::$send_custom_email          = ! empty( $payload['send_custom_email'] );
+		self::$send_custom_email_admin    = ! empty( $payload['send_custom_email_admin'] );
+
+		// Two paths converge here:
+		//   A) "Show Flag on User list" was OFF: nothing exists yet → wp_insert_user now.
+		//   B) "Show Flag on User list" was ON:  the user already exists with `_eael_otp_pending=1`
+		//      → just clear the flag and run the post-create hooks.
+		if ( ! empty( $payload['pre_created_user_id'] ) ) {
+			$user_id = (int) $payload['pre_created_user_id'];
+			$user    = get_user_by( 'id', $user_id );
+			if ( ! $user ) {
+				return new \WP_Error( 'eael_otp_user', __( 'The pending user no longer exists.', 'essential-addons-for-elementor-lite' ) );
+			}
+
+			delete_user_meta( $user_id, '_eael_otp_pending' );
+			delete_user_meta( $user_id, '_eael_otp_pending_since' );
+
+			$user_data = [
+				'user_login' => $user->user_login,
+				'user_email' => $user->user_email,
+			];
+		} else {
+			$user_data = isset( $payload['user_data'] ) ? (array) $payload['user_data'] : [];
+
+			if ( empty( $user_data['user_email'] ) || empty( $user_data['user_login'] ) ) {
+				return new \WP_Error( 'eael_otp_payload', __( 'Stored registration data is incomplete.', 'essential-addons-for-elementor-lite' ) );
+			}
+
+			do_action( 'eael/login-register/before-insert-user', $user_data );
+
+			$user_id = wp_insert_user( $user_data );
+
+			if ( is_wp_error( $user_id ) ) {
+				return new \WP_Error(
+					'eael_otp_create_user',
+					isset( $settings['err_unknown'] )
+						? Helper::eael_wp_kses( $settings['err_unknown'] )
+						: __( 'Sorry, something went wrong. User could not be registered.', 'essential-addons-for-elementor-lite' )
+				);
+			}
+
+			if ( ! empty( $user_data['eael_phone_number'] ) ) {
+				update_user_meta( $user_id, 'eael_phone_number', $user_data['eael_phone_number'] );
+			}
+
+			$custom_profile_fields = isset( $payload['custom_profile_fields'] ) ? (array) $payload['custom_profile_fields'] : [];
+			foreach ( $custom_profile_fields as $key => $value ) {
+				update_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $key, $value );
+			}
+
+			do_action( 'eael/login-register/after-insert-user', $user_id, $user_data, $settings );
+		}
+
+		$register_actions = isset( $payload['register_actions'] ) ? (array) $payload['register_actions'] : [];
+		$is_pass_auto    = ! empty( $payload['is_pass_auto_generated'] );
+		$admin_or_both   = ( $is_pass_auto || in_array( 'send_email', $register_actions, true ) ) ? 'both' : 'admin';
+
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+		remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
+		do_action( 'register_new_user', $user_id );
+		wp_new_user_notification( $user_id, null, $admin_or_both );
+
+		$response = [
+			'message' => isset( $settings['success_register'] )
+				? Helper::eael_wp_kses( $settings['success_register'] )
+				: __( 'Your registration completed successfully.', 'essential-addons-for-elementor-lite' ),
+		];
+
+		// Persist the success flag the same way the standard (non-OTP) register flow does, so
+		// that when the JS reloads the page after the verify-success delay, the form's
+		// existing print_validation_message() / print_registration_success_message() picks it up
+		// and the user lands on the standard success banner instead of an empty register form.
+		if ( ! in_array( 'redirect', $register_actions, true ) && ! empty( $session['widget_id'] ) ) {
+			update_option( 'eael_register_success_' . $session['widget_id'], 1, false );
+		}
+
+		// Optional auto-login.
+		if ( in_array( 'auto_login', $register_actions, true ) && ! is_user_logged_in() ) {
+			wp_signon( [
+				'user_login'    => $user_data['user_login'],
+				'user_password' => isset( $payload['plain_password'] ) ? $payload['plain_password'] : '',
+				'remember'      => true,
+			] );
+		}
+
+		if ( in_array( 'redirect', $register_actions, true ) && ! empty( $payload['redirect_url'] ) ) {
+			$response['redirect_to'] = esc_url_raw( $payload['redirect_url'] );
+		}
+
+		return $response;
+	}
+
+	/**
+	 * Finalize a login after a successful OTP verification.
+	 *
+	 * @param array $session
+	 * @param array $settings
+	 * @return array|\WP_Error
+	 */
+	protected function eael_otp_finalize_login( $session, $settings ) {
+		$payload = isset( $session['payload'] ) ? (array) $session['payload'] : [];
+		$user_id = isset( $payload['user_id'] ) ? (int) $payload['user_id'] : 0;
+
+		if ( ! $user_id ) {
+			return new \WP_Error( 'eael_otp_payload', __( 'Stored login data is incomplete.', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		$user = get_user_by( 'id', $user_id );
+		if ( ! $user ) {
+			return new \WP_Error( 'eael_otp_user', __( 'User no longer exists.', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		// If this login OTP was triggered to complete a pending registration, clear the flag now.
+		if ( ! empty( $payload['is_pending_registration'] ) ) {
+			delete_user_meta( $user_id, '_eael_otp_pending' );
+			delete_user_meta( $user_id, '_eael_otp_pending_since' );
+		}
+
+		$remember = ! empty( $payload['remember'] );
+		wp_set_current_user( $user->ID, $user->user_login );
+		wp_set_auth_cookie( $user->ID, $remember );
+
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+		do_action( 'wp_login', $user->user_login, $user );
+		do_action( 'eael/login-register/after-login', $user->user_login, $user, $settings );
+
+		$response = [
+			'message' => isset( $settings['success_login'] )
+				? Helper::eael_wp_kses( $settings['success_login'] )
+				: __( 'You are logged in successfully', 'essential-addons-for-elementor-lite' ),
+		];
+
+		if ( ! empty( $payload['redirect_url'] ) ) {
+			$response['redirect_to'] = esc_url_raw( $payload['redirect_url'] );
+		}
+
+		return $response;
+	}
+
+	/**
+	 * Decorate the WP Users list rows for users that are still pending OTP verification.
+	 *
+	 * Renders inline in the wp-admin Users page footer (no new column added). For each user
+	 * carrying the `_eael_otp_pending=1` meta we inject a small dashicon flag next to the
+	 * username, with `title` and `aria-label` attributes describing the state.
+	 *
+	 * Wired to the `admin_footer-users.php` action so it only loads on the Users screen.
+	 */
+	public function eael_lr_otp_pending_user_flag() {
+		if ( ! current_user_can( 'list_users' ) ) {
+			return;
+		}
+
+		$pending_users = get_users( [
+			'meta_key'   => '_eael_otp_pending',
+			'meta_value' => '1',
+			'fields'     => 'ID',
+			'number'     => -1,
+		] );
+
+		if ( empty( $pending_users ) ) {
+			return;
+		}
+
+		$pending_users = array_map( 'intval', $pending_users );
+		$tooltip       = esc_html__( 'Email verification pending — this user has not completed OTP verification.', 'essential-addons-for-elementor-lite' );
+		?>
+		<style>
+			.eael-otp-pending-flag {
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				margin-left: 6px;
+				color: #d63638;
+				font-size: 16px;
+				line-height: 1;
+				vertical-align: middle;
+				cursor: help;
+				text-decoration: none;
+			}
+			.eael-otp-pending-flag:before {
+				content: "\f534"; /* dashicons-warning */
+				font-family: dashicons;
+			}
+		</style>
+		<script>
+		(function ($) {
+			var pendingIds = <?php echo wp_json_encode( array_values( $pending_users ) ); ?>;
+			var tooltip    = <?php echo wp_json_encode( $tooltip ); ?>;
+			$(function () {
+				pendingIds.forEach(function (uid) {
+					var $row = $('tr#user-' + uid);
+					if (!$row.length) {
+						return;
+					}
+					// Append the flag inside the username cell, after the <strong>username</strong>.
+					var $username = $row.find('td.username strong, td.column-username strong').first();
+					if (!$username.length) {
+						$username = $row.find('td.username, td.column-username').first();
+					}
+					if ($username.length && !$username.find('.eael-otp-pending-flag').length) {
+						$username.append(
+							' <span class="eael-otp-pending-flag" title="' + tooltip + '" aria-label="' + tooltip + '"></span>'
+						);
+					}
+				});
+			});
+		})(jQuery);
+		</script>
+		<?php
+	}
+
 	public function lr_get_widget_settings( $page_id, $widget_id ) {
 		$document = Plugin::$instance->documents->get( $page_id );
 		$settings = [];
@@ -1682,7 +2564,10 @@ trait Login_Registration {
 			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
 			$widget_data = $this->find_element_recursive( $elements, $widget_id );
 
-			if(!empty($widget_data)) {
+			// Enforce widget type. Without this check, a spoofed page_id / widget_id
+			// returns an empty settings array, causing OTP, reCAPTCHA, and Cloudflare
+			// Turnstile gates to be silently skipped in the login/register handlers.
+			if ( ! empty( $widget_data ) && isset( $widget_data['widgetType'] ) && 'eael-login-register' === $widget_data['widgetType'] ) {
                 $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
                 if ( $widget ) {
                     $settings    = $widget->get_settings_for_display();
