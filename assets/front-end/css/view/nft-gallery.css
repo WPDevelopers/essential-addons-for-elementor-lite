@@ -64,8 +64,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   background-color: rgba(159, 159, 159, 0.4);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   width: 32px;
   height: 32px;
   border-radius: 50%;
