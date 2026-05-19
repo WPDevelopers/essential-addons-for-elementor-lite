@@ -1,362 +1,353 @@
 var WooProdectImage = function ($scope, $) {
-   //Select key elements
-   const $productGallery = $(".eael-single-product-images");
-   const $sliderThumbsOptions = $(".product_image_slider__thumbs", $scope);
-   const $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
+	//Select key elements
+	const $productGallery = $(".eael-single-product-images");
+	const $sliderThumbsOptions = $(".product_image_slider__thumbs", $scope);
+	const $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
 
-   //Find initial images
-   const $productGalleryImage = $(
-      ".swiper-wrapper .swiper-slide:first-child .image_slider__image > img",
-      $productGallery
-   );
-   const $productThumbImage = $(
-      ".swiper-wrapper .swiper-slide:first-child .product_image_slider__thumbs__image > img",
-      $productGallery
-   );
+	//Find initial images
+	const $productGalleryImage = $(
+		".swiper-wrapper .swiper-slide:first-child .image_slider__image > img",
+		$productGallery
+	);
+	const $productThumbImage = $(
+		".swiper-wrapper .swiper-slide:first-child .product_image_slider__thumbs__image > img",
+		$productGallery
+	);
 
-   //Store original image attributes
-   const originalImage = getImageAttributes($productGalleryImage);
-   const originalThumbImage = getImageAttributes($productThumbImage);
+	//Store original image attributes
+	const originalImage = getImageAttributes($productGalleryImage);
+	const originalThumbImage = getImageAttributes($productThumbImage);
 
-   //Helper function to get image attributes
-   function getImageAttributes($image) {
-      return {
-         src: $image.attr("src"),
-         srcset: $image.attr("srcset"),
-         sizes: $image.attr("sizes"),
-      };
-   }
+	//Helper function to get image attributes
+	function getImageAttributes($image) {
+		return {
+			src: $image.attr("src"),
+			srcset: $image.attr("srcset"),
+			sizes: $image.attr("sizes"),
+		};
+	}
 
-   // Listen for show variation event
-   $(".variations_form").on("show_variation", handleShowVariation);
+	// Listen for show variation event
+	$(".variations_form").on("show_variation", handleShowVariation);
 
-   //Event handler for showing variation
-   function handleShowVariation(event, variation) {
-      if (variation?.image?.src) {
-         updateProductImage(variation.image);
-         stopSliders();
-      }
-   }
+	//Event handler for showing variation
+	function handleShowVariation(event, variation) {
+		if (variation?.image?.src) {
+			updateProductImage(variation.image);
+			stopSliders();
+		}
+	}
 
-   //Stop sliders
-   function stopSliders() {
-      toggleSliderAutoplay("stop");
-   }
+	//Stop sliders
+	function stopSliders() {
+		if ($sliderThumbs.autoplay !== undefined) {
+			toggleSliderAutoplay("stop");
+		}
+	}
 
-   //Toggle slider autoplay
-   function toggleSliderAutoplay(action) {
-      const $sliders = $(".swiper-container", $scope);
-      $sliders.each((index, sliderEl) => {
-         const swiperInstance = sliderEl.swiper;
-         if (swiperInstance && !swiperInstance.destroyed) {
-            if (swiperInstance.autoplay && typeof swiperInstance.autoplay[action] === 'function') {
-               swiperInstance.autoplay[action]();
-            }
-            
-            if (typeof swiperInstance.slideTo === 'function') {
-               try {
-                  if (swiperInstance.params && swiperInstance.params.loop) {
-                     swiperInstance.slideToLoop(0);
-                  } else {
-                     swiperInstance.slideTo(0);
-                  }
-               } catch (e) {
-                  // Fallback or silent fail if slideTo fails
-                  console.warn("Swiper slideTo failed:", e);
-               }
-            }
-         }
-      });
-   }
+	//Toggle slider autoplay
+	function toggleSliderAutoplay(action) {
+		const $sliders = $(".swiper-container", $scope);
+		$sliders.each((index, sliderEl) => {
+			const swiperInstance = sliderEl.swiper;
+			if (swiperInstance && !swiperInstance.destroyed) {
+				if (swiperInstance.autoplay && typeof swiperInstance.autoplay[action] === "function") {
+					swiperInstance.autoplay[action]();
+				}
 
-   //Update product iamges with variation images
-   function updateProductImage(variationImage) {
-      setImageAttributes($productGalleryImage, variationImage);
-      setThumbImageAttributes($productThumbImage, variationImage);
+				if (typeof swiperInstance.slideTo === "function") {
+					try {
+						if (swiperInstance.params && swiperInstance.params.loop) {
+							swiperInstance.slideToLoop(0);
+						} else {
+							swiperInstance.slideTo(0);
+						}
+					} catch (e) {
+						// Fallback or silent fail if slideTo fails
+						console.warn("Swiper slideTo failed:", e);
+					}
+				}
+			}
+		});
+	}
 
-      // Re-initialize zoom lens for the updated image
-      setTimeout(() => {
-         initializeZoomLens($productGalleryImage);
-      }, 100); // Small delay to ensure image attributes are updated
-   }
+	//Update product iamges with variation images
+	function updateProductImage(variationImage) {
+		setImageAttributes($productGalleryImage, variationImage);
+		setThumbImageAttributes($productThumbImage, variationImage);
 
-   //Set image attributes
-   function setImageAttributes($image, imageAttributes) {
-      $image
-         .attr("src", imageAttributes.src)
-         .attr("srcset", imageAttributes.srcset)
-         .attr("sizes", imageAttributes.sizes)
-         .attr("data-src", imageAttributes.src)
-         .attr("data-large_image", imageAttributes.full_src);
-   }
+		// Re-initialize zoom lens for the updated image
+		setTimeout(() => {
+			initializeZoomLens($productGalleryImage);
+		}, 100); // Small delay to ensure image attributes are updated
+	}
 
-   //Set thumb image attributes
-   function setThumbImageAttributes($image, imageAttributes) {
-      $image
-         .attr("src", imageAttributes.gallery_thumbnail_src)
-         .attr("srcset", imageAttributes.gallery_thumbnail_src)
-         .attr("sizes", imageAttributes.gallery_thumbnail_src_h);
-   }
+	//Set image attributes
+	function setImageAttributes($image, imageAttributes) {
+		$image
+			.attr("src", imageAttributes.src)
+			.attr("srcset", imageAttributes.srcset)
+			.attr("sizes", imageAttributes.sizes)
+			.attr("data-src", imageAttributes.src)
+			.attr("data-large_image", imageAttributes.full_src);
+	}
 
-   // Listen for hide variation or reset image event
-   $(".variations_form").on("hide_variation reset_image", handleResetVariation);
+	//Set thumb image attributes
+	function setThumbImageAttributes($image, imageAttributes) {
+		$image
+			.attr("src", imageAttributes.gallery_thumbnail_src)
+			.attr("srcset", imageAttributes.gallery_thumbnail_src)
+			.attr("sizes", imageAttributes.gallery_thumbnail_src_h);
+	}
 
-   //Event handler for reseting variation
-   function handleResetVariation() {
-      resetProductImages();
-      resumeSliders();
-   }
+	// Listen for hide variation or reset image event
+	$(".variations_form").on("hide_variation reset_image", handleResetVariation);
 
-   //Resume sliders
-   function resumeSliders() {
-      if ($sliderThumbs.autoplay !== undefined) {
-         toggleSliderAutoplay("start");
-      }
-   }
+	//Event handler for reseting variation
+	function handleResetVariation() {
+		resetProductImages();
+		resumeSliders();
+	}
 
-   //Reset product image to original state
-   function resetProductImages() {
-      resetProductImage($productGalleryImage, originalImage);
-      resetProductImage($productThumbImage, originalThumbImage);
-   }
+	//Resume sliders
+	function resumeSliders() {
+		if ($sliderThumbs.autoplay !== undefined) {
+			toggleSliderAutoplay("start");
+		}
+	}
 
-   //Reset a single image with fade effect
-   function resetProductImage($image, originalAttributes) {
-      $image.fadeOut(100, function () {
-         $image
-            .attr("src", originalAttributes.src)
-            .attr("srcset", originalAttributes.srcset)
-            .attr("sizes", originalAttributes.sizes)
-            .removeAttr("data-src")
-            .removeAttr("data-large_image");
-         $image.fadeIn(100, function() {
-            // Re-initialize zoom lens after image is reset and visible
-            if ($image.hasClass('image_slider__image')) {
-               setTimeout(() => {
-                  initializeZoomLens($image);
-               }, 50);
-            }
-         });
-      });
-   }
+	//Reset product image to original state
+	function resetProductImages() {
+		resetProductImage($productGalleryImage, originalImage);
+		resetProductImage($productThumbImage, originalThumbImage);
+	}
 
-   const swiperLoader = (swiperElement, swiperConfig) => {
-      if ("undefined" === typeof Swiper || "function" === typeof Swiper) {
-         const asyncSwiper = elementorFrontend.utils.swiper;
-         return new asyncSwiper(swiperElement, swiperConfig).then(
-            (newSwiperInstance) => {
-               return newSwiperInstance;
-            }
-         );
-      } else {
-         return swiperPromise(swiperElement, swiperConfig);
-      }
-   };
+	//Reset a single image with fade effect
+	function resetProductImage($image, originalAttributes) {
+		$image.fadeOut(100, function () {
+			$image
+				.attr("src", originalAttributes.src)
+				.attr("srcset", originalAttributes.srcset)
+				.attr("sizes", originalAttributes.sizes)
+				.removeAttr("data-src")
+				.removeAttr("data-large_image");
+			$image.fadeIn(100, function () {
+				// Re-initialize zoom lens after image is reset and visible
+				if ($image.hasClass("image_slider__image")) {
+					setTimeout(() => {
+						initializeZoomLens($image);
+					}, 50);
+				}
+			});
+		});
+	}
 
-   const swiperPromise = (swiperElement, swiperConfig) => {
-      return new Promise((resolve, reject) => {
-         const swiperInstance = new Swiper(swiperElement, swiperConfig);
-         resolve(swiperInstance);
-      });
-   };
+	const swiperLoader = (swiperElement, swiperConfig) => {
+		if ("undefined" === typeof Swiper || "function" === typeof Swiper) {
+			const asyncSwiper = elementorFrontend.utils.swiper;
+			return new asyncSwiper(swiperElement, swiperConfig).then((newSwiperInstance) => {
+				return newSwiperInstance;
+			});
+		} else {
+			return swiperPromise(swiperElement, swiperConfig);
+		}
+	};
 
-   // Get unique ID for the slider
-   const sliderId = $scope.data("id"); // Ensure your Elementor widget has a unique data attribute like data-id
-   const sliderThumbSelector = `#slider-container-${sliderId} .product_image_slider__thumbs .swiper-container`;
-   const sliderImageSelector = `#slider-container-${sliderId} .product_image_slider__container .swiper-container`;
+	const swiperPromise = (swiperElement, swiperConfig) => {
+		return new Promise((resolve, reject) => {
+			const swiperInstance = new Swiper(swiperElement, swiperConfig);
+			resolve(swiperInstance);
+		});
+	};
 
-   // Thumb slider options
-   // let $sliderThumbsOptions = $(".product_image_slider__thumbs", $scope);
-   // let $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
-   let $height_for_mobile = $sliderThumbsOptions.data("for_mobile");
+	// Get unique ID for the slider
+	const sliderId = $scope.data("id"); // Ensure your Elementor widget has a unique data attribute like data-id
+	const sliderThumbSelector = `#slider-container-${sliderId} .product_image_slider__thumbs .swiper-container`;
+	const sliderImageSelector = `#slider-container-${sliderId} .product_image_slider__container .swiper-container`;
 
-   // console.log("Item", $sliderThumbs);
+	// Thumb slider options
+	// let $sliderThumbsOptions = $(".product_image_slider__thumbs", $scope);
+	// let $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
+	let $height_for_mobile = $sliderThumbsOptions.data("for_mobile");
 
-   // Image slider options
-   let $sliderImagesOptions = $(".product_image_slider__container", $scope);
-   let $sliderImagesData = $sliderImagesOptions.data("pi_image") || {};
-   const zoomEffect = $sliderImagesData.zoomEffect;
+	// console.log("Item", $sliderThumbs);
 
-   const zoomOptions = {
-      lensWidth: zoomEffect?.lensSize || 100,
-      lensHeight: zoomEffect?.lensSize || 100,
-      borderRadius: zoomEffect?.lensBorderRadius || '8px',
-      lensBorder: zoomEffect?.lensBorder,
-      autoResize: true
-   };
+	// Image slider options
+	let $sliderImagesOptions = $(".product_image_slider__container", $scope);
+	let $sliderImagesData = $sliderImagesOptions.data("pi_image") || {};
+	const zoomEffect = $sliderImagesData.zoomEffect;
 
-   // Initialize zoom lens for image(s)
-   function initializeZoomLens($images) {
-      if (zoomEffect?.enabled !== 'yes' || zoomEffect?.type !== 'lense') {
-         return;
-      }
+	const zoomOptions = {
+		lensWidth: zoomEffect?.lensSize || 100,
+		lensHeight: zoomEffect?.lensSize || 100,
+		borderRadius: zoomEffect?.lensBorderRadius || "8px",
+		lensBorder: zoomEffect?.lensBorder,
+		autoResize: true,
+	};
 
-      if (!$images) {
-         $images = $(".image_slider__image img", $scope);
-      }
+	// Initialize zoom lens for image(s)
+	function initializeZoomLens($images) {
+		if (zoomEffect?.enabled !== "yes" || zoomEffect?.type !== "lense") {
+			return;
+		}
 
-      $images.each(function() {
-         const $img = $(this);
+		if (!$images) {
+			$images = $(".image_slider__image img", $scope);
+		}
 
-         // Clean up existing zoom lens
-         $img.off('.zoom');
-         $('.eael-lens-zoom, .eael-result-zoom').remove();
+		$images.each(function () {
+			const $img = $(this);
 
-         // Initialize when image is ready
-         if (this.complete && this.naturalHeight !== 0) {
-            $img.eaelZoomLense(zoomOptions);
-         } else {
-            $img.on('load.zoom', function() {
-               $(this).eaelZoomLense(zoomOptions);
-            });
-         }
-      });
-   }
+			// Clean up existing zoom lens
+			$img.off(".zoom");
+			$(".eael-lens-zoom, .eael-result-zoom").remove();
 
-   // Set slider height dynamically
-   $(window).on("load", function () {
-      // Check if the screen width is less than or equal to 767px
-      if (window.matchMedia("(max-width: 767px)").matches) {
-         // For small screens
-         let getImageHeight = $(".image_slider__image", $scope).height();
-         let newThumbHeight = $sliderThumbs.slidesPerView * $height_for_mobile;
-         let compareHeight = Math.min(newThumbHeight, getImageHeight);
+			// Initialize when image is ready
+			if (this.complete && this.naturalHeight !== 0) {
+				$img.eaelZoomLense(zoomOptions);
+			} else {
+				$img.on("load.zoom", function () {
+					$(this).eaelZoomLense(zoomOptions);
+				});
+			}
+		});
+	}
 
-         $(
-            ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs",
-            $scope
-         ).css("height", compareHeight);
+	// Set slider height dynamically
+	$(window).on("load", function () {
+		// Check if the screen width is less than or equal to 767px
+		if (window.matchMedia("(max-width: 767px)").matches) {
+			// For small screens
+			let getImageHeight = $(".image_slider__image", $scope).height();
+			let newThumbHeight = $sliderThumbs.slidesPerView * $height_for_mobile;
+			let compareHeight = Math.min(newThumbHeight, getImageHeight);
 
-         $scope
-            .find(
-               ".eael-pi-thumb-bottom .product_image_slider .product_image_slider__thumbs"
-            )
-            .css("width", compareHeight);
-      } else {
-         // For larger screens
-         let getImageHeight = $(".image_slider__image", $scope).height();
-         let newThumbHeight = $sliderThumbs.slidesPerView * 100;
-         let compareHeight = Math.min(newThumbHeight, getImageHeight);
+			$(
+				".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs",
+				$scope
+			).css("height", compareHeight);
 
-         $(
-            ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs",
-            $scope
-         ).css("height", compareHeight);
-      }
-   });
+			$scope
+				.find(".eael-pi-thumb-bottom .product_image_slider .product_image_slider__thumbs")
+				.css("width", compareHeight);
+		} else {
+			// For larger screens
+			let getImageHeight = $(".image_slider__image", $scope).height();
+			let newThumbHeight = $sliderThumbs.slidesPerView * 100;
+			let compareHeight = Math.min(newThumbHeight, getImageHeight);
 
-   // Load the thumbs Swiper first
-   let sliderThumbsObj = swiperLoader($(sliderThumbSelector), $sliderThumbs);
+			$(
+				".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs",
+				$scope
+			).css("height", compareHeight);
+		}
+	});
 
-   sliderThumbsObj
-      .then((swiperInstance) => {
-         let $sliderImages = {
-            ...$sliderImagesData,
-            ...($sliderThumbs.thumbnail === "yes" && {
-               thumbs: {
-                  swiper: swiperInstance,
-               },
-            }),
-         };
+	// Load the thumbs Swiper first
+	let sliderThumbsObj = swiperLoader($(sliderThumbSelector), $sliderThumbs);
 
-         // Initialize the main slider after setting the thumbs swiper
-         swiperLoader($(sliderImageSelector), $sliderImages)
-            .then((mainSwiperInstance) => {
-               // Initialize zoom lens for the active slide when swiper changes
-               if (mainSwiperInstance) {
-                  mainSwiperInstance.on('slideChange', function() {
-                     setTimeout(() => {
-                        const $activeSlide = $(mainSwiperInstance.slides[mainSwiperInstance.activeIndex]);
-                        const $activeImg = $activeSlide.find('.image_slider__image img');
-                        if ($activeImg.length) {
-                           initializeZoomLens($activeImg);
-                        }
-                     }, 100);
-                  });
-               }
-            })
-            .catch((error) => {
-               console.log("Error initializing main Swiper:", error);
-            });
-      })
-      .catch((error) => {
-         console.log("Error initializing Swiper thumbs:", error);
-      });
+	sliderThumbsObj
+		.then((swiperInstance) => {
+			let $sliderImages = {
+				...$sliderImagesData,
+				...($sliderThumbs.thumbnail === "yes" && {
+					thumbs: {
+						swiper: swiperInstance,
+					},
+				}),
+			};
 
-   // Magnific Popup for the specific slider
-   $(".product_image_slider__trigger a", $scope).on("click", function (e) {
-      e.preventDefault();
-      var items = [];
-      $scope
-         .find(".swiper-slide .image_slider__image img")
-         .each(function (index) {
-            items.push({
-               src: $(this).attr("src"),
-            });
-         });
+			// Initialize the main slider after setting the thumbs swiper
+			swiperLoader($(sliderImageSelector), $sliderImages)
+				.then((mainSwiperInstance) => {
+					// Initialize zoom lens for the active slide when swiper changes
+					if (mainSwiperInstance) {
+						mainSwiperInstance.on("slideChange", function () {
+							setTimeout(() => {
+								const $activeSlide = $(mainSwiperInstance.slides[mainSwiperInstance.activeIndex]);
+								const $activeImg = $activeSlide.find(".image_slider__image img");
+								if ($activeImg.length) {
+									initializeZoomLens($activeImg);
+								}
+							}, 100);
+						});
+					}
+				})
+				.catch((error) => {
+					console.log("Error initializing main Swiper:", error);
+				});
+		})
+		.catch((error) => {
+			console.log("Error initializing Swiper thumbs:", error);
+		});
 
-      $.magnificPopup.open({
-         items: items,
-         mainClass: "eael-pi",
-         gallery: {
-            enabled: true,
-         },
-         type: "image",
-      });
-   });
+	// Magnific Popup for the specific slider
+	$(".product_image_slider__trigger a", $scope).on("click", function (e) {
+		e.preventDefault();
+		var items = [];
+		$scope.find(".swiper-slide .image_slider__image img").each(function (index) {
+			items.push({
+				src: $(this).attr("src"),
+			});
+		});
 
-   function zoomLenseEffect(){
-      // Initialize zoom lens with multiple fallbacks
-      function setupZoomLens() {
-         // Try immediate initialization
-         initializeZoomLens();
+		$.magnificPopup.open({
+			items: items,
+			mainClass: "eael-pi",
+			gallery: {
+				enabled: true,
+			},
+			type: "image",
+		});
+	});
 
-         // Fallback for window load
-         $(window).on('load', function() {
-            initializeZoomLens();
-         });
+	function zoomLenseEffect() {
+		// Initialize zoom lens with multiple fallbacks
+		function setupZoomLens() {
+			// Try immediate initialization
+			initializeZoomLens();
 
-         // Use imagesLoaded if available
-         if (typeof $.fn.imagesLoaded === 'function') {
-            $(".image_slider__image img", $scope).imagesLoaded(function() {
-               initializeZoomLens();
-            });
-         }
-      }
+			// Fallback for window load
+			$(window).on("load", function () {
+				initializeZoomLens();
+			});
 
-      // Setup zoom lens
-      setupZoomLens();
-   }
+			// Use imagesLoaded if available
+			if (typeof $.fn.imagesLoaded === "function") {
+				$(".image_slider__image img", $scope).imagesLoaded(function () {
+					initializeZoomLens();
+				});
+			}
+		}
 
-   function magnifyEffect(){
-      $(".image_slider__image img", $scope).eaelMagnify({
-         lensSize: zoomEffect?.lensSize || 200,
-         lensBorder: zoomEffect?.lensBorder,
-      });
-   }
+		// Setup zoom lens
+		setupZoomLens();
+	}
 
-   function zoomInsideEffect(){
+	function magnifyEffect() {
+		$(".image_slider__image img", $scope).eaelMagnify({
+			lensSize: zoomEffect?.lensSize || 200,
+			lensBorder: zoomEffect?.lensBorder,
+		});
+	}
 
-   }
-   
-   if( window.isEditMode ){
-      $('.eael-magnify-lens').remove();
-   }
-   if ( zoomEffect?.enabled === 'yes') {
-      // Image Zoom Lens Configuration
-      if( 'lense' === zoomEffect?.type ){
-         zoomLenseEffect();
-      } else if( 'magnify' === zoomEffect?.type ){
-         magnifyEffect();
-      } else if( 'inside' === zoomEffect?.type ){
-         zoomInsideEffect();
-      }
-   }
+	function zoomInsideEffect() {}
+
+	if (window.isEditMode) {
+		$(".eael-magnify-lens").remove();
+	}
+	if (zoomEffect?.enabled === "yes") {
+		// Image Zoom Lens Configuration
+		if ("lense" === zoomEffect?.type) {
+			zoomLenseEffect();
+		} else if ("magnify" === zoomEffect?.type) {
+			magnifyEffect();
+		} else if ("inside" === zoomEffect?.type) {
+			zoomInsideEffect();
+		}
+	}
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
-   elementorFrontend.hooks.addAction(
-      "frontend/element_ready/eael-woo-product-images.default",
-      WooProdectImage
-   );
+	elementorFrontend.hooks.addAction("frontend/element_ready/eael-woo-product-images.default", WooProdectImage);
 });
