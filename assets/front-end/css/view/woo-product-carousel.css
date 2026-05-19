@@ -518,9 +518,15 @@
 .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .icons-wrap.box-style li a {
   color: #ec3b75;
 }
+.eael-woo-product-carousel-container.preset-4 .eael-product-carousel .icons-wrap.box-style li a svg {
+  fill: #ec3b75;
+}
 .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .icons-wrap.box-style li a:hover {
   background: #ec3b75;
   color: #fff;
+}
+.eael-woo-product-carousel-container.preset-4 .eael-product-carousel .icons-wrap.box-style li a:hover svg {
+  fill: #fff;
 }
 .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .icons-wrap.box-style li a.button.add_to_cart_button {
   color: #ec3b75;
@@ -672,7 +678,7 @@
   line-height: 74px;
   height: 50px;
   width: 100px;
-  left: -35pX;
+  left: -35px;
   top: -8px;
   right: auto;
   padding: 0;
@@ -939,8 +945,14 @@
   border-radius: 5px;
   color: #597dfc;
 }
+.eael-woo-product-carousel-container .icons-wrap.box-style li a svg {
+  fill: #597dfc;
+}
 .eael-woo-product-carousel-container .icons-wrap.box-style li a:hover {
   background: #597dfc;
+}
+.eael-woo-product-carousel-container .icons-wrap.box-style li a:hover svg {
+  fill: #fff;
 }
 .eael-woo-product-carousel-container .icons-wrap.box-style li a i {
   line-height: 1rem;
@@ -1047,8 +1059,14 @@
   border-radius: 5px;
   color: #5f3ae0;
 }
+.eael-woo-product-carousel-container .icons-wrap.box-style-list li a svg {
+  fill: #5f3ae0;
+}
 .eael-woo-product-carousel-container .icons-wrap.box-style-list li a:hover {
   background: #5f3ae0;
+}
+.eael-woo-product-carousel-container .icons-wrap.box-style-list li a:hover svg {
+  fill: #fff;
 }
 .eael-woo-product-carousel-container .icons-wrap.box-style-list li a i {
   line-height: 1rem;
@@ -1125,9 +1143,15 @@
   color: #fff;
   background: #5f3ae0;
 }
+.eael-woo-product-carousel-container .icons-wrap.block-style li a svg {
+  fill: #fff;
+}
 .eael-woo-product-carousel-container .icons-wrap.block-style li a:hover {
   background: transparent;
   color: #fff;
+}
+.eael-woo-product-carousel-container .icons-wrap.block-style li a:hover svg {
+  fill: #fff;
 }
 .eael-woo-product-carousel-container .icons-wrap.block-style li a.added_to_cart {
   font-size: 0;
@@ -1655,7 +1679,7 @@
   border: none;
   border-radius: 3px;
   color: #fff;
-  background-color: #8040FF;
+  background-color: #8040ff;
 }
 .eael-popup-details-render .eael-popup-buy-now-button i,
 .eael-popup-details-render .eael-popup-buy-now-button svg {
