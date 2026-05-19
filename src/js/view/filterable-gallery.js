@@ -160,7 +160,9 @@ jQuery(window).on("elementor/frontend/init", function () {
             $is_randomize = $gallery.data("is-randomize");
          isRTL = $("body").hasClass("rtl");
 
-         fg_items = fg_items.map((item) => DOMPurify.sanitize(item));
+         fg_items = fg_items.map(function (item) {
+            return DOMPurify.sanitize(item, { ADD_ATTR: ['target'] });
+         });
 
          if ("yes" === $is_randomize) {
             fg_items = shuffleGalleryItems(fg_items);
