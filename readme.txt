@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.4
+Stable tag: 6.6.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -317,6 +317,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.6.5 - 21/05/2026 =
+
+- Fixed: EA Creative Button | Resolved invisible default text color issue when enabling gradient background
+- Fixed: EA Dual Color Heading | Resolved typography gradient global color issue in editor and frontend
+- Fixed: EA Filterable Gallery | Fixed “Open in New Tab” issue after using the Load More button
+- Fixed: EA Woo Product Images | Fixed broken image behavior issue
+- Improved: EA Login/Register Form | Added email OTP verification for secure login and registration
+- Improved: EA Event Calendar | Added individual event style options for Google Calendar events
+- Improved: EA Woo Product Carousel | Added Buy Now button option for direct product purchase
+- Improved: Improved security validation for AJAX requests in EA Product Quick View
+- Few minor bug fixes & improvements
 
 = 6.6.4 - 13/05/2026 =
 
