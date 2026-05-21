@@ -12510,7 +12510,7 @@ msgstr ""
 msgid "I already did"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1870, ../includes/Traits/Admin.php:1916
+#: ../includes/Traits/Admin.php:1870
 msgid "Maybe Later"
 msgstr ""
 
@@ -12523,11 +12523,15 @@ msgid "Never show again"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1909
-msgid "<strong>🌸 Spring Savings:</strong> Design Elementor website faster and smoother with 110+ advanced elements – now <strong>Flat 25% OFF</strong>! ⚡️"
+msgid "<strong>🏖️</strong> Your Elementor site deserves a Summer glow-up. Get 110+ advanced elements and build faster, smarter <strong>- up to $100 OFF</strong>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1913
-msgid "Upgrade To Pro Now"
+msgid "Upgrade To PRO Now"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1916
+msgid "I Don't Want Any Discount"
 msgstr ""
 
 #: ../includes/Traits/Ajax_Handler.php:112, ../includes/Traits/Ajax_Handler.php:1051, ../includes/Traits/Login_Registration.php:96, ../includes/Traits/Login_Registration.php:447, ../includes/Traits/Login_Registration.php:1106, ../includes/Traits/Login_Registration.php:1334
