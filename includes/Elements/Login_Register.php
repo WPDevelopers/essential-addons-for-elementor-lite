@@ -331,6 +331,7 @@ class Login_Register extends Widget_Base {
 		$this->init_style_login_recaptcha_controls();
 		$this->init_style_register_recaptcha_controls();
 		$this->init_style_lostpassword_recaptcha_controls();
+		$this->init_style_otp_controls();
 		do_action( 'eael/login-register/animated-character-style-controls', $this );
 		do_action( 'eael/login-register/after-style-controls', $this );
 
@@ -876,7 +877,7 @@ class Login_Register extends Widget_Base {
 				'content' 		  => sprintf(
 					/* translators: %1$s: Opening HTML link tag, %2$s: Closing HTML link tag. */
 					__( 'Please add them from %1$sDashboard >> Essential Addons >> Elements >> Login | Register Form%2$s Settings', 'essential-addons-for-elementor-lite' ),
-					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) . '" target="_blank"><strong>',
+					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings#/elements/login-register' ) ) . '" target="_blank"><strong>',
 					'</strong></a>'
 				),
 				'condition'       => [
@@ -895,7 +896,7 @@ class Login_Register extends Widget_Base {
 				'content' 		  => sprintf(
 					/* translators: %1$s: Opening HTML link tag, %2$s: Closing HTML link tag. */
 					__( 'Please add them from %1$sDashboard >> Essential Addons >> Elements >> Login | Register Form%2$s Settings', 'essential-addons-for-elementor-lite' ),
-					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) . '" target="_blank"><strong>',
+					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings#/elements/login-register' ) ) . '" target="_blank"><strong>',
 					'</strong></a>'
 				),
 				'condition'       => [
@@ -996,7 +997,7 @@ class Login_Register extends Widget_Base {
 				'content' 	  => sprintf(
 					/* translators: %1$s: Opening HTML link tag, %2$s: Closing HTML link tag. */
 					__( 'Please add it from %1$sDashboard >> Essential Addons >> Elements >> Login | Register Form%2$s Settings', 'essential-addons-for-elementor-lite' ),
-					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) . '" target="_blank"><strong>',
+					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings#/elements/login-register' ) ) . '" target="_blank"><strong>',
 					'</strong></a>'
 				),
 				'condition'       => [
@@ -1862,7 +1863,269 @@ class Login_Register extends Widget_Base {
 			'separator'   => 'before',
 		] );
 
+		$this->_init_otp_controls( 'login' );
+
 		$this->end_controls_section();
+	}
+
+	/**
+	 * Email OTP Verification controls — shared between login and register sections.
+	 *
+	 * @param string $form_type 'login' or 'register'
+	 */
+	protected function _init_otp_controls( $form_type = 'login' ) {
+		$prefix          = $form_type; // login | register
+		$default_subject = sprintf(
+			/* translators: %s: Site Name */
+			__( 'Your verification code for %s', 'essential-addons-for-elementor-lite' ),
+			get_option( 'blogname' )
+		);
+		$default_message  = __( 'Hello,', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= __( 'Your one-time verification code is: [otp_code]', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= __( 'This code will expire in [otp_expiry] minutes.', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= __( 'You can return to the verification screen here: [direct_login_url]', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= __( 'If you did not request this code, you can safely ignore this email.', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= __( 'Thanks,', 'essential-addons-for-elementor-lite' ) . "\r\n";
+		$default_message .= '[sitetitle]';
+
+		$this->add_control( "enable_{$prefix}_otp_heading", [
+			'label'     => __( 'Email OTP Verification', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( "enable_{$prefix}_otp", [
+			'label'        => 'login' === $form_type
+				? __( 'Enable OTP for Login', 'essential-addons-for-elementor-lite' )
+				: __( 'Enable OTP for Registration', 'essential-addons-for-elementor-lite' ),
+			'description'  => __( 'Require an email-based one-time password before completing this action.', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'default'      => '',
+		] );
+
+		$this->add_control( "{$prefix}_otp_expiry", [
+			'label'       => __( 'OTP Expiry Time (minutes)', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::NUMBER,
+			'min'         => 1,
+			'max'         => 60,
+			'step'        => 1,
+			'default'     => 5,
+			'condition'   => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+		] );
+
+		$this->add_control( "{$prefix}_otp_resend_cooldown", [
+			'label'       => __( 'Resend Cooldown (seconds)', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Minimum number of seconds before a user can request a new OTP.', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::NUMBER,
+			'min'         => 15,
+			'max'         => 600,
+			'step'        => 5,
+			'default'     => 60,
+			'condition'   => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+		] );
+
+		$this->add_control( "{$prefix}_otp_email_subject", [
+			'label'       => __( 'Email Subject', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'placeholder' => $default_subject,
+			'default'     => $default_subject,
+			'label_block' => true,
+			'render_type' => 'none',
+			'condition'   => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+			'ai' => [
+				'active' => true,
+			],
+		] );
+
+		$this->add_control( "{$prefix}_otp_email_message", [
+			'label'       => __( 'Email Message', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::WYSIWYG,
+			'placeholder' => __( 'Enter Your Custom Email Message..', 'essential-addons-for-elementor-lite' ),
+			'default'     => $default_message,
+			'label_block' => true,
+			'render_type' => 'none',
+			'condition'   => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+		] );
+
+		$this->add_control( "{$prefix}_otp_email_content_note", [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( '<strong>Note:</strong> Available tags are: [otp_code], [otp_expiry], [email], [sitetitle], [direct_login_url]. In HTML emails [direct_login_url] expands to a clickable link; in plain emails it expands to the bare URL. The link automatically carries an <code>?eael_otp=&lt;token&gt;</code> query arg so it works from any browser or device.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			'condition'       => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+			'render_type'     => 'none',
+		] );
+
+		$this->add_control( "{$prefix}_otp_email_content_type", [
+			'label'       => __( 'Email Content Type', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SELECT,
+			'default'     => 'html',
+			'render_type' => 'none',
+			'options'     => [
+				'html'  => __( 'HTML', 'essential-addons-for-elementor-lite' ),
+				'plain' => __( 'Plain', 'essential-addons-for-elementor-lite' ),
+			],
+			'condition'   => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+		] );
+
+		$this->add_control( "{$prefix}_otp_title_text", [
+			'label'       => __( 'OTP Form Title', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'default'     => __( 'Verify Your Email', 'essential-addons-for-elementor-lite' ),
+			'label_block' => true,
+			'condition'   => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+		] );
+
+		$this->add_control( "{$prefix}_otp_subtitle_text", [
+			'label'       => __( 'OTP Form Subtitle', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'default'     => __( 'We have sent a 6-digit verification code to your email. Please enter it below to continue.', 'essential-addons-for-elementor-lite' ),
+			'label_block' => true,
+			'condition'   => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+		] );
+
+		$this->add_control( "{$prefix}_otp_verify_button_text", [
+			'label'       => __( 'Verify Button Text', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'default'     => __( 'Verify', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+		] );
+
+		$this->add_control( "{$prefix}_otp_resend_text", [
+			'label'       => __( 'Resend Link Text', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'default'     => __( 'Resend Code', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				"enable_{$prefix}_otp" => 'yes',
+			],
+		] );
+
+		// Register-only: an admin-side switcher that flips OTP register behavior to
+		// "create user immediately + mark as pending until verified", and surfaces the
+		// flag in wp-admin → Users.
+		if ( 'register' === $prefix ) {
+			$users_list_link  = esc_url( admin_url( 'users.php' ) );
+			$flag_description = sprintf(
+				/* translators: %1$s: link to wp-admin users.php */
+				__( 'When enabled, new sign-ups are created immediately and marked as <em>email verification pending</em>. Pending users appear with a flag at <a href="%1$s" target="_blank" rel="noopener">%1$s</a>. The flag is removed automatically on successful OTP verification.', 'essential-addons-for-elementor-lite' ),
+				$users_list_link
+			);
+
+			$this->add_control( 'register_otp_show_user_flag', [
+				'label'        => __( 'Show Flag on User list', 'essential-addons-for-elementor-lite' ),
+				'description'  => $flag_description,
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'separator'    => 'before',
+				'condition'    => [
+					"enable_{$prefix}_otp" => 'yes',
+				],
+			] );
+		}
+	}
+
+	/**
+	 * Returns the active OTP flow ('login' | 'register') for this widget on the current request,
+	 * or empty string if no OTP challenge is in flight.
+	 *
+	 * Sources, in priority order:
+	 *   1. Editor "Preview OTP Field" switcher (editor only) — register wins if both are on.
+	 *   2. ?eael_otp=<token>&eael_otp_flow=<login|register> URL params (clicked email link).
+	 *   3. eael_lr_otp_token_<wid> cookie (same-device fallback).
+	 *
+	 * When this returns non-empty, EVERY form section other than the matching one must be
+	 * suppressed so the user only sees the OTP wrapper.
+	 *
+	 * @return string '' | 'login' | 'register'
+	 */
+	protected function eael_otp_active_flow() {
+		// Editor preview — only honored inside the editor canvas. Single global switcher
+		// (`otp_preview`) drives both login and register; we resolve which form's OTP UI to
+		// reveal by picking the currently-visible form (default form first, then any form
+		// with OTP enabled).
+		if ( $this->in_editor && ! empty( $this->ds['otp_preview'] ) && 'yes' === $this->ds['otp_preview'] ) {
+			$default          = isset( $this->ds['default_form_type'] ) ? $this->ds['default_form_type'] : '';
+			$login_enabled    = ! empty( $this->ds['enable_login_otp'] ) && 'yes' === $this->ds['enable_login_otp'];
+			$register_enabled = ! empty( $this->ds['enable_register_otp'] ) && 'yes' === $this->ds['enable_register_otp'];
+
+			if ( 'register' === $default && $register_enabled ) {
+				return 'register';
+			}
+			if ( 'login' === $default && $login_enabled ) {
+				return 'login';
+			}
+			if ( $register_enabled ) {
+				return 'register';
+			}
+			if ( $login_enabled ) {
+				return 'login';
+			}
+		}
+
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_GET['eael_otp'] ) && ! empty( $_GET['eael_otp_flow'] ) ) {
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$flow = sanitize_text_field( wp_unslash( $_GET['eael_otp_flow'] ) );
+			if ( 'login' === $flow || 'register' === $flow ) {
+				return $flow;
+			}
+		}
+
+		$cookie_name = 'eael_lr_otp_token_' . $this->get_id();
+		if ( ! empty( $_COOKIE[ $cookie_name ] ) ) {
+			$cookie_value = sanitize_text_field( wp_unslash( $_COOKIE[ $cookie_name ] ) );
+			if ( strpos( $cookie_value, '|' ) !== false ) {
+				list( , $cookie_flow ) = array_map( 'sanitize_text_field', explode( '|', $cookie_value, 2 ) );
+				if ( 'login' === $cookie_flow || 'register' === $cookie_flow ) {
+					return $cookie_flow;
+				}
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Should the OTP UI be force-shown for this form on the current request?
+	 *
+	 * Returns true when:
+	 *   - the user is in the Elementor editor and toggled the Preview switcher on, OR
+	 *   - a non-AJAX OTP challenge is in flight (the OTP cookie is present for this widget+flow).
+	 *
+	 * The Preview switcher is intentionally honored only inside the editor, so even if the
+	 * value is persisted in the database it has zero effect on the live frontend.
+	 *
+	 * @param string $form_type 'login' or 'register'
+	 * @return bool
+	 */
+	protected function eael_otp_should_force_show( $form_type ) {
+		// The pending-registration intercept in log_user_in() sets an OTP cookie using flow='login'
+		// even when enable_login_otp is off. We must honour that cookie so the page-reload path
+		// (non-AJAX) also shows the OTP UI and prevents a flash of the login form.
+		return $this->eael_otp_active_flow() === $form_type;
 	}
 
 	public function eael_get_role_names() {
@@ -2415,7 +2678,7 @@ class Login_Register extends Widget_Base {
 			'raw'  => sprintf(
 				/* translators: %s: Link to the Login Register Form Settings page. */
 				__( 'Select the type of fields you want to show in the registration form. You can enable custom fields from EA Dashboard » Elements » %s.', 'essential-addons-for-elementor-lite' ),
-				'<a href="' . esc_url( site_url('/wp-admin/admin.php?page=eael-settings') ) . '" target="_blank">Login Register Form Settings</a>'
+				'<a href="' . esc_url( site_url('/wp-admin/admin.php?page=eael-settings#/elements/login-register') ) . '" target="_blank">Login Register Form Settings</a>'
 			),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
@@ -2736,6 +2999,8 @@ class Login_Register extends Widget_Base {
 			'options'   => $user_role,
 			'separator' => 'before',
 		] );
+
+		$this->_init_otp_controls( 'register' );
 
 		$this->end_controls_section();
 	}
@@ -5374,6 +5639,218 @@ class Login_Register extends Widget_Base {
 	}
 
 	/**
+	 * Style controls for the Email OTP Verification UI.
+	 */
+	protected function init_style_otp_controls() {
+		$this->start_controls_section( 'section_style_otp', [
+			'label' => __( 'Email OTP Verification', 'essential-addons-for-elementor-lite' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+			'conditions' => [
+				'relation' => 'or',
+				'terms' => [
+					[
+						'name'     => 'enable_login_otp',
+						'value'    => 'yes',
+						'operator' => '===',
+					],
+					[
+						'name'     => 'enable_register_otp',
+						'value'    => 'yes',
+						'operator' => '===',
+					],
+				],
+			],
+		] );
+
+		/*
+		 * Editor-only preview switcher.
+		 *
+		 * Login and register share the same OTP UI component, so one switcher drives both.
+		 * `render_type => 'template'` re-renders the widget when toggled. The value is
+		 * persisted by Elementor but deliberately ignored on the live frontend
+		 * (see eael_otp_active_flow() — gated by `$this->in_editor`), so even though it's
+		 * saved to the database it has zero effect outside the editor canvas.
+		 *
+		 * In the editor canvas, when this is on, the OTP UI is revealed for whichever form
+		 * is currently visible: the configured default form first, then any form that has
+		 * its own OTP toggle on.
+		 */
+		$this->add_control( 'otp_preview', [
+			'label'        => __( 'Preview OTP Field', 'essential-addons-for-elementor-lite' ),
+			'description'  => __( 'Editor only — force the OTP verification field to be visible so you can style it without triggering a real email. Reveals the OTP UI on whichever form is currently visible. Has no effect on the live site.', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'On', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'Off', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'default'      => '',
+			'render_type'  => 'template',
+		] );
+
+		$this->add_responsive_control( 'otp_container_padding', [
+			'label'      => __( 'Container Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', 'em', '%' ],
+			'selectors'  => [
+				'{{WRAPPER}} .eael-lr-otp-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( 'otp_container_bg', [
+			'label'     => __( 'Container Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .eael-lr-otp-wrapper' => 'background-color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => 'otp_container_border',
+			'selector' => '{{WRAPPER}} .eael-lr-otp-wrapper',
+		] );
+
+		$this->add_control( 'otp_title_heading', [
+			'label'     => __( 'Title', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'otp_title_color', [
+			'label'     => __( 'Title Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .eael-lr-otp-title' => 'color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'otp_title_typography',
+			'selector' => '{{WRAPPER}} .eael-lr-otp-title',
+		] );
+
+		$this->add_control( 'otp_subtitle_heading', [
+			'label'     => __( 'Subtitle', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'otp_subtitle_color', [
+			'label'     => __( 'Subtitle Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .eael-lr-otp-subtitle' => 'color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'otp_subtitle_typography',
+			'selector' => '{{WRAPPER}} .eael-lr-otp-subtitle',
+		] );
+
+		$this->add_control( 'otp_input_heading', [
+			'label'     => __( 'Input Field', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'otp_input_color', [
+			'label'     => __( 'Input Text Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .eael-lr-otp-input' => 'color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_control( 'otp_input_bg', [
+			'label'     => __( 'Input Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .eael-lr-otp-input' => 'background-color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'otp_input_typography',
+			'selector' => '{{WRAPPER}} .eael-lr-otp-input',
+		] );
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => 'otp_input_border',
+			'selector' => '{{WRAPPER}} .eael-lr-otp-input',
+		] );
+
+		$this->add_responsive_control( 'otp_input_padding', [
+			'label'      => __( 'Input Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', 'em', '%' ],
+			'selectors'  => [
+				'{{WRAPPER}} .eael-lr-otp-input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( 'otp_button_heading', [
+			'label'     => __( 'Verify Button', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'otp_button_color', [
+			'label'     => __( 'Button Text Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .eael-lr-otp-verify-btn' => 'color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_control( 'otp_button_bg', [
+			'label'     => __( 'Button Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .eael-lr-otp-verify-btn' => 'background-color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'otp_button_typography',
+			'selector' => '{{WRAPPER}} .eael-lr-otp-verify-btn',
+		] );
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => 'otp_button_border',
+			'selector' => '{{WRAPPER}} .eael-lr-otp-verify-btn',
+		] );
+
+		$this->add_responsive_control( 'otp_button_padding', [
+			'label'      => __( 'Button Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', 'em', '%' ],
+			'selectors'  => [
+				'{{WRAPPER}} .eael-lr-otp-verify-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( 'otp_resend_heading', [
+			'label'     => __( 'Resend Link', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'otp_resend_color', [
+			'label'     => __( 'Resend Link Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .eael-lr-otp-resend' => 'color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'otp_resend_typography',
+			'selector' => '{{WRAPPER}} .eael-lr-otp-resend',
+		] );
+
+		$this->end_controls_section();
+	}
+
+	/**
 	 * Print style controls for a specific type of button.
 	 *
 	 * @param string $button_type the type of the button. accepts login or register.
@@ -6268,10 +6745,22 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_login_form() {
+		// If an OTP challenge is in flight for a DIFFERENT form (e.g. ?eael_otp_flow=register),
+		// suppress the entire login section so only the OTP UI is visible on the page.
+		$otp_active_flow = $this->eael_otp_active_flow();
+		if ( $otp_active_flow && 'login' !== $otp_active_flow ) {
+			return;
+		}
+
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$default_hide_class = ( 'register' === $this->default_form || 'lostpassword' === $this->default_form || $this->should_print_resetpassword_form_editor || isset($_GET['eael-register']) || isset($_GET['eael-lostpassword']) || isset($_GET['eael-resetpassword']) ) ? 'eael-lr-d-none' : '';
+
+			// Force-show this section if a login OTP challenge is in progress, or the editor preview is on.
+			if ( $this->eael_otp_should_force_show( 'login' ) ) {
+				$default_hide_class = '';
+			}
 
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
@@ -6350,7 +6839,8 @@ class Login_Register extends Widget_Base {
 			$show_login_spinner  = !empty( $this->ds['login_btn_show_spinner'] ) ? $this->ds['login_btn_show_spinner'] : '';
 			$err_msg_position = $this->ds['err_message_position_login'];
 			?>
-            <section id="eael-login-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>" data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>" data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
+            <?php $otp_active_class = $this->eael_otp_should_force_show( 'login' ) ? ' eael-lr-otp-active' : ''; ?>
+            <section id="eael-login-form-wrapper" class="<?php echo esc_attr( trim( $default_hide_class . $otp_active_class ) ); ?>" data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>" data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
                 <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
 					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
@@ -6492,7 +6982,10 @@ class Login_Register extends Widget_Base {
 								do_action( 'eael/login-register/before-login-form-close', $this );
 								?>
                             </form>
-							<?php do_action( 'eael/login-register/after-login-form', $this ); ?>
+							<?php
+							do_action( 'eael/login-register/after-login-form', $this );
+							$this->print_otp_form( 'login' );
+							?>
                         </div>
 						<?php
 						if ( 'right' === $this->form_illustration_pos ) {
@@ -6526,9 +7019,21 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_register_form() {
+		// If an OTP challenge is in flight for a DIFFERENT form (e.g. ?eael_otp_flow=login),
+		// suppress the entire register section so only the OTP UI is visible on the page.
+		$otp_active_flow = $this->eael_otp_active_flow();
+		if ( $otp_active_flow && 'register' !== $otp_active_flow ) {
+			return;
+		}
+
 		if ( $this->should_print_register_form ) {
 			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$default_hide_class = ( 'login' === $this->default_form || 'lostpassword' === $this->default_form || $this->should_print_resetpassword_form_editor || isset($_GET['eael-lostpassword']) || isset($_GET['eael-resetpassword']) ) && !isset($_GET['eael-register']) ? 'eael-lr-d-none' : ''; //eael-register flag for show error/success message when formal form submit
+
+			// Force-show this section if a register OTP challenge is in progress, or the editor preview is on.
+			if ( $this->eael_otp_should_force_show( 'register' ) ) {
+				$default_hide_class = '';
+			}
 			$is_pass_valid      = false; // Does the form has a password field?
 			$is_pass_confirmed  = false;
 			// placeholders to flag if user use one type of field more than once.
@@ -6618,11 +7123,13 @@ class Login_Register extends Widget_Base {
 			$password_one_special = !empty( $this->ds['weak_pass_one_special'] ) ? true : false;
 			$err_msg_position = $this->ds['err_message_position_registration'];
 
+			$otp_active_class = $this->eael_otp_should_force_show( 'register' ) ? ' eael-lr-otp-active' : '';
+
 			ob_start();
 			?>
             <section
                     id="eael-register-form-wrapper"
-                    class="<?php echo esc_attr( $default_hide_class ); ?>"
+                    class="<?php echo esc_attr( trim( $default_hide_class . $otp_active_class ) ); ?>"
                     data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
                     data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>"
                     data-use-weak-password="<?php echo esc_attr( $use_weak_password ); ?>"
@@ -6879,7 +7386,10 @@ class Login_Register extends Widget_Base {
 							do_action( 'eael/login-register/before-register-form-close', $this );
 							?>
                         </form>
-						<?php do_action( 'eael/login-register/after-register-form', $this ); ?>
+						<?php
+						do_action( 'eael/login-register/after-register-form', $this );
+						$this->print_otp_form( 'register' );
+						?>
                     </div>
 					<?php if ( 'right' === $this->form_illustration_pos ) {
 						$this->print_form_illustration();
@@ -6906,6 +7416,11 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_lostpassword_form(){
+		// Suppress this section entirely while any OTP challenge is in flight.
+		if ( $this->eael_otp_active_flow() ) {
+			return;
+		}
+
 		if ( $this->should_print_lostpassword_form ) {
 			$form_not_enabled = ! ( 'lostpassword' === $this->default_form || ( 'yes' === $this->get_settings_for_display( 'show_lost_password' ) && 'form' === $this->get_settings_for_display( 'lost_password_link_type' ) ) );
 
@@ -7066,6 +7581,11 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_resetpassword_form(){
+		// Suppress this section entirely while any OTP challenge is in flight.
+		if ( $this->eael_otp_active_flow() ) {
+			return;
+		}
+
 		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || 'lostpassword' === $this->default_form || isset($_GET['eael-register']) || isset($_GET['eael-lostpassword']) ) && !isset($_GET['eael-resetpassword']) ? 'eael-lr-d-none' : '';
 		$default_hide_class = $this->should_print_resetpassword_form_editor ? '' : $default_hide_class;
@@ -7321,6 +7841,102 @@ class Login_Register extends Widget_Base {
 			<?php } ?>
         </div>
 		<?php
+	}
+
+	/**
+	 * Print the Email OTP Verification UI for the given form type.
+	 * It's hidden by default; the frontend JS reveals it after the form submission triggers an OTP step.
+	 *
+	 * @param string $form_type 'login' or 'register'
+	 */
+	protected function print_otp_form( $form_type = 'login' ) {
+		$prefix  = ( 'login' === $form_type ) ? 'login' : 'register';
+		$enabled = ! empty( $this->ds[ "enable_{$prefix}_otp" ] ) && 'yes' === $this->ds[ "enable_{$prefix}_otp" ];
+
+		// Always render the OTP wrapper — even when the OTP toggle is off — so the DOM anchor
+		// exists for the pending-registration intercept: if a user registered with OTP required
+		// but never verified, `log_user_in()` blocks the login and returns `otp_required: true`.
+		// Without the wrapper the JS has nowhere to inject the OTP screen and silently does nothing.
+		// The wrapper starts `eael-d-none` and is only revealed by JS on demand.
+
+		$title       = ! empty( $this->ds[ "{$prefix}_otp_title_text" ] ) ? $this->ds[ "{$prefix}_otp_title_text" ] : __( 'Verify Your Email', 'essential-addons-for-elementor-lite' );
+		$subtitle    = ! empty( $this->ds[ "{$prefix}_otp_subtitle_text" ] ) ? $this->ds[ "{$prefix}_otp_subtitle_text" ] : __( 'We have sent a 6-digit verification code to your email. Please enter it below to continue.', 'essential-addons-for-elementor-lite' );
+		$verify_text = ! empty( $this->ds[ "{$prefix}_otp_verify_button_text" ] ) ? $this->ds[ "{$prefix}_otp_verify_button_text" ] : __( 'Verify', 'essential-addons-for-elementor-lite' );
+		$resend_text = ! empty( $this->ds[ "{$prefix}_otp_resend_text" ] ) ? $this->ds[ "{$prefix}_otp_resend_text" ] : __( 'Resend Code', 'essential-addons-for-elementor-lite' );
+		$cooldown    = ! empty( $this->ds[ "{$prefix}_otp_resend_cooldown" ] ) ? (int) $this->ds[ "{$prefix}_otp_resend_cooldown" ] : 60;
+
+		// Hydrate the OTP token. Two sources are accepted:
+		//   1. ?eael_otp=<token>&eael_otp_flow=<flow>  — links emailed to the user
+		//   2. eael_lr_otp_token_<wid> cookie          — same-device fallback after non-AJAX submit
+		$widget_id    = $this->get_id();
+		$cookie_name  = 'eael_lr_otp_token_' . $widget_id;
+		$cookie_value = isset( $_COOKIE[ $cookie_name ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ $cookie_name ] ) ) : '';
+		$cookie_token = '';
+		$cookie_flow  = '';
+		if ( $cookie_value && strpos( $cookie_value, '|' ) !== false ) {
+			list( $cookie_token, $cookie_flow ) = array_map( 'sanitize_text_field', explode( '|', $cookie_value, 2 ) );
+		}
+
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_GET['eael_otp'] ) && ! empty( $_GET['eael_otp_flow'] ) ) {
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$query_flow = sanitize_text_field( wp_unslash( $_GET['eael_otp_flow'] ) );
+			if ( $query_flow === $form_type ) {
+				//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$cookie_token = sanitize_text_field( wp_unslash( $_GET['eael_otp'] ) );
+				$cookie_flow  = $query_flow;
+			}
+		}
+
+		$auto_show      = ( $cookie_token && $cookie_flow === $form_type );
+		$editor_preview = ( $enabled && $this->in_editor && ! empty( $this->ds['otp_preview'] ) && 'yes' === $this->ds['otp_preview'] && $this->eael_otp_active_flow() === $form_type );
+		$visible        = ( $auto_show || $editor_preview );
+
+		// Compute the remaining resend cooldown server-side from the OTP transient so the
+		// countdown survives page reloads. The transient (eael_lr_otp_<token>) is the canonical
+		// store and is deleted on verify-success or on expiry, so we don't need any usermeta.
+		$initial_remaining_cooldown = 0;
+		if ( $cookie_token ) {
+			// Hardcoded prefix mirrors Login_Registration::$otp_transient_prefix to avoid pulling
+			// the trait into the widget class.
+			$session = get_transient( 'eael_lr_otp_' . $cookie_token );
+			if ( is_array( $session ) && ! empty( $session['last_sent'] ) && ! empty( $session['cooldown'] ) ) {
+				$elapsed                    = time() - (int) $session['last_sent'];
+				$initial_remaining_cooldown = max( 0, (int) $session['cooldown'] - $elapsed );
+			}
+		}
+		?>
+		<div class="eael-lr-otp-wrapper<?php echo $visible ? '' : ' eael-d-none'; ?><?php echo $editor_preview ? ' eael-lr-otp-editor-preview' : ''; ?>"
+			 data-remaining-cooldown="<?php echo esc_attr( $initial_remaining_cooldown ); ?>"
+			 data-flow="<?php echo esc_attr( $form_type ); ?>"
+			 data-widget-id="<?php echo esc_attr( $widget_id ); ?>"
+			 data-cooldown="<?php echo esc_attr( $cooldown ); ?>"
+			 data-otp-nonce="<?php echo esc_attr( wp_create_nonce( 'eael_lr_otp' ) ); ?>"
+			 data-ajax-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
+			<h3 class="eael-lr-otp-title"><?php echo esc_html( $title ); ?></h3>
+			<p class="eael-lr-otp-subtitle"><?php echo esc_html( $subtitle ); ?></p>
+			<input type="hidden" class="eael-lr-otp-token" value="<?php echo esc_attr( $cookie_token ); ?>">
+			<div class="eael-lr-otp-input-row">
+				<input type="text"
+					   inputmode="numeric"
+					   autocomplete="one-time-code"
+					   maxlength="6"
+					   pattern="[0-9]{6}"
+					   class="eael-lr-otp-input"
+					   placeholder="------">
+			</div>
+			<button type="button" class="eael-lr-otp-verify-btn eael-lr-btn eael-lr-btn-block">
+				<?php echo esc_html( $verify_text ); ?>
+			</button>
+			<div class="eael-lr-otp-resend-row">
+				<a href="#" class="eael-lr-otp-resend"><?php echo esc_html( $resend_text ); ?></a>
+				<span class="eael-lr-otp-cooldown-text"></span>
+			</div>
+			<div class="eael-lr-otp-message" aria-live="polite"></div>
+		</div>
+		<?php
+		// Note: the auto-show cookie is short-lived (its lifetime equals the OTP expiry) and is also
+		// cleared client-side by the OTP JS once the UI is shown, so a refresh after success won't replay it.
 	}
 
 	protected function print_necessary_hidden_fields( $form_type = 'login' ) {
