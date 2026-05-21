@@ -34,6 +34,7 @@ eael.hooks.addAction("init", "ea", () => {
 		}
 
 		var $isMarqueeLite = $wooProductCarousel.hasClass("no-gsap");
+		var $slideCount = $wooProductCarousel.find("> .swiper-wrapper > .swiper-slide").length;
 
 		var $pause_on_hover =
 				$wooProductCarousel.data("pause-on-hover") !== undefined
@@ -78,6 +79,17 @@ eael.hooks.addAction("init", "ea", () => {
 			$rotate = $wooProductCarousel.data("rotate") !== undefined ? $wooProductCarousel.data("rotate") : 50,
 			$stretch = $wooProductCarousel.data("stretch") !== undefined ? $wooProductCarousel.data("stretch") : 10;
 
+		// Swiper's loop requires at least slidesPerView*2 real slides on every
+		// breakpoint, otherwise navigation arrows silently stop working on
+		// desktop (issue #802). Disable loop when the slide count can't sustain
+		// it across the widest configured slidesPerView.
+		var $maxSlidesPerView = Math.max(
+			parseInt($items, 10) || 1,
+			parseInt($items_tablet, 10) || 1,
+			parseInt($items_mobile, 10) || 1
+		);
+		var $safeLoop = $loop && $slideCount > $maxSlidesPerView ? $loop : 0;
+
 		const $carouselOptions = {
 			direction: "horizontal",
 			speed: $speed,
@@ -85,7 +97,7 @@ eael.hooks.addAction("init", "ea", () => {
 			centeredSlides: $centeredSlides,
 			grabCursor: $grab_cursor,
 			autoHeight: true,
-			loop: $isMarqueeLite ? true : $loop,
+			loop: $isMarqueeLite ? true : $safeLoop,
 			autoplay: {
 				delay: $isMarqueeLite ? 0 : $autoplay,
 				disableOnInteraction: false,
@@ -98,6 +110,9 @@ eael.hooks.addAction("init", "ea", () => {
 				nextEl: $arrow_next,
 				prevEl: $arrow_prev,
 			},
+			observer: true,
+			observeParents: true,
+			watchOverflow: true,
 			freeMode: false,
 			allowTouchMove: !$isMarqueeLite,
 			slidesPerView: $items,
@@ -248,7 +263,7 @@ eael.hooks.addAction("init", "ea", () => {
 					centeredSlides: $centeredSlides,
 					touchRatio: 0.2,
 					slideToClickedSlide: true,
-					loop: $loop,
+					loop: $safeLoop,
 					slidesPerGroup: 1,
 					// loopedSlides: $items,
 					slidesPerView: 3,
