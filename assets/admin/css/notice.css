@@ -263,7 +263,8 @@ span.coupon-code {
 }
 
 @media screen and (max-width: 767px) {
-    .notice-essential-addons-for-elementor-lite-bfcm_2025_notice {
+    .notice-essential-addons-for-elementor-lite-bfcm_2025_notice,
+    .notice-essential-addons-for-elementor-lite-summer_campaign_2026_notice {
         display: none !important;
     }
 }
