@@ -2984,6 +2984,32 @@ class GravityForms extends Widget_Base {
                 <?php GFCommon::gf_global() ?>
 				<?php GFCommon::gf_vars() ?>
 			</script>
+
+            <script type="text/javascript">
+                /* EA Gravity Forms - ensure GF's per-form post-render event dispatches
+                 * even when the widget's render context prevents GF's standard
+                 * GFFormDisplay::footer_init_scripts() per-form trigger from executing.
+                 * Without this, third-party GF add-ons (e.g. Gravity Forms reCAPTCHA
+                 * Add-On v2.2.2+) that hook into `gform/post_render` to register
+                 * submission filters will never fire, breaking v3 token population.
+                 */
+                ( function () {
+                    var formId = <?php echo (int) $eael_form_id; ?>;
+                    if ( typeof window.gform === 'undefined'
+                         || typeof window.gform.initializeOnLoaded !== 'function' ) {
+                        return;
+                    }
+                    window.gform.initializeOnLoaded( function () {
+                        var flag = '__eaelGfPostRenderFired_' + formId;
+                        if ( window[ flag ] ) { return; }
+                        if ( window.gform && window.gform.core
+                             && typeof window.gform.core.triggerPostRenderEvents === 'function' ) {
+                            window[ flag ] = true;
+                            window.gform.core.triggerPostRenderEvents( formId, 1 );
+                        }
+                    } );
+                } )();
+            </script>
             <?php
         }
     }
