@@ -1010,6 +1010,11 @@ trait Ajax_Handler {
 			wp_send_json_error( __( 'Product not found or not accessible', 'essential-addons-for-elementor-lite' ) );
 		}
 
+		// Block password-protected products for users who cannot edit them
+		if ( ! current_user_can( 'edit_post', $product_id ) && post_password_required( $post ) ) {
+			wp_send_json_error( __( 'Product not found or not accessible', 'essential-addons-for-elementor-lite' ) );
+		}
+
 		setup_postdata( $post );
 
 		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );

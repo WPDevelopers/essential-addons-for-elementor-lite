@@ -1,16 +1,18 @@
 import consumer from "../context";
+import {useNavigate} from "react-router-dom";
 
 function ElementItem(props) {
     const eaData = props.source[props.index],
         isProActivated = localize.eael_dashboard.is_eapro_activate,
         isDisabled = eaData.is_pro && !isProActivated,
         {eaState, eaDispatch} = consumer(),
+        navigate = useNavigate(),
         checked = !isDisabled && eaState.elements[props.index],
         changeHandler = (e) => {
             eaDispatch({type: 'ON_CHANGE_ELEMENT', payload: {key: props.index, value: e.target.checked}});
         },
         clickHandler = () => {
-            eaDispatch({type: 'OPEN_MODAL', payload: {key: eaData.setting.id, title: eaData.title}});
+            navigate(`/${props.urlType}/${props.index}`);
         },
         goProModal = () => {
             eaDispatch({type: 'GO_PRO_MODAL'});

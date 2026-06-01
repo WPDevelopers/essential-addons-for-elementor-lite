@@ -558,6 +558,14 @@ use HelperTrait;
             [
                 'name'      => 'eael_creative_button_gradient_background',
                 'types'     => ['gradient', 'classic'],
+                'fields_options' => [
+                    'background' => [
+                        'default' => 'gradient',
+                    ],
+                    'color' => [
+                        'default' => '#7A3CFF',
+                    ],
+                ],
                 'selector'  => apply_filters( 'eael_creative_button/normal/gradient_background/selector', $eael_creative_button_gradient_background_selector ),
                 'condition' => [
                     'use_gradient_background' => 'yes',
