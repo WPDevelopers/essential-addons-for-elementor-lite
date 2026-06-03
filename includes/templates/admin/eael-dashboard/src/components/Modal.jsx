@@ -35,9 +35,10 @@ function Modal() {
         },
         eaData = localize.eael_dashboard.modal,
         isAccordionModal = ['businessReviewsSetting', 'pinterestFeedSetting'].includes(eaState.modalID),
-        // Pinterest connected state needs no footer — connect/disconnect are link actions, no Save.
+        // Pinterest connect/connected states render their own actions — no generic Save footer.
         pinterestConnected = eaState.modalID === 'pinterestFeedSetting'
-            && eaData?.pinterestFeedSetting?.accordion?.pinterestFeed?.profile !== undefined,
+            && (eaData?.pinterestFeedSetting?.accordion?.pinterestFeed?.profile !== undefined
+                || eaData?.pinterestFeedSetting?.accordion?.pinterestFeed?.connect_intro !== undefined),
         modalWrapperClasses = ['ea__modal-content-wrapper'],
         modalBodyClasses = ['ea__modal-body'];
 

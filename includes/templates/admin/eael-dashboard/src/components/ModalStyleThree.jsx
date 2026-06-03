@@ -102,6 +102,24 @@ function ModalStyleThree() {
                                        type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
+                        {eaData.accordion[item]?.connect_intro !== undefined && <div className="ea__pf-connect">
+                            <div className="ea__pf-connect-head">
+                                {eaData.accordion[item].connect_intro.icon && <span className="ea__pf-notice-icon">
+                                    <img src={localize.eael_dashboard.reactPath + eaData.accordion[item].connect_intro.icon} alt=""/>
+                                </span>}
+                                <h3 className="ea__pf-connect-title">{eaData.accordion[item].connect_intro.title}</h3>
+                            </div>
+                            {eaData.accordion[item].connect_intro.text && <p className="ea__pf-connect-text">{eaData.accordion[item].connect_intro.text}</p>}
+                            {eaData.accordion[item].connect_intro.illustration && <div className="ea__pf-connect-art" aria-hidden="true">
+                                <img className="ea__pf-connect-img" src={localize.eael_dashboard.reactPath + eaData.accordion[item].connect_intro.illustration} alt=""/>
+                            </div>}
+                            {eaData.accordion[item]?.auth_button !== undefined && <div className="ea__pf-connect-actions">
+                                <a href={eaData.accordion[item].auth_button.url} target="_blank" rel="noopener noreferrer"
+                                    className="ea__pf-connect-btn">
+                                    {eaData.accordion[item].auth_button.text}
+                                </a>
+                            </div>}
+                        </div>}
                         {eaData.accordion[item]?.connected_notice !== undefined && <div className="ea__pf-notice">
                             {eaData.accordion[item].connected_notice.icon && <span className="ea__pf-notice-icon">
                                 <img src={localize.eael_dashboard.reactPath + eaData.accordion[item].connected_notice.icon} alt=""/>
@@ -132,7 +150,7 @@ function ModalStyleThree() {
                             </div>
                         </div>}
                         <div className="flex flex-col gap-2 ea__auth-action-wrapper">
-                            {eaData.accordion[item]?.auth_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                            {eaData.accordion[item]?.auth_button !== undefined && eaData.accordion[item]?.connect_intro === undefined && <div className="flex gap-4 items-center ea__auth-action">
                                 <a href={eaData.accordion[item].auth_button.url} target="_blank" rel="noopener noreferrer"
                                 className="ea__btn ea__btn-primary ea__auth-link">
                                     {eaData.accordion[item].auth_button.text}
