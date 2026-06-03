@@ -2005,7 +2005,6 @@ section.ea__modal-wrapper {
 
 .ea__modal-body--accordion {
   flex: 1;
-  min-height: 520px;
 }
 
 @media (max-width: 1024px), (max-height: 780px) {
@@ -2265,27 +2264,24 @@ section.ea__modal-wrapper {
 .ea__modal-body .ea__pf-profile-name {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-color-25);
+  gap: 5px;
+  font-size: 16px;
+  color: #475467;
   word-break: break-word;
 }
 
 .ea__modal-body .ea__pf-name-icon {
-  width: 18px;
-  height: 18px;
+  width: 12px;
+  height: 12px;
   display: block;
 }
 
 .ea__modal-body .ea__pf-badge {
   display: inline-flex;
   align-items: center;
-  padding: 4px 12px;
+  padding: 0 5px;
   border-radius: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 11px;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -2306,7 +2302,7 @@ section.ea__modal-wrapper {
   padding: 9px 19px;
   border-radius: 6px;
   text-decoration: none;
-  background: transparent;
+  background: #FEF3F2;
   color: #d63638;
   border: 1px solid #d63638;
   transition: all 0.2s ease;
