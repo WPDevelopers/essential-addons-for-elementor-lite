@@ -35,6 +35,9 @@ function Modal() {
         },
         eaData = localize.eael_dashboard.modal,
         isAccordionModal = ['businessReviewsSetting', 'pinterestFeedSetting'].includes(eaState.modalID),
+        // Pinterest connected state needs no footer — connect/disconnect are link actions, no Save.
+        pinterestConnected = eaState.modalID === 'pinterestFeedSetting'
+            && eaData?.pinterestFeedSetting?.accordion?.pinterestFeed?.profile !== undefined,
         modalWrapperClasses = ['ea__modal-content-wrapper'],
         modalBodyClasses = ['ea__modal-body'];
 
@@ -59,7 +62,7 @@ function Modal() {
                         {['loginRegisterSetting', 'businessReviewsSetting', 'pinterestFeedSetting', 'postDuplicatorSetting'].includes(eaState.modalID) ||
                             <ModalStyleOne/>}
                     </div>
-                    <div className="ea__modal-footer flex items-center">
+                    {!pinterestConnected && <div className="ea__modal-footer flex items-center">
                         {['loginRegisterSetting', 'businessReviewsSetting', 'pinterestFeedSetting'].includes(eaState.modalID) &&
                             <a className="ea__api-link" target="_blank"
                                href={eaData[eaState.modalID].link.url}>{eaData[eaState.modalID].link.text}</a>}
@@ -67,7 +70,7 @@ function Modal() {
                             <button className="ea__modal-btn">Save {eaState.btnLoader === 'modal' &&
                                 <span className="eael_btn_loader"></span>}</button>
                         </div>
-                    </div>
+                    </div>}
                     <div className="ea__modal-close-btn" onClick={clickHandler}>
                         <i className="ea-dash-icon ea-close"></i>
                     </div>
