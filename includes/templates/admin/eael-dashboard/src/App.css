@@ -2192,6 +2192,141 @@ section.ea__modal-wrapper {
   font-weight: 500;
 }
 
+/* Pinterest Feed — connected state */
+.ea__modal-body .ea__pf-notice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.ea__modal-body .ea__pf-notice-icon img {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.ea__modal-body .ea__pf-notice-text {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-color-25);
+  margin: 0;
+}
+
+.ea__modal-body .ea__pf-profile-card {
+  padding: 18px 20px;
+  background: var(--base-background);
+  border: 1px solid var(--border-color-base);
+  border-radius: 10px;
+}
+
+.ea__modal-body .ea__pf-profile-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ea__modal-body .ea__pf-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+}
+
+.ea__modal-body .ea__pf-profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--background-13);
+  display: block;
+}
+
+.ea__modal-body .ea__pf-online-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #21a85a;
+  border: 2px solid #fff;
+}
+
+.ea__modal-body .ea__pf-profile-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-right: auto;
+}
+
+.ea__modal-body .ea__pf-profile-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-color-25);
+  word-break: break-word;
+}
+
+.ea__modal-body .ea__pf-name-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.ea__modal-body .ea__pf-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ea__modal-body .ea__pf-badge--success {
+  background: #21a85a;
+  color: #fff;
+}
+
+.ea__modal-body .ea__pf-badge--error {
+  background: #d63638;
+  color: #fff;
+}
+
+.ea__modal-body .ea__pf-profile-action {
+  flex-shrink: 0;
+  align-self: center;
+  padding: 9px 19px;
+  border-radius: 6px;
+  text-decoration: none;
+  background: transparent;
+  color: #d63638;
+  border: 1px solid #d63638;
+  transition: all 0.2s ease;
+}
+
+.ea__modal-body .ea__pf-profile-action:hover {
+  background: #d63638;
+  color: #fff;
+}
+
+/* Single-item modal — no accordion header, content shows directly */
+.ea__modal-body .ea__api-key-according--single .ea__according-content {
+  border-top: none;
+}
+
+.ea__modal-body .ea__api-key-according--single .ea__according-content.accordion-show {
+  padding-top: 0;
+  max-height: none;
+}
+
 .ea__modal-body p.info--text:before {
   position: absolute;
   content: '\e924';

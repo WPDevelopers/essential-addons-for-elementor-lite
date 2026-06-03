@@ -38,6 +38,9 @@ function ModalStyleThree() {
             }
         };
 
+    // Single-item modals (e.g. Pinterest) drop the collapsible accordion — content shows directly.
+    const isSingleItem = Object.keys(eaData.accordion).length === 1;
+
     return (
         <>
             {Object.keys(eaData.accordion).map((item, index) => {
@@ -45,8 +48,10 @@ function ModalStyleThree() {
                     return;
                 }
 
-                return <div className="ea__api-key-according" key={index}>
-                    <div className="ea__according-title" onClick={() => clickHandler(item)}>
+                const isOpen = isSingleItem || item === eaState.modalAccordion;
+
+                return <div className={isSingleItem ? 'ea__api-key-according ea__api-key-according--single' : 'ea__api-key-according'} key={index}>
+                    {!isSingleItem && <div className="ea__according-title" onClick={() => clickHandler(item)}>
                         <div className="flex justify-between items-center gap-2 pointer">
                         <span className="flex gap-2 items-center">
                             <img src={localize.eael_dashboard.reactPath + eaData.accordion[item].icon} alt="icon"/>
@@ -62,9 +67,9 @@ function ModalStyleThree() {
                         </span>
                             <i className={item === eaState.modalAccordion ? 'ea-dash-icon ea-dropdown rotate-180' : 'ea-dash-icon ea-dropdown'}></i>
                         </div>
-                    </div>
+                    </div>}
                     <div
-                        className={item === eaState.modalAccordion ? 'ea__according-content flex flex-col gap-2 accordion-show' : 'ea__according-content flex flex-col gap-2'}>
+                        className={isOpen ? 'ea__according-content flex flex-col gap-2 accordion-show' : 'ea__according-content flex flex-col gap-2'}>
                         {eaData.accordion[item]?.info !== undefined && <div className="flex flex-col gap-2">
                             <p className="info--text">
                                 {eaData.accordion[item].info}
@@ -97,6 +102,35 @@ function ModalStyleThree() {
                                        type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
+                        {eaData.accordion[item]?.connected_notice !== undefined && <div className="ea__pf-notice">
+                            {eaData.accordion[item].connected_notice.icon && <span className="ea__pf-notice-icon">
+                                <img src={localize.eael_dashboard.reactPath + eaData.accordion[item].connected_notice.icon} alt=""/>
+                            </span>}
+                            <h3 className="ea__pf-notice-text">{eaData.accordion[item].connected_notice.text}</h3>
+                        </div>}
+                        {eaData.accordion[item]?.profile !== undefined && <div className="ea__pf-profile-card">
+                            <div className="ea__pf-profile-head">
+                                <div className="ea__pf-avatar-wrap">
+                                    {eaData.accordion[item].profile.avatar
+                                        ? <img className="ea__pf-profile-avatar" src={eaData.accordion[item].profile.avatar} alt={eaData.accordion[item].profile.name}/>
+                                        : <span className="ea__pf-profile-avatar ea__pf-profile-avatar--empty"></span>}
+                                    <span className="ea__pf-online-dot"></span>
+                                </div>
+                                <div className="ea__pf-profile-meta">
+                                    <span className="ea__pf-profile-name">
+                                        {eaData.accordion[item].profile.icon && <img className="ea__pf-name-icon"
+                                            src={localize.eael_dashboard.reactPath + eaData.accordion[item].profile.icon} alt=""/>}
+                                        {eaData.accordion[item].profile.name}
+                                    </span>
+                                    {eaData.accordion[item].profile.badge && <span className="ea__pf-badge ea__pf-badge--success">{eaData.accordion[item].profile.badge}</span>}
+                                </div>
+                                {eaData.accordion[item]?.disconnect_button !== undefined && <a
+                                    href={eaData.accordion[item].disconnect_button.url} rel="noopener noreferrer"
+                                    className="ea__btn ea__btn-secondary ea__auth-link ea__pf-profile-action">
+                                    {eaData.accordion[item].disconnect_button.text}
+                                </a>}
+                            </div>
+                        </div>}
                         <div className="flex flex-col gap-2 ea__auth-action-wrapper">
                             {eaData.accordion[item]?.auth_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
                                 <a href={eaData.accordion[item].auth_button.url} target="_blank" rel="noopener noreferrer"
@@ -104,12 +138,18 @@ function ModalStyleThree() {
                                     {eaData.accordion[item].auth_button.text}
                                 </a>
                             </div>}
-                            {eaData.accordion[item]?.auth_status !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                            {eaData.accordion[item]?.auth_status !== undefined && eaData.accordion[item]?.profile === undefined && <div className="flex gap-4 items-center ea__auth-action">
                                 <div className={ eaData.accordion[item].auth_status.status === 'success' ? 'ea__auth-status ea__auth-status--success' : 'ea__auth-status ea__auth-status--error' }>
                                     <strong>{eaData.accordion[item].auth_status.status === 'success' ? '✓ ' : ''}{eaData.accordion[item].auth_status.text}</strong>
                                 </div>
                             </div>}
-                            {eaData.accordion[item]?.disconnect_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                            {eaData.accordion[item]?.reconnect_button !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                                <a href={eaData.accordion[item].reconnect_button.url} target="_blank" rel="noopener noreferrer"
+                                className="ea__btn ea__btn-primary ea__auth-link">
+                                    {eaData.accordion[item].reconnect_button.text}
+                                </a>
+                            </div>}
+                            {eaData.accordion[item]?.disconnect_button !== undefined && eaData.accordion[item]?.profile === undefined && <div className="flex gap-4 items-center ea__auth-action">
                                 <a href={eaData.accordion[item].disconnect_button.url} rel="noopener noreferrer"
                                 className="ea__btn ea__btn-secondary ea__auth-link">
                                     {eaData.accordion[item].disconnect_button.text}
