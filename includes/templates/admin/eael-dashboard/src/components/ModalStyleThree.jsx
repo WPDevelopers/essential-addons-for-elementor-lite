@@ -179,7 +179,7 @@ function ModalStyleThree() {
                                     {eaData.accordion[item].refresh_button.text}
                                 </a>
                             </div>}
-                            {eaData.accordion[item]?.status_message !== undefined && <div className="flex gap-4 items-center ea__auth-action">
+                            {eaData.accordion[item]?.status_message !== undefined && eaData.accordion[item].status_message.display !== 'toast' && <div className="flex gap-4 items-center ea__auth-action">
                                 <div className={ eaData.accordion[item].status_message.type === 'success' ? 'ea__status-message ea__status-message--success' : 'ea__status-message ea__status-message--error' }>
                                     <span>{eaData.accordion[item].status_message.type === 'success' ? '✓ ' : '⚠ '}{eaData.accordion[item].status_message.text}</span>
                                 </div>

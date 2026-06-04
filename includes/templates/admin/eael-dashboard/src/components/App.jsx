@@ -102,6 +102,19 @@ function App() {
 				});
 			}
 
+			// Status messages flagged display:'toast' (e.g. disconnect) surface as a
+			// dismissible toast instead of an inline notice inside the modal.
+			const statusMessage = firstAccordionKey ? accordion[firstAccordionKey]?.status_message : undefined;
+			if (statusMessage && statusMessage.display === "toast") {
+				eaDispatch({
+					type: "SHOW_TOAST",
+					payload: {
+						toastType: statusMessage.type || "warning",
+						toastMessage: statusMessage.text,
+					},
+				});
+			}
+
 			// Drop the flag so a reload doesn't reopen the modal with a stale message.
 			const newUrl = window.location.pathname + "?page=eael-settings";
 			window.history.replaceState({}, "", newUrl);

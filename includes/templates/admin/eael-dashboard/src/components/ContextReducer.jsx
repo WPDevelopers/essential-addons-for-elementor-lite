@@ -120,6 +120,8 @@ function ContextReducer() {
                 return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title, modalAccordion}
             case 'CLOSE_MODAL':
                 return {...state, modal: 'close', modalGoPremium: 'close'}
+            case 'SHOW_TOAST':
+                return {...state, toasts: true, toastType: payload.toastType, toastMessage: payload.toastMessage};
             case 'CLOSE_TOAST':
                 return {...state, toasts: false}
             case 'MODAL_ACCORDION':
