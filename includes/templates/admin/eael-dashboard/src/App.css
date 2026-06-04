@@ -2195,20 +2195,20 @@ section.ea__modal-wrapper {
 .ea__modal-body .ea__pf-connect-head {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   margin-bottom: 14px;
 }
 
 .ea__modal-body .ea__pf-connect-title {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 450;
   line-height: 1.25;
   color: var(--text-color-25);
   margin: 0;
 }
 
 .ea__modal-body .ea__pf-connect-text {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--text-color-100);
   margin: 0 0 18px;
@@ -2256,6 +2256,17 @@ section.ea__modal-wrapper {
   align-items: center;
   gap: 14px;
   margin-bottom: 24px;
+}
+
+.ea__modal-body .ea__pf-notice-icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  background: #FCF6F6;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;    
 }
 
 .ea__modal-body .ea__pf-notice-icon img {
@@ -2373,6 +2384,10 @@ section.ea__modal-wrapper {
 }
 
 /* Single-item modal — no accordion header, content shows directly */
+.ea__modal-body .ea__api-key-according--single {
+  background: transparent;
+}
+
 .ea__modal-body .ea__api-key-according--single .ea__according-content {
   border-top: none;
 }
