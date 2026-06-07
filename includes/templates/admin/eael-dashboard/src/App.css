@@ -2232,6 +2232,12 @@ section.ea__modal-wrapper {
   margin-top: 22px;
   padding-top: 18px;
   border-top: 1px solid var(--label-color);
+  /* Full-bleed divider: break out of card (16px) + modal-body (40px) padding,
+     re-add as padding so the button keeps its position. */
+  margin-left: -56px;
+  margin-right: -56px;
+  padding-left: 56px;
+  padding-right: 56px;
 }
 
 .ea__modal-body .ea__pf-connect-btn {
