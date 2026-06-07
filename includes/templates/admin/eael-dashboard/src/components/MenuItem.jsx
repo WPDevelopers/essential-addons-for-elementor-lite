@@ -1,13 +1,15 @@
 import consumer from "../context";
+import {useNavigate} from "react-router-dom";
 
 
 function MenuItem(props) {
     const eaData = localize.eael_dashboard.menu[props.item],
         label = eaData.label,
         icon = eaData.icon,
-        {eaState, eaDispatch} = consumer(),
+        {eaState} = consumer(),
+        navigate = useNavigate(),
         changeHandler = () => {
-            eaDispatch({type: 'SET_MENU', payload: props.item});
+            navigate(`/${props.item}`);
             window.dispatchEvent(new Event('resize'));
         };
 

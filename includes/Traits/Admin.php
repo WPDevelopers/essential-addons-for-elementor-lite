@@ -1909,20 +1909,20 @@ trait Admin {
 	    );
 
 	    ob_start(); ?>
-		<div class="eael-spring-campaign-logo">
-			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" width="25" alt="">
+		<div class="eael-summer-campaign-logo">
+			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" alt="">
 		</div>
-		<div class="eael-spring-campaign-content">
+		<div class="eael-summer-campaign-content">
 			<p><?php
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo __( '<strong>🌸 Spring Savings:</strong> Design Elementor website faster and smoother with 110+ advanced elements – now <strong>Flat 25% OFF</strong>! ⚡️', 'essential-addons-for-elementor-lite' );
+			echo __( '<strong>🏖️</strong> Your Elementor site deserves a Summer glow-up. Get 110+ advanced elements and build faster, smarter <strong>- up to $100 OFF</strong>', 'essential-addons-for-elementor-lite' );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
-                <a href="https://essential-addons.com/spring2026-admin-notice" target="_blank" class="button-primary">
-                    <?php esc_html_e( 'Upgrade To Pro Now', 'essential-addons-for-elementor-lite' ); ?>
+                <a href="https://essential-addons.com/summer2026-admin-notice" target="_blank" class="button-primary">
+                    <?php esc_html_e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
                 <span class="eael-action-dismiss-btn">
-                    <?php esc_html_e( 'Maybe Later', 'essential-addons-for-elementor-lite' ); ?>
+                    <?php esc_html_e( "I Don't Want Any Discount", 'essential-addons-for-elementor-lite' ); ?>
                 </span>
             </div>
 		</div>
@@ -1930,7 +1930,7 @@ trait Admin {
 		<script>
             jQuery(document).ready(function ($) {
                 setTimeout(function () {
-                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-spring_campaign_2026_notice .notice-dismiss');
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-summer_campaign_2026_notice .notice-dismiss');
 
                     function wpNoticeDismissFunc(event) {
                         event.preventDefault();
@@ -1944,7 +1944,7 @@ trait Admin {
                             jQuery(event.target.offsetParent).slideUp(200);
                         }
 
-                        postData += 'id=spring_campaign_2026_notice';
+                        postData += 'id=summer_campaign_2026_notice';
                         postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
                         if (dismiss) {
                             postData += '&dismiss=' + dismiss;
@@ -1953,7 +1953,7 @@ trait Admin {
                             postData += '&later=' + later;
                         }
 
-                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_spring_campaign_2026_notice' ) );?>';
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_summer_campaign_2026_notice' ) );?>';
 
                         httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
                         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -1962,7 +1962,7 @@ trait Admin {
 
                     dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
 
-                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-spring_campaign_2026_notice .eael-action-dismiss-btn');
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-summer_campaign_2026_notice .eael-action-dismiss-btn');
                     if (customDismissBtn && dismissBtn) {
                         customDismissBtn.addEventListener('click', function(event) {
                             event.preventDefault();
@@ -1974,20 +1974,20 @@ trait Admin {
 		</script>
 	    <?php
 	    $b_message                     = ob_get_clean();
-	    $_spring_campaign_2026_notice  = [
+	    $_summer_campaign_2026_notice  = [
 		    'html' => $b_message,
 	    ];
 
 	    $notices->add(
-			'spring_campaign_2026_notice',
-			$_spring_campaign_2026_notice,
+			'summer_campaign_2026_notice',
+			$_summer_campaign_2026_notice,
 			[
-				'start'       => strtotime( '12:00:00am 15th April, 2026' ),
+				'start'       => strtotime( '12:00:00am 21st May, 2026' ),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				'expire'      => strtotime( '11:59:59pm 10th May, 2026' ),
-				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '11:59:59pm 10th May, 2026' ),
+				'expire'      => strtotime( '11:59:59pm 25th June, 2026' ),
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '11:59:59pm 25th June, 2026' ),
 			]
 		);
 
