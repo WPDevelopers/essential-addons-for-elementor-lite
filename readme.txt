@@ -172,6 +172,7 @@ Extensions (Free):
 39. [Multicolumn Pricing Table](https://essential-addons.com/multicolumn-pricing-table/)- Display pricing plans in multiple columns to compare features and choose the right option
 40. [Figma to Elementor Converter](https://essential-addons.com/figma-to-elementor-converter/)- Turn Figma designs into fully customizable Elementor Pages
 41. [Pricing Slider](https://essential-addons.com/pricing-slider/)- Showcase dynamic pricing plans with interactive slider control
+42. [Pinterest Feed](https://essential-addons.com/pinterest-feed/) – Showcase stunning Pinterest content on your website with beautiful layouts.
 
 
 Extensions (Pro):
