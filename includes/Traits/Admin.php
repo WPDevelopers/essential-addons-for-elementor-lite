@@ -1348,7 +1348,7 @@ trait Admin {
 							    'key'         => 'pinterest-feed',
 							    'title'       => __( 'Pinterest Feed', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/pinterest-feed/',
-							    'doc_link'    => 'https://essential-addons.com/docs/pinterest-feed/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-pinterest-feed',
 							    'is_pro'      => true,
 							    'promotion'   => 'new',
 							    'setting'     => $this->pro_enabled ? [ 'id' => 'pinterestFeedSetting' ] : [],
