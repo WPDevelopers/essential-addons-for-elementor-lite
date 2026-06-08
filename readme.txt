@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.5
+Stable tag: 6.6.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -204,7 +204,7 @@ With Essential Addons, we bring you seamless compatibility with WooCommerce, enh
 
 [EA Woo Add to Cart](https://essential-addons.com/docs/ea-woo-add-to-cart/): Simplify the shopping experience by displaying an easy-to-access ‘Add to Cart’ button for all your WooCommerce products.
 
-[EA Woo Product Slider (PRO)](https://essential-addons.com/docs/woo-product-slider/): Present your WooCommerce products in a stunning slider format with this advanced Elementor addon. 
+[EA Woo Product Slider (PRO)](https://essential-addons.com/docs/woo-product-slider/): Present your WooCommerce products in a stunning slider format with this advanced Elementor addon.
 
 [EA Woo Product Collection (PRO)](https://essential-addons.com/docs/ea-woo-product-collections/): Exhibit your WooCommerce product collections on any section of your Elementor website to showcase items based on categories, tags, or attributes, and add engaging hover effects.
 
@@ -318,6 +318,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 6.6.6 - 08/06/2026 =
+
+- Improved: EA Woo Product Grid | Added Option to set image resolution
+- Fixed: EA Event Calendar | Timed Events Filtered Incorrectly
+- Fixed: Prevent fatal error during plugin update when a request initializes the setup wizard
+- Few minor bug fixes & improvements
+
 = 6.6.5 - 21/05/2026 =
 
 - Fixed: EA Creative Button | Resolved invisible default text color issue when enabling gradient background
@@ -402,7 +409,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Login/Register Form | Password reset link redirecting to default WP reset page
 - Fixed: EA Gravity Forms | Gravity Forms not working when used via EA widget
 - Improved: Added support for a Query ID option for all post-related elements.
-- Improved: EA Woo Product Gallery | Added option to hide categories and quantity input in the “Quick View” popup 
+- Improved: EA Woo Product Gallery | Added option to hide categories and quantity input in the “Quick View” popup
 - Improved: EA Woo Product Carousel | Pause on hover for the Marquee style
 - Few minor bug fixes & improvements
 
@@ -483,7 +490,7 @@ Your existing elements/content will work with premium version. So you won't lose
 = 6.5.4 - 14/12/2025 =
 
 - Improved: Security Enhancement
-- Fixed: Plugin Check (PCP) warnings 
+- Fixed: Plugin Check (PCP) warnings
 - Few minor bug fixes & improvements
 
 = 6.5.3 - 27/11/2025 =
