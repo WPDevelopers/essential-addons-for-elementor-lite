@@ -12227,7 +12227,7 @@ msgid "Image Masking"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:649
-msgid "Section Slider"
+msgid "Advanced Slider"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:658

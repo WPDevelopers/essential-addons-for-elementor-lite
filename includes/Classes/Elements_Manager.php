@@ -205,9 +205,9 @@ class Elements_Manager {
 			$list['image-masking'] = 'image-masking';
 		}
 
-		//Section Slider
-		if ( ! empty( $element['settings']['eael_enable_section_slider'] ) ) {
-			$list['section-slider'] = 'section-slider';
+		//Advanced Slider
+		if ( ! empty( $element['settings']['eael_enable_advanced_slider'] ) ) {
+			$list['advanced-slider'] = 'advanced-slider';
 		}
 
 		return $list;
