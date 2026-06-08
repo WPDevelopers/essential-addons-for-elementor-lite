@@ -8230,19 +8230,30 @@ class Login_Register extends Widget_Base {
 	protected function print_validation_message() {
 		$errors  = get_option( 'eael_register_errors_' . $this->get_id() );
 		$success = get_option( 'eael_register_success_' . $this->get_id() );
+		$pending_approval = get_option( 'eael_register_pending_approval_' . $this->get_id() );
 		$resetpassword_success_key = 'eael_resetpassword_success_' . $this->get_id();
 		$resetpassword_success = apply_filters( 'eael/login-register/resetpassword-success-message', get_option( $resetpassword_success_key ) );
 
-		if ( empty( $errors ) && empty( $success ) && empty( $resetpassword_success ) ) {
+		if ( empty( $errors ) && empty( $success ) && empty( $pending_approval ) && empty( $resetpassword_success ) ) {
 			return;
 		}
 		if ( ! empty( $errors ) && is_array( $errors ) ) {
 			$this->print_registration_errors_message( $errors );
+		} else if ( ! empty( $pending_approval ) ) {
+			$this->print_registration_pending_approval_message( $pending_approval );
 		} else if( ! empty ( $success ) ) {
 			$this->print_registration_success_message( $success );
 		} else if( !empty( $resetpassword_success ) && 'register' === $this->ds['default_form_type'] ){
 			$this->print_resetpassword_success_message( $resetpassword_success );
-		} 
+		}
+	}
+
+	protected function print_registration_pending_approval_message( $message ) {
+		$html = '<p class="eael-form-msg valid eael-pending-approval">' . esc_html( $message ) . '</p>';
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo apply_filters( 'eael/login-register/pending-approval-msg', $html, $message );
+
+		delete_option( 'eael_register_pending_approval_' . $this->get_id() );
 	}
 
 	protected function print_registration_errors_message( $errors ) {

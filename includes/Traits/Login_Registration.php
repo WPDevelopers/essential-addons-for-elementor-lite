@@ -1017,8 +1017,10 @@ trait Login_Registration {
 
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
+		$is_admin_approval_on = ( 'on' === get_option( 'eael_lr_admin_approval' ) );
+
 		// success & handle after registration action as defined by user in the widget
-		if ( ! $ajax && !in_array( 'redirect', $register_actions ) ) {
+		if ( ! $ajax && !in_array( 'redirect', $register_actions ) && ! $is_admin_approval_on ) {
 			update_option( 'eael_register_success_' . $widget_id, 1, false );
 		}
 
@@ -1029,8 +1031,17 @@ trait Login_Registration {
 		];
 		// should user be auto logged in?
 		// Skip auto-login entirely when Admin Approval is enabled – user must wait for approval.
-		if ( 'on' === get_option( 'eael_lr_admin_approval' ) ) {
-			$data['message'] = __( 'Your registration is complete. Your account is pending administrator approval.', 'essential-addons-for-elementor-lite' );
+		if ( $is_admin_approval_on ) {
+			$pending_message = __( 'Your registration is complete. Your account is pending administrator approval.', 'essential-addons-for-elementor-lite' );
+			$data['message'] = $pending_message;
+
+			// Persist the pending message so the next page render (non-AJAX flow, or Pro-disabled
+			// site) can display it. The widget's print_validation_message() reads this option
+			// before falling back to the generic "success_register" control text.
+			if ( ! $ajax ) {
+				update_option( 'eael_register_pending_approval_' . $widget_id, $pending_message, false );
+			}
+
 			if ( $ajax ) {
 				wp_send_json_success( $data );
 			}
@@ -2603,6 +2614,7 @@ trait Login_Registration {
     {
         delete_option('eael_register_success_' . $widget_id);
         delete_option('eael_register_errors_' . $widget_id);
+        delete_option('eael_register_pending_approval_' . $widget_id);
 	}
 
 	/**
