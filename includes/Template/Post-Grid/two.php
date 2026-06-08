@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $thumbnail_html = '';
 if ( $settings['eael_show_image'] == 'yes' ) {
 	$settings[ 'eael_image_size_customize' ] = [
@@ -228,3 +229,4 @@ echo '<article class="eael-grid-post '. esc_attr( $css_classes ) .'" data-id="' 
 echo '</div>
     </div>
 </article>';
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

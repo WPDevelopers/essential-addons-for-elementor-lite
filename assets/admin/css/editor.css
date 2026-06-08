@@ -189,6 +189,52 @@
 .ea-nerd-box .elementor-button.ea-nerd-box-link:hover {
    background-color: #f22074;
 }
+
+/* Bit Integrations cross-promo (Login/Register widget → Connect & Automate section) */
+.eael-bit-integrations-promo {
+   padding: 20px 16px;
+   text-align: center;
+   background: rgba(87, 37, 255, 0.08);
+   border: 1px solid rgba(87, 37, 255, 0.18);
+   border-radius: 6px;
+   margin: 5px 0;
+}
+.eael-bit-integrations-promo__title {
+   font-size: 13px;
+   font-weight: 700;
+   line-height: 1.45;
+   margin: 0 0 10px;
+}
+.eael-bit-integrations-promo__message {
+   font-size: 11px;
+   line-height: 1.7;
+   margin: 0 0 18px;
+   opacity: 0.85;
+}
+.eael-bit-integrations-promo__cta {
+   display: inline-block;
+   background: #5725ff;
+   color: #fff !important;
+   padding: 9px 20px;
+   border-radius: 4px;
+   font-size: 12px;
+   font-weight: 600;
+   text-decoration: none !important;
+   transition: background 0.2s ease;
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+.eael-bit-integrations-promo__cta:hover,
+.eael-bit-integrations-promo__cta:focus {
+   background: #4517d9;
+   color: #fff !important;
+}
+/* Slightly stronger contrast in Elementor's dark editor theme */
+.eps-theme-dark .eael-bit-integrations-promo,
+body.elementor-editor-active.eps-theme-dark .eael-bit-integrations-promo {
+   background: rgba(87, 37, 255, 0.14);
+   border-color: rgba(87, 37, 255, 0.3);
+}
+
 .elementor-control-ea_woo_checkout_notices_border_color {
    display: none;
 }

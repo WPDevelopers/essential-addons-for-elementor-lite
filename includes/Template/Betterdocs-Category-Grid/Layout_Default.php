@@ -6,6 +6,11 @@ use \Essential_Addons_Elementor\Classes\Helper;
  *
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 echo '<article class="eael-better-docs-category-grid-post" data-id="' . esc_attr( get_the_ID() ) . '">
     <div class="eael-bd-cg-inner">';
         if ($settings['show_header'] === 'true') {
@@ -226,3 +231,4 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . esc_attr
         echo '</div>';
     echo '</div>';
 echo '</article>';
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

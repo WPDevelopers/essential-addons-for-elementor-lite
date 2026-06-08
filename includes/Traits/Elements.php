@@ -368,6 +368,12 @@ trait Elements {
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
+				'name'       => 'pricing-slider',
+				'title'      => __( 'Pricing Slider', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-pricing-slider',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
 				'name'       => 'sphere-photo-viewer',
 				'title'      => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-photo-sphere',

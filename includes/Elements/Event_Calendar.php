@@ -4348,6 +4348,8 @@ class Event_Calendar extends Widget_Base
                     'allDay'         => $all_day,
                     'external'       => 'on',
                     'nofollow'       => 'on',
+                    'google_event_id'=> $item->id,
+                    'backgroundColor'=> '',
                 ];
             }
 

@@ -254,7 +254,11 @@
             if (settings.searchable) {
                 var searchHeader = settings.searchInput;
                 if (settings.globalSearch) {
-                    var searchField = $("input").bind("change paste keyup", function () {
+                    var searchField = $(settings.searchInput);
+                    if (searchField.prop("tagName") !== "INPUT") {
+                        searchField = searchField.find("input");
+                    }
+                    searchField.bind("change paste keyup", function () {
                         elm.fancyTable.search = $(this).val();
                         elm.fancyTable.page = 1;
                         instance.tableUpdate(elm);

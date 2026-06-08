@@ -1092,23 +1092,24 @@ class Woo_Product_Images extends Widget_Base {
 		?>
 		<div <?php $this->print_render_attribute_string( 'eael-pi-thumb' ); ?>>
 			<div class="swiper-container">
-				<?php if( 'yes' == $thumb_settings['thumbnail'] ) {
-					$single_thumb_img = ( count($img_links) > 1 ) ? '' : 'single-thumb-img';
-					$thumb_size = $thumb_settings['thumbnail_size']; ?>
-					<div class="swiper-wrapper <?php echo esc_attr( $single_thumb_img ); ?>">
-						<?php
-							foreach ( $img_links as $img_link ) {
-								$this->render_slide( $img_link, 'product_image_slider__thumbs__image', $thumb_size );
-							}
-						?>
-					</div>
-					<?php $print_left_right = in_array( $thumb_settings['thumb_position'], $thumb_position ) ? 'left-right-prev' : ''; ?>
-						<?php if ( 'yes' == $thumb_settings['thumb_navigation'] && count( $img_links ) > $thumb_settings['desktop'] ) { ?>
-							<span class="swiper-button-prev <?php echo esc_attr( $print_left_right ); ?>"></span>
-							<span class="swiper-button-next <?php echo esc_attr( $print_left_right ); ?>"></span>
-						<?php } ?>
-					<?php } ?>
-				</div>
+                <?php $single_thumb_img = (count($img_links) > 1) ? '' : 'single-thumb-img'; ?>
+                <div class="swiper-wrapper <?php echo esc_attr( $single_thumb_img ); ?>">
+                    <?php if ('yes' == $thumb_settings['thumbnail']) {
+                        $thumb_size = $thumb_settings['thumbnail_size'];
+                        foreach ($img_links as $img_link) {
+                            $this->render_slide($img_link, 'product_image_slider__thumbs__image', $thumb_size);
+                        }
+                    }
+                    ?>
+                </div>
+                <?php if ( 'yes' == $thumb_settings['thumbnail'] ) {
+                    $print_left_right = in_array($thumb_settings['thumb_position'], $thumb_position) ? 'left-right-prev' : '';
+                    if ( 'yes' == $thumb_settings['thumb_navigation'] && count( $img_links ) > $thumb_settings['desktop'] ) { ?>
+                        <span class="swiper-button-prev <?php echo esc_attr( $print_left_right ); ?>"></span>
+                        <span class="swiper-button-next <?php echo esc_attr( $print_left_right ); ?>"></span>
+                    <?php }
+                } ?>
+			</div>
 		</div>
 		<?php
 	}
@@ -1138,7 +1139,7 @@ class Woo_Product_Images extends Widget_Base {
 		
 		global $product;
 		$eael_product_id = apply_filters( 'eael_product_image_product_id', false, $this );
-		$product  = Helper::get_product( $eael_product_id );
+		$product  = Helper::get_product( $eael_product_id ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 		$settings = $this->get_settings_for_display();
 		$widget_id = $this->get_id();
 
