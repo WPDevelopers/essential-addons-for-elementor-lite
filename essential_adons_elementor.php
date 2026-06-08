@@ -123,6 +123,10 @@ add_action(
 add_action(
 	'wp_loaded',
 	function () {
+		if ( ! class_exists( '\Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard' ) ) {
+			return;
+		}
+
 		$setup_wizard = get_option( 'eael_setup_wizard' );
 		if ( $setup_wizard === 'redirect' ) {
 			\Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard::redirect();
