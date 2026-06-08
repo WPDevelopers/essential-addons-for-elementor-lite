@@ -1351,7 +1351,7 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/pinterest-feed/',
 							    'is_pro'      => true,
 							    'promotion'   => 'new',
-							    'setting'     => [ 'id' => 'pinterestFeedSetting' ],
+							    'setting'     => $this->pro_enabled ? [ 'id' => 'pinterestFeedSetting' ] : [],
 							    'is_activate' => boolval( $this->get_settings( 'pinterest-feed' ) )
 						    ],
 					    ]
