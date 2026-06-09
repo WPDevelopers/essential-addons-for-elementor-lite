@@ -631,12 +631,17 @@ trait Login_Registration {
 					}
 				}
 
-				// Allow developers to add custom server-side validation for custom profile fields.
-				if ( isset( $register_field['field_type'] ) && array_key_exists( $register_field['field_type'], $eael_custom_profile_fields ) ) {
-					$field_value       = isset( $_POST[ $register_field['field_type'] ] ) ? sanitize_text_field( wp_unslash( $_POST[ $register_field['field_type'] ] ) ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+				// Allow developers to add custom server-side validation for any registration field.
+				// Fires for option-registered custom profile fields as well as custom field types
+				// injected via the `eael/registration-form-fields` filter. Callbacks guard on
+				// $field_settings['field_type'] themselves, and the default $is_valid passthrough
+				// keeps this safe for every field.
+				if ( isset( $register_field['field_type'] ) ) {
+					$field_key         = sanitize_text_field( $register_field['field_type'] );
+					$field_value       = isset( $_POST[ $field_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $field_key ] ) ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 					$validation_result = apply_filters( 'eael_custom_registration_field_validation', true, $field_value, $register_field );
 					if ( is_string( $validation_result ) && ! empty( $validation_result ) ) {
-						$errors[ sanitize_key( $register_field['field_type'] ) ] = wp_kses_post( $validation_result );
+						$errors[ sanitize_key( $field_key ) ] = wp_kses_post( $validation_result );
 					}
 				}
 			}
@@ -2711,8 +2716,8 @@ trait Login_Registration {
 		$eael_custom_profile_fields = [];
 		$custom_profile_fields_arr 	= [];
 
-		$eael_custom_profile_field_text_trimmed  	= trim( get_option( 'eael_custom_profile_fields_text' ), ' ,\n\r\0\x0B' );
-		$eael_custom_profile_field_image_trimmed 	= trim( get_option( 'eael_custom_profile_fields_img' ), ' ,\n\r\0\x0B' );
+		$eael_custom_profile_field_text_trimmed  	= trim( get_option( 'eael_custom_profile_fields_text' ), " ,\n\r\0\x0B" );
+		$eael_custom_profile_field_image_trimmed 	= trim( get_option( 'eael_custom_profile_fields_img' ), " ,\n\r\0\x0B" );
 		$eael_custom_profile_field_text_trimmed 	= str_replace(self::$eael_custom_profile_field_prefix, '', $eael_custom_profile_field_text_trimmed);
 		$eael_custom_profile_field_image_trimmed 	= str_replace(self::$eael_custom_profile_field_prefix, '', $eael_custom_profile_field_image_trimmed);
 
