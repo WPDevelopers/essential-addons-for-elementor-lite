@@ -36,6 +36,11 @@
       -ms-flex-direction: column;
           flex-direction: column;
 }
+.infobox-content .infobox-title-section .title {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
 .infobox-content .infobox-title-section .sub_title {
   margin: 0 0 10px 0;
 }
@@ -102,6 +107,21 @@
 .eael-infobox-content-align--center .eael-infobox .infobox-content,
 .eael-infobox-content-align--center .eael-infobox .infobox-button {
   text-align: center;
+}
+.eael-infobox-content-align--left .infobox-title-section {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+}
+.eael-infobox-content-align--right .infobox-title-section {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+}
+.eael-infobox-content-align--center .infobox-title-section {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*--- For icon background shape ---*/
 .eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap,

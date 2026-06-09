@@ -319,7 +319,7 @@ class Info_Box extends Widget_Base
 			'eael_infobox_show_sub_title',
 			[
 				'label'        => esc_html__( 'Sub Title', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -330,7 +330,7 @@ class Info_Box extends Widget_Base
 			'eael_infobox_show_sub_title_after',
 			[
 				'label'   => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'column' => [
 						'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
