@@ -141,6 +141,18 @@ eael.hooks.addAction("editMode.init", "ea", () => {
 		}
 	);
 
+	elementor.settings.page.addChangeCallback(
+		"eael_ext_toc_scroll_sync",
+		function (newValue) {
+			let tocList = jQuery("#eael-toc-list");
+			if (newValue === "yes") {
+				tocList.addClass("eael-toc-scroll-sync");
+			} else {
+				tocList.removeClass("eael-toc-scroll-sync");
+			}
+		}
+	);
+
 	elementor.settings.page.addChangeCallback("eael_ext_toc_title", function (
 		newValue
 	) {

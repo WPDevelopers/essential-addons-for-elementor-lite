@@ -228,45 +228,59 @@
 			}
 		}
 
-		function highlightCurrentHeading(){
-			var allHeadings = document.querySelectorAll("#eael-toc-list .eael-toc-link");
-			$('#eael-toc-list .eael-toc-link').removeClass('eael-highlight-active');
-			let showSinlgeHeadingOnly = $('#eael-toc').hasClass('eael-toc-auto-highlight.eael-toc-highlight-single-item') ? true : false;
+		var eaelTocActiveHref = null;
 
-			for(let i=0; i < allHeadings.length; i++) {
-				let headingElement = allHeadings[i];
-				let headingTarget = headingElement.getAttribute("href");
-				let headingTargettedElement = document.getElementById( headingTarget.substring(1) ); //removes # and fetch element
-				
-				if(isElementInViewport(headingTargettedElement)){
-					$(headingElement).addClass("eael-highlight-active");
-					if(showSinlgeHeadingOnly){
-						break;
-					}
+		function highlightCurrentHeading(){
+			var allTocLinks = document.querySelectorAll("#eael-toc-list .eael-toc-link");
+			if(!allTocLinks.length) return;
+
+			var currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			var threshold = currentScrollTop + offsetSpan + 10;
+
+			// Find active link: the last heading whose absolute top is at or above scroll threshold
+			var activeLink = null;
+			for(var i = 0; i < allTocLinks.length; i++) {
+				var headingTarget = allTocLinks[i].getAttribute("href");
+				var headingEl = document.getElementById(headingTarget.substring(1));
+				if(!headingEl) continue;
+
+				var headingAbsTop = headingEl.getBoundingClientRect().top + currentScrollTop;
+				if(headingAbsTop <= threshold) {
+					activeLink = allTocLinks[i];
+				} else {
+					break;
 				}
 			}
-		}
 
-		/**
-		 * Determine if the element is in the viewport.
-		 * @param {*} el 
-		 * @returns 
-		 */
-		function isElementInViewport (el) {
+			// Clear all active/parent classes
+			var $tocList = $('#eael-toc-list');
+			$tocList.find('.eael-toc-link').removeClass('eael-highlight-active');
+			$tocList.find('li').removeClass('eael-highlight-active eael-highlight-parent');
 
-			// Special bonus for those using jQuery
-			if (typeof jQuery === "function" && el instanceof jQuery) {
-				el = el[0];
+			if(!activeLink) return;
+
+			// Mark active link
+			$(activeLink).addClass('eael-highlight-active');
+
+			// Mark active li and all ancestor lis for collapse expansion
+			var $activeLi = $(activeLink).closest('li');
+			$activeLi.addClass('eael-highlight-active eael-highlight-parent');
+			$activeLi.parents('#eael-toc-list li').addClass('eael-highlight-parent');
+
+			// Scroll TOC body so active item is at the top (only when active heading changes)
+			var newActiveHref = activeLink.getAttribute('href');
+			if(newActiveHref !== eaelTocActiveHref && $tocList.hasClass('eael-toc-scroll-sync')) {
+				eaelTocActiveHref = newActiveHref;
+				var tocBody = document.querySelector('#eael-toc .eael-toc-body');
+				if(tocBody) {
+					var linkRect     = activeLink.getBoundingClientRect();
+					var bodyRect     = tocBody.getBoundingClientRect();
+					var targetScroll = linkRect.top - bodyRect.top + tocBody.scrollTop;
+					tocBody.scrollTo({ top: targetScroll-10, behavior: 'smooth' });
+				}
+			} else {
+				eaelTocActiveHref = newActiveHref;
 			}
-		
-			var rect = el.getBoundingClientRect();
-		
-			return (
-				rect.top >= 0 &&
-				rect.left >= 0 &&
-				rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
-				rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
-			);
 		}
 
 		/**
@@ -355,6 +369,10 @@
 				pageSetting.eael_ext_toc_list_icon === "number"
 					? " eael-toc-number"
 					: " eael-toc-bullet";
+			toc_style_class +=
+				pageSetting.eael_ext_toc_scroll_sync === "yes"
+					? " eael-toc-scroll-sync"
+					: " ";
 
 			return (
 				'<div id="eael-toc" class="eael-toc eael-toc-disable ' +
