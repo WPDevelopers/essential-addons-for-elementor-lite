@@ -6660,27 +6660,27 @@ msgid "Login Form Options"
 msgstr ""
 
 #: ../includes/Elements/Login_Register.php:1801
-msgid "Redirect After Login"
-msgstr ""
-
-#: ../includes/Elements/Login_Register.php:1822
-msgid "Redirect Based On User Roles"
-msgstr ""
-
-#: ../includes/Elements/Login_Register.php:1847, ../includes/Elements/Login_Register.php:2997
-msgid "Redirect to Previous Page"
-msgstr ""
-
-#: ../includes/Elements/Login_Register.php:1848
-msgid "Redirect to the last visited page before login."
-msgstr ""
-
-#: ../includes/Elements/Login_Register.php:1857
 msgid "Allowed User Roles"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1858
+#: ../includes/Elements/Login_Register.php:1802
 msgid "Select user roles that are allowed to login. Leave empty to allow all."
+msgstr ""
+
+#: ../includes/Elements/Login_Register.php:1810
+msgid "Redirect After Login"
+msgstr ""
+
+#: ../includes/Elements/Login_Register.php:1832
+msgid "Redirect Based On User Roles"
+msgstr ""
+
+#: ../includes/Elements/Login_Register.php:1857, ../includes/Elements/Login_Register.php:2997
+msgid "Redirect to Previous Page"
+msgstr ""
+
+#: ../includes/Elements/Login_Register.php:1858
+msgid "Redirect to the last visited page before login."
 msgstr ""
 
 #: ../includes/Elements/Login_Register.php:1868
