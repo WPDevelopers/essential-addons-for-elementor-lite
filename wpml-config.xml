@@ -76,6 +76,9 @@
                 <field type="Dual Color Heading: Sub Text" editor_type="VISUAL">eael_dch_subtext</field>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
+            <fields-in-item items_of="eael_dch_multiple_titles">
+                <field type="Dual Color Heading: Title" editor_type="LINE">eael_dch_title</field>
+            </fields-in-item>
         </widget>
         <widget name="eael-fancy-text">
             <conditions>
@@ -138,6 +141,8 @@
                 <field type="Flip Box: Back Content" editor_type="LINE">eael_flipbox_back_text</field>
                 <field type="Flip Box: Button Text" editor_type="VISUAL">flipbox_button_text</field>
                 <field type="Flip Box: Button Link" key_of="flipbox_link" editor_type="LINE">url</field>
+                <field type="Flip Box: Front Image" key_of="eael_flipbox_image" editor_type="MEDIA">id</field>
+                <field type="Flip Box: Back Image" key_of="eael_flipbox_image_back" editor_type="MEDIA">id</field>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>

@@ -1344,6 +1344,16 @@ trait Admin {
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'facebook-feed' ) )
 						    ],
+						    'pinterest-feed'        => [
+							    'key'         => 'pinterest-feed',
+							    'title'       => __( 'Pinterest Feed', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/pinterest-feed/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-pinterest-feed',
+							    'is_pro'      => true,
+							    'promotion'   => 'new',
+							    'setting'     => $this->pro_enabled ? [ 'id' => 'pinterestFeedSetting' ] : [],
+							    'is_activate' => boolval( $this->get_settings( 'pinterest-feed' ) )
+						    ],
 					    ]
 				    ],
 				    'learn-dash-elements'      => [
@@ -1561,6 +1571,14 @@ trait Admin {
 					    'placeholder'=> __( "Custom Tab 1, Custom Tab 2, Custom Tab 3", 'essential-addons-for-elementor-lite' ),
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
+				    'pinterestFeedSetting'   => apply_filters( 'eael/admin/modal/pinterestFeedSetting', [
+					    'accordion' => [],
+					    'link'      => [
+						    'text' => __( 'How to connect your Pinterest account', 'essential-addons-for-elementor-lite' ),
+						    'url'  => 'https://essential-addons.com/docs/pinterest-feed/'
+					    ]
+				    ] ),
+
 				    'businessReviewsSetting' => apply_filters( 'eael/admin/modal/businessReviewsSetting', [
 					    'accordion' => [
 						    'googlePlaces' => [
@@ -1750,7 +1768,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.8 with new \"<b><a target='_blank' href='%1\$s'>Pricing Slider</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/pricing-slider/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.9 with new \"<b><a target='_blank' href='%1\$s'>Pinterest Feed</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/pinterest-feed/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -1900,20 +1918,20 @@ trait Admin {
 	    );
 
 	    ob_start(); ?>
-		<div class="eael-black-friday-optin-logo">
-			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" width="25" alt="">
+		<div class="eael-summer-campaign-logo">
+			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" alt="">
 		</div>
-		<div class="eael-february-deal-content">
-			<p><?php 
+		<div class="eael-summer-campaign-content">
+			<p><?php
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo __( 'Elevate web design more than ever with 110+ Elements – now <strong>Flat 20% OFF! 🎁</strong>', 'essential-addons-for-elementor-lite' );
+			echo __( '<strong>🏖️</strong> Your Elementor site deserves a Summer glow-up. Get 110+ advanced elements and build faster, smarter <strong>- up to $100 OFF</strong>', 'essential-addons-for-elementor-lite' );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
-                <a href="https://essential-addons.com/feb2026-admin-notice" target="_blank" class="button-primary">
-                    <?php esc_html_e( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ); ?>
+                <a href="https://essential-addons.com/summer2026-admin-notice" target="_blank" class="button-primary">
+                    <?php esc_html_e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
                 <span class="eael-action-dismiss-btn">
-                    <?php esc_html_e( 'I’ll Grab It Later', 'essential-addons-for-elementor-lite' ); ?>
+                    <?php esc_html_e( "I Don't Want Any Discount", 'essential-addons-for-elementor-lite' ); ?>
                 </span>
             </div>
 		</div>
@@ -1921,7 +1939,7 @@ trait Admin {
 		<script>
             jQuery(document).ready(function ($) {
                 setTimeout(function () {
-                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-february_deal_2026_notice .notice-dismiss');
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-summer_campaign_2026_notice .notice-dismiss');
 
                     function wpNoticeDismissFunc(event) {
                         event.preventDefault();
@@ -1935,8 +1953,7 @@ trait Admin {
                             jQuery(event.target.offsetParent).slideUp(200);
                         }
 
-                        // Data has to be formatted as a string here.
-                        postData += 'id=february_deal_2026_notice';
+                        postData += 'id=summer_campaign_2026_notice';
                         postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
                         if (dismiss) {
                             postData += '&dismiss=' + dismiss;
@@ -1945,18 +1962,16 @@ trait Admin {
                             postData += '&later=' + later;
                         }
 
-                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_february_deal_2026_notice' ) );?>';
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_summer_campaign_2026_notice' ) );?>';
 
                         httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
                         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                         httpRequest.send(postData);
                     }
 
-                    // Add an event listener to the dismiss button.
                     dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
 
-                    // Handle custom dismiss button clicks
-                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-february_deal_2026_notice .eael-action-dismiss-btn');
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-summer_campaign_2026_notice .eael-action-dismiss-btn');
                     if (customDismissBtn && dismissBtn) {
                         customDismissBtn.addEventListener('click', function(event) {
                             event.preventDefault();
@@ -1967,21 +1982,21 @@ trait Admin {
             });
 		</script>
 	    <?php
-	    $b_message            = ob_get_clean();
-	    $_february_deal_notice = [
+	    $b_message                     = ob_get_clean();
+	    $_summer_campaign_2026_notice  = [
 		    'html' => $b_message,
 	    ];
 
 	    $notices->add(
-			'february_deal_2026_notice',
-			$_february_deal_notice,
+			'summer_campaign_2026_notice',
+			$_summer_campaign_2026_notice,
 			[
-				'start'       => strtotime('11:59:59pm 9th February, 2026'),
+				'start'       => strtotime( '12:00:00am 21st May, 2026' ),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				"expire"      => strtotime( '11:59:59pm 7th March, 2026' ),
-				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '11:59:59pm 7th March, 2026' ),
+				'expire'      => strtotime( '11:59:59pm 25th June, 2026' ),
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '11:59:59pm 25th June, 2026' ),
 			]
 		);
 

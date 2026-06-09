@@ -20,7 +20,30 @@ class Wrapper_Link {
 		add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
+        //WPML Support
+        add_filter( 'elementor/frontend/before_render', [ $this, 'eael_container_before_wrapper_link_wpml' ] );
 	}
+
+    /**
+     * WPML Support for container's wrapper link
+     */
+    public function eael_container_before_wrapper_link_wpml( $element ) {
+        if ( 'container' !== $element->get_data( 'elType' ) ) {
+            return;
+        }
+
+        $settings = $element->get_settings();
+
+        if ( empty( $settings['eael_wrapper_link']['url'] ) ) {
+            return;
+        }
+
+        $lang = apply_filters( 'wpml_current_language', null );
+        $url = apply_filters( 'wpml_permalink', $settings['eael_wrapper_link']['url'], $lang, true );
+
+        $settings['eael_wrapper_link']['url'] = $url;
+        $element->set_settings( 'eael_wrapper_link', $settings['eael_wrapper_link'] );
+    }
 
 	public function register_controls( $element ) {
 		$element->start_controls_section(

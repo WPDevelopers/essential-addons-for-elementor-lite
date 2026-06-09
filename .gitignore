@@ -7,3 +7,9 @@ pnpm-lock.yaml
 composer.lock
 /node_modules
 .idea/*
+/tools/vendor/
+/tools/composer.lock
+
+# E2E testing
+test-results/
+playwright-report/

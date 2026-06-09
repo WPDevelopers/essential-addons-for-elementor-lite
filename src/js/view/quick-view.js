@@ -69,17 +69,22 @@ const QuickView = {
 		});
 	},
 	closePopup: ($scope, jq) => {
-		
+
 		jq(document).on("click", ".eael-product-popup-close", function (event) {
 			event.stopPropagation();
 			QuickView.remove_product_popup(jq);
 		});
-		
-		jq(document).on("click", function (event) {
+
+		// Prevent clicks inside popup content from closing the modal
+		jq(document).on("click", ".eael-product-popup-details", function (event) {
+			event.stopPropagation();
+		});
+
+		jq(document).on("click", ".eael-woocommerce-popup-view", function (event) {
 			if (event.target.closest(".eael-product-popup-details")) return;
 			QuickView.remove_product_popup(jq);
 		});
-		
+
 	},
 	singlePageAddToCartButton: ($scope, $) => {
 		$(document).on(
@@ -136,8 +141,8 @@ const QuickView = {
 					       type: "post",
 					       data: {
 						       action: "eael_product_add_to_cart",
+						       security: localize.nonce,
 						       product_data: product_data,
-						       eael_add_to_cart_nonce: localize.nonce,
 						       cart_item_data: form.serializeArray(),
 					       },
 					       success: function (response) {

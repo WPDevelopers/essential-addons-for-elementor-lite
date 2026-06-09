@@ -137,7 +137,7 @@ class Business_Reviews extends Widget_Base {
 				'raw' => sprintf(
 					/* translators: %s: Link to Business Reviews Settings page. */
 					__( 'Google Place API key is missing. Please add it from EA Dashboard » Elements » %s', 'essential-addons-for-elementor-lite' ),
-					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) . '" target="_blank">' . esc_html__( 'Business Reviews Settings', 'essential-addons-for-elementor-lite' ) . '</a>'
+					'<a href="' . esc_url( site_url( '/wp-admin/admin.php?page=eael-settings#/elements/business-reviews' ) ) . '" target="_blank">' . esc_html__( 'Business Reviews Settings', 'essential-addons-for-elementor-lite' ) . '</a>'
 				),
 				'content_classes' => 'eael-warning',
 				'condition'       => [
