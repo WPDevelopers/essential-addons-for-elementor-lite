@@ -1797,9 +1797,19 @@ class Login_Register extends Widget_Base {
 			'conditions' => $this->get_form_controls_display_condition( 'login' ),
 		] );
 
+		$this->add_control( 'allow_login_roles', [
+			'label'       => __( 'Allowed User Roles', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Select user roles that are allowed to login. Leave empty to allow all.', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SELECT2,
+			'multiple'    => true,
+			'options'     => $this->eael_get_role_names(),
+			'label_block' => true,
+		] );
+
 		$this->add_control( 'redirect_after_login', [
 			'label' => __( 'Redirect After Login', 'essential-addons-for-elementor-lite' ),
 			'type'  => Controls_Manager::SWITCHER,
+			'separator'   => 'before',
 		] );
 
 		$this->add_control( 'redirect_url', [
@@ -1853,23 +1863,13 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-		$this->add_control( 'allow_login_roles', [
-			'label'       => __( 'Allowed User Roles', 'essential-addons-for-elementor-lite' ),
-			'description' => __( 'Select user roles that are allowed to login. Leave empty to allow all.', 'essential-addons-for-elementor-lite' ),
-			'type'        => Controls_Manager::SELECT2,
-			'multiple'    => true,
-			'options'     => $this->eael_get_role_names(),
-			'label_block' => true,
-			'separator'   => 'before',
-		] );
-
 		$this->add_control( 'logout_redirect_url', [
 			'type'          => Controls_Manager::URL,
 			'label'         => __( 'Redirect After Logout', 'essential-addons-for-elementor-lite' ),
 			'description'   => __( 'Leave empty to redirect back to the current page.', 'essential-addons-for-elementor-lite' ),
 			'show_external' => false,
 			'separator'     => 'before',
-			'options'       => false
+			'options'       => false,
 		] );
 
 		$this->_init_otp_controls( 'login' );
