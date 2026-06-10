@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.6
+Stable tag: 6.6.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -318,6 +318,17 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= Free 6.6.7 - 10/06/2026 =
+
+- Improved: EA Advanced Data Table | Added option to set default sorting column on initial load
+- Improved: EA Sticky Video | Video now pauses automatically when the modal window is closed
+- Improved: EA Woo Account Dashboard | Added dynamic option to display data from user details
+- Improved: EA Login/Register Form | Added option to set page redirect after signing out
+- Improved: EA Table of Contents | Enhanced user experience with additional improvements
+- Fixed: EA Sticky Video | Sticky video displayed with incorrect margins
+- Fixed: EA Filterable Gallery | Search results did not display all matching items properly
+- Few minor bug fixes & improvements
 
 = 6.6.6 - 08/06/2026 =
 
