@@ -54,9 +54,35 @@ trait Login_Registration {
 			$this->send_password_reset();
 		} else if ( isset( $_POST['eael-resetpassword-submit'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$this->reset_password();
+		} else if ( isset( $_GET['eael-lr-action'] ) && 'logout' === $_GET['eael-lr-action'] ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$this->handle_eael_lr_logout();
 		}
 		do_action( 'eael/login-register/after-processing-login-register', $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
+	}
+
+	/**
+	 * Handles the custom EAEL logout action.
+	 * Uses wp_redirect() (not wp_safe_redirect()) to support external redirect URLs
+	 * configured in the widget. The nonce is tied to the exact redirect URL, so
+	 * the redirect_to parameter cannot be tampered with without invalidating the nonce.
+	 */
+	public function handle_eael_lr_logout() {
+		$redirect_to = ! empty( $_GET['redirect_to'] ) ? esc_url_raw( wp_unslash( $_GET['redirect_to'] ) ) : home_url( '/' ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		$nonce = ! empty( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+		if ( ! wp_verify_nonce( $nonce, 'eael-lr-logout|' . $redirect_to ) ) {
+			wp_die( esc_html__( 'Invalid logout request.', 'essential-addons-for-elementor-lite' ), 403 );
+		}
+
+		if ( ! is_user_logged_in() ) {
+			wp_redirect( $redirect_to );
+			exit;
+		}
+
+		wp_logout();
+		wp_redirect( $redirect_to );
+		exit;
 	}
 
 	/**
@@ -1924,8 +1950,28 @@ trait Login_Registration {
 	 * @return null|string|string[]
 	 */
 	public function replace_placeholders_logout_link_text( $text ) {
-		$current_user   = wp_get_current_user()->display_name;
-		$logout_link 	= sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_logout_url() ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
+		$current_user = wp_get_current_user()->display_name;
+
+		$logout_redirect_url = ! empty( $this->ds['logout_redirect_url']['url'] )
+			? esc_url_raw( $this->ds['logout_redirect_url']['url'] )
+			: get_permalink( ! empty( $this->page_id ) ? $this->page_id : get_queried_object_id() );
+
+		if ( ! $logout_redirect_url ) {
+			$logout_redirect_url = home_url( '/' );
+		}
+
+		// Use a custom logout handler URL so external redirects work.
+		// The nonce is bound to the exact redirect URL, preventing redirect_to tampering.
+		$logout_url = add_query_arg(
+			[
+				'eael-lr-action' => 'logout',
+				'redirect_to'    => rawurlencode( $logout_redirect_url ),
+				'_wpnonce'       => wp_create_nonce( 'eael-lr-logout|' . $logout_redirect_url ),
+			],
+			home_url( '/' )
+		);
+
+		$logout_link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $logout_url ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
 
 		$placeholders = [
 			'/\[username\]/',
@@ -2736,5 +2782,83 @@ trait Login_Registration {
 		}
 
 		return $eael_custom_profile_fields;
+	}
+
+	/**
+	 * Read "Show on My Account" fields from option.
+	 * Stored as [ post_id => [ field_type => field_label ] ] — merged across all posts.
+	 *
+	 * @return array  [ field_type => field_label ]
+	 */
+	protected function eael_get_lr_my_account_fields() {
+		$merged = [];
+		foreach ( (array) get_option( 'eael_lr_my_account_fields', [] ) as $post_fields ) {
+			$merged = array_merge( $merged, (array) $post_fields );
+		}
+		return $merged;
+	}
+
+	/**
+	 * Render "Show on My Account" fields inside the WooCommerce edit-account form.
+	 * Hooked to woocommerce_edit_account_form.
+	 */
+	public function eael_wc_account_form_fields() {
+		$fields = $this->eael_get_lr_my_account_fields();
+		
+		if ( empty( $fields ) ) {
+			return;
+		}
+
+		$user_id = get_current_user_id();
+		
+		foreach ( $fields as $type => $label ) {
+			if ( 'website' === $type ) {
+				$value = esc_attr( get_userdata( $user_id )->user_url ?? '' );
+			} elseif ( 'eael_phone_number' === $type ) {
+				$value = esc_attr( get_user_meta( $user_id, 'eael_phone_number', true ) );
+			} else {
+				$value = esc_attr( get_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, true ) );
+			}
+			?>
+			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+				<label for="eael_mya_<?php echo esc_attr( $type ); ?>"><?php echo esc_html( $label ); ?></label>
+				<input type="text"
+				       class="woocommerce-Input woocommerce-Input--text input-text"
+				       name="eael_mya_<?php echo esc_attr( $type ); ?>"
+				       id="eael_mya_<?php echo esc_attr( $type ); ?>"
+				       value="<?php echo $value; ?>">
+			</p>
+			<?php
+		}
+	}
+
+	/**
+	 * Save "Show on My Account" fields submitted from the WooCommerce edit-account form.
+	 * Hooked to woocommerce_save_account_details.
+	 *
+	 * @param int $user_id
+	 */
+	public function eael_wc_save_account_fields( $user_id ) {
+		$fields = $this->eael_get_lr_my_account_fields();
+		if ( empty( $fields ) ) {
+			return;
+		}
+
+		foreach ( array_keys( $fields ) as $type ) {
+			$post_key = 'eael_mya_' . $type;
+			if ( ! isset( $_POST[ $post_key ] ) ) {
+				continue;
+			}
+
+			$value = sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) );
+
+			if ( 'website' === $type ) {
+				wp_update_user( [ 'ID' => $user_id, 'user_url' => esc_url_raw( $value ) ] );
+			} elseif ( 'eael_phone_number' === $type ) {
+				update_user_meta( $user_id, 'eael_phone_number', $value );
+			} else {
+				update_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, $value );
+			}
+		}
 	}
 }

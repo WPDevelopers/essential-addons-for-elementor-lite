@@ -1353,6 +1353,16 @@ trait Admin {
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'facebook-feed' ) )
 						    ],
+						    'pinterest-feed'        => [
+							    'key'         => 'pinterest-feed',
+							    'title'       => __( 'Pinterest Feed', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/pinterest-feed/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-pinterest-feed',
+							    'is_pro'      => true,
+							    'promotion'   => 'new',
+							    'setting'     => $this->pro_enabled ? [ 'id' => 'pinterestFeedSetting' ] : [],
+							    'is_activate' => boolval( $this->get_settings( 'pinterest-feed' ) )
+						    ],
 					    ]
 				    ],
 				    'learn-dash-elements'      => [
@@ -1570,6 +1580,14 @@ trait Admin {
 					    'placeholder'=> __( "Custom Tab 1, Custom Tab 2, Custom Tab 3", 'essential-addons-for-elementor-lite' ),
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
+				    'pinterestFeedSetting'   => apply_filters( 'eael/admin/modal/pinterestFeedSetting', [
+					    'accordion' => [],
+					    'link'      => [
+						    'text' => __( 'How to connect your Pinterest account', 'essential-addons-for-elementor-lite' ),
+						    'url'  => 'https://essential-addons.com/docs/pinterest-feed/'
+					    ]
+				    ] ),
+
 				    'businessReviewsSetting' => apply_filters( 'eael/admin/modal/businessReviewsSetting', [
 					    'accordion' => [
 						    'googlePlaces' => [
@@ -1759,7 +1777,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.8 with new \"<b><a target='_blank' href='%1\$s'>Pricing Slider</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/pricing-slider/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.9 with new \"<b><a target='_blank' href='%1\$s'>Pinterest Feed</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/pinterest-feed/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),

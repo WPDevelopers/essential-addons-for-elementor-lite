@@ -183,8 +183,9 @@ jQuery(window).on("elementor/frontend/init", function () {
             isOriginLeft: !isRTL,
             filter: function () {
                var $this = $(this);
+               var searchHaystack = $this.text() + " " + ($this.attr("data-search-categories") || "");
                var $result = searchRegex
-                  ? $this.text().match(searchRegex)
+                  ? searchHaystack.match(searchRegex)
                   : true;
                if (buttonFilter === undefined) {
                   if (layoutMode !== "layout_3") {

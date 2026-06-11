@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.5
+Stable tag: 6.6.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -172,6 +172,7 @@ Extensions (Free):
 39. [Multicolumn Pricing Table](https://essential-addons.com/multicolumn-pricing-table/)- Display pricing plans in multiple columns to compare features and choose the right option
 40. [Figma to Elementor Converter](https://essential-addons.com/figma-to-elementor-converter/)- Turn Figma designs into fully customizable Elementor Pages
 41. [Pricing Slider](https://essential-addons.com/pricing-slider/)- Showcase dynamic pricing plans with interactive slider control
+42. [Pinterest Feed](https://essential-addons.com/pinterest-feed/) – Showcase stunning Pinterest content on your website with beautiful layouts.
 
 
 Extensions (Pro):
@@ -204,7 +205,7 @@ With Essential Addons, we bring you seamless compatibility with WooCommerce, enh
 
 [EA Woo Add to Cart](https://essential-addons.com/docs/ea-woo-add-to-cart/): Simplify the shopping experience by displaying an easy-to-access ‘Add to Cart’ button for all your WooCommerce products.
 
-[EA Woo Product Slider (PRO)](https://essential-addons.com/docs/woo-product-slider/): Present your WooCommerce products in a stunning slider format with this advanced Elementor addon. 
+[EA Woo Product Slider (PRO)](https://essential-addons.com/docs/woo-product-slider/): Present your WooCommerce products in a stunning slider format with this advanced Elementor addon.
 
 [EA Woo Product Collection (PRO)](https://essential-addons.com/docs/ea-woo-product-collections/): Exhibit your WooCommerce product collections on any section of your Elementor website to showcase items based on categories, tags, or attributes, and add engaging hover effects.
 
@@ -318,6 +319,24 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= Free 6.6.7 - 10/06/2026 =
+
+- Improved: EA Advanced Data Table | Added option to set default sorting column on initial load
+- Improved: EA Sticky Video | Video now pauses automatically when the modal window is closed
+- Improved: EA Woo Account Dashboard | Added dynamic option to display data from user details
+- Improved: EA Login/Register Form | Added option to set page redirect after signing out
+- Improved: EA Table of Contents | Enhanced user experience with additional improvements
+- Fixed: EA Sticky Video | Sticky video displayed with incorrect margins
+- Fixed: EA Filterable Gallery | Search results did not display all matching items properly
+- Few minor bug fixes & improvements
+
+= 6.6.6 - 08/06/2026 =
+
+- Improved: EA Woo Product Grid | Added Option to set image resolution
+- Fixed: EA Event Calendar | Timed Events Filtered Incorrectly
+- Fixed: Prevent fatal error during plugin update when a request initializes the setup wizard
+- Few minor bug fixes & improvements
+
 = 6.6.5 - 21/05/2026 =
 
 - Fixed: EA Creative Button | Resolved invisible default text color issue when enabling gradient background
@@ -402,7 +421,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Login/Register Form | Password reset link redirecting to default WP reset page
 - Fixed: EA Gravity Forms | Gravity Forms not working when used via EA widget
 - Improved: Added support for a Query ID option for all post-related elements.
-- Improved: EA Woo Product Gallery | Added option to hide categories and quantity input in the “Quick View” popup 
+- Improved: EA Woo Product Gallery | Added option to hide categories and quantity input in the “Quick View” popup
 - Improved: EA Woo Product Carousel | Pause on hover for the Marquee style
 - Few minor bug fixes & improvements
 
@@ -483,7 +502,7 @@ Your existing elements/content will work with premium version. So you won't lose
 = 6.5.4 - 14/12/2025 =
 
 - Improved: Security Enhancement
-- Fixed: Plugin Check (PCP) warnings 
+- Fixed: Plugin Check (PCP) warnings
 - Few minor bug fixes & improvements
 
 = 6.5.3 - 27/11/2025 =
