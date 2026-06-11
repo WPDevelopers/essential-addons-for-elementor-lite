@@ -4412,7 +4412,7 @@ class Event_Calendar extends Widget_Base
             if (tribe_event_is_all_day($event->ID)) {
               $end = wp_date('Y-m-d', strtotime("+1 days", strtotime(tribe_get_end_date($event->ID, true, $date_format))));
             } else {
-              $end = wp_date('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format))) . ":01";
+              $end = tribe_get_end_date($event->ID, true, $date_format) . ":01";
             }
             
             if ( $random_color_enabled ) {
