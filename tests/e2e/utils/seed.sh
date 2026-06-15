@@ -12,6 +12,7 @@ EAEL_SLUG=$(wp plugin list --field=name --allow-root | grep essential-addons | h
 echo "==> Setting permalink structure..."
 wp rewrite structure '/%postname%/' --allow-root
 wp rewrite flush --allow-root
+wp option update timezone_string Europe/Berlin --allow-root
 
 # Create an Elementor page from a JSON template.
 # Usage: create_elementor_page "Title" "slug" "template.json"
@@ -39,9 +40,10 @@ create_elementor_page() {
 
 echo "==> Creating test pages..."
 create_elementor_page "Info Box Test" "info-box-test" "info-box.json"
+create_elementor_page "Event Calendar Timezone Test" "event-calendar-timezone-test" "event-calendar-timezone.json"
 
 echo "==> Flushing Elementor CSS..."
 wp elementor flush-css --allow-root 2>/dev/null || true
 
 echo "==> Done. http://localhost:8888 | wp-admin: admin / password"
-echo "    Pages: /info-box-test/"
+echo "    Pages: /info-box-test/, /event-calendar-timezone-test/"

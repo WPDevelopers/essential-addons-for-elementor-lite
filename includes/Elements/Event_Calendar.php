@@ -4146,17 +4146,18 @@ class Event_Calendar extends Widget_Base
         $events = $settings['eael_event_items'];
         $data = [];
         if ($events) {
+            $utc_timezone = new \DateTimeZone( 'UTC' );
             $i = 0;
             foreach ($events as $event) {
 
                 if ($event['eael_event_all_day'] == 'yes') {
                     $start = !empty( $event["eael_event_start_date_allday"] ) ? $event["eael_event_start_date_allday"] : wp_date('Y-m-d', current_time('timestamp', 0));
 					$_end  = !empty( $event["eael_event_end_date_allday"] ) ? $event["eael_event_end_date_allday"] : wp_date('Y-m-d', current_time('timestamp', 0));
-                    $end = wp_date('Y-m-d', strtotime("+1 days", strtotime($_end)));
+                    $end = wp_date('Y-m-d', strtotime("+1 days", strtotime($_end)), $utc_timezone);
                 } else {
                     $start = !empty( $event["eael_event_start_date"] ) ? $event["eael_event_start_date"] : wp_date('Y-m-d', current_time('timestamp', 0));
 					$_end  = !empty( $event["eael_event_end_date"] ) ? $event["eael_event_end_date"] : wp_date('Y-m-d', strtotime("+59 minute", current_time('timestamp', 0)) );
-                    $end = wp_date('Y-m-d H:i', strtotime($_end))  . ":01";
+                    $end = wp_date('Y-m-d H:i', strtotime($_end), $utc_timezone)  . ":01";
                 }
 
                 if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
@@ -4400,6 +4401,7 @@ class Event_Calendar extends Widget_Base
         $random_color_index = 0;
 
         $calendar_data = [];
+        $utc_timezone = new \DateTimeZone( 'UTC' );
         foreach ($events as $key => $event) {
             $date_format = 'Y-m-d';
             $all_day = 'yes';
@@ -4410,9 +4412,9 @@ class Event_Calendar extends Widget_Base
 
 
             if (tribe_event_is_all_day($event->ID)) {
-              $end = wp_date('Y-m-d', strtotime("+1 days", strtotime(tribe_get_end_date($event->ID, true, $date_format))));
+              $end = wp_date('Y-m-d', strtotime("+1 days", strtotime(tribe_get_end_date($event->ID, true, $date_format))), $utc_timezone);
             } else {
-              $end = wp_date('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format))) . ":01";
+              $end = wp_date('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format)), $utc_timezone) . ":01";
             }
             
             if ( $random_color_enabled ) {
