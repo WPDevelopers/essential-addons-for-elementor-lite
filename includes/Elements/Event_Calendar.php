@@ -4156,7 +4156,7 @@ class Event_Calendar extends Widget_Base
                 } else {
                     $start = !empty( $event["eael_event_start_date"] ) ? $event["eael_event_start_date"] : wp_date('Y-m-d', current_time('timestamp', 0));
 					$_end  = !empty( $event["eael_event_end_date"] ) ? $event["eael_event_end_date"] : wp_date('Y-m-d', strtotime("+59 minute", current_time('timestamp', 0)) );
-                    $end = wp_date('Y-m-d H:i', strtotime($_end))  . ":01";
+                    $end = gmdate('Y-m-d H:i', strtotime($_end))  . ":01";
                 }
 
                 if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
@@ -4412,7 +4412,7 @@ class Event_Calendar extends Widget_Base
             if (tribe_event_is_all_day($event->ID)) {
               $end = wp_date('Y-m-d', strtotime("+1 days", strtotime(tribe_get_end_date($event->ID, true, $date_format))));
             } else {
-              $end = tribe_get_end_date($event->ID, true, $date_format) . ":01";
+              $end = gmdate('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format))) . ":01";
             }
             
             if ( $random_color_enabled ) {
