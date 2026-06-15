@@ -1,0 +1,52 @@
+[
+  {
+    "id": "eaec001",
+    "elType": "section",
+    "settings": [],
+    "elements": [
+      {
+        "id": "eaec002",
+        "elType": "column",
+        "settings": { "_column_size": 100 },
+        "elements": [
+          {
+            "id": "eaec003",
+            "elType": "widget",
+            "widgetType": "eael-event-calendar",
+            "settings": {
+              "eael_event_calendar_type": "manual",
+              "eael_event_display_layout": "calendar",
+              "eael_event_calendar_default_view": "listMonth",
+              "eael_event_default_date_type": "custom",
+              "eael_event_calendar_default_date": "2026-06-21",
+              "eael_event_time_format": "yes",
+              "eael_event_details_link_hide": "yes",
+              "eael_event_items": [
+                {
+                  "_id": "event1",
+                  "eael_event_title": "Berlin Summer Event",
+                  "eael_event_link": {
+                    "url": "",
+                    "is_external": "",
+                    "nofollow": "",
+                    "custom_attributes": ""
+                  },
+                  "eael_event_redirection": "",
+                  "eael_event_all_day": "",
+                  "eael_event_start_date": "2026-06-21 11:00",
+                  "eael_event_end_date": "2026-06-21 14:00",
+                  "eael_event_description": "Regression coverage for local event times.",
+                  "eael_event_bg_color": "#1d4ed8",
+                  "eael_event_text_color": "#ffffff",
+                  "eael_event_border_color": "#1d4ed8",
+                  "eael_event_location": "Berlin",
+                  "eael_event_category": "Regression"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
