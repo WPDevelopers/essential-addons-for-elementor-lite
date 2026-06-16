@@ -127,8 +127,14 @@ jQuery(window).on("elementor/frontend/init", function () {
     }
     elementorFrontend.hooks.addAction("frontend/element_ready/widget", ImageMaskingHandler);
 
-    elementor.hooks.addFilter('elementor/documents/save/data', function (data) {
-        cleanLegacySvgPath(data?.elements);
-        return data;
-    });
+    // The `elementor` global only exists inside the Elementor editor iframe. In
+    // standalone preview (?preview=true) WP core `is_preview()` makes EAEL emit this
+    // edit bundle too, but `elementor` is undefined there — so guard the editor-only
+    // save hook to avoid "Uncaught ReferenceError: elementor is not defined".
+    if (elementorFrontend.isEditMode() && typeof elementor !== 'undefined') {
+        elementor.hooks.addFilter('elementor/documents/save/data', function (data) {
+            cleanLegacySvgPath(data?.elements);
+            return data;
+        });
+    }
 });
