@@ -527,19 +527,25 @@ figcaption .mfp-bottom-bar {
 	justify-content: center;
 }
 
-.video-popup:hover>img {
-	transform: scale(1.1);
-}
-
 .video-popup-bg {
 	visibility: hidden;
 	opacity: 0;
 	transition: 350ms;
 }
 
-.eael-gallery-grid-item:hover .video-popup-bg {
-	visibility: visible;
-	opacity: 1;
+// Hover affordances must not be the sole interaction path. On touch / no-hover
+// devices (Android Chrome, Samsung Internet) the first tap is consumed as a
+// hover-reveal, blocking lightbox activation. Apply hover-only effects only
+// where a real hover + fine pointer exists; the play icon stays visible on touch.
+@media (hover: hover) and (pointer: fine) {
+	.video-popup:hover>img {
+		transform: scale(1.1);
+	}
+
+	.eael-gallery-grid-item:hover .video-popup-bg {
+		visibility: visible;
+		opacity: 1;
+	}
 }
 
 .gallery-item-thumbnail-wrap>.gallery-item-caption-wrap {

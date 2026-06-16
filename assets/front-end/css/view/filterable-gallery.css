@@ -619,12 +619,6 @@ figcaption .mfp-bottom-bar {
           justify-content: center;
 }
 
-.video-popup:hover > img {
-  -webkit-transform: scale(1.1);
-      -ms-transform: scale(1.1);
-          transform: scale(1.1);
-}
-
 .video-popup-bg {
   visibility: hidden;
   opacity: 0;
@@ -632,9 +626,16 @@ figcaption .mfp-bottom-bar {
   transition: 350ms;
 }
 
-.eael-gallery-grid-item:hover .video-popup-bg {
-  visibility: visible;
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .video-popup:hover > img {
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  .eael-gallery-grid-item:hover .video-popup-bg {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .gallery-item-thumbnail-wrap > .gallery-item-caption-wrap {
