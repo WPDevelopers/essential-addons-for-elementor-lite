@@ -1,0 +1,19 @@
+{% import 'elementor/macros' as m %}
+{%- set allowed_tags = '<b><strong><sup><sub><s><em><i><u><del><span><br>' -%}
+{%- set effect = settings.effect | default('eael-creative-button--default') -%}
+{%- set classes = settings.classes | merge( [ base_styles.base, 'eael-creative-button', effect ] ) | join(' ') -%}
+<div class="eael-creative-button-wrapper">
+	<a class="{{ classes }}" data-text="{{ settings.secondary_text | e('html_attr') }}" data-interaction-id="{{ interaction_id }}"
+		{%- if settings.link is defined and settings.link.href is defined and settings.link.href is not empty %} {{ m.render_link_attributes(settings.link) }}{% endif %}
+		{{- m.render_custom_attributes(settings) }}>
+		{%- if effect == 'eael-creative-button--tamaya' -%}
+			<div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-before"><span>{{ settings.secondary_text }}</span></div>
+		{%- endif -%}
+		<div class="creative-button-inner">
+			<span class="cretive-button-text">{{ settings.text | striptags(allowed_tags) | raw }}</span>
+		</div>
+		{%- if effect == 'eael-creative-button--tamaya' -%}
+			<div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-after"><span>{{ settings.secondary_text }}</span></div>
+		{%- endif -%}
+	</a>
+</div>

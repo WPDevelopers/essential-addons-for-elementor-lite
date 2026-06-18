@@ -174,6 +174,9 @@ class Bootstrap
 		    }
 	    }
 
+        // Atomic (V4 editor) widgets — pilot. Self-gated on the Atomic experiment.
+        new \Essential_Addons_Elementor\Elements\Atomic\Loader();
+
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
