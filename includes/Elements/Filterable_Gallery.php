@@ -3956,7 +3956,7 @@ class Filterable_Gallery extends Widget_Base
         }
 
         if (!empty($icon_url)) {
-            $html .= '<img width="62" height="62" src="' . esc_url($icon_url) . '" alt="eael-fg-video-play-icon" >';
+            $html .= '<img width="62" height="62" src="' . esc_url($icon_url) . '" class="eael-fg-video-play-icon" alt="" >';
         }
 
         $html .= '</a>';
@@ -4262,7 +4262,10 @@ class Filterable_Gallery extends Widget_Base
                 }
             }
 
-            if ($settings['eael_fg_show_popup'] == 'media') {
+            // Mirror the opening condition (~line 4251) so the anchor is only closed
+            // when it was actually opened. Card-layout video items open no media
+            // anchor here, so an unconditional close emitted an orphan </a>.
+            if ($settings['eael_fg_show_popup'] == 'media' && $settings['eael_fg_caption_style'] !== 'card' && !$this->popup_status) {
                 $html .= '</a>';
             }
 
