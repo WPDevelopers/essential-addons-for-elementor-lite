@@ -1065,6 +1065,7 @@ class Feature_List extends Widget_Base {
 
 
             if ( $item['eael_feature_list_icon_type'] == 'image' ) {
+            $item['eael_feature_list_img'] = Helper::eael_wpml_translate_media( $item['eael_feature_list_img'] ); // WPML Media Translation compatibility
             $this->add_render_attribute( 'feature_list_image' . $index, [
                 'src'   => esc_url( $item['eael_feature_list_img']['url'] ),
                 'class' => 'eael-feature-list-img',

@@ -3769,6 +3769,7 @@ class Filterable_Gallery extends Widget_Base
         $video_gallery_yt_privacy = ! empty( $settings['video_gallery_yt_privacy'] ) && 'yes' === $settings['video_gallery_yt_privacy'] ? 1 : 0;
         
         foreach ($gallery_items as $gallery) {
+            $gallery['eael_fg_gallery_img'] = Helper::eael_wpml_translate_media( $gallery['eael_fg_gallery_img'] ); // WPML Media Translation compatibility
             $gallery_store[$counter]['title']        = Helper::eael_wp_kses($gallery['eael_fg_gallery_item_name']);
             $gallery_store[$counter]['content']      = $this->parse_text_editor( wp_kses( $gallery['eael_fg_gallery_item_content'], Helper::eael_allowed_tags() ) );
             $gallery_store[$counter]['id']           = $gallery['_id'];

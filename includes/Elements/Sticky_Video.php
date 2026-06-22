@@ -749,6 +749,9 @@ class Sticky_Video extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        // WPML Media Translation compatibility
+        $settings['eaelsv_overlay_image'] = Helper::eael_wpml_translate_media( $settings['eaelsv_overlay_image'] );
+        $settings['eaelsv_hosted_url']    = Helper::eael_wpml_translate_media( $settings['eaelsv_hosted_url'] );
         $iconNew = $settings['eaelsv_icon_new'];
         $sticky = isset( $settings['eaelsv_is_sticky'] ) ? $settings['eaelsv_is_sticky'] : 'yes';
         $autoplay = ($settings['eaelsv_autopaly'] == 'yes') ? $settings['eaelsv_autopaly'] : 'no';
