@@ -1387,7 +1387,8 @@ class Adv_Tabs extends Widget_Base
                                     } else {
                                         echo '<i class="' . esc_attr( $tab['eael_adv_tabs_tab_title_icon'] ) . '"></i>';
                                     } ?>
-                                <?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image') : ?>
+                                <?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image') :
+                                    $tab['eael_adv_tabs_tab_title_image'] = Helper::eael_wpml_translate_media( $tab['eael_adv_tabs_tab_title_image'] ); // WPML Media Translation compatibility ?>
                                     <img src="<?php echo esc_url( $tab['eael_adv_tabs_tab_title_image']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($tab['eael_adv_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true)); ?>">
                                 <?php endif; ?>
                             <?php endif; ?>

@@ -2165,4 +2165,32 @@ class Helper
 
 		return get_post_status( $template_id ) === 'publish' && get_post_type( $template_id ) === 'elementor_library';
 	}
+
+	/**
+	 * eael_wpml_translate_media
+	 *
+	 * Resolve an Elementor MEDIA control value (image/video) to its
+	 * WPML-translated attachment so the correct media is shown per language.
+	 * Safe to call when WPML / WPML Media Translation is inactive — the
+	 * `wpml_object_id` filter simply returns the original id unchanged.
+	 *
+	 * @param array $media Elementor MEDIA control value (expects 'id' and 'url').
+	 *
+	 * @return array The media array with translated 'id' and 'url' when available.
+	 */
+	public static function eael_wpml_translate_media( $media ) {
+		if ( ! is_array( $media ) || empty( $media['id'] ) ) {
+			return $media;
+		}
+
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+		$translated_id = apply_filters( 'wpml_object_id', $media['id'], 'attachment', true );
+
+		if ( $translated_id && (int) $translated_id !== (int) $media['id'] ) {
+			$media['id']  = $translated_id;
+			$media['url'] = wp_get_attachment_url( $translated_id );
+		}
+
+		return $media;
+	}
 }

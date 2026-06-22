@@ -1416,6 +1416,7 @@ class Data_Table extends Widget_Base {
 			            	<?php endif; ?>
 							<?php
 								if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'image' ) :
+									$header_title['eael_data_table_header_col_img'] = Helper::eael_wpml_translate_media( $header_title['eael_data_table_header_col_img'] ); // WPML Media Translation compatibility
 									$this->add_render_attribute('data_table_th_img'.$i, [
 										'src'	=> esc_url( $header_title['eael_data_table_header_col_img']['url'] ),
 										'class'	=> 'eael-data-table-th-img',
