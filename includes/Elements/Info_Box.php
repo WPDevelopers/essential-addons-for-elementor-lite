@@ -2512,6 +2512,7 @@ class Info_Box extends Widget_Base
         }
 
         $infobox_image = $this->get_settings('eael_infobox_image');
+        $infobox_image = Helper::eael_wpml_translate_media( $infobox_image ); // WPML Media Translation compatibility
         $infobox_image_url = Group_Control_Image_Size::get_attachment_image_src($infobox_image['id'], 'thumbnail', $settings);
         if (empty($infobox_image_url)){
 	        $infobox_image_url = $infobox_image['url'];

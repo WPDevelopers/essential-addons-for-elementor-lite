@@ -19,6 +19,7 @@
             <fields-in-item items_of="eael_adv_tabs_tab">
                 <field type="Advance Tab: Title" editor_type="LINE">eael_adv_tabs_tab_title</field>
                 <field type="Advance Tab: Content" editor_type="VISUAL">eael_adv_tabs_tab_content</field>
+                <field type="Advance Tab: Title Image" key_of="eael_adv_tabs_tab_title_image" editor_type="MEDIA">id</field>
             </fields-in-item>
             <fields>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
@@ -56,6 +57,7 @@
             </conditions>
             <fields-in-item items_of="eael_data_table_header_cols_data">
                 <field type="Data Table: Header" editor_type="LINE">eael_data_table_header_col</field>
+                <field type="Data Table: Header Image" key_of="eael_data_table_header_col_img" editor_type="MEDIA">id</field>
             </fields-in-item>
             <fields-in-item items_of="eael_data_table_content_rows">
                 <field type="Data Table: Cell Text" editor_type="AREA">eael_data_table_content_row_title</field>
@@ -115,6 +117,7 @@
                 <field type="Filterable Gallery: Item Content" editor_type="VISUAL">eael_fg_gallery_item_content</field>
                 <field type="Filterable Gallery: Item Link" key_of="eael_fg_gallery_img_link" editor_type="LINE">url</field>
                 <field type="Filterable Gallery: Item Video Link" editor_type="LINK">eael_fg_gallery_item_video_link</field>
+                <field type="Filterable Gallery: Item Image" key_of="eael_fg_gallery_img" editor_type="MEDIA">id</field>
             </fields-in-item>
         </widget>
         <widget name="eael-image-accordion">
@@ -125,6 +128,7 @@
                 <field type="Image Accordion: Title" editor_type="LINE">eael_accordion_tittle</field>
                 <field type="Image Accordion: Content" editor_type="VISUAL">eael_accordion_content</field>
                 <field type="Image Accordion: Link" key_of="eael_accordion_title_link" editor_type="LINE">url</field>
+                <field type="Image Accordion: Image" key_of="eael_accordion_bg" editor_type="MEDIA">id</field>
             </fields-in-item>
             <fields>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
@@ -157,6 +161,7 @@
                 <field type="Info Box: Sub Title Text" editor_type="LINE">eael_infobox_number</field>
                 <field type="Info Box: Button Link" key_of="infobox_button_link_url" editor_type="LINE">url</field>
                 <field type="Info Box: Link" key_of="eael_show_infobox_clickable_link" editor_type="LINE">url</field>
+                <field type="Info Box: Image" key_of="eael_infobox_image" editor_type="MEDIA">id</field>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
@@ -233,6 +238,7 @@
                 <field type="Team Member: Name" editor_type="LINE">eael_team_member_name</field>
                 <field type="Team Member: Title" editor_type="LINE">eael_team_member_job_title</field>
                 <field type="Team Member: Description" editor_type="AREA">eael_team_member_description</field>
+                <field type="Team Member: Image" key_of="eael_team_member_image" editor_type="MEDIA">id</field>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
             <fields-in-item items_of="eael_team_member_social_profile_links">
@@ -247,6 +253,7 @@
                 <field type="Testimonial: User Name" editor_type="LINE">eael_testimonial_name</field>
                 <field type="Testimonial: Company Name" editor_type="LINE">eael_testimonial_company_title</field>
                 <field type="Testimonial: Description" editor_type="VISUAL">eael_testimonial_description</field>
+                <field type="Testimonial: Avatar" key_of="image" editor_type="MEDIA">id</field>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
         </widget>
@@ -271,6 +278,7 @@
                 <field type="Feature List: Title" editor_type="LINE">eael_feature_list_title</field>
                 <field type="Feature List: Content" editor_type="AREA">eael_feature_list_content</field>
                 <field type="Feature List: Link" key_of="eael_feature_list_link" editor_type="LINE">url</field>
+                <field type="Feature List: Image" key_of="eael_feature_list_img" editor_type="MEDIA">id</field>
             </fields-in-item>
             <fields>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
@@ -449,6 +457,8 @@
                 <field type="Login | Register Form: Redirect URL" editor_type="LINK">redirect_url>url</field>
                 <field type="Login | Register Form: Register Link" editor_type="LINK">custom_register_url>url</field>
                 <field type="Login | Register Form: Sign in Link Text" editor_type="AREA">login_link_text</field>
+                <field type="Login | Register Form: Form Image" key_of="lr_form_image" editor_type="MEDIA">id</field>
+                <field type="Login | Register Form: Form Logo" key_of="lr_form_logo" editor_type="MEDIA">id</field>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
             </fields>
             <fields-in-item items_of="register_fields">
@@ -564,7 +574,17 @@
                 <field type="Woo Product Gallery: Sale Text" editor_type="LINE">eael_product_gallery_sale_text</field>
                 <field type="Woo Product Gallery: Stock Out Text" editor_type="LINE">eael_product_gallery_stockout_text</field>
                 <field type="Woo Product Gallery: Label Text" editor_type="LINE">show_load_more_text</field>
+                <field type="Woo Product Gallery: All Tab Thumbnail" key_of="eael_all_tab_thumb" editor_type="MEDIA">id</field>
                 <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+            </fields>
+        </widget>
+        <widget name="eael-sticky-video">
+            <conditions>
+                <condition key="widgetType">eael-sticky-video</condition>
+            </conditions>
+            <fields>
+                <field type="Sticky Video: Overlay Image" key_of="eaelsv_overlay_image" editor_type="MEDIA">id</field>
+                <field type="Sticky Video: Self Hosted Video" key_of="eaelsv_hosted_url" editor_type="MEDIA">id</field>
             </fields>
         </widget>
         <widget name="icon-box">

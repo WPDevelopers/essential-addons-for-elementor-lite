@@ -6709,6 +6709,13 @@ class Login_Register extends Widget_Base {
 		$this->page_id_for_popup = get_queried_object_id();
 
 		//handle form illustration
+		// WPML Media Translation compatibility
+		if ( ! empty( $this->ds['lr_form_image'] ) ) {
+			$this->ds['lr_form_image'] = HelperCLass::eael_wpml_translate_media( $this->ds['lr_form_image'] );
+		}
+		if ( ! empty( $this->ds['lr_form_logo'] ) ) {
+			$this->ds['lr_form_logo'] = HelperCLass::eael_wpml_translate_media( $this->ds['lr_form_logo'] );
+		}
 		$form_image_id               = ! empty( $this->ds['lr_form_image']['id'] ) ? $this->ds['lr_form_image']['id'] : '';
 		$this->form_illustration_pos = ! empty( $this->ds['lr_form_image_position'] ) ? $this->ds['lr_form_image_position'] : 'left';
 		$this->form_illustration_url = Group_Control_Image_Size::get_attachment_image_src( $form_image_id, 'lr_form_image', $this->ds );
