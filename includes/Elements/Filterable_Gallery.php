@@ -3929,7 +3929,10 @@ class Filterable_Gallery extends Widget_Base
         $title      = isset( $item['title'] ) ? $item['title'] : '';
         $classes    = "video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe playout-" . $item['video_layout'];
         
-        $html .= '<a area-hidden="true"  title="' . esc_attr( wp_strip_all_tags( $title ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="yes">';
+        // EA Magnific Popup is the single owner of video lightbox clicks (bound in
+        // assets JS on .eael-magnific-link.active). Opt the anchor out of Elementor's
+        // global lightbox to prevent both systems binding the same tap.
+        $html .= '<a area-hidden="true"  title="' . esc_attr( wp_strip_all_tags( $title ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="no">';
 
         if( $show_video_popup_bg ) {
             if( 'caption-style-card' === $caption_style ) {
