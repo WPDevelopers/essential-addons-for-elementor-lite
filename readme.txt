@@ -319,7 +319,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 6.6.8 - 21/06/2026 =
+= 6.6.8 - 22/06/2026 =
 
 - Fixed: EA Event Calendar | End time displayed incorrectly for The Events Calendar events on non-UTC sites
 - Fixed: EA Advanced Data Table | Resolved "elementor is not defined" error in standalone preview mode
