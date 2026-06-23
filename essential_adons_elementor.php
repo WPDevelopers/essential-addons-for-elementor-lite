@@ -4,14 +4,14 @@
  * Description: The Essential plugin you install after Elementor! Packed with 100+ stunning elements like Data Table, Event Calendar, Filterable Gallery, WooCommerce.
  * Plugin URI: https://essential-addons.com/
  * Author: WPDeveloper
- * Version: 6.6.5
+ * Version: 6.6.8
  * Author URI: https://wpdeveloper.com/
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
  *
- * WC tested up to: 10.0
- * Elementor tested up to: 4.0
- * Elementor Pro tested up to: 4.0
+ * WC tested up to: 10.8
+ * Elementor tested up to: 4.1
+ * Elementor Pro tested up to: 4.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +27,7 @@ define( 'EAEL_PLUGIN_FILE', __FILE__ );
 define( 'EAEL_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'EAEL_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'EAEL_PLUGIN_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
-define( 'EAEL_PLUGIN_VERSION', '6.6.5' );
+define( 'EAEL_PLUGIN_VERSION', '6.6.8' );
 define( 'EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor' );
 define( 'EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor' );
 /**
@@ -123,6 +123,10 @@ add_action(
 add_action(
 	'wp_loaded',
 	function () {
+		if ( ! class_exists( '\Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard' ) ) {
+			return;
+		}
+
 		$setup_wizard = get_option( 'eael_setup_wizard' );
 		if ( $setup_wizard === 'redirect' ) {
 			\Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard::redirect();

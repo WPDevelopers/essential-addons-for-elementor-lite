@@ -75,8 +75,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 20;
-    const EAEL_ADMIN_MENU_FLAG = 20;
+    const EAEL_PROMOTION_FLAG = 21;
+    const EAEL_ADMIN_MENU_FLAG = 21;
     /**
      * Singleton instance
      *
@@ -232,6 +232,10 @@ class Bootstrap
         }
 
 	    if( class_exists( 'woocommerce' ) ) {
+		    // Login|Register custom fields on WooCommerce My Account edit-account page
+		    add_action( 'woocommerce_edit_account_form_fields', [ $this, 'eael_wc_account_form_fields' ] );
+		    add_action( 'woocommerce_save_account_details', [ $this, 'eael_wc_save_account_fields' ] );
+
 		    // quick view
 		    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
 		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );

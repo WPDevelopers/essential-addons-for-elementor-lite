@@ -127,8 +127,11 @@ jQuery(window).on("elementor/frontend/init", function () {
     }
     elementorFrontend.hooks.addAction("frontend/element_ready/widget", ImageMaskingHandler);
 
-    elementor.hooks.addFilter('elementor/documents/save/data', function (data) {
-        cleanLegacySvgPath(data?.elements);
-        return data;
-    });
+    // editor-only: `elementor` global exists only inside the editor iframe, not in standalone preview
+    if (elementorFrontend.isEditMode() && typeof elementor !== "undefined") {
+        elementor.hooks.addFilter('elementor/documents/save/data', function (data) {
+            cleanLegacySvgPath(data?.elements);
+            return data;
+        });
+    }
 });
