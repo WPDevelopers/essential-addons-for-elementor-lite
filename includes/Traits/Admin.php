@@ -1433,6 +1433,14 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-list/',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-list' ) )
 						    ],
+						    'woo-product-title'     => [
+							    'key'         => 'woo-product-title',
+							    'title'       => __( 'Woo Product Title', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-title/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-title',
+							    'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-title' ) )
+						    ],
 						    'woo-product-price'     => [
 							    'key'         => 'woo-product-price',
 							    'title'       => __( 'Woo Product Price', 'essential-addons-for-elementor-lite' ),
