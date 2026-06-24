@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Elementor\Plugin;
 use Elementor\Widget_Base;
+use Elementor\Icons_Manager;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Text_Shadow;
@@ -130,6 +131,142 @@ class Woo_Product_Title extends Widget_Base {
 			]
 		);
 
+		// Prefix.
+		$this->add_control(
+            'eael_product_title_show_prefix',
+			[
+				'label'        => esc_html__( 'Show Prefix', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'separator'    => 'before',
+			]
+		);
+
+		$this->add_control(
+            'eael_product_title_prefix_content',
+			[
+				'label'     => esc_html__( 'Prefix Content', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'default'   => 'text',
+				'toggle'    => false,
+				'options'   => [
+					'text' => [
+						'title' => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-t-letter',
+					],
+					'icon' => [
+						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-star',
+					],
+				],
+				'condition' => [
+                    'eael_product_title_show_prefix' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+            'eael_product_title_prefix_text',
+			[
+				'label'       => esc_html__( 'Prefix Text', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => [ 'active' => true ],
+				'default'     => esc_html__( 'New', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'condition'   => [
+                    'eael_product_title_show_prefix'    => 'yes',
+                    'eael_product_title_prefix_content' => 'text',
+				],
+			]
+		);
+
+		$this->add_control(
+            'eael_product_title_prefix_icon',
+			[
+				'label'     => esc_html__( 'Prefix Icon', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::ICONS,
+				'default'   => [
+					'value'   => 'fas fa-star',
+					'library' => 'fa-solid',
+				],
+				'condition' => [
+                    'eael_product_title_show_prefix'    => 'yes',
+                    'eael_product_title_prefix_content' => 'icon',
+				],
+			]
+		);
+
+		// Suffix.
+		$this->add_control(
+            'eael_product_title_show_suffix',
+			[
+				'label'        => esc_html__( 'Show Suffix', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'separator'    => 'before',
+			]
+		);
+
+		$this->add_control(
+            'eael_product_title_suffix_content',
+			[
+				'label'     => esc_html__( 'Suffix Content', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'default'   => 'text',
+				'toggle'    => false,
+				'options'   => [
+					'text' => [
+						'title' => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-t-letter',
+					],
+					'icon' => [
+						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-star',
+					],
+				],
+				'condition' => [
+                    'eael_product_title_show_suffix' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+            'eael_product_title_suffix_text',
+			[
+				'label'       => esc_html__( 'Suffix Text', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => [ 'active' => true ],
+				'default'     => esc_html__( 'Sale', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'condition'   => [
+                    'eael_product_title_show_suffix'    => 'yes',
+                    'eael_product_title_suffix_content' => 'text',
+				],
+			]
+		);
+
+		$this->add_control(
+            'eael_product_title_suffix_icon',
+			[
+				'label'     => esc_html__( 'Suffix Icon', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::ICONS,
+				'default'   => [
+					'value'   => 'fas fa-tag',
+					'library' => 'fa-solid',
+				],
+				'condition' => [
+                    'eael_product_title_show_suffix'    => 'yes',
+                    'eael_product_title_suffix_content' => 'icon',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -167,7 +304,8 @@ class Woo_Product_Title extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-woo-product-title' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-woo-product-title'                => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .eael-woo-product-title .product_title' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -269,7 +407,7 @@ class Woo_Product_Title extends Widget_Base {
 		// Resolve the title text.
 		if ( ! $product ) {
 			if ( ! $is_editor ) {
-				return; // No product context on the frontend — render nothing.
+				return;
 			}
 			$title = esc_html__( 'Product Title', 'essential-addons-for-elementor-lite' );
 		} else {
@@ -301,10 +439,64 @@ class Woo_Product_Title extends Widget_Base {
 			}
 		}
 
-		printf(
-			'<div class="eael-woo-product-title"><%1$s class="product_title entry-title">%2$s</%1$s></div>',
+		$title_element = sprintf(
+			'<%1$s class="product_title entry-title">%2$s</%1$s>',
 			esc_attr( $tag ),
-			$title_html // Title is escaped above; optional <a> built from sanitized attributes.
+			$title_html
+		);
+
+		// Optional prefix / suffix (text or icon) flanking the title.
+		$prefix_html = $this->render_affix( $settings, 'prefix' );
+		$suffix_html = $this->render_affix( $settings, 'suffix' );
+
+		printf(
+			'<div class="eael-woo-product-title">%1$s%2$s%3$s</div>',
+			$prefix_html,
+			$title_element,
+			$suffix_html
+		);
+	}
+
+	/**
+	 * Build a prefix/suffix affix block (text or icon) that flanks the title.
+	 *
+	 * @param array  $settings Widget settings.
+	 * @param string $type     'prefix' or 'suffix'.
+	 */
+	protected function render_affix( $settings, $type ) {
+		$base = 'eael_product_title_';
+
+		if ( 'yes' !== ( $settings[ $base . 'show_' . $type ] ?? '' ) ) {
+			return '';
+		}
+
+		$content = $settings[ $base . $type . '_content' ] ?? 'text';
+
+		if ( 'icon' === $content ) {
+			$icon = $settings[ $base . $type . '_icon' ] ?? [];
+			if ( empty( $icon['value'] ) ) {
+				return '';
+			}
+			ob_start();
+			Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] );
+			$icon_html = ob_get_clean();
+
+			return sprintf(
+				'<span class="eael-product-title-%1$s eael-product-title-%1$s-icon">%2$s</span>',
+				esc_attr( $type ),
+				$icon_html
+			);
+		}
+
+		$text = $settings[ $base . $type . '_text' ] ?? '';
+		if ( '' === $text ) {
+			return '';
+		}
+
+		return sprintf(
+			'<span class="eael-product-title-%1$s eael-product-title-%1$s-text">%2$s</span>',
+			esc_attr( $type ),
+			wp_kses( $text, Helper::eael_allowed_tags() )
 		);
 	}
 

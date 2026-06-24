@@ -1,4 +1,9 @@
 .eael-woo-product-title {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+
 	.product_title {
 		margin: 0;
 	}
@@ -6,5 +11,12 @@
 	a {
 		text-decoration: none;
 		color: inherit;
+	}
+
+	.eael-product-title-prefix,
+	.eael-product-title-suffix {
+		display: inline-flex;
+		align-items: center;
+		line-height: 1;
 	}
 }

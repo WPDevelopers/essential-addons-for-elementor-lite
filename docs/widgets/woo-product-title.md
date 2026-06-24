@@ -1,6 +1,6 @@
 # Woo Product Title Widget
 
-> ℹ️ **Implemented.** Class, SCSS, and `config.php` registration are in place. A few render-time line references are still marked `TBD` pending a final pass. PRD (with Bangla rationale, kept outside the repo): `eadev/PRD/PRD-Woo-Product-Title.md`.
+> ℹ️ **Implemented (Lite-only, no Pro dependency).** Class, SCSS, and `config.php` registration are in place; the widget renders with zero Pro/license gating. PRD (with Bangla rationale, kept outside the repo): `eadev/PRD/PRD-Woo-Product-Title.md`.
 
 > Renders the current WooCommerce product's name as a heading (`h1`–`h6` / `div` / `span` / `p`) inside a single-product context — modelled on Elementor Pro's `Product Title`, but built free on `Widget_Base` instead of extending `Widget_Heading`. Emits the WC/theme-standard `product_title entry-title` classes. Likely **pure-CSS widget — no JS**, since style is driven entirely by Elementor selector controls.
 
@@ -57,32 +57,45 @@ No JS file planned. No vendor libraries. No `get_style_depends()` beyond Element
 ### Frontend (real product context)
 
 ```html
-<h1 class="product_title entry-title">
-  [?] <a href="{product_permalink | custom_url}">  <!-- when link switcher on -->
-        {product->get_name()}
-      </a>
-  <!-- OR, when link off: -->
-  {product->get_name()}
-</h1>
+<div class="eael-woo-product-title">          <!-- flex row: prefix · title · suffix -->
+  [?] <span class="eael-product-title-prefix eael-product-title-prefix-text">{prefix_text}</span>
+      <!-- OR -->
+  [?] <span class="eael-product-title-prefix eael-product-title-prefix-icon">{Icons_Manager::render_icon(prefix_icon)}</span>
+
+  <h1 class="product_title entry-title">
+    [?] <a href="{product_permalink | custom_url}">  <!-- when link switcher on -->
+          {product->get_name()}
+        </a>
+    <!-- OR, when link off: -->
+    {product->get_name()}
+  </h1>
+
+  [?] <span class="eael-product-title-suffix eael-product-title-suffix-text">{suffix_text}</span>
+      <!-- OR -->
+  [?] <span class="eael-product-title-suffix eael-product-title-suffix-icon">{Icons_Manager::render_icon(suffix_icon)}</span>
+</div>
 ```
 
-- The wrapper tag (`h1` shown) is the validated `header_size` value.
+- The heading tag (`h1` shown) is the validated `header_size` value.
 - `[?]` `<a>` wrap appears only when `eael_product_title_link == 'yes'`.
+- `[?]` prefix appears only when `show_prefix == 'yes'` (text or icon per `prefix_content`); suffix likewise. An empty text / unset icon renders nothing even when the switch is on.
 
 ### Editor preview (no product context)
 
 ```html
-<h1 class="product_title entry-title">Product Title</h1>
+<div class="eael-woo-product-title">
+  <h1 class="product_title entry-title">Product Title</h1>
+</div>
 ```
 
 Notes:
 
-- No extra editor-only wrapper element is planned (simpler than `Woo_Product_Price`, which wraps the price in `.eael-product-price-edit`).
-- Style controls target `{{WRAPPER}} .product_title`, so the same selectors apply to both editor placeholder and frontend output — no editor/frontend selector mismatch.
+- Single render path — the same `render()` runs in editor and frontend; only the title text differs (placeholder vs `$product->get_name()`). No separate editor mockup branch, no editor-only wrapper.
+- `.eael-woo-product-title` is `display:flex; align-items:center; flex-wrap:wrap; gap:10px` so prefix/suffix sit on the same baseline as the title. `align` drives `justify-content` on the wrapper (positions the group) and `text-align` on `.product_title` (aligns wrapped title text).
 
 ## Controls Reference
 
-Source `register_controls()` (TBD line) is the truth once implemented.
+Source [`register_controls()`](../../includes/Elements/Woo_Product_Title.php#L52) is the truth; [`render()`](../../includes/Elements/Woo_Product_Title.php#L260) drives output.
 
 | ID | Type | Default | Tab → Section | Affects |
 | --- | ---- | ------- | ------------- | ------- |
@@ -90,7 +103,15 @@ Source `register_controls()` (TBD line) is the truth once implemented.
 | `eael_product_title_link` | SWITCHER | empty | Content → Content | Wrap title in an anchor |
 | `eael_product_title_link_type` | SELECT | `product` | Content → Content | `product` (permalink) or `custom` URL |
 | `eael_product_title_custom_link` | URL | empty | Content → Content | Custom link target |
-| `align` | CHOOSE (responsive) | — | Style → Title | `text-align` on `.product_title` |
+| `show_prefix` | SWITCHER | empty | Content → Content | Show a prefix block before the title |
+| `prefix_content` | CHOOSE | `text` | Content → Content | `text` or `icon` |
+| `prefix_text` | TEXT | `New` | Content → Content | Prefix text (`wp_kses` allowed tags) |
+| `prefix_icon` | ICONS | `fas fa-star` | Content → Content | Prefix icon |
+| `show_suffix` | SWITCHER | empty | Content → Content | Show a suffix block after the title |
+| `suffix_content` | CHOOSE | `text` | Content → Content | `text` or `icon` |
+| `suffix_text` | TEXT | `Sale` | Content → Content | Suffix text (`wp_kses` allowed tags) |
+| `suffix_icon` | ICONS | `fas fa-tag` | Content → Content | Suffix icon |
+| `align` | CHOOSE (responsive) | — | Style → Title | `justify-content` on wrapper + `text-align` on `.product_title` |
 | `title_color` | COLOR | — | Style → Title | Title color |
 | `typography` | GROUP_TYPOGRAPHY | — | Style → Title | Title typography |
 | `text_shadow` | GROUP_TEXT_SHADOW | — | Style → Title | Title text shadow |
@@ -103,6 +124,14 @@ Plus `eael_global_warning` (RAW_HTML) shown only when WooCommerce is inactive.
 ```text
 eael_product_title_link_type    → visible when eael_product_title_link == 'yes'
 eael_product_title_custom_link  → visible when eael_product_title_link == 'yes' AND eael_product_title_link_type == 'custom'
+
+prefix_content                  → visible when show_prefix == 'yes'
+prefix_text                     → visible when show_prefix == 'yes' AND prefix_content == 'text'
+prefix_icon                     → visible when show_prefix == 'yes' AND prefix_content == 'icon'
+
+suffix_content                  → visible when show_suffix == 'yes'
+suffix_text                     → visible when show_suffix == 'yes' AND suffix_content == 'text'
+suffix_icon                     → visible when show_suffix == 'yes' AND suffix_content == 'icon'
 
 # Frontend gates
 Entire control set              → replaced by WooCommerce-inactive warning when WC not active
