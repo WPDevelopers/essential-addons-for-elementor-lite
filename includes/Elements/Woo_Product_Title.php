@@ -339,6 +339,161 @@ class Woo_Product_Title extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		$this->register_affix_style_controls( 'prefix' );
+		$this->register_affix_style_controls( 'suffix' );
+	}
+
+	/**
+	 * Register Style-tab controls for a prefix/suffix affix.
+	 *
+	 * Text variant: color, typography, margin, padding.
+	 * Icon variant: size, color, margin, padding.
+	 */
+	protected function register_affix_style_controls( $type ) {
+		$base  = 'eael_product_title_';
+		$show  = $base . 'show_' . $type;
+		$ctype = $base . $type . '_content';
+		$sel   = '{{WRAPPER}} .eael-product-title-' . $type;
+		$label = 'prefix' === $type
+			? esc_html__( 'Prefix', 'essential-addons-for-elementor-lite' )
+			: esc_html__( 'Suffix', 'essential-addons-for-elementor-lite' );
+
+		$this->start_controls_section(
+			$base . $type . '_style',
+			[
+				'label'     => $label,
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [ $show => 'yes' ],
+			]
+		);
+
+		// Text variant.
+		$this->add_control(
+			$base . $type . '_text_heading',
+			[
+				'label'     => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'condition' => [ $ctype => 'text' ],
+			]
+		);
+
+		$this->add_control(
+			$base . $type . '_text_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					$sel . '-text' => 'color: {{VALUE}};',
+				],
+				'condition' => [ $ctype => 'text' ],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'      => $base . $type . '_text_typography',
+				'selector'  => $sel . '-text',
+				'condition' => [ $ctype => 'text' ],
+			]
+		);
+
+		$this->add_responsive_control(
+			$base . $type . '_text_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					$sel . '-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [ $ctype => 'text' ],
+			]
+		);
+
+		$this->add_responsive_control(
+			$base . $type . '_text_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					$sel . '-text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [ $ctype => 'text' ],
+			]
+		);
+
+		// Icon variant.
+		$this->add_control(
+			$base . $type . '_icon_heading',
+			[
+				'label'     => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [ $ctype => 'icon' ],
+			]
+		);
+
+		$this->add_responsive_control(
+			$base . $type . '_icon_size',
+			[
+				'label'      => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [ 'min' => 6, 'max' => 100 ],
+					'em' => [ 'min' => 0.5, 'max' => 10, 'step' => 0.1 ],
+				],
+				'selectors'  => [
+					$sel . '-icon i'   => 'font-size: {{SIZE}}{{UNIT}};',
+					$sel . '-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [ $ctype => 'icon' ],
+			]
+		);
+
+		$this->add_control(
+			$base . $type . '_icon_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					$sel . '-icon i'   => 'color: {{VALUE}};',
+					$sel . '-icon svg' => 'fill: {{VALUE}};',
+				],
+				'condition' => [ $ctype => 'icon' ],
+			]
+		);
+
+		$this->add_responsive_control(
+			$base . $type . '_icon_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					$sel . '-icon' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [ $ctype => 'icon' ],
+			]
+		);
+
+		$this->add_responsive_control(
+			$base . $type . '_icon_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					$sel . '-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [ $ctype => 'icon' ],
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	/**
