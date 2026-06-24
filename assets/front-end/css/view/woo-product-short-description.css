@@ -1,0 +1,6 @@
+.eael-single-product-short-description .woocommerce-product-details__short-description {
+  margin: 0;
+}
+.eael-single-product-short-description .woocommerce-product-details__short-description p:last-child {
+  margin-bottom: 0;
+}

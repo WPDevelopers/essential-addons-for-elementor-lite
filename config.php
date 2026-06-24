@@ -688,6 +688,18 @@ $config = [
                 ],
             ],
         ],
+        'woo-product-short-description' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Short_Description',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-short-description.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'woo-product-rating' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Rating',
             'dependency' => [
