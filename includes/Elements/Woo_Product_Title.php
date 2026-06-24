@@ -175,7 +175,7 @@ class Woo_Product_Title extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
 				'default'     => esc_html__( 'New', 'essential-addons-for-elementor-lite' ),
-				'label_block' => true,
+				'label_block' => false,
 				'condition'   => [
                     'eael_product_title_show_prefix'    => 'yes',
                     'eael_product_title_prefix_content' => 'text',
@@ -243,7 +243,7 @@ class Woo_Product_Title extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
 				'default'     => esc_html__( 'Sale', 'essential-addons-for-elementor-lite' ),
-				'label_block' => true,
+				'label_block' => false,
 				'condition'   => [
                     'eael_product_title_show_suffix'    => 'yes',
                     'eael_product_title_suffix_content' => 'text',
@@ -335,33 +335,6 @@ class Woo_Product_Title extends Widget_Base {
 			[
 				'name'     => 'text_shadow',
 				'selector' => '{{WRAPPER}} .eael-woo-product-title .product_title',
-			]
-		);
-
-		$this->add_control(
-			'blend_mode',
-			[
-				'label'     => esc_html__( 'Blend Mode', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SELECT,
-				'options'   => [
-					''            => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
-					'multiply'    => esc_html__( 'Multiply', 'essential-addons-for-elementor-lite' ),
-					'screen'      => esc_html__( 'Screen', 'essential-addons-for-elementor-lite' ),
-					'overlay'     => esc_html__( 'Overlay', 'essential-addons-for-elementor-lite' ),
-					'darken'      => esc_html__( 'Darken', 'essential-addons-for-elementor-lite' ),
-					'lighten'     => esc_html__( 'Lighten', 'essential-addons-for-elementor-lite' ),
-					'color-dodge' => esc_html__( 'Color Dodge', 'essential-addons-for-elementor-lite' ),
-					'saturation'  => esc_html__( 'Saturation', 'essential-addons-for-elementor-lite' ),
-					'color'       => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-					'difference'  => esc_html__( 'Difference', 'essential-addons-for-elementor-lite' ),
-					'exclusion'   => esc_html__( 'Exclusion', 'essential-addons-for-elementor-lite' ),
-					'hue'         => esc_html__( 'Hue', 'essential-addons-for-elementor-lite' ),
-					'luminosity'  => esc_html__( 'Luminosity', 'essential-addons-for-elementor-lite' ),
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-woo-product-title .product_title' => 'mix-blend-mode: {{VALUE}};',
-				],
-				'separator' => 'before',
 			]
 		);
 
