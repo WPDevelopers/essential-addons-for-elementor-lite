@@ -1,0 +1,33 @@
+[
+  {
+    "id": "eacb0001",
+    "elType": "section",
+    "settings": [],
+    "elements": [
+      {
+        "id": "eacb0002",
+        "elType": "column",
+        "settings": { "_column_size": 100 },
+        "elements": [
+          {
+            "id": "eacb0003",
+            "elType": "widget",
+            "widgetType": "eael-creative-button-atomic",
+            "settings": {
+              "classes": { "$$type": "classes", "value": [] },
+              "text": {
+                "$$type": "html-v3",
+                "value": {
+                  "content": { "$$type": "string", "value": "Atomic CTA" },
+                  "children": []
+                }
+              },
+              "secondary_text": { "$$type": "string", "value": "Go Atomic!" },
+              "effect": { "$$type": "string", "value": "eael-creative-button--winona" }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

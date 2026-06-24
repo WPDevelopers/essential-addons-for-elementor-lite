@@ -4,7 +4,7 @@
  * The shared `creative-btn.scss` leaves the effect reveal layers (the `::before`
  * pseudo-elements that slide/scale in on hover) without a background, because the
  * classic widget paints them from its "Hover Background Color" control. The atomic
- * pilot has no such control yet, so without a default these reveals animate in
+ * widget has no such control, so without a default these reveals animate in
  * fully transparent — Ujarak / Wayra / Rayen show no visible hover state.
  *
  * Scoped under the `.eael-creative-button--atomic` marker class (added only by the

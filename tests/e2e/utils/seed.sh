@@ -13,6 +13,11 @@ echo "==> Setting permalink structure..."
 wp rewrite structure '/%postname%/' --allow-root
 wp rewrite flush --allow-root
 
+echo "==> Enabling Elementor Atomic Widgets (V4) experiment..."
+# Atomic widgets (e.g. the Creative Button atomic variant) only register when
+# Elementor's "e_atomic_elements" experiment is active.
+wp option update elementor_experiment-e_atomic_elements active --allow-root 2>/dev/null || true
+
 # Create an Elementor page from a JSON template.
 # Usage: create_elementor_page "Title" "slug" "template.json"
 create_elementor_page() {
@@ -39,9 +44,10 @@ create_elementor_page() {
 
 echo "==> Creating test pages..."
 create_elementor_page "Info Box Test" "info-box-test" "info-box.json"
+create_elementor_page "Creative Button Atomic Test" "creative-btn-atomic-test" "creative-btn-atomic.json"
 
 echo "==> Flushing Elementor CSS..."
 wp elementor flush-css --allow-root 2>/dev/null || true
 
 echo "==> Done. http://localhost:8888 | wp-admin: admin / password"
-echo "    Pages: /info-box-test/"
+echo "    Pages: /info-box-test/  /creative-btn-atomic-test/"

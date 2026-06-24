@@ -1,6 +1,8 @@
 <?php
 
-namespace Essential_Addons_Elementor\Elements\Atomic;
+namespace Essential_Addons_Elementor\Classes;
+
+use Essential_Addons_Elementor\Elements\Atomic\Creative_Button\Creative_Button;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -13,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * nothing here loads — or fatals — when the experiment is off or the atomic
  * base classes are absent.
  */
-class Loader {
+class Atomic_Widgets_Loader {
 
 	public function __construct() {
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );

@@ -1,6 +1,6 @@
 <?php
 
-namespace Essential_Addons_Elementor\Elements\Atomic;
+namespace Essential_Addons_Elementor\Elements\Atomic\Creative_Button;
 
 use Elementor\Modules\AtomicWidgets\Controls\Section;
 use Elementor\Modules\AtomicWidgets\Controls\Types\Inline_Editing_Control;
@@ -29,8 +29,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Atomic (V4 editor) variant of the EA Creative Button.
  *
- * Pilot scope: text, secondary text, link, and the free hover effects.
- * Deferred vs. the classic widget: icon (V4 has no FontAwesome icon-library
+ * Scope: text, secondary text, link, and the free hover effects.
+ * Not supported vs. the classic widget: icon (V4 has no FontAwesome icon-library
  * picker, and the SVG control lacks a clear/remove action), gradient
  * background, liquid-glass effects, and all Pro effects. The classic widget
  * (eael-creative-button) remains the full-feature implementation.
@@ -61,7 +61,7 @@ class Creative_Button extends Atomic_Widget_Base {
 	}
 
 	/**
-	 * Free effects only. Pro effects are intentionally omitted from the pilot.
+	 * Free effects only. Pro effects are intentionally not supported here.
 	 */
 	public static function get_effects(): array {
 		return [
