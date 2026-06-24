@@ -30,8 +30,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Atomic (V4 editor) variant of the EA Creative Button.
  *
  * Pilot scope: text, secondary text, link, and the free hover effects.
- * Deferred vs. the classic widget: icon picker, gradient background,
- * liquid-glass effects, and all Pro effects. The classic widget
+ * Deferred vs. the classic widget: icon (V4 has no FontAwesome icon-library
+ * picker, and the SVG control lacks a clear/remove action), gradient
+ * background, liquid-glass effects, and all Pro effects. The classic widget
  * (eael-creative-button) remains the full-feature implementation.
  */
 class Creative_Button extends Atomic_Widget_Base {
@@ -44,7 +45,7 @@ class Creative_Button extends Atomic_Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Creative Button (A)', 'essential-addons-for-elementor-lite' );
+		return esc_html__( 'Creative Button', 'essential-addons-for-elementor-lite' );
 	}
 
 	public function get_keywords() {

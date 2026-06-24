@@ -12,6 +12,14 @@
  * atomic twig template) so classic creative buttons are never affected, even when
  * both widgets appear on the same page.
  */
+button.eael-creative-button--atomic {
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+}
 .eael-creative-button--atomic.eael-creative-button--ujarak::before, .eael-creative-button--atomic.eael-creative-button--wayra::before, .eael-creative-button--atomic.eael-creative-button--rayen::before {
   background-color: #f54;
 }

@@ -6,18 +6,26 @@
 	{%- set class_list = class_list | merge( [ 'eael-creative-button--has-secondary' ] ) -%}
 {%- endif -%}
 {%- set classes = class_list | join(' ') -%}
-<div class="eael-creative-button-wrapper">
-	<a class="{{ classes }}" data-text="{{ settings.secondary_text | e('html_attr') }}" data-interaction-id="{{ interaction_id }}"
-		{%- if settings.link is defined and settings.link.href is defined and settings.link.href is not empty %} {{ m.render_link_attributes(settings.link) }}{% endif %}
-		{{- m.render_custom_attributes(settings) }}>
-		{%- if effect == 'eael-creative-button--tamaya' -%}
-			<div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-before"><span>{{ settings.secondary_text }}</span></div>
-		{%- endif -%}
-		<div class="creative-button-inner">
-			<span class="cretive-button-text">{{ settings.text | striptags(allowed_tags) | raw }}</span>
-		</div>
-		{%- if effect == 'eael-creative-button--tamaya' -%}
-			<div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-after"><span>{{ settings.secondary_text }}</span></div>
-		{%- endif -%}
-	</a>
-</div>
+{#-
+	Render <button> by default, <a> only when a link is set — mirroring Elementor's
+	atomic Button. Elementor's link-in-link guard flags the element if its root DOM
+	node merely *contains* an <a> while having no link of its own, which disables
+	the Link control. Always emitting <a> trips that guard; emitting <button> until
+	a link exists keeps the control usable. The root then becomes the <a> once the
+	user adds a link, so the anchor is never nested inside a non-linked element.
+-#}
+{%- set has_link = settings.link is defined and settings.link.href is defined and settings.link.href is not empty -%}
+{%- set tag = has_link ? 'a' : 'button' -%}
+<{{ tag }} class="{{ classes }}" data-text="{{ settings.secondary_text | e('html_attr') }}" data-interaction-id="{{ interaction_id }}"
+	{%- if has_link %} {{ m.render_link_attributes(settings.link) }}{% endif %}
+	{{- m.render_custom_attributes(settings) }}>
+	{%- if effect == 'eael-creative-button--tamaya' -%}
+		<div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-before"><span>{{ settings.secondary_text }}</span></div>
+	{%- endif -%}
+	<div class="creative-button-inner">
+		<span class="cretive-button-text">{{ settings.text | striptags(allowed_tags) | raw }}</span>
+	</div>
+	{%- if effect == 'eael-creative-button--tamaya' -%}
+		<div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-after"><span>{{ settings.secondary_text }}</span></div>
+	{%- endif -%}
+</{{ tag }}>
