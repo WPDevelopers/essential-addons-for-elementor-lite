@@ -1,17 +1,21 @@
-<wpml-config>
-    <elementor-widgets>
-        <widget name="eael-adv-accordion">
-            <conditions>
-                <condition key="widgetType">eael-adv-accordion</condition>
-            </conditions>
-            <fields-in-item items_of="eael_adv_accordion_tab">
-                <field type="Advance Accordion: Title" editor_type="LINE">eael_adv_accordion_tab_title</field>
-                <field type="Advance Accordion: Content" editor_type="VISUAL">eael_adv_accordion_tab_content</field>
-            </fields-in-item>
-            <fields>
-                <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
-            </fields>
-        </widget>
+<widget name="eael-adv-accordion">
+    <conditions>
+        <condition key="widgetType">eael-adv-accordion</condition>
+    </conditions>
+    <fields-in-item items_of="eael_adv_accordion_tab">
+        <field type="Advance Accordion: Title" editor_type="LINE">eael_adv_accordion_tab_title</field>
+        <field type="Advance Accordion: Content" editor_type="VISUAL">eael_adv_accordion_tab_content</field>
+    </fields-in-item>
+    <fields-in-item items_of="eael_adv_accordion_media_type_tab">
+        <field type="Advanced Accordion: Media Tab Title" editor_type="LINE">eael_adv_accordion_media_type_tab_title</field>
+        <field type="Advanced Accordion: Media Tab Content" editor_type="VISUAL">eael_adv_accordion_media_type_tab_content</field>
+        <field type="Advanced Accordion: Media Image" key_of="eael_adv_accordion_media_type_media" editor_type="MEDIA">id</field>
+        <field type="Advanced Accordion: Media Video" key_of="eael_adv_accordion_media_type_video" editor_type="MEDIA">id</field>
+    </fields-in-item>
+    <fields>
+        <field type="Wrapper Link" key_of="eael_wrapper_link" editor_type="LINE">url</field>
+    </fields>
+</widget>
         <widget name="eael-adv-tabs">
             <conditions>
                 <condition key="widgetType">eael-adv-tabs</condition>
