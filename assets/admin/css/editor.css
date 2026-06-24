@@ -131,6 +131,18 @@
    color: #cdcfd2;
 }
 
+/* Atomic (V4) EA widget tiles render two corner badges: Elementor's atomic
+   indicator (.eicon-atomic) and EA's logo (the \e907 added above to every
+   eaicon). Both default to the top-right corner and overlap. Shift the atomic
+   indicator to the top-left wherever an EA icon is present, so the EA logo stays
+   top-right and the widget reads clearly as an EA atomic widget. */
+.elementor-panel
+   .elementor-element:has(.icon [class*="eaicon-"])
+   .eicon-atomic {
+   inset-inline-start: 5px;
+   inset-inline-end: auto;
+}
+
 #elementor-panel__editor__help__link[href^="https://essential-addons.com/"]:before
 {
    content: "\e98a";

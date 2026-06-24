@@ -1,7 +1,11 @@
 {% import 'elementor/macros' as m %}
 {%- set allowed_tags = '<b><strong><sup><sub><s><em><i><u><del><span><br>' -%}
 {%- set effect = settings.effect | default('eael-creative-button--default') -%}
-{%- set classes = settings.classes | merge( [ base_styles.base, 'eael-creative-button', effect ] ) | join(' ') -%}
+{%- set class_list = settings.classes | merge( [ base_styles.base, 'eael-creative-button', 'eael-creative-button--atomic', effect ] ) -%}
+{%- if settings.secondary_text is not empty -%}
+	{%- set class_list = class_list | merge( [ 'eael-creative-button--has-secondary' ] ) -%}
+{%- endif -%}
+{%- set classes = class_list | join(' ') -%}
 <div class="eael-creative-button-wrapper">
 	<a class="{{ classes }}" data-text="{{ settings.secondary_text | e('html_attr') }}" data-interaction-id="{{ interaction_id }}"
 		{%- if settings.link is defined and settings.link.href is defined and settings.link.href is not empty %} {{ m.render_link_attributes(settings.link) }}{% endif %}

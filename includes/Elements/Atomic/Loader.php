@@ -35,10 +35,21 @@ class Loader {
 	}
 
 	public function register_assets(): void {
+		// Shared effect mechanics (keyframes, transitions). Same file the classic
+		// widget uses, but registered under its own handle so the atomic widget
+		// does not depend on the classic widget being present on the page.
 		wp_register_style(
-			'eael-cb-atomic',
+			'eael-cb-atomic-base',
 			EAEL_PLUGIN_URL . 'assets/front-end/css/view/creative-btn.min.css',
 			[],
+			EAEL_PLUGIN_VERSION
+		);
+
+		// Atomic-only default reveal colors, layered on top of the mechanics.
+		wp_register_style(
+			'eael-cb-atomic',
+			EAEL_PLUGIN_URL . 'assets/front-end/css/view/creative-btn-atomic.min.css',
+			[ 'eael-cb-atomic-base' ],
 			EAEL_PLUGIN_VERSION
 		);
 	}
