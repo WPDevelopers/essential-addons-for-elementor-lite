@@ -60,6 +60,55 @@ class Woo_Product_Tabs extends Widget_Base {
 		}
 
 		/**
+		 * Content Tab: Tab Items
+		 */
+		$this->start_controls_section(
+			'eael_section_product_tabs_content',
+			[
+				'label' => esc_html__( 'Tab Items', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'eael_product_tabs_show_description',
+			[
+				'label'        => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_product_tabs_show_additional_information',
+			[
+				'label'        => esc_html__( 'Additional Information', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_product_tabs_show_reviews',
+			[
+				'label'        => esc_html__( 'Reviews', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
 		 * Style Tab: Tabs
 		 */
 		$this->start_controls_section(
@@ -322,7 +371,12 @@ class Woo_Product_Tabs extends Widget_Base {
 
 		setup_postdata( $product->get_id() );
 
+		// Remove the tabs the user turned off (see remove_hidden_tabs()).
+		add_filter( 'woocommerce_product_tabs', [ $this, 'remove_hidden_tabs' ], 98 );
+
 		wc_get_template( 'single-product/tabs/tabs.php' );
+
+		remove_filter( 'woocommerce_product_tabs', [ $this, 'remove_hidden_tabs' ], 98 );
 
 		// On render widget from Editor - trigger the WooCommerce tab JS manually.
 		if ( wp_doing_ajax() ) {
@@ -334,5 +388,27 @@ class Woo_Product_Tabs extends Widget_Base {
 		}
 
 		wp_reset_postdata();
+	}
+
+	/**
+	 * Remove the default WooCommerce tabs the user switched off.
+	 * Hooked to the `woocommerce_product_tabs` filter while the tabs template renders. 
+	 */
+	public function remove_hidden_tabs( $tabs ) {
+		$settings = $this->get_settings_for_display();
+
+		if ( 'yes' !== $settings['eael_product_tabs_show_description'] ) {
+			unset( $tabs['description'] );
+		}
+
+		if ( 'yes' !== $settings['eael_product_tabs_show_additional_information'] ) {
+			unset( $tabs['additional_information'] );
+		}
+
+		if ( 'yes' !== $settings['eael_product_tabs_show_reviews'] ) {
+			unset( $tabs['reviews'] );
+		}
+
+		return $tabs;
 	}
 }
