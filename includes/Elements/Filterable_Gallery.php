@@ -3929,7 +3929,10 @@ class Filterable_Gallery extends Widget_Base
         $title      = isset( $item['title'] ) ? $item['title'] : '';
         $classes    = "video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe playout-" . $item['video_layout'];
         
-        $html .= '<a area-hidden="true"  title="' . esc_attr( wp_strip_all_tags( $title ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="yes">';
+        // EA Magnific Popup is the single owner of video lightbox clicks (bound in
+        // assets JS on .eael-magnific-link.active). Opt the anchor out of Elementor's
+        // global lightbox to prevent both systems binding the same tap.
+        $html .= '<a area-hidden="true"  title="' . esc_attr( wp_strip_all_tags( $title ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="no">';
 
         if( $show_video_popup_bg ) {
             if( 'caption-style-card' === $caption_style ) {
@@ -3953,7 +3956,7 @@ class Filterable_Gallery extends Widget_Base
         }
 
         if (!empty($icon_url)) {
-            $html .= '<img width="62" height="62" src="' . esc_url($icon_url) . '" alt="eael-fg-video-play-icon" >';
+            $html .= '<img width="62" height="62" src="' . esc_url($icon_url) . '" class="eael-fg-video-play-icon" alt="" >';
         }
 
         $html .= '</a>';
@@ -4259,7 +4262,10 @@ class Filterable_Gallery extends Widget_Base
                 }
             }
 
-            if ($settings['eael_fg_show_popup'] == 'media') {
+            // Mirror the opening condition (~line 4251) so the anchor is only closed
+            // when it was actually opened. Card-layout video items open no media
+            // anchor here, so an unconditional close emitted an orphan </a>.
+            if ($settings['eael_fg_show_popup'] == 'media' && $settings['eael_fg_caption_style'] !== 'card' && !$this->popup_status) {
                 $html .= '</a>';
             }
 
