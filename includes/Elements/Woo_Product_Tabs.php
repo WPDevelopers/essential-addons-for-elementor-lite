@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Elementor\Plugin;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
+use Elementor\Icons_Manager;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
@@ -89,6 +90,14 @@ class Woo_Product_Tabs extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'description',
 				'description' => esc_html__( 'WooCommerce tab slug, e.g. description, additional_information, reviews, or a custom tab key added by another plugin.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$repeater->add_control(
+			'eael_product_tabs_item_icon',
+			[
+				'label'       => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::ICONS,
 			]
 		);
 
@@ -454,10 +463,15 @@ class Woo_Product_Tabs extends Widget_Base {
 				continue;
 			}
 
-			// Custom title entered — rename the tab.
+			// Start from the original title, replace it only when a custom one is set.
+			$title = $tabs[ $key ]['title'];
 			if ( '' !== $item['eael_product_tabs_item_title'] ) {
-				$tabs[ $key ]['title'] = $item['eael_product_tabs_item_title'];
+				$title = $item['eael_product_tabs_item_title'];
 			}
+
+			// Prepend the chosen icon (WC runs wp_kses_post on the title, so font-icon HTML is allowed).
+			$icon                  = isset( $item['eael_product_tabs_item_icon'] ) ? $item['eael_product_tabs_item_icon'] : [];
+			$tabs[ $key ]['title'] = $this->get_tab_icon_html( $icon ) . $title;
 
 			// Order the tab to match this row's position.
 			$tabs[ $key ]['priority'] = $order;
@@ -465,5 +479,23 @@ class Woo_Product_Tabs extends Widget_Base {
 		}
 
 		return $tabs;
+	}
+
+	/**
+	 * Build the HTML for a repeater row icon.
+	 * Returns an empty string when no icon was picked. Otherwise the icon
+	 */
+	private function get_tab_icon_html( $icon ) {
+		if ( empty( $icon['value'] ) ) {
+			return '';
+		}
+
+		$icon_html = Icons_Manager::try_get_icon_html( $icon, [ 'aria-hidden' => 'true' ] );
+
+		if ( empty( $icon_html ) ) {
+			return '';
+		}
+
+		return '<span class="eael-product-tab-icon">' . $icon_html . '</span>';
 	}
 }

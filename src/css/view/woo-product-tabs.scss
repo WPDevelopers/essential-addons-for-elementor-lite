@@ -6,3 +6,15 @@
 	border: 1px dashed #c2cbd2;
 	border-radius: 3px;
 }
+
+.woocommerce-tabs ul.wc-tabs li a .eael-product-tab-icon {
+	display: inline-flex;
+	align-items: center;
+	margin-right: 6px;
+
+	svg {
+		width: 1em;
+		height: 1em;
+		fill: currentColor;
+	}
+}
