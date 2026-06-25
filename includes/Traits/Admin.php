@@ -1924,7 +1924,7 @@ trait Admin {
 		<div class="eael-summer-campaign-content">
 			<p><?php
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo __( '<strong>🏖️</strong> Your Elementor site deserves a Summer glow-up. Get 110+ advanced elements and build faster, smarter <strong>- up to $100 OFF</strong>', 'essential-addons-for-elementor-lite' );
+			echo __( '<strong>🏖️</strong> Your Elementor site deserves a Summer glow-up. Get 110+ advanced elements and build faster, smarter <strong>- up to $120 OFF</strong>', 'essential-addons-for-elementor-lite' );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
                 <a href="https://essential-addons.com/summer2026-admin-notice" target="_blank" class="button-primary">
@@ -1991,11 +1991,11 @@ trait Admin {
 			'summer_campaign_2026_notice',
 			$_summer_campaign_2026_notice,
 			[
-				'start'       => strtotime( '12:00:00am 21st May, 2026' ),
+				'start'       => strtotime( '12:00:00pm 24th June, 2026' ),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				'expire'      => strtotime( '11:59:59pm 25th June, 2026' ),
+				'expire'      => strtotime( '11:59:59pm 19th July, 2026' ),
 				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '11:59:59pm 25th June, 2026' ),
 			]
 		);

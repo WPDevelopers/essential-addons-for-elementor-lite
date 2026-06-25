@@ -6173,7 +6173,11 @@ class Login_Register extends Widget_Base {
 				],
 			],
 			'selectors'  => [
+				// The button is wrapped in .eael-lr-form-loader-wrapper (login/register only), which
+				// shrink-wraps to the button. Size that wrapper too so % resolves against the form and
+				// px can't overflow it (max-width:100%). lostpassword/reset have no wrapper → button rule applies.
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-form-loader-wrapper" => 'width: {{SIZE}}{{UNIT}}; max-width: 100%;',
 			],
 			'separator'  => 'before',
 		] );

@@ -26,6 +26,9 @@
    .infobox-title-section {
       display: flex;
       flex-direction: column;
+      .title{
+         width: max-content;
+      }
       .sub_title {
          margin: 0 0 10px 0;
       }
@@ -91,6 +94,23 @@
 .eael-infobox-content-align--center .eael-infobox .infobox-content,
 .eael-infobox-content-align--center .eael-infobox .infobox-button {
    text-align: center;
+}
+.eael-infobox-content-align-{
+   &-left{
+      .infobox-title-section{
+         align-items: start;
+      }
+   }
+   &-right{
+      .infobox-title-section{
+         align-items: end;
+      }
+   }
+   &-center{
+      .infobox-title-section{
+         align-items: center;
+      }
+   }
 }
 
 /*--- For icon background shape ---*/
