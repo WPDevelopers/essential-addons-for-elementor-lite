@@ -1449,6 +1449,14 @@ trait Admin {
 							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-price' ) )
 						    ],
+						    'woo-product-tabs'      => [
+							    'key'         => 'woo-product-tabs',
+							    'title'       => __( 'Woo Product Tabs', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-tabs/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-tabs',
+							    'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-tabs' ) )
+						    ],
 						    'woo-product-short-description' => [
 							    'key'         => 'woo-product-short-description',
 							    'title'       => __( 'Woo Product Short Description', 'essential-addons-for-elementor-lite' ),

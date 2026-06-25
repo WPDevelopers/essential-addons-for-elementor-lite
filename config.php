@@ -688,6 +688,18 @@ $config = [
                 ],
             ],
         ],
+        'woo-product-tabs' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Tabs',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-tabs.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'woo-product-short-description' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Short_Description',
             'dependency' => [
