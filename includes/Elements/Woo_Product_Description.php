@@ -163,26 +163,35 @@ class Woo_Product_Description extends Widget_Base {
 		if ( ! $product && ! $is_editor ) {
 			return;
 		}
+		$post_object = $product ? get_post( $product->get_id() ) : false;
+		$has_content = $post_object && '' !== trim( $post_object->post_content );
 		?>
 		<div class="eael-single-product-description">
 			<?php
-			if ( $product ) {
-				$post_object = get_post( $product->get_id() );
-
-				if ( $post_object && '' !== trim( $post_object->post_content ) ) {
-					setup_postdata( $post_object );
-					// Run the_content filter so shortcodes, wpautop and oEmbed are processed (mirrors Pro's render_post_content()).
-					echo apply_filters( 'the_content', $post_object->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					wp_reset_postdata();
-				}
-			} else {
-				?>
-				<p><?php esc_html_e( 'This is a product description placeholder. Add a long description (the main editor content) to your product to see it here.', 'essential-addons-for-elementor-lite' ); ?></p>
-				<?php
+			if ( $has_content ) {
+				setup_postdata( $post_object );
+				echo apply_filters( 'the_content', $post_object->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				wp_reset_postdata();
+			} elseif ( $is_editor ) {
+				echo wp_kses_post( $this->get_editor_placeholder() );
 			}
 			?>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Dummy long-description markup shown only inside the Elementor editor
+	 */
+	protected function get_editor_placeholder() {
+		$para_1  = esc_html__( 'This is a placeholder for the product long description. Add content to the main editor of your product and it will appear here on the front end.', 'essential-addons-for-elementor-lite' );
+		$para_2  = esc_html__( 'Use this widget on a Single Product template to display the full product description. Style the alignment, text color and typography from the Style tab.', 'essential-addons-for-elementor-lite' );
+
+		return sprintf(
+			'<p>%1$s</p><p>%2$s</p>',
+			$para_1,
+			$para_2
+		);
 	}
 
 }

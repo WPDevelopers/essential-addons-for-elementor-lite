@@ -993,7 +993,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:31, ../includes/Elements/Product_Grid.php:1960, ../includes/Elements/Woo_Cart.php:210, ../includes/Elements/Woo_Product_Carousel.php:1712
+#: ../includes/Controls/Select2.php:31, ../includes/Elements/Product_Grid.php:1960, ../includes/Elements/Woo_Cart.php:210, ../includes/Elements/Woo_Product_Carousel.php:1712, ../includes/Elements/Woo_Product_Description.php:192
 msgid "Product Description"
 msgstr ""
 
@@ -10638,8 +10638,12 @@ msgstr ""
 msgid "Image Size"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Description.php:180
-msgid "This is a product description placeholder. Add a long description (the main editor content) to your product to see it here."
+#: ../includes/Elements/Woo_Product_Description.php:193
+msgid "This is a placeholder for the product long description. Add content to the main editor of your product and it will appear here on the front end."
+msgstr ""
+
+#: ../includes/Elements/Woo_Product_Description.php:194
+msgid "Use this widget on a Single Product template to display the full product description. Style the alignment, text color and typography from the Style tab."
 msgstr ""
 
 #: ../includes/Elements/Woo_Product_Gallery.php:293
