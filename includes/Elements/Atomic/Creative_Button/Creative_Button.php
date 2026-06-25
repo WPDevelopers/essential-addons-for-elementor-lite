@@ -29,10 +29,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Atomic (V4 editor) variant of the EA Creative Button.
  *
- * Scope: text, secondary text, link, and the free hover effects.
+ * Scope: text, secondary text, link, and the free hover effects. Pro presets are
+ * injected at runtime through the `eael/atomic/creative_button/effects` and
+ * `eael/atomic/creative_button/style_depends` filters (see EA Pro's Extender).
  * Not supported vs. the classic widget: icon (V4 has no FontAwesome icon-library
  * picker, and the SVG control lacks a clear/remove action), gradient
- * background, liquid-glass effects, and all Pro effects. The classic widget
+ * background, and liquid-glass effects. The classic widget
  * (eael-creative-button) remains the full-feature implementation.
  */
 class Creative_Button extends Atomic_Widget_Base {
@@ -57,14 +59,19 @@ class Creative_Button extends Atomic_Widget_Base {
 	}
 
 	public function get_style_depends(): array {
-		return [ 'eael-cb-atomic' ];
+		// Pro hooks here to append its own effect stylesheet handles (mechanics +
+		// atomic reveal-color defaults) so the Pro presets render on the front end.
+		return apply_filters( 'eael/atomic/creative_button/style_depends', [ 'eael-cb-atomic' ] );
 	}
 
 	/**
-	 * Free effects only. Pro effects are intentionally not supported here.
+	 * Free effects ship here. Pro appends its presets via the
+	 * `eael/atomic/creative_button/effects` filter — the `effect` prop enum and the
+	 * Effect dropdown are both built from this list, so a Pro key becomes a valid
+	 * choice automatically once Pro injects it.
 	 */
 	public static function get_effects(): array {
-		return [
+		$effects = [
 			'eael-creative-button--default' => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			'eael-creative-button--winona'  => __( 'Winona', 'essential-addons-for-elementor-lite' ),
 			'eael-creative-button--ujarak'  => __( 'Ujarak', 'essential-addons-for-elementor-lite' ),
@@ -72,6 +79,8 @@ class Creative_Button extends Atomic_Widget_Base {
 			'eael-creative-button--tamaya'  => __( 'Tamaya', 'essential-addons-for-elementor-lite' ),
 			'eael-creative-button--rayen'   => __( 'Rayen', 'essential-addons-for-elementor-lite' ),
 		];
+
+		return apply_filters( 'eael/atomic/creative_button/effects', $effects );
 	}
 
 	protected static function define_props_schema(): array {
