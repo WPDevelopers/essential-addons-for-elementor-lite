@@ -417,7 +417,9 @@ class Woo_Product_Tabs extends Widget_Base {
 		// Hide / rename / reorder tabs based on the Tab Items repeater (see manage_product_tabs()).
 		add_filter( 'woocommerce_product_tabs', [ $this, 'manage_product_tabs' ], 98 );
 
+		echo '<div class="eael-woo-product-tabs">';
 		wc_get_template( 'single-product/tabs/tabs.php' );
+		echo '</div>';
 
 		remove_filter( 'woocommerce_product_tabs', [ $this, 'manage_product_tabs' ], 98 );
 
