@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Elementor\Plugin;
+use Elementor\Repeater;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
@@ -71,9 +72,40 @@ class Woo_Product_Tabs extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_product_tabs_show_description',
+			'eael_product_tabs_items_info',
 			[
-				'label'        => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::ALERT,
+				'alert_type' => 'info',
+				'content'    => esc_html__( 'Each row controls one WooCommerce tab. Drag rows to reorder, switch a row off to hide it, or set a Title to rename it.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$repeater = new Repeater();
+
+		$repeater->add_control(
+			'eael_product_tabs_item_key',
+			[
+				'label'       => esc_html__( 'Tab Key', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'placeholder' => 'description',
+				'description' => esc_html__( 'WooCommerce tab slug, e.g. description, additional_information, reviews, or a custom tab key added by another plugin.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$repeater->add_control(
+			'eael_product_tabs_item_title',
+			[
+				'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'label_block' => false,
+				'description' => esc_html__( 'Leave empty to keep the original tab title.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$repeater->add_control(
+			'eael_product_tabs_item_show',
+			[
+				'label'        => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -83,26 +115,28 @@ class Woo_Product_Tabs extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_product_tabs_show_additional_information',
+			'eael_product_tabs_items',
 			[
-				'label'        => esc_html__( 'Additional Information', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'eael_product_tabs_show_reviews',
-			[
-				'label'        => esc_html__( 'Reviews', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
+				'type'        => Controls_Manager::REPEATER,
+				'fields'      => $repeater->get_controls(),
+				'title_field' => '{{{ eael_product_tabs_item_title || eael_product_tabs_item_key }}}',
+				'default'     => [
+					[
+						'eael_product_tabs_item_key'   => 'description',
+						'eael_product_tabs_item_title' => '',
+						'eael_product_tabs_item_show'  => 'yes',
+					],
+					[
+						'eael_product_tabs_item_key'   => 'additional_information',
+						'eael_product_tabs_item_title' => '',
+						'eael_product_tabs_item_show'  => 'yes',
+					],
+					[
+						'eael_product_tabs_item_key'   => 'reviews',
+						'eael_product_tabs_item_title' => '',
+						'eael_product_tabs_item_show'  => 'yes',
+					],
+				],
 			]
 		);
 
@@ -371,12 +405,12 @@ class Woo_Product_Tabs extends Widget_Base {
 
 		setup_postdata( $product->get_id() );
 
-		// Remove the tabs the user turned off (see remove_hidden_tabs()).
-		add_filter( 'woocommerce_product_tabs', [ $this, 'remove_hidden_tabs' ], 98 );
+		// Hide / rename / reorder tabs based on the Tab Items repeater (see manage_product_tabs()).
+		add_filter( 'woocommerce_product_tabs', [ $this, 'manage_product_tabs' ], 98 );
 
 		wc_get_template( 'single-product/tabs/tabs.php' );
 
-		remove_filter( 'woocommerce_product_tabs', [ $this, 'remove_hidden_tabs' ], 98 );
+		remove_filter( 'woocommerce_product_tabs', [ $this, 'manage_product_tabs' ], 98 );
 
 		// On render widget from Editor - trigger the WooCommerce tab JS manually.
 		if ( wp_doing_ajax() ) {
@@ -391,22 +425,43 @@ class Woo_Product_Tabs extends Widget_Base {
 	}
 
 	/**
-	 * Remove the default WooCommerce tabs the user switched off.
-	 * Hooked to the `woocommerce_product_tabs` filter while the tabs template renders. 
+	 * Apply the Tab Items repeater to the WooCommerce product tabs.
+	 * Hooked to the `woocommerce_product_tabs` filter while the tabs
+	 * template renders. `$tabs` is an array keyed by tab slug
+	 * ( description, additional_information, reviews, or any custom key ).
 	 */
-	public function remove_hidden_tabs( $tabs ) {
+	public function manage_product_tabs( $tabs ) {
 		$settings = $this->get_settings_for_display();
+		$items    = $settings['eael_product_tabs_items'];
 
-		if ( 'yes' !== $settings['eael_product_tabs_show_description'] ) {
-			unset( $tabs['description'] );
+		if ( empty( $items ) ) {
+			return $tabs;
 		}
 
-		if ( 'yes' !== $settings['eael_product_tabs_show_additional_information'] ) {
-			unset( $tabs['additional_information'] );
-		}
+		$order = 10;
 
-		if ( 'yes' !== $settings['eael_product_tabs_show_reviews'] ) {
-			unset( $tabs['reviews'] );
+		foreach ( $items as $item ) {
+			$key = trim( $item['eael_product_tabs_item_key'] );
+
+			// Row points to a tab that isn't there — ignore it.
+			if ( '' === $key || ! isset( $tabs[ $key ] ) ) {
+				continue;
+			}
+
+			// Switched off — remove the tab and move on.
+			if ( 'yes' !== $item['eael_product_tabs_item_show'] ) {
+				unset( $tabs[ $key ] );
+				continue;
+			}
+
+			// Custom title entered — rename the tab.
+			if ( '' !== $item['eael_product_tabs_item_title'] ) {
+				$tabs[ $key ]['title'] = $item['eael_product_tabs_item_title'];
+			}
+
+			// Order the tab to match this row's position.
+			$tabs[ $key ]['priority'] = $order;
+			$order                   += 10;
 		}
 
 		return $tabs;
