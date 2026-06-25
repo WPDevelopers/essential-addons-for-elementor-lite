@@ -854,6 +854,11 @@ class WPDeveloper_Setup_Wizard {
 						'preferences' => 'advance',
 					],
 					[
+						'key'         => 'woo-product-description',
+						'title'       => __( 'Woo Product Description', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
 						'key'         => 'woo-product-rating',
 						'title'       => __( 'Woo Product Rating', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',

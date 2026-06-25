@@ -700,6 +700,18 @@ $config = [
                 ],
             ],
         ],
+        'woo-product-description' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Description',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-description.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'woo-product-rating' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Rating',
             'dependency' => [
