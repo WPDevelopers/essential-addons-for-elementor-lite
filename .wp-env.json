@@ -1,0 +1,15 @@
+{
+	"plugins": [
+		".",
+		"https://downloads.wordpress.org/plugin/elementor.zip"
+	],
+	"config": {
+		"WP_DEBUG": true,
+		"SCRIPT_DEBUG": true,
+		"WP_HTTP_BLOCK_EXTERNAL": true
+	},
+	"testsEnvironment": false,
+	"mappings": {
+		"wp-content/mu-plugins": "./tests/e2e/mu-plugins"
+	}
+}

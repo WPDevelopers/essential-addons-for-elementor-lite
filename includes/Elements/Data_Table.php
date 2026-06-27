@@ -1473,7 +1473,7 @@ class Data_Table extends Widget_Base {
 													if ( Helper::is_elementor_publish_template( $table_td[ $j ]['template'] ) ) {
 														// WPML Compatibility
 														if ( ! is_array( $table_td[ $j ]['template'] ) ) {
-															$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
+															$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 														}
 
 														Helper::eael_onpage_edit_template_markup( get_the_ID(), $table_td[ $j ]['template'] );
@@ -1487,7 +1487,9 @@ class Data_Table extends Widget_Base {
 										<?php else: ?>
 											<td <?php $this->print_render_attribute_string('table_inside_td'.$i.$j); ?>>
 												<div class="td-content-wrapper"><div <?php $this->print_render_attribute_string('td_content'); ?>>
-													<?php echo $this->parse_text_editor( wp_kses( $table_td[$j]['title'], Helper::eael_allowed_tags() ) ); ?>
+													<?php 
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+													echo $this->parse_text_editor( wp_kses( $table_td[$j]['title'], Helper::eael_allowed_tags() ) ); ?>
 												</div></div>
 											</td>
 										<?php endif; ?>

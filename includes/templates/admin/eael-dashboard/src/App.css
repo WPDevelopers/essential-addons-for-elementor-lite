@@ -2005,7 +2005,6 @@ section.ea__modal-wrapper {
 
 .ea__modal-body--accordion {
   flex: 1;
-  min-height: 520px;
 }
 
 @media (max-width: 1024px), (max-height: 780px) {
@@ -2094,6 +2093,18 @@ section.ea__modal-wrapper {
   color: #fff;
 }
 
+.ea__modal-body .ea__auth-action .ea__auth-link.ea__btn-secondary {
+  background-color: transparent;
+  color: #d63638;
+  border: 1px solid #d63638;
+  padding: 9px 19px;
+}
+
+.ea__modal-body .ea__auth-action .ea__auth-link.ea__btn-secondary:hover {
+  background-color: #d63638;
+  color: #fff;
+}
+
 .ea__modal-body .ea__auth-status {
   padding: 10px;
   border-radius: 3px;
@@ -2178,6 +2189,219 @@ section.ea__modal-wrapper {
   font-size: 13px;
   color: var(--text-color-50);
   font-weight: 500;
+}
+
+/* Pinterest Feed — connect (pre-auth) state */
+.ea__modal-body .ea__pf-connect-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.ea__modal-body .ea__pf-connect-title {
+  font-size: 22px;
+  font-weight: 450;
+  line-height: 1.25;
+  color: var(--text-color-25);
+  margin: 0;
+}
+
+.ea__modal-body .ea__pf-connect-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-color-100);
+  margin: 0 0 18px;
+}
+
+.ea__modal-body .ea__pf-connect-art {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ea__modal-body .ea__pf-connect-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.ea__modal-body .ea__pf-connect-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--label-color);
+  /* Full-bleed divider: break out of card (16px) + modal-body (40px) padding,
+     re-add as padding so the button keeps its position. */
+  margin-left: -56px;
+  margin-right: -56px;
+  padding-left: 56px;
+  padding-right: 56px;
+}
+
+.ea__modal-body .ea__pf-connect-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  background: var(--base-color-75);
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.ea__modal-body .ea__pf-connect-btn:hover {
+  opacity: 0.9;
+  color: #fff;
+}
+
+/* Pinterest Feed — connected state */
+.ea__modal-body .ea__pf-notice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.ea__modal-body .ea__pf-notice-icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  background: #FCF6F6;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+}
+
+.ea__modal-body .ea__pf-notice-icon img {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+
+.ea__modal-body .ea__pf-notice-text {
+  font-size: 22px;
+  font-weight: 450;
+  line-height: 1.25;
+  color: var(--text-color-25);
+  margin: 0;
+}
+
+.ea__modal-body .ea__pf-profile-card {
+  padding: 18px 20px;
+  background: var(--base-background);
+  border: 1px solid var(--border-color-base);
+  border-radius: 10px;
+}
+
+.ea__modal-body .ea__pf-profile-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ea__modal-body .ea__pf-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+}
+
+.ea__modal-body .ea__pf-profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--background-13);
+  display: block;
+}
+
+.ea__modal-body .ea__pf-online-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #21a85a;
+  border: 2px solid #fff;
+}
+
+.ea__modal-body .ea__pf-profile-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-right: auto;
+}
+
+.ea__modal-body .ea__pf-profile-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  color: #475467;
+  word-break: break-word;
+}
+
+.ea__modal-body .ea__pf-name-icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+.ea__modal-body .ea__pf-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 20px;
+}
+
+.ea__modal-body .ea__pf-badge--success {
+  background: #21a85a;
+  color: #fff;
+}
+
+.ea__modal-body .ea__pf-badge--error {
+  background: #d63638;
+  color: #fff;
+}
+
+.ea__modal-body .ea__pf-profile-action {
+  flex-shrink: 0;
+  align-self: center;
+  padding: 9px 19px;
+  border-radius: 6px;
+  text-decoration: none;
+  background: #FEF3F2;
+  color: #d63638;
+  border: 1px solid #d63638;
+  transition: all 0.2s ease;
+}
+
+.ea__modal-body .ea__pf-profile-action:hover {
+  background: #d63638;
+  color: #fff;
+}
+
+/* Single-item modal — no accordion header, content shows directly */
+.ea__modal-body .ea__api-key-according--single {
+  background: transparent;
+}
+
+.ea__modal-body .ea__api-key-according--single .ea__according-content {
+  border-top: none;
+}
+
+.ea__modal-body .ea__api-key-according--single .ea__according-content.accordion-show {
+  padding-top: 0;
+  max-height: none;
 }
 
 .ea__modal-body p.info--text:before {

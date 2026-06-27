@@ -160,7 +160,7 @@ jQuery(window).on("elementor/frontend/init", function () {
             $is_randomize = $gallery.data("is-randomize");
          isRTL = $("body").hasClass("rtl");
 
-         fg_items = fg_items.map((item) => DOMPurify.sanitize(item));
+         fg_items = fg_items.map((item) => DOMPurify.sanitize(item, { ADD_ATTR: ['target'] }));
 
          if ("yes" === $is_randomize) {
             fg_items = shuffleGalleryItems(fg_items);
@@ -183,8 +183,9 @@ jQuery(window).on("elementor/frontend/init", function () {
             isOriginLeft: !isRTL,
             filter: function () {
                var $this = $(this);
+               var searchHaystack = $this.text() + " " + ($this.attr("data-search-categories") || "");
                var $result = searchRegex
-                  ? $this.text().match(searchRegex)
+                  ? searchHaystack.match(searchRegex)
                   : true;
                if (buttonFilter === undefined) {
                   if (layoutMode !== "layout_3") {

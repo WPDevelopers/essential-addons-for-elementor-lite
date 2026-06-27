@@ -478,7 +478,7 @@ class Woo_Product_Rating extends Widget_Base {
 				return;
 			}
 			
-			$product      = Helper::get_product();
+			$product      = Helper::get_product(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 			$rating_count = $product->get_rating_count();
 			$review_count = $product->get_review_count();
 			$average      = $product->get_average_rating();

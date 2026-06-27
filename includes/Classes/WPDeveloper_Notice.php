@@ -558,11 +558,15 @@ class WPDeveloper_Notice {
             return;
         }
         if( $current_notice == 'opt_in' ) {
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
             do_action( $this->do_notice_action );
             return;
-        }
+        } 
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
         do_action( 'wpdeveloper_before_notice_for_' . $this->plugin_name );
-            do_action( $this->do_notice_action );
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
+        do_action( $this->do_notice_action );
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
         do_action( 'wpdeveloper_after_notice_for_' . $this->plugin_name );
     }
     /**
