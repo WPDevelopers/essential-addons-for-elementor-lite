@@ -4,6 +4,7 @@ namespace Essential_Addons_Elementor\Elements;
 
 use Elementor\Group_Control_Background;
 use Elementor\Repeater;
+use Essential_Addons_Elementor\Controls\EAEL_Gradient_Text;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -746,15 +747,12 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 
-		$this->add_control(
-			'eael_dch_subtext_color',
+		$this->add_group_control(
+			EAEL_Gradient_Text::get_type(),
 			[
-				'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#4d4d4d',
-				'selectors' => [
-					'{{WRAPPER}} .eael-dual-header .subtext' => 'color: {{VALUE}};',
-				],
+				'name'     => 'eael_dch_subtext',
+				'selector' => '{{WRAPPER}} .eael-dual-header .subtext',
+				'default'  => '#4d4d4d',
 			]
 		);
 

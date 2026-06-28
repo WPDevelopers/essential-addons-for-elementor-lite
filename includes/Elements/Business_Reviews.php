@@ -812,7 +812,7 @@ class Business_Reviews extends Widget_Base {
 			'eael_business_reviews_review_text_translation',
 			[
 				'label'        => __( 'Translation', 'essential-addons-for-elementor-lite' ),
-				'description'  => __('Reviews will be translated into English.', 'essential-addons-for-elementor-lite' ),
+				'description'  => __('Reviews will be translated into your site language.', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -2656,9 +2656,13 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['reviews_sort']            		= ! empty( $settings['eael_business_reviews_sort_by'] ) ? esc_html( $settings['eael_business_reviews_sort_by'] ) : 'most_relevant';
 		$business_reviews['review_text_translation'] 		= ! empty( $settings['eael_business_reviews_review_text_translation'] ) && 'yes' === $settings['eael_business_reviews_review_text_translation'] ? 1 : 0;
 
+		// New Places API needs an explicit languageCode. Always request the site locale so that
+		// without it Google defaults everything to English.
+		$business_reviews['language_code']                  = $this->get_review_language_code();
+
 		$business_reviews['expiration'] 					= ! empty( $settings['eael_business_reviews_data_cache_time'] ) ? absint( $settings['eael_business_reviews_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
 
-		$cache_key_parts = [ $business_reviews['reviews_sort'], $business_reviews['review_text_translation'], $this->get_id() ];
+		$cache_key_parts = [ $business_reviews['reviews_sort'], $business_reviews['review_text_translation'], $business_reviews['language_code'], $this->get_id() ];
 		$cache_key_parts[] = isset( $business_reviews['api_key'] ) ? $business_reviews['api_key'] : '';
 
 		$business_reviews['md5']        					= md5( implode( '_', $cache_key_parts ) );
@@ -2789,13 +2793,67 @@ class Business_Reviews extends Widget_Base {
 		return $data;
 	}
 
+	/**
+	 * Resolve the WordPress locale to a Google Places API languageCode.
+	 *
+	 * Google accepts a fixed list of codes — mostly the primary language subtag
+	 * (de, bn, fr ...) with only a few region/script variants. Region-suffixed codes
+	 * that are NOT on Google's list (e.g. de-DE, bn-BD) are ignored and Google falls
+	 * back to English, so we map the WordPress locale to a Google-valid code:
+	 * de_DE => de, bn_BD => bn, pt_BR => pt-BR, zh_CN => zh-CN, he_IL => iw.
+	 *
+	 * @see https://developers.google.com/maps/faq#languagesupport
+	 * @return string
+	 */
+	public function get_review_language_code() {
+		$locale = get_locale();
+
+		// WordPress locales whose Google code keeps a region/script suffix.
+		$region_variants = array(
+			'zh_CN' => 'zh-CN',
+			'zh_HK' => 'zh-HK',
+			'zh_TW' => 'zh-TW',
+			'pt_BR' => 'pt-BR',
+			'pt_PT' => 'pt-PT',
+			'en_AU' => 'en-AU',
+			'en_GB' => 'en-GB',
+			'fr_CA' => 'fr-CA',
+		);
+
+		if ( isset( $region_variants[ $locale ] ) ) {
+			$code = $region_variants[ $locale ];
+		} elseif ( 0 === strpos( $locale, 'es_' ) && 'es_ES' !== $locale ) {
+			// Latin-American Spanish locales share Google's es-419; Spain stays es.
+			$code = 'es-419';
+		} else {
+			$primary = strtolower( strtok( $locale, '_' ) ); // de_DE => de, bn_BD => bn, fil => fil
+
+			// WordPress subtags that differ from Google's code.
+			$aliases = array(
+				'he' => 'iw',
+				'nb' => 'no',
+				'nn' => 'no',
+				'tl' => 'fil',
+			);
+
+			$code = isset( $aliases[ $primary ] ) ? $aliases[ $primary ] : $primary;
+		}
+
+		return apply_filters( 'eael/business_reviews/language_code', $code, $locale );
+	}
+
 	public function fetch_google_reviews_from_api( $business_reviews_settings ) {
 		$business_reviews = $business_reviews_settings;
 		$error_message    = '';
 		$response         = false;
 
 		if ( 'places-new' === $business_reviews['google_api_type'] ) {
-			$url     = "https://places.googleapis.com/v1/places/" . sanitize_text_field( $business_reviews['place_id'] );
+			$url = "https://places.googleapis.com/v1/places/" . sanitize_text_field( $business_reviews['place_id'] );
+
+			if ( ! empty( $business_reviews['language_code'] ) ) {
+				$url = add_query_arg( 'languageCode', $business_reviews['language_code'], $url );
+			}
+
 			$headers = array(
 				'Content-Type'       => 'application/json',
 				'X-Goog-Api-Key'     => sanitize_text_field( $business_reviews['api_key'] ),
@@ -2835,7 +2893,12 @@ class Business_Reviews extends Widget_Base {
 							$m_review->profile_photo_url         = ! empty( $review->authorAttribution->photoUri ) ? $review->authorAttribution->photoUri : '';
 							$m_review->rating                    = ! empty( $review->rating ) ? $review->rating : 0;
 							$m_review->relative_time_description = ! empty( $review->relativePublishTimeDescription ) ? $review->relativePublishTimeDescription : '';
-							$m_review->text                      = ! empty( $review->text->text ) ? $review->text->text : '';
+							// Translation OFF (default): render the review in its original written language
+							if ( empty( $business_reviews['review_text_translation'] ) && ! empty( $review->originalText->text ) ) {
+								$m_review->text = $review->originalText->text;
+							} else {
+								$m_review->text = ! empty( $review->text->text ) ? $review->text->text : '';
+							}
 							$mapped_reviews[] = $m_review;
 						}
 					}
