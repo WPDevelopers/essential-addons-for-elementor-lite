@@ -123,6 +123,14 @@ class Woo_Product_Tabs extends Widget_Base {
 			]
 		);
 
+        $repeater->add_control(
+            'eael_product_tabs_list_note',
+            [
+                'type'      => Controls_Manager::RAW_HTML,
+                'raw'       => '<style>.elementor-control-eael_product_tabs_items .elementor-repeater-add { display: none !important; }</style>',
+            ]
+        );
+
 		$this->add_control(
 			'eael_product_tabs_items',
 			[
