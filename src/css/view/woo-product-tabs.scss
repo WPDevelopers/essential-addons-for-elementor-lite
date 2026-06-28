@@ -15,6 +15,7 @@
 	div.product {
 		.eael-woo-product-tabs {
 			.woocommerce-tabs ul.tabs {
+				padding: 0;
 				&::before {
 					border: none;
 				}

@@ -369,8 +369,7 @@ class Woo_Product_Tabs extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'alpha'     => false,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel, .woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs li.active' => 'background-color: {{VALUE}}',
-                    '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs li.active' => 'border-bottom-color: {{VALUE}}',
+					'.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs li.active' => 'background-color: {{VALUE}}',
 				],
 			]
 		);

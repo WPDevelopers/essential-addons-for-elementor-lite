@@ -11,6 +11,10 @@
   border: none;
 }
 
+.woocommerce div.product .eael-woo-product-tabs .woocommerce-tabs ul.tabs {
+  padding: 0;
+}
+
 .woocommerce div.product .eael-woo-product-tabs .woocommerce-tabs ul.tabs::before {
   border: none;
 }
