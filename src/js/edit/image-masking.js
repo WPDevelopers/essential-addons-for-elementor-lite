@@ -1,4 +1,10 @@
 let ImageMaskingHandler = function ($scope, $) {
+    // MetForm (and other 3rd-party widgets) re-fire element_ready without forwarding
+    // jQuery, leaving `$` undefined; fall back to global jQuery. See compat: MetForm editor.
+    $ = $ || window.jQuery;
+    if ( ! $ ) {
+        return;
+    }
 
     function get_clip_path(shape) {
         let shapes = {

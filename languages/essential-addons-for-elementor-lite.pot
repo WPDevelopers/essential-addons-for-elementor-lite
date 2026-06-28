@@ -2440,7 +2440,7 @@ msgid "Translation"
 msgstr ""
 
 #: ../includes/Elements/Business_Reviews.php:815
-msgid "Reviews will be translated into English."
+msgid "Reviews will be translated into your site language."
 msgstr ""
 
 #: ../includes/Elements/Business_Reviews.php:830
@@ -2459,7 +2459,7 @@ msgstr ""
 msgid "Hide 4 Star Reviews"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:878, ../includes/Elements/Business_Reviews.php:3198, ../includes/Elements/Business_Reviews.php:3248, ../includes/Elements/Business_Reviews.php:3319
+#: ../includes/Elements/Business_Reviews.php:878, ../includes/Elements/Business_Reviews.php:3261, ../includes/Elements/Business_Reviews.php:3311, ../includes/Elements/Business_Reviews.php:3382
 msgid "Reviewer"
 msgstr ""
 
@@ -2599,31 +2599,31 @@ msgstr ""
 msgid "Active Color"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2816
+#: ../includes/Elements/Business_Reviews.php:2874
 msgid "An error occurred while fetching data from Google Places API."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2909
+#: ../includes/Elements/Business_Reviews.php:2972
 msgid "The referenced location, place_id, was valid but no longer refers to a valid result. This may occur if the establishment is no longer in business."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2913
+#: ../includes/Elements/Business_Reviews.php:2976
 msgid "The referenced location, place_id, was not found in the Places database."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2917
+#: ../includes/Elements/Business_Reviews.php:2980
 msgid "The API request was malformed."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2921
+#: ../includes/Elements/Business_Reviews.php:2984
 msgid "You have exceeded the QPS limits. Or, Billing has not been enabled on your account. Or, The monthly $200 credit, or a self-imposed usage cap, has been exceeded. Or, The provided method of payment is no longer valid (for example, a credit card has expired)."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2925
+#: ../includes/Elements/Business_Reviews.php:2988
 msgid "The request is missing an API key. Or, The key parameter is invalid."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2929
+#: ../includes/Elements/Business_Reviews.php:2992
 msgid "An unknown error occurred."
 msgstr ""
 
@@ -12603,7 +12603,7 @@ msgid "Never show again"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1927
-msgid "<strong>🏖️</strong> Your Elementor site deserves a Summer glow-up. Get 110+ advanced elements and build faster, smarter <strong>- up to $100 OFF</strong>"
+msgid "<strong>🏖️</strong> Your Elementor site deserves a Summer glow-up. Get 110+ advanced elements and build faster, smarter <strong>- up to $120 OFF</strong>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1931
