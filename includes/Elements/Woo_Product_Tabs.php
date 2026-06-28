@@ -706,11 +706,13 @@ class Woo_Product_Tabs extends Widget_Base {
 
 		remove_filter( 'woocommerce_product_tabs', [ $this, 'manage_product_tabs' ], 98 );
 
-		// On render widget from Editor - trigger the WooCommerce tab JS manually.
-		if ( wp_doing_ajax() ) {
+		// In the Elementor editor / preview the page
+		if ( wp_doing_ajax() || Plugin::$instance->editor->is_edit_mode() || Plugin::$instance->preview->is_preview_mode() ) {
 			?>
 			<script>
-				jQuery( '.wc-tabs-wrapper, .woocommerce-tabs, #rating' ).trigger( 'init' );
+				jQuery( function ( $ ) {
+					$( '.wc-tabs-wrapper, .woocommerce-tabs, #rating' ).trigger( 'init' );
+				} );
 			</script>
 			<?php
 		}
