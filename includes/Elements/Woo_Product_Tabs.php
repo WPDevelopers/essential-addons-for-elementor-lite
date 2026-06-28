@@ -246,6 +246,70 @@ class Woo_Product_Tabs extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'eael_product_tabs_icon_heading',
+            [
+                'type'      => Controls_Manager::HEADING,
+                'label'     => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_tabs_icon_color',
+            [
+                'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-woo-product-tabs .tabs.wc-tabs li a .eael-product-tab-icon'     => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-woo-product-tabs .tabs.wc-tabs li a .eael-product-tab-icon svg' => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_tabs_icon_active_color',
+            [
+                'label'     => esc_html__('Active Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-woo-product-tabs .tabs.wc-tabs li.active a .eael-product-tab-icon'     => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-woo-product-tabs .tabs.wc-tabs li.active a .eael-product-tab-icon svg' => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_tabs_icon_size',
+            [
+                'label'      => esc_html__('Size', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', 'rem', 'custom'],
+                'range'      => [
+                    'px' => ['min' => 0, 'max' => 100],
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-woo-product-tabs .tabs.wc-tabs li a .eael-product-tab-icon'     => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-woo-product-tabs .tabs.wc-tabs li a .eael-product-tab-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_tabs_icon_gap',
+            [
+                'label'      => esc_html__('Gap', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', 'rem', 'custom'],
+                'range'      => [
+                    'px' => ['min' => 0, 'max' => 60],
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-woo-product-tabs .tabs.wc-tabs li a .eael-product-tab-icon' => 'margin-right: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->start_controls_tabs( 'eael_product_tabs_style_tabs' );
 
 		$this->start_controls_tab(
