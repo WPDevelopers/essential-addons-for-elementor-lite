@@ -14,6 +14,7 @@
 .woocommerce div.product .eael-woo-product-tabs .woocommerce-tabs ul.tabs li {
   border: none;
   background-color: transparent;
+  border-radius: 0;
 }
 
 .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs {

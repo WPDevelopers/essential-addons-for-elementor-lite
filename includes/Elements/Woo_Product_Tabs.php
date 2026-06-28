@@ -238,7 +238,15 @@ class Woo_Product_Tabs extends Widget_Base {
             ]
         );
 
-		$this->start_controls_tabs( 'eael_product_tabs_style_tabs' );
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name'     => 'eael_product_tabs_border',
+                'selector' => '{{WRAPPER}} .eael-woo-product-tabs .tabs.wc-tabs li',
+            ]
+        );
+
+        $this->start_controls_tabs( 'eael_product_tabs_style_tabs' );
 
 		$this->start_controls_tab(
 			'eael_product_tabs_normal_style',
@@ -302,6 +310,20 @@ class Woo_Product_Tabs extends Widget_Base {
 				],
 			]
 		);
+
+        $this->add_control(
+            'eael_product_tabs_active_border_color',
+            [
+                'label'     => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    // '.woocommerce {{WRAPPER}} .woocommerce-tabs .woocommerce-Tabs-panel'   => 'border-color: {{VALUE}}',
+                    // '.woocommerce {{WRAPPER}} .woocommerce-tabs ul.wc-tabs li.active'       => 'border-color: {{VALUE}} {{VALUE}} {{eael_product_tabs_active_tab_bg_color.VALUE}} {{VALUE}}',
+                    // '.woocommerce {{WRAPPER}} .woocommerce-tabs ul.wc-tabs li:not(.active)' => 'border-bottom-color: {{VALUE}}',
+                    '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs li.active a' => 'border-bottom-color: {{VALUE}}',
+                ],
+            ]
+        );
 
 		$this->end_controls_tab();
 
