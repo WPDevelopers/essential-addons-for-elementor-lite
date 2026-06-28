@@ -524,6 +524,136 @@ class Woo_Product_Tabs extends Widget_Base {
 			]
 		);
 
+        $this->add_control(
+            'eael_product_tabs_panel_button',
+            [
+                'type'      => Controls_Manager::HEADING,
+                'label'     => esc_html__('Button', 'essential-addons-for-elementor-lite'),
+                'separator' => 'before',
+            ]
+        );
+
+        $button_selector = '{{WRAPPER}} .eael-woo-product-tabs .woocommerce-Tabs-panel #respond input#submit, {{WRAPPER}} .eael-woo-product-tabs .woocommerce-Tabs-panel .button';
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_tabs_button_typography',
+                'selector' => $button_selector,
+            ]
+        );
+
+        $this->start_controls_tabs( 'eael_product_tabs_button_tabs' );
+
+        $this->start_controls_tab(
+            'eael_product_tabs_button_normal',
+            [
+                'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_tabs_button_text_color',
+            [
+                'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    $button_selector => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_tabs_button_bg_color',
+            [
+                'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    $button_selector => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'eael_product_tabs_button_hover',
+            [
+                'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_tabs_button_hover_color',
+            [
+                'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-woo-product-tabs .woocommerce-Tabs-panel #respond input#submit:hover, {{WRAPPER}} .eael-woo-product-tabs .woocommerce-Tabs-panel .button:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_tabs_button_hover_bg_color',
+            [
+                'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-woo-product-tabs .woocommerce-Tabs-panel #respond input#submit:hover, {{WRAPPER}} .eael-woo-product-tabs .woocommerce-Tabs-panel .button:hover' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name'      => 'eael_product_tabs_button_border',
+                'selector'  => $button_selector,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_tabs_button_border_radius',
+            [
+                'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'selectors'  => [
+                    $button_selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_tabs_button_padding',
+            [
+                'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'selectors'  => [
+                    $button_selector => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_tabs_button_margin',
+            [
+                'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'selectors'  => [
+                    $button_selector => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
 		$this->end_controls_section();
 	}
 
