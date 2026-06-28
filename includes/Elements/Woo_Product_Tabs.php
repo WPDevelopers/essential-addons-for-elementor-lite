@@ -406,6 +406,106 @@ class Woo_Product_Tabs extends Widget_Base {
 			]
 		);
 
+        $this->add_control(
+            'eael_product_tabs_panel_bg_color',
+            [
+                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-Tabs-panel' => 'background-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_tabs_panel_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_tabs_panel_padding',
+            [
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name'     => 'eael_product_tabs_panel_box_border',
+                'selector' => '{{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_tabs_panel_border_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'eael_product_tabs_panel_box_shadow',
+                'selector' => '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_tabs_panel_heading',
+            [
+                'type'      => Controls_Manager::HEADING,
+                'label'     => esc_html__('Heading', 'essential-addons-for-elementor-lite'),
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_tabs_heading_color',
+            [
+                'label'     => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-Tabs-panel h2' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_tabs_content_heading_typography',
+                'selector' => '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel h2',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_tabs_panel_heading_content',
+            [
+                'type'      => Controls_Manager::HEADING,
+                'label'     => esc_html__('Content', 'essential-addons-for-elementor-lite'),
+                'separator' => 'before',
+            ]
+        );
+
 		$this->add_control(
 			'eael_product_tabs_panel_text_color',
 			[
@@ -421,68 +521,6 @@ class Woo_Product_Tabs extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'eael_product_tabs_content_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel',
-			]
-		);
-
-		$this->add_control(
-			'eael_product_tabs_panel_heading',
-			[
-				'type'      => Controls_Manager::HEADING,
-				'label'     => esc_html__( 'Heading', 'essential-addons-for-elementor-lite' ),
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'eael_product_tabs_heading_color',
-			[
-				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-                    '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-Tabs-panel h2' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'eael_product_tabs_content_heading_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel h2',
-			]
-		);
-
-		$this->add_control(
-			'eael_product_tabs_panel_border_width',
-			[
-				'label'      => esc_html__( 'Border Width', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
-				'selectors'  => [
-                    '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; margin-top: -{{TOP}}{{UNIT}}',
-				],
-				'separator'  => 'before',
-			]
-		);
-
-		$this->add_control(
-			'eael_product_tabs_panel_border_radius',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-				'selectors'  => [
-                    '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
-                    '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs'             => 'margin-left: {{TOP}}{{UNIT}}; margin-right: {{RIGHT}}{{UNIT}}',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'eael_product_tabs_panel_box_shadow',
 				'selector' => '.woocommerce {{WRAPPER}} .eael-woo-product-tabs .woocommerce-tabs .woocommerce-Tabs-panel',
 			]
 		);
