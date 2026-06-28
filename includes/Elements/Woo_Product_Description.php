@@ -27,7 +27,7 @@ class Woo_Product_Description extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eicon-product-description';
+		return 'eaicon-product-description';
 	}
 
 	public function get_categories() {

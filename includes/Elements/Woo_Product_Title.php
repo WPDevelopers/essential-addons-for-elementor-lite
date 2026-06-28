@@ -27,7 +27,7 @@ class Woo_Product_Title extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-product-price';
+		return 'eaicon-product-title';
 	}
 
 	public function get_categories() {
