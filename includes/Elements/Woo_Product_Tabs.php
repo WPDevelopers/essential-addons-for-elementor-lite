@@ -179,14 +179,14 @@ class Woo_Product_Tabs extends Widget_Base {
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'eael_product_tabs_border_radius',
             [
                 'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'selectors'  => [
-                    '.woocommerce {{WRAPPER}} .woocommerce-tabs ul.wc-tabs li' => 'border-radius: {{SIZE}}{{UNIT}} {{SIZE}}{{UNIT}} 0 0',
+                    '{{WRAPPER}} .eael-woo-product-tabs .tabs.wc-tabs li' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
