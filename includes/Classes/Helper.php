@@ -266,8 +266,88 @@ class Helper
             $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
         }
 
+	    // Polylang: pin the query to the language of the page/document the widget is
+	    // on, instead of the ambient (cookie / last-page-load) current language. In
+	    // the editor the ambient language flips on every page load, which made the
+	    // Post Grid show the wrong language's posts. Skip manual ("by_id") selections
+	    // and post types Polylang isn't translating.
+	    if ( function_exists( 'pll_get_post_language' ) && 'by_id' !== $settings['post_type'] ) {
+		    $eael_is_translated = ! function_exists( 'pll_is_translated_post_type' );
+		    if ( ! $eael_is_translated ) {
+			    foreach ( (array) $args['post_type'] as $eael_pt ) {
+				    if ( 'any' !== $eael_pt && pll_is_translated_post_type( $eael_pt ) ) {
+					    $eael_is_translated = true;
+					    break;
+				    }
+			    }
+		    }
+
+		    if ( $eael_is_translated ) {
+			    $eael_lang = self::eael_get_current_language();
+			    // Allow integrators to override the pinned language.
+			    $eael_lang = apply_filters( 'eael/post_grid/query_lang', $eael_lang, $settings, $args );
+			    if ( ! empty( $eael_lang ) ) {
+				    $args['lang'] = $eael_lang;
+			    }
+		    }
+	    }
+
         return $args;
     }
+
+	/**
+	 * Resolve the Polylang language slug a widget's query/content should be pinned
+	 * to.
+	 *
+	 * The Elementor editor (and admin-ajax) "current language" is ambient global
+	 * state driven by the pll_language cookie, which flips on every page load. That
+	 * made the Post Grid and template widgets follow the last-loaded language rather
+	 * than the language of the page the widget actually lives on. We instead derive
+	 * the language from the current document/page id so it is deterministic.
+	 *
+	 * @param int $post_id Optional page/post id to read the language from.
+	 *
+	 * @return string Language slug, or '' when Polylang is inactive/undeterminable.
+	 */
+	public static function eael_get_current_language( $post_id = 0 ) {
+		if ( ! function_exists( 'pll_get_post_language' ) ) {
+			return '';
+		}
+
+		if ( ! $post_id && class_exists( '\Elementor\Plugin' ) ) {
+			$document = \Elementor\Plugin::$instance->documents->get_current();
+			if ( $document ) {
+				$post_id = $document->get_main_id();
+			}
+		}
+
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
+
+		$lang = $post_id ? pll_get_post_language( $post_id ) : '';
+
+		if ( ! $lang && function_exists( 'pll_current_language' ) ) {
+			$lang = pll_current_language();
+		}
+
+		return $lang ? $lang : '';
+	}
+
+	/**
+	 * Build a language-specific cache-key suffix so translated pages that share a
+	 * widget id (e.g. created via Polylang "copy content") don't collide in the
+	 * Post Grid transients.
+	 *
+	 * @param int $post_id Optional page/post id to read the language from.
+	 *
+	 * @return string e.g. "_lang_es", or '' when no language is resolved.
+	 */
+	public static function eael_lang_suffix( $post_id = 0 ) {
+		$lang = self::eael_get_current_language( $post_id );
+
+		return $lang ? '_lang_' . sanitize_key( $lang ) : '';
+	}
 
     /**
      * Go Premium

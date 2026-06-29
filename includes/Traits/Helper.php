@@ -488,17 +488,60 @@ trait Helper
 
 	/**
 	 * eael_wpml_template_translation
+	 *
+	 * Resolve an Elementor template/library id to its translation in the current
+	 * language. Works for both WPML and Polylang:
+	 *  - WPML auto-registers elementor_library and answers wpml_object_id.
+	 *  - Polylang does NOT register elementor_library as translatable by default, so
+	 *    its wpml_object_id compat filter would return the id unchanged. We therefore
+	 *    resolve via pll_get_post(), which honours the translation group directly.
+	 *
 	 * @param $id
 	 * @return mixed|void
 	 */
     public function eael_wpml_template_translation($id){
 	    $postType = get_post_type( $id );
-	    if ( 'elementor_library' === $postType ) {
-			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-		    return apply_filters( 'wpml_object_id', $id, $postType, true );
+	    if ( 'elementor_library' !== $postType ) {
+		    return $id;
 	    }
-	    return $id;
+
+	    // Polylang path (independent of the translatable-post-type setting).
+	    if ( function_exists( 'pll_get_post' ) && function_exists( 'pll_current_language' ) ) {
+		    $lang = pll_current_language();
+		    if ( $lang ) {
+			    $translated = pll_get_post( $id, $lang );
+			    // pll_get_post returns false when no translation exists for $lang;
+			    // keep the original id in that case.
+			    if ( $translated ) {
+				    return $translated;
+			    }
+		    }
+		    return $id;
+	    }
+
+	    // WPML path.
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+	    return apply_filters( 'wpml_object_id', $id, $postType, true );
     }
+
+	/**
+	 * Register Elementor's template library as translatable in Polylang.
+	 *
+	 * Polylang ships no Elementor integration, so elementor_library is not
+	 * translatable out of the box — which means saved templates embedded in EA
+	 * widgets cannot be mapped to the current language. Opt the post type in so the
+	 * translation group (and Polylang's own UI) works for these templates.
+	 *
+	 * Hooked to: pll_get_post_types
+	 *
+	 * @param array $post_types
+	 * @param bool  $is_settings
+	 * @return array
+	 */
+	public function eael_pll_translate_elementor_library( $post_types, $is_settings = false ) {
+		$post_types['elementor_library'] = 'elementor_library';
+		return $post_types;
+	}
 
 	/**
 	 * eael_sanitize_template_param
