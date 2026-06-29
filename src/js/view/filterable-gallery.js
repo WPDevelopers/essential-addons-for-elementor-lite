@@ -599,6 +599,61 @@ jQuery(window).on("elementor/frontend/init", function () {
             "ea",
             FilterableGallery
          );
+      } else {
+         // Editor preview only. Elementor builds the widget's items in the
+         // top-window realm and injects them into the preview iframe, so
+         // `instanceof HTMLElement` fails inside isotope (which runs in the
+         // iframe) and it cannot lay them out — the same cross-realm reason
+         // the old inline render_editor_script never filtered. The editor
+         // doesn't need masonry (CSS already lays the items out as a grid
+         // here), so just show/hide items by their filter class to make the
+         // controls visibly work. Full isotope layout, load-more and lightbox
+         // run on the published page and in Preview. Plain jQuery css/filter
+         // is used (not isotope) because it is realm-safe.
+         var applyFilter = function (filter) {
+            var $items = $scope.find(".eael-filterable-gallery-item-wrap");
+            if (!filter || filter === "*") {
+               $items.css("display", "");
+            } else {
+               $items.css("display", "none").filter(filter).css("display", "");
+            }
+         };
+
+         // filter controls
+         $scope.on("click", ".control", function () {
+            var $this = $(this);
+            $this.siblings().removeClass("active");
+            $this.addClass("active");
+            var $triggerLabel = $scope.find("#fg-filter-trigger > span");
+            if ($triggerLabel.length) {
+               $triggerLabel.text($this.text());
+            }
+            applyFilter($this.attr("data-filter"));
+         });
+
+         // quick search
+         input.on("input", function () {
+            var value = $(this).val();
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+               var rx = value ? new RegExp(value, "gi") : null;
+               $scope
+                  .find(".eael-filterable-gallery-item-wrap")
+                  .each(function () {
+                     var $item = $(this);
+                     $item.css(
+                        "display",
+                        !rx || rx.test($item.text()) ? "" : "none"
+                     );
+                  });
+            }, 600);
+         });
+
+         // reflect the control that is active on load (e.g. custom default)
+         var $activeControl = $scope.find(".control.active").first();
+         if ($activeControl.length) {
+            applyFilter($activeControl.attr("data-filter"));
+         }
       }
    };
 
