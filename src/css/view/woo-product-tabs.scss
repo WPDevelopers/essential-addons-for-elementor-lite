@@ -16,6 +16,7 @@
 		.eael-woo-product-tabs {
 			.woocommerce-tabs ul.tabs {
 				padding: 0;
+				list-style: none;
 				&::before {
 					border: none;
 				}
