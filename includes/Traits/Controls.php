@@ -31,6 +31,13 @@ trait Controls
             $post_types['source_dynamic'] = __('Dynamic', 'essential-addons-for-elementor-lite');
         }
 
+        // Dynamic Gallery can source images directly from the Media Library (attachments).
+        // Adding 'attachment' here also lets the taxonomy loop below expose any media
+        // taxonomies (e.g. eael_media_category) as filter controls for this widget only.
+        if ( 'eael-dynamic-filterable-gallery' === $wb->get_name() ) {
+            $post_types['attachment'] = __( 'Media Library', 'essential-addons-for-elementor-lite' );
+        }
+
         $taxonomies = get_taxonomies([], 'objects');
 
         if ('eael-content-ticker' === $wb->get_name()) {
