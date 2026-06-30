@@ -140,13 +140,17 @@ jQuery(window).on("elementor/frontend/init", function () {
       $(".eaelsv-sticky-player-close").on("click", function () {
         element.removeClass("out").addClass("in");
         $(".eael-sticky-video-player2").removeAttr("style");
+        playerAbc.pause();
         videoIsActive = "off";
       });
 
-      element.parent().css("height", element.height() + "px");
-      $(window).resize(function () {
-        element.parent().css("height", element.height() + "px");
-      });
+      var setWrapperHeight = function () {
+        if (!element.hasClass("out")) {
+          element.parent()[0].style.setProperty("height", element.height() + "px", "important");
+        }
+      };
+      setWrapperHeight();
+      $(window).resize(setWrapperHeight);
     }
   );
 });
@@ -156,11 +160,7 @@ jQuery(window).scroll(function () {
     var scrollBottom = jQuery(document).height() - scrollTop;
     if (scrollBottom > jQuery(window).height() + 400) {
 
-        if (videoIsActive == "on") {
-            let wrapper = jQuery('.eael-sticky-video-wrapper'),
-                height = GetHeightFromStyle(wrapper.attr('style'));
-            wrapper.attr('style','height:'+ height+'px !important;');
-        }
+
 
         if (scrollTop >= eaelsvDomHeight) {
             if (videoIsActive == "on") {

@@ -1,10 +1,10 @@
 === Essential Addons for Elementor - Popular Elementor Templates & Widgets ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, rudlinkon, nhrrob, jakariaistauk, himadree
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, rudlinkon, jakariaistauk, himadree
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.2
+Stable tag: 6.6.9
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -172,6 +172,7 @@ Extensions (Free):
 39. [Multicolumn Pricing Table](https://essential-addons.com/multicolumn-pricing-table/)- Display pricing plans in multiple columns to compare features and choose the right option
 40. [Figma to Elementor Converter](https://essential-addons.com/figma-to-elementor-converter/)- Turn Figma designs into fully customizable Elementor Pages
 41. [Pricing Slider](https://essential-addons.com/pricing-slider/)- Showcase dynamic pricing plans with interactive slider control
+42. [Pinterest Feed](https://essential-addons.com/pinterest-feed/) – Showcase stunning Pinterest content on your website with beautiful layouts.
 
 
 Extensions (Pro):
@@ -204,7 +205,7 @@ With Essential Addons, we bring you seamless compatibility with WooCommerce, enh
 
 [EA Woo Add to Cart](https://essential-addons.com/docs/ea-woo-add-to-cart/): Simplify the shopping experience by displaying an easy-to-access ‘Add to Cart’ button for all your WooCommerce products.
 
-[EA Woo Product Slider (PRO)](https://essential-addons.com/docs/woo-product-slider/): Present your WooCommerce products in a stunning slider format with this advanced Elementor addon. 
+[EA Woo Product Slider (PRO)](https://essential-addons.com/docs/woo-product-slider/): Present your WooCommerce products in a stunning slider format with this advanced Elementor addon.
 
 [EA Woo Product Collection (PRO)](https://essential-addons.com/docs/ea-woo-product-collections/): Exhibit your WooCommerce product collections on any section of your Elementor website to showcase items based on categories, tags, or attributes, and add engaging hover effects.
 
@@ -318,6 +319,77 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 6.6.9 - 24/06/2026 =
+
+- Improved: EA Login/Register Form | Added validation for custom fields to prevent submission when the input is invalid
+- Improved: Added new Gradient Text Color controller
+- Fixed: EA Business Reviews | Reviews and timestamps always displayed in English regardless of the site language
+- Fixed: EA Gravity Forms | reCAPTCHA v3 submissions silently failed as the per-form render event was not dispatched
+- Fixed: EA Filterable Gallery | Video items triggered two lightboxes causing inconsistent popup behavior on mobile
+- Fixed: EA Filterable Gallery | Invalid markup generated for video gallery items in Card layout
+- Fixed: EA Simple Menu | Dropdown toggle not working on iOS mobile devices
+- Fixed: EA Login/Register Form | Submit button width and style controls not working
+- Few minor bug fixes & improvements
+
+= 6.6.8 - 22/06/2026 =
+
+- Fixed: EA Event Calendar | End time displayed incorrectly for The Events Calendar events on non-UTC sites
+- Fixed: EA Advanced Data Table | Resolved "elementor is not defined" error in standalone preview mode
+- Few minor bug fixes & improvements
+
+= 6.6.7 - 10/06/2026 =
+
+- Improved: EA Advanced Data Table | Added option to set default sorting column on initial load
+- Improved: EA Sticky Video | Video now pauses automatically when the modal window is closed
+- Improved: EA Woo Account Dashboard | Added dynamic option to display data from user details
+- Improved: EA Login/Register Form | Added option to set page redirect after signing out
+- Improved: EA Table of Contents | Enhanced user experience with additional improvements
+- Fixed: EA Sticky Video | Sticky video displayed with incorrect margins
+- Fixed: EA Filterable Gallery | Search results did not display all matching items properly
+- Few minor bug fixes & improvements
+
+= 6.6.6 - 08/06/2026 =
+
+- Improved: EA Woo Product Grid | Added Option to set image resolution
+- Fixed: EA Event Calendar | Timed Events Filtered Incorrectly
+- Fixed: Prevent fatal error during plugin update when a request initializes the setup wizard
+- Few minor bug fixes & improvements
+
+= 6.6.5 - 21/05/2026 =
+
+- Fixed: EA Creative Button | Resolved invisible default text color issue when enabling gradient background
+- Fixed: EA Dual Color Heading | Resolved typography gradient global color issue in editor and frontend
+- Fixed: EA Filterable Gallery | Fixed “Open in New Tab” issue after using the Load More button
+- Fixed: EA Woo Product Images | Fixed broken image behavior issue
+- Improved: EA Login/Register Form | Added email OTP verification for secure login and registration
+- Improved: EA Event Calendar | Added individual event style options for Google Calendar events
+- Improved: EA Woo Product Carousel | Added Buy Now button option for direct product purchase
+- Improved: Improved security validation for AJAX requests in EA Product Quick View
+- Few minor bug fixes & improvements
+
+= 6.6.4 - 13/05/2026 =
+
+- Fixed: Duplicate control registration for enable_webhook causes Elementor warning
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+
+= 6.6.3 - 30/04/2026 =
+
+- Fixed: Certain pages are returning a 404 server error when EA is active
+- Fixed: Elementor editor not loading when Essential Addons is enabled
+- Fixed: EA Flip Box | WPML media translation not working for Flipbox images
+- Fixed: EA Breadcrumb | WooCommerce products empty category breadcrumb display error
+- Fixed: EA Event Calendar | Conflict with Contact Form 7 causing calendar filtering on form input
+- Fixed: EA Woo Checkout | Uncaught TypeError causing checkout script failure on WooCommerce pages
+- Fixed: EA Wrapper Link | Container wrapper links were not translated properly
+- Fixed: EA Dual Color Heading | Multiple heading not working with WPML
+- Improved: EA Woo Add to Cart | Added option to customize hover style for icon and border
+- Improved: EA Woo Add to Cart | Products can now be added to cart without page reload
+- Improved: Enhanced plugin compliance with WordPress Plugin Check (PCP) standards including performance, accessibility, and code quality improvements
+- Improved: Improved overall security and stability across the plugin
+- Few minor bug fixes & improvements
+
 = 6.6.2 - 16/04/2026 =
 
 - Improved: Security Enhancement
@@ -367,7 +439,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Login/Register Form | Password reset link redirecting to default WP reset page
 - Fixed: EA Gravity Forms | Gravity Forms not working when used via EA widget
 - Improved: Added support for a Query ID option for all post-related elements.
-- Improved: EA Woo Product Gallery | Added option to hide categories and quantity input in the “Quick View” popup 
+- Improved: EA Woo Product Gallery | Added option to hide categories and quantity input in the “Quick View” popup
 - Improved: EA Woo Product Carousel | Pause on hover for the Marquee style
 - Few minor bug fixes & improvements
 
@@ -448,7 +520,7 @@ Your existing elements/content will work with premium version. So you won't lose
 = 6.5.4 - 14/12/2025 =
 
 - Improved: Security Enhancement
-- Fixed: Plugin Check (PCP) warnings 
+- Fixed: Plugin Check (PCP) warnings
 - Few minor bug fixes & improvements
 
 = 6.5.3 - 27/11/2025 =

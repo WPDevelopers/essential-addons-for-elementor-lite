@@ -75,8 +75,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 20;
-    const EAEL_ADMIN_MENU_FLAG = 20;
+    const EAEL_PROMOTION_FLAG = 21;
+    const EAEL_ADMIN_MENU_FLAG = 21;
     /**
      * Singleton instance
      *
@@ -197,6 +197,15 @@ class Bootstrap
         add_action('init', [$this, 'login_or_register_user']);
         add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);
         add_filter('wp_new_user_notification_email_admin', array($this, 'new_user_notification_email_admin'), 10, 3);
+
+        // Email OTP Verification (Login | Register)
+        add_action('wp_ajax_eael_lr_send_otp',        [$this, 'eael_ajax_send_otp']);
+        add_action('wp_ajax_nopriv_eael_lr_send_otp', [$this, 'eael_ajax_send_otp']);
+        add_action('wp_ajax_eael_lr_verify_otp',        [$this, 'eael_ajax_verify_otp']);
+        add_action('wp_ajax_nopriv_eael_lr_verify_otp', [$this, 'eael_ajax_verify_otp']);
+
+        // Flag unverified OTP register users in wp-admin → Users.
+        add_action('admin_footer-users.php', [$this, 'eael_lr_otp_pending_user_flag']);
         add_action( 'init', [$this, 'eael_redirect_to_reset_password'] );
 
         if( 'on' === get_option( 'eael_custom_profile_fields' ) ){
@@ -223,6 +232,10 @@ class Bootstrap
         }
 
 	    if( class_exists( 'woocommerce' ) ) {
+		    // Login|Register custom fields on WooCommerce My Account edit-account page
+		    add_action( 'woocommerce_edit_account_form_fields', [ $this, 'eael_wc_account_form_fields' ] );
+		    add_action( 'woocommerce_save_account_details', [ $this, 'eael_wc_save_account_fields' ] );
+
 		    // quick view
 		    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
 		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );

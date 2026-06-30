@@ -21,6 +21,7 @@ trait Elements {
 		if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
 			$controls_manager->register( new \Essential_Addons_Elementor\Controls\Select2() );
 			$controls_manager->add_group_control( 'eael-background', new \Essential_Addons_Elementor\Controls\EAEL_Background() );
+			$controls_manager->add_group_control( 'eael-gradient-text', new \Essential_Addons_Elementor\Controls\EAEL_Gradient_Text() );
 			$controls_manager->register( new \Essential_Addons_Elementor\Controls\EAEL_Choose() );
 		} else {
 			$controls_manager->register_control( 'eael-select2', new \Essential_Addons_Elementor\Controls\Select2() );
@@ -556,7 +557,8 @@ trait Elements {
 				$position                        = $settings_data['eael_ext_toc_position'];
 				$is_mobile_on                    = isset( $settings_data['eael_ext_toc_position_mobile'] ) ? $settings_data['eael_ext_toc_position_mobile'] : 'no';
 				$mobile_position                 = isset( $settings_data['eael_ext_toc_position_mobile_top_bottom'] ) ? $settings_data['eael_ext_toc_position_mobile_top_bottom'] : $position;
-				$page_offset                     = ! empty( $settings_data['eael_ext_toc_main_page_offset'] ) ? $settings_data['eael_ext_toc_main_page_offset']['size'] : 0;
+				$page_offset                     = ! empty( $settings_data['eael_ext_toc_main_page_offset'] ) ? $settings_data['eael_ext_toc_main_page_offset']['size'] : 120;
+				$page_offset					 = $page_offset = max(5, min(2000, $page_offset));
 				$close_bt_text_style             = $settings_data['eael_ext_toc_close_button_text_style'];
 				$auto_collapse                   = $settings_data['eael_ext_toc_auto_collapse'];
 				$auto_highlight                  = ! empty( $settings_data['eael_ext_toc_auto_highlight'] ) ? $settings_data['eael_ext_toc_auto_highlight'] : '';
@@ -583,12 +585,15 @@ trait Elements {
 					$el_class .= ( 'top' === $mobile_position ) ? ' eael-toc-top' : ' eael-toc-bottom';
 				}
 
+				$scroll_sync                     = ! empty( $settings_data['eael_ext_toc_scroll_sync'] ) ? $settings_data['eael_ext_toc_scroll_sync'] : '';
+
 				$toc_style_class = ' eael-toc-list-' . $toc_style;
 				$toc_style_class .= ( $toc_collapse == 'yes' ) ? ' eael-toc-collapse' : ' ';
 				$toc_style_class .= ( $list_icon == 'number' ) ? ' eael-toc-number' : ' eael-toc-bullet';
 				$toc_style_class .= ( $toc_word_wrap == 'yes' ) ? ' eael-toc-word-wrap' : ' ';
 				$toc_style_class .= ( $auto_highlight == 'yes' ) ? ' eael-toc-auto-highlight' : ' ';
 				$toc_style_class .= ( $auto_highlight == 'yes' && $auto_highlight_single_item_only == 'yes' ) ? ' eael-toc-highlight-single-item' : ' ';
+				$toc_style_class .= ( $auto_highlight == 'yes' && $scroll_sync == 'yes' ) ? ' eael-toc-scroll-sync' : ' ';
 				$title_url       = ( $title_to_url == 'yes' ) ? 'true' : 'false';
 				$icon_html       = ! empty( $icon_check['value'] ) ? "<i class='" . esc_attr( $icon_check['value'] ) . "'></i>" : '';
 

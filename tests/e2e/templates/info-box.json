@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ea000001",
+    "elType": "section",
+    "settings": [],
+    "elements": [
+      {
+        "id": "ea000002",
+        "elType": "column",
+        "settings": { "_column_size": 100 },
+        "elements": [
+          {
+            "id": "ea000003",
+            "elType": "widget",
+            "widgetType": "eael-info-box",
+            "settings": {
+              "eael_infobox_title": "Sample Info Box",
+              "eael_infobox_text": "This is a sample info box for E2E testing.",
+              "eael_infobox_img_or_icon": "icon",
+              "eael_infobox_icon_new": {
+                "value": "fas fa-star",
+                "library": "fa-solid"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

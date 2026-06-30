@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $product = wc_get_product( get_the_ID() );
 if ( ! $product ) {
 	return;
@@ -73,6 +74,7 @@ if ( $should_print_rating ) {
 		$product_data['ratings'] = Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
 	}
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <li class="product <?php echo esc_attr( "{$product_wrapper_classes} {$list_style_preset}" ) ?>">
     <div class="eael-product-wrap">
@@ -103,6 +105,7 @@ if ( $should_print_rating ) {
                 do_action( 'woocommerce_before_shop_loop_item' );
             }
 
+            // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
             $_product_data['id'] = $product_data['id'];
             $_product_data['title']       = $product_data['title'];
             $_product_data['price']       = $product_data['price'];
@@ -119,6 +122,7 @@ if ( $should_print_rating ) {
                     }
                 }
             }
+            // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
             ?>
 
             <ul class="icons-wrap <?php echo esc_attr( $settings['eael_product_action_buttons_preset'] ); ?>">

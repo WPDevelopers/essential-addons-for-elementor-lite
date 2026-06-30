@@ -1039,6 +1039,102 @@ class Product_Grid extends Widget_Base
             ]
         );
 
+        $this->add_group_control(
+            Group_Control_Image_Size::get_type(),
+            [
+                'name'        => 'eael_product_grid_image_size',
+                'exclude'     => [ 'custom' ],
+                'default'     => 'medium',
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_grid_image_height',
+            [
+                'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+                'type'  => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_grid_image_object_fitting',
+            [
+                'label'     => esc_html__( 'Render Type', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'fill' => [
+                        'title' => esc_html__( 'Stretched', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-image',
+                    ],
+                    'cover' => [
+                        'title' => esc_html__( 'Cropped', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-frame-expand',
+                    ],
+                    'contain' => [
+                        'title' => esc_html__( 'Contain', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-frame-minimize',
+                    ],
+                ],
+                'default'   => 'fill',
+                'toggle'    => true,
+                'condition' => [
+                    'eael_product_grid_image_height[size]!' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img' => 'object-fit: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_grid_image_object_position',
+            [
+                'label'     => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'top' => [
+                        'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-top',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-middle',
+                    ],
+                    'bottom' => [
+                        'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'default'   => 'center',
+                'toggle'    => true,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img' => 'object-position: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_product_grid_image_object_fitting' => 'cover',
+                    'eael_product_grid_image_height[size]!'  => '',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
     }
 

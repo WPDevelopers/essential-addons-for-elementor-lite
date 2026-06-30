@@ -1966,6 +1966,7 @@ trait Woo_Product_Comparable {
 		if ( ! empty( $products ) && is_array( $products ) ) {
 			foreach ( $products as $product_id ) {
 				/** @type WC_Product $product WooCommerce Product */
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 				$product = wc_get_product( $product_id );
 				if ( ! $product ) {
 					continue;
@@ -2211,6 +2212,7 @@ trait Woo_Product_Comparable {
 		if ( ! empty( $products ) && is_array( $products ) ) {
 			foreach ( $products as $product_id ) {
 				/** @type WC_Product $product WooCommerce Product */
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 				$product = wc_get_product( $product_id );
 				if ( ! $product ) {
 					continue;
