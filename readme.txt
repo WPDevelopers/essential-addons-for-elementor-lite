@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.9
+Stable tag: 6.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -318,6 +318,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.7.0 - 01/07/2026 =
+
+- Improved: EA Pricing Table | Improved security validation for the Title Tag setting
+- Improved: EA Woo Product Compare | Enhanced security measures
+- Fixed: Added WPML Media Translation support for all media-supported widgets
+- Fixed: EA Post Grid | Resolved an issue where Post Grid and widgets using Saved Templates displayed the wrong language on multilingual sites using Polylang
+- Fixed: EA Info Box | Resolved title and content overflow issue
+- Few minor bug fixes & improvements
 
 = 6.6.9 - 24/06/2026 =
 
