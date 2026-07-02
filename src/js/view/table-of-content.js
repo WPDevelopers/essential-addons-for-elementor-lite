@@ -1,4 +1,4 @@
-(function ($) {
+function eaelTocMain($) {
 	jQuery(document).ready(function () {
 		/**
 		 * add ID in main content heading tag
@@ -14,7 +14,7 @@
 		function eael_toc_content(selector, supportTag) {
 			var listId = document.getElementById("eael-toc-list");
 			if (selector === null || supportTag === undefined || !listId) {
-				return null;
+				return 0;
 			}
 			var eaelToc = document.getElementById("eael-toc");
 			var titleUrl =
@@ -49,11 +49,25 @@
 
 			var firstChild = $("ul.eael-toc-list > li");
 			if (firstChild.length < 1) {
-				document.getElementById("eael-toc").classList.add("eael-toc-disable");
+				eaelToc.classList.add("eael-toc-disable");
+				// diagnostic breadcrumb for support (invisible to visitors)
+				eaelToc.classList.add("eael-toc-not-found");
+				if (window.console && console.debug) {
+					console.debug(
+						"[EA TOC] No headings matched. selector=%o tags=%o containersMatched=%o headingsInSelector=%o",
+						selector,
+						supportTag,
+						mainSelector.length,
+						allSupportTag.length
+					);
+				}
+			} else {
+				eaelToc.classList.remove("eael-toc-not-found");
 			}
 			firstChild.each(function () {
 				this.classList.add("eael-first-child");
 			});
+			return firstChild.length;
 		}
 
 		/**
@@ -411,11 +425,86 @@
 			);
 		}
 
-		const editMode = (typeof isEditMode !== 'undefined')?isEditMode:false;
-		var intSupportTag = $("#eael-toc").data("eaeltoctag");
-		if (intSupportTag !== "" && !editMode) {
-			eael_toc_content(eael_toc_check_content(), intSupportTag);
+		// Resilient build: run from every reliable trigger and retry for late content
+		// so the list can't silently fail to render (single document.ready was fragile).
+		var eaelTocBuildDone = false;
+		var eaelTocRetries = 0;
+		var eaelTocObserver = null;
+
+		function eaelTocDisconnectObserver() {
+			if (eaelTocObserver) {
+				eaelTocObserver.disconnect();
+				eaelTocObserver = null;
+			}
 		}
+
+		function eaelTocObserveContent(selector) {
+			if (eaelTocObserver || !window.MutationObserver) {
+				return;
+			}
+			var root = document.querySelector(selector) || document.body;
+			if (!root) {
+				return;
+			}
+			eaelTocObserver = new MutationObserver(function () {
+				if (eaelTocBuildDone) {
+					eaelTocDisconnectObserver();
+					return;
+				}
+				window.requestAnimationFrame(runEaelTocBuild);
+			});
+			try {
+				eaelTocObserver.observe(root, { childList: true, subtree: true });
+			} catch (e) {}
+			// safety valve: stop observing after 10s no matter what
+			window.setTimeout(eaelTocDisconnectObserver, 10000);
+		}
+
+		function runEaelTocBuild() {
+			if (eaelTocBuildDone || !document.getElementById("eael-toc")) {
+				return;
+			}
+			var editMode = typeof isEditMode !== "undefined" ? isEditMode : false;
+			var intSupportTag = $("#eael-toc").data("eaeltoctag");
+			if (intSupportTag === "" || intSupportTag === undefined || editMode) {
+				return;
+			}
+			var selector = eael_toc_check_content();
+			var built = eael_toc_content(selector, intSupportTag);
+			// reveal immediately if the page is already scrolled (anchor / bfcache)
+			eaelTocSticky();
+			if (built > 0) {
+				eaelTocBuildDone = true;
+				eaelTocDisconnectObserver();
+				return;
+			}
+			if (eaelTocRetries < 10) {
+				eaelTocRetries++;
+				window.setTimeout(runEaelTocBuild, 300);
+				eaelTocObserveContent(selector);
+			}
+		}
+
+		runEaelTocBuild();
+
+		if (window.elementorFrontend && elementorFrontend.hooks) {
+			elementorFrontend.hooks.addAction(
+				"frontend/element_ready/global",
+				function () {
+					runEaelTocBuild();
+				}
+			);
+		}
+		$(window).on("elementor/frontend/init", function () {
+			runEaelTocBuild();
+		});
+		window.addEventListener("pageshow", function () {
+			if (eaelTocBuildDone) {
+				eaelTocSticky();
+			} else {
+				runEaelTocBuild();
+			}
+		});
 
 		// Function to check the window width and add/remove the class
 		function checkWindowSize() {
@@ -429,4 +518,11 @@
 		window.addEventListener('resize', checkWindowSize);
 		
 	});
-})(jQuery);
+}
+
+(function eaelTocBootstrap() {
+	if (typeof window.jQuery === "undefined") {
+		return window.setTimeout(eaelTocBootstrap, 50);
+	}
+	eaelTocMain(window.jQuery);
+})();
