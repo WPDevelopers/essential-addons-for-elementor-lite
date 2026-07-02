@@ -22,8 +22,8 @@
 					? eaelToc.dataset.titleurl
 					: "false";
 			var excludeArr =
-				typeof eaelToc.dataset.excludeSelector !== "undefined"
-					? eaelToc.dataset.excludeSelector.replace(/^,|,$/g, "")
+				typeof eaelToc.dataset.excludeselector !== "undefined"
+					? eaelToc.dataset.excludeselector.replace(/^,|,$/g, "")
 					: "";
 			var allSupportTag = [];
 			var mainSelector = document.querySelectorAll(selector),
@@ -138,8 +138,7 @@
 					liNode.setAttribute("itemprop", "itemListElement");
 				}
 
-				var Linkid =
-					"#" + i + "-" + eael_build_id(titleUrl, currentHeading.textContent);
+				var Linkid = "#" + currentHeading.id;
 				anchorTag.className = "eael-toc-link";
 				anchorTag.setAttribute("itemprop", "item");
 				anchorTag.setAttribute("href", Linkid);
@@ -323,8 +322,10 @@
 				contentSelectro = ".elementor-inner";
 			} else if ($("#site-content")[0]) {
 				contentSelectro = "#site-content";
-			}else if ($(".site-main")){
+			} else if ($(".site-main")[0]) {
 				contentSelectro = ".site-main";
+			} else {
+				contentSelectro = "body";
 			}
 			return contentSelectro;
 		}
