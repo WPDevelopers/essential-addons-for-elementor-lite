@@ -231,6 +231,15 @@ trait Ajax_Handler {
 				$args['post_type']   = $dfg_safe_post_types;
 			}
 
+			// Media Library source (no ACF): filter/Load More queries the Media Library
+			// directly. Constrain to image attachments with the 'inherit' status — never
+			// 'any' — so this nopriv path cannot leak non-public content.
+			if ( 'attachment' === $settings['post_type'] && empty( $args['fetch_acf_image'] ) ) {
+				$args['post_type']      = [ 'attachment' ];
+				$args['post_status']    = $dfg_safe_post_status;
+				$args['post_mime_type'] = 'image';
+			}
+
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			$exclude_ids = json_decode( html_entity_decode( stripslashes ( $_POST['exclude_ids'] ) ) );
 			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique( (array) $exclude_ids ) ) : array();

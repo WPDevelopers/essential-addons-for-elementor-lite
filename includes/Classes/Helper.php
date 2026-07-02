@@ -266,6 +266,13 @@ class Helper
             $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
         }
 
+        // Media Library source: attachments use the 'inherit' post status (not 'publish'),
+        // and a gallery should only render image attachments.
+        if ( 'attachment' === $settings['post_type'] ) {
+            $args['post_status']    = 'inherit';
+            $args['post_mime_type'] = 'image';
+        }
+
 	    // Polylang: pin the query to the language of the page/document the widget is
 	    // on, instead of the ambient (cookie / last-page-load) current language. In
 	    // the editor the ambient language flips on every page load, which made the
