@@ -700,11 +700,15 @@ class Woo_Product_Tabs extends Widget_Base {
 		// Hide / rename / reorder tabs based on the Tab Items repeater (see manage_product_tabs()).
 		add_filter( 'woocommerce_product_tabs', [ $this, 'manage_product_tabs' ], 98 );
 
-		echo '<div class="eael-woo-product-tabs">';
+		// Buffer the WC tabs markup so we can inject icons into the tab anchors
+		// directly (bypasses the title's wp_kses_post, which strips inline SVG).
+		ob_start();
 		wc_get_template( 'single-product/tabs/tabs.php' );
-		echo '</div>';
+		$tabs_html = ob_get_clean();
 
 		remove_filter( 'woocommerce_product_tabs', [ $this, 'manage_product_tabs' ], 98 );
+
+		echo '<div class="eael-woo-product-tabs">' . $this->inject_tab_icons( $tabs_html ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		// In the Elementor editor / preview the page
 		if ( wp_doing_ajax() || Plugin::$instance->editor->is_edit_mode() || Plugin::$instance->preview->is_preview_mode() ) {
@@ -750,15 +754,12 @@ class Woo_Product_Tabs extends Widget_Base {
 				continue;
 			}
 
-			// Start from the original title, replace it only when a custom one is set.
-			$title = $tabs[ $key ]['title'];
+			// Rename the tab when a custom title is set (icons are injected later,
+			// see inject_tab_icons() — the title is run through wp_kses_post which
+			// would strip inline SVG, so icons must not go through it).
 			if ( '' !== $item['eael_product_tabs_item_title'] ) {
-				$title = $item['eael_product_tabs_item_title'];
+				$tabs[ $key ]['title'] = $item['eael_product_tabs_item_title'];
 			}
-
-			// Prepend the chosen icon (WC runs wp_kses_post on the title, so font-icon HTML is allowed).
-			$icon                  = isset( $item['eael_product_tabs_item_icon'] ) ? $item['eael_product_tabs_item_icon'] : [];
-			$tabs[ $key ]['title'] = $this->get_tab_icon_html( $icon ) . $title;
 
 			// Order the tab to match this row's position.
 			$tabs[ $key ]['priority'] = $order;
@@ -766,6 +767,54 @@ class Woo_Product_Tabs extends Widget_Base {
 		}
 
 		return $tabs;
+	}
+
+	/**
+	 * Insert each row's icon into its tab anchor.
+	 *
+	 * WooCommerce prints every tab link as `<a href="#tab-{key}" …>`, so we
+	 * match that opening tag per key and drop the icon HTML right after it —
+	 * before the (kses-escaped) title text. Because the icon never passes
+	 * through `wp_kses_post`, both font icons (`<i>`) and inline `<svg>`
+	 * render intact. A callback replacement is used so `$`/`\` inside SVG
+	 */
+	private function inject_tab_icons( $html ) {
+		if ( '' === trim( $html ) ) {
+			return $html;
+		}
+
+		$settings = $this->get_settings_for_display();
+		$items    = ! empty( $settings['eael_product_tabs_items'] ) ? $settings['eael_product_tabs_items'] : [];
+
+		foreach ( $items as $item ) {
+			$key = trim( $item['eael_product_tabs_item_key'] );
+
+			if ( '' === $key || 'yes' !== $item['eael_product_tabs_item_show'] ) {
+				continue;
+			}
+
+			$icon      = isset( $item['eael_product_tabs_item_icon'] ) ? $item['eael_product_tabs_item_icon'] : [];
+			$icon_html = $this->get_tab_icon_html( $icon );
+
+			if ( '' === $icon_html ) {
+				continue;
+			}
+
+			// Match the opening <a> of this tab: href="#tab-{key}".
+			// Delimiter is ~ because the pattern itself contains a literal #.
+			$pattern = '~(<a[^>]*href="#tab-' . preg_quote( $key, '~' ) . '"[^>]*>)~';
+
+			$html = preg_replace_callback(
+				$pattern,
+				function ( $matches ) use ( $icon_html ) {
+					return $matches[1] . $icon_html;
+				},
+				$html,
+				1
+			);
+		}
+
+		return $html;
 	}
 
 	/**
