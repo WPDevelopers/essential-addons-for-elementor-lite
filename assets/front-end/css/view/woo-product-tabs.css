@@ -37,6 +37,9 @@
       -ms-flex-pack: center;
           justify-content: center;
   gap: 5px;
+  outline: none;
+  margin-bottom: 15px;
+  padding: 10px 0;
 }
 
 .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs {
