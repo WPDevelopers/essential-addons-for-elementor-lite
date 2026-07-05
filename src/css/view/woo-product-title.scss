@@ -1,3 +1,7 @@
+.woocommerce div.product .product_title {
+	margin: 0;
+}
+
 .eael-woo-product-title {
 	display: flex;
 	align-items: center;
@@ -12,10 +16,27 @@
 		color: inherit;
 	}
 
-	.eael-product-title-prefix,
+	.eael-product-title-prefix {
+		display: inline-flex;
+		align-items: center;
+		line-height: 1;
+		&.eael-product-title-prefix-icon {
+			svg {
+				width: 16px;
+				height: 16px;
+			}
+		}
+	}
+
 	.eael-product-title-suffix {
 		display: inline-flex;
 		align-items: center;
 		line-height: 1;
+		&.eael-product-title-suffix-icon {
+			svg {
+				width: 16px;
+				height: 16px;
+			}
+		}
 	}
 }
