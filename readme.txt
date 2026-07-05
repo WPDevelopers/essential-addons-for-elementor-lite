@@ -319,7 +319,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 6.7.0 - 01/07/2026 =
+= 6.7.0 - 05/07/2026 =
 
 - Improved: EA Pricing Table | Improved security validation for the Title Tag setting
 - Improved: EA Woo Product Compare | Enhanced security measures
