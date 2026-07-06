@@ -4073,6 +4073,8 @@ class Woo_Product_Carousel extends Widget_Base {
 		    $tax_query_count++;
 	    }
 
+	    $args = HelperClass::eael_multivendorx_store_query_args( $args );
+
 	    return $args;
     }
 

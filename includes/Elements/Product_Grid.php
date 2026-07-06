@@ -4112,6 +4112,8 @@ class Product_Grid extends Widget_Base
             );
         }
 
+        $args = HelperClass::eael_multivendorx_store_query_args( $args );
+
         return $args;
     }
 

@@ -176,6 +176,54 @@ class Helper
         return $settings;
     }
 
+    /**
+     * Filter product query args by the current MultiVendorX (5.0+) store.
+     *
+     * MultiVendorX 5.0 replaced the legacy vendor taxonomy archive with a virtual
+     * store page and links products to stores via the `multivendorx_store_id`
+     * post meta. When a product widget renders on a store page, limit the query
+     * to that store's products so each seller's page shows only their items.
+     *
+     * @since 6.7.0
+     * @param array $args WP_Query arguments.
+     * @return array
+     */
+    public static function eael_multivendorx_store_query_args( $args ) {
+        if ( ! function_exists( 'MultiVendorX' ) || ! class_exists( '\MultiVendorX\Store\Store' ) ) {
+            return $args;
+        }
+
+        $store_query_var = 'store';
+        if ( is_callable( [ MultiVendorX()->setting, 'get_setting' ] ) ) {
+            $store_query_var = MultiVendorX()->setting->get_setting( 'store_url', 'store' ) ?: 'store';
+        }
+
+        $store_slug = get_query_var( $store_query_var );
+        if ( empty( $store_slug ) || ! is_string( $store_slug ) ) {
+            return $args;
+        }
+
+        $store = \MultiVendorX\Store\Store::get_store( $store_slug, 'slug' );
+        if ( empty( $store ) || ! $store->get_id() ) {
+            return $args;
+        }
+
+        $store_id_meta_key = defined( '\MultiVendorX\Utill::POST_META_SETTINGS' ) && ! empty( \MultiVendorX\Utill::POST_META_SETTINGS['store_id'] )
+            ? \MultiVendorX\Utill::POST_META_SETTINGS['store_id']
+            : 'multivendorx_store_id';
+
+        if ( ! isset( $args['meta_query'] ) || ! is_array( $args['meta_query'] ) ) {
+            $args['meta_query'] = [ 'relation' => 'AND' ];
+        }
+
+        $args['meta_query'][] = [
+            'key'   => $store_id_meta_key,
+            'value' => $store->get_id(),
+        ];
+
+        return apply_filters( 'eael/multivendorx/store_query_args', $args, $store );
+    }
+
     public static function get_query_args($settings = [], $post_type = 'post')
     {
 	    $settings = wp_parse_args( $settings, [
