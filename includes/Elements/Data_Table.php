@@ -1477,9 +1477,12 @@ class Data_Table extends Widget_Base {
 															$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 														}
 
-														Helper::eael_onpage_edit_template_markup( get_the_ID(), $table_td[ $j ]['template'] );
-														// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-														echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
+														// Re-validate the translated template is a published elementor_library post before rendering.
+														if ( Helper::is_elementor_publish_template( $table_td[ $j ]['template'] ) ) {
+															Helper::eael_onpage_edit_template_markup( get_the_ID(), $table_td[ $j ]['template'] );
+															// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+															echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
+														}
 													}
 													?>
 												</div>
