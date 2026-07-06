@@ -683,13 +683,23 @@ class Woo_Product_Tabs extends Widget_Base {
 
 		$is_editor = Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library';
 
+		// Editor with no product in context: load the latest published product so the
+		// widget previews REAL tabs (same approach Elementor Pro uses for its Single
+		// Product preview). Set $GLOBALS['post'] too, so the Description tab's the_content
+		// resolves. The static mock below is only reached when the store has no products.
+		if ( ! $product && $is_editor ) {
+			$product = $this->get_editor_preview_product();
+			if ( $product ) {
+				$GLOBALS['post'] = get_post( $product->get_id() ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+			}
+		}
+
 		if ( ! $product ) {
+			// No product in context (e.g. a normal page or a Single Product template
+			// with no preview product set). Render a static mock built from the
+			// configured tab items so the widget is visible and stylable in the editor.
 			if ( $is_editor ) {
-				?>
-				<div class="eael-woo-product-tabs-placeholder">
-					<?php esc_html_e( 'Product Data Tabs will be displayed here on a single product page.', 'essential-addons-for-elementor-lite' ); ?>
-				</div>
-				<?php
+				$this->render_editor_mock();
 			}
 
 			return;
@@ -815,6 +825,102 @@ class Woo_Product_Tabs extends Widget_Base {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Render a static tabs mock for the Elementor editor.
+	 *
+	 * Used when there is no product in context (a normal page, or a Single
+	 * Product template without a preview product). Mirrors the WooCommerce
+	 * tabs markup and classes so the default styles and the Style-tab controls
+	 * preview correctly. Built from the configured Tab Items (title, icon,
+	 * order, visibility); falls back to the three WooCommerce defaults when
+	 * nothing is configured.
+	 *
+	 * @return void
+	 */
+	private function render_editor_mock() {
+		$settings = $this->get_settings_for_display();
+		$items    = ! empty( $settings['eael_product_tabs_items'] ) ? $settings['eael_product_tabs_items'] : [];
+
+		$tabs = [];
+
+		foreach ( $items as $item ) {
+			$key = trim( $item['eael_product_tabs_item_key'] );
+
+			if ( '' === $key || 'yes' !== $item['eael_product_tabs_item_show'] ) {
+				continue;
+			}
+
+			$label = '' !== $item['eael_product_tabs_item_title']
+				? $item['eael_product_tabs_item_title']
+				: ucwords( str_replace( '_', ' ', $key ) );
+
+			$icon = isset( $item['eael_product_tabs_item_icon'] ) ? $item['eael_product_tabs_item_icon'] : [];
+
+			$tabs[] = [
+				'key'       => $key,
+				'label'     => $label,
+				'icon_html' => $this->get_tab_icon_html( $icon ),
+			];
+		}
+
+		if ( empty( $tabs ) ) {
+			$tabs = [
+				[ 'key' => 'description', 'label' => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ), 'icon_html' => '' ],
+				[ 'key' => 'additional_information', 'label' => esc_html__( 'Additional Information', 'essential-addons-for-elementor-lite' ), 'icon_html' => '' ],
+				[ 'key' => 'reviews', 'label' => esc_html__( 'Reviews', 'essential-addons-for-elementor-lite' ), 'icon_html' => '' ],
+			];
+		}
+
+		$first = $tabs[0];
+		?>
+		<div class="eael-woo-product-tabs eael-woo-product-tabs--editor-preview">
+			<div class="woocommerce-tabs wc-tabs-wrapper">
+				<ul class="tabs wc-tabs">
+					<?php foreach ( $tabs as $index => $tab ) : ?>
+						<li class="<?php echo esc_attr( $tab['key'] ); ?>_tab<?php echo 0 === $index ? ' active' : ''; ?>">
+							<a href="#"><?php echo $tab['icon_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- icon HTML from Elementor icon picker (admin) ?><?php echo esc_html( $tab['label'] ); ?></a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+				<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--<?php echo esc_attr( $first['key'] ); ?> panel entry-content wc-tab">
+					<h2><?php echo esc_html( $first['label'] ); ?></h2>
+					<p><?php esc_html_e( 'This is an editor preview of the product tabs. The real tab content is shown on a single product page.', 'essential-addons-for-elementor-lite' ); ?></p>
+					<p><a href="#" class="button"><?php esc_html_e( 'Sample Button', 'essential-addons-for-elementor-lite' ); ?></a></p>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Editor-only fallback product.
+	 *
+	 * Mirrors how Elementor Pro's Single Product document seeds its preview with
+	 * the latest published product (elementor-pro product.php:176-188) so the
+	 * widget can preview real tab content when no product is in context (e.g. a
+	 * plain page or a non-Pro theme-builder template). Frontend never calls this.
+	 *
+	 * @return \WC_Product|false
+	 */
+	private function get_editor_preview_product() {
+		static $cached = null; // avoid re-query when several tabs widgets exist.
+
+		if ( null !== $cached ) {
+			return $cached;
+		}
+
+		$products = wc_get_products( [
+			'status'  => 'publish',
+			'limit'   => 1,
+			'orderby' => 'date',
+			'order'   => 'DESC',
+		] );
+
+		$cached = ! empty( $products ) ? $products[0] : false;
+
+		return $cached;
 	}
 
 	/**
