@@ -2502,6 +2502,7 @@ class Info_Box extends Widget_Base
         }
 
         $infobox_image = $this->get_settings('eael_infobox_image');
+        $infobox_image = Helper::eael_wpml_translate_media( $infobox_image ); // WPML Media Translation compatibility
         $infobox_image_url = Group_Control_Image_Size::get_attachment_image_src($infobox_image['id'], 'thumbnail', $settings);
         if (empty($infobox_image_url)){
 	        $infobox_image_url = $infobox_image['url'];
@@ -2616,7 +2617,7 @@ class Info_Box extends Widget_Base
 
                         // WPML Compatibility
                         if ( ! is_array( $settings['eael_primary_templates'] ) ) {
-                            $settings['eael_primary_templates'] = apply_filters( 'wpml_object_id', $settings['eael_primary_templates'], 'wp_template', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+                            $settings['eael_primary_templates'] = apply_filters( 'wpml_object_id', $settings['eael_primary_templates'], 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
                         }
 
 	                    Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['eael_primary_templates'] );

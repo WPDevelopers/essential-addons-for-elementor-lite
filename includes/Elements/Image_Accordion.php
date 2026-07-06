@@ -1059,6 +1059,7 @@ class Image_Accordion extends Widget_Base {
             <?php
 	        $active    = $img_accordion['eael_accordion_is_active'];
 	        $activeCSS = ( $active === 'yes' ? ' flex: 3 1 0%;' : '' );
+	        $img_accordion['eael_accordion_bg'] = Helper::eael_wpml_translate_media( $img_accordion['eael_accordion_bg'] ); // WPML Media Translation compatibility
 	        $this->add_render_attribute(
 		        'eael-image-accordion-item-wrapper-' . $key,
 		        [

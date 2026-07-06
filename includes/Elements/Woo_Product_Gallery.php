@@ -3284,6 +3284,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				$all_taxonomy = 'product_tag';
 			}
 
+			$settings['eael_all_tab_thumb'] = HelperClass::eael_wpml_translate_media( $settings['eael_all_tab_thumb'] ); // WPML Media Translation compatibility
 			if ( $show_cat_thumb && !empty($settings['eael_all_tab_thumb']['url'])) {
 				$show_all_cat_thumb = '<img src="' . esc_url( $settings['eael_all_tab_thumb']['url'] ) . '" />';
 			} else {

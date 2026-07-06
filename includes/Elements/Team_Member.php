@@ -1031,6 +1031,7 @@ class Team_Member extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
 		$team_member_image = $settings['eael_team_member_image'] ?? '';
+		$team_member_image = HelperClass::eael_wpml_translate_media( $team_member_image ); // WPML Media Translation compatibility
 		$image_url = $team_member_image['url'] ?? '';
 		$alt_text = $settings['eael_team_member_name'] ?? '';
 
