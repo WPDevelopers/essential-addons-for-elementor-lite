@@ -54,6 +54,15 @@ class Creative_Button extends Atomic_Widget_Base {
 		return [ 'button', 'cta', 'creative', 'atomic', 'ea', 'essential addons' ];
 	}
 
+	/**
+	 * Place this atomic widget under EA's own "Atomic Essential Addons" panel
+	 * category (registered in Atomic_Widgets_Loader) instead of Elementor's
+	 * native "Atomic Elements" (v4-elements) section.
+	 */
+	public function get_categories(): array {
+		return [ \Essential_Addons_Elementor\Classes\Atomic_Widgets_Loader::CATEGORY ];
+	}
+
 	public function get_icon() {
 		return 'eaicon-creative-button atomic';
 	}
