@@ -572,7 +572,7 @@ class Product_Grid extends Widget_Base
 				    'type'        => Controls_Manager::SELECT2,
 				    'label_block' => true,
 				    'multiple'    => true,
-				    'default'     => [ 'publish', 'pending', 'future' ],
+				    'default'     => [ 'publish' ],
 				    'options'     => $this->eael_get_product_statuses(),
 				    'condition'   => [
 					    'eael_product_grid_product_filter!' => 'manual',
@@ -3921,9 +3921,9 @@ class Product_Grid extends Widget_Base
 
         $args = [
             'post_type'      => 'product',
-            'post_status'    => ! empty( $settings['eael_product_grid_products_status'] )
-                ? $settings['eael_product_grid_products_status']
-                : [ 'publish', 'pending', 'future' ],
+            'post_status'    => HelperClass::eael_validate_product_statuses(
+                ! empty( $settings['eael_product_grid_products_status'] ) ? $settings['eael_product_grid_products_status'] : [ 'publish' ]
+            ),
             'posts_per_page' => ! empty( $settings['eael_product_grid_products_count'] )
                 ? (int) $settings['eael_product_grid_products_count']
                 : 4,

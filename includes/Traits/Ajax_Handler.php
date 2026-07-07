@@ -701,10 +701,12 @@ trait Ajax_Handler {
 			'return' => 'objects',
 		];
 
-		// Map common WP_Query args to WC_Product_Query args
+		// Map common WP_Query args to WC_Product_Query args.
+		// NOTE: post_status is deliberately NOT mapped from client $args — status is
+		// derived server-side from the saved widget settings below and capability-clamped,
+		// so an unauthenticated caller cannot request pending/future/draft products.
 		$arg_mapping = [
 			'posts_per_page' => 'limit',
-			'post_status' => 'status',
 			'post__in' => 'include',
 			'post__not_in' => 'exclude',
 			'author__in' => 'author',
@@ -756,12 +758,16 @@ trait Ajax_Handler {
 			$wc_args['meta_query'][] = $meta_query;
 		}
 
-		// Set product status from settings (handle both Product_Grid and Woo_Product_List)
+		// Set product status from settings (handle both Product_Grid and Woo_Product_List),
+		// capability-clamped so non-public statuses never reach unauthenticated viewers.
 		if ( ! empty( $settings['eael_product_grid_products_status'] ) ) {
-			$wc_args['status'] = array_intersect( (array) $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
+			$status_setting = $settings['eael_product_grid_products_status'];
 		} elseif ( ! empty( $settings['eael_product_list_products_status'] ) ) {
-			$wc_args['status'] = array_intersect( (array) $settings['eael_product_list_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
+			$status_setting = $settings['eael_product_list_products_status'];
+		} else {
+			$status_setting = [ 'publish' ];
 		}
+		$wc_args['status'] = HelperClass::eael_validate_product_statuses( $status_setting );
 
 		// Set visibility
 		$wc_args['visibility'] = 'visible';

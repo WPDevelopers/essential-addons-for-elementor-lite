@@ -2167,6 +2167,60 @@ class Helper
 	}
 
 	/**
+	 * Clamp a product-query post_status list to what the current viewer may see.
+	 *
+	 * Non-public statuses (draft/pending/future/private) are only honoured for
+	 * users who can edit others' products (shop managers / admins). Everyone else
+	 * — including logged-out visitors — is forced to 'publish'. This prevents the
+	 * WooCommerce listing widgets (Product Grid / Woo Product List / Carousel)
+	 * from leaking pending/scheduled/draft products through a saved or default
+	 * post_status control value on an anonymous render.
+	 *
+	 * @param mixed  $statuses Requested status(es) — array or single string.
+	 * @param string $context  Reserved for future per-widget filtering.
+	 *
+	 * @return array Sanitized, capability-clamped status list (never empty).
+	 */
+	/**
+	 * Render a saved Elementor template only when it is a *published* elementor_library
+	 * post. Every widget/extension that echoes a settings-selected template id must go
+	 * through here so a draft/private/pending template — or an id injected via Elementor
+	 * copy-paste / JSON import by a low-privilege editor — can never be rendered to
+	 * front-end (including anonymous) visitors.
+	 *
+	 * @param int  $template_id Selected template id.
+	 * @param bool $with_css    Pass-through to Frontend::get_builder_content().
+	 * @param bool $for_display Use get_builder_content_for_display() instead (Offcanvas et al.).
+	 *
+	 * @return string Rendered content, or '' when the id is not a published template.
+	 */
+	public static function eael_render_published_template( $template_id, $with_css = true, $for_display = false ) {
+		if ( ! static::is_elementor_publish_template( $template_id ) ) {
+			return '';
+		}
+
+		if ( $for_display ) {
+			return Plugin::$instance->frontend->get_builder_content_for_display( $template_id );
+		}
+
+		return Plugin::$instance->frontend->get_builder_content( $template_id, $with_css );
+	}
+
+	public static function eael_validate_product_statuses( $statuses, $context = '' ) {
+		$statuses = array_filter( array_map( 'sanitize_key', (array) $statuses ) );
+
+		if ( current_user_can( 'edit_others_products' ) ) {
+			$allowed = [ 'publish', 'draft', 'pending', 'future', 'private' ];
+		} else {
+			$allowed = [ 'publish' ];
+		}
+
+		$statuses = array_values( array_intersect( $statuses, $allowed ) );
+
+		return empty( $statuses ) ? [ 'publish' ] : $statuses;
+	}
+
+	/**
 	 * eael_wpml_translate_media
 	 *
 	 * Resolve an Elementor MEDIA control value (image/video) to its

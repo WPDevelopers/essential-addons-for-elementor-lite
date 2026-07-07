@@ -511,8 +511,12 @@ trait Helper
 		    if ( $lang ) {
 			    $translated = pll_get_post( $id, $lang );
 			    // pll_get_post returns false when no translation exists for $lang;
-			    // keep the original id in that case.
-			    if ( $translated ) {
+			    // keep the original id in that case. Only swap to a translation that is
+			    // itself a *published* elementor_library — otherwise this hook (bound to
+			    // elementor/documents/get/post_id) would remap the id downstream of the
+			    // widget's own publish re-check and render a draft/private template to
+			    // anonymous visitors.
+			    if ( $translated && HelperClass::is_elementor_publish_template( $translated ) ) {
 				    return $translated;
 			    }
 		    }
@@ -521,7 +525,14 @@ trait Helper
 
 	    // WPML path.
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-	    return apply_filters( 'wpml_object_id', $id, $postType, true );
+	    $translated = apply_filters( 'wpml_object_id', $id, $postType, true );
+
+	    // Same guard for WPML: never remap to a non-published template.
+	    if ( $translated && (int) $translated !== (int) $id && ! HelperClass::is_elementor_publish_template( $translated ) ) {
+		    return $id;
+	    }
+
+	    return $translated;
     }
 
 	/**
