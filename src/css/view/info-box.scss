@@ -28,6 +28,9 @@
       flex-direction: column;
       .title{
          width: max-content;
+         max-width: 100%;
+         overflow-wrap: break-word;
+         word-break: break-word;
       }
       .sub_title {
          margin: 0 0 10px 0;
@@ -284,6 +287,7 @@
 .eael-infobox.icon-on-left .infobox-content {
    padding-left: 15px;
    flex: 1 1 auto;
+   min-width: 0;
 }
 
 .eael-infobox.icon-on-left .infobox-content .title {
@@ -317,6 +321,7 @@
    padding-right: 15px;
    flex: 1 1 auto;
    box-sizing: border-box;
+   min-width: 0;
 }
 
 .eael-infobox.icon-on-right .infobox-content .title {

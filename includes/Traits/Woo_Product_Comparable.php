@@ -1969,6 +1969,19 @@ trait Woo_Product_Comparable {
 					continue;
 				}
 
+				// SECURITY FIX: do not expose non-published / inaccessible products to unauthenticated callers.
+				// Mirrors the quickview handler guards (CVE-2026-1004).
+				$compare_post = get_post( $product_id );
+				if ( ! $product->is_visible() ) {
+					continue;
+				}
+				if ( ! current_user_can( 'edit_post', $product_id ) && ( ! $compare_post || 'publish' !== $compare_post->post_status ) ) {
+					continue;
+				}
+				if ( ! current_user_can( 'edit_post', $product_id ) && post_password_required( $compare_post ) ) {
+					continue;
+				}
+
 				$product->fields = [];
 
 				// custom attributes
@@ -2212,6 +2225,19 @@ trait Woo_Product_Comparable {
 				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 				$product = wc_get_product( $product_id );
 				if ( ! $product ) {
+					continue;
+				}
+
+				// SECURITY FIX: do not expose non-published / inaccessible products to unauthenticated callers.
+				// Mirrors the quickview handler guards (CVE-2026-1004).
+				$compare_post = get_post( $product_id );
+				if ( ! $product->is_visible() ) {
+					continue;
+				}
+				if ( ! current_user_can( 'edit_post', $product_id ) && ( ! $compare_post || 'publish' !== $compare_post->post_status ) ) {
+					continue;
+				}
+				if ( ! current_user_can( 'edit_post', $product_id ) && post_password_required( $compare_post ) ) {
 					continue;
 				}
 
