@@ -2573,7 +2573,8 @@ class Pricing_Table extends Widget_Base
         <?php if ('style-1' === $settings['eael_pricing_table_style']) : ?>
             <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
                 <div class="header">
-                    <<?php echo esc_html($settings['eael_pricing_table_title_tag']); ?> class="title"><?php echo wp_kses( $settings['eael_pricing_table_title'], HelperClass::eael_allowed_tags() ); ?></<?php echo esc_html($settings['eael_pricing_table_title_tag']); ?>>
+                    <?php $eael_pricing_table_title_tag = HelperClass::eael_validate_html_tag( $settings['eael_pricing_table_title_tag'] ); ?>
+                    <<?php echo esc_html( $eael_pricing_table_title_tag ); ?> class="title"><?php echo wp_kses( $settings['eael_pricing_table_title'], HelperClass::eael_allowed_tags() ); ?></<?php echo esc_html( $eael_pricing_table_title_tag ); ?>>
                 </div>
                 <div class="eael-pricing-tag">
                     <?php 
