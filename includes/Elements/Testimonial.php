@@ -901,6 +901,7 @@ class Testimonial extends Widget_Base {
 
 	protected function render_testimonial_image() {
 		$settings = $this->get_settings();
+		$settings['image'] = HelperClass::eael_wpml_translate_media( $settings['image'] ); // WPML Media Translation compatibility
 		$image = Group_Control_Image_Size::get_attachment_image_html( $settings );
 		if( ! empty($image) && ! empty($settings['eael_testimonial_enable_avatar']) ) {
 			ob_start();
