@@ -1181,7 +1181,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'        => Controls_Manager::SELECT2,
                 'label_block' => true,
                 'multiple'    => true,
-                'default'     => [ 'publish', 'pending', 'future' ],
+                'default'     => [ 'publish' ],
                 'options'     => $this->eael_get_product_statuses(),
                 'condition'   => [
                     'eael_product_carousel_product_filter!' => 'manual',
@@ -3826,7 +3826,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $order_by                     = $settings[ 'orderby' ];
 	    $filter                        = $settings[ 'eael_product_carousel_product_filter' ];
 	    $args                         = [
-		    'status'         => !empty( $settings['eael_product_carousel_products_status'] ) ? $settings['eael_product_carousel_products_status'] : ['publish'],
+		    'status'         => HelperClass::eael_validate_product_statuses( !empty( $settings['eael_product_carousel_products_status'] ) ? $settings['eael_product_carousel_products_status'] : ['publish'] ),
 		    'limit'          => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
 		    'order'          => $settings[ 'order' ],
 		    'offset'         => $settings[ 'product_offset' ],
@@ -3961,7 +3961,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $filter                        = $settings[ 'eael_product_carousel_product_filter' ];
 	    $args                         = [
 		    'post_type'      => 'product',
-		    'post_status'    => !empty( $settings['eael_product_carousel_products_status'] ) ? $settings['eael_product_carousel_products_status'] : ['publish'],
+		    'post_status'    => HelperClass::eael_validate_product_statuses( !empty( $settings['eael_product_carousel_products_status'] ) ? $settings['eael_product_carousel_products_status'] : ['publish'] ),
 		    'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
 		    'order'          => $settings[ 'order' ],
 		    'offset'         => $settings[ 'product_offset' ],
@@ -4141,13 +4141,11 @@ class Woo_Product_Carousel extends Widget_Base {
 			$wc_args['meta_query'][] = $meta_query;
 		}
 
-		// Apply settings-based parameters
-		if ( ! empty( $settings['eael_product_carousel_products_status'] ) ) {
-			$wc_args['status'] = array_intersect(
-				(array) $settings['eael_product_carousel_products_status'],
-				[ 'publish', 'draft', 'pending', 'future' ]
-			);
-		}
+		// Apply settings-based parameters (capability-clamped: non-public statuses
+		// only for users who can edit others' products; everyone else -> publish).
+		$wc_args['status'] = HelperClass::eael_validate_product_statuses(
+			! empty( $settings['eael_product_carousel_products_status'] ) ? $settings['eael_product_carousel_products_status'] : [ 'publish' ]
+		);
 
 		return $wc_args;
 	}

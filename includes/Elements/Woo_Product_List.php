@@ -576,7 +576,7 @@ class Woo_Product_List extends Widget_Base
                 'type'          => Controls_Manager::SELECT2,
                 'label_block'   => true,
                 'multiple'      => true,
-                'default'       => [ 'publish', 'pending', 'future' ],
+                'default'       => [ 'publish' ],
                 'options'       => $this->eael_get_product_statuses(),
                 'condition'     => [
                     'eael_product_list_product_filter!' => 'manual',
@@ -3948,7 +3948,7 @@ class Woo_Product_List extends Widget_Base
         $args = [
             'post_type'         => 'product',
             'order'             => ! empty( $settings['order'] )  ? sanitize_text_field( $settings['order'] ) : 'desc',
-            'post_status'       => ! empty( $settings['eael_product_list_products_status'] ) ? $settings['eael_product_list_products_status'] : [ 'publish', 'pending', 'future' ],
+            'post_status'       => ClassesHelper::eael_validate_product_statuses( ! empty( $settings['eael_product_list_products_status'] ) ? $settings['eael_product_list_products_status'] : [ 'publish' ] ),
             'posts_per_page'    => ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4,
             'offset'            => ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0,
             'tax_query' => [

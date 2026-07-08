@@ -2732,8 +2732,11 @@ class Flip_Box extends Widget_Base
 		                    if ( ! is_array( $settings['eael_flipbox_front_templates'] ) ) {
 			                    $settings['eael_flipbox_front_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_front_templates'], 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		                    }
-                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		                    echo Plugin::$instance->frontend->get_builder_content( $settings['eael_flipbox_front_templates'], true );
+		                    // Re-validate the translated template is a published elementor_library post before rendering.
+		                    if ( Helper::is_elementor_publish_template( $settings['eael_flipbox_front_templates'] ) ) {
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			                    echo Plugin::$instance->frontend->get_builder_content( $settings['eael_flipbox_front_templates'], true );
+		                    }
 	                    }
                     } else { ?>
 
@@ -2779,8 +2782,11 @@ class Flip_Box extends Widget_Base
 		                    if ( ! is_array( $settings['eael_flipbox_back_templates'] ) ) {
 			                    $settings['eael_flipbox_back_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_back_templates'], 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		                    }
+		                    // Re-validate the translated template is a published elementor_library post before rendering.
+		                    if ( Helper::is_elementor_publish_template( $settings['eael_flipbox_back_templates'] ) ) {
                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		                    echo Plugin::$instance->frontend->get_builder_content( $settings['eael_flipbox_back_templates'], true );
+		                    }
 	                    }
                     } else { ?>
                         <div class="eael-elements-slider-display-table">

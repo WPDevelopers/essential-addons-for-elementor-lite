@@ -4137,10 +4137,10 @@ class Filterable_Gallery extends Widget_Base
             $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer">';
             $html .= '<div class="fg-caption-head">';
             if (isset($item['price_switch']) && $item['price_switch'] == 'true') {
-                $html .= '<div class="fg-item-price">' . $item['price'] . '</div>';
+                $html .= '<div class="fg-item-price">' . esc_html( $item['price'] ) . '</div>';
             }
             if (isset($item['ratings_switch']) && $item['ratings_switch'] == 'true') {
-                $html .= '<div class="fg-item-ratings"><i class="fas fa-star"></i> ' . $item['ratings'] . '</div>';
+                $html .= '<div class="fg-item-ratings"><i class="fas fa-star"></i> ' . esc_html( $item['ratings'] ) . '</div>';
             }
             $html .= '</div>';
 
@@ -4161,7 +4161,7 @@ class Filterable_Gallery extends Widget_Base
             $html .= '<div class="fg-layout-3-item-content">';
             
             if (isset($item['category_switch']) && $item['category_switch'] == 'true') {
-                $html .= '<div class="fg-item-category"><span>' . $item['category'] . '</span></div>';
+                $html .= '<div class="fg-item-category"><span>' . esc_html( $item['category'] ) . '</span></div>';
             }
             $title_link_open = $title_link_close = '';
             if ( $settings['eael_title_clickable'] === 'yes' ){
