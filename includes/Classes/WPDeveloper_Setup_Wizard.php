@@ -114,6 +114,7 @@ class WPDeveloper_Setup_Wizard {
 			'configuration_content' => $this->data_configuration_content(),
 			'elements_content' => $this->data_elements_content(),
 			'go_pro_content' => $this->data_go_pro_content(),
+			'thinkrank_content' => $this->data_thinkrank_content(),
 			'plugins_content' => $this->data_plugins_content(),
 			'integrations_content' => $this->data_integrations_content(),
 			'modal_content' => $this->data_modal_content(),
@@ -128,6 +129,7 @@ class WPDeveloper_Setup_Wizard {
 			'configuration' => __( 'Configuration', 'essential-addons-for-elementor-lite' ),
 			'elements'      => __( 'Elements', 'essential-addons-for-elementor-lite' ),
 			'go_pro'        => __( 'Go PRO', 'essential-addons-for-elementor-lite' ),
+			'thinkrank'     => __( 'Boost SEO', 'essential-addons-for-elementor-lite' ),
 			'pluginspromo'  => __( 'Plugins', 'essential-addons-for-elementor-lite' ),
 			'integrations'  => __( 'Integrations', 'essential-addons-for-elementor-lite' ),
 		];
@@ -256,46 +258,56 @@ class WPDeveloper_Setup_Wizard {
 		return $go_pro_content;
 	}
 
+	/**
+	 * Dedicated "Boost SEO" step data (ThinkRank – AI SEO Assistant).
+	 * Rendered as its own wizard tab before the Templately / Essential Blocks
+	 * Plugins step. No Essential Addons branding — pure "configure SEO" framing.
+	 *
+	 * TODO(design): swap $tr_icon for a proper hero image + per-feature icons.
+	 */
+	public function data_thinkrank_content(){
+		$tr_icon = EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank.svg';
+		return [
+			'slug'              => 'thinkrank',
+			'basename'          => 'thinkrank/thinkrank.php',
+			'is_active'         => is_plugin_active( 'thinkrank/thinkrank.php' ),
+			'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
+			'logo'              => $tr_icon,
+			'promo_img_url'     => $tr_icon,
+			'title'             => __( 'Boost your SEO with AI', 'essential-addons-for-elementor-lite' ),
+			'subtitle'          => __( 'Get found on Google and in AI answers. Let AI optimize every page you build — automatically.', 'essential-addons-for-elementor-lite' ),
+			'install_label'     => __( 'Install & Set Up SEO', 'essential-addons-for-elementor-lite' ),
+			'installing_label'  => __( 'Installing…', 'essential-addons-for-elementor-lite' ),
+			'done_label'        => __( 'Opening SEO setup…', 'essential-addons-for-elementor-lite' ),
+			'skip_label'        => __( 'Skip for now', 'essential-addons-for-elementor-lite' ),
+			'open_url'          => admin_url( 'admin.php?page=thinkrank' ),
+			'features'          => [
+				[
+					'image_url' => $tr_icon,
+					'content'   => __( 'AI-written titles, meta & descriptions', 'essential-addons-for-elementor-lite' ),
+				],
+				[
+					'image_url' => $tr_icon,
+					'content'   => __( 'Schema & LLM answer optimization', 'essential-addons-for-elementor-lite' ),
+				],
+				[
+					'image_url' => $tr_icon,
+					'content'   => __( 'XML sitemaps & smart indexing', 'essential-addons-for-elementor-lite' ),
+				],
+				[
+					'image_url' => $tr_icon,
+					'content'   => __( 'Rank tracking with GA4', 'essential-addons-for-elementor-lite' ),
+				],
+			],
+		];
+	}
+
 	public function data_plugins_content(){
 		$plugins_content = [
 			'tab_title'    => __( 'Plugins', 'essential-addons-for-elementor-lite' ),
 			'plugins' => [
 			],
 		];
-
-		// ThinkRank — AI SEO Assistant. First panel in the Plugins step so new
-		// users see the "Boost your SEO" promo during onboarding.
-		if ( ! $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ) ) {
-			$tr_icon = EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank.svg';
-			$plugins_content['plugins'][] = [
-				'slug'              => 'thinkrank',
-				'basename'          => 'thinkrank/thinkrank.php',
-				'tab_title'         => __( 'ThinkRank', 'essential-addons-for-elementor-lite' ),
-				'is_active'         => is_plugin_active( 'thinkrank/thinkrank.php' ),
-				'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
-				// TODO(design): replace with a proper hero promo image + feature icons.
-				'promo_img_url'     => $tr_icon,
-				'titles'            => __( 'Get Found on Google & AI Answers', 'essential-addons-for-elementor-lite' ),
-				'features'          => [
-					[
-						'image_url' => $tr_icon,
-						'content'   => __( 'AI-written titles, meta & descriptions', 'essential-addons-for-elementor-lite' ),
-					],
-					[
-						'image_url' => $tr_icon,
-						'content'   => __( 'Schema & LLM answer optimization', 'essential-addons-for-elementor-lite' ),
-					],
-					[
-						'image_url' => $tr_icon,
-						'content'   => __( 'XML sitemaps & smart indexing', 'essential-addons-for-elementor-lite' ),
-					],
-					[
-						'image_url' => $tr_icon,
-						'content'   => __( 'Rank tracking with GA4', 'essential-addons-for-elementor-lite' ),
-					],
-				],
-			];
-		}
 
 		if ( ! $this->get_local_plugin_data( 'templately/templately.php' ) ) {
 			$plugins_content['plugins'][] = [

@@ -30,6 +30,11 @@ function MenuItems({ activeTab, handleTabChange }) {
             return null;
           }
 
+          // Hide the "Boost SEO" tab once ThinkRank is installed.
+          if ( 'thinkrank' === item && eaelQuickSetup?.thinkrank_content?.local_plugin_data !== false ) {
+            return null;
+          }
+
           itemClass = item.trim().toLowerCase().replace(/ /g, "-");
 
           return (

@@ -5,6 +5,7 @@ import ConfigurationContent from "./ConfigurationContent.jsx";
 import ElementsContent from "./ElementsContent.jsx";
 import GoProContent from "./GoProContent.jsx";
 import PluginsPromo from "./PluginsPromo.jsx";
+import ThinkRankContent from "./ThinkRankContent.jsx";
 import IntegrationContent from "./IntegrationContent.jsx";
 import ModalContent from "./ModalContent.jsx";
 
@@ -284,6 +285,19 @@ function App() {
               handleTabChange={handleTabChange}
             />
           </div>
+
+          { eaelQuickSetup?.thinkrank_content?.local_plugin_data === false ?
+          <div
+            className={`eael-setup-content eael-thinkrank-content ${
+              activeTab === "thinkrank" ? "" : "eael-d-none"
+            }`}
+          >
+            <ThinkRankContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
+          </div>
+          : '' }
 
           { hasPluginPromo ?
           <div
