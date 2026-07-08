@@ -12,10 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Surfaces WPDeveloper's AI SEO plugin (ThinkRank) inside the Essential Addons
  * admin experience. Every surface is:
  *   - native to WordPress admin,
- *   - attributed to Essential Addons ("Recommended by Essential Addons"),
+ *   - framed as "configure / analyze SEO" — no Essential Addons branding in the
+ *     surface itself (product decision),
  *   - permanently dismissible where it's a notice/prompt,
- *   - scoped to relevant, high-intent moments — never a global banner,
- *     never disguised.
+ *   - scoped to relevant, high-intent moments — never a global banner.
  *
  * Install is delegated to the shared WPDeveloper_Plugin_Installer AJAX
  * endpoint (`wpdeveloper_install_plugin`), the same pipeline Quick Setup uses
@@ -187,8 +187,8 @@ class ThinkRank_Promotion {
 
 	/**
 	 * Which context should the banner render in?
-	 *  - 'ea'      : Essential Addons' own admin pages (page slug starts eael) — attributed.
-	 *  - 'content' : Posts / Pages / CPT list screens — unbranded.
+	 *  - 'ea'      : Essential Addons' own admin pages (page slug starts eael).
+	 *  - 'content' : Posts / Pages / CPT list screens.
 	 *  - ''        : nowhere (keeps it off unrelated admin screens).
 	 *
 	 * Scoped to LIST screens (screen base 'edit') on purpose: classic admin
@@ -214,9 +214,8 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Dismissible ThinkRank banner. Attributed on EA's own pages; unbranded on
-	 * the Posts / Pages / CPT list screens. Never global; permanent per-user
-	 * dismiss. See banner_context() for scope.
+	 * Dismissible "configure your SEO" prompt. Unbranded (no EA mention).
+	 * Never global; permanent per-user dismiss. See banner_context() for scope.
 	 */
 	public function render_dashboard_banner() {
 		if ( $this->is_thinkrank_active() || $this->is_dismissed() ) {
@@ -226,13 +225,9 @@ class ThinkRank_Promotion {
 			return;
 		}
 
-		$context = $this->banner_context();
-		if ( ! $context ) {
+		if ( ! $this->banner_context() ) {
 			return;
 		}
-		// Attribution shows on EA's own pages; the content screens (Posts /
-		// Pages / CPTs) stay unbranded per product direction.
-		$attributed = ( 'ea' === $context );
 
 		$nonce = wp_create_nonce( 'essential-addons-elementor' );
 		$open  = esc_url( admin_url( 'admin.php?page=' . self::ADMIN_PAGE ) );
@@ -242,16 +237,13 @@ class ThinkRank_Promotion {
 				<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/thinkrank/icon.svg' ); ?>" width="40" height="40" alt="">
 			</div>
 			<div class="eael-tr-banner__body">
-				<strong class="eael-tr-banner__title"><?php esc_html_e( 'New: pair Essential Addons with ThinkRank AI SEO', 'essential-addons-for-elementor-lite' ); ?></strong>
-				<span class="eael-tr-banner__desc"><?php esc_html_e( 'Turn the pages you build into pages that rank. ThinkRank’s AI handles titles, meta, schema, LLM answers & sitemaps — free.', 'essential-addons-for-elementor-lite' ); ?></span>
+				<strong class="eael-tr-banner__title"><?php esc_html_e( 'Get found on Google & AI answers — configure your SEO', 'essential-addons-for-elementor-lite' ); ?></strong>
+				<span class="eael-tr-banner__desc"><?php esc_html_e( 'Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank.', 'essential-addons-for-elementor-lite' ); ?></span>
 			</div>
 			<div class="eael-tr-banner__actions">
 				<button type="button" class="button button-primary eael-tr-banner__install"><?php esc_html_e( 'Install ThinkRank', 'essential-addons-for-elementor-lite' ); ?></button>
 				<button type="button" class="eael-tr-banner__later"><?php esc_html_e( 'Maybe later', 'essential-addons-for-elementor-lite' ); ?></button>
 			</div>
-			<?php if ( $attributed ) : ?>
-			<span class="eael-tr-banner__attr"><span class="eael-tr-attr__mark">EA</span><?php esc_html_e( 'Recommended by Essential Addons', 'essential-addons-for-elementor-lite' ); ?></span>
-			<?php endif; ?>
 			<button type="button" class="notice-dismiss eael-tr-banner__dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dismiss', 'essential-addons-for-elementor-lite' ); ?></span></button>
 		</div>
 		<?php
@@ -278,8 +270,6 @@ class ThinkRank_Promotion {
 			.eael-tr-banner__install.button-primary { background:#4451ff; border-color:#4451ff; box-shadow:none; text-shadow:none; }
 			.eael-tr-banner__install.button-primary:hover { background:#3742d6; border-color:#3742d6; }
 			.eael-tr-banner__later { background:none; border:none; color:#50575e; cursor:pointer; font-size:13px; text-decoration:underline; }
-			.eael-tr-banner__attr { display:flex; align-items:center; gap:6px; font-size:11.5px; color:#8a8f94; flex:none; }
-			.eael-tr-banner .eael-tr-attr__mark { width:15px; height:15px; border-radius:4px; background:linear-gradient(150deg,#e6316f,#92003b); color:#fff; font-size:7px; font-weight:800; display:flex; align-items:center; justify-content:center; }
 		</style>
 		<script>
 		( function () {
@@ -351,19 +341,6 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Small inline EA attribution mark + the required attribution line.
-	 * Kept identical across every ThinkRank surface for consistency.
-	 */
-	private function attribution_footer() {
-		?>
-		<div class="eael-tr-attr">
-			<span class="eael-tr-attr__mark">EA</span>
-			<?php esc_html_e( 'Recommended by Essential Addons', 'essential-addons-for-elementor-lite' ); ?>
-		</div>
-		<?php
-	}
-
-	/**
 	 * Render the dashboard widget body.
 	 */
 	public function render_dashboard_widget() {
@@ -378,7 +355,6 @@ class ThinkRank_Promotion {
 			$this->render_prompt_state();
 		}
 
-		$this->attribution_footer();
 		echo '</div>';
 	}
 
@@ -465,17 +441,6 @@ class ThinkRank_Promotion {
 			.eael-tr-notice { margin-top: 12px; font-size: 12.5px; color: #50575e; }
 			.eael-tr-notice.is-error { color: #d63638; }
 			.eael-tr-notice.is-success { color: #00a32a; }
-			.eael-tr-attr {
-				display: flex; align-items: center; gap: 6px;
-				padding: 10px 14px; border-top: 1px solid #f0f0f1; background: #fbfbfc;
-				font-size: 11.5px; color: #8a8f94;
-			}
-			.eael-tr-attr__mark {
-				width: 16px; height: 16px; border-radius: 4px; flex: none;
-				background: linear-gradient(150deg, #e6316f, #92003b);
-				color: #fff; font-size: 8px; font-weight: 800;
-				display: flex; align-items: center; justify-content: center;
-			}
 		</style>
 		<?php
 	}
