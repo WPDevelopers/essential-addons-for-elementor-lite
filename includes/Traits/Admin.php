@@ -644,6 +644,15 @@ trait Admin {
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'image-masking' ) )
 					    ],
+						'advanced-slider'        => [
+						    'key'         => 'advanced-slider',
+						    'title'       => __( 'Advanced Slider', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/advanced-slider/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-advanced-slider/',
+						    'is_pro'      => true,
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'advanced-slider' ) )
+					    ],
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
