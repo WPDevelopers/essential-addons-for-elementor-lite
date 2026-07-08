@@ -353,6 +353,15 @@ class WPDeveloper_Setup_Wizard {
 	public function get_plugin_list() {
 		return [
 			[
+				'slug'     => 'thinkrank',
+				'basename' => 'thinkrank/thinkrank.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank.svg',
+				'title'    => __( 'ThinkRank – AI SEO Assistant', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Get found on Google & AI answers. ThinkRank optimizes titles, meta, schema & sitemaps and tracks rankings with GA4 — turn the pages you build into pages that rank.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'thinkrank/thinkrank.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
+			],
+			[
 				'slug'     => 'betterdocs',
 				'basename' => 'betterdocs/betterdocs.php',
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/bd-new.svg',

@@ -38,17 +38,192 @@ class ThinkRank_Promotion {
 	const SLUG = 'thinkrank';
 
 	/**
-	 * Candidate main-file basenames used to detect an active ThinkRank install.
-	 * Confirm the real basename at release and trim this list.
+	 * ThinkRank main-file basename — used to detect an active install.
+	 * Verified against wp.org (ThinkRank – AI SEO Assistant).
 	 */
-	const ACTIVE_BASENAMES = [ 'thinkrank/thinkrank.php', 'thinkrank/plugin.php' ];
+	const ACTIVE_BASENAMES = [ 'thinkrank/thinkrank.php' ];
+
+	/**
+	 * ThinkRank top-level admin page (add_menu_page slug 'thinkrank').
+	 */
+	const ADMIN_PAGE = 'thinkrank';
 
 	public function __construct() {
 		if ( ! is_admin() ) {
 			return;
 		}
 
+		// Surface 3 — WP Dashboard "SEO Check" widget.
 		add_action( 'wp_dashboard_setup', [ $this, 'register_dashboard_widget' ] );
+
+		// Surface 4 — after an EA update, bring existing users to the EA
+		// Dashboard once and show a dismissible, attributed ThinkRank banner.
+		add_action( 'upgrader_process_complete', [ $this, 'flag_after_update' ], 10, 2 );
+		add_action( 'admin_init', [ $this, 'maybe_redirect_after_update' ] );
+		add_action( 'admin_notices', [ $this, 'render_dashboard_banner' ] );
+		add_action( 'wp_ajax_eael_thinkrank_dismiss', [ $this, 'ajax_dismiss_banner' ] );
+	}
+
+	/**
+	 * Has the current user permanently dismissed the ThinkRank promo banner?
+	 */
+	public function is_dismissed() {
+		return (bool) get_user_meta( get_current_user_id(), 'eael_thinkrank_dismissed', true );
+	}
+
+	/**
+	 * Flag a redirect after Essential Addons (Lite) itself is updated.
+	 *
+	 * Runs only in admin context (the class self-returns otherwise), so cron
+	 * auto-updates never set the flag — we never hijack a background update.
+	 */
+	public function flag_after_update( $upgrader, $options ) {
+		if ( empty( $options['action'] ) || 'update' !== $options['action'] ) {
+			return;
+		}
+		if ( empty( $options['type'] ) || 'plugin' !== $options['type'] ) {
+			return;
+		}
+
+		$plugins = isset( $options['plugins'] ) ? (array) $options['plugins'] : [];
+		if ( ! empty( $options['plugin'] ) ) {
+			$plugins[] = $options['plugin'];
+		}
+
+		if ( ! in_array( EAEL_PLUGIN_BASENAME, $plugins, true ) ) {
+			return;
+		}
+		if ( $this->is_thinkrank_active() || $this->is_dismissed() ) {
+			return;
+		}
+
+		set_transient( 'eael_thinkrank_after_update', 1, 5 * MINUTE_IN_SECONDS );
+	}
+
+	/**
+	 * One-time, guarded redirect to the EA Dashboard after an EA update.
+	 */
+	public function maybe_redirect_after_update() {
+		if ( ! get_transient( 'eael_thinkrank_after_update' ) ) {
+			return;
+		}
+		if ( wp_doing_ajax() || ( defined( 'DOING_CRON' ) && DOING_CRON ) ) {
+			return;
+		}
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		// Never hijack the bulk-update result screen.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['activate-multi'] ) || ( isset( $_GET['action'] ) && 'do-plugin-upgrade' === $_GET['action'] ) ) {
+			return;
+		}
+
+		delete_transient( 'eael_thinkrank_after_update' );
+		wp_safe_redirect( admin_url( 'admin.php?page=eael-settings&eael-thinkrank=1' ) );
+		exit;
+	}
+
+	/**
+	 * Permanent per-user dismiss of the banner.
+	 */
+	public function ajax_dismiss_banner() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error();
+		}
+		update_user_meta( get_current_user_id(), 'eael_thinkrank_dismissed', 1 );
+		wp_send_json_success();
+	}
+
+	/**
+	 * Dismissible, attributed banner — scoped to EA's own admin pages only.
+	 * Never a global banner; carries a permanent dismiss and honest sourcing.
+	 */
+	public function render_dashboard_banner() {
+		if ( $this->is_thinkrank_active() || $this->is_dismissed() ) {
+			return;
+		}
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			return;
+		}
+		// Scope strictly to Essential Addons' own screens (page slug starts eael).
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+		if ( 0 !== strpos( $page, 'eael' ) ) {
+			return;
+		}
+
+		$nonce = wp_create_nonce( 'essential-addons-elementor' );
+		$open  = esc_url( admin_url( 'admin.php?page=' . self::ADMIN_PAGE ) );
+		?>
+		<div class="notice eael-tr-banner" data-slug="<?php echo esc_attr( self::SLUG ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-open="<?php echo $open; ?>">
+			<div class="eael-tr-banner__icon" aria-hidden="true">
+				<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/thinkrank/icon.svg' ); ?>" width="40" height="40" alt="">
+			</div>
+			<div class="eael-tr-banner__body">
+				<strong class="eael-tr-banner__title"><?php esc_html_e( 'New: pair Essential Addons with ThinkRank AI SEO', 'essential-addons-for-elementor-lite' ); ?></strong>
+				<span class="eael-tr-banner__desc"><?php esc_html_e( 'Turn the pages you build into pages that rank. ThinkRank’s AI handles titles, meta, schema, LLM answers & sitemaps — free.', 'essential-addons-for-elementor-lite' ); ?></span>
+			</div>
+			<div class="eael-tr-banner__actions">
+				<button type="button" class="button button-primary eael-tr-banner__install"><?php esc_html_e( 'Install ThinkRank', 'essential-addons-for-elementor-lite' ); ?></button>
+				<button type="button" class="eael-tr-banner__later"><?php esc_html_e( 'Maybe later', 'essential-addons-for-elementor-lite' ); ?></button>
+			</div>
+			<span class="eael-tr-banner__attr"><span class="eael-tr-attr__mark">EA</span><?php esc_html_e( 'Recommended by Essential Addons', 'essential-addons-for-elementor-lite' ); ?></span>
+			<button type="button" class="notice-dismiss eael-tr-banner__dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dismiss', 'essential-addons-for-elementor-lite' ); ?></span></button>
+		</div>
+		<?php
+		$this->banner_assets();
+	}
+
+	/**
+	 * Inline styles + behaviour for the banner. Reuses the shared installer
+	 * AJAX for install and the dismiss endpoint for permanent dismissal.
+	 */
+	private function banner_assets() {
+		$installing = esc_js( __( 'Installing ThinkRank…', 'essential-addons-for-elementor-lite' ) );
+		$done       = esc_js( __( 'Installed! Opening ThinkRank…', 'essential-addons-for-elementor-lite' ) );
+		$failed     = esc_js( __( 'Could not install automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ) );
+		$label      = esc_js( __( 'Install ThinkRank', 'essential-addons-for-elementor-lite' ) );
+		?>
+		<style>
+			.eael-tr-banner.notice { display:flex; align-items:center; gap:16px; padding:14px 40px 14px 16px; border-left-color:#4451ff; position:relative; }
+			.eael-tr-banner__icon img { display:block; border-radius:8px; }
+			.eael-tr-banner__body { display:flex; flex-direction:column; gap:2px; min-width:0; }
+			.eael-tr-banner__title { font-size:14px; color:#1d2327; }
+			.eael-tr-banner__desc { font-size:13px; color:#50575e; }
+			.eael-tr-banner__actions { display:flex; align-items:center; gap:10px; margin-left:auto; flex:none; }
+			.eael-tr-banner__install.button-primary { background:#4451ff; border-color:#4451ff; box-shadow:none; text-shadow:none; }
+			.eael-tr-banner__install.button-primary:hover { background:#3742d6; border-color:#3742d6; }
+			.eael-tr-banner__later { background:none; border:none; color:#50575e; cursor:pointer; font-size:13px; text-decoration:underline; }
+			.eael-tr-banner__attr { display:flex; align-items:center; gap:6px; font-size:11.5px; color:#8a8f94; flex:none; }
+			.eael-tr-banner .eael-tr-attr__mark { width:15px; height:15px; border-radius:4px; background:linear-gradient(150deg,#e6316f,#92003b); color:#fff; font-size:7px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+		</style>
+		<script>
+		( function () {
+			var el = document.querySelector( '.eael-tr-banner' );
+			if ( ! el || el.dataset.bound ) { return; }
+			el.dataset.bound = '1';
+			function post( action ) {
+				var b = new URLSearchParams();
+				b.append( 'action', action );
+				b.append( 'security', el.dataset.nonce );
+				if ( 'wpdeveloper_install_plugin' === action ) { b.append( 'slug', el.dataset.slug ); }
+				return window.fetch( window.ajaxurl, { method:'POST', credentials:'same-origin', headers:{ 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8' }, body:b.toString() } ).then( function(r){ return r.json(); } );
+			}
+			function dismiss() { post( 'eael_thinkrank_dismiss' ); el.parentNode && el.parentNode.removeChild( el ); }
+			el.querySelector( '.eael-tr-banner__dismiss' ).addEventListener( 'click', dismiss );
+			el.querySelector( '.eael-tr-banner__later' ).addEventListener( 'click', function () { el.parentNode && el.parentNode.removeChild( el ); } );
+			el.querySelector( '.eael-tr-banner__install' ).addEventListener( 'click', function () {
+				var btn = this; btn.setAttribute( 'disabled', 'disabled' ); btn.textContent = '<?php echo $installing; ?>';
+				post( 'wpdeveloper_install_plugin' ).then( function ( res ) {
+					if ( res && res.success ) { btn.textContent = '<?php echo $done; ?>'; window.setTimeout( function () { window.location.href = el.dataset.open; }, 800 ); }
+					else { btn.removeAttribute( 'disabled' ); btn.textContent = '<?php echo $label; ?>'; window.alert( ( res && res.data ) ? res.data : '<?php echo $failed; ?>' ); }
+				} ).catch( function () { btn.removeAttribute( 'disabled' ); btn.textContent = '<?php echo $label; ?>'; window.alert( '<?php echo $failed; ?>' ); } );
+			} );
+		} )();
+		</script>
+		<?php
 	}
 
 	/**
