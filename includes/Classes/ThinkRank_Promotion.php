@@ -61,6 +61,11 @@ class ThinkRank_Promotion {
 		add_action( 'upgrader_process_complete', [ $this, 'flag_after_update' ], 10, 2 );
 		add_action( 'admin_init', [ $this, 'maybe_redirect_after_update' ] );
 		add_action( 'admin_notices', [ $this, 'render_dashboard_banner' ] );
+		// On the EA Dashboard (toplevel_page_eael-settings) EA strips all
+		// admin_notices and re-dispatches its own via `eael_admin_notices`, so
+		// the banner is registered there too. That hook only fires on the EA
+		// Dashboard, so this never double-renders on other screens.
+		add_action( 'eael_admin_notices', [ $this, 'render_dashboard_banner' ] );
 		add_action( 'wp_ajax_eael_thinkrank_dismiss', [ $this, 'ajax_dismiss_banner' ] );
 
 		// Surface 5 — Gutenberg editor "Configure SEO" document panel.
