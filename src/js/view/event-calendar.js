@@ -308,7 +308,7 @@ var EventCalendar = function ($scope, $) {
 							locationSelector.hide();
 						}
 
-						if ($(".eael-event-calendar-cls", $scope).data('hidedetailslink') !== 'yes') {
+						if ($(".eael-event-calendar-cls", $scope).data('hidedetailslink') !== 'yes' && event.url && event.url.trim() !== '') {
 							modalFooterLink.attr("href", event.url).css("display", "block");
 						} else {
 							modalFooterLink.css("display", "none");

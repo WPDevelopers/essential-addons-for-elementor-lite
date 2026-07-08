@@ -713,7 +713,7 @@ class Event_Calendar extends Widget_Base
                 'default' => 'no',
                 'description' => __('Display event location information in the popup modal', 'essential-addons-for-elementor-lite'),
                 'condition' => [
-                    'eael_event_calendar_type' => 'google',
+                    'eael_event_calendar_type' => [ 'manual', 'google', 'the_events_calendar' ],
                 ],
             ]
         );
