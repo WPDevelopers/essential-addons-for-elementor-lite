@@ -62,6 +62,52 @@ class ThinkRank_Promotion {
 		add_action( 'admin_init', [ $this, 'maybe_redirect_after_update' ] );
 		add_action( 'admin_notices', [ $this, 'render_dashboard_banner' ] );
 		add_action( 'wp_ajax_eael_thinkrank_dismiss', [ $this, 'ajax_dismiss_banner' ] );
+
+		// Surface 5 — Gutenberg editor "Configure SEO" document panel.
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_gutenberg_panel' ] );
+	}
+
+	/**
+	 * Should any editor-context promo render for the current user?
+	 */
+	private function can_promote() {
+		return ! $this->is_thinkrank_active() && ! $this->is_dismissed() && current_user_can( 'install_plugins' );
+	}
+
+	/**
+	 * Enqueue the build-free Gutenberg panel (uses the wp.* editor globals).
+	 */
+	public function enqueue_gutenberg_panel() {
+		if ( ! $this->can_promote() ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'eael-thinkrank-gutenberg',
+			EAEL_PLUGIN_URL . 'assets/admin/js/thinkrank-gutenberg.js',
+			[ 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-i18n' ],
+			defined( 'EAEL_PLUGIN_VERSION' ) ? EAEL_PLUGIN_VERSION : false,
+			true
+		);
+
+		wp_localize_script( 'eael-thinkrank-gutenberg', 'eaelThinkRank', [
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'nonce'   => wp_create_nonce( 'essential-addons-elementor' ),
+			'slug'    => self::SLUG,
+			'openUrl' => admin_url( 'admin.php?page=' . self::ADMIN_PAGE ),
+		] );
+
+		wp_register_style( 'eael-thinkrank-gb', false );
+		wp_enqueue_style( 'eael-thinkrank-gb' );
+		wp_add_inline_style( 'eael-thinkrank-gb',
+			'.eael-tr-gb__desc{font-size:12.5px;line-height:1.5;color:#3c434a;margin:0 0 10px;}'
+			. '.eael-tr-gb__err{font-size:12px;color:#d63638;margin:0 0 8px;}'
+			. '.eael-tr-gb__cta.components-button.is-primary{background:#4451ff;justify-content:center;width:100%;}'
+			. '.eael-tr-gb__cta.components-button.is-primary:hover:not(:disabled){background:#3742d6;}'
+			. '.eael-tr-gb__later.components-button.is-link{display:block;margin:8px 0 2px;color:#50575e;font-size:12px;}'
+			. '.eael-tr-gb__attr{display:flex;align-items:center;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid #f0f0f1;font-size:11px;color:#8a8f94;}'
+			. '.eael-tr-gb__mark{width:15px;height:15px;border-radius:4px;background:linear-gradient(150deg,#e6316f,#92003b);color:#fff;font-size:7px;font-weight:800;display:flex;align-items:center;justify-content:center;}'
+		);
 	}
 
 	/**
