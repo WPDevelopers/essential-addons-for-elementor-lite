@@ -14,6 +14,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Text_Shadow;
+use Elementor\Group_Control_Background;
 use Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Product_Title extends Widget_Base {
@@ -455,7 +456,46 @@ class Woo_Product_Title extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'      => $base . $type . '_text_background',
+                'types'     => ['classic', 'gradient'],
+                'selector'  => $sel . '-text',
+                'condition' => [$ctype => 'text'],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'      => $base . $type . '_text_bg_border',
+                'selector'  => $sel . '-text',
+                'condition' => [$ctype => 'text'],
+            ]
+        );
+
+        $this->add_control(
+            $base . $type . '_text_border_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+                'range' => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    $sel . '-text' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [$ctype => 'text'],
+            ]
+        );
+
+        $this->add_responsive_control(
 			$base . $type . '_text_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
