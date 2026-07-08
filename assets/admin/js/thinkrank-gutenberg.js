@@ -36,13 +36,6 @@
 		} ).then( function ( r ) { return r.json(); } );
 	}
 
-	function Attribution() {
-		return el( 'div', { className: 'eael-tr-gb__attr' },
-			el( 'span', { className: 'eael-tr-gb__mark' }, 'EA' ),
-			__( 'Recommended by Essential Addons', 'essential-addons-for-elementor-lite' )
-		);
-	}
-
 	function Body() {
 		var s = useState( { status: 'idle', hidden: false } );
 		var state = s[0], set = s[1];
@@ -85,8 +78,7 @@
 			}, label ),
 			el( Button, { variant: 'link', className: 'eael-tr-gb__later', onClick: dismiss },
 				__( 'Don’t show again', 'essential-addons-for-elementor-lite' )
-			),
-			el( Attribution )
+			)
 		);
 	}
 

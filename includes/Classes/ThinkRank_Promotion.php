@@ -105,8 +105,6 @@ class ThinkRank_Promotion {
 			. '.eael-tr-gb__cta.components-button.is-primary{background:#4451ff;justify-content:center;width:100%;}'
 			. '.eael-tr-gb__cta.components-button.is-primary:hover:not(:disabled){background:#3742d6;}'
 			. '.eael-tr-gb__later.components-button.is-link{display:block;margin:8px 0 2px;color:#50575e;font-size:12px;}'
-			. '.eael-tr-gb__attr{display:flex;align-items:center;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid #f0f0f1;font-size:11px;color:#8a8f94;}'
-			. '.eael-tr-gb__mark{width:15px;height:15px;border-radius:4px;background:linear-gradient(150deg,#e6316f,#92003b);color:#fff;font-size:7px;font-weight:800;display:flex;align-items:center;justify-content:center;}'
 		);
 	}
 
@@ -183,8 +181,37 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Dismissible, attributed banner — scoped to EA's own admin pages only.
-	 * Never a global banner; carries a permanent dismiss and honest sourcing.
+	 * Which context should the banner render in?
+	 *  - 'ea'      : Essential Addons' own admin pages (page slug starts eael) — attributed.
+	 *  - 'content' : Posts / Pages / CPT list screens — unbranded.
+	 *  - ''        : nowhere (keeps it off unrelated admin screens).
+	 *
+	 * Scoped to LIST screens (screen base 'edit') on purpose: classic admin
+	 * notices don't render reliably inside the block editor (post.php), and the
+	 * editor itself is already covered by the Gutenberg "Configure SEO" panel.
+	 */
+	private function banner_context() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+		if ( 0 === strpos( $page, 'eael' ) ) {
+			return 'ea';
+		}
+
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		if ( $screen && 'edit' === $screen->base && ! empty( $screen->post_type ) ) {
+			$obj = get_post_type_object( $screen->post_type );
+			if ( $obj && ! empty( $obj->public ) && 'attachment' !== $screen->post_type ) {
+				return 'content';
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Dismissible ThinkRank banner. Attributed on EA's own pages; unbranded on
+	 * the Posts / Pages / CPT list screens. Never global; permanent per-user
+	 * dismiss. See banner_context() for scope.
 	 */
 	public function render_dashboard_banner() {
 		if ( $this->is_thinkrank_active() || $this->is_dismissed() ) {
@@ -193,12 +220,14 @@ class ThinkRank_Promotion {
 		if ( ! current_user_can( 'install_plugins' ) ) {
 			return;
 		}
-		// Scope strictly to Essential Addons' own screens (page slug starts eael).
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
-		if ( 0 !== strpos( $page, 'eael' ) ) {
+
+		$context = $this->banner_context();
+		if ( ! $context ) {
 			return;
 		}
+		// Attribution shows on EA's own pages; the content screens (Posts /
+		// Pages / CPTs) stay unbranded per product direction.
+		$attributed = ( 'ea' === $context );
 
 		$nonce = wp_create_nonce( 'essential-addons-elementor' );
 		$open  = esc_url( admin_url( 'admin.php?page=' . self::ADMIN_PAGE ) );
@@ -215,7 +244,9 @@ class ThinkRank_Promotion {
 				<button type="button" class="button button-primary eael-tr-banner__install"><?php esc_html_e( 'Install ThinkRank', 'essential-addons-for-elementor-lite' ); ?></button>
 				<button type="button" class="eael-tr-banner__later"><?php esc_html_e( 'Maybe later', 'essential-addons-for-elementor-lite' ); ?></button>
 			</div>
+			<?php if ( $attributed ) : ?>
 			<span class="eael-tr-banner__attr"><span class="eael-tr-attr__mark">EA</span><?php esc_html_e( 'Recommended by Essential Addons', 'essential-addons-for-elementor-lite' ); ?></span>
+			<?php endif; ?>
 			<button type="button" class="notice-dismiss eael-tr-banner__dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dismiss', 'essential-addons-for-elementor-lite' ); ?></span></button>
 		</div>
 		<?php
