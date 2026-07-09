@@ -3701,7 +3701,7 @@ class Business_Reviews extends Widget_Base {
 			?>
 			<!-- EA LocalBusiness Schema : Starts-->
 			<script type="application/ld+json">
-				<?php echo wp_json_encode( $full_schema_array, JSON_UNESCAPED_UNICODE ); ?>
+				<?php echo wp_json_encode( eael_neutralize_shortcodes( $full_schema_array ), JSON_UNESCAPED_UNICODE ); ?>
 			</script>
 			<!-- EA LocalBusiness Schema : Ends-->
 			<?php

@@ -7808,8 +7808,8 @@ class Login_Register extends Widget_Base {
 							?>
 
 							<div class="eael-lr-footer">
-								<input type="hidden" name="rp_key" value="<?php echo esc_attr( !empty( $rp_data['rp_key'] ) ? esc_html( $rp_data['rp_key'] ) : '' ); ?>" />
-								<input type="hidden" name="rp_login" value="<?php echo esc_attr( !empty( $rp_data['rp_login'] ) ? esc_html( $rp_data['rp_login'] ) : '' ); ?>" />
+								<input type="hidden" name="rp_key" value="<?php echo eael_neutralize_shortcodes( esc_attr( !empty( $rp_data['rp_key'] ) ? esc_html( $rp_data['rp_key'] ) : '' ) ); ?>" />
+								<input type="hidden" name="rp_login" value="<?php echo eael_neutralize_shortcodes( esc_attr( !empty( $rp_data['rp_login'] ) ? esc_html( $rp_data['rp_login'] ) : '' ) ); ?>" />
 
 								<input type="submit"
 									   name="eael-resetpassword-submit"
