@@ -859,7 +859,8 @@ trait Login_Registration {
 				self::$email_options['message'] = $settings['reg_email_message'];
 			}
 			if ( isset( $settings['reg_email_content_type'] ) ) {
-				self::$email_options['headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
+				$reg_email_content_type          = in_array( $settings['reg_email_content_type'], [ 'html', 'plain' ], true ) ? $settings['reg_email_content_type'] : 'html';
+				self::$email_options['headers'] = 'Content-Type: text/' . $reg_email_content_type . '; charset=UTF-8' . "\r\n";
 			}
 
 
@@ -872,7 +873,8 @@ trait Login_Registration {
 				self::$email_options['admin_message'] = Helper::eael_wp_kses( $settings['reg_admin_email_message'] );
 			}
 			if ( isset( $settings['reg_admin_email_content_type'] ) ) {
-				self::$email_options['admin_headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_admin_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
+				$reg_admin_email_content_type          = in_array( $settings['reg_admin_email_content_type'], [ 'html', 'plain' ], true ) ? $settings['reg_admin_email_content_type'] : 'html';
+				self::$email_options['admin_headers'] = 'Content-Type: text/' . $reg_admin_email_content_type . '; charset=UTF-8' . "\r\n";
 			}
 		}
 
@@ -1268,7 +1270,8 @@ trait Login_Registration {
 			self::$email_options_lostpassword['message'] = $settings['lostpassword_email_message'];
 		}
 		if ( isset( $settings['lostpassword_email_content_type'] ) ) {
-			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . Helper::eael_wp_kses( $settings['lostpassword_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
+			$lostpassword_email_content_type              = in_array( $settings['lostpassword_email_content_type'], [ 'html', 'plain' ], true ) ? $settings['lostpassword_email_content_type'] : 'html';
+			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . $lostpassword_email_content_type . '; charset=UTF-8' . "\r\n";
 		}
 
 		if ( isset($_SERVER['HTTP_REFERER']) ) {
@@ -2147,8 +2150,8 @@ trait Login_Registration {
 			? $settings[ "{$prefix}_otp_email_message" ]
 			: $default_message;
 
-		$content_type = ! empty( $settings[ "{$prefix}_otp_email_content_type" ] )
-			? wp_strip_all_tags( $settings[ "{$prefix}_otp_email_content_type" ] )
+		$content_type = ! empty( $settings[ "{$prefix}_otp_email_content_type" ] ) && in_array( $settings[ "{$prefix}_otp_email_content_type" ], [ 'html', 'plain' ], true )
+			? $settings[ "{$prefix}_otp_email_content_type" ]
 			: 'html';
 
 		// Fall back to the home URL if the caller did not pass an explicit direct URL.
