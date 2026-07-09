@@ -493,11 +493,11 @@ trait Elements {
 				$reading_progress_html = '<div id="eael-reading-progress-'. get_the_ID() .'" class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ( $this->get_extensions_value( 'eael_ext_reading_progress' ) == 'yes' ? 'local' : 'global' ) . '">';
 
 				if ( $global_reading_progress ) {
-					$reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . $this->get_extensions_value( 'eael_ext_reading_progress_position' ) . '" style="height: ' . esc_attr( $progress_height ) . 'px;background-color: ' . $this->get_extensions_value( 'eael_ext_reading_progress_bg_color' ) . ';">
-                        <div class="eael-reading-progress-fill" style="height: ' . esc_attr( $progress_height ) . 'px;background-color: ' . $this->get_extensions_value( 'eael_ext_reading_progress_fill_color' ) . ';transition: width ' . esc_attr( $animation_speed ) . 'ms ease;"></div>
+					$reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . esc_attr( $this->get_extensions_value( 'eael_ext_reading_progress_position' ) ) . '" style="height: ' . esc_attr( $progress_height ) . 'px;background-color: ' . esc_attr( $this->get_extensions_value( 'eael_ext_reading_progress_bg_color' ) ) . ';">
+                        <div class="eael-reading-progress-fill" style="height: ' . esc_attr( $progress_height ) . 'px;background-color: ' . esc_attr( $this->get_extensions_value( 'eael_ext_reading_progress_fill_color' ) ) . ';transition: width ' . esc_attr( $animation_speed ) . 'ms ease;"></div>
                     </div>';
 				} else {
-					$reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $this->get_extensions_value( 'eael_ext_reading_progress_position' ) . '">
+					$reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . esc_attr( $this->get_extensions_value( 'eael_ext_reading_progress_position' ) ) . '">
                         <div class="eael-reading-progress-fill"></div>
                     </div>';
 				}
