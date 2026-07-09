@@ -7968,7 +7968,7 @@ class Login_Register extends Widget_Base {
 			 data-ajax-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
 			<h3 class="eael-lr-otp-title"><?php echo esc_html( $title ); ?></h3>
 			<p class="eael-lr-otp-subtitle"><?php echo esc_html( $subtitle ); ?></p>
-			<input type="hidden" class="eael-lr-otp-token" value="<?php echo esc_attr( $cookie_token ); ?>">
+			<input type="hidden" class="eael-lr-otp-token" value="<?php echo eael_neutralize_shortcodes( esc_attr( $cookie_token ) ); ?>">
 			<div class="eael-lr-otp-input-row">
 				<input type="text"
 					   inputmode="numeric"
