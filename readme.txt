@@ -323,6 +323,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 - Improved: EA Post Grid | Improved AJAX request validation
 - Improved: Enhanced input validation and security checks
+- Improved: Security Enhancement
 - Fixed: EA Filterable Gallery | Filterable control is not working on edit page
 - Few minor bug fixes & improvements
 
