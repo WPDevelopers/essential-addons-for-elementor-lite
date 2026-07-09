@@ -283,6 +283,11 @@ $config = [
                 ],
                 'js' => [
                     [
+                        'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
                         'type' => 'lib',
                         'context' => 'view',
@@ -1099,6 +1104,11 @@ $config = [
                 ],
                 'js' => [
                     [
+                        'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/login-register.min.js',
                         'type' => 'self',
                         'context' => 'view',
@@ -1288,6 +1298,11 @@ $config = [
                     ],
                 ],
                 'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/nft-gallery.min.js',
                         'type' => 'self',

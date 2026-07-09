@@ -253,13 +253,13 @@ trait Facebook_Feed {
 				$poshttps = stripos( trim( $explodeText[ $st ] ), 'https' );
 
 				if ( $pos !== false ) {
-					$stringText .= '<a href="https://facebook.com/hashtag/' . str_replace( '#', '', $explodeText[ $st ] ) . '?source=feed_text" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
+					$stringText .= '<a href="https://facebook.com/hashtag/' . esc_attr( str_replace( '#', '', $explodeText[ $st ] ) ) . '?source=feed_text" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
 				} elseif ( $pos1 !== false ) {
-					$stringText .= '<a href="https://facebook.com/' . $explodeText[ $st ] . '/" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
+					$stringText .= '<a href="https://facebook.com/' . esc_attr( $explodeText[ $st ] ) . '/" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
 				} elseif ( $poshttp !== false || $poshttps !== false ) {
 					$stringText .= '<a href="' . esc_url( $explodeText[ $st ] ) . '" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
 				} else {
-					$stringText .= ' ' . $explodeText[ $st ];
+					$stringText .= ' ' . esc_html( $explodeText[ $st ] );
 				}
 			}
 		}

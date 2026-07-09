@@ -1828,6 +1828,63 @@ class Helper
         ];
     }
 
+    /**
+     * Allowlist for wp_kses() when rendering a user-supplied raw SVG
+     * (e.g. SVG Draw's custom SVG textarea). Covers the shape/structure
+     * elements SVG Draw needs while excluding <script>, <foreignObject>,
+     * <use> (can reference external content) and any on* event handler
+     * attribute.
+     */
+    public static function eael_allowed_svg_draw_tags() {
+        $common_attrs = [
+            'id'              => [],
+            'class'           => [],
+            'style'           => [],
+            'fill'            => [],
+            'fill-rule'       => [],
+            'fill-opacity'    => [],
+            'stroke'          => [],
+            'stroke-width'    => [],
+            'stroke-linecap'  => [],
+            'stroke-linejoin' => [],
+            'stroke-dasharray' => [],
+            'stroke-dashoffset' => [],
+            'stroke-opacity' => [],
+            'opacity'         => [],
+            'transform'       => [],
+            'clip-rule'       => [],
+            'clip-path'       => [],
+        ];
+
+        return [
+            'svg'            => array_merge( $common_attrs, [
+                'xmlns'   => [],
+                'width'   => [],
+                'height'  => [],
+                'viewbox' => [],
+                'role'    => [],
+                'aria-hidden' => [],
+                'aria-labelledby' => [],
+                'preserveaspectratio' => [],
+            ] ),
+            'g'              => $common_attrs,
+            'defs'           => $common_attrs,
+            'title'          => [ 'class' => [] ],
+            'desc'           => [ 'class' => [] ],
+            'path'           => array_merge( $common_attrs, [ 'd' => [] ] ),
+            'circle'         => array_merge( $common_attrs, [ 'cx' => [], 'cy' => [], 'r' => [] ] ),
+            'ellipse'        => array_merge( $common_attrs, [ 'cx' => [], 'cy' => [], 'rx' => [], 'ry' => [] ] ),
+            'rect'           => array_merge( $common_attrs, [ 'x' => [], 'y' => [], 'width' => [], 'height' => [], 'rx' => [], 'ry' => [] ] ),
+            'line'           => array_merge( $common_attrs, [ 'x1' => [], 'y1' => [], 'x2' => [], 'y2' => [] ] ),
+            'polyline'       => array_merge( $common_attrs, [ 'points' => [] ] ),
+            'polygon'        => array_merge( $common_attrs, [ 'points' => [] ] ),
+            'lineargradient' => array_merge( $common_attrs, [ 'x1' => [], 'y1' => [], 'x2' => [], 'y2' => [], 'gradientunits' => [], 'gradienttransform' => [] ] ),
+            'radialgradient' => array_merge( $common_attrs, [ 'cx' => [], 'cy' => [], 'r' => [], 'fx' => [], 'fy' => [], 'gradientunits' => [], 'gradienttransform' => [] ] ),
+            'stop'           => array_merge( $common_attrs, [ 'offset' => [], 'stop-color' => [], 'stop-opacity' => [] ] ),
+            'clippath'       => $common_attrs,
+        ];
+    }
+
     public static function eael_fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
             return '';
@@ -1846,6 +1903,15 @@ class Helper
         }
 
         return $color;
+    }
+
+    /**
+     * Strip characters that could break out of an inline <style> block or
+     * inject new CSS rules/declarations from a user-supplied CSS value
+     * (e.g. a color/size setting interpolated raw into a <style> tag).
+     */
+    public static function eael_sanitize_css_value( $value ) {
+        return str_replace( [ '<', '>', '{', '}', ';' ], '', (string) $value );
     }
 
 	/**

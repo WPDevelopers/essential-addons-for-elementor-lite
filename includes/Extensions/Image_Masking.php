@@ -11,6 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Image_Masking {
 
     private static $svg_dir_url = EAEL_PLUGIN_URL . 'assets/front-end/img/image-masking/svg-shapes/';
+
+    /**
+     * Strip characters that could break out of the <style> block or inject
+     * new CSS rules/declarations from a user-supplied CSS fragment.
+     */
+    private static function sanitize_css_fragment( $value ) {
+        return str_replace( [ '<', '>', '{', '}', ';' ], '', (string) $value );
+    }
 	/**
 	 * Initialize hooks
 	 */
@@ -557,6 +565,7 @@ class Image_Masking {
                 if( 'yes' === $settings['eael_image_masking_enable_custom_clip_path'] ){
                     $clip_path_value = $settings['eael_image_masking_custom_clip_path'];
                     $clip_path_value = str_replace( 'clip-path: ', '', $clip_path_value );
+                    $clip_path_value = self::sanitize_css_fragment( $clip_path_value );
                 } else {
                     $clip_path = $settings['eael_image_masking_clip_path'];
                     $clip_path_value = $this->clip_paths( $clip_path );
@@ -564,12 +573,13 @@ class Image_Masking {
                 if( $clip_path_value ) {
                     $style .= '.eael-image-masking-'. esc_html( $element_id ) .' img {clip-path: '.$clip_path_value.'}';
                 }
-    
+
                 if( 'yes' === $settings['eael_image_masking_hover_effect'] ){
                     $hover_clip_path_value = '';
                     if( 'yes' === $settings['eael_image_masking_enable_custom_clip_path_hover'] ){
                         $hover_clip_path_value = $settings['eael_image_masking_custom_clip_path_hover'];
                         $hover_clip_path_value = str_replace( 'clip-path: ', '', $hover_clip_path_value );
+                        $hover_clip_path_value = self::sanitize_css_fragment( $hover_clip_path_value );
                     } else {
                         $hover_clip_path = $settings['eael_image_masking_clip_path_hover'];
                         $hover_clip_path_value = $this->clip_paths( $hover_clip_path );
@@ -577,7 +587,7 @@ class Image_Masking {
                     if( $hover_clip_path_value ) {
                         $hover_selector = $settings['eael_image_masking_hover_selector'];
                         if( $hover_selector ){
-                            $hover_selector = ' ' . trim( $hover_selector );
+                            $hover_selector = ' ' . self::sanitize_css_fragment( trim( $hover_selector ) );
                         }
                         $style .= '.eael-image-masking-'. esc_html( $element_id ) . $hover_selector . ':hover img {clip-path: '.$hover_clip_path_value.'}';
                     }
@@ -594,6 +604,7 @@ class Image_Masking {
                 }
 
                 if( $mask_url ) {
+                    $mask_url = esc_url( $mask_url );
                     $style .= '.eael-image-masking-'. esc_html( $element_id ) .' img {mask-image: url('.$mask_url.'); -webkit-mask-image: url('.$mask_url.');}';
                 }
 
@@ -609,9 +620,10 @@ class Image_Masking {
                         $hover_mask_url = $hover_image['url'] ?? '';
                     }
                     if( $hover_mask_url ) {
+                        $hover_mask_url = esc_url( $hover_mask_url );
                         $hover_selector = $element->get_settings_for_display( 'eael_image_masking_hover_selector' );
                         if( $hover_selector ){
-                            $hover_selector = ' ' . trim( $hover_selector );
+                            $hover_selector = ' ' . self::sanitize_css_fragment( trim( $hover_selector ) );
                         }
                         $style .= '.eael-image-masking-'. esc_html( $element_id ) . $hover_selector .':hover img {mask-image: url('.$hover_mask_url.'); -webkit-mask-image: url('.$hover_mask_url.');}';
                     }
