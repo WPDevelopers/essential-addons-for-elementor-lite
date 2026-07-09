@@ -34,7 +34,20 @@
         },
         animate: function () {
             this.index = ++this.index % this.phrases.length;
-            this.element[0].innerHTML = "<span class=\"animated " + this.settings.animation + "\">" + this.phrases[this.index] + "</span>";
+
+            // Build the animated span without innerHTML so neither the animation
+            // class nor the phrase text can inject markup (CVE-2026-15145).
+            var span = document.createElement("span");
+            span.className = "animated";
+            String(this.settings.animation || "").split(/\s+/).forEach(function (cls) {
+                if (cls) {
+                    span.classList.add(cls);
+                }
+            });
+            span.textContent = this.phrases[this.index];
+
+            this.element[0].textContent = "";
+            this.element[0].appendChild(span);
 
             if ($.isFunction(this.settings.complete)) {
                 this.settings.complete.call(this);
