@@ -1,7 +1,7 @@
 var SimpleMenu = function ($scope, $) {
     let $hamburger_icon = $('.eael-simple-menu-container', $scope).data('hamburger-icon'),
-        $indicator_icon = $('.eael-simple-menu-container', $scope).data('indicator-icon'),
-        $dropdown_indicator_icon = $('.eael-simple-menu-container', $scope).data('dropdown-indicator-icon'),
+        $indicator_icon = DOMPurify.sanitize($('.eael-simple-menu-container', $scope).data('indicator-icon')),
+        $dropdown_indicator_icon = DOMPurify.sanitize($('.eael-simple-menu-container', $scope).data('dropdown-indicator-icon')),
         $horizontal = $('.eael-simple-menu', $scope).hasClass('eael-simple-menu-horizontal'),
         $hamburger_breakpoints = $('.eael-simple-menu-container', $scope).data('hamburger-breakpoints'),
         $hamburger_device = $('.eael-simple-menu-container', $scope).data('hamburger-device');
