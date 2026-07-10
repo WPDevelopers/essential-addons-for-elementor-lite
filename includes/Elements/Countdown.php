@@ -1346,9 +1346,12 @@ class Countdown extends Widget_Base {
                             $settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
                         }
 
-	                    Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['countdown_expiry_templates'] );
-	                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
+	                    // Re-validate the translated template is a published elementor_library post before rendering.
+	                    if ( Helper::is_elementor_publish_template( $settings['countdown_expiry_templates'] ) ) {
+		                    Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['countdown_expiry_templates'] );
+		                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	                        echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
+	                    }
                     } ?>
                <?php else: ?>
                     <ul id="eael-countdown-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-countdown-items" data-date="<?php echo esc_attr( "{$due_date} {$gmt_offset}" ); ?>">
@@ -1366,9 +1369,12 @@ class Countdown extends Widget_Base {
                                     $settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
                                 }
 
-	                            Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['countdown_expiry_templates'] );
-                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
+	                            // Re-validate the translated template is a published elementor_library post before rendering.
+	                            if ( Helper::is_elementor_publish_template( $settings['countdown_expiry_templates'] ) ) {
+		                            Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['countdown_expiry_templates'] );
+	                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	                                echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
+	                            }
                             }
                         }
                         ?>

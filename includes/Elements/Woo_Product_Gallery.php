@@ -3083,7 +3083,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		
 		$args = [
 			'post_type'      => 'product',
-			'post_status'    => array( 'publish', 'pending', 'future' ),
+			'post_status'    => 'publish',
 			'posts_per_page' => $settings[ 'eael_product_gallery_products_count' ] ?: 4,
 			'order'          => ( isset( $settings[ 'order' ] ) ? $settings[ 'order' ] : 'desc' ),
 			'offset'         => $settings[ 'product_offset' ],

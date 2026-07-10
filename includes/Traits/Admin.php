@@ -644,6 +644,15 @@ trait Admin {
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'image-masking' ) )
 					    ],
+						'advanced-slider'        => [
+						    'key'         => 'advanced-slider',
+						    'title'       => __( 'Advanced Slider', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/advanced-slider/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-advanced-slider/',
+						    'is_pro'      => true,
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'advanced-slider' ) )
+					    ],
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
@@ -1768,7 +1777,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.9 with new \"<b><a target='_blank' href='%1\$s'>Pinterest Feed</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/pinterest-feed/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 7.0 with new \"<b><a target='_blank' href='%1\$s'>Advanced Slider</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/advanced-slider/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),

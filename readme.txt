@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.10
+Stable tag: 6.6.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -318,6 +318,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.6.11 - 08/07/2026 =
+
+- Improved: EA Post Grid | Improved AJAX request validation
+- Improved: Enhanced input validation and security checks
+- Improved: Security Enhancement
+- Fixed: EA Filterable Gallery | Filterable control is not working on edit page
+- Few minor bug fixes & improvements
 
 = 6.6.10 - 05/07/2026 =
 
