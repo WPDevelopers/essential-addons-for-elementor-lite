@@ -204,6 +204,12 @@ class Bootstrap
         add_action('wp_ajax_eael_lr_verify_otp',        [$this, 'eael_ajax_verify_otp']);
         add_action('wp_ajax_nopriv_eael_lr_verify_otp', [$this, 'eael_ajax_verify_otp']);
 
+        // Block any core authentication path (wp-login.php, XML-RPC, application
+        // passwords, wp_signon() calls elsewhere) for accounts still pending OTP
+        // verification. The EA login widget's own gate in log_user_in() only covers
+        // logins submitted through that widget's form/AJAX endpoint.
+        add_filter( 'wp_authenticate_user', [ $this, 'eael_block_otp_pending_authentication' ], 20, 2 );
+
         // Flag unverified OTP register users in wp-admin → Users.
         add_action('admin_footer-users.php', [$this, 'eael_lr_otp_pending_user_flag']);
         add_action( 'init', [$this, 'eael_redirect_to_reset_password'] );
