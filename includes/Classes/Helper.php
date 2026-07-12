@@ -1210,6 +1210,42 @@ class Helper
 		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
 	}
 
+	/**
+	 * Trim a string by word or character count.
+	 *
+	 * Word counting (wp_trim_words / explode by space) does not work for
+	 * languages that do not use spaces between words (e.g. Chinese, Japanese).
+	 * The 'character' type uses multibyte character counting so those
+	 * languages can be limited correctly.
+	 *
+	 * @param string $text      the text to trim.
+	 * @param int    $length    max words or characters to keep.
+	 * @param string $type      'word' or 'character'.
+	 * @param string $indicator appended when the text is actually trimmed.
+	 * @return string
+	 */
+	public static function eael_trim_text( $text, $length, $type = 'word', $indicator = '' ) {
+		$length = intval( $length );
+		if ( $length <= 0 || '' === (string) $text ) {
+			return $text;
+		}
+
+		if ( 'character' === $type ) {
+			$text = wp_strip_all_tags( $text );
+			if ( mb_strlen( $text ) > $length ) {
+				$text = trim( mb_substr( $text, 0, $length ) ) . $indicator;
+			}
+			return $text;
+		}
+
+		// Word based.
+		if ( '' !== (string) $indicator ) {
+			return wp_trim_words( $text, $length, $indicator );
+		}
+
+		return implode( ' ', array_slice( explode( ' ', $text ), 0, $length ) );
+	}
+
     /**
      * List of allowed protocols for wp_kses
      *

@@ -333,6 +333,23 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
+            'eael_title_length_type',
+            [
+                'label'       => __('Length Unit', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => 'word',
+                'options'     => [
+                    'word'      => __('Words', 'essential-addons-for-elementor-lite'),
+                    'character' => __('Characters', 'essential-addons-for-elementor-lite'),
+                ],
+                'description' => __('Use "Characters" for languages without spaces between words (e.g. Chinese, Japanese).', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'eael_show_title' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
 			'eael_excerpt_heading',
 			[
 				'label'     => esc_html__( 'Excerpt', 'essential-addons-for-elementor-lite' ),
@@ -360,6 +377,23 @@ class Post_Grid extends Widget_Base
                 'type'      => Controls_Manager::NUMBER,
                 'default'   => 10,
                 'condition' => [
+                    'eael_show_excerpt' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_excerpt_length_type',
+            [
+                'label'       => __('Length Unit', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => 'word',
+                'options'     => [
+                    'word'      => __('Words', 'essential-addons-for-elementor-lite'),
+                    'character' => __('Characters', 'essential-addons-for-elementor-lite'),
+                ],
+                'description' => __('Use "Characters" for languages without spaces between words (e.g. Chinese, Japanese).', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
                     'eael_show_excerpt' => 'yes',
                 ],
             ]

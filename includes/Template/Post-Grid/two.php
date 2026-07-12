@@ -105,7 +105,7 @@ echo '<article class="eael-grid-post '. esc_attr( $css_classes ) .'" data-id="' 
                     if (empty($settings['eael_title_length'])) {
                         echo wp_kses( get_the_title(), Helper::eael_allowed_tags() );
                     } else {
-                        echo wp_kses( implode(" ", array_slice(explode(" ", get_the_title()), 0, $settings['eael_title_length'])), Helper::eael_allowed_tags() );
+                        echo wp_kses( Helper::eael_trim_text( get_the_title(), $settings['eael_title_length'], ( isset( $settings['eael_title_length_type'] ) ? $settings['eael_title_length_type'] : 'word' ) ), Helper::eael_allowed_tags() );
                     }
                     echo '</a>';
                     echo '</' . esc_attr( $title_tag ) . '></header>';
@@ -142,7 +142,7 @@ echo '<article class="eael-grid-post '. esc_attr( $css_classes ) .'" data-id="' 
                             echo '<p>' . strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()) . '</p>';
                         } else {
                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                            echo '<p>' . wp_trim_words( strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator'] ) . '</p>';
+                            echo '<p>' . esc_html( Helper::eael_trim_text( strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], ( isset( $settings['eael_excerpt_length_type'] ) ? $settings['eael_excerpt_length_type'] : 'word' ), $settings['excerpt_expanison_indicator'] ) ) . '</p>';
                         }
                     }
 
