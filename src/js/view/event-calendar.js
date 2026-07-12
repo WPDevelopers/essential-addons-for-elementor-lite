@@ -308,6 +308,14 @@ var EventCalendar = function ($scope, $) {
 							locationSelector.hide();
 						}
 
+						// Handle category display
+						var categorySelector = $(".eaelec-event-category");
+						if (event.extendedProps.category && event.extendedProps.category.trim() !== '') {
+							categorySelector.html('<i class="eicon-folder"></i> ' + DOMPurify.sanitize(event.extendedProps.category)).show();
+						} else {
+							categorySelector.hide();
+						}
+
 						if ($(".eael-event-calendar-cls", $scope).data('hidedetailslink') !== 'yes' && event.url && event.url.trim() !== '') {
 							modalFooterLink.attr("href", event.url).css("display", "block");
 						} else {

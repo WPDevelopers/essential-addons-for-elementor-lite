@@ -291,6 +291,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Location', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'ai' => [ 'active' => false ],
                 'dynamic'     => [ 'active' => true ],
                 'label_block' => true,
             ]
@@ -301,6 +302,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Category', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'ai' => [ 'active' => false ],
                 'dynamic'     => [ 'active' => true ],
                 'label_block' => true,
             ]
@@ -4040,6 +4042,7 @@ class Event_Calendar extends Widget_Base
                     <span class="eaelec-event-date-start eaelec-event-popup-date"></span>
                     <span class="eaelec-event-date-end eaelec-event-popup-date"></span>
                     <span class="eaelec-event-location eaelec-event-popup-location" style="display: none;"></span>
+                    <span class="eaelec-event-category eaelec-event-popup-category" style="display: none;"></span>
                 </div>
                 <div class="eaelec-modal-body">
                     <p></p>
