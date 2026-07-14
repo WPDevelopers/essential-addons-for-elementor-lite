@@ -214,7 +214,7 @@ trait Twitter_Feed
                             if ( $settings['eael_twitter_feed_show_icon'] == 'true' && ! empty( $user_name_full ) ) {
                                 $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
                             }
-                            $html .= '<span class="eael-twitter-feed-item-author">' . esc_html( $user_name_full ) . '</span>
+                            $html .= '<span class="eael-twitter-feed-item-author">' . eael_neutralize_shortcodes( esc_html( $user_name_full ) ) . '</span>
                         </a>';
 
                         if ( $settings['eael_twitter_feed_show_date'] == 'true' && isset( $item['created_at'] )) {
@@ -255,14 +255,14 @@ trait Twitter_Feed
                                 }
                                 $content = str_replace( array_keys($mentions), $mentions, $content );
                             }
-                            $html .= '<p>' . $content . '</p>';
+                            $html .= '<p>' . eael_neutralize_shortcodes( wp_kses_post( $content ) ) . '</p>';
 
                             $item_user_screen_name = ! empty( $item['user']['screen_name'] ) ? $item['user']['screen_name'] : '';
                             $item_user_screen_name = $twitter_v2 && ! empty( $user_username ) ? $user_username : '';
 
                             if ($settings['eael_twitter_feed_show_read_more'] == 'true' && ! empty( $item_user_screen_name ) ) {
 	                        $read_more = !empty( $settings[ 'eael_twitter_feed_show_read_more_text' ] ) ? $settings[ 'eael_twitter_feed_show_read_more_text' ] : __( 'Read More', 'essential-addons-for-elementor-lite' );
-                            $html .= '<a href="//twitter.com/' . esc_attr( $item_user_screen_name ) . '/status/' . esc_attr( $item['id_str'] ) . '" target="_blank" class="read-more-link">'. esc_html( $read_more ).' <i class="fas fa-angle-double-right"></i></a>';
+                            $html .= '<a href="//twitter.com/' . eael_neutralize_shortcodes( esc_attr( $item_user_screen_name ) ) . '/status/' . esc_attr( $item['id_str'] ) . '" target="_blank" class="read-more-link">'. esc_html( $read_more ).' <i class="fas fa-angle-double-right"></i></a>';
                         }
                     $html .= '</div>
                     ' . ( isset( $media[0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $media[0]['type'] == 'photo' ? '<img src="' . esc_url( $media[0]['media_url_https'] ) . '">' : '' ) : '' ) . '

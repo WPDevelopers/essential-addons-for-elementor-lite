@@ -114,8 +114,8 @@ trait Facebook_Feed {
                     <div class="eael-facebook-feed-item-inner">
                         <header class="eael-facebook-feed-item-header clearfix">
                             <div class="eael-facebook-feed-item-user clearfix">
-                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $current_page_id . '/picture" alt="' . esc_attr( $item_form_name ) . '" class="eael-facebook-feed-avatar"></a>
-                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . esc_html( $item_form_name ) . '</p></a>
+                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $current_page_id . '/picture" alt="' . eael_neutralize_shortcodes( esc_attr( $item_form_name ) ) . '" class="eael-facebook-feed-avatar"></a>
+                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . eael_neutralize_shortcodes( esc_html( $item_form_name ) ) . '</p></a>
                             </div>';
 
 				if ( $settings['eael_facebook_feed_date'] ) {
@@ -125,7 +125,7 @@ trait Facebook_Feed {
 
 				if ( $settings['eael_facebook_feed_message'] && ! empty( $message ) ) {
 					$html .= '<div class="eael-facebook-feed-item-content">
-                                        <p class="eael-facebook-feed-message">' . $this->eael_str_check( $message ) . '</p>
+                                        <p class="eael-facebook-feed-message">' . eael_neutralize_shortcodes( wp_kses_post( $this->eael_str_check( $message ) ) ) . '</p>
                                     </div>';
 				}
 
@@ -149,15 +149,15 @@ trait Facebook_Feed {
 
 						$html .= '<div class="eael-facebook-feed-url-preview">';
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_host'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_host'] && !empty($item['attachments']['data'][0]['unshimmed_url']) ) {
-							$html .= '<p class="eael-facebook-feed-url-host">' . wp_parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
+							$html .= '<p class="eael-facebook-feed-url-host">' . eael_neutralize_shortcodes( esc_html( wp_parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] ) ) . '</p>';
 						}
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_title'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_title'] ) {
-							$html .= '<h2 class="eael-facebook-feed-url-title">' . esc_html( $item['attachments']['data'][0]['title'] ?? '' ) . '</h2>';
+							$html .= '<h2 class="eael-facebook-feed-url-title">' . eael_neutralize_shortcodes( esc_html( $item['attachments']['data'][0]['title'] ?? '' ) ) . '</h2>';
 						}
 
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_description'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_description'] ) {
 							$description = isset( $item['attachments']['data'][0]['description'] ) ? $item['attachments']['data'][0]['description'] : '';
-							$html        .= '<p class="eael-facebook-feed-url-description">' . wp_kses( $description, HelperClass::eael_allowed_tags() ) . '</p>';
+							$html        .= '<p class="eael-facebook-feed-url-description">' . eael_neutralize_shortcodes( wp_kses( $description, HelperClass::eael_allowed_tags() ) ) . '</p>';
 						}
 						$html .= '</div>';
 
