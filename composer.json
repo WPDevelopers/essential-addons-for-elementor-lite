@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "priyomukul/wp-notice": "v2.x-dev"
+        "priyomukul/wp-notice": "v2.x-dev#5471f3262e583ebcba56062d84faecc910bd04d6"
     },
     "scripts": {
         "tools:install": "composer install --working-dir=tools",

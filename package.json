@@ -10,10 +10,19 @@
     "build": "webpack --mode production && webpack --mode development",
     "format": "prettier --write 'src/**/*.{js,scss,css,json}'",
     "format:check": "prettier --check 'src/**/*.{js,scss,css,json}'",
+    "lint:js": "eslint 'src/**/*.js'",
+    "lint:css": "stylelint 'src/**/*.scss'",
     "prepare": "husky",
     "test:setup": "wp-env start && wp-env run cli bash /var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/tests/e2e/utils/seed.sh",
     "test:reset": "echo y | wp-env destroy && npm run test:setup",
-    "test:e2e": "playwright test --config=tests/e2e/playwright.config.ts"
+    "test:e2e": "playwright test --config=tests/e2e/playwright.config.ts",
+    "test:php": "wp-env run tests-cli --env-cwd=wp-content/plugins/essential-addons-for-elementor-lite tools/vendor/bin/phpunit"
+  },
+  "lint-staged": {
+    "*.php": "sh bin/lint-php.sh",
+    "src/**/*.js": ["eslint --fix", "prettier --write"],
+    "src/**/*.scss": ["stylelint --fix", "prettier --write"],
+    "src/**/*.{css,json}": "prettier --write"
   },
   "repository": {
     "type": "git",
@@ -26,6 +35,11 @@
   },
   "homepage": "https://github.com/rupok/essential-addons-for-elementor-lite#readme",
   "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "eslint": "^9.15.0",
+    "globals": "^15.12.0",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard-scss": "^13.1.0",
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",

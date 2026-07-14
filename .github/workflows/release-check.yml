@@ -1,0 +1,33 @@
+# Version + changelog consistency guard.
+#   - On PRs that touch version/changelog files: fail if the three version
+#     strings drift apart or the changelog lacks the version.
+#   - On a release tag: additionally assert the tag equals the plugin version.
+# This runs independently of release.yml (which does the SVN deploy) — it is a
+# gate, not a deploy step, so a mis-tagged release is caught early.
+name: Release check
+
+on:
+  pull_request:
+    paths:
+      - "essential_adons_elementor.php"
+      - "readme.txt"
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: read
+
+jobs:
+  version-consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check version consistency (+ tag when tagged)
+        run: |
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            bash bin/check-version.sh "${{ github.ref_name }}"
+          else
+            bash bin/check-version.sh
+          fi

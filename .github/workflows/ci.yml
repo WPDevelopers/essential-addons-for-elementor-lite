@@ -1,0 +1,137 @@
+# PR / push validation — the first quality gate in the pipeline.
+# Deploy workflows (release.yml, assets.yml) are unaffected; this only validates.
+#
+# The legacy tree predates these standards (~2500 PHPCS violations, 112
+# unformatted src files), so whole-tree linting would fail every PR. Instead we
+# lint only the files a PR actually changes — the same philosophy as the
+# lint-staged pre-commit hook: new and edited code must be clean, legacy code is
+# grandfathered until normalized. The build + asset-drift checks run on the
+# whole tree since they are inherently global.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [dev, master, trunk, dev_pr]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  js:
+    name: JS — build, format, asset drift
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # need base ref for the changed-files diff
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install JS deps (locked)
+        run: npm ci
+        env:
+          HUSKY: 0 # skip git-hook install in CI
+
+      # Prettier only on src files this PR touches (blocking).
+      - name: Prettier check (changed files)
+        if: github.event_name == 'pull_request'
+        run: |
+          base="origin/${{ github.base_ref }}"
+          files=$(git diff --name-only --diff-filter=ACMR "$base"...HEAD \
+            | grep -E '^src/.*\.(js|scss|css|json)$' || true)
+          if [ -z "$files" ]; then
+            echo "No src files changed — skipping Prettier."
+            exit 0
+          fi
+          echo "$files"
+          echo "$files" | xargs npx prettier --check
+
+      # ESLint on changed JS (blocking). Legacy code emits warnings only; real
+      # errors (undefined refs, parse errors) fail the gate.
+      - name: ESLint (changed files)
+        if: github.event_name == 'pull_request'
+        run: |
+          base="origin/${{ github.base_ref }}"
+          files=$(git diff --name-only --diff-filter=ACMR "$base"...HEAD \
+            | grep -E '^src/.*\.js$' || true)
+          if [ -z "$files" ]; then
+            echo "No JS changed — skipping ESLint."
+            exit 0
+          fi
+          echo "$files"
+          echo "$files" | xargs npx eslint
+
+      # Stylelint on changed SCSS. Advisory until a stylelint --fix normalization
+      # pass lands (legacy SCSS predates stylelint-config-standard-scss). The
+      # pre-commit hook auto-fixes new work, so committed SCSS stays clean.
+      - name: Stylelint (changed files)
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: |
+          base="origin/${{ github.base_ref }}"
+          files=$(git diff --name-only --diff-filter=ACMR "$base"...HEAD \
+            | grep -E '^src/.*\.scss$' || true)
+          if [ -z "$files" ]; then
+            echo "No SCSS changed — skipping Stylelint."
+            exit 0
+          fi
+          echo "$files"
+          echo "$files" | xargs npx stylelint
+
+      - name: Build assets
+        run: npm run build
+
+      # Drift gate: committed assets/ must equal a fresh build from src/.
+      # Advisory until committed assets are rebuilt from the locked toolchain
+      # in one environment; flip to blocking (remove continue-on-error) once green.
+      - name: Assets ↔ source drift
+        continue-on-error: true
+        run: |
+          if [ -n "$(git status --porcelain assets/)" ]; then
+            echo "::warning::assets/ is out of sync with a fresh build from src/. Run 'npm run build' and commit the result."
+            git status --porcelain assets/
+            git diff -- assets/
+            exit 1
+          fi
+
+  php:
+    name: PHP — coding standards
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer
+          coverage: none
+
+      - name: Install PHP tooling (locked)
+        run: composer run tools:install
+
+      # PHPCS only on PHP files this PR touches (blocking).
+      - name: PHPCS (changed files)
+        run: |
+          base="origin/${{ github.base_ref }}"
+          files=$(git diff --name-only --diff-filter=ACMR "$base"...HEAD \
+            | grep -E '\.php$' \
+            | grep -vE '^(vendor|tools|node_modules|assets|languages|tests|docs)/' || true)
+          if [ -z "$files" ]; then
+            echo "No PHP files changed — skipping PHPCS."
+            exit 0
+          fi
+          echo "$files"
+          echo "$files" | xargs composer run phpcs --

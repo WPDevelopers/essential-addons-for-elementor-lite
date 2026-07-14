@@ -1,0 +1,21 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "ignoreFiles": [
+    "assets/**",
+    "node_modules/**",
+    "vendor/**",
+    "**/*.min.css"
+  ],
+  "rules": {
+    "selector-class-pattern": null,
+    "no-descending-specificity": null,
+    "scss/at-extend-no-missing-placeholder": null,
+    "scss/operator-no-newline-after": null,
+    "scss/double-slash-comment-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "comment-empty-line-before": null,
+    "no-empty-source": null,
+    "font-family-no-missing-generic-family-keyword": null,
+    "value-keyword-case": null
+  }
+}

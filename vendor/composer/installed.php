@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
         'name' => 'mukul/essential-addons-for-elementor-lite',
-        'pretty_version' => '80746.x-dev',
-        'version' => '80746.9999999.9999999.9999999-dev',
-        'reference' => 'b4c4c67e025041e7144577053af37dc985fab616',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '36fa60b5750f0148efb6b5a0b28c0988f461a30a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'mukul/essential-addons-for-elementor-lite' => array(
-            'pretty_version' => '80746.x-dev',
-            'version' => '80746.9999999.9999999.9999999-dev',
-            'reference' => 'b4c4c67e025041e7144577053af37dc985fab616',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '36fa60b5750f0148efb6b5a0b28c0988f461a30a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

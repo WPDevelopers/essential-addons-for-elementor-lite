@@ -1,9 +1,14 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "ae6032ced2436b9fff3da28af83242fe",
     "packages": [
         {
             "name": "priyomukul/wp-notice",
             "version": "v2.x-dev",
-            "version_normalized": "2.9999999.9999999.9999999-dev",
             "source": {
                 "type": "git",
                 "url": "git@github.com:priyomukul/wp-notice.git",
@@ -15,9 +20,7 @@
                 "reference": "5471f3262e583ebcba56062d84faecc910bd04d6",
                 "shasum": ""
             },
-            "time": "2023-12-27T06:49:41+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "PriyoMukul\\WPNotice\\": "src/"
@@ -29,13 +32,18 @@
                     "email": "17237437+priyomukul@users.noreply.github.com"
                 }
             ],
-            "support": {
-                "source": "https://github.com/priyomukul/wp-notice/tree/v2",
-                "issues": "https://github.com/priyomukul/wp-notice/issues"
-            },
-            "install-path": "../priyomukul/wp-notice"
+            "time": "2023-12-27T06:49:41+00:00"
         }
     ],
-    "dev": true,
-    "dev-package-names": []
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "priyomukul/wp-notice": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }

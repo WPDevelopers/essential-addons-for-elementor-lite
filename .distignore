@@ -8,6 +8,7 @@
 .eslintrc
 .eslintrc.cjs
 .eslintrc.json
+eslint.config.js
 .git
 .github
 .gitattributes

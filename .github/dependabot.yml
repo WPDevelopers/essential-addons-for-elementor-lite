@@ -1,0 +1,45 @@
+# Automated dependency + action update PRs.
+# Grouped to keep PR noise low; security updates always open individually.
+version: 2
+updates:
+  # Root PHP deps (wp-notice).
+  - package-ecosystem: composer
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      composer:
+        patterns: ["*"]
+
+  # Dev-only PHP tooling (phpcs, wpcs, phpcompatibility).
+  - package-ecosystem: composer
+    directory: "/tools"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      php-tooling:
+        patterns: ["*"]
+
+  # JS build + test toolchain.
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      js-dev:
+        dependency-type: development
+      js-prod:
+        dependency-type: production
+
+  # GitHub Actions used by the workflows.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        patterns: ["*"]

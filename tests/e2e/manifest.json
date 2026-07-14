@@ -1,0 +1,13 @@
+{
+  "_comment": "Data-driven smoke coverage. Each entry pairs a seeded page (/{slug}-test/, created by seed.sh from templates/{slug}.json) with frontend assertions. To add a widget: (1) export an Elementor page containing it to templates/{slug}.json, (2) add an entry here. smoke.spec.ts generates one test per entry. Use a bespoke *.spec.ts (see info-box.spec.ts) only when assertions exceed 'element renders + contains text'.",
+  "widgets": [
+    {
+      "slug": "info-box",
+      "selector": ".eael-infobox",
+      "contains": [
+        "Sample Info Box",
+        "This is a sample info box for E2E testing."
+      ]
+    }
+  ]
+}

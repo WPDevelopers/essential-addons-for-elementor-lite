@@ -1,0 +1,62 @@
+# Cross-repo guard. The Pro plugin overlays Lite by hooking into config.php and
+# shared traits/hooks (see CLAUDE.md "Pro ↔ Lite Relationship"). A change to those
+# surfaces can silently break Pro, which lives in a separate repo and has no
+# visibility here. This flags such PRs so a human loops in Pro review — it does
+# not block; it labels + annotates.
+name: Pro review guard
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  flag-shared-surface:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect shared-surface changes
+        id: detect
+        run: |
+          base="origin/${{ github.base_ref }}"
+          # Files whose changes can affect the Pro overlay.
+          hits=$(git diff --name-only --diff-filter=ACMR "$base"...HEAD \
+            | grep -E '^(config\.php|includes/Traits/.*\.php|includes/Classes/Bootstrap\.php|includes/Classes/Asset_Builder\.php)$' \
+            || true)
+          if [ -n "$hits" ]; then
+            echo "Shared surface touched:"
+            echo "$hits"
+            {
+              echo "### ⚠️ Pro review recommended";
+              echo "This PR changes files the Pro plugin depends on:";
+              echo '```';
+              echo "$hits";
+              echo '```';
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "hit=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "hit=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Label PR for Pro review
+        if: steps.detect.outputs.hit == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const name = 'needs-pro-review';
+            try {
+              await github.rest.issues.getLabel({ ...context.repo, name });
+            } catch (e) {
+              await github.rest.issues.createLabel({
+                ...context.repo, name, color: 'd93f0b',
+                description: 'Touches Lite surface the Pro plugin overlays',
+              });
+            }
+            await github.rest.issues.addLabels({
+              ...context.repo, issue_number: context.issue.number, labels: [ name ],
+            });

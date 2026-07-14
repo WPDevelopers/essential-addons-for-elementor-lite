@@ -38,10 +38,18 @@ create_elementor_page() {
 }
 
 echo "==> Creating test pages..."
-create_elementor_page "Info Box Test" "info-box-test" "info-box.json"
+# Auto-discover every template in tests/e2e/templates/. A widget is added to the
+# suite simply by dropping <slug>.json here — the page is published at /<slug>-test/.
+# Specs assert against those pages (see tests/e2e/manifest.json).
+shopt -s nullglob 2>/dev/null || true
+for TEMPLATE_PATH in "$TEMPLATE_DIR"/*.json; do
+    SLUG=$(basename "$TEMPLATE_PATH" .json)
+    TITLE=$(echo "$SLUG" | tr '-' ' ')
+    create_elementor_page "${TITLE} Test" "${SLUG}-test" "${SLUG}.json"
+done
 
 echo "==> Flushing Elementor CSS..."
 wp elementor flush-css --allow-root 2>/dev/null || true
 
 echo "==> Done. http://localhost:8888 | wp-admin: admin / password"
-echo "    Pages: /info-box-test/"
+echo "    Pages seeded from tests/e2e/templates/*.json (one /<slug>-test/ each)."

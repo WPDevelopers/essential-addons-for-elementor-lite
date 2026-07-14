@@ -1,0 +1,91 @@
+# E2E suite — Playwright against a real wp-env (WordPress + Elementor + this plugin).
+# On-demand only (Actions tab → Run workflow): booting wp-env + seeding is slow,
+# and the suite is a smoke net, not a merge gate. Add a `schedule:` trigger to run
+# nightly, or `pull_request:` to gate merges, once the widget backfill is broad enough.
+name: E2E
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: Playwright (wp-env)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install JS deps (locked)
+        run: npm ci
+        env:
+          HUSKY: 0
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      # Boots wp-env (Docker, preinstalled on ubuntu runners) and seeds the test
+      # pages from tests/e2e/templates/*.json via seed.sh.
+      - name: Start wp-env + seed
+        run: npm run test:setup
+
+      - name: Run E2E specs
+        run: npm run test:e2e
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: tests/e2e/playwright-report/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  phpunit:
+    name: PHPUnit (wp-env tests env)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install JS deps (locked)
+        run: npm ci
+        env:
+          HUSKY: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          tools: composer
+          coverage: none
+
+      - name: Install PHP tooling (locked)
+        run: composer run tools:install
+
+      - name: Start wp-env
+        run: npx wp-env start
+
+      - name: Run PHPUnit
+        run: npm run test:php

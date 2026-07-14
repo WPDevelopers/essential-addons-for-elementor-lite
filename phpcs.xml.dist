@@ -48,8 +48,14 @@
 		</properties>
 	</rule>
 
-	<!-- Minimum PHP version support -->
-	<config name="testVersion" value="7.4-"/>
+	<!-- Flag syntax/APIs newer than the advertised PHP floor. Without this rule
+	     the testVersion below is inert config. -->
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- Minimum PHP version support — must match the advertised floor in readme.txt
+	     ("Requires PHP: 7.0"). If changed code legitimately needs newer syntax,
+	     bump the advertised requirement here and in readme.txt together. -->
+	<config name="testVersion" value="7.0-"/>
 
 	<!-- Minimum WordPress version -->
 	<config name="minimum_wp_version" value="5.6"/>
@@ -65,8 +71,14 @@
 	<rule ref="WordPress.Security.NonceVerification"/>
 	<rule ref="WordPress.Security.ValidatedSanitizedInput"/>
 
-	<!-- Database query rules -->
-	<!-- <rule ref="WordPress.DB.PreparedSQL"/> -->
-	<!-- <rule ref="WordPress.DB.DirectDatabaseQuery"/> -->
+	<!-- Database query rules — SQL-injection class. Enforced on changed files via CI. -->
+	<rule ref="WordPress.DB.PreparedSQL"/>
+	<rule ref="WordPress.DB.PreparedSQLPlaceholders"/>
+	<rule ref="WordPress.DB.DirectDatabaseQuery">
+		<!-- Caching/schema-change advisories are noisy in a plugin context; keep the
+		     injection-relevant sniffs (unprepared queries) which PreparedSQL covers. -->
+		<exclude name="WordPress.DB.DirectDatabaseQuery.NoCaching"/>
+		<exclude name="WordPress.DB.DirectDatabaseQuery.SchemaChange"/>
+	</rule>
 
 </ruleset>
