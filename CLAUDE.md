@@ -110,9 +110,18 @@ Site: `http://localhost:8888` — WP admin: `admin` / `password`
 
 **Always verify fixes visually on the test site before marking a task done.**
 
+## Quality Gates
+
+Before committing, use the automated feedback loop — pre-commit hook (lint-staged),
+`npm run lint:js` / `lint:css`, `composer run phpcs`, `npm run test:php` / `test:e2e`,
+`bin/check-version.sh`. CI gates changed files on every PR. Full map:
+[`.claude/rules/quality-gates.md`](.claude/rules/quality-gates.md). Never hand-edit
+`assets/`; never `--no-verify`; keep deps locked (`npm ci`, not `npm install`).
+
 ## Rules
 
 @.claude/rules/widget-development.md
 @.claude/rules/php-standards.md
 @.claude/rules/asset-pipeline.md
 @.claude/rules/testing.md
+@.claude/rules/quality-gates.md
