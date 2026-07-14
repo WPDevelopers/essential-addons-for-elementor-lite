@@ -47,7 +47,7 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 			WC()->cart->calculate_totals();
 			$auto_update = $settings['eael_woo_cart_auto_cart_update'] === 'yes' ? 'eael-auto-update' : '';
 			if ( WC()->cart->is_empty() ) { ?>
-				<div class="eael-woo-cart-wrapper eael-woo-cart-empty <?php echo esc_attr( printf( '%s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update ) ); ?>">
+				<div class="eael-woo-cart-wrapper eael-woo-cart-empty <?php echo esc_attr( sprintf( '%s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update ) ); ?>">
 				<?php wc_get_template( 'cart/cart-empty.php' ); ?>
                 </div>
 				<?php
