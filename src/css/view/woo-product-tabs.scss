@@ -65,7 +65,7 @@
 			}
 
 			a {
-				padding: 14px 0;
+				padding: 8px 0;
 				margin-bottom: -1px;
 				color: #515962;
 				font-weight: 600;
@@ -80,6 +80,21 @@
 			&.active a {
 				border-bottom-color: #434347;
 			}
+		}
+	}
+
+	.woocommerce-Tabs-panel.wc-tab {
+		border-radius: 0;
+		box-shadow: none;
+		margin: -1px 0 0;
+		padding: 20px;
+		ul {
+			list-style: inherit;
+			padding-inline-start: 40px;
+		}
+		ol {
+			list-style: auto;
+			padding-inline-start: 40px;
 		}
 	}
 

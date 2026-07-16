@@ -71,7 +71,7 @@
 }
 
 .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs li a {
-  padding: 14px 0;
+  padding: 8px 0;
   margin-bottom: -1px;
   color: #515962;
   font-weight: 600;
@@ -84,6 +84,26 @@
 
 .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs li.active a {
   border-bottom-color: #434347;
+}
+
+.eael-woo-product-tabs .woocommerce-Tabs-panel.wc-tab {
+  border-radius: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin: -1px 0 0;
+  padding: 20px;
+}
+
+.eael-woo-product-tabs .woocommerce-Tabs-panel.wc-tab ul {
+  list-style: inherit;
+  -webkit-padding-start: 40px;
+          padding-inline-start: 40px;
+}
+
+.eael-woo-product-tabs .woocommerce-Tabs-panel.wc-tab ol {
+  list-style: auto;
+  -webkit-padding-start: 40px;
+          padding-inline-start: 40px;
 }
 
 .eael-woo-product-tabs .woocommerce-tabs ul.wc-tabs li a .eael-product-tab-icon {
