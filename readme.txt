@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.6.11
+Stable tag: 6.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
