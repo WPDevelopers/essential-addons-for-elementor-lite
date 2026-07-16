@@ -3340,6 +3340,8 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_google_reviews_slider_preset_3( $business_reviews, $single_review_data ) {
+		static $filter_instance = 0;
+		$filter_id = sprintf( 'eael-br-filter-%s-%d', $this->get_id(), ++$filter_instance );
 		?>
         <div class="preset-content-body">
 			<?php if ( $business_reviews['review_rating'] ): ?>
@@ -3356,11 +3358,11 @@ class Business_Reviews extends Widget_Base {
 
 			<div class="preset-extra-shadow eael-d-none">
 				<svg width="85" height="74" viewBox="0 0 85 74" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<g filter="url(#filter0_d_67_255)">
+				<g filter="url(#<?php echo esc_attr( $filter_id ); ?>)">
 				<path d="M25 31.3423V12C25 10.8954 25.8954 10 27 10H57.174C59.1715 10 59.9349 12.6058 58.2533 13.6838L28.0793 33.0261C26.7482 33.8794 25 32.9235 25 31.3423Z" fill="white"/>
 				</g>
 				<defs>
-				<filter id="filter0_d_67_255" x="0" y="0" width="84.1776" height="73.3457" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+				<filter id="<?php echo esc_attr( $filter_id ); ?>" x="0" y="0" width="84.1776" height="73.3457" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 				<feFlood flood-opacity="0" result="BackgroundImageFix"/>
 				<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 				<feOffset dy="15"/>
@@ -3586,12 +3588,15 @@ class Business_Reviews extends Widget_Base {
 		<path d="M7.37499 10.6517L3.26074 12.9547L4.17949 8.33008L0.717407 5.12875L5.39982 4.57341L7.37499 0.291748L9.35016 4.57341L14.0326 5.12875L10.5705 8.33008L11.4892 12.9547L7.37499 10.6517Z" fill="#F4BB4C"/>
 		</svg>';
 
+		static $clip_instance = 0;
+		$clip_id = sprintf( 'eael-br-clip-%s-%d', $this->get_id(), ++$clip_instance );
+
 		$rating_svg_half = '<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<g clip-path="url(#clip0_51_21)">
+		<g clip-path="url(#' . esc_attr( $clip_id ) . ')">
 		<path d="M7.88891 9.31475L10.3663 10.7013L9.81274 7.91708L11.897 5.98916L9.07774 5.65491L7.88891 3.07716V9.31475ZM7.88891 10.6517L3.77466 12.9547L4.69341 8.33008L1.23132 5.12875L5.91374 4.57341L7.88891 0.291748L9.86407 4.57341L14.5465 5.12875L11.0844 8.33008L12.0032 12.9547L7.88891 10.6517Z" fill="#F4BB4C"/>
 		</g>
 		<defs>
-		<clipPath id="clip0_51_21">
+		<clipPath id="' . esc_attr( $clip_id ) . '">
 		<rect width="14" height="14" fill="white" transform="translate(0.888916)"/>
 		</clipPath>
 		</defs>
