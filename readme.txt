@@ -319,6 +319,21 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 6.7.0 - 16/07/2026 =
+
+- Added: New Widget | EA Woo Product Title
+- Added: New Widget | EA Woo Product Short Description
+- Added: New Widget | EA Woo Product Description
+- Added: New Widget | EA Woo Products Tabs
+- Improved: EA Login/Register Form | Enhanced OTP verification for more secure user registration
+- Improved: Enhanced security hardening across multiple widgets and extensions
+- Improved: Enhanced security when handling external data across multiple widgets
+- Improved: EA Reading Progress Bar | Enhanced global color settings security
+- Improved: EA Login/Register Form | Strengthened email handling security during user registration
+- Fixed: Restored compatibility with MultivendorX 5.0.0, ensuring vendor store pages correctly display vendor products
+- Fixed: EA Fancy Text | Addressed stored XSS vulnerability
+- Few minor bug fixes & improvements
+
 = 6.6.11 - 08/07/2026 =
 
 - Improved: EA Post Grid | Improved AJAX request validation
