@@ -4,7 +4,7 @@
  * Description: The Essential plugin you install after Elementor! Packed with 100+ stunning elements like Data Table, Event Calendar, Filterable Gallery, WooCommerce.
  * Plugin URI: https://essential-addons.com/
  * Author: WPDeveloper
- * Version: 6.6.11
+ * Version: 6.7.0
  * Author URI: https://wpdeveloper.com/
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
@@ -27,7 +27,7 @@ define( 'EAEL_PLUGIN_FILE', __FILE__ );
 define( 'EAEL_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'EAEL_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'EAEL_PLUGIN_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
-define( 'EAEL_PLUGIN_VERSION', '6.6.11' );
+define( 'EAEL_PLUGIN_VERSION', '6.7.0' );
 define( 'EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor' );
 define( 'EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor' );
 /**
@@ -36,6 +36,41 @@ define( 'EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elemen
  * @since 3.0.0
  */
 require_once EAEL_PLUGIN_PATH . 'autoload.php';
+
+/**
+ * Neutralize WordPress shortcode syntax in untrusted external / reflected data.
+ *
+ * Elementor injects widget HTML into `the_content` at priority 9, while core
+ * `do_shortcode` runs at priority 11 — so any `[shortcode]` token present in a
+ * widget's rendered output (including inside attribute values) is executed during
+ * page generation. None of esc_html/esc_attr/esc_url/wp_kses* encode `[` or `]`,
+ * so escaping alone does NOT stop shortcode injection.
+ *
+ * Apply this to every untrusted external (Google/social/remote API) or reflected
+ * request field, OUTERMOST — i.e. after any esc_*() call — so the escaped output
+ * is not double-encoded. Brackets become HTML entities that render as literal
+ * `[` `]` text and are ignored by `do_shortcode`.
+ *
+ * Array-aware: recurses into arrays (e.g. data destined for json_encode()).
+ *
+ * @since 6.6.11
+ *
+ * @param mixed $value String or array of untrusted data.
+ * @return mixed Value with `[`/`]` bracket-encoded.
+ */
+if ( ! function_exists( 'eael_neutralize_shortcodes' ) ) {
+	function eael_neutralize_shortcodes( $value ) {
+		if ( is_array( $value ) ) {
+			return array_map( 'eael_neutralize_shortcodes', $value );
+		}
+
+		if ( is_string( $value ) ) {
+			return str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $value );
+		}
+
+		return $value;
+	}
+}
 
 /**
  * Including plugin config.

@@ -214,7 +214,7 @@ trait Twitter_Feed
                             if ( $settings['eael_twitter_feed_show_icon'] == 'true' && ! empty( $user_name_full ) ) {
                                 $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
                             }
-                            $html .= '<span class="eael-twitter-feed-item-author">' . esc_html( $user_name_full ) . '</span>
+                            $html .= '<span class="eael-twitter-feed-item-author">' . eael_neutralize_shortcodes( esc_html( $user_name_full ) ) . '</span>
                         </a>';
 
                         if ( $settings['eael_twitter_feed_show_date'] == 'true' && isset( $item['created_at'] )) {
@@ -226,13 +226,14 @@ trait Twitter_Feed
                     <div class="eael-twitter-feed-item-content">';
                             $content = isset($item['entities']['urls'][0]['url'])?str_replace($item['entities']['urls'][0]['url'], '', $item['full_text']):$item['full_text'];
                             $content = substr( $content, 0, $settings['eael_twitter_feed_content_length']) . $delimeter;
+                            $content = esc_html( $content );
                             if ( ! empty( $settings['eael_twitter_feed_hash_linked'] ) && $settings['eael_twitter_feed_hash_linked'] === 'yes' && ! empty( $item['entities']['hashtags'] ) ) {
                                 $hashtags = [];
                                 foreach ( $item['entities']['hashtags'] as $hashtag ){
                                     $hashtag['text'] = $twitter_v2 ? $hashtag['tag'] : $hashtag['text'];
                                     
                                     if ( $hashtag['text'] ){
-                                        $hashtags['#'.$hashtag['text']] = "<a href='https://twitter.com/hashtag/{$hashtag['text']}?src=hashtag_click' target='_blank'>#{$hashtag['text']}</a>";
+                                        $hashtags['#'.esc_html( $hashtag['text'] )] = "<a href='https://twitter.com/hashtag/" . esc_attr( $hashtag['text'] ) . "?src=hashtag_click' target='_blank'>#" . esc_html( $hashtag['text'] ) . "</a>";
                                     }
                                 }
                                 $content = str_replace( array_keys($hashtags), $hashtags, $content );
@@ -249,19 +250,19 @@ trait Twitter_Feed
                                     $mention['screen_name'] = $twitter_v2 ? ( ! empty( $mention['tag'] ) ? $mention['tag'] : '' ) : $mention['screen_name'];
 
                                     if ( $mention['screen_name'] ){
-                                        $mentions['@'.$mention['screen_name']] = "<a href='https://twitter.com/{$mention['screen_name']}' target='_blank'>@{$mention['screen_name']}</a>";
+                                        $mentions['@'.esc_html( $mention['screen_name'] )] = "<a href='https://twitter.com/" . esc_attr( $mention['screen_name'] ) . "' target='_blank'>@" . esc_html( $mention['screen_name'] ) . "</a>";
                                     }
                                 }
                                 $content = str_replace( array_keys($mentions), $mentions, $content );
                             }
-                            $html .= '<p>' . $content . '</p>';
+                            $html .= '<p>' . eael_neutralize_shortcodes( wp_kses_post( $content ) ) . '</p>';
 
                             $item_user_screen_name = ! empty( $item['user']['screen_name'] ) ? $item['user']['screen_name'] : '';
                             $item_user_screen_name = $twitter_v2 && ! empty( $user_username ) ? $user_username : '';
 
                             if ($settings['eael_twitter_feed_show_read_more'] == 'true' && ! empty( $item_user_screen_name ) ) {
 	                        $read_more = !empty( $settings[ 'eael_twitter_feed_show_read_more_text' ] ) ? $settings[ 'eael_twitter_feed_show_read_more_text' ] : __( 'Read More', 'essential-addons-for-elementor-lite' );
-                            $html .= '<a href="//twitter.com/' . esc_attr( $item_user_screen_name ) . '/status/' . esc_attr( $item['id_str'] ) . '" target="_blank" class="read-more-link">'. esc_html( $read_more ).' <i class="fas fa-angle-double-right"></i></a>';
+                            $html .= '<a href="//twitter.com/' . eael_neutralize_shortcodes( esc_attr( $item_user_screen_name ) ) . '/status/' . esc_attr( $item['id_str'] ) . '" target="_blank" class="read-more-link">'. esc_html( $read_more ).' <i class="fas fa-angle-double-right"></i></a>';
                         }
                     $html .= '</div>
                     ' . ( isset( $media[0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $media[0]['type'] == 'photo' ? '<img src="' . esc_url( $media[0]['media_url_https'] ) . '">' : '' ) : '' ) . '
