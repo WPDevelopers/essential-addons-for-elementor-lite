@@ -103,6 +103,36 @@ trait Login_Registration {
 	}
 
 	/**
+	 * Global authentication gate for accounts still pending OTP verification.
+	 *
+	 * Hooked on WordPress core's `wp_authenticate_user` filter, which every
+	 * authentication path runs through (wp-login.php, wp_signon(), XML-RPC,
+	 * application passwords) — unlike the OTP-pending check in log_user_in(),
+	 * which only fires for logins submitted through the EA login widget itself.
+	 * Without this, a registered-but-unverified account (see `_eael_otp_pending`)
+	 * could authenticate anywhere outside the widget while still being blocked
+	 * by the widget's own login form.
+	 *
+	 * @param \WP_User|\WP_Error $user     Authenticated user or existing error.
+	 * @param string             $password Plaintext password (unused, required by hook signature).
+	 * @return \WP_User|\WP_Error
+	 */
+	public function eael_block_otp_pending_authentication( $user, $password ) {
+		if ( is_wp_error( $user ) || ! ( $user instanceof \WP_User ) ) {
+			return $user;
+		}
+
+		if ( '1' === get_user_meta( $user->ID, '_eael_otp_pending', true ) ) {
+			return new \WP_Error(
+				'eael_otp_pending',
+				__( '<strong>Error:</strong> Your registration is not complete. Please verify the one-time code sent to your email before logging in.', 'essential-addons-for-elementor-lite' )
+			);
+		}
+
+		return $user;
+	}
+
+	/**
 	 * It logs the user in when the login form is submitted normally without AJAX.
 	 */
 	public function log_user_in() {

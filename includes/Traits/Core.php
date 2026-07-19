@@ -179,6 +179,12 @@ trait Core
             return;
         }
 
+        // eael_global_settings is a site-wide option; only users who can manage
+        // options may mutate it. Prevents Contributor+ stored XSS (CVE-2026-15156).
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+
         $document = Plugin::$instance->documents->get($post_id, false);
         $global_settings = get_option('eael_global_settings', []) ?: [];
          

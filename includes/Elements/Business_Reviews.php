@@ -3158,7 +3158,7 @@ class Business_Reviews extends Widget_Base {
 							<?php if ( $business_reviews['business_name'] ): ?>
                                 <div class="eael-google-reviews-business-name">
 									<?php $business_reviews['business_name_label'] = $business_reviews['business_name_label'] ? $business_reviews['business_name_label'] : $google_reviews_data['name']; ?>
-                                    <a href="<?php echo esc_url( $google_reviews_data['website'] ); ?>" <?php if ( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?>  target="_blank" <?php endif; ?>  ><?php echo esc_html( $business_reviews['business_name_label'] ); ?></a>
+                                    <a href="<?php echo eael_neutralize_shortcodes( esc_url( $google_reviews_data['website'] ) ); ?>" <?php if ( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?>  target="_blank" <?php endif; ?>  ><?php echo esc_html( $business_reviews['business_name_label'] ); ?></a>
                                 </div>
 							<?php endif; ?>
 
@@ -3258,19 +3258,19 @@ class Business_Reviews extends Widget_Base {
 	public function print_google_reviews_slider_preset_1( $business_reviews, $single_review_data ) {
 		if ( $business_reviews['reviewer_photo'] ): ?>
             <div class="eael-google-review-reviewer-photo">
-                <img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="<?php echo  $single_review_data['author_name'] ? esc_attr(  $single_review_data['author_name'] ) : esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ); ?>">
+                <img src="<?php echo eael_neutralize_shortcodes( esc_url_raw( $single_review_data['profile_photo_url'] ) ); ?>" alt="<?php echo  $single_review_data['author_name'] ? eael_neutralize_shortcodes( esc_attr(  $single_review_data['author_name'] ) ) : esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ); ?>">
             </div>
 		<?php endif;
 
 		if ( $business_reviews['reviewer_name'] ): ?>
             <div class="eael-google-review-reviewer-name">
-                <a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" <?php if ( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?> target="_blank" <?php endif; ?> ><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
+                <a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? eael_neutralize_shortcodes( esc_url_raw( $single_review_data['author_url'] ) ) : '#'; ?>" <?php if ( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?> target="_blank" <?php endif; ?> ><?php echo eael_neutralize_shortcodes( esc_html( $single_review_data['author_name'] ) ); ?></a>
             </div>
 		<?php endif;
 
 		if ( $business_reviews['review_time'] ): ?>
             <div class="eael-google-review-time">
-				<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
+				<?php echo eael_neutralize_shortcodes( esc_html( $single_review_data['relative_time_description'] ) ); ?>
             </div>
 		<?php endif;
 
@@ -3282,7 +3282,7 @@ class Business_Reviews extends Widget_Base {
 
 		if ( $business_reviews['review_text'] ): ?>
             <div class="eael-google-review-text">
-				<?php echo esc_html( $single_review_data['text'] ); ?>
+				<?php echo eael_neutralize_shortcodes( esc_html( $single_review_data['text'] ) ); ?>
             </div>
 		<?php endif;
 
@@ -3299,7 +3299,7 @@ class Business_Reviews extends Widget_Base {
             <div class="preset-content-body">
 				<?php if ( $business_reviews['review_text'] ): ?>
                     <div class="eael-google-review-text">
-						<?php echo esc_html( $single_review_data['text'] ); ?>
+						<?php echo eael_neutralize_shortcodes( esc_html( $single_review_data['text'] ) ); ?>
                     </div>
 				<?php endif; ?>
             </div>
@@ -3308,7 +3308,7 @@ class Business_Reviews extends Widget_Base {
                 <div class="preset-content-footer-photo">
 					<?php if ( $business_reviews['reviewer_photo'] ): ?>
                         <div class="eael-google-review-reviewer-photo">
-                            <img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="<?php echo  $single_review_data['author_name'] ? esc_attr(  $single_review_data['author_name'] ) : esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ); ?>">
+                            <img src="<?php echo eael_neutralize_shortcodes( esc_url_raw( $single_review_data['profile_photo_url'] ) ); ?>" alt="<?php echo  $single_review_data['author_name'] ? eael_neutralize_shortcodes( esc_attr(  $single_review_data['author_name'] ) ) : esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ); ?>">
                         </div>
 					<?php endif; ?>
                 </div>
@@ -3316,13 +3316,13 @@ class Business_Reviews extends Widget_Base {
                 <div class="preset-content-footer-reviewer-name">
 					<?php if ( $business_reviews['reviewer_name'] ): ?>
                         <div class="eael-google-review-reviewer-name">
-                            <a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" <?php if ( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?> target="_blank"  <?php endif; ?> ><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
+                            <a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? eael_neutralize_shortcodes( esc_url_raw( $single_review_data['author_url'] ) ) : '#'; ?>" <?php if ( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?> target="_blank"  <?php endif; ?> ><?php echo eael_neutralize_shortcodes( esc_html( $single_review_data['author_name'] ) ); ?></a>
                         </div>
 					<?php endif;
 
 					if ( $business_reviews['review_time'] ): ?>
                         <div class="eael-google-review-time">
-							<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
+							<?php echo eael_neutralize_shortcodes( esc_html( $single_review_data['relative_time_description'] ) ); ?>
                         </div>
 					<?php endif; ?>
                 </div>
@@ -3350,7 +3350,7 @@ class Business_Reviews extends Widget_Base {
 
 			if ( $business_reviews['review_text'] ): ?>
                 <div class="eael-google-review-text">
-					<?php echo esc_html( $single_review_data['text'] ); ?>
+					<?php echo eael_neutralize_shortcodes( esc_html( $single_review_data['text'] ) ); ?>
                 </div>
 			<?php endif; ?>
 
@@ -3379,7 +3379,7 @@ class Business_Reviews extends Widget_Base {
             <div>
 				<?php if ( $business_reviews['reviewer_photo'] ): ?>
                     <div class="eael-google-review-reviewer-photo">
-                        <img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="<?php echo $single_review_data['author_name'] ? esc_attr(  $single_review_data['author_name'] ) : esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ); ?>">
+                        <img src="<?php echo eael_neutralize_shortcodes( esc_url_raw( $single_review_data['profile_photo_url'] ) ); ?>" alt="<?php echo $single_review_data['author_name'] ? eael_neutralize_shortcodes( esc_attr(  $single_review_data['author_name'] ) ) : esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ); ?>">
                     </div>
 				<?php endif; ?>
             </div>
@@ -3387,13 +3387,13 @@ class Business_Reviews extends Widget_Base {
             <div>
 				<?php if ( $business_reviews['reviewer_name'] ): ?>
                     <div class="eael-google-review-reviewer-name">
-                        <a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" <?php if( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?> target="_blank"  <?php endif; ?> ><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
+                        <a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? eael_neutralize_shortcodes( esc_url_raw( $single_review_data['author_url'] ) ) : '#'; ?>" <?php if( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?> target="_blank"  <?php endif; ?> ><?php echo eael_neutralize_shortcodes( esc_html( $single_review_data['author_name'] ) ); ?></a>
                     </div>
 				<?php endif;
 
 				if ( $business_reviews['review_time'] ): ?>
                     <div class="eael-google-review-time">
-						<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
+						<?php echo eael_neutralize_shortcodes( esc_html( $single_review_data['relative_time_description'] ) ); ?>
                     </div>
 				<?php endif; ?>
             </div>
@@ -3455,7 +3455,7 @@ class Business_Reviews extends Widget_Base {
 							<?php if ( $business_reviews['business_name'] ): ?>
                                 <div class="eael-google-reviews-business-name">
 									<?php $business_reviews['business_name_label'] = $business_reviews['business_name_label'] ? $business_reviews['business_name_label'] : $google_reviews_data['name']; ?>
-                                    <a href="<?php echo esc_url( $google_reviews_data['website'] ); ?>" <?php if( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?> target="_blank"  <?php endif; ?> ><?php echo esc_html( $business_reviews['business_name_label'] ); ?></a>
+                                    <a href="<?php echo eael_neutralize_shortcodes( esc_url( $google_reviews_data['website'] ) ); ?>" <?php if( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?> target="_blank"  <?php endif; ?> ><?php echo esc_html( $business_reviews['business_name_label'] ); ?></a>
                                 </div>
 							<?php endif; ?>
 
@@ -3701,7 +3701,7 @@ class Business_Reviews extends Widget_Base {
 			?>
 			<!-- EA LocalBusiness Schema : Starts-->
 			<script type="application/ld+json">
-				<?php echo wp_json_encode( $full_schema_array, JSON_UNESCAPED_UNICODE ); ?>
+				<?php echo wp_json_encode( eael_neutralize_shortcodes( $full_schema_array ), JSON_UNESCAPED_UNICODE ); ?>
 			</script>
 			<!-- EA LocalBusiness Schema : Ends-->
 			<?php
