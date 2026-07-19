@@ -167,18 +167,6 @@ class Feature_List extends Widget_Base {
                 ]
             );
 
-            $this->add_control(
-                'eael_fl_acf_repeater_icon_' . $repeater_name,
-                [
-                    'label'       => esc_html__( 'Icon Class', 'essential-addons-for-elementor-lite' ),
-                    'description' => esc_html__( 'Map an ACF text field holding an icon class (e.g. "fas fa-check"). Used only when no Image is mapped.', 'essential-addons-for-elementor-lite' ),
-                    'type'        => Controls_Manager::SELECT,
-                    'default'     => '',
-                    'options'     => $sub_field_options,
-                    'condition'   => $repeater_condition,
-                ]
-            );
-
             $extra_field_options = $sub_field_options;
             unset( $extra_field_options[''] );
             $this->add_control(
@@ -223,7 +211,6 @@ class Feature_List extends Widget_Base {
         $content_key = sanitize_text_field( $settings[ 'eael_fl_acf_repeater_content_' . $field_name ] ?? '' );
         $link_key    = sanitize_text_field( $settings[ 'eael_fl_acf_repeater_link_' . $field_name ] ?? '' );
         $image_key   = sanitize_text_field( $settings[ 'eael_fl_acf_repeater_image_' . $field_name ] ?? '' );
-        $icon_key    = sanitize_text_field( $settings[ 'eael_fl_acf_repeater_icon_' . $field_name ] ?? '' );
         $extra_keys  = ( isset( $settings[ 'eael_fl_acf_repeater_extras_' . $field_name ] ) && is_array( $settings[ 'eael_fl_acf_repeater_extras_' . $field_name ] ) )
             ? $settings[ 'eael_fl_acf_repeater_extras_' . $field_name ]
             : [];
@@ -283,8 +270,7 @@ class Feature_List extends Widget_Base {
                 }
             }
 
-            $icon_class = ( $icon_key && is_scalar( $row[ $icon_key ] ?? null ) ) ? sanitize_text_field( (string) $row[ $icon_key ] ) : '';
-            $has_image  = '' !== $image['url'];
+            $has_image = '' !== $image['url'];
 
             // Additional fields: [ [ 'label' => ..., 'value' => ... ], ... ].
             $extras = [];
@@ -301,7 +287,7 @@ class Feature_List extends Widget_Base {
 
             $items[] = [
                 'eael_feature_list_icon_type' => $has_image ? 'image' : 'icon',
-                'eael_feature_list_icon'      => $has_image ? '' : $icon_class,
+                'eael_feature_list_icon'      => '',
                 'eael_feature_list_icon_new'  => '',
                 'eael_feature_list_img'       => $image,
                 'eael_feature_list_title'     => $title,
