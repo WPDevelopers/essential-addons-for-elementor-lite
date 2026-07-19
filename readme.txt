@@ -8,13 +8,13 @@ Stable tag: 6.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Elementor addon offering 110+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
+Elementor addon offering 120+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
 
 == Description ==
 
-Enhance **[Elementor](https://wordpress.org/plugins/elementor/)** page building experience with 110+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready Elementor templates, which were designed to make your next WordPress website design easier and prettier than ever before.
+Enhance **[Elementor](https://wordpress.org/plugins/elementor/)** page building experience with 120+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready Elementor templates, which were designed to make your next WordPress website design easier and prettier than ever before.
 
-= Essential Addons for Elementor offers 110+ advanced Elementor widgets with kits, 6,500+ ready templates & WooCommerce builder, serving 2 million+ active users. =
+= Essential Addons for Elementor offers 120+ advanced Elementor widgets with kits, 6,500+ ready templates & WooCommerce builder, serving 2 million+ active users. =
 
 [Check the Demos](https://essential-addons.com/demos)
 
@@ -284,17 +284,45 @@ Note : This plugin works with Elementor. Make sure you have [Elementor](https://
 
 == Frequently Asked Questions ==
 
-= Can I use the plugin without Elementor Page Builder? =
+= Do I need Elementor to use Essential Addons? =
 
-No. You cannot use without Elementor since it's an addon for Elementor.
+Yes. Essential Addons is built specifically for the Elementor page builder, so Elementor must be installed and activated on your WordPress website before you can use the widgets and extensions.
 
-= Does it work with any theme? =
+= Will Essential Addons work with my WordPress theme? =
 
-Absolutely! It will work with any theme where Elementor works.
+Yes. Essential Addons works with any standard WordPress theme that supports Elementor. If Elementor works properly with your theme, you can use Essential Addons widgets on your pages.
 
-= What if I update to Premium version? =
+= What can I build with Essential Addons for Elementor? =
 
-Your existing elements/content will work with premium version. So you won't lose your developed contents.
+You can build more flexible Elementor pages using creative widgets, content elements, marketing sections, WooCommerce layouts, navigation elements, accordions, tabs, headings, carousels, and other design-focused blocks for your website.
+
+= Does Essential Addons include Elementor templates and ready design elements? =
+
+Essential Addons helps you design faster with Elementor widgets, extensions, and ready design elements. You can use them to create landing pages, business websites, portfolios, WooCommerce sections, and content-rich pages without starting from scratch.
+
+= Can I use Essential Addons for WooCommerce websites? =
+
+Yes. Essential Addons includes WooCommerce-focused widgets and design elements that help you showcase products and create better shopping experiences with Elementor.
+
+= Will Essential Addons slow down my Elementor website? =
+
+Essential Addons is built to help you use only the elements you need. For the best performance, keep unused widgets disabled, optimize your images, and use a reliable hosting and caching setup.
+
+= Can I customize Essential Addons widgets without coding? =
+
+Yes. Essential Addons widgets are designed for no-code customization inside Elementor. You can adjust content, layout, colors, typography, spacing, and styling options visually from the Elementor editor.
+
+= What happens if I upgrade to Essential Addons Pro? =
+
+Your existing Essential Addons content will continue to work. Upgrading unlocks additional premium widgets, extensions, and advanced design options while keeping your existing Elementor pages intact.
+
+= Is Essential Addons suitable for beginners? =
+
+Yes. Essential Addons is beginner-friendly because it works inside Elementor's visual editor. You can drag, drop, customize, and publish sections without writing code.
+
+= Where can I get help with Essential Addons? =
+
+You can use the official documentation, tutorials, community resources, and support channels from WPDeveloper to learn how to set up widgets, troubleshoot issues, and get the most out of Essential Addons.
 
 == Screenshots ==
 
