@@ -205,6 +205,11 @@ class Elements_Manager {
 			$list['image-masking'] = 'image-masking';
 		}
 
+		//Advanced Slider
+		if ( ! empty( $element['settings']['eael_enable_advanced_slider'] ) ) {
+			$list['advanced-slider'] = 'advanced-slider';
+		}
+
 		return $list;
 	}
 

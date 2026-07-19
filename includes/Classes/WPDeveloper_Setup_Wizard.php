@@ -839,8 +839,28 @@ class WPDeveloper_Setup_Wizard {
 						'preferences' => 'advance',
 					],
 					[
+						'key'         => 'woo-product-title',
+						'title'       => __( 'Woo Product Title', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
 						'key'         => 'woo-product-price',
 						'title'       => __( 'Woo Product Price', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
+						'key'         => 'woo-product-tabs',
+						'title'       => __( 'Woo Product Tabs', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
+						'key'         => 'woo-product-short-description',
+						'title'       => __( 'Woo Product Short Description', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
+						'key'         => 'woo-product-description',
+						'title'       => __( 'Woo Product Description', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
 					[
