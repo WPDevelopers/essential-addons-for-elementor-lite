@@ -213,8 +213,37 @@ var WooProdectImage = function ($scope, $) {
 		});
 	}
 
+	// Hide the loading indicator once the slider is initialized and the visible
+	// image has finished decoding.
+	function hideLoader() {
+		const $loader = $(".eael-pi-loader", $scope);
+		if (!$loader.length) {
+			return;
+		}
+
+		const images = $(".image_slider__image img", $scope).toArray();
+		const pending = images.filter((img) => !(img.complete && img.naturalHeight !== 0));
+
+		if (!pending.length) {
+			$loader.remove();
+			return;
+		}
+
+		let remaining = pending.length;
+		pending.forEach((img) => {
+			$(img).one("load.eaelPiLoader error.eaelPiLoader", function () {
+				if (--remaining <= 0) {
+					$loader.remove();
+				}
+			});
+		});
+
+		// Failsafe: never keep the overlay if an image never fires load/error.
+		setTimeout(() => $loader.remove(), 8000);
+	}
+
 	// Set slider height dynamically
-	$(window).on("load", function () {
+	function setSliderHeight() {
 		// Check if the screen width is less than or equal to 767px
 		if (window.matchMedia("(max-width: 767px)").matches) {
 			// For small screens
@@ -241,7 +270,15 @@ var WooProdectImage = function ($scope, $) {
 				$scope
 			).css("height", compareHeight);
 		}
-	});
+	}
+
+	// element_ready can fire after window load, in which case the handler would
+	// never run — call it directly when the page is already loaded.
+	if (document.readyState === "complete") {
+		setSliderHeight();
+	} else {
+		$(window).on("load", setSliderHeight);
+	}
 
 	// Load the thumbs Swiper first
 	let sliderThumbsObj = swiperLoader($(sliderThumbSelector), $sliderThumbs);
@@ -272,13 +309,17 @@ var WooProdectImage = function ($scope, $) {
 							}, 100);
 						});
 					}
+
+					hideLoader();
 				})
 				.catch((error) => {
 					console.log("Error initializing main Swiper:", error);
+					hideLoader();
 				});
 		})
 		.catch((error) => {
 			console.log("Error initializing Swiper thumbs:", error);
+			hideLoader();
 		});
 
 	// Magnific Popup for the specific slider

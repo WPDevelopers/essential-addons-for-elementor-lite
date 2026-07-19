@@ -523,6 +523,19 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_pi_show_loader',
+			[
+				'label'        => esc_html__( 'Image Loader', 'essential-addons-for-elementor-lite' ),
+				'description'  => esc_html__( 'Show a loading indicator until the images are ready.', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'eael_pi_effects',
 			[
 				'label'   => esc_html__( 'Effects', 'essential-addons-for-elementor-lite' ),
@@ -884,6 +897,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['keyboard_press'] = ! empty( $settings['eael_pi_keyboard_press'] ) ? $settings['eael_pi_keyboard_press'] : false;
 		$pi_data_settings['thumb_navigation'] = ! empty( $settings['eael_pi_thumb_navigation'] ) ? $settings['eael_pi_thumb_navigation'] : false;
 		$pi_data_settings['image_resolution'] = ! empty( $settings['eael_pi_image_resolution'] ) ? $settings['eael_pi_image_resolution'] : 'full';
+		$pi_data_settings['show_loader'] = ! empty( $settings['eael_pi_show_loader'] ) ? $settings['eael_pi_show_loader'] : '';
 		$pi_data_settings['pagination'] = ! empty( $settings['eael_pi_pagination'] ) ? $settings['eael_pi_pagination'] : 'false';
 		$pi_data_settings['navigation'] = ! empty( $settings['eael_pi_navigation'] ) ? $settings['eael_pi_navigation'] : '';
 		$pi_data_settings['sale_flash'] = ! empty( $settings['eael_image_sale_flash'] ) ? $settings['eael_image_sale_flash'] : '';
@@ -964,6 +978,11 @@ class Woo_Product_Images extends Widget_Base {
 			'data-pi_image' => json_encode( $sliderImages ),
 			'class'        => 'product_image_slider__container ' . $slider_image_container_width,
 		] );
+
+		$image_ratio = $this->eael_pi_image_ratio( $img_links, $image_settings['image_resolution'] );
+		if ( $image_ratio ) {
+			$this->add_render_attribute( 'eael-pi-image', 'style', '--eael-pi-ratio:' . $image_ratio . ';' );
+		}
 		?>
 
 		<div <?php $this->print_render_attribute_string('eael-pi-image'); ?>>
@@ -998,11 +1017,41 @@ class Woo_Product_Images extends Widget_Base {
 						<span class="swiper-button-prev"></span>
 						<span class="swiper-button-next"></span>
 						<?php
-					} 
+					}
 					?>
 				</div>
+				<?php if ( 'yes' === $image_settings['show_loader'] ) { ?>
+					<div class="eael-pi-loader"><span class="eael-pi-loader__spinner"></span></div>
+				<?php } ?>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Aspect ratio of the first gallery image, used to reserve the slider box
+	 * before the images are decoded.
+	 *
+	 * @param array|string $img_links Gallery attachment ids (front-end) or urls (editor).
+	 * @param string       $size      Selected image resolution.
+	 *
+	 * @return string Ratio as `width / height`, or an empty string when unknown.
+	 */
+	protected function eael_pi_image_ratio( $img_links, $size ) {
+		if ( empty( $img_links ) || ! is_array( $img_links ) ) {
+			return '';
+		}
+
+		$first = reset( $img_links );
+		if ( ! is_numeric( $first ) ) {
+			return '';
+		}
+
+		$image = wp_get_attachment_image_src( absint( $first ), $size );
+		if ( empty( $image[1] ) || empty( $image[2] ) ) {
+			return '';
+		}
+
+		return absint( $image[1] ) . ' / ' . absint( $image[2] );
 	}
 
 	protected function render_thumbnail_slider( $settings, $img_links ) {
