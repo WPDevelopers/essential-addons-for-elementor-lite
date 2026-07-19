@@ -236,3 +236,18 @@
   border-right: 10px solid #444;
   border-left: 0;
 }
+
+.elementor-widget-eael-adv-tabs .eael-adv-tabs-extras {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.elementor-widget-eael-adv-tabs .eael-adv-tabs-extras .eael-adv-tabs-extra {
+  margin: 0;
+  padding: 0;
+}
+
+.elementor-widget-eael-adv-tabs .eael-adv-tabs-extras .eael-adv-tabs-extra .eael-adv-tabs-extra-value {
+  display: inline-block;
+}
