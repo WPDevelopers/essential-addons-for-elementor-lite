@@ -16,7 +16,7 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 		 *
 		 * @param array $atts Shortcode attributes.
 		 */
-		public static function output( $atts, $settings = [] ) {
+		public static function output( $atts, $settings = array() ) {
 			if ( ! apply_filters( 'woocommerce_output_cart_shortcode_content', true ) ) {
 				return;
 			}
@@ -24,15 +24,16 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 			// Constants.
 			wc_maybe_define_constant( 'WOOCOMMERCE_CART', true );
 
-			$atts        = shortcode_atts( [], $atts, 'woocommerce_cart' );
+			$atts = shortcode_atts( array(), $atts, 'woocommerce_cart' );
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
-			$nonce_value = wc_get_var( $_REQUEST['woocommerce-shipping-calculator-nonce'],
+			$nonce_value = wc_get_var(
+				$_REQUEST['woocommerce-shipping-calculator-nonce'],
 				wc_get_var( $_REQUEST['_wpnonce'], '' ) ); // @codingStandardsIgnoreLine.
 
 			// Update Shipping. Nonce check uses new value and old value (woocommerce-cart). @todo remove in 4.0.
 			if ( ! empty( $_POST['calc_shipping'] )
-			     && ( wp_verify_nonce( $nonce_value, 'woocommerce-shipping-calculator' )
-			          || wp_verify_nonce( $nonce_value, 'woocommerce-cart' ) )
+				&& ( wp_verify_nonce( $nonce_value, 'woocommerce-shipping-calculator' )
+						|| wp_verify_nonce( $nonce_value, 'woocommerce-cart' ) )
 			) { // WPCS: input var ok.
 				self::calculate_shipping();
 
@@ -47,9 +48,9 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 			WC()->cart->calculate_totals();
 			$auto_update = $settings['eael_woo_cart_auto_cart_update'] === 'yes' ? 'eael-auto-update' : '';
 			if ( WC()->cart->is_empty() ) { ?>
-				<div class="eael-woo-cart-wrapper eael-woo-cart-empty <?php echo esc_attr( printf( '%s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update ) ); ?>">
+				<div class="eael-woo-cart-wrapper eael-woo-cart-empty <?php echo esc_attr( sprintf( '%s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update ) ); ?>">
 				<?php wc_get_template( 'cart/cart-empty.php' ); ?>
-                </div>
+				</div>
 				<?php
 			} else {
 				$style_two_wrapper_class = '';
@@ -58,17 +59,20 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 						$style_two_wrapper_class .= ' has-table-left-content';
 					}
 
-					if ( in_array( 'yes', [
-						$settings['eael_woo_cart_table_components_price'],
-						$settings['eael_woo_cart_table_components_qty'],
-						$settings['eael_woo_cart_table_components_subtotal'],
-						$settings['eael_woo_cart_table_components_remove']
-					] ) ) {
+					if ( in_array(
+						'yes',
+						array(
+							$settings['eael_woo_cart_table_components_price'],
+							$settings['eael_woo_cart_table_components_qty'],
+							$settings['eael_woo_cart_table_components_subtotal'],
+							$settings['eael_woo_cart_table_components_remove'],
+						)
+					) ) {
 						$style_two_wrapper_class .= ' has-table-right-content';
 					}
 				}
 				?>
-                <div class="eael-woo-cart-wrapper <?php echo esc_attr( sprintf( '%s %s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update, $style_two_wrapper_class ) ); ?>">
+				<div class="eael-woo-cart-wrapper <?php echo esc_attr( sprintf( '%s %s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update, $style_two_wrapper_class ) ); ?>">
 					<?php
 					do_action( 'woocommerce_before_cart' );
 
@@ -83,10 +87,9 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 
 					do_action( 'woocommerce_after_cart' );
 					?>
-                </div>
+				</div>
 				<?php
 			}
 		}
-
 	}
 }

@@ -4,19 +4,19 @@ namespace Essential_Addons_Elementor\Classes;
 
 use Elementor\Utils;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 } // Exit if accessed directly
 
-use \Elementor\Controls_Manager;
+use Elementor\Controls_Manager;
 use Elementor\Icons_Manager;
 use Elementor\Plugin;
 
-class Helper
-{
+class Helper {
 
 
-	const EAEL_ALLOWED_HTML_TAGS = [
+
+	const EAEL_ALLOWED_HTML_TAGS = array(
 		'article',
 		'aside',
 		'details',
@@ -39,261 +39,308 @@ class Helper
 		'section',
 		'span',
 		'summary',
-	];
+	);
 
-    /**
-     * It stores all faqs data for all ea elements
-     * @since 5.1.9
-     */
-    public static $eael_advanced_accordion_faq = [];
-    
-    /**
-     * Returns all the faqs in one instance
-     *
-     * @since 5.1.9
-     * @return array
-     */
-    public static function get_eael_advanced_accordion_faq(){
-        $json = [];
-        if( count( self::$eael_advanced_accordion_faq ) ) {
-            $json = [
-                '@context' => 'https://schema.org',
-                '@type' => 'FAQPage',
-                'mainEntity' => self::$eael_advanced_accordion_faq,
-            ];
-        }
-        
-        return $json;
-    }
+	/**
+	 * It stores all faqs data for all ea elements
+	 * @since 5.1.9
+	 */
+	public static $eael_advanced_accordion_faq = array();
 
-    /**
-     * Adds faq to the faq list
-     * @since 5.1.9
-     * @param array $faq single faq data - question and answer
-     */
-    public static function set_eael_advanced_accordion_faq( $faq ){
-        return self::$eael_advanced_accordion_faq[] = $faq;
-    }
+	/**
+	 * Returns all the faqs in one instance
+	 *
+	 * @since 5.1.9
+	 * @return array
+	 */
+	public static function get_eael_advanced_accordion_faq() {
+		$json = array();
+		if ( count( self::$eael_advanced_accordion_faq ) ) {
+			$json = array(
+				'@context'   => 'https://schema.org',
+				'@type'      => 'FAQPage',
+				'mainEntity' => self::$eael_advanced_accordion_faq,
+			);
+		}
 
-    /**
-     * Include a file with variables
-     *
-     * @param $file_path
-     * @param $variables
-     *
-     * @return string
-     * @since  4.2.2
-     */
-    public static function include_with_variable( $file_path, $variables = [])
-    {
-        if (file_exists($file_path)) {
-            extract($variables);
+		return $json;
+	}
 
-            ob_start();
+	/**
+	 * Adds faq to the faq list
+	 * @since 5.1.9
+	 * @param array $faq single faq data - question and answer
+	 */
+	public static function set_eael_advanced_accordion_faq( $faq ) {
+		return self::$eael_advanced_accordion_faq[] = $faq;
+	}
 
-            include $file_path;
+	/**
+	 * Include a file with variables
+	 *
+	 * @param $file_path
+	 * @param $variables
+	 *
+	 * @return string
+	 * @since  4.2.2
+	 */
+	public static function include_with_variable( $file_path, $variables = array() ) {
+		if ( file_exists( $file_path ) ) {
+			extract( $variables );
 
-            return ob_get_clean();
-        }
+			ob_start();
 
-        return '';
-    }
+			include $file_path;
 
-    /**
-     * check EAEL extension can load this page or post
-     *
-     * @param $id  page or post id
-     *
-     * @return bool
-     * @since  4.0.4
-     */
-    public static function prevent_extension_loading($post_id)
-    {
-        $template_name = get_post_meta($post_id, '_elementor_template_type', true);
-        $template_list = [
-            'header',
-            'footer',
-            'single',
-            'post',
-            'page',
-            // 'archive',
-            'search-results',
-            'error-404',
-            // 'product',
-            // 'product-archive',
-            'section',
-        ];
+			return ob_get_clean();
+		}
 
-        return in_array($template_name, $template_list);
-    }
+		return '';
+	}
+
+	/**
+	 * check EAEL extension can load this page or post
+	 *
+	 * @param $id  page or post id
+	 *
+	 * @return bool
+	 * @since  4.0.4
+	 */
+	public static function prevent_extension_loading( $post_id ) {
+		$template_name = get_post_meta( $post_id, '_elementor_template_type', true );
+		$template_list = array(
+			'header',
+			'footer',
+			'single',
+			'post',
+			'page',
+			// 'archive',
+			'search-results',
+			'error-404',
+			// 'product',
+			// 'product-archive',
+			'section',
+		);
+
+		return in_array( $template_name, $template_list );
+	}
 
 	public static function str_to_css_id( $str ) {
 		$str = strtolower( $str );
 
 		//Make alphanumeric (removes all other characters)
-		$str = preg_replace( "/[^a-z0-9_\s-]/", "", $str );
+		$str = preg_replace( '/[^a-z0-9_\s-]/', '', $str );
 
 		//Clean up multiple dashes or whitespaces
-		$str = preg_replace( "/[\s-]+/", " ", $str );
+		$str = preg_replace( '/[\s-]+/', ' ', $str );
 
 		//Convert whitespaces and underscore to dash
-		$str = preg_replace( "/[\s_]/", "-", $str );
+		$str = preg_replace( '/[\s_]/', '-', $str );
 
 		return $str;
 	}
 
-    public static function fix_old_query($settings)
-    {
-        $update_query = false;
+	public static function fix_old_query( $settings ) {
+		$update_query = false;
 
-        foreach ($settings as $key => $value) {
-            if (strpos($key, 'eaeposts_') !== false) {
-                $settings[str_replace('eaeposts_', '', $key)] = $value;
-                $update_query = true;
-            }
-        }
+		foreach ( $settings as $key => $value ) {
+			if ( strpos( $key, 'eaeposts_' ) !== false ) {
+				$settings[ str_replace( 'eaeposts_', '', $key ) ] = $value;
+				$update_query                                     = true;
+			}
+		}
 
-        if ($update_query) {
-            global $wpdb;
+		if ( $update_query ) {
+			global $wpdb;
 
-            $post_id = get_the_ID();
-            $data = get_post_meta($post_id, '_elementor_data', true);
-            $data = str_replace('eaeposts_', '', $data);
+			$post_id = get_the_ID();
+			$data    = get_post_meta( $post_id, '_elementor_data', true );
+			$data    = str_replace( 'eaeposts_', '', $data );
 
             // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-            $wpdb->update(
-                $wpdb->postmeta,
-                [
-                    'meta_value' => $data,
-                ],
-                [
-                    'post_id' => $post_id,
-                    'meta_key' => '_elementor_data',
-                ]
-            );
-        }
+			$wpdb->update(
+				$wpdb->postmeta,
+				array(
+					'meta_value' => $data,
+				),
+				array(
+					'post_id'  => $post_id,
+					'meta_key' => '_elementor_data',
+				)
+			);
+		}
 
-        return $settings;
-    }
+		return $settings;
+	}
 
-    public static function get_query_args($settings = [], $post_type = 'post')
-    {
-	    $settings = wp_parse_args( $settings, [
-		    'post_type'      => $post_type,
-		    'posts_ids'      => [],
-		    'orderby'        => 'date',
-		    'order'          => 'desc',
-		    'posts_per_page' => 3,
-		    'offset'         => 0,
-		    'post__not_in'   => [],
-	    ] );
+	/**
+	 * Filter product query args by the current MultiVendorX (5.0+) store.
+	 *
+	 * MultiVendorX 5.0 replaced the legacy vendor taxonomy archive with a virtual
+	 * store page and links products to stores via the `multivendorx_store_id`
+	 * post meta. When a product widget renders on a store page, limit the query
+	 * to that store's products so each seller's page shows only their items.
+	 *
+	 * @since 6.7.0
+	 * @param array $args WP_Query arguments.
+	 * @return array
+	 */
+	public static function eael_multivendorx_store_query_args( $args ) {
+		if ( ! function_exists( 'MultiVendorX' ) || ! class_exists( '\MultiVendorX\Store\Store' ) ) {
+			return $args;
+		}
 
-	    $args = [
-		    'orderby'             => $settings['orderby'],
-		    'order'               => $settings['order'],
-		    'ignore_sticky_posts' => 1,
-		    'post_status'         => 'publish',
-		    'posts_per_page'      => $settings['posts_per_page'],
-		    'offset'              => $settings['offset'],
-	    ];
+		$store_query_var = 'store';
+		if ( is_callable( array( MultiVendorX()->setting, 'get_setting' ) ) ) {
+			$store_query_var = MultiVendorX()->setting->get_setting( 'store_url', 'store' ) ?: 'store';
+		}
 
-	    if ( 'by_id' === $settings['post_type'] ) {
-		    $args['post_type'] = 'any';
-		    $args['post__in']  = empty( $settings['posts_ids'] ) ? [ 0 ] : $settings['posts_ids'];
-	    } else {
-		    $args['post_type'] = $settings['post_type'];
-		    $args['tax_query'] = [];
+		$store_slug = get_query_var( $store_query_var );
+		if ( empty( $store_slug ) || ! is_string( $store_slug ) ) {
+			return $args;
+		}
 
-		    $taxonomies = get_object_taxonomies( $settings['post_type'], 'objects' );
+		$store = \MultiVendorX\Store\Store::get_store( $store_slug, 'slug' );
+		if ( empty( $store ) || ! $store->get_id() ) {
+			return $args;
+		}
 
-		    foreach ( $taxonomies as $object ) {
-			    $setting_key = $object->name . '_ids';
+		$store_id_meta_key = defined( '\MultiVendorX\Utill::POST_META_SETTINGS' ) && ! empty( \MultiVendorX\Utill::POST_META_SETTINGS['store_id'] )
+			? \MultiVendorX\Utill::POST_META_SETTINGS['store_id']
+			: 'multivendorx_store_id';
 
-			    if ( ! empty( $settings[ $setting_key ] ) ) {
-				    $args['tax_query'][] = [
-					    'taxonomy' => $object->name,
-					    'field'    => 'term_id',
-					    'terms'    => $settings[ $setting_key ],
-				    ];
-			    }
-		    }
+		if ( ! isset( $args['meta_query'] ) || ! is_array( $args['meta_query'] ) ) {
+			$args['meta_query'] = array( 'relation' => 'AND' );
+		}
 
-		    if ( ! empty( $args['tax_query'] ) ) {
-			    $args['tax_query']['relation'] = isset( $settings['tax_query_relation'] ) ? $settings['tax_query_relation'] : 'AND';
-		    }
-	    }
+		$args['meta_query'][] = array(
+			'key'   => $store_id_meta_key,
+			'value' => $store->get_id(),
+		);
 
-	    if ( $args['orderby'] === 'most_viewed' ) {
-		    $args['orderby']  = 'meta_value_num';
-		    $args['meta_key'] = '_eael_post_view_count';
-	    }
+		return apply_filters( 'eael/multivendorx/store_query_args', $args, $store );
+	}
 
-	    // Handle custom field sorting
-	    if ( $args['orderby'] === 'meta_value' && ! empty( $settings['meta_key'] ) ) {
-		    $args['meta_key'] = sanitize_text_field( $settings['meta_key'] );
+	public static function get_query_args( $settings = array(), $post_type = 'post' ) {
+		$settings = wp_parse_args(
+			$settings,
+			array(
+				'post_type'      => $post_type,
+				'posts_ids'      => array(),
+				'orderby'        => 'date',
+				'order'          => 'desc',
+				'posts_per_page' => 3,
+				'offset'         => 0,
+				'post__not_in'   => array(),
+			)
+		);
 
-		    // Set the appropriate orderby based on meta_type
-		    $meta_type = ! empty( $settings['meta_type'] ) ? $settings['meta_type'] : 'CHAR';
+		$args = array(
+			'orderby'             => $settings['orderby'],
+			'order'               => $settings['order'],
+			'ignore_sticky_posts' => 1,
+			'post_status'         => 'publish',
+			'posts_per_page'      => $settings['posts_per_page'],
+			'offset'              => $settings['offset'],
+		);
 
-		    switch ( $meta_type ) {
-			    case 'NUMERIC':
-				    $args['orderby'] = 'meta_value_num';
-				    break;
-			    case 'DATE':
-			    case 'DATETIME':
-				    $args['orderby'] = 'meta_value';
-				    $args['meta_type'] = $meta_type;
-				    break;
-			    case 'CHAR':
-			    default:
-				    $args['orderby'] = 'meta_value';
-				    $args['meta_type'] = 'CHAR';
-				    break;
-		    }
-	    }
+		if ( 'by_id' === $settings['post_type'] ) {
+			$args['post_type'] = 'any';
+			$args['post__in']  = empty( $settings['posts_ids'] ) ? array( 0 ) : $settings['posts_ids'];
+		} else {
+			$args['post_type'] = $settings['post_type'];
+			$args['tax_query'] = array();
 
-        if ( ! empty( $settings['posts_by_current_user'] ) && 'yes' === $settings['posts_by_current_user'] ) {
-		    $args['author__in'] = [ get_current_user_id() ];
-	    } elseif ( ! empty( $settings['authors'] ) ) {
-		    $args['author__in'] = $settings['authors'];
-	    }
+			$taxonomies = get_object_taxonomies( $settings['post_type'], 'objects' );
 
-	    if ( ! empty( $settings['post__not_in'] ) ) {
-		    $args['post__not_in'] = $settings['post__not_in'];
-	    }
+			foreach ( $taxonomies as $object ) {
+				$setting_key = $object->name . '_ids';
 
-        if( 'product' === $post_type && function_exists('whols_lite') ){
-            $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
-        }
+				if ( ! empty( $settings[ $setting_key ] ) ) {
+					$args['tax_query'][] = array(
+						'taxonomy' => $object->name,
+						'field'    => 'term_id',
+						'terms'    => $settings[ $setting_key ],
+					);
+				}
+			}
 
-	    // Polylang: pin the query to the language of the page/document the widget is
-	    // on, instead of the ambient (cookie / last-page-load) current language. In
-	    // the editor the ambient language flips on every page load, which made the
-	    // Post Grid show the wrong language's posts. Skip manual ("by_id") selections
-	    // and post types Polylang isn't translating.
-	    if ( function_exists( 'pll_get_post_language' ) && 'by_id' !== $settings['post_type'] ) {
-		    $eael_is_translated = ! function_exists( 'pll_is_translated_post_type' );
-		    if ( ! $eael_is_translated ) {
-			    foreach ( (array) $args['post_type'] as $eael_pt ) {
-				    if ( 'any' !== $eael_pt && pll_is_translated_post_type( $eael_pt ) ) {
-					    $eael_is_translated = true;
-					    break;
-				    }
-			    }
-		    }
+			if ( ! empty( $args['tax_query'] ) ) {
+				$args['tax_query']['relation'] = isset( $settings['tax_query_relation'] ) ? $settings['tax_query_relation'] : 'AND';
+			}
+		}
 
-		    if ( $eael_is_translated ) {
-			    $eael_lang = self::eael_get_current_language();
-			    // Allow integrators to override the pinned language.
-			    $eael_lang = apply_filters( 'eael/post_grid/query_lang', $eael_lang, $settings, $args );
-			    if ( ! empty( $eael_lang ) ) {
-				    $args['lang'] = $eael_lang;
-			    }
-		    }
-	    }
+		if ( $args['orderby'] === 'most_viewed' ) {
+			$args['orderby']  = 'meta_value_num';
+			$args['meta_key'] = '_eael_post_view_count';
+		}
 
-        return $args;
-    }
+		// Handle custom field sorting
+		if ( $args['orderby'] === 'meta_value' && ! empty( $settings['meta_key'] ) ) {
+			$args['meta_key'] = sanitize_text_field( $settings['meta_key'] );
+
+			// Set the appropriate orderby based on meta_type
+			$meta_type = ! empty( $settings['meta_type'] ) ? $settings['meta_type'] : 'CHAR';
+
+			switch ( $meta_type ) {
+				case 'NUMERIC':
+					$args['orderby'] = 'meta_value_num';
+					break;
+				case 'DATE':
+				case 'DATETIME':
+					$args['orderby']   = 'meta_value';
+					$args['meta_type'] = $meta_type;
+					break;
+				case 'CHAR':
+				default:
+					$args['orderby']   = 'meta_value';
+					$args['meta_type'] = 'CHAR';
+					break;
+			}
+		}
+
+		if ( ! empty( $settings['posts_by_current_user'] ) && 'yes' === $settings['posts_by_current_user'] ) {
+			$args['author__in'] = array( get_current_user_id() );
+		} elseif ( ! empty( $settings['authors'] ) ) {
+			$args['author__in'] = $settings['authors'];
+		}
+
+		if ( ! empty( $settings['post__not_in'] ) ) {
+			$args['post__not_in'] = $settings['post__not_in'];
+		}
+
+		if ( 'product' === $post_type && function_exists( 'whols_lite' ) ) {
+			$args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
+		}
+
+		// Polylang: pin the query to the language of the page/document the widget is
+		// on, instead of the ambient (cookie / last-page-load) current language. In
+		// the editor the ambient language flips on every page load, which made the
+		// Post Grid show the wrong language's posts. Skip manual ("by_id") selections
+		// and post types Polylang isn't translating.
+		if ( function_exists( 'pll_get_post_language' ) && 'by_id' !== $settings['post_type'] ) {
+			$eael_is_translated = ! function_exists( 'pll_is_translated_post_type' );
+			if ( ! $eael_is_translated ) {
+				foreach ( (array) $args['post_type'] as $eael_pt ) {
+					if ( 'any' !== $eael_pt && pll_is_translated_post_type( $eael_pt ) ) {
+						$eael_is_translated = true;
+						break;
+					}
+				}
+			}
+
+			if ( $eael_is_translated ) {
+				$eael_lang = self::eael_get_current_language();
+				// Allow integrators to override the pinned language.
+				$eael_lang = apply_filters( 'eael/post_grid/query_lang', $eael_lang, $settings, $args );
+				if ( ! empty( $eael_lang ) ) {
+					$args['lang'] = $eael_lang;
+				}
+			}
+		}
+
+		return $args;
+	}
 
 	/**
 	 * Resolve the Polylang language slug a widget's query/content should be pinned
@@ -349,171 +396,172 @@ class Helper
 		return $lang ? '_lang_' . sanitize_key( $lang ) : '';
 	}
 
-    /**
-     * Go Premium
-     *
-     */
-    public static function go_premium($wb)
-    {
-        $wb->start_controls_section(
-            'eael_section_pro',
-            [
-                'label' => __('Go Premium for More Features', 'essential-addons-for-elementor-lite'),
-            ]
-        );
+	/**
+	 * Go Premium
+	 *
+	 */
+	public static function go_premium( $wb ) {
+		$wb->start_controls_section(
+			'eael_section_pro',
+			array(
+				'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite' ),
+			)
+		);
 
-        $wb->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __('Unlock more possibilities', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    '1' => [
-                        'title' => '',
-                        'icon' => 'fa fa-unlock-alt',
-                    ],
-                ],
-                'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
-            ]
-        );
+		$wb->add_control(
+			'eael_control_get_pro',
+			array(
+				'label'       => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => array(
+					'1' => array(
+						'title' => '',
+						'icon'  => 'fa fa-unlock-alt',
+					),
+				),
+				'default'     => '1',
+				'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+			)
+		);
 
-        $wb->end_controls_section();
-    }
+		$wb->end_controls_section();
+	}
 
-    /**
-     * Get All POst Types
-     * @return array
-     */
-    public static function get_post_types()
-    {
-        $post_types = get_post_types(['public' => true, 'show_in_nav_menus' => true], 'objects');
-        $post_types = wp_list_pluck($post_types, 'label', 'name');
+	/**
+	 * Get All POst Types
+	 * @return array
+	 */
+	public static function get_post_types() {
+		$post_types = get_post_types(
+			array(
+				'public'            => true,
+				'show_in_nav_menus' => true,
+			),
+			'objects'
+		);
+		$post_types = wp_list_pluck( $post_types, 'label', 'name' );
 
-        return array_diff_key($post_types, ['elementor_library', 'attachment']);
-    }
+		return array_diff_key( $post_types, array( 'elementor_library', 'attachment' ) );
+	}
 
 
-    /**
-     * Get All POst Types
-     * @todo should be removed on future version
-     * @return array
-     */
-    public static function get_allowed_post_types()
-    {
-        return self::get_post_types();
-    }
+	/**
+	 * Get All POst Types
+	 * @todo should be removed on future version
+	 * @return array
+	 */
+	public static function get_allowed_post_types() {
+		return self::get_post_types();
+	}
 
-    /**
-     * Get all types of post.
-     *
-     * @param  string  $post_type
-     *
-     * @return array
-     */
-    public static function get_post_list($post_type = 'any')
-    {
-        return self::get_query_post_list($post_type);
-    }
+	/**
+	 * Get all types of post.
+	 *
+	 * @param  string  $post_type
+	 *
+	 * @return array
+	 */
+	public static function get_post_list( $post_type = 'any' ) {
+		return self::get_query_post_list( $post_type );
+	}
 
-    /**
-     * POst Orderby Options
-     *
-     * @return array
-     */
-    public static function get_post_orderby_options()
-    {
-	    $orderby = array(
-		    'ID'            => __( 'Post ID', 'essential-addons-for-elementor-lite' ),
-		    'author'        => __( 'Post Author', 'essential-addons-for-elementor-lite' ),
-		    'title'         => __( 'Title', 'essential-addons-for-elementor-lite' ),
-		    'date'          => __( 'Date', 'essential-addons-for-elementor-lite' ),
-		    'modified'      => __( 'Last Modified Date', 'essential-addons-for-elementor-lite' ),
-		    'parent'        => __( 'Parent Id', 'essential-addons-for-elementor-lite' ),
-		    'rand'          => __( 'Random', 'essential-addons-for-elementor-lite' ),
-		    'comment_count' => __( 'Comment Count', 'essential-addons-for-elementor-lite' ),
-		    'most_viewed'   => __( 'Most Viewed', 'essential-addons-for-elementor-lite' ),
-		    'menu_order'    => __( 'Menu Order', 'essential-addons-for-elementor-lite' ),
-		    'meta_value'    => __( 'Custom Field', 'essential-addons-for-elementor-lite' )
-	    );
+	/**
+	 * POst Orderby Options
+	 *
+	 * @return array
+	 */
+	public static function get_post_orderby_options() {
+		$orderby = array(
+			'ID'            => __( 'Post ID', 'essential-addons-for-elementor-lite' ),
+			'author'        => __( 'Post Author', 'essential-addons-for-elementor-lite' ),
+			'title'         => __( 'Title', 'essential-addons-for-elementor-lite' ),
+			'date'          => __( 'Date', 'essential-addons-for-elementor-lite' ),
+			'modified'      => __( 'Last Modified Date', 'essential-addons-for-elementor-lite' ),
+			'parent'        => __( 'Parent Id', 'essential-addons-for-elementor-lite' ),
+			'rand'          => __( 'Random', 'essential-addons-for-elementor-lite' ),
+			'comment_count' => __( 'Comment Count', 'essential-addons-for-elementor-lite' ),
+			'most_viewed'   => __( 'Most Viewed', 'essential-addons-for-elementor-lite' ),
+			'menu_order'    => __( 'Menu Order', 'essential-addons-for-elementor-lite' ),
+			'meta_value'    => __( 'Custom Field', 'essential-addons-for-elementor-lite' ),
+		);
 
-        return $orderby;
-    }
+		return $orderby;
+	}
 
-    /**
-     * Get Post Categories
-     *
-     * @return array
-     */
-    public static function get_terms_list($taxonomy = 'category', $key = 'term_id')
-    {
-        $options = [];
-        $terms = get_terms([
-            'taxonomy' => $taxonomy,
-            'hide_empty' => true,
-        ]);
+	/**
+	 * Get Post Categories
+	 *
+	 * @return array
+	 */
+	public static function get_terms_list( $taxonomy = 'category', $key = 'term_id' ) {
+		$options = array();
+		$terms   = get_terms(
+			array(
+				'taxonomy'   => $taxonomy,
+				'hide_empty' => true,
+			)
+		);
 
-        if (!empty($terms) && !is_wp_error($terms)) {
-            foreach ($terms as $term) {
-                $options[$term->{$key}] = $term->name;
-            }
-        }
+		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$options[ $term->{$key} ] = $term->name;
+			}
+		}
 
-        return $options;
-    }
+		return $options;
+	}
 
-    /**
-     * Get all elementor page templates
-     *
-     * @param  null  $type
-     *
-     * @return array
-     */
-    public static function get_elementor_templates($type = null)
-    {
-        $options = [];
+	/**
+	 * Get all elementor page templates
+	 *
+	 * @param  null  $type
+	 *
+	 * @return array
+	 */
+	public static function get_elementor_templates( $type = null ) {
+		$options = array();
 
-        if ($type) {
-            $args = [
-                'post_type' => 'elementor_library',
-                'posts_per_page' => -1,
-            ];
-            $args['tax_query'] = [
-                [
-                    'taxonomy' => 'elementor_library_type',
-                    'field' => 'slug',
-                    'terms' => $type,
-                ],
-            ];
+		if ( $type ) {
+			$args              = array(
+				'post_type'      => 'elementor_library',
+				'posts_per_page' => -1,
+			);
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'elementor_library_type',
+					'field'    => 'slug',
+					'terms'    => $type,
+				),
+			);
 
-            $page_templates = get_posts($args);
+			$page_templates = get_posts( $args );
 
-            if (!empty($page_templates) && !is_wp_error($page_templates)) {
-                foreach ($page_templates as $post) {
-                    $options[$post->ID] = $post->post_title;
-                }
-            }
-        } else {
-            $options = self::get_query_post_list('elementor_library');
-        }
+			if ( ! empty( $page_templates ) && ! is_wp_error( $page_templates ) ) {
+				foreach ( $page_templates as $post ) {
+					$options[ $post->ID ] = $post->post_title;
+				}
+			}
+		} else {
+			$options = self::get_query_post_list( 'elementor_library' );
+		}
 
-        return $options;
-    }
+		return $options;
+	}
 
-    /**
-     * Get all Authors
-     *
-     * @return array
-     */
+	/**
+	 * Get all Authors
+	 *
+	 * @return array
+	 */
 	public static function get_authors_list() {
-		$args = [
-			'capability'          => [ 'edit_posts' ],
+		$args = array(
+			'capability'          => array( 'edit_posts' ),
 			'has_published_posts' => true,
-			'fields'              => [
+			'fields'              => array(
 				'ID',
 				'display_name',
-			],
-		];
+			),
+		);
 
 		// Capability queries were only introduced in WP 5.9.
 		if ( version_compare( $GLOBALS['wp_version'], '5.9-alpha', '<' ) ) {
@@ -527,292 +575,286 @@ class Helper
 			return wp_list_pluck( $users, 'display_name', 'ID' );
 		}
 
-		return [];
+		return array();
 	}
 
-    /**
-     * Get all Tags
-     *
-     * @param  array  $args
-     *
-     * @return array
-     */
-    public static function get_tags_list($args = array())
-    {
-        $options = [];
-        $tags = get_tags($args);
+	/**
+	 * Get all Tags
+	 *
+	 * @param  array  $args
+	 *
+	 * @return array
+	 */
+	public static function get_tags_list( $args = array() ) {
+		$options = array();
+		$tags    = get_tags( $args );
 
-        if (!is_wp_error($tags) && !empty($tags)) {
-            foreach ($tags as $tag) {
-                $options[$tag->term_id] = $tag->name;
-            }
-        }
+		if ( ! is_wp_error( $tags ) && ! empty( $tags ) ) {
+			foreach ( $tags as $tag ) {
+				$options[ $tag->term_id ] = $tag->name;
+			}
+		}
 
-        return $options;
-    }
+		return $options;
+	}
 
-    /**
-     * Get all taxonomies by post
-     *
-     * @param  array   $args
-     *
-     * @param  string  $output
-     * @param  string  $operator
-     *
-     * @return array
-     */
-    public static function get_taxonomies_by_post($args = [], $output = 'names', $operator = 'and')
-    {
-        global $wp_taxonomies;
+	/**
+	 * Get all taxonomies by post
+	 *
+	 * @param  array   $args
+	 *
+	 * @param  string  $output
+	 * @param  string  $operator
+	 *
+	 * @return array
+	 */
+	public static function get_taxonomies_by_post( $args = array(), $output = 'names', $operator = 'and' ) {
+		global $wp_taxonomies;
 
-        $field = ('names' === $output) ? 'name' : false;
+		$field = ( 'names' === $output ) ? 'name' : false;
 
-        // Handle 'object_type' separately.
-        if (isset($args['object_type'])) {
-            $object_type = (array) $args['object_type'];
-            unset($args['object_type']);
-        }
+		// Handle 'object_type' separately.
+		if ( isset( $args['object_type'] ) ) {
+			$object_type = (array) $args['object_type'];
+			unset( $args['object_type'] );
+		}
 
-        $taxonomies = wp_filter_object_list($wp_taxonomies, $args, $operator);
+		$taxonomies = wp_filter_object_list( $wp_taxonomies, $args, $operator );
 
-        if (isset($object_type)) {
-            foreach ($taxonomies as $tax => $tax_data) {
-                if (!array_intersect($object_type, $tax_data->object_type)) {
-                    unset($taxonomies[$tax]);
-                }
-            }
-        }
+		if ( isset( $object_type ) ) {
+			foreach ( $taxonomies as $tax => $tax_data ) {
+				if ( ! array_intersect( $object_type, $tax_data->object_type ) ) {
+					unset( $taxonomies[ $tax ] );
+				}
+			}
+		}
 
-        if ($field) {
-            $taxonomies = wp_list_pluck($taxonomies, $field);
-        }
+		if ( $field ) {
+			$taxonomies = wp_list_pluck( $taxonomies, $field );
+		}
 
-        return $taxonomies;
-    }
+		return $taxonomies;
+	}
 
-    /**
-     * Get Contact Form 7 [ if exists ]
-     */
-    public static function get_wpcf7_list()
-    {
-        $options = array();
+	/**
+	 * Get Contact Form 7 [ if exists ]
+	 */
+	public static function get_wpcf7_list() {
+		$options = array();
 
-        if (function_exists('wpcf7')) {
-            $wpcf7_form_list = get_posts(array(
-                'post_type' => 'wpcf7_contact_form',
-                'showposts' => 999,
-            ));
-            $options[0] = esc_html__('Select a Contact Form', 'essential-addons-for-elementor-lite');
-            if (!empty($wpcf7_form_list) && !is_wp_error($wpcf7_form_list)) {
-                foreach ($wpcf7_form_list as $post) {
-                    $options[$post->ID] = $post->post_title;
-                }
-            } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-            }
-        }
-        return $options;
-    }
+		if ( function_exists( 'wpcf7' ) ) {
+			$wpcf7_form_list = get_posts(
+				array(
+					'post_type' => 'wpcf7_contact_form',
+					'showposts' => 999,
+				)
+			);
+			$options[0]      = esc_html__( 'Select a Contact Form', 'essential-addons-for-elementor-lite' );
+			if ( ! empty( $wpcf7_form_list ) && ! is_wp_error( $wpcf7_form_list ) ) {
+				foreach ( $wpcf7_form_list as $post ) {
+					$options[ $post->ID ] = $post->post_title;
+				}
+			} else {
+				$options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
+			}
+		}
+		return $options;
+	}
 
-    /**
-     * Get Gravity Form [ if exists ]
-     *
-     * @return array
-     */
-    public static function get_gravity_form_list()
-    {
-        $options = array();
+	/**
+	 * Get Gravity Form [ if exists ]
+	 *
+	 * @return array
+	 */
+	public static function get_gravity_form_list() {
+		$options = array();
 
-        if (class_exists('GFCommon')) {
-            $gravity_forms = \RGFormsModel::get_forms(null, 'title');
+		if ( class_exists( 'GFCommon' ) ) {
+			$gravity_forms = \RGFormsModel::get_forms( null, 'title' );
 
-            if (!empty($gravity_forms) && !is_wp_error($gravity_forms)) {
+			if ( ! empty( $gravity_forms ) && ! is_wp_error( $gravity_forms ) ) {
 
-                $options[0] = esc_html__('Select Gravity Form', 'essential-addons-for-elementor-lite');
-                foreach ($gravity_forms as $form) {
-                    $options[$form->id] = $form->title;
-                }
+				$options[0] = esc_html__( 'Select Gravity Form', 'essential-addons-for-elementor-lite' );
+				foreach ( $gravity_forms as $form ) {
+					$options[ $form->id ] = $form->title;
+				}
+			} else {
+				$options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
+			}
+		}
 
-            } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-            }
-        }
+		return $options;
+	}
 
-        return $options;
-    }
+	/**
+	 * Get WeForms Form List
+	 *
+	 * @return array
+	 */
+	public static function get_weform_list() {
+		$wpuf_form_list = get_posts(
+			array(
+				'post_type' => 'wpuf_contact_form',
+				'showposts' => 999,
+			)
+		);
 
-    /**
-     * Get WeForms Form List
-     *
-     * @return array
-     */
-    public static function get_weform_list()
-    {
-        $wpuf_form_list = get_posts(array(
-            'post_type' => 'wpuf_contact_form',
-            'showposts' => 999,
-        ));
+		$options = array();
 
-        $options = array();
+		if ( ! empty( $wpuf_form_list ) && ! is_wp_error( $wpuf_form_list ) ) {
+			$options[0] = esc_html__( 'Select weForm', 'essential-addons-for-elementor-lite' );
+			foreach ( $wpuf_form_list as $post ) {
+				$options[ $post->ID ] = $post->post_title;
+			}
+		} else {
+			$options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
+		}
 
-        if (!empty($wpuf_form_list) && !is_wp_error($wpuf_form_list)) {
-            $options[0] = esc_html__('Select weForm', 'essential-addons-for-elementor-lite');
-            foreach ($wpuf_form_list as $post) {
-                $options[$post->ID] = $post->post_title;
-            }
-        } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-        }
+		return $options;
+	}
 
-        return $options;
-    }
+	/**
+	 * Get Ninja Form List
+	 *
+	 * @return array
+	 */
+	public static function get_ninja_form_list() {
+		$options = array();
 
-    /**
-     * Get Ninja Form List
-     *
-     * @return array
-     */
-    public static function get_ninja_form_list()
-    {
-        $options = array();
+		if ( class_exists( 'Ninja_Forms' ) ) {
+			$contact_forms = Ninja_Forms()->form()->get_forms();
 
-        if (class_exists('Ninja_Forms')) {
-            $contact_forms = Ninja_Forms()->form()->get_forms();
+			if ( ! empty( $contact_forms ) && ! is_wp_error( $contact_forms ) ) {
 
-            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
+				$options[0] = esc_html__( 'Select Ninja Form', 'essential-addons-for-elementor-lite' );
 
-                $options[0] = esc_html__('Select Ninja Form', 'essential-addons-for-elementor-lite');
+				foreach ( $contact_forms as $form ) {
+					$options[ $form->get_id() ] = $form->get_setting( 'title' );
+				}
+			}
+		} else {
+			$options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
+		}
 
-                foreach ($contact_forms as $form) {
-                    $options[$form->get_id()] = $form->get_setting('title');
-                }
-            }
-        } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-        }
+		return $options;
+	}
 
-        return $options;
-    }
+	/**
+	 * Get Caldera Form List
+	 *
+	 * @return array
+	 */
+	public static function get_caldera_form_list() {
+		$options = array();
 
-    /**
-     * Get Caldera Form List
-     *
-     * @return array
-     */
-    public static function get_caldera_form_list()
-    {
-        $options = array();
+		if ( class_exists( 'Caldera_Forms' ) ) {
+			$contact_forms = \Caldera_Forms_Forms::get_forms( true, true );
 
-        if (class_exists('Caldera_Forms')) {
-            $contact_forms = \Caldera_Forms_Forms::get_forms(true, true);
+			if ( ! empty( $contact_forms ) && ! is_wp_error( $contact_forms ) ) {
+				$options[0] = esc_html__( 'Select Caldera Form', 'essential-addons-for-elementor-lite' );
+				foreach ( $contact_forms as $form ) {
+					$options[ $form['ID'] ] = $form['name'];
+				}
+			}
+		} else {
+			$options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
+		}
 
-            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-                $options[0] = esc_html__('Select Caldera Form', 'essential-addons-for-elementor-lite');
-                foreach ($contact_forms as $form) {
-                    $options[$form['ID']] = $form['name'];
-                }
-            }
-        } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-        }
+		return $options;
+	}
 
-        return $options;
-    }
+	/**
+	 * Get WPForms List
+	 *
+	 * @return array
+	 */
+	public static function get_wpforms_list() {
+		$options = array();
 
-    /**
-     * Get WPForms List
-     *
-     * @return array
-     */
-    public static function get_wpforms_list()
-    {
-        $options = array();
+		if ( class_exists( '\WPForms\WPForms' ) ) {
+			$args = array(
+				'post_type'      => 'wpforms',
+				'posts_per_page' => -1,
+			);
 
-        if (class_exists('\WPForms\WPForms')) {
-            $args = array(
-                'post_type' => 'wpforms',
-                'posts_per_page' => -1,
-            );
+			$contact_forms = get_posts( $args );
 
-            $contact_forms = get_posts($args);
+			if ( ! empty( $contact_forms ) && ! is_wp_error( $contact_forms ) ) {
+				$options[0] = esc_html__( 'Select a WPForm', 'essential-addons-for-elementor-lite' );
+				foreach ( $contact_forms as $post ) {
+					$options[ $post->ID ] = $post->post_title;
+				}
+			}
+		} else {
+			$options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
+		}
 
-            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-                $options[0] = esc_html__('Select a WPForm', 'essential-addons-for-elementor-lite');
-                foreach ($contact_forms as $post) {
-                    $options[$post->ID] = $post->post_title;
-                }
-            }
-        } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-        }
-
-        return $options;
-    }
+		return $options;
+	}
 
 
 
-    public static function get_ninja_tables_list()
-    {
-        $tables = get_posts([
-            'post_type' => 'ninja-table',
-            'post_status' => 'publish',
-            'posts_per_page' => '-1',
-        ]);
+	public static function get_ninja_tables_list() {
+		$tables = get_posts(
+			array(
+				'post_type'      => 'ninja-table',
+				'post_status'    => 'publish',
+				'posts_per_page' => '-1',
+			)
+		);
 
-        if (!empty($tables)) {
-            return wp_list_pluck($tables, 'post_title', 'ID');
-        }
+		if ( ! empty( $tables ) ) {
+			return wp_list_pluck( $tables, 'post_title', 'ID' );
+		}
 
-        return [];
-    }
+		return array();
+	}
 
-    public static function get_terms_as_list($term_type = 'category', $length = 1)
-    {
-	    $terms = get_the_terms( get_the_ID(), $term_type );
+	public static function get_terms_as_list( $term_type = 'category', $length = 1 ) {
+		$terms = get_the_terms( get_the_ID(), $term_type );
 
-        if ($term_type === 'category') {
-            $terms = get_the_category();
-        }
+		if ( $term_type === 'category' ) {
+			$terms = get_the_category();
+		}
 
-        if ($term_type === 'tags') {
-            $terms = get_the_tags();
-        }
+		if ( $term_type === 'tags' ) {
+			$terms = get_the_tags();
+		}
 
-        if (empty($terms)) {
-            return;
-        }
+		if ( empty( $terms ) ) {
+			return;
+		}
 
-        $count = 0;
+		$count = 0;
 
-        $html = '<ul class="post-carousel-categories">';
-        foreach ($terms as $term) {
-            if ( $count === absint( $length ) ) {
-                break;
-            }
-            $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
-            $html .= '<li>';
-            $html .= '<a href="' . esc_url($link) . '">';
-            $html .= esc_html( $term->name );
-            $html .= '</a>';
-            $html .= '</li>';
-            $count++;
-        }
-        $html .= '</ul>';
+		$html = '<ul class="post-carousel-categories">';
+		foreach ( $terms as $term ) {
+			if ( $count === absint( $length ) ) {
+				break;
+			}
+			$link  = ( $term_type === 'category' ) ? get_category_link( $term->term_id ) : get_tag_link( $term->term_id );
+			$html .= '<li>';
+			$html .= '<a href="' . esc_url( $link ) . '">';
+			$html .= esc_html( $term->name );
+			$html .= '</a>';
+			$html .= '</li>';
+			++$count;
+		}
+		$html .= '</ul>';
 
-        return $html;
-
-    }
+		return $html;
+	}
 
 	/**
 	 * Returns product categories list
 	 *
 	 * @return string
 	 */
-	public static function get_product_categories_list($terms_name) {
+	public static function get_product_categories_list( $terms_name ) {
 		global $product;
 
 		if ( ! is_a( $product, 'WC_Product' ) ) {
-			return ''; 
+			return '';
 		}
 
 		$separator = '';
@@ -822,222 +864,221 @@ class Helper
 		return get_the_term_list( $product->get_id(), $terms_name, $before, $separator, $after );
 	}
 
-    /**
-     * This function is responsible for counting doc post under a category.
-     *
-     * @param int $term_count
-     * @param int $term_id
-     * @return int $term_count;
-     */
-    public static function get_doc_post_count($term_count = 0, $term_id = 0)
-    {
-        $tax_terms = get_terms([
-            'taxonomy' => 'doc_category',
-            'child_of' => $term_id
-        ]);
+	/**
+	 * This function is responsible for counting doc post under a category.
+	 *
+	 * @param int $term_count
+	 * @param int $term_id
+	 * @return int $term_count;
+	 */
+	public static function get_doc_post_count( $term_count = 0, $term_id = 0 ) {
+		$tax_terms = get_terms(
+			array(
+				'taxonomy' => 'doc_category',
+				'child_of' => $term_id,
+			)
+		);
 
-        foreach ($tax_terms as $tax_term) {
-            $term_count += $tax_term->count;
-        }
+		foreach ( $tax_terms as $tax_term ) {
+			$term_count += $tax_term->count;
+		}
 
-        return $term_count;
-    }
+		return $term_count;
+	}
 
-    public static function get_dynamic_args(array $settings, array $args)
-    {
-	    if ( $settings['post_type'] === 'source_dynamic' && ( is_archive() || is_search() ) ) {
-            $data = get_queried_object();
+	public static function get_dynamic_args( array $settings, array $args ) {
+		if ( $settings['post_type'] === 'source_dynamic' && ( is_archive() || is_search() ) ) {
+			$data = get_queried_object();
 
-            if (isset($data->post_type)) {
-                $args['post_type'] = $data->post_type;
-                $args['tax_query'] = [];
-            } else {
-                global $wp_query;
-                $args['post_type'] = $wp_query->query_vars['post_type'];
-                if(!empty($wp_query->query_vars['s'])){
-                    $args['s'] = $wp_query->query_vars['s'];
-                    $args['offset'] = 0;
-                }
-            }
+			if ( isset( $data->post_type ) ) {
+				$args['post_type'] = $data->post_type;
+				$args['tax_query'] = array();
+			} else {
+				global $wp_query;
+				$args['post_type'] = $wp_query->query_vars['post_type'];
+				if ( ! empty( $wp_query->query_vars['s'] ) ) {
+					$args['s']      = $wp_query->query_vars['s'];
+					$args['offset'] = 0;
+				}
+			}
 
-            if ( isset( $data->taxonomy ) ) {
-                $args[ 'tax_query' ][] = [
-                    'taxonomy' => $data->taxonomy,
-                    'field'    => 'term_id',
-                    'terms'    => $data->term_id,
-                ];
-            }
+			if ( isset( $data->taxonomy ) ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => $data->taxonomy,
+					'field'    => 'term_id',
+					'terms'    => $data->term_id,
+				);
+			}
 
-            if (get_query_var('author') > 0) {
-                $args['author__in'] = get_query_var('author');
-            }
+			if ( get_query_var( 'author' ) > 0 ) {
+				$args['author__in'] = get_query_var( 'author' );
+			}
 
-            if (get_query_var('s')!='') {
-                $args['s'] = get_query_var('s');
-            }
+			if ( get_query_var( 's' ) != '' ) {
+				$args['s'] = get_query_var( 's' );
+			}
 
-            if (get_query_var('year') || get_query_var('monthnum') || get_query_var('day')) {
-                $args['date_query'] = [
-                    'year' => get_query_var('year'),
-                    'month' => get_query_var('monthnum'),
-                    'day' => get_query_var('day'),
-                ];
-            }
+			if ( get_query_var( 'year' ) || get_query_var( 'monthnum' ) || get_query_var( 'day' ) ) {
+				$args['date_query'] = array(
+					'year'  => get_query_var( 'year' ),
+					'month' => get_query_var( 'monthnum' ),
+					'day'   => get_query_var( 'day' ),
+				);
+			}
 
-            if (!empty($args['tax_query'])) {
-                $args['tax_query']['relation'] = 'AND';
-            }
+			if ( ! empty( $args['tax_query'] ) ) {
+				$args['tax_query']['relation'] = 'AND';
+			}
 
-            $args[ 'meta_query' ] = [ 'relation' => 'AND' ];
-            $show_stock_out_products = isset( $settings['eael_product_out_of_stock_show'] ) ? $settings['eael_product_out_of_stock_show'] : 'yes';
+			$args['meta_query']      = array( 'relation' => 'AND' );
+			$show_stock_out_products = isset( $settings['eael_product_out_of_stock_show'] ) ? $settings['eael_product_out_of_stock_show'] : 'yes';
 
-            if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' || 'yes' !== $show_stock_out_products  ) {
-                $args[ 'meta_query' ][] = [
-                    'key'   => '_stock_status',
-                    'value' => 'instock'
-                ];
-            }
-            if( 'product' === $args['post_type'] && function_exists('whols_lite') ){
-                $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
-            }
-        }
+			if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' || 'yes' !== $show_stock_out_products ) {
+				$args['meta_query'][] = array(
+					'key'   => '_stock_status',
+					'value' => 'instock',
+				);
+			}
+			if ( 'product' === $args['post_type'] && function_exists( 'whols_lite' ) ) {
+				$args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
+			}
+		}
 
-        return $args;
-    }
+		return $args;
+	}
 
-    public static function get_multiple_kb_terms($prettify = false, $term_id = true)
-    {
-        $args = [
-            'taxonomy' => 'knowledge_base',
-            'hide_empty' => true,
-            'parent' => 0,
-        ];
+	public static function get_multiple_kb_terms( $prettify = false, $term_id = true ) {
+		$args = array(
+			'taxonomy'   => 'knowledge_base',
+			'hide_empty' => true,
+			'parent'     => 0,
+		);
 
-        $terms = get_terms($args);
+		$terms = get_terms( $args );
 
-        if (is_wp_error($terms)) {
-            return [];
-        }
+		if ( is_wp_error( $terms ) ) {
+			return array();
+		}
 
-        if ($prettify) {
-            $pretty_taxonomies = [];
+		if ( $prettify ) {
+			$pretty_taxonomies = array();
 
-            foreach ($terms as $term) {
-                $pretty_taxonomies[$term_id ? $term->term_id : $term->slug] = $term->name;
-            }
+			foreach ( $terms as $term ) {
+				$pretty_taxonomies[ $term_id ? $term->term_id : $term->slug ] = $term->name;
+			}
 
-            return $pretty_taxonomies;
-        }
+			return $pretty_taxonomies;
+		}
 
-        return $terms;
-    }
+		return $terms;
+	}
 
-    public static function get_betterdocs_multiple_kb_status()
-    {
-        if (\BetterDocs_DB::get_settings('multiple_kb') == 1) {
-            return 'true';
-        }
+	public static function get_betterdocs_multiple_kb_status() {
+		if ( \BetterDocs_DB::get_settings( 'multiple_kb' ) == 1 ) {
+			return 'true';
+		}
 
-        return '';
-    }
+		return '';
+	}
 
-    public static function get_query_post_list($post_type = 'any', $limit = -1, $search = '')
-    {
-        global $wpdb;
-        $where = '';
-        $data = [];
+	public static function get_query_post_list( $post_type = 'any', $limit = -1, $search = '' ) {
+		global $wpdb;
+		$where = '';
+		$data  = array();
 
-        if (-1 == $limit) {
-            $limit = '';
-        } elseif (0 == $limit) {
-            $limit = "limit 0,1";
-        } else {
-            $limit = $wpdb->prepare(" limit 0,%d", esc_sql($limit));
-        }
+		if ( -1 == $limit ) {
+			$limit = '';
+		} elseif ( 0 == $limit ) {
+			$limit = 'limit 0,1';
+		} else {
+			$limit = $wpdb->prepare( ' limit 0,%d', esc_sql( $limit ) );
+		}
 
-        if ('any' === $post_type) {
-            $in_search_post_types = get_post_types(['exclude_from_search' => false]);
-            if (empty($in_search_post_types)) {
-                $where .= ' AND 1=0 ';
-            } else {
-                $where .= " AND {$wpdb->posts}.post_type IN ('" . join("', '",
-                    array_map('esc_sql', $in_search_post_types)) . "')";
-            }
-        } elseif (!empty($post_type)) {
-            $where .= $wpdb->prepare(" AND {$wpdb->posts}.post_type = %s", esc_sql($post_type));
-        }
+		if ( 'any' === $post_type ) {
+			$in_search_post_types = get_post_types( array( 'exclude_from_search' => false ) );
+			if ( empty( $in_search_post_types ) ) {
+				$where .= ' AND 1=0 ';
+			} else {
+				$where .= " AND {$wpdb->posts}.post_type IN ('" . join(
+					"', '",
+					array_map( 'esc_sql', $in_search_post_types )
+				) . "')";
+			}
+		} elseif ( ! empty( $post_type ) ) {
+			$where .= $wpdb->prepare( " AND {$wpdb->posts}.post_type = %s", esc_sql( $post_type ) );
+		}
 
-        if (!empty($search)) {
-            $where .= $wpdb->prepare(" AND {$wpdb->posts}.post_title LIKE %s", '%' . esc_sql($search) . '%');
-        }
+		if ( ! empty( $search ) ) {
+			$where .= $wpdb->prepare( " AND {$wpdb->posts}.post_title LIKE %s", '%' . esc_sql( $search ) . '%' );
+		}
 
-        $query = "select post_title,ID  from $wpdb->posts where post_status = 'publish' $where $limit";
+		$query = "select post_title,ID  from $wpdb->posts where post_status = 'publish' $where $limit";
 
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
-        $results = $wpdb->get_results($query);
-        if (!empty($results)) {
-            foreach ($results as $row) {
-                $data[$row->ID] = $row->post_title;
-            }
-        }
-        return $data;
-    }
+		$results = $wpdb->get_results( $query );
+		if ( ! empty( $results ) ) {
+			foreach ( $results as $row ) {
+				$data[ $row->ID ] = $row->post_title;
+			}
+		}
+		return $data;
+	}
 
-    public static function eael_get_widget_settings( $page_id, $widget_id ) {
-        $document = Plugin::$instance->documents->get( $page_id );
-        $settings = [];
-        if ( $document ) {
-            $elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
-            $widget_data = self::find_element_recursive( $elements, $widget_id );
-            if (!empty($widget_data) && is_array($widget_data)) {
-                $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
-            }
-            if ( !empty($widget) ) {
-                $settings    = $widget->get_settings_for_display();
-            }
-        }
-        return $settings;
-    }
+	public static function eael_get_widget_settings( $page_id, $widget_id ) {
+		$document = Plugin::$instance->documents->get( $page_id );
+		$settings = array();
+		if ( $document ) {
+			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
+			$widget_data = self::find_element_recursive( $elements, $widget_id );
+			if ( ! empty( $widget_data ) && is_array( $widget_data ) ) {
+				$widget = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
+			}
+			if ( ! empty( $widget ) ) {
+				$settings = $widget->get_settings_for_display();
+			}
+		}
+		return $settings;
+	}
 
-    /**
-     * Get Widget data.
-     *
-     * @param array  $elements Element array.
-     * @param string $form_id  Element ID.
-     *
-     * @return bool|array
-     */
-    public static function find_element_recursive( $elements, $form_id ) {
+	/**
+	 * Get Widget data.
+	 *
+	 * @param array  $elements Element array.
+	 * @param string $form_id  Element ID.
+	 *
+	 * @return bool|array
+	 */
+	public static function find_element_recursive( $elements, $form_id ) {
 
-        foreach ( $elements as $element ) {
-            if ( $form_id === $element['id'] ) {
-                return $element;
-            }
+		foreach ( $elements as $element ) {
+			if ( $form_id === $element['id'] ) {
+				return $element;
+			}
 
-            if ( ! empty( $element['elements'] ) ) {
-                $element = self::find_element_recursive( $element['elements'], $form_id );
+			if ( ! empty( $element['elements'] ) ) {
+				$element = self::find_element_recursive( $element['elements'], $form_id );
 
-                if ( $element ) {
-                    return $element;
-                }
-            }
-        }
+				if ( $element ) {
+					return $element;
+				}
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 	/**
 	 * eael_pagination
-     * Generate post pagination
-     *
+	 * Generate post pagination
+	 *
 	 * @param $args array wp_query param
 	 * @param $settings array Elementor widget setting data
 	 *
-     * @access public
+	 * @access public
 	 * @return string|void
-     * @since 3.3.0
+	 * @since 3.3.0
 	 */
-	public static function eael_pagination ($args, $settings) {
+	public static function eael_pagination( $args, $settings ) {
 
 		$pagination_Count          = intval( $args['total_post'] ?? 0 );
 		$paginationLimit           = intval( $settings['eael_product_grid_products_count'] ) ?: 4;
@@ -1045,95 +1086,103 @@ class Helper
 		$widget_id                 = sanitize_key( $settings['eael_widget_id'] );
 		$page_id                   = intval( $settings['eael_page_id'] );
 		$next_label                = $settings['pagination_next_label'];
-		$adjacents                 = "2";
-		$setPagination             = "";
-		$template_info             = [
+		$adjacents                 = '2';
+		$setPagination             = '';
+		$template_info             = array(
 			'dir'       => 'free',
-			'file_name'  => 'default',
-			'name'      => $settings['eael_widget_name']
-		];
+			'file_name' => 'default',
+			'name'      => $settings['eael_widget_name'],
+		);
 
-        if ( ! empty( $settings['eael_dynamic_template_Layout'] ) ) {
-            $template_info['file_name'] = $settings['eael_dynamic_template_Layout'];
-        } else if ( ! empty( $settings['eael_product_grid_template'] ) ) {
-            $template_info['file_name'] = $settings['eael_product_grid_template'];
-        }
+		if ( ! empty( $settings['eael_dynamic_template_Layout'] ) ) {
+			$template_info['file_name'] = $settings['eael_dynamic_template_Layout'];
+		} elseif ( ! empty( $settings['eael_product_grid_template'] ) ) {
+			$template_info['file_name'] = $settings['eael_product_grid_template'];
+		}
 
-		if( $pagination_Paginationlist > 0 ){
+		if ( $pagination_Paginationlist > 0 ) {
 
-			$setPagination .="<nav id='{$widget_id}-eael-pagination' class='eael-woo-pagination' data-plimit='$paginationLimit' data-totalpage ='{$args['total_post']}' data-widgetid='{$widget_id}' data-pageid='$page_id' data-args='".http_build_query( $args )."'  data-template='".json_encode( $template_info, 1 )."'>";
-			    $setPagination .="<ul class='page-numbers'>";
+			$setPagination     .= "<nav id='{$widget_id}-eael-pagination' class='eael-woo-pagination' data-plimit='$paginationLimit' data-totalpage ='{$args['total_post']}' data-widgetid='{$widget_id}' data-pageid='$page_id' data-args='" . http_build_query( $args ) . "'  data-template='" . json_encode( $template_info, 1 ) . "'>";
+				$setPagination .= "<ul class='page-numbers'>";
 
-                    if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
-                        for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
-                            $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" , esc_attr( $active ) ,esc_html( $pagination ) );
-                        }
+			if ( $pagination_Paginationlist < 7 + ( $adjacents * 2 ) ) {
+				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination++ ) {
+					$active         = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
+				}
+			} elseif ( $pagination_Paginationlist >= 5 + ( $adjacents * 2 ) ) {
+				for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination++ ) {
+					$active         = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
+				}
 
-                    } else if ( $pagination_Paginationlist >= 5 + ($adjacents * 2) ){
-                        for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
-                            $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
-                        }
+				$setPagination .= "<li class='pagitext dots'>...</li>";
+				$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
+			}
 
-                        $setPagination .="<li class='pagitext dots'>...</li>";
-                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
-                    }
+			if ( $pagination_Paginationlist > 1 ) {
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='2'>" . esc_html( $next_label ) . '</a></li>';
+			}
 
-                    if ($pagination_Paginationlist > 1) {
-                        $setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='2'>".esc_html( $next_label )."</a></li>";
-                    }
-
-                $setPagination .="</ul>";
-			$setPagination .="</nav>";
+				$setPagination .= '</ul>';
+			$setPagination     .= '</nav>';
 
 			return $setPagination;
 		}
 	}
 
-	public static function eael_product_quick_view ($product, $settings, $widget_id) {
+	public static function eael_product_quick_view( $product, $settings, $widget_id ) {
 
 		$sale_badge_align  = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
 		$sale_badge_preset = isset( $settings['eael_product_sale_badge_preset'] ) ? $settings['eael_product_sale_badge_preset'] : '';
-		$sale_text         = ! empty( $settings['eael_product_carousel_sale_text'] ) ? $settings['eael_product_carousel_sale_text'] : (! empty( $settings['eael_product_sale_text'] ) ? $settings['eael_product_sale_text'] :( !empty( $settings['eael_product_gallery_sale_text'] ) ? $settings['eael_product_gallery_sale_text'] : 'Sale!' ));
-		$stockout_text     = ! empty( $settings['eael_product_carousel_stockout_text'] ) ? $settings['eael_product_carousel_stockout_text'] : (! empty( $settings['eael_product_stockout_text'] ) ? $settings['eael_product_stockout_text'] : ( !empty($settings['eael_product_gallery_stockout_text']) ? $settings['eael_product_gallery_stockout_text'] : 'Stock Out' ));
-        $tag               = ! empty( $settings['eael_product_quick_view_title_tag'] ) ? self::eael_validate_html_tag( $settings['eael_product_quick_view_title_tag'] ) : 'h1';
-        
-        remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
-        add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
-            printf('<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>',esc_html( $tag ), wp_kses( get_the_title(), Helper::eael_allowed_tags() ));
-        }, 5 );
+		$sale_text         = ! empty( $settings['eael_product_carousel_sale_text'] ) ? $settings['eael_product_carousel_sale_text'] : ( ! empty( $settings['eael_product_sale_text'] ) ? $settings['eael_product_sale_text'] : ( ! empty( $settings['eael_product_gallery_sale_text'] ) ? $settings['eael_product_gallery_sale_text'] : 'Sale!' ) );
+		$stockout_text     = ! empty( $settings['eael_product_carousel_stockout_text'] ) ? $settings['eael_product_carousel_stockout_text'] : ( ! empty( $settings['eael_product_stockout_text'] ) ? $settings['eael_product_stockout_text'] : ( ! empty( $settings['eael_product_gallery_stockout_text'] ) ? $settings['eael_product_gallery_stockout_text'] : 'Stock Out' ) );
+		$tag               = ! empty( $settings['eael_product_quick_view_title_tag'] ) ? self::eael_validate_html_tag( $settings['eael_product_quick_view_title_tag'] ) : 'h1';
 
-        // Quick View Buy Now button — rendered inside form.cart via woocommerce_after_add_to_cart_button hook
-        $qv_buy_now_enabled = isset( $settings['eael_product_carousel_qv_buy_now'] ) && 'yes' === $settings['eael_product_carousel_qv_buy_now'];
-        if ( $qv_buy_now_enabled && $product->is_purchasable() && $product->is_in_stock() ) {
-            $qv_buy_now_text = ! empty( $settings['eael_product_carousel_qv_buy_now_text'] ) ? $settings['eael_product_carousel_qv_buy_now_text'] : '';
-            $qv_buy_now_icon = ! empty( $settings['eael_product_carousel_qv_buy_now_icon'] ) ? $settings['eael_product_carousel_qv_buy_now_icon'] : [];
-            $qv_checkout_url = wc_get_checkout_url();
+		remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
+		add_action(
+			'eael_woo_single_product_summary',
+			function () use ( $tag ) {
+				printf( '<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>', esc_html( $tag ), wp_kses( get_the_title(), Helper::eael_allowed_tags() ) );
+			},
+			5
+		);
 
-            add_action( 'woocommerce_after_add_to_cart_button', function () use ( $qv_buy_now_text, $qv_buy_now_icon, $qv_checkout_url ) {
-                ?>
-                <button type="button" class="eael-popup-buy-now-button" data-checkout-url="<?php echo esc_url( $qv_checkout_url ); ?>" aria-label="<?php echo esc_attr( $qv_buy_now_text ? $qv_buy_now_text : __( 'Buy Now', 'essential-addons-for-elementor-lite' ) ); ?>">
-                    <?php if ( ! empty( $qv_buy_now_icon['value'] ) ) {
-                        Icons_Manager::render_icon( $qv_buy_now_icon, [ 'aria-hidden' => 'true' ] );
-                    } ?>
-                    <?php if ( ! empty( $qv_buy_now_text ) ) { ?>
-                        <span class="eael-buy-now-text"><?php echo esc_html( $qv_buy_now_text ); ?></span>
-                    <?php } ?>
-                </button>
-                <?php
-            } );
-        }
+		// Quick View Buy Now button — rendered inside form.cart via woocommerce_after_add_to_cart_button hook
+		$qv_buy_now_enabled = isset( $settings['eael_product_carousel_qv_buy_now'] ) && 'yes' === $settings['eael_product_carousel_qv_buy_now'];
+		if ( $qv_buy_now_enabled && $product->is_purchasable() && $product->is_in_stock() ) {
+			$qv_buy_now_text = ! empty( $settings['eael_product_carousel_qv_buy_now_text'] ) ? $settings['eael_product_carousel_qv_buy_now_text'] : '';
+			$qv_buy_now_icon = ! empty( $settings['eael_product_carousel_qv_buy_now_icon'] ) ? $settings['eael_product_carousel_qv_buy_now_icon'] : array();
+			$qv_checkout_url = wc_get_checkout_url();
 
-        $popup_classes = array();
+			add_action(
+				'woocommerce_after_add_to_cart_button',
+				function () use ( $qv_buy_now_text, $qv_buy_now_icon, $qv_checkout_url ) {
+					?>
+				<button type="button" class="eael-popup-buy-now-button" data-checkout-url="<?php echo esc_url( $qv_checkout_url ); ?>" aria-label="<?php echo esc_attr( $qv_buy_now_text ? $qv_buy_now_text : __( 'Buy Now', 'essential-addons-for-elementor-lite' ) ); ?>">
+					<?php
+					if ( ! empty( $qv_buy_now_icon['value'] ) ) {
+						Icons_Manager::render_icon( $qv_buy_now_icon, array( 'aria-hidden' => 'true' ) );
+					}
+					?>
+					<?php if ( ! empty( $qv_buy_now_text ) ) { ?>
+						<span class="eael-buy-now-text"><?php echo esc_html( $qv_buy_now_text ); ?></span>
+					<?php } ?>
+				</button>
+					<?php
+				}
+			);
+		}
 
-        if ( isset( $settings['eael_product_quick_view_hide_categories'] ) && 'yes' === $settings['eael_product_quick_view_hide_categories'] ) {
-            $popup_classes[] = 'eael-quick-view-hide-categories';
-        }
-        if ( isset( $settings['eael_product_quick_view_hide_quantity'] ) && 'yes' === $settings['eael_product_quick_view_hide_quantity'] ) {
-            $popup_classes[] = 'eael-quick-view-hide-quantity';
-        }
-	    ?>
+		$popup_classes = array();
+
+		if ( isset( $settings['eael_product_quick_view_hide_categories'] ) && 'yes' === $settings['eael_product_quick_view_hide_categories'] ) {
+			$popup_classes[] = 'eael-quick-view-hide-categories';
+		}
+		if ( isset( $settings['eael_product_quick_view_hide_quantity'] ) && 'yes' === $settings['eael_product_quick_view_hide_quantity'] ) {
+			$popup_classes[] = 'eael-quick-view-hide-quantity';
+		}
+		?>
 
 		<div id="eaproduct<?php echo esc_attr( $widget_id . $product->get_id() ); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
@@ -1143,7 +1192,7 @@ class Helper
 					<div class="eael-product-image-wrap">
 						<?php
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">'. Helper::eael_wp_kses( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">' . Helper::eael_wp_kses( $sale_text ) . '</span>' : '') );
+						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset ) . ' ' . esc_attr( $sale_badge_align ) . '">' . Helper::eael_wp_kses( $stockout_text ) . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset ) . ' ' . esc_attr( $sale_badge_align ) . '">' . Helper::eael_wp_kses( $sale_text ) . '</span>' : '' ) );
 						do_action( 'eael_woo_single_product_image' );
 						?>
 					</div>
@@ -1155,7 +1204,7 @@ class Helper
 			</div>
 
 		</div>
-	<?php
+		<?php
 	}
 
 	public static function eael_avoid_redirect_to_single_page() {
@@ -1166,618 +1215,617 @@ class Helper
 
 		add_filter( 'woocommerce_add_to_cart_form_action', self::eael_avoid_redirect_to_single_page(), 10 );
 		add_action( 'eael_woo_before_product_loop', 'woocommerce_output_all_notices', 30 );
-
 	}
 
-    public static function get_local_plugin_data( $basename = '' ) {
-        if ( empty( $basename ) ) {
-            return false;
-        }
+	public static function get_local_plugin_data( $basename = '' ) {
+		if ( empty( $basename ) ) {
+			return false;
+		}
 
-        if ( !function_exists( 'get_plugins' ) ) {
-            include_once ABSPATH . 'wp-admin/includes/plugin.php';
-        }
+		if ( ! function_exists( 'get_plugins' ) ) {
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
 
-        $plugins = get_plugins();
+		$plugins = get_plugins();
 
-        if ( !isset( $plugins[ $basename ] ) ) {
-            return false;
-        }
+		if ( ! isset( $plugins[ $basename ] ) ) {
+			return false;
+		}
 
-        return $plugins[ $basename ];
-    }
+		return $plugins[ $basename ];
+	}
 
 	/**
 	 * eael_validate_html_tag
 	 * @param $tag
 	 * @return mixed|string
 	 */
-    public static function eael_validate_html_tag( $tag ){
-	    return in_array( strtolower( (string) $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
-    }
+	public static function eael_validate_html_tag( $tag ) {
+		return in_array( strtolower( (string) $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
+	}
 
 	/**
-     *
-     * Strip tag based on allowed html tag
+	 *
+	 * Strip tag based on allowed html tag
 	 * eael_wp_kses
 	 * @param $text
 	 * @return string
 	 */
 	public static function eael_wp_kses( $text ) {
-        if ( empty( $text ) ) {
-            return '';
-        }
-		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
-	}
-
-    /**
-     * List of allowed protocols for wp_kses
-     *
-	 * eael_allowed_protocols
-	 * @return array
-	 */
-    public static function eael_allowed_protocols( $extra = [] ) {
-        $protocols = array_merge( wp_allowed_protocols(), [ 'data' ] );
-        if ( count( $extra ) > 0 ) {
-			$protocols = array_merge( $protocols, $extra );
+		if ( empty( $text ) ) {
+			return '';
 		}
-        return $protocols;
+		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), array( 'data' ) ) );
 	}
 
 	/**
-     * List of allowed html tag for wp_kses
-     *
+	 * List of allowed protocols for wp_kses
+	 *
+	 * eael_allowed_protocols
+	 * @return array
+	 */
+	public static function eael_allowed_protocols( $extra = array() ) {
+		$protocols = array_merge( wp_allowed_protocols(), array( 'data' ) );
+		if ( count( $extra ) > 0 ) {
+			$protocols = array_merge( $protocols, $extra );
+		}
+		return $protocols;
+	}
+
+	/**
+	 * List of allowed html tag for wp_kses
+	 *
 	 * eael_allowed_tags
 	 * @return array
 	 */
-	public static function eael_allowed_tags( $extra = [] ) {
-		$allowed_tags = [
-			'a'       => [
-				'href'   => [],
-				'title'  => [],
-				'class'  => [],
-				'rel'    => [],
-				'id'     => [],
-				'style'  => [],
-				'target' => [],
-				'data-elementor-open-lightbox' => [],
-			],
-			'q'       => [
-				'cite'  => [],
-				'class' => [],
-				'id'    => [],
-			],
-			'img'     => [
-                'src'            => [],
-                'alt'            => [],
-                'title'          => [],
-                'height'         => [],
-                'width'          => [],
-                'class'          => [],
-                'id'             => [],
-                'data-lazy-src'  => [],
-                'data-src'       => [],
-                'data-srcset'    => [],
-                'loading'        => [],
-                'srcset'         => [],
-                'sizes'          => [],
-                'decoding'       => [],
-                'fetchpriority'  => [],
-            ],
-			'span'    => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'dfn'     => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'time'    => [
-				'datetime' => [],
-				'class'    => [],
-				'id'       => [],
-				'style'    => [],
-			],
-			'cite'    => [
-				'title' => [],
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'hr'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'b'       => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'p'       => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'i'       => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'u'       => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			's'       => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'br'      => [],
-			'em'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'code'    => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'mark'    => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'small'   => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'abbr'    => [
-				'title' => [],
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'strong'  => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'del'     => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'ins'     => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'sub'     => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'sup'     => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'div'     => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-			'strike'  => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'acronym' => [],
-			'h1'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'h2'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'h3'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'h4'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'h5'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'h6'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'center'  => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'ul'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'ol'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'li'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-			'table'   => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-				'dir'   => [],
-				'align' => [],
-			],
-			'thead'   => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-				'align' => [],
-			],
-			'tbody'   => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-				'align' => [],
-			],
-			'tfoot'   => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-				'align' => [],
-			],
-			'th'      => [
-				'class'   => [],
-				'id'      => [],
-				'style'   => [],
-				'align'   => [],
-				'colspan' => [],
-				'rowspan' => [],
-			],
-			'tr'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-				'align' => [],
-			],
-			'td'     => [
-				'class'   => [],
-				'id'      => [],
-				'style'   => [],
-				'align'   => [],
-				'colspan' => [],
-				'rowspan' => [],
-			],
-			'header' => [
-				'class' => [],
-				'id'    => [],
-				'style' => [],
-			],
-            'iframe' => [
-				'class'  => [],
-				'id'     => [],
-				'style'  => [],
-				'title'  => [],
-				'width'  => [],
-				'height' => [],
-				'src'    => [],
-                'allowfullscreen' => []
-			],
-            'pre' => [
-                'class' => [],
-                'id'    => [],
-                'style' => [],
-            ],
-            'blockquote' => [
-                'cite'  => true, // URL of the source (HTML spec)
-                'class' => true,
-                'id'    => true,
-                'style' => true, // only if you intentionally allow inline styles
-            ],
-            'form' => [
-                'action' => true,
-                'method' => true,
-                'id'     => true,
-                'class'  => true,
-                'name'   => true,
-                'novalidate' => true,
-            ],
-            'input' => [
-                'type'        => true,
-                'name'        => true,
-                'value'       => true,
-                'placeholder' => true,
-                'id'          => true,
-                'class'       => true,
-                'checked'     => true,
-                'disabled'    => true,
-                'required'    => true,
-                'readonly'    => true,
-                'min'         => true,
-                'max'         => true,
-                'step'        => true,
-                'maxlength'   => true,
-                'pattern'     => true,
-                'autocomplete'=> true,
-            ],
-            'textarea' => [
-                'name'        => true,
-                'rows'        => true,
-                'cols'        => true,
-                'placeholder' => true,
-                'id'          => true,
-                'class'       => true,
-                'required'    => true,
-                'readonly'    => true,
-            ],
-            'select' => [
-                'name'     => true,
-                'id'       => true,
-                'class'    => true,
-                'required' => true,
-                'multiple' => true,
-            ],
-            'option' => [
-                'value'    => true,
-                'selected' => true,
-                'disabled' => true,
-            ],
-            'label' => [
-                'for'   => true,
-                'class'=> true,
-            ],
-            'button' => [
-                'type'     => true,
-                'id'       => true,
-                'class'    => true,
-                'disabled' => true,
-            ],
-            // Semantic Layout Tags
-            'main' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'section' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'article' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'aside' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'nav' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'footer' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'hgroup' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            // Rich Media Tags
-            'video' => [
-                'src'      => true,
-                'poster'   => true,
-                'controls' => true,
-                'autoplay' => true,
-                'loop'     => true,
-                'muted'    => true,
-                'preload'  => true,
-                'width'    => true,
-                'height'   => true,
-                'class'    => true,
-                'id'       => true,
-                'style'    => true,
-            ],
-            'audio' => [
-                'src'      => true,
-                'controls' => true,
-                'autoplay' => true,
-                'loop'     => true,
-                'muted'    => true,
-                'preload'  => true,
-                'class'    => true,
-                'id'       => true,
-                'style'    => true,
-            ],
-            'source' => [
-                'src'   => true,
-                'type'  => true,
-                'media' => true,
-            ],
-            'track' => [
-                'src'     => true,
-                'kind'    => true,
-                'srclang' => true,
-                'label'   => true,
-                'default' => true,
-            ],
-            // Advanced Lists
-            'dl' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'dt' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'dd' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            // Figures
-            'figure' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'figcaption' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            // Advanced Table Tags
-            'caption' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'colgroup' => [
-                'span'  => true,
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'col' => [
-                'span'  => true,
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            // Interactive Elements
-            'details' => [
-                'open'  => true,
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'summary' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'dialog' => [
-                'open'  => true,
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            // Extended Form Tags
-            'fieldset' => [
-                'disabled' => true,
-                'form'     => true,
-                'name'     => true,
-                'class'    => true,
-                'id'       => true,
-                'style'    => true,
-            ],
-            'legend' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'optgroup' => [
-                'label'    => true,
-                'disabled' => true,
-            ],
-            'datalist' => [
-                'id'    => true,
-                'class' => true,
-            ],
-            'output' => [
-                'for'   => true,
-                'form'  => true,
-                'name'  => true,
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'progress' => [
-                'value' => true,
-                'max'   => true,
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'meter' => [
-                'value'   => true,
-                'min'     => true,
-                'max'     => true,
-                'low'     => true,
-                'high'    => true,
-                'optimum' => true,
-                'class'   => true,
-                'id'      => true,
-                'style'   => true,
-            ],
-            // Text Semantics
-            'kbd' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'samp' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'var' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            // International Typography
-            'ruby' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'rt' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-            'rp' => [
-                'class' => true,
-                'id'    => true,
-                'style' => true,
-            ],
-		];
+	public static function eael_allowed_tags( $extra = array() ) {
+		$allowed_tags = array(
+			'a'          => array(
+				'href'                         => array(),
+				'title'                        => array(),
+				'class'                        => array(),
+				'rel'                          => array(),
+				'id'                           => array(),
+				'style'                        => array(),
+				'target'                       => array(),
+				'data-elementor-open-lightbox' => array(),
+			),
+			'q'          => array(
+				'cite'  => array(),
+				'class' => array(),
+				'id'    => array(),
+			),
+			'img'        => array(
+				'src'           => array(),
+				'alt'           => array(),
+				'title'         => array(),
+				'height'        => array(),
+				'width'         => array(),
+				'class'         => array(),
+				'id'            => array(),
+				'data-lazy-src' => array(),
+				'data-src'      => array(),
+				'data-srcset'   => array(),
+				'loading'       => array(),
+				'srcset'        => array(),
+				'sizes'         => array(),
+				'decoding'      => array(),
+				'fetchpriority' => array(),
+			),
+			'span'       => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'dfn'        => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'time'       => array(
+				'datetime' => array(),
+				'class'    => array(),
+				'id'       => array(),
+				'style'    => array(),
+			),
+			'cite'       => array(
+				'title' => array(),
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'hr'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'b'          => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'p'          => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'i'          => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'u'          => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			's'          => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'br'         => array(),
+			'em'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'code'       => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'mark'       => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'small'      => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'abbr'       => array(
+				'title' => array(),
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'strong'     => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'del'        => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'ins'        => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'sub'        => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'sup'        => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'div'        => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'strike'     => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'acronym'    => array(),
+			'h1'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'h2'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'h3'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'h4'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'h5'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'h6'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'center'     => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'ul'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'ol'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'li'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'table'      => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+				'dir'   => array(),
+				'align' => array(),
+			),
+			'thead'      => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+				'align' => array(),
+			),
+			'tbody'      => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+				'align' => array(),
+			),
+			'tfoot'      => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+				'align' => array(),
+			),
+			'th'         => array(
+				'class'   => array(),
+				'id'      => array(),
+				'style'   => array(),
+				'align'   => array(),
+				'colspan' => array(),
+				'rowspan' => array(),
+			),
+			'tr'         => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+				'align' => array(),
+			),
+			'td'         => array(
+				'class'   => array(),
+				'id'      => array(),
+				'style'   => array(),
+				'align'   => array(),
+				'colspan' => array(),
+				'rowspan' => array(),
+			),
+			'header'     => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'iframe'     => array(
+				'class'           => array(),
+				'id'              => array(),
+				'style'           => array(),
+				'title'           => array(),
+				'width'           => array(),
+				'height'          => array(),
+				'src'             => array(),
+				'allowfullscreen' => array(),
+			),
+			'pre'        => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'blockquote' => array(
+				'cite'  => true, // URL of the source (HTML spec)
+				'class' => true,
+				'id'    => true,
+				'style' => true, // only if you intentionally allow inline styles
+			),
+			'form'       => array(
+				'action'     => true,
+				'method'     => true,
+				'id'         => true,
+				'class'      => true,
+				'name'       => true,
+				'novalidate' => true,
+			),
+			'input'      => array(
+				'type'         => true,
+				'name'         => true,
+				'value'        => true,
+				'placeholder'  => true,
+				'id'           => true,
+				'class'        => true,
+				'checked'      => true,
+				'disabled'     => true,
+				'required'     => true,
+				'readonly'     => true,
+				'min'          => true,
+				'max'          => true,
+				'step'         => true,
+				'maxlength'    => true,
+				'pattern'      => true,
+				'autocomplete' => true,
+			),
+			'textarea'   => array(
+				'name'        => true,
+				'rows'        => true,
+				'cols'        => true,
+				'placeholder' => true,
+				'id'          => true,
+				'class'       => true,
+				'required'    => true,
+				'readonly'    => true,
+			),
+			'select'     => array(
+				'name'     => true,
+				'id'       => true,
+				'class'    => true,
+				'required' => true,
+				'multiple' => true,
+			),
+			'option'     => array(
+				'value'    => true,
+				'selected' => true,
+				'disabled' => true,
+			),
+			'label'      => array(
+				'for'   => true,
+				'class' => true,
+			),
+			'button'     => array(
+				'type'     => true,
+				'id'       => true,
+				'class'    => true,
+				'disabled' => true,
+			),
+			// Semantic Layout Tags
+			'main'       => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'section'    => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'article'    => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'aside'      => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'nav'        => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'footer'     => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'hgroup'     => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			// Rich Media Tags
+			'video'      => array(
+				'src'      => true,
+				'poster'   => true,
+				'controls' => true,
+				'autoplay' => true,
+				'loop'     => true,
+				'muted'    => true,
+				'preload'  => true,
+				'width'    => true,
+				'height'   => true,
+				'class'    => true,
+				'id'       => true,
+				'style'    => true,
+			),
+			'audio'      => array(
+				'src'      => true,
+				'controls' => true,
+				'autoplay' => true,
+				'loop'     => true,
+				'muted'    => true,
+				'preload'  => true,
+				'class'    => true,
+				'id'       => true,
+				'style'    => true,
+			),
+			'source'     => array(
+				'src'   => true,
+				'type'  => true,
+				'media' => true,
+			),
+			'track'      => array(
+				'src'     => true,
+				'kind'    => true,
+				'srclang' => true,
+				'label'   => true,
+				'default' => true,
+			),
+			// Advanced Lists
+			'dl'         => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'dt'         => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'dd'         => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			// Figures
+			'figure'     => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'figcaption' => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			// Advanced Table Tags
+			'caption'    => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'colgroup'   => array(
+				'span'  => true,
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'col'        => array(
+				'span'  => true,
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			// Interactive Elements
+			'details'    => array(
+				'open'  => true,
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'summary'    => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'dialog'     => array(
+				'open'  => true,
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			// Extended Form Tags
+			'fieldset'   => array(
+				'disabled' => true,
+				'form'     => true,
+				'name'     => true,
+				'class'    => true,
+				'id'       => true,
+				'style'    => true,
+			),
+			'legend'     => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'optgroup'   => array(
+				'label'    => true,
+				'disabled' => true,
+			),
+			'datalist'   => array(
+				'id'    => true,
+				'class' => true,
+			),
+			'output'     => array(
+				'for'   => true,
+				'form'  => true,
+				'name'  => true,
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'progress'   => array(
+				'value' => true,
+				'max'   => true,
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'meter'      => array(
+				'value'   => true,
+				'min'     => true,
+				'max'     => true,
+				'low'     => true,
+				'high'    => true,
+				'optimum' => true,
+				'class'   => true,
+				'id'      => true,
+				'style'   => true,
+			),
+			// Text Semantics
+			'kbd'        => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'samp'       => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'var'        => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			// International Typography
+			'ruby'       => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'rt'         => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+			'rp'         => array(
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+			),
+		);
 
 		if ( count( $extra ) > 0 ) {
 			$allowed_tags = array_merge_recursive( $allowed_tags, $extra );
@@ -1786,67 +1834,197 @@ class Helper
 		return apply_filters( 'eael_allowed_tags', $allowed_tags );
 	}
 
-    /**
-     * List of allowed icon/svg tags for wp_kses
-     *
+	/**
+	 * List of allowed icon/svg tags for wp_kses
+	 *
 	 * eael_allowed_icon_tags
 	 * @return array
 	 */
-    public static function eael_allowed_icon_tags(){
-        return [
-            'svg'   => [
-                'class'           => [],
-                'aria-hidden'     => [],
-                'aria-labelledby' => [],
-                'role'            => [],
-                'xmlns'           => [],
-                'width'           => [],
-                'height'          => [],
-                'viewbox'         => []
-            ],
-            'g'     => [ 'fill'  => [] ],
-            'title' => [ 'title' => [] ],
-            'path'     => [
-                'd'    => [], 
-                'fill' => [],
-                'transform' => [] 
-            ],
-			'i'      => [
-				'class' => [],
-				'id'    => [],
-				'style' => []
-			],
-            'img'     => [
-				'src'    => [],
-				'alt'    => [],
-				'height' => [],
-				'width'  => [],
-				'class'  => [],
-				'id'     => [],
-				'style'  => []
-			],
-        ];
-    }
+	public static function eael_allowed_icon_tags() {
+		return array(
+			'svg'   => array(
+				'class'           => array(),
+				'aria-hidden'     => array(),
+				'aria-labelledby' => array(),
+				'role'            => array(),
+				'xmlns'           => array(),
+				'width'           => array(),
+				'height'          => array(),
+				'viewbox'         => array(),
+			),
+			'g'     => array( 'fill' => array() ),
+			'title' => array( 'title' => array() ),
+			'path'  => array(
+				'd'         => array(),
+				'fill'      => array(),
+				'transform' => array(),
+			),
+			'i'     => array(
+				'class' => array(),
+				'id'    => array(),
+				'style' => array(),
+			),
+			'img'   => array(
+				'src'    => array(),
+				'alt'    => array(),
+				'height' => array(),
+				'width'  => array(),
+				'class'  => array(),
+				'id'     => array(),
+				'style'  => array(),
+			),
+		);
+	}
 
-    public static function eael_fetch_color_or_global_color($settings, $control_name=''){
-        if( !isset($settings[$control_name])) {
-            return '';
-        }
+	/**
+	 * Allowlist for wp_kses() when rendering a user-supplied raw SVG
+	 * (e.g. SVG Draw's custom SVG textarea). Covers the shape/structure
+	 * elements SVG Draw needs while excluding <script>, <foreignObject>,
+	 * <use> (can reference external content) and any on* event handler
+	 * attribute.
+	 */
+	public static function eael_allowed_svg_draw_tags() {
+		$common_attrs = array(
+			'id'                => array(),
+			'class'             => array(),
+			'style'             => array(),
+			'fill'              => array(),
+			'fill-rule'         => array(),
+			'fill-opacity'      => array(),
+			'stroke'            => array(),
+			'stroke-width'      => array(),
+			'stroke-linecap'    => array(),
+			'stroke-linejoin'   => array(),
+			'stroke-dasharray'  => array(),
+			'stroke-dashoffset' => array(),
+			'stroke-opacity'    => array(),
+			'opacity'           => array(),
+			'transform'         => array(),
+			'clip-rule'         => array(),
+			'clip-path'         => array(),
+		);
 
-        $color = $settings[$control_name];
+		return array(
+			'svg'            => array_merge(
+				$common_attrs,
+				array(
+					'xmlns'               => array(),
+					'width'               => array(),
+					'height'              => array(),
+					'viewbox'             => array(),
+					'role'                => array(),
+					'aria-hidden'         => array(),
+					'aria-labelledby'     => array(),
+					'preserveaspectratio' => array(),
+				)
+			),
+			'g'              => $common_attrs,
+			'defs'           => $common_attrs,
+			'title'          => array( 'class' => array() ),
+			'desc'           => array( 'class' => array() ),
+			'path'           => array_merge( $common_attrs, array( 'd' => array() ) ),
+			'circle'         => array_merge(
+				$common_attrs,
+				array(
+					'cx' => array(),
+					'cy' => array(),
+					'r'  => array(),
+				)
+			),
+			'ellipse'        => array_merge(
+				$common_attrs,
+				array(
+					'cx' => array(),
+					'cy' => array(),
+					'rx' => array(),
+					'ry' => array(),
+				)
+			),
+			'rect'           => array_merge(
+				$common_attrs,
+				array(
+					'x'      => array(),
+					'y'      => array(),
+					'width'  => array(),
+					'height' => array(),
+					'rx'     => array(),
+					'ry'     => array(),
+				)
+			),
+			'line'           => array_merge(
+				$common_attrs,
+				array(
+					'x1' => array(),
+					'y1' => array(),
+					'x2' => array(),
+					'y2' => array(),
+				)
+			),
+			'polyline'       => array_merge( $common_attrs, array( 'points' => array() ) ),
+			'polygon'        => array_merge( $common_attrs, array( 'points' => array() ) ),
+			'lineargradient' => array_merge(
+				$common_attrs,
+				array(
+					'x1'                => array(),
+					'y1'                => array(),
+					'x2'                => array(),
+					'y2'                => array(),
+					'gradientunits'     => array(),
+					'gradienttransform' => array(),
+				)
+			),
+			'radialgradient' => array_merge(
+				$common_attrs,
+				array(
+					'cx'                => array(),
+					'cy'                => array(),
+					'r'                 => array(),
+					'fx'                => array(),
+					'fy'                => array(),
+					'gradientunits'     => array(),
+					'gradienttransform' => array(),
+				)
+			),
+			'stop'           => array_merge(
+				$common_attrs,
+				array(
+					'offset'       => array(),
+					'stop-color'   => array(),
+					'stop-opacity' => array(),
+				)
+			),
+			'clippath'       => $common_attrs,
+		);
+	}
 
-        if(!empty($settings['__globals__']) && !empty($settings['__globals__'][$control_name])){
-            $color = $settings['__globals__'][$control_name];
-            $color_arr = explode('?id=', $color); //E.x. 'globals/colors/?id=primary'
+	public static function eael_fetch_color_or_global_color( $settings, $control_name = '' ) {
+		if ( ! isset( $settings[ $control_name ] ) ) {
+			return '';
+		}
 
-            $color_name = count($color_arr) > 1 ? $color_arr[1] : '';
-            if( !empty($color_name) ) {
-                $color = "var( --e-global-color-$color_name )";
-            }
-        }
+		$color = $settings[ $control_name ];
 
-        return $color;
-    }
+		if ( ! empty( $settings['__globals__'] ) && ! empty( $settings['__globals__'][ $control_name ] ) ) {
+			$color     = $settings['__globals__'][ $control_name ];
+			$color_arr = explode( '?id=', $color ); //E.x. 'globals/colors/?id=primary'
+
+			$color_name = count( $color_arr ) > 1 ? $color_arr[1] : '';
+			if ( ! empty( $color_name ) ) {
+				$color = "var( --e-global-color-$color_name )";
+			}
+		}
+
+		return $color;
+	}
+
+	/**
+	 * Strip characters that could break out of an inline <style> block or
+	 * inject new CSS rules/declarations from a user-supplied CSS value
+	 * (e.g. a color/size setting interpolated raw into a <style> tag).
+	 */
+	public static function eael_sanitize_css_value( $value ) {
+		return str_replace( array( '<', '>', '{', '}', ';' ), '', (string) $value );
+	}
 
 	/**
 	 * Get Render Icon
@@ -1858,7 +2036,7 @@ class Helper
 	 *
 	 * @return mixed|string
 	 */
-	public static function get_render_icon( $icon, $attributes = [], $tag = 'i' ) {
+	public static function get_render_icon( $icon, $attributes = array(), $tag = 'i' ) {
 		if ( empty( $icon['library'] ) ) {
 			return false;
 		}
@@ -1878,71 +2056,75 @@ class Helper
 		return $output;
 	}
 
-    /**
-     * Get SVG html by Icon
-     *
-     * Used to get svg attributes from Icon class for SVG Drawing widget
-     * @param string $icon             Icon
-     *
-     * @return string
-     */
-    public static function get_svg_by_icon( $icon, $attributes = [] ) {
-        if ( empty( $icon ) || empty( $icon['value'] ) || empty( $icon['library'] ) ) return '';
+	/**
+	 * Get SVG html by Icon
+	 *
+	 * Used to get svg attributes from Icon class for SVG Drawing widget
+	 * @param string $icon             Icon
+	 *
+	 * @return string
+	 */
+	public static function get_svg_by_icon( $icon, $attributes = array() ) {
+		if ( empty( $icon ) || empty( $icon['value'] ) || empty( $icon['library'] ) ) {
+			return '';
+		}
 
-        $svg_html = "";
+		$svg_html = '';
 
-        $icon_name  = str_replace( [ 'fas fa-', 'fab fa-', 'far fa-' ], '', $icon['value'] );
-        $library    = str_replace( 'fa-', '', $icon['library'] );
-        $svg_object = file_get_contents( EAEL_PLUGIN_PATH . "assets/front-end/js/lib-view/icons/{$library}.json" );
-        $svg_object = json_decode( $svg_object, true );
-        $i_class    = str_replace(' ', '-', $icon['value']);
+		$icon_name  = str_replace( array( 'fas fa-', 'fab fa-', 'far fa-' ), '', $icon['value'] );
+		$library    = str_replace( 'fa-', '', $icon['library'] );
+		$svg_object = file_get_contents( EAEL_PLUGIN_PATH . "assets/front-end/js/lib-view/icons/{$library}.json" );
+		$svg_object = json_decode( $svg_object, true );
+		$i_class    = str_replace( ' ', '-', $icon['value'] );
 
-        if ( empty( $svg_object['icons'][$icon_name] ) ) return $svg_html;
+		if ( empty( $svg_object['icons'][ $icon_name ] ) ) {
+			return $svg_html;
+		}
 
-        $icon       = $svg_object['icons'][$icon_name];
-        $view_box   = "0 0 {$icon[0]} {$icon[1]}";
-        $svg_html  .= "<svg ";
+		$icon      = $svg_object['icons'][ $icon_name ];
+		$view_box  = "0 0 {$icon[0]} {$icon[1]}";
+		$svg_html .= '<svg ';
 
-        $color = '';
-        if( ! empty( $attributes ) ) {
-            $color = $attributes['fill'] ?? '';
-            unset( $attributes['fill'] );
-            foreach ( $attributes as $key => $value ) {
-                $svg_html .= $value ? "{$key}='{$value}' " : '';
-            }
-        }
-        $svg_html  .= " class='svg-inline--". $i_class ."  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
-        $svg_html  .= "<path fill='{$color}' d='{$icon[4]}'></path>";
-        $svg_html  .= "</svg>";
+		$color = '';
+		if ( ! empty( $attributes ) ) {
+			$color = $attributes['fill'] ?? '';
+			unset( $attributes['fill'] );
+			foreach ( $attributes as $key => $value ) {
+				$svg_html .= $value ? "{$key}='{$value}' " : '';
+			}
+		}
+		$svg_html .= " class='svg-inline--" . $i_class . "  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
+		$svg_html .= "<path fill='{$color}' d='{$icon[4]}'></path>";
+		$svg_html .= '</svg>';
 
-        return $svg_html;
-    }
-    
-    /**
-     * Get product image src and Product gallery's first image src
-     * 
-     * @since 5.1.9
-     * @return array 
-     */
-    public static function eael_get_woo_product_gallery_image_srcs( $product, $image_size ){
-        $image_id = $product->get_image_id();
-        $image_gallery_ids = $product->get_gallery_image_ids();
+		return $svg_html;
+	}
 
-        $src = function_exists('wc_placeholder_img_src') ? wc_placeholder_img_src() : '';
+	/**
+	 * Get product image src and Product gallery's first image src
+	 *
+	 * @since 5.1.9
+	 * @return array
+	 */
+	public static function eael_get_woo_product_gallery_image_srcs( $product, $image_size ) {
+		$image_id          = $product->get_image_id();
+		$image_gallery_ids = $product->get_gallery_image_ids();
 
-        if ( $image_id ) {
-            $src = wp_get_attachment_image_src( $image_id, $image_size );
-            $src = is_array($src) ? $src[0] : $src;
-        }
+		$src = function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src() : '';
 
-        $src_hover = count( $image_gallery_ids ) ? wp_get_attachment_image_src( $image_gallery_ids[0], $image_size ) : '';
-        $src_hover = is_array($src_hover) ? $src_hover[0] : $src_hover;
-        
-        return [
-            'src' => $src,
-            'src_hover' => $src_hover,
-        ];
-    }
+		if ( $image_id ) {
+			$src = wp_get_attachment_image_src( $image_id, $image_size );
+			$src = is_array( $src ) ? $src[0] : $src;
+		}
+
+		$src_hover = count( $image_gallery_ids ) ? wp_get_attachment_image_src( $image_gallery_ids[0], $image_size ) : '';
+		$src_hover = is_array( $src_hover ) ? $src_hover[0] : $src_hover;
+
+		return array(
+			'src'       => $src,
+			'src_hover' => $src_hover,
+		);
+	}
 
 	/**
 	 * Sanitize a 'relation' operator.
@@ -1961,36 +2143,36 @@ class Helper
 		}
 	}
 
-    /**
-     * Get all ordered products by the user
-     * @return boolean|array order ids
-     * @since 5.8.9
-     */
-    public static function eael_get_all_user_ordered_products() {
-        $user_id = get_current_user_id();
+	/**
+	 * Get all ordered products by the user
+	 * @return boolean|array order ids
+	 * @since 5.8.9
+	 */
+	public static function eael_get_all_user_ordered_products() {
+		$user_id = get_current_user_id();
 
-        if( ! $user_id ) {
-            return false;
-        }
+		if ( ! $user_id ) {
+			return false;
+		}
 
-        $args = array(
-            'customer_id' => $user_id,
-            'limit' => -1,
-        );
+		$args = array(
+			'customer_id' => $user_id,
+			'limit'       => -1,
+		);
 
-        $orders = wc_get_orders($args);
-        $product_ids = [];
+		$orders      = wc_get_orders( $args );
+		$product_ids = array();
 
-        foreach( $orders as $order ){
-            $items = $order->get_items();
-            
-            foreach($items as $item){
-                $product_ids[] = $item->get_product_id();
-            }
-        }
+		foreach ( $orders as $order ) {
+			$items = $order->get_items();
 
-        return $product_ids;
-    }
+			foreach ( $items as $item ) {
+				$product_ids[] = $item->get_product_id();
+			}
+		}
+
+		return $product_ids;
+	}
 
 	/**
 	 * Get current device by screen size
@@ -2002,26 +2184,31 @@ class Helper
 	 */
 	public static function eael_get_current_device_by_screen() {
 		if ( ! session_id() ) {
-			session_start( [
-				'read_and_close' => true,
-			] );
+			session_start(
+				array(
+					'read_and_close' => true,
+				)
+			);
 		}
 
 		if ( isset( $_SESSION['eael_screen'] ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
-			$breakpoints = array_filter( $breakpoints, function ( $breakpoint ) {
-				return $breakpoint['is_enabled'];
-			} );
+			$breakpoints = array_filter(
+				$breakpoints,
+				function ( $breakpoint ) {
+					return $breakpoint['is_enabled'];
+				}
+			);
 
 			if ( isset( $breakpoints['widescreen'] ) ) {
 				$widescreen = $breakpoints['widescreen'];
 				unset( $breakpoints['widescreen'] );
 				$breakpoints['desktop'] = $widescreen;
-			}else{
-                $breakpoints['desktop'] = [
-                    'value' => 2400
-                ];
-            }
-            
+			} else {
+				$breakpoints['desktop'] = array(
+					'value' => 2400,
+				);
+			}
+
 			$current_screen = intval( $_SESSION['eael_screen'] );
 			foreach ( $breakpoints as $device => $screen ) {
 				if ( $current_screen <= $screen['value'] ) {
@@ -2029,60 +2216,65 @@ class Helper
 				}
 			}
 
-			return "widescreen";
+			return 'widescreen';
 		}
 
 		// If no match is found, you can return a default value or handle it as needed.
-		return "unknown";
+		return 'unknown';
 	}
 
-    public static function get_all_acf_fields() {
+	public static function get_all_acf_fields() {
 
-        if ( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ) {
-            return [];
-        }
+		if ( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ) {
+			return array();
+		}
 
-        $acf_field_groups = acf_get_field_groups();
+		$acf_field_groups = acf_get_field_groups();
 
-        if ( empty( $acf_field_groups ) ) return [];
+		if ( empty( $acf_field_groups ) ) {
+			return array();
+		}
 
-        $acf_fields = [];
-		foreach( $acf_field_groups as $group ){
+		$acf_fields = array();
+		foreach ( $acf_field_groups as $group ) {
 			$default_acf_fields = acf_get_fields( $group['key'] );
 			if ( ! empty( $default_acf_fields ) ) {
-				foreach( $default_acf_fields as $field ) {
-					$acf_fields[ $field['name'] ] = [
+				foreach ( $default_acf_fields as $field ) {
+					$acf_fields[ $field['name'] ] = array(
 						'ID'    => $field['ID'],
 						'key'   => $field['key'],
 						'label' => $field['label'] ?? '',
 						'name'  => $field['name'] ?? '',
 						'type'  => $field['type'],
 						'group' => $group['title'] ?? '',
-					];
+					);
 				}
 			}
 		}
-    
-        return $acf_fields;
-    }
 
-    public static function eael_get_attachment_id_from_url( $attachment_url ) {
-        global $wpdb;
-    
-        // Strip the image size from the file name (if any)
-        $attachment_url = preg_replace( '/-\d+x\d+(?=\.[^.\s]{2,4}$)/i', '', $attachment_url );
-    
-        // Prepare the query to search in the 'guid' column in 'wp_posts'
+		return $acf_fields;
+	}
+
+	public static function eael_get_attachment_id_from_url( $attachment_url ) {
+		global $wpdb;
+
+		// Strip the image size from the file name (if any)
+		$attachment_url = preg_replace( '/-\d+x\d+(?=\.[^.\s]{2,4}$)/i', '', $attachment_url );
+
+		// Prepare the query to search in the 'guid' column in 'wp_posts'
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-        $attachment_id = $wpdb->get_var( $wpdb->prepare(
-            "SELECT ID FROM $wpdb->posts WHERE guid = %s AND post_type = 'attachment'", $attachment_url
-        ));
-    
-        return $attachment_id;
-    }
-      
-    public static function eael_rating_markup( $rating, $count ) {
-        $html = '';
+		$attachment_id = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT ID FROM $wpdb->posts WHERE guid = %s AND post_type = 'attachment'",
+				$attachment_url
+			)
+		);
+
+		return $attachment_id;
+	}
+
+	public static function eael_rating_markup( $rating, $count ) {
+		$html = '';
 		if ( 0 == $rating ) {
 			$html  = '<div class="eael-star-rating star-rating">';
 			$html .= wc_get_star_rating_html( $rating, $count );
@@ -2091,12 +2283,12 @@ class Helper
 		return $html;
 	}
 
-    //WooCommerce Helper Function
-    public static function get_product_variation( $product_id = false ) {
+	//WooCommerce Helper Function
+	public static function get_product_variation( $product_id = false ) {
 		return wc_get_product( get_the_ID() );
 	}
-    
-    public static function get_product( $product_id = false ) {
+
+	public static function get_product( $product_id = false ) {
 		if ( 'product_variation' === get_post_type() ) {
 			return self::get_product_variation( $product_id );
 		}
@@ -2114,12 +2306,12 @@ class Helper
 
 		if ( Plugin::$instance->editor->is_edit_mode() ) {
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$active_doc = !empty( $_GET['active-document'] ) ? sanitize_text_field( wp_unslash( $_GET['active-document'] ) ) : 0;
+			$active_doc = ! empty( $_GET['active-document'] ) ? sanitize_text_field( wp_unslash( $_GET['active-document'] ) ) : 0;
 			$mode       = $active_doc === $template_id ? 'save' : 'edit';
 			?>
 			<div class='eael-onpage-edit-template-wrapper'>
 				<div class='eael-onpage-edit-template' data-eael-template-id='<?php echo esc_attr( $template_id ); ?>'
-					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='<?php echo esc_attr( $mode ); ?>'>
+					data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='<?php echo esc_attr( $mode ); ?>'>
 					<i class='eicon-edit'></i>
 					<span><?php esc_html_e( 'Edit Template', 'essential-addons-for-elementor-lite' ); ?></span>
 				</div>
@@ -2128,12 +2320,12 @@ class Helper
 			if ( $mode === 'save' ) {
 				?>
 				<script>
-                    (function ($) {
-                        let $this = $("[data-eael-template-id='<?php echo esc_js( $template_id ); ?>']");
-                        $this.find('span').text('Save & Back');
-                        $this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
-                        $this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
-                    })(jQuery);
+					(function ($) {
+						let $this = $("[data-eael-template-id='<?php echo esc_js( $template_id ); ?>']");
+						$this.find('span').text('Save & Back');
+						$this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
+						$this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
+					})(jQuery);
 				</script>
 				<?php
 			}
@@ -2144,14 +2336,14 @@ class Helper
 		}
 	}
 
-    public static function eael_e_optimized_markup(){
-        return Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
-    }
+	public static function eael_e_optimized_markup() {
+		return Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+	}
 
-    //Get revision id by post id
-    public static function current_revision_id( $post_id = null ) {
+	//Get revision id by post id
+	public static function current_revision_id( $post_id = null ) {
 		$current_revision_id = $post_id ?? get_the_ID();
-		$autosave = Utils::get_post_autosave( $current_revision_id );
+		$autosave            = Utils::get_post_autosave( $current_revision_id );
 
 		if ( is_object( $autosave ) ) {
 			$current_revision_id = $autosave->ID;
@@ -2210,14 +2402,14 @@ class Helper
 		$statuses = array_filter( array_map( 'sanitize_key', (array) $statuses ) );
 
 		if ( current_user_can( 'edit_others_products' ) ) {
-			$allowed = [ 'publish', 'draft', 'pending', 'future', 'private' ];
+			$allowed = array( 'publish', 'draft', 'pending', 'future', 'private' );
 		} else {
-			$allowed = [ 'publish' ];
+			$allowed = array( 'publish' );
 		}
 
 		$statuses = array_values( array_intersect( $statuses, $allowed ) );
 
-		return empty( $statuses ) ? [ 'publish' ] : $statuses;
+		return empty( $statuses ) ? array( 'publish' ) : $statuses;
 	}
 
 	/**

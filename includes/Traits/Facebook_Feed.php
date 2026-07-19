@@ -5,7 +5,7 @@ namespace Essential_Addons_Elementor\Traits;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
-use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 trait Facebook_Feed {
 	/**
@@ -16,7 +16,7 @@ trait Facebook_Feed {
 	 * @return false|string|void
 	 * @since 3.4.0
 	 */
-	public function facebook_feed_render_items( $settings = [] ) {
+	public function facebook_feed_render_items( $settings = array() ) {
 		// check if ajax request
 		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$ajax = wp_doing_ajax();
@@ -24,7 +24,7 @@ trait Facebook_Feed {
 			check_ajax_referer( 'essential-addons-elementor', 'security' );
 
 			// init vars
-			$page = !empty( $_POST['page'] ) ? intval( wp_unslash( $_POST['page'] ), 10 ) : 0;
+			$page = ! empty( $_POST['page'] ) ? intval( wp_unslash( $_POST['page'] ), 10 ) : 0;
 			if ( ! empty( $_POST['post_id'] ) ) {
 				$post_id = intval( wp_unslash( $_POST['post_id'] ), 10 );
 			} else {
@@ -53,17 +53,17 @@ trait Facebook_Feed {
 			$settings = ! empty( $settings ) ? $settings : $this->get_settings_for_display();
 		}
 
-		$html    = '';
-		$page_id = $settings['eael_facebook_feed_page_id'];
-		$token   = $settings['eael_facebook_feed_access_token'];
-		$source    = $settings['eael_facebook_feed_data_source'];
-        $display_comment = isset( $settings['eael_facebook_feed_comments'] ) ? $settings['eael_facebook_feed_comments'] : '';
+		$html            = '';
+		$page_id         = $settings['eael_facebook_feed_page_id'];
+		$token           = $settings['eael_facebook_feed_access_token'];
+		$source          = $settings['eael_facebook_feed_data_source'];
+		$display_comment = isset( $settings['eael_facebook_feed_comments'] ) ? $settings['eael_facebook_feed_comments'] : '';
 
 		if ( empty( $page_id ) || empty( $token ) ) {
 			return;
 		}
 
-		$key = sprintf(
+		$key           = sprintf(
 			'eael_facebook_feed_%s',
 			md5(
 				sanitize_text_field( wp_unslash( $source . $page_id . $token ) ) .
@@ -73,9 +73,14 @@ trait Facebook_Feed {
 		$facebook_data = get_transient( $key );
 
 		if ( $facebook_data == false ) {
-			$facebook_data = wp_remote_retrieve_body( wp_remote_get( $this->get_url($page_id, $token, $source, $display_comment), [
-				'timeout' => 70,
-			] ) );
+			$facebook_data = wp_remote_retrieve_body(
+				wp_remote_get(
+					$this->get_url( $page_id, $token, $source, $display_comment ),
+					array(
+						'timeout' => 70,
+					)
+				)
+			);
 			$facebook_data = json_decode( $facebook_data, true );
 			if ( isset( $facebook_data['data'] ) ) {
 				set_transient( $key, $facebook_data, ( $settings['eael_facebook_feed_cache_limit'] * MINUTE_IN_SECONDS ) );
@@ -92,8 +97,8 @@ trait Facebook_Feed {
 				$facebook_data = array_reverse( $facebook_data );
 				break;
 		}
-		$items = array_splice( $facebook_data, ( $page * $settings['eael_facebook_feed_image_count']['size'] ), $settings['eael_facebook_feed_image_count']['size'] );
-		$bg_style = isset( $settings['eael_facebook_feed_image_render_type'] ) && $settings['eael_facebook_feed_image_render_type'] == 'cover' ? "background-size: cover;background-position: center;background-repeat: no-repeat;" : "background-size: 100% 100%;background-repeat: no-repeat;";
+		$items    = array_splice( $facebook_data, ( $page * $settings['eael_facebook_feed_image_count']['size'] ), $settings['eael_facebook_feed_image_count']['size'] );
+		$bg_style = isset( $settings['eael_facebook_feed_image_render_type'] ) && $settings['eael_facebook_feed_image_render_type'] == 'cover' ? 'background-size: cover;background-position: center;background-repeat: no-repeat;' : 'background-size: 100% 100%;background-repeat: no-repeat;';
 		foreach ( $items as $item ) {
 			$t        = 'eael_facebook_feed_message_max_length'; // short it
 			$limit    = isset( $settings[ $t ] ) && isset( $settings[ $t ]['size'] ) ? $settings[ $t ]['size'] : null;
@@ -114,18 +119,18 @@ trait Facebook_Feed {
                     <div class="eael-facebook-feed-item-inner">
                         <header class="eael-facebook-feed-item-header clearfix">
                             <div class="eael-facebook-feed-item-user clearfix">
-                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $current_page_id . '/picture" alt="' . esc_attr( $item_form_name ) . '" class="eael-facebook-feed-avatar"></a>
-                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . esc_html( $item_form_name ) . '</p></a>
+                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $current_page_id . '/picture" alt="' . eael_neutralize_shortcodes( esc_attr( $item_form_name ) ) . '" class="eael-facebook-feed-avatar"></a>
+                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . eael_neutralize_shortcodes( esc_html( $item_form_name ) ) . '</p></a>
                             </div>';
 
 				if ( $settings['eael_facebook_feed_date'] ) {
-					$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date_i18n( get_option('date_format'), strtotime( $item['created_time'] ) ) . '</a>';
+					$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date_i18n( get_option( 'date_format' ), strtotime( $item['created_time'] ) ) . '</a>';
 				}
 				$html .= '</header>';
 
 				if ( $settings['eael_facebook_feed_message'] && ! empty( $message ) ) {
 					$html .= '<div class="eael-facebook-feed-item-content">
-                                        <p class="eael-facebook-feed-message">' . $this->eael_str_check( $message ) . '</p>
+                                        <p class="eael-facebook-feed-message">' . eael_neutralize_shortcodes( wp_kses_post( $this->eael_str_check( $message ) ) ) . '</p>
                                     </div>';
 				}
 
@@ -136,7 +141,7 @@ trait Facebook_Feed {
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
-							if ( !empty($item['attachments']['data'][0]['media_type']) && $item['attachments']['data'][0]['media_type'] == 'video' ) {
+							if ( ! empty( $item['attachments']['data'][0]['media_type'] ) && $item['attachments']['data'][0]['media_type'] == 'video' ) {
 								$html .= '<div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . ');' . esc_attr( $bg_style ) . '">
 								<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '"></div>
 	                                                    <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
@@ -148,20 +153,20 @@ trait Facebook_Feed {
 						}
 
 						$html .= '<div class="eael-facebook-feed-url-preview">';
-						if ( isset( $settings['eael_facebook_feed_is_show_preview_host'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_host'] && !empty($item['attachments']['data'][0]['unshimmed_url']) ) {
-							$html .= '<p class="eael-facebook-feed-url-host">' . wp_parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
+						if ( isset( $settings['eael_facebook_feed_is_show_preview_host'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_host'] && ! empty( $item['attachments']['data'][0]['unshimmed_url'] ) ) {
+							$html .= '<p class="eael-facebook-feed-url-host">' . eael_neutralize_shortcodes( esc_html( wp_parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] ) ) . '</p>';
 						}
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_title'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_title'] ) {
-							$html .= '<h2 class="eael-facebook-feed-url-title">' . esc_html( $item['attachments']['data'][0]['title'] ?? '' ) . '</h2>';
+							$html .= '<h2 class="eael-facebook-feed-url-title">' . eael_neutralize_shortcodes( esc_html( $item['attachments']['data'][0]['title'] ?? '' ) ) . '</h2>';
 						}
 
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_description'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_description'] ) {
 							$description = isset( $item['attachments']['data'][0]['description'] ) ? $item['attachments']['data'][0]['description'] : '';
-							$html        .= '<p class="eael-facebook-feed-url-description">' . wp_kses( $description, HelperClass::eael_allowed_tags() ) . '</p>';
+							$html       .= '<p class="eael-facebook-feed-url-description">' . eael_neutralize_shortcodes( wp_kses( $description, HelperClass::eael_allowed_tags() ) ) . '</p>';
 						}
 						$html .= '</div>';
 
-					} else if ( $item['status_type'] == 'added_video' ) {
+					} elseif ( $item['status_type'] == 'added_video' ) {
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
@@ -184,7 +189,6 @@ trait Facebook_Feed {
 					}
 					$html .= '</div>';
 				}
-
 
 				if ( $settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments'] ) {
 					$html .= '<footer class="eael-facebook-feed-item-footer">
@@ -227,10 +231,10 @@ trait Facebook_Feed {
 		}
 
 		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$data = [
+			$data = array(
 				'num_pages' => ceil( count( $facebook_data ) / $settings['eael_facebook_feed_image_count']['size'] ),
 				'html'      => $html,
-			];
+			);
 			while ( ob_get_status() ) {
 				ob_end_clean();
 			}
@@ -246,20 +250,20 @@ trait Facebook_Feed {
 		$stringText = '';
 		if ( strlen( $textData ) > 5 ) {
 			$explodeText = explode( ' ', trim( $textData ) );
-			for ( $st = 0; $st < count( $explodeText ); $st ++ ) {
+			for ( $st = 0; $st < count( $explodeText ); $st++ ) {
 				$pos      = stripos( trim( $explodeText[ $st ] ), '#' );
 				$pos1     = stripos( trim( $explodeText[ $st ] ), '@' );
 				$poshttp  = stripos( trim( $explodeText[ $st ] ), 'http' );
 				$poshttps = stripos( trim( $explodeText[ $st ] ), 'https' );
 
 				if ( $pos !== false ) {
-					$stringText .= '<a href="https://facebook.com/hashtag/' . str_replace( '#', '', $explodeText[ $st ] ) . '?source=feed_text" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
+					$stringText .= '<a href="https://facebook.com/hashtag/' . esc_attr( str_replace( '#', '', $explodeText[ $st ] ) ) . '?source=feed_text" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
 				} elseif ( $pos1 !== false ) {
-					$stringText .= '<a href="https://facebook.com/' . $explodeText[ $st ] . '/" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
+					$stringText .= '<a href="https://facebook.com/' . esc_attr( $explodeText[ $st ] ) . '/" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
 				} elseif ( $poshttp !== false || $poshttps !== false ) {
 					$stringText .= '<a href="' . esc_url( $explodeText[ $st ] ) . '" target="_blank"> ' . esc_html( $explodeText[ $st ] ) . ' </a>';
 				} else {
-					$stringText .= ' ' . $explodeText[ $st ];
+					$stringText .= ' ' . esc_html( $explodeText[ $st ] );
 				}
 			}
 		}
@@ -290,13 +294,13 @@ trait Facebook_Feed {
 		// 1. Lightweight field sets
 		// -----------------------------
 		$post_fields =
-			"status_type,created_time,from,message,story,permalink_url," .
-			"attachments.limit(1){type,media_type,unshimmed_url,media{image}}" .
+			'status_type,created_time,from,message,story,permalink_url,' .
+			'attachments.limit(1){type,media_type,unshimmed_url,media{image}}' .
 			"{$comment_count},reactions.summary(total_count)";
 
 		$feed_fields =
-			"id,message,status_type,created_time,from,permalink_url,privacy," .
-			"attachments.limit(1){type,media_type,unshimmed_url,media{image}}" .
+			'id,message,status_type,created_time,from,permalink_url,privacy,' .
+			'attachments.limit(1){type,media_type,unshimmed_url,media{image}}' .
 			"{$comment_count},reactions.summary(total_count)";
 
 		// -----------------------------
@@ -312,7 +316,7 @@ trait Facebook_Feed {
 			"https://graph.facebook.com/v18.0/{$page_id}/feed" .
 			"?fields={$feed_fields}" .
 			"&limit={$post_limit}" .
-			"&locale=en_US" .
+			'&locale=en_US' .
 			"&access_token={$token}";
 
 		// -----------------------------
@@ -327,7 +331,7 @@ trait Facebook_Feed {
 		// -----------------------------
 		$test = wp_remote_get(
 			"https://graph.facebook.com/v18.0/{$page_id}/posts?limit=1&access_token={$token}",
-			[ 'timeout' => 6 ]
+			array( 'timeout' => 6 )
 		);
 
 		// If request failed (network timeout) → fallback to feed

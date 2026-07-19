@@ -1,9 +1,22 @@
 var FancyText = function ($scope, $) {
+    // Only these animation names are ever emitted by the widget. Anything else
+    // is attacker-supplied (e.g. via a ShortCode widget) and must not reach
+    // Morphext, which uses it as a CSS class token (CVE-2026-15145).
+    var ALLOWED_TRANSITIONS = [
+        "typing", "fadeIn", "fadeInUp", "fadeInDown", "fadeInLeft",
+        "fadeInRight", "zoomIn", "bounceIn", "swing"
+    ];
+
     var $fancyText = $scope.find(".eael-fancy-text-container").eq(0);
+    var rawTransition = $fancyText.data("fancy-text-transition-type");
+    var transitionType = ALLOWED_TRANSITIONS.indexOf(rawTransition) !== -1
+        ? rawTransition
+        : "fadeIn";
+
     var config = {
         id: $fancyText.data("fancy-text-id"),
         text: DOMPurify.sanitize($fancyText.data("fancy-text") || "").split("|"),
-        transitionType: $fancyText.data("fancy-text-transition-type"),
+        transitionType: transitionType,
         speed: $fancyText.data("fancy-text-speed"),
         delay: $fancyText.data("fancy-text-delay"),
         showCursor: $fancyText.data("fancy-text-cursor") === "yes",

@@ -2015,7 +2015,7 @@ trait Woo_Product_Comparable {
 						case 'sku':
 							$sku = $product->get_sku();
 							! $sku && $sku = '-';
-							$product->fields[ $field ] = $sku;
+							$product->fields[ $field ] = esc_html( $sku );
 							break;
 						case 'weight':
 							if ( $weight = $product->get_weight() ) {
@@ -2037,7 +2037,7 @@ trait Woo_Product_Comparable {
 								if ( ! empty( $terms ) && is_array( $terms ) ) {
 									foreach ( $terms as $term ) {
 										$term                        = sanitize_term( $term, $field );
-										$product->fields[ $field ][] = $term->name;
+										$product->fields[ $field ][] = esc_html( $term->name );
 									}
 								}
 								if ( ! empty( $product->fields[ $field ] ) ) {
@@ -2274,7 +2274,7 @@ trait Woo_Product_Comparable {
 						case 'sku':
 							$sku = $product->get_sku();
 							! $sku && $sku = '-';
-							$product->fields[ $field ] = $sku;
+							$product->fields[ $field ] = esc_html( $sku );
 							break;
 						case 'weight':
 							if ( $weight = $product->get_weight() ) {
@@ -2298,7 +2298,7 @@ trait Woo_Product_Comparable {
 								if ( ! empty( $terms ) && is_array( $terms ) ) {
 									foreach ( $terms as $term ) {
 										$term                        = sanitize_term( $term, $field );
-										$product->fields[ $field ][] = $term->name;
+										$product->fields[ $field ][] = esc_html( $term->name );
 									}
 								}
 

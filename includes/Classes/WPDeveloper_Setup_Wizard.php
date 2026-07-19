@@ -3,13 +3,13 @@
 namespace Essential_Addons_Elementor\Classes;
 
 // Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 // Ensure WordPress core functions are available
-if ( !function_exists('__') ) {
-    require_once( ABSPATH . 'wp-includes/l10n.php' );
+if ( ! function_exists( '__' ) ) {
+	require_once ABSPATH . 'wp-includes/l10n.php';
 }
 
 class WPDeveloper_Setup_Wizard {
@@ -19,12 +19,12 @@ class WPDeveloper_Setup_Wizard {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'setup_wizard_scripts' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-		add_action( 'wp_ajax_save_setup_wizard_data', [ $this, 'save_setup_wizard_data' ] );
-		add_action( 'wp_ajax_enable_wpins_process', [ $this, 'enable_wpins_process' ] );
-		add_action( 'wp_ajax_save_eael_elements_data', [ $this, 'save_eael_elements_data' ] );
-		add_action( 'in_admin_header', [ $this, 'remove_notice' ], 1000 );
+		add_action( 'wp_ajax_save_setup_wizard_data', array( $this, 'save_setup_wizard_data' ) );
+		add_action( 'wp_ajax_enable_wpins_process', array( $this, 'enable_wpins_process' ) );
+		add_action( 'wp_ajax_save_eael_elements_data', array( $this, 'save_eael_elements_data' ) );
+		add_action( 'in_admin_header', array( $this, 'remove_notice' ), 1000 );
 		$this->templately_status = $this->templately_active_status();
-		$this->eblocks_status = $this->eblocks_active_status();
+		$this->eblocks_status    = $this->eblocks_active_status();
 	}
 
 	/**
@@ -32,7 +32,7 @@ class WPDeveloper_Setup_Wizard {
 	 * @return bool
 	 */
 	public function templately_active_status() {
-		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		return is_plugin_active( 'templately/templately.php' );
 	}
 	/**
@@ -40,7 +40,7 @@ class WPDeveloper_Setup_Wizard {
 	 * @return bool
 	 */
 	public function eblocks_active_status() {
-		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		return is_plugin_active( 'essential-blocks/essential-blocks.php' );
 	}
 
@@ -48,7 +48,7 @@ class WPDeveloper_Setup_Wizard {
 	 * Remove all notice in setup wizard page
 	 */
 	public function remove_notice() {
-		if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'eael-setup-wizard' ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'eael-setup-wizard' ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
 			remove_all_actions( 'admin_notices' );
 			remove_all_actions( 'all_admin_notices' );
 		}
@@ -62,22 +62,26 @@ class WPDeveloper_Setup_Wizard {
 	public function setup_wizard_scripts( $hook ) {
 		if ( isset( $hook ) && $hook == 'admin_page_eael-setup-wizard' ) {
 			wp_enqueue_style( 'essential_addons_elementor-setup-wizard-css', EAEL_PLUGIN_URL . 'assets/admin/css/quick-setup.css', false, EAEL_PLUGIN_VERSION );
-            wp_enqueue_style( 'essential_addons_elementor-setup-wizard-fonts', EAEL_PLUGIN_URL . 'includes/templates/admin/icons/style.css', false, EAEL_PLUGIN_VERSION );
+			wp_enqueue_style( 'essential_addons_elementor-setup-wizard-fonts', EAEL_PLUGIN_URL . 'includes/templates/admin/icons/style.css', false, EAEL_PLUGIN_VERSION );
 			wp_enqueue_style( 'sweetalert2-css', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION );
 			wp_enqueue_script( 'sweetalert2-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'sweetalert2-core-js' ), EAEL_PLUGIN_VERSION, true );
 			wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 			// wp_enqueue_script( 'essential_addons_elementor-setup-wizard-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 			// wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-css', EAEL_PLUGIN_URL . 'includes/templates/admin/quick-setup/dist/quick-setup.min.css', array(), EAEL_PLUGIN_VERSION, true );
 			wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-js', EAEL_PLUGIN_URL . 'includes/templates/admin/quick-setup/dist/quick-setup.min.js', array(), EAEL_PLUGIN_VERSION, true );
-			
-			wp_localize_script( 'essential_addons_elementor-setup-wizard-react-js', 'localize', array(
-				'ajaxurl'       => esc_url( admin_url( 'admin-ajax.php' ) ),
-				'nonce'         => wp_create_nonce( 'essential-addons-elementor' ),
-				'success_image' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/success.gif',
-				'eael_quick_setup_data' => $this->eael_quick_setup_data(),
-			) );
+
+			wp_localize_script(
+				'essential_addons_elementor-setup-wizard-react-js',
+				'localize',
+				array(
+					'ajaxurl'               => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'nonce'                 => wp_create_nonce( 'essential-addons-elementor' ),
+					'success_image'         => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/success.gif',
+					'eael_quick_setup_data' => $this->eael_quick_setup_data(),
+				)
+			);
 		}
-		return [];
+		return array();
 	}
 
 	/**
@@ -91,7 +95,7 @@ class WPDeveloper_Setup_Wizard {
 			__( 'Essential Addons ', 'essential-addons-for-elementor-lite' ),
 			'manage_options',
 			'eael-setup-wizard',
-			[ $this, 'render_wizard' ]
+			array( $this, 'render_wizard' )
 		);
 	}
 
@@ -107,241 +111,239 @@ class WPDeveloper_Setup_Wizard {
 	}
 
 	public function eael_quick_setup_data() {
-		$eael_quick_setup_data = [
-			'is_quick_setup' => 1,
-			'menu_items' => $this->data_menu_items(),
+		$eael_quick_setup_data = array(
+			'is_quick_setup'          => 1,
+			'menu_items'              => $this->data_menu_items(),
 			'getting_started_content' => $this->data_getting_started_content(),
-			'configuration_content' => $this->data_configuration_content(),
-			'elements_content' => $this->data_elements_content(),
-			'go_pro_content' => $this->data_go_pro_content(),
-			'plugins_content' => $this->data_plugins_content(),
-			'integrations_content' => $this->data_integrations_content(),
-			'modal_content' => $this->data_modal_content(),
-		];
+			'configuration_content'   => $this->data_configuration_content(),
+			'elements_content'        => $this->data_elements_content(),
+			'go_pro_content'          => $this->data_go_pro_content(),
+			'plugins_content'         => $this->data_plugins_content(),
+			'integrations_content'    => $this->data_integrations_content(),
+			'modal_content'           => $this->data_modal_content(),
+		);
 
 		return $eael_quick_setup_data;
 	}
 
-	public function data_menu_items(){
-		$items = [
+	public function data_menu_items() {
+		$items = array(
 			'started'       => __( 'Getting Started', 'essential-addons-for-elementor-lite' ),
 			'configuration' => __( 'Configuration', 'essential-addons-for-elementor-lite' ),
 			'elements'      => __( 'Elements', 'essential-addons-for-elementor-lite' ),
 			'go_pro'        => __( 'Go PRO', 'essential-addons-for-elementor-lite' ),
 			'pluginspromo'  => __( 'Plugins', 'essential-addons-for-elementor-lite' ),
 			'integrations'  => __( 'Integrations', 'essential-addons-for-elementor-lite' ),
-		];
+		);
 
-		$menu_items = [
-			'templately_status' => $this->templately_status,
-			'eblocks_status' => $this->eblocks_status,
-			'wizard_column' => ! $this->templately_status || ! $this->eblocks_status ? 'five' : 'four',
-			'items' => $items,
+		$menu_items = array(
+			'templately_status'            => $this->templately_status,
+			'eblocks_status'               => $this->eblocks_status,
+			'wizard_column'                => ! $this->templately_status || ! $this->eblocks_status ? 'five' : 'four',
+			'items'                        => $items,
 			'templately_local_plugin_data' => $this->get_local_plugin_data( 'templately/templately.php' ),
-			'eblocks_local_plugin_data' => $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ),
-			'ea_pro_local_plugin_data' => $this->get_local_plugin_data( 'essential-addons-elementor/essential_adons_elementor.php' ),
-		];
+			'eblocks_local_plugin_data'    => $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ),
+			'ea_pro_local_plugin_data'     => $this->get_local_plugin_data( 'essential-addons-elementor/essential_adons_elementor.php' ),
+		);
 
 		return $menu_items;
 	}
-	
-	public function data_getting_started_content(){
-		$getting_started_content = [
-			'youtube_promo_src' => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' ),
+
+	public function data_getting_started_content() {
+		$getting_started_content = array(
+			'youtube_promo_src'   => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' ),
 			'is_tracking_allowed' => $this->get_is_tracking_allowed(),
-		];
+		);
 
 		return $getting_started_content;
 	}
-	
-	public function data_configuration_content(){
-		$configuration_content = [
+
+	public function data_configuration_content() {
+		$configuration_content = array(
 			'ea_logo_src' => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ea-new.png' ),
-		];
+		);
 
 		return $configuration_content;
 	}
 
-	public function data_elements_content(){
-		$elements_content = [
+	public function data_elements_content() {
+		$elements_content = array(
 			'elements_list' => $this->get_element_list(),
-		];
+		);
 
 		return $elements_content;
 	}
-	
-	public function data_go_pro_content(){
-		$feature_items = [
-			[
-				'title' => 'Smart Post List',
-				'link' => 'https://essential-addons.com/post-list/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/smart-post-list.svg',
-			],
-            [
-                'title' => 'Dynamic Gallery',
-                'link' => 'https://essential-addons.com/dynamic-gallery/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/dynamic-gallery.svg',
-            ],
-            [
-                'title' => 'Custom JS',
-                'link' => 'https://essential-addons.com/custom-js/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/custom-js.svg',
-            ],
-            [
-                'title' => 'Protected Content',
-                'link' => 'https://essential-addons.com/protected-content/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/protected-content.svg',
-            ],
-            [
-                'title' => 'Interactive Animations',
-                'link' => 'https://essential-addons.com/interactive-animations/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-modal.svg',
-            ],
-            [
-                'title' => 'Advanced Google Map',
-                'link' => 'https://essential-addons.com/advanced-google-map/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-google-map.svg',
-            ],
-            [
-                'title' => 'Mailchimp',
-                'link' => 'https://essential-addons.com/mailchimp/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mailchimp.svg',
-            ],
-            [
-                'title' => 'Instagram Feed',
-                'link' => 'https://essential-addons.com/instagram-feed/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/instagram-feed.svg',
-            ],
-            [
-                'title' => 'Woo Product Slider',
-                'link' => 'https://essential-addons.com/woo-product-slider/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-product-slider.svg',
-            ],
-            [
-                'title' => 'Parallax',
-                'link' => 'https://essential-addons.com/parallax-scrolling/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/parallax-scrolling.svg',
-            ],
-            [
-                'title' => 'Post Carousel',
-                'link' => 'https://essential-addons.com/post-carousel/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/post-carousel.svg',
-            ],
-            [
-                'title' => 'LearnDash Course List',
-                'link' => 'https://essential-addons.com/learndash-course-list/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/learndash-course-list.svg',
-            ],
-            [
-                'title' => 'Particle Effect',
-                'link' => 'https://essential-addons.com/particle-effect/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/particle-effect.svg',
-            ],
-			[
-				'title' => 'Logo Carousel',
-				'link' => 'https://essential-addons.com/logo-carousel/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/logo-carousel.svg',
-			],
-            [
-                'title' => 'Image Hotspots',
-                'link' => 'https://essential-addons.com/image-hotspots/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/image-hotspots.svg',
-            ]
-		];
 
-		$go_pro_content = [
+	public function data_go_pro_content() {
+		$feature_items = array(
+			array(
+				'title'   => 'Smart Post List',
+				'link'    => 'https://essential-addons.com/post-list/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/smart-post-list.svg',
+			),
+			array(
+				'title'   => 'Dynamic Gallery',
+				'link'    => 'https://essential-addons.com/dynamic-gallery/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/dynamic-gallery.svg',
+			),
+			array(
+				'title'   => 'Custom JS',
+				'link'    => 'https://essential-addons.com/custom-js/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/custom-js.svg',
+			),
+			array(
+				'title'   => 'Protected Content',
+				'link'    => 'https://essential-addons.com/protected-content/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/protected-content.svg',
+			),
+			array(
+				'title'   => 'Interactive Animations',
+				'link'    => 'https://essential-addons.com/interactive-animations/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-modal.svg',
+			),
+			array(
+				'title'   => 'Advanced Google Map',
+				'link'    => 'https://essential-addons.com/advanced-google-map/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-google-map.svg',
+			),
+			array(
+				'title'   => 'Mailchimp',
+				'link'    => 'https://essential-addons.com/mailchimp/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mailchimp.svg',
+			),
+			array(
+				'title'   => 'Instagram Feed',
+				'link'    => 'https://essential-addons.com/instagram-feed/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/instagram-feed.svg',
+			),
+			array(
+				'title'   => 'Woo Product Slider',
+				'link'    => 'https://essential-addons.com/woo-product-slider/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-product-slider.svg',
+			),
+			array(
+				'title'   => 'Parallax',
+				'link'    => 'https://essential-addons.com/parallax-scrolling/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/parallax-scrolling.svg',
+			),
+			array(
+				'title'   => 'Post Carousel',
+				'link'    => 'https://essential-addons.com/post-carousel/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/post-carousel.svg',
+			),
+			array(
+				'title'   => 'LearnDash Course List',
+				'link'    => 'https://essential-addons.com/learndash-course-list/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/learndash-course-list.svg',
+			),
+			array(
+				'title'   => 'Particle Effect',
+				'link'    => 'https://essential-addons.com/particle-effect/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/particle-effect.svg',
+			),
+			array(
+				'title'   => 'Logo Carousel',
+				'link'    => 'https://essential-addons.com/logo-carousel/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/logo-carousel.svg',
+			),
+			array(
+				'title'   => 'Image Hotspots',
+				'link'    => 'https://essential-addons.com/image-hotspots/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/image-hotspots.svg',
+			),
+		);
+
+		$go_pro_content = array(
 			'feature_items' => $feature_items,
-		];
+		);
 
 		return $go_pro_content;
 	}
 
-	public function data_plugins_content(){
-		$plugins_content = [
-			'tab_title'    => __( 'Plugins', 'essential-addons-for-elementor-lite' ),
-			'plugins' => [
-			],
-		];
+	public function data_plugins_content() {
+		$plugins_content = array(
+			'tab_title' => __( 'Plugins', 'essential-addons-for-elementor-lite' ),
+			'plugins'   => array(),
+		);
 
 		if ( ! $this->get_local_plugin_data( 'templately/templately.php' ) ) {
-			$plugins_content['plugins'][] = [
+			$plugins_content['plugins'][] = array(
 				'slug'              => 'templately',
 				'basename'          => 'templately/templately.php',
 				'tab_title'         => __( 'Templately', 'essential-addons-for-elementor-lite' ),
 				'is_active'         => is_plugin_active( 'templately/templately.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'templately/templately.php' ),
 				'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-qs-img.png',
-				'titles'            => [
-					__("6500+", "essential-addons-for-elementor-lite"),
-					__("Ready Templates", "essential-addons-for-elementor-lite")
-				],
-				'features' => [
-					[
+				'titles'            => array(
+					__( '6500+', 'essential-addons-for-elementor-lite' ),
+					__( 'Ready Templates', 'essential-addons-for-elementor-lite' ),
+				),
+				'features'          => array(
+					array(
 						'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-1.svg',
-						'content'   => __( "Stunning Ready Website Templates", "essential-addons-for-elementor-lite" )
-					],
-					[
+						'content'   => __( 'Stunning Ready Website Templates', 'essential-addons-for-elementor-lite' ),
+					),
+					array(
 						'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-2.svg',
-						'content'   => __( "One-Click Full Site Import", "essential-addons-for-elementor-lite" )
-					],
-					[
+						'content'   => __( 'One-Click Full Site Import', 'essential-addons-for-elementor-lite' ),
+					),
+					array(
 						'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-3.svg',
-						'content'   => __( "Team Collaboration WorkSpace", "essential-addons-for-elementor-lite" )
-					],
-					[
+						'content'   => __( 'Team Collaboration WorkSpace', 'essential-addons-for-elementor-lite' ),
+					),
+					array(
 						'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-4.svg',
-						'content'   => __( "Unlimited Cloud Storage", "essential-addons-for-elementor-lite" )
-					],
-				],
-			];
+						'content'   => __( 'Unlimited Cloud Storage', 'essential-addons-for-elementor-lite' ),
+					),
+				),
+			);
 		}
 
-
 		if ( ! $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) ) {
-			$plugins_content['plugins'][] = [
+			$plugins_content['plugins'][] = array(
 				'slug'              => 'essential-blocks',
 				'basename'          => 'essential-blocks/essential-blocks.php',
 				'tab_title'         => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 				'is_active'         => is_plugin_active( 'essential-blocks/essential-blocks.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ),
 				'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-promo-image.png',
-				'titles'            => __("Power Up Gutenberg Editor", "essential-addons-for-elementor-lite")					,
-				'features'          => [
-					[
+				'titles'            => __( 'Power Up Gutenberg Editor', 'essential-addons-for-elementor-lite' ),
+				'features'          => array(
+					array(
 						'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-icon-1.png',
-						'content'   => __( "Access 60+ Essential Gutenberg Blocks", "essential-addons-for-elementor-lite" )
-					],
-					[
+						'content'   => __( 'Access 60+ Essential Gutenberg Blocks', 'essential-addons-for-elementor-lite' ),
+					),
+					array(
 						'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-icon-2.png',
-						'content'   => __( "Get Global Styling & Typography Support", "essential-addons-for-elementor-lite" )
-					],
-					[
+						'content'   => __( 'Get Global Styling & Typography Support', 'essential-addons-for-elementor-lite' ),
+					),
+					array(
 						'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-icon-3.png',
-						'content'   => __( "Avail 2,900+ Exclusive Gutenberg Templates", "essential-addons-for-elementor-lite" )
-					],
-					[
+						'content'   => __( 'Avail 2,900+ Exclusive Gutenberg Templates', 'essential-addons-for-elementor-lite' ),
+					),
+					array(
 						'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-icon-4.png',
-						'content'   => __( "Use Ready Patterns & Reuse Facilities On Entire Site", "essential-addons-for-elementor-lite" )
-					],
-				],
-			];
+						'content'   => __( 'Use Ready Patterns & Reuse Facilities On Entire Site', 'essential-addons-for-elementor-lite' ),
+					),
+				),
+			);
 		}
-		
+
 		return $plugins_content;
 	}
-	
-	public function data_integrations_content(){
-		$integrations_content = [
+
+	public function data_integrations_content() {
+		$integrations_content = array(
 			'plugin_list' => $this->get_plugin_list(),
-		];
+		);
 
 		return $integrations_content;
 	}
-	
-	public function data_modal_content(){
-		$modal_content = [
+
+	public function data_modal_content() {
+		$modal_content = array(
 			'success_2_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/success-2.png',
-		];
+		);
 
 		return $modal_content;
 	}
@@ -351,80 +353,80 @@ class WPDeveloper_Setup_Wizard {
 	 * @return array
 	 */
 	public function get_plugin_list() {
-		return [
-			[
-				'slug'     => 'betterdocs',
-				'basename' => 'betterdocs/betterdocs.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/bd-new.svg',
-				'title'    => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Create and organize your knowledge base, FAQ & documentation page efficiently, making it easy for visitors to find any helpful article quickly and effortlessly.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'betterdocs/betterdocs.php' ),
+		return array(
+			array(
+				'slug'              => 'betterdocs',
+				'basename'          => 'betterdocs/betterdocs.php',
+				'logo'              => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/bd-new.svg',
+				'title'             => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
+				'desc'              => __( 'Create and organize your knowledge base, FAQ & documentation page efficiently, making it easy for visitors to find any helpful article quickly and effortlessly.', 'essential-addons-for-elementor-lite' ),
+				'is_active'         => is_plugin_active( 'betterdocs/betterdocs.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'betterdocs/betterdocs.php' ),
-			],
-			[
-				'slug'     => 'betterlinks',
-				'basename' => 'betterlinks/betterlinks.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/btl.svg',
-				'title'    => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Link Shortening tool to create, shorten & manage any URL. It helps to cross promote brands & products and gather analytics reports while running marketing campaigns.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'betterlinks/betterlinks.php' ),
+			),
+			array(
+				'slug'              => 'betterlinks',
+				'basename'          => 'betterlinks/betterlinks.php',
+				'logo'              => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/btl.svg',
+				'title'             => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
+				'desc'              => __( 'Link Shortening tool to create, shorten & manage any URL. It helps to cross promote brands & products and gather analytics reports while running marketing campaigns.', 'essential-addons-for-elementor-lite' ),
+				'is_active'         => is_plugin_active( 'betterlinks/betterlinks.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'betterlinks/betterlinks.php' ),
-			],
-			[
-				'slug'     => 'better-payment',
-				'basename' => 'better-payment/better-payment.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bp.svg',
-				'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Streamline transactions in Elementor by integrating PayPal & Stripe. Experience advanced analytics, validation, and Elementor forms for secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'better-payment/better-payment.php' ),
+			),
+			array(
+				'slug'              => 'better-payment',
+				'basename'          => 'better-payment/better-payment.php',
+				'logo'              => EAEL_PLUGIN_URL . 'assets/admin/images/bp.svg',
+				'title'             => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
+				'desc'              => __( 'Streamline transactions in Elementor by integrating PayPal & Stripe. Experience advanced analytics, validation, and Elementor forms for secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
+				'is_active'         => is_plugin_active( 'better-payment/better-payment.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'better-payment/better-payment.php' ),
-			],
-			[
-				'slug'     => 'notificationx',
-				'basename' => 'notificationx/notificationx.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/nx-logo.svg',
-				'title'    => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Best FOMO & social proof plugin to boost sales conversion by creating stunning sales popups, growth & discount alerts, flashing tabs, notification bars & more.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'notificationx/notificationx.php' ),
+			),
+			array(
+				'slug'              => 'notificationx',
+				'basename'          => 'notificationx/notificationx.php',
+				'logo'              => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/nx-logo.svg',
+				'title'             => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
+				'desc'              => __( 'Best FOMO & social proof plugin to boost sales conversion by creating stunning sales popups, growth & discount alerts, flashing tabs, notification bars & more.', 'essential-addons-for-elementor-lite' ),
+				'is_active'         => is_plugin_active( 'notificationx/notificationx.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'notificationx/notificationx.php' ),
-			],
-			[
-				'slug'     => 'wp-scheduled-posts',
-				'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/wscp.svg',
-				'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Advanced content marketing tool for WordPress to schedule posts & pages with Schedule Calendar, Auto & Manual Scheduler, etc. It also allows auto-social sharing.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'wp-scheduled-posts/wp-scheduled-posts.php' ),
+			),
+			array(
+				'slug'              => 'wp-scheduled-posts',
+				'basename'          => 'wp-scheduled-posts/wp-scheduled-posts.php',
+				'logo'              => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/wscp.svg',
+				'title'             => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
+				'desc'              => __( 'Advanced content marketing tool for WordPress to schedule posts & pages with Schedule Calendar, Auto & Manual Scheduler, etc. It also allows auto-social sharing.', 'essential-addons-for-elementor-lite' ),
+				'is_active'         => is_plugin_active( 'wp-scheduled-posts/wp-scheduled-posts.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'wp-scheduled-posts/wp-scheduled-posts.php' ),
-			],
-			[
-				'slug'     => 'easyjobs',
-				'basename' => 'easyjobs/easyjobs.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/easy-jobs-logo.svg',
-				'title'    => __( 'easy.jobs', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Job recruitment tool to attract, manage, and hire the right talent faster. This talent recruitment solution lets you manage jobs and career pages in Elementor.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'easyjobs/easyjobs.php' ),
+			),
+			array(
+				'slug'              => 'easyjobs',
+				'basename'          => 'easyjobs/easyjobs.php',
+				'logo'              => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/easy-jobs-logo.svg',
+				'title'             => __( 'easy.jobs', 'essential-addons-for-elementor-lite' ),
+				'desc'              => __( 'Job recruitment tool to attract, manage, and hire the right talent faster. This talent recruitment solution lets you manage jobs and career pages in Elementor.', 'essential-addons-for-elementor-lite' ),
+				'is_active'         => is_plugin_active( 'easyjobs/easyjobs.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'easyjobs/easyjobs.php' ),
-			],
-			[
-				'slug'     => 'embedpress',
-				'basename' => 'embedpress/embedpress.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ep-logo.png',
-				'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Embed videos, images, gifs, charts, docs, maps, audio, live streams, pdf & more from 150+ sources into your WordPress site and get seamless customization options.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'embedpress/embedpress.php' ),
+			),
+			array(
+				'slug'              => 'embedpress',
+				'basename'          => 'embedpress/embedpress.php',
+				'logo'              => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ep-logo.png',
+				'title'             => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
+				'desc'              => __( 'Embed videos, images, gifs, charts, docs, maps, audio, live streams, pdf & more from 150+ sources into your WordPress site and get seamless customization options.', 'essential-addons-for-elementor-lite' ),
+				'is_active'         => is_plugin_active( 'embedpress/embedpress.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'embedpress/embedpress.php' ),
-			],
-			[
-				'slug'     => 'essential-blocks',
-				'basename' => 'essential-blocks/essential-blocks.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-new.svg',
-				'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Enhance Gutenberg experience with 50+ unique blocks (more coming soon). Boost your block editor with easy-to-use blocks for a simpler WordPress page or post design.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'essential-blocks/essential-blocks.php' ),
+			),
+			array(
+				'slug'              => 'essential-blocks',
+				'basename'          => 'essential-blocks/essential-blocks.php',
+				'logo'              => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-new.svg',
+				'title'             => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
+				'desc'              => __( 'Enhance Gutenberg experience with 50+ unique blocks (more coming soon). Boost your block editor with easy-to-use blocks for a simpler WordPress page or post design.', 'essential-addons-for-elementor-lite' ),
+				'is_active'         => is_plugin_active( 'essential-blocks/essential-blocks.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ),
-			],
-		];
+			),
+		);
 	}
 
 	/**
@@ -439,13 +441,13 @@ class WPDeveloper_Setup_Wizard {
 			return false;
 		}
 
-		if ( !function_exists( 'get_plugins' ) ) {
+		if ( ! function_exists( 'get_plugins' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
 		$plugins = get_plugins();
 
-		if ( !isset( $plugins[ $basename ] ) ) {
+		if ( ! isset( $plugins[ $basename ] ) ) {
 			return false;
 		}
 
@@ -459,22 +461,22 @@ class WPDeveloper_Setup_Wizard {
 
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		if ( !current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		if ( !isset( $_POST[ 'fields' ] ) ) {
+		if ( ! isset( $_POST['fields'] ) ) {
 			return;
 		}
 
-		wp_parse_str( $_POST[ 'fields' ], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+		wp_parse_str( $_POST['fields'], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 
-		if ( isset( $fields[ 'eael_user_email_address' ] ) && intval( $fields[ 'eael_user_email_address' ] ) == 1 ) {
+		if ( isset( $fields['eael_user_email_address'] ) && intval( $fields['eael_user_email_address'] ) == 1 ) {
 			$this->wpins_process();
 		}
 		update_option( 'eael_setup_wizard', 'complete' );
 		if ( $this->save_element_list( $fields ) ) {
-			wp_send_json_success( [ 'redirect_url' => esc_url( admin_url( 'admin.php?page=eael-settings' ) ) ] );
+			wp_send_json_success( array( 'redirect_url' => esc_url( admin_url( 'admin.php?page=eael-settings' ) ) ) );
 		}
 		wp_send_json_error();
 	}
@@ -483,16 +485,16 @@ class WPDeveloper_Setup_Wizard {
 
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		if ( !current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		if ( !isset( $_POST[ 'fields' ] ) ) {
+		if ( ! isset( $_POST['fields'] ) ) {
 			return;
 		}
 
-		wp_parse_str( $_POST[ 'fields' ], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		
+		wp_parse_str( $_POST['fields'], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+
 		$this->wpins_process();
 
 		wp_send_json_success();
@@ -504,15 +506,15 @@ class WPDeveloper_Setup_Wizard {
 	public function save_eael_elements_data() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		if ( !current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		if ( !isset( $_POST[ 'fields' ] ) ) {
+		if ( ! isset( $_POST['fields'] ) ) {
 			return;
 		}
 
-		wp_parse_str( $_POST[ 'fields' ], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+		wp_parse_str( $_POST['fields'], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 
 		if ( $this->save_element_list( $fields ) ) {
 			wp_send_json_success();
@@ -526,11 +528,11 @@ class WPDeveloper_Setup_Wizard {
 	 * @return bool
 	 */
 	public function save_element_list( $fields ) {
-		if ( !empty( $fields ) ) {
+		if ( ! empty( $fields ) ) {
 
-			$el_list      = $fields[ 'eael_element' ];
-			$save_element = [];
-			foreach ( $GLOBALS[ 'eael_config' ][ 'elements' ] as $key => $item ) {
+			$el_list      = $fields['eael_element'];
+			$save_element = array();
+			foreach ( $GLOBALS['eael_config']['elements'] as $key => $item ) {
 				$save_element[ $key ] = ( isset( $el_list[ $key ] ) ) ? 1 : '';
 			}
 			$save_element = array_merge( $save_element, $this->get_dummy_widget() );
@@ -545,338 +547,358 @@ class WPDeveloper_Setup_Wizard {
 	 * @return array[]
 	 */
 	public function get_element_list() {
-		return [
-			'content-elements'         => [
+		return array(
+			'content-elements'         => array(
 				'title'    => __( 'Content Elements', 'essential-addons-for-elementor-lite' ),
-				'elements' => [
-					[
+				'elements' => array(
+					array(
 						'key'         => 'creative-btn',
 						'title'       => __( 'Creative Button', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'team-members',
 						'title'       => __( 'Team Member', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'testimonials',
 						'title'       => __( 'Testimonial', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'flip-box',
 						'title'       => __( 'Flip Box', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'info-box',
 						'title'       => __( 'Info Box', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'dual-header',
 						'title'       => __( 'Dual Color Heading', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'tooltip',
 						'title'       => __( 'Tooltip', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'adv-accordion',
 						'title'       => __( 'Advanced Accordion', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'adv-tabs',
 						'title'       => __( 'Advanced Tabs', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'feature-list',
 						'title'       => __( 'Feature List', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
 
-					],
-					[
+					),
+					array(
 						'key'         => 'sticky-video',
 						'title'       => __( 'Sticky Video', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'event-calendar',
 						'title'       => __( 'Event Calendar', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'simple-menu',
 						'title'       => __( 'Simple Menu', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'breadcrumbs',
 						'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'code-snippet',
 						'title'       => __( 'Code Snippet', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-				]
-			],
-			'dynamic-content-elements' => [
+					),
+				),
+			),
+			'dynamic-content-elements' => array(
 				'title'    => __( 'Dynamic Content Elements', 'essential-addons-for-elementor-lite' ),
-				'elements' => [
-					[
+				'elements' => array(
+					array(
 						'key'         => 'post-grid',
 						'title'       => __( 'Post Grid', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'   => 'post-timeline',
 						'title' => __( 'Post Timeline', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'         => 'data-table',
 						'title'       => __( 'Data Table', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'   => 'advanced-data-table',
 						'title' => __( 'Advanced Data Table', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'         => 'content-ticker',
 						'title'       => __( 'Content Ticker', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'nft-gallery',
 						'title'       => __( 'NFT Gallery', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
-						'key'         => 'business-reviews',
-						'title'       => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
-					],
-				]
-			],
-			'creative-elements'        => [
+					),
+					array(
+						'key'   => 'business-reviews',
+						'title' => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
+					),
+				),
+			),
+			'creative-elements'        => array(
 				'title'    => __( 'Creative Elements', 'essential-addons-for-elementor-lite' ),
-				'elements' => [
-					[
+				'elements' => array(
+					array(
 						'key'         => 'count-down',
 						'title'       => __( 'Countdown', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'fancy-text',
 						'title'       => __( 'Fancy Text', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'filter-gallery',
 						'title'       => __( 'Filterable Gallery', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'image-accordion',
 						'title'       => __( 'Image Accordion', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'progress-bar',
 						'title'       => __( 'Progress Bar', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'interactive-circle',
 						'title'       => __( 'Interactive Circle', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-                    [
-                        'key'         => 'svg-draw',
-                        'title'       => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
-                        'preferences' => 'advance',
-                    ],
-					[
+					),
+					array(
+						'key'         => 'svg-draw',
+						'title'       => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					),
+					array(
 						'key'         => 'fancy-chart',
 						'title'       => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'stacked-cards',
 						'title'       => __( 'Stacked Cards', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'pricing-slider',
 						'title'       => __( 'Pricing Slider', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'sphere-photo-viewer',
 						'title'       => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-				]
-			],
-			'marketing-elements'       => [
+					),
+				),
+			),
+			'marketing-elements'       => array(
 				'title'    => __( 'Marketing & Social Feed Elements', 'essential-addons-for-elementor-lite' ),
-				'elements' => [
-					[
+				'elements' => array(
+					array(
 						'key'         => 'call-to-action',
 						'title'       => __( 'Call To Action', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'price-table',
 						'title'       => __( 'Pricing Table', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					],
-					[
+					),
+					array(
 						'key'         => 'twitter-feed',
 						'title'       => __( 'Twitter Feed', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'facebook-feed',
 						'title'       => __( 'Facebook Feed', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
+					),
 
-				]
-			],
-			'form-styler-elements'     => [
+				),
+			),
+			'form-styler-elements'     => array(
 				'title'    => __( 'Form Styler Elements', 'essential-addons-for-elementor-lite' ),
-				'elements' => [
-					[
+				'elements' => array(
+					array(
 						'key'         => 'contact-form-7',
 						'title'       => __( 'Contact Form 7', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'   => 'weforms',
 						'title' => __( 'weForms', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'ninja-form',
 						'title' => __( 'Ninja Form', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'gravity-form',
 						'title' => __( 'Gravity Form', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'caldera-form',
 						'title' => __( 'Caldera Form', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'wpforms',
 						'title' => __( 'WPForms', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'fluentform',
 						'title' => __( 'Fluent Forms', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'formstack',
 						'title' => __( 'Formstack', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'typeform',
 						'title' => __( 'Typeform', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'         => 'login-register',
 						'title'       => __( 'Login Register Form', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-				]
-			],
-			'documentation-elements'   => [
+					),
+				),
+			),
+			'documentation-elements'   => array(
 				'title'    => __( 'Documentation Elements', 'essential-addons-for-elementor-lite' ),
-				'elements' => [
-					[
+				'elements' => array(
+					array(
 						'key'   => 'betterdocs-category-grid',
 						'title' => __( 'BetterDocs Category Grid', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'betterdocs-category-box',
 						'title' => __( 'BetterDocs Category Box', 'essential-addons-for-elementor-lite' ),
 
-					],
-					[
+					),
+					array(
 						'key'   => 'betterdocs-search-form',
 						'title' => __( 'BetterDocs Search Form', 'essential-addons-for-elementor-lite' ),
-					]
-				]
-			],
-			'woocommerce-elements'     => [
+					),
+				),
+			),
+			'woocommerce-elements'     => array(
 				'title'    => __( 'WooCommerce Elements', 'essential-addons-for-elementor-lite' ),
-				'elements' => [
-					[
+				'elements' => array(
+					array(
 						'key'         => 'product-grid',
 						'title'       => __( 'Woo Product Grid', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'woo-product-list',
 						'title'       => __( 'Woo Product List', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'woo-product-image',
 						'title'       => __( 'Woo Product Images', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'woo-add-to-cart',
 						'title'       => __( 'Woo Add To Cart', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
+						'key'         => 'woo-product-title',
+						'title'       => __( 'Woo Product Title', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					),
+					array(
 						'key'         => 'woo-product-price',
 						'title'       => __( 'Woo Product Price', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
+						'key'         => 'woo-product-tabs',
+						'title'       => __( 'Woo Product Tabs', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					),
+					array(
+						'key'         => 'woo-product-short-description',
+						'title'       => __( 'Woo Product Short Description', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					),
+					array(
+						'key'         => 'woo-product-description',
+						'title'       => __( 'Woo Product Description', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					),
+					array(
 						'key'         => 'woo-product-rating',
 						'title'       => __( 'Woo Product Rating', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'   => 'woo-product-carousel',
 						'title' => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'woo-checkout',
 						'title' => __( 'Woo Checkout', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'woo-cart',
 						'title' => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'   => 'woo-cross-sells',
 						'title' => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
-					],
-					[
+					),
+					array(
 						'key'         => 'woo-product-compare',
 						'title'       => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					],
-					[
+					),
+					array(
 						'key'         => 'woo-product-gallery',
 						'title'       => __( 'Woo Product Gallery', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
-					]
-				]
-			]
-		];
+					),
+				),
+			),
+		);
 	}
 
 	public static function redirect() {
@@ -891,26 +913,29 @@ class WPDeveloper_Setup_Wizard {
 
 	public function change_site_title() {
 		?>
-        <script>
+		<script>
 			document.title = "<?php esc_html_e( 'Quick Setup Wizard- Essential Addons', 'essential-addons-for-elementor-lite' ); ?>"
-        </script>
+		</script>
 		<?php
 	}
 
 	public function wpins_process() {
 		$plugin_name = basename( EAEL_PLUGIN_FILE, '.php' );
 		if ( class_exists( '\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker' ) ) {
-			$tracker = \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker::get_instance( EAEL_PLUGIN_FILE, [
-				'opt_in'       => true,
-				'goodbye_form' => true,
-				'item_id'      => '760e8569757fa16992d8'
-			] );
+			$tracker = \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker::get_instance(
+				EAEL_PLUGIN_FILE,
+				array(
+					'opt_in'       => true,
+					'goodbye_form' => true,
+					'item_id'      => '760e8569757fa16992d8',
+				)
+			);
 			$tracker->set_is_tracking_allowed( true );
 			$tracker->do_tracking( true );
 		}
 	}
 
-	public function get_is_tracking_allowed( $plugin = 'essential_adons_elementor' ){
+	public function get_is_tracking_allowed( $plugin = 'essential_adons_elementor' ) {
 		/**
 		 * Get All Tracked Plugin List using this Tracker.
 		 */
@@ -918,11 +943,11 @@ class WPDeveloper_Setup_Wizard {
 		/**
 		 * Check user is opted out for tracking or not.
 		 */
-		return intval( isset( $allow_tracking[$plugin] ) );
+		return intval( isset( $allow_tracking[ $plugin ] ) );
 	}
 
 	public function get_dummy_widget() {
-		return [
+		return array(
 			'embedpress'                  => 1,
 			'woocommerce-review'          => 1,
 			'career-page'                 => 1,
@@ -930,7 +955,7 @@ class WPDeveloper_Setup_Wizard {
 			'crowdfundly-organization'    => 1,
 			'crowdfundly-all-campaign'    => 1,
 			'better-payment'              => 1,
-		];
+		);
 	}
 }
 

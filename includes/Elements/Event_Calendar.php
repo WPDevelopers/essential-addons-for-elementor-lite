@@ -3858,7 +3858,7 @@ class Event_Calendar extends Widget_Base
             data-hideDetailsLink= "' . esc_attr( $settings['eael_event_details_link_hide'] ) . '"
             data-detailsButtonText = "' . esc_attr( wp_kses( $settings['eael_event_details_text'], Helper::eael_allowed_tags() ) ) . '"
             data-location-display = "' . esc_attr( $settings['eael_event_location_display'] ) . '"
-            data-events="' . esc_attr( htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) ) . '"
+            data-events="' . esc_attr( htmlspecialchars( json_encode( eael_neutralize_shortcodes( $data ) ), ENT_QUOTES, 'UTF-8' ) ) . '"
             data-thumbnail_position = "' . ( !empty( $settings['eael_event_show_thumbnail'] ) ? esc_attr( $settings['eael_event_thumbnail_position'] ) : '') . '"
             data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>';
 
@@ -4015,7 +4015,7 @@ class Event_Calendar extends Widget_Base
 					$tr_inner_html .= '<td class="eael-ec-event-date" ' . $row_style . '>' . $date . '</td>';
 				}
                 if( $tr_inner_html ){
-                    echo wp_kses( $tr_inner_html, Helper::eael_allowed_tags() );
+                    echo eael_neutralize_shortcodes( wp_kses( $tr_inner_html, Helper::eael_allowed_tags() ) );
                 }
 				echo "</tr>";
 			}

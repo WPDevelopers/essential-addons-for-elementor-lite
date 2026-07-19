@@ -4029,6 +4029,8 @@ class Woo_Product_List extends Widget_Base
                 break;
         }
 
+        $args = ClassesHelper::eael_multivendorx_store_query_args( $args );
+
         return $args;
     }
 
