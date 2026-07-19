@@ -723,3 +723,15 @@
 .rtl .elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-item {
   direction: ltr;
 }
+.elementor-widget-eael-feature-list .eael-feature-list-extras {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.elementor-widget-eael-feature-list .eael-feature-list-extras .eael-feature-list-extra {
+  margin: 0;
+  padding: 0;
+}
+.elementor-widget-eael-feature-list .eael-feature-list-extras .eael-feature-list-extra .eael-feature-list-extra-value {
+  display: inline-block;
+}

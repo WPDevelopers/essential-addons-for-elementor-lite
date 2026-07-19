@@ -178,6 +178,22 @@ class Feature_List extends Widget_Base {
                     'condition'   => $repeater_condition,
                 ]
             );
+
+            $extra_field_options = $sub_field_options;
+            unset( $extra_field_options[''] );
+            $this->add_control(
+                'eael_fl_acf_repeater_extras_' . $repeater_name,
+                [
+                    'label'       => esc_html__( 'Additional Fields', 'essential-addons-for-elementor-lite' ),
+                    'description' => esc_html__( 'Select extra sub-fields to display below each feature content.', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::SELECT2,
+                    'multiple'    => true,
+                    'default'     => [],
+                    'options'     => $extra_field_options,
+                    'label_block' => true,
+                    'condition'   => $repeater_condition,
+                ]
+            );
         }
 
         $this->end_controls_section();
@@ -208,6 +224,20 @@ class Feature_List extends Widget_Base {
         $link_key    = sanitize_text_field( $settings[ 'eael_fl_acf_repeater_link_' . $field_name ] ?? '' );
         $image_key   = sanitize_text_field( $settings[ 'eael_fl_acf_repeater_image_' . $field_name ] ?? '' );
         $icon_key    = sanitize_text_field( $settings[ 'eael_fl_acf_repeater_icon_' . $field_name ] ?? '' );
+        $extra_keys  = ( isset( $settings[ 'eael_fl_acf_repeater_extras_' . $field_name ] ) && is_array( $settings[ 'eael_fl_acf_repeater_extras_' . $field_name ] ) )
+            ? $settings[ 'eael_fl_acf_repeater_extras_' . $field_name ]
+            : [];
+
+        // Resolve sub-field labels once for the selected additional fields.
+        $sub_field_labels = [];
+        if ( ! empty( $extra_keys ) && function_exists( 'acf_get_field' ) ) {
+            $repeater_field = acf_get_field( $field_name );
+            if ( ! empty( $repeater_field['sub_fields'] ) ) {
+                foreach ( $repeater_field['sub_fields'] as $sf ) {
+                    $sub_field_labels[ $sf['name'] ] = $sf['label'];
+                }
+            }
+        }
 
         $object_id = get_the_ID() ?: get_queried_object_id();
         $rows      = get_field( $field_name, $object_id );
@@ -256,6 +286,19 @@ class Feature_List extends Widget_Base {
             $icon_class = ( $icon_key && is_scalar( $row[ $icon_key ] ?? null ) ) ? sanitize_text_field( (string) $row[ $icon_key ] ) : '';
             $has_image  = '' !== $image['url'];
 
+            // Additional fields: [ [ 'label' => ..., 'value' => ... ], ... ].
+            $extras = [];
+            foreach ( $extra_keys as $ekey ) {
+                $val = $row[ $ekey ] ?? '';
+                if ( '' === $val || null === $val || [] === $val ) {
+                    continue;
+                }
+                $extras[] = [
+                    'label' => $sub_field_labels[ $ekey ] ?? $ekey,
+                    'value' => is_scalar( $val ) ? (string) $val : '',
+                ];
+            }
+
             $items[] = [
                 'eael_feature_list_icon_type' => $has_image ? 'image' : 'icon',
                 'eael_feature_list_icon'      => $has_image ? '' : $icon_class,
@@ -264,6 +307,7 @@ class Feature_List extends Widget_Base {
                 'eael_feature_list_title'     => $title,
                 'eael_feature_list_content'   => $content,
                 'eael_feature_list_link'      => $link,
+                'eael_feature_list_extras'    => $extras,
                 '_id'                         => uniqid( 'fl_', false ),
             ];
         }
@@ -1302,6 +1346,13 @@ class Feature_List extends Widget_Base {
                             echo '</' . esc_html( $feat_title_tag ) . '>';
                             ?>
 						<p <?php $this->print_render_attribute_string( 'eael_feature_list_content' . $index); ?>><?php echo wp_kses( $item['eael_feature_list_content'], Helper::eael_allowed_tags() ); ?></p>
+						<?php if ( ! empty( $item['eael_feature_list_extras'] ) ) : ?>
+							<ul class="eael-feature-list-extras">
+								<?php foreach ( $item['eael_feature_list_extras'] as $extra ) : ?>
+									<li class="eael-feature-list-extra"><span class="eael-feature-list-extra-value"><?php echo wp_kses_post( $extra['value'] ); ?></span></li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
 						</div>
 
 					</li>

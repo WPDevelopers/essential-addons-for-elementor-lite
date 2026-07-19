@@ -738,3 +738,21 @@ $enable-prefers-reduced-motion-media-query: true !default;
         direction: ltr;
     }
 }
+
+// ACF Repeater "Additional Fields" output
+.elementor-widget-eael-feature-list {
+    .eael-feature-list-extras {
+        list-style: none;
+        margin: 8px 0 0;
+        padding: 0;
+
+        .eael-feature-list-extra {
+            margin: 0;
+            padding: 0;
+
+            .eael-feature-list-extra-value {
+                display: inline-block;
+            }
+        }
+    }
+}
