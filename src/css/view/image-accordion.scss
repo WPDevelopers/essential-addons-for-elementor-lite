@@ -284,3 +284,21 @@
       box-shadow: inherit !important;
    }
 }
+
+// ACF Repeater "Additional Fields" output
+.elementor-widget-eael-image-accordion {
+	.eael-img-accordion-extras {
+		list-style: none;
+		margin: 8px 0 0;
+		padding: 0;
+
+		.eael-img-accordion-extra {
+			margin: 0;
+			padding: 0;
+
+			.eael-img-accordion-extra-value {
+				display: inline-block;
+			}
+		}
+	}
+}
