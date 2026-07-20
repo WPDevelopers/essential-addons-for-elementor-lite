@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Icons_Manager;
+use \Elementor\Plugin;
 use \Elementor\Repeater;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Widget_Base;
@@ -51,8 +52,341 @@ class Interactive_Circle extends Widget_Base {
 	}
 
 	protected function is_dynamic_content():bool {
-        return false;
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			return false;
+		}
+
+		$settings = $this->get_data( 'settings' );
+
+		if ( empty( $settings ) || ! is_array( $settings ) ) {
+			return false;
+		}
+
+		// ACF Repeater pulls per-post data — treat as dynamic so it is not statically cached.
+		if ( 'acf_repeater' === ( $settings['eael_ic_data_source'] ?? 'custom' ) ) {
+			return true;
+		}
+
+		return false;
     }
+
+	/**
+	 * Max items the preset layouts can lay out without breaking.
+	 * Mirrors the manual repeater's own documented limit.
+	 */
+	const EAEL_IC_MAX_ITEMS = 8;
+
+	/**
+	 * Registers ACF Repeater data-source controls for Interactive Circle (Lite-native).
+	 * Minimal field set: Short Title, Tab Content, Link.
+	 */
+	protected function eael_register_acf_controls() {
+		$this->start_controls_section(
+			'eael_ic_section_data_source',
+			[
+				'label' => esc_html__( 'Data Source', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_ic_data_source',
+			[
+				'label'   => esc_html__( 'Source', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'custom',
+				'options' => [
+					'custom'       => esc_html__( 'Custom (Manual)', 'essential-addons-for-elementor-lite' ),
+					'acf_repeater' => esc_html__( 'ACF Repeater Field', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_ic_acf_repeater_field',
+			[
+				'label'     => esc_html__( 'Repeater Field', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => Helper::eael_get_acf_repeater_options(),
+				'condition' => [ 'eael_ic_data_source' => 'acf_repeater' ],
+			]
+		);
+
+		// ACF inactive notice (no-op when ACF is active).
+		Helper::eael_acf_notice_controls( $this, [ 'eael_ic_data_source' => 'acf_repeater' ] );
+
+		$this->add_control(
+			'eael_ic_acf_limit_notice',
+			[
+				'type'            => Controls_Manager::RAW_HTML,
+				/* translators: %d: maximum number of circle items. */
+				'raw'             => sprintf( __( '<strong>Circle Item limit max %d.</strong> Only the first %d rows of the ACF Repeater are used — extra rows are ignored so the preset layout is not broken.', 'essential-addons-for-elementor-lite' ), self::EAEL_IC_MAX_ITEMS, self::EAEL_IC_MAX_ITEMS ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [ 'eael_ic_data_source' => 'acf_repeater' ],
+			]
+		);
+
+		// The per-item Icon is an ICONS control (value + library pair) with no ACF
+		// equivalent — presentation belongs in the widget, not in a mapped field.
+		$this->add_control(
+			'eael_ic_acf_icon',
+			[
+				'label'       => esc_html__( 'Item Icon', 'essential-addons-for-elementor-lite' ),
+				'description' => esc_html__( 'Icon used for every item in ACF mode.', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::ICONS,
+				'default'     => [
+					'value'   => 'fas fa-home',
+					'library' => 'fa-solid',
+				],
+				'condition'   => [ 'eael_ic_data_source' => 'acf_repeater' ],
+			]
+		);
+
+		// Per-repeater sub-field mapping.
+		$acf_sub_fields_by_repeater = Helper::eael_get_acf_repeater_sub_fields();
+
+		foreach ( $acf_sub_fields_by_repeater as $repeater_name => $sub_field_options ) {
+			$repeater_condition = [
+				'eael_ic_data_source'        => 'acf_repeater',
+				'eael_ic_acf_repeater_field' => $repeater_name,
+			];
+
+			$this->add_control(
+				'eael_ic_acf_fields_heading_' . $repeater_name,
+				[
+					'label'     => esc_html__( 'Field Mapping', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'before',
+					'condition' => $repeater_condition,
+				]
+			);
+
+			$this->add_control(
+				'eael_ic_acf_repeater_title_' . $repeater_name,
+				[
+					'label'     => esc_html__( 'Short Title', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::SELECT,
+					'default'   => '',
+					'options'   => $sub_field_options,
+					'condition' => $repeater_condition,
+				]
+			);
+
+			$this->add_control(
+				'eael_ic_acf_repeater_content_' . $repeater_name,
+				[
+					'label'       => esc_html__( 'Tab Content', 'essential-addons-for-elementor-lite' ),
+					'description' => esc_html__( 'Map a Text, Textarea, or WYSIWYG ACF field.', 'essential-addons-for-elementor-lite' ),
+					'type'        => Controls_Manager::SELECT,
+					'default'     => '',
+					'options'     => $sub_field_options,
+					'condition'   => $repeater_condition,
+				]
+			);
+
+			$this->add_control(
+				'eael_ic_acf_repeater_link_' . $repeater_name,
+				[
+					'label'       => esc_html__( 'Link', 'essential-addons-for-elementor-lite' ),
+					'description' => esc_html__( 'Map an ACF URL, Link, or Page Link field. The item links only when the row has a value.', 'essential-addons-for-elementor-lite' ),
+					'type'        => Controls_Manager::SELECT,
+					'default'     => '',
+					'options'     => $sub_field_options,
+					'condition'   => $repeater_condition,
+				]
+			);
+
+			$extra_field_options = $sub_field_options;
+			unset( $extra_field_options[''] );
+			$this->add_control(
+				'eael_ic_acf_repeater_extras_' . $repeater_name,
+				[
+					'label'       => esc_html__( 'Additional Fields', 'essential-addons-for-elementor-lite' ),
+					'description' => esc_html__( 'Select extra sub-fields to display below each item content.', 'essential-addons-for-elementor-lite' ),
+					'type'        => Controls_Manager::SELECT2,
+					'multiple'    => true,
+					'default'     => [],
+					'options'     => $extra_field_options,
+					'label_block' => true,
+					'condition'   => $repeater_condition,
+				]
+			);
+		}
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Returns the circle items to render.
+	 *
+	 * Custom mode returns the manual repeater unchanged. ACF mode maps the selected
+	 * ACF Repeater field's rows into the item shape both render loops consume, capped
+	 * at EAEL_IC_MAX_ITEMS so the preset layouts are not broken.
+	 *
+	 * @param array $settings Widget settings from get_settings_for_display().
+	 * @return array
+	 */
+	protected function get_interactive_circle_items( $settings ) {
+		if ( 'acf_repeater' !== ( $settings['eael_ic_data_source'] ?? 'custom' ) ) {
+			return is_array( $settings['eael_interactive_circle_item'] ?? null ) ? $settings['eael_interactive_circle_item'] : [];
+		}
+
+		$field_name = sanitize_text_field( $settings['eael_ic_acf_repeater_field'] ?? '' );
+		if ( empty( $field_name ) || ! function_exists( 'get_field' ) ) {
+			return [];
+		}
+
+		$title_key   = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_title_' . $field_name ] ?? '' );
+		$content_key = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_content_' . $field_name ] ?? '' );
+		$link_key    = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_link_' . $field_name ] ?? '' );
+		$extra_keys  = ( isset( $settings[ 'eael_ic_acf_repeater_extras_' . $field_name ] ) && is_array( $settings[ 'eael_ic_acf_repeater_extras_' . $field_name ] ) )
+			? $settings[ 'eael_ic_acf_repeater_extras_' . $field_name ]
+			: [];
+
+		// Single widget-level icon reused by every ACF item (both icon slots).
+		$icon = ( isset( $settings['eael_ic_acf_icon'] ) && is_array( $settings['eael_ic_acf_icon'] ) )
+			? $settings['eael_ic_acf_icon']
+			: [ 'value' => '', 'library' => '' ];
+
+		// Resolve sub-field labels once for the selected additional fields.
+		$sub_field_labels = [];
+		if ( ! empty( $extra_keys ) && function_exists( 'acf_get_field' ) ) {
+			$repeater_field = acf_get_field( $field_name );
+			if ( ! empty( $repeater_field['sub_fields'] ) ) {
+				foreach ( $repeater_field['sub_fields'] as $sf ) {
+					$sub_field_labels[ $sf['name'] ] = $sf['label'];
+				}
+			}
+		}
+
+		$object_id = get_the_ID() ?: get_queried_object_id();
+		$rows      = get_field( $field_name, $object_id );
+
+		if ( empty( $rows ) || ! is_array( $rows ) ) {
+			return [];
+		}
+
+		// Preset layouts break beyond 8 items — cap, matching the manual repeater's warning.
+		$rows = array_slice( $rows, 0, self::EAEL_IC_MAX_ITEMS );
+
+		$items = [];
+		$i     = 0;
+		foreach ( $rows as $row ) {
+			if ( ! is_array( $row ) ) {
+				continue;
+			}
+
+			// Title / content kept raw; render escapes (esc_html / wp_kses + parse_text_editor).
+			$title   = ( $title_key && is_scalar( $row[ $title_key ] ?? null ) ) ? (string) $row[ $title_key ] : '';
+			$content = ( $content_key && is_scalar( $row[ $content_key ] ?? null ) ) ? (string) $row[ $content_key ] : '';
+
+			// Link: ACF Link array, or a plain URL / page-link string.
+			$link = [ 'url' => '', 'is_external' => '', 'nofollow' => '' ];
+			if ( $link_key ) {
+				$raw_link = $row[ $link_key ] ?? '';
+				if ( is_array( $raw_link ) ) {
+					$link['url']         = $raw_link['url'] ?? '';
+					$link['is_external'] = ( ! empty( $raw_link['target'] ) && '_blank' === $raw_link['target'] ) ? 'on' : '';
+				} elseif ( is_string( $raw_link ) && '' !== $raw_link ) {
+					$link['url'] = $raw_link;
+				}
+			}
+
+			// Additional fields: [ [ 'label' => ..., 'value' => ... ], ... ].
+			$extras = [];
+			foreach ( $extra_keys as $ekey ) {
+				$val = $row[ $ekey ] ?? '';
+				if ( '' === $val || null === $val || [] === $val ) {
+					continue;
+				}
+				$extras[] = [
+					'label' => $sub_field_labels[ $ekey ] ?? $ekey,
+					'value' => is_scalar( $val ) ? (string) $val : '',
+				];
+			}
+
+			$items[] = [
+				// First item active: an all-inactive circle renders no content panel.
+				'eael_interactive_circle_default_active'        => ( 0 === $i ? 'yes' : '' ),
+				'eael_interactive_circle_btn_icon'              => $icon,
+				'eael_interactive_circle_content_icon'          => $icon,
+				'eael_interactive_circle_btn_title'             => $title,
+				// Only "yes" when the row actually has a URL — the render emits a bare
+				// <a> without an href otherwise.
+				'eael_interactive_circle_btn_link_on'           => ( '' !== $link['url'] ) ? 'yes' : '',
+				'eael_interactive_circle_btn_link'              => $link,
+				'eael_interactive_circle_item_content'          => $content,
+				'eael_interactive_circle_tab_bgtype_background' => '',
+				'eael_ic_extras'                                => $extras,
+				'_id'                                           => uniqid( 'ic_', false ),
+			];
+			$i++;
+		}
+
+		return $items;
+	}
+
+	/**
+	 * Style controls for the ACF "Additional Fields" output (Style tab).
+	 * Only shown when the data source is an ACF Repeater.
+	 */
+	protected function eael_acf_extra_data_controls_style() {
+		$this->start_controls_section(
+			'eael_ic_section_extra_data_style',
+			[
+				'label'     => esc_html__( 'Additional Fields', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_ic_data_source' => 'acf_repeater',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_ic_extra_data_text_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-interactive-circle-extras .eael-interactive-circle-extra-value' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_ic_extra_data_text_typography',
+				'selector' => '{{WRAPPER}} .eael-interactive-circle-extras .eael-interactive-circle-extra-value',
+			]
+		);
+
+		$this->add_control(
+			'eael_ic_extra_data_text_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-interactive-circle-extras .eael-interactive-circle-extra' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_ic_extra_data_text_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-interactive-circle-extras .eael-interactive-circle-extra' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+	}
 
 	public function has_widget_inner_wrapper(): bool {
         return ! Helper::eael_e_optimized_markup();
@@ -152,7 +486,8 @@ class Interactive_Circle extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_interactive_circle_content_settings',
 			[
-				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+				'label'     => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+				'condition' => [ 'eael_ic_data_source' => 'custom' ],
 			]
 		);
 
@@ -1020,6 +1355,8 @@ class Interactive_Circle extends Widget_Base {
 	}
 
 	protected function register_controls() {
+		$this->eael_register_acf_controls();
+
 		$this->eael_interactive_circle_general();
 		$this->eael_interactive_circle_item();
 		$this->eael_interactive_circle_additional();
@@ -1028,10 +1365,20 @@ class Interactive_Circle extends Widget_Base {
 
 		$this->eael_interactive_circle_button_style();
 		$this->eael_interactive_circle_content_style();
+
+		$this->eael_acf_extra_data_controls_style();
 	}
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
+
+		// Custom mode returns the manual repeater unchanged; ACF mode swaps in the mapped rows.
+		// Done once here — both preset render loops below read the same key.
+		$settings['eael_interactive_circle_item'] = $this->get_interactive_circle_items( $settings );
+
+		if ( empty( $settings['eael_interactive_circle_item'] ) ) {
+			return;
+		}
 
 		$this->add_render_attribute(
 			'eael_interactive_circle_container',
@@ -1143,6 +1490,13 @@ class Interactive_Circle extends Widget_Base {
 											<?php 
 											// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											echo $this->parse_text_editor( wp_kses( $item['eael_interactive_circle_item_content'], Helper::eael_allowed_tags() ) ); ?>
+											<?php if ( ! empty( $item['eael_ic_extras'] ) ) : ?>
+												<ul class="eael-interactive-circle-extras">
+													<?php foreach ( $item['eael_ic_extras'] as $extra ) : ?>
+														<li class="eael-interactive-circle-extra"><span class="eael-interactive-circle-extra-value"><?php echo wp_kses_post( $extra['value'] ); ?></span></li>
+													<?php endforeach; ?>
+												</ul>
+											<?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -1220,6 +1574,13 @@ class Interactive_Circle extends Widget_Base {
 												</div>
 											<?php endif; ?>
 											<?php echo wp_kses( $item['eael_interactive_circle_item_content'], Helper::eael_allowed_tags() ); ?>
+											<?php if ( ! empty( $item['eael_ic_extras'] ) ) : ?>
+												<ul class="eael-interactive-circle-extras">
+													<?php foreach ( $item['eael_ic_extras'] as $extra ) : ?>
+														<li class="eael-interactive-circle-extra"><span class="eael-interactive-circle-extra-value"><?php echo wp_kses_post( $extra['value'] ); ?></span></li>
+													<?php endforeach; ?>
+												</ul>
+											<?php endif; ?>
                                         </div>
                                     </div>
                                 </div>

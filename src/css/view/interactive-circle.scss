@@ -6520,3 +6520,21 @@
         }
     }
 }
+
+// ACF Repeater "Additional Fields" output
+.elementor-widget-eael-interactive-circle {
+	.eael-interactive-circle-extras {
+		list-style: none;
+		margin: 8px 0 0;
+		padding: 0;
+
+		.eael-interactive-circle-extra {
+			margin: 0;
+			padding: 0;
+
+			.eael-interactive-circle-extra-value {
+				display: inline-block;
+			}
+		}
+	}
+}
