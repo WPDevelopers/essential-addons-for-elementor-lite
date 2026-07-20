@@ -531,7 +531,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
-				'default'      => 'yes',
+				'default'      => 'no',
 			]
 		);
 
