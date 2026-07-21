@@ -187,6 +187,15 @@ trait Ajax_Handler {
 				unset( $args['offset'] );
 			}
 		}
+		if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_Gallery' ) {
+			// Safety net for Product Gallery archive requests: older markup may still
+			// send the raw main-query args with an empty post_type, which makes the
+			// WP_Query below default to the "post" type and return nothing. Force the
+			// product post type so Load More / Infinity Scroll keeps returning products.
+			if ( empty( $args['post_type'] ) ) {
+				$args['post_type'] = 'product';
+			}
+		}
 		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
 			do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
 		}

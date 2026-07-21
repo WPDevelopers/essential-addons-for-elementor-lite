@@ -2907,9 +2907,34 @@ class Woo_Product_Gallery extends Widget_Base {
 					if( $settings['post_type'] === 'archive' && is_archive() && $is_product_archive ){
                         global $wp_query;
                         $query = $wp_query;
-                        $args  = $wp_query->query_vars;
                         $found_posts = $query->found_posts;
                         $max_page = $query->max_num_pages;
+
+                        // Build a clean query for the Load More / Infinity Scroll requests
+                        // instead of serializing the whole main-query query_vars. The raw
+                        // query_vars carry WP defaults (empty post_type, empty menu_order,
+                        // etc.) that make the re-run WP_Query in the AJAX handler return
+                        // zero results on some setups (e.g. products with a custom menu
+                        // order), so pagination stops after the first page.
+                        $args = [
+                            'post_type'      => 'product',
+                            'post_status'    => 'publish',
+                            'posts_per_page' => (int) ( $wp_query->get( 'posts_per_page' ) ?: ( $settings['eael_product_gallery_products_count'] ?: 4 ) ),
+                            'orderby'        => $wp_query->get( 'orderby' ) ?: 'menu_order title',
+                            'order'          => $wp_query->get( 'order' ) ?: 'ASC',
+                        ];
+
+                        // Keep the current archive taxonomy term (product category, tag or attribute).
+                        $queried_object = $query->get_queried_object();
+                        if ( $queried_object instanceof \WP_Term ) {
+                            $args['tax_query'] = [
+                                [
+                                    'taxonomy' => $queried_object->taxonomy,
+                                    'field'    => 'term_id',
+                                    'terms'    => $queried_object->term_id,
+                                ],
+                            ];
+                        }
                     } else {
 	                    $query = new \WP_Query( $args );
                     }
