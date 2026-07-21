@@ -697,6 +697,38 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_business_reviews_rating_round',
+			[
+				'label'        => __( 'Round Rating', 'essential-addons-for-elementor-lite' ),
+				'description'  => __( 'Round the business rating value shown in the header (e.g. 4.8000001 becomes 4.8).', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'On', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Off', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'condition'    => [
+					'eael_business_reviews_business_rating' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_rating_decimals',
+			[
+				'label'     => __( 'Decimal Places', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::NUMBER,
+				'default'   => 1,
+				'min'       => 0,
+				'max'       => 2,
+				'step'      => 1,
+				'condition' => [
+					'eael_business_reviews_business_rating' => 'yes',
+					'eael_business_reviews_rating_round'    => 'yes',
+				],
+			]
+		);
+
 		$this->add_control( 'eael_business_reviews_google_reviews_label', [
 			'label'       => esc_html__( 'Custom Text', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
@@ -864,6 +896,19 @@ class Business_Reviews extends Widget_Base {
 			'eael_business_reviews_review_4_star_hide',
 			[
 				'label'        => __( 'Hide 4 Star Reviews', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_hide_no_text',
+			[
+				'label'        => __( 'Hide Reviews Without Text', 'essential-addons-for-elementor-lite' ),
+				'description'  => __( 'Only show reviews that have a written comment; hide ratings-only reviews.', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
@@ -2689,6 +2734,8 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['business_logo']     				= ! empty( $settings['eael_business_reviews_business_logo'] ) && 'yes' === $settings['eael_business_reviews_business_logo'] ? 1 : 0;
 		$business_reviews['business_name']     				= ! empty( $settings['eael_business_reviews_business_name'] ) && 'yes' === $settings['eael_business_reviews_business_name'] ? 1 : 0;
 		$business_reviews['business_rating']   				= ! empty( $settings['eael_business_reviews_business_rating'] ) && 'yes' === $settings['eael_business_reviews_business_rating'] ? 1 : 0;
+		$business_reviews['rating_round']      				= ! empty( $settings['eael_business_reviews_rating_round'] ) && 'yes' === $settings['eael_business_reviews_rating_round'] ? 1 : 0;
+		$business_reviews['rating_decimals']   				= isset( $settings['eael_business_reviews_rating_decimals'] ) && '' !== $settings['eael_business_reviews_rating_decimals'] ? absint( $settings['eael_business_reviews_rating_decimals'] ) : 1;
 		$business_reviews['business_address']  				= ! empty( $settings['eael_business_reviews_business_address'] ) && 'yes' === $settings['eael_business_reviews_business_address'] ? 1 : 0;
 		$business_reviews['reviewer_photo']    				= ! empty( $settings['eael_business_reviews_reviewer_photo'] ) && 'yes' === $settings['eael_business_reviews_reviewer_photo'] ? 1 : 0;
 		$business_reviews['reviewer_name']     				= ! empty( $settings['eael_business_reviews_reviewer_name'] ) && 'yes' === $settings['eael_business_reviews_reviewer_name'] ? 1 : 0;
@@ -2700,6 +2747,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_2_star']     				= empty( $settings['eael_business_reviews_review_2_star_hide'] ) ? 1 : 0;
 		$business_reviews['review_3_star']     				= empty( $settings['eael_business_reviews_review_3_star_hide'] ) ? 1 : 0;
 		$business_reviews['review_4_star']     				= empty( $settings['eael_business_reviews_review_4_star_hide'] ) ? 1 : 0;
+		$business_reviews['review_hide_no_text']			= ! empty( $settings['eael_business_reviews_review_hide_no_text'] ) && 'yes' === $settings['eael_business_reviews_review_hide_no_text'] ? 1 : 0;
 		
 		// Set max reviews count (with backward compatibility)
 		if ( 'google-reviews' === $business_reviews['source'] ) {
@@ -3164,7 +3212,12 @@ class Business_Reviews extends Widget_Base {
 
 							<?php if ( $business_reviews['business_rating'] ): ?>
                                 <div class="eael-google-reviews-business-rating">
-                                    <p><?php echo esc_html( $google_reviews_data['rating'] ); ?></p>
+                                    <p><?php
+										$eael_display_rating = ( ! empty( $business_reviews['rating_round'] ) && is_numeric( $google_reviews_data['rating'] ) )
+											? round( (float) $google_reviews_data['rating'], (int) $business_reviews['rating_decimals'] )
+											: $google_reviews_data['rating'];
+										echo esc_html( $eael_display_rating );
+									?></p>
                                     <p><?php $this->print_business_reviews_ratings( $google_reviews_data['rating'] ); ?></p>
                                     <p><a href="<?php echo esc_url( $google_reviews_data['url'] ); ?>" <?php if ( ! $business_reviews['accessibility_link_in_same_tab'] ) :  ?> target="_blank"  <?php endif; ?> ><?php echo esc_html( number_format( $google_reviews_data['user_ratings_total'] ) . ' ' . $business_reviews['google_reviews_label'] ); ?></a></p>
                                 </div>
@@ -3206,6 +3259,10 @@ class Business_Reviews extends Widget_Base {
 									$should_hide_review = true;
 								}
 								if( ! $business_reviews['review_4_star'] && $single_review_data['rating'] === 4 ){
+									$should_hide_review = true;
+								}
+
+								if( $business_reviews['review_hide_no_text'] && '' === trim( wp_strip_all_tags( (string) $single_review_data['text'] ) ) ){
 									$should_hide_review = true;
 								}
 
@@ -3461,7 +3518,12 @@ class Business_Reviews extends Widget_Base {
 
 							<?php if ( $business_reviews['business_rating'] ): ?>
                                 <div class="eael-google-reviews-business-rating">
-                                    <p><?php echo esc_html( $google_reviews_data['rating'] ); ?></p>
+                                    <p><?php
+										$eael_display_rating = ( ! empty( $business_reviews['rating_round'] ) && is_numeric( $google_reviews_data['rating'] ) )
+											? round( (float) $google_reviews_data['rating'], (int) $business_reviews['rating_decimals'] )
+											: $google_reviews_data['rating'];
+										echo esc_html( $eael_display_rating );
+									?></p>
                                     <p><?php $this->print_business_reviews_ratings( $google_reviews_data['rating'] ); ?></p>
                                     <p><a href="<?php echo esc_url( $google_reviews_data['url'] ); ?>" <?php if( ! $business_reviews['accessibility_link_in_same_tab'] ) : ?> target="_blank"  <?php endif; ?> ><?php echo esc_html( number_format( $google_reviews_data['user_ratings_total'] ) . ' ' . $business_reviews['google_reviews_label'] ); ?></a></p>
                                 </div>
@@ -3503,6 +3565,10 @@ class Business_Reviews extends Widget_Base {
 									$should_hide_review = true;
 								}
 								if( ! $business_reviews['review_4_star'] && $single_review_data['rating'] === 4 ){
+									$should_hide_review = true;
+								}
+
+								if( $business_reviews['review_hide_no_text'] && '' === trim( wp_strip_all_tags( (string) $single_review_data['text'] ) ) ){
 									$should_hide_review = true;
 								}
 
