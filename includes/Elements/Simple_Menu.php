@@ -1698,13 +1698,68 @@ class Simple_Menu extends Widget_Base
                 'echo'        => false,
             ];
 
+	        /**
+	         * Pre-JS ("loading") styles.
+	         *
+	         * The menu's real layout rules live behind `.eael-hamburger--not-responsive` /
+	         * `.eael-hamburger--responsive`, classes that are only added by JS. Until then the
+	         * markup has no layout at all, so these rules stand in for the desktop/non-hamburger
+	         * state and must mirror it exactly per orientation and per alignment — otherwise the
+	         * menu visibly re-flows (the "flash") the moment the loading class is removed.
+	         *
+	         * Every selector is scoped to this widget instance. A page can hold several menus
+	         * with different hamburger breakpoints, and an unscoped rule coming from a 'none'
+	         * widget would out-specify another widget's hamburger `display: none` and force
+	         * its collapsed menu open while loading.
+	         */
+	        // CSS context, not HTML: whitelist to a valid CSS identifier rather than relying on an
+	        // HTML escaper, since entities are not decoded inside a <style> block.
+	        $eael_sm_id  = preg_replace( '/[^a-zA-Z0-9_-]/', '', (string) $this->get_id() );
+	        $eael_sm_sel = '.elementor-element-' . $eael_sm_id . ' .eael-simple-menu-container.eael-simple-menu--loading';
+
+	        $eael_loading_layout_css = "
+                    /* Left-aligned horizontal menus lay out via `float: left` on the items
+                       (ungated base CSS), so the list itself must stay `block` — forcing flex
+                       here would drop the floats and shift the row. Only centre/right aligned
+                       menus use inline-flex, mirrored below. */
+                    {$eael_sm_sel} > ul.eael-simple-menu-horizontal,
+                    {$eael_sm_sel} > ul.eael-simple-menu-vertical {
+                        display: block;
+                    }
+                    {$eael_sm_sel}.eael-simple-menu-align-center {
+                        text-align: center;
+                    }
+                    {$eael_sm_sel}.eael-simple-menu-align-right {
+                        text-align: right;
+                    }
+                    {$eael_sm_sel}.eael-simple-menu-align-center > ul.eael-simple-menu-horizontal,
+                    {$eael_sm_sel}.eael-simple-menu-align-right > ul.eael-simple-menu-horizontal {
+                        display: -webkit-inline-box;
+                        display: -ms-inline-flexbox;
+                        display: inline-flex;
+                    }
+                    {$eael_sm_sel} > .eael-simple-menu-toggle,
+                    {$eael_sm_sel} > .eael-simple-menu-toggle-text {
+                        display: none;
+                    }";
+
+	        // Orientation-agnostic loading rules; safe at every breakpoint.
+	        $eael_loading_base_css = "
+                    {$eael_sm_sel} > ul {
+                        list-style: none;
+                    }
+                    {$eael_sm_sel} li ul {
+                        visibility: hidden !important;
+                        opacity: 0 !important;
+                    }";
+
 	        //Check breakpoint form hamburger options
 	        if ( ! empty( $hamburger_device ) && 'none' !== $hamburger_device ) {
 		        if ( 'desktop' === $hamburger_device ) {
 			        $breakpoints                     = method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : [];
-			        $eael_get_breakpoint_from_option = isset( $breakpoints['widescreen'] ) ? $breakpoints['widescreen']['value'] - 1 : 2400;
+			        $eael_get_breakpoint_from_option = isset( $breakpoints['widescreen'] ) ? (int) $breakpoints['widescreen']['value'] - 1 : 2400;
 		        } else {
-			        $eael_get_breakpoint_from_option = Plugin::$instance->breakpoints->get_breakpoints( $hamburger_device )->get_value();
+			        $eael_get_breakpoint_from_option = (int) Plugin::$instance->breakpoints->get_breakpoints( $hamburger_device )->get_value();
 		        }
 
 		        echo "<style>
@@ -1721,17 +1776,16 @@ class Simple_Menu extends Widget_Base
                                 }
                             }
                         }
-                        .eael-simple-menu-container.eael-simple-menu--loading > ul {
-                            display: -webkit-box !important;
-                            display: -ms-flexbox !important;
-                            display: flex !important;
-                            list-style: none !important;
-                        }
-                        .eael-simple-menu-container.eael-simple-menu--loading li ul {
-                            visibility: hidden !important;
-                            opacity: 0 !important;
-                        }
+                        /* Desktop-side loading layout only above the hamburger breakpoint, so it can
+                           never override the hamburger 'display: none' / toggle rules above. */
+                        @media screen and (min-width: " . esc_html( $eael_get_breakpoint_from_option + 1 ) . "px) {"
+                            . $eael_loading_layout_css . "
+                        }"
+                        . $eael_loading_base_css . "
                     </style>";
+	        } else {
+		        // No hamburger at any breakpoint: the loading layout applies everywhere.
+		        echo '<style>' . $eael_loading_layout_css . $eael_loading_base_css . '</style>';
 	        }
             ?>
             <div <?php $this->print_render_attribute_string('eael-simple-menu'); ?>>
