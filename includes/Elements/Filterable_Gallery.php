@@ -93,9 +93,404 @@ class Filterable_Gallery extends Widget_Base
     {
         return 'https://essential-addons.com/elementor/docs/filterable-gallery/';
     }
-    
+
+    /**
+     * Registers the ACF Repeater data-source controls: source switch, repeater picker,
+     * ACF-inactive notice, per-repeater sub-field mapping and the ACF-mode button toggles.
+     */
+    protected function eael_register_acf_controls() {
+        $this->start_controls_section(
+            'eael_section_fg_data_source',
+            [
+                'label' => esc_html__( 'Data Source', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_data_source',
+            [
+                'label'   => esc_html__( 'Source', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'custom',
+                'options' => [
+                    'custom'       => esc_html__( 'Custom (Manual)', 'essential-addons-for-elementor-lite' ),
+                    'acf_repeater' => esc_html__( 'ACF Repeater Field', 'essential-addons-for-elementor-lite' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_acf_repeater_field',
+            [
+                'label'     => esc_html__( 'Repeater Field', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT,
+                'default'   => '',
+                'options'   => Helper::eael_get_acf_repeater_options(),
+                'condition' => [ 'eael_fg_data_source' => 'acf_repeater' ],
+            ]
+        );
+
+        // ACF inactive notice (no-op when ACF is active).
+        Helper::eael_acf_notice_controls( $this, [ 'eael_fg_data_source' => 'acf_repeater' ] );
+
+        // Per-repeater sub-field mapping.
+        $acf_sub_fields_by_repeater = Helper::eael_get_acf_repeater_sub_fields();
+
+        foreach ( $acf_sub_fields_by_repeater as $repeater_name => $sub_field_options ) {
+            $repeater_condition = [
+                'eael_fg_data_source'        => 'acf_repeater',
+                'eael_fg_acf_repeater_field' => $repeater_name,
+            ];
+
+            $this->add_control(
+                'eael_fg_acf_fields_heading_' . $repeater_name,
+                [
+                    'label'     => esc_html__( 'Field Mapping', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::HEADING,
+                    'separator' => 'before',
+                    'condition' => $repeater_condition,
+                ]
+            );
+
+            $this->add_control(
+                'eael_fg_acf_repeater_title_' . $repeater_name,
+                [
+                    'label'     => esc_html__( 'Gallery Item Title', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'default'   => '',
+                    'options'   => $sub_field_options,
+                    'condition' => $repeater_condition,
+                ]
+            );
+
+            $this->add_control(
+                'eael_fg_acf_repeater_filter_' . $repeater_name,
+                [
+                    'label'       => esc_html__( 'Gallery Filter Title', 'essential-addons-for-elementor-lite' ),
+                    'description' => __( 'Map a field whose value matches the filter titles from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Filter, Gallery Filter 2</strong>)', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::SELECT,
+                    'default'     => '',
+                    'options'     => $sub_field_options,
+                    'condition'   => $repeater_condition,
+                ]
+            );
+
+            $this->add_control(
+                'eael_fg_acf_repeater_content_' . $repeater_name,
+                [
+                    'label'     => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'default'   => '',
+                    'options'   => $sub_field_options,
+                    'condition' => $repeater_condition,
+                ]
+            );
+
+            $this->add_control(
+                'eael_fg_acf_repeater_image_' . $repeater_name,
+                [
+                    'label'       => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
+                    'description' => esc_html__( 'Map an ACF Image field.', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::SELECT,
+                    'default'     => '',
+                    'options'     => $sub_field_options,
+                    'condition'   => $repeater_condition,
+                ]
+            );
+
+            $this->add_control(
+                'eael_fg_acf_repeater_link_' . $repeater_name,
+                [
+                    'label'       => esc_html__( 'Button Link', 'essential-addons-for-elementor-lite' ),
+                    'description' => esc_html__( 'Map an ACF Link, URL, or text field.', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::SELECT,
+                    'default'     => '',
+                    'options'     => $sub_field_options,
+                    'condition'   => $repeater_condition,
+                ]
+            );
+
+            $extra_field_options = $sub_field_options;
+            unset( $extra_field_options[''] );
+            $this->add_control(
+                'eael_fg_acf_repeater_extras_' . $repeater_name,
+                [
+                    'label'       => esc_html__( 'Additional Fields', 'essential-addons-for-elementor-lite' ),
+                    'description' => esc_html__( 'Select extra sub-fields to display below each gallery item content.', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::SELECT2,
+                    'multiple'    => true,
+                    'default'     => [],
+                    'options'     => $extra_field_options,
+                    'label_block' => true,
+                    'condition'   => $repeater_condition,
+                ]
+            );
+        }
+
+        // Lightbox / Link buttons are per-row switchers in manual mode. ACF rows cannot
+        // carry them, so the choice moves to the widget level.
+        $this->add_control(
+            'eael_fg_acf_buttons_heading',
+            [
+                'label'     => esc_html__( 'Item Buttons', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [ 'eael_fg_data_source' => 'acf_repeater' ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_acf_show_lightbox',
+            [
+                'label'        => esc_html__( 'Lightbox Button?', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'true',
+                'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'true',
+                'condition'    => [ 'eael_fg_data_source' => 'acf_repeater' ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_acf_show_link',
+            [
+                'label'        => esc_html__( 'Link Button?', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'true',
+                'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'true',
+                'description'  => esc_html__( 'Hidden automatically on items whose mapped link is empty.', 'essential-addons-for-elementor-lite' ),
+                'condition'    => [ 'eael_fg_data_source' => 'acf_repeater' ],
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    /**
+     * Returns the raw gallery item rows to render.
+     *
+     * Custom mode returns the manual repeater unchanged. ACF mode maps the selected
+     * ACF Repeater field's rows into the exact row shape gallery_item_store() consumes,
+     * so every downstream layout (including the Pro grid-flow / harmonic presets) stays
+     * identical across both sources.
+     *
+     * @param array $settings Widget settings from get_settings_for_display().
+     * @return array
+     */
+    protected function get_fg_gallery_items( $settings ) {
+        if ( 'acf_repeater' !== ( $settings['eael_fg_data_source'] ?? 'custom' ) ) {
+            return is_array( $settings['eael_fg_gallery_items'] ?? null ) ? $settings['eael_fg_gallery_items'] : [];
+        }
+
+        $field_name = sanitize_text_field( $settings['eael_fg_acf_repeater_field'] ?? '' );
+        if ( empty( $field_name ) || ! function_exists( 'get_field' ) ) {
+            return [];
+        }
+
+        $title_key   = sanitize_text_field( $settings[ 'eael_fg_acf_repeater_title_' . $field_name ] ?? '' );
+        $filter_key  = sanitize_text_field( $settings[ 'eael_fg_acf_repeater_filter_' . $field_name ] ?? '' );
+        $content_key = sanitize_text_field( $settings[ 'eael_fg_acf_repeater_content_' . $field_name ] ?? '' );
+        $image_key   = sanitize_text_field( $settings[ 'eael_fg_acf_repeater_image_' . $field_name ] ?? '' );
+        $link_key    = sanitize_text_field( $settings[ 'eael_fg_acf_repeater_link_' . $field_name ] ?? '' );
+        $extra_keys  = ( isset( $settings[ 'eael_fg_acf_repeater_extras_' . $field_name ] ) && is_array( $settings[ 'eael_fg_acf_repeater_extras_' . $field_name ] ) )
+            ? $settings[ 'eael_fg_acf_repeater_extras_' . $field_name ]
+            : [];
+
+        $show_lightbox = ( 'true' === ( $settings['eael_fg_acf_show_lightbox'] ?? 'true' ) ) ? 'true' : '';
+        $show_link     = ( 'true' === ( $settings['eael_fg_acf_show_link'] ?? 'true' ) );
+
+        // Resolve sub-field labels once for the selected additional fields.
+        $sub_field_labels = [];
+        if ( ! empty( $extra_keys ) && function_exists( 'acf_get_field' ) ) {
+            $repeater_field = acf_get_field( $field_name );
+            if ( ! empty( $repeater_field['sub_fields'] ) ) {
+                foreach ( $repeater_field['sub_fields'] as $sf ) {
+                    $sub_field_labels[ $sf['name'] ] = $sf['label'];
+                }
+            }
+        }
+
+        $object_id = get_the_ID() ?: get_queried_object_id();
+        $rows      = get_field( $field_name, $object_id );
+
+        if ( empty( $rows ) || ! is_array( $rows ) ) {
+            return [];
+        }
+
+        $items = [];
+        foreach ( $rows as $row ) {
+            if ( ! is_array( $row ) ) {
+                continue;
+            }
+
+            // Title / content / filter kept raw; gallery_item_store() escapes them.
+            $title   = ( $title_key && is_scalar( $row[ $title_key ] ?? null ) ) ? (string) $row[ $title_key ] : '';
+            $content = ( $content_key && is_scalar( $row[ $content_key ] ?? null ) ) ? (string) $row[ $content_key ] : '';
+            $filter  = ( $filter_key && is_scalar( $row[ $filter_key ] ?? null ) ) ? (string) $row[ $filter_key ] : '';
+
+            // Image: ACF image array, attachment ID, or URL string.
+            $image = [ 'url' => '', 'id' => 0 ];
+            if ( $image_key ) {
+                $raw_image = $row[ $image_key ] ?? '';
+                if ( is_array( $raw_image ) ) {
+                    $image['url'] = $raw_image['url'] ?? '';
+                    $image['id']  = (int) ( $raw_image['ID'] ?? ( $raw_image['id'] ?? 0 ) );
+                } elseif ( is_numeric( $raw_image ) ) {
+                    $image['id']  = (int) $raw_image;
+                    $image['url'] = (string) wp_get_attachment_url( $image['id'] );
+                } elseif ( is_string( $raw_image ) && '' !== $raw_image ) {
+                    $image['url'] = $raw_image;
+                }
+            }
+
+            // Link: ACF Link (array), URL string, or empty.
+            $link = [ 'url' => '', 'is_external' => '', 'nofollow' => '' ];
+            if ( $link_key ) {
+                $raw_link = $row[ $link_key ] ?? '';
+                if ( is_array( $raw_link ) ) {
+                    $link['url']         = esc_url_raw( $raw_link['url'] ?? '' );
+                    $link['is_external'] = ( '_blank' === ( $raw_link['target'] ?? '' ) ) ? 'on' : '';
+                } elseif ( is_string( $raw_link ) && '' !== $raw_link ) {
+                    $link['url'] = esc_url_raw( $raw_link );
+                }
+            }
+
+            // Additional fields: [ [ 'label' => ..., 'value' => ... ], ... ].
+            // Non-scalars (image/relationship sub-fields) and anything that stringifies
+            // to blank -- including an unchecked true/false field, which is boolean false
+            // and would otherwise render an empty <li> -- are skipped outright.
+            $extras = [];
+            foreach ( $extra_keys as $ekey ) {
+                $val = $row[ $ekey ] ?? '';
+                if ( ! is_scalar( $val ) ) {
+                    continue;
+                }
+                $val = trim( (string) $val );
+                if ( '' === $val ) {
+                    continue;
+                }
+                $extras[] = [
+                    'label' => $sub_field_labels[ $ekey ] ?? $ekey,
+                    'value' => $val,
+                ];
+            }
+
+            // Every key gallery_item_store() reads unguarded must be present here.
+            $items[] = [
+                'eael_fg_gallery_item_name'       => $title,
+                'eael_fg_gallery_control_name'    => $filter,
+                'eael_fg_gallery_item_content'    => $content,
+                'eael_fg_gallery_img'             => $image,
+                'eael_fg_gallery_img_link'        => $link,
+                'eael_fg_gallery_link'            => ( $show_link && '' !== $link['url'] ) ? 'true' : '',
+                'eael_fg_gallery_lightbox'        => $show_lightbox,
+                'eael_fg_gallery_extras'          => $extras,
+                'fg_video_gallery_switch'         => 'false',
+                'eael_fg_gallery_item_video_link' => '',
+                'eael_fg_gallery_video_layout'    => 'horizontal',
+                'fg_video_gallery_play_icon'      => [ 'url' => '' ],
+                'fg_item_price_switch'            => 'false',
+                'fg_item_price'                   => '',
+                'fg_item_ratings_switch'          => 'false',
+                'fg_item_ratings'                 => '',
+                'fg_item_cat_switch'              => 'false',
+                'fg_item_cat'                     => '',
+                '_id'                             => uniqid( 'fg_', false ),
+            ];
+        }
+
+        return $items;
+    }
+
+    /**
+     * Markup for the ACF "Additional Fields" of a single gallery item.
+     *
+     * @param array $item Normalized gallery item from gallery_item_store().
+     * @return string
+     */
+    protected function render_fg_acf_extras( $item ) {
+        if ( empty( $item['extras'] ) || ! is_array( $item['extras'] ) ) {
+            return '';
+        }
+
+        $html = '<ul class="eael-fg-extras">';
+        foreach ( $item['extras'] as $extra ) {
+            $html .= '<li class="eael-fg-extra"><span class="eael-fg-extra-value">' . esc_html( $extra['value'] ) . '</span></li>';
+        }
+        $html .= '</ul>';
+
+        return $html;
+    }
+
+    /**
+     * Style controls for the ACF "Additional Fields" output (Style tab).
+     * Only shown when the data source is an ACF Repeater.
+     */
+    protected function eael_acf_extra_data_controls_style() {
+        $this->start_controls_section(
+            'eael_fg_section_extra_data_style',
+            [
+                'label'     => esc_html__( 'Additional Fields', 'essential-addons-for-elementor-lite' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_fg_data_source' => 'acf_repeater',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_section_extra_data_text_color',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-fg-extras .eael-fg-extra-value' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_fg_section_extra_data_text_typography',
+                'selector' => '{{WRAPPER}} .eael-fg-extras .eael-fg-extra-value',
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_section_extra_data_text_margin',
+            [
+                'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-fg-extras .eael-fg-extra' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_section_extra_data_text_padding',
+            [
+                'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-fg-extras .eael-fg-extra' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
     protected function register_controls()
     {
+        $this->eael_register_acf_controls();
+
         /**
          * Filter Gallery Settings
          */
@@ -1115,6 +1510,9 @@ class Filterable_Gallery extends Widget_Base
                 ],
                 'fields' => $repeater->get_controls(),
                 'title_field' => '{{eael_fg_gallery_item_name}}',
+                'condition' => [
+                    'eael_fg_data_source' => 'custom',
+                ],
             ]
         );
         
@@ -3577,8 +3975,10 @@ class Filterable_Gallery extends Widget_Base
         
         $this->end_controls_tab();
         $this->end_controls_tabs();
-        
+
         $this->end_controls_section();
+
+        $this->eael_acf_extra_data_controls_style();
     }
 
 	public function sorter_class( $string ) {
@@ -3763,7 +4163,7 @@ class Filterable_Gallery extends Widget_Base
     protected function gallery_item_store()
     {
         $settings = $this->get_settings_for_display();
-        $gallery_items = $settings['eael_fg_gallery_items'];
+        $gallery_items = $this->get_fg_gallery_items( $settings );
         $gallery_store = [];
         $counter = 0;
         $video_gallery_yt_privacy = ! empty( $settings['video_gallery_yt_privacy'] ) && 'yes' === $settings['video_gallery_yt_privacy'] ? 1 : 0;
@@ -3820,6 +4220,7 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['ratings'] = $gallery['fg_item_ratings'];
             $gallery_store[$counter]['category_switch'] = $gallery['fg_item_cat_switch'];
             $gallery_store[$counter]['category'] = $gallery['fg_item_cat'];
+            $gallery_store[$counter]['extras'] = isset( $gallery['eael_fg_gallery_extras'] ) && is_array( $gallery['eael_fg_gallery_extras'] ) ? $gallery['eael_fg_gallery_extras'] : [];
             $counter++;
         }
         
@@ -4023,6 +4424,8 @@ class Filterable_Gallery extends Widget_Base
             }
         }
 
+        $html .= $this->render_fg_acf_extras( $item );
+
         if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
             if ( ! $is_image_clickable ) {
                 $html .= $this->render_fg_buttons($settings, $item);
@@ -4178,6 +4581,7 @@ class Filterable_Gallery extends Widget_Base
             $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
             $html .= $title_link_open . '<' . $title_tag . ' class="fg-item-title">' . $item['title'] . '</' . $title_tag . '>' . $title_link_close;
             $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
+            $html .= $this->render_fg_acf_extras( $item );
             $html .= '</div>';
             
             $html .= '</div>';
@@ -4351,7 +4755,18 @@ class Filterable_Gallery extends Widget_Base
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-        
+
+        // Resolve the item rows once for this render pass.
+        $fg_gallery_items = $this->get_fg_gallery_items( $settings );
+
+        // The manual repeater control is conditioned on eael_fg_data_source=custom, and
+        // get_settings_for_display() drops inactive controls entirely -- so in ACF mode
+        // $settings['eael_fg_gallery_items'] does not exist at all. The Pro grid-flow /
+        // harmonic handler reads that key directly (an unguarded count()), so republish the
+        // resolved rows onto this local copy before it is handed to Pro. Keeps every shipped
+        // Pro version working without a Pro-side change, and reports the true ACF row count.
+        $settings['eael_fg_gallery_items'] = $fg_gallery_items;
+
         if (!empty($settings['eael_fg_filter_duration'])) {
             $filter_duration = $settings['eael_fg_filter_duration'];
         } else {
@@ -4406,7 +4821,7 @@ class Filterable_Gallery extends Widget_Base
                 $grid_class
             ],
             'data-images-per-page' => $settings['images_per_page'],
-            'data-total-gallery-items' => count($settings['eael_fg_gallery_items']),
+            'data-total-gallery-items' => count( $fg_gallery_items ),
             'data-nomore-item-text' => $no_more_items_text,
             'data-is-randomize' => 'yes' === $settings['eael_item_randomize'] ? 'yes' : 'no',
         ]);
