@@ -41,6 +41,8 @@ class Breadcrumbs extends Widget_Base {
    protected function register_controls() {
       //General Section
       $this->eael_breadcrumb_general();
+      //Archive Labels Section
+      $this->eael_breadcrumb_labels();
       //Style Section
       $this->eael_breadcrumb_style();
 
@@ -192,6 +194,87 @@ class Breadcrumbs extends Widget_Base {
 			]
 		);
       
+      $this->end_controls_section();
+   }
+
+   protected function eael_breadcrumb_labels() {
+      $this->start_controls_section(
+         'breadcrumb_labels',
+         [
+            'label' => esc_html__( 'Archive Labels', 'essential-addons-for-elementor-lite' ),
+            'tab'   => Controls_Manager::TAB_CONTENT,
+         ]
+      );
+
+      $this->add_control(
+			'eael_breadcrumb_wrap_title_quotes',
+			[
+				'label'        => esc_html__( 'Wrap Title In Quotes', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'description'  => esc_html__( 'Wrap the category/tag/search title in double quotes, e.g. Archive by category "News".', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+      $this->add_control(
+			'eael_breadcrumb_category_label',
+			[
+				'label'       => esc_html__( 'Category Label', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Archive by category', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'separator'   => 'before',
+				'ai'          => [ 'active' => false ],
+			]
+		);
+
+      $this->add_control(
+			'eael_breadcrumb_tag_label',
+			[
+				'label'       => esc_html__( 'Tag Label', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Posts tagged', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'ai'          => [ 'active' => false ],
+			]
+		);
+
+      $this->add_control(
+			'eael_breadcrumb_search_label',
+			[
+				'label'       => esc_html__( 'Search Label', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Search results for', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'ai'          => [ 'active' => false ],
+			]
+		);
+
+      $this->add_control(
+			'eael_breadcrumb_author_label',
+			[
+				'label'       => esc_html__( 'Author Label', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Articles posted by', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'ai'          => [ 'active' => false ],
+			]
+		);
+
+      $this->add_control(
+			'eael_breadcrumb_404_label',
+			[
+				'label'       => esc_html__( '404 Label', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Error 404', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'ai'          => [ 'active' => false ],
+			]
+		);
+
       $this->end_controls_section();
    }
 
@@ -605,6 +688,7 @@ class Breadcrumbs extends Widget_Base {
 
 	protected function eael_breadcrumbs() {
 		global $post;
+		$settings     = $this->get_settings_for_display();
 		$show_on_home = 1;
 		$delimiter    = $this->eael_breadcrumb_separator();
 		$home         = $this->eael_breadcrumb_home_label();
@@ -612,6 +696,15 @@ class Breadcrumbs extends Widget_Base {
 		$before       = '<span class = "eael-current">';
 		$after        = '</span>';
 		$home_link    = get_bloginfo( 'url' );
+
+		// Editable archive labels (fall back to legacy hardcoded strings for widgets saved before these controls existed).
+		$cat_label    = ! empty( $settings['eael_breadcrumb_category_label'] ) ? $settings['eael_breadcrumb_category_label'] : esc_html__( 'Archive by category', 'essential-addons-for-elementor-lite' );
+		$tag_label    = ! empty( $settings['eael_breadcrumb_tag_label'] ) ? $settings['eael_breadcrumb_tag_label'] : esc_html__( 'Posts tagged', 'essential-addons-for-elementor-lite' );
+		$search_label = ! empty( $settings['eael_breadcrumb_search_label'] ) ? $settings['eael_breadcrumb_search_label'] : esc_html__( 'Search results for', 'essential-addons-for-elementor-lite' );
+		$author_label = ! empty( $settings['eael_breadcrumb_author_label'] ) ? $settings['eael_breadcrumb_author_label'] : esc_html__( 'Articles posted by', 'essential-addons-for-elementor-lite' );
+		$notfound_label = ! empty( $settings['eael_breadcrumb_404_label'] ) ? $settings['eael_breadcrumb_404_label'] : esc_html__( 'Error 404', 'essential-addons-for-elementor-lite' );
+		// Legacy widgets have no switch value saved (unset) — keep the historical quoted output as the default.
+		$quote        = ( ! isset( $settings['eael_breadcrumb_wrap_title_quotes'] ) || 'yes' === $settings['eael_breadcrumb_wrap_title_quotes'] ) ? '"' : '';
 
 		//
 		$output = '';
@@ -628,7 +721,7 @@ class Breadcrumbs extends Widget_Base {
 				if ( $get_category->parent != 0 ) {
 					$output .= get_category_parents( $get_category->parent, true, ' ' . $delimiter . ' ' );
 				}
-				$output .= $before . esc_html__( 'Archive by category', 'essential-addons-for-elementor-lite' ) .' "' . single_cat_title( '', false ) . '"' . $after;
+				$output .= $before . esc_html( $cat_label ) . ' ' . $quote . single_cat_title( '', false ) . $quote . $after;
 			} elseif ( is_attachment() ) {
 				$parent   = get_post( $post->post_parent );
 				$cat      = get_the_category( $parent->ID ); 
@@ -695,7 +788,7 @@ class Breadcrumbs extends Widget_Base {
 					$output .= $before . $post_type->labels->singular_name . $after;
 				}
 			} elseif ( is_search() ) {
-				$output .= $before . esc_html__( 'Search results for', 'essential-addons-for-elementor-lite' ) . ' "' . get_search_query() . '"' . $after;
+				$output .= $before . esc_html( $search_label ) . ' ' . $quote . get_search_query() . $quote . $after;
 			} elseif ( is_day() ) {
 				$output .= '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a> ' . $delimiter . ' ';
 				$output .= '<a href="' . get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) . '">' . get_the_time( 'F' ) . '</a> ' . $delimiter . ' ';
@@ -706,13 +799,13 @@ class Breadcrumbs extends Widget_Base {
 			} elseif ( is_year() ) {
 				$output .= $before . get_the_time( 'Y' ) . $after;
 			} elseif ( is_tag() ) {
-				$output .= $before . esc_html__( 'Posts tagged', 'essential-addons-for-elementor-lite' ) . ' "' . single_tag_title( '', false ) . '"' . $after;
+				$output .= $before . esc_html( $tag_label ) . ' ' . $quote . single_tag_title( '', false ) . $quote . $after;
 			} elseif( is_author() ) {
 				global $author;
 				$user_data = get_userdata( $author );
-				$output .= $before . esc_html__( 'Articles posted by', 'essential-addons-for-elementor-lite' ) . $user_data->display_name . $after;
+				$output .= $before . esc_html( $author_label ) . ' ' . $user_data->display_name . $after;
 			} elseif ( is_404() ) {
-				$output .= $before . esc_html__( 'Error 404', 'essential-addons-for-elementor-lite' ) . $after;
+				$output .= $before . esc_html( $notfound_label ) . $after;
 			}
 
 			$output .= "</div>";
