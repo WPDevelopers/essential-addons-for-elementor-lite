@@ -697,12 +697,13 @@ class Breadcrumbs extends Widget_Base {
 		$after        = '</span>';
 		$home_link    = get_bloginfo( 'url' );
 
-		// Editable archive labels (fall back to legacy hardcoded strings for widgets saved before these controls existed).
-		$cat_label    = ! empty( $settings['eael_breadcrumb_category_label'] ) ? $settings['eael_breadcrumb_category_label'] : esc_html__( 'Archive by category', 'essential-addons-for-elementor-lite' );
-		$tag_label    = ! empty( $settings['eael_breadcrumb_tag_label'] ) ? $settings['eael_breadcrumb_tag_label'] : esc_html__( 'Posts tagged', 'essential-addons-for-elementor-lite' );
-		$search_label = ! empty( $settings['eael_breadcrumb_search_label'] ) ? $settings['eael_breadcrumb_search_label'] : esc_html__( 'Search results for', 'essential-addons-for-elementor-lite' );
-		$author_label = ! empty( $settings['eael_breadcrumb_author_label'] ) ? $settings['eael_breadcrumb_author_label'] : esc_html__( 'Articles posted by', 'essential-addons-for-elementor-lite' );
-		$notfound_label = ! empty( $settings['eael_breadcrumb_404_label'] ) ? $settings['eael_breadcrumb_404_label'] : esc_html__( 'Error 404', 'essential-addons-for-elementor-lite' );
+		// Editable archive labels. Only an absent key falls back to the legacy string — an empty
+		// value is a deliberate choice by the user (show the title alone), so never override it.
+		$cat_label    = isset( $settings['eael_breadcrumb_category_label'] ) ? $settings['eael_breadcrumb_category_label'] : esc_html__( 'Archive by category', 'essential-addons-for-elementor-lite' );
+		$tag_label    = isset( $settings['eael_breadcrumb_tag_label'] ) ? $settings['eael_breadcrumb_tag_label'] : esc_html__( 'Posts tagged', 'essential-addons-for-elementor-lite' );
+		$search_label = isset( $settings['eael_breadcrumb_search_label'] ) ? $settings['eael_breadcrumb_search_label'] : esc_html__( 'Search results for', 'essential-addons-for-elementor-lite' );
+		$author_label = isset( $settings['eael_breadcrumb_author_label'] ) ? $settings['eael_breadcrumb_author_label'] : esc_html__( 'Articles posted by', 'essential-addons-for-elementor-lite' );
+		$notfound_label = isset( $settings['eael_breadcrumb_404_label'] ) ? $settings['eael_breadcrumb_404_label'] : esc_html__( 'Error 404', 'essential-addons-for-elementor-lite' );
 		// Legacy widgets have no switch value saved (unset) — keep the historical quoted output as the default.
 		$quote        = ( ! isset( $settings['eael_breadcrumb_wrap_title_quotes'] ) || 'yes' === $settings['eael_breadcrumb_wrap_title_quotes'] ) ? '"' : '';
 
@@ -721,7 +722,7 @@ class Breadcrumbs extends Widget_Base {
 				if ( $get_category->parent != 0 ) {
 					$output .= get_category_parents( $get_category->parent, true, ' ' . $delimiter . ' ' );
 				}
-				$output .= $before . esc_html( $cat_label ) . ' ' . $quote . single_cat_title( '', false ) . $quote . $after;
+				$output .= $before . trim( esc_html( $cat_label ) . ' ' . $quote . single_cat_title( '', false ) . $quote ) . $after;
 			} elseif ( is_attachment() ) {
 				$parent   = get_post( $post->post_parent );
 				$cat      = get_the_category( $parent->ID ); 
@@ -788,7 +789,7 @@ class Breadcrumbs extends Widget_Base {
 					$output .= $before . $post_type->labels->singular_name . $after;
 				}
 			} elseif ( is_search() ) {
-				$output .= $before . esc_html( $search_label ) . ' ' . $quote . get_search_query() . $quote . $after;
+				$output .= $before . trim( esc_html( $search_label ) . ' ' . $quote . get_search_query() . $quote ) . $after;
 			} elseif ( is_day() ) {
 				$output .= '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a> ' . $delimiter . ' ';
 				$output .= '<a href="' . get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) . '">' . get_the_time( 'F' ) . '</a> ' . $delimiter . ' ';
@@ -799,11 +800,11 @@ class Breadcrumbs extends Widget_Base {
 			} elseif ( is_year() ) {
 				$output .= $before . get_the_time( 'Y' ) . $after;
 			} elseif ( is_tag() ) {
-				$output .= $before . esc_html( $tag_label ) . ' ' . $quote . single_tag_title( '', false ) . $quote . $after;
+				$output .= $before . trim( esc_html( $tag_label ) . ' ' . $quote . single_tag_title( '', false ) . $quote ) . $after;
 			} elseif( is_author() ) {
 				global $author;
 				$user_data = get_userdata( $author );
-				$output .= $before . esc_html( $author_label ) . ' ' . $user_data->display_name . $after;
+				$output .= $before . trim( esc_html( $author_label ) . ' ' . $user_data->display_name ) . $after;
 			} elseif ( is_404() ) {
 				$output .= $before . esc_html( $notfound_label ) . $after;
 			}

@@ -2197,7 +2197,7 @@ msgstr ""
 msgid "Category Label"
 msgstr ""
 
-#: ../includes/Elements/Breadcrumbs.php:227, ../includes/Elements/Breadcrumbs.php:701
+#: ../includes/Elements/Breadcrumbs.php:227, ../includes/Elements/Breadcrumbs.php:702
 msgid "Archive by category"
 msgstr ""
 
@@ -2205,7 +2205,7 @@ msgstr ""
 msgid "Tag Label"
 msgstr ""
 
-#: ../includes/Elements/Breadcrumbs.php:239, ../includes/Elements/Breadcrumbs.php:702
+#: ../includes/Elements/Breadcrumbs.php:239, ../includes/Elements/Breadcrumbs.php:703
 msgid "Posts tagged"
 msgstr ""
 
@@ -2213,7 +2213,7 @@ msgstr ""
 msgid "Search Label"
 msgstr ""
 
-#: ../includes/Elements/Breadcrumbs.php:250, ../includes/Elements/Breadcrumbs.php:703
+#: ../includes/Elements/Breadcrumbs.php:250, ../includes/Elements/Breadcrumbs.php:704
 msgid "Search results for"
 msgstr ""
 
@@ -2221,7 +2221,7 @@ msgstr ""
 msgid "Author Label"
 msgstr ""
 
-#: ../includes/Elements/Breadcrumbs.php:261, ../includes/Elements/Breadcrumbs.php:704
+#: ../includes/Elements/Breadcrumbs.php:261, ../includes/Elements/Breadcrumbs.php:705
 msgid "Articles posted by"
 msgstr ""
 
@@ -2229,7 +2229,7 @@ msgstr ""
 msgid "404 Label"
 msgstr ""
 
-#: ../includes/Elements/Breadcrumbs.php:272, ../includes/Elements/Breadcrumbs.php:705
+#: ../includes/Elements/Breadcrumbs.php:272, ../includes/Elements/Breadcrumbs.php:706
 msgid "Error 404"
 msgstr ""
 
