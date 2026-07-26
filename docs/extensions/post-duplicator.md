@@ -1,6 +1,6 @@
 # Post Duplicator Extension
 
-> Admin-side "EA Duplicator" link in the row actions of every post / page list and an entry in the top admin bar on `post.php`. Clicking the link deep-copies the post — title (with " - Copy" suffix), content, excerpt, parent, status (forced to `draft`), taxonomies, and all post meta except a tight blocklist (`_wc_average_rating`, `_wc_review_count`, `_wc_rating_count`, `_elementor_css`).
+> Admin-side "EA Duplicator" link in the row actions of every post / page list and an entry in the top admin bar on `post.php`. Clicking the link deep-copies the post — title (with " - Copy" suffix), content, excerpt, parent, status (forced to `draft`), taxonomies, and all post meta except a blocklist (`_wc_average_rating`, `_wc_review_count`, `_wc_rating_count`, `_elementor_css`, `_edit_lock`, `_edit_last`, `_wp_old_slug`, `_wp_desired_post_slug`). A standing `update_post_metadata` guard also blocks any later write that would blank out an already-populated Elementor meta key (`_elementor_data`, `_elementor_edit_mode`, `_elementor_template_type`, `_elementor_page_settings`).
 
 **Class file:** [`includes/Extensions/Post_Duplicator.php`](../../includes/Extensions/Post_Duplicator.php) (186 lines)
 **Slug:** `post-duplicator` ([`config.php:1388`](../../config.php#L1388))
@@ -46,10 +46,12 @@ No Pro override exists. The single Lite class is the source of truth.
 - **No `dependency` block.** Because nothing runs on the frontend, the registry entry omits `dependency`. `Asset_Builder` reads the empty entry and contributes zero bytes per request.
 - **Two-step capability check.** The row-actions filter uses a coarse `current_user_can( 'edit_posts' )` so the link appears for editors / authors / contributors. The duplicate action handler then runs a per-post `current_user_can( 'edit_post', $post_id )` and, for non-administrator/editor/author roles, a `edit_others_posts` / `edit_others_pages` check. Users without permission are silently redirected back to the post list without an error message.
 - **Direct SQL for meta copy.** Post meta is copied via a single batched `INSERT` statement constructed from a `$wpdb->prepare`-d row list. The `$wpdb->query` call carries a `phpcs:ignore` for `PreparedSQL.NotPrepared` because the row VALUES are individually prepared and concatenated into one query for performance — the alternative of one `wp_insert_post_meta` per row is dramatically slower for posts with hundreds of meta rows (Elementor pages especially).
-- **Blocklist on meta keys.** Four keys are skipped:
+- **Blocklist on meta keys.** Eight keys are skipped:
     - `_wc_average_rating` / `_wc_review_count` / `_wc_rating_count` — copying these would falsely inflate WooCommerce review aggregates on the duplicate.
     - `_elementor_css` — generated CSS, regenerated on first edit of the duplicate; copying it would point to the source's CSS file.
+    - `_edit_lock` / `_edit_last` / `_wp_old_slug` / `_wp_desired_post_slug` — transient editor-state meta scoped to the source post; copying it onto the duplicate is meaningless at best (stale lock/slug pointers) and WordPress regenerates these itself as needed.
     - `_elementor_template_type` is conditionally deleted before insert (via `delete_post_meta` of the freshly created duplicate). This guards against duplicating a template's "template type" semantically — the duplicate becomes a regular `post`/`page`/etc. of the same post type rather than a template subtype.
+- **`update_post_metadata` guard against empty-value overwrites.** A filter registered in the constructor blocks any write (from anywhere — REST, Gutenberg, another plugin) that would set `_elementor_data`, `_elementor_edit_mode`, `_elementor_template_type`, or `_elementor_page_settings` to an empty value while the post already has a real value stored. This exists because the block editor's first load on a just-duplicated draft can briefly hold un-hydrated (empty) Elementor meta in its REST state; if an unrelated field save (e.g. an ACF field) fires while that state is stale, Gutenberg submits the empty Elementor keys alongside it and wipes the real layout data — see [#838](https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues/838). The guard only intercepts *updates* to an empty value, never `delete_post_meta()`, so Elementor's own "disconnect" flow is unaffected.
 - **`wp_insert_post` + `wp_set_object_terms`.** Taxonomies are copied via `wp_get_object_terms` followed by `wp_set_object_terms`. No deep custom logic — just whatever the source had.
 
 ## Render Behavior
@@ -192,6 +194,11 @@ Fragile — it inspects the title suffix and the request action. A real `eael/po
 - **Cause:** The meta key matches one of the four hardcoded blocklist entries, or the source's meta lives outside `wp_postmeta` (some plugins store custom data in custom tables).
 - **Fix:** Custom-table data: write a separate copier hooked to `wp_insert_post` after the duplicate is created. Blocklist: see [Recipe 2](#recipe-2--extend-the-meta-key-blocklist).
 
+### Duplicate's Elementor layout collapses into a single Text Editor block after editing custom fields
+
+- **Cause:** The block editor's first load on the new draft can hold empty `_elementor_data`/`_elementor_edit_mode` in its REST state before the real values hydrate. Saving any other meta (commonly an ACF field, which sets `_acf_changed`) while that state is stale causes Gutenberg to PATCH the empty Elementor keys back to the server, overwriting the valid layout data. WordPress core issue, not something Post Duplicator's meta-copy caused — the copy itself is correct.
+- **Fix:** A guard on `update_post_metadata` (registered by this class) rejects any write that would blank `_elementor_data`, `_elementor_edit_mode`, `_elementor_template_type`, or `_elementor_page_settings` while a non-empty value already exists, so the stale empty payload is silently dropped instead of persisted. See [#838](https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues/838).
+
 ### Duplicate created but featured image / Elementor data is broken
 
 - **Cause:** Featured image is a `_thumbnail_id` post meta pointing at an attachment ID — the attachment itself is not duplicated; both posts share the same attachment, which is intended. For Elementor: `_elementor_css` is intentionally skipped (regenerated on first edit). If `_elementor_data` is missing, the meta-copy loop ran into an error before reaching it — check `debug.log` for `$wpdb` errors.
@@ -269,7 +276,9 @@ Fragile — it inspects the title suffix and the request action. A real `eael/po
 
 ## Recent Significant Changes
 
-No tracked changes yet. Future entries here when:
+- Unreleased — Fixed: block-editor REST race could overwrite a duplicate's real `_elementor_data` with empty values after an unrelated meta save (e.g. ACF), collapsing the layout into a single Text Editor block; added an `update_post_metadata` guard and extended the meta blocklist with `_edit_lock`, `_edit_last`, `_wp_old_slug`, `_wp_desired_post_slug` (#838)
+
+Future entries here when:
 
 - A new meta-key blocklist filter (`eael/post_duplicator/exclude_meta_keys`) ships
 - An `eael/post_duplicator/after_duplicate` action ships

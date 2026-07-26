@@ -13,7 +13,43 @@ class Post_Duplicator {
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 10000 );
 		add_filter( 'post_row_actions', array( $this, 'row_actions' ), 10, 2 );
 		add_filter( 'page_row_actions', array( $this, 'row_actions' ), 10, 2 );
+		add_filter( 'update_post_metadata', array( $this, 'protect_elementor_meta' ), 10, 5 );
 
+	}
+
+	/**
+	 * Block writes that would blank out already-populated Elementor layout data.
+	 *
+	 * On a freshly duplicated draft, the block editor's first load can submit a REST
+	 * meta payload where Elementor's own keys haven't hydrated yet (empty strings).
+	 * If that payload rides along with an unrelated meta save (e.g. an ACF field
+	 * change), WordPress happily overwrites the real `_elementor_data` with the
+	 * empty one and the layout collapses into a single text block (see #838).
+	 * Elementor itself never clears these keys by writing empty values — a
+	 * disconnect uses delete_post_meta() — so an empty incoming value while a
+	 * real one already exists is always stale client state, never an intentional edit.
+	 *
+	 * @param null|bool $check      Whether to short-circuit the update.
+	 * @param int       $object_id  Post ID being updated.
+	 * @param string    $meta_key   Meta key being updated.
+	 * @param mixed     $meta_value New meta value.
+	 * @param mixed     $prev_value Previous value to check before updating, if provided.
+	 *
+	 * @return null|bool
+	 */
+	public function protect_elementor_meta( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
+
+		$protected_keys = array( '_elementor_data', '_elementor_edit_mode', '_elementor_template_type', '_elementor_page_settings' );
+
+		if ( ! in_array( $meta_key, $protected_keys, true ) || ! empty( $meta_value ) ) {
+			return $check;
+		}
+
+		if ( ! empty( get_post_meta( $object_id, $meta_key, true ) ) ) {
+			return true; // Short-circuit update_metadata(): keep the existing, valid value.
+		}
+
+		return $check;
 	}
 
 	public function admin_bar_menu( $wp_admin_bar ) {
@@ -159,7 +195,7 @@ class Post_Duplicator {
 					$meta_key      = sanitize_text_field( $meta_info->meta_key );
 					$meta_value    =  $meta_info->meta_value;
 					
-					$exclude_meta_keys = [ '_wc_average_rating', '_wc_review_count', '_wc_rating_count', '_elementor_css' ];
+					$exclude_meta_keys = [ '_wc_average_rating', '_wc_review_count', '_wc_rating_count', '_elementor_css', '_edit_lock', '_edit_last', '_wp_old_slug', '_wp_desired_post_slug' ];
 					
 					if( in_array($meta_key, $exclude_meta_keys) ){
 						continue;
