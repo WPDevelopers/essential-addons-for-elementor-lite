@@ -110,7 +110,11 @@ class WPDeveloper_Plugin_Installer
 
         // activate plugin
         if ($install === true && $active) {
-            $active = activate_plugin($upgrader->plugin_info(), '', false, true);
+            // Not silent: silent activation skips the "activate_{$plugin}" hook,
+            // which is what register_activation_hook() binds to. Suppressing it
+            // leaves the freshly installed plugin without its tables, default
+            // options and cron events.
+            $active = activate_plugin($upgrader->plugin_info(), '', false, false);
 
             if (is_wp_error($active)) {
                 return $active;
@@ -206,7 +210,9 @@ class WPDeveloper_Plugin_Installer
         }
 
 	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( wp_unslash( $_POST['basename'] ) ) : '';
-	    $result   = activate_plugin( $basename, '', false, true );
+	    // Not silent — see install_plugin(): a silent activation never fires the
+	    // plugin's own activation hook.
+	    $result   = activate_plugin( $basename, '', false, false );
 
 	    if ( is_wp_error( $result ) ) {
 		    wp_send_json_error( $result->get_error_message() );
