@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.7.0
+Stable tag: 6.7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -346,6 +346,12 @@ You can use the official documentation, tutorials, community resources, and supp
 
 
 == Changelog ==
+
+= 6.7.1 - 27/07/2026 =
+
+- Improved: EA Woo Product Images | Added variation image support so the gallery updates when a product variation is selected
+- Fixed: EA Feature List | Icon Position control displayed incorrect icons for Left, Top and Right options
+- Few minor bug fixes & improvements
 
 = 6.7.0 - 16/07/2026 =
 
