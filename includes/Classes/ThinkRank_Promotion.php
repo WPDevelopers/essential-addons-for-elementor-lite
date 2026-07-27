@@ -273,7 +273,7 @@ class ThinkRank_Promotion {
 				<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/thinkrank/icon.svg' ); ?>" width="40" height="40" alt="">
 			</div>
 			<div class="eael-tr-banner__body">
-				<strong class="eael-tr-banner__title"><?php esc_html_e( 'Get found on Google & AI answers — configure your SEO', 'essential-addons-for-elementor-lite' ); ?></strong>
+				<strong class="eael-tr-banner__title"><?php esc_html_e( 'Get found on Google & AI answers - configure your SEO', 'essential-addons-for-elementor-lite' ); ?></strong>
 				<span class="eael-tr-banner__desc"><?php esc_html_e( 'Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank.', 'essential-addons-for-elementor-lite' ); ?></span>
 			</div>
 			<div class="eael-tr-banner__actions">

@@ -210,7 +210,7 @@ msgid "Just Deactivate"
 msgstr ""
 
 #: ../includes/Classes/ThinkRank_Promotion.php:276
-msgid "Get found on Google & AI answers — configure your SEO"
+msgid "Get found on Google & AI answers - configure your SEO"
 msgstr ""
 
 #: ../includes/Classes/ThinkRank_Promotion.php:277
@@ -354,7 +354,7 @@ msgid "Boost your SEO with AI"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:278
-msgid "Get found on Google and in AI answers. Let AI optimize every page you build — automatically."
+msgid "Get found on Google and in AI answers. Let AI optimize every page you build - automatically."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:279
@@ -450,7 +450,7 @@ msgid "ThinkRank – AI SEO Assistant"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:405
-msgid "Get found on Google & AI answers. ThinkRank optimizes titles, meta, schema & sitemaps and tracks rankings with GA4 — turn the pages you build into pages that rank."
+msgid "Get found on Google & AI answers. ThinkRank optimizes titles, meta, schema & sitemaps and tracks rankings with GA4 - turn the pages you build into pages that rank."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:413, ../includes/Traits/Admin.php:226
