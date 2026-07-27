@@ -114,6 +114,7 @@ class WPDeveloper_Setup_Wizard {
 			'configuration_content' => $this->data_configuration_content(),
 			'elements_content' => $this->data_elements_content(),
 			'go_pro_content' => $this->data_go_pro_content(),
+			'thinkrank_content' => $this->data_thinkrank_content(),
 			'plugins_content' => $this->data_plugins_content(),
 			'integrations_content' => $this->data_integrations_content(),
 			'modal_content' => $this->data_modal_content(),
@@ -128,6 +129,7 @@ class WPDeveloper_Setup_Wizard {
 			'configuration' => __( 'Configuration', 'essential-addons-for-elementor-lite' ),
 			'elements'      => __( 'Elements', 'essential-addons-for-elementor-lite' ),
 			'go_pro'        => __( 'Go PRO', 'essential-addons-for-elementor-lite' ),
+			'thinkrank'     => __( 'Boost SEO', 'essential-addons-for-elementor-lite' ),
 			'pluginspromo'  => __( 'Plugins', 'essential-addons-for-elementor-lite' ),
 			'integrations'  => __( 'Integrations', 'essential-addons-for-elementor-lite' ),
 		];
@@ -256,6 +258,49 @@ class WPDeveloper_Setup_Wizard {
 		return $go_pro_content;
 	}
 
+	/**
+	 * Dedicated "Boost SEO" step data (ThinkRank – AI SEO Assistant).
+	 * Rendered as its own wizard tab before the Templately / Essential Blocks
+	 * Plugins step. No Essential Addons branding — pure "configure SEO" framing.
+	 *
+	 * TODO(design): swap $tr_icon for a proper hero image + per-feature icons.
+	 */
+	public function data_thinkrank_content(){
+		$tr_icon = EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank.svg';
+		return [
+			'slug'              => 'thinkrank',
+			'basename'          => 'thinkrank/thinkrank.php',
+			'is_active'         => is_plugin_active( 'thinkrank/thinkrank.php' ),
+			'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
+			'logo'              => $tr_icon,
+			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-promo-image.jpg',
+			'title'             => __( 'Boost your SEO with AI', 'essential-addons-for-elementor-lite' ),
+			'subtitle'          => __( 'Get found on Google and in AI answers. Let AI optimize every page you build — automatically.', 'essential-addons-for-elementor-lite' ),
+			'install_label'     => __( 'Install & Set Up SEO', 'essential-addons-for-elementor-lite' ),
+			'installing_label'  => __( 'Installing…', 'essential-addons-for-elementor-lite' ),
+			'done_label'        => __( 'Opening SEO setup…', 'essential-addons-for-elementor-lite' ),
+			'skip_label'        => __( 'Skip for now', 'essential-addons-for-elementor-lite' ),
+			'open_url'          => admin_url( 'admin.php?page=thinkrank' ),
+			'features'          => [
+				[
+					'content' => __( 'AI-written titles, meta & descriptions', 'essential-addons-for-elementor-lite' ),
+				],
+				[
+					'content' => __( 'Schema & LLM answer optimization', 'essential-addons-for-elementor-lite' ),
+				],
+				[
+					'content' => __( 'Built-in MCP server for AI agents', 'essential-addons-for-elementor-lite' ),
+				],
+				[
+					'content' => __( 'XML sitemaps & smart indexing', 'essential-addons-for-elementor-lite' ),
+				],
+				[
+					'content' => __( 'Rank tracking with GA4', 'essential-addons-for-elementor-lite' ),
+				],
+			],
+		];
+	}
+
 	public function data_plugins_content(){
 		$plugins_content = [
 			'tab_title'    => __( 'Plugins', 'essential-addons-for-elementor-lite' ),
@@ -352,6 +397,15 @@ class WPDeveloper_Setup_Wizard {
 	 */
 	public function get_plugin_list() {
 		return [
+			[
+				'slug'     => 'thinkrank',
+				'basename' => 'thinkrank/thinkrank.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank.svg',
+				'title'    => __( 'ThinkRank – AI SEO Assistant', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Get found on Google & AI answers. ThinkRank optimizes titles, meta, schema & sitemaps and tracks rankings with GA4 — turn the pages you build into pages that rank.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'thinkrank/thinkrank.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
+			],
 			[
 				'slug'     => 'betterdocs',
 				'basename' => 'betterdocs/betterdocs.php',

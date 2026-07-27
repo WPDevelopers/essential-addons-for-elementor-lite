@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { __ } from "@wordpress/i18n";
-import { hasDisplayablePlugins, getPluginPromoCount } from "../utils/pluginPromoUtils";
+import { hasDisplayablePlugins, getPluginPromoCount, isPluginsPromoStepVisible, isThinkRankStepVisible } from "../utils/pluginPromoUtils";
 
 function IntegrationContent({
   activeTab,
@@ -164,7 +164,7 @@ function IntegrationContent({
         <button
           className="previous-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={ hasPluginPromo && shouldShowPluginsPromo ? "pluginspromo" : !ea_pro_local_plugin_data ? "go-pro" : "elements" }
+          data-next={ isPluginsPromoStepVisible() ? "pluginspromo" : isThinkRankStepVisible() ? "thinkrank" : !ea_pro_local_plugin_data ? "go-pro" : "elements" }
           onClick={handleTabChange}
         >
           <i className="ea-dash-icon ea-left-arrow-long"></i>

@@ -6352,6 +6352,7 @@ section.eael-onboard-main-wrapper {
     background: #fff;
     border-radius: 8px 8px 0 0;
     border: 1px solid #F2F4F7;
+    overflow-x: auto;
 }
 
 .eael-onboard-nav {
@@ -6359,16 +6360,21 @@ section.eael-onboard-main-wrapper {
     line-height: 1em;
     font-weight: 450;
     color: #1D2939;
-    padding: 20px 16px;
+    padding: 20px 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     cursor: pointer;
+}
+
+.eael-onboard-nav .eael-nav-text {
+    white-space: nowrap;
 }
 
 .eael-onboard-nav .eael-nav-count {
     width: 32px;
     height: 32px;
+    flex-shrink: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6690,6 +6696,92 @@ span.eael-tooltip:after {
 }
 .eael-setup-content.eael-plugins-promo-content .eael-onboard-content-wrapper:not(:first-child){
     border-radius: 8px;
+}
+
+/*-------- Boost SEO (ThinkRank) step ------------*/
+
+.eael-onboard-content-wrapper.eael-thinkrank-promo {
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.eael-thinkrank-promo-content {
+    max-width: 485px;
+}
+
+.eael-thinkrank-promo-img img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+
+.eael-thinkrank-promo__logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+}
+
+.eael-thinkrank-promo__title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1D2939;
+    margin: 16px 0 8px;
+}
+
+.eael-thinkrank-promo__subtitle {
+    font-size: 15px;
+    line-height: 1.55;
+    color: #667085;
+    margin: 0 0 24px;
+}
+
+.eael-thinkrank-promo__features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.eael-thinkrank-promo__feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #344054;
+}
+
+.eael-thinkrank-promo__feature::before {
+    content: "";
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #F6EEFF;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M14.83 4.89l1.34.94-5.81 8.38H9.02L5.78 9.67l1.34-1.25 2.57 2.4z' fill='%23760EF4'/></svg>");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 18px 18px;
+}
+
+.eael-thinkrank-promo__error {
+    color: #d63638;
+    font-size: 13px;
+    margin: 24px 0 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .eael-onboard-content-wrapper.eael-thinkrank-promo {
+        padding: 30px;
+        grid-template-columns: 1fr;
+    }
+
+    .eael-thinkrank-promo-content {
+        max-width: 100%;
+    }
 }
 
 .eael-onboard--wrapper .eael-general-content-item h2 {
