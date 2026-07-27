@@ -37,6 +37,23 @@ trait Login_Registration {
 
 	public static $recaptcha_v3_default_action = 'eael_login_register_form';
 
+	/**
+	 * Validate an email content-type widget setting against a strict allowlist.
+	 *
+	 * The content-type SELECT control is enforced client-side only, so its value must
+	 * never be trusted when concatenated into a mail header. wp_kses / wp_strip_all_tags
+	 * strip tags but leave CR/LF intact, allowing header injection (e.g. an added Bcc:).
+	 * Only 'html' and 'plain' are ever valid; anything else falls back to 'html'.
+	 *
+	 * @param mixed  $value    Raw setting value.
+	 * @param string $fallback Default when the value is not in the allowlist.
+	 * @return string 'html' or 'plain'.
+	 */
+	public static function eael_sanitize_email_content_type( $value, $fallback = 'html' ) {
+		$value = is_string( $value ) ? strtolower( trim( $value ) ) : '';
+		return in_array( $value, [ 'html', 'plain' ], true ) ? $value : $fallback;
+	}
+
 	public static function get_recaptcha_threshold( $settings = [] ) {
 		$score_threshold = isset( $settings['login_register_recaptcha_v3_score_threshold']['size'] ) ? floatval( $settings['login_register_recaptcha_v3_score_threshold']['size'] ) : 0.5;
 		$score_threshold = $score_threshold >= 0 && $score_threshold <= 1 ? $score_threshold : 0.5;
@@ -83,6 +100,36 @@ trait Login_Registration {
 		wp_logout();
 		wp_redirect( $redirect_to );
 		exit;
+	}
+
+	/**
+	 * Global authentication gate for accounts still pending OTP verification.
+	 *
+	 * Hooked on WordPress core's `wp_authenticate_user` filter, which every
+	 * authentication path runs through (wp-login.php, wp_signon(), XML-RPC,
+	 * application passwords) — unlike the OTP-pending check in log_user_in(),
+	 * which only fires for logins submitted through the EA login widget itself.
+	 * Without this, a registered-but-unverified account (see `_eael_otp_pending`)
+	 * could authenticate anywhere outside the widget while still being blocked
+	 * by the widget's own login form.
+	 *
+	 * @param \WP_User|\WP_Error $user     Authenticated user or existing error.
+	 * @param string             $password Plaintext password (unused, required by hook signature).
+	 * @return \WP_User|\WP_Error
+	 */
+	public function eael_block_otp_pending_authentication( $user, $password ) {
+		if ( is_wp_error( $user ) || ! ( $user instanceof \WP_User ) ) {
+			return $user;
+		}
+
+		if ( '1' === get_user_meta( $user->ID, '_eael_otp_pending', true ) ) {
+			return new \WP_Error(
+				'eael_otp_pending',
+				__( '<strong>Error:</strong> Your registration is not complete. Please verify the one-time code sent to your email before logging in.', 'essential-addons-for-elementor-lite' )
+			);
+		}
+
+		return $user;
 	}
 
 	/**
@@ -859,7 +906,7 @@ trait Login_Registration {
 				self::$email_options['message'] = $settings['reg_email_message'];
 			}
 			if ( isset( $settings['reg_email_content_type'] ) ) {
-				self::$email_options['headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
+				self::$email_options['headers'] = 'Content-Type: text/' . self::eael_sanitize_email_content_type( $settings['reg_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
 			}
 
 
@@ -872,7 +919,7 @@ trait Login_Registration {
 				self::$email_options['admin_message'] = Helper::eael_wp_kses( $settings['reg_admin_email_message'] );
 			}
 			if ( isset( $settings['reg_admin_email_content_type'] ) ) {
-				self::$email_options['admin_headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_admin_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
+				self::$email_options['admin_headers'] = 'Content-Type: text/' . self::eael_sanitize_email_content_type( $settings['reg_admin_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
 			}
 		}
 
@@ -1268,7 +1315,7 @@ trait Login_Registration {
 			self::$email_options_lostpassword['message'] = $settings['lostpassword_email_message'];
 		}
 		if ( isset( $settings['lostpassword_email_content_type'] ) ) {
-			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . Helper::eael_wp_kses( $settings['lostpassword_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
+			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . self::eael_sanitize_email_content_type( $settings['lostpassword_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
 		}
 
 		if ( isset($_SERVER['HTTP_REFERER']) ) {
@@ -2147,9 +2194,7 @@ trait Login_Registration {
 			? $settings[ "{$prefix}_otp_email_message" ]
 			: $default_message;
 
-		$content_type = ! empty( $settings[ "{$prefix}_otp_email_content_type" ] )
-			? wp_strip_all_tags( $settings[ "{$prefix}_otp_email_content_type" ] )
-			: 'html';
+		$content_type = self::eael_sanitize_email_content_type( $settings[ "{$prefix}_otp_email_content_type" ] ?? '' );
 
 		// Fall back to the home URL if the caller did not pass an explicit direct URL.
 		if ( empty( $direct_url ) ) {

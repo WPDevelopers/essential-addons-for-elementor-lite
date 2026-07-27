@@ -176,6 +176,54 @@ class Helper
         return $settings;
     }
 
+    /**
+     * Filter product query args by the current MultiVendorX (5.0+) store.
+     *
+     * MultiVendorX 5.0 replaced the legacy vendor taxonomy archive with a virtual
+     * store page and links products to stores via the `multivendorx_store_id`
+     * post meta. When a product widget renders on a store page, limit the query
+     * to that store's products so each seller's page shows only their items.
+     *
+     * @since 6.7.0
+     * @param array $args WP_Query arguments.
+     * @return array
+     */
+    public static function eael_multivendorx_store_query_args( $args ) {
+        if ( ! function_exists( 'MultiVendorX' ) || ! class_exists( '\MultiVendorX\Store\Store' ) ) {
+            return $args;
+        }
+
+        $store_query_var = 'store';
+        if ( is_callable( [ MultiVendorX()->setting, 'get_setting' ] ) ) {
+            $store_query_var = MultiVendorX()->setting->get_setting( 'store_url', 'store' ) ?: 'store';
+        }
+
+        $store_slug = get_query_var( $store_query_var );
+        if ( empty( $store_slug ) || ! is_string( $store_slug ) ) {
+            return $args;
+        }
+
+        $store = \MultiVendorX\Store\Store::get_store( $store_slug, 'slug' );
+        if ( empty( $store ) || ! $store->get_id() ) {
+            return $args;
+        }
+
+        $store_id_meta_key = defined( '\MultiVendorX\Utill::POST_META_SETTINGS' ) && ! empty( \MultiVendorX\Utill::POST_META_SETTINGS['store_id'] )
+            ? \MultiVendorX\Utill::POST_META_SETTINGS['store_id']
+            : 'multivendorx_store_id';
+
+        if ( ! isset( $args['meta_query'] ) || ! is_array( $args['meta_query'] ) ) {
+            $args['meta_query'] = [ 'relation' => 'AND' ];
+        }
+
+        $args['meta_query'][] = [
+            'key'   => $store_id_meta_key,
+            'value' => $store->get_id(),
+        ];
+
+        return apply_filters( 'eael/multivendorx/store_query_args', $args, $store );
+    }
+
     public static function get_query_args($settings = [], $post_type = 'post')
     {
 	    $settings = wp_parse_args( $settings, [
@@ -1828,6 +1876,63 @@ class Helper
         ];
     }
 
+    /**
+     * Allowlist for wp_kses() when rendering a user-supplied raw SVG
+     * (e.g. SVG Draw's custom SVG textarea). Covers the shape/structure
+     * elements SVG Draw needs while excluding <script>, <foreignObject>,
+     * <use> (can reference external content) and any on* event handler
+     * attribute.
+     */
+    public static function eael_allowed_svg_draw_tags() {
+        $common_attrs = [
+            'id'              => [],
+            'class'           => [],
+            'style'           => [],
+            'fill'            => [],
+            'fill-rule'       => [],
+            'fill-opacity'    => [],
+            'stroke'          => [],
+            'stroke-width'    => [],
+            'stroke-linecap'  => [],
+            'stroke-linejoin' => [],
+            'stroke-dasharray' => [],
+            'stroke-dashoffset' => [],
+            'stroke-opacity' => [],
+            'opacity'         => [],
+            'transform'       => [],
+            'clip-rule'       => [],
+            'clip-path'       => [],
+        ];
+
+        return [
+            'svg'            => array_merge( $common_attrs, [
+                'xmlns'   => [],
+                'width'   => [],
+                'height'  => [],
+                'viewbox' => [],
+                'role'    => [],
+                'aria-hidden' => [],
+                'aria-labelledby' => [],
+                'preserveaspectratio' => [],
+            ] ),
+            'g'              => $common_attrs,
+            'defs'           => $common_attrs,
+            'title'          => [ 'class' => [] ],
+            'desc'           => [ 'class' => [] ],
+            'path'           => array_merge( $common_attrs, [ 'd' => [] ] ),
+            'circle'         => array_merge( $common_attrs, [ 'cx' => [], 'cy' => [], 'r' => [] ] ),
+            'ellipse'        => array_merge( $common_attrs, [ 'cx' => [], 'cy' => [], 'rx' => [], 'ry' => [] ] ),
+            'rect'           => array_merge( $common_attrs, [ 'x' => [], 'y' => [], 'width' => [], 'height' => [], 'rx' => [], 'ry' => [] ] ),
+            'line'           => array_merge( $common_attrs, [ 'x1' => [], 'y1' => [], 'x2' => [], 'y2' => [] ] ),
+            'polyline'       => array_merge( $common_attrs, [ 'points' => [] ] ),
+            'polygon'        => array_merge( $common_attrs, [ 'points' => [] ] ),
+            'lineargradient' => array_merge( $common_attrs, [ 'x1' => [], 'y1' => [], 'x2' => [], 'y2' => [], 'gradientunits' => [], 'gradienttransform' => [] ] ),
+            'radialgradient' => array_merge( $common_attrs, [ 'cx' => [], 'cy' => [], 'r' => [], 'fx' => [], 'fy' => [], 'gradientunits' => [], 'gradienttransform' => [] ] ),
+            'stop'           => array_merge( $common_attrs, [ 'offset' => [], 'stop-color' => [], 'stop-opacity' => [] ] ),
+            'clippath'       => $common_attrs,
+        ];
+    }
+
     public static function eael_fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
             return '';
@@ -1846,6 +1951,15 @@ class Helper
         }
 
         return $color;
+    }
+
+    /**
+     * Strip characters that could break out of an inline <style> block or
+     * inject new CSS rules/declarations from a user-supplied CSS value
+     * (e.g. a color/size setting interpolated raw into a <style> tag).
+     */
+    public static function eael_sanitize_css_value( $value ) {
+        return str_replace( [ '<', '>', '{', '}', ';' ], '', (string) $value );
     }
 
 	/**

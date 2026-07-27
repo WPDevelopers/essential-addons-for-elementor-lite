@@ -283,6 +283,11 @@ $config = [
                 ],
                 'js' => [
                     [
+                        'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
                         'type' => 'lib',
                         'context' => 'view',
@@ -664,12 +669,60 @@ $config = [
                 ],
             ],
         ],
+        'woo-product-title' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Title',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-title.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'woo-product-price' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Price',
             'dependency' => [
                 'css' => [
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-price.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'woo-product-tabs' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Tabs',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-tabs.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'woo-product-short-description' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Short_Description',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-short-description.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'woo-product-description' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Description',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-description.min.css',
                         'type' => 'self',
                         'context' => 'view',
                     ],
@@ -1099,6 +1152,11 @@ $config = [
                 ],
                 'js' => [
                     [
+                        'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/login-register.min.js',
                         'type' => 'self',
                         'context' => 'view',
@@ -1183,6 +1241,11 @@ $config = [
 			        ],
 		        ],
 		        'js'  => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+				        'type' => 'lib',
+				        'context' => 'view',
+			        ],
 			        [
 				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/simple-menu.min.js',
 				        'type' => 'self',
@@ -1283,6 +1346,11 @@ $config = [
                     ],
                 ],
                 'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/nft-gallery.min.js',
                         'type' => 'self',
