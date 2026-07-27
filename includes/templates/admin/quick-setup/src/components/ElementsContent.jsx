@@ -1,7 +1,7 @@
 import { __ } from "@wordpress/i18n";
-import { hasDisplayablePlugins, getPluginPromoCount } from "../utils/pluginPromoUtils";
+import { hasDisplayablePlugins, getPluginPromoCount, isPluginsPromoStepVisible, isThinkRankStepVisible } from "../utils/pluginPromoUtils";
 
-function ElementsContent({ 
+function ElementsContent({
   activeTab, 
   handleTabChange, 
   showElements, 
@@ -131,7 +131,7 @@ function ElementsContent({
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={ ! ea_pro_local_plugin_data ? "go-pro" : ( hasPluginPromo && shouldShowPluginsPromo ? "pluginspromo" : "integrations" ) }
+          data-next={ ! ea_pro_local_plugin_data ? "go-pro" : isThinkRankStepVisible() ? "thinkrank" : isPluginsPromoStepVisible() ? "pluginspromo" : "integrations" }
           onClick={handleTabChange}
         >
           {__("Next", "essential-addons-for-elementor-lite")}

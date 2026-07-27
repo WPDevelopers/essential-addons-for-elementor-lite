@@ -1,6 +1,19 @@
 import { __ } from "@wordpress/i18n";
 import { hasDisplayablePlugins, getPluginPromoCount } from "../utils/pluginPromoUtils";
 
+/**
+ * Menu keys whose tab id is not just the slugified key. The rest of the wizard
+ * navigates by these ids (data-next / activeTab), so the nav item has to resolve
+ * to the same value or it never gets the active state.
+ */
+const TAB_IDS = {
+  started: "getting-started",
+  go_pro: "go-pro",
+};
+
+const getTabId = (key) =>
+  TAB_IDS[key] ?? key.trim().toLowerCase().replace(/[\s_]+/g, "-");
+
 function MenuItems({ activeTab, handleTabChange }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let menu_items = eaelQuickSetup?.menu_items;
@@ -35,7 +48,7 @@ function MenuItems({ activeTab, handleTabChange }) {
             return null;
           }
 
-          itemClass = item.trim().toLowerCase().replace(/ /g, "-");
+          itemClass = getTabId(item);
 
           return (
             <div

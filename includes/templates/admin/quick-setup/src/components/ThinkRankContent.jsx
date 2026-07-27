@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { __ } from "@wordpress/i18n";
+import { isPluginsPromoStepVisible } from "../utils/pluginPromoUtils";
 
 /**
  * "Boost SEO" step — installs ThinkRank (AI SEO). Its own wizard tab, shown
@@ -99,7 +100,7 @@ function ThinkRankContent({ activeTab, handleTabChange }) {
         <button
           type="button"
           className="eael-thinkrank-promo__skip"
-          data-next="pluginspromo"
+          data-next={ isPluginsPromoStepVisible() ? "pluginspromo" : "integrations" }
           onClick={handleTabChange}
         >
           {data.skip_label}
