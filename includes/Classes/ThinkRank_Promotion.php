@@ -48,6 +48,11 @@ class ThinkRank_Promotion {
 	 */
 	const ADMIN_PAGE = 'thinkrank';
 
+	/**
+	 * How long "Maybe later" hides the promo for, in seconds.
+	 */
+	const SNOOZE_DURATION = 30 * DAY_IN_SECONDS;
+
 	public function __construct() {
 		if ( ! is_admin() ) {
 			return;
@@ -67,6 +72,7 @@ class ThinkRank_Promotion {
 		// Dashboard, so this never double-renders on other screens.
 		add_action( 'eael_admin_notices', [ $this, 'render_dashboard_banner' ] );
 		add_action( 'wp_ajax_eael_thinkrank_dismiss', [ $this, 'ajax_dismiss_banner' ] );
+		add_action( 'wp_ajax_eael_thinkrank_snooze', [ $this, 'ajax_snooze_banner' ] );
 
 		// Surface 5 — Gutenberg editor "Configure SEO" document panel.
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_gutenberg_panel' ] );
@@ -76,7 +82,7 @@ class ThinkRank_Promotion {
 	 * Should any editor-context promo render for the current user?
 	 */
 	private function can_promote() {
-		return ! $this->is_thinkrank_active() && ! $this->is_dismissed() && current_user_can( 'install_plugins' );
+		return ! $this->is_thinkrank_active() && ! $this->is_hidden() && current_user_can( 'install_plugins' );
 	}
 
 	/**
@@ -121,6 +127,23 @@ class ThinkRank_Promotion {
 	}
 
 	/**
+	 * Has the current user snoozed the promo via "Maybe later", and is that
+	 * snooze still running? Unlike is_dismissed() this expires on its own.
+	 */
+	public function is_snoozed() {
+		$until = (int) get_user_meta( get_current_user_id(), 'eael_thinkrank_snoozed_until', true );
+
+		return $until > time();
+	}
+
+	/**
+	 * Is the promo hidden for the current user right now, for any reason?
+	 */
+	public function is_hidden() {
+		return $this->is_dismissed() || $this->is_snoozed();
+	}
+
+	/**
 	 * Flag a redirect after Essential Addons (Lite) itself is updated.
 	 *
 	 * Runs only in admin context (the class self-returns otherwise), so cron
@@ -142,7 +165,7 @@ class ThinkRank_Promotion {
 		if ( ! in_array( EAEL_PLUGIN_BASENAME, $plugins, true ) ) {
 			return;
 		}
-		if ( $this->is_thinkrank_active() || $this->is_dismissed() ) {
+		if ( $this->is_thinkrank_active() || $this->is_hidden() ) {
 			return;
 		}
 
@@ -186,6 +209,19 @@ class ThinkRank_Promotion {
 	}
 
 	/**
+	 * Per-user snooze of the banner via "Maybe later". Stores the timestamp the
+	 * promo becomes eligible again, so it lapses on its own without any cleanup.
+	 */
+	public function ajax_snooze_banner() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error();
+		}
+		update_user_meta( get_current_user_id(), 'eael_thinkrank_snoozed_until', time() + self::SNOOZE_DURATION );
+		wp_send_json_success();
+	}
+
+	/**
 	 * Which context should the banner render in?
 	 *  - 'ea'      : Essential Addons' own admin pages (page slug starts eael).
 	 *  - 'content' : Posts / Pages / CPT list screens.
@@ -218,7 +254,7 @@ class ThinkRank_Promotion {
 	 * Never global; permanent per-user dismiss. See banner_context() for scope.
 	 */
 	public function render_dashboard_banner() {
-		if ( $this->is_thinkrank_active() || $this->is_dismissed() ) {
+		if ( $this->is_thinkrank_active() || $this->is_hidden() ) {
 			return;
 		}
 		if ( ! current_user_can( 'install_plugins' ) ) {
@@ -285,7 +321,7 @@ class ThinkRank_Promotion {
 			}
 			function dismiss() { post( 'eael_thinkrank_dismiss' ); el.parentNode && el.parentNode.removeChild( el ); }
 			el.querySelector( '.eael-tr-banner__dismiss' ).addEventListener( 'click', dismiss );
-			el.querySelector( '.eael-tr-banner__later' ).addEventListener( 'click', function () { el.parentNode && el.parentNode.removeChild( el ); } );
+			el.querySelector( '.eael-tr-banner__later' ).addEventListener( 'click', function () { post( 'eael_thinkrank_snooze' ); el.parentNode && el.parentNode.removeChild( el ); } );
 			el.querySelector( '.eael-tr-banner__install' ).addEventListener( 'click', function () {
 				var btn = this; btn.setAttribute( 'disabled', 'disabled' ); btn.textContent = '<?php echo $installing; ?>';
 				post( 'wpdeveloper_install_plugin' ).then( function ( res ) {
