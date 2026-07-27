@@ -59,7 +59,7 @@
 			set( { status: state.status, hidden: true } );
 		}
 
-		var label = __( 'Enable SEO tools', 'essential-addons-for-elementor-lite' );
+		var label = __( 'Enable SEO tool', 'essential-addons-for-elementor-lite' );
 		if ( 'installing' === state.status ) { label = __( 'Installing…', 'essential-addons-for-elementor-lite' ); }
 		if ( 'done' === state.status ) { label = __( 'Opening ThinkRank…', 'essential-addons-for-elementor-lite' ); }
 

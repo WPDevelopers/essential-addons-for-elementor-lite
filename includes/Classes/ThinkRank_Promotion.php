@@ -241,7 +241,7 @@ class ThinkRank_Promotion {
 				<span class="eael-tr-banner__desc"><?php esc_html_e( 'Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank.', 'essential-addons-for-elementor-lite' ); ?></span>
 			</div>
 			<div class="eael-tr-banner__actions">
-				<button type="button" class="button button-primary eael-tr-banner__install"><?php esc_html_e( 'Install ThinkRank', 'essential-addons-for-elementor-lite' ); ?></button>
+				<button type="button" class="button button-primary eael-tr-banner__install"><?php esc_html_e( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ); ?></button>
 				<button type="button" class="eael-tr-banner__later"><?php esc_html_e( 'Maybe later', 'essential-addons-for-elementor-lite' ); ?></button>
 			</div>
 			<button type="button" class="notice-dismiss eael-tr-banner__dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dismiss', 'essential-addons-for-elementor-lite' ); ?></span></button>
@@ -255,10 +255,10 @@ class ThinkRank_Promotion {
 	 * AJAX for install and the dismiss endpoint for permanent dismissal.
 	 */
 	private function banner_assets() {
-		$installing = esc_js( __( 'Installing ThinkRank…', 'essential-addons-for-elementor-lite' ) );
-		$done       = esc_js( __( 'Installed! Opening ThinkRank…', 'essential-addons-for-elementor-lite' ) );
-		$failed     = esc_js( __( 'Could not install automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ) );
-		$label      = esc_js( __( 'Install ThinkRank', 'essential-addons-for-elementor-lite' ) );
+		$installing = esc_js( __( 'Enabling ThinkRank…', 'essential-addons-for-elementor-lite' ) );
+		$done       = esc_js( __( 'Enabled! Opening ThinkRank…', 'essential-addons-for-elementor-lite' ) );
+		$failed     = esc_js( __( 'Could not enable automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ) );
+		$label      = esc_js( __( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ) );
 		?>
 		<style>
 			.eael-tr-banner.notice { display:flex; align-items:center; gap:16px; padding:14px 40px 14px 16px; border-left-color:#4451ff; position:relative; }
