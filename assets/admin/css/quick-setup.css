@@ -6701,14 +6701,27 @@ span.eael-tooltip:after {
 /*-------- Boost SEO (ThinkRank) step ------------*/
 
 .eael-onboard-content-wrapper.eael-thinkrank-promo {
-    padding: 48px 40px;
-    text-align: center;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.eael-thinkrank-promo-content {
+    max-width: 485px;
+}
+
+.eael-thinkrank-promo-img img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
 }
 
 .eael-thinkrank-promo__logo {
-    width: 64px;
-    height: 64px;
-    border-radius: 14px;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
 }
 
 .eael-thinkrank-promo__title {
@@ -6722,19 +6735,15 @@ span.eael-tooltip:after {
     font-size: 15px;
     line-height: 1.55;
     color: #667085;
-    margin: 0 auto 24px;
-    max-width: 480px;
+    margin: 0 0 24px;
 }
 
 .eael-thinkrank-promo__features {
     list-style: none;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 20px;
-    max-width: 540px;
-    text-align: left;
+    gap: 12px;
 }
 
 .eael-thinkrank-promo__feature {
@@ -6756,6 +6765,17 @@ span.eael-tooltip:after {
     color: #d63638;
     font-size: 13px;
     margin: 24px 0 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .eael-onboard-content-wrapper.eael-thinkrank-promo {
+        padding: 30px;
+        grid-template-columns: 1fr;
+    }
+
+    .eael-thinkrank-promo-content {
+        max-width: 100%;
+    }
 }
 
 .eael-onboard--wrapper .eael-general-content-item h2 {

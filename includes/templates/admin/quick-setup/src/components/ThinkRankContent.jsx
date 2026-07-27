@@ -57,22 +57,30 @@ function ThinkRankContent({ activeTab, handleTabChange }) {
   return (
     <>
       <div className="eael-onboard-content-wrapper eael-thinkrank-promo mb-4">
-        <div className="eael-thinkrank-promo__head">
-          {data.logo ? <img className="eael-thinkrank-promo__logo" src={data.logo} alt="" /> : null}
-          <h2 className="eael-thinkrank-promo__title">{data.title}</h2>
-          <p className="eael-thinkrank-promo__subtitle">{data.subtitle}</p>
+        <div className="eael-thinkrank-promo-content">
+          <div className="eael-thinkrank-promo__head">
+            {data.logo ? <img className="eael-thinkrank-promo__logo" src={data.logo} alt="" /> : null}
+            <h2 className="eael-thinkrank-promo__title">{data.title}</h2>
+            <p className="eael-thinkrank-promo__subtitle">{data.subtitle}</p>
+          </div>
+
+          <ul className="eael-thinkrank-promo__features">
+            {(data.features || []).map((feature, index) => (
+              <li className="eael-thinkrank-promo__feature" key={index}>
+                {feature.image_url ? <img src={feature.image_url} alt="" /> : null}
+                <span>{feature.content}</span>
+              </li>
+            ))}
+          </ul>
+
+          {error ? <p className="eael-thinkrank-promo__error">{error}</p> : null}
         </div>
 
-        <ul className="eael-thinkrank-promo__features">
-          {(data.features || []).map((feature, index) => (
-            <li className="eael-thinkrank-promo__feature" key={index}>
-              {feature.image_url ? <img src={feature.image_url} alt="" /> : null}
-              <span>{feature.content}</span>
-            </li>
-          ))}
-        </ul>
-
-        {error ? <p className="eael-thinkrank-promo__error">{error}</p> : null}
+        {data.promo_img_url ? (
+          <div className="eael-thinkrank-promo-img">
+            <img src={data.promo_img_url} alt={data.title} />
+          </div>
+        ) : null}
       </div>
 
       <div className="eael-section-wrapper flex flex-end gap-4">

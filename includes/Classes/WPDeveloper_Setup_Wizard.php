@@ -273,7 +273,7 @@ class WPDeveloper_Setup_Wizard {
 			'is_active'         => is_plugin_active( 'thinkrank/thinkrank.php' ),
 			'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
 			'logo'              => $tr_icon,
-			'promo_img_url'     => $tr_icon,
+			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-promo-image.jpg',
 			'title'             => __( 'Boost your SEO with AI', 'essential-addons-for-elementor-lite' ),
 			'subtitle'          => __( 'Get found on Google and in AI answers. Let AI optimize every page you build — automatically.', 'essential-addons-for-elementor-lite' ),
 			'install_label'     => __( 'Install & Set Up SEO', 'essential-addons-for-elementor-lite' ),
