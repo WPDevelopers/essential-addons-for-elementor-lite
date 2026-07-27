@@ -60,12 +60,12 @@
 		}
 
 		var label = __( 'Enable SEO tool', 'essential-addons-for-elementor-lite' );
-		if ( 'installing' === state.status ) { label = __( 'Installing…', 'essential-addons-for-elementor-lite' ); }
+		if ( 'installing' === state.status ) { label = __( 'Enabling…', 'essential-addons-for-elementor-lite' ); }
 		if ( 'done' === state.status ) { label = __( 'Opening ThinkRank…', 'essential-addons-for-elementor-lite' ); }
 
 		return el( 'div', { className: 'eael-tr-gb' },
 			el( 'p', { className: 'eael-tr-gb__desc' },
-				__( 'Add AI SEO analysis to this page with ThinkRank — titles, meta, schema & readability. Free.', 'essential-addons-for-elementor-lite' )
+				__( 'Add AI SEO analysis to this page with ThinkRank - titles, meta, schema & readability. Free.', 'essential-addons-for-elementor-lite' )
 			),
 			'error' === state.status ? el( 'p', { className: 'eael-tr-gb__err' },
 				__( 'Could not install automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' )
