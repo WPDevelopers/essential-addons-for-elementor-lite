@@ -6352,6 +6352,7 @@ section.eael-onboard-main-wrapper {
     background: #fff;
     border-radius: 8px 8px 0 0;
     border: 1px solid #F2F4F7;
+    overflow-x: auto;
 }
 
 .eael-onboard-nav {
@@ -6359,16 +6360,21 @@ section.eael-onboard-main-wrapper {
     line-height: 1em;
     font-weight: 450;
     color: #1D2939;
-    padding: 20px 16px;
+    padding: 20px 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     cursor: pointer;
+}
+
+.eael-onboard-nav .eael-nav-text {
+    white-space: nowrap;
 }
 
 .eael-onboard-nav .eael-nav-count {
     width: 32px;
     height: 32px;
+    flex-shrink: 0;
     display: flex;
     justify-content: center;
     align-items: center;
