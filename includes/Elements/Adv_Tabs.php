@@ -1482,10 +1482,13 @@ class Adv_Tabs extends Widget_Base
 								        $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 							        }
 
-							        Helper::eael_onpage_edit_template_markup( $page_id, $tab['eael_primary_templates'] );
+							        // Re-validate the translated template is a published elementor_library post before rendering.
+							        if ( Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
+								        Helper::eael_onpage_edit_template_markup( $page_id, $tab['eael_primary_templates'] );
 
-							        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							        echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
+								        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								        echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
+							        }
 						        }
 					        }
 				        endif; ?>

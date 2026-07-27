@@ -7808,8 +7808,8 @@ class Login_Register extends Widget_Base {
 							?>
 
 							<div class="eael-lr-footer">
-								<input type="hidden" name="rp_key" value="<?php echo esc_attr( !empty( $rp_data['rp_key'] ) ? esc_html( $rp_data['rp_key'] ) : '' ); ?>" />
-								<input type="hidden" name="rp_login" value="<?php echo esc_attr( !empty( $rp_data['rp_login'] ) ? esc_html( $rp_data['rp_login'] ) : '' ); ?>" />
+								<input type="hidden" name="rp_key" value="<?php echo eael_neutralize_shortcodes( esc_attr( !empty( $rp_data['rp_key'] ) ? esc_html( $rp_data['rp_key'] ) : '' ) ); ?>" />
+								<input type="hidden" name="rp_login" value="<?php echo eael_neutralize_shortcodes( esc_attr( !empty( $rp_data['rp_login'] ) ? esc_html( $rp_data['rp_login'] ) : '' ) ); ?>" />
 
 								<input type="submit"
 									   name="eael-resetpassword-submit"
@@ -7968,7 +7968,7 @@ class Login_Register extends Widget_Base {
 			 data-ajax-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
 			<h3 class="eael-lr-otp-title"><?php echo esc_html( $title ); ?></h3>
 			<p class="eael-lr-otp-subtitle"><?php echo esc_html( $subtitle ); ?></p>
-			<input type="hidden" class="eael-lr-otp-token" value="<?php echo esc_attr( $cookie_token ); ?>">
+			<input type="hidden" class="eael-lr-otp-token" value="<?php echo eael_neutralize_shortcodes( esc_attr( $cookie_token ) ); ?>">
 			<div class="eael-lr-otp-input-row">
 				<input type="text"
 					   inputmode="numeric"

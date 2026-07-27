@@ -71,7 +71,7 @@ var TwitterFeedHandler = function($scope, $) {
         $(".eael-twitter-feed-masonry", $scope).isotope("layout");
         
         if( $('.eael-twitter-feed-item.page-' + $next_page, $scope).hasClass('eael-last-twitter-feed-item') ) {
-            $(".eael-twitter-feed-load-more", $scope).html( $nomore_item_text ).fadeOut('1500');
+            $(".eael-twitter-feed-load-more", $scope).html( DOMPurify.sanitize($nomore_item_text) ).fadeOut('1500');
         }
 
         $next_page++;

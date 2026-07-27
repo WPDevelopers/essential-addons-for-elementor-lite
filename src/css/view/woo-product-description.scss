@@ -1,0 +1,18 @@
+.eael-single-product-description {
+	ul {
+		list-style: inherit;
+		padding-inline-start: 40px;
+	}
+	ol {
+		list-style: auto;
+		padding-inline-start: 40px;
+	}
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+
+	> *:last-child {
+		margin-bottom: 0;
+	}
+}
