@@ -347,7 +347,7 @@ You can use the official documentation, tutorials, community resources, and supp
 
 == Changelog ==
 
-= 6.7.1 - 27/07/2026 =
+= 6.7.1 - 28/07/2026 =
 
 - Improved: EA Woo Product Images | Added variation image support so the gallery updates when a product variation is selected
 - Fixed: EA Feature List | Icon Position control displayed incorrect icons for Left, Top and Right options
