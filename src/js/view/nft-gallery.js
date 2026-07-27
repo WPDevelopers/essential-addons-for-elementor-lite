@@ -11,7 +11,7 @@ var NFTGalleryHandler = function ($scope, $) {
         $eael_nft_gallery.attr("data-next-page", $next_page + 1);
 
         if ($('.eael-nft-item.page-' + $next_page, $scope).hasClass('eael-last-nft-gallery-item')) {
-            $(".eael-nft-gallery-load-more", $scope).html($nomore_item_text).fadeOut('1500');
+            $(".eael-nft-gallery-load-more", $scope).html(DOMPurify.sanitize($nomore_item_text)).fadeOut('1500');
         }
 
         $next_page++;

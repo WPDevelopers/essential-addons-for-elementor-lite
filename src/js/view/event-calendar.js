@@ -256,9 +256,9 @@ var EventCalendar = function ($scope, $) {
 						) {
 							endSelector.html(" ");
 						} else {
-							endSelector.html(endView != "" ? "- " + endView : "");
+							endSelector.html(DOMPurify.sanitize(endView != "" ? "- " + endView : ""));
 						}
-						startSelector.html('<i class="eicon-calendar"></i> ' + startView);
+						startSelector.html('<i class="eicon-calendar"></i> ' + DOMPurify.sanitize(startView));
 
 						$(".eaelec-modal-header h2").html(DOMPurify.sanitize(event.title));
 						$(".eaelec-modal-body").html(DOMPurify.sanitize(event.extendedProps.description));
@@ -358,7 +358,9 @@ var EventCalendar = function ($scope, $) {
 			var modalFooter = $(".eaelec-modal-footer"),
 				modalFooterClass = modalFooter.find('a').attr('class'),
 				modalFooterText = $(".eael-event-calendar-cls", $scope).attr('data-detailsButtonText');
-			modalFooter.html('<a class="' + modalFooterClass + '">' + DOMPurify.sanitize(modalFooterText) + '</a>');
+			modalFooter.empty().append(
+				$('<a></a>').attr('class', modalFooterClass).html(DOMPurify.sanitize(modalFooterText))
+			);
 		}
 
 		CloseButton.on("click", function (event) {

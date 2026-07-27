@@ -89,18 +89,19 @@ trait Ajax_Handler {
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
 		wp_parse_str( $_POST['args'], $args );
 
+		// $args comes from the client; coerce ID-list query vars (author__not_in, post__in, …)
+		// to int arrays before they reach WP_Query, else a string payload injects raw SQL.
+		$args = $this->eael_sanitize_query_args( $args );
+
 		// NOTE: $args comes from client ($_POST['args']); strip visibility-widening keys (e.g., post_status, perm) to prevent nopriv access to non-public content.
-		// NOTE: Keep author / author__in / author__not_in—used in Load More data-args; safe since post_status='publish' limits results to already-public posts.
 		unset( $args['post_status'], $args['perm'], $args['suppress_filters'] );
 		$args['post_status'] = 'publish';
 
 		if ( isset( $args['post__in'] ) ) {
-			$args['post__in'] = array_values( array_filter( array_map( 'absint', (array) $args['post__in'] ) ) );
 			// Cap to a sane bound to prevent abuse.
 			$args['post__in'] = array_slice( $args['post__in'], 0, 1000 );
 		}
 		if ( isset( $args['post__not_in'] ) ) {
-			$args['post__not_in'] = array_values( array_filter( array_map( 'absint', (array) $args['post__not_in'] ) ) );
 			$args['post__not_in'] = array_slice( $args['post__not_in'], 0, 1000 );
 		}
 
@@ -622,6 +623,7 @@ trait Ajax_Handler {
 		$settings['eael_widget_id'] = $widget_id;
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		wp_parse_str( $_REQUEST['args'], $args );
+		$args = $this->eael_sanitize_query_args( $args );
 
 		// Convert WP_Query args to WC_Product_Query args if needed
 		$wc_args = $this->convert_pagination_args_to_wc_product_query( $args, $settings );
@@ -690,6 +692,65 @@ trait Ajax_Handler {
 	}
 
 	/**
+	 * Harden client-supplied WP_Query args parsed from $_POST/$_REQUEST['args'].
+	 *
+	 * wp_parse_str() yields these as strings, and several WP_Query ID-list vars
+	 * are only absint()'d by core when they arrive as an array (e.g.
+	 * author__not_in — class-wp-query.php only maps absint inside `if ( is_array() )`).
+	 * A string value like "0)and 1=1 -- -" therefore lands raw in the SQL WHERE
+	 * clause → blind boolean SQL injection on the nopriv load_more endpoints.
+	 *
+	 * Coercing each of these to an array of absint both neutralises the payload
+	 * and forces core down its already-sanitised array branch. post_status is
+	 * intentionally left to each caller (it still overrides to 'publish').
+	 *
+	 * @param array $args Parsed query args (by value).
+	 * @return array Sanitised args.
+	 */
+	private function eael_sanitize_query_args( $args ) {
+		if ( ! is_array( $args ) ) {
+			return [];
+		}
+
+		// Vars that must be arrays of post/term/user IDs.
+		$id_list_keys = [
+			'author__in', 'author__not_in',
+			'post__in', 'post__not_in',
+			'post_parent__in', 'post_parent__not_in',
+			'category__in', 'category__not_in', 'category__and',
+			'tag__in', 'tag__not_in', 'tag__and',
+			'tag_slug__in', 'tag_slug__and',
+		];
+		foreach ( $id_list_keys as $key ) {
+			if ( isset( $args[ $key ] ) ) {
+				if ( in_array( $key, [ 'tag_slug__in', 'tag_slug__and' ], true ) ) {
+					$args[ $key ] = array_values( array_filter( array_map( 'sanitize_title', (array) $args[ $key ] ) ) );
+				} else {
+					$args[ $key ] = array_values( array_filter( array_map( 'absint', (array) $args[ $key ] ) ) );
+				}
+			}
+		}
+
+		// Comma-list ID vars: preserve the list but force every token to an int.
+		// (Core already intval()s these, but harden here too for defense-in-depth.)
+		foreach ( [ 'author', 'cat' ] as $key ) {
+			if ( isset( $args[ $key ] ) && ! is_array( $args[ $key ] ) ) {
+				$args[ $key ] = implode( ',', array_filter( array_map( 'absint', explode( ',', (string) $args[ $key ] ) ) ) );
+			}
+		}
+
+		// Scalar single-int vars.
+		$int_keys = [ 'tag_id', 'p', 'page_id', 'post_parent', 'offset', 'paged', 'page', 'posts_per_page', 'numberposts', 'menu_order', 'w', 'year', 'monthnum', 'day', 'hour', 'minute', 'second' ];
+		foreach ( $int_keys as $key ) {
+			if ( isset( $args[ $key ] ) && ! is_array( $args[ $key ] ) ) {
+				$args[ $key ] = (int) $args[ $key ];
+			}
+		}
+
+		return $args;
+	}
+
+	/**
 	 * Convert pagination arguments to WC_Product_Query arguments
 	 * @param array $args Original arguments from pagination
 	 * @param array $settings Widget settings
@@ -701,10 +762,12 @@ trait Ajax_Handler {
 			'return' => 'objects',
 		];
 
-		// Map common WP_Query args to WC_Product_Query args
+		// Map common WP_Query args to WC_Product_Query args.
+		// NOTE: post_status is deliberately NOT mapped from client $args — status is
+		// derived server-side from the saved widget settings below and capability-clamped,
+		// so an unauthenticated caller cannot request pending/future/draft products.
 		$arg_mapping = [
 			'posts_per_page' => 'limit',
-			'post_status' => 'status',
 			'post__in' => 'include',
 			'post__not_in' => 'exclude',
 			'author__in' => 'author',
@@ -756,12 +819,16 @@ trait Ajax_Handler {
 			$wc_args['meta_query'][] = $meta_query;
 		}
 
-		// Set product status from settings (handle both Product_Grid and Woo_Product_List)
+		// Set product status from settings (handle both Product_Grid and Woo_Product_List),
+		// capability-clamped so non-public statuses never reach unauthenticated viewers.
 		if ( ! empty( $settings['eael_product_grid_products_status'] ) ) {
-			$wc_args['status'] = array_intersect( (array) $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
+			$status_setting = $settings['eael_product_grid_products_status'];
 		} elseif ( ! empty( $settings['eael_product_list_products_status'] ) ) {
-			$wc_args['status'] = array_intersect( (array) $settings['eael_product_list_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
+			$status_setting = $settings['eael_product_list_products_status'];
+		} else {
+			$status_setting = [ 'publish' ];
 		}
+		$wc_args['status'] = HelperClass::eael_validate_product_statuses( $status_setting );
 
 		// Set visibility
 		$wc_args['visibility'] = 'visible';
@@ -804,6 +871,7 @@ trait Ajax_Handler {
 		$settings['eael_page_id'] = $page_id;
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		wp_parse_str( $_REQUEST['args'], $args );
+		$args = $this->eael_sanitize_query_args( $args );
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
@@ -1041,6 +1109,7 @@ trait Ajax_Handler {
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
 		wp_parse_str( $_POST['args'], $args );
+		$args                = $this->eael_sanitize_query_args( $args );
 		$args['post_status'] = 'publish';
 		$args['offset']      = $args['offset'] ?? 0;
 

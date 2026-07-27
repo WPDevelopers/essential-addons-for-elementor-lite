@@ -211,14 +211,14 @@ eael.hooks.addAction("init", "ea", () => {
 
             const errormessage = getCookie('eael_login_error_' + widgetId);
             if (errormessage) {
-                $('.eael-form-validation-container', $scope).html(`<p class="eael-form-msg invalid">${errormessage}</p>`);
+                $('.eael-form-validation-container', $scope).html(`<p class="eael-form-msg invalid">${DOMPurify.sanitize(errormessage)}</p>`);
                 removeCookie('eael_login_error_' + widgetId);
             }
 
             //This register error message
             const registerErrorMessage = getCookie('eael_register_errors_' + widgetId);
             if ( registerErrorMessage ) {
-                $('.eael-form-validation-container', $scope).html(`<div class="eael-form-msg invalid">${registerErrorMessage}</div>`);
+                $('.eael-form-validation-container', $scope).html(`<div class="eael-form-msg invalid">${DOMPurify.sanitize(registerErrorMessage)}</div>`);
                 removeCookie('eael_register_errors_' + widgetId);
             }
         });

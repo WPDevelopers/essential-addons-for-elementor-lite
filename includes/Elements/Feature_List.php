@@ -333,15 +333,15 @@ class Feature_List extends Widget_Base {
                 'options'         => [
                     'left'  => [
                         'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'eicon-text-align-left',
+                        'icon'  => 'eicon-order-start',
                     ],
                     'top'   => [
                         'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'eicon-text-align-center',
+                        'icon'  => 'eicon-v-align-top',
                     ],
                     'right' => [
                         'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'eicon-text-align-right',
+                        'icon'  => 'eicon-order-end',
                     ],
                 ],
                 'default'         => 'left',

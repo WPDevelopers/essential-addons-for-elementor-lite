@@ -596,7 +596,7 @@ class SVG_Draw extends Widget_Base {
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		$svg_html = isset( $settings['svg_html'] ) ? preg_replace( ['#<script(.*?)>(.*?)</script>#is', '#<script(.*?)>(.*?)</script#is'], '', $settings['svg_html'] ) : '';
+		$svg_html = isset( $settings['svg_html'] ) ? wp_kses( $settings['svg_html'], Helper::eael_allowed_svg_draw_tags() ) : '';
 		$this->add_render_attribute( 'eael-svg-drow-wrapper', [
 			'class' => [
 				'eael-svg-draw-container',
