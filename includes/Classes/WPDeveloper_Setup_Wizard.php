@@ -69,7 +69,7 @@ class WPDeveloper_Setup_Wizard {
 			// wp_enqueue_script( 'essential_addons_elementor-setup-wizard-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 			// wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-css', EAEL_PLUGIN_URL . 'includes/templates/admin/quick-setup/dist/quick-setup.min.css', array(), EAEL_PLUGIN_VERSION, true );
 			wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-js', EAEL_PLUGIN_URL . 'includes/templates/admin/quick-setup/dist/quick-setup.min.js', array(), EAEL_PLUGIN_VERSION, true );
-			
+
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-react-js', 'localize', array(
 				'ajaxurl'       => esc_url( admin_url( 'admin-ajax.php' ) ),
 				'nonce'         => wp_create_nonce( 'essential-addons-elementor' ),
@@ -146,7 +146,7 @@ class WPDeveloper_Setup_Wizard {
 
 		return $menu_items;
 	}
-	
+
 	public function data_getting_started_content(){
 		$getting_started_content = [
 			'youtube_promo_src' => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' ),
@@ -155,7 +155,7 @@ class WPDeveloper_Setup_Wizard {
 
 		return $getting_started_content;
 	}
-	
+
 	public function data_configuration_content(){
 		$configuration_content = [
 			'ea_logo_src' => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ea-new.png' ),
@@ -171,7 +171,7 @@ class WPDeveloper_Setup_Wizard {
 
 		return $elements_content;
 	}
-	
+
 	public function data_go_pro_content(){
 		$feature_items = [
 			[
@@ -276,7 +276,7 @@ class WPDeveloper_Setup_Wizard {
 			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-promo-image.jpg',
 			'title'             => __( 'Boost your SEO with AI', 'essential-addons-for-elementor-lite' ),
 			'subtitle'          => __( 'Get found on Google and in AI answers. Let AI optimize every page you build — automatically.', 'essential-addons-for-elementor-lite' ),
-			'install_label'     => __( 'Install & Set Up SEO', 'essential-addons-for-elementor-lite' ),
+			'install_label'     => __( 'Enable & Configure SEO', 'essential-addons-for-elementor-lite' ),
 			'installing_label'  => __( 'Installing…', 'essential-addons-for-elementor-lite' ),
 			'done_label'        => __( 'Opening SEO setup…', 'essential-addons-for-elementor-lite' ),
 			'skip_label'        => __( 'Skip for now', 'essential-addons-for-elementor-lite' ),
@@ -371,10 +371,10 @@ class WPDeveloper_Setup_Wizard {
 				],
 			];
 		}
-		
+
 		return $plugins_content;
 	}
-	
+
 	public function data_integrations_content(){
 		$integrations_content = [
 			'plugin_list' => $this->get_plugin_list(),
@@ -382,7 +382,7 @@ class WPDeveloper_Setup_Wizard {
 
 		return $integrations_content;
 	}
-	
+
 	public function data_modal_content(){
 		$modal_content = [
 			'success_2_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/success-2.png',
@@ -546,7 +546,7 @@ class WPDeveloper_Setup_Wizard {
 		}
 
 		wp_parse_str( $_POST[ 'fields' ], $fields ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		
+
 		$this->wpins_process();
 
 		wp_send_json_success();
