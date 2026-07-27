@@ -55,58 +55,46 @@ function ThinkRankContent({ activeTab, handleTabChange }) {
     status === "installing" ? data.installing_label : status === "done" ? data.done_label : data.install_label;
 
   return (
-    <div className="eael-thinkrank-promo">
-      <style>{`
-        .eael-thinkrank-promo { max-width: 640px; margin: 0 auto; text-align: center; padding: 8px 0 4px; }
-        .eael-thinkrank-promo__logo { width: 64px; height: 64px; border-radius: 14px; }
-        .eael-thinkrank-promo__title { font-size: 26px; font-weight: 700; color: #1d2327; margin: 16px 0 8px; }
-        .eael-thinkrank-promo__subtitle { font-size: 15px; line-height: 1.55; color: #50575e; margin: 0 auto 24px; max-width: 480px; }
-        .eael-thinkrank-promo__features { list-style: none; margin: 0 auto 26px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; max-width: 540px; text-align: left; }
-        .eael-thinkrank-promo__feature { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #2c3338; }
-        .eael-thinkrank-promo__feature img { width: 22px; height: 22px; border-radius: 6px; flex: none; }
-        .eael-thinkrank-promo__error { color: #d63638; font-size: 13px; margin: 0 0 14px; }
-        .eael-thinkrank-promo__actions { display: flex; align-items: center; justify-content: center; gap: 16px; }
-        .eael-thinkrank-promo__install { background: #4451ff; color: #fff; border: none; border-radius: 6px; padding: 12px 26px; font-size: 15px; font-weight: 600; cursor: pointer; }
-        .eael-thinkrank-promo__install:hover:not(:disabled) { background: #3742d6; }
-        .eael-thinkrank-promo__install:disabled { opacity: .7; cursor: default; }
-        .eael-thinkrank-promo__skip { background: none; border: none; color: #50575e; font-size: 14px; text-decoration: underline; cursor: pointer; }
-      `}</style>
-      <div className="eael-thinkrank-promo__head">
-        {data.logo ? <img className="eael-thinkrank-promo__logo" src={data.logo} alt="" /> : null}
-        <h2 className="eael-thinkrank-promo__title">{data.title}</h2>
-        <p className="eael-thinkrank-promo__subtitle">{data.subtitle}</p>
+    <>
+      <div className="eael-onboard-content-wrapper eael-thinkrank-promo mb-4">
+        <div className="eael-thinkrank-promo__head">
+          {data.logo ? <img className="eael-thinkrank-promo__logo" src={data.logo} alt="" /> : null}
+          <h2 className="eael-thinkrank-promo__title">{data.title}</h2>
+          <p className="eael-thinkrank-promo__subtitle">{data.subtitle}</p>
+        </div>
+
+        <ul className="eael-thinkrank-promo__features">
+          {(data.features || []).map((feature, index) => (
+            <li className="eael-thinkrank-promo__feature" key={index}>
+              {feature.image_url ? <img src={feature.image_url} alt="" /> : null}
+              <span>{feature.content}</span>
+            </li>
+          ))}
+        </ul>
+
+        {error ? <p className="eael-thinkrank-promo__error">{error}</p> : null}
       </div>
 
-      <ul className="eael-thinkrank-promo__features">
-        {(data.features || []).map((feature, index) => (
-          <li className="eael-thinkrank-promo__feature" key={index}>
-            {feature.image_url ? <img src={feature.image_url} alt="" /> : null}
-            <span>{feature.content}</span>
-          </li>
-        ))}
-      </ul>
-
-      {error ? <p className="eael-thinkrank-promo__error">{error}</p> : null}
-
-      <div className="eael-thinkrank-promo__actions">
+      <div className="eael-section-wrapper flex flex-end gap-4">
         <button
+          className="previous-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          className="eael-thinkrank-promo__install"
+          data-next={ isPluginsPromoStepVisible() ? "pluginspromo" : "integrations" }
+          onClick={handleTabChange}
+          disabled={status !== "idle"}
+        >
+          {data.skip_label}
+        </button>
+        <button
+          className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
+          type="button"
           onClick={install}
           disabled={status !== "idle"}
         >
           {label}
         </button>
-        <button
-          type="button"
-          className="eael-thinkrank-promo__skip"
-          data-next={ isPluginsPromoStepVisible() ? "pluginspromo" : "integrations" }
-          onClick={handleTabChange}
-        >
-          {data.skip_label}
-        </button>
       </div>
-    </div>
+    </>
   );
 }
 

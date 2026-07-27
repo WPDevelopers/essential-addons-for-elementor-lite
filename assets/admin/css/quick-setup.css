@@ -6698,6 +6698,66 @@ span.eael-tooltip:after {
     border-radius: 8px;
 }
 
+/*-------- Boost SEO (ThinkRank) step ------------*/
+
+.eael-onboard-content-wrapper.eael-thinkrank-promo {
+    padding: 48px 40px;
+    text-align: center;
+}
+
+.eael-thinkrank-promo__logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+}
+
+.eael-thinkrank-promo__title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1D2939;
+    margin: 16px 0 8px;
+}
+
+.eael-thinkrank-promo__subtitle {
+    font-size: 15px;
+    line-height: 1.55;
+    color: #667085;
+    margin: 0 auto 24px;
+    max-width: 480px;
+}
+
+.eael-thinkrank-promo__features {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+    max-width: 540px;
+    text-align: left;
+}
+
+.eael-thinkrank-promo__feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #344054;
+}
+
+.eael-thinkrank-promo__feature img {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    flex: none;
+}
+
+.eael-thinkrank-promo__error {
+    color: #d63638;
+    font-size: 13px;
+    margin: 24px 0 0;
+}
+
 .eael-onboard--wrapper .eael-general-content-item h2 {
     font-size: 40px;
     line-height: 1.2em;
