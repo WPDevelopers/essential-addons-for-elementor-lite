@@ -289,6 +289,9 @@ class WPDeveloper_Setup_Wizard {
 					'content' => __( 'Schema & LLM answer optimization', 'essential-addons-for-elementor-lite' ),
 				],
 				[
+					'content' => __( 'Built-in MCP server for AI agents', 'essential-addons-for-elementor-lite' ),
+				],
+				[
 					'content' => __( 'XML sitemaps & smart indexing', 'essential-addons-for-elementor-lite' ),
 				],
 				[
