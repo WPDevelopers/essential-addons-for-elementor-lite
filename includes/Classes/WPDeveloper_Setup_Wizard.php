@@ -283,20 +283,16 @@ class WPDeveloper_Setup_Wizard {
 			'open_url'          => admin_url( 'admin.php?page=thinkrank' ),
 			'features'          => [
 				[
-					'image_url' => $tr_icon,
-					'content'   => __( 'AI-written titles, meta & descriptions', 'essential-addons-for-elementor-lite' ),
+					'content' => __( 'AI-written titles, meta & descriptions', 'essential-addons-for-elementor-lite' ),
 				],
 				[
-					'image_url' => $tr_icon,
-					'content'   => __( 'Schema & LLM answer optimization', 'essential-addons-for-elementor-lite' ),
+					'content' => __( 'Schema & LLM answer optimization', 'essential-addons-for-elementor-lite' ),
 				],
 				[
-					'image_url' => $tr_icon,
-					'content'   => __( 'XML sitemaps & smart indexing', 'essential-addons-for-elementor-lite' ),
+					'content' => __( 'XML sitemaps & smart indexing', 'essential-addons-for-elementor-lite' ),
 				],
 				[
-					'image_url' => $tr_icon,
-					'content'   => __( 'Rank tracking with GA4', 'essential-addons-for-elementor-lite' ),
+					'content' => __( 'Rank tracking with GA4', 'essential-addons-for-elementor-lite' ),
 				],
 			],
 		];

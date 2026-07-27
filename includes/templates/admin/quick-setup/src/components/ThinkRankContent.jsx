@@ -67,7 +67,6 @@ function ThinkRankContent({ activeTab, handleTabChange }) {
           <ul className="eael-thinkrank-promo__features">
             {(data.features || []).map((feature, index) => (
               <li className="eael-thinkrank-promo__feature" key={index}>
-                {feature.image_url ? <img src={feature.image_url} alt="" /> : null}
                 <span>{feature.content}</span>
               </li>
             ))}
