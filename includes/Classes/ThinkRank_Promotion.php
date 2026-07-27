@@ -487,9 +487,8 @@ class ThinkRank_Promotion {
 	 */
 	private function widget_script() {
 		$open_url = esc_url( admin_url( 'admin.php?page=thinkrank' ) );
-		$installing = esc_js( __( 'Analyzing… installing ThinkRank', 'essential-addons-for-elementor-lite' ) );
-		$done       = esc_js( __( 'ThinkRank installed. Opening your SEO analysis…', 'essential-addons-for-elementor-lite' ) );
-		$failed     = esc_js( __( 'Could not install automatically. Please try from Plugins → Add New.', 'essential-addons-for-elementor-lite' ) );
+		$installing = esc_js( __( 'Analyzing… enabling ThinkRank', 'essential-addons-for-elementor-lite' ) );
+		$failed     = esc_js( __( 'Could not enable automatically. Please try from Plugins → Add New.', 'essential-addons-for-elementor-lite' ) );
 		?>
 		<script>
 		( function () {
@@ -515,7 +514,6 @@ class ThinkRank_Promotion {
 					body: body.toString()
 				} ).then( function ( r ) { return r.json(); } ).then( function ( res ) {
 					if ( res && res.success ) {
-						if ( notice ) { notice.className = 'eael-tr-notice is-success'; notice.style.display = 'block'; notice.textContent = '<?php echo $done; ?>'; }
 						window.setTimeout( function () { window.location.href = '<?php echo $open_url; ?>'; }, 900 );
 					} else {
 						btn.removeAttribute( 'disabled' );
