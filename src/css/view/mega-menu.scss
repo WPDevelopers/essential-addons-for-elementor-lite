@@ -1,3 +1,40 @@
 .eael-mega-menu-container {
     position: relative;
+
+    .eael-mega-menu {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: var(--eael-mm-justify, flex-start);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .eael-mega-menu__item {
+        position: relative;
+        flex-grow: var(--eael-mm-item-grow, 0);
+    }
+
+    .eael-mega-menu__item-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    &.eael-mega-menu--vertical {
+        .eael-mega-menu {
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+    }
+}
+
+.eael-mega-menu-notice {
+    padding: 15px;
+    border: 1px dashed #d5d8dc;
+    color: #6d7882;
+    font-size: 13px;
+    text-align: center;
 }

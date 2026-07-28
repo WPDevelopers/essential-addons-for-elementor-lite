@@ -1,3 +1,53 @@
 .eael-mega-menu-container {
   position: relative;
 }
+.eael-mega-menu-container .eael-mega-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: var(--eael-mm-justify, flex-start);
+      -ms-flex-pack: var(--eael-mm-justify, flex-start);
+          justify-content: var(--eael-mm-justify, flex-start);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.eael-mega-menu-container .eael-mega-menu__item {
+  position: relative;
+  -webkit-box-flex: var(--eael-mm-item-grow, 0);
+      -ms-flex-positive: var(--eael-mm-item-grow, 0);
+          flex-grow: var(--eael-mm-item-grow, 0);
+}
+.eael-mega-menu-container .eael-mega-menu__item-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+}
+.eael-mega-menu-container.eael-mega-menu--vertical .eael-mega-menu {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.eael-mega-menu-notice {
+  padding: 15px;
+  border: 1px dashed #d5d8dc;
+  color: #6d7882;
+  font-size: 13px;
+  text-align: center;
+}
