@@ -38,7 +38,6 @@
   overflow: hidden;
   height: auto !important;
   /* Plyr CSS Started  */
-  /* Plyr CSS Ended */
 }
 
 .eael-sticky-video-wrapper .plyr__controls button {
@@ -53,6 +52,10 @@
 
 .eael-sticky-video-wrapper .plyr__controls {
   display: none !important;
+}
+
+.eael-sticky-video-wrapper {
+  /* Plyr CSS Ended */
 }
 
 .eael-sticky-video-player2 {

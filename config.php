@@ -1402,6 +1402,18 @@ $config = [
                 ],
             ],
         ],
+        'mega-menu' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Mega_Menu',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/mega-menu.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
     ],
     'extensions' => [
         'promotion' => [
