@@ -232,6 +232,18 @@ var MegaMenu = function ($scope, $) {
 		}, CLOSE_DELAY);
 	}
 
+	// Place every panel held open by the "Keep Panel Open" switch, so the user
+	// styles it at the same size it will have on the live site.
+	function positionEditorOpenPanels() {
+		$panelItems.each(function () {
+			var panel = getPanel(this);
+
+			if (panel.classList.contains("eael-mega-menu__panel--editor-open")) {
+				positionPanel(this);
+			}
+		});
+	}
+
 	// -----------------------------------------------------------------
 	// 7. Wire up the events
 	// -----------------------------------------------------------------
@@ -240,6 +252,21 @@ var MegaMenu = function ($scope, $) {
 	// ones. See the eventNs comment above for why this matters.
 	$(document).off(eventNs);
 	$(window).off(eventNs);
+
+	// Inside the Elementor editor a panel is opened by the "Keep Panel Open"
+	// switch instead of by hovering — otherwise the panel would vanish the
+	// moment you moved the mouse towards the style controls. So we skip all
+	// the open/close wiring here and only keep the panels correctly sized.
+	if (window.isEditMode) {
+		positionEditorOpenPanels();
+
+		$(window).on(
+			"resize" + eventNs,
+			eael.debounce(positionEditorOpenPanels, RESIZE_DELAY)
+		);
+
+		return;
+	}
 
 	if (trigger === "click") {
 		$panelItems

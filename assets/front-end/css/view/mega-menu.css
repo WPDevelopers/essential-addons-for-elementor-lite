@@ -71,7 +71,7 @@
   -webkit-transition: opacity var(--eael-mm-duration, 300ms) ease-in-out, visibility var(--eael-mm-duration, 300ms) ease-in-out, translate var(--eael-mm-duration, 300ms) ease-in-out, scale var(--eael-mm-duration, 300ms) ease-in-out;
   transition: opacity var(--eael-mm-duration, 300ms) ease-in-out, visibility var(--eael-mm-duration, 300ms) ease-in-out, translate var(--eael-mm-duration, 300ms) ease-in-out, scale var(--eael-mm-duration, 300ms) ease-in-out;
 }
-.eael-mega-menu-container .eael-mega-menu__panel.is-open {
+.eael-mega-menu-container .eael-mega-menu__panel.is-open, .eael-mega-menu-container .eael-mega-menu__panel--editor-open {
   opacity: 1;
   visibility: visible;
   translate: 0 0;

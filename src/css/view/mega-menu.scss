@@ -65,7 +65,11 @@
             translate var(--eael-mm-duration, 300ms) ease-in-out,
             scale var(--eael-mm-duration, 300ms) ease-in-out;
 
-        &.is-open {
+        // `.is-open` is set by the JS on the front end.
+        // `--editor-open` comes from the per-item "Keep Panel Open" switch and
+        // is only ever printed inside the Elementor editor.
+        &.is-open,
+        &--editor-open {
             opacity: 1;
             visibility: visible;
             translate: 0 0;

@@ -306,6 +306,22 @@ class Mega_Menu extends Widget_Base {
 		);
 
 		$repeater->add_control(
+			'editor_preview_open',
+			[
+				'label'        => esc_html__( 'Keep Panel Open (Editor Only)', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'description'  => esc_html__( 'Holds this dropdown open inside the Elementor editor so you can style it. Has no effect on the live site.', 'essential-addons-for-elementor-lite' ),
+				'condition'    => [
+					'content_source!' => 'none',
+				],
+			]
+		);
+
+		$repeater->add_control(
 			'panel_width',
 			[
 				'label'     => esc_html__( 'Panel Width', 'essential-addons-for-elementor-lite' ),
@@ -918,13 +934,14 @@ class Mega_Menu extends Widget_Base {
 
 	protected function render() {
 
-		$settings = $this->get_settings_for_display();
-		$items    = ! empty( $settings['eael_mega_menu_items'] ) && is_array( $settings['eael_mega_menu_items'] )
+		$settings      = $this->get_settings_for_display();
+		$is_edit_mode  = Plugin::$instance->editor->is_edit_mode();
+		$items         = ! empty( $settings['eael_mega_menu_items'] ) && is_array( $settings['eael_mega_menu_items'] )
 			? $settings['eael_mega_menu_items']
 			: [];
 
 		if ( empty( $items ) ) {
-			if ( Plugin::$instance->editor->is_edit_mode() ) {
+			if ( $is_edit_mode ) {
 				printf(
 					'<div class="eael-mega-menu-notice">%s</div>',
 					esc_html__( 'Add at least one menu item from the Menu Items section.', 'essential-addons-for-elementor-lite' )
@@ -1032,6 +1049,12 @@ class Mega_Menu extends Widget_Base {
 
 							if ( 'full' !== $panel_width ) {
 								$panel_classes[] = 'eael-mega-menu__panel--pos-' . sanitize_html_class( $panel_position );
+							}
+
+							// Editor-only: hold the panel open so it can be styled. This class
+							// is never emitted on the front end.
+							if ( $is_edit_mode && ! empty( $item['editor_preview_open'] ) && 'yes' === $item['editor_preview_open'] ) {
+								$panel_classes[] = 'eael-mega-menu__panel--editor-open';
 							}
 
 							$this->add_render_attribute(
