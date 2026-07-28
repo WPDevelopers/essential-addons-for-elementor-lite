@@ -227,6 +227,14 @@ trait Admin {
 						    'desc'     => __( 'Create and organize your knowledge base, FAQ & documentation page efficiently, making it easy for visitors to find any helpful article quickly and effortlessly.', 'essential-addons-for-elementor-lite' ),
 						    'status'   => is_plugin_active( 'betterdocs/betterdocs.php' )
 					    ],
+					    'tr' => [
+						    'slug'     => 'thinkrank',
+						    'basename' => 'thinkrank/thinkrank.php',
+						    'logo'     => 'images/TR.svg',
+						    'title'    => __( 'ThinkRank', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'AI SEO assistant for WordPress — optimize titles, meta, schema, LLM answers & sitemaps, and track rankings with GA4. Turn the pages you build into pages that rank.', 'essential-addons-for-elementor-lite' ),
+						    'status'   => is_plugin_active( 'thinkrank/thinkrank.php' )
+					    ],
 					    'bl' => [
 						    'slug'     => 'betterlinks',
 						    'basename' => 'betterlinks/betterlinks.php',

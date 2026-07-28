@@ -540,6 +540,19 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_pi_variation_image',
+			[
+				'label'        => esc_html__( 'Update Image on Variation Change', 'essential-addons-for-elementor-lite' ),
+				'description'  => esc_html__( 'Swap the main slider image to match the selected product variation. Reverts to the gallery when the selection is cleared.', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'eael_pi_pagination',
 			[
 				'label'        => esc_html__( 'Pagination', 'essential-addons-for-elementor-lite' ),
@@ -884,6 +897,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['keyboard_press'] = ! empty( $settings['eael_pi_keyboard_press'] ) ? $settings['eael_pi_keyboard_press'] : false;
 		$pi_data_settings['thumb_navigation'] = ! empty( $settings['eael_pi_thumb_navigation'] ) ? $settings['eael_pi_thumb_navigation'] : false;
 		$pi_data_settings['image_resolution'] = ! empty( $settings['eael_pi_image_resolution'] ) ? $settings['eael_pi_image_resolution'] : 'full';
+		$pi_data_settings['variation_image'] = ! empty( $settings['eael_pi_variation_image'] ) ? $settings['eael_pi_variation_image'] : '';
 		$pi_data_settings['pagination'] = ! empty( $settings['eael_pi_pagination'] ) ? $settings['eael_pi_pagination'] : 'false';
 		$pi_data_settings['navigation'] = ! empty( $settings['eael_pi_navigation'] ) ? $settings['eael_pi_navigation'] : '';
 		$pi_data_settings['sale_flash'] = ! empty( $settings['eael_image_sale_flash'] ) ? $settings['eael_image_sale_flash'] : '';
@@ -922,6 +936,7 @@ class Woo_Product_Images extends Widget_Base {
 			'keyboard'=> [
 				'enabled' => $image_settings['keyboard_press'],
 			],
+			'variationImage' => $image_settings['variation_image'],
 		];
 
 		$sliderImages['navigation'] = [

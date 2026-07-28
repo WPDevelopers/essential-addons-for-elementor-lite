@@ -101,6 +101,9 @@ class Bootstrap
         // init modules
         $this->installer = new WPDeveloper_Plugin_Installer();
 
+        // ThinkRank cross-promotion surfaces (admin-only; self-gates internally)
+        new ThinkRank_Promotion();
+
         // before init hook
         do_action('eael/before_init');
 
