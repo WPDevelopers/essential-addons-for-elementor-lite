@@ -8,6 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Elementor\Controls_Manager;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
@@ -284,6 +290,322 @@ class Mega_Menu extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		$this->register_container_style_controls();
+		$this->register_item_style_controls();
+	}
+
+	/**
+	 * Style: Container
+	 */
+	protected function register_container_style_controls() {
+
+		$this->start_controls_section(
+			'eael_mega_menu_style_container',
+			[
+				'label' => esc_html__( 'Container', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'     => 'eael_mega_menu_container_background',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eael-mega-menu-container',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_container_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_container_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_mega_menu_container_border',
+				'selector' => '{{WRAPPER}} .eael-mega-menu-container',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_container_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_mega_menu_container_shadow',
+				'selector' => '{{WRAPPER}} .eael-mega-menu-container',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_container_min_height',
+			[
+				'label'      => esc_html__( 'Min Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'vh' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 300,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => 'min-height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_item_gap',
+			[
+				'label'      => esc_html__( 'Item Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_container_z_index',
+			[
+				'label'     => esc_html__( 'Z-Index', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::NUMBER,
+				'min'       => 0,
+				'selectors' => [
+					'{{WRAPPER}} .eael-mega-menu-container' => 'z-index: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Style: Menu Items
+	 */
+	protected function register_item_style_controls() {
+
+		$this->start_controls_section(
+			'eael_mega_menu_style_items',
+			[
+				'label' => esc_html__( 'Menu Items', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_mega_menu_item_typography',
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+				'selector' => '{{WRAPPER}} .eael-mega-menu__item-link',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_item_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'default'    => [
+					'top'      => 10,
+					'right'    => 15,
+					'bottom'   => 10,
+					'left'     => 15,
+					'unit'     => 'px',
+					'isLinked' => false,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__item-link' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'eael_mega_menu_item_tabs' );
+
+		/**
+		 * Normal
+		 */
+		$this->start_controls_tab(
+			'eael_mega_menu_item_tab_normal',
+			[
+				'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_item_state_controls( 'normal', '{{WRAPPER}} .eael-mega-menu__item-link' );
+
+		$this->end_controls_tab();
+
+		/**
+		 * Hover
+		 */
+		$this->start_controls_tab(
+			'eael_mega_menu_item_tab_hover',
+			[
+				'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_item_state_controls(
+			'hover',
+			'{{WRAPPER}} .eael-mega-menu__item-link:hover, {{WRAPPER}} .eael-mega-menu__item-link:focus'
+		);
+
+		$this->end_controls_tab();
+
+		/**
+		 * Active — current page item, and (from Step 5) the item whose panel is open.
+		 */
+		$this->start_controls_tab(
+			'eael_mega_menu_item_tab_active',
+			[
+				'label' => esc_html__( 'Active', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_item_state_controls(
+			'active',
+			'{{WRAPPER}} .eael-mega-menu__item--active > .eael-mega-menu__item-link, {{WRAPPER}} .eael-mega-menu__item.is-active > .eael-mega-menu__item-link'
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Colour / background / border / radius / shadow for one menu item state.
+	 *
+	 * @param string $state    Control id suffix — normal, hover or active.
+	 * @param string $selector CSS selector the state applies to.
+	 */
+	protected function add_item_state_controls( $state, $selector ) {
+
+		$this->add_control(
+			'eael_mega_menu_item_color_' . $state,
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'global'    => [
+					'default' => 'normal' === $state ? Global_Colors::COLOR_TEXT : '',
+				],
+				'selectors' => [
+					$selector => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_item_bg_' . $state,
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					$selector => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_mega_menu_item_border_' . $state,
+				'selector' => $selector,
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_item_radius_' . $state,
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					$selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_mega_menu_item_shadow_' . $state,
+				'selector' => $selector,
+			]
+		);
+	}
+
+	/**
+	 * Whether a menu item link points at the document currently being viewed.
+	 *
+	 * @param string $url Raw link url from the repeater row.
+	 *
+	 * @return bool
+	 */
+	protected function is_current_menu_item( $url ) {
+
+		if ( empty( $url ) || '#' === $url ) {
+			return false;
+		}
+
+		// Compare paths only — ignore query strings and fragments.
+		$item_url = untrailingslashit( strtok( $url, '?#' ) );
+
+		if ( '' === $item_url ) {
+			return false;
+		}
+
+		global $wp;
+
+		$current_url = untrailingslashit( home_url( isset( $wp->request ) ? $wp->request : '' ) );
+
+		return $item_url === $current_url;
 	}
 
 	protected function render() {
@@ -341,20 +663,32 @@ class Mega_Menu extends Widget_Base {
 				<ul class="eael-mega-menu">
 					<?php foreach ( $items as $index => $item ) : ?>
 						<?php
-						$item_key = 'menu-item-' . $index;
-						$link_key = 'menu-item-link-' . $index;
+						$item_key   = 'menu-item-' . $index;
+						$link_key   = 'menu-item-link-' . $index;
+						$item_url   = isset( $item['item_link']['url'] ) ? $item['item_link']['url'] : '';
+						$is_current = $this->is_current_menu_item( $item_url );
+
+						$item_classes = [ 'eael-mega-menu__item' ];
+
+						if ( $is_current ) {
+							$item_classes[] = 'eael-mega-menu__item--active';
+						}
 
 						$this->add_render_attribute(
 							$item_key,
 							[
-								'class'     => 'eael-mega-menu__item',
+								'class'     => $item_classes,
 								'data-item' => $index,
 							]
 						);
 
 						$this->add_render_attribute( $link_key, 'class', 'eael-mega-menu__item-link' );
 
-						if ( ! empty( $item['item_link']['url'] ) ) {
+						if ( $is_current ) {
+							$this->add_render_attribute( $link_key, 'aria-current', 'page' );
+						}
+
+						if ( ! empty( $item_url ) ) {
 							$this->add_link_attributes( $link_key, $item['item_link'] );
 						}
 						?>

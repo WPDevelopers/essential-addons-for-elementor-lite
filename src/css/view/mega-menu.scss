@@ -14,12 +14,35 @@
     .eael-mega-menu__item {
         position: relative;
         flex-grow: var(--eael-mm-item-grow, 0);
+        margin: 0;
+        list-style: none;
     }
 
     .eael-mega-menu__item-link {
         display: flex;
         align-items: center;
+        width: 100%;
         text-decoration: none;
+        transition:
+            color 0.2s ease-in-out,
+            background-color 0.2s ease-in-out,
+            border-color 0.2s ease-in-out,
+            box-shadow 0.2s ease-in-out;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+    }
+
+    .eael-mega-menu__item-text {
+        display: inline-block;
+    }
+
+    &.eael-mega-menu--horizontal {
+        .eael-mega-menu {
+            flex-direction: row;
+        }
     }
 
     &.eael-mega-menu--vertical {
@@ -37,4 +60,16 @@
     color: #6d7882;
     font-size: 13px;
     text-align: center;
+}
+
+// RTL
+// Alignment, flex-direction and gap all resolve against the document direction,
+// so the rules above already mirror themselves. Only text flow needs a nudge here;
+// icon / badge / indicator offsets get their RTL rules in Step 9.
+.rtl {
+    .eael-mega-menu-container {
+        .eael-mega-menu__item-link {
+            text-align: right;
+        }
+    }
 }
