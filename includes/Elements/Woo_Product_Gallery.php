@@ -2925,15 +2925,44 @@ class Woo_Product_Gallery extends Widget_Base {
                         ];
 
                         // Keep the current archive taxonomy term (product category, tag or attribute).
+                        $tax_query      = [];
                         $queried_object = $query->get_queried_object();
                         if ( $queried_object instanceof \WP_Term ) {
-                            $args['tax_query'] = [
-                                [
-                                    'taxonomy' => $queried_object->taxonomy,
-                                    'field'    => 'term_id',
-                                    'terms'    => $queried_object->term_id,
-                                ],
+                            $tax_query[] = [
+                                'taxonomy' => $queried_object->taxonomy,
+                                'field'    => 'term_id',
+                                'terms'    => $queried_object->term_id,
                             ];
+                        }
+
+                        // Carry over the catalog filters WooCommerce applied to the main archive
+                        // query (product_visibility exclusions such as "hide out of stock items",
+                        // layered-nav attribute filters, etc.). Without them the Load More query
+                        // matches MORE products than page one rendered, so the offset drifts and
+                        // the next batch repeats products already shown.
+                        $main_tax_query = $wp_query->get( 'tax_query' );
+                        if ( ! empty( $main_tax_query ) && is_array( $main_tax_query ) ) {
+                            foreach ( $main_tax_query as $key => $clause ) {
+                                // 'relation' is dropped: the merged clauses are always ANDed here.
+                                if ( 'relation' !== $key && is_array( $clause ) ) {
+                                    $tax_query[] = $clause;
+                                }
+                            }
+                        }
+
+                        if ( ! empty( $tax_query ) ) {
+                            $args['tax_query'] = $tax_query;
+                        }
+
+                        $main_meta_query = $wp_query->get( 'meta_query' );
+                        if ( ! empty( $main_meta_query ) && is_array( $main_meta_query ) ) {
+                            $args['meta_query'] = $main_meta_query;
+                        }
+
+                        // Sorting by popularity/rating/price needs the meta key WooCommerce set.
+                        $main_meta_key = $wp_query->get( 'meta_key' );
+                        if ( ! empty( $main_meta_key ) && is_string( $main_meta_key ) ) {
+                            $args['meta_key'] = $main_meta_key;
                         }
                     } else {
 	                    $query = new \WP_Query( $args );
