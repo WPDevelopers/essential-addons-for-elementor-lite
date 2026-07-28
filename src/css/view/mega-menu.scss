@@ -57,6 +57,20 @@
         opacity: 0;
         visibility: hidden;
         text-align: left;
+        // `translate` / `scale` are used for the open animation instead of
+        // `transform`, so JS stays free to use `transform` for placement.
+        transition:
+            opacity var(--eael-mm-duration, 300ms) ease-in-out,
+            visibility var(--eael-mm-duration, 300ms) ease-in-out,
+            translate var(--eael-mm-duration, 300ms) ease-in-out,
+            scale var(--eael-mm-duration, 300ms) ease-in-out;
+
+        &.is-open {
+            opacity: 1;
+            visibility: visible;
+            translate: 0 0;
+            scale: 1;
+        }
 
         // Saved-template output drops a container / section in here — let it fill
         // the panel instead of re-applying the theme's content width.
@@ -67,10 +81,12 @@
             max-width: 100% !important;
         }
 
+        // No-JS resting values only — mega-menu.js measures and overrides both
+        // of these on open, so no `transform` is used here (it would compound
+        // with the offset JS sets).
         &--full {
-            left: 50%;
+            left: 0;
             width: 100vw;
-            transform: translateX(-50%);
         }
 
         &--pos-left {
@@ -87,12 +103,22 @@
         }
     }
 
-    // Step 4 fallback so panels are reachable before the Step 5 JS lands.
-    // Remove this block when open/close handling moves into mega-menu.js.
-    .eael-mega-menu__item--has-panel:hover > .eael-mega-menu__panel,
-    .eael-mega-menu__item--has-panel:focus-within > .eael-mega-menu__panel {
-        opacity: 1;
-        visibility: visible;
+    // Panel open animations. The closed state is declared here and `.is-open`
+    // (set by mega-menu.js) returns each property to its resting value.
+    &.eael-mega-menu--anim-none .eael-mega-menu__panel {
+        transition: none;
+    }
+
+    &.eael-mega-menu--anim-slide-down .eael-mega-menu__panel {
+        translate: 0 -10px;
+    }
+
+    &.eael-mega-menu--anim-slide-up .eael-mega-menu__panel {
+        translate: 0 10px;
+    }
+
+    &.eael-mega-menu--anim-zoom .eael-mega-menu__panel {
+        scale: 0.96;
     }
 
     &.eael-mega-menu--horizontal {
