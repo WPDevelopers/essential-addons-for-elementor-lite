@@ -99,6 +99,10 @@
 .eael-mega-menu-container .eael-mega-menu__panel--pos-right {
   right: 0;
 }
+.eael-mega-menu-container .eael-mega-menu__adopted {
+  width: 100%;
+  max-width: 100%;
+}
 .eael-mega-menu-container.eael-mega-menu--anim-none .eael-mega-menu__panel {
   -webkit-transition: none;
   transition: none;
@@ -129,6 +133,9 @@
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+}
+.eael-mega-menu__src-hidden {
+  display: none !important;
 }
 .eael-mega-menu-notice {
   padding: 15px;

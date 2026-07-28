@@ -107,6 +107,12 @@
         }
     }
 
+    // A linked Container that the JS moved into a panel.
+    .eael-mega-menu__adopted {
+        width: 100%;
+        max-width: 100%;
+    }
+
     // Panel open animations. The closed state is declared here and `.is-open`
     // (set by mega-menu.js) returns each property to its resting value.
     &.eael-mega-menu--anim-none .eael-mega-menu__panel {
@@ -138,6 +144,12 @@
             justify-content: flex-start;
         }
     }
+}
+
+// A linked section the JS deliberately did not move (see the mobile "hide"
+// behaviour). It must not reappear in its original spot.
+.eael-mega-menu__src-hidden {
+    display: none !important;
 }
 
 .eael-mega-menu-notice {

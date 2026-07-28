@@ -285,9 +285,10 @@ class Mega_Menu extends Widget_Base {
 				'default'     => 'template',
 				'options'     => [
 					'template' => esc_html__( 'Saved Template', 'essential-addons-for-elementor-lite' ),
+					'section'  => esc_html__( 'Section ID', 'essential-addons-for-elementor-lite' ),
 					'none'     => esc_html__( 'Link only', 'essential-addons-for-elementor-lite' ),
 				],
-				'description' => esc_html__( 'Saved Template — build the dropdown once in Templates → Saved Templates. Works on every page. Link only — no dropdown, plain menu link.', 'essential-addons-for-elementor-lite' ),
+				'description' => esc_html__( 'Saved Template — build the dropdown once in Templates → Saved Templates. Works on every page. Recommended. Section ID — design a Container in THIS page or template and enter its CSS ID here. Link only — no dropdown, plain menu link.', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
@@ -301,6 +302,22 @@ class Mega_Menu extends Widget_Base {
 				'label_block' => true,
 				'condition'   => [
 					'content_source' => 'template',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'section_css_id',
+			[
+				'label'       => esc_html__( 'Section CSS ID', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'label_block' => true,
+				'dynamic'     => [
+					'active' => true,
+				],
+				'description' => esc_html__( 'Enter the container\'s Advanced → CSS ID, without the #. It must exist in the same page or template as this menu. Editing a header template? Put the container inside that header template.', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'content_source' => 'section',
 				],
 			]
 		);
@@ -617,6 +634,90 @@ class Mega_Menu extends Widget_Base {
 		echo Plugin::$instance->frontend->get_builder_content( $template_id, true );
 
 		unset( self::$rendering_templates[ $template_id ] );
+	}
+
+	/**
+	 * Read a repeater row's linked-section CSS ID, sanitized for safe use.
+	 *
+	 * The value reaches both a CSS selector and getElementById(), and it can
+	 * come from a dynamic tag, so it is reduced to [A-Za-z0-9_-] before use.
+	 *
+	 * @param array $item Repeater row.
+	 *
+	 * @return string Safe CSS ID, or an empty string when there is nothing usable.
+	 */
+	protected function get_linked_section_id( $item ) {
+
+		if ( empty( $item['section_css_id'] ) || ! is_string( $item['section_css_id'] ) ) {
+			return '';
+		}
+
+		// Users routinely paste the selector rather than the bare ID.
+		$section_id = ltrim( trim( $item['section_css_id'] ), '#' );
+
+		return sanitize_html_class( $section_id );
+	}
+
+	/**
+	 * Collect every linked-section CSS ID used by this menu.
+	 *
+	 * @param array $items Repeater rows.
+	 *
+	 * @return array Unique list of sanitized CSS IDs.
+	 */
+	protected function collect_linked_section_ids( $items ) {
+
+		$section_ids = [];
+
+		foreach ( $items as $item ) {
+			if ( empty( $item['content_source'] ) || 'section' !== $item['content_source'] ) {
+				continue;
+			}
+
+			$section_id = $this->get_linked_section_id( $item );
+
+			if ( '' !== $section_id ) {
+				$section_ids[] = $section_id;
+			}
+		}
+
+		return array_unique( $section_ids );
+	}
+
+	/**
+	 * Print the stylesheet that hides linked sections until the JS has moved
+	 * them into their panels. Without it the sections would flash in their
+	 * original position on first paint.
+	 *
+	 * mega-menu.js removes this tag as soon as the move is done — otherwise the
+	 * section would stay hidden inside the panel too.
+	 *
+	 * @param array $section_ids Sanitized CSS IDs.
+	 */
+	protected function print_linked_section_hide_style( $section_ids ) {
+
+		if ( empty( $section_ids ) ) {
+			return;
+		}
+
+		$selectors = [];
+
+		foreach ( $section_ids as $section_id ) {
+			// An attribute selector rather than `#id`, because a CSS ID that
+			// starts with a digit is valid HTML but an invalid CSS selector —
+			// and one bad selector would void the whole rule.
+			$selectors[] = '[id="' . $section_id . '"]';
+		}
+
+		printf(
+			'<style id="eael-mm-hide-%s">%s{display:none!important}</style>',
+			esc_attr( $this->get_id() ),
+			// Safe: every ID passed through sanitize_html_class(), so only
+			// [A-Za-z0-9_-] survives. esc_html() is wrong here — <style> is a
+			// raw-text element, so entities would be taken literally by the
+			// CSS parser and break the rule.
+			implode( ',', $selectors ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		);
 	}
 
 	/**
@@ -982,6 +1083,11 @@ class Mega_Menu extends Widget_Base {
 				'aria-label' => esc_attr__( 'Main menu', 'essential-addons-for-elementor-lite' ),
 			]
 		);
+		// Printed before the menu markup so the browser applies it as early as
+		// possible. Editor keeps the sections visible and editable in place.
+		if ( ! $is_edit_mode ) {
+			$this->print_linked_section_hide_style( $this->collect_linked_section_ids( $items ) );
+		}
 		?>
 		<div <?php $this->print_render_attribute_string( 'eael-mega-menu-container' ); ?>>
 			<nav <?php $this->print_render_attribute_string( 'eael-mega-menu-nav' ); ?>>
@@ -995,10 +1101,12 @@ class Mega_Menu extends Widget_Base {
 						$is_current = $this->is_current_menu_item( $item_url );
 
 						// A panel is only rendered when the chosen source actually resolves
-						// to something. An unresolved template leaves the item a plain link.
+						// to something. An unresolved template or a blank section ID
+						// leaves the item as a plain link.
 						$content_source = ! empty( $item['content_source'] ) ? $item['content_source'] : 'template';
 						$template_id    = 'template' === $content_source ? $this->get_renderable_template_id( $item ) : 0;
-						$has_panel      = (bool) $template_id;
+						$section_id     = 'section' === $content_source ? $this->get_linked_section_id( $item ) : '';
+						$has_panel      = $template_id || '' !== $section_id;
 						$panel_id       = 'eael-mega-panel-' . $this->get_id() . '-' . $index;
 
 						$item_classes = [
@@ -1067,6 +1175,11 @@ class Mega_Menu extends Widget_Base {
 									'aria-label' => sprintf( esc_attr__( '%s submenu', 'essential-addons-for-elementor-lite' ), $item['item_label'] ),
 								]
 							);
+
+							// mega-menu.js reads this and moves the matching element in.
+							if ( '' !== $section_id ) {
+								$this->add_render_attribute( $panel_key, 'data-mega-section', $section_id );
+							}
 						}
 
 						if ( ! empty( $item_url ) ) {
@@ -1084,7 +1197,13 @@ class Mega_Menu extends Widget_Base {
 							</a>
 							<?php if ( $has_panel ) : ?>
 								<div <?php $this->print_render_attribute_string( $panel_key ); ?>>
-									<?php $this->render_template_panel_content( $template_id ); ?>
+									<?php
+									// Section panels start empty — the JS moves the linked
+									// element in once the page has parsed.
+									if ( $template_id ) {
+										$this->render_template_panel_content( $template_id );
+									}
+									?>
 								</div>
 							<?php endif; ?>
 						</li>

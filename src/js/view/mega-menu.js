@@ -54,11 +54,15 @@ var MegaMenu = function ($scope, $) {
 	// Holds the pending "close this panel" timer, so we can cancel it.
 	var closeTimer = null;
 
+	// Elementor's id for this widget. PHP used it to name the temporary
+	// stylesheet, and we use it to keep our event handlers separate.
+	var widgetId = $scope.data("id") || "";
+
 	// Every widget gets its own event namespace. We attach some handlers to
 	// document/window, and the Elementor editor re-runs this file each time
 	// the widget is edited — without a namespace to remove first, those
 	// handlers would pile up on every edit.
-	var eventNs = ".eaelMegaMenu" + ($scope.data("id") || "");
+	var eventNs = ".eaelMegaMenu" + widgetId;
 
 	// -----------------------------------------------------------------
 	// 3. Apply the animation settings
@@ -186,6 +190,11 @@ var MegaMenu = function ($scope, $) {
 			return;
 		}
 
+		// Nothing to show — see markUnresolved().
+		if (getPanel(item).classList.contains("is-unresolved")) {
+			return;
+		}
+
 		// Only one panel may be open at a time.
 		closeAllPanels();
 
@@ -232,6 +241,80 @@ var MegaMenu = function ($scope, $) {
 		}, CLOSE_DELAY);
 	}
 
+	// -----------------------------------------------------------------
+	// 7. Linked sections
+	// -----------------------------------------------------------------
+	//
+	// A panel can pull in a Container that lives elsewhere on the page,
+	// matched by its CSS ID. We physically MOVE that Container into the
+	// panel, so it still exists only once in the page — good for SEO and
+	// for screen readers. PHP hid it with a small stylesheet meanwhile.
+
+	// Mark a panel whose linked section could not be used. An unresolved
+	// panel never opens, so the menu item behaves as an ordinary link.
+	function markUnresolved(panel) {
+		panel.classList.add("is-unresolved");
+	}
+
+	// Move one item's linked section into its panel.
+	function adoptLinkedSection(item) {
+		var panel = getPanel(item);
+		var sectionId = panel.getAttribute("data-mega-section");
+
+		// This panel uses a saved template, not a linked section.
+		if (!sectionId) {
+			return;
+		}
+
+		var section = document.getElementById(sectionId);
+
+		// Nothing on the page has that CSS ID.
+		if (!section) {
+			markUnresolved(panel);
+			return;
+		}
+
+		// Already moved in by an earlier run.
+		if (panel.contains(section)) {
+			return;
+		}
+
+		// This menu sits inside the section it points at. Moving the section
+		// would put the menu inside its own panel, so refuse.
+		if (section.contains(container)) {
+			markUnresolved(panel);
+			return;
+		}
+
+		// Another menu item already claimed this section.
+		if (section.dataset.eaelAdopted) {
+			markUnresolved(panel);
+			return;
+		}
+
+		section.dataset.eaelAdopted = "1";
+		section.classList.add("eael-mega-menu__adopted");
+		panel.appendChild(section);
+	}
+
+	function adoptAllLinkedSections() {
+		$panelItems.each(function () {
+			adoptLinkedSection(this);
+		});
+
+		// The sections are inside their panels now, so drop the stylesheet that
+		// was hiding them — otherwise they would stay hidden in there too.
+		var hideStyle = document.getElementById("eael-mm-hide-" + widgetId);
+
+		if (hideStyle) {
+			hideStyle.remove();
+		}
+
+		// Anything inside a moved section (sliders, lazy images) measured itself
+		// while hidden and got zero. Ask everything to measure again.
+		elementorFrontend.elements.$window.trigger("resize");
+	}
+
 	// Place every panel held open by the "Keep Panel Open" switch, so the user
 	// styles it at the same size it will have on the live site.
 	function positionEditorOpenPanels() {
@@ -268,14 +351,35 @@ var MegaMenu = function ($scope, $) {
 		return;
 	}
 
+	adoptAllLinkedSections();
+
+	// Some content arrives late (lazy loading, other widgets rendering). Give
+	// any section we could not find one more chance once the page has loaded.
+	$(window).on("load" + eventNs, function () {
+		$panelItems.each(function () {
+			var panel = getPanel(this);
+
+			if (panel.classList.contains("is-unresolved")) {
+				panel.classList.remove("is-unresolved");
+				adoptLinkedSection(this);
+			}
+		});
+	});
+
 	if (trigger === "click") {
 		$panelItems
 			.children(".eael-mega-menu__item-link")
 			.on("click" + eventNs, function (event) {
+				var item = $(this).closest(".eael-mega-menu__item")[0];
+
+				// An unresolved panel has nothing to show, so let the link
+				// behave like a normal link instead of opening an empty box.
+				if (getPanel(item).classList.contains("is-unresolved")) {
+					return;
+				}
+
 				// Stop the browser following the link's href.
 				event.preventDefault();
-
-				var item = $(this).closest(".eael-mega-menu__item")[0];
 
 				togglePanel(item);
 			});
