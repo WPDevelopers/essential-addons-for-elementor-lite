@@ -81,6 +81,59 @@ class Mega_Menu extends Widget_Base {
 		return 'https://essential-addons.com/elementor/docs/mega-menu/';
 	}
 
+	/**
+	 * Devices a menu item can be hidden on.
+	 *
+	 * @return array<string, string> Device key => translated label.
+	 */
+	protected function get_device_options() {
+
+		return [
+			'desktop' => esc_html__( 'Desktop', 'essential-addons-for-elementor-lite' ),
+			'tablet'  => esc_html__( 'Tablet', 'essential-addons-for-elementor-lite' ),
+			'mobile'  => esc_html__( 'Mobile', 'essential-addons-for-elementor-lite' ),
+		];
+	}
+
+	/**
+	 * Build the device-visibility classes for one menu item.
+	 *
+	 * Two classes per device, on purpose:
+	 *
+	 *  - `elementor-hidden-{device}` does the actual hiding. Elementor generates
+	 *    that rule from the site's own breakpoints, so a kit with custom
+	 *    breakpoints keeps working — media queries hard-coded in our stylesheet
+	 *    would not.
+	 *  - `eael-mega-menu__item--hide-{device}` carries no CSS of its own. It is
+	 *    the documented hook for styling and makes the markup readable.
+	 *
+	 * @param array $item Repeater row.
+	 *
+	 * @return array List of class names, empty when the item is visible everywhere.
+	 */
+	protected function get_item_device_classes( $item ) {
+
+		if ( empty( $item['hide_on'] ) || ! is_array( $item['hide_on'] ) ) {
+			return [];
+		}
+
+		$devices = array_keys( $this->get_device_options() );
+		$classes = [];
+
+		foreach ( $item['hide_on'] as $device ) {
+			// Ignore anything that is not one of our own device keys — the value
+			// reaches a class attribute.
+			if ( ! is_string( $device ) || ! in_array( $device, $devices, true ) ) {
+				continue;
+			}
+
+			$classes[] = 'eael-mega-menu__item--hide-' . $device;
+			$classes[] = 'elementor-hidden-' . $device;
+		}
+
+		return $classes;
+	}
+
 	protected function register_controls() {
 
 		/**
@@ -278,6 +331,53 @@ class Mega_Menu extends Widget_Base {
 		);
 
 		$repeater->add_control(
+			'item_icon',
+			[
+				'label'       => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::ICONS,
+				'description' => esc_html__( 'Shown before the label. Leave it empty and no icon markup is output at all.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$repeater->add_control(
+			'item_badge',
+			[
+				'label'       => esc_html__( 'Badge', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'label_block' => true,
+				'description' => esc_html__( 'A short tag such as New or Sale, shown after the label. Leave it empty and no badge markup is output at all.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$repeater->add_control(
+			'item_badge_color',
+			[
+				'label'     => esc_html__( 'Badge Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} {{CURRENT_ITEM}} .eael-mega-menu__item-badge' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'item_badge!' => '',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'item_badge_bg',
+			[
+				'label'     => esc_html__( 'Badge Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} {{CURRENT_ITEM}} .eael-mega-menu__item-badge' => 'background-color: {{VALUE}};',
+				],
+				'condition' => [
+					'item_badge!' => '',
+				],
+			]
+		);
+
+		$repeater->add_control(
 			'content_source',
 			[
 				'label'       => esc_html__( 'Dropdown Content', 'essential-addons-for-elementor-lite' ),
@@ -425,6 +525,18 @@ class Mega_Menu extends Widget_Base {
 				'condition'  => [
 					'content_source!' => 'none',
 				],
+			]
+		);
+
+		$repeater->add_control(
+			'hide_on',
+			[
+				'label'       => esc_html__( 'Hide On', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SELECT2,
+				'multiple'    => true,
+				'label_block' => true,
+				'options'     => $this->get_device_options(),
+				'description' => esc_html__( 'Devices this item is hidden on. It follows the same breakpoints as Elementor\'s own responsive settings.', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
@@ -945,7 +1057,276 @@ class Mega_Menu extends Widget_Base {
 
 		$this->end_controls_tabs();
 
+		$this->register_item_icon_style_controls();
+		$this->register_item_indicator_style_controls();
+		$this->register_item_badge_style_controls();
+
 		$this->end_controls_section();
+	}
+
+	/**
+	 * Style: the per-item icon that sits before the label.
+	 *
+	 * Lives inside the Menu Items section — see register_item_style_controls().
+	 */
+	protected function register_item_icon_style_controls() {
+
+		$this->add_control(
+			'eael_mega_menu_icon_heading',
+			[
+				'label'     => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_icon_size',
+			[
+				'label'      => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 6,
+						'max' => 80,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__item-icon'     => 'font-size: {{SIZE}}{{UNIT}};',
+					// An inline SVG ignores font-size, so it is sized directly.
+					'{{WRAPPER}} .eael-mega-menu__item-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_icon_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-mega-menu__item-icon'     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-mega-menu__item-icon svg' => 'fill: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_icon_gap',
+			[
+				'label'      => esc_html__( 'Gap After Icon', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 50,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-icon-gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+	}
+
+	/**
+	 * Style: the dropdown indicator, including how far it turns when a panel opens.
+	 *
+	 * Lives inside the Menu Items section — see register_item_style_controls().
+	 */
+	protected function register_item_indicator_style_controls() {
+
+		$this->add_control(
+			'eael_mega_menu_indicator_heading',
+			[
+				'label'     => esc_html__( 'Dropdown Indicator', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_indicator_size',
+			[
+				'label'      => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 6,
+						'max' => 50,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__indicator'     => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-mega-menu__indicator svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_indicator_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-mega-menu__indicator'     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-mega-menu__indicator svg' => 'fill: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_indicator_gap',
+			[
+				'label'      => esc_html__( 'Gap Before Indicator', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 50,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-indicator-gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_indicator_rotation',
+			[
+				'label'       => esc_html__( 'Rotation When Open', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => [ 'deg' ],
+				'default'     => [
+					'unit' => 'deg',
+					'size' => 180,
+				],
+				'range'       => [
+					'deg' => [
+						'min'  => -360,
+						'max'  => 360,
+						'step' => 15,
+					],
+				],
+				'description' => esc_html__( 'How far the indicator turns while its dropdown is open. Set it to 0 to keep it still.', 'essential-addons-for-elementor-lite' ),
+				// A variable rather than a rule, because the open state is matched
+				// in two places: `.is-active` on the front end, and the editor
+				// preview switch. Both read this one value.
+				'selectors'   => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-indicator-rotate: {{SIZE}}deg;',
+				],
+			]
+		);
+	}
+
+	/**
+	 * Style: the per-item badge. Colours are per row (see the Menu Items
+	 * repeater) — shape and type are shared by every badge.
+	 *
+	 * Lives inside the Menu Items section — see register_item_style_controls().
+	 */
+	protected function register_item_badge_style_controls() {
+
+		$this->add_control(
+			'eael_mega_menu_badge_heading',
+			[
+				'label'     => esc_html__( 'Badge', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_mega_menu_badge_typography',
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
+				'selector' => '{{WRAPPER}} .eael-mega-menu__item-badge',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_badge_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'default'    => [
+					'top'      => 2,
+					'right'    => 8,
+					'bottom'   => 2,
+					'left'     => 8,
+					'unit'     => 'px',
+					'isLinked' => false,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__item-badge' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_badge_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'default'    => [
+					'top'      => 3,
+					'right'    => 3,
+					'bottom'   => 3,
+					'left'     => 3,
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__item-badge' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_badge_offset_x',
+			[
+				'label'      => esc_html__( 'Horizontal Offset', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min' => -50,
+						'max' => 50,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-badge-offset-x: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_badge_offset_y',
+			[
+				'label'      => esc_html__( 'Vertical Offset', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min' => -50,
+						'max' => 50,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-badge-offset-y: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 	}
 
 	/**
@@ -1127,6 +1508,12 @@ class Mega_Menu extends Widget_Base {
 							$item_classes[] = 'eael-mega-menu__item--has-panel';
 						}
 
+						$item_classes = array_merge( $item_classes, $this->get_item_device_classes( $item ) );
+
+						// An empty badge must leave no element behind at all, so the
+						// value is trimmed once here and checked before printing.
+						$item_badge = isset( $item['item_badge'] ) ? trim( $item['item_badge'] ) : '';
+
 						$this->add_render_attribute(
 							$item_key,
 							[
@@ -1192,7 +1579,15 @@ class Mega_Menu extends Widget_Base {
 						?>
 						<li <?php $this->print_render_attribute_string( $item_key ); ?>>
 							<a <?php $this->print_render_attribute_string( $link_key ); ?>>
+								<?php if ( ! empty( $item['item_icon']['value'] ) ) : ?>
+									<span class="eael-mega-menu__item-icon">
+										<?php Icons_Manager::render_icon( $item['item_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+									</span>
+								<?php endif; ?>
 								<span class="eael-mega-menu__item-text"><?php echo esc_html( $item['item_label'] ); ?></span>
+								<?php if ( '' !== $item_badge ) : ?>
+									<span class="eael-mega-menu__item-badge"><?php echo esc_html( $item_badge ); ?></span>
+								<?php endif; ?>
 								<?php if ( $has_panel && ! empty( $settings['eael_mega_menu_indicator_icon']['value'] ) ) : ?>
 									<span class="eael-mega-menu__indicator">
 										<?php Icons_Manager::render_icon( $settings['eael_mega_menu_indicator_icon'], [ 'aria-hidden' => 'true' ] ); ?>

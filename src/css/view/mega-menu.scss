@@ -39,11 +39,65 @@
 		display: inline-block;
 	}
 
+	// Icon, badge and indicator all sit beside the label, so their spacing uses
+	// logical properties (`inline-start` / `inline-end`). Those flip themselves in
+	// RTL, which is why the RTL block at the bottom of this file has nothing to
+	// say about them.
+	.eael-mega-menu__item-icon {
+		display: inline-flex;
+		align-items: center;
+		flex-shrink: 0;
+		margin-inline-end: var(--eael-mm-icon-gap, 6px);
+		line-height: 1;
+
+		// An inline SVG has no intrinsic size the way an icon font does, so it is
+		// tied to the surrounding font size until the Size control overrides it.
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	.eael-mega-menu__item-badge {
+		display: inline-flex;
+		align-items: center;
+		flex-shrink: 0;
+		margin-inline-start: 6px;
+		background-color: #f0f2f5;
+		color: #2f3439;
+		font-size: 11px;
+		font-weight: 500;
+		line-height: 1.6;
+		white-space: nowrap;
+		// Nudged rather than repositioned, so the badge cannot change the height
+		// of the row it sits in.
+		transform: translate(
+			var(--eael-mm-badge-offset-x, 0px),
+			var(--eael-mm-badge-offset-y, 0px)
+		);
+	}
+
 	.eael-mega-menu__indicator {
 		display: inline-flex;
 		align-items: center;
-		margin-left: 6px;
+		flex-shrink: 0;
+		margin-inline-start: var(--eael-mm-indicator-gap, 6px);
 		line-height: 1;
+		transition: transform 0.2s ease-in-out;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	// The open state. `.is-active` is set by mega-menu.js on the front end; the
+	// editor equivalent lives in the editor-only block further down. Both read
+	// the same variable, so one control drives both.
+	.eael-mega-menu__item.is-active .eael-mega-menu__indicator {
+		transform: rotate(var(--eael-mm-indicator-rotate, 180deg));
 	}
 
 	.eael-mega-menu__panel {
@@ -160,6 +214,15 @@
 // set by mega-menu.js.
 // ---------------------------------------------------------------------
 body.elementor-editor-active {
+	// A panel held open by the preview switch is open, so its indicator turns —
+	// exactly as it would on the live site. The switch only puts a class on the
+	// panel, and the panel is a SIBLING of the link the indicator lives in, so
+	// `:has()` is the only way back up to it.
+	.eael-mega-menu__item:has(> .eael-mega-menu__panel--editor-open)
+		.eael-mega-menu__indicator {
+		transform: rotate(var(--eael-mm-indicator-rotate, 180deg));
+	}
+
 	// The read-only copy shown inside a panel when the preview switch is on.
 	.eael-mega-menu__preview-clone {
 		// Clicking the copy would mislead — the original is the editable one.
@@ -279,17 +342,13 @@ body.elementor-editor-active {
 
 // RTL
 // Alignment, flex-direction and gap all resolve against the document direction,
-// so the rules above already mirror themselves. Only text flow needs a nudge here;
-// icon / badge / indicator offsets get their RTL rules in Step 9.
+// so the rules above already mirror themselves. Icon, badge and indicator spacing
+// uses logical properties, which mirror themselves too. Only text flow and the
+// panel's own left/right pinning need a nudge here.
 .rtl {
 	.eael-mega-menu-container {
 		.eael-mega-menu__item-link {
 			text-align: right;
-		}
-
-		.eael-mega-menu__indicator {
-			margin-right: 6px;
-			margin-left: 0;
 		}
 
 		.eael-mega-menu__panel {
