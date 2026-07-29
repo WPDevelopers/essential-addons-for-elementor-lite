@@ -196,10 +196,19 @@ body.elementor-editor-active {
 	// The real section, left exactly where it is so it stays visible and
 	// editable. Only a small corner tag is added — no tint, no overlay, and
 	// nothing that covers the content.
+	//
+	// The tag MUST live on `::after`. An Elementor Container reserves `::before`
+	// for its own background-overlay layer, which is already sized to the whole
+	// container (`content: var(--background-overlay)`, `position: absolute`,
+	// full width/height — see Elementor's frontend.css). That pseudo normally
+	// never renders, because the variable is unset and an invalid `content`
+	// suppresses it. Giving it a `content` here would bring it to life wearing
+	// Elementor's full-container geometry, and this tag's background would tint
+	// the entire section instead of drawing a small corner pill.
 	.eael-mega-menu__linked-src {
 		position: relative;
 
-		&::before {
+		&::after {
 			content: "⇢ Dropdown for “" attr(data-eael-mega-label) "”";
 			position: absolute;
 			top: 0;

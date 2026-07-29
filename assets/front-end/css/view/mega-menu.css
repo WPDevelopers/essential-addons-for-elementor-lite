@@ -167,7 +167,7 @@ body.elementor-editor-active .eael-mega-menu__panel--editor-open::before {
 body.elementor-editor-active .eael-mega-menu__linked-src {
   position: relative;
 }
-body.elementor-editor-active .eael-mega-menu__linked-src::before {
+body.elementor-editor-active .eael-mega-menu__linked-src::after {
   content: "⇢ Dropdown for “" attr(data-eael-mega-label) "”";
   position: absolute;
   top: 0;
