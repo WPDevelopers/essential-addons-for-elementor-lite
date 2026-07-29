@@ -4110,7 +4110,9 @@ class Filterable_Gallery extends Widget_Base
             $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . esc_attr( $item['controls'] ) . '" data-search-key="' . esc_attr( strtolower(str_replace(" ", "-", $item['title'])) ) . '" data-search-categories="' . esc_attr( strtolower( $item['controls_name'] ) ) . '">';
             $html .= '<div class="fg-layout-3-item eael-gallery-grid-item">';
             
+            $close_full_image_clickable = false;
             if ( $settings['eael_section_fg_full_image_clickable'] && 'true' !== $item['video_gallery_switch'] ) {
+                $close_full_image_clickable = true;
                 $html .= $this->gallery_item_full_image_clickable_content($settings, $item, false);
             }
             
@@ -4156,7 +4158,9 @@ class Filterable_Gallery extends Widget_Base
             
             $html .= '</div>';
             
-            if ($settings['eael_section_fg_full_image_clickable']) $html .= '</a>';
+            // Mirror the open above: close only when an anchor was actually emitted.
+            // Video items skip the open, so an unconditional close emitted an orphan </a>.
+            if ( $close_full_image_clickable ) $html .= '</a>';
             
             $html .= '<div class="fg-layout-3-item-content">';
             
@@ -4205,6 +4209,7 @@ class Filterable_Gallery extends Widget_Base
         foreach ($gallery as $item) {
             $this->popup_status = false;
             $close_media_content_wrap = false;
+            $close_full_image_clickable = false;
 
             $title = '';
         
@@ -4231,6 +4236,11 @@ class Filterable_Gallery extends Widget_Base
             }
             
             if ( $settings['eael_section_fg_full_image_clickable'] && 'true' !== $item['video_gallery_switch'] ) {
+                // Track whether an anchor was actually emitted so the matching closes below
+                // mirror the open. The helper only opens an <a> for these actions, and a
+                // lightbox anchor is skipped when one is already open ($this->popup_status).
+                $full_image_action          = isset( $settings['eael_section_fg_full_image_action'] ) ? $settings['eael_section_fg_full_image_action'] : 'lightbox';
+                $close_full_image_clickable = ( 'lightbox' === $full_image_action && ! $this->popup_status ) || 'link' === $full_image_action;
                 $html .= $this->gallery_item_full_image_clickable_content($settings, $item );
             }
 
@@ -4245,7 +4255,7 @@ class Filterable_Gallery extends Widget_Base
 
             $html .= '</div>';
 
-            if ( $settings['eael_section_fg_full_image_clickable'] && 'card' === $settings['eael_fg_caption_style'] ) {
+            if ( $close_full_image_clickable && 'card' === $settings['eael_fg_caption_style'] ) {
                 $html .= '</a>';
             }
             if ($close_media_content_wrap) {
@@ -4270,7 +4280,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '</a>';
             }
 
-            if ( $settings['eael_section_fg_full_image_clickable'] && 'card' !== $settings['eael_fg_caption_style'] ) {
+            if ( $close_full_image_clickable && 'card' !== $settings['eael_fg_caption_style'] ) {
                 $html .= '</a>';
             }
 
