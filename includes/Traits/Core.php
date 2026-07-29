@@ -138,8 +138,7 @@ trait Core
             'extra_notice' => __( 'Nothing is sent unless you allow it. If you do: your site URL and name;
             WordPress, PHP and server versions; language and charset; your <strong>active</strong> plugins and theme
             (and how many inactive); which Essential Addons elements you use; and your admin email, for the coupon.
-            We never collect your content, your visitors\' data, or your inactive plugin names.
-            You can withdraw consent anytime from the plugin settings. No spam, I promise.', 'essential-addons-for-elementor-lite' ),
+            We never collect your content, your visitors\' data, or your inactive plugin names. No spam, I promise.', 'essential-addons-for-elementor-lite' ),
         ));
         $tracker->init();
     }

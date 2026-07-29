@@ -86,7 +86,7 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
             </p>
             <p>
               {__(
-                "We never collect your content, your visitors' data, or your inactive plugin names. You can withdraw consent anytime from the plugin settings. No spam, we promise.",
+                "We never collect your content, your visitors' data, or your inactive plugin names. No spam, we promise.",
                 "essential-addons-for-elementor-lite"
               )}
             </p>
