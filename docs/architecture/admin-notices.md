@@ -332,7 +332,7 @@ If activated, the class would expose this set of extension points:
 
 | Surface | Hook | Notes |
 | ------- | ---- | ----- |
-| WP Dashboard "SEO Check (Essential Addons)" widget | `wp_dashboard_setup` | Promo state only renders when no opt-out applies; once ThinkRank is active the widget is functional and stays |
+| WP Dashboard "SEO Check" widget | `wp_dashboard_setup` | Promo state only renders when no opt-out applies; once ThinkRank is active the widget is functional and stays |
 | Banner on Posts/Pages/public-CPT **list** screens | `admin_notices` | Secondary action is **"Never show me again"** (site-wide, permanent) |
 | Banner on the EA Dashboard | `eael_admin_notices` | Secondary action is **"Skip for 30 days"** (site-wide snooze) |
 | Gutenberg "Configure SEO" document panel | `enqueue_block_editor_assets` | Its "Never show me again" is also the site-wide permanent opt-out |

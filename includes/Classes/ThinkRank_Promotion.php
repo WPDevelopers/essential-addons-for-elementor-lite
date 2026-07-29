@@ -394,7 +394,7 @@ class ThinkRank_Promotion {
 
 		wp_add_dashboard_widget(
 			'eael_thinkrank_seo_check',
-			esc_html__( 'SEO Check (Essential Addons)', 'essential-addons-for-elementor-lite' ),
+			esc_html__( 'SEO Check', 'essential-addons-for-elementor-lite' ),
 			[ $this, 'render_dashboard_widget' ]
 		);
 	}

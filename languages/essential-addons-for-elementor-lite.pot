@@ -209,75 +209,71 @@ msgstr ""
 msgid "Just Deactivate"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:308
+#: ../includes/Classes/ThinkRank_Promotion.php:307
 msgid "Skip"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:309, ../includes/Classes/ThinkRank_Promotion.php:471
+#: ../includes/Classes/ThinkRank_Promotion.php:308, ../includes/Classes/ThinkRank_Promotion.php:468
 msgid "Never show me again"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:319
+#: ../includes/Classes/ThinkRank_Promotion.php:318
 msgid "Get found on Google & AI answers - configure your SEO"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:320
+#: ../includes/Classes/ThinkRank_Promotion.php:319
 msgid "Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:321
-msgid "Suggestion by Essential Addons"
-msgstr ""
-
-#: ../includes/Classes/ThinkRank_Promotion.php:324, ../includes/Classes/ThinkRank_Promotion.php:340
+#: ../includes/Classes/ThinkRank_Promotion.php:322, ../includes/Classes/ThinkRank_Promotion.php:338
 msgid "Enable SEO Tool"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:337
+#: ../includes/Classes/ThinkRank_Promotion.php:335
 msgid "Enabling ThinkRank…"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:338
+#: ../includes/Classes/ThinkRank_Promotion.php:336
 msgid "Enabled! Opening ThinkRank…"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:339
+#: ../includes/Classes/ThinkRank_Promotion.php:337
 msgid "Could not enable automatically. Try Plugins → Add New."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:400
-msgid "SEO Check (Essential Addons)"
+#: ../includes/Classes/ThinkRank_Promotion.php:397
+msgid "SEO Check"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:459
+#: ../includes/Classes/ThinkRank_Promotion.php:456
 msgid "Analyze your SEO with AI"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:461
+#: ../includes/Classes/ThinkRank_Promotion.php:458
 msgid "ThinkRank's AI reviews your titles, meta, schema and readability, then shows the quick wins. See how your pages score."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:466, ../includes/Classes/ThinkRank_Promotion.php:588, ../includes/Classes/ThinkRank_Promotion.php:593
+#: ../includes/Classes/ThinkRank_Promotion.php:463, ../includes/Classes/ThinkRank_Promotion.php:585, ../includes/Classes/ThinkRank_Promotion.php:590
 msgid "Analyze my SEO"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:488
+#: ../includes/Classes/ThinkRank_Promotion.php:485
 msgid "ThinkRank is active"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:490
+#: ../includes/Classes/ThinkRank_Promotion.php:487
 msgid "Open ThinkRank to see your AI SEO score and page-by-page fixes."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:493
+#: ../includes/Classes/ThinkRank_Promotion.php:490
 msgid "Open ThinkRank"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:546
+#: ../includes/Classes/ThinkRank_Promotion.php:543
 msgid "Analyzing… enabling ThinkRank"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:547
+#: ../includes/Classes/ThinkRank_Promotion.php:544
 msgid "Could not enable automatically. Please try from Plugins → Add New."
 msgstr ""
 
