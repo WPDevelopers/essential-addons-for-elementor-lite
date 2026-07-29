@@ -305,7 +305,7 @@ class ThinkRank_Promotion {
 
 		$later_action = 'ea' === $context ? 'eael_thinkrank_skip' : 'eael_thinkrank_never_show';
 		$later_label  = 'ea' === $context
-			? __( 'Skip for 30 days', 'essential-addons-for-elementor-lite' )
+			? __( 'Skip', 'essential-addons-for-elementor-lite' )
 			: __( 'Never show me again', 'essential-addons-for-elementor-lite' );
 
 		$nonce = wp_create_nonce( 'essential-addons-elementor' );
