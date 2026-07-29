@@ -7,7 +7,7 @@ add_action(
 	'in_admin_header',
 	function () {
 
-		if ( $this->pro_enabled || time() > strtotime( '09:59:59pm 4th December, 2025' ) || ( $GLOBALS["pagenow"] !== 'index.php' && get_current_screen()->id !== 'toplevel_page_eael-settings' ) || get_transient( 'eael_bfcm25_pointer_dismiss' ) ) {
+		if ( \Essential_Addons_Elementor\Classes\ThinkRank_Promotion::promotions_disabled() || $this->pro_enabled || time() > strtotime( '09:59:59pm 4th December, 2025' ) || ( $GLOBALS["pagenow"] !== 'index.php' && get_current_screen()->id !== 'toplevel_page_eael-settings' ) || get_transient( 'eael_bfcm25_pointer_dismiss' ) ) {
 			return;
 		}
 

@@ -12,18 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Surfaces WPDeveloper's AI SEO plugin (ThinkRank) inside the Essential Addons
  * admin experience. Every surface is:
  *   - native to WordPress admin,
- *   - framed as "configure / analyze SEO" — no Essential Addons branding in the
- *     surface itself (product decision),
- *   - permanently dismissible where it's a notice/prompt,
- *   - scoped to relevant, high-intent moments — never a global banner.
+ *   - clearly attributed to Essential Addons, so admins always know which
+ *     plugin the suggestion comes from,
+ *   - permanently dismissible — "Never show me again" hides EVERY ThinkRank
+ *     surface for the whole installation, all users, forever,
+ *   - scoped to relevant, high-intent moments — never a global banner, and
+ *     never a redirect,
+ *   - switchable off entirely via the EAEL_DISABLE_PROMOTIONS constant or the
+ *     `eael/disable_promotions` filter (see promotions_disabled()).
  *
  * Install is delegated to the shared WPDeveloper_Plugin_Installer AJAX
  * endpoint (`wpdeveloper_install_plugin`), the same pipeline Quick Setup uses
  * to install Essential Blocks / Templately.
- *
- * Phase 1 implements the WordPress Dashboard widget ("SEO Check"). Other
- * surfaces (Quick Setup step, EA Dashboard banner, Integrations card, editor
- * entries) are added incrementally on this branch.
  *
  * @since 6.7.1
  */
@@ -49,9 +49,21 @@ class ThinkRank_Promotion {
 	const ADMIN_PAGE = 'thinkrank';
 
 	/**
-	 * How long "Maybe later" hides the promo for, in seconds.
+	 * How long "Maybe later" / "Skip for 30 days" hides the promo for, in seconds.
 	 */
 	const SNOOZE_DURATION = 30 * DAY_IN_SECONDS;
+
+	/**
+	 * Site option — permanent "Never show me again". When set, every ThinkRank
+	 * surface is hidden for all users of this installation, forever.
+	 */
+	const NEVER_SHOW_OPTION = 'eael_thinkrank_never_show';
+
+	/**
+	 * Site option — timestamp until which the promo is skipped site-wide
+	 * ("Skip for 30 days" on the EA Dashboard banner).
+	 */
+	const SKIP_UNTIL_OPTION = 'eael_thinkrank_skip_until';
 
 	public function __construct() {
 		if ( ! is_admin() ) {
@@ -61,10 +73,7 @@ class ThinkRank_Promotion {
 		// Surface 3 — WP Dashboard "SEO Check" widget.
 		add_action( 'wp_dashboard_setup', [ $this, 'register_dashboard_widget' ] );
 
-		// Surface 4 — after an EA update, bring existing users to the EA
-		// Dashboard once and show a dismissible, attributed ThinkRank banner.
-		add_action( 'upgrader_process_complete', [ $this, 'flag_after_update' ], 10, 2 );
-		add_action( 'admin_init', [ $this, 'maybe_redirect_after_update' ] );
+		// Attributed, dismissible banner on EA's own pages + content list screens.
 		add_action( 'admin_notices', [ $this, 'render_dashboard_banner' ] );
 		// On the EA Dashboard (toplevel_page_eael-settings) EA strips all
 		// admin_notices and re-dispatches its own via `eael_admin_notices`, so
@@ -73,9 +82,34 @@ class ThinkRank_Promotion {
 		add_action( 'eael_admin_notices', [ $this, 'render_dashboard_banner' ] );
 		add_action( 'wp_ajax_eael_thinkrank_dismiss', [ $this, 'ajax_dismiss_banner' ] );
 		add_action( 'wp_ajax_eael_thinkrank_snooze', [ $this, 'ajax_snooze_banner' ] );
+		add_action( 'wp_ajax_eael_thinkrank_never_show', [ $this, 'ajax_never_show' ] );
+		add_action( 'wp_ajax_eael_thinkrank_skip', [ $this, 'ajax_skip' ] );
 
 		// Surface 5 — Gutenberg editor "Configure SEO" document panel.
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_gutenberg_panel' ] );
+	}
+
+	/**
+	 * Global kill switch for ALL Essential Addons promotional surfaces.
+	 *
+	 * Operators managing fleets can disable every promo surface for an entire
+	 * installation, without touching per-user or per-site dismissals:
+	 *
+	 *     // wp-config.php
+	 *     define( 'EAEL_DISABLE_PROMOTIONS', true );
+	 *
+	 *     // or from an mu-plugin
+	 *     add_filter( 'eael/disable_promotions', '__return_true' );
+	 *
+	 * Checked per-surface (not once in the constructor) so late-registered
+	 * filters are still honored.
+	 */
+	public static function promotions_disabled() {
+		if ( defined( 'EAEL_DISABLE_PROMOTIONS' ) && EAEL_DISABLE_PROMOTIONS ) {
+			return true;
+		}
+
+		return (bool) apply_filters( 'eael/disable_promotions', false );
 	}
 
 	/**
@@ -116,6 +150,7 @@ class ThinkRank_Promotion {
 			. '.eael-tr-gb__cta.components-button.is-primary{background:#4451ff;justify-content:center;width:100%;}'
 			. '.eael-tr-gb__cta.components-button.is-primary:hover:not(:disabled){background:#3742d6;}'
 			. '.eael-tr-gb__later.components-button.is-link{display:block;margin:8px 0 2px;color:#50575e;font-size:12px;}'
+			. '.eael-tr-gb__attr{font-size:11px;color:#787c82;margin:6px 0 0;}'
 		);
 	}
 
@@ -137,63 +172,29 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Is the promo hidden for the current user right now, for any reason?
+	 * Has ANY admin permanently hidden the ThinkRank promo for the whole site?
+	 */
+	public function is_never_shown() {
+		return (bool) get_option( self::NEVER_SHOW_OPTION );
+	}
+
+	/**
+	 * Is the site-wide "Skip for 30 days" snooze still running?
+	 */
+	public function is_skipped() {
+		return (int) get_option( self::SKIP_UNTIL_OPTION ) > time();
+	}
+
+	/**
+	 * Is the promo hidden right now, for any reason? Site-wide switches
+	 * (kill switch, never-show, skip) win over per-user state.
 	 */
 	public function is_hidden() {
-		return $this->is_dismissed() || $this->is_snoozed();
-	}
-
-	/**
-	 * Flag a redirect after Essential Addons (Lite) itself is updated.
-	 *
-	 * Runs only in admin context (the class self-returns otherwise), so cron
-	 * auto-updates never set the flag — we never hijack a background update.
-	 */
-	public function flag_after_update( $upgrader, $options ) {
-		if ( empty( $options['action'] ) || 'update' !== $options['action'] ) {
-			return;
-		}
-		if ( empty( $options['type'] ) || 'plugin' !== $options['type'] ) {
-			return;
-		}
-
-		$plugins = isset( $options['plugins'] ) ? (array) $options['plugins'] : [];
-		if ( ! empty( $options['plugin'] ) ) {
-			$plugins[] = $options['plugin'];
-		}
-
-		if ( ! in_array( EAEL_PLUGIN_BASENAME, $plugins, true ) ) {
-			return;
-		}
-		if ( $this->is_thinkrank_active() || $this->is_hidden() ) {
-			return;
-		}
-
-		set_transient( 'eael_thinkrank_after_update', 1, 5 * MINUTE_IN_SECONDS );
-	}
-
-	/**
-	 * One-time, guarded redirect to the EA Dashboard after an EA update.
-	 */
-	public function maybe_redirect_after_update() {
-		if ( ! get_transient( 'eael_thinkrank_after_update' ) ) {
-			return;
-		}
-		if ( wp_doing_ajax() || ( defined( 'DOING_CRON' ) && DOING_CRON ) ) {
-			return;
-		}
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-		// Never hijack the bulk-update result screen.
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( isset( $_GET['activate-multi'] ) || ( isset( $_GET['action'] ) && 'do-plugin-upgrade' === $_GET['action'] ) ) {
-			return;
-		}
-
-		delete_transient( 'eael_thinkrank_after_update' );
-		wp_safe_redirect( admin_url( 'admin.php?page=eael-settings&eael-thinkrank=1' ) );
-		exit;
+		return self::promotions_disabled()
+			|| $this->is_never_shown()
+			|| $this->is_skipped()
+			|| $this->is_dismissed()
+			|| $this->is_snoozed();
 	}
 
 	/**
@@ -218,6 +219,34 @@ class ThinkRank_Promotion {
 			wp_send_json_error();
 		}
 		update_user_meta( get_current_user_id(), 'eael_thinkrank_snoozed_until', time() + self::SNOOZE_DURATION );
+		wp_send_json_success();
+	}
+
+	/**
+	 * Site-wide, permanent "Never show me again". One click by any admin hides
+	 * every ThinkRank surface (notices, Gutenberg panel, dashboard widget) for
+	 * all users of this installation, forever.
+	 */
+	public function ajax_never_show() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error();
+		}
+		update_option( self::NEVER_SHOW_OPTION, 1, true );
+		wp_send_json_success();
+	}
+
+	/**
+	 * Site-wide "Skip for 30 days" from the EA Dashboard banner. The promo may
+	 * come back after SNOOZE_DURATION — unless "Never show me again" was used,
+	 * which always wins.
+	 */
+	public function ajax_skip() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error();
+		}
+		update_option( self::SKIP_UNTIL_OPTION, time() + self::SNOOZE_DURATION, true );
 		wp_send_json_success();
 	}
 
@@ -250,8 +279,16 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Dismissible "configure your SEO" prompt. Unbranded (no EA mention).
-	 * Never global; permanent per-user dismiss. See banner_context() for scope.
+	 * Dismissible, attributed "configure your SEO" prompt.
+	 *
+	 * Secondary action depends on context:
+	 *  - 'content' (Posts/Pages/CPT list screens): "Never show me again" —
+	 *    permanent, SITE-WIDE. One click hides every ThinkRank surface for all
+	 *    users of this installation, forever.
+	 *  - 'ea' (EA Dashboard): "Skip for 30 days" — site-wide snooze; the promo
+	 *    may return after 30 days unless never-show was used.
+	 *
+	 * Never global; see banner_context() for scope.
 	 */
 	public function render_dashboard_banner() {
 		if ( $this->is_thinkrank_active() || $this->is_hidden() ) {
@@ -261,9 +298,15 @@ class ThinkRank_Promotion {
 			return;
 		}
 
-		if ( ! $this->banner_context() ) {
+		$context = $this->banner_context();
+		if ( ! $context ) {
 			return;
 		}
+
+		$later_action = 'ea' === $context ? 'eael_thinkrank_skip' : 'eael_thinkrank_never_show';
+		$later_label  = 'ea' === $context
+			? __( 'Skip for 30 days', 'essential-addons-for-elementor-lite' )
+			: __( 'Never show me again', 'essential-addons-for-elementor-lite' );
 
 		$nonce = wp_create_nonce( 'essential-addons-elementor' );
 		$open  = esc_url( admin_url( 'admin.php?page=' . self::ADMIN_PAGE ) );
@@ -275,10 +318,11 @@ class ThinkRank_Promotion {
 			<div class="eael-tr-banner__body">
 				<strong class="eael-tr-banner__title"><?php esc_html_e( 'Get found on Google & AI answers - configure your SEO', 'essential-addons-for-elementor-lite' ); ?></strong>
 				<span class="eael-tr-banner__desc"><?php esc_html_e( 'Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank.', 'essential-addons-for-elementor-lite' ); ?></span>
+				<span class="eael-tr-banner__attribution"><?php esc_html_e( 'Suggestion by Essential Addons', 'essential-addons-for-elementor-lite' ); ?></span>
 			</div>
 			<div class="eael-tr-banner__actions">
 				<button type="button" class="button button-primary eael-tr-banner__install"><?php esc_html_e( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ); ?></button>
-				<button type="button" class="eael-tr-banner__later"><?php esc_html_e( 'Maybe later', 'essential-addons-for-elementor-lite' ); ?></button>
+				<button type="button" class="eael-tr-banner__later" data-action="<?php echo esc_attr( $later_action ); ?>"><?php echo esc_html( $later_label ); ?></button>
 			</div>
 			<button type="button" class="notice-dismiss eael-tr-banner__dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dismiss', 'essential-addons-for-elementor-lite' ); ?></span></button>
 		</div>
@@ -302,6 +346,7 @@ class ThinkRank_Promotion {
 			.eael-tr-banner__body { display:flex; flex-direction:column; gap:2px; min-width:0; }
 			.eael-tr-banner__title { font-size:14px; color:#1d2327; }
 			.eael-tr-banner__desc { font-size:13px; color:#50575e; }
+			.eael-tr-banner__attribution { font-size:11px; color:#787c82; margin-top:2px; }
 			.eael-tr-banner__actions { display:flex; align-items:center; gap:10px; margin-left:auto; flex:none; }
 			.eael-tr-banner__install.button-primary { background:#4451ff; border-color:#4451ff; box-shadow:none; text-shadow:none; }
 			.eael-tr-banner__install.button-primary:hover { background:#3742d6; border-color:#3742d6; }
@@ -321,7 +366,8 @@ class ThinkRank_Promotion {
 			}
 			function dismiss() { post( 'eael_thinkrank_dismiss' ); el.parentNode && el.parentNode.removeChild( el ); }
 			el.querySelector( '.eael-tr-banner__dismiss' ).addEventListener( 'click', dismiss );
-			el.querySelector( '.eael-tr-banner__later' ).addEventListener( 'click', function () { post( 'eael_thinkrank_snooze' ); el.parentNode && el.parentNode.removeChild( el ); } );
+			var later = el.querySelector( '.eael-tr-banner__later' );
+			later.addEventListener( 'click', function () { post( later.dataset.action || 'eael_thinkrank_snooze' ); el.parentNode && el.parentNode.removeChild( el ); } );
 			el.querySelector( '.eael-tr-banner__install' ).addEventListener( 'click', function () {
 				var btn = this; btn.setAttribute( 'disabled', 'disabled' ); btn.textContent = '<?php echo $installing; ?>';
 				post( 'wpdeveloper_install_plugin' ).then( function ( res ) {
@@ -339,15 +385,22 @@ class ThinkRank_Promotion {
 	 *
 	 * Gated to users who can install plugins so the CTA is actionable. Being a
 	 * real dashboard widget, it is removable by the user via Screen Options.
+	 *
+	 * The promo (not-installed) state honors every opt-out — kill switch,
+	 * site-wide never-show/skip and per-user dismiss/snooze. Once ThinkRank is
+	 * actually active the widget is functional, not promotional, so it stays.
 	 */
 	public function register_dashboard_widget() {
 		if ( ! current_user_can( 'install_plugins' ) ) {
 			return;
 		}
+		if ( ! $this->is_thinkrank_active() && $this->is_hidden() ) {
+			return;
+		}
 
 		wp_add_dashboard_widget(
 			'eael_thinkrank_seo_check',
-			esc_html__( 'SEO Check', 'essential-addons-for-elementor-lite' ),
+			esc_html__( 'SEO Check (Essential Addons)', 'essential-addons-for-elementor-lite' ),
 			[ $this, 'render_dashboard_widget' ]
 		);
 	}
@@ -416,6 +469,10 @@ class ThinkRank_Promotion {
 				<span class="eael-tr-cta__label"><?php esc_html_e( 'Analyze my SEO', 'essential-addons-for-elementor-lite' ); ?></span>
 			</button>
 			<div class="eael-tr-notice" role="status" style="display:none;"></div>
+			<button type="button" class="button-link eael-tr-never"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'essential-addons-elementor' ) ); ?>">
+				<?php esc_html_e( 'Never show me again', 'essential-addons-for-elementor-lite' ); ?>
+			</button>
 		</div>
 		<?php
 		$this->widget_script();
@@ -477,6 +534,8 @@ class ThinkRank_Promotion {
 			.eael-tr-notice { margin-top: 12px; font-size: 12.5px; color: #50575e; }
 			.eael-tr-notice.is-error { color: #d63638; }
 			.eael-tr-notice.is-success { color: #00a32a; }
+			.eael-tr-never.button-link { display: block; margin: 10px auto 0; color: #787c82; font-size: 12px; text-decoration: underline; cursor: pointer; }
+			.eael-tr-never.button-link:hover { color: #50575e; }
 		</style>
 		<?php
 	}
@@ -492,6 +551,18 @@ class ThinkRank_Promotion {
 		?>
 		<script>
 		( function () {
+			var never = document.querySelector( '#eael_thinkrank_seo_check .eael-tr-never' );
+			if ( never && ! never.dataset.bound ) {
+				never.dataset.bound = '1';
+				never.addEventListener( 'click', function () {
+					var body = new URLSearchParams();
+					body.append( 'action', 'eael_thinkrank_never_show' );
+					body.append( 'security', never.dataset.nonce );
+					window.fetch( window.ajaxurl, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }, body: body.toString() } );
+					var widget = document.getElementById( 'eael_thinkrank_seo_check' );
+					widget && widget.parentNode && widget.parentNode.removeChild( widget );
+				} );
+			}
 			var btn = document.querySelector( '#eael_thinkrank_seo_check .eael-tr-install' );
 			if ( ! btn || btn.dataset.bound ) { return; }
 			btn.dataset.bound = '1';
