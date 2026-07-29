@@ -173,6 +173,14 @@ class WPDeveloper_Plugin_Installer
             if ( isset( $remote_urls[ $promotype ][ $slug ] ) ) {
                 wp_remote_get( $remote_urls[ $promotype ][ $slug ] );
             }
+
+            // ThinkRank schedules a one-time redirect to its own setup wizard on
+            // activation. When installed from Quick Setup the user must stay in
+            // EA's wizard, so consume that flag before it can hijack the next
+            // admin page load.
+            if ( 'quick-setup' === $promotype && 'thinkrank' === $slug && ! is_wp_error( $result ) ) {
+                delete_transient( 'thinkrank_setup_wizard_redirect' );
+            }
         }
 
 	    if ( is_wp_error( $result ) ) {

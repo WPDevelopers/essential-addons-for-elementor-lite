@@ -35,8 +35,12 @@ function ThinkRankContent({ activeTab, handleTabChange }) {
       const result = await response.json();
       if (result && result.success) {
         setStatus("done");
+        // Stay inside the wizard: advance to the next step instead of
+        // leaving for the ThinkRank dashboard.
         window.setTimeout(() => {
-          window.location.href = data.open_url;
+          const nextButton = document.createElement("button");
+          nextButton.setAttribute("data-next", isPluginsPromoStepVisible() ? "pluginspromo" : "integrations");
+          handleTabChange({ currentTarget: nextButton });
         }, 900);
       } else {
         setStatus("idle");
