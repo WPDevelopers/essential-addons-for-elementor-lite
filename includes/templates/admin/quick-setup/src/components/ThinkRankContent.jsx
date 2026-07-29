@@ -35,6 +35,16 @@ function ThinkRankContent({ activeTab, handleTabChange }) {
       const result = await response.json();
       if (result && result.success) {
         setStatus("done");
+        // The Integrations step rendered its plugin list from data localized
+        // before this install — tell it ThinkRank is now active.
+        if (localize?.eael_quick_setup_data?.thinkrank_content) {
+          localize.eael_quick_setup_data.thinkrank_content.is_active = true;
+        }
+        window.dispatchEvent(
+          new CustomEvent("eael-quick-setup:plugin-activated", {
+            detail: { slug: data.slug, basename: data.basename },
+          })
+        );
         // Stay inside the wizard: advance to the next step instead of
         // leaving for the ThinkRank dashboard.
         window.setTimeout(() => {
@@ -92,9 +102,9 @@ function ThinkRankContent({ activeTab, handleTabChange }) {
           type="button"
           data-next={ isPluginsPromoStepVisible() ? "pluginspromo" : "integrations" }
           onClick={handleTabChange}
-          disabled={status !== "idle"}
+          disabled={status === "installing"}
         >
-          {data.skip_label}
+          {status === "done" ? __("Next", "essential-addons-for-elementor-lite") : data.skip_label}
         </button>
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
