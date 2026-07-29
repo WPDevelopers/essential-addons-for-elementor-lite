@@ -135,10 +135,13 @@ trait Core
         ] );
         $tracker->set_notice_options(array(
             'notice' => __( 'Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>10% discount coupon</strong> for Pro upgrade if you allow.', 'essential-addons-for-elementor-lite' ),
-            'extra_notice' => __( 'We collect non-sensitive diagnostic data and plugin usage information.
-            Your site URL, WordPress & PHP version, plugins & themes and email address to send you the
-            discount coupon. This data lets us make sure this plugin always stays compatible with the most
-            popular plugins and themes. No spam, I promise.', 'essential-addons-for-elementor-lite' ),
+            'extra_notice' => __( 'Nothing is sent unless you allow it here. If you do, we collect:
+            your site URL, site name, WordPress, PHP and server version, site language, charset and text direction;
+            your list of <strong>active</strong> plugins, the number of inactive ones, and your active theme and its version;
+            which Essential Addons elements you use; and your admin email address, to send you the discount coupon.
+            We do not collect your visitors\' data, your content, or the names of your inactive plugins.
+            This data lets us keep the plugin compatible with the most popular plugins and themes.
+            You can withdraw consent at any time from the plugin settings. No spam, I promise.', 'essential-addons-for-elementor-lite' ),
         ));
         $tracker->init();
     }
