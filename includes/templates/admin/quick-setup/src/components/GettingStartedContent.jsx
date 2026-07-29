@@ -80,7 +80,13 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
             </h5>
             <p>
               {__(
-                "We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes, and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise.",
+                "Nothing is sent unless you allow it here. If you do, we collect: your site URL, site name, WordPress, PHP and server version, site language, charset and text direction; your list of active plugins, the number of inactive ones, and your active theme and its version; which Essential Addons elements you use; and your admin email address, to send you the discount coupon.",
+                "essential-addons-for-elementor-lite"
+              )}
+            </p>
+            <p>
+              {__(
+                "We do not collect your visitors' data, your content, or the names of your inactive plugins. This data lets us keep the plugin compatible with the most popular plugins and themes. You can withdraw consent at any time from the plugin settings. No spam, we promise.",
                 "essential-addons-for-elementor-lite"
               )}
             </p>
