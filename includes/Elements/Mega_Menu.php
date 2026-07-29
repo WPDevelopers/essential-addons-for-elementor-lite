@@ -325,13 +325,17 @@ class Mega_Menu extends Widget_Base {
 		$repeater->add_control(
 			'editor_preview_open',
 			[
-				'label'        => esc_html__( 'Keep Panel Open (Editor Only)', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Preview Dropdown Here', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
+				// Off by default on purpose. The panel is an absolute overlay, so
+				// an open preview sits on top of the page — including the very
+				// section a Section ID dropdown points at. Opening it is the
+				// user's call, one dropdown at a time.
 				'default'      => '',
-				'description'  => esc_html__( 'Holds this dropdown open inside the Elementor editor so you can style it. Has no effect on the live site.', 'essential-addons-for-elementor-lite' ),
+				'description'  => esc_html__( 'Switch on to open this dropdown inside the editor so you can style it. It overlays the page while open, so turn it off again when you need to reach what is underneath. Editor only — it never affects the live site.', 'essential-addons-for-elementor-lite' ),
 				'condition'    => [
 					'content_source!' => 'none',
 				],

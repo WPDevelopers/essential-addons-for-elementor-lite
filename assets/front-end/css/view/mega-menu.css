@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .eael-mega-menu-container {
   position: relative;
 }
@@ -136,6 +137,78 @@
 }
 .eael-mega-menu__src-hidden {
   display: none !important;
+}
+body.elementor-editor-active .eael-mega-menu__preview-clone {
+  pointer-events: none;
+}
+body.elementor-editor-active .eael-mega-menu__panel--editor-open {
+  outline: 1px solid rgba(31, 34, 41, 0.55);
+  outline-offset: -1px;
+}
+body.elementor-editor-active .eael-mega-menu__panel--editor-open::before {
+  content: "Preview — switch off to reach the page underneath";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  max-width: 100%;
+  padding: 3px 9px;
+  border-radius: 0 0 3px 0;
+  background-color: rgba(31, 34, 41, 0.85);
+  color: #ffffff;
+  font-family: Roboto, -apple-system, sans-serif;
+  font-size: 11px;
+  line-height: 1.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+body.elementor-editor-active .eael-mega-menu__linked-src {
+  position: relative;
+}
+body.elementor-editor-active .eael-mega-menu__linked-src::before {
+  content: "⇢ Dropdown for “" attr(data-eael-mega-label) "”";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  max-width: 100%;
+  padding: 3px 9px;
+  border-radius: 0 0 3px 0;
+  background-color: rgba(31, 34, 41, 0.85);
+  color: #ffffff;
+  font-family: Roboto, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+body.elementor-editor-active .eael-mega-menu__panel.is-unresolved {
+  min-height: 60px;
+  border: 2px dashed #e01e5a;
+}
+body.elementor-editor-active .eael-mega-menu__panel.is-unresolved::after {
+  content: "Linked section unavailable — see the note above this menu";
+  display: block;
+  padding: 20px;
+  color: #e01e5a;
+  font-size: 12px;
+  text-align: center;
+}
+body.elementor-editor-active .eael-mega-menu__diagnostics {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-left: 3px solid #e01e5a;
+  border-radius: 3px;
+  background-color: #fdeaef;
+  color: #93123a;
+  font-family: Roboto, -apple-system, sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
 }
 .eael-mega-menu-notice {
   padding: 15px;

@@ -1,163 +1,271 @@
 .eael-mega-menu-container {
-    position: relative;
+	position: relative;
 
-    .eael-mega-menu {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: var(--eael-mm-justify, flex-start);
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
+	.eael-mega-menu {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: var(--eael-mm-justify, flex-start);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
 
-    .eael-mega-menu__item {
-        position: relative;
-        flex-grow: var(--eael-mm-item-grow, 0);
-        margin: 0;
-        list-style: none;
-    }
+	.eael-mega-menu__item {
+		position: relative;
+		flex-grow: var(--eael-mm-item-grow, 0);
+		margin: 0;
+		list-style: none;
+	}
 
-    .eael-mega-menu__item-link {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        text-decoration: none;
-        transition:
-            color 0.2s ease-in-out,
-            background-color 0.2s ease-in-out,
-            border-color 0.2s ease-in-out,
-            box-shadow 0.2s ease-in-out;
+	.eael-mega-menu__item-link {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		text-decoration: none;
+		transition:
+			color 0.2s ease-in-out,
+			background-color 0.2s ease-in-out,
+			border-color 0.2s ease-in-out,
+			box-shadow 0.2s ease-in-out;
 
-        &:hover,
-        &:focus {
-            text-decoration: none;
-        }
-    }
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
+	}
 
-    .eael-mega-menu__item-text {
-        display: inline-block;
-    }
+	.eael-mega-menu__item-text {
+		display: inline-block;
+	}
 
-    .eael-mega-menu__indicator {
-        display: inline-flex;
-        align-items: center;
-        margin-left: 6px;
-        line-height: 1;
-    }
+	.eael-mega-menu__indicator {
+		display: inline-flex;
+		align-items: center;
+		margin-left: 6px;
+		line-height: 1;
+	}
 
-    .eael-mega-menu__panel {
-        position: absolute;
-        top: calc(100% + var(--eael-mm-offset-y, 0px));
-        z-index: 999;
-        width: max-content;
-        min-width: 100%;
-        max-width: 100vw;
-        background-color: #ffffff;
-        opacity: 0;
-        visibility: hidden;
-        text-align: left;
-        // `translate` / `scale` are used for the open animation instead of
-        // `transform`, so JS stays free to use `transform` for placement.
-        transition:
-            opacity var(--eael-mm-duration, 300ms) ease-in-out,
-            visibility var(--eael-mm-duration, 300ms) ease-in-out,
-            translate var(--eael-mm-duration, 300ms) ease-in-out,
-            scale var(--eael-mm-duration, 300ms) ease-in-out;
+	.eael-mega-menu__panel {
+		position: absolute;
+		top: calc(100% + var(--eael-mm-offset-y, 0px));
+		z-index: 999;
+		width: max-content;
+		min-width: 100%;
+		max-width: 100vw;
+		background-color: #ffffff;
+		opacity: 0;
+		visibility: hidden;
+		text-align: left;
+		// `translate` / `scale` are used for the open animation instead of
+		// `transform`, so JS stays free to use `transform` for placement.
+		transition:
+			opacity var(--eael-mm-duration, 300ms) ease-in-out,
+			visibility var(--eael-mm-duration, 300ms) ease-in-out,
+			translate var(--eael-mm-duration, 300ms) ease-in-out,
+			scale var(--eael-mm-duration, 300ms) ease-in-out;
 
-        // `.is-open` is set by the JS on the front end.
-        // `--editor-open` comes from the per-item "Keep Panel Open" switch and
-        // is only ever printed inside the Elementor editor.
-        &.is-open,
-        &--editor-open {
-            opacity: 1;
-            visibility: visible;
-            translate: 0 0;
-            scale: 1;
-        }
+		// `.is-open` is set by the JS on the front end.
+		// `--editor-open` comes from the per-item "Keep Panel Open" switch and
+		// is only ever printed inside the Elementor editor.
+		&.is-open,
+		&--editor-open {
+			opacity: 1;
+			visibility: visible;
+			translate: 0 0;
+			scale: 1;
+		}
 
-        // Saved-template output drops a container / section in here — let it fill
-        // the panel instead of re-applying the theme's content width.
-        > .e-con,
-        > .elementor-section,
-        > .elementor {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
+		// Saved-template output drops a container / section in here — let it fill
+		// the panel instead of re-applying the theme's content width.
+		> .e-con,
+		> .elementor-section,
+		> .elementor {
+			width: 100% !important;
+			max-width: 100% !important;
+		}
 
-        // No-JS resting values only — mega-menu.js measures and overrides both
-        // of these on open, so no `transform` is used here (it would compound
-        // with the offset JS sets).
-        &--full {
-            left: 0;
-            width: 100vw;
-        }
+		// No-JS resting values only — mega-menu.js measures and overrides both
+		// of these on open, so no `transform` is used here (it would compound
+		// with the offset JS sets).
+		&--full {
+			left: 0;
+			width: 100vw;
+		}
 
-        &--pos-left {
-            left: 0;
-        }
+		&--pos-left {
+			left: 0;
+		}
 
-        &--pos-center {
-            left: 50%;
-            transform: translateX(-50%);
-        }
+		&--pos-center {
+			left: 50%;
+			transform: translateX(-50%);
+		}
 
-        &--pos-right {
-            right: 0;
-        }
-    }
+		&--pos-right {
+			right: 0;
+		}
+	}
 
-    // A linked Container that the JS moved into a panel.
-    .eael-mega-menu__adopted {
-        width: 100%;
-        max-width: 100%;
-    }
+	// A linked Container that the JS moved into a panel.
+	.eael-mega-menu__adopted {
+		width: 100%;
+		max-width: 100%;
+	}
 
-    // Panel open animations. The closed state is declared here and `.is-open`
-    // (set by mega-menu.js) returns each property to its resting value.
-    &.eael-mega-menu--anim-none .eael-mega-menu__panel {
-        transition: none;
-    }
+	// Panel open animations. The closed state is declared here and `.is-open`
+	// (set by mega-menu.js) returns each property to its resting value.
+	&.eael-mega-menu--anim-none .eael-mega-menu__panel {
+		transition: none;
+	}
 
-    &.eael-mega-menu--anim-slide-down .eael-mega-menu__panel {
-        translate: 0 -10px;
-    }
+	&.eael-mega-menu--anim-slide-down .eael-mega-menu__panel {
+		translate: 0 -10px;
+	}
 
-    &.eael-mega-menu--anim-slide-up .eael-mega-menu__panel {
-        translate: 0 10px;
-    }
+	&.eael-mega-menu--anim-slide-up .eael-mega-menu__panel {
+		translate: 0 10px;
+	}
 
-    &.eael-mega-menu--anim-zoom .eael-mega-menu__panel {
-        scale: 0.96;
-    }
+	&.eael-mega-menu--anim-zoom .eael-mega-menu__panel {
+		scale: 0.96;
+	}
 
-    &.eael-mega-menu--horizontal {
-        .eael-mega-menu {
-            flex-direction: row;
-        }
-    }
+	&.eael-mega-menu--horizontal {
+		.eael-mega-menu {
+			flex-direction: row;
+		}
+	}
 
-    &.eael-mega-menu--vertical {
-        .eael-mega-menu {
-            flex-direction: column;
-            align-items: stretch;
-            justify-content: flex-start;
-        }
-    }
+	&.eael-mega-menu--vertical {
+		.eael-mega-menu {
+			flex-direction: column;
+			align-items: stretch;
+			justify-content: flex-start;
+		}
+	}
 }
 
 // A linked section the JS deliberately did not move (see the mobile "hide"
 // behaviour). It must not reappear in its original spot.
 .eael-mega-menu__src-hidden {
-    display: none !important;
+	display: none !important;
+}
+
+// ---------------------------------------------------------------------
+// Editor-only helpers
+//
+// `body.elementor-editor-active` exists only inside the Elementor editor
+// preview, so none of this can reach a visitor. The classes themselves are
+// set by mega-menu.js.
+// ---------------------------------------------------------------------
+body.elementor-editor-active {
+	// The read-only copy shown inside a panel when the preview switch is on.
+	.eael-mega-menu__preview-clone {
+		// Clicking the copy would mislead — the original is the editable one.
+		pointer-events: none;
+	}
+
+	// An open preview is an overlay sitting on the page, so it says so. Kept
+	// neutral dark rather than tinted, so it never recolours the content.
+	.eael-mega-menu__panel--editor-open {
+		outline: 1px solid rgba(31, 34, 41, 0.55);
+		outline-offset: -1px;
+
+		&::before {
+			content: "Preview — switch off to reach the page underneath";
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 4;
+			max-width: 100%;
+			padding: 3px 9px;
+			border-radius: 0 0 3px 0;
+			background-color: rgba(31, 34, 41, 0.85);
+			color: #ffffff;
+			font-family: Roboto, -apple-system, sans-serif;
+			font-size: 11px;
+			line-height: 1.6;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			pointer-events: none;
+		}
+	}
+
+	// The real section, left exactly where it is so it stays visible and
+	// editable. Only a small corner tag is added — no tint, no overlay, and
+	// nothing that covers the content.
+	.eael-mega-menu__linked-src {
+		position: relative;
+
+		&::before {
+			content: "⇢ Dropdown for “" attr(data-eael-mega-label) "”";
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 3;
+			max-width: 100%;
+			padding: 3px 9px;
+			border-radius: 0 0 3px 0;
+			background-color: rgba(31, 34, 41, 0.85);
+			color: #ffffff;
+			font-family:
+				Roboto,
+				-apple-system,
+				sans-serif;
+			font-size: 11px;
+			font-weight: 400;
+			line-height: 1.6;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			pointer-events: none;
+		}
+	}
+
+	// A panel whose CSS ID did not resolve.
+	.eael-mega-menu__panel.is-unresolved {
+		min-height: 60px;
+		border: 2px dashed #e01e5a;
+
+		// Deliberately generic — the exact reason (missing / already used /
+		// self-referencing) is spelled out in the diagnostics note above the
+		// menu, so it is not restated, and cannot go stale, here.
+		&::after {
+			content: "Linked section unavailable — see the note above this menu";
+			display: block;
+			padding: 20px;
+			color: #e01e5a;
+			font-size: 12px;
+			text-align: center;
+		}
+	}
+
+	// Shown only when something actually needs fixing. Never to confirm that
+	// things worked — that would just be noise in the canvas.
+	.eael-mega-menu__diagnostics {
+		margin-bottom: 10px;
+		padding: 8px 12px;
+		border-left: 3px solid #e01e5a;
+		border-radius: 3px;
+		background-color: #fdeaef;
+		color: #93123a;
+		font-family:
+			Roboto,
+			-apple-system,
+			sans-serif;
+		font-size: 12px;
+		line-height: 1.7;
+	}
 }
 
 .eael-mega-menu-notice {
-    padding: 15px;
-    border: 1px dashed #d5d8dc;
-    color: #6d7882;
-    font-size: 13px;
-    text-align: center;
+	padding: 15px;
+	border: 1px dashed #d5d8dc;
+	color: #6d7882;
+	font-size: 13px;
+	text-align: center;
 }
 
 // RTL
@@ -165,28 +273,28 @@
 // so the rules above already mirror themselves. Only text flow needs a nudge here;
 // icon / badge / indicator offsets get their RTL rules in Step 9.
 .rtl {
-    .eael-mega-menu-container {
-        .eael-mega-menu__item-link {
-            text-align: right;
-        }
+	.eael-mega-menu-container {
+		.eael-mega-menu__item-link {
+			text-align: right;
+		}
 
-        .eael-mega-menu__indicator {
-            margin-right: 6px;
-            margin-left: 0;
-        }
+		.eael-mega-menu__indicator {
+			margin-right: 6px;
+			margin-left: 0;
+		}
 
-        .eael-mega-menu__panel {
-            text-align: right;
+		.eael-mega-menu__panel {
+			text-align: right;
 
-            &--pos-left {
-                right: 0;
-                left: auto;
-            }
+			&--pos-left {
+				right: 0;
+				left: auto;
+			}
 
-            &--pos-right {
-                right: auto;
-                left: 0;
-            }
-        }
-    }
+			&--pos-right {
+				right: auto;
+				left: 0;
+			}
+		}
+	}
 }

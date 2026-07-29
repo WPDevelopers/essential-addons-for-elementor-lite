@@ -7,6 +7,10 @@
  *   3. Works out how wide each panel should be and where to place it.
  *   4. Closes panels again on mouse-out, outside click, Escape, or tab-out.
  */
+// Editor only. Keyed by widget id, so a widget can drop its own listener
+// before registering a fresh one. See the editor block further down.
+var editorRefreshListeners = {};
+
 var MegaMenu = function ($scope, $) {
 	// -----------------------------------------------------------------
 	// 1. Find the elements we need
@@ -50,6 +54,10 @@ var MegaMenu = function ($scope, $) {
 	// How long to wait after a resize before measuring again. Resize fires
 	// many times per second, and measuring on every one of them is wasteful.
 	var RESIZE_DELAY = 150;
+
+	// Editor only: how long to wait after an edit before rebuilding the
+	// linked-section previews. Typing in a field fires many changes.
+	var RECLONE_DELAY = 300;
 
 	// Holds the pending "close this panel" timer, so we can cancel it.
 	var closeTimer = null;
@@ -328,6 +336,211 @@ var MegaMenu = function ($scope, $) {
 	}
 
 	// -----------------------------------------------------------------
+	// 8. Editor preview for linked sections
+	// -----------------------------------------------------------------
+	//
+	// On the front end we MOVE the linked section into the panel. In the
+	// editor we must not: moving it would take it out of Elementor's own
+	// element tree, and you could no longer click or edit it. So the editor
+	// shows a throwaway COPY inside the panel, and the real section stays
+	// exactly where it is.
+
+	// Put a "⇢ Dropdown for Shop" marker on the real section, so it is obvious
+	// in the editor why that section is sitting there on its own.
+	function tagLinkedSource(section, label) {
+		section.classList.add("eael-mega-menu__linked-src");
+		section.dataset.eaelMegaLabel = label;
+	}
+
+	// Clean a freshly made copy.
+	//
+	// Two jobs:
+	//  1. Remove every attribute Elementor uses to recognise one of its own
+	//     elements. A copy that kept them would look to the editor like a
+	//     second, duplicate element.
+	//  2. Remove our own source marker, or the copy would show the
+	//     "⇢ Dropdown for" label on itself, inside the panel.
+	function stripEditorAttributes(node) {
+		var attributes = [
+			"id",
+			"data-id",
+			"data-element_type",
+			"data-model-cid",
+			"data-widget_type",
+			"data-eael-mega-label",
+		];
+
+		// The copy's own attributes, then every descendant's.
+		var nodes = [node].concat(
+			Array.prototype.slice.call(node.querySelectorAll("*"))
+		);
+
+		for (var i = 0; i < nodes.length; i++) {
+			for (var a = 0; a < attributes.length; a++) {
+				nodes[i].removeAttribute(attributes[a]);
+			}
+
+			nodes[i].classList.remove("eael-mega-menu__linked-src");
+			nodes[i].classList.remove("eael-mega-menu__preview-clone");
+		}
+	}
+
+	// Put a read-only copy of the section inside the panel, so the dropdown can
+	// be seen and styled where it will actually appear. Only ever called when
+	// the user switched the preview on for that item.
+	function showSectionCopyInPanel(panel, section) {
+		var copy = section.cloneNode(true);
+
+		stripEditorAttributes(copy);
+		copy.classList.add("eael-mega-menu__preview-clone");
+
+		// Replace whatever the previous run put here.
+		panel.innerHTML = "";
+		panel.appendChild(copy);
+	}
+
+	// Is this item's preview switched on?
+	function isPreviewRequested(panel) {
+		return panel.classList.contains("eael-mega-menu__panel--editor-open");
+	}
+
+	// Check one menu item's linked section, label it in the page, and copy it
+	// into the panel IF the user asked for a preview.
+	//
+	// The copy is deliberately not made by default. The panel is an absolute
+	// overlay, so an open preview covers the page — including the very section
+	// it points at. Left off, the real section stays visible and editable right
+	// where the user built it.
+	//
+	// Returns what happened, so the note can say what needs fixing:
+	//   "ok"        — section found and labelled
+	//   "missing"   — no element on the page has that CSS ID
+	//   "duplicate" — an earlier item already uses that section
+	//   "self"      — this menu is inside the section it points at
+	function buildEditorPreview(item, claimedIds) {
+		var panel = getPanel(item);
+		var sectionId = panel.getAttribute("data-mega-section");
+
+		if (!sectionId) {
+			return "skip";
+		}
+
+		var section = document.getElementById(sectionId);
+
+		// Nothing on the page has that CSS ID.
+		if (!section) {
+			markUnresolved(panel);
+			return "missing";
+		}
+
+		// This menu lives inside the section it points at.
+		if (section.contains(container)) {
+			markUnresolved(panel);
+			return "self";
+		}
+
+		// An earlier menu item already claimed this section.
+		if (claimedIds.indexOf(sectionId) !== -1) {
+			markUnresolved(panel);
+			return "duplicate";
+		}
+
+		claimedIds.push(sectionId);
+
+		tagLinkedSource(section, getLink(item).textContent.trim());
+
+		if (isPreviewRequested(panel)) {
+			showSectionCopyInPanel(panel, section);
+		}
+
+		return "ok";
+	}
+
+	// Editor-only note above the menu. It appears only when there is something
+	// to fix, or something the user probably does not know yet — never just to
+	// confirm that things worked. Never rendered on the live site.
+	function renderDiagnostics(result) {
+		var existing = container.querySelector(".eael-mega-menu__diagnostics");
+
+		if (existing) {
+			existing.remove();
+		}
+
+		var problems = [];
+
+		// Each problem is worded as the thing the user needs to change.
+		if (result.missing.length) {
+			problems.push(
+				"No element on this page has the CSS ID " + result.missing.join(" or ") +
+					". Open the Container you want as the dropdown and set Advanced → CSS ID."
+			);
+		}
+
+		if (result.duplicate.length) {
+			problems.push(
+				"Two menu items point at " + result.duplicate.join(", ") +
+					". A section can only feed one dropdown — give the second one its own Container."
+			);
+		}
+
+		if (result.self.length) {
+			problems.push(
+				"This menu sits inside " + result.self.join(", ") +
+					", so that section cannot also be its dropdown. Move the menu outside it."
+			);
+		}
+
+		// Nothing wrong — say nothing. The dropdown shows itself, so there is
+		// no longer anything the user needs to be told.
+		if (problems.length === 0) {
+			return;
+		}
+
+		var box = document.createElement("div");
+
+		box.className = "eael-mega-menu__diagnostics has-problem";
+
+		// textContent, not innerHTML — the IDs come from user input.
+		box.textContent = problems.join("  ");
+
+		container.insertBefore(box, container.firstChild);
+	}
+
+	// Rebuild every linked-section preview and refresh the diagnostics note.
+	function refreshEditorPreviews() {
+		var claimedIds = [];
+		var result = {
+			found: 0,
+			missing: [],
+			duplicate: [],
+			self: [],
+		};
+
+		$panelItems.each(function () {
+			var panel = getPanel(this);
+			var sectionId = panel.getAttribute("data-mega-section");
+
+			if (!sectionId) {
+				return;
+			}
+
+			// Start clean so a section that has since appeared can resolve.
+			panel.classList.remove("is-unresolved");
+
+			var status = buildEditorPreview(this, claimedIds);
+
+			if (status === "ok") {
+				result.found++;
+			} else if (result[status]) {
+				result[status].push(sectionId);
+			}
+		});
+
+		renderDiagnostics(result);
+		positionEditorOpenPanels();
+	}
+
+	// -----------------------------------------------------------------
 	// 7. Wire up the events
 	// -----------------------------------------------------------------
 
@@ -341,7 +554,28 @@ var MegaMenu = function ($scope, $) {
 	// moment you moved the mouse towards the style controls. So we skip all
 	// the open/close wiring here and only keep the panels correctly sized.
 	if (window.isEditMode) {
-		positionEditorOpenPanels();
+		refreshEditorPreviews();
+
+		// Editing the linked section re-renders it, which leaves our copy
+		// stale. Elementor fires this action for every element it re-renders,
+		// so we rebuild shortly after any edit anywhere on the page.
+		var onElementRendered = eael.debounce(refreshEditorPreviews, RECLONE_DELAY);
+
+		// Remove the previous run's listener first. This file runs again every
+		// time the widget is edited, and these listeners are global — without
+		// this they would build up one per edit.
+		if (editorRefreshListeners[widgetId]) {
+			elementorFrontend.hooks.removeAction(
+				"frontend/element_ready/global",
+				editorRefreshListeners[widgetId]
+			);
+		}
+
+		editorRefreshListeners[widgetId] = onElementRendered;
+		elementorFrontend.hooks.addAction(
+			"frontend/element_ready/global",
+			onElementRendered
+		);
 
 		$(window).on(
 			"resize" + eventNs,
