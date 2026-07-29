@@ -367,10 +367,7 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 
 = 6.7.2 - 29/07/2026 =
 
-- Fixed: Quick Setup Wizard | Enabling the SEO tool from the Boost SEO step redirected out of the wizard instead of continuing to the next step
-- Fixed: Quick Setup Wizard | Integrations step did not reflect the SEO tool's status after enabling it, and revisiting the Boost SEO step left the navigation buttons stuck
-- Fixed: Enabling a plugin that was already installed but inactive showed a "not allowed to access this page" error instead of activating it
-- Improved: Refined the SEO promo banner and renamed the dashboard widget to "SEO Check"
+- Improved: EA Login/Register Form | Strengthened user registration security - thanks to `Jakub Herman` for the security research
 - Few minor bug fixes & improvements
 
 = 6.7.1 - 28/07/2026 =
