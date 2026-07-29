@@ -92,6 +92,24 @@ class WPDeveloper_Plugin_Installer
         include_once ABSPATH . 'wp-admin/includes/file.php';
         include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
         include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
+        include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+        // Already installed? Plugin_Upgrader::install() would return null
+        // (not true, not WP_Error), so the caller would report success while
+        // the plugin was never activated. Activate the existing copy instead.
+        foreach ( array_keys( get_plugins() ) as $installed_basename ) {
+            if ( 0 !== strpos( $installed_basename, $slug . '/' ) ) {
+                continue;
+            }
+
+            if ( ! $active || is_plugin_active( $installed_basename ) ) {
+                return true;
+            }
+
+            $activated = activate_plugin( $installed_basename, '', false, false );
+
+            return is_wp_error( $activated ) ? $activated : true;
+        }
 
         $plugin_data = $this->get_remote_plugin_data($slug);
 
