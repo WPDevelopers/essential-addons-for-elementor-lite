@@ -324,7 +324,6 @@ class ThinkRank_Promotion {
 				<button type="button" class="button button-primary eael-tr-banner__install"><?php esc_html_e( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ); ?></button>
 				<button type="button" class="eael-tr-banner__later" data-action="<?php echo esc_attr( $later_action ); ?>"><?php echo esc_html( $later_label ); ?></button>
 			</div>
-			<button type="button" class="notice-dismiss eael-tr-banner__dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dismiss', 'essential-addons-for-elementor-lite' ); ?></span></button>
 		</div>
 		<?php
 		$this->banner_assets();
@@ -341,7 +340,7 @@ class ThinkRank_Promotion {
 		$label      = esc_js( __( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ) );
 		?>
 		<style>
-			.eael-tr-banner.notice { display:flex; align-items:center; gap:16px; padding:14px 40px 14px 16px; border-left-color:#4451ff; position:relative; }
+			.eael-tr-banner.notice { display:flex; align-items:center; gap:16px; padding:14px 16px; border-left-color:#4451ff; position:relative; }
 			.eael-tr-banner__icon img { display:block; border-radius:8px; }
 			.eael-tr-banner__body { display:flex; flex-direction:column; gap:2px; min-width:0; }
 			.eael-tr-banner__title { font-size:14px; color:#1d2327; }
@@ -364,8 +363,6 @@ class ThinkRank_Promotion {
 				if ( 'wpdeveloper_install_plugin' === action ) { b.append( 'slug', el.dataset.slug ); }
 				return window.fetch( window.ajaxurl, { method:'POST', credentials:'same-origin', headers:{ 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8' }, body:b.toString() } ).then( function(r){ return r.json(); } );
 			}
-			function dismiss() { post( 'eael_thinkrank_dismiss' ); el.parentNode && el.parentNode.removeChild( el ); }
-			el.querySelector( '.eael-tr-banner__dismiss' ).addEventListener( 'click', dismiss );
 			var later = el.querySelector( '.eael-tr-banner__later' );
 			later.addEventListener( 'click', function () { post( later.dataset.action || 'eael_thinkrank_snooze' ); el.parentNode && el.parentNode.removeChild( el ); } );
 			el.querySelector( '.eael-tr-banner__install' ).addEventListener( 'click', function () {
