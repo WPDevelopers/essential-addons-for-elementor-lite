@@ -3213,6 +3213,7 @@ class Woo_Checkout extends Widget_Base {
 		if ( $settings['eael_enable_checkout_fields_reorder'] === 'yes' ){
 			global $post;
 			$eael_checkout_fields = [];
+			$checkout_field_keys  = [ 'billing' => [], 'shipping' => [] ];
 			if ( count( $settings['ea_billing_fields_list'] ) > 0 ) {
 				foreach ( $settings['ea_billing_fields_list'] as $item ) {
 					$checkout_field_keys['billing'][ $item['field_key'] ] = $item['field_class'];
@@ -3232,10 +3233,12 @@ class Woo_Checkout extends Widget_Base {
 					];
 				}
 			}
-            update_post_meta( $post->ID, '_eael_checkout_fields_settings', $eael_checkout_fields );
+			if ( $post instanceof \WP_Post ) {
+				update_post_meta( $post->ID, '_eael_checkout_fields_settings', $eael_checkout_fields );
+			}
 			$fields = WC()->checkout()->get_checkout_fields();
 
-			$extra_billing_fields = array_diff( array_keys($fields['billing']), array_keys($checkout_field_keys['billing']) );
+			$extra_billing_fields = array_diff( array_keys( isset( $fields['billing'] ) ? $fields['billing'] : [] ), array_keys($checkout_field_keys['billing']) );
 			if ( count($extra_billing_fields) > 0 ){
 				foreach ( $extra_billing_fields as $_field_key ){
 					if ( isset( $fields['billing'][$_field_key]['class'] ) ) {
@@ -3249,7 +3252,7 @@ class Woo_Checkout extends Widget_Base {
 				}
 			}
 
-			$extra_shipping_fields = array_diff( array_keys($fields['shipping']), array_keys($checkout_field_keys['shipping']) );
+			$extra_shipping_fields = array_diff( array_keys( isset( $fields['shipping'] ) ? $fields['shipping'] : [] ), array_keys($checkout_field_keys['shipping']) );
 			if ( count($extra_shipping_fields) > 0 ){
 				foreach ( $extra_shipping_fields as $_field_key ){
 					if ( isset( $fields['shipping'][$_field_key]['class'] ) ) {
@@ -3267,7 +3270,9 @@ class Woo_Checkout extends Widget_Base {
 		}
         else{
 	        global $post;
-	        delete_post_meta( $post->ID, '_eael_checkout_fields_settings' );
+	        if ( $post instanceof \WP_Post ) {
+		        delete_post_meta( $post->ID, '_eael_checkout_fields_settings' );
+	        }
         }
 
 		$button_texts = [
