@@ -67,7 +67,7 @@
 
 		return el( 'div', { className: 'eael-tr-gb' },
 			el( 'p', { className: 'eael-tr-gb__desc' },
-				__( 'Add AI SEO analysis to this page with ThinkRank - titles, meta, schema & readability. Free.', 'essential-addons-for-elementor-lite' )
+				__( 'Add AI SEO analysis to this page with ThinkRank - titles, meta, schema & readability.', 'essential-addons-for-elementor-lite' )
 			),
 			'error' === state.status ? el( 'p', { className: 'eael-tr-gb__err' },
 				__( 'Could not install automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' )
