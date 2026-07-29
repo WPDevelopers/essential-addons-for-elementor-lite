@@ -670,9 +670,57 @@ class Mega_Menu extends Widget_Base {
 				'default'   => 'dropdown',
 				'options'   => [
 					'dropdown' => esc_html__( 'Dropdown (pushes the page down)', 'essential-addons-for-elementor-lite' ),
+					'offcanvas' => esc_html__( 'Off-Canvas (slides in from the side)', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
 					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_offcanvas_side',
+			[
+				'label'     => esc_html__( 'Slide In From', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'left',
+				'options'   => [
+					'left'  => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+					'right' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_mega_menu_breakpoint!' => 'none',
+					'eael_mega_menu_mobile_type' => 'offcanvas',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_offcanvas_width',
+			[
+				'label'      => esc_html__( 'Drawer Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [
+						'min' => 200,
+						'max' => 600,
+					],
+					'%'  => [
+						'min' => 30,
+						'max' => 100,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 320,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-drawer-width: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_mega_menu_breakpoint!' => 'none',
+					'eael_mega_menu_mobile_type' => 'offcanvas',
 				],
 			]
 		);
@@ -737,6 +785,40 @@ class Mega_Menu extends Widget_Base {
 				],
 				'condition'            => [
 					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_mobile_panel_behavior',
+			[
+				'label'       => esc_html__( 'Dropdowns On Mobile', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'accordion',
+				'options'     => [
+					'accordion' => esc_html__( 'Accordion (open inside the menu)', 'essential-addons-for-elementor-lite' ),
+					'hide'      => esc_html__( 'Hide (menu links only)', 'essential-addons-for-elementor-lite' ),
+				],
+				'description' => esc_html__( 'Hide keeps linked-section dropdowns out of the page on small screens, which is lighter. Those items become plain links. Saved Template dropdowns are rendered by the server and are unaffected.', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_body_scroll_lock',
+			[
+				'label'        => esc_html__( 'Lock Page Scroll', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'description'  => esc_html__( 'Stops the page behind the drawer from scrolling while it is open. The reading position is restored on close.', 'essential-addons-for-elementor-lite' ),
+				'condition'    => [
+					'eael_mega_menu_breakpoint!' => 'none',
+					'eael_mega_menu_mobile_type' => 'offcanvas',
 				],
 			]
 		);
@@ -1088,6 +1170,109 @@ class Mega_Menu extends Widget_Base {
 				'size_units' => [ 'px', 'em' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-mega-menu--is-mobile .eael-mega-menu__item-link' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_drawer_heading',
+			[
+				'label'     => esc_html__( 'Drawer Close Button', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'eael_mega_menu_mobile_type' => 'offcanvas',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_drawer_header_padding',
+			[
+				'label'      => esc_html__( 'Header Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'default'    => [
+					'top'      => 10,
+					'right'    => 10,
+					'bottom'   => 10,
+					'left'     => 10,
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__drawer-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_mega_menu_mobile_type' => 'offcanvas',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_drawer_close_size',
+			[
+				'label'      => esc_html__( 'Close Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 10,
+						'max' => 60,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 22,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__close'     => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-mega-menu__close svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_mega_menu_mobile_type' => 'offcanvas',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_drawer_close_color',
+			[
+				'label'     => esc_html__( 'Close Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-mega-menu__close'     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-mega-menu__close svg' => 'fill: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_mega_menu_mobile_type' => 'offcanvas',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_overlay_heading',
+			[
+				'label'     => esc_html__( 'Drawer Overlay', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'eael_mega_menu_mobile_type' => 'offcanvas',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_mobile_overlay_color',
+			[
+				'label'     => esc_html__( 'Overlay Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => 'rgba(0, 0, 0, 0.5)',
+				'selectors' => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-overlay-color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_mega_menu_mobile_type' => 'offcanvas',
 				],
 			]
 		);
@@ -1952,6 +2137,10 @@ class Mega_Menu extends Widget_Base {
 		$breakpoint_width = $this->get_breakpoint_width( $breakpoint );
 		$mobile_type      = ! empty( $settings['eael_mega_menu_mobile_type'] ) ? $settings['eael_mega_menu_mobile_type'] : 'dropdown';
 		$close_on_click   = ! empty( $settings['eael_mega_menu_close_on_click'] ) ? 'yes' : 'no';
+		$panel_behavior   = ! empty( $settings['eael_mega_menu_mobile_panel_behavior'] ) ? $settings['eael_mega_menu_mobile_panel_behavior'] : 'accordion';
+		$scroll_lock      = ! empty( $settings['eael_mega_menu_body_scroll_lock'] ) ? 'yes' : 'no';
+		$offcanvas_side   = ! empty( $settings['eael_mega_menu_offcanvas_side'] ) ? $settings['eael_mega_menu_offcanvas_side'] : 'left';
+		$is_offcanvas     = $breakpoint_width && 'offcanvas' === $mobile_type;
 
 		$container_classes = [
 			'eael-mega-menu-container',
@@ -1961,6 +2150,11 @@ class Mega_Menu extends Widget_Base {
 
 		if ( $breakpoint_width ) {
 			$container_classes[] = 'eael-mega-menu--hamburger-' . sanitize_html_class( $breakpoint );
+			$container_classes[] = 'eael-mega-menu--mobile-' . sanitize_html_class( $mobile_type );
+		}
+
+		if ( $is_offcanvas ) {
+			$container_classes[] = 'eael-mega-menu--drawer-' . sanitize_html_class( $offcanvas_side );
 		}
 
 		$this->add_render_attribute(
@@ -1976,6 +2170,8 @@ class Mega_Menu extends Widget_Base {
 				'data-breakpoint'     => $breakpoint_width,
 				'data-mobile-type'    => sanitize_key( $mobile_type ),
 				'data-close-on-click' => $close_on_click,
+				'data-mobile-panel'   => sanitize_key( $panel_behavior ),
+				'data-scroll-lock'    => $scroll_lock,
 			]
 		);
 
@@ -2008,7 +2204,18 @@ class Mega_Menu extends Widget_Base {
 					</span>
 				</button>
 			<?php endif; ?>
+			<?php if ( $is_offcanvas ) : ?>
+				<div class="eael-mega-menu__overlay" aria-hidden="true"></div>
+			<?php endif; ?>
 			<nav <?php $this->print_render_attribute_string( 'eael-mega-menu-nav' ); ?>>
+				<?php if ( $is_offcanvas ) : ?>
+					<div class="eael-mega-menu__drawer-header">
+						<button class="eael-mega-menu__close" type="button"
+							aria-label="<?php esc_attr_e( 'Close menu', 'essential-addons-for-elementor-lite' ); ?>">
+							<?php Icons_Manager::render_icon( $settings['eael_mega_menu_hamburger_close_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+						</button>
+					</div>
+				<?php endif; ?>
 				<ul class="eael-mega-menu">
 					<?php foreach ( $items as $index => $item ) : ?>
 						<?php

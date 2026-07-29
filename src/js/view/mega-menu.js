@@ -72,6 +72,15 @@ var MegaMenu = function ($scope, $) {
 	// Should tapping a plain link close the collapsed menu behind it?
 	var closeOnClick = container.dataset.closeOnClick === "yes";
 
+	// Does the collapsed menu slide in from the side, or unroll downwards?
+	var isOffcanvas = container.dataset.mobileType === "offcanvas";
+
+	// "hide" keeps linked sections out of the page entirely on small screens.
+	var panelBehavior = container.dataset.mobilePanel || "accordion";
+
+	// Should the page behind an open drawer stop scrolling?
+	var scrollLockEnabled = container.dataset.scrollLock === "yes";
+
 	// How long to wait before closing after the mouse leaves. Without this
 	// small delay the panel flickers shut while moving towards it.
 	var CLOSE_DELAY = 150;
@@ -232,8 +241,8 @@ var MegaMenu = function ($scope, $) {
 			return;
 		}
 
-		// Nothing to show — see markUnresolved().
-		if (getPanel(item).classList.contains("is-unresolved")) {
+		// Nothing to show — see isPanelEmpty().
+		if (isPanelEmpty(getPanel(item))) {
 			return;
 		}
 
@@ -298,6 +307,21 @@ var MegaMenu = function ($scope, $) {
 		panel.classList.add("is-unresolved");
 	}
 
+	// Is the viewport currently narrow enough for the collapsed menu?
+	function isMobileWidth() {
+		return !!mobileQuery && mobileQuery.matches;
+	}
+
+	// A panel with nothing inside it: either its CSS ID never resolved, or the
+	// "Hide" mobile setting deliberately left it empty. Either way the item has
+	// to behave as an ordinary link rather than opening an empty box.
+	function isPanelEmpty(panel) {
+		return (
+			panel.classList.contains("is-unresolved") ||
+			panel.classList.contains("eael-mega-menu__panel--mobile-hidden")
+		);
+	}
+
 	// Move one item's linked section into its panel.
 	function adoptLinkedSection(item) {
 		var panel = getPanel(item);
@@ -334,9 +358,35 @@ var MegaMenu = function ($scope, $) {
 			return;
 		}
 
+		// The "Hide" setting keeps linked sections out of the collapsed menu, so
+		// a phone never downloads and lays out a dropdown it will not show. The
+		// section stays where it is, hidden, and the item becomes a plain link.
+		if (isMobileWidth() && panelBehavior === "hide") {
+			section.classList.add("eael-mega-menu__src-hidden");
+			panel.classList.add("eael-mega-menu__panel--mobile-hidden");
+			return;
+		}
+
 		section.dataset.eaelAdopted = "1";
+		section.classList.remove("eael-mega-menu__src-hidden");
 		section.classList.add("eael-mega-menu__adopted");
 		panel.appendChild(section);
+	}
+
+	// Pull in whatever the "Hide" setting kept out while the menu was
+	// collapsed. Without this a visitor who widens the window would be left
+	// with dropdowns that never open.
+	function adoptSectionsHeldBackOnMobile() {
+		$panelItems.each(function () {
+			var panel = getPanel(this);
+
+			if (!panel.classList.contains("eael-mega-menu__panel--mobile-hidden")) {
+				return;
+			}
+
+			panel.classList.remove("eael-mega-menu__panel--mobile-hidden");
+			adoptLinkedSection(this);
+		});
 	}
 
 	function adoptAllLinkedSections() {
@@ -599,9 +649,55 @@ var MegaMenu = function ($scope, $) {
 		return container.classList.contains("is-mobile-open");
 	}
 
+	// Where the visitor was reading before the drawer took the scrollbar away,
+	// and whether this menu is the one holding the lock.
+	var lockedScrollTop = 0;
+	var holdsScrollLock = false;
+
+	function lockPageScroll() {
+		if (!scrollLockEnabled || holdsScrollLock) {
+			return;
+		}
+
+		lockedScrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+		// Both elements — see the stylesheet. <html> is what actually scrolls.
+		document.documentElement.classList.add("eael-mega-menu-locked");
+		document.body.classList.add("eael-mega-menu-locked");
+		holdsScrollLock = true;
+	}
+
+	function unlockPageScroll() {
+		// Only the menu that took the lock may give it back, so a second menu
+		// on the page cannot unlock while this drawer is still open.
+		if (!holdsScrollLock) {
+			return;
+		}
+
+		document.documentElement.classList.remove("eael-mega-menu-locked");
+		document.body.classList.remove("eael-mega-menu-locked");
+
+		// Reading a layout value forces the browser to work out the page height
+		// again right now. Without it the page is still measured as unscrollable
+		// from a moment ago, and the scroll below would be clamped to the top.
+		void document.documentElement.offsetHeight;
+
+		// Taking the scrollbar away collapses the page to the top, so the
+		// reading position has to be put back by hand.
+		window.scrollTo(0, lockedScrollTop);
+		holdsScrollLock = false;
+	}
+
 	function openMobileNav() {
 		container.classList.add("is-mobile-open");
 		toggleButton.setAttribute("aria-expanded", "true");
+
+		// A drawer slides in from the side, which is pure CSS — there is no
+		// height to measure.
+		if (isOffcanvas) {
+			lockPageScroll();
+			return;
+		}
 
 		nav.style.maxHeight = nav.scrollHeight + "px";
 
@@ -616,6 +712,13 @@ var MegaMenu = function ($scope, $) {
 	}
 
 	function closeMobileNav() {
+		if (isOffcanvas) {
+			container.classList.remove("is-mobile-open");
+			toggleButton.setAttribute("aria-expanded", "false");
+			unlockPageScroll();
+			return;
+		}
+
 		// The menu is sitting at `none` while open, and there is nothing to
 		// animate from. Put a real number back first and let the browser apply
 		// it before switching to 0.
@@ -625,6 +728,20 @@ var MegaMenu = function ($scope, $) {
 		container.classList.remove("is-mobile-open");
 		toggleButton.setAttribute("aria-expanded", "false");
 		nav.style.maxHeight = "0px";
+	}
+
+	// Focusing an element normally scrolls it into view. Right after closing a
+	// drawer that would undo the reading position we have just handed back, so
+	// the scroll is asked to stay put — and put back anyway on the older
+	// browsers that ignore the request.
+	function focusWithoutScrolling(element) {
+		var top = window.pageYOffset;
+
+		element.focus({ preventScroll: true });
+
+		if (window.pageYOffset !== top) {
+			window.scrollTo(0, top);
+		}
 	}
 
 	function toggleMobileNav() {
@@ -651,8 +768,7 @@ var MegaMenu = function ($scope, $) {
 	function openMobilePanel(item) {
 		var panel = getPanel(item);
 
-		// Nothing to show — see markUnresolved().
-		if (panel.classList.contains("is-unresolved")) {
+		if (isPanelEmpty(panel)) {
 			return;
 		}
 
@@ -700,6 +816,10 @@ var MegaMenu = function ($scope, $) {
 		container.classList.remove("eael-mega-menu--is-mobile");
 		container.classList.remove("is-mobile-open");
 
+		// A drawer left open across the breakpoint would otherwise keep the
+		// page locked with no way to release it.
+		unlockPageScroll();
+
 		if (toggleButton) {
 			toggleButton.setAttribute("aria-expanded", "false");
 		}
@@ -713,6 +833,7 @@ var MegaMenu = function ($scope, $) {
 			closePanel(this);
 		});
 
+		adoptSectionsHeldBackOnMobile();
 		bindDesktopHandlers();
 	}
 
@@ -727,7 +848,9 @@ var MegaMenu = function ($scope, $) {
 		container.classList.add("eael-mega-menu--is-mobile");
 		container.classList.remove("is-mobile-open");
 		toggleButton.setAttribute("aria-expanded", "false");
-		nav.style.maxHeight = "0px";
+
+		// A drawer is placed by CSS; only the unrolling menu needs a height.
+		nav.style.maxHeight = isOffcanvas ? "" : "0px";
 
 		bindMobileHandlers();
 	}
@@ -883,9 +1006,9 @@ var MegaMenu = function ($scope, $) {
 				.on("click" + eventNs + modeNs, function (event) {
 					var item = $(this).closest(".eael-mega-menu__item")[0];
 
-					// An unresolved panel has nothing to show, so let the link
-					// behave like a normal link instead of opening an empty box.
-					if (getPanel(item).classList.contains("is-unresolved")) {
+					// An empty panel has nothing to show, so let the link behave
+					// like a normal link instead of opening an empty box.
+					if (isPanelEmpty(getPanel(item))) {
 						return;
 					}
 
@@ -959,6 +1082,27 @@ var MegaMenu = function ($scope, $) {
 			toggleMobileNav();
 		});
 
+		// The drawer's own close button and the dimmed page behind it. Both are
+		// only in the markup when the off-canvas style is chosen.
+		var drawerClose = container.querySelector(".eael-mega-menu__close");
+		var overlay = container.querySelector(".eael-mega-menu__overlay");
+
+		if (drawerClose) {
+			$(drawerClose).on("click" + eventNs + modeNs, function (event) {
+				event.preventDefault();
+				closeMobileNav();
+				// Focus goes back to the control that opened the drawer, not to
+				// a button that has just slid off screen.
+				focusWithoutScrolling(toggleButton);
+			});
+		}
+
+		if (overlay) {
+			$(overlay).on("click" + eventNs + modeNs, function () {
+				closeMobileNav();
+			});
+		}
+
 		// One handler for every link. An item that owns a dropdown opens it
 		// instead of navigating — on a touch screen there is no hover, so the
 		// tap has to do both jobs.
@@ -966,7 +1110,7 @@ var MegaMenu = function ($scope, $) {
 			var item = $(this).closest(".eael-mega-menu__item")[0];
 			var panel = getPanel(item);
 
-			if (panel && !panel.classList.contains("is-unresolved")) {
+			if (panel && !isPanelEmpty(panel)) {
 				event.preventDefault();
 				toggleMobilePanel(item);
 				return;
@@ -985,7 +1129,7 @@ var MegaMenu = function ($scope, $) {
 
 			if (isMobileNavOpen()) {
 				closeMobileNav();
-				toggleButton.focus();
+				focusWithoutScrolling(toggleButton);
 			}
 		});
 	}

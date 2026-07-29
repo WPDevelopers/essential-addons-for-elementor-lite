@@ -318,9 +318,10 @@
 			visibility: visible;
 			translate: none;
 			scale: none;
-			transition:
-				max-height var(--eael-mm-duration, 300ms) ease-in-out,
-				padding var(--eael-mm-duration, 300ms) ease-in-out;
+			// Height only. Padding must NOT animate: the JS measures the panel
+			// the instant it opens, and a padding still on its way in would be
+			// missing from that measurement, leaving the last line clipped.
+			transition: max-height var(--eael-mm-duration, 300ms) ease-in-out;
 		}
 
 		// `max-height: 0` cannot squeeze out padding or a border — they have no
@@ -343,6 +344,120 @@
 			max-height: none !important;
 		}
 	}
+
+	// ---------------------------------------------------------------
+	// Off-canvas drawer
+	// ---------------------------------------------------------------
+
+	// Both of these are in the markup as soon as the drawer style is chosen, so
+	// they start hidden and are only revealed once the menu has collapsed.
+	.eael-mega-menu__overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 998;
+		background-color: var(--eael-mm-overlay-color, rgba(0, 0, 0, 0.5));
+		opacity: 0;
+		visibility: hidden;
+		transition:
+			opacity var(--eael-mm-duration, 300ms) ease-in-out,
+			visibility var(--eael-mm-duration, 300ms) ease-in-out;
+	}
+
+	.eael-mega-menu__drawer-header {
+		display: none;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	.eael-mega-menu__close {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: 0;
+		background: none;
+		color: inherit;
+		font-size: 22px;
+		line-height: 1;
+		cursor: pointer;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	&.eael-mega-menu--is-mobile.eael-mega-menu--mobile-offcanvas {
+		.eael-mega-menu__drawer-header {
+			display: flex;
+		}
+
+		// The drawer carries its own close button, so the outer button keeps
+		// showing the hamburger instead of swapping icons behind the overlay.
+		.eael-mega-menu__toggle-close {
+			display: none;
+		}
+
+		.eael-mega-menu__nav {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			z-index: 999;
+			flex-basis: auto;
+			width: var(--eael-mm-drawer-width, 320px);
+			max-width: 100%;
+			// A drawer floats over the dimmed page, so it needs a surface of its
+			// own — without one the overlay shows straight through it. The
+			// Mobile Menu background control overrides this.
+			background-color: #ffffff;
+			// Undoes the collapsed height from the render-time media query — a
+			// drawer slides in from the side instead of unrolling downwards.
+			max-height: none;
+			overflow-y: auto;
+			transition: transform var(--eael-mm-duration, 300ms) ease-in-out;
+		}
+	}
+
+	// Resting position, off the side it belongs to.
+	&.eael-mega-menu--is-mobile.eael-mega-menu--mobile-offcanvas.eael-mega-menu--drawer-left
+		.eael-mega-menu__nav {
+		left: 0;
+		transform: translateX(-100%);
+	}
+
+	&.eael-mega-menu--is-mobile.eael-mega-menu--mobile-offcanvas.eael-mega-menu--drawer-right
+		.eael-mega-menu__nav {
+		right: 0;
+		transform: translateX(100%);
+	}
+
+	// Open state. It matches the two rules above at exactly the same
+	// specificity, so it MUST stay below them — order is what decides.
+	&.eael-mega-menu--is-mobile.eael-mega-menu--mobile-offcanvas.is-mobile-open {
+		.eael-mega-menu__nav {
+			transform: translateX(0);
+		}
+
+		.eael-mega-menu__overlay {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.eael-mega-menu__toggle-open {
+			display: inline-flex;
+		}
+	}
+}
+
+// Set while a drawer is open. The JS records the reading position first and
+// puts it back on close, because collapsing the scrollbar loses it.
+//
+// It has to go on BOTH elements. In standards mode the page is scrolled by
+// <html>, not <body>, so hiding overflow on <body> alone leaves the page still
+// scrollable behind the drawer.
+html.eael-mega-menu-locked,
+body.eael-mega-menu-locked {
+	overflow: hidden;
 }
 
 // A linked section the JS deliberately did not move (see the mobile "hide"
