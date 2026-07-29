@@ -55,7 +55,9 @@
 		}
 
 		function dismiss() {
-			post( 'eael_thinkrank_dismiss' );
+			// Permanent, SITE-WIDE opt-out: hides every ThinkRank surface for
+			// all users of this installation (see ThinkRank_Promotion).
+			post( 'eael_thinkrank_never_show' );
 			set( { status: state.status, hidden: true } );
 		}
 
@@ -77,7 +79,10 @@
 				onClick: install
 			}, label ),
 			el( Button, { variant: 'link', className: 'eael-tr-gb__later', onClick: dismiss },
-				__( 'Don’t show again', 'essential-addons-for-elementor-lite' )
+				__( 'Never show me again', 'essential-addons-for-elementor-lite' )
+			),
+			el( 'p', { className: 'eael-tr-gb__attr' },
+				__( 'Suggestion by Essential Addons', 'essential-addons-for-elementor-lite' )
 			)
 		);
 	}

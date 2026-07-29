@@ -326,6 +326,35 @@ If activated, the class would expose this set of extension points:
 | `wpdeveloper_after_upsale_notice_for_<plugin>` | After upsale | Same |
 | `wpdeveloper_notices_for_<plugin>` | The main render hook | What `content()` itself listens to |
 
+## ThinkRank Promotion (6.7.1+) — surfaces & opt-out controls
+
+[`includes/Classes/ThinkRank_Promotion.php`](../../includes/Classes/ThinkRank_Promotion.php) (instantiated unconditionally from `Bootstrap`, self-gates to `is_admin()`) promotes WPDeveloper's ThinkRank SEO plugin on four surfaces:
+
+| Surface | Hook | Notes |
+| ------- | ---- | ----- |
+| WP Dashboard "SEO Check (Essential Addons)" widget | `wp_dashboard_setup` | Promo state only renders when no opt-out applies; once ThinkRank is active the widget is functional and stays |
+| Banner on Posts/Pages/public-CPT **list** screens | `admin_notices` | Secondary action is **"Never show me again"** (site-wide, permanent) |
+| Banner on the EA Dashboard | `eael_admin_notices` | Secondary action is **"Skip for 30 days"** (site-wide snooze) |
+| Gutenberg "Configure SEO" document panel | `enqueue_block_editor_assets` | Its "Never show me again" is also the site-wide permanent opt-out |
+
+The post-update admin redirect that shipped in 6.7.1 was **removed** — promo surfaces must never navigate the user anywhere on their own.
+
+### Opt-out layers (site-wide wins over per-user)
+
+| Control | Storage | Scope | Set by |
+| ------- | ------- | ----- | ------ |
+| Kill switch | `EAEL_DISABLE_PROMOTIONS` constant or `eael/disable_promotions` filter | Whole install, ALL promo surfaces incl. `bfcm-pointer.php` | Operator (wp-config / mu-plugin) |
+| Never show again | option `eael_thinkrank_never_show` | Whole install, all ThinkRank surfaces, forever | Any `manage_options` user, one click |
+| Skip for 30 days | option `eael_thinkrank_skip_until` (timestamp) | Whole install, all ThinkRank surfaces, until expiry | Any `manage_options` user |
+| Per-user dismiss (X) | user meta `eael_thinkrank_dismissed` | Current user, forever | Notice dismiss button |
+| Per-user snooze | user meta `eael_thinkrank_snoozed_until` | Current user, 30 days | Legacy "Maybe later" |
+
+AJAX endpoints: `eael_thinkrank_never_show` and `eael_thinkrank_skip` (both `manage_options` + nonce `essential-addons-elementor`), alongside the legacy per-user `eael_thinkrank_dismiss` / `eael_thinkrank_snooze`.
+
+### Guardrails for any future promo surface
+
+Every promotional surface must be: on EA's own screens first; clearly attributed to Essential Addons; dismissible with a **site-wide permanent** opt-out; honoring `ThinkRank_Promotion::promotions_disabled()`; never a redirect; never unbranded. See [issue #851](https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues/851) for the rationale (WordPress.org Guidelines 9 & 11).
+
 ## Adding a New Campaign Notice
 
 The choice of which pattern to follow depends on what the campaign is:
