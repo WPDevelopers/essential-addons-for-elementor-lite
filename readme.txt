@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.7.1
+Stable tag: 6.7.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -364,6 +364,14 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 
 
 == Changelog ==
+
+= 6.7.2 - 29/07/2026 =
+
+- Fixed: Quick Setup Wizard | Enabling the SEO tool from the Boost SEO step redirected out of the wizard instead of continuing to the next step
+- Fixed: Quick Setup Wizard | Integrations step did not reflect the SEO tool's status after enabling it, and revisiting the Boost SEO step left the navigation buttons stuck
+- Fixed: Enabling a plugin that was already installed but inactive showed a "not allowed to access this page" error instead of activating it
+- Improved: Refined the SEO promo banner and renamed the dashboard widget to "SEO Check"
+- Few minor bug fixes & improvements
 
 = 6.7.1 - 28/07/2026 =
 

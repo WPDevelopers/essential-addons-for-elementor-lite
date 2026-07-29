@@ -92,24 +92,24 @@ class WPDeveloper_Plugin_Installer
         include_once ABSPATH . 'wp-admin/includes/file.php';
         include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
         include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
-        include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-        // Already installed? Plugin_Upgrader::install() would return null
-        // (not true, not WP_Error), so the caller would report success while
-        // the plugin was never activated. Activate the existing copy instead.
-        foreach ( array_keys( get_plugins() ) as $installed_basename ) {
-            if ( 0 !== strpos( $installed_basename, $slug . '/' ) ) {
-                continue;
-            }
+		// Already installed? Plugin_Upgrader::install() would return null
+		// (not true, not WP_Error), so the caller would report success while
+		// the plugin was never activated. Activate the existing copy instead.
+		foreach ( array_keys( get_plugins() ) as $installed_basename ) {
+			if ( 0 !== strpos( $installed_basename, $slug . '/' ) ) {
+				continue;
+			}
 
-            if ( ! $active || is_plugin_active( $installed_basename ) ) {
-                return true;
-            }
+			if ( ! $active || is_plugin_active( $installed_basename ) ) {
+				return true;
+			}
 
-            $activated = activate_plugin( $installed_basename, '', false, false );
+			$activated = activate_plugin( $installed_basename, '', false, false );
 
-            return is_wp_error( $activated ) ? $activated : true;
-        }
+			return is_wp_error( $activated ) ? $activated : true;
+		}
 
         $plugin_data = $this->get_remote_plugin_data($slug);
 
@@ -192,13 +192,13 @@ class WPDeveloper_Plugin_Installer
                 wp_remote_get( $remote_urls[ $promotype ][ $slug ] );
             }
 
-            // ThinkRank schedules a one-time redirect to its own setup wizard on
-            // activation. When installed from Quick Setup the user must stay in
-            // EA's wizard, so consume that flag before it can hijack the next
-            // admin page load.
-            if ( 'quick-setup' === $promotype && 'thinkrank' === $slug && ! is_wp_error( $result ) ) {
-                delete_transient( 'thinkrank_setup_wizard_redirect' );
-            }
+			// ThinkRank schedules a one-time redirect to its own setup wizard on
+			// activation. When installed from Quick Setup the user must stay in
+			// EA's wizard, so consume that flag before it can hijack the next
+			// admin page load.
+			if ( 'quick-setup' === $promotype && 'thinkrank' === $slug && ! is_wp_error( $result ) ) {
+				delete_transient( 'thinkrank_setup_wizard_redirect' );
+			}
         }
 
 	    if ( is_wp_error( $result ) ) {
