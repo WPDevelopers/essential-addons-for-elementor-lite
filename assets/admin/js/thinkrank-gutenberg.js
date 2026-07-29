@@ -80,9 +80,6 @@
 			}, label ),
 			el( Button, { variant: 'link', className: 'eael-tr-gb__later', onClick: dismiss },
 				__( 'Never show me again', 'essential-addons-for-elementor-lite' )
-			),
-			el( 'p', { className: 'eael-tr-gb__attr' },
-				__( 'Suggestion by Essential Addons', 'essential-addons-for-elementor-lite' )
 			)
 		);
 	}

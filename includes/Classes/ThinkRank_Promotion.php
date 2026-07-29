@@ -150,7 +150,6 @@ class ThinkRank_Promotion {
 			. '.eael-tr-gb__cta.components-button.is-primary{background:#4451ff;justify-content:center;width:100%;}'
 			. '.eael-tr-gb__cta.components-button.is-primary:hover:not(:disabled){background:#3742d6;}'
 			. '.eael-tr-gb__later.components-button.is-link{display:block;margin:8px 0 2px;color:#50575e;font-size:12px;}'
-			. '.eael-tr-gb__attr{font-size:11px;color:#787c82;margin:6px 0 0;}'
 		);
 	}
 
@@ -318,7 +317,6 @@ class ThinkRank_Promotion {
 			<div class="eael-tr-banner__body">
 				<strong class="eael-tr-banner__title"><?php esc_html_e( 'Get found on Google & AI answers - configure your SEO', 'essential-addons-for-elementor-lite' ); ?></strong>
 				<span class="eael-tr-banner__desc"><?php esc_html_e( 'Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank.', 'essential-addons-for-elementor-lite' ); ?></span>
-				<span class="eael-tr-banner__attribution"><?php esc_html_e( 'Suggestion by Essential Addons', 'essential-addons-for-elementor-lite' ); ?></span>
 			</div>
 			<div class="eael-tr-banner__actions">
 				<button type="button" class="button button-primary eael-tr-banner__install"><?php esc_html_e( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ); ?></button>
@@ -345,7 +343,6 @@ class ThinkRank_Promotion {
 			.eael-tr-banner__body { display:flex; flex-direction:column; gap:2px; min-width:0; }
 			.eael-tr-banner__title { font-size:14px; color:#1d2327; }
 			.eael-tr-banner__desc { font-size:13px; color:#50575e; }
-			.eael-tr-banner__attribution { font-size:11px; color:#787c82; margin-top:2px; }
 			.eael-tr-banner__actions { display:flex; align-items:center; gap:10px; margin-left:auto; flex:none; }
 			.eael-tr-banner__install.button-primary { background:#4451ff; border-color:#4451ff; box-shadow:none; text-shadow:none; }
 			.eael-tr-banner__install.button-primary:hover { background:#3742d6; border-color:#3742d6; }
