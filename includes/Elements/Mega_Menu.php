@@ -565,9 +565,199 @@ class Mega_Menu extends Widget_Base {
 
 		$this->end_controls_section();
 
+		$this->register_mobile_controls();
+
 		$this->register_container_style_controls();
 		$this->register_item_style_controls();
 		$this->register_panel_style_controls();
+		$this->register_hamburger_style_controls();
+		$this->register_mobile_menu_style_controls();
+	}
+
+	/**
+	 * Widths the menu can collapse into a hamburger at.
+	 *
+	 * Mirrors Simple Menu's own dropdown options so the two widgets read the
+	 * same in the panel. Laptop and widescreen are left out — collapsing a menu
+	 * on a wide screen is not what this control is for.
+	 *
+	 * @return array<string, string> Breakpoint key => translated label.
+	 */
+	protected function get_breakpoint_options() {
+
+		$options = [];
+
+		foreach ( Plugin::$instance->breakpoints->get_active_breakpoints() as $key => $breakpoint ) {
+			if ( in_array( $key, [ 'laptop', 'widescreen' ], true ) ) {
+				continue;
+			}
+
+			$options[ $key ] = sprintf(
+				/* translators: 1: breakpoint label, 2: breakpoint width in pixels. */
+				esc_html__( '%1$s (up to %2$dpx)', 'essential-addons-for-elementor-lite' ),
+				$breakpoint->get_label(),
+				$breakpoint->get_value()
+			);
+		}
+
+		$options['desktop'] = esc_html__( 'Desktop and below', 'essential-addons-for-elementor-lite' );
+		$options['none']    = esc_html__( 'Never collapse', 'essential-addons-for-elementor-lite' );
+
+		return $options;
+	}
+
+	/**
+	 * The width, in pixels, below which the hamburger takes over.
+	 *
+	 * @param string $breakpoint Breakpoint key from get_breakpoint_options().
+	 *
+	 * @return int Pixel width, or 0 when the menu should never collapse.
+	 */
+	protected function get_breakpoint_width( $breakpoint ) {
+
+		if ( '' === $breakpoint || 'none' === $breakpoint ) {
+			return 0;
+		}
+
+		// "Desktop" means everything below the widescreen breakpoint, since there
+		// is no desktop breakpoint of its own to read.
+		if ( 'desktop' === $breakpoint ) {
+			$config = method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' )
+				? Plugin::$instance->breakpoints->get_breakpoints_config()
+				: [];
+
+			return isset( $config['widescreen']['value'] ) ? absint( $config['widescreen']['value'] ) - 1 : 2400;
+		}
+
+		$active = Plugin::$instance->breakpoints->get_active_breakpoints();
+
+		if ( ! isset( $active[ $breakpoint ] ) ) {
+			return 0;
+		}
+
+		return absint( $active[ $breakpoint ]->get_value() );
+	}
+
+	/**
+	 * Content: Mobile & Hamburger
+	 */
+	protected function register_mobile_controls() {
+
+		$this->start_controls_section(
+			'eael_mega_menu_section_mobile',
+			[
+				'label' => esc_html__( 'Mobile & Hamburger', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_breakpoint',
+			[
+				'label'       => esc_html__( 'Collapse Into Hamburger', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'tablet',
+				'options'     => $this->get_breakpoint_options(),
+				'description' => esc_html__( 'Below this width the menu is replaced by a hamburger button.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_mobile_type',
+			[
+				'label'     => esc_html__( 'Mobile Menu Style', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'dropdown',
+				'options'   => [
+					'dropdown' => esc_html__( 'Dropdown (pushes the page down)', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_hamburger_icon',
+			[
+				'label'     => esc_html__( 'Hamburger Icon', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::ICONS,
+				'default'   => [
+					'value'   => 'fas fa-bars',
+					'library' => 'fa-solid',
+				],
+				'condition' => [
+					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_hamburger_close_icon',
+			[
+				'label'     => esc_html__( 'Close Icon', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::ICONS,
+				'default'   => [
+					'value'   => 'fas fa-times',
+					'library' => 'fa-solid',
+				],
+				'condition' => [
+					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_hamburger_align',
+			[
+				'label'                => esc_html__( 'Hamburger Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'default'              => 'right',
+				'options'              => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-center',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'selectors_dictionary' => [
+					'left'   => 'flex-start',
+					'center' => 'center',
+					'right'  => 'flex-end',
+				],
+				'selectors'            => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-toggle-justify: {{VALUE}};',
+				],
+				'condition'            => [
+					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_close_on_click',
+			[
+				'label'        => esc_html__( 'Close After Tapping a Link', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'description'  => esc_html__( 'Only applies to links that navigate. Tapping an item that has a dropdown always opens that dropdown instead.', 'essential-addons-for-elementor-lite' ),
+				'condition'    => [
+					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	/**
@@ -672,6 +862,275 @@ class Mega_Menu extends Widget_Base {
 				'default'   => 999,
 				'selectors' => [
 					'{{WRAPPER}} .eael-mega-menu__panel' => 'z-index: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Style: Hamburger Button
+	 */
+	protected function register_hamburger_style_controls() {
+
+		$this->start_controls_section(
+			'eael_mega_menu_style_hamburger',
+			[
+				'label'     => esc_html__( 'Hamburger Button', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_toggle_size',
+			[
+				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 10,
+						'max' => 80,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 24,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__toggle'     => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-mega-menu__toggle svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_toggle_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'default'    => [
+					'top'      => 8,
+					'right'    => 8,
+					'bottom'   => 8,
+					'left'     => 8,
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__toggle' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'eael_mega_menu_toggle_tabs' );
+
+		$this->start_controls_tab(
+			'eael_mega_menu_toggle_tab_normal',
+			[
+				'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_toggle_state_controls( 'normal', '{{WRAPPER}} .eael-mega-menu__toggle' );
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'eael_mega_menu_toggle_tab_hover',
+			[
+				'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_toggle_state_controls(
+			'hover',
+			'{{WRAPPER}} .eael-mega-menu__toggle:hover, {{WRAPPER}} .eael-mega-menu__toggle:focus'
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->add_responsive_control(
+			'eael_mega_menu_toggle_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'separator'  => 'before',
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu__toggle' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_mega_menu_toggle_border',
+				'selector' => '{{WRAPPER}} .eael-mega-menu__toggle',
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Colour and background for one hamburger button state.
+	 *
+	 * @param string $state    Control id suffix — normal or hover.
+	 * @param string $selector CSS selector the state applies to.
+	 */
+	protected function add_toggle_state_controls( $state, $selector ) {
+
+		$this->add_control(
+			'eael_mega_menu_toggle_color_' . $state,
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					$selector          => 'color: {{VALUE}};',
+					$selector . ' svg' => 'fill: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_toggle_bg_' . $state,
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					$selector => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+	}
+
+	/**
+	 * Style: Mobile Menu — how the menu looks once it has collapsed.
+	 */
+	protected function register_mobile_menu_style_controls() {
+
+		$this->start_controls_section(
+			'eael_mega_menu_style_mobile_panel',
+			[
+				'label'     => esc_html__( 'Mobile Menu', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_mega_menu_breakpoint!' => 'none',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_mobile_notice',
+			[
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'These only take effect below the width set in Content → Mobile & Hamburger. Switch the editor to Tablet or Mobile to see them.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'elementor-control-field-description',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'     => 'eael_mega_menu_mobile_background',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eael-mega-menu__nav',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_mega_menu_mobile_typography',
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+				'selector' => '{{WRAPPER}} .eael-mega-menu--is-mobile .eael-mega-menu__item-link',
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_mobile_item_color',
+			[
+				'label'     => esc_html__( 'Item Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-mega-menu--is-mobile .eael-mega-menu__item-link' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_mobile_item_bg',
+			[
+				'label'     => esc_html__( 'Item Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-mega-menu--is-mobile .eael-mega-menu__item-link' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_mega_menu_mobile_item_padding',
+			[
+				'label'      => esc_html__( 'Item Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu--is-mobile .eael-mega-menu__item-link' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_mobile_divider_heading',
+			[
+				'label'     => esc_html__( 'Divider', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_mobile_divider_width',
+			[
+				'label'      => esc_html__( 'Thickness', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 10,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 1,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-mobile-divider-width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_mega_menu_mobile_divider_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#e6e8eb',
+				'selectors' => [
+					'{{WRAPPER}} .eael-mega-menu-container' => '--eael-mm-mobile-divider-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1392,6 +1851,49 @@ class Mega_Menu extends Widget_Base {
 	}
 
 	/**
+	 * Print the media query that swaps the menu for a hamburger.
+	 *
+	 * It has to be generated here rather than written into the stylesheet
+	 * because the width comes from the site's own Elementor breakpoints, and
+	 * every menu can collapse at a different one. The rules are scoped by the
+	 * `--hamburger-{device}` class, so two menus set to different widths on the
+	 * same page do not interfere.
+	 *
+	 * @param string $breakpoint Breakpoint key.
+	 * @param int    $width      Pixel width below which the hamburger takes over.
+	 */
+	protected function print_breakpoint_style( $breakpoint, $width ) {
+
+		if ( ! $width ) {
+			return;
+		}
+
+		$scope = '.eael-mega-menu--hamburger-' . sanitize_html_class( $breakpoint );
+
+		// Deliberately minimal. This only has to hold the collapsed state on the
+		// very first paint, before mega-menu.js adds `--is-mobile`; all of the
+		// mobile layout lives in the stylesheet under that class.
+		$css = sprintf(
+			'@media screen and (max-width:%1$dpx){' .
+				'%2$s .eael-mega-menu__toggle{display:inline-flex}' .
+				'%2$s .eael-mega-menu__nav{max-height:0;overflow:hidden}' .
+			'}',
+			absint( $width ),
+			$scope
+		);
+
+		printf(
+			'<style id="eael-mm-bp-%s">%s</style>',
+			esc_attr( $this->get_id() ),
+			// Safe: the width is absint()'d and the scope class is built from a
+			// sanitize_html_class()'d breakpoint key, so nothing user-authored
+			// reaches the CSS. esc_html() is wrong inside <style> — it is a
+			// raw-text element, so entities would break the rules.
+			$css // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		);
+	}
+
+	/**
 	 * Whether a menu item link points at the document currently being viewed.
 	 *
 	 * @param string $url Raw link url from the repeater row.
@@ -1446,17 +1948,34 @@ class Mega_Menu extends Widget_Base {
 			: 300;
 		$nav_id    = 'eael-mega-menu-' . esc_attr( $this->get_id() );
 
+		$breakpoint       = ! empty( $settings['eael_mega_menu_breakpoint'] ) ? $settings['eael_mega_menu_breakpoint'] : 'tablet';
+		$breakpoint_width = $this->get_breakpoint_width( $breakpoint );
+		$mobile_type      = ! empty( $settings['eael_mega_menu_mobile_type'] ) ? $settings['eael_mega_menu_mobile_type'] : 'dropdown';
+		$close_on_click   = ! empty( $settings['eael_mega_menu_close_on_click'] ) ? 'yes' : 'no';
+
+		$container_classes = [
+			'eael-mega-menu-container',
+			'eael-mega-menu--' . sanitize_html_class( $layout ),
+			'eael-mega-menu--' . sanitize_html_class( $preset ),
+		];
+
+		if ( $breakpoint_width ) {
+			$container_classes[] = 'eael-mega-menu--hamburger-' . sanitize_html_class( $breakpoint );
+		}
+
 		$this->add_render_attribute(
 			'eael-mega-menu-container',
 			[
-				'class'          => [
-					'eael-mega-menu-container',
-					'eael-mega-menu--' . sanitize_html_class( $layout ),
-					'eael-mega-menu--' . sanitize_html_class( $preset ),
-				],
+				'class'          => $container_classes,
 				'data-trigger'   => sanitize_key( $trigger ),
 				'data-animation' => sanitize_key( $animation ),
 				'data-duration'  => $duration,
+				// The pixel width, not the breakpoint key — the JS feeds it
+				// straight into matchMedia(). The key is already on the element
+				// as the --hamburger-* class.
+				'data-breakpoint'     => $breakpoint_width,
+				'data-mobile-type'    => sanitize_key( $mobile_type ),
+				'data-close-on-click' => $close_on_click,
 			]
 		);
 
@@ -1473,8 +1992,22 @@ class Mega_Menu extends Widget_Base {
 		if ( ! $is_edit_mode ) {
 			$this->print_linked_section_hide_style( $this->collect_linked_section_ids( $items ) );
 		}
+
+		$this->print_breakpoint_style( $breakpoint, $breakpoint_width );
 		?>
 		<div <?php $this->print_render_attribute_string( 'eael-mega-menu-container' ); ?>>
+			<?php if ( $breakpoint_width ) : ?>
+				<button class="eael-mega-menu__toggle" type="button" aria-expanded="false"
+					aria-controls="<?php echo esc_attr( $nav_id ); ?>"
+					aria-label="<?php esc_attr_e( 'Toggle menu', 'essential-addons-for-elementor-lite' ); ?>">
+					<span class="eael-mega-menu__toggle-open">
+						<?php Icons_Manager::render_icon( $settings['eael_mega_menu_hamburger_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+					</span>
+					<span class="eael-mega-menu__toggle-close">
+						<?php Icons_Manager::render_icon( $settings['eael_mega_menu_hamburger_close_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+					</span>
+				</button>
+			<?php endif; ?>
 			<nav <?php $this->print_render_attribute_string( 'eael-mega-menu-nav' ); ?>>
 				<ul class="eael-mega-menu">
 					<?php foreach ( $items as $index => $item ) : ?>

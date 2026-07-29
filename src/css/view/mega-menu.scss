@@ -161,6 +161,48 @@
 		}
 	}
 
+	// ---------------------------------------------------------------
+	// Hamburger button
+	//
+	// Hidden by default and revealed by the media query PHP prints at render
+	// time — the width comes from the site's own Elementor breakpoints, so it
+	// cannot be written here. See print_breakpoint_style().
+	// ---------------------------------------------------------------
+	.eael-mega-menu__toggle {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		border: 0;
+		background: none;
+		color: inherit;
+		font-size: 24px;
+		line-height: 1;
+		cursor: pointer;
+		transition:
+			color 0.2s ease-in-out,
+			background-color 0.2s ease-in-out;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	// Only one of the two icons shows at a time; `.is-mobile-open` on the
+	// container decides which.
+	.eael-mega-menu__toggle-close {
+		display: none;
+	}
+
+	&.is-mobile-open .eael-mega-menu__toggle-open {
+		display: none;
+	}
+
+	&.is-mobile-open .eael-mega-menu__toggle-close {
+		display: inline-flex;
+	}
+
 	// A linked Container that the JS moved into a panel.
 	.eael-mega-menu__adopted {
 		width: 100%;
@@ -196,6 +238,109 @@
 			flex-direction: column;
 			align-items: stretch;
 			justify-content: flex-start;
+		}
+	}
+
+	// ---------------------------------------------------------------
+	// Collapsed (mobile) menu
+	//
+	// `--is-mobile` is set by mega-menu.js once the viewport is below the
+	// chosen breakpoint. It costs nothing on desktop, because the class is
+	// simply absent there.
+	//
+	// This block MUST stay below the `--horizontal` / `--vertical` blocks. It
+	// overrides flex-direction at the same specificity as they do, so order is
+	// the only thing deciding the winner — moving it up leaves a collapsed menu
+	// laid out in a row.
+	// ---------------------------------------------------------------
+	&.eael-mega-menu--is-mobile {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: var(--eael-mm-toggle-justify, flex-end);
+
+		.eael-mega-menu__nav {
+			// Full row of its own, so the menu opens BELOW the button and pushes
+			// the rest of the page down rather than floating over it.
+			flex-basis: 100%;
+			// `max-height: 0` and `overflow: hidden` come from the media query
+			// PHP prints (print_breakpoint_style), so the menu is already
+			// collapsed on first paint, before this file's class is applied.
+			// The open height is set inline by the JS, which measures the real
+			// content — a guessed max-height would either clip a long menu or
+			// make the animation start late.
+			transition: max-height var(--eael-mm-duration, 300ms) ease-in-out;
+		}
+
+		.eael-mega-menu {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0;
+		}
+
+		.eael-mega-menu__item {
+			flex-grow: 0;
+			border-bottom: var(--eael-mm-mobile-divider-width, 1px) solid
+				var(--eael-mm-mobile-divider-color, #e6e8eb);
+
+			&:last-child {
+				border-bottom: 0;
+			}
+		}
+
+		// Pushed to the far edge so every row's arrow lines up, whatever the
+		// label length.
+		.eael-mega-menu__indicator {
+			margin-inline-start: auto;
+		}
+
+		// A dropdown becomes an accordion: in normal flow, full width, and
+		// collapsed until its item is tapped. The JS clears the inline
+		// left / width / transform it wrote while placing panels on desktop, so
+		// only the stylesheet values below are left to beat.
+		//
+		// `!important` is needed on the properties that the per-panel style
+		// controls also write. Elementor generates those with a higher
+		// specificity than anything this file can reach, so a collapsed
+		// accordion would otherwise inherit the desktop Custom Width and sit
+		// permanently open at the Max Height.
+		//
+		// The open height arrives as a custom property rather than an inline
+		// max-height, because an inline value cannot beat `!important`.
+		.eael-mega-menu__panel {
+			position: static;
+			min-width: 0;
+			width: 100% !important;
+			max-width: 100% !important;
+			max-height: var(--eael-mm-accordion-height, 0px) !important;
+			overflow: hidden;
+			opacity: 1;
+			visibility: visible;
+			translate: none;
+			scale: none;
+			transition:
+				max-height var(--eael-mm-duration, 300ms) ease-in-out,
+				padding var(--eael-mm-duration, 300ms) ease-in-out;
+		}
+
+		// `max-height: 0` cannot squeeze out padding or a border — they have no
+		// content to shrink — so a closed accordion would still leave a strip of
+		// panel background under every item. They are zeroed here and restored
+		// by `.is-active`, which the JS sets before it measures the open height,
+		// so the measurement already includes the padding coming back.
+		.eael-mega-menu__item:not(.is-active)
+			> .eael-mega-menu__panel:not(.eael-mega-menu__panel--editor-open) {
+			padding-top: 0 !important;
+			padding-bottom: 0 !important;
+			border-top-width: 0 !important;
+			border-bottom-width: 0 !important;
+		}
+
+		// Editor only. The per-item preview switch has to open the accordion
+		// here too, and it has no measured height to work from — nothing binds
+		// open/close in the editor.
+		.eael-mega-menu__panel--editor-open {
+			max-height: none !important;
 		}
 	}
 }

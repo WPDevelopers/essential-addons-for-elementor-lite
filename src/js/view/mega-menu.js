@@ -11,6 +11,11 @@
 // before registering a fresh one. See the editor block further down.
 var editorRefreshListeners = {};
 
+// Front end only. The media-query listener that watches for the menu crossing
+// its breakpoint. Keyed by widget id for the same reason as above — this file
+// can run again for the same widget, and a stale listener would keep firing.
+var breakpointWatchers = {};
+
 var MegaMenu = function ($scope, $) {
 	// -----------------------------------------------------------------
 	// 1. Find the elements we need
@@ -30,7 +35,16 @@ var MegaMenu = function ($scope, $) {
 	// Only items that actually have a dropdown need any behaviour.
 	var $panelItems = $container.find(".eael-mega-menu__item--has-panel");
 
-	if (!$panelItems.length) {
+	// Every link, dropdown or not. The mobile menu needs them all — a plain
+	// link has to be able to close the menu behind it.
+	var $links = $container.find(".eael-mega-menu__item-link");
+
+	// Present only when the menu is set to collapse at some width.
+	var toggleButton = container.querySelector(".eael-mega-menu__toggle");
+	var nav = container.querySelector(".eael-mega-menu__nav");
+
+	// A menu with no dropdowns and no hamburger has nothing to do.
+	if (!$panelItems.length && !toggleButton) {
 		return;
 	}
 
@@ -46,6 +60,17 @@ var MegaMenu = function ($scope, $) {
 	if (isNaN(duration)) {
 		duration = 300;
 	}
+
+	// The width below which the hamburger takes over, in pixels. PHP sends 0
+	// when the user chose never to collapse.
+	var breakpoint = parseInt(container.dataset.breakpoint, 10);
+
+	if (isNaN(breakpoint)) {
+		breakpoint = 0;
+	}
+
+	// Should tapping a plain link close the collapsed menu behind it?
+	var closeOnClick = container.dataset.closeOnClick === "yes";
 
 	// How long to wait before closing after the mouse leaves. Without this
 	// small delay the panel flickers shut while moving towards it.
@@ -71,6 +96,15 @@ var MegaMenu = function ($scope, $) {
 	// the widget is edited — without a namespace to remove first, those
 	// handlers would pile up on every edit.
 	var eventNs = ".eaelMegaMenu" + widgetId;
+
+	// A second namespace for the handlers that belong to ONE layout — desktop
+	// or collapsed. Crossing the breakpoint drops everything in this namespace
+	// and binds the other set, which is what stops handlers stacking up when
+	// the window is resized back and forth.
+	//
+	// Mode handlers carry both namespaces, so the blanket `.off(eventNs)` above
+	// still clears them when this file runs again for the same widget.
+	var modeNs = ".eaelMegaMenuMode" + widgetId;
 
 	// -----------------------------------------------------------------
 	// 3. Apply the animation settings
@@ -447,7 +481,11 @@ var MegaMenu = function ($scope, $) {
 
 		claimedIds.push(sectionId);
 
-		tagLinkedSource(section, getLink(item).textContent.trim());
+		// The label only, not the whole link — otherwise a badge would be read
+		// as part of the name and the tag would say "Products New".
+		var labelText = item.querySelector(".eael-mega-menu__item-text");
+
+		tagLinkedSource(section, labelText ? labelText.textContent.trim() : "");
 
 		if (isPreviewRequested(panel)) {
 			showSectionCopyInPanel(panel, section);
@@ -541,6 +579,225 @@ var MegaMenu = function ($scope, $) {
 	}
 
 	// -----------------------------------------------------------------
+	// 9. The collapsed (mobile) menu
+	// -----------------------------------------------------------------
+	//
+	// Below the chosen breakpoint the menu turns into a hamburger button plus a
+	// list that pushes the page down, and each dropdown becomes an accordion.
+	//
+	// Heights are measured rather than guessed. A fixed max-height would either
+	// cut off a long menu or leave the animation stalling on a short one.
+
+	// Wait for a height animation to finish. A timer is used instead of the
+	// `transitionend` event because that event never fires when the duration is
+	// 0, which the Animation Duration control allows.
+	function afterHeightAnimation(done) {
+		setTimeout(done, duration);
+	}
+
+	function isMobileNavOpen() {
+		return container.classList.contains("is-mobile-open");
+	}
+
+	function openMobileNav() {
+		container.classList.add("is-mobile-open");
+		toggleButton.setAttribute("aria-expanded", "true");
+
+		nav.style.maxHeight = nav.scrollHeight + "px";
+
+		// Once the menu has finished opening, stop constraining it. An
+		// accordion opening inside it would otherwise be cut off at the height
+		// measured a moment ago.
+		afterHeightAnimation(function () {
+			if (isMobileNavOpen()) {
+				nav.style.maxHeight = "none";
+			}
+		});
+	}
+
+	function closeMobileNav() {
+		// The menu is sitting at `none` while open, and there is nothing to
+		// animate from. Put a real number back first and let the browser apply
+		// it before switching to 0.
+		nav.style.maxHeight = nav.scrollHeight + "px";
+		void nav.offsetHeight;
+
+		container.classList.remove("is-mobile-open");
+		toggleButton.setAttribute("aria-expanded", "false");
+		nav.style.maxHeight = "0px";
+	}
+
+	function toggleMobileNav() {
+		if (isMobileNavOpen()) {
+			closeMobileNav();
+		} else {
+			openMobileNav();
+		}
+	}
+
+	// An accordion's height goes through a custom property rather than
+	// `style.maxHeight`. The stylesheet needs `!important` there to beat the
+	// per-panel Max Height style control, and an inline value would lose to it.
+	function setAccordionHeight(panel, height) {
+		panel.style.setProperty("--eael-mm-accordion-height", height);
+	}
+
+	function closeMobilePanel(item) {
+		item.classList.remove("is-active");
+		setAccordionHeight(getPanel(item), "0px");
+		getLink(item).setAttribute("aria-expanded", "false");
+	}
+
+	function openMobilePanel(item) {
+		var panel = getPanel(item);
+
+		// Nothing to show — see markUnresolved().
+		if (panel.classList.contains("is-unresolved")) {
+			return;
+		}
+
+		// Same rule as the desktop menu: one dropdown open at a time.
+		$panelItems.each(function () {
+			if (this !== item && isOpen(this)) {
+				closeMobilePanel(this);
+			}
+		});
+
+		item.classList.add("is-active");
+		setAccordionHeight(panel, panel.scrollHeight + "px");
+		getLink(item).setAttribute("aria-expanded", "true");
+	}
+
+	function toggleMobilePanel(item) {
+		if (isOpen(item)) {
+			closeMobilePanel(item);
+		} else {
+			openMobilePanel(item);
+		}
+	}
+
+	// -----------------------------------------------------------------
+	// 10. Switching between the two layouts
+	// -----------------------------------------------------------------
+
+	// Which set of handlers is currently bound: "desktop" or "mobile".
+	var currentMode = "";
+
+	var mobileQuery = breakpoint > 0
+		? window.matchMedia("(max-width:" + breakpoint + "px)")
+		: null;
+
+	// Clear the placement the desktop code wrote onto a panel. The collapsed
+	// menu lays panels out itself, and a leftover inline width would win.
+	function clearPanelPlacement(panel) {
+		panel.style.left = "";
+		panel.style.right = "";
+		panel.style.width = "";
+		panel.style.transform = "";
+	}
+
+	function enterDesktopMode() {
+		container.classList.remove("eael-mega-menu--is-mobile");
+		container.classList.remove("is-mobile-open");
+
+		if (toggleButton) {
+			toggleButton.setAttribute("aria-expanded", "false");
+		}
+
+		if (nav) {
+			nav.style.maxHeight = "";
+		}
+
+		$panelItems.each(function () {
+			setAccordionHeight(getPanel(this), "");
+			closePanel(this);
+		});
+
+		bindDesktopHandlers();
+	}
+
+	function enterMobileMode() {
+		// Anything the desktop layout left open would be stuck open here.
+		$panelItems.each(function () {
+			closePanel(this);
+			clearPanelPlacement(getPanel(this));
+			setAccordionHeight(getPanel(this), "0px");
+		});
+
+		container.classList.add("eael-mega-menu--is-mobile");
+		container.classList.remove("is-mobile-open");
+		toggleButton.setAttribute("aria-expanded", "false");
+		nav.style.maxHeight = "0px";
+
+		bindMobileHandlers();
+	}
+
+	// Drop every handler belonging to the layout we are leaving. Handlers that
+	// must survive — the breakpoint watcher, the late-content retry — use
+	// `eventNs` alone and are untouched by this.
+	function unbindModeHandlers() {
+		$panelItems.off(modeNs);
+		$links.off(modeNs);
+		$container.off(modeNs);
+		$(document).off(modeNs);
+		$(window).off(modeNs);
+
+		if (toggleButton) {
+			$(toggleButton).off(modeNs);
+		}
+	}
+
+	// Bind the layout that matches the current width, but only when it is not
+	// the one already bound. Without that check a resize would re-bind the same
+	// handlers over and over.
+	function applyMode() {
+		var next = mobileQuery && mobileQuery.matches ? "mobile" : "desktop";
+
+		if (next === currentMode) {
+			return;
+		}
+
+		unbindModeHandlers();
+		currentMode = next;
+
+		if (next === "mobile") {
+			enterMobileMode();
+		} else {
+			enterDesktopMode();
+		}
+	}
+
+	// Editor only. Open/close is never wired up there (see the editor block
+	// below), so a collapsed menu would be stuck shut and the Mobile Menu style
+	// controls impossible to preview. Below the breakpoint it is shown already
+	// expanded instead, with the button left inert.
+	function showEditorMobilePreview() {
+		var mobile = !!mobileQuery && mobileQuery.matches;
+
+		container.classList.toggle("eael-mega-menu--is-mobile", mobile);
+		container.classList.toggle("is-mobile-open", mobile);
+		nav.style.maxHeight = mobile ? "none" : "";
+	}
+
+	// Safari only grew addEventListener on media queries in version 14, so the
+	// old method is kept as a fallback.
+	function listenToQuery(query, handler) {
+		if (query.addEventListener) {
+			query.addEventListener("change", handler);
+		} else {
+			query.addListener(handler);
+		}
+	}
+
+	function stopListeningToQuery(query, handler) {
+		if (query.removeEventListener) {
+			query.removeEventListener("change", handler);
+		} else {
+			query.removeListener(handler);
+		}
+	}
+
+	// -----------------------------------------------------------------
 	// 7. Wire up the events
 	// -----------------------------------------------------------------
 
@@ -582,6 +839,25 @@ var MegaMenu = function ($scope, $) {
 			eael.debounce(positionEditorOpenPanels, RESIZE_DELAY)
 		);
 
+		// Switching the editor's device preview resizes the canvas, so the
+		// collapsed view has to follow it.
+		showEditorMobilePreview();
+
+		if (mobileQuery) {
+			if (breakpointWatchers[widgetId]) {
+				stopListeningToQuery(
+					breakpointWatchers[widgetId].query,
+					breakpointWatchers[widgetId].handler
+				);
+			}
+
+			breakpointWatchers[widgetId] = {
+				query: mobileQuery,
+				handler: showEditorMobilePreview,
+			};
+			listenToQuery(mobileQuery, showEditorMobilePreview);
+		}
+
 		return;
 	}
 
@@ -600,80 +876,137 @@ var MegaMenu = function ($scope, $) {
 		});
 	});
 
-	if (trigger === "click") {
-		$panelItems
-			.children(".eael-mega-menu__item-link")
-			.on("click" + eventNs, function (event) {
-				var item = $(this).closest(".eael-mega-menu__item")[0];
+	function bindDesktopHandlers() {
+		if (trigger === "click") {
+			$panelItems
+				.children(".eael-mega-menu__item-link")
+				.on("click" + eventNs + modeNs, function (event) {
+					var item = $(this).closest(".eael-mega-menu__item")[0];
 
-				// An unresolved panel has nothing to show, so let the link
-				// behave like a normal link instead of opening an empty box.
-				if (getPanel(item).classList.contains("is-unresolved")) {
-					return;
-				}
+					// An unresolved panel has nothing to show, so let the link
+					// behave like a normal link instead of opening an empty box.
+					if (getPanel(item).classList.contains("is-unresolved")) {
+						return;
+					}
 
-				// Stop the browser following the link's href.
-				event.preventDefault();
+					// Stop the browser following the link's href.
+					event.preventDefault();
 
-				togglePanel(item);
+					togglePanel(item);
+				});
+		} else {
+			$panelItems.on("mouseenter" + eventNs + modeNs, function () {
+				cancelScheduledClose();
+				openPanel(this);
 			});
-	} else {
-		$panelItems.on("mouseenter" + eventNs, function () {
-			cancelScheduledClose();
-			openPanel(this);
+
+			$panelItems.on("mouseleave" + eventNs + modeNs, function () {
+				scheduleClose(this);
+			});
+		}
+
+		// Clicking anywhere outside this menu closes it.
+		$(document).on("click" + eventNs + modeNs, function (event) {
+			if (!container.contains(event.target)) {
+				cancelScheduledClose();
+				closeAllPanels();
+			}
 		});
 
-		$panelItems.on("mouseleave" + eventNs, function () {
-			scheduleClose(this);
+		// Escape closes the menu and puts focus back on the item that was open.
+		$(document).on("keydown" + eventNs + modeNs, function (event) {
+			if (event.key !== "Escape" && event.key !== "Esc") {
+				return;
+			}
+
+			var openItem = container.querySelector(".eael-mega-menu__item.is-active");
+
+			if (!openItem) {
+				return;
+			}
+
+			cancelScheduledClose();
+			closeAllPanels();
+			getLink(openItem).focus();
+		});
+
+		// Tabbing out of the menu closes it. relatedTarget is whatever received
+		// focus next; if that is outside the menu, we are done here.
+		$container.on("focusout" + eventNs + modeNs, function (event) {
+			if (!event.relatedTarget || !container.contains(event.relatedTarget)) {
+				cancelScheduledClose();
+				closeAllPanels();
+			}
+		});
+
+		// A resized window changes every measurement, so re-place whatever is
+		// still open. eael.debounce waits until resizing stops.
+		var repositionOpenPanel = eael.debounce(function () {
+			$panelItems.each(function () {
+				if (isOpen(this)) {
+					positionPanel(this);
+				}
+			});
+		}, RESIZE_DELAY);
+
+		$(window).on("resize" + eventNs + modeNs, repositionOpenPanel);
+		$(window).on("orientationchange" + eventNs + modeNs, repositionOpenPanel);
+	}
+
+	function bindMobileHandlers() {
+		$(toggleButton).on("click" + eventNs + modeNs, function (event) {
+			event.preventDefault();
+			toggleMobileNav();
+		});
+
+		// One handler for every link. An item that owns a dropdown opens it
+		// instead of navigating — on a touch screen there is no hover, so the
+		// tap has to do both jobs.
+		$links.on("click" + eventNs + modeNs, function (event) {
+			var item = $(this).closest(".eael-mega-menu__item")[0];
+			var panel = getPanel(item);
+
+			if (panel && !panel.classList.contains("is-unresolved")) {
+				event.preventDefault();
+				toggleMobilePanel(item);
+				return;
+			}
+
+			if (closeOnClick && isMobileNavOpen()) {
+				closeMobileNav();
+			}
+		});
+
+		// Escape closes the menu and hands focus back to the button that opened it.
+		$(document).on("keydown" + eventNs + modeNs, function (event) {
+			if (event.key !== "Escape" && event.key !== "Esc") {
+				return;
+			}
+
+			if (isMobileNavOpen()) {
+				closeMobileNav();
+				toggleButton.focus();
+			}
 		});
 	}
 
-	// Clicking anywhere outside this menu closes it.
-	$(document).on("click" + eventNs, function (event) {
-		if (!container.contains(event.target)) {
-			cancelScheduledClose();
-			closeAllPanels();
-		}
-	});
+	// Pick the layout that matches the width we loaded at, then follow the
+	// breakpoint from here on.
+	applyMode();
 
-	// Escape closes the menu and puts focus back on the item that was open.
-	$(document).on("keydown" + eventNs, function (event) {
-		if (event.key !== "Escape" && event.key !== "Esc") {
-			return;
-		}
-
-		var openItem = container.querySelector(".eael-mega-menu__item.is-active");
-
-		if (!openItem) {
-			return;
+	if (mobileQuery) {
+		// Drop the watcher left behind by an earlier run of this file for the
+		// same widget, or the old one would keep switching modes as well.
+		if (breakpointWatchers[widgetId]) {
+			stopListeningToQuery(
+				breakpointWatchers[widgetId].query,
+				breakpointWatchers[widgetId].handler
+			);
 		}
 
-		cancelScheduledClose();
-		closeAllPanels();
-		getLink(openItem).focus();
-	});
-
-	// Tabbing out of the menu closes it. relatedTarget is whatever received
-	// focus next; if that is outside the menu, we are done here.
-	$container.on("focusout" + eventNs, function (event) {
-		if (!event.relatedTarget || !container.contains(event.relatedTarget)) {
-			cancelScheduledClose();
-			closeAllPanels();
-		}
-	});
-
-	// A resized window changes every measurement, so re-place whatever is
-	// still open. eael.debounce waits until resizing stops.
-	var repositionOpenPanel = eael.debounce(function () {
-		$panelItems.each(function () {
-			if (isOpen(this)) {
-				positionPanel(this);
-			}
-		});
-	}, RESIZE_DELAY);
-
-	$(window).on("resize" + eventNs, repositionOpenPanel);
-	$(window).on("orientationchange" + eventNs, repositionOpenPanel);
+		breakpointWatchers[widgetId] = { query: mobileQuery, handler: applyMode };
+		listenToQuery(mobileQuery, applyMode);
+	}
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
