@@ -406,6 +406,64 @@ class Filterable_Gallery extends Widget_Base
     }
 
     /**
+     * Returns the filter buttons (the "Filterable Controls" list) to render.
+     *
+     * Custom mode returns the manual repeater unchanged. ACF mode DERIVES the
+     * buttons from the distinct filter values of the gallery items, so the buttons
+     * and the per-item filter classes come from one source and pass through the
+     * same sorter_class() normalization — they can never drift apart. Requiring the
+     * user to hand-maintain a parallel button list that must exactly match the ACF
+     * filter field is the bug this replaces.
+     *
+     * @param array $settings Widget settings from get_settings_for_display().
+     * @return array
+     */
+    protected function get_fg_filter_controls( $settings ) {
+        if ( 'acf_repeater' !== ( $settings['eael_fg_data_source'] ?? 'custom' ) ) {
+            return is_array( $settings['eael_fg_controls'] ?? null ) ? $settings['eael_fg_controls'] : [];
+        }
+
+        $items    = $this->get_fg_gallery_items( $settings );
+        $controls = [];
+        $seen     = [];
+
+        foreach ( $items as $item ) {
+            $raw = isset( $item['eael_fg_gallery_control_name'] ) ? (string) $item['eael_fg_gallery_control_name'] : '';
+            if ( '' === trim( $raw ) ) {
+                continue;
+            }
+
+            // An item may belong to several filters (comma-separated) — the same
+            // convention the manual per-item "Gallery Filter Title" field uses.
+            foreach ( explode( ',', $raw ) as $token ) {
+                $token = trim( $token );
+                if ( '' === $token ) {
+                    continue;
+                }
+
+                // Dedupe by the normalized class so values that collapse to the
+                // same filter (e.g. "Gallery 1" / "gallery 1") yield one button.
+                $key = $this->sorter_class( $token );
+                if ( isset( $seen[ $key ] ) ) {
+                    continue;
+                }
+                $seen[ $key ] = true;
+
+                $controls[] = [
+                    'eael_fg_control'                   => $token,
+                    'eael_fg_control_label'             => '',
+                    'eael_fg_control_custom_id'         => '',
+                    'eael_fg_custom_label'              => '',
+                    'eael_fg_control_active_as_default' => '',
+                    '_id'                               => uniqid( 'fgc_', false ),
+                ];
+            }
+        }
+
+        return $controls;
+    }
+
+    /**
      * Markup for the ACF "Additional Fields" of a single gallery item.
      *
      * @param array $item Normalized gallery item from gallery_item_store().
@@ -1030,9 +1088,20 @@ class Filterable_Gallery extends Widget_Base
         );
         
         $this->add_control(
+            'eael_fg_acf_controls_notice',
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => esc_html__( 'Filter buttons are generated automatically from the mapped ACF Filter field — one button per distinct value. Manage them by editing the ACF Filter values.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+                'condition'       => [ 'eael_fg_data_source' => 'acf_repeater' ],
+            ]
+        );
+
+        $this->add_control(
             'eael_fg_controls',
             [
                 'type' => Controls_Manager::REPEATER,
+                'condition' => [ 'eael_fg_data_source' => 'custom' ],
                 'default' => [
                     ['eael_fg_control' => 'Gallery Filter'],
                 ],
@@ -4029,6 +4098,8 @@ class Filterable_Gallery extends Widget_Base
     protected function render_filters()
     {
         $settings = $this->get_settings_for_display();
+        // ACF mode derives the buttons from the gallery data; custom mode unchanged.
+        $settings['eael_fg_controls'] = $this->get_fg_filter_controls( $settings );
         $all_text = ($settings['eael_fg_all_label_text'] != '') ? $settings['eael_fg_all_label_text'] : esc_html__('All', 'essential-addons-for-elementor-lite');
         
         if ($settings['filter_enable'] == 'yes') {
@@ -4060,6 +4131,8 @@ class Filterable_Gallery extends Widget_Base
     protected function render_layout_3_filters()
     {
         $settings = $this->get_settings_for_display();
+        // ACF mode derives the buttons from the gallery data; custom mode unchanged.
+        $settings['eael_fg_controls'] = $this->get_fg_filter_controls( $settings );
         if ($settings['filter_enable'] == 'yes') {
             ?>
             <div class="fg-layout-3-filters-wrap">
@@ -4776,6 +4849,12 @@ class Filterable_Gallery extends Widget_Base
         // resolved rows onto this local copy before it is handed to Pro. Keeps every shipped
         // Pro version working without a Pro-side change, and reports the true ACF row count.
         $settings['eael_fg_gallery_items'] = $fg_gallery_items;
+
+        // Same story for the filter buttons: the manual "Filterable Controls" repeater
+        // is gated on custom, so in ACF mode $settings['eael_fg_controls'] is absent.
+        // Derive it from the gallery data so this render's default-control loop, and any
+        // Pro handler that reads the key (grid-flow / harmonic), both see valid buttons.
+        $settings['eael_fg_controls'] = $this->get_fg_filter_controls( $settings );
 
         if (!empty($settings['eael_fg_filter_duration'])) {
             $filter_duration = $settings['eael_fg_filter_duration'];
