@@ -10184,3 +10184,12 @@
 .elementor-widget-eael-interactive-circle .eael-interactive-circle-extras .eael-interactive-circle-extra .eael-interactive-circle-extra-value {
   display: inline-block;
 }
+.eael-interactive-circle .eael-circle-btn-icon img.eael-circle-acf-icon,
+.eael-interactive-circle .eael-circle-content-icon img.eael-circle-acf-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  -o-object-fit: contain;
+     object-fit: contain;
+  vertical-align: middle;
+}

@@ -126,13 +126,13 @@ class Interactive_Circle extends Widget_Base {
 			]
 		);
 
-		// The per-item Icon is an ICONS control (value + library pair) with no ACF
-		// equivalent — presentation belongs in the widget, not in a mapped field.
+		// Default icon for every item. Per-row icons come from a mapped ACF Image
+		// field below; this is the fallback used whenever a row has no image.
 		$this->add_control(
 			'eael_ic_acf_icon',
 			[
-				'label'       => esc_html__( 'Item Icon', 'essential-addons-for-elementor-lite' ),
-				'description' => esc_html__( 'Icon used for every item in ACF mode.', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Default Item Icon', 'essential-addons-for-elementor-lite' ),
+				'description' => esc_html__( 'Shown when a row has no mapped Item Icon image. Map an ACF Image field below to give each item its own icon.', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'default'     => [
 					'value'   => 'fas fa-home',
@@ -196,6 +196,18 @@ class Interactive_Circle extends Widget_Base {
 				]
 			);
 
+			$this->add_control(
+				'eael_ic_acf_repeater_icon_image_' . $repeater_name,
+				[
+					'label'       => esc_html__( 'Item Icon (Image)', 'essential-addons-for-elementor-lite' ),
+					'description' => esc_html__( 'Map an ACF Image field to give each item its own icon. Rows with no image fall back to the Default Item Icon above.', 'essential-addons-for-elementor-lite' ),
+					'type'        => Controls_Manager::SELECT,
+					'default'     => '',
+					'options'     => $sub_field_options,
+					'condition'   => $repeater_condition,
+				]
+			);
+
 			$extra_field_options = $sub_field_options;
 			unset( $extra_field_options[''] );
 			$this->add_control(
@@ -236,14 +248,16 @@ class Interactive_Circle extends Widget_Base {
 			return [];
 		}
 
-		$title_key   = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_title_' . $field_name ] ?? '' );
-		$content_key = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_content_' . $field_name ] ?? '' );
-		$link_key    = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_link_' . $field_name ] ?? '' );
+		$title_key      = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_title_' . $field_name ] ?? '' );
+		$content_key    = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_content_' . $field_name ] ?? '' );
+		$link_key       = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_link_' . $field_name ] ?? '' );
+		$icon_image_key = sanitize_text_field( $settings[ 'eael_ic_acf_repeater_icon_image_' . $field_name ] ?? '' );
 		$extra_keys  = ( isset( $settings[ 'eael_ic_acf_repeater_extras_' . $field_name ] ) && is_array( $settings[ 'eael_ic_acf_repeater_extras_' . $field_name ] ) )
 			? $settings[ 'eael_ic_acf_repeater_extras_' . $field_name ]
 			: [];
 
-		// Single widget-level icon reused by every ACF item (both icon slots).
+		// Widget-level fallback icon — used for any row whose mapped Item Icon image
+		// is empty (and for both icon slots).
 		$icon = ( isset( $settings['eael_ic_acf_icon'] ) && is_array( $settings['eael_ic_acf_icon'] ) )
 			? $settings['eael_ic_acf_icon']
 			: [ 'value' => '', 'library' => '' ];
@@ -292,6 +306,22 @@ class Interactive_Circle extends Widget_Base {
 				}
 			}
 
+			// Per-item icon image: ACF Image array, attachment ID, or URL string.
+			// Empty url => the render falls back to the widget-level icon.
+			$icon_image = [ 'url' => '', 'id' => 0 ];
+			if ( $icon_image_key ) {
+				$raw_image = $row[ $icon_image_key ] ?? '';
+				if ( is_array( $raw_image ) ) {
+					$icon_image['url'] = $raw_image['url'] ?? '';
+					$icon_image['id']  = (int) ( $raw_image['ID'] ?? ( $raw_image['id'] ?? 0 ) );
+				} elseif ( is_numeric( $raw_image ) ) {
+					$icon_image['id']  = (int) $raw_image;
+					$icon_image['url'] = (string) wp_get_attachment_url( $icon_image['id'] );
+				} elseif ( is_string( $raw_image ) && '' !== $raw_image ) {
+					$icon_image['url'] = $raw_image;
+				}
+			}
+
 			// Additional fields: [ [ 'label' => ..., 'value' => ... ], ... ].
 			$extras = [];
 			foreach ( $extra_keys as $ekey ) {
@@ -310,6 +340,7 @@ class Interactive_Circle extends Widget_Base {
 				'eael_interactive_circle_default_active'        => ( 0 === $i ? 'yes' : '' ),
 				'eael_interactive_circle_btn_icon'              => $icon,
 				'eael_interactive_circle_content_icon'          => $icon,
+				'eael_ic_icon_image'                            => $icon_image,
 				'eael_interactive_circle_btn_title'             => $title,
 				// Only "yes" when the row actually has a URL — the render emits a bare
 				// <a> without an href otherwise.
@@ -1021,6 +1052,7 @@ class Interactive_Circle extends Widget_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .eael-circle-btn-icon i'   => 'font-size: {{SIZE}}{{UNIT}}!important;',
 					'{{WRAPPER}} .eael-circle-btn-icon svg' => 'width: {{SIZE}}{{UNIT}}!important; height: {{SIZE}}{{UNIT}}!important; min-width: {{SIZE}}{{UNIT}}!important; min-height: {{SIZE}}{{UNIT}}!important;',
+					'{{WRAPPER}} .eael-circle-btn-icon img.eael-circle-acf-icon' => 'width: {{SIZE}}{{UNIT}}!important; height: {{SIZE}}{{UNIT}}!important;',
 				],
 			]
 		);
@@ -1287,6 +1319,7 @@ class Interactive_Circle extends Widget_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .eael-circle-content-icon i'   => 'font-size: {{SIZE}}{{UNIT}}!important;',
 					'{{WRAPPER}} .eael-circle-content-icon svg' => 'width: {{SIZE}}{{UNIT}}!important; height: {{SIZE}}{{UNIT}}!important; min-width: {{SIZE}}{{UNIT}}!important; min-height: {{SIZE}}{{UNIT}}!important;',
+					'{{WRAPPER}} .eael-circle-content-icon img.eael-circle-acf-icon' => 'width: {{SIZE}}{{UNIT}}!important; height: {{SIZE}}{{UNIT}}!important;',
 				],
 			]
 		);
@@ -1367,6 +1400,32 @@ class Interactive_Circle extends Widget_Base {
 		$this->eael_interactive_circle_content_style();
 
 		$this->eael_acf_extra_data_controls_style();
+	}
+
+	/**
+	 * Renders a single item's icon.
+	 *
+	 * A per-item ACF image (mapped via "Item Icon (Image)") wins; otherwise the
+	 * icon control value is rendered. In custom mode there is no image key, so this
+	 * always falls through to Icons_Manager — byte-identical to the old behaviour.
+	 *
+	 * @param array  $item     Normalized item (from get_interactive_circle_items or the manual repeater).
+	 * @param string $icon_key Which icon control key to fall back to (btn / content).
+	 * @return void
+	 */
+	protected function eael_ic_render_item_icon( $item, $icon_key ) {
+		if ( ! empty( $item['eael_ic_icon_image']['url'] ) ) {
+			printf(
+				'<img class="eael-circle-acf-icon" src="%s" alt="%s" />',
+				esc_url( $item['eael_ic_icon_image']['url'] ),
+				esc_attr( $item['eael_interactive_circle_btn_title'] ?? '' )
+			);
+			return;
+		}
+
+		if ( ! empty( $item[ $icon_key ] ) ) {
+			Icons_Manager::render_icon( $item[ $icon_key ] );
+		}
 	}
 
 	protected function render() {
@@ -1456,7 +1515,7 @@ class Interactive_Circle extends Widget_Base {
 													<div class="eael-circle-icon-inner">
 														<?php
 														if ( $show_btn_icon ) {
-															Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
+															$this->eael_ic_render_item_icon( $item, 'eael_interactive_circle_btn_icon' );
 														}
 														if ( $show_btn_title ) {
 															echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
@@ -1472,7 +1531,7 @@ class Interactive_Circle extends Widget_Base {
 												<div class="eael-circle-icon-inner">
 													<?php
 													if ( $show_btn_icon ) {
-														Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
+														$this->eael_ic_render_item_icon( $item, 'eael_interactive_circle_btn_icon' );
 													}
 													if ( $show_btn_title ) {
 														echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
@@ -1536,7 +1595,7 @@ class Interactive_Circle extends Widget_Base {
 													<div class="eael-circle-btn-icon-inner">
 														<?php
 														if ( $show_btn_icon ) {
-															Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
+															$this->eael_ic_render_item_icon( $item, 'eael_interactive_circle_btn_icon' );
 														}
 														if ( $show_btn_title ) {
 															echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
@@ -1552,7 +1611,7 @@ class Interactive_Circle extends Widget_Base {
 												<div class="eael-circle-btn-icon-inner">
 													<?php
 													if ( $show_btn_icon ) {
-														Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
+														$this->eael_ic_render_item_icon( $item, 'eael_interactive_circle_btn_icon' );
 													}
 													if ( $show_btn_title ) {
 														echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
@@ -1570,7 +1629,7 @@ class Interactive_Circle extends Widget_Base {
                                         <div id="eael-interactive<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-content">
 											<?php if ( $show_content_icon ) : ?>
 												<div class="eael-circle-content-icon">
-													<?php Icons_Manager::render_icon( $item['eael_interactive_circle_content_icon'] ); ?>
+													<?php $this->eael_ic_render_item_icon( $item, 'eael_interactive_circle_content_icon' ); ?>
 												</div>
 											<?php endif; ?>
 											<?php echo wp_kses( $item['eael_interactive_circle_item_content'], Helper::eael_allowed_tags() ); ?>
