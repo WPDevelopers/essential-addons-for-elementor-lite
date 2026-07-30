@@ -35,14 +35,14 @@ Body POSTed to `send.wpinsight.com/process-plugin-data`:
 | `marketing_method` | `$this->marketing` | bool |
 | `server` | `$_SERVER['SERVER_SOFTWARE']` | Apache / Nginx / etc. |
 | `active_plugins` | `get_option('active_plugins')` or network option | array of plugin paths |
-| `inactive_plugins` | all installed minus active | array of plugin paths |
+| `inactive_plugins_count` | count of installed minus active | integer only — **the inactive plugin list itself is no longer transmitted** (6.7.2); it is low-signal for compatibility work and is exactly the inventory used to match a site against known CVEs |
 | `text_direction` | `is_rtl() ? 'RTL' : 'LTR'` | |
 | `plugin`, `version` | `get_plugin_data($plugin_file)` | EA's own name + version from header |
 | `status` | `'Active'` / `'Deactivated'` / `'NOT FOUND'` | NOT FOUND when `get_plugin_data` returns empty |
 | `theme`, `theme_version` | `wp_get_theme()` | |
 | `optional_data` | `get_used_elements_count()` | **the EA-specific payload** — see below |
 | `deactivation_reason`, `deactivation_details`, `deactivated_date` | `wpins_deactivation_*` options | only on deactivation send |
-| `country` | `http://ip-api.com/json/<remote-IP>?fields=country` lookup | **only on first send**; calls third-party `ip-api.com` over **HTTP not HTTPS** — see Gaps |
+| ~~`country`~~ | ~~`http://ip-api.com/json/<remote-IP>?fields=country`~~ | **Removed in 6.7.2.** Sent the admin's IP to a second third party (`ip-api.com`) over plaintext HTTP. ip-api.com has no HTTPS on its free tier, so the call was deleted rather than re-pointed — the receiving endpoint already sees the request IP and can resolve country server-side. **Do not reintroduce a client-side geo lookup.** |
 | `item_id` | `'760e8569757fa16992d8'` (EA-specific constant) | first send only |
 
 ### Widget / extension usage computation — `get_used_elements_count()` ([line 1113-1273](../../includes/Classes/Plugin_Usage_Tracker.php#L1113))
@@ -100,9 +100,9 @@ Adding a new EA extension that should be tracked requires editing this switch �
 Gaps the issue captured plus discoveries from verification — these are open follow-ups, not blockers for closing the architecture doc:
 
 - **`put_do_weekly_action` cron-name drift unresolved.** Either rename to `put_do_daily_action`, or change recurrence to `weekly`, or document the drift as known-historical. Currently mismatched.
-- **`http://ip-api.com/json/` third-party dependency over HTTP.** First-send country lookup hits a 3rd-party geolocation service over plaintext HTTP. Privacy implication: site visitor IP is exposed to `ip-api.com`. Should be HTTPS at minimum; ideally documented as a consent consideration in the disclosure copy (currently isn't).
+- ~~**`http://ip-api.com/json/` third-party dependency over HTTP.**~~ **Fixed in 6.7.2** — the lookup was removed entirely (see payload table). No plugin code contacts `ip-api.com` any more.
 - **Failed-send queue has no cap or backoff.** `wpins_<plugin>_<site_id>_send_failed` accumulates indefinitely if API is down. Risk: large option grows DB / autoload size unbounded.
-- **`country` field captured only on first send.** Never refreshed even if site moves to a different host or hosting region. Stale by design.
+- ~~**`country` field captured only on first send.**~~ Moot — the field is no longer collected client-side as of 6.7.2.
 - **Plugin-update behaviour undocumented.** Site_id persists across updates (option not cleared); diff-based send means the upgrade itself isn't a separate event — only changed fields (like `version`) get re-sent. No "upgrade event" hook.
 - **Server-side (WPInsights) is out of scope** — data retention, deletion-request endpoint, response format beyond `siteId`, GDPR/SOC2 posture all live on the WPDeveloper SaaS side. Cross-reference needed if customers ask.
 - **Email-marketing consent isn't a separate question.** Disclosure copy mentions an email for the 10% discount coupon ([`consent.md`](consent.md)), but the `email` field is included unconditionally when `marketing = true` (which defaults to true). User can't opt out of marketing while opting in to tracking. Worth a Pro / engineering ticket.
@@ -124,7 +124,8 @@ Gaps the issue captured plus discoveries from verification — these are open fo
 - [x] Cross-link to [`consent.md`](consent.md) and [`quick-setup.md`](quick-setup.md)
 - [x] Transport details (diff-based, retry queue, site_id assignment) covered
 - [x] Goodbye / deactivation form flow documented
-- [x] Third-party `ip-api.com` HTTP dependency flagged
+- [x] Third-party `ip-api.com` HTTP dependency flagged — **and removed in 6.7.2**
+- [x] Disclosure copy in [`Core.php`](../../includes/Traits/Core.php) rewritten (6.7.2) to enumerate every field actually sent, per WP.org Guideline 7 and GDPR Art. 13
 - [ ] Cron-name drift physical fix (rename or recurrence change) — engineering follow-up, not docs
 - [ ] Failed-send queue cap — engineering follow-up
 

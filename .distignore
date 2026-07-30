@@ -45,6 +45,8 @@ webpack.config.js
 wp-cli.local.yml
 yarn.lock
 tests
+playwright-report
+test-results
 .wp-env.json
 node_modules
 *.sql
@@ -64,6 +66,10 @@ vendor/priyomukul/wp-notice/.editorconfig
 vendor/priyomukul/wp-notice/.gitignore
 vendor/priyomukul/wp-notice/composer.json
 vendor/priyomukul/wp-notice/README.md
+
+includes/templates/admin/quick-setup/src
+includes/templates/admin/quick-setup/index.html
+includes/templates/admin/quick-setup/dist/index.html
 
 includes/templates/admin/eael-dashboard/src
 includes/templates/admin/eael-dashboard/public

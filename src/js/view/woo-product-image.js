@@ -18,6 +18,9 @@ var WooProdectImage = function ($scope, $) {
 	const originalImage = getImageAttributes($productGalleryImage);
 	const originalThumbImage = getImageAttributes($productThumbImage);
 
+	//Variation-image support: toggle read from widget data during init
+	let updateOnVariation = false;
+
 	//Helper function to get image attributes
 	function getImageAttributes($image) {
 		return {
@@ -32,6 +35,7 @@ var WooProdectImage = function ($scope, $) {
 
 	//Event handler for showing variation
 	function handleShowVariation(event, variation) {
+		if (!updateOnVariation) return;
 		if (variation?.image?.src) {
 			updateProductImage(variation.image);
 			stopSliders();
@@ -76,10 +80,28 @@ var WooProdectImage = function ($scope, $) {
 		setImageAttributes($productGalleryImage, variationImage);
 		setThumbImageAttributes($productThumbImage, variationImage);
 
+		// Recalculate swiper dimensions so the swapped image renders correctly
+		refreshSwiper();
+
 		// Re-initialize zoom lens for the updated image
 		setTimeout(() => {
 			initializeZoomLens($productGalleryImage);
 		}, 100); // Small delay to ensure image attributes are updated
+	}
+
+	//Recalculate main/thumb swiper dimensions after an image swap
+	function refreshSwiper() {
+		$(".swiper-container", $scope).each((index, sliderEl) => {
+			const swiperInstance = sliderEl.swiper;
+			if (swiperInstance && !swiperInstance.destroyed && typeof swiperInstance.update === "function") {
+				// Wait for the new image to load before measuring
+				const $img = $(sliderEl).find(".swiper-slide-active .image_slider__image > img");
+				if ($img.length && !$img[0].complete) {
+					$img.one("load", () => swiperInstance.update());
+				}
+				swiperInstance.update();
+			}
+		});
 	}
 
 	//Set image attributes
@@ -105,8 +127,10 @@ var WooProdectImage = function ($scope, $) {
 
 	//Event handler for reseting variation
 	function handleResetVariation() {
+		if (!updateOnVariation) return;
 		resetProductImages();
 		resumeSliders();
+		refreshSwiper();
 	}
 
 	//Resume sliders
@@ -176,6 +200,7 @@ var WooProdectImage = function ($scope, $) {
 	let $sliderImagesOptions = $(".product_image_slider__container", $scope);
 	let $sliderImagesData = $sliderImagesOptions.data("pi_image") || {};
 	const zoomEffect = $sliderImagesData.zoomEffect;
+	updateOnVariation = $sliderImagesData.variationImage === "yes";
 
 	const zoomOptions = {
 		lensWidth: zoomEffect?.lensSize || 100,
