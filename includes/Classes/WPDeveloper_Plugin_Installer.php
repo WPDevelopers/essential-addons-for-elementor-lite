@@ -54,26 +54,33 @@ class WPDeveloper_Plugin_Installer
             return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
-        $response = wp_remote_post(
-            'http://api.wordpress.org/plugins/info/1.0/',
+        // Core's plugins_api() talks to the HTTPS JSON endpoint with certificate
+        // verification and returns a structured object. It never feeds a remote
+        // response body to unserialize(), so neither the object-injection sink
+        // nor an attacker-chosen download_link survives a MITM.
+        if ( ! function_exists( 'plugins_api' ) ) {
+            include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+        }
+
+        $plugin_data = plugins_api(
+            'plugin_information',
             [
-                'body' => [
-                    'action' => 'plugin_information',
-                    'request' => serialize((object) [
-                        'slug' => $slug,
-                        'fields' => [
-                            'version' => false,
-                        ],
-                    ]),
+                'slug'   => $slug,
+                'fields' => [
+                    'version' => false,
                 ],
             ]
         );
 
-        if (is_wp_error($response)) {
-            return $response;
+        if ( is_wp_error( $plugin_data ) ) {
+            return $plugin_data;
         }
 
-        return unserialize(wp_remote_retrieve_body($response));
+        if ( ! is_object( $plugin_data ) ) {
+            return new WP_Error( 'invalid_response', __( 'Could not retrieve plugin information.', 'essential-addons-for-elementor-lite' ) );
+        }
+
+        return $plugin_data;
     }
 
     /**
@@ -115,6 +122,10 @@ class WPDeveloper_Plugin_Installer
 
         if (is_wp_error($plugin_data)) {
             return $plugin_data;
+        }
+
+        if ( empty( $plugin_data->download_link ) ) {
+            return new WP_Error( 'no_download_link', __( 'Could not retrieve plugin information.', 'essential-addons-for-elementor-lite' ) );
         }
 
         $upgrader = new \Plugin_Upgrader(new \Automatic_Upgrader_Skin());
@@ -203,6 +214,12 @@ class WPDeveloper_Plugin_Installer
 
 	    if ( is_wp_error( $result ) ) {
 		    wp_send_json_error( $result->get_error_message() );
+	    }
+
+	    // install_plugin() also returns false / an array when Plugin_Upgrader
+	    // bails without a WP_Error. Only a strict true means installed+activated.
+	    if ( true !== $result ) {
+		    wp_send_json_error( __( 'Plugin could not be installed.', 'essential-addons-for-elementor-lite' ) );
 	    }
 
         wp_send_json_success(__('Plugin is installed successfully!', 'essential-addons-for-elementor-lite'));
