@@ -366,7 +366,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$body['server'] = isset( $_SERVER['SERVER_SOFTWARE'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : '';
 
 			/**
-			 * Collect all active and inactive plugins
+			 * Collect active plugins.
+			 *
+			 * The full inventory of *inactive* plugins is deliberately not sent.
+			 * It carries little compatibility signal (dormant code does not run)
+			 * while being exactly the inventory an attacker would use to match a
+			 * site against known vulnerabilities. Only the count is reported, so
+			 * the "how much dormant code is installed" signal survives without
+			 * shipping the list itself.
+			 *
+			 * @since 6.7.2
 			 */
 			if( ! function_exists( 'get_plugins' ) ) {
 				include ABSPATH . '/wp-admin/includes/plugin.php';
@@ -379,7 +388,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 			}
 			$body['active_plugins'] = $active_plugins;
-			$body['inactive_plugins'] = $plugins;
+			$body['inactive_plugins_count'] = count( $plugins );
 
 			/**
 			 * Text Direction.
@@ -456,13 +465,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 			 * Send Initial Data to API
 			 */
 			if( $site_id == false && $this->item_id !== false ) {
-				if( isset( $_SERVER['REMOTE_ADDR'] ) && ! empty( $_SERVER['REMOTE_ADDR'] && $_SERVER['REMOTE_ADDR'] != '127.0.0.1' ) ) {
-					$country_request = wp_remote_get( 'http://ip-api.com/json/'. sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) .'?fields=country');
-					if( ! is_wp_error( $country_request ) && $country_request['response']['code'] == 200 ) {
-						$ip_data = json_decode( $country_request["body"] );
-						$body['country'] = isset( $ip_data->country ) ? $ip_data->country : 'NOT SET';
-					}
-				}
+				/**
+				 * Country is intentionally NOT resolved here.
+				 *
+				 * This used to POST the administrator's IP address to
+				 * http://ip-api.com over plain, unencrypted HTTP — a second
+				 * third-party recipient of personal data, sent in the clear.
+				 * ip-api.com offers no HTTPS on its free tier, so the lookup was
+				 * removed outright rather than re-pointed: the receiving endpoint
+				 * already sees the request IP and can resolve country server-side
+				 * without any extra party or any plaintext hop.
+				 *
+				 * Do not reintroduce a client-side geo lookup here.
+				 *
+				 * @since 6.7.2
+				 */
 
 				$body['plugin_slug'] = $this->plugin_name;
 				$body['url']         = $site_url;

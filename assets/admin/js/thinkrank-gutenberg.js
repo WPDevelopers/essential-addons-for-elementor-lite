@@ -55,7 +55,9 @@
 		}
 
 		function dismiss() {
-			post( 'eael_thinkrank_dismiss' );
+			// Permanent, SITE-WIDE opt-out: hides every ThinkRank surface for
+			// all users of this installation (see ThinkRank_Promotion).
+			post( 'eael_thinkrank_never_show' );
 			set( { status: state.status, hidden: true } );
 		}
 
@@ -65,7 +67,7 @@
 
 		return el( 'div', { className: 'eael-tr-gb' },
 			el( 'p', { className: 'eael-tr-gb__desc' },
-				__( 'Add AI SEO analysis to this page with ThinkRank - titles, meta, schema & readability. Free.', 'essential-addons-for-elementor-lite' )
+				__( 'Add AI SEO analysis to this page with ThinkRank - titles, meta, schema & readability.', 'essential-addons-for-elementor-lite' )
 			),
 			'error' === state.status ? el( 'p', { className: 'eael-tr-gb__err' },
 				__( 'Could not install automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' )
@@ -77,7 +79,7 @@
 				onClick: install
 			}, label ),
 			el( Button, { variant: 'link', className: 'eael-tr-gb__later', onClick: dismiss },
-				__( 'Don’t show again', 'essential-addons-for-elementor-lite' )
+				__( 'Never show me again', 'essential-addons-for-elementor-lite' )
 			)
 		);
 	}

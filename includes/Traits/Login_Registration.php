@@ -520,20 +520,24 @@ trait Login_Registration {
 				wp_send_json_error( __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' ) );
 			}
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+			// Fail closed: never fall through into the registration logic. Redirect
+			// back when a Referer is available, otherwise terminate unconditionally.
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+			}
+			exit();
 		}
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-register-nonce'] ) ), 'essential-addons-elementor' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
 			}
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+			// Fail closed: never fall through into the registration logic. Redirect
+			// back when a Referer is available, otherwise terminate unconditionally.
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+			}
+			exit();
 		}
 		$page_id = $widget_id = 0;
 		if ( ! empty( $_POST['page_id'] ) ) {
@@ -2834,13 +2838,66 @@ trait Login_Registration {
 		}
 
 		if( count( $custom_profile_fields_arr ) ){
+			// Keys that wp_insert_user() interprets as core user properties. A custom
+			// profile field whose label slugifies to one of these would be copied into
+			// the $user_data array passed to wp_insert_user() and silently overwrite a
+			// core property (e.g. a field labelled "Role" -> `role` => privilege
+			// escalation). Reject any such slug so it can never become a custom field.
+			$reserved_user_keys = self::get_reserved_user_data_keys();
+
 			foreach( $custom_profile_fields_arr as $custom_profile_field_text ){
 				$custom_profile_field_slug = str_replace(' ', '_', trim( strtolower( sanitize_text_field( $custom_profile_field_text ) ), ' ' ));
-				$eael_custom_profile_fields[ sanitize_text_field( $custom_profile_field_slug ) ] = esc_html( $custom_profile_field_text );
+				$custom_profile_field_slug = sanitize_text_field( $custom_profile_field_slug );
+
+				if ( '' === $custom_profile_field_slug || in_array( $custom_profile_field_slug, $reserved_user_keys, true ) ) {
+					continue;
+				}
+
+				$eael_custom_profile_fields[ $custom_profile_field_slug ] = esc_html( $custom_profile_field_text );
 			}
 		}
 
 		return $eael_custom_profile_fields;
+	}
+
+	/**
+	 * Keys that wp_insert_user() / wp_update_user() read from their data array as
+	 * core user properties or preferences. Any custom profile field slug matching
+	 * one of these must be rejected, otherwise a submitted value would overwrite a
+	 * core account property (role, user_pass, user_login, user_email, ...).
+	 *
+	 * `id` is included for defence in depth even though core matches `ID`
+	 * case-sensitively and the slugifier lowercases labels.
+	 *
+	 * @return array Lowercase reserved key slugs.
+	 */
+	public static function get_reserved_user_data_keys() {
+		return [
+			'id',
+			'user_pass',
+			'user_login',
+			'user_nicename',
+			'user_url',
+			'user_email',
+			'display_name',
+			'nickname',
+			'first_name',
+			'last_name',
+			'description',
+			'rich_editing',
+			'syntax_highlighting',
+			'infinite_scrolling',
+			'comment_shortcuts',
+			'admin_color',
+			'use_ssl',
+			'user_registered',
+			'user_activation_key',
+			'spam',
+			'show_admin_bar_front',
+			'role',
+			'locale',
+			'meta_input',
+		];
 	}
 
 	/**

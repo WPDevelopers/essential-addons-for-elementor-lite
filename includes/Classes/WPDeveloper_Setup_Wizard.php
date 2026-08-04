@@ -277,8 +277,8 @@ class WPDeveloper_Setup_Wizard {
 			'title'             => __( 'Boost your SEO with AI', 'essential-addons-for-elementor-lite' ),
 			'subtitle'          => __( 'Get found on Google and in AI answers. Let AI optimize every page you build - automatically.', 'essential-addons-for-elementor-lite' ),
 			'install_label'     => __( 'Enable & Configure SEO', 'essential-addons-for-elementor-lite' ),
-			'installing_label'  => __( 'Enabling…', 'essential-addons-for-elementor-lite' ),
-			'done_label'        => __( 'Opening SEO setup…', 'essential-addons-for-elementor-lite' ),
+			'installing_label'  => __( 'Configuring…', 'essential-addons-for-elementor-lite' ),
+			'done_label'        => __( 'Configured', 'essential-addons-for-elementor-lite' ),
 			'skip_label'        => __( 'Skip for now', 'essential-addons-for-elementor-lite' ),
 			'open_url'          => admin_url( 'admin.php?page=thinkrank' ),
 			'features'          => [

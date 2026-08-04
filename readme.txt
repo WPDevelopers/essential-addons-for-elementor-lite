@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.7.1
+Stable tag: 6.7.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -324,6 +324,24 @@ Yes. Essential Addons is beginner-friendly because it works inside Elementor's v
 
 You can use the official documentation, tutorials, community resources, and support channels from WPDeveloper to learn how to set up widgets, troubleshoot issues, and get the most out of Essential Addons.
 
+= How do I turn off recommendations and promotional notices? =
+
+Any administrator can click "Never show me again" on a recommendation. That is site-wide and permanent: it hides that recommendation everywhere on the installation, for every user, including the WordPress Dashboard widget and the block editor panel. It is not a per-user dismissal.
+
+If you manage many sites and want every Essential Addons recommendation switched off up front, add this to `wp-config.php`:
+
+`define( 'EAEL_DISABLE_PROMOTIONS', true );`
+
+Or, from a plugin or mu-plugin:
+
+`add_filter( 'eael/disable_promotions', '__return_true' );`
+
+Either one disables all promotional surfaces for the whole installation, including seasonal campaign notices.
+
+= What data does Essential Addons collect? =
+
+Nothing is sent unless you explicitly opt in. If you do opt in, we send: your site URL and name; WordPress, PHP and server version; site language, charset and text direction; your list of **active** plugins and the **number** of inactive ones; your active theme and version; which Essential Addons elements you use; and your admin email address so we can send the discount coupon. We do not collect your visitors' data, your content, or the names of your inactive plugins. You can withdraw consent at any time from the plugin settings.
+
 == Screenshots ==
 
 1. Overview of few widgets
@@ -346,6 +364,11 @@ You can use the official documentation, tutorials, community resources, and supp
 
 
 == Changelog ==
+
+= 6.7.2 - 29/07/2026 =
+
+- Improved: EA Login/Register Form | Strengthened user registration security - thanks to `Jakub Herman` for the security research
+- Few minor bug fixes & improvements
 
 = 6.7.1 - 28/07/2026 =
 

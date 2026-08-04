@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
 import { hasDisplayablePlugins, getPluginPromoCount, isPluginsPromoStepVisible, isThinkRankStepVisible } from "../utils/pluginPromoUtils";
 
@@ -21,6 +21,22 @@ function IntegrationContent({
   const shouldShowPluginsPromo = hasDisplayablePlugins();
 
   const [pluginList, setPluginList] = useState(initialPluginList);
+
+  // The list above is a snapshot from page load. Other wizard steps (Boost
+  // SEO) can install one of these plugins mid-session — sync their state here.
+  useEffect(() => {
+    const onPluginActivated = (event) => {
+      const basename = event?.detail?.basename;
+      if (!basename) return;
+      setPluginList((prevList) =>
+        prevList.map((p) =>
+          p.basename === basename ? { ...p, is_active: true, local_plugin_data: true } : p
+        )
+      );
+    };
+    window.addEventListener("eael-quick-setup:plugin-activated", onPluginActivated);
+    return () => window.removeEventListener("eael-quick-setup:plugin-activated", onPluginActivated);
+  }, []);
 
   const handleSaveClick = async (event) => {
     event.preventDefault();
@@ -111,7 +127,9 @@ function IntegrationContent({
         <div className="eael-integration-content-wrapper onboard-scroll-wrap">
           {pluginList.map((plugin) => (
             'essential-blocks' === plugin?.slug ? '' :
-            <div className="eael-integration-item" key={plugin.basename}>
+            // is_active in the key: the toggle uses defaultChecked, so a
+            // mid-session activation must remount the item to re-check it
+            <div className="eael-integration-item" key={`${plugin.basename}-${plugin.is_active ? 1 : 0}`}>
               <div className="eael-integration-header flex gap-2 items-center">
                 <img src={plugin.logo} alt="logo" width="30" />
                 <h5>{plugin.title}</h5>
