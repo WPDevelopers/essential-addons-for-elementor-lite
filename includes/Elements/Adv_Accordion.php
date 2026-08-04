@@ -934,6 +934,55 @@ class Adv_Accordion extends Widget_Base
 			]
 		);
 
+        $this->add_responsive_control(
+			'eael_adv_accordion_media_image_object_fit',
+			[
+				'label'     => esc_html__( 'Image Fit', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => [
+					'cover'      => esc_html__( 'Cover', 'essential-addons-for-elementor-lite' ),
+					'contain'    => esc_html__( 'Contain', 'essential-addons-for-elementor-lite' ),
+					'fill'       => esc_html__( 'Fill', 'essential-addons-for-elementor-lite' ),
+					'scale-down' => esc_html__( 'Scale Down', 'essential-addons-for-elementor-lite' ),
+					'none'       => esc_html__( 'None (Original Size)', 'essential-addons-for-elementor-lite' ),
+				],
+				'default'   => 'cover',
+                'condition' => [
+                    'eael_adv_accordion_type' => 'accordion_media',
+                ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-image' => 'object-fit: {{VALUE}};',
+				],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_adv_accordion_media_image_object_position',
+			[
+				'label'     => esc_html__( 'Image Position', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => [
+					'center center' => esc_html__( 'Center Center', 'essential-addons-for-elementor-lite' ),
+					'center left'   => esc_html__( 'Center Left', 'essential-addons-for-elementor-lite' ),
+					'center right'  => esc_html__( 'Center Right', 'essential-addons-for-elementor-lite' ),
+					'top center'    => esc_html__( 'Top Center', 'essential-addons-for-elementor-lite' ),
+					'top left'      => esc_html__( 'Top Left', 'essential-addons-for-elementor-lite' ),
+					'top right'     => esc_html__( 'Top Right', 'essential-addons-for-elementor-lite' ),
+					'bottom center' => esc_html__( 'Bottom Center', 'essential-addons-for-elementor-lite' ),
+					'bottom left'   => esc_html__( 'Bottom Left', 'essential-addons-for-elementor-lite' ),
+					'bottom right'  => esc_html__( 'Bottom Right', 'essential-addons-for-elementor-lite' ),
+				],
+				'default'   => '',
+                'condition' => [
+                    'eael_adv_accordion_type'                    => 'accordion_media',
+                    'eael_adv_accordion_media_image_object_fit'  => [ 'cover', 'contain', 'scale-down', 'none' ],
+                ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-accordion_media-wrapper .eael-accordion_media-image' => 'object-position: {{VALUE}};',
+				],
+			]
+		);
+
         $this->end_controls_section();
     }
 
