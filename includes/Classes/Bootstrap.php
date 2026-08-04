@@ -18,6 +18,7 @@ use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 use Essential_Addons_Elementor\Traits\Controls;
 use Essential_Addons_Elementor\Traits\Facebook_Feed;
 use Essential_Addons_Elementor\Classes\Asset_Builder;
+use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 use Essential_Addons_Elementor\Traits\Ajax_Handler;
 use Essential_Addons_Elementor\Pro\Classes\License\LicenseManager;
 
@@ -130,6 +131,11 @@ class Bootstrap
 	    if ( $this->is_activate_elementor() ) {
 		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
 	    }
+
+        // Theme Builder — header & footer templates built with Elementor.
+        if ( Theme_Builder::is_enabled() ) {
+            Theme_Builder::instance();
+        }
 
         // Compatibility Support
         new Compatibility_Support();

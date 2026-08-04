@@ -10,8 +10,6 @@
   transition: -webkit-box-shadow 0.3s ease;
   transition: box-shadow 0.3s ease;
   transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
-  /* Light */
-  /* Dark Theme */
 }
 .eael-code-snippet-wrapper:hover {
   -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -22,6 +20,9 @@
 }
 .eael-code-snippet-wrapper.view-mode-collapsed .eael-code-snippet-code {
   overflow-y: hidden;
+}
+.eael-code-snippet-wrapper {
+  /* Light */
 }
 .eael-code-snippet-wrapper.theme-light {
   background-color: #ffffff;
@@ -83,6 +84,9 @@
 .eael-code-snippet-wrapper.theme-light .eael-code-snippet-copy-button svg {
   width: 16px;
   height: 16px;
+}
+.eael-code-snippet-wrapper {
+  /* Dark Theme */
 }
 .eael-code-snippet-wrapper.theme-dark {
   background-color: #0d1117;
@@ -455,7 +459,6 @@
   background: transparent;
   border: none;
   min-height: 3rem;
-  /* Custom scrollbar for webkit browsers */
 }
 .eael-code-snippet-code code {
   font-family: inherit;
@@ -466,6 +469,9 @@
   border: none;
   display: block;
   white-space: pre;
+}
+.eael-code-snippet-code {
+  /* Custom scrollbar for webkit browsers */
 }
 .eael-code-snippet-code::-webkit-scrollbar {
   height: 8px;
