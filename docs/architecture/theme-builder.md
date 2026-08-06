@@ -27,7 +27,7 @@ Assets: [`assets/admin/css/theme-builder.css`](../../assets/admin/css/theme-buil
 | `Integrations/Compatibility.php` | Polylang / WPML translation, sitemap exclusions (core, Yoast, Rank Math) |
 | `Frontend/Frontend.php` | Resolves templates for the request and picks a render mode |
 | `Renderers/Template_Renderer.php` | Produces the markup, guarded against duplicate rendering |
-| `Templates/` | `header.php`, `footer.php`, `canvas.php` + the `admin/` views |
+| `Templates/` | `header.php`, `footer.php`, `canvas.php` for the front end, plus `admin/dashboard.php` — the only admin view left in PHP, since the modals are React |
 
 ## Data model
 

@@ -102,7 +102,7 @@ export default function TargetSelect( { source, value, label, onChange } ) {
 						role="button"
 						tabIndex={ 0 }
 						className="eatb-target__clear"
-						aria-label={ strings.removeCondition || 'Clear' }
+						aria-label={ strings.clearSelection || 'Clear selection' }
 						onClick={ ( event ) => {
 							event.stopPropagation();
 							choose( 0, '' );
@@ -160,7 +160,7 @@ export default function TargetSelect( { source, value, label, onChange } ) {
 							<li className="eatb-target__empty">{ strings.noResults || 'No results found' }</li>
 						) : null }
 
-						{ loading ? <li className="eatb-target__empty">{ strings.saving || 'Loading…' }</li> : null }
+						{ loading ? <li className="eatb-target__empty">{ strings.loading || 'Loading…' }</li> : null }
 					</ul>
 				</div>
 			) : null }

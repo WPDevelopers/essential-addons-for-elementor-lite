@@ -44,10 +44,6 @@ $elementor_ok   = Theme_Builder::is_enabled();
 		</div>
 	<?php endif; ?>
 
-	<div class="notice notice-error is-dismissible eael-tb-error-notice" style="display:none;">
-		<p></p>
-	</div>
-
 	<nav class="nav-tab-wrapper eael-tb-tabs wp-clearfix">
 		<a href="<?php echo esc_url( Theme_Builder::page_url() ); ?>"
 			class="nav-tab <?php echo '' === $current_type ? 'nav-tab-active' : ''; ?>">

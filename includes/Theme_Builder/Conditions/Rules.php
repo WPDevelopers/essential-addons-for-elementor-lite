@@ -666,13 +666,15 @@ class Rules {
 		$prepared = [];
 
 		foreach ( self::get_rules() as $name => $rule ) {
+			// `sub_source_type` is deliberately not sent: the client passes the
+			// sub_source slug back and the server resolves the kind itself, so
+			// shipping it would be payload nothing reads.
 			$prepared[ $name ] = [
-				'name'            => $name,
-				'label'           => $rule['label'],
-				'group'           => $rule['group'],
-				'sub_source'      => $rule['sub_source'],
-				'sub_source_type' => $rule['sub_source_type'],
-				'supports'        => array_values( (array) $rule['supports'] ),
+				'name'       => $name,
+				'label'      => $rule['label'],
+				'group'      => $rule['group'],
+				'sub_source' => $rule['sub_source'],
+				'supports'   => array_values( (array) $rule['supports'] ),
 			];
 		}
 

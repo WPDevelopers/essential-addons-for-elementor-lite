@@ -73,7 +73,7 @@ export default function ConditionRow( { condition, onChange, onRemove, canRemove
 			</label>
 
 			<label className="eatb-field eatb-field--group">
-				<span className="screen-reader-text">{ strings.groupLabel || 'Group' }</span>
+				<span className="screen-reader-text">{ strings.groupLabel || 'Condition group' }</span>
 				<select value={ condition.group } onChange={ ( event ) => changeGroup( event.target.value ) }>
 					{ groups.map( ( group ) => (
 						<option key={ group.slug } value={ group.slug }>{ group.label }</option>

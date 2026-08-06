@@ -124,7 +124,7 @@ export default function ConditionsModal( { template, onClose, onSaved } ) {
 		>
 			<div className="eatb-hero">
 				<h2 className="eatb-hero__title">
-					{ strings.conditionsTitle || 'Where Do You Want to Display This Template one' }
+					{ strings.conditionsTitle || 'Where Do You Want to Display This Template' }
 				</h2>
 				<p className="eatb-hero__subtitle">{ strings.conditionsIntro }</p>
 			</div>
@@ -155,7 +155,8 @@ export default function ConditionsModal( { template, onClose, onSaved } ) {
 
 			{ conflicts.length ? (
 				<Notice type="warning">
-					{ ( strings.conflictWarning || '%s' ).replace( '%s', conflicts.join( ', ' ) ) }
+					{ ( strings.conflictWarning || 'Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number.' )
+						.replace( '%s', conflicts.join( ', ' ) ) }
 				</Notice>
 			) : null }
 		</Modal>
