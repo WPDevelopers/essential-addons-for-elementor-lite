@@ -857,6 +857,14 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/simple-menu/',
 							    'is_activate' => boolval( $this->get_settings( 'simple-menu' ) )
 						    ],
+						    'mega-menu'            => [
+							    'key'         => 'mega-menu',
+							    'title'       => __( 'Mega Menu', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/mega-menu/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-mega-menu/',
+							    'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'mega-menu' ) )
+						    ],
 						    'advanced-search'      => [
 							    'key'         => 'advanced-search',
 							    'title'       => __( 'Advanced Search', 'essential-addons-for-elementor-lite' ),

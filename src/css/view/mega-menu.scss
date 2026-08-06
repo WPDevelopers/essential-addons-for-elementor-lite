@@ -1,0 +1,354 @@
+/**
+ * EA Mega Menu
+ *
+ * Every themable value comes from a CSS custom property that the widget's style
+ * controls write onto the Elementor wrapper. Defaults live in the `var()`
+ * fallback at the point of use — never as a declaration on `.eael-mega-menu`
+ * itself, otherwise the local declaration would beat the inherited control value.
+ */
+
+.eael-mega-menu {
+	position: relative;
+
+	/* --------------------------------------------------------------------- */
+	/* Menu bar                                                              */
+	/* --------------------------------------------------------------------- */
+
+	&__container {
+		position: relative;
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: var(--eael-mm-bar-justify, flex-start);
+		gap: var(--eael-mm-item-gap, 8px);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	&__item {
+		position: relative;
+		display: flex;
+		align-items: center;
+		background-color: var(--eael-mm-item-bg, transparent);
+		border-radius: var(--eael-mm-item-radius, 0);
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	&__link,
+	&__disclosure {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		font: inherit;
+		color: var(--eael-mm-item-color, inherit);
+		text-decoration: none;
+		background: none;
+		border: 0;
+		border-radius: var(--eael-mm-item-radius, 0);
+		cursor: pointer;
+		transition: color 0.2s ease, background-color 0.2s ease;
+	}
+
+	&__link {
+		flex-direction: var(--eael-mm-item-direction, row);
+		gap: var(--eael-mm-icon-gap, 8px);
+		padding: var(--eael-mm-item-padding, 12px 16px);
+	}
+
+	&__disclosure {
+		padding: var(--eael-mm-item-padding, 12px 16px);
+		padding-inline-start: 0;
+	}
+
+	span.eael-mega-menu__link {
+		cursor: default;
+	}
+
+	&__item-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		order: var(--eael-mm-icon-order, 0);
+		font-size: var(--eael-mm-icon-size, 16px);
+		color: var(--eael-mm-icon-color, currentColor);
+		line-height: 1;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	&__item-label {
+		order: 1;
+	}
+
+	&__item-indicator {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		order: 2;
+		margin-inline-start: var(--eael-mm-indicator-gap, 6px);
+		font-size: var(--eael-mm-indicator-size, 12px);
+		color: var(--eael-mm-indicator-color, currentColor);
+		line-height: 1;
+		transition: transform var(--eael-mm-animation-duration, 300ms) ease;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	&__disclosure &__item-indicator {
+		margin-inline-start: 0;
+	}
+
+	/* Hover state. */
+	&__item:hover {
+		background-color: var(--eael-mm-item-bg-hover, var(--eael-mm-item-bg, transparent));
+	}
+
+	&__item:hover &__link,
+	&__item:hover &__disclosure {
+		color: var(--eael-mm-item-color-hover, var(--eael-mm-item-color, inherit));
+	}
+
+	&__item:hover &__item-icon {
+		color: var(--eael-mm-icon-color-hover, var(--eael-mm-icon-color, currentColor));
+	}
+
+	/* Active state — the item whose submenu is open. */
+	&__item--active {
+		background-color: var(--eael-mm-item-bg-active, var(--eael-mm-item-bg-hover, var(--eael-mm-item-bg, transparent)));
+	}
+
+	&__item--active &__link,
+	&__item--active &__disclosure {
+		color: var(--eael-mm-item-color-active, var(--eael-mm-item-color-hover, var(--eael-mm-item-color, inherit)));
+	}
+
+	&__item--active &__item-icon {
+		color: var(--eael-mm-icon-color-active, var(--eael-mm-icon-color-hover, var(--eael-mm-icon-color, currentColor)));
+	}
+
+	&__item--active &__item-indicator {
+		color: var(--eael-mm-indicator-color-active, var(--eael-mm-indicator-color, currentColor));
+		transform: rotate(var(--eael-mm-indicator-rotate, 0deg));
+	}
+
+	&__link:focus-visible,
+	&__disclosure:focus-visible,
+	&__toggle:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+
+	/* --------------------------------------------------------------------- */
+	/* Submenu panels                                                        */
+	/* --------------------------------------------------------------------- */
+
+	&__panels {
+		position: static;
+	}
+
+	&__panel {
+		position: absolute;
+		top: calc(100% + var(--eael-mm-panel-offset, 0px));
+		inset-inline-start: var(--eael-mm-panel-inset-start, 0px);
+		width: var(--eael-mm-panel-width, 100%);
+		max-width: none;
+		z-index: var(--eael-mm-panel-z-index, 999);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition:
+			opacity var(--eael-mm-animation-duration, 300ms) ease,
+			transform var(--eael-mm-animation-duration, 300ms) ease,
+			visibility var(--eael-mm-animation-duration, 300ms) ease;
+
+		&[data-width-mode="item"] {
+			width: var(--eael-mm-panel-width, max-content);
+		}
+	}
+
+	&__panel--active {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: none;
+	}
+
+	/* Reveal animations. */
+	&--anim-none &__panel {
+		transition: none;
+	}
+
+	&--anim-slide-down &__panel {
+		transform: translateY(-12px);
+	}
+
+	&--anim-slide-up &__panel {
+		transform: translateY(12px);
+	}
+
+	&--anim-zoom &__panel {
+		transform: scale(0.96);
+	}
+
+	/* --------------------------------------------------------------------- */
+	/* Editing mode (Elementor preview only)                                 */
+	/* --------------------------------------------------------------------- */
+
+	/* The class is added by the handler, so it can only be present alongside
+	   the `__panel` class it modifies — there is no state where this hides a
+	   panel that would otherwise have been droppable. */
+	&--editing &__panel {
+		position: static;
+		display: none;
+		width: auto;
+		inset-inline-start: auto;
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: none;
+		transition: none;
+	}
+
+	&--editing &__panel--active {
+		display: block;
+	}
+
+	/* --------------------------------------------------------------------- */
+	/* Mobile toggle                                                         */
+	/* --------------------------------------------------------------------- */
+
+	&__toggle {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		margin: 0;
+		padding: var(--eael-mm-toggle-padding, 10px 14px);
+		font: inherit;
+		color: var(--eael-mm-toggle-color, inherit);
+		background-color: var(--eael-mm-toggle-bg, transparent);
+		border: 0;
+		border-radius: var(--eael-mm-toggle-radius, 0);
+		cursor: pointer;
+		transition: color 0.2s ease, background-color 0.2s ease;
+
+		&:hover {
+			color: var(--eael-mm-toggle-color-hover, var(--eael-mm-toggle-color, inherit));
+			background-color: var(--eael-mm-toggle-bg-hover, var(--eael-mm-toggle-bg, transparent));
+		}
+	}
+
+	&__toggle-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: var(--eael-mm-toggle-icon-size, 20px);
+		line-height: 1;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	&__toggle-icon--close {
+		display: none;
+	}
+
+	/* --------------------------------------------------------------------- */
+	/* Collapsed (mobile) layout                                             */
+	/* --------------------------------------------------------------------- */
+
+	&--mobile {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+
+		.eael-mega-menu__toggle {
+			display: inline-flex;
+			align-self: var(--eael-mm-toggle-align, flex-start);
+		}
+
+		.eael-mega-menu__container {
+			display: none;
+			flex-direction: column;
+			width: 100%;
+		}
+
+		/* The list and the panels wrapper step out of the box model so that
+		   items and their panels can interleave through `order`. */
+		.eael-mega-menu__list,
+		.eael-mega-menu__panels {
+			display: contents;
+		}
+
+		.eael-mega-menu__item,
+		.eael-mega-menu__panel {
+			order: var(--eael-mm-order, 0);
+		}
+
+		.eael-mega-menu__item {
+			justify-content: space-between;
+			width: 100%;
+		}
+
+		.eael-mega-menu__link {
+			flex: 1 1 auto;
+			justify-content: flex-start;
+		}
+
+		.eael-mega-menu__panel {
+			position: static;
+			display: none;
+			width: auto;
+			inset-inline-start: auto;
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+			transform: none;
+			transition: none;
+		}
+
+		.eael-mega-menu__panel--active {
+			display: block;
+		}
+	}
+
+	&--mobile#{&}--menu-open {
+		.eael-mega-menu__container {
+			display: flex;
+		}
+
+		.eael-mega-menu__toggle-icon--open {
+			display: none;
+		}
+
+		.eael-mega-menu__toggle-icon--close {
+			display: inline-flex;
+		}
+	}
+
+	/* Overlay the dropdown instead of pushing the following content down. */
+	&--mobile#{&}--stretch-dropdown {
+		.eael-mega-menu__container {
+			position: absolute;
+			top: 100%;
+			inset-inline: 0;
+			z-index: var(--eael-mm-panel-z-index, 999);
+		}
+	}
+}

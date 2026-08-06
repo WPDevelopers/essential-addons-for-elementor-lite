@@ -1,7 +1,6 @@
 .eael-popup-details-render {
   width: 80%;
   max-width: 900px;
-  /* Safari */
 }
 .eael-popup-details-render .eael-preloader {
   margin: 0 auto;
@@ -12,6 +11,9 @@
   height: 50px;
   -webkit-animation: eaelSpin 2s linear infinite; /* Safari */
   animation: eaelSpin 2s linear infinite;
+}
+.eael-popup-details-render {
+  /* Safari */
 }
 @-webkit-keyframes eaelSpin {
   0% {

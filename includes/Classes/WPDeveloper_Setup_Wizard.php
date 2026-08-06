@@ -670,6 +670,11 @@ class WPDeveloper_Setup_Wizard {
 						'preferences' => 'basic',
 					],
 					[
+						'key'         => 'mega-menu',
+						'title'       => __( 'Mega Menu', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
 						'key'         => 'breadcrumbs',
 						'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',

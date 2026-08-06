@@ -1,0 +1,212 @@
+# Mega Menu Widget
+
+> A nested Elementor widget where every menu item behaves like a tab and owns its own container, so any widget — headings, images, forms, WooCommerce widgets, dynamic tags — can be dropped inside a submenu panel.
+
+**Class file:** [`includes/Elements/Mega_Menu.php`](../../includes/Elements/Mega_Menu.php)
+**Slug:** `mega-menu` (widget id `eael-mega-menu`)
+**Requires:** Elementor 3.8+ (`Widget_Nested_Base`) with the *Nested Elements* experiment active
+
+---
+
+## Overview
+
+Mega Menu is EA's first **nested** widget. It follows the same architecture as Elementor's Nested Tabs: the `eael_mega_menu_items` repeater and the widget's child elements are kept in a strict 1:1 index mapping, so adding a repeater row creates a container and removing one deletes it. Elementor owns that lifecycle — the widget only decides *where* those containers are printed and *what* attributes they carry. A menu item is a tab, a tab is a container, and a container holds arbitrary widgets.
+
+Because children are ordinary Elementor container elements they live inside the existing `_elementor_data` post meta: no new tables, no extra post meta, no extra queries.
+
+## Pro vs Lite
+
+| Capability | Lite | Pro |
+| ---------- | ---- | --- |
+| Nested menu items with per-item containers | ✅ | — |
+| Hover / click trigger, close delay, outside-click close | ✅ | — |
+| Four submenu width modes (menu, viewport, fit, custom) | ✅ | — |
+| Five reveal animations | ✅ | — |
+| Responsive collapse to toggle + accordion | ✅ | — |
+| Full style tab (bar, item states, icon, indicator, panel, toggle) | ✅ | — |
+
+Lite-only widget — Pro adds nothing and hooks nothing. The one public extension point is the `eael/mega-menu/menu_items` filter.
+
+## File Map
+
+| File | Role |
+| ---- | ---- |
+| [`includes/Elements/Mega_Menu.php`](../../includes/Elements/Mega_Menu.php) | Widget class — metadata, nested wiring, `print_child()` |
+| [`includes/MegaMenu/Conditions.php`](../../includes/MegaMenu/Conditions.php) | Availability gate — Elementor version, nested API, experiment state |
+| [`includes/MegaMenu/Manager.php`](../../includes/MegaMenu/Manager.php) | Service provider — option lists, defaults, child container shape |
+| [`includes/MegaMenu/Controls/Content_Controls.php`](../../includes/MegaMenu/Controls/Content_Controls.php) | Content tab — repeater, settings, responsive |
+| [`includes/MegaMenu/Controls/Style_Controls.php`](../../includes/MegaMenu/Controls/Style_Controls.php) | Style tab — six sections, all writing CSS custom properties |
+| [`includes/MegaMenu/Renderers/Frontend_Renderer.php`](../../includes/MegaMenu/Renderers/Frontend_Renderer.php) | PHP render + panel attribute decoration |
+| [`includes/MegaMenu/Renderers/Editor_Renderer.php`](../../includes/MegaMenu/Renderers/Editor_Renderer.php) | Underscore `content_template()` |
+| [`includes/MegaMenu/Traits/Menu_Items.php`](../../includes/MegaMenu/Traits/Menu_Items.php) | Repeater row normalisation shared by widget and renderer |
+| [`includes/MegaMenu/Templates/menu-item.php`](../../includes/MegaMenu/Templates/menu-item.php) | Single menu item markup partial |
+| [`includes/MegaMenu/Templates/mobile-toggle.php`](../../includes/MegaMenu/Templates/mobile-toggle.php) | Mobile toggle button partial |
+| [`src/css/view/mega-menu.scss`](../../src/css/view/mega-menu.scss) | Source styles |
+| [`src/js/view/mega-menu.js`](../../src/js/view/mega-menu.js) | Frontend + editor preview handler |
+| [`src/js/edit/mega-menu.js`](../../src/js/edit/mega-menu.js) | **Editor window** — registers the nested element type with Elementor |
+| [`config.php`](../../config.php) entry `'mega-menu'` | Asset_Builder dependencies + availability condition |
+| `assets/front-end/css/view/mega-menu.min.css` / `js/view/mega-menu.min.js` | Built output (do not edit) |
+
+## Architecture
+
+- **`Widget_Nested_Base` + `Control_Nested_Repeater`** — Elementor owns the repeater ↔ child container lifecycle, which is what makes copy, paste, duplicate, delete, drag-and-drop and the Navigator work with no custom code. `get_default_children_placeholder_selector()` returns `.eael-mega-menu__panels`, which is where the editor mounts the container views.
+- **A nested widget must register an editor element type** — returning `support_nesting` from PHP only *describes* the widget. Elementor treats it as nestable only once `elementor.elementsManager.registerElementType()` has been called for it in the **editor window**, which is what [`src/js/edit/mega-menu.js`](../../src/js/edit/mega-menu.js) does (subclassing `NestedElementBase` and implementing just `getType()`). Without it Elementor falls back to the plain widget model, `NestedModelBase.initialize()` never runs, and the default child containers are never created — the widget renders but has nowhere to drop widgets. `Manager::init()` enqueues that script on `elementor/editor/before_enqueue_scripts` at priority 20 with a `nested-elements` dependency.
+- **Availability is gated in `config.php`, not in the class** — the `condition` entry (`class_exists` on `Widget_Nested_Base`, skip when false) means that on Elementor < 3.8 the widget is never instantiated and `Mega_Menu.php` is never autoloaded, so extending a missing base class cannot fatal. `show_in_panel()` additionally hides the widget when the *Nested Elements* experiment is off.
+- **No separate Assets or Documents layer** — apart from the editor script above, asset loading goes through the existing `config.php` registry + `Asset_Builder`, which already gives per-page conditional loading plus popup / shortcode / Theme-Builder coverage; a parallel asset layer would double-load the files. Submenu content is stored as child elements in `_elementor_data`, so a custom document type would create exactly the duplicate storage that should be avoided.
+- **CSS custom properties with fallbacks at the point of use** — every style control writes a `--eael-mm-*` variable onto `{{WRAPPER}}`. Defaults live in the `var()` fallback (`var(--eael-mm-item-gap, 8px)`), never as a declaration on `.eael-mega-menu`, because a declaration on the descendant would beat the value inherited from the Elementor wrapper.
+- **One panels wrapper, `order`-based interleaving on mobile** — the editor mounts every child into a single placeholder, so the frontend uses the same single wrapper. Below the breakpoint, `.eael-mega-menu__list` and `.eael-mega-menu__panels` become `display: contents` and each item/panel carries `--eael-mm-order` (`2n` / `2n+1`) so they interleave into an accordion. Same technique Elementor's nested tabs uses.
+- **A handler class, not the usual jQuery callback** — most EA widgets register `function ($scope, $)`. Mega Menu extends `elementorModules.frontend.handlers.Base` because a nested widget must react to `onEditSettingsChange('activeItemIndex')` so selecting a repeater row switches the previewed panel. Registered through `elementorFrontend.elementsHandler.attachHandler()` with a factory function (Elementor accepts class or factory).
+- **JS-driven breakpoint, not a media query** — the collapse breakpoint is compared against `elementorFrontend.getCurrentDeviceMode()` and toggles `.eael-mega-menu--mobile`. Static media queries could not honour custom breakpoint values set in Site Settings.
+
+## Render Output
+
+```html
+<!-- data-trigger / data-breakpoint / data-touch-mode are read by JS -->
+<nav class="eael-mega-menu eael-mega-menu--trigger-hover eael-mega-menu--anim-fade eael-mega-menu--stretch-dropdown"
+     data-widget-number="195021895" data-trigger="hover" data-breakpoint="tablet"
+     data-touch-mode="false" aria-label="Mega Menu">
+
+  <!-- conditional: omitted when breakpoint = none. Visible only in .eael-mega-menu--mobile -->
+  <button class="eael-mega-menu__toggle" type="button" aria-expanded="false"
+          aria-controls="eael-mega-menu-container-195021895">…</button>
+
+  <div class="eael-mega-menu__container" id="eael-mega-menu-container-195021895">
+    <ul class="eael-mega-menu__list">
+
+      <!-- link + submenu: the link stays navigable, a disclosure button owns the panel -->
+      <li class="eael-mega-menu__item eael-mega-menu__item--has-submenu" data-item-index="1" style="--eael-mm-order: 2;">
+        <a class="eael-mega-menu__link" id="eael-mega-menu-item-195021895-1" href="/shop">
+          <span class="eael-mega-menu__item-icon">…</span>
+          <span class="eael-mega-menu__item-label">Shop</span>
+        </a>
+        <button class="eael-mega-menu__disclosure" aria-expanded="false"
+                aria-controls="eael-mega-menu-panel-195021895-1" aria-label="Show submenu for Shop">…</button>
+      </li>
+
+      <!-- no link + submenu: the item itself is the disclosure control -->
+      <li class="eael-mega-menu__item eael-mega-menu__item--has-submenu" data-item-index="2" style="--eael-mm-order: 4;">
+        <button class="eael-mega-menu__link" id="…-2" aria-expanded="false" aria-controls="…-panel-…-2">…</button>
+      </li>
+
+      <!-- link, no submenu: a plain anchor, no panel is printed -->
+      <li class="eael-mega-menu__item" data-item-index="3" style="--eael-mm-order: 6;">
+        <a class="eael-mega-menu__link" id="…-3" href="/contact" target="_blank" rel="nofollow">…</a>
+      </li>
+    </ul>
+
+    <!-- editor mount point; PHP prints the same containers here -->
+    <div class="eael-mega-menu__panels">
+      <div id="eael-mega-menu-panel-195021895-1" class="eael-mega-menu__panel e-con …"
+           aria-labelledby="eael-mega-menu-item-195021895-1" data-item-index="1"
+           data-width-mode="full" style="--eael-mm-order: 3;"> … nested widgets … </div>
+    </div>
+  </div>
+</nav>
+```
+
+Styling hooks: `.eael-mega-menu__item--active` (item whose panel is open), `.eael-mega-menu__panel--active`, `.eael-mega-menu--mobile`, `.eael-mega-menu--menu-open`, `.eael-mega-menu--active`.
+JS-written properties: `--eael-mm-panel-inset-start` and `--eael-mm-panel-width`, set on open and on resize for every width mode except `full`.
+
+## Controls Reference
+
+| Control | Type | Default | Tab → Section | Affects |
+| ------- | ---- | ------- | ------------- | ------- |
+| `eael_mega_menu_items` | Nested repeater | 4 rows | Content → Menu Items | Items + child containers; `frontend_available` |
+| `…_item_label` | Text (dynamic) | `Menu Item` | ↳ row | `.eael-mega-menu__item-label` |
+| `…_item_link` | URL (dynamic) | — | ↳ row | `<a>` vs `<button>` element choice |
+| `…_item_icon` | Icons | — | ↳ row | `.eael-mega-menu__item-icon` |
+| `…_item_has_submenu` | Switcher | `yes` | ↳ row | Whether a panel is printed at all |
+| `…_item_submenu_width` | Select | `full` | ↳ row | `data-width-mode`; `full` / `viewport` / `item` / `custom` |
+| `…_item_submenu_custom_width` | Slider | `480px` | ↳ row | `--eael-mm-panel-width` (via JS) |
+| `…_item_css_id` / `…_item_css_classes` | Text | — | ↳ row | `<li>` id / classes (`sanitize_html_class`) |
+| `eael_mega_menu_trigger` | Select | `hover` | Content → Settings | `data-trigger` |
+| `eael_mega_menu_hover_delay` | Slider ms | `150` | Content → Settings | Close timer |
+| `eael_mega_menu_close_on_outside_click` | Switcher | `yes` | Content → Settings | Document click handler |
+| `eael_mega_menu_animation` | Select | `fade` | Content → Settings | `--anim-*` root class |
+| `eael_mega_menu_animation_duration` | Slider ms | `300` | Content → Settings | `--eael-mm-animation-duration` |
+| `eael_mega_menu_align` | Choose (resp.) | `flex-start` | Content → Settings | `--eael-mm-bar-justify` |
+| `eael_mega_menu_indicator_icon` | Icons | `fa-chevron-down` | Content → Settings | `.eael-mega-menu__item-indicator` |
+| `eael_mega_menu_breakpoint` | Select | `tablet` | Content → Responsive | `data-breakpoint`; `none` disables collapsing |
+| `eael_mega_menu_toggle_text` / `_icon` / `_close_icon` | Text / Icons | `Menu`, bars, times | Content → Responsive | Toggle button contents |
+| `eael_mega_menu_toggle_full_width` | Switcher | `yes` | Content → Responsive | `--stretch-dropdown` (overlay vs push) |
+| Style sections | — | — | Style | `Menu Bar`, `Menu Items` (normal/hover/active), `Icon`, `Submenu Indicator`, `Submenu Panel`, `Mobile Toggle` — all emit `--eael-mm-*` |
+
+## Conditional Dependencies
+
+```text
+eael_mega_menu_item_has_submenu = yes
+  └── eael_mega_menu_item_submenu_width
+        └── = custom → eael_mega_menu_item_submenu_custom_width
+
+eael_mega_menu_trigger = hover
+  └── eael_mega_menu_hover_delay
+
+eael_mega_menu_animation != none
+  └── eael_mega_menu_animation_duration
+
+eael_mega_menu_breakpoint != none
+  ├── eael_mega_menu_toggle_text / _icon / _close_icon / _full_width
+  └── Style → Mobile Toggle (whole section)
+
+eael_mega_menu_indicator_icon[value] != ''
+  └── Style → Submenu Indicator (whole section)
+```
+
+## JavaScript Lifecycle
+
+Registered on `elementor/frontend/init`, guarded by `eael.elementStatusCheck('eaelMegaMenu')` so repeated init events (popups, SPA navigation) don't double-register:
+
+```js
+elementorFrontend.elementsHandler.attachHandler("eael-mega-menu", getMegaMenuHandler);
+```
+
+`getMegaMenuHandler` is a factory returning the class so `elementorModules` is dereferenced only once Elementor is ready.
+
+- **`onInit()`** — normalise panels (the editor mounts bare containers, so class / id / `data-item-index` / `data-width-mode` / `--eael-mm-order` are applied there), compute device mode, detect touch, and in the editor open `activeItemIndex` (defaults to 1 for a freshly dropped widget).
+- **Reads** — `getElementSettings()` for trigger, delay, breakpoint, outside-click, and the repeater rows (for per-item width). DOM `data-*` attributes for everything else.
+- **Branches** — hover trigger binds `mouseenter`/`mouseleave` on items *and* panels with a shared close timer; click / touch / mobile route through `togglePanel()`. On a linked item the first tap opens and the second follows the link.
+- **Editor hooks** — `onEditSettingsChange('activeItemIndex')` switches the previewed panel; `onElementChange('eael_mega_menu_items')` rebuilds the cached collections after add / remove / reorder; `onElementChange('eael_mega_menu_breakpoint*')` recomputes the collapsed layout.
+- **Runtime state** — `activeIndex` (only one panel open at a time) and `closeTimer`. `resize` / `orientationchange` recompute device mode and reposition the open panel.
+- **Scoping** — element lookups use `.children()` chains rather than `.find()`, and every delegated handler checks `isOwnEvent()`, so a Mega Menu nested inside another one's panel cannot steal its parent's events.
+
+## Hooks & Filters
+
+| Hook | Type | Signature | Purpose |
+| ---- | ---- | --------- | ------- |
+| `eael/mega-menu/menu_items` | filter | `( array $items, Widget_Base $widget )` | Modify, extend or reorder repeater rows immediately before render |
+
+Assets are declared in `config.php` only (`type: self`, `context: view` for both CSS and JS), so `Asset_Builder` folds them into the per-page `eael-{post_id}.css` / `.js` bundle only when the widget is on the page. Nothing is enqueued globally.
+
+## Common Issues
+
+### The widget is missing from the Elementor panel
+
+The *Nested Elements* experiment is off, or Elementor is older than 3.8. Check **Elementor → Settings → Features**; `Conditions::is_nested_elements_active()` drives `show_in_panel()`. On Elementor < 3.8 the `condition` in `config.php` skips registration entirely, so the widget also won't appear in **EA → Elements**.
+
+### Menu items show but there is no container to drop widgets into
+
+The editor element type was not registered, so Elementor never created the child containers. Confirm `assets/front-end/js/edit/mega-menu.min.js` loads in the **editor window** (not the preview iframe) and that `elementor.elementsManager` has an `eael-mega-menu` type. Note that default children are only created at element-create time: a widget instance saved while the registration was missing stays empty, so **delete and re-add the widget** after fixing the load.
+
+### The submenu is clipped inside a sticky header
+
+An ancestor has `overflow: hidden`. Set the containing section / container to `overflow: visible`, and raise **Style → Submenu Panel → Z-Index** if the panel renders behind following content.
+
+### The panel opens in the wrong horizontal position
+
+Only `full` width is pure CSS. `viewport`, `item` and `custom` are positioned by JS on open and on resize. If the menu sits inside an ancestor with `transform`, `filter` or `will-change`, that ancestor becomes the containing block for the absolutely positioned panel and the computed offset will be wrong — remove the property or switch the item to `full` width.
+
+### Turning a submenu off still shows a container in the editor
+
+Expected. Elementor keeps one child container per repeater row so indexes stay aligned; `render_panels()` simply skips printing it on the frontend. Turning the submenu back on restores the existing content.
+
+### Panels briefly stack on top of each other in the editor
+
+The child containers are mounted before the handler adds `.eael-mega-menu__panel`. It resolves on the same tick. If it *persists*, the handler threw — check the console; a JS error in `mega-menu.min.js` leaves every panel visible rather than hiding them, which is the deliberate failure mode.
+
+## Known Limitations
+
+- No roving-tabindex arrow-key navigation between top-level items; keyboard support is Tab + Escape based (WAI-ARIA *Disclosure Navigation with Top Level Links*, not the menubar pattern).
+- Only one panel can be open at a time, by design.
+- `viewport` width uses `document.documentElement.clientWidth`, so a layout with an overlaid/hidden scrollbar can be off by the scrollbar width.
+- The mobile accordion relies on `display: contents`, which strips the `<ul>`/`<li>` list semantics in some browsers; explicit ARIA on the interactive elements compensates, but list-item counts are not announced below the breakpoint.
+- Nesting a Mega Menu inside another Mega Menu's panel works and is scoped defensively, but is not a tested configuration.

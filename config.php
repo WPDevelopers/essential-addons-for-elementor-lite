@@ -1254,6 +1254,33 @@ $config = [
 		        ],
 	        ],
         ],
+        'mega-menu' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Mega_Menu',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/mega-menu.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/mega-menu.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
+	        // Mega Menu extends Elementor's Widget_Nested_Base (Elementor 3.8+).
+	        // Skip registration entirely when that API is missing so the class is
+	        // never autoloaded on older Elementor versions.
+	        'condition' => [
+		        'class_exists',
+		        '\Elementor\Modules\NestedElements\Base\Widget_Nested_Base',
+		        false,
+	        ],
+        ],
         'woo-product-gallery' => [
 	        'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Gallery',
 	        'dependency' => [
