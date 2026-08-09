@@ -56,6 +56,11 @@ Lite-only widget — Pro adds nothing and hooks nothing. The one public extensio
 - **CSS custom properties with fallbacks at the point of use** — every style control writes a `--eael-mm-*` variable onto `{{WRAPPER}}`. Defaults live in the `var()` fallback (`var(--eael-mm-item-gap, 8px)`), never as a declaration on `.eael-mega-menu`, because a declaration on the descendant would beat the value inherited from the Elementor wrapper.
 - **One panels wrapper, `order`-based interleaving on mobile** — the editor mounts every child into a single placeholder, so the frontend uses the same single wrapper. Below the breakpoint, `.eael-mega-menu__list` and `.eael-mega-menu__panels` become `display: contents` and each item/panel carries `--eael-mm-order` (`2n` / `2n+1`) so they interleave into an accordion. Same technique Elementor's nested tabs uses.
 - **A handler class, not the usual jQuery callback** — most EA widgets register `function ($scope, $)`. Mega Menu extends `elementorModules.frontend.handlers.Base` because a nested widget must react to `onEditSettingsChange('activeItemIndex')` so selecting a repeater row switches the previewed panel. Registered through `elementorFrontend.elementsHandler.attachHandler()` with a factory function (Elementor accepts class or factory).
+- **The widget stretches itself, via `width`, not `flex-grow`** — a widget dropped into a row-direction container is a flex item and sizes to its content, which leaves the Align control nothing to distribute. `eael_mega_menu_stretch` (default on) sets `width: 100%` on the wrapper. `flex-grow` would have been wrong: in Elementor's default *column* containers the main axis is vertical, so it would stretch the menu bar's height instead of its width.
+- **`section` items relocate an existing element, they do not copy it** — the referenced section is a normal Elementor element rendered elsewhere on the page, so it cannot be pulled in server side. PHP prints an empty panel carrying `data-section-id`, and the handler moves that node into it with `appendChild`. A move, not a clone, so the CSS ID stays unique. Two guards apply: the source is skipped if it contains the menu (relocating an ancestor would detach the widget from the document) and if the panel already has children. Never runs in the editor — relocating a container there would fight Elementor's views, which re-render elements into their original parents.
+- **Saved-template panels are rendered by PHP, not by the nested container** — for `template` items the widget prints its own panel wrapper and fills it with `Plugin::$instance->frontend->get_builder_content()`, reusing the exact guards Advanced Tabs uses (refuse the current page or its revisions, require a published `elementor_library` post, honour `wpml_object_id`). The item's nested container still exists — Elementor keeps one per repeater row — but is skipped.
+- **Theme button resets are neutralised explicitly** — an unlinked item and every disclosure button render as `<button type="button">`, and themes routinely ship `[type=button]:hover, button:focus { background: …; color: … }`. The attribute form is **(0,2,0)**, a straight tie with `.eael-mega-menu__link:hover`, so load order alone decided the winner and the widget's own colour controls could be silently overridden. The defence selectors are prefixed with the block class to reach **(0,3,0)**, and are declared before the hover/active blocks so those still take precedence by source order. The `<li>` owns the visible background; the button stays transparent in every state.
+- **State colours never chain into each other** — `--eael-mm-*-active` falls back to the *normal* value, never to the hover value. Chaining them meant setting a hover colour silently repainted the active state, which reads as "I can't change this colour".
 - **JS-driven breakpoint, not a media query** — the collapse breakpoint is compared against `elementorFrontend.getCurrentDeviceMode()` and toggles `.eael-mega-menu--mobile`. Static media queries could not honour custom breakpoint values set in Site Settings.
 
 ## Render Output
@@ -115,8 +120,13 @@ JS-written properties: `--eael-mm-panel-inset-start` and `--eael-mm-panel-width`
 | `…_item_label` | Text (dynamic) | `Menu Item` | ↳ row | `.eael-mega-menu__item-label` |
 | `…_item_link` | URL (dynamic) | — | ↳ row | `<a>` vs `<button>` element choice |
 | `…_item_icon` | Icons | — | ↳ row | `.eael-mega-menu__item-icon` |
-| `…_item_has_submenu` | Switcher | `yes` | ↳ row | Whether a panel is printed at all |
+| `…_item_type` | Select | `mega` | ↳ row | `link` / `mega` (nested container) / `template` (saved template) / `section` (CSS ID) |
+| `…_item_section_id` | Text | — | ↳ row | CSS ID of a section on the page, moved into the panel by JS |
+| `…_item_template` | eael-select2 | — | ↳ row | Saved `elementor_library` post rendered into the panel |
+| `…_item_panel_align` | Choose | `start` | ↳ row | Panel anchored start/center/end of its item (`item` & `custom` widths) |
+| `…_item_panel_offset_x` / `_y` | Slider px | `0` | ↳ row | Per-item nudge, applied in every width mode |
 | `…_item_submenu_width` | Select | `full` | ↳ row | `data-width-mode`; `full` / `viewport` / `item` / `custom` |
+| `eael_mega_menu_stretch` | Switcher (resp.) | `yes` | Content → Settings | `width: 100%` on the widget wrapper |
 | `…_item_submenu_custom_width` | Slider | `480px` | ↳ row | `--eael-mm-panel-width` (via JS) |
 | `…_item_css_id` / `…_item_css_classes` | Text | — | ↳ row | `<li>` id / classes (`sanitize_html_class`) |
 | `eael_mega_menu_trigger` | Select | `hover` | Content → Settings | `data-trigger` |
@@ -124,7 +134,7 @@ JS-written properties: `--eael-mm-panel-inset-start` and `--eael-mm-panel-width`
 | `eael_mega_menu_close_on_outside_click` | Switcher | `yes` | Content → Settings | Document click handler |
 | `eael_mega_menu_animation` | Select | `fade` | Content → Settings | `--anim-*` root class |
 | `eael_mega_menu_animation_duration` | Slider ms | `300` | Content → Settings | `--eael-mm-animation-duration` |
-| `eael_mega_menu_align` | Choose (resp.) | `flex-start` | Content → Settings | `--eael-mm-bar-justify` |
+| `eael_mega_menu_align` | Choose (resp.) | `flex-start` | Content → Settings | `--eael-mm-bar-justify`; `stretch` also sets `--eael-mm-item-grow: 1` |
 | `eael_mega_menu_indicator_icon` | Icons | `fa-chevron-down` | Content → Settings | `.eael-mega-menu__item-indicator` |
 | `eael_mega_menu_breakpoint` | Select | `tablet` | Content → Responsive | `data-breakpoint`; `none` disables collapsing |
 | `eael_mega_menu_toggle_text` / `_icon` / `_close_icon` | Text / Icons | `Menu`, bars, times | Content → Responsive | Toggle button contents |
@@ -134,9 +144,18 @@ JS-written properties: `--eael-mm-panel-inset-start` and `--eael-mm-panel-width`
 ## Conditional Dependencies
 
 ```text
-eael_mega_menu_item_has_submenu = yes
-  └── eael_mega_menu_item_submenu_width
-        └── = custom → eael_mega_menu_item_submenu_custom_width
+eael_mega_menu_item_type = template
+  └── eael_mega_menu_item_template
+
+eael_mega_menu_item_type = section
+  └── eael_mega_menu_item_section_id
+
+eael_mega_menu_item_type ∈ { mega, template, section }
+  ├── eael_mega_menu_item_submenu_width
+  │     ├── = custom        → eael_mega_menu_item_submenu_custom_width
+  │     └── ∈ {item,custom} → eael_mega_menu_item_panel_align
+  ├── eael_mega_menu_item_panel_offset_x
+  └── eael_mega_menu_item_panel_offset_y
 
 eael_mega_menu_trigger = hover
   └── eael_mega_menu_hover_delay
@@ -183,6 +202,22 @@ Assets are declared in `config.php` only (`type: self`, `context: view` for both
 
 The *Nested Elements* experiment is off, or Elementor is older than 3.8. Check **Elementor → Settings → Features**; `Conditions::is_nested_elements_active()` drives `show_in_panel()`. On Elementor < 3.8 the `condition` in `config.php` skips registration entirely, so the widget also won't appear in **EA → Elements**.
 
+### The active or focused item shows a colour I never set (often pink)
+
+Almost always a theme reset painting the underlying `<button>`, e.g. `button:focus { background-color: #c36; color: #fff; }` in the theme's `reset.css`. Menu items without a URL, and every disclosure button, are `<button type="button">` elements, and a focused button keeps that style after being clicked. The widget now overrides these at (0,3,0) specificity, so the Normal / Hover / Active controls win regardless of stylesheet order. If a theme still breaks through, it is using `!important` or an ID — inspect the winning rule in DevTools before assuming it is the widget.
+
+### A Section CSS ID item shows nothing
+
+Check, in order: the ID matches exactly (enter it without the `#`, and IDs are case sensitive); the section is on the *same page* as the menu — a section in a different template is not in the DOM to move; and the section is not an ancestor of the menu itself, which the handler refuses to move. A missing or invalid ID leaves the panel empty and logs nothing, by design. The section is also only relocated on the front end, so an empty panel in the editor is expected.
+
+### The menu bar does not fill its container, and Align appears to do nothing
+
+Both symptoms are the same cause: the widget sits in a **row-direction** container, so it is a flex item that shrinks to its content and `justify-content` has no free space to distribute. Turn on **Content → Settings → Stretch To Full Width** (on by default), or set the container to column direction, or set Advanced → Width to 100%.
+
+### "Stretch" alignment does not make the items fill the bar
+
+Confirm the Align control is set to `stretch` and not the legacy `space-between` value. `stretch` sets `--eael-mm-item-grow: 1` so each item grows; `justify-content` on its own can only reposition items, never resize them.
+
 ### Menu items show but there is no container to drop widgets into
 
 The editor element type was not registered, so Elementor never created the child containers. Confirm `assets/front-end/js/edit/mega-menu.min.js` loads in the **editor window** (not the preview iframe) and that `elementor.elementsManager` has an `eael-mega-menu` type. Note that default children are only created at element-create time: a widget instance saved while the registration was missing stays empty, so **delete and re-add the widget** after fixing the load.
@@ -209,4 +244,6 @@ The child containers are mounted before the handler adds `.eael-mega-menu__panel
 - Only one panel can be open at a time, by design.
 - `viewport` width uses `document.documentElement.clientWidth`, so a layout with an overlaid/hidden scrollbar can be off by the scrollbar width.
 - The mobile accordion relies on `display: contents`, which strips the `<ul>`/`<li>` list semantics in some browsers; explicit ARIA on the interactive elements compensates, but list-item counts are not announced below the breakpoint.
+- A `section` item briefly shows its source section in its original position before the handler moves it, and shows nothing at all if JavaScript fails. Moving is deliberately not done in the editor, so those panels preview empty (dimmed and dashed).
+- A `template` item's panel is not previewed in the editor — the editor renders the widget from an Underscore template, which cannot run PHP. The panel shows the item's unused nested container, dimmed and dashed, and the content appears on the front end. Live preview would need an AJAX render round-trip.
 - Nesting a Mega Menu inside another Mega Menu's panel works and is scoped defensively, but is not a tested configuration.

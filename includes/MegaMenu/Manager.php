@@ -133,6 +133,21 @@ class Manager {
 	}
 
 	/**
+	 * What a menu item is: a plain link, an inline nested container, or a saved
+	 * Elementor template.
+	 *
+	 * @return array
+	 */
+	public function get_item_type_options() {
+		return [
+			'link'     => esc_html__( 'Normal (Link Only)', 'essential-addons-for-elementor-lite' ),
+			'mega'     => esc_html__( 'Mega Menu (Build Inline)', 'essential-addons-for-elementor-lite' ),
+			'template' => esc_html__( 'Mega Menu (Saved Template)', 'essential-addons-for-elementor-lite' ),
+			'section'  => esc_html__( 'Mega Menu (Section CSS ID)', 'essential-addons-for-elementor-lite' ),
+		];
+	}
+
+	/**
 	 * Submenu reveal animations. Keys map to `eael-mega-menu--anim-{key}` classes.
 	 *
 	 * @return array
@@ -216,8 +231,8 @@ class Manager {
 
 		foreach ( $labels as $label ) {
 			$items[] = [
-				'eael_mega_menu_item_label'        => $label,
-				'eael_mega_menu_item_has_submenu'  => 'yes',
+				'eael_mega_menu_item_label'         => $label,
+				'eael_mega_menu_item_type'          => 'mega',
 				'eael_mega_menu_item_submenu_width' => 'full',
 			];
 		}

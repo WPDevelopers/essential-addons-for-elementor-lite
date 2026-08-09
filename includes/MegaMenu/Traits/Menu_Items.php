@@ -32,6 +32,8 @@ trait Menu_Items {
 		$custom_class = isset( $item['eael_mega_menu_item_css_classes'] ) ? trim( (string) $item['eael_mega_menu_item_css_classes'] ) : '';
 		$url          = isset( $item['eael_mega_menu_item_link']['url'] ) ? trim( (string) $item['eael_mega_menu_item_link']['url'] ) : '';
 
+		$type = $this->eael_mega_menu_item_type( $item );
+
 		return [
 			'index'        => $index,
 			'position'     => $position,
@@ -40,7 +42,10 @@ trait Menu_Items {
 			'icon'         => isset( $item['eael_mega_menu_item_icon'] ) ? $item['eael_mega_menu_item_icon'] : [],
 			'link'         => isset( $item['eael_mega_menu_item_link'] ) ? $item['eael_mega_menu_item_link'] : [],
 			'has_url'      => '' !== $url,
-			'has_submenu'  => $this->eael_mega_menu_item_has_submenu( $item ),
+			'type'         => $type,
+			'has_submenu'  => 'link' !== $type,
+			'template_id'  => isset( $item['eael_mega_menu_item_template'] ) ? absint( $item['eael_mega_menu_item_template'] ) : 0,
+			'section_id'   => $this->eael_mega_menu_sanitize_element_id( isset( $item['eael_mega_menu_item_section_id'] ) ? $item['eael_mega_menu_item_section_id'] : '' ),
 			'width_mode'   => isset( $item['eael_mega_menu_item_submenu_width'] ) && '' !== $item['eael_mega_menu_item_submenu_width']
 				? $item['eael_mega_menu_item_submenu_width']
 				: 'full',
@@ -52,6 +57,27 @@ trait Menu_Items {
 	}
 
 	/**
+	 * Normalised menu item type.
+	 *
+	 * Falls back to the switcher this control replaced so rows saved before the
+	 * type existed keep behaving the same way.
+	 *
+	 * @param array $item Raw repeater row.
+	 *
+	 * @return string One of `link`, `mega`, `template`.
+	 */
+	public function eael_mega_menu_item_type( $item ) {
+		$type = isset( $item['eael_mega_menu_item_type'] ) ? $item['eael_mega_menu_item_type'] : '';
+
+		if ( '' === $type ) {
+			$had_submenu = ! isset( $item['eael_mega_menu_item_has_submenu'] ) || 'yes' === $item['eael_mega_menu_item_has_submenu'];
+			$type        = $had_submenu ? 'mega' : 'link';
+		}
+
+		return in_array( $type, [ 'link', 'mega', 'template', 'section' ], true ) ? $type : 'mega';
+	}
+
+	/**
 	 * Does a repeater row own a submenu panel.
 	 *
 	 * @param array $item Raw repeater row.
@@ -59,7 +85,25 @@ trait Menu_Items {
 	 * @return bool
 	 */
 	public function eael_mega_menu_item_has_submenu( $item ) {
-		return ! isset( $item['eael_mega_menu_item_has_submenu'] ) || 'yes' === $item['eael_mega_menu_item_has_submenu'];
+		return 'link' !== $this->eael_mega_menu_item_type( $item );
+	}
+
+	/**
+	 * Sanitise a user supplied CSS ID.
+	 *
+	 * Tolerates a leading `#` and strips anything that could break out of the
+	 * attribute or be abused as a selector.
+	 *
+	 * @param string $id Raw CSS ID.
+	 *
+	 * @return string
+	 */
+	public function eael_mega_menu_sanitize_element_id( $id ) {
+		if ( ! is_string( $id ) || '' === trim( $id ) ) {
+			return '';
+		}
+
+		return preg_replace( '/[^A-Za-z0-9_-]/', '', ltrim( trim( $id ), '#' ) );
 	}
 
 	/**

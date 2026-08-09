@@ -38,6 +38,9 @@ const getMegaMenuHandler = () =>
 					active: "eael-mega-menu--active",
 					itemActive: "eael-mega-menu__item--active",
 					panel: "eael-mega-menu__panel",
+					panelTemplate: "eael-mega-menu__panel--template",
+					panelSection: "eael-mega-menu__panel--section",
+					sectionSource: "eael-mega-menu__section-source",
 					panelActive: "eael-mega-menu__panel--active",
 					hasSubmenu: "eael-mega-menu__item--has-submenu",
 				},
@@ -75,6 +78,7 @@ const getMegaMenuHandler = () =>
 			}
 
 			this.normalizePanels();
+			this.mountSectionPanels();
 			this.updateDeviceMode();
 			this.setTouchMode();
 
@@ -180,6 +184,27 @@ const getMegaMenuHandler = () =>
 			return item[key];
 		}
 
+		/**
+		 * Normalised item type, mirroring the PHP Menu_Items trait (including the
+		 * fallback for rows saved before the type control existed).
+		 */
+		getItemType(index) {
+			const item = this.getMenuItems()[index - 1];
+
+			if (!item) {
+				return "mega";
+			}
+
+			if (item.eael_mega_menu_item_type) {
+				return item.eael_mega_menu_item_type;
+			}
+
+			return undefined === item.eael_mega_menu_item_has_submenu ||
+				"yes" === item.eael_mega_menu_item_has_submenu
+				? "mega"
+				: "link";
+		}
+
 		getTrigger() {
 			return "click" === this.getElementSettings("eael_mega_menu_trigger")
 				? "click"
@@ -232,7 +257,57 @@ const getMegaMenuHandler = () =>
 					);
 				}
 
+				if (this.isEdit) {
+					const type = this.getItemType(position);
+
+					if ("template" === type) {
+						$panel.addClass(classes.panelTemplate);
+					} else if ("section" === type) {
+						$panel.addClass(classes.panelSection);
+					}
+				}
+
 				$panel[0].style.setProperty("--eael-mm-order", String(position * 2 + 1));
+			});
+		}
+
+		/**
+		 * Move each referenced section into its panel.
+		 *
+		 * A move rather than a clone, so the CSS ID stays unique in the document.
+		 * Never runs in the editor: relocating a container there would fight
+		 * Elementor's own views, which re-render elements into their original
+		 * parents.
+		 */
+		mountSectionPanels() {
+			if (this.isEdit) {
+				return;
+			}
+
+			const { classes } = this.getSettings();
+			const root = this.elements.$root[0];
+
+			this.elements.$panels.each((i, node) => {
+				const sectionId = node.getAttribute("data-section-id");
+
+				if (!sectionId || node.children.length) {
+					return;
+				}
+
+				const source = document.getElementById(sectionId);
+
+				if (!source || source === node) {
+					return;
+				}
+
+				// Refuse to swallow one of our own ancestors — that would detach
+				// the menu from the document along with it.
+				if (source.contains(root) || source.contains(node)) {
+					return;
+				}
+
+				source.classList.add(classes.sectionSource);
+				node.appendChild(source);
 			});
 		}
 
@@ -348,9 +423,13 @@ const getMegaMenuHandler = () =>
 			if (this.isMobileMode()) {
 				panel.style.removeProperty("--eael-mm-panel-inset-start");
 				panel.style.removeProperty("--eael-mm-panel-width");
+				panel.style.removeProperty("--eael-mm-panel-offset-y");
 
 				return;
 			}
+
+			// Per item vertical nudge, applied in every width mode.
+			panel.style.setProperty("--eael-mm-panel-offset-y", `${this.getItemOffset(index, "y")}px`);
 
 			const mode = $panel.attr("data-width-mode") || "full";
 			const $item = this.getItemByIndex(index);
@@ -360,8 +439,10 @@ const getMegaMenuHandler = () =>
 				return;
 			}
 
+			const offsetX = this.getItemOffset(index, "x");
+
 			if ("full" === mode) {
-				panel.style.setProperty("--eael-mm-panel-inset-start", "0px");
+				panel.style.setProperty("--eael-mm-panel-inset-start", `${offsetX}px`);
 				panel.style.setProperty("--eael-mm-panel-width", "100%");
 
 				return;
@@ -373,7 +454,7 @@ const getMegaMenuHandler = () =>
 					? document.documentElement.clientWidth - rect.right
 					: rect.left;
 
-				panel.style.setProperty("--eael-mm-panel-inset-start", `${-start}px`);
+				panel.style.setProperty("--eael-mm-panel-inset-start", `${-start + offsetX}px`);
 				panel.style.setProperty(
 					"--eael-mm-panel-width",
 					`${document.documentElement.clientWidth}px`
@@ -383,10 +464,6 @@ const getMegaMenuHandler = () =>
 			}
 
 			// "item" and "custom" are anchored to the menu item that owns them.
-			const offset = $item.length ? this.getItemInlineOffset($item[0], container) : 0;
-
-			panel.style.setProperty("--eael-mm-panel-inset-start", `${offset}px`);
-
 			if ("custom" === mode) {
 				const width = this.getItemSetting(
 					index,
@@ -401,6 +478,40 @@ const getMegaMenuHandler = () =>
 			} else {
 				panel.style.setProperty("--eael-mm-panel-width", "max-content");
 			}
+
+			const itemOffset = $item.length ? this.getItemInlineOffset($item[0], container) : 0;
+			const align = this.getItemSetting(index, "eael_mega_menu_item_panel_align", "start");
+
+			let start = itemOffset;
+
+			if ("start" !== align && $item.length) {
+				// The width was just applied, so the panel can be measured now.
+				const panelWidth = panel.getBoundingClientRect().width;
+				const itemWidth = $item[0].getBoundingClientRect().width;
+
+				start =
+					"center" === align
+						? itemOffset + itemWidth / 2 - panelWidth / 2
+						: itemOffset + itemWidth - panelWidth;
+			}
+
+			panel.style.setProperty("--eael-mm-panel-inset-start", `${start + offsetX}px`);
+		}
+
+		/**
+		 * Per item panel nudge, in pixels.
+		 *
+		 * @param {number} index Menu item position.
+		 * @param {string} axis  "x" or "y".
+		 */
+		getItemOffset(index, axis) {
+			const value = this.getItemSetting(
+				index,
+				`eael_mega_menu_item_panel_offset_${axis}`,
+				null
+			);
+
+			return value && undefined !== value.size ? parseFloat(value.size) || 0 : 0;
 		}
 
 		getItemInlineOffset(item, container) {
@@ -703,6 +814,7 @@ const getMegaMenuHandler = () =>
 
 			this.activeIndex = null;
 			this.normalizePanels();
+			this.mountSectionPanels();
 			this.updateDeviceMode();
 
 			if (this.isEdit) {

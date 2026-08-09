@@ -6,7 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
+use Elementor\Plugin;
 use Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper;
 use Essential_Addons_Elementor\MegaMenu\Manager;
 use Essential_Addons_Elementor\MegaMenu\Traits\Menu_Items;
 
@@ -129,8 +131,103 @@ class Frontend_Renderer {
 				continue;
 			}
 
+			if ( 'template' === $prepared['type'] ) {
+				$this->render_template_panel( $prepared );
+
+				continue;
+			}
+
+			if ( 'section' === $prepared['type'] ) {
+				$this->render_section_panel( $prepared );
+
+				continue;
+			}
+
 			$this->widget->print_child( $prepared['index'], $prepared );
 		}
+	}
+
+	/**
+	 * Print an empty panel that the handler fills with an existing element.
+	 *
+	 * The referenced section is a normal Elementor element rendered elsewhere on
+	 * the page, so it cannot be pulled in server side. The panel is printed with
+	 * the id to look for and the frontend handler moves that node into it — a
+	 * move, not a copy, so the id stays unique.
+	 *
+	 * @param array $prepared Prepared repeater row.
+	 */
+	protected function render_section_panel( $prepared ) {
+		if ( '' === $prepared['section_id'] ) {
+			return;
+		}
+
+		$key = 'eael_mega_menu_section_panel_' . $prepared['index'];
+
+		$this->widget->add_render_attribute( $key, [
+			'id'               => $prepared['panel_id'],
+			'class'            => [ 'eael-mega-menu__panel', 'eael-mega-menu__panel--section' ],
+			'aria-labelledby'  => $prepared['item_id'],
+			'data-item-index'  => $prepared['position'],
+			'data-width-mode'  => $prepared['width_mode'],
+			'data-section-id'  => $prepared['section_id'],
+			'style'            => '--eael-mm-order: ' . ( (int) $prepared['position'] * 2 + 1 ) . ';',
+		] );
+		?>
+		<div <?php $this->widget->print_render_attribute_string( $key ); ?>></div>
+		<?php
+	}
+
+	/**
+	 * Print a panel whose content comes from a saved Elementor template.
+	 *
+	 * Mirrors the guards the Advanced Tabs widget uses for the same feature:
+	 * refuse to render the current page (infinite recursion), require a published
+	 * `elementor_library` post, and honour WPML translations.
+	 *
+	 * @param array $prepared Prepared repeater row.
+	 */
+	protected function render_template_panel( $prepared ) {
+		$template_id = absint( $prepared['template_id'] );
+
+		if ( ! $template_id ) {
+			return;
+		}
+
+		$page_id      = get_the_ID();
+		$revisions    = wp_get_post_revisions( $page_id );
+		$revision_ids = wp_list_pluck( $revisions, 'ID' );
+
+		$key = 'eael_mega_menu_template_panel_' . $prepared['index'];
+
+		$this->widget->add_render_attribute( $key, [
+			'id'              => $prepared['panel_id'],
+			'class'           => [ 'eael-mega-menu__panel', 'eael-mega-menu__panel--template' ],
+			'aria-labelledby' => $prepared['item_id'],
+			'data-item-index' => $prepared['position'],
+			'data-width-mode' => $prepared['width_mode'],
+			'style'           => '--eael-mm-order: ' . ( (int) $prepared['position'] * 2 + 1 ) . ';',
+		] );
+		?>
+		<div <?php $this->widget->print_render_attribute_string( $key ); ?>>
+			<?php
+			if ( $template_id === absint( $page_id ) || in_array( $template_id, array_map( 'absint', (array) $revision_ids ), true ) ) {
+				echo '<p>' . esc_html__( 'The provided Template matches the current page or one of its revisions!', 'essential-addons-for-elementor-lite' ) . '</p>';
+			} elseif ( Helper::is_elementor_publish_template( $template_id ) ) {
+				// WPML Compatibility.
+				$template_id = apply_filters( 'wpml_object_id', $template_id, 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
+				// Re-validate the translated template is still a published library post.
+				if ( Helper::is_elementor_publish_template( $template_id ) ) {
+					Helper::eael_onpage_edit_template_markup( $page_id, $template_id );
+
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo Plugin::$instance->frontend->get_builder_content( $template_id, true );
+				}
+			}
+			?>
+		</div>
+		<?php
 	}
 
 	/**

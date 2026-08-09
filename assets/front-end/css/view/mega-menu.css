@@ -41,6 +41,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  /* Driven by the "Stretch" option of the Align control. */
+  -webkit-box-flex: var(--eael-mm-item-grow, 0);
+      -ms-flex-positive: var(--eael-mm-item-grow, 0);
+          flex-grow: var(--eael-mm-item-grow, 0);
   background-color: var(--eael-mm-item-bg, transparent);
   border-radius: var(--eael-mm-item-radius, 0);
   -webkit-transition: background-color 0.2s ease, border-color 0.2s ease;
@@ -68,6 +72,9 @@
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 .eael-mega-menu__link {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: var(--eael-mm-item-direction, row);
@@ -143,6 +150,30 @@
           margin-inline-start: 0;
 }
 .eael-mega-menu {
+  /* Neutralise theme button resets.
+   *
+   * Themes commonly ship resets like
+   * `[type=button]:hover, button:focus { background: #c36; color: #fff; }`.
+   * The attribute form is (0,2,0) — a tie with `.eael-mega-menu__link:hover` —
+   * so whichever stylesheet loads last would win. Our unlinked items and
+   * disclosure buttons both carry `type="button"`, so they are squarely in
+   * range, and no widget control could reliably override it.
+   *
+   * Prefixing with the block class makes these (0,3,0), which wins regardless
+   * of load order. They are declared *before* the hover and active blocks
+   * below, which share that specificity and therefore take precedence by
+   * source order. The <li> keeps ownership of the background.
+   */
+}
+.eael-mega-menu .eael-mega-menu__link:hover, .eael-mega-menu .eael-mega-menu__link:focus, .eael-mega-menu .eael-mega-menu__link:focus-visible, .eael-mega-menu .eael-mega-menu__link:active, .eael-mega-menu .eael-mega-menu__disclosure:hover, .eael-mega-menu .eael-mega-menu__disclosure:focus, .eael-mega-menu .eael-mega-menu__disclosure:focus-visible, .eael-mega-menu .eael-mega-menu__disclosure:active {
+  color: var(--eael-mm-item-color, inherit);
+  background-color: transparent;
+  background-image: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  text-decoration: none;
+}
+.eael-mega-menu {
   /* Hover state. */
 }
 .eael-mega-menu__item:hover {
@@ -158,13 +189,13 @@
   /* Active state — the item whose submenu is open. */
 }
 .eael-mega-menu__item--active {
-  background-color: var(--eael-mm-item-bg-active, var(--eael-mm-item-bg-hover, var(--eael-mm-item-bg, transparent)));
+  background-color: var(--eael-mm-item-bg-active, var(--eael-mm-item-bg, transparent));
 }
 .eael-mega-menu__item--active .eael-mega-menu__link, .eael-mega-menu__item--active .eael-mega-menu__disclosure {
-  color: var(--eael-mm-item-color-active, var(--eael-mm-item-color-hover, var(--eael-mm-item-color, inherit)));
+  color: var(--eael-mm-item-color-active, var(--eael-mm-item-color, inherit));
 }
 .eael-mega-menu__item--active .eael-mega-menu__item-icon {
-  color: var(--eael-mm-icon-color-active, var(--eael-mm-icon-color-hover, var(--eael-mm-icon-color, currentColor)));
+  color: var(--eael-mm-icon-color-active, var(--eael-mm-icon-color, currentColor));
 }
 .eael-mega-menu__item--active .eael-mega-menu__item-indicator {
   color: var(--eael-mm-indicator-color-active, var(--eael-mm-indicator-color, currentColor));
@@ -186,7 +217,7 @@
 }
 .eael-mega-menu__panel {
   position: absolute;
-  top: calc(100% + var(--eael-mm-panel-offset, 0px));
+  top: calc(100% + var(--eael-mm-panel-offset, 0px) + var(--eael-mm-panel-offset-y, 0px));
   inset-inline-start: var(--eael-mm-panel-inset-start, 0px);
   width: var(--eael-mm-panel-width, 100%);
   max-width: none;
@@ -260,6 +291,15 @@
   display: block;
 }
 .eael-mega-menu {
+  /* A saved-template panel renders on the front end, so the nested container
+     behind it is unused. Make that obvious rather than inviting a drop. */
+}
+.eael-mega-menu--editing .eael-mega-menu__panel--template, .eael-mega-menu--editing .eael-mega-menu__panel--section {
+  opacity: 0.55;
+  outline: 1px dashed currentColor;
+  outline-offset: -1px;
+}
+.eael-mega-menu {
   /* --------------------------------------------------------------------- */
   /* Mobile toggle                                                         */
   /* --------------------------------------------------------------------- */
@@ -284,7 +324,18 @@
   -webkit-transition: color 0.2s ease, background-color 0.2s ease;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
-.eael-mega-menu__toggle:hover {
+.eael-mega-menu {
+  /* Same theme-reset defence as the menu items, at matching specificity.
+     Focus is declared first so hovering a focused toggle still shows hover. */
+}
+.eael-mega-menu .eael-mega-menu__toggle:focus, .eael-mega-menu .eael-mega-menu__toggle:focus-visible, .eael-mega-menu .eael-mega-menu__toggle:active {
+  color: var(--eael-mm-toggle-color, inherit);
+  background-color: var(--eael-mm-toggle-bg, transparent);
+  background-image: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.eael-mega-menu .eael-mega-menu__toggle:hover {
   color: var(--eael-mm-toggle-color-hover, var(--eael-mm-toggle-color, inherit));
   background-color: var(--eael-mm-toggle-bg-hover, var(--eael-mm-toggle-bg, transparent));
 }

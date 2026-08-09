@@ -68,15 +68,36 @@ class Content_Controls {
 			'label_block' => false,
 		] );
 
-		$repeater->add_control( 'eael_mega_menu_item_has_submenu', [
-			'label'        => esc_html__( 'Submenu', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::SWITCHER,
-			'label_on'     => esc_html__( 'On', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => esc_html__( 'Off', 'essential-addons-for-elementor-lite' ),
-			'default'      => 'yes',
-			'return_value' => 'yes',
-			'description'  => esc_html__( 'Turn off to render this item as a plain link without a dropdown panel.', 'essential-addons-for-elementor-lite' ),
-			'separator'    => 'before',
+		$repeater->add_control( 'eael_mega_menu_item_type', [
+			'label'     => esc_html__( 'Menu Item Type', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SELECT,
+			'default'   => 'mega',
+			'options'   => $manager->get_item_type_options(),
+			'separator' => 'before',
+		] );
+
+		$repeater->add_control( 'eael_mega_menu_item_template', [
+			'label'       => esc_html__( 'Choose Template', 'essential-addons-for-elementor-lite' ),
+			'type'        => 'eael-select2',
+			'source_name' => 'post_type',
+			'source_type' => 'elementor_library',
+			'label_block' => true,
+			'description' => esc_html__( 'The selected template is rendered on the front end. This item\'s nested container is ignored.', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [ 'eael_mega_menu_item_type' => 'template' ],
+		] );
+
+		$repeater->add_control( 'eael_mega_menu_item_section_id', [
+			'label'          => esc_html__( 'Section ID', 'essential-addons-for-elementor-lite' ),
+			'type'           => Controls_Manager::TEXT,
+			'default'        => '',
+			'ai'             => [ 'active' => false ],
+			'label_block'    => true,
+			'placeholder'    => esc_html__( 'e.g: one', 'essential-addons-for-elementor-lite' ),
+			'title'          => esc_html__( 'Add the CSS ID of the section WITHOUT the Pound key. e.g: one', 'essential-addons-for-elementor-lite' ),
+			'description'    => esc_html__( 'Give a container or section on this page the same CSS ID. It is moved into this menu item on the front end. Preview it on the front end — the editor leaves it in place.', 'essential-addons-for-elementor-lite' ),
+			'style_transfer' => false,
+			'classes'        => 'elementor-control-direction-ltr',
+			'condition'      => [ 'eael_mega_menu_item_type' => 'section' ],
 		] );
 
 		$repeater->add_control( 'eael_mega_menu_item_submenu_width', [
@@ -84,7 +105,7 @@ class Content_Controls {
 			'type'      => Controls_Manager::SELECT,
 			'default'   => 'full',
 			'options'   => $manager->get_submenu_width_options(),
-			'condition' => [ 'eael_mega_menu_item_has_submenu' => 'yes' ],
+			'condition' => [ 'eael_mega_menu_item_type' => [ 'mega', 'template', 'section' ] ],
 		] );
 
 		$repeater->add_control( 'eael_mega_menu_item_submenu_custom_width', [
@@ -98,9 +119,52 @@ class Content_Controls {
 			],
 			'default'    => [ 'unit' => 'px', 'size' => 480 ],
 			'condition'  => [
-				'eael_mega_menu_item_has_submenu'   => 'yes',
+				'eael_mega_menu_item_type'          => [ 'mega', 'template', 'section' ],
 				'eael_mega_menu_item_submenu_width' => 'custom',
 			],
+		] );
+
+		$repeater->add_control( 'eael_mega_menu_item_panel_align', [
+			'label'       => esc_html__( 'Panel Alignment', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::CHOOSE,
+			'options'     => [
+				'start'  => [
+					'title' => esc_html__( 'Start', 'essential-addons-for-elementor-lite' ),
+					'icon'  => 'eicon-align-start-h',
+				],
+				'center' => [
+					'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+					'icon'  => 'eicon-align-center-h',
+				],
+				'end'    => [
+					'title' => esc_html__( 'End', 'essential-addons-for-elementor-lite' ),
+					'icon'  => 'eicon-align-end-h',
+				],
+			],
+			'default'     => 'start',
+			'description' => esc_html__( 'Where the panel sits relative to this menu item. Full width panels ignore this.', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				'eael_mega_menu_item_type'          => [ 'mega', 'template', 'section' ],
+				'eael_mega_menu_item_submenu_width' => [ 'item', 'custom' ],
+			],
+		] );
+
+		$repeater->add_control( 'eael_mega_menu_item_panel_offset_x', [
+			'label'      => esc_html__( 'Horizontal Offset', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => -500, 'max' => 500 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => 0 ],
+			'condition'  => [ 'eael_mega_menu_item_type' => [ 'mega', 'template', 'section' ] ],
+		] );
+
+		$repeater->add_control( 'eael_mega_menu_item_panel_offset_y', [
+			'label'      => esc_html__( 'Vertical Offset', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => -200, 'max' => 200 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => 0 ],
+			'condition'  => [ 'eael_mega_menu_item_type' => [ 'mega', 'template', 'section' ] ],
 		] );
 
 		$repeater->add_control( 'eael_mega_menu_item_css_id', [
@@ -197,32 +261,57 @@ class Content_Controls {
 			'condition'  => [ 'eael_mega_menu_animation!' => 'none' ],
 		] );
 
+		$widget->add_responsive_control( 'eael_mega_menu_stretch', [
+			'label'        => esc_html__( 'Stretch To Full Width', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'default'      => 'yes',
+			'return_value' => 'yes',
+			'description'  => esc_html__( 'Fill the parent container. Turn off to let the menu bar shrink to the width of its items.', 'essential-addons-for-elementor-lite' ),
+			'separator'    => 'before',
+			// Widgets placed in a row-direction container are flex items and would
+			// otherwise size to their content, leaving Align nothing to distribute.
+			// Width (not flex-grow) is used so this never stretches the widget
+			// vertically inside a column-direction container.
+			'selectors'    => [
+				'{{WRAPPER}}' => 'width: 100%;',
+			],
+		] );
+
 		$widget->add_responsive_control( 'eael_mega_menu_align', [
 			'label'                => esc_html__( 'Align Menu', 'essential-addons-for-elementor-lite' ),
 			'type'                 => Controls_Manager::CHOOSE,
 			'options'              => [
-				'flex-start'    => [
+				'flex-start' => [
 					'title' => esc_html__( 'Start', 'essential-addons-for-elementor-lite' ),
 					'icon'  => 'eicon-align-start-h',
 				],
-				'center'        => [
+				'center'     => [
 					'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
 					'icon'  => 'eicon-align-center-h',
 				],
-				'flex-end'      => [
+				'flex-end'   => [
 					'title' => esc_html__( 'End', 'essential-addons-for-elementor-lite' ),
 					'icon'  => 'eicon-align-end-h',
 				],
-				'space-between' => [
+				'stretch'    => [
 					'title' => esc_html__( 'Stretch', 'essential-addons-for-elementor-lite' ),
 					'icon'  => 'eicon-align-stretch-h',
 				],
 			],
 			'default'              => 'flex-start',
-			'selectors'            => [
-				'{{WRAPPER}}' => '--eael-mm-bar-justify: {{VALUE}};',
+			'selectors_dictionary' => [
+				'flex-start' => '--eael-mm-bar-justify: flex-start; --eael-mm-item-grow: 0;',
+				'center'     => '--eael-mm-bar-justify: center; --eael-mm-item-grow: 0;',
+				'flex-end'   => '--eael-mm-bar-justify: flex-end; --eael-mm-item-grow: 0;',
+				// "Stretch" has to grow the items themselves — justify-content
+				// alone only moves them around, it never fills the bar.
+				'stretch'    => '--eael-mm-bar-justify: flex-start; --eael-mm-item-grow: 1;',
+				// Alias for the value this option used before it grew the items.
+				'space-between' => '--eael-mm-bar-justify: flex-start; --eael-mm-item-grow: 1;',
 			],
-			'separator'            => 'before',
+			'selectors'            => [
+				'{{WRAPPER}}' => '{{VALUE}}',
+			],
 		] );
 
 		$widget->add_control( 'eael_mega_menu_indicator_icon', [

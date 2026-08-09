@@ -89,9 +89,10 @@ class Editor_Renderer {
 				<ul class="eael-mega-menu__list">
 					<# _.each( items, function( item, index ) {
 						const position = index + 1,
-							hasSubmenu = 'undefined' === typeof item.eael_mega_menu_item_has_submenu
-								? true
-								: 'yes' === item.eael_mega_menu_item_has_submenu,
+							itemType = item.eael_mega_menu_item_type
+								? item.eael_mega_menu_item_type
+								: ( 'undefined' === typeof item.eael_mega_menu_item_has_submenu || 'yes' === item.eael_mega_menu_item_has_submenu ? 'mega' : 'link' ),
+							hasSubmenu = 'link' !== itemType,
 							url = item.eael_mega_menu_item_link && item.eael_mega_menu_item_link.url
 								? item.eael_mega_menu_item_link.url
 								: '',
