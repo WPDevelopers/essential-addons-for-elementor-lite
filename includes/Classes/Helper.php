@@ -2361,4 +2361,85 @@ class Helper
 
 		return $media;
 	}
+
+	/**
+	 * Renders an admin notice when ACF is not installed/activated.
+	 * Ported for ACF Repeater data-source support (Feature List, etc.).
+	 *
+	 * @param \Elementor\Widget_Base $wb        Widget instance.
+	 * @param array                  $condition Elementor control condition array.
+	 */
+	public static function eael_acf_notice_controls( $wb, $condition ) {
+		if ( ! function_exists( 'acf_get_field_groups' ) ) {
+			$wb->add_control(
+				'eael_acf_notice_controls',
+				[
+					'type'            => Controls_Manager::RAW_HTML,
+					'raw'             => __( '<strong>Advanced Custom Fields (ACF)</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=advanced-custom-fields&tab=search&type=term" target="_blank">ACF</a> first.', 'essential-addons-for-elementor-lite' ),
+					'content_classes' => 'eael-warning',
+					'condition'       => $condition,
+				]
+			);
+		}
+	}
+
+	/**
+	 * Returns a SELECT-ready options map of every ACF repeater field across all field groups.
+	 *
+	 * @return array [ '' => 'Select Repeater Field', field_name => 'Label (Group Title)', ... ]
+	 */
+	public static function eael_get_acf_repeater_options() {
+		$acf_repeater_options = [ '' => esc_html__( 'Select Repeater Field', 'essential-addons-for-elementor-lite' ) ];
+
+		if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) ) {
+			$field_groups = acf_get_field_groups();
+			foreach ( $field_groups as $group ) {
+				$fields = acf_get_fields( $group['key'] );
+				if ( ! is_array( $fields ) ) {
+					continue;
+				}
+				foreach ( $fields as $field ) {
+					if ( 'repeater' !== $field['type'] ) {
+						continue;
+					}
+					$acf_repeater_options[ $field['name'] ] = $field['label'] . ' (' . $group['title'] . ')';
+				}
+			}
+		}
+
+		return $acf_repeater_options;
+	}
+
+	/**
+	 * Returns, per ACF repeater field, a SELECT-ready options map of its sub-fields.
+	 *
+	 * @return array [ repeater_field_name => [ '' => 'Select', sub_field_name => sub_field_label, ... ], ... ]
+	 */
+	public static function eael_get_acf_repeater_sub_fields() {
+		$acf_sub_fields_by_repeater = [];
+
+		if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) ) {
+			$field_groups = acf_get_field_groups();
+			foreach ( $field_groups as $group ) {
+				$fields = acf_get_fields( $group['key'] );
+				if ( ! is_array( $fields ) ) {
+					continue;
+				}
+				foreach ( $fields as $field ) {
+					if ( 'repeater' !== $field['type'] ) {
+						continue;
+					}
+					$sub_field_options = [ '' => esc_html__( 'Select', 'essential-addons-for-elementor-lite' ) ];
+					if ( ! empty( $field['sub_fields'] ) && is_array( $field['sub_fields'] ) ) {
+						foreach ( $field['sub_fields'] as $sf ) {
+							$sub_field_options[ $sf['name'] ] = $sf['label'];
+						}
+					}
+					$acf_sub_fields_by_repeater[ $field['name'] ] = $sub_field_options;
+				}
+			}
+		}
+
+		return $acf_sub_fields_by_repeater;
+	}
 }

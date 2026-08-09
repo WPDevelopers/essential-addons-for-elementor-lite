@@ -99,3 +99,21 @@
         transform: rotate(-90deg);
     }
 }
+
+// ACF Repeater "Additional Fields" output
+.elementor-widget-eael-adv-accordion {
+	.eael-adv-accordion-extras {
+		list-style: none;
+		margin: 8px 0 0;
+		padding: 0;
+
+		.eael-adv-accordion-extra {
+			margin: 0;
+			padding: 0;
+
+			.eael-adv-accordion-extra-value {
+				display: inline-block;
+			}
+		}
+	}
+}

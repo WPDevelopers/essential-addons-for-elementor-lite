@@ -1146,3 +1146,15 @@ body.theme-salient.material .mfp-arrow-right:before,
 body.material .mfp-arrow-right:before {
 	transform: none;
 }
+/* ACF Repeater — Additional Fields */
+.eael-filter-gallery-container .eael-fg-extras {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.eael-filter-gallery-container .eael-fg-extras .eael-fg-extra {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}

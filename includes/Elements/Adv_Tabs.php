@@ -72,6 +72,11 @@ class Adv_Tabs extends Widget_Base
             return false;
         }
 
+        // ACF Repeater pulls per-post data — treat as dynamic so it is not statically cached.
+        if ( 'acf_repeater' === ( $settings['eael_at_data_source'] ?? 'custom' ) ) {
+            return true;
+        }
+
         $tabs               = $settings['eael_adv_tabs_tab'] ?? [];
         $is_dynamic_content = false;
         if( ! empty( $tabs ) ){
@@ -95,8 +100,295 @@ class Adv_Tabs extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/advanced-tabs/';
     }
 
+    /**
+     * Registers ACF Repeater data-source controls for Advanced Tabs (Lite-native).
+     * Minimal field set: Tab Title, Tab Content, and Icon Class / Icon Image.
+     */
+    protected function eael_register_acf_controls() {
+        $this->start_controls_section(
+            'eael_at_section_data_source',
+            [
+                'label' => esc_html__( 'Data Source', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $this->add_control(
+            'eael_at_data_source',
+            [
+                'label'   => esc_html__( 'Source', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'custom',
+                'options' => [
+                    'custom'       => esc_html__( 'Custom (Manual)', 'essential-addons-for-elementor-lite' ),
+                    'acf_repeater' => esc_html__( 'ACF Repeater Field', 'essential-addons-for-elementor-lite' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_at_acf_repeater_field',
+            [
+                'label'     => esc_html__( 'Repeater Field', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT,
+                'default'   => '',
+                'options'   => Helper::eael_get_acf_repeater_options(),
+                'condition' => [ 'eael_at_data_source' => 'acf_repeater' ],
+            ]
+        );
+
+        // ACF inactive notice (no-op when ACF is active).
+        Helper::eael_acf_notice_controls( $this, [ 'eael_at_data_source' => 'acf_repeater' ] );
+
+        // Per-repeater sub-field mapping.
+        $acf_sub_fields_by_repeater = Helper::eael_get_acf_repeater_sub_fields();
+
+        foreach ( $acf_sub_fields_by_repeater as $repeater_name => $sub_field_options ) {
+            $repeater_condition = [
+                'eael_at_data_source'        => 'acf_repeater',
+                'eael_at_acf_repeater_field' => $repeater_name,
+            ];
+
+            $this->add_control(
+                'eael_at_acf_fields_heading_' . $repeater_name,
+                [
+                    'label'     => esc_html__( 'Field Mapping', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::HEADING,
+                    'separator' => 'before',
+                    'condition' => $repeater_condition,
+                ]
+            );
+
+            $this->add_control(
+                'eael_at_acf_repeater_title_' . $repeater_name,
+                [
+                    'label'     => esc_html__( 'Tab Title', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'default'   => '',
+                    'options'   => $sub_field_options,
+                    'condition' => $repeater_condition,
+                ]
+            );
+
+            $this->add_control(
+                'eael_at_acf_repeater_content_' . $repeater_name,
+                [
+                    'label'       => esc_html__( 'Tab Content', 'essential-addons-for-elementor-lite' ),
+                    'description' => esc_html__( 'Map a Text, Textarea, or WYSIWYG ACF field.', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::SELECT,
+                    'default'     => '',
+                    'options'     => $sub_field_options,
+                    'condition'   => $repeater_condition,
+                ]
+            );
+
+            $this->add_control(
+                'eael_at_acf_repeater_image_' . $repeater_name,
+                [
+                    'label'       => esc_html__( 'Icon Image', 'essential-addons-for-elementor-lite' ),
+                    'description' => esc_html__( 'Map an ACF Image field for the tab icon.', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::SELECT,
+                    'default'     => '',
+                    'options'     => $sub_field_options,
+                    'condition'   => $repeater_condition,
+                ]
+            );
+
+            $extra_field_options = $sub_field_options;
+            unset( $extra_field_options[''] );
+            $this->add_control(
+                'eael_at_acf_repeater_extras_' . $repeater_name,
+                [
+                    'label'       => esc_html__( 'Additional Fields', 'essential-addons-for-elementor-lite' ),
+                    'description' => esc_html__( 'Select extra sub-fields to display below each tab content.', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::SELECT2,
+                    'multiple'    => true,
+                    'default'     => [],
+                    'options'     => $extra_field_options,
+                    'label_block' => true,
+                    'condition'   => $repeater_condition,
+                ]
+            );
+        }
+
+        $this->end_controls_section();
+    }
+
+    /**
+     * Returns the tabs to render.
+     *
+     * Custom mode returns the manual repeater unchanged. ACF mode maps the selected
+     * ACF Repeater field's rows into the item shape the render loops consume. ACF tabs
+     * are always content-type (the "template" option cannot come from ACF).
+     *
+     * @param array $settings Widget settings from get_settings_for_display().
+     * @return array
+     */
+    protected function get_adv_tabs_items( $settings ) {
+        if ( 'acf_repeater' !== ( $settings['eael_at_data_source'] ?? 'custom' ) ) {
+            return is_array( $settings['eael_adv_tabs_tab'] ?? null ) ? $settings['eael_adv_tabs_tab'] : [];
+        }
+
+        $field_name = sanitize_text_field( $settings['eael_at_acf_repeater_field'] ?? '' );
+        if ( empty( $field_name ) || ! function_exists( 'get_field' ) ) {
+            return [];
+        }
+
+        $title_key   = sanitize_text_field( $settings[ 'eael_at_acf_repeater_title_' . $field_name ] ?? '' );
+        $content_key = sanitize_text_field( $settings[ 'eael_at_acf_repeater_content_' . $field_name ] ?? '' );
+        $image_key   = sanitize_text_field( $settings[ 'eael_at_acf_repeater_image_' . $field_name ] ?? '' );
+        $extra_keys  = ( isset( $settings[ 'eael_at_acf_repeater_extras_' . $field_name ] ) && is_array( $settings[ 'eael_at_acf_repeater_extras_' . $field_name ] ) )
+            ? $settings[ 'eael_at_acf_repeater_extras_' . $field_name ]
+            : [];
+
+        // Resolve sub-field labels once for the selected additional fields.
+        $sub_field_labels = [];
+        if ( ! empty( $extra_keys ) && function_exists( 'acf_get_field' ) ) {
+            $repeater_field = acf_get_field( $field_name );
+            if ( ! empty( $repeater_field['sub_fields'] ) ) {
+                foreach ( $repeater_field['sub_fields'] as $sf ) {
+                    $sub_field_labels[ $sf['name'] ] = $sf['label'];
+                }
+            }
+        }
+
+        $object_id = get_the_ID() ?: get_queried_object_id();
+        $rows      = get_field( $field_name, $object_id );
+
+        if ( empty( $rows ) || ! is_array( $rows ) ) {
+            return [];
+        }
+
+        $items = [];
+        $i     = 0;
+        foreach ( $rows as $row ) {
+            if ( ! is_array( $row ) ) {
+                continue;
+            }
+
+            // Title / content kept raw; render escapes (wp_kses + parse_text_editor).
+            $title   = ( $title_key && is_scalar( $row[ $title_key ] ?? null ) ) ? (string) $row[ $title_key ] : '';
+            $content = ( $content_key && is_scalar( $row[ $content_key ] ?? null ) ) ? (string) $row[ $content_key ] : '';
+
+            // Image: ACF image array, attachment ID, or URL string.
+            $image = [ 'url' => '', 'id' => 0 ];
+            if ( $image_key ) {
+                $raw_image = $row[ $image_key ] ?? '';
+                if ( is_array( $raw_image ) ) {
+                    $image['url'] = $raw_image['url'] ?? '';
+                    $image['id']  = (int) ( $raw_image['ID'] ?? ( $raw_image['id'] ?? 0 ) );
+                } elseif ( is_numeric( $raw_image ) ) {
+                    $image['id']  = (int) $raw_image;
+                    $image['url'] = (string) wp_get_attachment_url( $image['id'] );
+                } elseif ( is_string( $raw_image ) && '' !== $raw_image ) {
+                    $image['url'] = $raw_image;
+                }
+            }
+
+            $icon_type = ( '' !== $image['url'] ) ? 'image' : 'none';
+
+            // Additional fields: [ [ 'label' => ..., 'value' => ... ], ... ].
+            $extras = [];
+            foreach ( $extra_keys as $ekey ) {
+                $val = $row[ $ekey ] ?? '';
+                if ( '' === $val || null === $val || [] === $val ) {
+                    continue;
+                }
+                $extras[] = [
+                    'label' => $sub_field_labels[ $ekey ] ?? $ekey,
+                    'value' => is_scalar( $val ) ? (string) $val : '',
+                ];
+            }
+
+            $items[] = [
+                'eael_adv_tabs_tab_show_as_default'   => ( 0 === $i ? 'active-default' : 'inactive' ),
+                'eael_adv_tabs_tab_show_as_scheduled' => 'no',
+                'eael_adv_tabs_schedule_date'         => '',
+                'eael_adv_tabs_schedule_end_date'     => '',
+                'eael_adv_tabs_icon_type'             => $icon_type,
+                'eael_adv_tabs_tab_title_icon_new'    => '',
+                'eael_adv_tabs_tab_title_icon'        => '',
+                'eael_adv_tabs_tab_title_image'       => $image,
+                'eael_adv_tabs_tab_title'             => $title,
+                'eael_adv_tabs_tab_title_html_tag'    => 'span',
+                'eael_adv_tabs_text_type'             => 'content',
+                'eael_adv_tabs_tab_content'           => $content,
+                'eael_adv_tabs_tab_id'                => 'eael-acf-tab-' . ( $i + 1 ),
+                'eael_at_extras'                      => $extras,
+                '_id'                                 => uniqid( 'at_', false ),
+            ];
+            $i++;
+        }
+
+        return $items;
+    }
+
+    /**
+     * Style controls for the ACF "Additional Fields" output (Style tab).
+     * Only shown when the data source is an ACF Repeater.
+     */
+    protected function eael_acf_extra_data_controls_style() {
+        $this->start_controls_section(
+            'eael_at_section_extra_data_style',
+            [
+                'label'     => esc_html__( 'Additional Fields', 'essential-addons-for-elementor-lite' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_at_data_source' => 'acf_repeater',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_at_extra_data_text_color',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-tabs-extras .eael-adv-tabs-extra-value' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_at_extra_data_text_typography',
+                'selector' => '{{WRAPPER}} .eael-adv-tabs-extras .eael-adv-tabs-extra-value',
+            ]
+        );
+
+        $this->add_control(
+            'eael_at_extra_data_text_margin',
+            [
+                'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-adv-tabs-extras .eael-adv-tabs-extra' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_at_extra_data_text_padding',
+            [
+                'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-adv-tabs-extras .eael-adv-tabs-extra' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
     protected function register_controls()
     {
+
+        $this->eael_register_acf_controls();
+
         /**
          * Advance Tabs Settings
          */
@@ -277,7 +569,8 @@ class Adv_Tabs extends Widget_Base
         $this->start_controls_section(
             'eael_section_adv_tabs_content_settings',
             [
-                'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
+                'label'     => esc_html__('Content', 'essential-addons-for-elementor-lite'),
+                'condition' => [ 'eael_at_data_source' => 'custom' ],
             ]
         );
 
@@ -1215,6 +1508,8 @@ class Adv_Tabs extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        $this->eael_acf_extra_data_controls_style();
     }
 
     /**
@@ -1282,6 +1577,9 @@ class Adv_Tabs extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+
+        // Swap in ACF-derived tabs when the data source is an ACF Repeater (both loops read this key).
+        $settings['eael_adv_tabs_tab'] = $this->get_adv_tabs_items( $settings );
 
         $scheduled_active_tab_index = $this->get_scheduled_active_tab($settings);
 
@@ -1492,6 +1790,13 @@ class Adv_Tabs extends Widget_Base
 						        }
 					        }
 				        endif; ?>
+                    <?php if ( ! empty( $tab['eael_at_extras'] ) ) : ?>
+                        <ul class="eael-adv-tabs-extras">
+                            <?php foreach ( $tab['eael_at_extras'] as $extra ) : ?>
+                                <li class="eael-adv-tabs-extra"><span class="eael-adv-tabs-extra-value"><?php echo wp_kses_post( $extra['value'] ); ?></span></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
                     </div>
 		        <?php endforeach; ?>
             </div>

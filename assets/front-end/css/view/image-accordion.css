@@ -308,3 +308,15 @@
   -webkit-box-shadow: inherit !important;
           box-shadow: inherit !important;
 }
+.elementor-widget-eael-image-accordion .eael-img-accordion-extras {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.elementor-widget-eael-image-accordion .eael-img-accordion-extras .eael-img-accordion-extra {
+  margin: 0;
+  padding: 0;
+}
+.elementor-widget-eael-image-accordion .eael-img-accordion-extras .eael-img-accordion-extra .eael-img-accordion-extra-value {
+  display: inline-block;
+}
