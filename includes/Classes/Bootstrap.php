@@ -225,6 +225,22 @@ class Bootstrap
             add_action( 'edit_user_profile_update', [ $this, 'eael_save_extra_user_profile_fields' ] );
         }
 
+        // Admin Approval hooks registered unconditionally so option/widget checks
+        // happen at call time (correct site context in Multisite) rather than at init.
+        add_filter( 'wp_authenticate_user', [ $this, 'eael_block_pending_user_login' ], 10, 2 );
+        add_filter( 'manage_users_columns', [ $this, 'eael_add_user_status_column' ] );
+        add_filter( 'manage_users_custom_column', [ $this, 'eael_render_user_status_column' ], 10, 3 );
+        add_action( 'show_user_profile', [ $this, 'eael_show_approve_user_button' ] );
+        add_action( 'edit_user_profile', [ $this, 'eael_show_approve_user_button' ] );
+        add_action( 'personal_options_update', [ $this, 'eael_handle_approve_user' ] );
+        add_action( 'edit_user_profile_update', [ $this, 'eael_handle_approve_user' ] );
+        add_filter( 'bulk_actions-users', [ $this, 'eael_register_bulk_approve_action' ] );
+        add_filter( 'views_users', [ $this, 'eael_register_status_views' ] );
+        add_action( 'pre_get_users', [ $this, 'eael_filter_users_by_status' ] );
+        add_filter( 'handle_bulk_actions-users', [ $this, 'eael_handle_bulk_approve_action' ], 10, 3 );
+        add_filter( 'handle_bulk_actions-users', [ $this, 'eael_handle_bulk_reject_action' ], 10, 3 );
+        add_action( 'admin_notices', [ $this, 'eael_bulk_approve_admin_notice' ] );
+
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 

@@ -7,7 +7,7 @@ function ModalStyleThree() {
             eaDispatch({type: 'MODAL_ACCORDION', payload: {key: param}});
         },
         changeHandler = (e, key) => {
-            const value = ['lr_custom_profile_fields', 'lr_recaptcha_badge_hide'].includes(key) ? (e.target.checked ? 'on' : '') : e.target.value;
+            const value = ['lr_custom_profile_fields', 'lr_recaptcha_badge_hide', 'lr_admin_approval'].includes(key) ? (e.target.checked ? 'on' : '') : e.target.value;
             eaDispatch({type: 'MODAL_ON_CHANGE', payload: {key, value}});
         },
         copyRedirectUri = (uri) => {

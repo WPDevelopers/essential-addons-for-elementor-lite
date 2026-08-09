@@ -229,7 +229,7 @@ trait Login_Registration {
 		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
 		if ( $is_version_2 || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
-			
+
 			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
 				$err_msg = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
@@ -558,7 +558,7 @@ trait Login_Registration {
             if ( $ajax ) {
                 wp_send_json_error( $err_msg );
             }
-            
+
 			setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
@@ -607,7 +607,7 @@ trait Login_Registration {
 		$url  = '';
 		if ( ! empty( $_SERVER['HTTP_HOST'] ) && ! empty( $_SERVER['REQUEST_URI'] ) ) {
 			$url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		} 
+		}
 
 		// vail early if reg is closed.
 		if ( ! $registration_allowed ) {
@@ -644,7 +644,7 @@ trait Login_Registration {
 						$errors['eael_phone_number'] = isset( $settings['err_phone_number_missing'] ) ? $settings['err_phone_number_missing'] : __( 'Phone number is required', 'essential-addons-for-elementor-lite' );
 					}
 				}
-				
+
 				if( isset( $register_field['field_type'] ) && 'honeypot' === $register_field['field_type']	){
 					$honeypot_name  = 'eaelhoneyp' . esc_attr( $widget_id );
 					$honeypot_value = !empty( $_POST[ esc_attr( $honeypot_name ) ] ) ? sanitize_text_field( wp_unslash( $_POST[ esc_attr( $honeypot_name ) ] ) ) : '';
@@ -732,7 +732,7 @@ trait Login_Registration {
 		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
 		if ( $is_version_2 || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
-			
+
 			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
 				$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 			}
@@ -802,14 +802,14 @@ trait Login_Registration {
 		if(!$is_pass_auto_generated){
 			$errors = apply_filters( 'eael/login-register/register-user-password-validation', $errors, $settings, $password );
 		}
-		
+
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
 			$err_msg = '<ol>';
 			if ( count( $errors ) === 1 ) {
 				$err_msg = '<ol class="'. esc_attr('eael-list-style-none-wrap').'">';
 			}
-			
+
 			foreach ( $errors as $error ) {
 				$err_msg .= "<li>{$error}</li>";
 			}
@@ -1050,6 +1050,11 @@ trait Login_Registration {
 
 		$user_id = wp_insert_user( $user_data );
 
+		// Admin Approval: mark newly registered user as pending
+		if ( 'on' === get_option( 'eael_lr_admin_approval' ) && ! is_wp_error( $user_id ) ) {
+			update_user_meta( $user_id, 'eael_registration_status', 'pending' );
+		}
+
 		if( count( $eael_custom_profile_fields_image ) ){
 			require_once( ABSPATH . 'wp-admin/includes/image.php' );
 			require_once( ABSPATH . 'wp-admin/includes/file.php' );
@@ -1088,7 +1093,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $errors['user_create'] );
 			}
-			
+
 			setcookie( 'eael_register_errors_' . $widget_id, $errors['user_create'] );
 			wp_safe_redirect( esc_url_raw( $url ) );
 			exit();
@@ -1096,7 +1101,7 @@ trait Login_Registration {
 
 		$user_data['eael_lrmuc'] = sanitize_text_field( wp_unslash( $_POST['eael_lrmuc'] ?? '' ) );
 		do_action( 'eael/login-register/mailchimp-integration-action', $user_id, $user_data, $settings );
-	
+
 		$admin_or_both = $is_pass_auto_generated || in_array( 'send_email', $register_actions ) ? 'both' : 'admin';
 
 		/**
@@ -1113,8 +1118,10 @@ trait Login_Registration {
 
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
+		$is_admin_approval_on = ( 'on' === get_option( 'eael_lr_admin_approval' ) );
+
 		// success & handle after registration action as defined by user in the widget
-		if ( ! $ajax && !in_array( 'redirect', $register_actions ) ) {
+		if ( ! $ajax && !in_array( 'redirect', $register_actions ) && ! $is_admin_approval_on ) {
 			update_option( 'eael_register_success_' . $widget_id, 1, false );
 			if ( ! empty( $email ) ) {
 				update_option( 'eael_register_success_email_' . $widget_id, $email, false );
@@ -1131,6 +1138,31 @@ trait Login_Registration {
 			'message' => $success_message,
 		];
 		// should user be auto logged in?
+		// Skip auto-login entirely when Admin Approval is enabled – user must wait for approval.
+		if ( $is_admin_approval_on ) {
+			$pending_message = __( 'Your registration is complete. Your account is pending administrator approval.', 'essential-addons-for-elementor-lite' );
+			$data['message'] = $pending_message;
+
+			// Persist the pending message so the next page render (non-AJAX flow, or Pro-disabled
+			// site) can display it. The widget's print_validation_message() reads this option
+			// before falling back to the generic "success_register" control text.
+			if ( ! $ajax ) {
+				update_option( 'eael_register_pending_approval_' . $widget_id, $pending_message, false );
+			}
+
+			if ( $ajax ) {
+				wp_send_json_success( $data );
+			}
+			if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
+				wp_safe_redirect( $custom_redirect_url );
+				exit();
+			}
+			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				exit();
+			}
+		}
+
 		if ( in_array( 'auto_login', $register_actions ) && ! is_user_logged_in() ) {
 			wp_signon( [
 				'user_login'    => $username,
@@ -1273,7 +1305,7 @@ trait Login_Registration {
 		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
 		if ( $is_version_2 || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
-			
+
 			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
 				$err_msg = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
@@ -1287,7 +1319,7 @@ trait Login_Registration {
 				} // fail early if recaptcha failed
 			}
 		}
-		
+
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -1303,7 +1335,7 @@ trait Login_Registration {
 
 		do_action( 'eael/login-register/before-lostpassword-email' );
 
-		if( $_POST['eael-user-lostpassword'] != wp_strip_all_tags( $_POST['eael-user-lostpassword'] ) ){ //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated 
+		if( $_POST['eael-user-lostpassword'] != wp_strip_all_tags( $_POST['eael-user-lostpassword'] ) ){ //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			// contains html tag
 			$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -1342,7 +1374,7 @@ trait Login_Registration {
 		if ( isset($_SERVER['HTTP_REFERER']) ) {
 			self::$email_options_lostpassword['http_referer'] = esc_url_raw( strtok( $_SERVER['HTTP_REFERER'], '?' ) ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		}
-		
+
 		if ( isset($page_id) ) {
 			self::$email_options_lostpassword['page_id'] = sanitize_text_field( $page_id );
 		}
@@ -1360,9 +1392,9 @@ trait Login_Registration {
 		}
 
 		add_filter( 'retrieve_password_notification_email', [ $this, 'eael_retrieve_password_notification_email' ], 10, 4 );
-		
+
 		$results = retrieve_password( $user_login );
-		
+
 		if ( is_wp_error( $results ) ) {
 			$err_msg = '';
 			if ( isset( $results->errors['invalidcombo'][0] ) ) {
@@ -1380,7 +1412,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 		} else {
-			$lostpassword_success_message = ! empty( $settings['success_lostpassword'] ) ? Helper::eael_wp_kses( $settings['success_lostpassword'] ) : Helper::eael_wp_kses( 'Check your email for the confirmation link.' ); 
+			$lostpassword_success_message = ! empty( $settings['success_lostpassword'] ) ? Helper::eael_wp_kses( $settings['success_lostpassword'] ) : Helper::eael_wp_kses( 'Check your email for the confirmation link.' );
 			$data = [
 				'message' => $lostpassword_success_message,
 			];
@@ -1404,7 +1436,7 @@ trait Login_Registration {
             exit();
         }
 	}
-	
+
 	/**
 	 * It reset the password with user submitted new password.
 	 */
@@ -1513,7 +1545,7 @@ trait Login_Registration {
 		if( ! empty( $_POST['eael-pass1'] ) && strlen( trim( $_POST['eael-pass1'] ) ) == 0 ){ //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$errors['password_reset_empty'] = esc_html__( 'The password cannot be empty.', 'essential-addons-for-elementor-lite' );
 		}
-		
+
 		// Check if password fields do not match.
 		if ( ! empty( $_POST['eael-pass1'] ) && ! empty( $_POST['eael-pass2'] ) && $_POST['eael-pass2'] !== $_POST['eael-pass1'] ) {
 			$errors['password_reset_mismatch'] = isset( $settings['err_conf_pass'] ) ? Helper::eael_wp_kses( $settings['err_conf_pass'] ) : esc_html__( 'The passwords do not match.', 'essential-addons-for-elementor-lite' );
@@ -1522,7 +1554,7 @@ trait Login_Registration {
 		if ( ( ! count( $errors ) ) && isset( $_POST['eael-pass1'] ) && ! empty( $_POST['eael-pass1'] ) ) {
 			$rp_data_db['rp_key']   = ! empty( $_POST['rp_key'] ) ? sanitize_text_field( wp_unslash( $_POST['rp_key'] ) ) : '';
 			$rp_data_db['rp_login'] = ! empty( $_POST['rp_login'] ) ? sanitize_text_field( wp_unslash( $_POST['rp_login'] ) ) : '';
-			
+
 			$user = check_password_reset_key( $rp_data_db['rp_key'], $rp_data_db['rp_login'] );
 
 			if( is_wp_error( $user ) || ! $user ){
@@ -1681,7 +1713,7 @@ trait Login_Registration {
 				self::$email_options_lostpassword['firstname'] = !empty( $user_meta['first_name'][0] ) ? $user_meta['first_name'][0] : '';
 				self::$email_options_lostpassword['lastname'] = !empty( $user_meta['last_name'][0] ) ? $user_meta['last_name'][0] : '';
 				self::$email_options_lostpassword['email'] = $user_data->user_email;
-				self::$email_options_lostpassword['website'] = $user_data->user_url;				
+				self::$email_options_lostpassword['website'] = $user_data->user_url;
 			}
 			$defaults['message'] = $this->replace_placeholders_lostpassword( self::$email_options_lostpassword['message'] );
 		}
@@ -1691,7 +1723,7 @@ trait Login_Registration {
 		}
 
 		$defaults['message'] = wpautop( $defaults['message'] );
-		
+
 		return $defaults;
 	}
 
@@ -1994,7 +2026,7 @@ trait Login_Registration {
 		$firstname 		   = !empty( self::$email_options_lostpassword['firstname'] ) ? self::$email_options_lostpassword['firstname'] : '';
 		$lastname 		   = !empty( self::$email_options_lostpassword['lastname'] ) ? self::$email_options_lostpassword['lastname'] : '';
 		$website 		   = !empty( self::$email_options_lostpassword['website'] ) ? self::$email_options_lostpassword['website'] : '';
-		
+
 		$placeholders = [
 			'/(\w+\s*=\s*["\'][^"\']*\[password_reset_link\][^"\']*["\'])/',
 			'/<[^>]*\[password_reset_link\][^>]*>/',
@@ -2085,7 +2117,7 @@ trait Login_Registration {
 				$action_ok = ! isset( $res['action'] ) ? true : $action === $res['action'];
 				return $action_ok && isset( $res['score'] ) && ( $res['score'] > self::get_recaptcha_threshold( $settings ) );
 			}else {
-				return $res['success'];				
+				return $res['success'];
 			}
 		}
 
@@ -2709,12 +2741,13 @@ trait Login_Registration {
         delete_option('eael_register_success_' . $widget_id);
         delete_option('eael_register_success_email_' . $widget_id);
         delete_option('eael_register_errors_' . $widget_id);
+        delete_option('eael_register_pending_approval_' . $widget_id);
 	}
 
 	/**
 	 * Add extra custom fields on user profile (e.x. edit page and Registration form).
 	 * @param \WP_User $user
-	 * 
+	 *
 	 * @since 5.1.4
 	 */
 	public function eael_extra_user_profile_fields( $user ){ ?>
@@ -2776,7 +2809,7 @@ trait Login_Registration {
 	/**
 	 * Save extra custom fields of user profile
 	 * @param int $user_id
-	 * 
+	 *
 	 * @since 5.1.4
 	 */
 	public function eael_save_extra_user_profile_fields( $user_id ){
@@ -2784,8 +2817,8 @@ trait Login_Registration {
 			return;
 		}
 
-		if ( !current_user_can( 'edit_user', $user_id ) ) { 
-			return false; 
+		if ( !current_user_can( 'edit_user', $user_id ) ) {
+			return false;
 		}
 		if( !empty( $_POST['eael_phone_number'] ) ) {
 			update_user_meta( $user_id, 'eael_phone_number', sanitize_text_field( wp_unslash( $_POST['eael_phone_number'] ) ) );
@@ -2938,13 +2971,13 @@ trait Login_Registration {
 	 */
 	public function eael_wc_account_form_fields() {
 		$fields = $this->eael_get_lr_my_account_fields();
-		
+
 		if ( empty( $fields ) ) {
 			return;
 		}
 
 		$user_id = get_current_user_id();
-		
+
 		foreach ( $fields as $type => $label ) {
 			if ( 'website' === $type ) {
 				$value = esc_attr( get_userdata( $user_id )->user_url ?? '' );
@@ -2994,5 +3027,471 @@ trait Login_Registration {
 				update_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, $value );
 			}
 		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Admin Approval feature
+	// -------------------------------------------------------------------------
+
+	/**
+	 * Block login for users whose registration is pending admin approval.
+	 *
+	 * Hooked to `wp_authenticate_user`.
+	 *
+	 * @param \WP_User|\WP_Error $user     Authenticated user object or error.
+	 * @param string             $password Submitted password (unused here).
+	 * @return \WP_User|\WP_Error
+	 */
+	private function eael_is_admin_approval_active(): bool {
+		if ( 'on' !== get_option( 'eael_lr_admin_approval' ) ) {
+			return false;
+		}
+		$eael_elements = get_option( 'eael_save_settings', [] );
+		return ! empty( $eael_elements['login-register'] );
+	}
+
+	public function eael_block_pending_user_login( $user, $password ) {
+		if ( is_wp_error( $user ) ) {
+			return $user;
+		}
+
+		if ( ! $this->eael_is_admin_approval_active() ) {
+			return $user;
+		}
+
+		$status = get_user_meta( $user->ID, 'eael_registration_status', true );
+
+		if ( 'pending' === $status ) {
+			return new \WP_Error(
+				'eael_pending_approval',
+				__( 'Your account is awaiting administrator approval.', 'essential-addons-for-elementor-lite' )
+			);
+		}
+
+		if ( 'rejected' === $status ) {
+			return new \WP_Error(
+				'eael_registration_rejected',
+				__( 'Your registration request has been rejected. Please contact the site administrator.', 'essential-addons-for-elementor-lite' )
+			);
+		}
+
+		return $user;
+	}
+
+	/**
+	 * Add a "Status" column to the WP-Admin users list table.
+	 *
+	 * Hooked to `manage_users_columns`.
+	 *
+	 * @param array $columns Existing columns.
+	 * @return array
+	 */
+	public function eael_add_user_status_column( $columns ) {
+		$columns['eael_status'] = __( 'Status', 'essential-addons-for-elementor-lite' );
+		return $columns;
+	}
+
+	/**
+	 * Render the "Status" column value for each user row.
+	 *
+	 * Hooked to `manage_users_custom_column`.
+	 *
+	 * @param string $output      Current column output.
+	 * @param string $column_name Column slug.
+	 * @param int    $user_id     User ID.
+	 * @return string
+	 */
+	public function eael_render_user_status_column( $output, $column_name, $user_id ) {
+		if ( 'eael_status' !== $column_name ) {
+			return $output;
+		}
+
+		$status = get_user_meta( $user_id, 'eael_registration_status', true );
+
+		if ( 'pending' === $status ) {
+			return '<span style="display:inline-block;background:#f0a500;color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">'
+				. esc_html__( 'Pending', 'essential-addons-for-elementor-lite' )
+				. '</span>';
+		}
+
+		if ( 'rejected' === $status ) {
+			return '<span style="display:inline-block;background:#dc3232;color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">'
+				. esc_html__( 'Rejected', 'essential-addons-for-elementor-lite' )
+				. '</span>';
+		}
+
+		return '<span style="display:inline-block;background:#46b450;color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">'
+			. esc_html__( 'Approved', 'essential-addons-for-elementor-lite' )
+			. '</span>';
+	}
+
+	/**
+	 * Show an "Approve User" button on the profile edit screen when the user is pending.
+	 *
+	 * Hooked to `show_user_profile` and `edit_user_profile`.
+	 *
+	 * @param \WP_User $user Profile user object.
+	 */
+	public function eael_show_approve_user_button( $user ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$status = get_user_meta( $user->ID, 'eael_registration_status', true );
+		wp_nonce_field( 'eael_approve_user_' . $user->ID, 'eael_approve_user_nonce' );
+		?>
+		<table class="form-table" id="eael-admin-approval">
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Account Status', 'essential-addons-for-elementor-lite' ); ?></th>
+				<td style="display: flex;align-items: center;gap:10px;">
+					<?php if ( 'pending' === $status ) : ?>
+						<span style="color:#f0a500;font-weight:bold;">
+							<?php esc_html_e( 'Pending Approval', 'essential-addons-for-elementor-lite' ); ?>
+						</span>
+						<input type="submit"
+							   name="eael_approve_user"
+							   class="button button-primary"
+							   value="<?php esc_attr_e( 'Approve', 'essential-addons-for-elementor-lite' ); ?>" >
+						<input type="submit"
+							   name="eael_reject_user"
+							   class="button button-secondary"
+							   value="<?php esc_attr_e( 'Reject', 'essential-addons-for-elementor-lite' ); ?>"
+							   onclick="return confirm('<?php esc_attr_e( 'Reject this user? They will be marked as rejected and unable to log in.', 'essential-addons-for-elementor-lite' ); ?>');">
+						<input type="submit"
+							   name="eael_delete_user"
+							   class="button button-link-delete"
+							   value="<?php esc_attr_e( 'Delete', 'essential-addons-for-elementor-lite' ); ?>"
+							   onclick="return confirm('<?php esc_attr_e( 'Permanently delete this user? This cannot be undone.', 'essential-addons-for-elementor-lite' ); ?>');">
+
+					<?php elseif ( 'rejected' === $status ) : ?>
+						<span style="color:#dc3232;font-weight:bold;">
+							<?php esc_html_e( 'Rejected', 'essential-addons-for-elementor-lite' ); ?>
+						</span>
+						<input type="submit"
+							   name="eael_approve_user"
+							   class="button button-primary"
+							   value="<?php esc_attr_e( 'Approve', 'essential-addons-for-elementor-lite' ); ?>">
+						<input type="submit"
+							   name="eael_delete_user"
+							   class="button button-link-delete"
+							   value="<?php esc_attr_e( 'Delete', 'essential-addons-for-elementor-lite' ); ?>"
+							   onclick="return confirm('<?php esc_attr_e( 'Permanently delete this user? This cannot be undone.', 'essential-addons-for-elementor-lite' ); ?>');">
+
+					<?php else : ?>
+						<span style="color:#46b450;font-weight:bold;">
+							<?php esc_html_e( 'Approved', 'essential-addons-for-elementor-lite' ); ?>
+						</span>
+					<?php endif; ?>
+				</td>
+			</tr>
+		</table>
+		<?php
+	}
+
+	/**
+	 * Handle the "Approve User" button submission on the profile page.
+	 *
+	 * Hooked to `personal_options_update` and `edit_user_profile_update`.
+	 *
+	 * @param int $user_id Profile user ID.
+	 */
+	public function eael_handle_approve_user( $user_id ) {
+		$actions = [ 'eael_approve_user', 'eael_reject_user', 'eael_delete_user' ];
+		$action  = '';
+		foreach ( $actions as $a ) {
+			if ( isset( $_POST[ $a ] ) ) {
+				$action = $a;
+				break;
+			}
+		}
+
+		if ( ! $action || ! isset( $_POST['eael_approve_user_nonce'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce(
+			sanitize_text_field( wp_unslash( $_POST['eael_approve_user_nonce'] ) ),
+			'eael_approve_user_' . $user_id
+		) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$user = get_userdata( $user_id );
+
+		if ( 'eael_approve_user' === $action ) {
+			update_user_meta( $user_id, 'eael_registration_status', 'approved' );
+			if ( $user ) {
+				/* translators: %s: user display name */
+				wp_mail(
+					$user->user_email,
+					__( 'Your account has been approved', 'essential-addons-for-elementor-lite' ),
+					sprintf( __( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ), $user->display_name )
+				);
+			}
+			return;
+		}
+
+		if ( 'eael_reject_user' === $action ) {
+			update_user_meta( $user_id, 'eael_registration_status', 'rejected' );
+			return;
+		}
+
+		if ( 'eael_delete_user' === $action ) {
+			require_once ABSPATH . 'wp-admin/includes/user.php';
+			wp_delete_user( $user_id );
+			wp_safe_redirect( admin_url( 'users.php?eael_user_deleted=1' ) );
+			exit();
+		}
+	}
+
+	/**
+	 * Register the "Approve" bulk action on the users list table.
+	 *
+	 * Hooked to `bulk_actions-users`.
+	 *
+	 * @param array $actions Existing bulk actions.
+	 * @return array
+	 */
+	public function eael_register_bulk_approve_action( $actions ) {
+		if ( ! $this->eael_is_admin_approval_active() ) {
+			return $actions;
+		}
+		$actions['eael_approve_users'] = __( 'EA: Approve', 'essential-addons-for-elementor-lite' );
+		$actions['eael_reject_users']  = __( 'EA: Reject', 'essential-addons-for-elementor-lite' );
+		return $actions;
+	}
+
+	/**
+	 * Handle the "Approve" bulk action and approve selected pending users.
+	 *
+	 * Hooked to `handle_bulk_actions-users`.
+	 *
+	 * @param string $redirect_url URL to redirect to after processing.
+	 * @param string $action       The bulk action being taken.
+	 * @param int[]  $user_ids     Array of selected user IDs.
+	 * @return string
+	 */
+	public function eael_handle_bulk_approve_action( $redirect_url, $action, $user_ids ) {
+		if ( 'eael_approve_users' !== $action || ! current_user_can( 'manage_options' ) || ! $this->eael_is_admin_approval_active() ) {
+			return $redirect_url;
+		}
+
+		$approved_count  = 0;
+		$current_user_id = get_current_user_id();
+
+		foreach ( $user_ids as $user_id ) {
+			$user_id = absint( $user_id );
+
+			// Never re-flag self or any administrator.
+			if ( $user_id === $current_user_id ) {
+				continue;
+			}
+			if ( user_can( $user_id, 'manage_options' ) ) {
+				continue;
+			}
+
+			// Whitelist: only approve users explicitly in 'pending' or 'rejected' state.
+			// Empty meta = pre-existing user (not part of approval flow) — skip.
+			$status = get_user_meta( $user_id, 'eael_registration_status', true );
+			if ( ! in_array( $status, [ 'pending', 'rejected' ], true ) ) {
+				continue;
+			}
+
+			update_user_meta( $user_id, 'eael_registration_status', 'approved' );
+			$approved_count++;
+
+			// Optional: notify each approved user.
+			$user = get_userdata( $user_id );
+			if ( $user ) {
+				$subject = __( 'Your account has been approved', 'essential-addons-for-elementor-lite' );
+				/* translators: %s: user display name */
+				$message = sprintf(
+					__( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ),
+					$user->display_name
+				);
+				wp_mail( $user->user_email, $subject, $message );
+			}
+		}
+
+		return add_query_arg( 'eael_approved_count', $approved_count, $redirect_url );
+	}
+
+	/**
+	 * Display an admin notice after a bulk approve action.
+	 *
+	 * Hooked to `admin_notices`.
+	 */
+	public function eael_handle_bulk_reject_action( $redirect_url, $action, $user_ids ) {
+		if ( 'eael_reject_users' !== $action || ! current_user_can( 'manage_options' ) || ! $this->eael_is_admin_approval_active() ) {
+			return $redirect_url;
+		}
+
+		$rejected_count  = 0;
+		$current_user_id = get_current_user_id();
+
+		foreach ( $user_ids as $user_id ) {
+			$user_id = absint( $user_id );
+
+			// Never reject self or any administrator.
+			if ( $user_id === $current_user_id ) {
+				continue;
+			}
+			if ( user_can( $user_id, 'manage_options' ) ) {
+				continue;
+			}
+
+			// Whitelist: only reject users explicitly in 'pending' state.
+			// Empty meta = pre-existing user (not part of approval flow) — skip.
+			$status = get_user_meta( $user_id, 'eael_registration_status', true );
+			if ( 'pending' !== $status ) {
+				continue;
+			}
+
+			update_user_meta( $user_id, 'eael_registration_status', 'rejected' );
+			$rejected_count++;
+		}
+
+		return add_query_arg( 'eael_rejected_count', $rejected_count, $redirect_url );
+	}
+
+	public function eael_bulk_approve_admin_notice() {
+		if ( ! current_user_can( 'list_users' ) ) {
+			return;
+		}
+
+		global $pagenow;
+		if ( 'users.php' !== $pagenow ) {
+			return;
+		}
+
+		//phpcs:disable WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['eael_approved_count'] ) ) {
+			$count = intval( $_GET['eael_approved_count'] );
+			printf(
+				'<div class="notice notice-success is-dismissible"><p>%s</p></div>',
+				esc_html(
+					/* translators: %d: number of approved users */
+					sprintf( _n( '%d user approved.', '%d users approved.', $count, 'essential-addons-for-elementor-lite' ), $count )
+				)
+			);
+		}
+
+		if ( isset( $_GET['eael_rejected_count'] ) ) {
+			$count = intval( $_GET['eael_rejected_count'] );
+			printf(
+				'<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+				esc_html(
+					/* translators: %d: number of rejected users */
+					sprintf( _n( '%d user rejected.', '%d users rejected.', $count, 'essential-addons-for-elementor-lite' ), $count )
+				)
+			);
+		}
+		//phpcs:enable WordPress.Security.NonceVerification.Recommended
+	}
+
+	/**
+	 * Add EA Status filter links above the users list table.
+	 *
+	 * Hooked to `views_users`.
+	 *
+	 * @param array $views Existing view links.
+	 * @return array
+	 */
+	public function eael_register_status_views( $views ) {
+		if ( ! $this->eael_is_admin_approval_active() ) {
+			return $views;
+		}
+
+		global $wpdb;
+
+		// One direct SQL query gives all three counts and bypasses pre_get_users entirely.
+		// meta_key is hardcoded literal — passed through prepare() for WPCS compliance only.
+		$rows = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT meta_value AS status, COUNT(*) AS total
+				 FROM {$wpdb->usermeta}
+				 WHERE meta_key = %s
+				 GROUP BY meta_value",
+				'eael_registration_status'
+			),
+			OBJECT_K
+		);
+
+		$counts = [
+			'pending'  => isset( $rows['pending'] )  ? (int) $rows['pending']->total  : 0,
+			'approved' => isset( $rows['approved'] ) ? (int) $rows['approved']->total : 0,
+			'rejected' => isset( $rows['rejected'] ) ? (int) $rows['rejected']->total : 0,
+		];
+
+		$statuses = [
+			'pending'  => __( 'Pending',  'essential-addons-for-elementor-lite' ),
+			'approved' => __( 'Approved', 'essential-addons-for-elementor-lite' ),
+			'rejected' => __( 'Rejected', 'essential-addons-for-elementor-lite' ),
+		];
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$current = isset( $_GET['eael_status'] ) ? sanitize_key( wp_unslash( $_GET['eael_status'] ) ) : '';
+
+		foreach ( $statuses as $key => $label ) {
+			$url   = add_query_arg( 'eael_status', $key, admin_url( 'users.php' ) );
+			$class = ( $current === $key ) ? ' class="current"' : '';
+
+			$views[ 'eael_' . $key ] = sprintf(
+				'<a href="%s"%s>%s <span class="count">(%d)</span></a>',
+				esc_url( $url ),
+				$class,
+				esc_html( $label ),
+				$counts[ $key ]
+			);
+		}
+
+		return $views;
+	}
+
+	/**
+	 * Filter the users list-table query by EA registration status.
+	 *
+	 * Hooked to `pre_get_users`. Scoped to the main WP_User_Query on users.php only
+	 * to avoid hijacking unrelated user queries (other plugins, dashboard widgets, etc.).
+	 *
+	 * @param \WP_User_Query $query
+	 * @return void
+	 */
+	public function eael_filter_users_by_status( $query ) {
+		if ( ! is_admin() || ! $this->eael_is_admin_approval_active() ) {
+			return;
+		}
+
+		// Restrict to capable admin viewing the users list.
+		if ( ! current_user_can( 'list_users' ) ) {
+			return;
+		}
+
+		global $pagenow;
+		if ( 'users.php' !== $pagenow ) {
+			return;
+		}
+
+		if ( ! $query instanceof \WP_User_Query ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( empty( $_GET['eael_status'] ) ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$status = sanitize_key( wp_unslash( $_GET['eael_status'] ) );
+		if ( ! in_array( $status, [ 'pending', 'approved', 'rejected' ], true ) ) {
+			return;
+		}
+
+		$query->set( 'meta_key',   'eael_registration_status' );
+		$query->set( 'meta_value', $status );
 	}
 }
