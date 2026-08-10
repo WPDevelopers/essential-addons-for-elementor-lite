@@ -10,6 +10,8 @@ namespace Essential_Addons_Elementor\Theme_Builder;
 
 use Essential_Addons_Elementor\Theme_Builder\Admin\Admin;
 use Essential_Addons_Elementor\Theme_Builder\Admin\Ajax;
+use Essential_Addons_Elementor\Theme_Builder\Admin\Requirements_Screen;
+use Essential_Addons_Elementor\Theme_Builder\Conditions\Conditions_Cleanup;
 use Essential_Addons_Elementor\Theme_Builder\Conditions\Conditions_Manager;
 use Essential_Addons_Elementor\Theme_Builder\Core\Post_Type;
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Types;
@@ -55,6 +57,30 @@ class Theme_Builder {
 	private $components = [];
 
 	/**
+	 * Boot the module, or the screen that explains why it cannot boot.
+	 *
+	 * The requirement notice is worth registering on its own: with the module
+	 * gated away entirely, the Theme Builder menu item simply vanishes when
+	 * Elementor is deactivated and its URL answers with a permissions error,
+	 * which reads like a bug rather than a missing dependency.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @return Theme_Builder|null The module, or null when it cannot run.
+	 */
+	public static function boot() {
+		if ( self::is_enabled() ) {
+			return self::instance();
+		}
+
+		if ( is_admin() ) {
+			new Requirements_Screen();
+		}
+
+		return null;
+	}
+
+	/**
 	 * Singleton accessor.
 	 *
 	 * @since 6.7.3
@@ -98,6 +124,7 @@ class Theme_Builder {
 		$this->components['types']      = Template_Types::instance();
 		$this->components['post_type']  = new Post_Type();
 		$this->components['conditions'] = Conditions_Manager::instance();
+		$this->components['cleanup']    = new Conditions_Cleanup();
 		$this->components['elementor']  = new Elementor_Integration();
 		$this->components['compat']     = new Compatibility();
 

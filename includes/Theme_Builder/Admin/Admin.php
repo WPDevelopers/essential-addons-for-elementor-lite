@@ -8,6 +8,7 @@
 
 namespace Essential_Addons_Elementor\Theme_Builder\Admin;
 
+use Essential_Addons_Elementor\Theme_Builder\Conditions\Conditions_Cleanup;
 use Essential_Addons_Elementor\Theme_Builder\Conditions\Rules;
 use Essential_Addons_Elementor\Theme_Builder\Core\Post_Type;
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Cache;
@@ -350,6 +351,46 @@ class Admin {
 	}
 
 	/**
+	 * Notice listing templates deactivated because their target was deleted.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @return string
+	 */
+	public function get_orphaned_notice() {
+		$ids = Conditions_Cleanup::pull_deactivated();
+
+		if ( empty( $ids ) ) {
+			return '';
+		}
+
+		$titles = [];
+
+		foreach ( $ids as $id ) {
+			$title = get_the_title( $id );
+
+			if ( $title ) {
+				$titles[] = $title;
+			}
+		}
+
+		if ( empty( $titles ) ) {
+			return '';
+		}
+
+		return sprintf(
+			/* translators: %s: comma separated template titles. */
+			_n(
+				'%s was deactivated: the page it was set to display on has been deleted, so it had no display conditions left. Add a condition to switch it back on.',
+				'%s were deactivated: the pages they were set to display on have been deleted, so they had no display conditions left. Add a condition to switch them back on.',
+				count( $titles ),
+				'essential-addons-for-elementor-lite'
+			),
+			implode( ', ', $titles )
+		);
+	}
+
+	/**
 	 * Enqueue the dashboard assets.
 	 *
 	 * @since 6.7.3
@@ -461,6 +502,11 @@ class Admin {
 			'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
 			'nonce'         => wp_create_nonce( Ajax::NONCE_ACTION ),
 			'types'         => $types,
+			'priority'      => [
+				'min'     => Post_Type::PRIORITY_MIN,
+				'max'     => Post_Type::PRIORITY_MAX,
+				'default' => Post_Type::PRIORITY_DEFAULT,
+			],
 			'rules'         => array_values( Rules::get_rules_for_ui() ),
 			'groups'        => Rules::get_groups(),
 			'pageTemplates' => Post_Type::get_page_template_options(),
@@ -517,6 +563,7 @@ class Admin {
 				'statusPending'    => __( 'Pending Review', 'essential-addons-for-elementor-lite' ),
 				'priorityLabel'    => __( 'Priority', 'essential-addons-for-elementor-lite' ),
 				'priorityHelp'     => __( 'Lower wins when two templates match a page equally well.', 'essential-addons-for-elementor-lite' ),
+				'priorityRange'    => Ajax::priority_range_message(),
 				'activeLabel'      => __( 'Active', 'essential-addons-for-elementor-lite' ),
 				'activeHelp'       => __( 'Inactive templates are never displayed, even when published.', 'essential-addons-for-elementor-lite' ),
 				/* translators: %s: comma separated template titles. */
@@ -562,6 +609,7 @@ class Admin {
 
 		$list_table = $this->list_table;
 		$notice     = $this->get_action_notice();
+		$warning    = $this->get_orphaned_notice();
 
 		include Theme_Builder::path() . 'Templates/admin/dashboard.php';
 	}

@@ -7,6 +7,7 @@
  *
  * @var \Essential_Addons_Elementor\Theme_Builder\Admin\Templates_List_Table|null $list_table Prepared list table.
  * @var string                                                                            $notice     Result of the last action.
+ * @var string                                                                            $warning    Templates deactivated by a condition cleanup.
  */
 
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Types;
@@ -19,6 +20,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 $current_type   = $list_table ? $list_table->get_request_type() : '';
 $current_status = $list_table ? $list_table->get_request_status() : '';
 $elementor_ok   = Theme_Builder::is_enabled();
+
+/*
+ * Elementor is missing: point at the one action that fixes it rather than
+ * leaving people to work out what "needs Elementor" means from here.
+ */
+$elementor_file   = 'elementor/elementor.php';
+$elementor_action = '';
+
+if ( ! $elementor_ok ) {
+	if ( file_exists( WP_PLUGIN_DIR . '/' . $elementor_file ) ) {
+		if ( current_user_can( 'activate_plugin', $elementor_file ) ) {
+			$elementor_action = sprintf(
+				'<a class="button button-primary" href="%1$s">%2$s</a>',
+				esc_url(
+					wp_nonce_url(
+						self_admin_url( 'plugins.php?action=activate&plugin=' . rawurlencode( $elementor_file ) ),
+						'activate-plugin_' . $elementor_file
+					)
+				),
+				esc_html__( 'Activate Elementor', 'essential-addons-for-elementor-lite' )
+			);
+		}
+	} elseif ( current_user_can( 'install_plugins' ) ) {
+		$elementor_action = sprintf(
+			'<a class="button button-primary" href="%1$s">%2$s</a>',
+			esc_url( self_admin_url( 'plugin-install.php?tab=search&type=term&s=' . rawurlencode( 'Elementor Website Builder' ) ) ),
+			esc_html__( 'Install Elementor', 'essential-addons-for-elementor-lite' )
+		);
+	}
+}
 
 ?>
 <div class="wrap eael-tb-wrap">
@@ -33,8 +64,11 @@ $elementor_ok   = Theme_Builder::is_enabled();
 	<hr class="wp-header-end">
 
 	<?php if ( ! $elementor_ok ) : ?>
-		<div class="notice notice-error">
-			<p><?php esc_html_e( 'Theme Builder needs Elementor to be installed and activated.', 'essential-addons-for-elementor-lite' ); ?></p>
+		<div class="notice notice-error eael-tb-requirement">
+			<p><?php esc_html_e( 'Theme Builder needs Elementor to be installed and activated. Your templates and their display conditions are kept safe in the meantime — they come back as soon as Elementor is active again.', 'essential-addons-for-elementor-lite' ); ?></p>
+			<?php if ( $elementor_action ) : ?>
+				<p><?php echo $elementor_action; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from escaped parts above. ?></p>
+			<?php endif; ?>
 		</div>
 	<?php endif; ?>
 
@@ -44,6 +78,13 @@ $elementor_ok   = Theme_Builder::is_enabled();
 		</div>
 	<?php endif; ?>
 
+	<?php if ( ! empty( $warning ) ) : ?>
+		<div class="notice notice-warning is-dismissible">
+			<p><?php echo esc_html( $warning ); ?></p>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( $elementor_ok ) : ?>
 	<nav class="nav-tab-wrapper eael-tb-tabs wp-clearfix">
 		<a href="<?php echo esc_url( Theme_Builder::page_url() ); ?>"
 			class="nav-tab <?php echo '' === $current_type ? 'nav-tab-active' : ''; ?>">
@@ -56,6 +97,7 @@ $elementor_ok   = Theme_Builder::is_enabled();
 			</a>
 		<?php endforeach; ?>
 	</nav>
+	<?php endif; ?>
 
 	<?php if ( $list_table ) : ?>
 		<?php $list_table->views(); ?>

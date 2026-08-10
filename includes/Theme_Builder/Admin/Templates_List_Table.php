@@ -678,7 +678,27 @@ class Templates_List_Table extends \WP_List_Table {
 			return '';
 		}
 
-		return esc_html( Conditions_Manager::instance()->get_conditions_summary( $template->get_conditions() ) );
+		$manager    = Conditions_Manager::instance();
+		$conditions = $template->get_conditions();
+		$summary    = esc_html( $manager->get_conditions_summary( $conditions ) );
+		$broken     = $manager->find_broken_conditions( $conditions );
+
+		if ( empty( $broken ) ) {
+			return $summary;
+		}
+
+		$warning = _n(
+			'One of the targeted items has been deleted, so this condition can never match. Edit the conditions to fix it.',
+			'Some of the targeted items have been deleted, so those conditions can never match. Edit the conditions to fix them.',
+			count( $broken ),
+			'essential-addons-for-elementor-lite'
+		);
+
+		return sprintf(
+			'<span class="eael-tb-broken-conditions" title="%1$s"><span class="dashicons dashicons-warning" aria-hidden="true"></span>%2$s<span class="screen-reader-text"> %1$s</span></span>',
+			esc_attr( $warning ),
+			$summary
+		);
 	}
 
 	/**

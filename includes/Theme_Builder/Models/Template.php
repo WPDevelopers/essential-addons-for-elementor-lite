@@ -320,18 +320,23 @@ class Template {
 	public function get_priority() {
 		$priority = get_post_meta( $this->get_id(), Post_Type::META_PRIORITY, true );
 
-		return is_numeric( $priority ) ? (int) $priority : 10;
+		return is_numeric( $priority ) ? (int) $priority : Post_Type::PRIORITY_DEFAULT;
 	}
 
 	/**
 	 * Set the matching priority.
 	 *
+	 * Out-of-range values are clamped rather than refused — callers that need to
+	 * reject them (the Quick Edit endpoint) validate before calling this.
+	 *
 	 * @since 6.7.3
 	 *
-	 * @param int $priority Priority between 1 and 100.
+	 * @param int $priority Priority between `Post_Type::PRIORITY_MIN` and `Post_Type::PRIORITY_MAX`.
 	 */
 	public function set_priority( $priority ) {
-		update_post_meta( $this->get_id(), Post_Type::META_PRIORITY, max( 1, min( 100, (int) $priority ) ) );
+		$priority = max( Post_Type::PRIORITY_MIN, min( Post_Type::PRIORITY_MAX, (int) $priority ) );
+
+		update_post_meta( $this->get_id(), Post_Type::META_PRIORITY, $priority );
 	}
 
 	/**

@@ -12,14 +12,16 @@ Assets: [`assets/admin/css/theme-builder.css`](../../assets/admin/css/theme-buil
 
 | Path | Responsibility |
 | --- | --- |
-| `Theme_Builder.php` | Module singleton. Instantiates components, exposes `path()`, `capability()`, `page_url()`, `is_enabled()` |
+| `Theme_Builder.php` | Module singleton. `boot()` is the entry point `Bootstrap` calls: the module when Elementor is present, `Requirements_Screen` when it is not. Also exposes `path()`, `capability()`, `page_url()`, `is_enabled()` |
 | `Core/Post_Type.php` | Registers the `ea_theme_builder` CPT + all `_ea_template_*` meta with sanitization callbacks |
 | `Core/Template_Types.php` | Registry of template types. `header` and `footer` ship; more are added on `eael/theme_builder/register_types` |
 | `Core/Template_Cache.php` | Version-namespaced cache over transients + a per-request static array |
 | `Models/Template.php` | Typed wrapper around one template post — the only place meta keys are read/written |
 | `Conditions/Rules.php` | The 13–14 display rules: labels, groups, specificity, sub-object source, evaluation callbacks |
 | `Conditions/Conditions_Manager.php` | Sanitize / validate conditions, resolve the winning template, detect conflicts, search sub-objects |
+| `Conditions/Conditions_Cleanup.php` | Drops condition rows whose target post / term / user was deleted, and deactivates a template left with no include row |
 | `Admin/Admin.php` | Submenu registration, row/bulk action handling, screen options, asset enqueue + localization |
+| `Admin/Requirements_Screen.php` | Stand-in submenu page registered instead of the module when Elementor is missing, so the page stays reachable and says why |
 | `Admin/Templates_List_Table.php` | `WP_List_Table` — columns, views, tabs, search, month filter, pagination, row actions |
 | `Admin/Ajax.php` | Four logged-in-only endpoints behind a shared nonce + capability check |
 | `Integrations/Document.php` | Elementor document type (`ea-theme-builder`) |
@@ -138,6 +140,14 @@ The `include`/`exclude` split is not symmetric — `Rules` declares a `supports`
 
 `find_conflicts()` finds other templates of the same type claiming an identical include row. It is **advisory, not blocking** — the save succeeds and the condition builder shows a warning naming the other templates, because a conflict is often intentional (a broad header plus a narrower one that overrides it on some pages).
 
+### When a condition's target is deleted
+
+A row narrowed to one object stores that object's ID, so deleting the object strands the row: it can never match again, and the list can no longer name what it targeted. Three things handle that, in order of when they apply:
+
+1. `Conditions_Cleanup` hooks `deleted_post`, `delete_term` and `deleted_user` and removes the matching rows — the same thing core does for nav menu items pointing at a deleted page. Post IDs are globally unique, so post deletion matches on the ID alone and does not need the post type.
+2. A template left with **no include row** would be published but unable to match anything, which is indistinguishable from a broken one. It is flagged inactive, its ID is queued in the `eael_tb_deactivated_templates` option, and the dashboard turns that into a notice on the next page load (`Admin::get_orphaned_notice()`, which clears the option as it reads it).
+3. Rows orphaned while the plugin was inactive miss the hooks entirely. `get_conditions_summary()` renders those as `Page: deleted #42` rather than a bare `Page` — which would read as "every page", the opposite of the truth — and `find_broken_conditions()` puts a warning marker on the row in the Display Conditions column.
+
 ## Caching
 
 `Template_Cache` namespaces every key with a version number from the `eael_theme_builder_cache_version` autoloaded option, plus the current language code. Flushing is a single option increment, so no orphan transients accumulate. It is flushed on: template save, status transition, deletion, `elementor/editor/after_save`, and every admin row/bulk action.
@@ -154,7 +164,7 @@ Two tiers:
 | Mode | When | What it does |
 | --- | --- | --- |
 | `replace` | Classic themes (default) | Swaps out the theme's `header.php` / `footer.php` |
-| `hooks` | Block themes (`wp_is_block_theme()`) | Injects at `wp_body_open` and `wp_footer` — block themes never call `get_header()` |
+| `hooks` | Block themes (`wp_is_block_theme()`) | Replaces the theme's header/footer `core/template-part` blocks — block themes never call `get_header()`. Falls back to `wp_body_open` / `wp_footer` when the template has no such part |
 | `theme` | Theme declares `add_theme_support( 'ea-theme-builder' )` | Nothing automatic; the theme calls `do_action( 'eael/theme_builder/render', 'header' )` |
 
 Override with the `eael/theme_builder/render_mode` filter.
@@ -172,6 +182,43 @@ Step 3 is the trick: `locate_template()` loads with `require_once`, so the call 
 **Guard against a second overrider.** If `did_action( 'wp_head' )` is already true when the hook fires, another plugin (Templately's builder does exactly this, at `get_header` priority 0) has already opened the document. Emitting a second doctype/`<head>`/`<body>` would corrupt the page, so the module prints only the template markup and skips the document scaffolding.
 
 **Known limitation of `replace` mode:** if only one of header/footer matches, the theme supplies the other. Themes that open a wrapper `<div>` in `header.php` and close it in `footer.php` will have an unbalanced wrapper in that case.
+
+### How `hooks` mode swallows a block theme's header
+
+A block theme has no `header.php` to discard — its header is a `core/template-part` block inside the resolved block template. `maybe_replace_template_part()` runs on `pre_render_block` and returns the matched template's markup for the first part in the `header` (or `footer`) area, which short-circuits the block: the theme's part is never rendered, and ours takes its place in the document. Every further part of the same area collapses to an empty string, so a theme that repeats its header part cannot stack two of ours.
+
+Working out a part's area, in order:
+
+1. `attrs.area` on the block — Twenty Twenty-Four writes it.
+2. The `area` of the `wp_template_part` the block references, via `get_block_template( "{$theme}//{$slug}", 'wp_template_part' )` — Twenty Twenty-Five writes only `{"slug":"header"}`, so this is the common path. Results are memoized per request.
+3. `attrs.tagName`, then the slug (`header`, or `header-*`).
+
+**The fallback.** A block template is free to have no header part at all — a landing-page template, say. Nothing would be replaced and the header would silently never render. `prepare_block_template_fallback()` runs on `template_include` (the last hook before `wp_body_open`, and late enough that `$_wp_current_template_content` is populated), scans that content for a header-area part, and hooks the old `wp_body_open` injection when it finds none. The footer hook is registered unconditionally — the renderer prints a `single` type only once, so it is a no-op when the footer part was already replaced.
+
+Two guards worth knowing about:
+
+- An **empty** template — no widgets yet, or filtered to nothing — returns `null` from the filter rather than an empty string, so an empty header cannot take the theme's header off the page and leave a gap.
+- `eael/theme_builder/replace_block_template_parts` turns the whole thing off, restoring injection-only behaviour alongside the theme's own header and footer.
+
+#### The root spacing that comes with the slot
+
+Taking the template part's place also means inheriting the spacing the block theme reserves around the root container. With `useRootPaddingAwareAlignments`, `class-wp-theme-json.php` emits:
+
+```css
+.wp-site-blocks { padding-top: var(--wp--style--root--padding-top); padding-bottom: var(--wp--style--root--padding-bottom); }
+:where(.wp-site-blocks) > * { margin-block-start: <block gap>; margin-block-end: 0; }
+```
+
+The theme's own header and footer sit inside that by design. A full-bleed Elementor header or footer does not want to — the result is a strip of page background above the header and below the footer that nothing in Elementor can remove. `enqueue_block_theme_spacing_reset()` prints an inline stylesheet that pulls the wrapper back by exactly that amount:
+
+```css
+.wp-site-blocks > .eael-theme-builder--header:first-child { margin-top: calc(var(--wp--style--root--padding-top, 0px) * -1); }
+.wp-site-blocks > .eael-theme-builder--footer:last-child  { margin-bottom: calc(var(--wp--style--root--padding-bottom, 0px) * -1); }
+```
+
+The `0px` fallback is what makes this safe to always print: Twenty Twenty-Four and Twenty Twenty-Five set only left/right root padding, leaving the custom property undefined, so the rules compute to zero. Twenty Twenty-Three sets `var(--wp--preset--spacing--40)` top and bottom and is the case this exists for. Selectors are generated from the type registry, so a third-party type at the header or footer location is covered. Horizontal padding needs no handling — it lands on the first `.has-global-padding` container, and `.wp-site-blocks` is not one.
+
+Turn it off with `eael/theme_builder/block_theme_spacing_reset` when the root padding is part of a deliberate framed layout.
 
 ### Assets
 
@@ -283,6 +330,8 @@ Four details that are easy to get wrong:
 - The editor is a `<div>`, **not** a `<form>`. It is injected inside the list table's own `<form>`, and a nested form is invalid HTML: the browser submits it natively instead of letting the handler intercept, which reloads the screen and silently drops the edit. Enter is intercepted on the row's inputs for the same reason.
 - `wp_update_post()` ignores `post_date` unless `edit_date` is also passed, so a date change would silently do nothing.
 
+Priority is validated, not clamped. `Post_Type::sanitize_priority()` still clamps to 1–100 — the right default for imports, WP-CLI and third-party writes — but a value typed into Quick Edit is range-checked by `Ajax::is_valid_priority()` and refused with a message, matching how the empty-title and invalid-date errors behave in the same panel. `assets/admin/js/theme-builder.js` mirrors the check so the error appears before the request goes out; both sides read the range from `Post_Type::PRIORITY_MIN` / `PRIORITY_MAX`, localized as `eaelThemeBuilder.priority`.
+
 Private is a checkbox beside the password field, mirroring core: ticking it forces `post_status` to `private` and clears the password, and the status select only offers Published / Pending Review / Draft.
 
 ### AJAX endpoints
@@ -350,6 +399,8 @@ add_filter( 'eael/theme_builder/condition_rules', function ( $rules ) {
 | `eael/theme_builder/active_template_id` | filter | The template chosen for the request |
 | `eael/theme_builder/should_render` | filter | Whether to render on this request |
 | `eael/theme_builder/render_mode` | filter | `replace` \| `hooks` \| `theme` |
+| `eael/theme_builder/replace_block_template_parts` | filter | Whether `hooks` mode replaces the theme's header/footer template parts |
+| `eael/theme_builder/block_theme_spacing_reset` | filter | Whether the block theme's root padding / block gap is neutralized around a replaced part |
 | `eael/theme_builder/render` | action | Manual render entry point — pass a type slug |
 | `eael/theme_builder/before_render` / `after_render` | action | Around one template, receives the type slug |
 | `eael/theme_builder/before_header` / `after_header` | action | Inside `Templates/header.php` |
@@ -359,6 +410,7 @@ add_filter( 'eael/theme_builder/condition_rules', function ( $rules ) {
 | `eael/theme_builder/enqueue_assets` | action | After template assets are enqueued |
 | `eael/theme_builder/cache_flushed` | action | After the caches are invalidated |
 | `eael/theme_builder/template_created` | action | After a template is created |
+| `eael/theme_builder/template_orphaned` | action | A template was deactivated because its last include condition targeted a deleted object |
 
 ## Gotchas
 

@@ -13,6 +13,7 @@
 
 	var config = window.eaelThemeBuilder || {};
 	var i18n = config.i18n || {};
+	var priorityRange = config.priority || { min: 1, max: 100, default: 10 };
 
 	/* ------------------------------------------------------------------
 	 * Helpers
@@ -257,7 +258,9 @@
 								'</label>' +
 								'<label class="alignleft" title="' + escapeHtml( i18n.priorityHelp ) + '">' +
 									'<span class="title">' + escapeHtml( i18n.priorityLabel ) + '</span>' +
-									'<input type="number" name="priority" class="eael-tb-priority-input" min="1" max="100" value="' + parseInt( current.priority, 10 ) + '" />' +
+									'<input type="number" name="priority" class="eael-tb-priority-input" inputmode="numeric" step="1"' +
+										' min="' + priorityRange.min + '" max="' + priorityRange.max + '"' +
+										' value="' + parseInt( current.priority, 10 ) + '" />' +
 								'</label>' +
 								'<div class="inline-edit-group wp-clearfix">' +
 									'<label class="alignleft eael-tb-active-label" title="' + escapeHtml( i18n.activeHelp ) + '">' +
@@ -300,12 +303,37 @@
 		} );
 	}
 
+	/**
+	 * Whether a Priority value is a whole number inside the allowed range.
+	 *
+	 * Mirrors `Ajax::is_valid_priority()`. Out-of-range values used to be clamped
+	 * on save with no feedback, so a typed 500 came back as 100 with nothing to
+	 * explain it — Title and Date in the same panel both reject bad input, and
+	 * Priority now does too.
+	 */
+	function isValidPriority( value ) {
+		var raw = $.trim( String( value === undefined || value === null ? '' : value ) );
+
+		if ( '' === raw ) {
+			return false;
+		}
+
+		var number = Number( raw );
+
+		if ( ! isFinite( number ) || number !== Math.floor( number ) ) {
+			return false;
+		}
+
+		return number >= priorityRange.min && number <= priorityRange.max;
+	}
+
 	function saveQuickEdit( $form ) {
 		var $editRow = $form.closest( '.eael-tb-quick-edit-row' );
 		var $row = $editRow.prev( 'tr' );
 		var id = parseInt( $editRow.data( 'template-id' ), 10 );
 		var $notice = $form.find( '.eael-tb-quick-edit-notice' );
 		var $error = $form.find( '.eael-tb-quick-edit-error' );
+		var $priority = $form.find( '[name="priority"]' );
 
 		function fail( message ) {
 			$error.text( message || i18n.genericError );
@@ -314,6 +342,14 @@
 
 		$notice.addClass( 'hidden' );
 		$error.text( '' );
+
+		if ( ! isValidPriority( $priority.val() ) ) {
+			fail( i18n.priorityRange );
+			$priority.trigger( 'focus' );
+
+			return;
+		}
+
 		setBusy( $form, true );
 
 		request( 'eael_theme_builder_quick_edit', {
@@ -330,7 +366,7 @@
 			mn: $form.find( '[name="mn"]' ).val(),
 			type: $form.find( '[name="type"]' ).val(),
 			status: $form.find( '[name="status"]' ).val(),
-			priority: $form.find( '[name="priority"]' ).val(),
+			priority: $priority.val(),
 			active: $form.find( '[name="active"]' ).is( ':checked' ) ? 'yes' : 'no',
 		} )
 			.done( function ( response ) {

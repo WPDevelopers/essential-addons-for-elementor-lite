@@ -132,10 +132,10 @@ class Bootstrap
 		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
 	    }
 
-        // Theme Builder — header & footer templates built with Elementor.
-        if ( Theme_Builder::is_enabled() ) {
-            Theme_Builder::instance();
-        }
+        // Theme Builder — header & footer templates built with Elementor. Boots
+        // the requirement notice instead of the module when Elementor is off, so
+        // the admin page stays reachable and says why it is empty.
+        Theme_Builder::boot();
 
         // Compatibility Support
         new Compatibility_Support();

@@ -421,10 +421,16 @@ class Conditions_Manager {
 			if ( $condition['sub_id'] && ! empty( $rule['sub_source'] ) ) {
 				$object = $this->get_object_label( $rule['sub_source'], $condition['sub_id'] );
 
-				if ( $object ) {
-					/* translators: 1: rule label, 2: object title. */
-					$label = sprintf( _x( '%1$s: %2$s', 'theme builder condition', 'essential-addons-for-elementor-lite' ), $label, $object );
+				if ( '' === $object ) {
+					// The target is gone. Rendering a bare "Page" here reads like a
+					// rule that targets every page, which is the opposite of what
+					// this row now does — it can never match anything again.
+					/* translators: %d: ID of the deleted object. */
+					$object = sprintf( __( 'deleted #%d', 'essential-addons-for-elementor-lite' ), (int) $condition['sub_id'] );
 				}
+
+				/* translators: 1: rule label, 2: object title. */
+				$label = sprintf( _x( '%1$s: %2$s', 'theme builder condition', 'essential-addons-for-elementor-lite' ), $label, $object );
 			}
 
 			if ( 'exclude' === $condition['type'] ) {
@@ -436,6 +442,41 @@ class Conditions_Manager {
 		}
 
 		return implode( ', ', $parts );
+	}
+
+	/**
+	 * Condition rows whose target object no longer exists.
+	 *
+	 * `Conditions_Cleanup` removes these as the objects are deleted, so in
+	 * practice this only turns up rows orphaned while the plugin was inactive —
+	 * which is exactly when an admin needs to be told about them.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param array $conditions Sanitized condition rows.
+	 *
+	 * @return array The broken rows.
+	 */
+	public function find_broken_conditions( $conditions ) {
+		$broken = [];
+
+		foreach ( (array) $conditions as $condition ) {
+			if ( empty( $condition['sub_id'] ) ) {
+				continue;
+			}
+
+			$rule = Rules::get_rule( $condition['name'] );
+
+			if ( ! $rule || empty( $rule['sub_source'] ) ) {
+				continue;
+			}
+
+			if ( '' === $this->get_object_label( $rule['sub_source'], $condition['sub_id'] ) ) {
+				$broken[] = $condition;
+			}
+		}
+
+		return $broken;
 	}
 
 	/**

@@ -63,6 +63,21 @@ class Post_Type {
 	const META_PRIORITY = '_ea_template_priority';
 
 	/**
+	 * Lowest priority a template may be given.
+	 */
+	const PRIORITY_MIN = 1;
+
+	/**
+	 * Highest priority a template may be given.
+	 */
+	const PRIORITY_MAX = 100;
+
+	/**
+	 * Priority applied to a template that has none.
+	 */
+	const PRIORITY_DEFAULT = 10;
+
+	/**
 	 * Mirror of `post_status`, kept for fast meta-only lookups.
 	 */
 	const META_STATUS = '_ea_template_status';
@@ -256,6 +271,11 @@ class Post_Type {
 	/**
 	 * Sanitize the priority value into a sane range.
 	 *
+	 * The last line of defence for anything writing the meta directly — imports,
+	 * WP-CLI, third-party add-ons. Input coming from the Quick Edit UI is
+	 * range-checked and rejected before it reaches here (see `Ajax::quick_edit()`),
+	 * so a typed-in value is never silently changed behind the user's back.
+	 *
 	 * @since 6.7.3
 	 *
 	 * @param mixed $value Raw value.
@@ -263,9 +283,9 @@ class Post_Type {
 	 * @return int
 	 */
 	public function sanitize_priority( $value ) {
-		$value = is_numeric( $value ) ? (int) $value : 10;
+		$value = is_numeric( $value ) ? (int) $value : self::PRIORITY_DEFAULT;
 
-		return max( 1, min( 100, $value ) );
+		return max( self::PRIORITY_MIN, min( self::PRIORITY_MAX, $value ) );
 	}
 
 	/**
@@ -358,7 +378,7 @@ class Post_Type {
 					'sub_id' => 0,
 				],
 			],
-			self::META_PRIORITY   => 10,
+			self::META_PRIORITY   => self::PRIORITY_DEFAULT,
 			self::META_STATUS     => 'draft',
 			self::META_PLATFORM   => 'elementor',
 			self::META_ACTIVE     => 'yes',

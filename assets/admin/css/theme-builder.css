@@ -198,3 +198,23 @@
 	transition: background-color 0.6s ease-out;
 	background-color: #f0f6fc;
 }
+
+/* A condition whose target object was deleted — it can never match again. */
+.eael-tb-broken-conditions {
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 4px;
+	color: #8a6d1a;
+}
+
+.eael-tb-broken-conditions .dashicons-warning {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	line-height: 1.4;
+	color: #dba617;
+}
+
+.eael-tb-requirement .button {
+	margin-bottom: 4px;
+}

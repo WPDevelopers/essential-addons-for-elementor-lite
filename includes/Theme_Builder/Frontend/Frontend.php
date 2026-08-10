@@ -24,8 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * - `replace` (classic themes, default) — the theme's `header.php` / `footer.php`
  *   are swapped out for the matched templates.
- * - `hooks` (block themes) — templates are injected at `wp_body_open` and
- *   `wp_footer` without touching the theme's own markup.
+ * - `hooks` (block themes) — the theme's `core/template-part` blocks in the
+ *   header and footer areas are swapped out for the matched templates, falling
+ *   back to injection at `wp_body_open` / `wp_footer` when the resolved block
+ *   template has no such part.
  * - `theme` — the theme declares `add_theme_support( 'ea-theme-builder' )` and
  *   calls `do_action( 'eael/theme_builder/render', 'header' )` wherever it wants
  *   the template to appear.
@@ -54,6 +56,13 @@ class Frontend {
 	 * @var bool
 	 */
 	private $footer_overridden = false;
+
+	/**
+	 * Resolved `wp_template_part` areas, keyed by `theme//slug`.
+	 *
+	 * @var array
+	 */
+	private $part_areas = [];
 
 	/**
 	 * Register the front-end hooks.
@@ -121,14 +130,367 @@ class Frontend {
 			return;
 		}
 
-		// `hooks` mode — inject alongside the theme's own header and footer.
-		if ( $has_header ) {
+		// `hooks` mode. A block theme renders its header and footer as
+		// `core/template-part` blocks, so the template takes the part's place in
+		// the document — otherwise both would render, one under the other.
+		if ( ( $has_header || $has_footer ) && $this->replaces_block_template_parts() ) {
+			add_filter( 'pre_render_block', [ $this, 'maybe_replace_template_part' ], 10, 2 );
+
+			// The block template is resolved by the time `template_include` runs,
+			// and that is still before `wp_body_open` — the last moment a header
+			// fallback can be hooked for a template that has no header part.
+			add_filter( 'template_include', [ $this, 'prepare_block_template_fallback' ], PHP_INT_MAX );
+
+			// Rendering inside `.wp-site-blocks` means inheriting the spacing the
+			// block theme reserves there. See enqueue_block_theme_spacing_reset().
+			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_block_theme_spacing_reset' ], 102 );
+		} elseif ( $has_header ) {
 			add_action( 'wp_body_open', [ $this, 'render_header_location' ], 0 );
 		}
 
+		// Always safe to hook: the renderer prints a `single` type only once, so
+		// this is a no-op when the footer template part was already replaced.
 		if ( $has_footer ) {
 			add_action( 'wp_footer', [ $this, 'render_footer_location' ], 5 );
 		}
+	}
+
+	/**
+	 * Whether the theme's header/footer block template parts get replaced.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @return bool
+	 */
+	private function replaces_block_template_parts() {
+		$replace = function_exists( 'wp_is_block_theme' ) && wp_is_block_theme();
+
+		/**
+		 * Filters whether Theme Builder replaces the theme's header/footer block
+		 * template parts.
+		 *
+		 * Turning this off makes templates inject at `wp_body_open` / `wp_footer`
+		 * and leaves the theme's own parts rendering alongside them.
+		 *
+		 * @since 6.7.3
+		 *
+		 * @param bool $replace Whether to replace the theme's template parts.
+		 */
+		return (bool) apply_filters( 'eael/theme_builder/replace_block_template_parts', $replace );
+	}
+
+	/**
+	 * Undo the spacing a block theme reserves around `.wp-site-blocks`.
+	 *
+	 * A block theme with `useRootPaddingAwareAlignments` makes WordPress emit
+	 * (`wp-includes/class-wp-theme-json.php`):
+	 *
+	 *     .wp-site-blocks { padding-top: var(--wp--style--root--padding-top);
+	 *                       padding-bottom: var(--wp--style--root--padding-bottom); }
+	 *     :where(.wp-site-blocks) > * { margin-block-start: <block gap>; }
+	 *
+	 * The theme's own header and footer template parts sit inside that padding by
+	 * design. A Theme Builder header or footer takes their slot, so it inherits
+	 * the same reserved space — which shows up as a strip of page background above
+	 * a full-bleed header and below a full-bleed footer, with nothing in Elementor
+	 * that can remove it. Twenty Twenty-Three is the obvious example: its root
+	 * padding is `var(--wp--preset--spacing--40)` top and bottom. Themes that set
+	 * only left/right padding (Twenty Twenty-Four, Twenty Twenty-Five) leave the
+	 * custom property undefined, so the `0px` fallback makes these rules a no-op.
+	 *
+	 * Horizontal padding needs no handling: it lands on the first `.has-global-padding`
+	 * container, and `.wp-site-blocks` is not one.
+	 *
+	 * @since 6.7.3
+	 */
+	public function enqueue_block_theme_spacing_reset() {
+		/**
+		 * Filters whether the theme's root spacing is neutralized around Theme
+		 * Builder templates that replaced a block template part.
+		 *
+		 * Return false to keep the gap — useful for a theme whose root padding is
+		 * part of a deliberate framed layout.
+		 *
+		 * @since 6.7.3
+		 *
+		 * @param bool $reset Whether to emit the reset stylesheet.
+		 */
+		if ( ! apply_filters( 'eael/theme_builder/block_theme_spacing_reset', true ) ) {
+			return;
+		}
+
+		$header = $this->location_selectors( 'header' );
+		$footer = $this->location_selectors( 'footer' );
+
+		if ( empty( $header ) && empty( $footer ) ) {
+			return;
+		}
+
+		$rules = [];
+
+		// The block gap between the root's children — the header is already exempt
+		// as the first child, the footer is not.
+		$all = array_merge( $header, $footer );
+
+		$rules[] = implode( ',', $all ) . '{margin-block-start:0;margin-block-end:0}';
+
+		// Only the first/last child can be the one sitting inside the root padding.
+		if ( $header ) {
+			$rules[] = implode( ':first-child,', $header ) . ':first-child{margin-top:calc(var(--wp--style--root--padding-top, 0px) * -1)}';
+		}
+
+		if ( $footer ) {
+			$rules[] = implode( ':last-child,', $footer ) . ':last-child{margin-bottom:calc(var(--wp--style--root--padding-bottom, 0px) * -1)}';
+		}
+
+		// An inline-only handle: there is no file, the rules are computed per theme.
+		wp_register_style( 'eael-theme-builder-fse', false, [], EAEL_PLUGIN_VERSION );
+		wp_enqueue_style( 'eael-theme-builder-fse' );
+		wp_add_inline_style( 'eael-theme-builder-fse', implode( '', $rules ) );
+	}
+
+	/**
+	 * Selectors for the resolved templates of a location, as root children.
+	 *
+	 * Built from the type registry rather than hard-coded, so a third-party type
+	 * registered at the header or footer location is covered too.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $location Location slug.
+	 *
+	 * @return array
+	 */
+	private function location_selectors( $location ) {
+		$selectors = [];
+
+		foreach ( Template_Types::instance()->get_types_by_location( $location ) as $slug => $type ) {
+			if ( empty( $this->active[ $slug ] ) ) {
+				continue;
+			}
+
+			$selectors[] = '.wp-site-blocks > .eael-theme-builder--' . sanitize_html_class( $slug );
+		}
+
+		return $selectors;
+	}
+
+	/**
+	 * Hook the header fallback when the block template has no header part.
+	 *
+	 * A block theme is free to build a template without a header template part —
+	 * a landing page template, for instance. Nothing would then be replaced, and
+	 * without this the matched header would silently never render.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $template Template file about to be loaded.
+	 *
+	 * @return string
+	 */
+	public function prepare_block_template_fallback( $template ) {
+		if ( ! $this->has_location( 'header' ) ) {
+			return $template;
+		}
+
+		if ( ! $this->block_template_has_header( $template ) ) {
+			add_action( 'wp_body_open', [ $this, 'render_header_location' ], 0 );
+		}
+
+		return $template;
+	}
+
+	/**
+	 * Whether the template about to load will render a header template part.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $template Template file about to be loaded.
+	 *
+	 * @return bool
+	 */
+	private function block_template_has_header( $template ) {
+		// Something replaced the block template with a file of its own — Elementor
+		// Canvas is the common case — so the block template, and with it every
+		// template part in it, never renders.
+		if ( 'template-canvas.php' !== basename( (string) $template ) ) {
+			return false;
+		}
+
+		global $_wp_current_template_content;
+
+		return $this->content_has_area( (string) $_wp_current_template_content, 'header' );
+	}
+
+	/**
+	 * Whether block markup contains a template part of the given area.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $content Block markup.
+	 * @param string $area    `header` or `footer`.
+	 *
+	 * @return bool
+	 */
+	private function content_has_area( $content, $area ) {
+		if ( '' === trim( $content ) || ! function_exists( 'parse_blocks' ) ) {
+			return false;
+		}
+
+		$blocks = parse_blocks( $content );
+
+		while ( $blocks ) {
+			$block = array_shift( $blocks );
+
+			if ( ! is_array( $block ) ) {
+				continue;
+			}
+
+			if ( isset( $block['blockName'] ) && 'core/template-part' === $block['blockName']
+				&& $area === $this->get_template_part_area( $block ) ) {
+				return true;
+			}
+
+			if ( ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
+				$blocks = array_merge( $blocks, $block['innerBlocks'] );
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Render the matched template in place of a header/footer template part.
+	 *
+	 * Runs on `pre_render_block`: returning a string short-circuits the block, so
+	 * the theme's own part is never rendered. Every further part of the same area
+	 * collapses to an empty string, which is what stops a theme that repeats its
+	 * header part from stacking two of ours.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string|null $pre_render   Pre-rendered content, or null to keep rendering.
+	 * @param array       $parsed_block The block about to be rendered.
+	 *
+	 * @return string|null
+	 */
+	public function maybe_replace_template_part( $pre_render, $parsed_block ) {
+		if ( null !== $pre_render ) {
+			return $pre_render;
+		}
+
+		if ( ! is_array( $parsed_block ) || empty( $parsed_block['blockName'] ) || 'core/template-part' !== $parsed_block['blockName'] ) {
+			return $pre_render;
+		}
+
+		$area = $this->get_template_part_area( $parsed_block );
+
+		if ( ! in_array( $area, [ 'header', 'footer' ], true ) || ! $this->has_location( $area ) ) {
+			return $pre_render;
+		}
+
+		// A second part of the same area: the template is already on the page, so
+		// the theme's copy must not render underneath it.
+		if ( $this->is_location_rendered( $area ) ) {
+			return '';
+		}
+
+		$html = $this->capture_location( $area );
+
+		// An empty template — no widgets yet, or filtered away — must not take the
+		// theme's header off the page and leave nothing behind.
+		if ( '' === trim( $html ) ) {
+			return $pre_render;
+		}
+
+		return $html;
+	}
+
+	/**
+	 * The `wp_template_part` area a `core/template-part` block renders.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param array $parsed_block Parsed block.
+	 *
+	 * @return string Area slug, or an empty string when it cannot be determined.
+	 */
+	private function get_template_part_area( $parsed_block ) {
+		$attrs = ( isset( $parsed_block['attrs'] ) && is_array( $parsed_block['attrs'] ) ) ? $parsed_block['attrs'] : [];
+		$slug  = isset( $attrs['slug'] ) ? (string) $attrs['slug'] : '';
+		$area  = isset( $attrs['area'] ) ? (string) $attrs['area'] : '';
+
+		// The block only carries `area` when the editor wrote it; otherwise the
+		// authoritative value is the one on the template part itself.
+		if ( ( '' === $area || 'uncategorized' === $area ) && '' !== $slug && function_exists( 'get_block_template' ) ) {
+			$theme = ! empty( $attrs['theme'] ) ? (string) $attrs['theme'] : get_stylesheet();
+			$id    = $theme . '//' . $slug;
+
+			if ( ! array_key_exists( $id, $this->part_areas ) ) {
+				$part = get_block_template( $id, 'wp_template_part' );
+
+				$this->part_areas[ $id ] = ( $part && ! empty( $part->area ) ) ? (string) $part->area : '';
+			}
+
+			if ( '' !== $this->part_areas[ $id ] ) {
+				$area = $this->part_areas[ $id ];
+			}
+		}
+
+		if ( '' !== $area && 'uncategorized' !== $area ) {
+			return $area;
+		}
+
+		// Last resort: an unregistered part still tells us what it is through the
+		// tag it renders with, or through its slug.
+		$tag = isset( $attrs['tagName'] ) ? (string) $attrs['tagName'] : '';
+
+		foreach ( [ 'header', 'footer' ] as $candidate ) {
+			if ( $candidate === $tag || $candidate === $slug || 0 === strpos( $slug, $candidate . '-' ) ) {
+				return $candidate;
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Whether any template of a location has already been printed.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $location Location slug.
+	 *
+	 * @return bool
+	 */
+	private function is_location_rendered( $location ) {
+		foreach ( Template_Types::instance()->get_types_by_location( $location ) as $slug => $type ) {
+			if ( ! empty( $this->active[ $slug ] ) && Template_Renderer::is_rendered( $slug ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Markup of a location, captured instead of printed.
+	 *
+	 * Buffered rather than concatenated so the `before_render` / `after_render`
+	 * hooks behave exactly as they do when the location is echoed.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $location Location slug.
+	 *
+	 * @return string
+	 */
+	private function capture_location( $location ) {
+		ob_start();
+
+		$this->render_location( $location );
+
+		return (string) ob_get_clean();
 	}
 
 	/**

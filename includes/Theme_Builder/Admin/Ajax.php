@@ -65,7 +65,9 @@ class Ajax {
 		$page_template = isset( $_POST['page_template'] ) ? sanitize_text_field( wp_unslash( $_POST['page_template'] ) ) : 'default';
 		$type          = isset( $_POST['type'] ) ? sanitize_key( wp_unslash( $_POST['type'] ) ) : '';
 		$status        = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : '';
-		$priority      = isset( $_POST['priority'] ) ? absint( $_POST['priority'] ) : 10;
+		// Read raw: the value is range-checked below rather than clamped, so the
+		// user is told their 500 was refused instead of quietly getting 100.
+		$priority      = isset( $_POST['priority'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['priority'] ) ) ) : '10';
 		$active        = ! empty( $_POST['active'] ) && 'no' !== $_POST['active'];
 
 		$month  = isset( $_POST['mm'] ) ? absint( $_POST['mm'] ) : 0;
@@ -92,6 +94,12 @@ class Ajax {
 		if ( ! Template_Types::instance()->type_exists( $type ) ) {
 			wp_send_json_error( [ 'message' => __( 'Please choose a valid template type.', 'essential-addons-for-elementor-lite' ) ] );
 		}
+
+		if ( ! self::is_valid_priority( $priority ) ) {
+			wp_send_json_error( [ 'message' => self::priority_range_message() ] );
+		}
+
+		$priority = (int) $priority;
 
 		// Trashing is a row action, not something Quick Edit should do by accident.
 		if ( ! in_array( $status, [ 'publish', 'draft', 'pending' ], true ) ) {
@@ -173,6 +181,56 @@ class Ajax {
 					'active'         => $template->is_active() ? 'yes' : 'no',
 				],
 			]
+		);
+	}
+
+	/**
+	 * Whether a submitted priority is a whole number inside the allowed range.
+	 *
+	 * `Post_Type::sanitize_priority()` clamps, which is the right default for
+	 * anything writing the meta directly (imports, WP-CLI, a third-party add-on) —
+	 * but a person typing 500 into Quick Edit has to be told it was refused, the
+	 * same way an empty title or a broken date is.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param mixed $priority Raw submitted value.
+	 *
+	 * @return bool
+	 */
+	public static function is_valid_priority( $priority ) {
+		$priority = is_string( $priority ) ? trim( $priority ) : $priority;
+
+		if ( '' === $priority || ! is_numeric( $priority ) ) {
+			return false;
+		}
+
+		$number = $priority + 0;
+
+		// A whole number, however it was written: 50, "50", "050" and "50.0" all
+		// mean the same priority — 50.5 does not.
+		if ( (float) (int) $number !== (float) $number ) {
+			return false;
+		}
+
+		return $number >= Post_Type::PRIORITY_MIN && $number <= Post_Type::PRIORITY_MAX;
+	}
+
+	/**
+	 * The message shown when a priority falls outside the allowed range.
+	 *
+	 * Shared with the Quick Edit script so both sides say the same thing.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @return string
+	 */
+	public static function priority_range_message() {
+		return sprintf(
+			/* translators: 1: lowest allowed priority, 2: highest allowed priority. */
+			__( 'Please enter a priority between %1$d and %2$d.', 'essential-addons-for-elementor-lite' ),
+			Post_Type::PRIORITY_MIN,
+			Post_Type::PRIORITY_MAX
 		);
 	}
 

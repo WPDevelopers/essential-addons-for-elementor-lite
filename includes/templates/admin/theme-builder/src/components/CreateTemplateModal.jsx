@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Modal from './Modal';
 import Notice from './Notice';
 import { errorMessage, request, settings, strings } from '../utils/api';
@@ -17,9 +17,17 @@ export default function CreateTemplateModal( { onClose, onCreated } ) {
 	const [ title, setTitle ] = useState( '' );
 	const [ busy, setBusy ] = useState( false );
 	const [ error, setError ] = useState( '' );
+	const titleRef = useRef( null );
 
 	const submit = async ( event ) => {
-		event.preventDefault();
+		if ( event ) {
+			event.preventDefault();
+		}
+
+		if ( busy ) {
+			return;
+		}
+
 		setError( '' );
 
 		if ( ! type ) {
@@ -71,13 +79,33 @@ export default function CreateTemplateModal( { onClose, onCreated } ) {
 				</h2>
 			</div>
 
-			<form className="eatb-form" onSubmit={ submit }>
+			{ /*
+			  * Never submits itself. Enter on the type <select> counts as implicit
+			  * submission in every browser, which used to create the template
+			  * before the name field had been touched — the typed name went
+			  * nowhere and the template landed as "Untitled Header". Enter is
+			  * wired to the one field where it is expected instead: the name.
+			  */ }
+			<form className="eatb-form" onSubmit={ ( event ) => event.preventDefault() }>
 				<div className="eatb-form__field">
 					<label htmlFor="eatb-template-type">{ strings.typeLabel || 'Template Type' }</label>
 					<select
 						id="eatb-template-type"
 						value={ type }
 						onChange={ ( event ) => setType( event.target.value ) }
+						onKeyDown={ ( event ) => {
+							if ( event.key !== 'Enter' ) {
+								return;
+							}
+
+							// Confirming the dropdown moves on to naming the
+							// template, it does not finish the form.
+							event.preventDefault();
+
+							if ( titleRef.current ) {
+								titleRef.current.focus();
+							}
+						} }
 					>
 						<option value="">{ strings.typePlaceholder || 'Select' }</option>
 						{ types.map( ( item ) => (
@@ -91,18 +119,20 @@ export default function CreateTemplateModal( { onClose, onCreated } ) {
 					<input
 						id="eatb-template-title"
 						type="text"
+						ref={ titleRef }
 						value={ title }
 						placeholder={ strings.namePlaceholder || 'Name your template' }
 						onChange={ ( event ) => setTitle( event.target.value ) }
+						onKeyDown={ ( event ) => {
+							if ( event.key === 'Enter' ) {
+								event.preventDefault();
+								submit();
+							}
+						} }
 					/>
 				</div>
 
 				{ error ? <Notice type="error">{ error }</Notice> : null }
-
-				{ /* Lets Enter submit without nesting a second form in the page. */ }
-				<button type="submit" className="screen-reader-text" tabIndex={ -1 }>
-					{ strings.createButton || 'Create Template' }
-				</button>
 			</form>
 		</Modal>
 	);
