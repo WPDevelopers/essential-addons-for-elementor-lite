@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.7.2
+Stable tag: 6.7.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -364,6 +364,18 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 
 
 == Changelog ==
+
+= 6.7.3 - 09/08/2026 =
+
+- Added: EA Advanced Accordion | Image display options (object-fit: Cover, Contain, Fill, Scale Down, None) for the Tab Content image
+- Added: EA Login/Register Form | Admin Approval option to hold new user registrations for admin review before they can log in
+- Added: EA Login/Register Form | Confirm Email field and [user_email] placeholder support in the registration success message
+- Improved: EA Woo Product Images | Added an image loader to prevent incorrect display on first load
+- Improved: EA Business Reviews | Added a rating decimal control and an option to hide reviews without text
+- Improved: EA Breadcrumbs | Made archive labels editable and added an option to wrap the title in quotes
+- Improved: Added ACF Repeater field support to more EA widgets
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
 
 = 6.7.2 - 29/07/2026 =
 
