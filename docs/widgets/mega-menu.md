@@ -43,17 +43,19 @@ Lite-only widget — Pro adds nothing and hooks nothing. The one public extensio
 | [`includes/MegaMenu/Templates/mobile-toggle.php`](../../includes/MegaMenu/Templates/mobile-toggle.php) | Mobile toggle button partial |
 | [`src/css/view/mega-menu.scss`](../../src/css/view/mega-menu.scss) | Source styles |
 | [`src/js/view/mega-menu.js`](../../src/js/view/mega-menu.js) | Frontend + editor preview handler |
-| [`src/js/edit/mega-menu.js`](../../src/js/edit/mega-menu.js) | **Editor window** — registers the nested element type with Elementor |
+| [`src/js/edit/mega-menu.js`](../../src/js/edit/mega-menu.js) | **Editor window** — registers the nested element type, plus a guarded view subclass |
 | [`config.php`](../../config.php) entry `'mega-menu'` | Asset_Builder dependencies + availability condition |
 | `assets/front-end/css/view/mega-menu.min.css` / `js/view/mega-menu.min.js` | Built output (do not edit) |
 
 ## Architecture
 
 - **`Widget_Nested_Base` + `Control_Nested_Repeater`** — Elementor owns the repeater ↔ child container lifecycle, which is what makes copy, paste, duplicate, delete, drag-and-drop and the Navigator work with no custom code. `get_default_children_placeholder_selector()` returns `.eael-mega-menu__panels`, which is where the editor mounts the container views.
+- **The editor element type also patches an Elementor core defect** — `NestedElementBase`'s view binds `events.click` that dereferences `event.target.closest('.elementor').dataset` with no null check. `closest()` returns null whenever the clicked node was already detached, which is exactly what clicking "+" in an empty nested container and choosing a layout does: creating the container tears down the empty view that owned the clicked node. [`src/js/edit/mega-menu.js`](../../src/js/edit/mega-menu.js) overrides `getView()` with a subclass that skips the handler for a detached target. Reproducible on Elementor's own Nested Tabs, so the upstream bug is theirs; this only shields our widget.
 - **A nested widget must register an editor element type** — returning `support_nesting` from PHP only *describes* the widget. Elementor treats it as nestable only once `elementor.elementsManager.registerElementType()` has been called for it in the **editor window**, which is what [`src/js/edit/mega-menu.js`](../../src/js/edit/mega-menu.js) does (subclassing `NestedElementBase` and implementing just `getType()`). Without it Elementor falls back to the plain widget model, `NestedModelBase.initialize()` never runs, and the default child containers are never created — the widget renders but has nowhere to drop widgets. `Manager::init()` enqueues that script on `elementor/editor/before_enqueue_scripts` at priority 20 with a `nested-elements` dependency.
 - **Availability is gated in `config.php`, not in the class** — the `condition` entry (`class_exists` on `Widget_Nested_Base`, skip when false) means that on Elementor < 3.8 the widget is never instantiated and `Mega_Menu.php` is never autoloaded, so extending a missing base class cannot fatal. `show_in_panel()` additionally hides the widget when the *Nested Elements* experiment is off.
 - **No separate Assets or Documents layer** — apart from the editor script above, asset loading goes through the existing `config.php` registry + `Asset_Builder`, which already gives per-page conditional loading plus popup / shortcode / Theme-Builder coverage; a parallel asset layer would double-load the files. Submenu content is stored as child elements in `_elementor_data`, so a custom document type would create exactly the duplicate storage that should be avoided.
 - **CSS custom properties with fallbacks at the point of use** — every style control writes a `--eael-mm-*` variable onto `{{WRAPPER}}`. Defaults live in the `var()` fallback (`var(--eael-mm-item-gap, 8px)`), never as a declaration on `.eael-mega-menu`, because a declaration on the descendant would beat the value inherited from the Elementor wrapper.
+- **A panel's `display` is never overridden** — the panel *is* an Elementor container and owns its own display (flex, or grid for a grid container). Hiding is therefore expressed as `…__panel:not(.…__panel--active) { display: none }` rather than `display: none` on all panels plus `display: block` on the active one. Forcing `block` silently disabled the container's own Direction control: a two-column layout stacked as two rows, because `flex-direction` has no effect on a block box.
 - **One panels wrapper, `order`-based interleaving on mobile** — the editor mounts every child into a single placeholder, so the frontend uses the same single wrapper. Below the breakpoint, `.eael-mega-menu__list` and `.eael-mega-menu__panels` become `display: contents` and each item/panel carries `--eael-mm-order` (`2n` / `2n+1`) so they interleave into an accordion. Same technique Elementor's nested tabs uses.
 - **A handler class, not the usual jQuery callback** — most EA widgets register `function ($scope, $)`. Mega Menu extends `elementorModules.frontend.handlers.Base` because a nested widget must react to `onEditSettingsChange('activeItemIndex')` so selecting a repeater row switches the previewed panel. Registered through `elementorFrontend.elementsHandler.attachHandler()` with a factory function (Elementor accepts class or factory).
 - **The widget stretches itself, via `width`, not `flex-grow`** — a widget dropped into a row-direction container is a flex item and sizes to its content, which leaves the Align control nothing to distribute. `eael_mega_menu_stretch` (default on) sets `width: 100%` on the wrapper. `flex-grow` would have been wrong: in Elementor's default *column* containers the main axis is vertical, so it would stretch the menu bar's height instead of its width.
@@ -61,6 +63,9 @@ Lite-only widget — Pro adds nothing and hooks nothing. The one public extensio
 - **Saved-template panels are rendered by PHP, not by the nested container** — for `template` items the widget prints its own panel wrapper and fills it with `Plugin::$instance->frontend->get_builder_content()`, reusing the exact guards Advanced Tabs uses (refuse the current page or its revisions, require a published `elementor_library` post, honour `wpml_object_id`). The item's nested container still exists — Elementor keeps one per repeater row — but is skipped.
 - **Theme button resets are neutralised explicitly** — an unlinked item and every disclosure button render as `<button type="button">`, and themes routinely ship `[type=button]:hover, button:focus { background: …; color: … }`. The attribute form is **(0,2,0)**, a straight tie with `.eael-mega-menu__link:hover`, so load order alone decided the winner and the widget's own colour controls could be silently overridden. The defence selectors are prefixed with the block class to reach **(0,3,0)**, and are declared before the hover/active blocks so those still take precedence by source order. The `<li>` owns the visible background; the button stays transparent in every state.
 - **State colours never chain into each other** — `--eael-mm-*-active` falls back to the *normal* value, never to the hover value. Chaining them meant setting a hover colour silently repainted the active state, which reads as "I can't change this colour".
+- **The collapsed dropdown is measured against the viewport, not the widget** — in a "logo left, hamburger right" header the widget shrinks to the toggle, and an overlay dropdown anchored to that box would render as a narrow strip. `positionDropdown()` writes `--eael-mm-dropdown-inset-start` (minus the nav's distance from the viewport edge, RTL aware) and `--eael-mm-dropdown-width`, giving a full-bleed sheet at any widget width. It falls back to the widget box if the handler has not run, and is reset in editing mode where the dropdown is in flow.
+- **The collapsed layout ships styled, the bar does not** — the mobile dropdown defaults to a white surface with a soft shadow and hairline dividers between items, so it reads as a proper mobile menu with zero configuration, while the desktop bar stays completely unstyled. This is done with `var()` fallbacks per layout rather than control defaults: the Divider controls default to *empty*, which writes no custom property and lets the stylesheet decide (`0` on the bar, `1px solid rgba(0,0,0,.12)` when collapsed). Setting any Divider or Mobile Dropdown control writes the property at higher specificity and wins.
+- **The collapsed layout is force-expanded while editing** — at a mobile breakpoint the menu starts closed and, with Overlay Dropdown on, floats over whatever follows it. Both make the mobile view impossible to design, so `--editing` + `--mobile` together pin the dropdown to `display: flex; position: static`. Front-end behaviour is untouched.
 - **JS-driven breakpoint, not a media query** — the collapse breakpoint is compared against `elementorFrontend.getCurrentDeviceMode()` and toggles `.eael-mega-menu--mobile`. Static media queries could not honour custom breakpoint values set in Site Settings.
 
 ## Render Output
@@ -138,8 +143,10 @@ JS-written properties: `--eael-mm-panel-inset-start` and `--eael-mm-panel-width`
 | `eael_mega_menu_indicator_icon` | Icons | `fa-chevron-down` | Content → Settings | `.eael-mega-menu__item-indicator` |
 | `eael_mega_menu_breakpoint` | Select | `tablet` | Content → Responsive | `data-breakpoint`; `none` disables collapsing |
 | `eael_mega_menu_toggle_text` / `_icon` / `_close_icon` | Text / Icons | `Menu`, bars, times | Content → Responsive | Toggle button contents |
+| `eael_mega_menu_toggle_align` | Choose (resp.) | `flex-end` | Style → Mobile Toggle | `--eael-mm-toggle-align`; needs Stretch on to have room to move |
 | `eael_mega_menu_toggle_full_width` | Switcher | `yes` | Content → Responsive | `--stretch-dropdown` (overlay vs push) |
-| Style sections | — | — | Style | `Menu Bar`, `Menu Items` (normal/hover/active), `Icon`, `Submenu Indicator`, `Submenu Panel`, `Mobile Toggle` — all emit `--eael-mm-*` |
+| `eael_mega_menu_divider_*` | Select / Slider (resp.) / Color | *empty* | Style → Menu Items | `--eael-mm-divider-*`; empty keeps the per-layout default (none on the bar, hairline collapsed) |
+| Style sections | — | — | Style | `Menu Bar`, `Menu Items` (+ Divider), `Icon`, `Submenu Indicator`, `Submenu Panel`, `Mobile Dropdown`, `Mobile Toggle` — all emit `--eael-mm-*` |
 
 ## Conditional Dependencies
 
@@ -218,6 +225,26 @@ Both symptoms are the same cause: the widget sits in a **row-direction** contain
 
 Confirm the Align control is set to `stretch` and not the legacy `space-between` value. `stretch` sets `--eael-mm-item-grow: 1` so each item grows; `justify-content` on its own can only reposition items, never resize them.
 
+### The mobile menu looks broken or uneditable in the editor
+
+Expected before this was fixed: the collapsed menu starts closed, so there was nothing to select, and an overlaying dropdown drew across the following section. While editing, the collapsed dropdown is now always expanded and in flow. If it still overlaps, check for custom CSS forcing `position: absolute` on `.eael-mega-menu__container`.
+
+### The collapsed dropdown is a narrow strip
+
+Fixed — the dropdown is positioned against the viewport rather than the widget box, so it stays full-bleed even when Stretch is off and the widget has shrunk to its toggle. If it reappears, the handler has not run; check for a JS error, since the CSS fallback is the widget box.
+
+### The hamburger will not align left / centre / right
+
+Alignment is **Style → Mobile Toggle → Alignment** (only shown when Breakpoint is not `None`), and it works by `align-self`, so it needs free space to move within. If the widget has shrunk to its content — the usual cause being a row-direction parent container — there is no space and every value looks identical. Turn on **Content → Settings → Stretch To Full Width**.
+
+### A multi-column layout inside a panel stacks vertically
+
+Check the panel's computed `display` in DevTools. It must be `flex` (or `grid`); if it computes to `block`, something is overriding the container's own display and `flex-direction` is being ignored — a block box has no flex axis, so the Direction control appears to do nothing. The widget no longer sets `display` on an open panel for exactly this reason. A theme or custom CSS targeting `.e-con` or `.eael-mega-menu__panel` can reintroduce it.
+
+### Console TypeError when adding a layout inside a menu item
+
+`Cannot read properties of null (reading 'dataset')` from `nested-elements` `events.click`. This is an Elementor core bug — `event.target.closest('.elementor')` is dereferenced unguarded and returns null once the clicked node has been detached by the insert. It is harmless (the handler only selects an element) and reproduces on Elementor's own Nested Tabs. The widget ships a guarded view subclass so it does not surface here; if you see it, confirm the stack frame really is inside a nested widget of ours before treating it as an EA bug.
+
 ### Menu items show but there is no container to drop widgets into
 
 The editor element type was not registered, so Elementor never created the child containers. Confirm `assets/front-end/js/edit/mega-menu.min.js` loads in the **editor window** (not the preview iframe) and that `elementor.elementsManager` has an `eael-mega-menu` type. Note that default children are only created at element-create time: a widget instance saved while the registration was missing stays empty, so **delete and re-add the widget** after fixing the load.
@@ -242,7 +269,8 @@ The child containers are mounted before the handler adds `.eael-mega-menu__panel
 
 - No roving-tabindex arrow-key navigation between top-level items; keyboard support is Tab + Escape based (WAI-ARIA *Disclosure Navigation with Top Level Links*, not the menubar pattern).
 - Only one panel can be open at a time, by design.
-- `viewport` width uses `document.documentElement.clientWidth`, so a layout with an overlaid/hidden scrollbar can be off by the scrollbar width.
+- `viewport` width, and the collapsed dropdown, use `document.documentElement.clientWidth`, so a layout with an overlaid/hidden scrollbar can be off by the scrollbar width.
+- A `fit to content` panel is clamped to `min(100vw, 100%)`; without it an intrinsic `max-content` width can resolve to thousands of pixels when the panel holds nowrap or full-width children.
 - The mobile accordion relies on `display: contents`, which strips the `<ul>`/`<li>` list semantics in some browsers; explicit ARIA on the interactive elements compensates, but list-item counts are not announced below the breakpoint.
 - A `section` item briefly shows its source section in its original position before the handler moves it, and shows nothing at all if JavaScript fails. Moving is deliberately not done in the editor, so those panels preview empty (dimmed and dashed).
 - A `template` item's panel is not previewed in the editor — the editor renders the widget from an Underscore template, which cannot run PHP. The panel shows the item's unused nested container, dimmed and dashed, and the content appears on the front end. Live preview would need an AJAX render round-trip.

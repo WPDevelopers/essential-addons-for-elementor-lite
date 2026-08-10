@@ -371,9 +371,43 @@ const getMegaMenuHandler = () =>
 				this.elements.$toggle.attr("aria-expanded", "false");
 			}
 
+			this.positionDropdown();
+
 			if (null !== this.activeIndex) {
 				this.positionPanel(this.activeIndex);
 			}
+		}
+
+		/**
+		 * Span the collapsed dropdown across the viewport.
+		 *
+		 * In a "logo left, hamburger right" header the widget shrinks to the
+		 * toggle, and an overlay dropdown anchored to that box would be a narrow
+		 * strip. Measuring the nav and offsetting by its distance from the
+		 * viewport edge gives a full-bleed sheet regardless of widget width.
+		 */
+		positionDropdown() {
+			const container = this.elements.$container[0];
+
+			if (!container) {
+				return;
+			}
+
+			const overlays = this.elements.$root.hasClass("eael-mega-menu--stretch-dropdown");
+
+			if (!this.isMobileMode() || !overlays) {
+				container.style.removeProperty("--eael-mm-dropdown-inset-start");
+				container.style.removeProperty("--eael-mm-dropdown-width");
+
+				return;
+			}
+
+			const rect = this.elements.$root[0].getBoundingClientRect();
+			const docWidth = document.documentElement.clientWidth;
+			const start = this.isRtl() ? docWidth - rect.right : rect.left;
+
+			container.style.setProperty("--eael-mm-dropdown-inset-start", `${-start}px`);
+			container.style.setProperty("--eael-mm-dropdown-width", `${docWidth}px`);
 		}
 
 		handleResize() {

@@ -41,6 +41,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  /* Divider: an inline edge on the horizontal bar. The collapsed layout
+     swaps it to a block edge further down. */
+  -webkit-border-end: var(--eael-mm-divider-width, 0) var(--eael-mm-divider-style, solid) var(--eael-mm-divider-color, currentColor);
+          border-inline-end: var(--eael-mm-divider-width, 0) var(--eael-mm-divider-style, solid) var(--eael-mm-divider-color, currentColor);
   /* Driven by the "Stretch" option of the Align control. */
   -webkit-box-flex: var(--eael-mm-item-grow, 0);
       -ms-flex-positive: var(--eael-mm-item-grow, 0);
@@ -111,6 +115,10 @@
   width: 1em;
   height: 1em;
   fill: currentColor;
+}
+.eael-mega-menu__item:last-child {
+  -webkit-border-end: 0;
+          border-inline-end: 0;
 }
 .eael-mega-menu__item-label {
   -webkit-box-ordinal-group: 2;
@@ -234,6 +242,10 @@
   width: var(--eael-mm-panel-width, -webkit-max-content);
   width: var(--eael-mm-panel-width, -moz-max-content);
   width: var(--eael-mm-panel-width, max-content);
+  /* `max-content` is an intrinsic size: a panel whose children are
+     nowrap or full-width can resolve to thousands of pixels and blow
+     out of the viewport. Clamp it. */
+  max-width: min(100vw, 100%);
 }
 .eael-mega-menu__panel--active {
   opacity: 1;
@@ -275,7 +287,6 @@
 }
 .eael-mega-menu--editing .eael-mega-menu__panel {
   position: static;
-  display: none;
   width: auto;
   inset-inline-start: auto;
   opacity: 1;
@@ -287,8 +298,17 @@
   -webkit-transition: none;
   transition: none;
 }
-.eael-mega-menu--editing .eael-mega-menu__panel--active {
-  display: block;
+.eael-mega-menu {
+  /* Hide the inactive panels only.
+   *
+   * `display` is deliberately never set on the active panel: the panel IS an
+   * Elementor container and owns its own display (flex, or grid for a grid
+   * container). Forcing `display: block` here silently disabled its Direction
+   * control — a two column layout would stack as two rows because
+   * `flex-direction` has no effect on a block box. */
+}
+.eael-mega-menu--editing .eael-mega-menu__panel:not(.eael-mega-menu__panel--active) {
+  display: none;
 }
 .eael-mega-menu {
   /* A saved-template panel renders on the front end, so the nested container
@@ -391,6 +411,12 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
+  /* Sensible out-of-the-box surface. The Mobile Dropdown controls are
+     written at higher specificity, so they win whenever they are set. */
+  padding-block: 8px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 .eael-mega-menu--mobile {
   /* The list and the panels wrapper step out of the box model so that
@@ -411,6 +437,16 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
+  -webkit-border-end: 0;
+          border-inline-end: 0;
+  /* Defaults to a hairline so the collapsed menu reads as a list out of
+     the box; the Divider controls override all three parts. */
+  -webkit-border-after: var(--eael-mm-divider-width, 1px) var(--eael-mm-divider-style, solid) var(--eael-mm-divider-color, rgba(0, 0, 0, 0.12));
+          border-block-end: var(--eael-mm-divider-width, 1px) var(--eael-mm-divider-style, solid) var(--eael-mm-divider-color, rgba(0, 0, 0, 0.12));
+}
+.eael-mega-menu--mobile .eael-mega-menu__item:last-child {
+  -webkit-border-after: 0;
+          border-block-end: 0;
 }
 .eael-mega-menu--mobile .eael-mega-menu__link {
   -webkit-box-flex: 1;
@@ -422,7 +458,6 @@
 }
 .eael-mega-menu--mobile .eael-mega-menu__panel {
   position: static;
-  display: none;
   width: auto;
   inset-inline-start: auto;
   opacity: 1;
@@ -434,8 +469,12 @@
   -webkit-transition: none;
   transition: none;
 }
-.eael-mega-menu--mobile .eael-mega-menu__panel--active {
-  display: block;
+.eael-mega-menu--mobile {
+  /* Same reasoning as editing mode — never set `display` on the open
+     panel, or its own container layout stops working. */
+}
+.eael-mega-menu--mobile .eael-mega-menu__panel:not(.eael-mega-menu__panel--active) {
+  display: none;
 }
 .eael-mega-menu--mobile.eael-mega-menu--menu-open .eael-mega-menu__container {
   display: -webkit-box;
@@ -456,6 +495,29 @@
 .eael-mega-menu--mobile.eael-mega-menu--stretch-dropdown .eael-mega-menu__container {
   position: absolute;
   top: 100%;
-  inset-inline: 0;
+  /* The handler measures the nav and writes these so the dropdown spans
+     the viewport even when the widget itself has shrunk to its toggle —
+     the usual "logo left, hamburger right" header. Falls back to the
+     widget box if the handler has not run. */
+  inset-inline-start: var(--eael-mm-dropdown-inset-start, 0);
+  inset-inline-end: auto;
+  width: var(--eael-mm-dropdown-width, 100%);
   z-index: var(--eael-mm-panel-z-index, 999);
+}
+.eael-mega-menu {
+  /* Editing the collapsed layout.
+   *
+   * Two things make the mobile view impossible to design otherwise: the menu
+   * starts closed, so there is nothing to select, and an overlaying dropdown
+   * floats across whatever follows it in the editor. While editing, keep it
+   * expanded and in flow. Declared after the rules above so it wins the
+   * same-specificity ties. */
+}
+.eael-mega-menu--editing.eael-mega-menu--mobile .eael-mega-menu__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: static;
+  inset-inline: auto;
+  width: 100%;
 }

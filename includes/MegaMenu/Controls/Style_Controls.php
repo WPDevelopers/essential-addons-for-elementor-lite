@@ -35,6 +35,7 @@ class Style_Controls {
 		self::register_icon_section( $widget );
 		self::register_indicator_section( $widget );
 		self::register_panel_section( $widget );
+		self::register_dropdown_section( $widget );
 		self::register_toggle_section( $widget );
 	}
 
@@ -233,6 +234,114 @@ class Style_Controls {
 		$widget->end_controls_tab();
 
 		$widget->end_controls_tabs();
+
+		$widget->add_control( 'eael_mega_menu_divider_heading', [
+			'label'     => esc_html__( 'Divider', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$widget->add_control( 'eael_mega_menu_divider_style', [
+			'label'     => esc_html__( 'Style', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SELECT,
+			// Empty writes no custom property, which lets the stylesheet keep its
+			// per-layout defaults: no divider on the bar, a hairline when collapsed.
+			'default'   => '',
+			'options'   => [
+				''       => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+				'none'   => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+				'solid'  => esc_html__( 'Solid', 'essential-addons-for-elementor-lite' ),
+				'dashed' => esc_html__( 'Dashed', 'essential-addons-for-elementor-lite' ),
+				'dotted' => esc_html__( 'Dotted', 'essential-addons-for-elementor-lite' ),
+			],
+			'selectors' => [
+				'{{WRAPPER}}' => '--eael-mm-divider-style: {{VALUE}};',
+			],
+		] );
+
+		$widget->add_responsive_control( 'eael_mega_menu_divider_width', [
+			'label'      => esc_html__( 'Thickness', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 20 ] ],
+			'selectors'  => [
+				'{{WRAPPER}}' => '--eael-mm-divider-width: {{SIZE}}{{UNIT}};',
+			],
+			'condition'  => [ 'eael_mega_menu_divider_style!' => 'none' ],
+		] );
+
+		$widget->add_control( 'eael_mega_menu_divider_color', [
+			'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}}' => '--eael-mm-divider-color: {{VALUE}};',
+			],
+			'condition' => [ 'eael_mega_menu_divider_style!' => 'none' ],
+		] );
+
+		$widget->end_controls_section();
+	}
+
+	/**
+	 * The collapsed (mobile) dropdown surface.
+	 *
+	 * @param Widget_Base $widget Mega Menu widget instance.
+	 */
+	protected static function register_dropdown_section( Widget_Base $widget ) {
+		// Scoped to the collapsed layout so the desktop wrapper stays untouched.
+		$dropdown = '{{WRAPPER}} .eael-mega-menu--mobile .eael-mega-menu__container';
+
+		$widget->start_controls_section( 'eael_mega_menu_dropdown_style_section', [
+			'label'     => esc_html__( 'Mobile Dropdown', 'essential-addons-for-elementor-lite' ),
+			'tab'       => Controls_Manager::TAB_STYLE,
+			'condition' => [ 'eael_mega_menu_breakpoint!' => 'none' ],
+		] );
+
+		$widget->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => 'eael_mega_menu_dropdown_background',
+			'types'    => [ 'classic', 'gradient' ],
+			'exclude'  => [ 'image' ],
+			'selector' => $dropdown,
+		] );
+
+		$widget->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => 'eael_mega_menu_dropdown_border',
+			'selector' => $dropdown,
+		] );
+
+		$widget->add_responsive_control( 'eael_mega_menu_dropdown_radius', [
+			'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%', 'em', 'rem' ],
+			'selectors'  => [
+				$dropdown => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
+		$widget->add_responsive_control( 'eael_mega_menu_dropdown_padding', [
+			'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%', 'em', 'rem' ],
+			'selectors'  => [
+				$dropdown => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
+		$widget->add_group_control( Group_Control_Box_Shadow::get_type(), [
+			'name'     => 'eael_mega_menu_dropdown_shadow',
+			'selector' => $dropdown,
+		] );
+
+		$widget->add_responsive_control( 'eael_mega_menu_dropdown_max_height', [
+			'label'       => esc_html__( 'Max Height', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SLIDER,
+			'size_units'  => [ 'px', 'vh' ],
+			'range'       => [ 'px' => [ 'min' => 0, 'max' => 1200 ], 'vh' => [ 'min' => 0, 'max' => 100 ] ],
+			'description' => esc_html__( 'Scroll the dropdown once it exceeds this height. Leave empty for no limit.', 'essential-addons-for-elementor-lite' ),
+			'selectors'   => [
+				$dropdown => 'max-height: {{SIZE}}{{UNIT}}; overflow-y: auto;',
+			],
+		] );
 
 		$widget->end_controls_section();
 	}
@@ -528,7 +637,7 @@ class Style_Controls {
 					'icon'  => 'eicon-align-end-h',
 				],
 			],
-			'default'   => 'flex-start',
+			'default'   => 'flex-end',
 			'selectors' => [
 				'{{WRAPPER}}' => '--eael-mm-toggle-align: {{VALUE}};',
 			],

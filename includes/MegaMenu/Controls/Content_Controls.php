@@ -271,7 +271,9 @@ class Content_Controls {
 			// Widgets placed in a row-direction container are flex items and would
 			// otherwise size to their content, leaving Align nothing to distribute.
 			// Width (not flex-grow) is used so this never stretches the widget
-			// vertically inside a column-direction container.
+			// vertically inside a column-direction container. Turning this off in a
+			// "logo left, hamburger right" header is safe: the collapsed dropdown
+			// is positioned against the viewport, not against the widget box.
 			'selectors'    => [
 				'{{WRAPPER}}' => 'width: 100%;',
 			],
