@@ -13927,7 +13927,7 @@ msgstr ""
 msgid "Posts by %s"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:85, ../includes/Theme_Builder/Admin/Admin.php:86, ../includes/Theme_Builder/Admin/Requirements_Screen.php:51, ../includes/Theme_Builder/Admin/Requirements_Screen.php:52, ../includes/Theme_Builder/Core/Post_Type.php:124
+#: ../includes/Theme_Builder/Admin/Admin.php:85, ../includes/Theme_Builder/Admin/Admin.php:86, ../includes/Theme_Builder/Admin/Requirements_Screen.php:52, ../includes/Theme_Builder/Admin/Requirements_Screen.php:53, ../includes/Theme_Builder/Core/Post_Type.php:124
 msgid "Theme Builder"
 msgstr ""
 
@@ -14150,7 +14150,7 @@ msgstr ""
 msgid "%1$s-%2$s"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:607, ../includes/Theme_Builder/Admin/Requirements_Screen.php:87
+#: ../includes/Theme_Builder/Admin/Admin.php:607, ../includes/Theme_Builder/Admin/Requirements_Screen.php:106
 msgid "You do not have permission to manage Theme Builder templates."
 msgstr ""
 

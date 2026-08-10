@@ -175,13 +175,30 @@ Override with the `eael/theme_builder/render_mode` filter.
 
 1. Include `Templates/header.php` — emits the doctype, `<head>`, `wp_head()`, opens `<body>`, calls `wp_body_open()`, prints the header template.
 2. `remove_all_actions( 'wp_head' )` and `remove_all_actions( 'wp_body_open' )` so those callbacks cannot fire twice.
-3. Pre-load the theme's own `header.php` into a discarded output buffer.
+3. `restore_theme_wrappers()` pre-loads the theme's own `header.php` into an output buffer.
 
-Step 3 is the trick: `locate_template()` loads with `require_once`, so the call WordPress makes immediately after this hook is a silent no-op. The `$name` argument is honoured, so `get_header( 'shop' )` discards `header-shop.php` too. `override_footer()` mirrors this, calling `wp_footer()` and closing the document itself.
+Step 3 is the trick: `locate_template()` loads with `require_once`, so the call WordPress makes immediately after this hook is a silent no-op. The `$name` argument is honoured, so `get_header( 'shop' )` swallows `header-shop.php` too. `override_footer()` mirrors this, calling `wp_footer()` and closing the document itself.
+
+**Why the buffer is scanned rather than thrown away.** A theme's `header.php` ends by opening the containers that lay out the rest of the page. GeneratePress opens `#page.site.grid-container` (the 1200px content container) and `#content.site-content` (`display: flex`, which is what puts the sidebar beside the article); both are closed in `footer.php`. Discarding the file therefore removes the page layout along with the theme's header — the article stretches edge to edge and the sidebar drops underneath it.
+
+`get_orphan_openers()` scans the captured markup and keeps the opening tags of elements the file never closes. Anything it opened *and* closed is its own header markup and goes. `html`, `head` and `body` are excluded — `Templates/header.php` printed those already. The wrappers are re-emitted **after** the Theme Builder header, so a full-width header is not clamped by the theme's container, and their tag names are remembered so `close_theme_wrappers()` can close them if the footer is replaced too (when it isn't, the theme's own `footer.php` still closes them). `eael/theme_builder/theme_wrappers` filters the list.
 
 **Guard against a second overrider.** If `did_action( 'wp_head' )` is already true when the hook fires, another plugin (Templately's builder does exactly this, at `get_header` priority 0) has already opened the document. Emitting a second doctype/`<head>`/`<body>` would corrupt the page, so the module prints only the template markup and skips the document scaffolding.
 
-**Known limitation of `replace` mode:** if only one of header/footer matches, the theme supplies the other. Themes that open a wrapper `<div>` in `header.php` and close it in `footer.php` will have an unbalanced wrapper in that case.
+**When only the footer matches.** Discarding `footer.php` wholesale is only safe when the header was replaced too. Replace the footer alone and the theme's own `header.php` has already opened wrappers that only `footer.php` closes — GeneratePress opens `.site.grid-container` and `.site-content`, Kadence opens `#wrapper` and `#inner-wrap`. Throw the file away and those never close, so the footer renders *inside* the content column: clamped to the container width and, since GeneratePress gives `.site-content` `display: flex`, sitting beside the content instead of beneath it.
+
+So in that one case the file is loaded normally into a buffer instead, and `swap_theme_footer()` closes that buffer on `wp_footer` — the call the theme makes at the end of its footer, after both the closing tags and its own footer markup:
+
+1. `get_footer` → `capture_theme_footer()` starts the buffer and hooks `wp_footer` at `-PHP_INT_MAX`.
+2. The theme's `footer.php` runs in full, into the buffer.
+3. Its `wp_footer()` call lands in our callback first. `get_orphan_closers()` scans the captured fragment and keeps only the closing tags with **no matching opening tag inside it** — precisely what the header opened. Everything the theme both opened and closed is its own footer, and goes.
+4. The template prints there, then the rest of `wp_footer` runs and the theme closes the document itself.
+
+Keeping *orphan* closers rather than *leading* ones matters: Kadence closes `#inner-wrap` before its footer and `#wrapper` after it, so a leading-run heuristic would leave `#wrapper` open.
+
+`shutdown` carries a fallback for a theme that never calls `wp_footer()`, and `eael/theme_builder/swap_theme_footer` returns to the plain discard. When the header is replaced as well, nothing changes — our `header.php` never opens the theme's wrappers, so there is nothing left to close.
+
+Both scans share `scan_tags()`, which skips void and self-closing elements, strips comments, and ignores tag-like text inside `<script>`, `<style>` and `<textarea>`. Attribute values are matched with their quotes, so a `>` inside one does not truncate a tag.
 
 ### How `hooks` mode swallows a block theme's header
 
@@ -400,6 +417,8 @@ add_filter( 'eael/theme_builder/condition_rules', function ( $rules ) {
 | `eael/theme_builder/should_render` | filter | Whether to render on this request |
 | `eael/theme_builder/render_mode` | filter | `replace` \| `hooks` \| `theme` |
 | `eael/theme_builder/replace_block_template_parts` | filter | Whether `hooks` mode replaces the theme's header/footer template parts |
+| `eael/theme_builder/swap_theme_footer` | filter | Whether a footer-only replacement swaps the theme's `footer.php` in place rather than discarding it |
+| `eael/theme_builder/theme_wrappers` | filter | The theme layout wrappers re-emitted after a replaced header |
 | `eael/theme_builder/block_theme_spacing_reset` | filter | Whether the block theme's root padding / block gap is neutralized around a replaced part |
 | `eael/theme_builder/render` | action | Manual render entry point — pass a type slug |
 | `eael/theme_builder/before_render` / `after_render` | action | Around one template, receives the type slug |

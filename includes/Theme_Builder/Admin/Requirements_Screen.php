@@ -8,6 +8,7 @@
 
 namespace Essential_Addons_Elementor\Theme_Builder\Admin;
 
+use Essential_Addons_Elementor\Classes\Bootstrap;
 use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -56,8 +57,26 @@ class Requirements_Screen {
 		);
 
 		if ( $hook_suffix ) {
+			add_action( 'load-' . $hook_suffix, [ $this, 'on_load' ] );
 			add_action( 'admin_print_styles-' . $hook_suffix, [ $this, 'enqueue_assets' ] );
 		}
+	}
+
+	/**
+	 * Prepare the screen.
+	 *
+	 * Essential Addons prints its own "requires Elementor" notice on every admin
+	 * screen, with the same wording and the same Activate button this page
+	 * already shows in the context of the templates it is about. Two identical
+	 * notices stacked on top of each other read as a bug, so the global one steps
+	 * aside here — this screen exists to say exactly that one thing.
+	 *
+	 * Runs on `load-{hook}`, which fires before `admin_notices`.
+	 *
+	 * @since 6.7.3
+	 */
+	public function on_load() {
+		remove_action( 'admin_notices', [ Bootstrap::instance(), 'elementor_not_loaded' ] );
 	}
 
 	/**

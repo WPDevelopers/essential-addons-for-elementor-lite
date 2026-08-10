@@ -219,15 +219,29 @@ body.eatb-modal-open {
 .eatb-form__field input[type="text"] {
 	box-sizing: border-box;
 	width: 100%;
+	/*
+	 * `.wp-core-ui select` in wp-admin/css/forms.css caps selects at 25rem.
+	 * Without this the Template Type select stops 60px short of the Template
+	 * Name input below it, since the form is 460px wide.
+	 */
+	max-width: 100%;
 	height: var(--eatb-field-height);
 	margin: 0;
-	padding: 0 14px;
 	font-size: 14px;
 	color: var(--eatb-text);
 	background-color: #fff;
 	border: 1px solid var(--eatb-border);
 	border-radius: var(--eatb-radius);
 	box-shadow: none;
+}
+
+.eatb-form__field input[type="text"] {
+	padding: 0 14px;
+}
+
+/* Room on the right for the arrow wp-admin draws as a background image. */
+.eatb-form__field select {
+	padding: 0 32px 0 14px;
 }
 
 .eatb-form__field select:focus,
@@ -276,6 +290,8 @@ body.eatb-modal-open {
 .eatb-field select {
 	box-sizing: border-box;
 	width: 100%;
+	/* See the note on .eatb-form__field select — wp-admin caps selects at 25rem. */
+	max-width: 100%;
 	height: var(--eatb-field-height);
 	margin: 0;
 	padding: 0 32px 0 14px;

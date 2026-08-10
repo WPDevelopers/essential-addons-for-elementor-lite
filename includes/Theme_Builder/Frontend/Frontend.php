@@ -65,6 +65,21 @@ class Frontend {
 	private $part_areas = [];
 
 	/**
+	 * Output buffer nesting level of the captured theme footer, 0 when not capturing.
+	 *
+	 * @var int
+	 */
+	private $footer_swap_level = 0;
+
+	/**
+	 * Tag names of the theme's layout wrappers re-emitted after the header,
+	 * outermost first.
+	 *
+	 * @var array
+	 */
+	private $theme_wrappers = [];
+
+	/**
 	 * Register the front-end hooks.
 	 *
 	 * @since 6.7.3
@@ -751,7 +766,122 @@ class Frontend {
 		remove_all_actions( 'wp_head' );
 		remove_all_actions( 'wp_body_open' );
 
-		$this->discard_theme_template( 'header', $name );
+		$this->restore_theme_wrappers( 'header', $name );
+	}
+
+	/**
+	 * Drop the theme's header markup but keep the layout wrappers it opens.
+	 *
+	 * A theme's `header.php` ends by opening the containers that lay out the rest
+	 * of the page — GeneratePress opens `.site.grid-container` (the 1200px content
+	 * container) and `.site-content` (`display: flex`, which is what puts the
+	 * sidebar beside the article). They are closed in `footer.php`.
+	 *
+	 * Discarding the file wholesale therefore does more than remove the theme's
+	 * header: it removes the page layout with it. The article stretches edge to
+	 * edge and the sidebar drops underneath, because neither container exists any
+	 * more.
+	 *
+	 * So the file is captured and scanned instead. Elements it opens *and* closes
+	 * are its own header markup and are dropped; elements it leaves open are the
+	 * layout, and their opening tags are re-emitted here — after the Theme Builder
+	 * header, so a full-width header is not clamped by the theme's container.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $slug Template slug.
+	 * @param string $name Optional template name.
+	 */
+	private function restore_theme_wrappers( $slug, $name = '' ) {
+		$html = $this->capture_theme_template( $slug, $name );
+
+		/**
+		 * Filters the theme layout wrappers re-emitted after a replaced header.
+		 *
+		 * Each entry is `[ 'tag' => 'div', 'html' => '<div id="page" …>' ]`.
+		 * Return an empty array to drop the theme's markup entirely, as releases
+		 * before 6.7.3 did.
+		 *
+		 * @since 6.7.3
+		 *
+		 * @param array  $wrappers Unclosed elements found in the theme template.
+		 * @param string $slug     Template slug.
+		 */
+		$wrappers = apply_filters( 'eael/theme_builder/theme_wrappers', $this->get_orphan_openers( $html ), $slug );
+
+		foreach ( (array) $wrappers as $wrapper ) {
+			if ( empty( $wrapper['tag'] ) || ! isset( $wrapper['html'] ) ) {
+				continue;
+			}
+
+			$this->theme_wrappers[] = $wrapper['tag'];
+
+			echo $wrapper['html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the theme's own markup, captured verbatim.
+		}
+	}
+
+	/**
+	 * Close the theme layout wrappers re-emitted after the header.
+	 *
+	 * Only needed when the footer is replaced too — otherwise the theme's own
+	 * `footer.php` still runs and closes them itself.
+	 *
+	 * @since 6.7.3
+	 */
+	private function close_theme_wrappers() {
+		if ( empty( $this->theme_wrappers ) ) {
+			return;
+		}
+
+		$tags = array_reverse( $this->theme_wrappers );
+
+		$this->theme_wrappers = [];
+
+		echo '</' . implode( '></', array_map( 'esc_html', $tags ) ) . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inline.
+	}
+
+	/**
+	 * Opening tags in a fragment for elements it never closes.
+	 *
+	 * The counterpart of `get_orphan_closers()`: what a theme's `header.php`
+	 * leaves open for the rest of the document to live in.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $html Markup fragment.
+	 *
+	 * @return array List of `[ 'tag' => string, 'html' => string ]`, outermost first.
+	 */
+	private function get_orphan_openers( $html ) {
+		$stack = [];
+
+		foreach ( $this->scan_tags( $html ) as $tag ) {
+			if ( $tag['closing'] ) {
+				for ( $i = count( $stack ) - 1; $i >= 0; $i-- ) {
+					if ( $stack[ $i ]['tag'] === $tag['name'] ) {
+						$stack = array_slice( $stack, 0, $i );
+						break;
+					}
+				}
+
+				continue;
+			}
+
+			$stack[] = [
+				'tag'  => $tag['name'],
+				'html' => $tag['html'],
+			];
+		}
+
+		// The document scaffolding is printed by Templates/header.php already.
+		return array_values(
+			array_filter(
+				$stack,
+				function ( $element ) {
+					return ! in_array( $element['tag'], [ 'html', 'head', 'body' ], true );
+				}
+			)
+		);
 	}
 
 	/**
@@ -771,10 +901,23 @@ class Frontend {
 
 		// Another footer override already closed the document — see override_header().
 		if ( did_action( 'wp_footer' ) ) {
+			$this->close_theme_wrappers();
 			$this->render_location( 'footer' );
 
 			return;
 		}
+
+		// The theme printed its own header, so the wrappers it opened are still
+		// open and the tags that close them live in the footer template we are
+		// about to replace. Swap it in place instead of discarding it.
+		if ( ! $this->header_overridden && $this->capture_theme_footer() ) {
+			return;
+		}
+
+		// Both templates are replaced: the theme's footer.php is discarded below,
+		// so the wrappers restore_theme_wrappers() re-emitted have to be closed
+		// here — before the footer, so it is not nested inside the content container.
+		$this->close_theme_wrappers();
 
 		// Prints the footer template, calls wp_footer() and closes the document.
 		include Theme_Builder::path() . 'Templates/footer.php';
@@ -782,6 +925,205 @@ class Frontend {
 		remove_all_actions( 'wp_footer' );
 
 		$this->discard_theme_template( 'footer', $name );
+	}
+
+	/**
+	 * Buffer the theme's footer template so it can be swapped out in place.
+	 *
+	 * Discarding `footer.php` wholesale only works when the module also replaced
+	 * the header. Replace the footer alone and the theme's `header.php` has
+	 * already opened wrappers that only `footer.php` closes — GeneratePress opens
+	 * `.site.grid-container` and `.site-content`, Kadence opens `#wrapper` and
+	 * `#inner-wrap`. Throw the file away and those never close, so the Theme
+	 * Builder footer renders *inside* the content column: constrained to the
+	 * container width and, because `.site-content` is `display: flex`, sitting
+	 * beside the content rather than beneath it.
+	 *
+	 * So the file is loaded normally into a buffer, and `swap_theme_footer()`
+	 * closes that buffer on `wp_footer` — the call the theme makes at the end of
+	 * its footer, after the closing tags and its own footer markup. What the theme
+	 * opened *and* closed in there is dropped; what it only closed is kept.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @return bool Whether the capture started.
+	 */
+	private function capture_theme_footer() {
+		/**
+		 * Filters whether the theme's footer template is swapped in place rather
+		 * than discarded, when the header was left to the theme.
+		 *
+		 * @since 6.7.3
+		 *
+		 * @param bool $swap Whether to swap in place.
+		 */
+		if ( ! apply_filters( 'eael/theme_builder/swap_theme_footer', true ) ) {
+			return false;
+		}
+
+		if ( ! ob_start() ) {
+			return false;
+		}
+
+		$this->footer_swap_level = ob_get_level();
+
+		// First callback of the hook, so the footer lands before the scripts.
+		add_action( 'wp_footer', [ $this, 'swap_theme_footer' ], -PHP_INT_MAX );
+
+		// A theme that never calls wp_footer() would otherwise print its own
+		// footer and none of ours.
+		add_action( 'shutdown', [ $this, 'flush_theme_footer' ], 0 );
+
+		return true;
+	}
+
+	/**
+	 * Replace the buffered theme footer with the matched template.
+	 *
+	 * @since 6.7.3
+	 */
+	public function swap_theme_footer() {
+		if ( ! $this->footer_swap_level ) {
+			return;
+		}
+
+		// Something opened a buffer on top of ours and has not closed it yet;
+		// taking ours now would swallow their output too. `flush_theme_footer()`
+		// gets a second chance at this.
+		if ( ob_get_level() !== $this->footer_swap_level ) {
+			return;
+		}
+
+		$this->footer_swap_level = 0;
+
+		$captured = (string) ob_get_clean();
+
+		// The tags the theme's header opened, which its footer was going to close.
+		echo $this->get_orphan_closers( $captured ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- close tags built from a fixed whitelist pattern.
+
+		/** This action is documented in includes/Theme_Builder/Templates/footer.php */
+		do_action( 'eael/theme_builder/before_footer' );
+
+		$this->render_location( 'footer' );
+
+		/** This action is documented in includes/Theme_Builder/Templates/footer.php */
+		do_action( 'eael/theme_builder/after_footer' );
+	}
+
+	/**
+	 * Last resort for a capture that `wp_footer` never resolved.
+	 *
+	 * @since 6.7.3
+	 */
+	public function flush_theme_footer() {
+		$this->swap_theme_footer();
+
+		if ( ! $this->footer_swap_level ) {
+			return;
+		}
+
+		// The buffer could not be taken safely. Better to print the footer after
+		// the theme's own than to lose it.
+		$this->footer_swap_level = 0;
+
+		$this->render_location( 'footer' );
+	}
+
+	/**
+	 * Closing tags in a fragment that have no matching opening tag in it.
+	 *
+	 * These are exactly the elements the fragment inherited from earlier in the
+	 * document — for a theme's `footer.php`, the wrappers its `header.php` opened.
+	 * Anything the fragment both opened and closed is its own markup and is
+	 * dropped along with the rest of it.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $html Markup fragment.
+	 *
+	 * @return string Closing tags, in the order they appeared.
+	 */
+	private function get_orphan_closers( $html ) {
+		// Closing these early would end the document mid-page; the theme prints
+		// them itself, after wp_footer().
+		$never = [ 'html', 'head', 'body' ];
+
+		$stack   = [];
+		$orphans = '';
+
+		foreach ( $this->scan_tags( $html ) as $tag ) {
+			if ( ! $tag['closing'] ) {
+				$stack[] = $tag['name'];
+
+				continue;
+			}
+
+			$open = false;
+
+			for ( $i = count( $stack ) - 1; $i >= 0; $i-- ) {
+				if ( $stack[ $i ] === $tag['name'] ) {
+					$open = $i;
+					break;
+				}
+			}
+
+			if ( false === $open ) {
+				if ( ! in_array( $tag['name'], $never, true ) ) {
+					$orphans .= '</' . $tag['name'] . '>';
+				}
+
+				continue;
+			}
+
+			// Drop the element and anything left unclosed inside it.
+			$stack = array_slice( $stack, 0, $open );
+		}
+
+		return $orphans;
+	}
+
+	/**
+	 * The container tags in a markup fragment, in document order.
+	 *
+	 * Void and self-closing elements are skipped — they can never leave anything
+	 * open, so neither balance scan cares about them.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $html Markup fragment.
+	 *
+	 * @return array List of `[ 'closing' => bool, 'name' => string, 'html' => string ]`.
+	 */
+	private function scan_tags( $html ) {
+		// Comments and raw-text elements can hold anything that looks like a tag.
+		$html = preg_replace( '#<!--.*?-->#s', '', (string) $html );
+		$html = preg_replace( '#<(script|style|textarea)\b[^>]*>.*?</\1\s*>#is', '', (string) $html );
+
+		// Quoted attribute values may contain `>`, so they are matched explicitly.
+		if ( ! preg_match_all( '#<(/?)([a-zA-Z][a-zA-Z0-9:._-]*)((?:"[^"]*"|\'[^\']*\'|[^"\'>])*)>#s', (string) $html, $matches, PREG_SET_ORDER ) ) {
+			return [];
+		}
+
+		$void = [ 'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr' ];
+
+		$tags = [];
+
+		foreach ( $matches as $match ) {
+			$name    = strtolower( $match[2] );
+			$closing = '' !== $match[1];
+
+			if ( ! $closing && ( in_array( $name, $void, true ) || '/' === substr( rtrim( $match[3] ), -1 ) ) ) {
+				continue;
+			}
+
+			$tags[] = [
+				'closing' => $closing,
+				'name'    => $name,
+				'html'    => $match[0],
+			];
+		}
+
+		return $tags;
 	}
 
 	/**
@@ -797,6 +1139,20 @@ class Frontend {
 	 * @param string $name Optional template name.
 	 */
 	private function discard_theme_template( $slug, $name = '' ) {
+		$this->capture_theme_template( $slug, $name );
+	}
+
+	/**
+	 * Load the theme's template into a buffer and return what it printed.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $slug `header` or `footer`.
+	 * @param string $name Optional template name.
+	 *
+	 * @return string
+	 */
+	private function capture_theme_template( $slug, $name = '' ) {
 		$templates = [];
 		$name      = (string) $name;
 
@@ -808,7 +1164,8 @@ class Frontend {
 
 		ob_start();
 		locate_template( $templates, true );
-		ob_get_clean();
+
+		return (string) ob_get_clean();
 	}
 
 	/**
