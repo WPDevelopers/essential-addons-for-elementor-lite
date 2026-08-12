@@ -409,6 +409,33 @@ class Conditions_Manager {
 	}
 
 	/**
+	 * Add the object labels the condition builder needs to rebuild its selects.
+	 *
+	 * A stored row only carries the target's ID; the builder shows its title.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param array $conditions Sanitized condition rows.
+	 *
+	 * @return array
+	 */
+	public function decorate_conditions( $conditions ) {
+		$decorated = [];
+
+		foreach ( (array) $conditions as $condition ) {
+			$rule = Rules::get_rule( $condition['name'] );
+
+			$condition['sub_label'] = ( $rule && ! empty( $rule['sub_source'] ) && $condition['sub_id'] )
+				? $this->get_object_label( $rule['sub_source'], $condition['sub_id'] )
+				: '';
+
+			$decorated[] = $condition;
+		}
+
+		return $decorated;
+	}
+
+	/**
 	 * Human readable summary of a condition set, for the templates list.
 	 *
 	 * @since 6.7.3

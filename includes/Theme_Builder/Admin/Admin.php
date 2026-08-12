@@ -400,7 +400,7 @@ class Admin {
 			'eael-theme-builder',
 			EAEL_PLUGIN_URL . 'assets/admin/css/theme-builder.css',
 			[],
-			$this->asset_version( 'assets/admin/css/theme-builder.css' )
+			self::asset_version( 'assets/admin/css/theme-builder.css' )
 		);
 
 		// List-table behaviour that has to live next to WordPress's own markup:
@@ -409,28 +409,48 @@ class Admin {
 			'eael-theme-builder',
 			EAEL_PLUGIN_URL . 'assets/admin/js/theme-builder.js',
 			[ 'jquery' ],
-			$this->asset_version( 'assets/admin/js/theme-builder.js' ),
+			self::asset_version( 'assets/admin/js/theme-builder.js' ),
 			true
 		);
 
-		wp_localize_script( 'eael-theme-builder', 'eaelThemeBuilder', $this->get_script_data() );
+		wp_localize_script( 'eael-theme-builder', 'eaelThemeBuilder', self::get_script_data() );
 
 		// The React app owns the modals. It depends on the handle above purely
 		// for ordering: both read the `eaelThemeBuilder` global printed with it.
+		self::enqueue_app( [ 'eael-theme-builder' ] );
+	}
+
+	/**
+	 * Enqueue the React modal bundle.
+	 *
+	 * Shared with the Elementor editor, which mounts the same app to gate
+	 * publishing behind the condition builder — see `Integrations\Editor`.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param array      $deps Script dependencies.
+	 * @param array|null $data Data to localize as `eaelThemeBuilder`, or null when
+	 *                         a dependency already printed the global.
+	 */
+	public static function enqueue_app( $deps = [], $data = null ) {
 		wp_enqueue_style(
 			'eael-theme-builder-app',
 			EAEL_PLUGIN_URL . 'includes/templates/admin/theme-builder/dist/theme-builder.min.css',
 			[],
-			$this->asset_version( 'includes/templates/admin/theme-builder/dist/theme-builder.min.css' )
+			self::asset_version( 'includes/templates/admin/theme-builder/dist/theme-builder.min.css' )
 		);
 
 		wp_enqueue_script(
 			'eael-theme-builder-app',
 			EAEL_PLUGIN_URL . 'includes/templates/admin/theme-builder/dist/theme-builder.min.js',
-			[ 'eael-theme-builder' ],
-			$this->asset_version( 'includes/templates/admin/theme-builder/dist/theme-builder.min.js' ),
+			$deps,
+			self::asset_version( 'includes/templates/admin/theme-builder/dist/theme-builder.min.js' ),
 			true
 		);
+
+		if ( null !== $data ) {
+			wp_localize_script( 'eael-theme-builder-app', 'eaelThemeBuilder', $data );
+		}
 	}
 
 	/**
@@ -450,7 +470,7 @@ class Admin {
 	 *
 	 * @return string
 	 */
-	private function asset_version( $relative_path ) {
+	public static function asset_version( $relative_path ) {
 		$debug = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) || ( defined( 'WP_DEBUG' ) && WP_DEBUG );
 
 		// Local/staging installs get it without having to turn WP_DEBUG on — that
@@ -486,9 +506,12 @@ class Admin {
 	 *
 	 * @since 6.7.3
 	 *
+	 * @param array $extra Context added on top — the editor passes the template
+	 *                     it is editing under `editor`.
+	 *
 	 * @return array
 	 */
-	private function get_script_data() {
+	public static function get_script_data( $extra = [] ) {
 		$types = [];
 
 		foreach ( Template_Types::instance()->get_types() as $slug => $type ) {
@@ -498,7 +521,7 @@ class Admin {
 			];
 		}
 
-		return [
+		$data = [
 			'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
 			'nonce'         => wp_create_nonce( Ajax::NONCE_ACTION ),
 			'types'         => $types,
@@ -510,7 +533,7 @@ class Admin {
 			'rules'         => array_values( Rules::get_rules_for_ui() ),
 			'groups'        => Rules::get_groups(),
 			'pageTemplates' => Post_Type::get_page_template_options(),
-			'months'        => $this->get_month_options(),
+			'months'        => self::get_month_options(),
 			'i18n'          => [
 				'templatesTitle'   => __( 'Templates', 'essential-addons-for-elementor-lite' ),
 				'groupLabel'       => __( 'Condition group', 'essential-addons-for-elementor-lite' ),
@@ -526,7 +549,7 @@ class Admin {
 				'conditionsIntro'  => __( 'Set the conditions that determine where your Template is used throughout your site. For example, choose \'Entire Site\' to display the template across your site.', 'essential-addons-for-elementor-lite' ),
 				'include'          => __( 'Include', 'essential-addons-for-elementor-lite' ),
 				'exclude'          => __( 'Exclude', 'essential-addons-for-elementor-lite' ),
-				'addCondition'     => __( 'Add Condition', 'essential-addons-for-elementor-lite' ),
+				'addCondition'     => __( 'ADD NEW CONDITION', 'essential-addons-for-elementor-lite' ),
 				'removeCondition'  => __( 'Remove condition', 'essential-addons-for-elementor-lite' ),
 				'saveConditions'   => __( 'Save & Edit Template', 'essential-addons-for-elementor-lite' ),
 				'saveOnly'         => __( 'Save Conditions', 'essential-addons-for-elementor-lite' ),
@@ -543,6 +566,16 @@ class Admin {
 				'genericError'     => __( 'Something went wrong. Please try again.', 'essential-addons-for-elementor-lite' ),
 				'confirmDelete'    => __( 'This template will be permanently deleted. Continue?', 'essential-addons-for-elementor-lite' ),
 				'quickEdit'        => __( 'Quick Edit', 'essential-addons-for-elementor-lite' ),
+				'bulkEdit'         => __( 'Bulk Edit', 'essential-addons-for-elementor-lite' ),
+				// A literal em dash, not `&mdash;` — this one is escaped before it
+				// reaches the DOM (it is an <option> label and a placeholder), so an
+				// entity would be printed as its own source text.
+				'noChange'         => __( '— No change —', 'essential-addons-for-elementor-lite' ),
+				'removeFromBulk'   => __( 'Remove from bulk edit', 'essential-addons-for-elementor-lite' ),
+				'bulkNoSelection'  => __( 'Select at least one template to edit.', 'essential-addons-for-elementor-lite' ),
+				'bulkNoChange'     => __( 'Choose at least one value to change.', 'essential-addons-for-elementor-lite' ),
+				/* translators: %s: number of templates that could not be updated. */
+				'bulkSkipped'      => __( '%s template(s) could not be updated.', 'essential-addons-for-elementor-lite' ),
 				'update'           => __( 'Update', 'essential-addons-for-elementor-lite' ),
 				'titleLabel'       => __( 'Title', 'essential-addons-for-elementor-lite' ),
 				'slugLabel'        => __( 'Slug', 'essential-addons-for-elementor-lite' ),
@@ -565,11 +598,19 @@ class Admin {
 				'priorityHelp'     => __( 'Lower wins when two templates match a page equally well.', 'essential-addons-for-elementor-lite' ),
 				'priorityRange'    => Ajax::priority_range_message(),
 				'activeLabel'      => __( 'Active', 'essential-addons-for-elementor-lite' ),
+				'inactiveLabel'    => __( 'Inactive', 'essential-addons-for-elementor-lite' ),
 				'activeHelp'       => __( 'Inactive templates are never displayed, even when published.', 'essential-addons-for-elementor-lite' ),
 				/* translators: %s: comma separated template titles. */
 				'conflictWarning'  => __( 'Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number, then the most recently created template.', 'essential-addons-for-elementor-lite' ),
+				'publishTitle'     => __( 'Where Do You Want to Display This Template', 'essential-addons-for-elementor-lite' ),
+				'publishIntro'     => __( 'This is the last step: choose where the template appears, and it goes live as soon as you publish.', 'essential-addons-for-elementor-lite' ),
+				'saveAndPublish'   => __( 'Save & Publish', 'essential-addons-for-elementor-lite' ),
+				'publishing'       => __( 'Publishing…', 'essential-addons-for-elementor-lite' ),
+				'publishCancelled' => __( 'Publishing cancelled. The template is still a draft.', 'essential-addons-for-elementor-lite' ),
 			],
 		];
+
+		return array_merge( $data, $extra );
 	}
 
 	/**
@@ -579,7 +620,7 @@ class Admin {
 	 *
 	 * @return array
 	 */
-	private function get_month_options() {
+	private static function get_month_options() {
 		global $wp_locale;
 
 		$months = [];

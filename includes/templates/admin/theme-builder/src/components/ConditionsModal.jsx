@@ -6,20 +6,25 @@ import { errorMessage, request, strings } from '../utils/api';
 import { blankCondition, groupOfRule } from '../utils/rules';
 
 /**
- * Step 2 of the creation flow, and the "Edit Conditions" row action.
+ * The condition builder — the "Edit Conditions" row action on the dashboard, and
+ * the last step before a template is published from the Elementor editor.
  *
  * @param {Object}   props
- * @param {Object}   props.template Template being edited.
- * @param {Function} props.onClose  Dismiss handler.
- * @param {Function} props.onSaved  Called with the server payload after a save.
+ * @param {Object}   props.template     Template being edited.
+ * @param {Function} props.onClose      Dismiss handler.
+ * @param {Function} props.onSaved      Called with the server payload after a save.
+ * @param {string}   [props.heading]    Headline above the rows.
+ * @param {string}   [props.intro]      Sentence under the headline.
+ * @param {string}   [props.primaryLabel] Label of the confirming button.
+ * @param {string}   [props.busyLabel]  Label of that button while the save runs.
  */
-export default function ConditionsModal( { template, onClose, onSaved } ) {
+export default function ConditionsModal( { template, onClose, onSaved, heading, intro, primaryLabel, busyLabel } ) {
+	// A template with no conditions opens on the empty state — just "Add
+	// Condition". Starting on a half-filled row would put a rule in front of the
+	// user that they never chose, and at publish time that row decides where the
+	// header goes.
 	const [ conditions, setConditions ] = useState( () => {
 		const stored = Array.isArray( template.conditions ) ? template.conditions : [];
-
-		if ( ! stored.length ) {
-			return [ blankCondition() ];
-		}
 
 		// Saved conditions only carry the rule name; the group is derived so the
 		// cascade can preselect it.
@@ -43,11 +48,7 @@ export default function ConditionsModal( { template, onClose, onSaved } ) {
 	};
 
 	const remove = ( index ) => {
-		setConditions( ( rows ) => {
-			const next = rows.filter( ( row, i ) => i !== index );
-
-			return next.length ? next : [ blankCondition() ];
-		} );
+		setConditions( ( rows ) => rows.filter( ( row, i ) => i !== index ) );
 	};
 
 	const finish = ( payload ) => {
@@ -94,9 +95,8 @@ export default function ConditionsModal( { template, onClose, onSaved } ) {
 		}
 	};
 
-	const primaryLabel = template.isNew
-		? ( strings.saveConditions || 'Save & Edit Template' )
-		: ( strings.saveOnly || 'Save Conditions' );
+	const confirmLabel = primaryLabel || strings.saveOnly || 'Save Conditions';
+	const workingLabel = busyLabel || strings.saving || 'Saving…';
 
 	return (
 		<Modal
@@ -116,7 +116,7 @@ export default function ConditionsModal( { template, onClose, onSaved } ) {
 							onClick={ save }
 							disabled={ busy }
 						>
-							{ busy ? ( strings.saving || 'Saving…' ) : primaryLabel }
+							{ busy ? workingLabel : confirmLabel }
 						</button>
 					) }
 				</>
@@ -124,9 +124,9 @@ export default function ConditionsModal( { template, onClose, onSaved } ) {
 		>
 			<div className="eatb-hero">
 				<h2 className="eatb-hero__title">
-					{ strings.conditionsTitle || 'Where Do You Want to Display This Template' }
+					{ heading || strings.conditionsTitle || 'Where Do You Want to Display This Template' }
 				</h2>
-				<p className="eatb-hero__subtitle">{ strings.conditionsIntro }</p>
+				<p className="eatb-hero__subtitle">{ intro || strings.conditionsIntro }</p>
 			</div>
 
 			<div className="eatb-conditions">
@@ -134,7 +134,7 @@ export default function ConditionsModal( { template, onClose, onSaved } ) {
 					<ConditionRow
 						key={ index }
 						condition={ condition }
-						canRemove={ conditions.length > 1 }
+						canRemove={ true }
 						onChange={ ( next ) => update( index, next ) }
 						onRemove={ () => remove( index ) }
 					/>
@@ -147,7 +147,7 @@ export default function ConditionsModal( { template, onClose, onSaved } ) {
 					className="eatb-button eatb-button--secondary"
 					onClick={ () => setConditions( ( rows ) => [ ...rows, blankCondition() ] ) }
 				>
-					{ strings.addCondition || 'Add Condition' }
+					{ strings.addCondition || 'ADD NEW CONDITION' }
 				</button>
 			</div>
 

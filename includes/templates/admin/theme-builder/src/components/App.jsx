@@ -76,8 +76,6 @@ export default function App() {
 					id: Number( conditionsLink.dataset.templateId ),
 					type: conditionsLink.dataset.templateType || '',
 					conditions: parseConditions( conditionsLink.dataset.conditions ),
-					isNew: false,
-					editUrl: '',
 				} );
 			}
 		};
@@ -87,26 +85,14 @@ export default function App() {
 		return () => document.removeEventListener( 'click', onClick );
 	}, [] );
 
+	// Naming the template is the whole of step 1: it goes straight into the
+	// editor, and the conditions are asked for when it is published.
 	const onCreated = useCallback( ( data ) => {
 		setCreating( false );
-		setEditing( {
-			id: data.id,
-			type: data.type,
-			conditions: data.conditions || [],
-			isNew: true,
-			editUrl: data.edit_url,
-		} );
+		window.location.href = data.edit_url;
 	}, [] );
 
 	const onSaved = useCallback( ( payload ) => {
-		// A brand new template goes straight into the editor; an edit stays put
-		// and just refreshes the row it changed.
-		if ( editing && editing.isNew ) {
-			window.location.href = editing.editUrl || payload.edit_url;
-
-			return;
-		}
-
 		if ( editing ) {
 			syncRow( editing.id, payload );
 		}

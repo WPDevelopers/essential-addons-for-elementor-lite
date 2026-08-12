@@ -362,6 +362,10 @@ class Post_Type {
 	/**
 	 * Default metadata applied to a freshly created template.
 	 *
+	 * Conditions start **empty**. A seeded "Entire Site" row would be a decision
+	 * the user never made, sitting pre-selected in the modal that opens when they
+	 * publish — and "everywhere" is the widest answer there is. They pick one.
+	 *
 	 * @since 6.7.3
 	 *
 	 * @param string $type Template type slug.
@@ -371,13 +375,7 @@ class Post_Type {
 	public static function default_meta( $type ) {
 		return [
 			self::META_TYPE       => $type,
-			self::META_CONDITIONS => [
-				[
-					'type'   => 'include',
-					'name'   => 'entire_site',
-					'sub_id' => 0,
-				],
-			],
+			self::META_CONDITIONS => [],
 			self::META_PRIORITY   => self::PRIORITY_DEFAULT,
 			self::META_STATUS     => 'draft',
 			self::META_PLATFORM   => 'elementor',

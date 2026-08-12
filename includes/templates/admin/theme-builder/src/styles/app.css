@@ -244,10 +244,19 @@ body.eatb-modal-open {
 	padding: 0 32px 0 14px;
 }
 
+/*
+ * The focus ring is drawn `inset` rather than spreading outwards. An outer
+ * `0 0 0 1px` shadow sits *beside* the border in the same colour, so it reads as
+ * a second ring haloing the control instead of a thicker border — and on a
+ * <select> the browser's native option popup overlays the control while leaving
+ * that halo showing around its edges, which looks like a stray drop shadow.
+ * Inset keeps the same 2px weight entirely inside the box, so nothing can
+ * escape from under the popup. Applies to every focus ring below.
+ */
 .eatb-form__field select:focus,
 .eatb-form__field input[type="text"]:focus {
 	border-color: var(--eatb-accent);
-	box-shadow: 0 0 0 1px var(--eatb-accent);
+	box-shadow: inset 0 0 0 1px var(--eatb-accent);
 	outline: none;
 }
 
@@ -305,8 +314,30 @@ body.eatb-modal-open {
 
 .eatb-field select:focus {
 	border-color: var(--eatb-accent);
-	box-shadow: 0 0 0 1px var(--eatb-accent);
+	box-shadow: inset 0 0 0 1px var(--eatb-accent);
 	outline: none;
+}
+
+/*
+ * A <select>'s option list is painted by the browser in its own layer on top of
+ * the control — page CSS cannot style it, and it does not quite cover the
+ * control's own edge. So the accent border underneath shows around the popup as
+ * a stray outline belonging to neither the field nor the list. While the popup
+ * is up, drop back to the resting border; `:focus` takes over again the moment
+ * it closes, so the field is still clearly focused afterwards.
+ *
+ * This has to come after *both* `:focus` rules above: `:open` and `:focus` have
+ * identical specificity, so only source order decides which one wins.
+ *
+ * Kept in its own rule on purpose — `:open` is Chromium-only for now, and an
+ * unsupported pseudo-class invalidates the entire selector list it appears in.
+ * Browsers without it degrade to the inset ring above, not to the outward halo
+ * this replaced.
+ */
+.eatb-form__field select:open,
+.eatb-field select:open {
+	border-color: var(--eatb-border);
+	box-shadow: none;
 }
 
 .eatb-condition__remove {
@@ -369,7 +400,7 @@ body.eatb-modal-open {
 .eatb-target.is-open .eatb-target__toggle,
 .eatb-target__toggle:focus-visible {
 	border-color: var(--eatb-accent);
-	box-shadow: 0 0 0 1px var(--eatb-accent);
+	box-shadow: inset 0 0 0 1px var(--eatb-accent);
 	outline: none;
 }
 

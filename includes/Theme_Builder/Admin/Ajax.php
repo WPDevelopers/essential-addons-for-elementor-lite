@@ -46,6 +46,7 @@ class Ajax {
 		add_action( 'wp_ajax_eael_theme_builder_save_conditions', [ $this, 'save_conditions' ] );
 		add_action( 'wp_ajax_eael_theme_builder_search_objects', [ $this, 'search_objects' ] );
 		add_action( 'wp_ajax_eael_theme_builder_quick_edit', [ $this, 'quick_edit' ] );
+		add_action( 'wp_ajax_eael_theme_builder_bulk_edit', [ $this, 'bulk_edit' ] );
 	}
 
 	/**
@@ -158,28 +159,144 @@ class Ajax {
 		Template_Cache::flush();
 
 		// Re-read so the response reflects what was actually stored.
-		$template = Template::get( $template_id );
-		$post     = $template->get_post();
+		wp_send_json_success( self::row_payload( Template::get( $template_id ) ) );
+	}
+
+	/**
+	 * Everything the list table needs to repaint one row after an edit.
+	 *
+	 * Shared by Quick Edit and Bulk Edit so a row repainted by either ends up in
+	 * the same state — including the `inline` stash the row carries, which is
+	 * what Quick Edit reads when it is opened again.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param Template $template Freshly re-read template.
+	 *
+	 * @return array
+	 */
+	private static function row_payload( $template ) {
+		$post = $template->get_post();
+
+		return [
+			'id'         => $template->get_id(),
+			'title'      => $template->get_title(),
+			'states'     => Templates_List_Table::render_post_states( $template ),
+			'type_label' => $template->get_type_label(),
+			'date_html'  => Templates_List_Table::render_date( $post ),
+			'inline'     => [
+				'title'         => $template->get_title(),
+				'slug'          => $post->post_name,
+				'date'          => $post->post_date,
+				'password'      => $post->post_password,
+				'private'       => 'private' === $post->post_status ? 'yes' : 'no',
+				'page-template' => (string) get_post_meta( $template->get_id(), '_wp_page_template', true ),
+				'status'        => $template->get_status(),
+				'type'          => $template->get_type(),
+				'priority'      => $template->get_priority(),
+				'active'        => $template->is_active() ? 'yes' : 'no',
+			],
+		];
+	}
+
+	/**
+	 * Apply one set of changes to several templates at once.
+	 *
+	 * Every field is optional: an empty value means "leave this one alone", which
+	 * is what makes a bulk edit safe to use for a single field without flattening
+	 * everything else the selected templates disagree on.
+	 *
+	 * @since 6.7.3
+	 */
+	public function bulk_edit() {
+		$this->verify_request();
+
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- verified in verify_request().
+		$ids      = isset( $_POST['template_ids'] ) ? (array) wp_unslash( $_POST['template_ids'] ) : [];
+		$type     = isset( $_POST['type'] ) ? sanitize_key( wp_unslash( $_POST['type'] ) ) : '';
+		$status   = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : '';
+		$priority = isset( $_POST['priority'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['priority'] ) ) ) : '';
+		$active   = isset( $_POST['active'] ) ? sanitize_key( wp_unslash( $_POST['active'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
+
+		$ids = array_values( array_unique( array_filter( array_map( 'absint', $ids ) ) ) );
+
+		if ( empty( $ids ) ) {
+			wp_send_json_error( [ 'message' => __( 'Select at least one template to edit.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		if ( '' === $type && '' === $status && '' === $priority && '' === $active ) {
+			wp_send_json_error( [ 'message' => __( 'Choose at least one value to change.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		if ( '' !== $type && ! Template_Types::instance()->type_exists( $type ) ) {
+			wp_send_json_error( [ 'message' => __( 'Please choose a valid template type.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		// Trashing stays a bulk action of its own, so it cannot be reached from
+		// here by accident.
+		if ( '' !== $status && ! in_array( $status, [ 'publish', 'draft', 'pending' ], true ) ) {
+			wp_send_json_error( [ 'message' => __( 'Please choose a valid status.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		if ( '' !== $priority && ! self::is_valid_priority( $priority ) ) {
+			wp_send_json_error( [ 'message' => self::priority_range_message() ] );
+		}
+
+		if ( '' !== $active && ! in_array( $active, [ 'yes', 'no' ], true ) ) {
+			$active = '';
+		}
+
+		$updated = [];
+		$skipped = 0;
+
+		foreach ( $ids as $id ) {
+			$template = Template::get( $id );
+
+			// Capability is re-checked per template rather than once for the batch:
+			// the selection is client-supplied, so it may name a template this user
+			// cannot touch — or one deleted since the page was rendered.
+			if ( ! $template || ! current_user_can( 'edit_post', $id ) ) {
+				++$skipped;
+				continue;
+			}
+
+			if ( '' !== $status ) {
+				$result = wp_update_post( [ 'ID' => $id, 'post_status' => $status ], true );
+
+				if ( is_wp_error( $result ) ) {
+					++$skipped;
+					continue;
+				}
+			}
+
+			if ( '' !== $type ) {
+				update_post_meta( $id, Post_Type::META_TYPE, $type );
+			}
+
+			if ( '' !== $priority ) {
+				$template->set_priority( (int) $priority );
+			}
+
+			if ( '' !== $active ) {
+				$template->set_active( 'yes' === $active );
+			}
+
+			$updated[] = self::row_payload( Template::get( $id ) );
+		}
+
+		if ( empty( $updated ) ) {
+			wp_send_json_error( [ 'message' => __( 'None of the selected templates could be updated.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		// Once for the batch, not per template — every write above invalidates the
+		// same per-type caches.
+		Template_Cache::flush();
 
 		wp_send_json_success(
 			[
-				'id'         => $template->get_id(),
-				'title'      => $template->get_title(),
-				'states'     => Templates_List_Table::render_post_states( $template ),
-				'type_label' => $template->get_type_label(),
-				'date_html'  => Templates_List_Table::render_date( $post ),
-				'inline'     => [
-					'title'          => $template->get_title(),
-					'slug'           => $post->post_name,
-					'date'           => $post->post_date,
-					'password'       => $post->post_password,
-					'private'        => 'private' === $post->post_status ? 'yes' : 'no',
-					'page-template'  => (string) get_post_meta( $template_id, '_wp_page_template', true ),
-					'status'         => $template->get_status(),
-					'type'           => $template->get_type(),
-					'priority'       => $template->get_priority(),
-					'active'         => $template->is_active() ? 'yes' : 'no',
-				],
+				'updated' => $updated,
+				'skipped' => $skipped,
 			]
 		);
 	}
@@ -260,7 +377,7 @@ class Ajax {
 				'id'         => $template->get_id(),
 				'type'       => $template->get_type(),
 				'title'      => $template->get_title(),
-				'conditions' => $this->decorate_conditions( $template->get_conditions() ),
+				'conditions' => Conditions_Manager::instance()->decorate_conditions( $template->get_conditions() ),
 				'edit_url'   => $template->get_edit_url(),
 			]
 		);
@@ -304,7 +421,7 @@ class Ajax {
 		wp_send_json_success(
 			[
 				'id'         => $template->get_id(),
-				'conditions' => $this->decorate_conditions( $saved ),
+				'conditions' => Conditions_Manager::instance()->decorate_conditions( $saved ),
 				'summary'    => Conditions_Manager::instance()->get_conditions_summary( $saved ),
 				'conflicts'  => wp_list_pluck( $conflicts, 'title' ),
 				'edit_url'   => $template->get_edit_url(),
@@ -350,32 +467,6 @@ class Ajax {
 	 */
 	private function is_known_source( $source ) {
 		return '' !== Rules::get_sub_source_type( $source );
-	}
-
-	/**
-	 * Add the object labels the condition builder needs to rebuild its selects.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @param array $conditions Sanitized condition rows.
-	 *
-	 * @return array
-	 */
-	private function decorate_conditions( $conditions ) {
-		$manager   = Conditions_Manager::instance();
-		$decorated = [];
-
-		foreach ( $conditions as $condition ) {
-			$rule = Rules::get_rule( $condition['name'] );
-
-			$condition['sub_label'] = ( $rule && ! empty( $rule['sub_source'] ) && $condition['sub_id'] )
-				? $manager->get_object_label( $rule['sub_source'], $condition['sub_id'] )
-				: '';
-
-			$decorated[] = $condition;
-		}
-
-		return $decorated;
 	}
 
 	/**

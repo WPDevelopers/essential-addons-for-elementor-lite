@@ -175,10 +175,15 @@ class Templates_List_Table extends \WP_List_Table {
 			];
 		}
 
+		// Activate / Deactivate are deliberately not offered here. Toggling the
+		// active flag is a per-template decision made against that template's
+		// conditions, which Quick Edit shows in context; in a bulk dropdown it is
+		// an easy mis-click that silently takes several headers off the site.
+		// `Admin::handle_bulk_action()` still accepts both, so the `bulk_actions`
+		// filter can put them back without any further change.
 		return [
-			'activate'   => __( 'Activate', 'essential-addons-for-elementor-lite' ),
-			'deactivate' => __( 'Deactivate', 'essential-addons-for-elementor-lite' ),
-			'trash'      => __( 'Move to Trash', 'essential-addons-for-elementor-lite' ),
+			'edit'  => __( 'Bulk Edit', 'essential-addons-for-elementor-lite' ),
+			'trash' => __( 'Move to Trash', 'essential-addons-for-elementor-lite' ),
 		];
 	}
 
@@ -513,19 +518,20 @@ class Templates_List_Table extends \WP_List_Table {
 			return $actions;
 		}
 
-		$actions['elementor'] = sprintf(
-			'<a href="%1$s">%2$s</a>',
-			esc_url( $template->get_edit_url() ),
-			esc_html__( 'Edit with Elementor', 'essential-addons-for-elementor-lite' )
-		);
+		// Order matters: `row_actions()` prints the array as given. The sequence
+		// below is the agreed one — Edit, Quick Edit, Trash, View, Duplicate,
+		// Edit Conditions, Edit with Elementor — so the two destructive-looking
+		// entries sit next to the everyday ones and the Theme Builder specific
+		// links close the row.
+		$wp_edit_url = get_edit_post_link( $id );
 
-		$actions['conditions'] = sprintf(
-			'<a href="#" class="eael-tb-edit-conditions" data-template-id="%1$d" data-template-type="%2$s" data-conditions="%3$s">%4$s</a>',
-			$id,
-			esc_attr( $template->get_type() ),
-			esc_attr( wp_json_encode( $this->prepare_conditions_for_ui( $template ) ) ),
-			esc_html__( 'Edit Conditions', 'essential-addons-for-elementor-lite' )
-		);
+		if ( $wp_edit_url ) {
+			$actions['edit'] = sprintf(
+				'<a href="%1$s">%2$s</a>',
+				esc_url( $wp_edit_url ),
+				esc_html__( 'Edit', 'essential-addons-for-elementor-lite' )
+			);
+		}
 
 		// Key carries `hide-if-no-js` so row_actions() puts it on the wrapping span
 		// — same convention core uses for its own Quick Edit.
@@ -535,10 +541,10 @@ class Templates_List_Table extends \WP_List_Table {
 			esc_html__( 'Quick Edit', 'essential-addons-for-elementor-lite' )
 		);
 
-		$actions['duplicate'] = sprintf(
-			'<a href="%1$s">%2$s</a>',
-			esc_url( $this->get_action_url( 'duplicate', $id ) ),
-			esc_html__( 'Duplicate', 'essential-addons-for-elementor-lite' )
+		$actions['trash'] = sprintf(
+			'<a class="submitdelete" href="%1$s">%2$s</a>',
+			esc_url( $this->get_action_url( 'trash', $id ) ),
+			esc_html__( 'Trash', 'essential-addons-for-elementor-lite' )
 		);
 
 		$preview_url = get_preview_post_link( $template->get_post() );
@@ -551,20 +557,24 @@ class Templates_List_Table extends \WP_List_Table {
 			);
 		}
 
-		$wp_edit_url = get_edit_post_link( $id );
+		$actions['duplicate'] = sprintf(
+			'<a href="%1$s">%2$s</a>',
+			esc_url( $this->get_action_url( 'duplicate', $id ) ),
+			esc_html__( 'Duplicate', 'essential-addons-for-elementor-lite' )
+		);
 
-		if ( $wp_edit_url ) {
-			$actions['edit'] = sprintf(
-				'<a href="%1$s">%2$s</a>',
-				esc_url( $wp_edit_url ),
-				esc_html__( 'Edit', 'essential-addons-for-elementor-lite' )
-			);
-		}
+		$actions['conditions'] = sprintf(
+			'<a href="#" class="eael-tb-edit-conditions" data-template-id="%1$d" data-template-type="%2$s" data-conditions="%3$s">%4$s</a>',
+			$id,
+			esc_attr( $template->get_type() ),
+			esc_attr( wp_json_encode( $this->prepare_conditions_for_ui( $template ) ) ),
+			esc_html__( 'Edit Conditions', 'essential-addons-for-elementor-lite' )
+		);
 
-		$actions['trash'] = sprintf(
-			'<a class="submitdelete" href="%1$s">%2$s</a>',
-			esc_url( $this->get_action_url( 'trash', $id ) ),
-			esc_html__( 'Trash', 'essential-addons-for-elementor-lite' )
+		$actions['elementor'] = sprintf(
+			'<a href="%1$s">%2$s</a>',
+			esc_url( $template->get_edit_url() ),
+			esc_html__( 'Edit with Elementor', 'essential-addons-for-elementor-lite' )
 		);
 
 		/**

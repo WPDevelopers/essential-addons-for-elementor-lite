@@ -17,6 +17,7 @@ use Essential_Addons_Elementor\Theme_Builder\Core\Post_Type;
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Types;
 use Essential_Addons_Elementor\Theme_Builder\Frontend\Frontend;
 use Essential_Addons_Elementor\Theme_Builder\Integrations\Compatibility;
+use Essential_Addons_Elementor\Theme_Builder\Integrations\Editor;
 use Essential_Addons_Elementor\Theme_Builder\Integrations\Elementor_Integration;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -129,8 +130,9 @@ class Theme_Builder {
 		$this->components['compat']     = new Compatibility();
 
 		if ( is_admin() ) {
-			$this->components['admin'] = new Admin();
-			$this->components['ajax']  = new Ajax();
+			$this->components['admin']  = new Admin();
+			$this->components['ajax']   = new Ajax();
+			$this->components['editor'] = new Editor();
 		} else {
 			$this->components['frontend'] = new Frontend();
 		}

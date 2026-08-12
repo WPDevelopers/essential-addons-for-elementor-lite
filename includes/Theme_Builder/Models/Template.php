@@ -85,10 +85,13 @@ class Template {
 		}
 
 		$title = trim( wp_strip_all_tags( (string) $title ) );
+		$named = ( '' !== $title );
 
-		if ( '' === $title ) {
-			/* translators: %s: template type label, e.g. Header. */
-			$title = sprintf( __( 'Untitled %s', 'essential-addons-for-elementor-lite' ), Template_Types::instance()->get_label( $type ) );
+		if ( ! $named ) {
+			// Placeholder only. The generated name carries the template ID, which
+			// `wp_insert_post()` has not handed out yet — and it refuses a post with
+			// no title, no content and no excerpt, so it cannot be left empty here.
+			$title = Template_Types::instance()->get_label( $type );
 		}
 
 		$defaults = [
@@ -102,6 +105,15 @@ class Template {
 
 		if ( is_wp_error( $post_id ) ) {
 			return $post_id;
+		}
+
+		if ( ! $named ) {
+			wp_update_post(
+				[
+					'ID'         => $post_id,
+					'post_title' => self::generate_title( $type, $post_id ),
+				]
+			);
 		}
 
 		foreach ( Post_Type::default_meta( $type ) as $key => $value ) {
@@ -131,6 +143,40 @@ class Template {
 		do_action( 'eael/theme_builder/template_created', $template );
 
 		return $template;
+	}
+
+	/**
+	 * Name for a template the user did not name themselves.
+	 *
+	 * Reads as "Header Template #205 (by EA)": the type says what it is, the ID
+	 * keeps two unnamed templates of the same type apart, and the suffix marks it
+	 * as ours in a media library or an export that mixes plugins.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $type    Template type slug.
+	 * @param int    $post_id Template ID.
+	 *
+	 * @return string
+	 */
+	public static function generate_title( $type, $post_id ) {
+		$title = sprintf(
+			/* translators: 1: template type label, e.g. Header. 2: template ID. */
+			__( '%1$s Template #%2$d (by EA)', 'essential-addons-for-elementor-lite' ),
+			Template_Types::instance()->get_label( $type ),
+			(int) $post_id
+		);
+
+		/**
+		 * Filters the name given to a template that was created without one.
+		 *
+		 * @since 6.7.3
+		 *
+		 * @param string $title   Generated title.
+		 * @param string $type    Template type slug.
+		 * @param int    $post_id Template ID.
+		 */
+		return (string) apply_filters( 'eael/theme_builder/auto_template_title', $title, $type, (int) $post_id );
 	}
 
 	/**

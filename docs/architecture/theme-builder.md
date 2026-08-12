@@ -23,8 +23,9 @@ Assets: [`assets/admin/css/theme-builder.css`](../../assets/admin/css/theme-buil
 | `Admin/Admin.php` | Submenu registration, row/bulk action handling, screen options, asset enqueue + localization |
 | `Admin/Requirements_Screen.php` | Stand-in submenu page registered instead of the module when Elementor is missing, so the page stays reachable and says why |
 | `Admin/Templates_List_Table.php` | `WP_List_Table` — columns, views, tabs, search, month filter, pagination, row actions |
-| `Admin/Ajax.php` | Four logged-in-only endpoints behind a shared nonce + capability check |
+| `Admin/Ajax.php` | Five logged-in-only endpoints behind a shared nonce + capability check |
 | `Integrations/Document.php` | Elementor document type (`ea-theme-builder`) |
+| `Integrations/Editor.php` | Loads the React app inside the Elementor editor and hands it the template being edited, so publishing can ask for display conditions first |
 | `Integrations/Elementor_Integration.php` | Document registration, canvas template, direct-access guard, cache busting on save |
 | `Integrations/Compatibility.php` | Polylang / WPML translation, sitemap exclusions (core, Yoast, Rank Math) |
 | `Frontend/Frontend.php` | Resolves templates for the request and picks a render mode |
@@ -278,8 +279,8 @@ The dashboard is deliberately split, and the line is drawn by whether WordPress 
 | Part | Rendered by | Why |
 | --- | --- | --- |
 | Templates list, views, tabs, search, filters, pagination, bulk actions | `WP_List_Table` (PHP) | Native admin chrome. Re-implementing it in React would mean re-implementing nonce-checked bulk actions, screen options and pagination, and would look foreign in wp-admin. |
-| Quick Edit | jQuery + core's `inline-edit-*` markup | Has to sit inside the list table's DOM and inherit `list-tables.css`. |
-| "Add New Template" and "Display Conditions" modals | **React** ([`includes/templates/admin/theme-builder/`](../../includes/templates/admin/theme-builder/)) | Genuinely stateful custom UI: a cascade whose options depend on each other, an async searchable target picker, and a two-step wizard. This is what the jQuery version was bad at. |
+| Quick Edit, Bulk Edit | jQuery + core's `inline-edit-*` markup | Have to sit inside the list table's DOM and inherit `list-tables.css`. |
+| "Add New Template" and "Display Conditions" modals, in the dashboard **and** in the Elementor editor | **React** ([`includes/templates/admin/theme-builder/`](../../includes/templates/admin/theme-builder/)) | Genuinely stateful custom UI: a cascade whose options depend on each other, an async searchable target picker, and a modal that has to hold a publish back while it is open. This is what the jQuery version was bad at. |
 
 The app follows the same convention as [`quick-setup`](../../includes/templates/admin/quick-setup/) and `eael-dashboard`: its own `package.json` and `vite.config.js`, sources in `src/`, built into `dist/theme-builder.min.js` + `.min.css` which `Admin::enqueue_assets()` enqueues. `src/`, `index.html` and the build config are excluded from the distribution via `.distignore`; only `dist/` ships.
 
@@ -292,11 +293,15 @@ npm run build     # one-off production build
 
 `npm run dev` is `vite build --watch`, the same approach the other two React apps use: it rebuilds the bundle, it does **not** serve it. WordPress still enqueues `dist/`, so there is no HMR — save, then refresh.
 
+**The bundle is built as an IIFE** (`rollupOptions.output.format = 'iife'`), and that is not cosmetic. WordPress enqueues it as a classic script, and in a classic script every top level `var` of Vite's default ES module output becomes a global — including the one React's minified internals declare, `$e`. That is the name Elementor's editor gives its command API, so the module build replaced `window.$e` with a React internal string (`__reactFiber$…`) and took the entire editor down with it. The IIFE wrapper keeps the bundle's declarations in one function scope.
+
 `Admin::asset_version()` versions the Theme Builder assets by `filemtime()` when `wp_get_environment_type()` is `local`/`development`, or when `WP_DEBUG`/`SCRIPT_DEBUG` is on, so a rebuild is picked up on a normal refresh instead of being masked by the cached `?ver=` from the plugin version. Production keeps `EAEL_PLUGIN_VERSION`, because `filemtime()` can differ across servers behind a load balancer and would break shared caching. Override with `eael/theme_builder/version_assets_by_mtime`.
 
 It does **not** take over the page. `App.jsx` attaches one delegated `click` listener and reacts to the two server-rendered triggers (`.eael-tb-add-new`, `.eael-tb-edit-conditions`), reading the row's `data-conditions` payload. After a save it repaints the affected row's conditions cell and re-stamps that attribute rather than reloading the screen.
 
-Data comes from the `eaelThemeBuilder` global. It is localized onto the jQuery handle, and the React bundle declares that handle as a dependency purely to guarantee the global is printed first — the app itself does not use jQuery.
+`main.jsx` picks its host at runtime: the dashboard container (`#eael-theme-builder-app`) when the list table printed one, otherwise — when `eaelThemeBuilder.editor` is present — a node it appends to the editor's document itself, rendering `EditorApp` instead of `App`.
+
+Data comes from the `eaelThemeBuilder` global. On the dashboard it is localized onto the jQuery handle, and the React bundle declares that handle as a dependency purely to guarantee the global is printed first — the app itself does not use jQuery. In the editor there is no jQuery handle of ours, so `Integrations\Editor` localizes the same payload onto the app handle directly, with the edited template added under `editor`.
 
 The condition builder is a cascade — **Include/Exclude → group → rule → specific target** — because the rule list grows with the site. With the dynamic layer registering every public post type and taxonomy, a single flat select stops being usable well before a typical WooCommerce install.
 
@@ -306,29 +311,64 @@ The condition builder is a cascade — **Include/Exclude → group → rule → 
 Theme Builder dashboard
         │  "Add New Template"
         ▼
-Modal 1 — type + name        → eael_theme_builder_create_template  (creates a DRAFT)
+Modal — type + name          → eael_theme_builder_create_template  (creates a DRAFT)
         ▼
-Modal 2 — display conditions → eael_theme_builder_save_conditions
+Elementor editor  →  Publish
+        ▼
+Modal — display conditions   → eael_theme_builder_save_conditions
         │                        └─ conflicts? warn + "Continue"
         ▼
-Elementor editor  →  Publish  →  template goes live
+the held-back publish runs  →  template goes live
 ```
 
 Templates are created as **drafts** on purpose: publishing immediately would put an empty header on the live site before the user has built anything. Only `publish` + `_ea_template_active = yes` templates take part in matching.
 
+Display conditions used to be step 2 of the creation wizard. They are asked at publish time instead, because that is the click that actually puts the header or footer on the live site — at creation time the honest answer is often "not sure yet", and the answer given then was never revisited. See [Publishing from the editor](#publishing-from-the-editor).
+
+**A template created without a name** is called `Header Template #205 (by EA)` — type, ID and an origin marker. `Template::create()` inserts with the bare type label as a placeholder (`wp_insert_post()` refuses a post with no title, no content and no excerpt, and the ID does not exist yet), then renames. Drafts get no `post_name`, so the placeholder never reaches the slug. Filter the result with `eael/theme_builder/auto_template_title`.
+
+### Publishing from the editor
+
+`Integrations\Editor` enqueues the React bundle on `elementor/editor/after_enqueue_scripts` when `Plugin::$instance->editor->get_post_id()` is a template the current user may edit, and `EditorApp` registers the gate.
+
+The gate is a **data dependency hook** on `document/save/publish`:
+
+```js
+class PublishGate extends $e.modules.hookData.Dependency {
+    getCommand() { return 'document/save/publish'; }
+    getId() { return 'eael-theme-builder-conditions'; }
+    getConditions( args ) { /* only this document */ }
+    apply( args ) { /* false holds the publish back */ }
+}
+```
+
+Of the four hook types Elementor exposes, `Dependency` is the only one whose callback can stop the command it is attached to — `CommandBase.onBeforeApply()` runs it, and a `false` return makes the web-cli throw a `HookBreak`, so the save request is never sent. UI and `after` hooks both run too late.
+
+It hooks the **command, not the button**: the top bar, the panel footer and the keyboard shortcut all funnel into `document/save/publish`, while the markup around them changes between Elementor releases.
+
+What follows from that shape:
+
+- Holding the publish back leaves the document a **draft** — nothing was saved, so dismissing the modal is a real cancel, and the editor says so in a toast.
+- After the conditions are saved, `EditorApp` flips a ref and re-runs the same command with the arguments it was called with. The ref, not state: the gate is registered once and would otherwise keep reading the values it closed over at mount.
+- Only `document/save/publish` is gated. `update` (an already published template), `draft`, `pending` and every autosave run untouched — the conditions exist by then, and are edited from the dashboard.
+- The modal opens on the conditions the template already has — for a new one, **none**: an empty body with "Add Condition" under it. `Post_Type::default_meta()` seeds no conditions, and the modal no longer materializes a blank row to fill the space, because at publish time a pre-selected row decides where the header goes. Rows can be removed down to zero.
+- `Conditions_Manager::validate_conditions()` refuses an empty set and a set with no `include` row, so publishing with nothing chosen comes back with "Add at least one display condition…" and the template stays a draft.
+
 ### Row actions
+
+Listed in the order they render — `row_actions()` prints the array as `get_row_actions()` built it, so that method's sequence *is* the display order:
 
 | Action | What it does |
 | --- | --- |
-| Edit with Elementor | Opens the document in the Elementor editor |
-| Edit Conditions | Opens the condition builder modal, prefilled from `data-conditions` on the link |
-| Quick Edit | Inline editor for name, type, status, priority and the active flag |
-| Duplicate | `Template::duplicate()` — copies the layout and every meta value as a new **draft** |
-| View | `get_preview_post_link()`; only reachable by users who can edit the template (see the direct-access guard) |
 | Edit | The classic WordPress editor |
+| Quick Edit | Inline editor for name, type, status, priority and the active flag |
 | Trash / Restore / Delete Permanently | Status depending |
+| View | `get_preview_post_link()`; only reachable by users who can edit the template (see the direct-access guard) |
+| Duplicate | `Template::duplicate()` — copies the layout and every meta value as a new **draft** |
+| Edit Conditions | Opens the condition builder modal, prefilled from `data-conditions` on the link |
+| Edit with Elementor | Opens the document in the Elementor editor |
 
-Activate / Deactivate live in Quick Edit and in the bulk actions rather than as standalone row links.
+Activate / Deactivate live in Quick Edit rather than as standalone row links, and are deliberately kept out of the bulk dropdown — the flag is a per-template decision made against that template's conditions, and in bulk it is an easy mis-click that silently pulls several headers off the site. `Admin::handle_bulk_action()` still accepts both actions, so the `bulk_actions` filter can restore them.
 
 Extend the list with the `eael/theme_builder/row_actions` filter.
 
@@ -358,9 +398,25 @@ Priority is validated, not clamped. `Post_Type::sanitize_priority()` still clamp
 
 Private is a checkbox beside the password field, mirroring core: ticking it forces `post_status` to `private` and clears the password, and the status select only offers Published / Pending Review / Draft.
 
+### Bulk Edit
+
+Selecting **Bulk Edit** and pressing Apply opens a panel above the table instead of submitting the form — the click handler on `#doaction` / `#doaction2` stops the submit when, and only when, that action is chosen. Every other bulk action still goes through `Admin::handle_bulk_action()` as a normal POST, and `edit` is deliberately absent from that method's allow-list, so with JavaScript off the Apply is a harmless no-op rather than a half-applied edit.
+
+It offers the four fields that are meaningful across several templates at once — Template Type, Status, Priority, Active — and **every one starts on "No change"**. That is the whole contract: a bulk edit that forced all four would flatten the differences between the selected templates the moment you wanted to change one thing. `Ajax::bulk_edit()` treats an empty value per field as "leave it alone", and refuses the request outright if all four are empty rather than reporting a success that changed nothing.
+
+The left column lists the selected templates, one per line, each with a `×` that drops it. Removing one also unticks its row, so the panel and the checkboxes can never disagree about what is about to be edited.
+
+The panel deviates from the shared `.eael-tb-inline-row` layout in two ways, and both are alignment: the four fields are stacked **one per row** with a fixed label column, so every control shares one left edge and one width; and the right column carries a `padding-top` the height of the `BULK EDIT` legend, so the first field starts level with the top of the list rather than with the legend above it. The label column survives the sub-782px stack — there are only four one-line fields, so there is room for it, and dropping it is what leaves the controls ragged.
+
+Two things it does not do, both on purpose: it cannot set a trash status (Move to Trash is its own bulk action), and it does not offer the per-template fields — title, slug, date, password — which have no meaning applied to a set.
+
+Capability is re-checked **per template** inside the loop, not once for the batch. The ID list comes from the client, so it can name a template the user cannot edit, or one deleted since the page was rendered; those are counted and reported as skipped rather than failing the whole request. `Template_Cache::flush()` runs once at the end, not per template — every write invalidates the same per-type caches.
+
+Rows repaint in place from the response, exactly as Quick Edit does; `Ajax::row_payload()` builds that payload for both, so a row updated either way ends up in the same state, stashed inline data included.
+
 ### AJAX endpoints
 
-All four are `wp_ajax_` only (never `nopriv`), share the `eael_theme_builder` nonce, and re-check `Theme_Builder::capability()`:
+All five are `wp_ajax_` only (never `nopriv`), share the `eael_theme_builder` nonce, and re-check `Theme_Builder::capability()`:
 
 | Action | Purpose |
 | --- | --- |
@@ -368,6 +424,7 @@ All four are `wp_ajax_` only (never `nopriv`), share the `eael_theme_builder` no
 | `eael_theme_builder_save_conditions` | Validate + persist conditions, return conflicts and a summary. Also checks `edit_post` on the specific template |
 | `eael_theme_builder_search_objects` | Populate the sub-object selector. Rejects any source not declared by a registered rule, so it cannot be used as a generic post/term query proxy |
 | `eael_theme_builder_quick_edit` | Save the inline editor. Also checks `edit_post`; will not set a trash status |
+| `eael_theme_builder_bulk_edit` | Apply one set of changes to many templates. Re-checks `edit_post` per template, since the selection is client-supplied; will not set a trash status |
 
 Row and bulk actions (trash, restore, delete, duplicate, activate, deactivate) are handled in `Admin::on_load()` behind `check_admin_referer()` and a per-post `current_user_can()` check, then redirect with a result message.
 
@@ -436,6 +493,7 @@ add_filter( 'eael/theme_builder/condition_rules', function ( $rules ) {
 | `eael/theme_builder/enqueue_assets` | action | After template assets are enqueued |
 | `eael/theme_builder/cache_flushed` | action | After the caches are invalidated |
 | `eael/theme_builder/template_created` | action | After a template is created |
+| `eael/theme_builder/auto_template_title` | filter | Name given to a template created without one |
 | `eael/theme_builder/template_orphaned` | action | A template was deactivated because its last include condition targeted a deleted object |
 
 ## Gotchas
@@ -444,3 +502,4 @@ add_filter( 'eael/theme_builder/condition_rules', function ( $rules ) {
 - **Two full-document overriders cannot both win.** The `did_action( 'wp_head' )` guard degrades gracefully, but a site running Theme Builder alongside another header/footer builder should use only one.
 - **The type registry lazily registers defaults** on first `get_types()` call, so labels are translated at use time rather than at file load.
 - **`Template_Cache` keys include the language code**, because `WP_Query` is language-filtered under WPML/Polylang and a cached template list is therefore language-specific.
+- **Anything enqueued into the Elementor editor must not leak globals.** The editor's whole API hangs off `window.$e`, and a bundle whose top level declarations become globals can overwrite it — which is why the React app is built as an IIFE. Check a new bundle with `typeof $e.run === 'function'` in the editor console before shipping it.

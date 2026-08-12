@@ -1,8 +1,8 @@
 /**
  * Essential Addons — Theme Builder list table.
  *
- * Quick Edit and the delete confirmation, i.e. the behaviour that has to live
- * next to WordPress's own list-table markup. The "Add New Template" and
+ * Quick Edit, Bulk Edit and the delete confirmation, i.e. the behaviour that has
+ * to live next to WordPress's own list-table markup. The "Add New Template" and
  * "Display Conditions" modals are a React app —
  * see includes/templates/admin/theme-builder/.
  *
@@ -84,6 +84,62 @@
 			if ( 13 === event.keyCode ) {
 				event.preventDefault();
 				saveQuickEdit( $( this ).closest( '.eael-tb-quick-edit-form' ) );
+			}
+		} );
+
+		/* --------------------------------------------------------------
+		 * Bulk Edit
+		 * ----------------------------------------------------------- */
+
+		// Every other bulk action is a normal form submit handled in PHP. This one
+		// opens a panel instead, so the submit has to be stopped before it starts.
+		$document.on( 'click', '#doaction, #doaction2', function ( event ) {
+			var which = 'doaction2' === this.id ? 'bottom' : 'top';
+
+			if ( 'edit' !== $( '#bulk-action-selector-' + which ).val() ) {
+				return;
+			}
+
+			event.preventDefault();
+			openBulkEdit();
+		} );
+
+		$document.on( 'click', '.eael-tb-bulk-edit-cancel', function ( event ) {
+			event.preventDefault();
+			closeBulkEdit();
+		} );
+
+		$document.on( 'keyup', '.eael-tb-bulk-edit-row', function ( event ) {
+			if ( 27 === event.keyCode ) {
+				closeBulkEdit();
+			}
+		} );
+
+		$document.on( 'click', '.eael-tb-bulk-edit-save', function ( event ) {
+			event.preventDefault();
+			saveBulkEdit( $( this ).closest( '.eael-tb-bulk-edit-form' ) );
+		} );
+
+		$document.on( 'keydown', '.eael-tb-bulk-edit-row input', function ( event ) {
+			if ( 13 === event.keyCode ) {
+				event.preventDefault();
+				saveBulkEdit( $( this ).closest( '.eael-tb-bulk-edit-form' ) );
+			}
+		} );
+
+		// Dropping a template from the list also unticks its row, so the panel and
+		// the checkboxes cannot disagree about what is about to be edited.
+		$document.on( 'click', '.eael-tb-bulk-remove', function ( event ) {
+			event.preventDefault();
+
+			var $chip = $( this ).closest( '.eael-tb-bulk-title' );
+			var id = parseInt( $chip.data( 'template-id' ), 10 );
+
+			$( '.wp-list-table' ).find( 'input[name="template_ids[]"][value="' + id + '"]' ).prop( 'checked', false );
+			$chip.remove();
+
+			if ( ! $( '.eael-tb-bulk-title' ).length ) {
+				closeBulkEdit();
 			}
 		} );
 	} );
@@ -185,7 +241,7 @@
 		var html =
 			// `quick-edit-row-post` is what core's list-tables.css keys the 40%/39%
 			// two-column split on — without it both fieldsets stay full width.
-			'<tr class="inline-edit-row inline-edit-row-post quick-edit-row quick-edit-row-post inline-edit-post eael-tb-quick-edit-row" data-template-id="' + id + '">' +
+			'<tr class="inline-edit-row inline-edit-row-post quick-edit-row quick-edit-row-post inline-edit-post eael-tb-inline-row eael-tb-quick-edit-row" data-template-id="' + id + '">' +
 				'<td colspan="' + colspan + '" class="colspanchange">' +
 					// `inline-edit-wrapper` is what supplies core's padding —
 					// `tr.inline-edit-row td` itself is padding: 0.
@@ -304,6 +360,254 @@
 	}
 
 	/**
+	 * Repaint one row from a server payload and re-stash its inline data.
+	 *
+	 * Shared by Quick Edit and Bulk Edit — both get the same payload back, so a
+	 * row updated either way ends up in the same state, including the stash Quick
+	 * Edit reads the next time it is opened.
+	 */
+	function repaintRow( $row, data ) {
+		if ( ! $row.length || ! data ) {
+			return;
+		}
+
+		$row.find( '.row-title' ).text( data.title );
+		$row.find( '.eael-tb-post-states' ).html( data.states );
+		$row.find( '.template_type' ).text( data.type_label );
+		$row.find( '.date' ).html( data.date_html );
+
+		var $stash = $( '#eael-tb-inline_' + data.id );
+
+		Object.keys( data.inline ).forEach( function ( key ) {
+			$stash.attr( 'data-' + key, data.inline[ key ] );
+		} );
+
+		$stash.removeData();
+
+		$row.addClass( 'eael-tb-row-updated' );
+		window.setTimeout( function () {
+			$row.removeClass( 'eael-tb-row-updated' );
+		}, 1200 );
+	}
+
+	/* ------------------------------------------------------------------
+	 * Bulk Edit
+	 * --------------------------------------------------------------- */
+
+	function rowFor( id ) {
+		return $( '.wp-list-table' ).find( 'input[name="template_ids[]"][value="' + id + '"]' ).closest( 'tr' );
+	}
+
+	/**
+	 * Open the bulk editor above the table for every ticked row.
+	 *
+	 * Every field carries a "no change" value and starts on it, so the panel can
+	 * be used to set one thing without flattening everything else the selected
+	 * templates disagree on — the same contract core's bulk edit offers.
+	 */
+	function openBulkEdit() {
+		closeAllQuickEdits();
+		closeBulkEdit();
+
+		var $table = $( '.wp-list-table' );
+		var selected = $table
+			.find( 'tbody input[name="template_ids[]"]:checked' )
+			.map( function () {
+				var $row = $( this ).closest( 'tr' );
+
+				return {
+					id: parseInt( this.value, 10 ),
+					title: $.trim( $row.find( '.row-title' ).text() ),
+				};
+			} )
+			.get();
+
+		if ( ! selected.length ) {
+			window.alert( i18n.bulkNoSelection );
+
+			return;
+		}
+
+		var colspan = $table.find( 'thead tr' ).first().children( 'td, th' ).length;
+
+		var noChange = [ [ '', i18n.noChange ] ];
+
+		var typeOptions = noChange.concat(
+			( config.types || [] ).map( function ( type ) {
+				return [ type.slug, type.label ];
+			} )
+		);
+
+		var statusOptions = noChange.concat( [
+			[ 'publish', i18n.statusPublish ],
+			[ 'pending', i18n.statusPending ],
+			[ 'draft', i18n.statusDraft ],
+		] );
+
+		var activeOptions = noChange.concat( [
+			[ 'yes', i18n.activeLabel ],
+			[ 'no', i18n.inactiveLabel ],
+		] );
+
+		var chips = selected
+			.map( function ( item ) {
+				return (
+					'<div class="eael-tb-bulk-title" data-template-id="' + item.id + '">' +
+						'<button type="button" class="button-link eael-tb-bulk-remove" aria-label="' + escapeHtml( i18n.removeFromBulk ) + '">' +
+							'<span aria-hidden="true">&times;</span>' +
+						'</button>' +
+						'<span class="eael-tb-bulk-title-text">' + escapeHtml( item.title ) + '</span>' +
+					'</div>'
+				);
+			} )
+			.join( '' );
+
+		// A <div>, not a <form> — same reason as Quick Edit: this row is injected
+		// inside the list table's own <form>, and a nested form is invalid HTML.
+		var html =
+			'<tr class="inline-edit-row inline-edit-row-post bulk-edit-row bulk-edit-row-post inline-edit-post eael-tb-inline-row eael-tb-bulk-edit-row">' +
+				'<td colspan="' + colspan + '" class="colspanchange">' +
+					'<div class="inline-edit-wrapper eael-tb-bulk-edit-form" role="region" aria-labelledby="eael-tb-bulk-edit-legend">' +
+
+						'<fieldset class="inline-edit-col-left">' +
+							'<legend class="inline-edit-legend" id="eael-tb-bulk-edit-legend">' + escapeHtml( i18n.bulkEdit ) + '</legend>' +
+							'<div class="inline-edit-col">' +
+								'<div class="eael-tb-bulk-titles">' + chips + '</div>' +
+							'</div>' +
+						'</fieldset>' +
+
+						'<fieldset class="inline-edit-col-right">' +
+							'<div class="inline-edit-col">' +
+								'<label class="alignleft">' +
+									'<span class="title">' + escapeHtml( i18n.typeLabel ) + '</span>' +
+									'<select name="type">' + buildOptions( typeOptions, '' ) + '</select>' +
+								'</label>' +
+								'<label class="inline-edit-status alignleft">' +
+									'<span class="title">' + escapeHtml( i18n.statusLabel ) + '</span>' +
+									'<select name="status">' + buildOptions( statusOptions, '' ) + '</select>' +
+								'</label>' +
+								'<label class="alignleft" title="' + escapeHtml( i18n.priorityHelp ) + '">' +
+									'<span class="title">' + escapeHtml( i18n.priorityLabel ) + '</span>' +
+									'<input type="number" name="priority" class="eael-tb-priority-input" inputmode="numeric" step="1"' +
+										' min="' + priorityRange.min + '" max="' + priorityRange.max + '"' +
+										// The field is ~5.5em wide, so the full "no change" label
+									// would be clipped to nonsense. An empty box already means
+									// no change here; the dash just makes that look deliberate.
+									' value="" placeholder="&mdash;" />' +
+								'</label>' +
+								'<label class="alignleft" title="' + escapeHtml( i18n.activeHelp ) + '">' +
+									'<span class="title">' + escapeHtml( i18n.activeLabel ) + '</span>' +
+									'<select name="active">' + buildOptions( activeOptions, '' ) + '</select>' +
+								'</label>' +
+							'</div>' +
+						'</fieldset>' +
+
+						'<div class="submit inline-edit-save">' +
+							'<button type="button" class="button button-primary eael-tb-submit eael-tb-bulk-edit-save">' + escapeHtml( i18n.update ) + '</button> ' +
+							'<button type="button" class="button eael-tb-bulk-edit-cancel">' + escapeHtml( i18n.cancel ) + '</button>' +
+							'<span class="notice notice-error notice-alt inline hidden eael-tb-quick-edit-notice">' +
+								'<p class="error eael-tb-quick-edit-error" role="alert"></p>' +
+							'</span>' +
+							'<br class="clear" />' +
+						'</div>' +
+
+					'</div>' +
+				'</td>' +
+			'</tr>';
+
+		$table.find( 'tbody' ).first().prepend( html );
+		$( '.eael-tb-bulk-edit-row' ).find( 'select[name="type"]' ).trigger( 'focus' );
+	}
+
+	function closeBulkEdit() {
+		$( '.eael-tb-bulk-edit-row' ).remove();
+	}
+
+	function saveBulkEdit( $form ) {
+		var $notice = $form.find( '.eael-tb-quick-edit-notice' );
+		var $error = $form.find( '.eael-tb-quick-edit-error' );
+		var $priority = $form.find( '[name="priority"]' );
+
+		function fail( message ) {
+			$error.text( message || i18n.genericError );
+			$notice.removeClass( 'hidden' );
+		}
+
+		$notice.addClass( 'hidden' );
+		$error.text( '' );
+
+		var ids = $form
+			.find( '.eael-tb-bulk-title' )
+			.map( function () {
+				return parseInt( $( this ).data( 'template-id' ), 10 );
+			} )
+			.get();
+
+		var type = $form.find( '[name="type"]' ).val();
+		var status = $form.find( '[name="status"]' ).val();
+		var active = $form.find( '[name="active"]' ).val();
+		var priority = $.trim( String( $priority.val() || '' ) );
+
+		if ( ! ids.length ) {
+			fail( i18n.bulkNoSelection );
+
+			return;
+		}
+
+		if ( ! type && ! status && ! active && '' === priority ) {
+			fail( i18n.bulkNoChange );
+
+			return;
+		}
+
+		// Empty means "leave it alone"; anything else has to be in range, exactly
+		// as in Quick Edit.
+		if ( '' !== priority && ! isValidPriority( priority ) ) {
+			fail( i18n.priorityRange );
+			$priority.trigger( 'focus' );
+
+			return;
+		}
+
+		setBusy( $form, true );
+
+		request( 'eael_theme_builder_bulk_edit', {
+			template_ids: ids,
+			type: type,
+			status: status,
+			priority: priority,
+			active: active,
+		} )
+			.done( function ( response ) {
+				if ( ! response || ! response.success ) {
+					fail( response && response.data ? response.data.message : '' );
+					return;
+				}
+
+				( response.data.updated || [] ).forEach( function ( row ) {
+					repaintRow( rowFor( row.id ), row );
+				} );
+
+				var skipped = parseInt( response.data.skipped, 10 ) || 0;
+
+				closeBulkEdit();
+
+				$( '.wp-list-table' ).find( 'input[name="template_ids[]"], #cb-select-all-1, #cb-select-all-2' ).prop( 'checked', false );
+				$( '#bulk-action-selector-top, #bulk-action-selector-bottom' ).val( '-1' );
+
+				if ( skipped ) {
+					window.alert( i18n.bulkSkipped.replace( '%s', skipped ) );
+				}
+			} )
+			.fail( function () {
+				fail( i18n.genericError );
+			} )
+			.always( function () {
+				setBusy( $form, false );
+			} );
+	}
+
+	/**
 	 * Whether a Priority value is a whole number inside the allowed range.
 	 *
 	 * Mirrors `Ajax::is_valid_priority()`. Out-of-range values used to be clamped
@@ -375,27 +679,8 @@
 					return;
 				}
 
-				var data = response.data;
-
-				$row.find( '.row-title' ).text( data.title );
-				$row.find( '.eael-tb-post-states' ).html( data.states );
-				$row.find( '.template_type' ).text( data.type_label );
-				$row.find( '.date' ).html( data.date_html );
-
-				// Keep the stash in sync so re-opening Quick Edit shows the new values.
-				var $stash = $( '#eael-tb-inline_' + id );
-
-				Object.keys( data.inline ).forEach( function ( key ) {
-					$stash.attr( 'data-' + key, data.inline[ key ] );
-				} );
-
-				$stash.removeData();
-
 				closeQuickEdit( $editRow );
-				$row.addClass( 'eael-tb-row-updated' );
-				window.setTimeout( function () {
-					$row.removeClass( 'eael-tb-row-updated' );
-				}, 1200 );
+				repaintRow( $row, response.data );
 			} )
 			.fail( function () {
 				fail( i18n.genericError );
