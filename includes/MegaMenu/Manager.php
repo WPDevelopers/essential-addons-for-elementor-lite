@@ -215,26 +215,51 @@ class Manager {
 	}
 
 	/**
+	 * Label and type of every default repeater row.
+	 *
+	 * A realistic starting menu: mostly plain links with a couple of mega panels,
+	 * so the widget demonstrates both item types the moment it is dropped instead
+	 * of opening an empty submenu under every label.
+	 *
+	 * @return array List of [ label, type ] pairs.
+	 */
+	protected function get_default_item_map() {
+		return [
+			[ 'label' => esc_html__( 'Home', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
+			[ 'label' => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ), 'type' => 'mega' ],
+			[ 'label' => esc_html__( 'Blog', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
+			[ 'label' => esc_html__( 'Docs', 'essential-addons-for-elementor-lite' ), 'type' => 'mega' ],
+			[ 'label' => esc_html__( 'Support', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
+			[ 'label' => esc_html__( 'Contact', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
+		];
+	}
+
+	/**
 	 * Default repeater rows. Kept in sync with get_default_children_elements().
 	 *
 	 * @return array
 	 */
 	public function get_default_menu_items() {
-		$labels = [
-			esc_html__( 'Home', 'essential-addons-for-elementor-lite' ),
-			esc_html__( 'Shop', 'essential-addons-for-elementor-lite' ),
-			esc_html__( 'Blog', 'essential-addons-for-elementor-lite' ),
-			esc_html__( 'Contact', 'essential-addons-for-elementor-lite' ),
-		];
-
 		$items = [];
 
-		foreach ( $labels as $label ) {
-			$items[] = [
-				'eael_mega_menu_item_label'         => $label,
-				'eael_mega_menu_item_type'          => 'mega',
-				'eael_mega_menu_item_submenu_width' => 'full',
+		foreach ( $this->get_default_item_map() as $default ) {
+			$item = [
+				'eael_mega_menu_item_label' => $default['label'],
+				'eael_mega_menu_item_type'  => $default['type'],
 			];
+
+			if ( 'link' === $default['type'] ) {
+				// Without an href the renderer falls back to a <span>, which is
+				// neither clickable nor focusable — a placeholder link keeps the
+				// default menu behaving like a menu. Submenu items are left
+				// deliberately unlinked so the item itself opens its panel
+				// instead of growing a separate disclosure button.
+				$item['eael_mega_menu_item_link'] = [ 'url' => '#' ];
+			} else {
+				$item['eael_mega_menu_item_submenu_width'] = 'full';
+			}
+
+			$items[] = $item;
 		}
 
 		return $items;
@@ -264,6 +289,12 @@ class Manager {
 
 	/**
 	 * Default children structure, one container per default repeater row.
+	 *
+	 * Every row gets a container, including the plain link ones: the widget
+	 * addresses children positionally (`print_child( $index )` in Mega_Menu), so
+	 * skipping the link rows would shift every later panel onto the wrong menu
+	 * item. An unused container costs nothing until its row is switched to a
+	 * submenu type, at which point it is already there.
 	 *
 	 * @return array
 	 */

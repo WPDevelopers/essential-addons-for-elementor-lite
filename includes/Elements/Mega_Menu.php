@@ -56,7 +56,7 @@ class Mega_Menu extends Widget_Nested_Base {
 	 * @inheritDoc
 	 */
 	public function get_icon() {
-		return 'eaicon-advanced-menu';
+		return 'eaicon-simple-menu';
 	}
 
 	/**

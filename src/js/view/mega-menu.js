@@ -87,20 +87,42 @@ const getMegaMenuHandler = () =>
 				// selected item sits in flow right under the bar and is an obvious,
 				// easy-to-hit drop target.
 				this.elements.$root.addClass("eael-mega-menu--editing");
-				this.activatePanel(this.getInitialEditIndex(), false);
+				this.setEditActiveItem(this.getInitialEditIndex());
 			}
 		}
 
 		/**
-		 * Which panel the editor should reveal first. A freshly dropped widget has
+		 * Which repeater row the editor has selected. A freshly dropped widget has
 		 * no edit settings entry yet, hence the guard.
 		 */
 		getInitialEditIndex() {
 			try {
-				return this.getEditSettings("activeItemIndex") || 1;
+				return parseInt(this.getEditSettings("activeItemIndex"), 10) || 1;
 			} catch (e) {
 				return 1;
 			}
+		}
+
+		/**
+		 * Mirror the editor's selected repeater row in the preview.
+		 *
+		 * Only the submenu types own a panel. Selecting a link-only row therefore
+		 * has to *close* whatever was open: leaving the previous item's panel on
+		 * screen would offer a drop target that belongs to a different menu item,
+		 * and anything dropped there would silently land under that other item.
+		 *
+		 * @param {number|string} index Menu item position.
+		 */
+		setEditActiveItem(index) {
+			index = parseInt(index, 10);
+
+			if (index && this.itemHasSubmenu(index)) {
+				this.activatePanel(index);
+
+				return;
+			}
+
+			this.closeAll();
 		}
 
 		bindEvents() {
@@ -687,7 +709,7 @@ const getMegaMenuHandler = () =>
 
 			if (this.isEdit) {
 				event.preventDefault();
-				this.activatePanel(index);
+				this.setEditActiveItem(index);
 
 				return;
 			}
@@ -823,7 +845,7 @@ const getMegaMenuHandler = () =>
 
 		onEditSettingsChange(propertyName, value) {
 			if ("activeItemIndex" === propertyName) {
-				this.activatePanel(value);
+				this.setEditActiveItem(value);
 			}
 		}
 
@@ -852,7 +874,7 @@ const getMegaMenuHandler = () =>
 			this.updateDeviceMode();
 
 			if (this.isEdit) {
-				this.activatePanel(this.getInitialEditIndex(), false);
+				this.setEditActiveItem(this.getInitialEditIndex());
 			}
 		}
 	};

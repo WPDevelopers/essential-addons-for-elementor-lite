@@ -32,6 +32,13 @@ class Editor_Renderer {
 			containerId = 'eael-mega-menu-container-' + elementUid,
 			wrapperClasses = [
 				'eael-mega-menu',
+				// This template is editor only, so the editing layout is always
+				// on. Printing the class here rather than leaving it to the
+				// handler means the panel rules already apply on the very first
+				// paint after a re-render — otherwise adding or removing a menu
+				// item flashes every submenu container stacked under the bar
+				// until the handler runs.
+				'eael-mega-menu--editing',
 				'eael-mega-menu--trigger-' + trigger,
 				'eael-mega-menu--anim-' + animation
 			];

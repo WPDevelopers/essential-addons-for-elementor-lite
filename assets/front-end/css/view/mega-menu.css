@@ -281,11 +281,19 @@
   /* --------------------------------------------------------------------- */
   /* Editing mode (Elementor preview only)                                 */
   /* --------------------------------------------------------------------- */
-  /* The class is added by the handler, so it can only be present alongside
-     the `__panel` class it modifies — there is no state where this hides a
-     panel that would otherwise have been droppable. */
+  /* Matched structurally — `> *` rather than the `__panel` class — because in
+   * the editor a panel only becomes a panel once the handler has classified
+   * it. Adding or removing a menu item re-renders the widget and re-mounts
+   * every child container, and until the handler catches up those containers
+   * are unclassified: they carry none of the panel rules, so all of them paint
+   * at once in normal flow, stacked under the bar. Keying the editing rules to
+   * the mount point instead makes them true at first paint, which is the only
+   * way to close that gap — no JS can run earlier than the render it follows.
+   *
+   * The panels wrapper only ever holds panels, so this matches exactly the
+   * same set as the class did, just sooner. */
 }
-.eael-mega-menu--editing .eael-mega-menu__panel {
+.eael-mega-menu--editing .eael-mega-menu__panels > * {
   position: static;
   width: auto;
   inset-inline-start: auto;
@@ -307,7 +315,7 @@
    * control — a two column layout would stack as two rows because
    * `flex-direction` has no effect on a block box. */
 }
-.eael-mega-menu--editing .eael-mega-menu__panel:not(.eael-mega-menu__panel--active) {
+.eael-mega-menu--editing .eael-mega-menu__panels > *:not(.eael-mega-menu__panel--active) {
   display: none;
 }
 .eael-mega-menu {
