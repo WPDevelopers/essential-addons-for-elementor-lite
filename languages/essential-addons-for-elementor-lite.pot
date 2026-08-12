@@ -14142,7 +14142,7 @@ msgstr ""
 
 #. translators: %s: comma separated template titles.
 #: ../includes/Theme_Builder/Admin/Admin.php:570
-msgid "Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number."
+msgid "Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number, then the most recently created template."
 msgstr ""
 
 #. translators: 1: month number (01, 02, …), 2: month abbreviation.

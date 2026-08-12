@@ -214,7 +214,7 @@ class Rules {
 				'specificity'     => self::SPECIFICITY_TYPE,
 				'sub_source'      => 'category',
 				'sub_source_type' => self::SOURCE_TAXONOMY,
-				'supports'        => [ 'include' ],
+				'supports'        => [ 'include', 'exclude' ],
 				'callback'        => [ __CLASS__, 'check_category_archive' ],
 			],
 			'tag_archive'      => [
@@ -223,7 +223,7 @@ class Rules {
 				'specificity'     => self::SPECIFICITY_TYPE,
 				'sub_source'      => 'post_tag',
 				'sub_source_type' => self::SOURCE_TAXONOMY,
-				'supports'        => [ 'include' ],
+				'supports'        => [ 'include', 'exclude' ],
 				'callback'        => [ __CLASS__, 'check_tag_archive' ],
 			],
 			'author_archive'   => [
@@ -232,14 +232,14 @@ class Rules {
 				'specificity'     => self::SPECIFICITY_TYPE,
 				'sub_source'      => 'author',
 				'sub_source_type' => self::SOURCE_USER,
-				'supports'        => [ 'include' ],
+				'supports'        => [ 'include', 'exclude' ],
 				'callback'        => [ __CLASS__, 'check_author_archive' ],
 			],
 			'date_archive'     => [
 				'label'       => __( 'Date Archive', 'essential-addons-for-elementor-lite' ),
 				'group'       => 'archive',
 				'specificity' => self::SPECIFICITY_TYPE,
-				'supports'    => [ 'include' ],
+				'supports'    => [ 'include', 'exclude' ],
 				'callback'    => [ __CLASS__, 'check_date_archive' ],
 			],
 			'singular'         => [
@@ -328,7 +328,7 @@ class Rules {
 				'label'       => sprintf( __( '%s Archive', 'essential-addons-for-elementor-lite' ), self::get_label( $post_type, 'name', $slug ) ),
 				'group'       => 'archive',
 				'specificity' => self::SPECIFICITY_TYPE,
-				'supports'    => [ 'include' ],
+				'supports'    => [ 'include', 'exclude' ],
 				'callback'    => function () use ( $slug ) {
 					return self::check_post_type_archive( $slug );
 				},
@@ -376,7 +376,7 @@ class Rules {
 				'specificity'     => self::SPECIFICITY_TYPE,
 				'sub_source'      => $slug,
 				'sub_source_type' => self::SOURCE_TAXONOMY,
-				'supports'        => [ 'include' ],
+				'supports'        => [ 'include', 'exclude' ],
 				'callback'        => function ( $sub_id = 0 ) use ( $slug ) {
 					return self::check_taxonomy_archive( $slug, $sub_id );
 				},

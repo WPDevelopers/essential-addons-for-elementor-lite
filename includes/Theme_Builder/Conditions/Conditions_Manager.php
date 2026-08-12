@@ -27,7 +27,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 2. Of all matching templates, the one whose winning `include` row is the most
  *    specific wins ("Page: Contact" > "Singular" > "Entire Site").
  * 3. Equal specificity is broken by the `_ea_template_priority` meta (lower
- *    first), then by the most recently modified template.
+ *    first), then by the highest post ID — i.e. the most recently *created*
+ *    template. The ID is used rather than the modification date so that
+ *    re-saving the losing template cannot silently flip the winner.
  *
  * @since 6.7.3
  */
@@ -314,12 +316,25 @@ class Conditions_Manager {
 				continue;
 			}
 
-			// Same specificity: the lower priority number wins. The query is
-			// ordered by modification date, so the first template to claim a
-			// priority also wins ties on it.
-			if ( $score === $best_score && $template['priority'] < $best_prio ) {
+			if ( $score !== $best_score ) {
+				continue;
+			}
+
+			// Same specificity: the lower priority number wins.
+			if ( $template['priority'] < $best_prio ) {
 				$best_id   = $template['id'];
 				$best_prio = $template['priority'];
+				continue;
+			}
+
+			// Same specificity *and* same priority. Leaving this case to fall
+			// through would hand the tie to whichever row the query happened to
+			// return first — which is `orderby => modified`, so the winner would
+			// flip every time the loser was re-saved with nothing about it
+			// actually changed. The post ID is the one key that never moves, so
+			// the tie goes to the template created last and stays there.
+			if ( $template['priority'] === $best_prio && $template['id'] > $best_id ) {
+				$best_id = $template['id'];
 			}
 		}
 

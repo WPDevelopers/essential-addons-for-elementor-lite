@@ -155,7 +155,7 @@ export default function ConditionsModal( { template, onClose, onSaved } ) {
 
 			{ conflicts.length ? (
 				<Notice type="warning">
-					{ ( strings.conflictWarning || 'Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number.' )
+					{ ( strings.conflictWarning || 'Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number, then the most recently created template.' )
 						.replace( '%s', conflicts.join( ', ' ) ) }
 				</Notice>
 			) : null }

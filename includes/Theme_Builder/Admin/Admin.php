@@ -567,7 +567,7 @@ class Admin {
 				'activeLabel'      => __( 'Active', 'essential-addons-for-elementor-lite' ),
 				'activeHelp'       => __( 'Inactive templates are never displayed, even when published.', 'essential-addons-for-elementor-lite' ),
 				/* translators: %s: comma separated template titles. */
-				'conflictWarning'  => __( 'Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number.', 'essential-addons-for-elementor-lite' ),
+				'conflictWarning'  => __( 'Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number, then the most recently created template.', 'essential-addons-for-elementor-lite' ),
 			],
 		];
 	}

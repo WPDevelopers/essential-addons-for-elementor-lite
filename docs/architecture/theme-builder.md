@@ -131,10 +131,17 @@ The registry is memoized, but **only once `init` has fired** — post types and 
    | + specific object | +20 | "Page: Contact", "Category: News" |
 
    So `Page: Contact` (50) beats `Page` (30) beats `Singular` (20) beats `Entire Site` (10).
-4. Equal specificity → lower `_ea_template_priority` wins; the query is ordered by modification date, so the most recently edited template also wins ties on priority.
+4. Equal specificity → lower `_ea_template_priority` wins. Equal priority too → the **highest post ID** wins, i.e. the template created last.
+
+   That third level is compared explicitly in the loop rather than left to the order `WP_Query` returned the rows in. The query is ordered by modification date, so a first-match-wins loop would hand the tie to whichever template was edited most recently — and the winner would then flip every time the *losing* template was re-saved, with nothing about either template actually changed. The post ID is the one key that never moves.
+
 5. The winner is passed through `Compatibility::translate_template_id()` for Polylang/WPML.
 
-The `include`/`exclude` split is not symmetric — `Rules` declares a `supports` array per rule, and the spec's exclusion list is smaller than the inclusion list (no Blog Page, Search, 404 or taxonomy archives). `Rules::is_valid( $name, $type )` enforces it on both save and read.
+The `include`/`exclude` split is not symmetric — `Rules` declares a `supports` array per rule, and three of the unique-view rules (Blog Page, Search Results, 404 Page) are include-only. `Rules::is_valid( $name, $type )` enforces it on both save and read, so an unsupported pair is dropped by `sanitize_conditions()` rather than stored.
+
+Every archive rule — the core Category / Tag / Author / Date archives as well as the dynamically generated `{post_type}_archive` and `{taxonomy}_archive` — supports **both**. They were include-only at first, which made "show this header everywhere except the News category archive" impossible to express: the rule vanished from the third select the moment the row was switched to Exclude, and `ConditionRow`'s `changeType()` reset the target that had already been picked. Since `match_conditions()` calls `Rules::check()` identically for both types and the callbacks have no notion of include/exclude, there was nothing behind the restriction to preserve.
+
+`supports` still defaults to `[ 'include' ]` in `normalize_rules()`, so a third-party rule opts in to exclusion deliberately.
 
 ### Conflict detection
 
