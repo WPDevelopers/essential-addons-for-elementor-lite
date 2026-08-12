@@ -85,6 +85,15 @@ class Mega_Menu extends Widget_Nested_Base {
 	}
 
 	/**
+	 * Documentation link shown as "Need Help" at the bottom of the widget panel.
+	 *
+	 * @inheritDoc
+	 */
+	public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/ea-mega-menu/';
+	}
+
+	/**
 	 * Hide the widget while Elementor's nested elements API is switched off.
 	 *
 	 * @return bool

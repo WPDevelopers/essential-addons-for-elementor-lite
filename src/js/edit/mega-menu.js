@@ -19,6 +19,8 @@
 (function () {
 	"use strict";
 
+	const WIDGET_TYPE = "eael-mega-menu";
+
 	function registerMegaMenuElementType() {
 		if (
 			"undefined" === typeof window.elementor ||
@@ -36,7 +38,7 @@
 		class EaelMegaMenuElementType extends elementor.modules.elements.types
 			.NestedElementBase {
 			getType() {
-				return "eael-mega-menu";
+				return WIDGET_TYPE;
 			}
 
 			getView() {
@@ -45,6 +47,164 @@
 		}
 
 		elementor.elementsManager.registerElementType(new EaelMegaMenuElementType());
+
+		patchContainerPresets();
+	}
+
+	/**
+	 * Restore the structure presets inside a submenu panel.
+	 *
+	 * Picking a structure in an empty nested container routes through
+	 * `elementor.helpers.container.createContainerFromPreset( preset, target,
+	 * { createWrapper: false } )` — "use this container as the preset's parent
+	 * instead of creating one". Editor V4 (`e_opt_in_v4`, on by default for sites
+	 * installed on Elementor 4.0+) reimplemented that helper in
+	 * `v4-flexbox-preset.js`, and its `createWrapper: false` branch reuses the
+	 * target *without ever applying the preset's parent props*:
+	 *
+	 *     const reuseTarget = isRoot && false === options.createWrapper;
+	 *     const node = reuseTarget ? target : createFlexboxElement( target, buildModel( parentProps … ) );
+	 *
+	 * So the row direction that makes a multi column preset a *row* of columns is
+	 * dropped — "50 / 50" builds two full width children that stack — and the two
+	 * direction-only presets (`c100`, `r100`), which carry no children at all,
+	 * become complete no-ops: clicking them does nothing.
+	 *
+	 * This is upstream behaviour shared by every nested element, Elementor's own
+	 * Nested Tabs included, so the repair is scoped as tightly as possible: it
+	 * only runs for a target that is a direct child of a Mega Menu widget, only
+	 * while V4 is on, and only for the `createWrapper: false` call shape. Every
+	 * other element keeps whatever the installed Elementor does.
+	 */
+	function patchContainerPresets() {
+		const helper = elementor.helpers ? elementor.helpers.container : null;
+
+		if (
+			!helper ||
+			helper.eaelMegaMenuPresetsPatched ||
+			"function" !== typeof helper.createContainerFromPreset
+		) {
+			return;
+		}
+
+		const createContainerFromPreset = helper.createContainerFromPreset;
+
+		helper.createContainerFromPreset = function (preset, target, options) {
+			const created = createContainerFromPreset.apply(this, arguments);
+
+			try {
+				applyPresetParent(preset, target, options);
+			} catch (e) {
+				// A repair is never worth breaking the insert that just succeeded.
+			}
+
+			return created;
+		};
+
+		helper.eaelMegaMenuPresetsPatched = true;
+	}
+
+	/**
+	 * Apply the parent half of a preset that V4 dropped.
+	 *
+	 * @param {string} preset  Preset id, e.g. `c100` or `50-50`.
+	 * @param {Object} target  Container the preset was applied to.
+	 * @param {Object} options Command options the preset was called with.
+	 */
+	function applyPresetParent(preset, target, options) {
+		if (!isV4OptIn() || !options || false !== options.createWrapper) {
+			return;
+		}
+
+		if (!isMegaMenuPanel(target)) {
+			return;
+		}
+
+		const settings = getPresetParentSettings(preset);
+
+		if (!settings) {
+			return;
+		}
+
+		// `c100` and `r100` describe a bare container with no children. Applying
+		// the direction to the panel itself would leave the click with nothing to
+		// show for it — the panel is still empty, so the picker just stays open.
+		// Creating the container the pre-V4 helper created keeps the visible
+		// result users expect from those two tiles.
+		if ("c100" === preset || "r100" === preset) {
+			elementor.helpers.container.createContainer(settings, target, {});
+
+			return;
+		}
+
+		elementor.helpers.container.setContainerSettings(settings, target);
+	}
+
+	/**
+	 * The flex settings a preset's parent carries.
+	 *
+	 * Mirrors `PRESET_DEFINITIONS` and `rowOfSizes()` in Elementor's
+	 * `v4-flexbox-preset.js`, including its rule that sizes summing past 100%
+	 * wrap.
+	 *
+	 * @param {string} preset Preset id.
+	 *
+	 * @return {Object|null} Container settings, or null when the id is unknown.
+	 */
+	function getPresetParentSettings(preset) {
+		if ("c100" === preset) {
+			return { flex_direction: "column" };
+		}
+
+		// The one preset whose id mixes prefixes and sizes; its parent is a row.
+		if ("r100" === preset || "c100-c50-50" === preset) {
+			return { flex_direction: "row" };
+		}
+
+		const sizes = String(preset).split("-").map(Number);
+
+		if (!sizes.length || sizes.some((size) => !size || isNaN(size))) {
+			return null;
+		}
+
+		const settings = { flex_direction: "row" };
+
+		if (sizes.reduce((sum, size) => sum + size, 0) > 100) {
+			settings.flex_wrap = "wrap";
+		}
+
+		return settings;
+	}
+
+	/**
+	 * Is this container one of our submenu panels — a direct child of a Mega Menu?
+	 *
+	 * @param {Object} container Elementor container object.
+	 *
+	 * @return {boolean} True for a Mega Menu panel.
+	 */
+	function isMegaMenuPanel(container) {
+		const parent = container ? container.parent : null;
+
+		if (!parent || !parent.model || "function" !== typeof parent.model.get) {
+			return false;
+		}
+
+		return WIDGET_TYPE === parent.model.get("widgetType");
+	}
+
+	/**
+	 * Is the V4 editor active? Its preset helper is the one with the gap above.
+	 *
+	 * @return {boolean}
+	 */
+	function isV4OptIn() {
+		const features =
+			window.elementorCommon && elementorCommon.config
+				? elementorCommon.config.experimentalFeatures
+				: null;
+
+		return !!(features && features.e_opt_in_v4);
 	}
 
 	/**

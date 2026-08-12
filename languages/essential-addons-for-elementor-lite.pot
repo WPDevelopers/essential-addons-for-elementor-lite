@@ -7917,7 +7917,7 @@ msgid "Error! It is required to use %1$s field with %2$s Field."
 msgstr ""
 
 #. translators: %d: Menu item index.
-#: ../includes/Elements/Mega_Menu.php:124, ../includes/MegaMenu/Manager.php:282
+#: ../includes/Elements/Mega_Menu.php:133, ../includes/MegaMenu/Manager.php:282
 msgid "Menu Item #%d"
 msgstr ""
 
