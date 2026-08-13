@@ -570,8 +570,11 @@ jQuery(window).on("elementor/frontend/init", function () {
          });
 
          $(document).ready(function () {
+            // The fragment is untrusted and this runs on page load, so a plain link is
+            // enough to reach it — resolve it as a literal id, never as a selector.
+            // See eael.triggerClickById() in general.js.
             if (window.location.hash) {
-               jQuery("#" + window.location.hash.substring(1)).trigger("click");
+               eael.triggerClickById(window.location.hash.substring(1));
             } else if (custom_default_control) {
                let increment = $settings.control_all_text ? 2 : 1;
                default_control_key = default_control_key + increment;
