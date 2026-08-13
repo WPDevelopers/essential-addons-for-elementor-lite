@@ -1,13 +1,18 @@
 import TargetSelect from './TargetSelect';
 import { strings } from '../utils/api';
-import { firstRuleOf, getRule, groupOfRule, groupsForType, rulesForGroup } from '../utils/rules';
+import { hasTarget, isValidPair, subConditionOptions, topLevel } from '../utils/rules';
 
 /**
- * One condition: Include/Exclude → group → rule → optional specific target.
+ * One condition: Include/Exclude → Entire Site | Archives | Singular → what
+ * inside it → which object.
  *
- * The cascade exists because the rule list grows with the site — every public
- * post type and taxonomy adds entries — and a single flat select stops being
- * usable well before that.
+ * The cascade is Elementor's Theme Builder, select for select: users arrive
+ * here already knowing that vocabulary, and the sub-condition select carries two
+ * levels of nesting as optgroups — "Posts" heading "In Category", "In Tag" — so
+ * the list stays navigable on a site with a dozen post types.
+ *
+ * Selects only appear once they have something to say: "Entire Site" needs no
+ * sub-condition, and a sub-condition that targets a whole view needs no object.
  *
  * @param {Object}   props
  * @param {Object}   props.condition  Row value.
@@ -16,90 +21,96 @@ import { firstRuleOf, getRule, groupOfRule, groupsForType, rulesForGroup } from 
  * @param {boolean}  props.canRemove  Whether the remove control is offered.
  */
 export default function ConditionRow( { condition, onChange, onRemove, canRemove } ) {
-	const groups = groupsForType( condition.type );
-	const rules = rulesForGroup( condition.type, condition.group );
-	const rule = getRule( condition.name );
-	const source = rule && rule.sub_source ? rule.sub_source : '';
+	const options = subConditionOptions( condition.name );
 
-	// Switching Include ⇄ Exclude can invalidate the group and the rule, since
-	// not every rule can be used as an exclusion.
-	const changeType = ( type ) => {
-		const nextGroups = groupsForType( type );
-		const group = nextGroups.some( ( item ) => item.slug === condition.group )
-			? condition.group
-			: ( nextGroups[ 0 ] ? nextGroups[ 0 ].slug : '' );
+	// "Entire Site" is the whole answer, so it has no second select. Anything
+	// else offers at least its own "All …" option.
+	const showSub = options.length > 1;
+	const showTarget = hasTarget( condition.sub_name );
 
-		const stillValid = rulesForGroup( type, group ).some( ( item ) => item.name === condition.name );
-		const name = stillValid ? condition.name : firstRuleOf( type, group );
+	const changeName = ( name ) => {
+		// Keep the sub-condition when it exists under the new top level too —
+		// switching Include ⇄ Exclude must never silently retarget a row, and the
+		// same goes for a name change that happens to keep it valid.
+		const keep = isValidPair( name, condition.sub_name );
 
-		onChange( {
-			...condition,
-			type,
-			group,
-			name,
-			sub_id: stillValid ? condition.sub_id : 0,
-			sub_label: stillValid ? condition.sub_label : '',
-		} );
-	};
-
-	const changeGroup = ( group ) => {
-		onChange( {
-			...condition,
-			group,
-			name: firstRuleOf( condition.type, group ),
-			sub_id: 0,
-			sub_label: '',
-		} );
-	};
-
-	const changeRule = ( name ) => {
 		onChange( {
 			...condition,
 			name,
-			group: groupOfRule( name ) || condition.group,
+			sub_name: keep ? condition.sub_name : '',
+			sub_id: keep ? condition.sub_id : 0,
+			sub_label: keep ? condition.sub_label : '',
+		} );
+	};
+
+	const changeSubName = ( subName ) => {
+		onChange( {
+			...condition,
+			sub_name: subName,
 			sub_id: 0,
 			sub_label: '',
 		} );
 	};
 
 	return (
-		<div className={ `eatb-condition ${ source ? 'eatb-condition--targeted' : '' }` }>
-			<label className="eatb-field eatb-field--type">
-				<span className="screen-reader-text">{ strings.include || 'Include' }</span>
-				<select value={ condition.type } onChange={ ( event ) => changeType( event.target.value ) }>
-					<option value="include">{ strings.include || 'Include' }</option>
-					<option value="exclude">{ strings.exclude || 'Exclude' }</option>
-				</select>
-			</label>
+		<div className={ `eatb-condition ${ showTarget ? 'eatb-condition--targeted' : '' }` }>
+			{ /*
+			  * The selects share one bordered group, separated by dividers rather
+			  * than sitting in boxes of their own — one control reading
+			  * "Include · Singular · In Category · News" left to right, with the
+			  * remove button outside it.
+			  */ }
+			<div className="eatb-condition__fields">
+				<label className="eatb-field eatb-field--type">
+					<span className="screen-reader-text">{ strings.include || 'Include' }</span>
+					<select
+						value={ condition.type }
+						onChange={ ( event ) => onChange( { ...condition, type: event.target.value } ) }
+					>
+						<option value="include">{ strings.include || 'Include' }</option>
+						<option value="exclude">{ strings.exclude || 'Exclude' }</option>
+					</select>
+				</label>
 
-			<label className="eatb-field eatb-field--group">
-				<span className="screen-reader-text">{ strings.groupLabel || 'Condition group' }</span>
-				<select value={ condition.group } onChange={ ( event ) => changeGroup( event.target.value ) }>
-					{ groups.map( ( group ) => (
-						<option key={ group.slug } value={ group.slug }>{ group.label }</option>
-					) ) }
-				</select>
-			</label>
+				<label className="eatb-field eatb-field--group">
+					<span className="screen-reader-text">{ strings.groupLabel || 'Condition' }</span>
+					<select value={ condition.name } onChange={ ( event ) => changeName( event.target.value ) }>
+						{ topLevel.map( ( item ) => (
+							<option key={ item.name } value={ item.name }>{ item.label }</option>
+						) ) }
+					</select>
+				</label>
 
-			<label className="eatb-field eatb-field--rule">
-				<span className="screen-reader-text">{ strings.ruleLabel || 'Condition' }</span>
-				<select value={ condition.name } onChange={ ( event ) => changeRule( event.target.value ) }>
-					{ rules.map( ( item ) => (
-						<option key={ item.name } value={ item.name }>{ item.label }</option>
-					) ) }
-				</select>
-			</label>
+				{ showSub ? (
+					<label className="eatb-field eatb-field--rule">
+						<span className="screen-reader-text">{ strings.ruleLabel || 'Sub condition' }</span>
+						<select value={ condition.sub_name } onChange={ ( event ) => changeSubName( event.target.value ) }>
+							{ options.map( ( option, index ) => (
+								option.type === 'group' ? (
+									<optgroup key={ `g${ index }` } label={ option.label }>
+										{ option.options.map( ( item ) => (
+											<option key={ item.value } value={ item.value }>{ item.label }</option>
+										) ) }
+									</optgroup>
+								) : (
+									<option key={ option.value || 'all' } value={ option.value }>{ option.label }</option>
+								)
+							) ) }
+						</select>
+					</label>
+				) : null }
 
-			{ source ? (
-				<div className="eatb-field eatb-field--target">
-					<TargetSelect
-						source={ source }
-						value={ condition.sub_id }
-						label={ condition.sub_label }
-						onChange={ ( id, text ) => onChange( { ...condition, sub_id: id, sub_label: text } ) }
-					/>
-				</div>
-			) : null }
+				{ showTarget ? (
+					<div className="eatb-field eatb-field--target">
+						<TargetSelect
+							condition={ condition.sub_name }
+							value={ condition.sub_id }
+							label={ condition.sub_label }
+							onChange={ ( id, text ) => onChange( { ...condition, sub_id: id, sub_label: text } ) }
+						/>
+					</div>
+				) : null }
+			</div>
 
 			<button
 				type="button"

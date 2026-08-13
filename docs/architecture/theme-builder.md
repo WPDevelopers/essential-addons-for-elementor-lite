@@ -17,7 +17,7 @@ Assets: [`assets/admin/css/theme-builder.css`](../../assets/admin/css/theme-buil
 | `Core/Template_Types.php` | Registry of template types. `header` and `footer` ship; more are added on `eael/theme_builder/register_types` |
 | `Core/Template_Cache.php` | Version-namespaced cache over transients + a per-request static array |
 | `Models/Template.php` | Typed wrapper around one template post — the only place meta keys are read/written |
-| `Conditions/Rules.php` | The 13–14 display rules: labels, groups, specificity, sub-object source, evaluation callbacks |
+| `Conditions/Rules.php` | The condition registry — Elementor's Theme Builder model: three top level conditions, everything nested under them derived from the site's post types and taxonomies, their labels, specificity and evaluation callbacks |
 | `Conditions/Conditions_Manager.php` | Sanitize / validate conditions, resolve the winning template, detect conflicts, search sub-objects |
 | `Conditions/Conditions_Cleanup.php` | Drops condition rows whose target post / term / user was deleted, and deactivates a template left with no include row |
 | `Admin/Admin.php` | Submenu registration, row/bulk action handling, screen options, asset enqueue + localization |
@@ -39,7 +39,7 @@ One custom post type, `ea_theme_builder`, holding six meta keys:
 | Meta | Value |
 | --- | --- |
 | `_ea_template_type` | `header` \| `footer` \| any registered type |
-| `_ea_template_conditions` | Array of `[ 'type' => include\|exclude, 'name' => rule, 'sub_id' => int ]` |
+| `_ea_template_conditions` | Array of `[ 'type' => include\|exclude, 'name' => general\|archive\|singular, 'sub_name' => string, 'sub_id' => int ]` |
 | `_ea_template_priority` | 1–100, default 10. Tie-breaker only |
 | `_ea_template_status` | Mirror of `post_status`, kept in sync on save/transition |
 | `_ea_template_platform` | `elementor` in v1 |
@@ -68,81 +68,136 @@ Elementor ships its Theme Builder in Pro; this module deliberately reimplements 
 
 ## The rule registry
 
-`Conditions/Rules.php` builds the registry in three layers, in order:
+`Conditions/Rules.php` is a port of Elementor's Theme Builder conditions — the model, the vocabulary and the specificity numbers. Users arrive at this screen already knowing that language, and an *almost* identical one is worse than either.
 
-1. **Core rules** — the fixed WordPress views: Entire Site, Front Page, Blog Page, Search Results, 404 Page, Archive, Category / Tag / Author / Date archive, Singular, Post, Page. Hard-coded, because `is_front_page()`, `is_search()` and friends have no generic, data-driven form.
-2. **Dynamic rules** — derived from `get_post_types()` and `get_taxonomies()` on every request:
-   - one **singular** rule per public post type (`product`, `portfolio`, …), targetable down to one entry;
-   - one **archive** rule per public post type that has `has_archive`;
-   - one **archive** rule per public taxonomy, targetable down to one term.
-3. **Third-party rules** — whatever `eael/theme_builder/condition_rules` returns.
+A saved row is four values:
 
-A site that registers a `portfolio` type and a `portfolio_cat` taxonomy gets `portfolio`, `portfolio_archive` and `portfolio_cat_archive` with no code.
+| Field | Value |
+| --- | --- |
+| `type` | `include` \| `exclude` |
+| `name` | `general` \| `archive` \| `singular` — the top level |
+| `sub_name` | a condition nested under that top level, or `''` for all of it |
+| `sub_id` | the object that sub-condition is narrowed to, or `0` for all |
 
-### What the dynamic layer skips
+Which reads, in the builder, as `Include / Singular / In Category / News`.
 
-`public => true` is not enough on its own: Elementor's library, Templately's library, floating buttons and similar builder post types are all public so their previews resolve. The discriminator is **`show_ui && show_in_nav_menus`** — content types users link to are in nav menus, container types are not — plus an explicit blocklist. `category` and `post_tag` are skipped because they are already core rules under the names saved conditions reference.
+### The tree
+
+Nesting is two levels deep and rendered as **one grouped select**: a sub-condition that has sub-conditions of its own becomes an optgroup whose first option is the sub-condition itself. That is what puts "In Category" — the condition that matches *single posts filed under a term*, as opposed to the term's archive — inside a "Posts" group.
+
+```text
+Entire Site
+
+Archives ─┬─ All Archives
+          ├─ Author Archive · Date Archive · Search Results
+          └─ [Posts Archive] ─┬─ Posts Archive
+                              ├─ Categories · Tags
+                              └─ Direct child Category of · Any child Category of
+
+Singular ─┬─ All Singular
+          ├─ Front Page
+          ├─ [Posts] ─┬─ Posts
+          │           ├─ In Category · In child Categories · In Tag
+          │           └─ Posts by Author
+          ├─ [Pages] ─┬─ Pages
+          │           └─ Pages by Author
+          └─ Direct child of · Any child of · By Author · 404 Page
+```
+
+Everything below the three top levels is derived from the site on every request: one entry per public post type, its taxonomies under both its archive and its singular condition, `child_of` / `any_child_of` for hierarchical types. A WooCommerce install gets "Products", "In Category", "In Brand" and "Products Archive" with no code, exactly as Elementor does.
+
+Include and exclude are offered on **every** condition. There is no `supports` allowlist: `match_conditions()` evaluates both the same way, so a restriction there could only ever produce the bug QA filed against the old registry — picking "Category Archive" and then switching the row to Exclude silently reset the target.
+
+### What the registry skips
+
+`public => true` is not enough on its own: Elementor's library, Templately's library, floating buttons and similar builder post types are all public so their previews resolve. The discriminator is **`show_ui && show_in_nav_menus`** — content types users link to are in nav menus, container types are not — plus an explicit blocklist. Taxonomies are filtered the same way, per post type, via `get_object_taxonomies()`.
 
 Both lists are filterable: `eael/theme_builder/excluded_post_types`, `eael/theme_builder/excluded_taxonomies`.
 
-### Rule shape
+### Condition shape
 
 | Key | Meaning |
 | --- | --- |
-| `label` | Name shown in the condition builder. **Required.** |
-| `callback` | Callable receiving the sub-object ID, returning bool. **Required.** |
-| `group` | Optgroup — `general`, `archive`, `singular` (default `general`) |
-| `specificity` | See the table below (default `SPECIFICITY_TYPE`) |
-| `sub_source` | Slug of the object type the rule narrows to, or `false` |
-| `sub_source_type` | What `sub_source` names — `post_type`, `taxonomy` or `user` |
-| `supports` | `include` and/or `exclude` (default `[ 'include' ]`) |
+| `label` | Name shown in the builder. **Required.** |
+| `callback` | Callable receiving `sub_id`, returning bool. **Required.** |
+| `all_label` | Name of its "all of it" option when it heads a group (defaults to `label`) |
+| `priority` | Specificity — see below (default `PRIORITY_SINGULAR_SUB`) |
+| `sub_conditions` | Names nested under it |
+| `source` | `[ 'kind' => post\|term\|user, … ]`, or absent when it targets a whole view |
 
-`normalize_rules()` runs over the filtered registry, so a third-party rule only needs a label and a callback — everything else is defaulted, `supports` is intersected against the valid values, and a rule with no callable callback or no label is dropped rather than reaching the matching engine.
+`normalize()` runs over the filtered registry: a third-party condition needs only a label and a callback, one with neither is dropped rather than reaching the engine, and a `sub_conditions` entry naming a condition that does not exist is removed so the builder cannot render an empty option.
 
 ```php
-add_filter( 'eael/theme_builder/condition_rules', function ( $rules ) {
-	$rules['is_logged_in'] = [
+add_filter( 'eael/theme_builder/conditions', function ( $conditions ) {
+	$conditions['logged_in'] = [
 		'label'    => __( 'Logged-in Users', 'my-textdomain' ),
-		'supports' => [ 'include', 'exclude' ],
+		'priority' => 40,
 		'callback' => 'is_user_logged_in',
 	];
 
-	return $rules;
+	// Make it reachable: add it under a top level condition.
+	$conditions['singular']['sub_conditions'][] = 'logged_in';
+
+	return $conditions;
 } );
 ```
 
-`sub_source_type` is what keeps the specific-target lookups generic: `Conditions_Manager::search_objects()` and `get_object_label()` ask `Rules::get_sub_source_type()` what kind of object a source names instead of carrying their own list of taxonomies. It also gates the AJAX search — a source no registered rule declares is rejected, so the endpoint cannot be steered into an arbitrary post type or taxonomy.
+`source` is what keeps the object picker generic — and what keeps the AJAX search safe. The client sends the **condition name**, never a post type or taxonomy to query; `search_objects()` resolves what may be searched from the registry, so a condition with no picker returns nothing and there is no request shape that reaches content the builder does not offer.
 
 The registry is memoized, but **only once `init` has fired** — post types and taxonomies are still being registered until then, and caching earlier would freeze an incomplete list. `Rules::flush()` drops the cache for late registrations and tests.
+
+### Conditions saved before this model
+
+Rows stored by earlier versions name a flat rule (`category_archive`, `blog`, `post`, `{taxonomy}_archive`, …) with no `sub_name`. `Rules::map_legacy_rule()` translates them as they are read, in `sanitize_conditions()`:
+
+| Was | Is now |
+| --- | --- |
+| `entire_site` | `general` / — |
+| `blog` | `archive` / `post_archive` |
+| `search`, `date_archive`, `author_archive` | `archive` / `search`, `date`, `author` |
+| `category_archive`, `tag_archive`, `{taxonomy}_archive` | `archive` / the taxonomy |
+| `{post_type}_archive` | `archive` / `{post_type}_archive` |
+| `front_page`, `not_found` | `singular` / `front_page`, `not_found404` |
+| `post`, `page`, `{post_type}` | `singular` / the post type |
+
+Translation happens on read, not as a one-off migration: a live site keeps rendering the same headers with no upgrade step, the meta is rewritten in the new shape the next time the template is saved, and rolling the plugin back leaves nothing stranded.
 
 ## Condition matching
 
 `Conditions_Manager::get_active_template_id( $type )` resolves exactly one template per type per request:
 
 1. Load every published, active template of that type (cached — see below).
-2. A template matches when **at least one `include` row matches and no `exclude` row does**. One matching exclusion vetoes the whole template.
-3. Among matches, the highest **specificity** wins. Specificity comes from `Rules`:
+2. A row matches when its top level condition matches **and** its sub-condition does. The top level is checked first: it is cheap and rules out most rows.
+3. A template matches when **at least one `include` row matches and no `exclude` row does**. One matching exclusion vetoes the whole template.
+4. Among matches, the **narrowest** condition wins — and narrow means a *low* number. The scale is Elementor's:
 
-   | Tier | Score | Examples |
-   | --- | --- | --- |
-   | Site-wide | 10 | Entire Site |
-   | Broad | 20 | Archive, Singular |
-   | Per type | 30 | Category Archive, Post, Page, Product |
-   | Unique view | 40 | Front Page, Blog Page, Search, 404 |
-   | + specific object | +20 | "Page: Contact", "Category: News" |
+   | Condition | Score |
+   | --- | --- |
+   | Entire Site | 100 |
+   | All Archives | 80 |
+   | Author / Date / Search / a post type archive / a taxonomy | 70 |
+   | All Singular | 60 |
+   | A post type, In Category, By Author, Child of | 40 |
+   | Front Page | 30 |
+   | 404 Page | 20 |
 
-   So `Page: Contact` (50) beats `Page` (30) beats `Singular` (20) beats `Entire Site` (10).
-4. Equal specificity → lower `_ea_template_priority` wins. Equal priority too → the **highest post ID** wins, i.e. the template created last.
+   `Rules::get_priority()` then narrows that score the way Elementor's `get_condition_priority()` does: take the lower of the top level and the sub-condition, subtract 10 for naming a sub-condition at all, another 10 for naming an object inside it, or 5 instead when the sub-condition has no children of its own and is therefore already specific.
+
+   So `Singular / Posts / Hello World` (20) beats `Singular / Posts` (30) beats `All Singular` (60) beats `Entire Site` (100).
+5. Equal specificity → lower `_ea_template_priority` wins. Equal priority too → the **highest post ID** wins, i.e. the template created last.
 
    That third level is compared explicitly in the loop rather than left to the order `WP_Query` returned the rows in. The query is ordered by modification date, so a first-match-wins loop would hand the tie to whichever template was edited most recently — and the winner would then flip every time the *losing* template was re-saved, with nothing about either template actually changed. The post ID is the one key that never moves.
 
-5. The winner is passed through `Compatibility::translate_template_id()` for Polylang/WPML.
+6. The winner is passed through `Compatibility::translate_template_id()` for Polylang/WPML.
 
-The `include`/`exclude` split is not symmetric — `Rules` declares a `supports` array per rule, and three of the unique-view rules (Blog Page, Search Results, 404 Page) are include-only. `Rules::is_valid( $name, $type )` enforces it on both save and read, so an unsupported pair is dropped by `sanitize_conditions()` rather than stored.
+### Archive of a term vs. content in a term
 
-Every archive rule — the core Category / Tag / Author / Date archives as well as the dynamically generated `{post_type}_archive` and `{taxonomy}_archive` — supports **both**. They were include-only at first, which made "show this header everywhere except the News category archive" impossible to express: the rule vanished from the third select the moment the row was switched to Exclude, and `ConditionRow`'s `changeType()` reset the target that had already been picked. Since `match_conditions()` calls `Rules::check()` identically for both types and the callbacks have no notion of include/exclude, there was nothing behind the restriction to preserve.
+The two are different conditions and always have been in Elementor, which is worth stating because it is the question this screen is asked most often:
 
-`supports` still defaults to `[ 'include' ]` in `normalize_rules()`, so a third-party rule opts in to exclusion deliberately.
+- `Archives / Categories: News` matches `/category/news/` — the listing.
+- `Singular / In Category: News` matches every single post filed under News.
+
+Neither implies the other. A header that should cover both needs two rows.
 
 ### Conflict detection
 
@@ -354,6 +409,10 @@ What follows from that shape:
 - The modal opens on the conditions the template already has — for a new one, **none**: an empty body with "Add Condition" under it. `Post_Type::default_meta()` seeds no conditions, and the modal no longer materializes a blank row to fill the space, because at publish time a pre-selected row decides where the header goes. Rows can be removed down to zero.
 - `Conditions_Manager::validate_conditions()` refuses an empty set and a set with no `include` row, so publishing with nothing chosen comes back with "Add at least one display condition…" and the template stays a draft.
 
+### The CPT's own list screen
+
+`edit.php?post_type=ea_theme_builder` still resolves — the post type keeps `show_ui` for the classic editor and for the row actions that link to it — but it is core's generic table: no type, conditions or platform columns, and its "Add New" lands on an empty post rather than the creation modal. `Admin::redirect_cpt_list()` sends it to the dashboard on `load-edit.php`, preserving `post_status` so a link to the trash still lands on the trash view.
+
 ### Row actions
 
 Listed in the order they render — `row_actions()` prints the array as `get_row_actions()` built it, so that method's sequence *is* the display order:
@@ -422,7 +481,7 @@ All five are `wp_ajax_` only (never `nopriv`), share the `eael_theme_builder` no
 | --- | --- |
 | `eael_theme_builder_create_template` | Create the draft, return its ID + editor URL |
 | `eael_theme_builder_save_conditions` | Validate + persist conditions, return conflicts and a summary. Also checks `edit_post` on the specific template |
-| `eael_theme_builder_search_objects` | Populate the sub-object selector. Rejects any source not declared by a registered rule, so it cannot be used as a generic post/term query proxy |
+| `eael_theme_builder_search_objects` | Populate the object picker. Takes a **condition name** and resolves the query from the registry, so it cannot be used as a generic post/term/user query proxy |
 | `eael_theme_builder_quick_edit` | Save the inline editor. Also checks `edit_post`; will not set a trash status |
 | `eael_theme_builder_bulk_edit` | Apply one set of changes to many templates. Re-checks `edit_post` per template, since the selection is client-supplied; will not set a trash status |
 
@@ -444,20 +503,19 @@ add_action( 'eael/theme_builder/register_types', function ( $types ) {
 } );
 ```
 
-Add a display rule:
+Add a display condition — and put it somewhere the builder can reach it:
 
 ```php
-add_filter( 'eael/theme_builder/condition_rules', function ( $rules ) {
-	$rules['is_logged_in'] = [
-		'label'       => __( 'Logged-in Users', 'my-textdomain' ),
-		'group'       => 'general',
-		'specificity' => 40,
-		'sub_source'  => false,
-		'supports'    => [ 'include', 'exclude' ],
-		'callback'    => 'is_user_logged_in',
+add_filter( 'eael/theme_builder/conditions', function ( $conditions ) {
+	$conditions['logged_in'] = [
+		'label'    => __( 'Logged-in Users', 'my-textdomain' ),
+		'priority' => 40,
+		'callback' => 'is_user_logged_in',
 	];
 
-	return $rules;
+	$conditions['singular']['sub_conditions'][] = 'logged_in';
+
+	return $conditions;
 } );
 ```
 
@@ -470,13 +528,12 @@ add_filter( 'eael/theme_builder/condition_rules', function ( $rules ) {
 | `eael/theme_builder/capability` | filter | Capability for the dashboard and the AJAX endpoints (default `manage_options`) |
 | `eael/theme_builder/register_types` | action | Register template types |
 | `eael/theme_builder/post_type_args` | filter | `register_post_type()` arguments |
-| `eael/theme_builder/condition_rules` | filter | Rule definitions — core + dynamic, before normalization |
-| `eael/theme_builder/condition_groups` | filter | Optgroup labels in the condition builder |
+| `eael/theme_builder/conditions` | filter | Condition definitions — the whole registry, before normalization |
 | `eael/theme_builder/excluded_post_types` | filter | Post types the dynamic layer skips |
 | `eael/theme_builder/excluded_taxonomies` | filter | Taxonomies the dynamic layer skips |
 | `eael/theme_builder/page_template_options` | filter | Page layouts offered in Quick Edit |
 | `eael/theme_builder/row_actions` | filter | Row actions on the templates list |
-| `eael/theme_builder/check_rule` | filter | Outcome of a single rule evaluation |
+| `eael/theme_builder/check_rule` | filter | Outcome of a single condition evaluation |
 | `eael/theme_builder/active_template_id` | filter | The template chosen for the request |
 | `eael/theme_builder/should_render` | filter | Whether to render on this request |
 | `eael/theme_builder/render_mode` | filter | `replace` \| `hooks` \| `theme` |

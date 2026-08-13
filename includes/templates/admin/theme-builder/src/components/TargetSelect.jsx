@@ -2,19 +2,20 @@ import { useEffect, useRef, useState } from 'react';
 import { request, strings } from '../utils/api';
 
 /**
- * Searchable picker for a rule's "specific target".
+ * Searchable picker for a condition's "specific target".
  *
- * The list is served by `eael_theme_builder_search_objects`, which resolves the
- * source (post type, taxonomy or user) from the rule registry — so this one
- * component covers posts, pages, products, terms and authors alike.
+ * The list is served by `eael_theme_builder_search_objects`, which resolves what
+ * may be searched from the condition itself — so this one component covers
+ * posts, pages, products, terms and authors alike, and the client never names a
+ * post type or taxonomy to query.
  *
  * @param {Object}   props
- * @param {string}   props.source   Sub-source slug declared by the rule.
+ * @param {string}   props.condition Condition the picker belongs to.
  * @param {number}   props.value    Selected object ID, 0 for "All".
  * @param {string}   props.label    Label of the selected object.
  * @param {Function} props.onChange Receives `( id, label )`.
  */
-export default function TargetSelect( { source, value, label, onChange } ) {
+export default function TargetSelect( { condition, value, label, onChange } ) {
 	const [ open, setOpen ] = useState( false );
 	const [ search, setSearch ] = useState( '' );
 	const [ results, setResults ] = useState( [] );
@@ -34,7 +35,7 @@ export default function TargetSelect( { source, value, label, onChange } ) {
 			setLoading( true );
 
 			try {
-				const response = await request( 'eael_theme_builder_search_objects', { source, search } );
+				const response = await request( 'eael_theme_builder_search_objects', { condition, search } );
 
 				// A slower earlier request must not overwrite a newer result.
 				if ( ticket !== requestId.current ) {
@@ -54,7 +55,7 @@ export default function TargetSelect( { source, value, label, onChange } ) {
 		}, search ? 300 : 0 );
 
 		return () => window.clearTimeout( timer );
-	}, [ open, search, source ] );
+	}, [ open, search, condition ] );
 
 	// Close when the focus or the pointer leaves the control.
 	useEffect( () => {
@@ -73,7 +74,7 @@ export default function TargetSelect( { source, value, label, onChange } ) {
 		return () => document.removeEventListener( 'mousedown', onDocumentDown );
 	}, [ open ] );
 
-	const allLabel = strings.all || 'All';
+	const allLabel = strings.allLabel || strings.all || 'All';
 	const selectedLabel = value && label ? label : allLabel;
 
 	const choose = ( id, text ) => {

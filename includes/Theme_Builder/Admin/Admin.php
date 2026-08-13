@@ -56,6 +56,41 @@ class Admin {
 		add_action( 'admin_menu', [ $this, 'register_menu' ], 11 );
 		add_filter( 'set-screen-option', [ $this, 'save_screen_option' ], 10, 3 );
 		add_filter( 'set_screen_option_eael_tb_templates_per_page', [ $this, 'save_screen_option_value' ], 10, 3 );
+		add_action( 'load-edit.php', [ $this, 'redirect_cpt_list' ] );
+	}
+
+	/**
+	 * Send the CPT's own list screen to the Theme Builder dashboard.
+	 *
+	 * `edit.php?post_type=ea_theme_builder` still resolves — the post type needs
+	 * `show_ui` for the classic editor and the row actions that point at it — but
+	 * it is core's generic table: no type, conditions or platform columns, and
+	 * "Add New" lands on an empty post instead of the creation modal. Anyone who
+	 * arrives there from a bookmark or an old link gets the real screen instead
+	 * of a worse copy of it.
+	 *
+	 * @since 6.7.3
+	 */
+	public function redirect_cpt_list() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- reading the screen being loaded, nothing is changed.
+		$post_type = isset( $_GET['post_type'] ) ? sanitize_key( wp_unslash( $_GET['post_type'] ) ) : '';
+
+		if ( Post_Type::CPT !== $post_type || ! current_user_can( Theme_Builder::capability() ) ) {
+			return;
+		}
+
+		$args = [];
+
+		// Keep the view the link asked for: the trash list is reachable from the
+		// dashboard's own views, so landing on "All" would look like a dead end.
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['post_status'] ) ) {
+			$args['post_status'] = sanitize_key( wp_unslash( $_GET['post_status'] ) );
+		}
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+		wp_safe_redirect( Theme_Builder::page_url( $args ) );
+		exit;
 	}
 
 	/**
@@ -530,14 +565,16 @@ class Admin {
 				'max'     => Post_Type::PRIORITY_MAX,
 				'default' => Post_Type::PRIORITY_DEFAULT,
 			],
-			'rules'         => array_values( Rules::get_rules_for_ui() ),
-			'groups'        => Rules::get_groups(),
+			'conditions'    => Rules::get_conditions_for_ui(),
+			'topLevel'      => Rules::get_top_level_for_ui(),
 			'pageTemplates' => Post_Type::get_page_template_options(),
 			'months'        => self::get_month_options(),
 			'i18n'          => [
 				'templatesTitle'   => __( 'Templates', 'essential-addons-for-elementor-lite' ),
-				'groupLabel'       => __( 'Condition group', 'essential-addons-for-elementor-lite' ),
-				'ruleLabel'        => __( 'Condition', 'essential-addons-for-elementor-lite' ),
+				'groupLabel'       => __( 'Condition', 'essential-addons-for-elementor-lite' ),
+				'ruleLabel'        => __( 'Sub condition', 'essential-addons-for-elementor-lite' ),
+				'targetLabel'      => __( 'Specific target', 'essential-addons-for-elementor-lite' ),
+				'allLabel'         => __( 'All', 'essential-addons-for-elementor-lite' ),
 				'chooseType'       => __( 'Please choose a valid template type.', 'essential-addons-for-elementor-lite' ),
 				'createTitle'      => __( 'Choose the type of template you want to work on', 'essential-addons-for-elementor-lite' ),
 				'typeLabel'        => __( 'Template Type', 'essential-addons-for-elementor-lite' ),

@@ -13,6 +13,7 @@
 	--eatb-muted: #6b6f80;
 	--eatb-surface: #fff;
 	--eatb-field-height: 44px;
+	--eatb-row-height: 38px;
 	--eatb-radius: 8px;
 
 	position: fixed;
@@ -267,55 +268,109 @@ body.eatb-modal-open {
 .eatb-conditions {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	gap: 12px;
-	max-width: 900px;
-	margin: 0 auto;
 }
 
 /*
- * Fixed tracks rather than 1fr: the row is centred, so a fluid last column
- * would drag the whole thing off-centre as soon as the target picker appears.
- * The modifier is set in ConditionRow rather than with :has() so the layout
- * does not depend on selector support.
+ * One row = one control. The selects share a single bordered group split by
+ * dividers rather than sitting in separate boxes, so a row reads left to right
+ * as one sentence — "Include · Singular · In Category · News" — and a stack of
+ * rows lines up like a table. Every row is the same width whether or not the
+ * object picker is showing, so adding one cannot shift the rows above it.
  */
 .eatb-condition {
-	display: grid;
-	grid-template-columns: 150px 180px minmax( 0, 280px ) 40px;
-	gap: 10px;
+	position: relative;
+	display: flex;
 	align-items: center;
-	justify-content: center;
+	width: 100%;
+	max-width: 640px;
 }
 
-.eatb-condition--targeted {
-	grid-template-columns: 150px 180px minmax( 0, 220px ) minmax( 0, 240px ) 40px;
+.eatb-condition__fields {
+	display: flex;
+	flex: 1 1 auto;
+	min-width: 0;
+	background: #fff;
+	border: 1px solid var(--eatb-border);
+	border-radius: var(--eatb-radius);
 }
 
 .eatb-field {
-	display: block;
+	display: flex;
 	min-width: 0;
 	margin: 0;
 }
 
-.eatb-field select {
-	box-sizing: border-box;
-	width: 100%;
-	/* See the note on .eatb-form__field select — wp-admin caps selects at 25rem. */
-	max-width: 100%;
-	height: var(--eatb-field-height);
-	margin: 0;
-	padding: 0 32px 0 14px;
-	font-size: 14px;
-	color: var(--eatb-text);
-	background-color: #fff;
-	border: 1px solid var(--eatb-border);
-	border-radius: var(--eatb-radius);
-	box-shadow: none;
+/* Include/Exclude is a fixed first segment; the rest share what is left. */
+.eatb-field--type {
+	flex: 0 0 20%;
 }
 
-.eatb-field select:focus {
-	border-color: var(--eatb-accent);
-	box-shadow: inset 0 0 0 1px var(--eatb-accent);
+.eatb-field--group,
+.eatb-field--rule,
+.eatb-field--target {
+	flex: 1 1 0;
+}
+
+.eatb-field + .eatb-field {
+	border-left: 1px solid var(--eatb-border);
+}
+
+/*
+ * The native arrow is replaced by one drawn as a background, together with the
+ * divider in front of it: a <select> cannot hold markup, and those two marks
+ * are what make a segment read as part of the group rather than as a bare word.
+ */
+.eatb-field select,
+.eatb-target__toggle {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	height: var(--eatb-row-height);
+	margin: 0;
+	/*
+	 * Symmetric padding is what keeps the value optically centred: the right
+	 * side has to clear the divider and the chevron, so the left matches it.
+	 */
+	padding: 0 30px;
+	font-size: 13px;
+	line-height: var(--eatb-row-height);
+	color: var(--eatb-text);
+	text-align: center;
+	text-align-last: center;
+	background-color: transparent;
+	border: 0;
+	border-radius: var(--eatb-radius);
+	box-shadow: none;
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+.eatb-field select {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%236b6f80' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E"),
+		linear-gradient( to bottom, var(--eatb-border), var(--eatb-border) );
+	background-repeat: no-repeat, no-repeat;
+	background-position: right 10px center, right 29px center;
+	background-size: 10px 7px, 1px 100%;
+}
+
+.eatb-field select:focus,
+.eatb-target__toggle:focus-visible {
+	box-shadow: inset 0 0 0 2px var(--eatb-accent);
 	outline: none;
+}
+
+/* Rounded ends belong to the group, not to the segments inside it. */
+.eatb-field:first-child select,
+.eatb-field:first-child .eatb-target__toggle {
+	border-radius: var(--eatb-radius) 0 0 var(--eatb-radius);
+}
+
+.eatb-field:last-child select,
+.eatb-field:last-child .eatb-target__toggle {
+	border-radius: 0 var(--eatb-radius) var(--eatb-radius) 0;
 }
 
 /*
@@ -340,26 +395,35 @@ body.eatb-modal-open {
 	box-shadow: none;
 }
 
+/*
+ * Outside the group — removing the row is not one of the row's values — and out
+ * of the flow, so the group itself sits dead centre in the modal. In the flow it
+ * would push every row left by half its own width.
+ */
 .eatb-condition__remove {
+	position: absolute;
+	top: 50%;
+	left: calc( 100% + 8px );
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 40px;
-	height: 40px;
+	width: 26px;
+	height: 26px;
+	transform: translateY( -50% );
 	padding: 0;
-	font-size: 18px;
+	font-size: 14px;
 	line-height: 1;
-	color: var(--eatb-muted);
+	color: #fff;
 	cursor: pointer;
-	background: #f1f1f5;
+	background: #82868e;
 	border: 1px solid transparent;
-	border-radius: var(--eatb-radius);
+	border-radius: 4px;
 	transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .eatb-condition__remove:hover:not(:disabled) {
-	color: #d63638;
-	background: #fbeaea;
+	color: #fff;
+	background: #d63638;
 }
 
 .eatb-condition__remove:disabled {
@@ -372,40 +436,44 @@ body.eatb-modal-open {
 	text-align: center;
 }
 
+.eatb-button--add {
+	min-height: 36px;
+	padding: 0 22px;
+	font-size: 13px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+}
+
 /* ------------------------------------------------------------------
  * Target picker
  * --------------------------------------------------------------- */
 
+/*
+ * The picker is a segment of the group like the selects beside it, so it is
+ * built out of the same parts: centred value, divider, chevron. It cannot *be*
+ * a <select> — the list is searched over AJAX — so the two marks a select draws
+ * as a background are real elements here.
+ */
 .eatb-target {
 	position: relative;
+	width: 100%;
 }
 
 .eatb-target__toggle {
 	display: flex;
 	align-items: center;
-	gap: 8px;
-	box-sizing: border-box;
-	width: 100%;
-	height: var(--eatb-field-height);
-	padding: 0 12px 0 14px;
-	font-size: 14px;
-	text-align: left;
-	color: var(--eatb-text);
+	justify-content: center;
+	gap: 6px;
 	cursor: pointer;
-	background: #fff;
-	border: 1px solid var(--eatb-border);
-	border-radius: var(--eatb-radius);
+	background: transparent;
 }
 
-.eatb-target.is-open .eatb-target__toggle,
-.eatb-target__toggle:focus-visible {
-	border-color: var(--eatb-accent);
-	box-shadow: inset 0 0 0 1px var(--eatb-accent);
+.eatb-target.is-open .eatb-target__toggle {
+	box-shadow: inset 0 0 0 2px var(--eatb-accent);
 	outline: none;
 }
 
 .eatb-target__value {
-	flex: 1 1 auto;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -417,7 +485,7 @@ body.eatb-modal-open {
 
 .eatb-target__clear {
 	flex: 0 0 auto;
-	padding: 0 4px;
+	padding: 0 2px;
 	font-size: 16px;
 	line-height: 1;
 	color: var(--eatb-muted);
@@ -429,12 +497,17 @@ body.eatb-modal-open {
 }
 
 .eatb-target__arrow {
-	flex: 0 0 auto;
-	width: 0;
-	height: 0;
-	border-top: 5px solid var(--eatb-muted);
-	border-right: 4px solid transparent;
-	border-left: 4px solid transparent;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 29px;
+	border-left: 1px solid var(--eatb-border);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%236b6f80' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 10px 7px;
+	pointer-events: none;
 }
 
 .eatb-target__panel {

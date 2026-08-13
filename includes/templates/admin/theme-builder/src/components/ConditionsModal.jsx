@@ -3,7 +3,7 @@ import Modal from './Modal';
 import ConditionRow from './ConditionRow';
 import Notice from './Notice';
 import { errorMessage, request, strings } from '../utils/api';
-import { blankCondition, groupOfRule } from '../utils/rules';
+import { blankCondition } from '../utils/rules';
 
 /**
  * The condition builder — the "Edit Conditions" row action on the dashboard, and
@@ -26,12 +26,12 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 	const [ conditions, setConditions ] = useState( () => {
 		const stored = Array.isArray( template.conditions ) ? template.conditions : [];
 
-		// Saved conditions only carry the rule name; the group is derived so the
-		// cascade can preselect it.
+		// A saved row is already in the shape the cascade uses; only the object
+		// label is added by the server, for the picker to show without a lookup.
 		return stored.map( ( condition ) => ( {
 			type: condition.type || 'include',
 			name: condition.name,
-			group: groupOfRule( condition.name ),
+			sub_name: condition.sub_name || '',
 			sub_id: Number( condition.sub_id ) || 0,
 			sub_label: condition.sub_label || '',
 		} ) );
@@ -65,6 +65,7 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 				conditions: conditions.map( ( row ) => ( {
 					type: row.type,
 					name: row.name,
+					sub_name: row.sub_name || '',
 					sub_id: row.sub_id || 0,
 				} ) ),
 			} );
@@ -144,7 +145,7 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 			<div className="eatb-conditions__add">
 				<button
 					type="button"
-					className="eatb-button eatb-button--secondary"
+					className="eatb-button eatb-button--primary eatb-button--add"
 					onClick={ () => setConditions( ( rows ) => [ ...rows, blankCondition() ] ) }
 				>
 					{ strings.addCondition || 'ADD NEW CONDITION' }

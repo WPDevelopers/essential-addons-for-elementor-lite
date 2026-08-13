@@ -430,7 +430,11 @@ class Ajax {
 	}
 
 	/**
-	 * Search the objects a condition rule can be narrowed down to.
+	 * Search the objects a condition can be narrowed down to.
+	 *
+	 * The client names the *condition*, not the post type or taxonomy to query.
+	 * What may be searched is resolved from the registry, so this cannot be
+	 * steered into content the condition builder never offers.
 	 *
 	 * @since 6.7.3
 	 */
@@ -438,35 +442,19 @@ class Ajax {
 		$this->verify_request();
 
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- verified in verify_request().
-		$source = isset( $_POST['source'] ) ? sanitize_key( wp_unslash( $_POST['source'] ) ) : '';
-		$search = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : '';
+		$condition = isset( $_POST['condition'] ) ? sanitize_key( wp_unslash( $_POST['condition'] ) ) : '';
+		$search    = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : '';
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
 
-		if ( ! $this->is_known_source( $source ) ) {
+		if ( ! Rules::get_source( $condition ) ) {
 			wp_send_json_error( [ 'message' => __( 'Unknown object type.', 'essential-addons-for-elementor-lite' ) ] );
 		}
 
 		wp_send_json_success(
 			[
-				'results' => Conditions_Manager::instance()->search_objects( $source, $search ),
+				'results' => Conditions_Manager::instance()->search_objects( $condition, $search ),
 			]
 		);
-	}
-
-	/**
-	 * Whether a sub-object source is declared by at least one rule.
-	 *
-	 * Prevents the endpoint from being used as a generic query proxy for post
-	 * types and taxonomies the condition builder never offers.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @param string $source Source slug.
-	 *
-	 * @return bool
-	 */
-	private function is_known_source( $source ) {
-		return '' !== Rules::get_sub_source_type( $source );
 	}
 
 	/**

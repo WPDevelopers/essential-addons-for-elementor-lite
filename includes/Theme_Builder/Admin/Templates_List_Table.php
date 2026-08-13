@@ -598,19 +598,7 @@ class Templates_List_Table extends \WP_List_Table {
 	 * @return array
 	 */
 	protected function prepare_conditions_for_ui( $template ) {
-		$manager    = Conditions_Manager::instance();
-		$conditions = $template->get_conditions();
-		$prepared   = [];
-
-		foreach ( $conditions as $condition ) {
-			$rule                    = \Essential_Addons_Elementor\Theme_Builder\Conditions\Rules::get_rule( $condition['name'] );
-			$condition['sub_label']  = ( $rule && ! empty( $rule['sub_source'] ) && $condition['sub_id'] )
-				? $manager->get_object_label( $rule['sub_source'], $condition['sub_id'] )
-				: '';
-			$prepared[]              = $condition;
-		}
-
-		return $prepared;
+		return Conditions_Manager::instance()->decorate_conditions( $template->get_conditions() );
 	}
 
 	/**

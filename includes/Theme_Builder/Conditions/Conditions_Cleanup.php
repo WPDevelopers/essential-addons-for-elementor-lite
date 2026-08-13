@@ -68,7 +68,7 @@ class Conditions_Cleanup {
 			return;
 		}
 
-		$this->purge( Rules::SOURCE_POST_TYPE, '', $post_id );
+		$this->purge( Rules::SOURCE_POST, '', $post_id );
 	}
 
 	/**
@@ -81,7 +81,7 @@ class Conditions_Cleanup {
 	 * @param string $taxonomy Taxonomy the term belonged to.
 	 */
 	public function on_deleted_term( $term_id, $tt_id, $taxonomy ) {
-		$this->purge( Rules::SOURCE_TAXONOMY, $taxonomy, $term_id );
+		$this->purge( Rules::SOURCE_TERM, $taxonomy, $term_id );
 	}
 
 	/**
@@ -135,10 +135,10 @@ class Conditions_Cleanup {
 					continue;
 				}
 
-				$name   = isset( $condition['name'] ) ? $condition['name'] : '';
-				$sub_id = isset( $condition['sub_id'] ) ? absint( $condition['sub_id'] ) : 0;
+				$sub_name = isset( $condition['sub_name'] ) ? $condition['sub_name'] : '';
+				$sub_id   = isset( $condition['sub_id'] ) ? absint( $condition['sub_id'] ) : 0;
 
-				if ( $sub_id === $object_id && isset( $rule_names[ $name ] ) ) {
+				if ( $sub_id === $object_id && isset( $rule_names[ $sub_name ] ) ) {
 					continue;
 				}
 
@@ -189,19 +189,21 @@ class Conditions_Cleanup {
 	 * @since 6.7.3
 	 *
 	 * @param string $source_type One of the `Rules::SOURCE_*` constants.
-	 * @param string $source      Sub-source slug, or an empty string for all of them.
+	 * @param string $source      Taxonomy slug, or an empty string for all of them.
 	 *
-	 * @return array Rule names as keys.
+	 * @return array Condition names as keys.
 	 */
 	private function get_rule_names( $source_type, $source ) {
 		$names = [];
 
-		foreach ( Rules::get_rules() as $name => $rule ) {
-			if ( empty( $rule['sub_source'] ) || $rule['sub_source_type'] !== $source_type ) {
+		foreach ( Rules::get_conditions() as $name => $condition ) {
+			if ( empty( $condition['source'] ) || $condition['source']['kind'] !== $source_type ) {
 				continue;
 			}
 
-			if ( '' !== $source && $rule['sub_source'] !== $source ) {
+			// A term picker is scoped to one taxonomy; a post or user picker is
+			// matched on the ID alone, which is unique site-wide either way.
+			if ( '' !== $source && Rules::SOURCE_TERM === $source_type && $condition['source']['taxonomy'] !== $source ) {
 				continue;
 			}
 

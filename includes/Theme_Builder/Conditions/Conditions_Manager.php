@@ -79,30 +79,13 @@ class Conditions_Manager {
 		$seen      = [];
 
 		foreach ( $conditions as $condition ) {
-			if ( ! is_array( $condition ) ) {
+			$row = $this->sanitize_condition( $condition );
+
+			if ( ! $row ) {
 				continue;
 			}
 
-			$type   = isset( $condition['type'] ) ? sanitize_key( $condition['type'] ) : 'include';
-			$name   = isset( $condition['name'] ) ? sanitize_key( $condition['name'] ) : '';
-			$sub_id = isset( $condition['sub_id'] ) ? absint( $condition['sub_id'] ) : 0;
-
-			if ( ! in_array( $type, [ 'include', 'exclude' ], true ) ) {
-				$type = 'include';
-			}
-
-			if ( ! Rules::is_valid( $name, $type ) ) {
-				continue;
-			}
-
-			$rule = Rules::get_rule( $name );
-
-			// A sub-object ID is only meaningful for rules that declare a source.
-			if ( empty( $rule['sub_source'] ) ) {
-				$sub_id = 0;
-			}
-
-			$key = $type . '|' . $name . '|' . $sub_id;
+			$key = implode( '|', $row );
 
 			if ( isset( $seen[ $key ] ) ) {
 				continue;
@@ -110,14 +93,63 @@ class Conditions_Manager {
 
 			$seen[ $key ] = true;
 
-			$sanitized[] = [
-				'type'   => $type,
-				'name'   => $name,
-				'sub_id' => $sub_id,
-			];
+			$sanitized[] = $row;
 		}
 
 		return $sanitized;
+	}
+
+	/**
+	 * Normalize one row, translating the pre-6.7.3 flat shape on the way.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param mixed $condition Raw row.
+	 *
+	 * @return array|null The row, or null when it cannot be evaluated.
+	 */
+	protected function sanitize_condition( $condition ) {
+		if ( ! is_array( $condition ) ) {
+			return null;
+		}
+
+		$type     = isset( $condition['type'] ) ? sanitize_key( $condition['type'] ) : 'include';
+		$name     = isset( $condition['name'] ) ? sanitize_key( $condition['name'] ) : '';
+		$sub_name = isset( $condition['sub_name'] ) ? sanitize_key( $condition['sub_name'] ) : '';
+		$sub_id   = isset( $condition['sub_id'] ) ? absint( $condition['sub_id'] ) : 0;
+
+		if ( ! in_array( $type, [ 'include', 'exclude' ], true ) ) {
+			$type = 'include';
+		}
+
+		// A row saved before the builder moved to Elementor's model names a rule
+		// where a top level condition belongs. Translate rather than drop it: the
+		// meta is what decides where a live header renders.
+		if ( '' === $sub_name && ! Rules::is_top_level( $name ) ) {
+			$legacy = Rules::map_legacy_rule( $name );
+
+			if ( ! $legacy ) {
+				return null;
+			}
+
+			list( $name, $sub_name ) = $legacy;
+		}
+
+		if ( ! Rules::is_valid_pair( $name, $sub_name ) ) {
+			return null;
+		}
+
+		// An object ID is only meaningful for a sub-condition that offers a picker.
+		if ( '' === $sub_name || ! Rules::get_source( $sub_name ) ) {
+			$sub_id = 0;
+		}
+
+		return [
+			'type'     => $type,
+			'name'     => $name,
+			'sub_name' => $sub_name,
+			'sub_id'   => $sub_id,
+		];
 	}
 
 	/**
@@ -139,7 +171,6 @@ class Conditions_Manager {
 
 		foreach ( $conditions as $condition ) {
 			$name = isset( $condition['name'] ) ? sanitize_key( $condition['name'] ) : '';
-			$type = isset( $condition['type'] ) ? sanitize_key( $condition['type'] ) : 'include';
 
 			if ( '' === $name ) {
 				return new \WP_Error(
@@ -148,7 +179,7 @@ class Conditions_Manager {
 				);
 			}
 
-			if ( ! Rules::is_valid( $name, $type ) ) {
+			if ( ! $this->sanitize_condition( $condition ) ) {
 				return new \WP_Error(
 					'eael_tb_invalid_rule',
 					__( 'One of the selected display conditions is not available. Please review your conditions.', 'essential-addons-for-elementor-lite' )
@@ -248,20 +279,44 @@ class Conditions_Manager {
 	}
 
 	/**
+	 * Whether one row matches the current request.
+	 *
+	 * Two checks, in Elementor's order: the top level first — it is cheap and
+	 * rules out most rows — and the sub-condition only if that passed.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param array $condition Sanitized row.
+	 *
+	 * @return bool
+	 */
+	public function check_condition( $condition ) {
+		if ( ! Rules::check( $condition['name'] ) ) {
+			return false;
+		}
+
+		if ( '' === (string) $condition['sub_name'] ) {
+			return true;
+		}
+
+		return Rules::check( $condition['sub_name'], $condition['sub_id'] );
+	}
+
+	/**
 	 * Score a condition set against the current request.
 	 *
 	 * @since 6.7.3
 	 *
 	 * @param array $conditions Sanitized condition rows.
 	 *
-	 * @return int|false Specificity of the winning include row, or false when the
-	 *                   set does not match the current request.
+	 * @return int|false Priority of the narrowest matching include row — **lower
+	 *                   is narrower** — or false when the set does not match.
 	 */
 	public function match_conditions( $conditions ) {
 		$score = false;
 
 		foreach ( $conditions as $condition ) {
-			if ( ! Rules::check( $condition['name'], $condition['sub_id'] ) ) {
+			if ( ! $this->check_condition( $condition ) ) {
 				continue;
 			}
 
@@ -270,10 +325,10 @@ class Conditions_Manager {
 				return false;
 			}
 
-			$specificity = Rules::get_specificity( $condition['name'], $condition['sub_id'] );
+			$priority = Rules::get_priority( $condition['name'], $condition['sub_name'], $condition['sub_id'] );
 
-			if ( false === $score || $specificity > $score ) {
-				$score = $specificity;
+			if ( false === $score || $priority < $score ) {
+				$score = $priority;
 			}
 		}
 
@@ -309,7 +364,10 @@ class Conditions_Manager {
 				continue;
 			}
 
-			if ( false === $best_score || $score > $best_score ) {
+			// The narrowest condition wins, and narrower means a *lower* score —
+			// the scale is Elementor's, where "Post: Hello World" is 20 and
+			// "Entire Site" is 100.
+			if ( false === $best_score || $score < $best_score ) {
 				$best_id    = $template['id'];
 				$best_score = $score;
 				$best_prio  = $template['priority'];
@@ -320,7 +378,7 @@ class Conditions_Manager {
 				continue;
 			}
 
-			// Same specificity: the lower priority number wins.
+			// Equally specific: the lower template priority number wins.
 			if ( $template['priority'] < $best_prio ) {
 				$best_id   = $template['id'];
 				$best_prio = $template['priority'];
@@ -374,7 +432,7 @@ class Conditions_Manager {
 
 		foreach ( $conditions as $condition ) {
 			if ( 'include' === $condition['type'] ) {
-				$claimed[ $condition['name'] . '|' . $condition['sub_id'] ] = true;
+				$claimed[ $this->condition_key( $condition ) ] = true;
 			}
 		}
 
@@ -395,7 +453,7 @@ class Conditions_Manager {
 					continue;
 				}
 
-				if ( isset( $claimed[ $condition['name'] . '|' . $condition['sub_id'] ] ) ) {
+				if ( isset( $claimed[ $this->condition_key( $condition ) ] ) ) {
 					$conflicts[ $template['id'] ] = [
 						'id'    => $template['id'],
 						'title' => get_the_title( $template['id'] ),
@@ -423,16 +481,54 @@ class Conditions_Manager {
 		$decorated = [];
 
 		foreach ( (array) $conditions as $condition ) {
-			$rule = Rules::get_rule( $condition['name'] );
-
-			$condition['sub_label'] = ( $rule && ! empty( $rule['sub_source'] ) && $condition['sub_id'] )
-				? $this->get_object_label( $rule['sub_source'], $condition['sub_id'] )
+			$condition['sub_label'] = $condition['sub_id']
+				? $this->get_object_label( $condition['sub_name'], $condition['sub_id'] )
 				: '';
 
 			$decorated[] = $condition;
 		}
 
 		return $decorated;
+	}
+
+	/**
+	 * Identity of a row, for conflict and duplicate comparisons.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param array $condition Sanitized row.
+	 *
+	 * @return string
+	 */
+	protected function condition_key( $condition ) {
+		return $condition['name'] . '|' . $condition['sub_name'] . '|' . $condition['sub_id'];
+	}
+
+	/**
+	 * The label a row is shown under: the sub-condition's, or the top level's.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param array $condition Sanitized row.
+	 *
+	 * @return string Empty when neither condition is registered any more.
+	 */
+	public function get_condition_label( $condition ) {
+		if ( '' !== (string) $condition['sub_name'] ) {
+			$sub = Rules::get_condition( $condition['sub_name'] );
+
+			if ( $sub ) {
+				// A sub-condition that owns a group is labelled by its "all" name:
+				// the row means "Posts", not "Post".
+				return empty( $sub['sub_conditions'] ) ? $sub['label'] : $sub['all_label'];
+			}
+
+			return '';
+		}
+
+		$parent = Rules::get_condition( $condition['name'] );
+
+		return $parent ? $parent['all_label'] : '';
 	}
 
 	/**
@@ -452,16 +548,14 @@ class Conditions_Manager {
 		$parts = [];
 
 		foreach ( $conditions as $condition ) {
-			$rule = Rules::get_rule( $condition['name'] );
+			$label = $this->get_condition_label( $condition );
 
-			if ( ! $rule ) {
+			if ( '' === $label ) {
 				continue;
 			}
 
-			$label = $rule['label'];
-
-			if ( $condition['sub_id'] && ! empty( $rule['sub_source'] ) ) {
-				$object = $this->get_object_label( $rule['sub_source'], $condition['sub_id'] );
+			if ( $condition['sub_id'] ) {
+				$object = $this->get_object_label( $condition['sub_name'], $condition['sub_id'] );
 
 				if ( '' === $object ) {
 					// The target is gone. Rendering a bare "Page" here reads like a
@@ -507,13 +601,7 @@ class Conditions_Manager {
 				continue;
 			}
 
-			$rule = Rules::get_rule( $condition['name'] );
-
-			if ( ! $rule || empty( $rule['sub_source'] ) ) {
-				continue;
-			}
-
-			if ( '' === $this->get_object_label( $rule['sub_source'], $condition['sub_id'] ) ) {
+			if ( '' === $this->get_object_label( $condition['sub_name'], $condition['sub_id'] ) ) {
 				$broken[] = $condition;
 			}
 		}
@@ -522,27 +610,26 @@ class Conditions_Manager {
 	}
 
 	/**
-	 * Title of a sub-object referenced by a condition.
+	 * Title of the object a condition row is narrowed to.
 	 *
 	 * @since 6.7.3
 	 *
-	 * @param string $source Object source.
-	 * @param int    $id     Object ID.
+	 * @param string $condition Condition name (the row's `sub_name`).
+	 * @param int    $id        Object ID.
 	 *
 	 * @return string Empty string when the object no longer exists.
 	 */
-	public function get_object_label( $source, $id ) {
-		$id = absint( $id );
+	public function get_object_label( $condition, $id ) {
+		$id     = absint( $id );
+		$source = Rules::get_source( $condition );
 
-		if ( ! $id ) {
+		if ( ! $id || ! $source ) {
 			return '';
 		}
 
-		// The registry knows whether the source is a post type, a taxonomy or a
-		// user lookup, so this stays correct for dynamically registered types.
-		switch ( Rules::get_sub_source_type( $source ) ) {
-			case Rules::SOURCE_TAXONOMY:
-				$term = get_term( $id, $source );
+		switch ( $source['kind'] ) {
+			case Rules::SOURCE_TERM:
+				$term = get_term( $id, $source['taxonomy'] );
 
 				return ( $term && ! is_wp_error( $term ) ) ? $term->name : '';
 
@@ -554,32 +641,46 @@ class Conditions_Manager {
 			default:
 				$post = get_post( $id );
 
-				return $post ? $post->post_title : '';
+				if ( ! $post ) {
+					return '';
+				}
+
+				return $post->post_title ? $post->post_title : __( '(no title)', 'essential-addons-for-elementor-lite' );
 		}
 	}
 
 	/**
-	 * Search selectable objects for a rule's sub-selector.
+	 * Search the objects a condition can be narrowed down to.
+	 *
+	 * The query is derived from the **condition**, never from anything else the
+	 * client sends: an unknown condition, or one with no picker, returns nothing.
+	 * That keeps the endpoint from being usable as a generic post/term/user query
+	 * proxy for content the builder never offers.
 	 *
 	 * @since 6.7.3
 	 *
-	 * @param string $source Object source.
-	 * @param string $search Search term.
-	 * @param int    $limit  Maximum number of results.
+	 * @param string $condition Condition name.
+	 * @param string $search    Search term.
+	 * @param int    $limit     Maximum number of results.
 	 *
 	 * @return array List of `[ id, text ]` rows.
 	 */
-	public function search_objects( $source, $search = '', $limit = 30 ) {
-		$source  = sanitize_key( $source );
+	public function search_objects( $condition, $search = '', $limit = 30 ) {
+		$source = Rules::get_source( sanitize_key( $condition ) );
+
+		if ( ! $source ) {
+			return [];
+		}
+
 		$search  = sanitize_text_field( $search );
 		$limit   = max( 1, min( 100, (int) $limit ) );
 		$results = [];
 
-		switch ( Rules::get_sub_source_type( $source ) ) {
-			case Rules::SOURCE_TAXONOMY:
+		switch ( $source['kind'] ) {
+			case Rules::SOURCE_TERM:
 				$terms = get_terms(
 					[
-						'taxonomy'   => $source,
+						'taxonomy'   => $source['taxonomy'],
 						'search'     => $search,
 						'number'     => $limit,
 						'hide_empty' => false,
@@ -615,17 +716,9 @@ class Conditions_Manager {
 				break;
 
 			default:
-				// Only ever query a post type a rule actually declared, so this
-				// can never be steered into an arbitrary type.
-				if ( Rules::SOURCE_POST_TYPE !== Rules::get_sub_source_type( $source ) || ! post_type_exists( $source ) ) {
-					break;
-				}
-
-				$post_type = $source;
-
 				$posts = get_posts(
 					[
-						'post_type'           => $post_type,
+						'post_type'           => (array) $source['post_type'],
 						'post_status'         => [ 'publish', 'private' ],
 						's'                   => $search,
 						'posts_per_page'      => $limit,
