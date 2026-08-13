@@ -85,6 +85,7 @@ class Frontend_Renderer {
 		$has_toggle   = $this->has_mobile_toggle();
 
 		$this->print_section_source_styles();
+		$this->print_collapse_styles();
 
 		$this->widget->add_render_attribute( 'eael_mega_menu_wrapper', [
 			'class'                 => $this->get_wrapper_classes(),
@@ -175,6 +176,68 @@ class Frontend_Renderer {
 			(int) $this->widget_number,
 			implode( ',', array_unique( $selectors ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Selector list built only from ids reduced to [A-Za-z0-9_-] above.
 		);
+	}
+
+	/**
+	 * Show the collapsed chrome from the very first paint.
+	 *
+	 * The layout switch itself is a class the handler adds once it has measured
+	 * the device, which is a frame or more after the browser has already painted
+	 * — so a phone showed the full menu bar and then snapped to a hamburger. The
+	 * fix has to be CSS, and it has to be printed here rather than live in the
+	 * stylesheet: which breakpoint collapses is a per widget setting, and the
+	 * pixel value behind it belongs to the site's Elementor breakpoints, which
+	 * can be edited in Site Settings. Only render time knows both.
+	 *
+	 * Deliberately just the three declarations that decide *which chrome shows*,
+	 * not a copy of the collapsed layout: the handler still owns that. Both
+	 * states agree, so when the class lands nothing moves.
+	 */
+	protected function print_collapse_styles() {
+		if ( ! $this->has_mobile_toggle() ) {
+			return;
+		}
+
+		$width = $this->get_breakpoint_width();
+
+		if ( ! $width ) {
+			return;
+		}
+
+		$root = '.eael-mega-menu[data-widget-number="' . (int) $this->widget_number . '"]';
+
+		// The dropdown rule excludes the open state rather than relying on being
+		// outranked by it. An attribute selector weighs the same as a class, so
+		// this selector ties with `--mobile--menu-open` at (0,3,0) — and printed
+		// in the body it comes later, so on a tie it wins and the menu could never
+		// be opened. Narrowing it to the closed state removes the contest.
+		printf(
+			'<style id="eael-mega-menu-collapse-%1$d">@media(max-width:%2$dpx){%3$s{display:flex;flex-direction:column;align-items:stretch}%3$s .eael-mega-menu__toggle{display:inline-flex;align-self:var(--eael-mm-toggle-align,flex-start)}%3$s:not(.eael-mega-menu--menu-open) .eael-mega-menu__container{display:none}}</style>',
+			(int) $this->widget_number,
+			(int) $width,
+			$root // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Built from an integer widget id only.
+		);
+	}
+
+	/**
+	 * Pixel width of the breakpoint this instance collapses at.
+	 *
+	 * @return int Zero when it cannot be resolved, which skips the inline rule.
+	 */
+	protected function get_breakpoint_width() {
+		$breakpoint = $this->get_breakpoint();
+
+		if ( 'none' === $breakpoint || ! isset( Plugin::$instance->breakpoints ) || ! is_object( Plugin::$instance->breakpoints ) ) {
+			return 0;
+		}
+
+		$active = Plugin::$instance->breakpoints->get_active_breakpoints();
+
+		if ( empty( $active[ $breakpoint ] ) || ! method_exists( $active[ $breakpoint ], 'get_value' ) ) {
+			return 0;
+		}
+
+		return (int) $active[ $breakpoint ]->get_value();
 	}
 
 	/**

@@ -7,6 +7,9 @@
  * switches the visible submenu in the preview.
  */
 
+/** Animation keys, mirroring Manager::get_animation_options(). */
+const ANIMATIONS = ["none", "fade", "slide-down", "slide-up", "zoom"];
+
 const DEVICE_ORDER_FALLBACK = [
 	"mobile",
 	"mobile_extra",
@@ -318,7 +321,14 @@ const getMegaMenuHandler = () =>
 
 			this.elements.$panels.each((index, node) => {
 				const $panel = jQuery(node);
-				const position = index + 1;
+
+				// The menu item this panel belongs to — NOT its position in the
+				// collection. Only submenu items own a panel, so on the front end a
+				// link-only item earlier in the bar leaves a gap: the third panel
+				// can belong to the fifth menu item. The renderer stamps the real
+				// index; the collection index is only a fallback for the editor,
+				// where every row is mounted and the two happen to agree.
+				const position = parseInt($panel.attr("data-item-index"), 10) || index + 1;
 
 				$panel.addClass(classes.panel);
 
@@ -1012,11 +1022,53 @@ const getMegaMenuHandler = () =>
 				this.updateDeviceMode();
 			}
 
+			if (
+				"eael_mega_menu_animation" === propertyName ||
+				"eael_mega_menu_trigger" === propertyName
+			) {
+				this.syncModifierClasses();
+			}
+
 			// Adding, removing or reordering rows re-mounts the child containers,
 			// so the cached collections have to be rebuilt.
 			if ("eael_mega_menu_items" === propertyName) {
 				this.refreshElements();
 			}
+		}
+
+		/**
+		 * Re-apply the root modifiers that used to arrive via a full re-render.
+		 *
+		 * Animation and Trigger carry `render_type: ui`, so Elementor refreshes the
+		 * element's CSS but leaves the markup — and therefore these classes —
+		 * untouched. Swapping two classes here costs nothing next to re-mounting
+		 * every panel and its contents, which is what the default render would do.
+		 *
+		 * Values are checked against the known keys before being written into a
+		 * class name; anything else falls back the way the PHP renderer does.
+		 */
+		syncModifierClasses() {
+			const root = this.elements.$root[0];
+
+			if (!root) {
+				return;
+			}
+
+			const animation = this.getElementSettings("eael_mega_menu_animation");
+			const settled = -1 !== ANIMATIONS.indexOf(animation) ? animation : "none";
+
+			Array.from(root.classList).forEach((name) => {
+				if (
+					0 === name.indexOf("eael-mega-menu--anim-") ||
+					0 === name.indexOf("eael-mega-menu--trigger-")
+				) {
+					root.classList.remove(name);
+				}
+			});
+
+			root.classList.add(`eael-mega-menu--anim-${settled}`);
+			root.classList.add(`eael-mega-menu--trigger-${this.getTrigger()}`);
+			root.setAttribute("data-trigger", this.getTrigger());
 		}
 
 		refreshElements() {

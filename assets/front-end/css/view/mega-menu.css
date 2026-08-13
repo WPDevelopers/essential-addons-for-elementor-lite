@@ -364,6 +364,27 @@
 .eael-mega-menu--editing .eael-mega-menu__panel--template .elementor-empty-view, .eael-mega-menu--editing .eael-mega-menu__panel--template .elementor-add-section {
   display: none;
 }
+.eael-mega-menu {
+  /* Default surface for an inline built panel, so a dropped menu reads as a
+   * panel floating over the page rather than transparent text on whatever sits
+   * underneath. Template and section panels are excluded — they render content
+   * that already carries its own design.
+   *
+   * This backs up the Submenu Panel → Background control, which carries the same
+   * colour as its default so the value is visible and editable. The control
+   * cannot be relied on alone: its Background *Type* field only reaches a
+   * widget's stored settings when the editor seeds it, so a panel can end up
+   * with the colour set but the type empty, which emits no CSS at all — exactly
+   * what leaves existing panels transparent.
+   *
+   * `:where()` gives this zero specificity, so anything the user actually sets
+   * wins: the widget's own control (0,3,0) and the nested container's Background
+   * (0,1,0) both beat it. To make a panel genuinely transparent, set the colour
+   * to fully transparent rather than clearing the type. */
+}
+:where(.eael-mega-menu__panel--inline) {
+  background-color: #f9f8f6;
+}
 .eael-mega-menu__template-preview {
   width: 100%;
   /* A preview, not an editing surface. Without this, a click inside would
@@ -509,6 +530,21 @@
       -ms-flex-pack: start;
           justify-content: flex-start;
 }
+.eael-mega-menu--mobile {
+  /* Park the indicator on the trailing edge.
+   *
+   * An unlinked item carries its indicator inside its own control, right
+   * after the label; a linked one gets a separate disclosure button, which
+   * the row's `space-between` pushes to the far edge. Side by side in a
+   * stacked list those two read as different components — one chevron
+   * hugging the text, the next one an inch away. Pushing the inline
+   * indicator over lines every row up the same way, whatever the item type.
+   * The disclosure button is already there, so it is left alone. */
+}
+.eael-mega-menu--mobile .eael-mega-menu__link .eael-mega-menu__item-indicator {
+  -webkit-margin-start: auto;
+          margin-inline-start: auto;
+}
 .eael-mega-menu--mobile .eael-mega-menu__panel {
   position: static;
   width: auto;
@@ -519,6 +555,8 @@
   -webkit-transform: none;
       -ms-transform: none;
           transform: none;
+  /* The reveal is a keyframe animation here, not a transition — see the
+     `--anim-*` rules below for why. */
   -webkit-transition: none;
   transition: none;
 }
@@ -528,6 +566,39 @@
 }
 .eael-mega-menu--mobile .eael-mega-menu__panel:not(.eael-mega-menu__panel--active) {
   display: none;
+}
+.eael-mega-menu {
+  /* Reveal animations, collapsed layout.
+   *
+   * The bar animates its panels with a transition, but that is unavailable
+   * here: a collapsed panel is toggled with `display`, and a transition cannot
+   * run on an element that was `display: none` a moment ago — the browser has
+   * no previous rendered state to interpolate from, which is why this layout
+   * disabled transitions outright and, until now, ignored the Animation control
+   * entirely.
+   *
+   * A keyframe animation has no such limitation: it starts the moment the
+   * element is rendered and matches the rule. Running animations also outrank
+   * normal declarations in the cascade, so these move the panel despite the
+   * `transform: none` above. Duration follows the same custom property as the
+   * bar, so the Animation Duration control keeps working. `none` is absent by
+   * design — nothing to run. */
+}
+.eael-mega-menu--mobile.eael-mega-menu--anim-fade .eael-mega-menu__panel--active {
+  -webkit-animation: eael-mm-reveal-fade var(--eael-mm-animation-duration, 300ms) ease;
+          animation: eael-mm-reveal-fade var(--eael-mm-animation-duration, 300ms) ease;
+}
+.eael-mega-menu--mobile.eael-mega-menu--anim-slide-down .eael-mega-menu__panel--active {
+  -webkit-animation: eael-mm-reveal-slide-down var(--eael-mm-animation-duration, 300ms) ease;
+          animation: eael-mm-reveal-slide-down var(--eael-mm-animation-duration, 300ms) ease;
+}
+.eael-mega-menu--mobile.eael-mega-menu--anim-slide-up .eael-mega-menu__panel--active {
+  -webkit-animation: eael-mm-reveal-slide-up var(--eael-mm-animation-duration, 300ms) ease;
+          animation: eael-mm-reveal-slide-up var(--eael-mm-animation-duration, 300ms) ease;
+}
+.eael-mega-menu--mobile.eael-mega-menu--anim-zoom .eael-mega-menu__panel--active {
+  -webkit-animation: eael-mm-reveal-zoom var(--eael-mm-animation-duration, 300ms) ease;
+          animation: eael-mm-reveal-zoom var(--eael-mm-animation-duration, 300ms) ease;
 }
 .eael-mega-menu--mobile.eael-mega-menu--menu-open .eael-mega-menu__container {
   display: -webkit-box;
@@ -573,4 +644,95 @@
   position: static;
   inset-inline: auto;
   width: 100%;
+}
+/* Keyframes for the collapsed layout's reveal. Kept at the top level because
+   `@keyframes` are global regardless of where they are declared; the offsets
+   mirror the resting transforms the bar animates out of. */
+@-webkit-keyframes eael-mm-reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes eael-mm-reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes eael-mm-reveal-slide-down {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-12px);
+            transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+@keyframes eael-mm-reveal-slide-down {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-12px);
+            transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+@-webkit-keyframes eael-mm-reveal-slide-up {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(12px);
+            transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+@keyframes eael-mm-reveal-slide-up {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(12px);
+            transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+@-webkit-keyframes eael-mm-reveal-zoom {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.96);
+            transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+@keyframes eael-mm-reveal-zoom {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.96);
+            transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
 }

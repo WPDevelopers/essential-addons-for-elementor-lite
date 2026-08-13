@@ -216,6 +216,23 @@ class Content_Controls {
 			'label' => esc_html__( 'Settings', 'essential-addons-for-elementor-lite' ),
 		] );
 
+		/*
+		 * `render_type` on the behaviour controls below is a deliberate
+		 * performance choice, not decoration.
+		 *
+		 * Elementor's default for a control with no `selectors` is a full
+		 * `renderHTML()` of the widget (see `renderChanges()` in editor.js). For a
+		 * nested widget that means tearing down and re-mounting every child
+		 * container — every panel, and everything the user has built inside it —
+		 * to change one class or a number the handler reads live. That is what
+		 * made the Animation control feel slow.
+		 *
+		 * `ui` regenerates the element's CSS only (`renderStyles()` and friends),
+		 * which keeps conditional selectors such as Animation Duration honest;
+		 * `none` skips even that, for the two settings that touch neither the
+		 * markup nor the stylesheet. The handler applies whatever visual
+		 * difference is left — see `syncModifierClasses()`.
+		 */
 		$widget->add_control( 'eael_mega_menu_trigger', [
 			'label'              => esc_html__( 'Open Submenu On', 'essential-addons-for-elementor-lite' ),
 			'type'               => Controls_Manager::SELECT,
@@ -223,6 +240,7 @@ class Content_Controls {
 			'options'            => $manager->get_trigger_options(),
 			'description'        => esc_html__( 'Touch devices always use tap, regardless of this setting.', 'essential-addons-for-elementor-lite' ),
 			'frontend_available' => true,
+			'render_type'        => 'ui',
 		] );
 
 		$widget->add_control( 'eael_mega_menu_hover_delay', [
@@ -232,6 +250,8 @@ class Content_Controls {
 			'default'            => [ 'size' => 150 ],
 			'frontend_available' => true,
 			'condition'          => [ 'eael_mega_menu_trigger' => 'hover' ],
+			// Read live by the handler on each close; nothing in the DOM or CSS.
+			'render_type'        => 'none',
 		] );
 
 		$widget->add_control( 'eael_mega_menu_close_on_outside_click', [
@@ -240,14 +260,17 @@ class Content_Controls {
 			'default'            => 'yes',
 			'return_value'       => 'yes',
 			'frontend_available' => true,
+			// Read live by the document click handler; nothing in the DOM or CSS.
+			'render_type'        => 'none',
 		] );
 
 		$widget->add_control( 'eael_mega_menu_animation', [
-			'label'     => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::SELECT,
-			'default'   => 'fade',
-			'options'   => $manager->get_animation_options(),
-			'separator' => 'before',
+			'label'       => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SELECT,
+			'default'     => 'fade',
+			'options'     => $manager->get_animation_options(),
+			'separator'   => 'before',
+			'render_type' => 'ui',
 		] );
 
 		$widget->add_control( 'eael_mega_menu_animation_duration', [

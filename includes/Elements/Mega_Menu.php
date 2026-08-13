@@ -151,6 +151,55 @@ class Mega_Menu extends Widget_Nested_Base {
 	}
 
 	/**
+	 * Per row settings the frontend handler actually reads.
+	 *
+	 * Mirrors getItemType() / getItemSetting() in src/js/view/mega-menu.js. The
+	 * legacy switcher is kept because getItemType() still falls back to it for
+	 * rows saved before the type control existed.
+	 */
+	const FRONTEND_ITEM_KEYS = [
+		'eael_mega_menu_item_type',
+		'eael_mega_menu_item_has_submenu',
+		'eael_mega_menu_item_submenu_width',
+		'eael_mega_menu_item_submenu_custom_width',
+		'eael_mega_menu_item_panel_align',
+		'eael_mega_menu_item_panel_offset_x',
+		'eael_mega_menu_item_panel_offset_y',
+	];
+
+	/**
+	 * Strip the menu item rows down to what the handler needs.
+	 *
+	 * The repeater is `frontend_available` because the handler resolves each
+	 * panel's width and placement from it — but the default serialisation ships
+	 * *every* field, labels, links, icons, template ids, CSS classes and all,
+	 * into a `data-settings` attribute. On a widget built for site headers that
+	 * is dead weight on every page of the site: a six item menu measured 7.2 KB,
+	 * roughly half of it never read.
+	 *
+	 * Only the front end is affected. Inside the editor the handler reads the
+	 * live settings model rather than this attribute, so the template preview and
+	 * every other editor-only lookup keep seeing the full row.
+	 *
+	 * @inheritDoc
+	 */
+	public function get_frontend_settings() {
+		$settings = parent::get_frontend_settings();
+
+		if ( empty( $settings['eael_mega_menu_items'] ) || ! is_array( $settings['eael_mega_menu_items'] ) ) {
+			return $settings;
+		}
+
+		$keep = array_flip( self::FRONTEND_ITEM_KEYS );
+
+		foreach ( $settings['eael_mega_menu_items'] as $index => $item ) {
+			$settings['eael_mega_menu_items'][ $index ] = array_intersect_key( (array) $item, $keep );
+		}
+
+		return $settings;
+	}
+
+	/**
 	 * Frontend renderer, lazily built.
 	 *
 	 * @return Frontend_Renderer

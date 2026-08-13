@@ -99,6 +99,15 @@ class Manager {
 			wp_send_json_error( [ 'message' => esc_html__( 'You are not allowed to preview templates.', 'essential-addons-for-elementor-lite' ) ], 403 );
 		}
 
+		// The action is registered on every request — Bootstrap boots this feature
+		// without checking Elementor, and it cannot: `plugins_loaded` runs before
+		// `elementor/loaded`. So the dependency is asserted here instead, where it
+		// is knowable. Without it, deactivating Elementor while library templates
+		// remain turns a stale editor tab into a fatal on `Plugin::$instance`.
+		if ( ! Conditions::has_elementor() ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Elementor is not available.', 'essential-addons-for-elementor-lite' ) ], 400 );
+		}
+
 		$template_id = isset( $_POST['template_id'] ) ? absint( $_POST['template_id'] ) : 0;
 		$page_id     = isset( $_POST['page_id'] ) ? absint( $_POST['page_id'] ) : 0;
 
