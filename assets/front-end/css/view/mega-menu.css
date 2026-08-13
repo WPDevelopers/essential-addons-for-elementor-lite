@@ -341,13 +341,36 @@
   display: none;
 }
 .eael-mega-menu {
-  /* A saved-template panel renders on the front end, so the nested container
-     behind it is unused. Make that obvious rather than inviting a drop. */
+  /* A saved-template or section panel renders its own content on the front end,
+     so the nested container behind it is unused. The dashed edge says "not a
+     drop target" without hiding what is inside. */
 }
 .eael-mega-menu--editing .eael-mega-menu__panel--template, .eael-mega-menu--editing .eael-mega-menu__panel--section {
-  opacity: 0.55;
   outline: 1px dashed currentColor;
   outline-offset: -1px;
+}
+.eael-mega-menu {
+  /* A section panel stays empty in the editor — the element it borrows is only
+     moved in on the front end — so it is dimmed to read as a placeholder. A
+     template panel is not: it shows the real template. */
+}
+.eael-mega-menu--editing .eael-mega-menu__panel--section {
+  opacity: 0.55;
+}
+.eael-mega-menu {
+  /* The container's own "Drag widget here" prompt would otherwise sit on top of
+     the preview, inviting a drop into a container the front end ignores. */
+}
+.eael-mega-menu--editing .eael-mega-menu__panel--template .elementor-empty-view, .eael-mega-menu--editing .eael-mega-menu__panel--template .elementor-add-section {
+  display: none;
+}
+.eael-mega-menu__template-preview {
+  width: 100%;
+  /* A preview, not an editing surface. Without this, a click inside would
+     reach Elementor's nested element handler carrying a `data-id` from the
+     *template's* document, which resolves to no container in the one being
+     edited. */
+  pointer-events: none;
 }
 .eael-mega-menu {
   /* --------------------------------------------------------------------- */

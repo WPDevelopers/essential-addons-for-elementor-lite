@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 use Elementor\Plugin;
+use Essential_Addons_Elementor\Classes\Helper;
 
 /**
  * Service provider for the Mega Menu feature.
@@ -40,6 +41,11 @@ class Manager {
 	const CSS_ROOT = 'eael-mega-menu';
 
 	/**
+	 * admin-ajax action that renders a saved template for the editor preview.
+	 */
+	const TEMPLATE_PREVIEW_ACTION = 'eael_mega_menu_template_preview';
+
+	/**
 	 * @var Manager|null
 	 */
 	private static $instance = null;
@@ -69,6 +75,49 @@ class Manager {
 		// on this hook at the default priority, and EA boots on `plugins_loaded`,
 		// which is earlier than the `init` pass that registers Elementor's modules.
 		add_action( 'elementor/editor/before_enqueue_scripts', [ $this, 'enqueue_editor_scripts' ], 20 );
+
+		// Logged-in only by design — there is no `nopriv` twin. The preview exists
+		// for the editor and returns rendered post content, so it stays behind the
+		// capability check in the handler.
+		add_action( 'wp_ajax_' . self::TEMPLATE_PREVIEW_ACTION, [ $this, 'ajax_template_preview' ] );
+	}
+
+	/**
+	 * Render a saved template so the editor can preview it inside its panel.
+	 *
+	 * The editor builds the widget from its JS template, which cannot run the PHP
+	 * that pulls a saved template in, so a Saved Template item would otherwise show
+	 * nothing there — only the unused nested container behind it. This returns the
+	 * same markup the front end renders; `get_builder_content()` forces the
+	 * document's CSS inline during an AJAX request, so the response is self
+	 * contained and needs no extra stylesheet wiring in the preview.
+	 */
+	public function ajax_template_preview() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You are not allowed to preview templates.', 'essential-addons-for-elementor-lite' ) ], 403 );
+		}
+
+		$template_id = isset( $_POST['template_id'] ) ? absint( $_POST['template_id'] ) : 0;
+		$page_id     = isset( $_POST['page_id'] ) ? absint( $_POST['page_id'] ) : 0;
+
+		// The same guards the front end renderer applies: a published library
+		// template, and never the document being edited — that would recurse.
+		if ( ! $template_id || $template_id === $page_id ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Invalid template.', 'essential-addons-for-elementor-lite' ) ], 400 );
+		}
+
+		// WPML compatibility, mirroring Frontend_Renderer::render_template_panel().
+		$template_id = apply_filters( 'wpml_object_id', $template_id, 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
+		if ( ! Helper::is_elementor_publish_template( $template_id ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Template not found.', 'essential-addons-for-elementor-lite' ) ], 404 );
+		}
+
+		wp_send_json_success( [
+			'html' => Plugin::$instance->frontend->get_builder_content( $template_id, true ),
+		] );
 	}
 
 	/**

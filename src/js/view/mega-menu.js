@@ -17,6 +17,62 @@ const DEVICE_ORDER_FALLBACK = [
 	"widescreen",
 ];
 
+/**
+ * Rendered saved templates, keyed by template id.
+ *
+ * A panel is re-mounted on every settings change, so without this the editor
+ * would re-request the same template on every keystroke in the repeater.
+ */
+const templatePreviewCache = {};
+
+/**
+ * Ask the server for a saved template's markup (its CSS comes inlined).
+ *
+ * @param {number} templateId Elementor library post id.
+ * @param {number} pageId     Document being edited, so the server can refuse to
+ *                            render it into itself.
+ *
+ * @return {Promise<string>} Rendered markup.
+ */
+const fetchTemplatePreview = (templateId, pageId) => {
+	if (templatePreviewCache[templateId]) {
+		return templatePreviewCache[templateId];
+	}
+
+	// `localize` is printed by Asset_Builder alongside the widget's own script.
+	if ("undefined" === typeof localize || !localize.ajaxurl) {
+		return Promise.reject(new Error("eael: no ajax config"));
+	}
+
+	templatePreviewCache[templateId] = fetch(localize.ajaxurl, {
+		method: "POST",
+		credentials: "same-origin",
+		headers: { "Content-Type": "application/x-www-form-urlencoded" },
+		body: new URLSearchParams({
+			action: "eael_mega_menu_template_preview",
+			security: localize.nonce,
+			template_id: templateId,
+			page_id: pageId || 0,
+		}).toString(),
+	})
+		.then((response) => response.json())
+		.then((response) => {
+			if (!response || !response.success || !response.data || !response.data.html) {
+				throw new Error("eael: empty template preview");
+			}
+
+			return response.data.html;
+		});
+
+	// A failed request must not poison the cache for the rest of the session —
+	// the template may simply not be published yet.
+	templatePreviewCache[templateId].catch(() => {
+		delete templatePreviewCache[templateId];
+	});
+
+	return templatePreviewCache[templateId];
+};
+
 const getMegaMenuHandler = () =>
 	class EaelMegaMenuHandler extends elementorModules.frontend.handlers.Base {
 		getDefaultSettings() {
@@ -41,6 +97,7 @@ const getMegaMenuHandler = () =>
 					panelInline: "eael-mega-menu__panel--inline",
 					panelTemplate: "eael-mega-menu__panel--template",
 					panelSection: "eael-mega-menu__panel--section",
+					templatePreview: "eael-mega-menu__template-preview",
 					sectionSource: "eael-mega-menu__section-source",
 					panelActive: "eael-mega-menu__panel--active",
 					hasSubmenu: "eael-mega-menu__item--has-submenu",
@@ -288,6 +345,7 @@ const getMegaMenuHandler = () =>
 
 					if ("template" === type) {
 						$panel.addClass(classes.panelTemplate);
+						this.renderTemplatePreview($panel, position);
 					} else if ("section" === type) {
 						$panel.addClass(classes.panelSection);
 					} else {
@@ -297,6 +355,77 @@ const getMegaMenuHandler = () =>
 
 				$panel[0].style.setProperty("--eael-mm-order", String(position * 2 + 1));
 			});
+		}
+
+		/**
+		 * Show a Saved Template item's template inside its panel, in the editor.
+		 *
+		 * The panel itself is the item's (unused) nested container, so the preview
+		 * goes into a wrapper of our own rather than among the container's child
+		 * views, where Elementor would treat it as content it owns.
+		 *
+		 * @param {Object} $panel   jQuery panel element.
+		 * @param {number} position Menu item position.
+		 */
+		renderTemplatePreview($panel, position) {
+			const { classes } = this.getSettings();
+			const templateId = parseInt(
+				this.getItemSetting(position, "eael_mega_menu_item_template", 0),
+				10
+			);
+			const $current = $panel.children(`.${classes.templatePreview}`);
+
+			if (!templateId) {
+				$current.remove();
+
+				return;
+			}
+
+			// Already showing this template — a re-mount must not refetch or flash.
+			if ($current.length && String(templateId) === $current.attr("data-template-id")) {
+				return;
+			}
+
+			$current.remove();
+
+			const $preview = jQuery("<div>", {
+				class: classes.templatePreview,
+				"data-template-id": templateId,
+			});
+
+			$panel.append($preview);
+
+			fetchTemplatePreview(templateId, this.getEditedPostId())
+				.then((html) => {
+					// The row may have changed type, or the panel may have been
+					// re-mounted, while the request was in flight.
+					if (!$preview.closest("body").length) {
+						return;
+					}
+
+					$preview.html(html);
+
+					// Give widgets inside the template a chance to initialise, so a
+					// carousel previews as a carousel. Failures are not fatal: the
+					// markup is already on screen either way.
+					try {
+						elementorFrontend.elementsHandler.runReadyTrigger($preview);
+					} catch (e) {}
+				})
+				.catch(() => {
+					$preview.remove();
+				});
+		}
+
+		/**
+		 * Id of the document being edited, when it can be determined.
+		 */
+		getEditedPostId() {
+			try {
+				return parseInt(elementorFrontend.config.post.id, 10) || 0;
+			} catch (e) {
+				return 0;
+			}
 		}
 
 		/**
