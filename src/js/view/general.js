@@ -161,6 +161,59 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
+	/**
+	 * Click the element carrying the given id, where the id is untrusted input
+	 * (a URL fragment, a query parameter, …).
+	 *
+	 * Never build `$('#' + id)` from such input. A URL fragment may legally carry
+	 * `,` and `*` unencoded, so `#x,*` turns a single id lookup into a selector
+	 * list matching the whole document, and jQuery's .trigger('click') also
+	 * invokes the native method — anchors navigate and buttons submit. Looking
+	 * the id up with getElementById treats it as a literal id instead of a
+	 * selector, so widening is structurally impossible; it also accepts every
+	 * id HTML5 permits (leading digits, unicode) that an allowlist pattern would
+	 * wrongly reject, and returns null instead of throwing on malformed input.
+	 *
+	 * @param {string} id Untrusted element id.
+	 * @return {boolean} Whether a matching element was found and clicked.
+	 */
+	eael.triggerClickById = function (id) {
+		if (typeof id !== 'string' || id === '' || id === 'undefined') {
+			return false;
+		}
+
+		const element = document.getElementById(id);
+
+		if (!element) {
+			return false;
+		}
+
+		$(element).trigger('click');
+
+		return true;
+	};
+
+	/**
+	 * Whether an untrusted CSS selector is narrow enough to click.
+	 *
+	 * Only used for selectors that address a single configured trigger element.
+	 * Every descendant step must be a chain of `.class` / `#id` tokens, so bare
+	 * type selectors (`button`, `a`, `li`), `*`, attribute selectors and pseudo
+	 * classes cannot be used to widen the match to unrelated page elements.
+	 *
+	 * @param {string} selector Untrusted CSS selector.
+	 * @return {boolean} Whether the selector is safe to act on.
+	 */
+	eael.isSafeTriggerSelector = function (selector) {
+		if (typeof selector !== 'string' || !selector.length || selector.length > 200) {
+			return false;
+		}
+
+		return selector.trim().split(/\s+/).every(function (step) {
+			return /^(?:[.#][A-Za-z0-9_-]+)+$/.test(step);
+		});
+	};
+
 	//Add hashchange code from advanced-accordion
 	let isTriggerOnHashchange = true;
 	window.addEventListener('hashchange', function () {
@@ -169,9 +222,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 		let hashTag = window.location.hash.substr(1);
 		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
-		if (hashTag !== 'undefined' && hashTag && /^[A-Za-z][-A-Za-z0-9_:.]*$/.test(hashTag)) {
-			$('#' + hashTag).trigger('click');
-		}
+		eael.triggerClickById(hashTag);
 	});
 
 	$('a').on('click', function (e) {
@@ -275,10 +326,15 @@ jQuery(window).on("elementor/frontend/init", function () {
 		let resetPasswordParams = new URLSearchParams(location.search);
 
 		if (resetPasswordParams.has('popup-selector') && (resetPasswordParams.has('eael-lostpassword') || resetPasswordParams.has('eael-resetpassword'))) {
-			let popupSelector = resetPasswordParams.get('popup-selector');
+			// NOTE: this selector arrives in the URL, so it is attacker-controlled even
+			// though the widget setting behind it is not. Validate the string that is
+			// actually executed — after the underscore/space swap — and only accept the
+			// class/id form the control documents ("Popup Button Selector", e.g.
+			// `.parent .child`). The previous pattern still allowed bare type selectors,
+			// so `?popup-selector=button` clicked every button on the page.
+			const popupSelector = resetPasswordParams.get('popup-selector').replace(/_/g, " ");
 
-			if (popupSelector.length && /^[A-Za-z.#][A-Za-z0-9_:.#\s-]*$/.test(popupSelector)) {
-				popupSelector = popupSelector.replace(/_/g, " ");
+			if (eael.isSafeTriggerSelector(popupSelector)) {
 				setTimeout(function () {
 					jQuery(popupSelector).trigger('click');
 				}, 300);

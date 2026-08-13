@@ -61,9 +61,9 @@ eael.hooks.addAction("init", "ea", () => {
 
 			window.addEventListener('hashchange', function (e) {
 				hashTag = window.location.hash.substr(1);
-				if (hashTag !== 'undefined' && hashTag) {
-					$('#' + hashTag).trigger('click');
-				}
+				// The fragment is untrusted — resolve it as a literal id, never as a
+				// selector. See eael.triggerClickById() in general.js.
+				eael.triggerClickById(hashTag);
 			});
 
 			var hashLink = false;
@@ -259,9 +259,14 @@ eael.hooks.addAction("init", "ea", () => {
 			$($currentTabId + ' > .eael-tabs-nav ul li.active', $scope).attr('tabindex', '0');
 
 			// If hashTag is not null then scroll to that hashTag smoothly
-			if( typeof hashTag !== 'undefined' && hashTag && !eael.elementStatusCheck('eaelAdvancedTabScroll')){
+			// $hashTarget is resolved by literal id (not as a selector) and may be empty
+			// when the fragment names no element on the page — calling .offset() on an
+			// empty set returns undefined and would throw, killing the rest of this handler.
+			const $hashTarget = $(document.getElementById(hashTag) || []);
+
+			if( typeof hashTag !== 'undefined' && hashTag && $hashTarget.length && !eael.elementStatusCheck('eaelAdvancedTabScroll')){
 				let $customIdOffsetValTab = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
-				let scrollPosition = $("#"+hashTag).offset().top;
+				let scrollPosition = $hashTarget.offset().top;
 
 				// For vertical layout, adjust scroll position to account for content area positioning
 				if ($currentTab.hasClass('eael-tabs-vertical')) {
