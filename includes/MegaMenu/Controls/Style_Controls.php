@@ -548,10 +548,26 @@ class Style_Controls {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
+		// Scoped to the inline built panels — the ones whose surface the widget
+		// owns. A saved template or a borrowed section arrives with its own
+		// design, so painting a default behind it would only show at the edges.
+		//
+		// The default is set on the control rather than in the stylesheet so it
+		// is visible in the panel: users see the colour they are getting and can
+		// change or clear it, instead of hunting for a value they cannot find.
 		$widget->add_group_control( Group_Control_Background::get_type(), [
-			'name'     => 'eael_mega_menu_panel_background',
-			'types'    => [ 'classic', 'gradient' ],
-			'selector' => $panel_selector,
+			'name'           => 'eael_mega_menu_panel_background',
+			'types'          => [ 'classic', 'gradient' ],
+			'selector'       => '{{WRAPPER}} .eael-mega-menu__panel--inline',
+			'fields_options' => [
+				'background' => [
+					'default'     => 'classic',
+					'description' => esc_html__( 'Applies to menu items built inline. Saved Template and Section CSS ID items keep their own background.', 'essential-addons-for-elementor-lite' ),
+				],
+				'color'      => [
+					'default' => '#F9F8F6',
+				],
+			],
 		] );
 
 		$widget->add_group_control( Group_Control_Border::get_type(), [

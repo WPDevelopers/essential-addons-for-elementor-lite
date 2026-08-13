@@ -288,13 +288,18 @@ class Frontend_Renderer {
 	/**
 	 * Decorate a nested container so it behaves as a submenu panel.
 	 *
+	 * Only ever called for an inline built panel — the template and section types
+	 * print their own wrappers — so the `--inline` modifier marks exactly the
+	 * panels whose surface the widget owns, and which therefore carry the default
+	 * background. A saved template or a borrowed section brings its own design.
+	 *
 	 * @param \Elementor\Element_Base $container Child container element.
 	 * @param array                   $prepared  Prepared repeater row.
 	 */
 	public function add_panel_attributes( $container, $prepared ) {
 		$container->add_render_attribute( '_wrapper', [
 			'id'              => $prepared['panel_id'],
-			'class'           => 'eael-mega-menu__panel',
+			'class'           => [ 'eael-mega-menu__panel', 'eael-mega-menu__panel--inline' ],
 			'aria-labelledby' => $prepared['item_id'],
 			'data-item-index' => $prepared['position'],
 			'data-width-mode' => $prepared['width_mode'],

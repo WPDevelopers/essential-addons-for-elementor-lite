@@ -38,6 +38,7 @@ const getMegaMenuHandler = () =>
 					active: "eael-mega-menu--active",
 					itemActive: "eael-mega-menu__item--active",
 					panel: "eael-mega-menu__panel",
+					panelInline: "eael-mega-menu__panel--inline",
 					panelTemplate: "eael-mega-menu__panel--template",
 					panelSection: "eael-mega-menu__panel--section",
 					sectionSource: "eael-mega-menu__section-source",
@@ -280,12 +281,17 @@ const getMegaMenuHandler = () =>
 				}
 
 				if (this.isEdit) {
+					// The editor mounts bare containers, so the type modifiers the
+					// PHP renderer prints have to be recreated here — including
+					// `--inline`, which carries the panel's default surface.
 					const type = this.getItemType(position);
 
 					if ("template" === type) {
 						$panel.addClass(classes.panelTemplate);
 					} else if ("section" === type) {
 						$panel.addClass(classes.panelSection);
+					} else {
+						$panel.addClass(classes.panelInline);
 					}
 				}
 

@@ -242,20 +242,31 @@
 		transform: none;
 	}
 
-	/* Reveal animations. */
+
+	/* Reveal animations.
+	 *
+	 * The transform is the panel's *resting* state — the offset it animates out
+	 * of — so it has to stop applying the instant the panel opens. That is what
+	 * `:not(--active)` is for, and it is load bearing: written as a bare
+	 * `&__panel` these rules are (0,2,0) and outrank the `transform: none` on
+	 * `&__panel--active` (0,1,0), so an opening panel kept its offset and
+	 * animated backwards — coming to rest 12px out of place, or permanently
+	 * scaled to 0.96, instead of settling into position. Excluding the open
+	 * panel leaves it with no transform to fight over, and the class flip still
+	 * animates it in both directions. */
 	&--anim-none &__panel {
 		transition: none;
 	}
 
-	&--anim-slide-down &__panel {
+	&--anim-slide-down &__panel:not(.eael-mega-menu__panel--active) {
 		transform: translateY(-12px);
 	}
 
-	&--anim-slide-up &__panel {
+	&--anim-slide-up &__panel:not(.eael-mega-menu__panel--active) {
 		transform: translateY(12px);
 	}
 
-	&--anim-zoom &__panel {
+	&--anim-zoom &__panel:not(.eael-mega-menu__panel--active) {
 		transform: scale(0.96);
 	}
 
