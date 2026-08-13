@@ -160,7 +160,7 @@ trait Ajax_Handler {
 		$html                       = '';
 		$class                      = !empty( $_REQUEST['class'] ) ? '\\' . str_replace( '\\\\', '\\', sanitize_text_field( wp_unslash( $_REQUEST['class'] ) ) ) : '';
 		$page = !empty(  $_REQUEST['page'] ) ? absint( $_REQUEST['page'] ) : 1;
-		$args['offset']             = (int) $args['offset'] + ( ( (int) $page - 1 ) * (int) $args['posts_per_page'] );
+		$args['offset']             = ( isset( $args['offset'] ) ? (int) $args['offset'] : 0 ) + ( ( (int) $page - 1 ) * ( isset( $args['posts_per_page'] ) ? (int) $args['posts_per_page'] : 0 ) );
 
 		if ( isset( $_REQUEST['taxonomy'] ) && isset( $_REQUEST['taxonomy']['taxonomy'] ) && $_REQUEST['taxonomy']['taxonomy'] != 'all' ) {
 			$args['tax_query'] = [
@@ -192,6 +192,39 @@ trait Ajax_Handler {
 		}
 		if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
 			do_action( 'eael/woo-product-list/before-product-loop' );
+		}
+		$wc_catalog_ordering_applied = false;
+
+		if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_Gallery' ) {
+			// Safety net for page markup cached before build_archive_load_more_args()
+			// existed: that payload shipped the archive main query's raw vars, in which
+			// post_type is an empty string. WP_Query only resolves it to `product` while
+			// a product taxonomy var survives the round trip — otherwise it silently
+			// falls back to the `post` type and the gallery loads nothing.
+			if ( empty( $args['post_type'] ) ) {
+				$args['post_type'] = 'product';
+			}
+
+			// Re-apply WooCommerce's clause-based catalog ordering (price / popularity /
+			// rating) for this request, so Load More keeps the order the archive is
+			// showing instead of falling back to date and repeating products.
+			if ( ! empty( $args['eael_wc_catalog_orderby'] ) && function_exists( 'WC' ) && ! empty( WC()->query ) ) {
+				$wc_ordering = WC()->query->get_catalog_ordering_args(
+					sanitize_key( $args['eael_wc_catalog_orderby'] ),
+					( ! empty( $args['order'] ) && 'DESC' === strtoupper( $args['order'] ) ) ? 'DESC' : 'ASC'
+				);
+
+				$wc_catalog_ordering_applied = true;
+
+				$args['orderby'] = $wc_ordering['orderby'];
+				$args['order']   = $wc_ordering['order'];
+
+				if ( ! empty( $wc_ordering['meta_key'] ) ) {
+					$args['meta_key'] = $wc_ordering['meta_key'];
+				}
+			}
+
+			unset( $args['eael_wc_catalog_orderby'] );
 		}
 		// ensure control name compatibility to old code if it is post block
 		if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_Block' ) {
@@ -329,6 +362,14 @@ trait Ajax_Handler {
 			if ( $file_path ) {
 				// wp_send_json( $args );
 				$query = new \WP_Query( $args );
+
+				// The catalog ordering above works through `posts_clauses`; detach it as
+				// soon as the SQL is built so it cannot leak into any later query.
+				if ( $wc_catalog_ordering_applied ) {
+					WC()->query->remove_ordering_args();
+					$wc_catalog_ordering_applied = false;
+				}
+
 				$found_posts = $query->found_posts;
 				$iterator = 0;
 
@@ -740,9 +781,14 @@ trait Ajax_Handler {
 		}
 
 		// Scalar single-int vars.
+		// NOTE: an empty string is left untouched on purpose. WP_Query reads '' as
+		// "not set" for these vars, but reads 0 as a real filter — casting '' to 0
+		// here would silently append `menu_order = 0`, `post_parent = 0` and a
+		// `DATE_FORMAT( post_date, '%H.%i%s' ) = 0` clause to the query, which is how
+		// widgets that ship raw main-query vars lost every result past page one.
 		$int_keys = [ 'tag_id', 'p', 'page_id', 'post_parent', 'offset', 'paged', 'page', 'posts_per_page', 'numberposts', 'menu_order', 'w', 'year', 'monthnum', 'day', 'hour', 'minute', 'second' ];
 		foreach ( $int_keys as $key ) {
-			if ( isset( $args[ $key ] ) && ! is_array( $args[ $key ] ) ) {
+			if ( isset( $args[ $key ] ) && ! is_array( $args[ $key ] ) && '' !== $args[ $key ] ) {
 				$args[ $key ] = (int) $args[ $key ];
 			}
 		}
@@ -1169,7 +1215,7 @@ trait Ajax_Handler {
 		$settings['eael_widget_id'] = $widget_id;
 		$settings['eael_page_id']   = $page_id;
 		$page = !empty(  $_REQUEST['page'] ) ? absint( $_REQUEST['page'] ) : 1;
-		$args['offset']             = (int) $args['offset'] + ( ( (int) $page - 1 ) * (int) $args['posts_per_page'] );
+		$args['offset']             = ( isset( $args['offset'] ) ? (int) $args['offset'] : 0 ) + ( ( (int) $page - 1 ) * ( isset( $args['posts_per_page'] ) ? (int) $args['posts_per_page'] : 0 ) );
 
 		if ( isset( $_REQUEST['taxonomy'] ) && isset( $_REQUEST['taxonomy']['taxonomy'] ) && $_REQUEST['taxonomy']['taxonomy'] != 'all' ) {
 			$args['tax_query'] = [
