@@ -239,12 +239,24 @@
   transition: opacity var(--eael-mm-animation-duration, 300ms) ease, transform var(--eael-mm-animation-duration, 300ms) ease, visibility var(--eael-mm-animation-duration, 300ms) ease, -webkit-transform var(--eael-mm-animation-duration, 300ms) ease;
 }
 .eael-mega-menu__panel[data-width-mode=item] {
-  width: var(--eael-mm-panel-width, -webkit-max-content);
-  width: var(--eael-mm-panel-width, -moz-max-content);
-  width: var(--eael-mm-panel-width, max-content);
-  /* `max-content` is an intrinsic size: a panel whose children are
-     nowrap or full-width can resolve to thousands of pixels and blow
-     out of the viewport. Clamp it. */
+  /* `fit-content`, never `max-content`.
+   *
+   * Both shrink the panel to its content, but `max-content` ignores the
+   * space actually available, so a panel anchored part way along the bar
+   * whose content is intrinsically wide — a section pulled in by CSS ID is
+   * the usual case, since it was authored to span the page — resolves to
+   * that full intrinsic width, runs past the right edge and drags a
+   * horizontal scrollbar onto the document.
+   *
+   * For an absolutely positioned box, `fit-content` resolves against the
+   * containing block *minus the inline offset*, which is exactly the room
+   * the panel has: it stops at the menu's edge and its content wraps
+   * inside instead of spilling out. `auto` behaves the same way here, so
+   * browsers too old for the keyword degrade to the same layout. */
+  width: var(--eael-mm-panel-width, -webkit-fit-content);
+  width: var(--eael-mm-panel-width, -moz-fit-content);
+  width: var(--eael-mm-panel-width, fit-content);
+  /* Backstop for content whose min-content width exceeds even that. */
   max-width: min(100vw, 100%);
 }
 .eael-mega-menu__panel--active {

@@ -312,13 +312,26 @@ const getMegaMenuHandler = () =>
 			this.elements.$panels.each((i, node) => {
 				const sectionId = node.getAttribute("data-section-id");
 
-				if (!sectionId || node.children.length) {
+				if (!sectionId) {
 					return;
 				}
 
 				const source = document.getElementById(sectionId);
 
-				if (!source || source === node) {
+				if (!source) {
+					return;
+				}
+
+				// Mark it before deciding anything else. The renderer prints a rule
+				// that hides the referenced section until this class appears, so
+				// that it never flashes in its authored place before being moved —
+				// which makes the class mean "the handler has dealt with this
+				// element", not "the move succeeded". Every bail-out below has to
+				// leave it set, or a section we deliberately refuse to move would
+				// stay hidden for the life of the page.
+				source.classList.add(classes.sectionSource);
+
+				if (source === node || node.children.length) {
 					return;
 				}
 
@@ -328,7 +341,6 @@ const getMegaMenuHandler = () =>
 					return;
 				}
 
-				source.classList.add(classes.sectionSource);
 				node.appendChild(source);
 			});
 		}
@@ -532,7 +544,10 @@ const getMegaMenuHandler = () =>
 					`${width.size}${width.unit || "px"}`
 				);
 			} else {
-				panel.style.setProperty("--eael-mm-panel-width", "max-content");
+				// Fit to content, capped at the room the panel actually has — see
+				// the `[data-width-mode="item"]` rule for why this is not
+				// `max-content`.
+				panel.style.setProperty("--eael-mm-panel-width", "fit-content");
 			}
 
 			const itemOffset = $item.length ? this.getItemInlineOffset($item[0], container) : 0;
@@ -541,6 +556,12 @@ const getMegaMenuHandler = () =>
 			let start = itemOffset;
 
 			if ("start" !== align && $item.length) {
+				// Measure from the menu's own edge rather than wherever the last
+				// pass left the panel: a fit-content width is a function of the
+				// inline offset, so measuring against a stale one would feed that
+				// offset back into the width it is about to be used to compute.
+				panel.style.setProperty("--eael-mm-panel-inset-start", "0px");
+
 				// The width was just applied, so the panel can be measured now.
 				const panelWidth = panel.getBoundingClientRect().width;
 				const itemWidth = $item[0].getBoundingClientRect().width;
@@ -720,15 +741,17 @@ const getMegaMenuHandler = () =>
 
 			const hasHref = "A" === event.currentTarget.tagName && event.currentTarget.getAttribute("href");
 
-			// A linked item keeps its link; its dedicated disclosure button owns
-			// the submenu. Unlinked items toggle from the item itself.
-			if (hasHref && !this.isMobileMode() && !this.isTouchMode()) {
-				return;
-			}
-
-			// On touch / mobile the first tap reveals the submenu, a second tap
-			// follows the link.
-			if (hasHref && this.activeIndex === index) {
+			// A linked item keeps its link and lets its dedicated disclosure button
+			// own the submenu — but only while the submenu opens on hover, where
+			// the panel is already open by the time a click lands, so the click has
+			// nothing left to do but navigate.
+			//
+			// Wherever the menu opens on click instead — by setting, by touch, or
+			// in the collapsed layout — the label is the submenu control: it opens
+			// the panel and closes it again, exactly like the indicator icon beside
+			// it. The trade is deliberate: an item that owns a submenu does not
+			// navigate on click, so its own URL is only followed in hover mode.
+			if (hasHref && !this.usesClickTrigger()) {
 				return;
 			}
 

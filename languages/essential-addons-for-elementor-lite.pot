@@ -569,7 +569,7 @@ msgstr ""
 msgid "Simple Menu"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:674, ../includes/Elements/Mega_Menu.php:52, ../includes/Traits/Admin.php:862, ../includes/MegaMenu/Renderers/Editor_Renderer.php:71, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:93
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:674, ../includes/Elements/Mega_Menu.php:52, ../includes/Traits/Admin.php:862, ../includes/MegaMenu/Renderers/Editor_Renderer.php:71, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:95
 msgid "Mega Menu"
 msgstr ""
 
@@ -2033,7 +2033,7 @@ msgstr ""
 msgid "Vertical Layout"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:1474, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:215
+#: ../includes/Elements/Adv_Tabs.php:1474, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:270
 msgid "The provided Template matches the current page or one of its revisions!"
 msgstr ""
 
@@ -14129,7 +14129,7 @@ msgid "Toggle menu"
 msgstr ""
 
 #. translators: %s: Menu item label.
-#: ../includes/MegaMenu/Renderers/Frontend_Renderer.php:314
+#: ../includes/MegaMenu/Renderers/Frontend_Renderer.php:369
 msgid "Show submenu for %s"
 msgstr ""
 

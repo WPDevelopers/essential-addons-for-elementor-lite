@@ -84,6 +84,8 @@ class Frontend_Renderer {
 		$container_id = 'eael-mega-menu-container-' . $this->widget_number;
 		$has_toggle   = $this->has_mobile_toggle();
 
+		$this->print_section_source_styles();
+
 		$this->widget->add_render_attribute( 'eael_mega_menu_wrapper', [
 			'class'                 => $this->get_wrapper_classes(),
 			'data-widget-number'    => $this->widget_number,
@@ -120,6 +122,59 @@ class Frontend_Renderer {
 			</div>
 		</nav>
 		<?php
+	}
+
+	/**
+	 * Keep every referenced section hidden until the handler adopts it.
+	 *
+	 * A Section CSS ID panel is filled on the front end by *moving* an element
+	 * that Elementor already rendered in its own place in the page — the panel
+	 * itself ships empty. Until that runs the section is ordinary page content:
+	 * it paints where it was authored and then disappears once the handler
+	 * relocates it, which reads as a flash of unrelated content on every load.
+	 *
+	 * Printing the rule here, ahead of the menu's own markup, puts it before the
+	 * section in the document for the usual "menu in the header" layout, so the
+	 * section is never painted in the first place. The handler adds
+	 * `--section-source` as it mounts the element, which is what releases it
+	 * again — matching on its absence means a section that is never adopted
+	 * (script blocked, id typo) is the only case left showing in place.
+	 *
+	 * Attribute form rather than `#id` so an id that starts with a digit stays a
+	 * valid selector; ids are already reduced to `[A-Za-z0-9_-]` upstream by
+	 * eael_mega_menu_sanitize_element_id().
+	 */
+	protected function print_section_source_styles() {
+		$selectors = [];
+
+		foreach ( $this->prepared_items as $prepared ) {
+			if ( 'section' !== $prepared['type'] ) {
+				continue;
+			}
+
+			// Re-reduced to `[A-Za-z0-9_-]` at the point of output. The value lands
+			// inside a <style> element, whose content is raw text — an escaping
+			// helper would turn the quotes into entities that CSS never decodes and
+			// quietly break the selector, so narrowing the character set is what
+			// makes this safe, not escaping.
+			$section_id = $this->eael_mega_menu_sanitize_element_id( $prepared['section_id'] );
+
+			if ( '' === $section_id ) {
+				continue;
+			}
+
+			$selectors[] = '[id="' . $section_id . '"]:not(.eael-mega-menu__section-source)';
+		}
+
+		if ( empty( $selectors ) ) {
+			return;
+		}
+
+		printf(
+			'<style id="eael-mega-menu-sections-%1$d">%2$s{display:none !important;}</style>',
+			(int) $this->widget_number,
+			implode( ',', array_unique( $selectors ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Selector list built only from ids reduced to [A-Za-z0-9_-] above.
+		);
 	}
 
 	/**
