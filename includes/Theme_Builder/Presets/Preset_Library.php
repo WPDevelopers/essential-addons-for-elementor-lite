@@ -65,6 +65,17 @@ class Preset_Library {
 			];
 		}
 
+		// No availability check: every widget it uses is Elementor core.
+		$presets['simple-footer'] = [
+			'slug'        => 'simple-footer',
+			'type'        => 'footer',
+			'title'       => __( 'Simple Footer', 'essential-addons-for-elementor-lite' ),
+			'badge'       => __( 'Minimal', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'One centred column: brand, a line of copy, links, social icons and a copyright. Reads the same at every screen size.', 'essential-addons-for-elementor-lite' ),
+			'thumbnail'   => self::thumbnail_url( 'simple-footer.svg' ),
+			'builder'     => [ Simple_Footer::class, 'build' ],
+		];
+
 		$presets['classic-header'] = [
 			'slug'        => 'classic-header',
 			'type'        => 'header',

@@ -31,6 +31,7 @@ Assets: [`assets/admin/css/theme-builder.css`](../../assets/admin/css/theme-buil
 | `Presets/Preset_Library.php` | Ready-made header and footer starting points: the cards the picker shows, and the Elementor elements each one inserts |
 | `Presets/Mega_Header.php` | The Mega Menu header preset — the header bar, the menu's settings, and the two mega panels it ships with |
 | `Presets/Modern_Footer.php` | The multi-column footer preset — columns, highlights strip and legal bar |
+| `Presets/Simple_Footer.php` | The minimal footer preset — one centred column, core widgets only |
 | `Presets/Elements.php` | The Elementor shapes a preset is assembled from: containers, widgets, repeater rows, spacing and slider values |
 | `Frontend/Frontend.php` | Resolves templates for the request and picks a render mode |
 | `Renderers/Template_Renderer.php` | Produces the markup, guarded against duplicate rendering |
@@ -446,7 +447,10 @@ Three ship today:
 |--------|------|-----------|-------|
 | Mega Menu Header | header | Mega Menu | Logo, centred menu with two ready-built mega panels, search, cart, call to action. Collapses at mobile |
 | Modern Footer | footer | Info Box ×5, Feature List, Creative Button | Five columns, a highlights strip and a dark legal bar. Columns stack at tablet and mobile |
+| Simple Footer | footer | none | One centred column: brand, a line of copy, links, social, copyright |
 | Classic Header | header | Simple Menu | Site name, links, call to action. Collapses at tablet |
+
+**A preset is allowed to use no EA widgets at all.** `Simple_Footer` uses only Elementor core, deliberately: `Asset_Builder` enqueues an EA widget's CSS on every page that widget appears on, and a footer appears on every page of the site — so a row of links and a copyright line should not pull three extra stylesheets onto the whole site. The library needs a light option as much as a rich one, and pairing it with `Modern_Footer` is what makes the choice meaningful. It is also the one preset with no breakpoint-specific layout: a single centred column reads the same at every width, so only type sizes and padding step down.
 
 **A preset built on a widget has to check the widget is there.** `Elements::has_widget()` asks `Plugin::$instance->widgets_manager->get_widget_types()` rather than testing for a class or an experiment: a widget can be missing because Elementor is too old, because an experiment is off, *or* because the element is switched off in EA's own settings, and the widgets manager is the one answer that covers all three. A preset whose widgets are missing is not offered at all (`Mega_Header::is_available()`, `Modern_Footer::is_available()`); a widget that is a nicety rather than a dependency is checked at the point of use instead.
 

@@ -2281,7 +2281,7 @@ msgstr ""
 msgid "Label For Home"
 msgstr ""
 
-#: ../includes/Elements/Breadcrumbs.php:68, ../includes/MegaMenu/Manager.php:286, ../includes/Theme_Builder/Presets/Mega_Header.php:331
+#: ../includes/Elements/Breadcrumbs.php:68, ../includes/MegaMenu/Manager.php:286, ../includes/Theme_Builder/Presets/Mega_Header.php:331, ../includes/Theme_Builder/Presets/Simple_Footer.php:189
 msgid "Home"
 msgstr ""
 
@@ -5799,7 +5799,7 @@ msgstr ""
 msgid "Link Type"
 msgstr ""
 
-#: ../includes/Elements/Flip_Box.php:847, ../includes/Theme_Builder/Presets/Mega_Header.php:290, ../includes/Theme_Builder/Presets/Preset_Library.php:238
+#: ../includes/Elements/Flip_Box.php:847, ../includes/Theme_Builder/Presets/Mega_Header.php:290, ../includes/Theme_Builder/Presets/Preset_Library.php:249
 msgid "Get Started"
 msgstr ""
 
@@ -10623,7 +10623,7 @@ msgstr ""
 msgid "Methods Info"
 msgstr ""
 
-#: ../includes/Elements/Woo_Checkout.php:2865, ../includes/Theme_Builder/Presets/Modern_Footer.php:688
+#: ../includes/Elements/Woo_Checkout.php:2865, ../includes/Theme_Builder/Presets/Modern_Footer.php:688, ../includes/Theme_Builder/Presets/Simple_Footer.php:194
 msgid "Privacy Policy"
 msgstr ""
 
@@ -12155,7 +12155,7 @@ msgstr ""
 msgid "%1$s (%2$s %3$dpx)"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:288, ../includes/Theme_Builder/Presets/Mega_Header.php:335, ../includes/Theme_Builder/Presets/Modern_Footer.php:182
+#: ../includes/MegaMenu/Manager.php:288, ../includes/Theme_Builder/Presets/Mega_Header.php:335, ../includes/Theme_Builder/Presets/Modern_Footer.php:182, ../includes/Theme_Builder/Presets/Simple_Footer.php:192
 msgid "Blog"
 msgstr ""
 
@@ -12167,7 +12167,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:291, ../includes/Theme_Builder/Presets/Mega_Header.php:336, ../includes/Theme_Builder/Presets/Modern_Footer.php:476
+#: ../includes/MegaMenu/Manager.php:291, ../includes/Theme_Builder/Presets/Mega_Header.php:336, ../includes/Theme_Builder/Presets/Modern_Footer.php:476, ../includes/Theme_Builder/Presets/Simple_Footer.php:193
 msgid "Contact"
 msgstr ""
 
@@ -14831,7 +14831,7 @@ msgstr ""
 msgid "Header Bar"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Mega_Header.php:138, ../includes/Theme_Builder/Presets/Mega_Header.php:239, ../includes/Theme_Builder/Presets/Modern_Footer.php:225, ../includes/Theme_Builder/Presets/Preset_Library.php:195
+#: ../includes/Theme_Builder/Presets/Mega_Header.php:138, ../includes/Theme_Builder/Presets/Mega_Header.php:239, ../includes/Theme_Builder/Presets/Modern_Footer.php:225, ../includes/Theme_Builder/Presets/Preset_Library.php:206
 msgid "Brand"
 msgstr ""
 
@@ -14843,11 +14843,11 @@ msgstr ""
 msgid "Cart"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Mega_Header.php:332
+#: ../includes/Theme_Builder/Presets/Mega_Header.php:332, ../includes/Theme_Builder/Presets/Simple_Footer.php:190
 msgid "About"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Mega_Header.php:333, ../includes/Theme_Builder/Presets/Modern_Footer.php:169
+#: ../includes/Theme_Builder/Presets/Mega_Header.php:333, ../includes/Theme_Builder/Presets/Modern_Footer.php:169, ../includes/Theme_Builder/Presets/Simple_Footer.php:191
 msgid "Features"
 msgstr ""
 
@@ -15007,7 +15007,7 @@ msgstr ""
 msgid "Affiliates"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Modern_Footer.php:263
+#: ../includes/Theme_Builder/Presets/Modern_Footer.php:263, ../includes/Theme_Builder/Presets/Simple_Footer.php:135
 msgid "Your Brand"
 msgstr ""
 
@@ -15108,11 +15108,11 @@ msgid "Refund Policy"
 msgstr ""
 
 #. translators: 1: Current year, 2: Site name.
-#: ../includes/Theme_Builder/Presets/Modern_Footer.php:712
+#: ../includes/Theme_Builder/Presets/Modern_Footer.php:712, ../includes/Theme_Builder/Presets/Simple_Footer.php:295
 msgid "&copy; %1$s %2$s. All rights reserved."
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Modern_Footer.php:724
+#: ../includes/Theme_Builder/Presets/Modern_Footer.php:724, ../includes/Theme_Builder/Presets/Simple_Footer.php:287
 msgid "Copyright"
 msgstr ""
 
@@ -15152,16 +15152,32 @@ msgstr ""
 msgid "Brand, two link columns, contact details and a newsletter card, over a strip of highlights and a dark legal bar. Stacks on smaller screens."
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:71
-msgid "Classic Header"
-msgstr ""
-
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:72
-msgid "Clean & Simple"
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:72, ../includes/Theme_Builder/Presets/Simple_Footer.php:95
+msgid "Simple Footer"
 msgstr ""
 
 #: ../includes/Theme_Builder/Presets/Preset_Library.php:73
+msgid "Minimal"
+msgstr ""
+
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:74
+msgid "One centred column: brand, a line of copy, links, social icons and a copyright. Reads the same at every screen size."
+msgstr ""
+
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:82
+msgid "Classic Header"
+msgstr ""
+
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:83
+msgid "Clean & Simple"
+msgstr ""
+
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:84
 msgid "Site name on the left, navigation and a call to action on the right. Collapses to a hamburger on mobile."
+msgstr ""
+
+#: ../includes/Theme_Builder/Presets/Simple_Footer.php:164
+msgid "One short line about what you do. A footer rarely needs more."
 msgstr ""
 
 #: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:107, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:534, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:642
