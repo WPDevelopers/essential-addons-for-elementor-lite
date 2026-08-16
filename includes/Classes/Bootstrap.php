@@ -140,6 +140,9 @@ class Bootstrap
         // Compatibility Support
         new Compatibility_Support();
 
+        // Mega Menu — registers the editor-side nested element type.
+        \Essential_Addons_Elementor\MegaMenu\Manager::instance()->init();
+
 		include_once(EAEL_PLUGIN_PATH . 'includes/bfcm-pointer.php');
 
     }
