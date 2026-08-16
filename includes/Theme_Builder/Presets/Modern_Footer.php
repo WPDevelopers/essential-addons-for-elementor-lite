@@ -83,27 +83,6 @@ class Modern_Footer {
 	const DARK_INK = '#C9C7E8';
 
 	/**
-	 * Are the EA widgets this preset is built on registered.
-	 *
-	 * A widget can be missing because the element is switched off in EA's own
-	 * settings, so the widgets manager is asked rather than the class checked —
-	 * it answers with what this editor session actually has.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @return bool
-	 */
-	public static function is_available() {
-		foreach ( [ 'eael-info-box', 'eael-feature-list', 'eael-creative-button' ] as $widget ) {
-			if ( ! Elements::has_widget( $widget ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * The elements this preset inserts.
 	 *
 	 * @since 6.7.3
@@ -243,7 +222,7 @@ class Modern_Footer {
 				[
 					'image'        => [ 'id' => $logo_id, 'url' => $logo ],
 					'image_size'   => 'full',
-					'align'        => 'left',
+					'align'        => 'start',
 					'width'        => Elements::size( 180 ),
 					'width_mobile' => Elements::size( 150 ),
 					'link_to'      => 'custom',
@@ -453,7 +432,10 @@ class Modern_Footer {
 						'eael_feature_list_icon_position'   => 'left',
 						'eael_feature_list_icon_shape'      => 'circle',
 						'eael_feature_list_icon_shape_view' => 'stacked',
-						'eael_feature_list_connector'       => 'no',
+						// Empty, not 'no': the control is a switcher whose only "on"
+						// value is 'yes', so anything else is an out of domain value the
+						// panel cannot render.
+						'eael_feature_list_connector'       => '',
 						'eael_feature_list_title_size'      => 'h6',
 						'eael_feature_list_space_between'   => Elements::size( 18 ),
 						'eael_feature_list_icon_circle_size' => Elements::size( 40 ),
@@ -532,9 +514,9 @@ class Modern_Footer {
 						'eael_infobox_title_typography_font_weight' => '600',
 						'eael_infobox_title_margin'   => Elements::spacing( 0, 0, 8, 0 ),
 						'eael_infobox_content_color'  => self::BODY,
-						'eael_infobox_content_typography_typography'  => 'custom',
-						'eael_infobox_content_typography_font_size'   => Elements::size( 15 ),
-						'eael_infobox_content_typography_line_height' => Elements::size( 1.6, 'em' ),
+						'eael_infobox_content_typography_hover_typography'  => 'custom',
+						'eael_infobox_content_typography_hover_font_size'   => Elements::size( 15 ),
+						'eael_infobox_content_typography_hover_line_height' => Elements::size( 1.6, 'em' ),
 					]
 				),
 				Elements::widget(
@@ -547,7 +529,8 @@ class Modern_Footer {
 						'eael_creative_button_icon_alignment' => 'right',
 						'eael_creative_button_icon_size'  => Elements::size( 14 ),
 						'eael_creative_button_icon_indent' => Elements::size( 8 ),
-						'eael_creative_button_alignment'  => 'left',
+						// The control writes `justify-content`, so it wants a flex value.
+						'eael_creative_button_alignment'  => 'flex-start',
 						'eael_creative_button_padding'    => Elements::spacing( 12, 22, 12, 22 ),
 						'eael_creative_button_border_radius' => Elements::spacing( 8, 8, 8, 8 ),
 						'eael_creative_button_text_color' => self::SURFACE,
@@ -641,9 +624,9 @@ class Modern_Footer {
 							'eael_infobox_title_typography_font_weight' => '600',
 							'eael_infobox_title_margin' => Elements::spacing( 0, 0, 4, 0 ),
 							'eael_infobox_content_color' => self::MUTED,
-							'eael_infobox_content_typography_typography' => 'custom',
-							'eael_infobox_content_typography_font_size'  => Elements::size( 14 ),
-							'eael_infobox_content_typography_line_height' => Elements::size( 1.6, 'em' ),
+							'eael_infobox_content_typography_hover_typography' => 'custom',
+							'eael_infobox_content_typography_hover_font_size'  => Elements::size( 14 ),
+							'eael_infobox_content_typography_hover_line_height' => Elements::size( 1.6, 'em' ),
 						]
 					),
 				],
@@ -713,7 +696,7 @@ class Modern_Footer {
 							esc_html( date_i18n( 'Y' ) ),
 							esc_html( get_bloginfo( 'name' ) )
 						) . '</p>',
-						'align'                 => 'left',
+						'align'                 => 'start',
 						'align_tablet'          => 'center',
 						'text_color'            => self::DARK_INK,
 						'typography_typography' => 'custom',
@@ -759,7 +742,7 @@ class Modern_Footer {
 					'text-editor',
 					[
 						'editor'                => '<p>' . __( 'Made with love by your team', 'essential-addons-for-elementor-lite' ) . '</p>',
-						'align'                 => 'right',
+						'align'                 => 'end',
 						'align_tablet'          => 'center',
 						'text_color'            => self::DARK_INK,
 						'typography_typography' => 'custom',

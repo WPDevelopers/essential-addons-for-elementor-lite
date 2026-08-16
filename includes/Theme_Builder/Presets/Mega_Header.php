@@ -61,22 +61,6 @@ class Mega_Header {
 	const SURFACE = '#FFFFFF';
 
 	/**
-	 * Is the Mega Menu widget usable on this install.
-	 *
-	 * The preset is nothing without it, and the widget can be absent for two
-	 * unrelated reasons — an Elementor without the nested elements API, or the
-	 * element switched off in the EA settings. Asking the widgets manager covers
-	 * both: it answers with what is actually registered for this editor session.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @return bool
-	 */
-	public static function is_available() {
-		return Elements::has_widget( Manager::WIDGET_NAME );
-	}
-
-	/**
 	 * The elements this preset inserts.
 	 *
 	 * @since 6.7.3
@@ -224,7 +208,7 @@ class Mega_Header {
 				[
 					'image'               => [ 'id' => $logo_id, 'url' => $logo ],
 					'image_size'          => 'full',
-					'align'               => 'left',
+					'align'               => 'start',
 					'width'               => Elements::size( 160 ),
 					'width_mobile'        => Elements::size( 120 ),
 					'link_to'             => 'custom',
@@ -704,8 +688,12 @@ class Mega_Header {
 						'selected_icon'      => Elements::icon( 'fas fa-cubes' ),
 						'view'               => 'stacked',
 						'shape'              => 'square',
-						'position'           => 'top',
-						'text_align'         => 'left',
+						// Logical values, not `top` / `left`: Elementor 4 moved these
+						// controls to `block-start` / `start` and keeps the old words
+						// working only through a back-compat dictionary — the CSS still
+						// lands, but the panel shows no option selected.
+						'position'           => 'block-start',
+						'text_align'         => 'start',
 						'title_text'         => __( 'Elementor Widgets', 'essential-addons-for-elementor-lite' ),
 						'description_text'   => __( 'Powerful widgets to build anything with Elementor.', 'essential-addons-for-elementor-lite' ),
 						'title_size'         => 'h4',
@@ -735,7 +723,8 @@ class Mega_Header {
 						'align'                 => 'left',
 						'size'                  => 'sm',
 						'selected_icon'         => Elements::icon( 'fas fa-arrow-right' ),
-						'icon_align'            => 'right',
+						// `row-reverse`, not `right`: this control sets `flex-direction`.
+						'icon_align'            => 'row-reverse',
 						'icon_indent'           => Elements::size( 8 ),
 						'background_color'      => 'rgba(0,0,0,0)',
 						'button_text_color'     => self::ACCENT,
@@ -820,7 +809,7 @@ class Mega_Header {
 				[
 					'image'               => [ 'url' => Elements::placeholder_image() ],
 					'image_size'          => 'full',
-					'align'               => 'left',
+					'align'               => 'start',
 					'width'               => Elements::size( 100, '%' ),
 					'image_border_radius' => Elements::spacing( 12, 12, 12, 12 ),
 				]

@@ -37,53 +37,48 @@ class Preset_Library {
 	 * @return array
 	 */
 	public static function get_presets() {
-		$presets = [];
-
-		// Listed first because it is the richer starting point — but only when the
-		// widget it is built on is actually registered for this editor session.
-		if ( Mega_Header::is_available() ) {
-			$presets['mega-header'] = [
+		// Richest first within each type — that is the order the picker shows.
+		$presets = [
+			'mega-header'    => [
 				'slug'        => 'mega-header',
 				'type'        => 'header',
 				'title'       => __( 'Mega Menu Header', 'essential-addons-for-elementor-lite' ),
 				'badge'       => __( 'Mega Menu', 'essential-addons-for-elementor-lite' ),
 				'description' => __( 'Logo, a centred mega menu with two ready-built panels, search, cart and a call to action. Collapses to a toggle on mobile.', 'essential-addons-for-elementor-lite' ),
 				'thumbnail'   => self::thumbnail_url( 'mega-header.svg' ),
+				'widgets'     => [ 'eael-mega-menu', 'heading', 'image', 'icon', 'icon-box', 'icon-list', 'button', 'text-editor' ],
 				'builder'     => [ Mega_Header::class, 'build' ],
-			];
-		}
-
-		if ( Modern_Footer::is_available() ) {
-			$presets['modern-footer'] = [
+			],
+			'modern-footer'  => [
 				'slug'        => 'modern-footer',
 				'type'        => 'footer',
 				'title'       => __( 'Modern Footer', 'essential-addons-for-elementor-lite' ),
 				'badge'       => __( 'Multi-Column', 'essential-addons-for-elementor-lite' ),
 				'description' => __( 'Brand, two link columns, contact details and a newsletter card, over a strip of highlights and a dark legal bar. Stacks on smaller screens.', 'essential-addons-for-elementor-lite' ),
 				'thumbnail'   => self::thumbnail_url( 'modern-footer.svg' ),
+				'widgets'     => [ 'eael-info-box', 'eael-feature-list', 'eael-creative-button', 'heading', 'image', 'icon-list', 'social-icons', 'text-editor' ],
 				'builder'     => [ Modern_Footer::class, 'build' ],
-			];
-		}
-
-		// No availability check: every widget it uses is Elementor core.
-		$presets['simple-footer'] = [
-			'slug'        => 'simple-footer',
-			'type'        => 'footer',
-			'title'       => __( 'Simple Footer', 'essential-addons-for-elementor-lite' ),
-			'badge'       => __( 'Minimal', 'essential-addons-for-elementor-lite' ),
-			'description' => __( 'One centred column: brand, a line of copy, links, social icons and a copyright. Reads the same at every screen size.', 'essential-addons-for-elementor-lite' ),
-			'thumbnail'   => self::thumbnail_url( 'simple-footer.svg' ),
-			'builder'     => [ Simple_Footer::class, 'build' ],
-		];
-
-		$presets['classic-header'] = [
-			'slug'        => 'classic-header',
-			'type'        => 'header',
-			'title'       => __( 'Classic Header', 'essential-addons-for-elementor-lite' ),
-			'badge'       => __( 'Clean & Simple', 'essential-addons-for-elementor-lite' ),
-			'description' => __( 'Site name on the left, navigation and a call to action on the right. Collapses to a hamburger on mobile.', 'essential-addons-for-elementor-lite' ),
-			'thumbnail'   => self::thumbnail_url( 'classic-header.svg' ),
-			'builder'     => [ __CLASS__, 'build_classic_header' ],
+			],
+			'simple-footer'  => [
+				'slug'        => 'simple-footer',
+				'type'        => 'footer',
+				'title'       => __( 'Simple Footer', 'essential-addons-for-elementor-lite' ),
+				'badge'       => __( 'Minimal', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'One centred column: brand, a line of copy, links, social icons and a copyright. Reads the same at every screen size.', 'essential-addons-for-elementor-lite' ),
+				'thumbnail'   => self::thumbnail_url( 'simple-footer.svg' ),
+				'widgets'     => [ 'heading', 'image', 'icon-list', 'social-icons', 'text-editor' ],
+				'builder'     => [ Simple_Footer::class, 'build' ],
+			],
+			'classic-header' => [
+				'slug'        => 'classic-header',
+				'type'        => 'header',
+				'title'       => __( 'Classic Header', 'essential-addons-for-elementor-lite' ),
+				'badge'       => __( 'Clean & Simple', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Site name on the left, navigation and a call to action on the right. Collapses to a hamburger on mobile.', 'essential-addons-for-elementor-lite' ),
+				'thumbnail'   => self::thumbnail_url( 'classic-header.svg' ),
+				'widgets'     => [ 'eael-simple-menu', 'heading', 'button' ],
+				'builder'     => [ __CLASS__, 'build_classic_header' ],
+			],
 		];
 
 		/**
@@ -91,7 +86,9 @@ class Preset_Library {
 		 *
 		 * A preset needs a `type` (`header` or `footer`), a `title`, a
 		 * `thumbnail` URL and a `builder` callable returning an array of
-		 * Elementor elements.
+		 * Elementor elements. The optional `widgets` list names every widget type
+		 * the builder can emit; a preset that names them is hidden whenever one is
+		 * missing, rather than half inserting and leaving the wreckage behind.
 		 *
 		 * @since 6.7.3
 		 *
@@ -109,6 +106,16 @@ class Preset_Library {
 			// runs inside an AJAX handler where a warning lands in front of the
 			// JSON and breaks every insert, not just the malformed preset.
 			if ( '' === $slug || ! is_array( $preset ) || empty( $preset['title'] ) || empty( $preset['builder'] ) || ! is_callable( $preset['builder'] ) ) {
+				continue;
+			}
+
+			// A widget can be missing because Elementor is too old, because an
+			// experiment is off, because the element is switched off in EA's own
+			// settings, or because it was deactivated in Elementor's element
+			// manager. Any of those turns an insert into a partial one: the create
+			// command throws part way through the tree, and what it already built
+			// stays on the canvas. Not offering the card is the only clean answer.
+			if ( ! empty( $preset['widgets'] ) && ! Elements::has_widgets( $preset['widgets'] ) ) {
 				continue;
 			}
 

@@ -261,6 +261,25 @@ class Elements {
 	}
 
 	/**
+	 * Are all of these widgets registered.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param array $types Widget types.
+	 *
+	 * @return bool
+	 */
+	public static function has_widgets( $types ) {
+		foreach ( (array) $types as $type ) {
+			if ( ! self::has_widget( $type ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * A fresh element ID.
 	 *
 	 * Elementor keys every element by a 7 character hex ID and expects them to
