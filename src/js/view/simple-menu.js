@@ -184,8 +184,13 @@ var SimpleMenu = function ($scope, $) {
                 $max_width = $breakpoints[$key];
             }
         }
-        // fetch max width value from string like 'Mobile (> 767px)' to 767
-        $max_width = $max_width.replace(/[^0-9]/g, '');
+
+        // fetch max width value from string like 'Mobile (> 767px)' to 767.
+        // Cast first: the breakpoint list is read off a data attribute the
+        // widget only prints once a menu is selected, and a saved device key can
+        // outlive the breakpoint that named it. Either case leaves the numeric
+        // default in place here, and a number has no .replace().
+        $max_width = String($max_width).replace(/[^0-9]/g, '');
         return $max_width;
     }
 

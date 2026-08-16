@@ -23,11 +23,12 @@ Assets: [`assets/admin/css/theme-builder.css`](../../assets/admin/css/theme-buil
 | `Admin/Admin.php` | Submenu registration, row/bulk action handling, screen options, asset enqueue + localization |
 | `Admin/Requirements_Screen.php` | Stand-in submenu page registered instead of the module when Elementor is missing, so the page stays reachable and says why |
 | `Admin/Templates_List_Table.php` | `WP_List_Table` — columns, views, tabs, search, month filter, pagination, row actions |
-| `Admin/Ajax.php` | Five logged-in-only endpoints behind a shared nonce + capability check |
+| `Admin/Ajax.php` | Six logged-in-only endpoints behind a shared nonce + capability check |
 | `Integrations/Document.php` | Elementor document type (`ea-theme-builder`) |
-| `Integrations/Editor.php` | Loads the React app inside the Elementor editor and hands it the template being edited, so publishing can ask for display conditions first |
+| `Integrations/Editor.php` | Loads the React app inside the Elementor editor and hands it the template being edited, so publishing can ask for display conditions first — and so the EA button can offer presets |
 | `Integrations/Elementor_Integration.php` | Document registration, canvas template, direct-access guard, cache busting on save |
 | `Integrations/Compatibility.php` | Polylang / WPML translation, sitemap exclusions (core, Yoast, Rank Math) |
+| `Presets/Preset_Library.php` | Ready-made header and footer starting points: the cards the picker shows, and the Elementor elements each one inserts |
 | `Frontend/Frontend.php` | Resolves templates for the request and picks a render mode |
 | `Renderers/Template_Renderer.php` | Produces the markup, guarded against duplicate rendering |
 | `Templates/` | `header.php`, `footer.php`, `canvas.php` for the front end, plus `admin/dashboard.php` — the only admin view left in PHP, since the modals are React |
@@ -413,6 +414,47 @@ What follows from that shape:
 
 `edit.php?post_type=ea_theme_builder` still resolves — the post type keeps `show_ui` for the classic editor and for the row actions that link to it — but it is core's generic table: no type, conditions or platform columns, and its "Add New" lands on an empty post rather than the creation modal. `Admin::redirect_cpt_list()` sends it to the dashboard on `load-edit.php`, preserving `post_status` so a link to the trash still lands on the trash view.
 
+### Presets — the EA button in the editor
+
+An empty header template is a blank canvas with no obvious first move. The EA button in Elementor's add-element row is that first move: it opens a picker of ready-made headers and footers and inserts one where the button was clicked.
+
+```text
+preview iframe                         editor window
+──────────────                         ─────────────
+[+] [▣] [✦] [EA] ──click──▶  CustomEvent ──▶ EditorApp ──▶ PresetLibrary
+                                                                │
+                                        eael_theme_builder_get_preset
+                                                                │
+                                            $e.run( 'document/elements/create' )
+```
+
+**The button** is a Marionette behaviour registered through `views/add-section/behaviors`, the filter Elementor applies to that view — the same door Templately uses. A behaviour gets the view's lifecycle, so the button survives the re-renders that row does on every layout change, and it inherits `.elementor-add-section-area-button` styling instead of fighting it. Two things follow from where that row lives:
+
+- The button element is created in the **preview iframe**, which has its own document and does not load this app's stylesheet — so its handful of styles are set inline.
+- The behaviour itself runs in the **editor window**, which is where the React app is, so the click is passed on as a plain `CustomEvent` rather than reaching across documents.
+
+**The elements are built per insert** (`Preset_Library::build_classic_header()`), not stored as a frozen JSON blob. A preset comes up carrying the site's own name and its own menu, and Elementor keys every element by a unique ID — inserting the same stored blob twice would collide.
+
+**Everything a preset uses ships with Lite.** Containers, Heading and Button are Elementor core; the navigation is EA's own Simple Menu, which is what makes the header responsive without Elementor Pro: links on desktop, hamburger from tablet down, full-width dropdown panel.
+
+**Colours are spelled out, transparents included.** An empty colour setting emits no rule at all, which leaves the *theme's* styling in charge — a Storefront install renders the menu as a solid bar in its link colour, inside the header. Every colour the preset depends on is therefore explicit, including the "current page" link state, which is filled by default and would otherwise paint a stray block on the one link matching the current URL.
+
+Add one with the `eael/theme_builder/presets` filter:
+
+```php
+add_filter( 'eael/theme_builder/presets', function ( $presets ) {
+	$presets['minimal-footer'] = [
+		'type'      => 'footer',
+		'title'     => __( 'Minimal Footer', 'my-textdomain' ),
+		'badge'     => __( 'Minimal', 'my-textdomain' ),
+		'thumbnail' => plugins_url( 'img/minimal-footer.svg', __FILE__ ),
+		'builder'   => 'my_minimal_footer_elements',   // returns Elementor elements
+	];
+
+	return $presets;
+} );
+```
+
 ### Row actions
 
 Listed in the order they render — `row_actions()` prints the array as `get_row_actions()` built it, so that method's sequence *is* the display order:
@@ -475,7 +517,7 @@ Rows repaint in place from the response, exactly as Quick Edit does; `Ajax::row_
 
 ### AJAX endpoints
 
-All five are `wp_ajax_` only (never `nopriv`), share the `eael_theme_builder` nonce, and re-check `Theme_Builder::capability()`:
+All six are `wp_ajax_` only (never `nopriv`), share the `eael_theme_builder` nonce, and re-check `Theme_Builder::capability()`:
 
 | Action | Purpose |
 | --- | --- |
@@ -484,6 +526,7 @@ All five are `wp_ajax_` only (never `nopriv`), share the `eael_theme_builder` no
 | `eael_theme_builder_search_objects` | Populate the object picker. Takes a **condition name** and resolves the query from the registry, so it cannot be used as a generic post/term/user query proxy |
 | `eael_theme_builder_quick_edit` | Save the inline editor. Also checks `edit_post`; will not set a trash status |
 | `eael_theme_builder_bulk_edit` | Apply one set of changes to many templates. Re-checks `edit_post` per template, since the selection is client-supplied; will not set a trash status |
+| `eael_theme_builder_get_preset` | Build one preset's elements — the site's own name and menu, fresh element IDs — for the editor to insert |
 
 Row and bulk actions (trash, restore, delete, duplicate, activate, deactivate) are handled in `Admin::on_load()` behind `check_admin_referer()` and a per-post `current_user_can()` check, then redirect with a result message.
 
@@ -551,6 +594,8 @@ add_filter( 'eael/theme_builder/conditions', function ( $conditions ) {
 | `eael/theme_builder/cache_flushed` | action | After the caches are invalidated |
 | `eael/theme_builder/template_created` | action | After a template is created |
 | `eael/theme_builder/auto_template_title` | filter | Name given to a template created without one |
+| `eael/theme_builder/presets` | filter | The header and footer presets offered by the EA button |
+| `eael/theme_builder/preset_content` | filter | The elements one preset inserts |
 | `eael/theme_builder/template_orphaned` | action | A template was deactivated because its last include condition targeted a deleted object |
 
 ## Gotchas

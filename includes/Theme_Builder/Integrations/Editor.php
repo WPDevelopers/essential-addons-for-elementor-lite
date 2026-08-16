@@ -12,6 +12,7 @@ use Essential_Addons_Elementor\Theme_Builder\Admin\Admin;
 use Essential_Addons_Elementor\Theme_Builder\Conditions\Conditions_Manager;
 use Essential_Addons_Elementor\Theme_Builder\Core\Post_Type;
 use Essential_Addons_Elementor\Theme_Builder\Models\Template;
+use Essential_Addons_Elementor\Theme_Builder\Presets\Preset_Library;
 use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -100,6 +101,8 @@ class Editor {
 			'title'      => $template->get_title(),
 			'status'     => $template->get_status(),
 			'conditions' => Conditions_Manager::instance()->decorate_conditions( $template->get_conditions() ),
+			'presets'    => Preset_Library::get_presets_for_ui(),
+			'icon'       => EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-new-white.svg',
 		];
 	}
 }

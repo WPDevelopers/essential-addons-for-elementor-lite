@@ -5795,7 +5795,7 @@ msgstr ""
 msgid "Link Type"
 msgstr ""
 
-#: ../includes/Elements/Flip_Box.php:847
+#: ../includes/Elements/Flip_Box.php:847, ../includes/Theme_Builder/Presets/Preset_Library.php:205
 msgid "Get Started"
 msgstr ""
 
@@ -14000,7 +14000,7 @@ msgstr ""
 msgid "Specific target"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:578, ../includes/Theme_Builder/Admin/Ajax.php:96, ../includes/Theme_Builder/Admin/Ajax.php:233, ../includes/Theme_Builder/Models/Template.php:83
+#: ../includes/Theme_Builder/Admin/Admin.php:578, ../includes/Theme_Builder/Admin/Ajax.php:98, ../includes/Theme_Builder/Admin/Ajax.php:235, ../includes/Theme_Builder/Models/Template.php:83
 msgid "Please choose a valid template type."
 msgstr ""
 
@@ -14108,11 +14108,11 @@ msgstr ""
 msgid "Remove from bulk edit"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:612, ../includes/Theme_Builder/Admin/Ajax.php:225
+#: ../includes/Theme_Builder/Admin/Admin.php:612, ../includes/Theme_Builder/Admin/Ajax.php:227
 msgid "Select at least one template to edit."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:613, ../includes/Theme_Builder/Admin/Ajax.php:229
+#: ../includes/Theme_Builder/Admin/Admin.php:613, ../includes/Theme_Builder/Admin/Ajax.php:231
 msgid "Choose at least one value to change."
 msgstr ""
 
@@ -14190,49 +14190,101 @@ msgstr ""
 msgid "Publishing cancelled. The template is still a draft."
 msgstr ""
 
+#: ../includes/Theme_Builder/Admin/Admin.php:647
+msgid "Essential Addons presets"
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:648
+msgid "Choose a Header & Footer Preset"
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:649
+msgid "Select a preset design to get started. You can customize it later in the builder."
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:650
+msgid "Header Presets"
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:651
+msgid "Footer Presets"
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:652
+msgid "Click to Insert"
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:653
+msgid "Inserting…"
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:654
+msgid "No header presets are available yet."
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:655
+msgid "Footer presets are on their way. Build yours from scratch in the meantime."
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:656
+msgid "Fully Customizable"
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:657
+msgid "Every preset is 100% editable in Elementor. Change colors, typography, spacing and add your own content."
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:658
+msgid "The preset could not be inserted."
+msgstr ""
+
 #. translators: 1: month number (01, 02, …), 2: month abbreviation.
-#: ../includes/Theme_Builder/Admin/Admin.php:671
+#: ../includes/Theme_Builder/Admin/Admin.php:683
 msgid "%1$s-%2$s"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:685, ../includes/Theme_Builder/Admin/Requirements_Screen.php:106
+#: ../includes/Theme_Builder/Admin/Admin.php:697, ../includes/Theme_Builder/Admin/Requirements_Screen.php:106
 msgid "You do not have permission to manage Theme Builder templates."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:84, ../includes/Theme_Builder/Admin/Ajax.php:402
+#: ../includes/Theme_Builder/Admin/Ajax.php:86, ../includes/Theme_Builder/Admin/Ajax.php:404
 msgid "This template no longer exists."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:88, ../includes/Theme_Builder/Admin/Ajax.php:406
+#: ../includes/Theme_Builder/Admin/Ajax.php:90, ../includes/Theme_Builder/Admin/Ajax.php:408
 msgid "You are not allowed to edit this template."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:92
+#: ../includes/Theme_Builder/Admin/Ajax.php:94
 msgid "Please give the template a name."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:132
+#: ../includes/Theme_Builder/Admin/Ajax.php:134
 msgid "Please enter a valid date."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:239
+#: ../includes/Theme_Builder/Admin/Ajax.php:241
 msgid "Please choose a valid status."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:289
+#: ../includes/Theme_Builder/Admin/Ajax.php:291
 msgid "None of the selected templates could be updated."
 msgstr ""
 
 #. translators: 1: lowest allowed priority, 2: highest allowed priority.
-#: ../includes/Theme_Builder/Admin/Ajax.php:348
+#: ../includes/Theme_Builder/Admin/Ajax.php:350
 msgid "Please enter a priority between %1$d and %2$d."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:450
+#: ../includes/Theme_Builder/Admin/Ajax.php:452
 msgid "Unknown object type."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:470
+#: ../includes/Theme_Builder/Admin/Ajax.php:480
+msgid "This preset is no longer available."
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Ajax.php:496
 msgid "You are not allowed to manage Theme Builder templates."
 msgstr ""
 
@@ -14514,6 +14566,22 @@ msgstr ""
 #. translators: %s: template title.
 #: ../includes/Theme_Builder/Models/Template.php:196
 msgid "%s (copy)"
+msgstr ""
+
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:44
+msgid "Classic Header"
+msgstr ""
+
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:45
+msgid "Clean & Simple"
+msgstr ""
+
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:46
+msgid "Site name on the left, navigation and a call to action on the right. Collapses to a hamburger on mobile."
+msgstr ""
+
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:165
+msgid "Brand"
 msgstr ""
 
 #: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:107, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:534, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:642

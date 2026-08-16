@@ -38,6 +38,37 @@ body.eatb-modal-open {
 	overflow: hidden;
 }
 
+/*
+ * The dialog arrives rather than appears: the ground dims first, the panel
+ * follows a frame later, rising and settling. Only the opening is animated —
+ * closing unmounts the component, and holding a dialog on screen to play it out
+ * would make dismissing it feel slower than it is.
+ */
+@keyframes eatb-overlay-in {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+@keyframes eatb-dialog-in {
+	from { opacity: 0; transform: translateY( 16px ) scale( 0.98 ); }
+	to   { opacity: 1; transform: none; }
+}
+
+.eatb-modal__overlay {
+	animation: eatb-overlay-in 0.18s ease-out both;
+}
+
+.eatb-modal__dialog {
+	animation: eatb-dialog-in 0.26s cubic-bezier( 0.2, 0.8, 0.3, 1 ) 0.04s both;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.eatb-modal__overlay,
+	.eatb-modal__dialog {
+		animation: none;
+	}
+}
+
 .eatb-modal__overlay {
 	position: fixed;
 	inset: 0;
@@ -636,3 +667,141 @@ body.eatb-modal-open {
 		grid-row: 1;
 	}
 }
+
+/* ------------------------------------------------------------------
+ * Preset library
+ * --------------------------------------------------------------- */
+
+.eatb-presets__tabs {
+	display: flex;
+	gap: 28px;
+	margin: 0 0 24px;
+	border-bottom: 1px solid var(--eatb-border);
+}
+
+.eatb-presets__tab {
+	padding: 0 2px 12px;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--eatb-muted);
+	cursor: pointer;
+	background: none;
+	border: 0;
+	border-bottom: 2px solid transparent;
+	transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.eatb-presets__tab.is-active {
+	color: var(--eatb-accent);
+	border-bottom-color: var(--eatb-accent);
+}
+
+.eatb-presets__grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fill, minmax( 260px, 1fr ) );
+	gap: 20px;
+}
+
+/*
+ * A card is one button: the whole thing is the target, so the preview, the name
+ * and the badge cannot be tabbed to separately or clicked to different effect.
+ */
+.eatb-preset {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	overflow: hidden;
+	text-align: left;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid var(--eatb-border);
+	border-radius: 10px;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.eatb-preset:hover:not(:disabled),
+.eatb-preset:focus-visible {
+	border-color: var(--eatb-accent);
+	box-shadow: 0 8px 24px rgba( 12, 14, 24, 0.1 );
+	outline: none;
+}
+
+.eatb-preset:disabled {
+	cursor: default;
+}
+
+.eatb-preset__preview {
+	position: relative;
+	display: block;
+	background: #f4f4f8;
+}
+
+.eatb-preset__preview img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.eatb-preset__overlay {
+	position: absolute;
+	inset: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	background: rgba( 244, 244, 248, 0.92 );
+	opacity: 0;
+	transition: opacity 0.15s ease;
+}
+
+.eatb-preset:hover .eatb-preset__overlay,
+.eatb-preset:focus-visible .eatb-preset__overlay,
+.eatb-preset.is-busy .eatb-preset__overlay {
+	opacity: 1;
+}
+
+.eatb-preset__insert {
+	padding: 10px 18px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #fff;
+	background: #2b2d3a;
+	border-radius: 8px;
+}
+
+.eatb-preset__footer {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 16px;
+}
+
+.eatb-preset__name {
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--eatb-text);
+}
+
+.eatb-preset__badge {
+	flex: 0 0 auto;
+	padding: 4px 10px;
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--eatb-accent);
+	background: #eeeaff;
+	border-radius: 20px;
+}
+
+.eatb-presets__empty {
+	margin: 0;
+	padding: 40px 0;
+	font-size: 14px;
+	color: var(--eatb-muted);
+	text-align: center;
+}
+

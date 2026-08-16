@@ -14,6 +14,7 @@ use Essential_Addons_Elementor\Theme_Builder\Core\Post_Type;
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Cache;
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Types;
 use Essential_Addons_Elementor\Theme_Builder\Models\Template;
+use Essential_Addons_Elementor\Theme_Builder\Presets\Preset_Library;
 use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -47,6 +48,7 @@ class Ajax {
 		add_action( 'wp_ajax_eael_theme_builder_search_objects', [ $this, 'search_objects' ] );
 		add_action( 'wp_ajax_eael_theme_builder_quick_edit', [ $this, 'quick_edit' ] );
 		add_action( 'wp_ajax_eael_theme_builder_bulk_edit', [ $this, 'bulk_edit' ] );
+		add_action( 'wp_ajax_eael_theme_builder_get_preset', [ $this, 'get_preset' ] );
 	}
 
 	/**
@@ -455,6 +457,30 @@ class Ajax {
 				'results' => Conditions_Manager::instance()->search_objects( $condition, $search ),
 			]
 		);
+	}
+
+	/**
+	 * Elements of one header or footer preset, ready for the editor to insert.
+	 *
+	 * The content is built server side rather than shipped with the page: it
+	 * carries the site's own name and menu, and every element needs a fresh ID
+	 * so inserting the same preset twice cannot collide.
+	 *
+	 * @since 6.7.3
+	 */
+	public function get_preset() {
+		$this->verify_request();
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified in verify_request().
+		$slug = isset( $_POST['preset'] ) ? sanitize_key( wp_unslash( $_POST['preset'] ) ) : '';
+
+		$content = Preset_Library::get_content( $slug );
+
+		if ( null === $content ) {
+			wp_send_json_error( [ 'message' => __( 'This preset is no longer available.', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		wp_send_json_success( [ 'content' => $content ] );
 	}
 
 	/**

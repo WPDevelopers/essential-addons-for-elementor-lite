@@ -1,0 +1,177 @@
+/**
+ * The EA button in the editor's "add new element" row.
+ *
+ * Elementor builds that row in the preview iframe from its own Marionette view
+ * and exposes one supported way in: `views/add-section/behaviors`, the filter it
+ * applies to the view's behaviours. A behaviour gets the view's lifecycle, so
+ * the button is re-injected every time the row re-renders — which it does on
+ * every layout change — and it inherits the row's own button styling instead of
+ * fighting it.
+ *
+ * The click only *reports*: it dispatches an event on the top window, where the
+ * React app lives. Nothing about the picker or the insert happens here.
+ */
+
+export const OPEN_PRESETS_EVENT = 'eael/theme-builder/open-presets';
+
+const BUTTON_CLASS = 'eael-add-preset-button';
+
+/**
+ * Whether the editor exposes the pieces the button needs.
+ *
+ * @return {boolean} True when the behaviour can be registered.
+ */
+function canRegister() {
+	return !! (
+		window.elementor &&
+		window.elementor.hooks &&
+		window.Marionette &&
+		window.Marionette.Behavior
+	);
+}
+
+/**
+ * Build the button element.
+ *
+ * @param {string} icon  Icon URL.
+ * @param {string} label Accessible name and tooltip.
+ *
+ * @return {HTMLElement} The button.
+ */
+function createButton( icon, label ) {
+	const button = document.createElement( 'div' );
+
+	button.className = `elementor-add-section-area-button ${ BUTTON_CLASS }`;
+	button.title = label;
+	button.dataset.tooltip = label;
+	button.setAttribute( 'role', 'button' );
+	button.setAttribute( 'tabindex', '0' );
+	button.setAttribute( 'aria-label', label );
+
+	// Inline, not a stylesheet: this element lives in the preview iframe, which
+	// has its own document and does not load the admin styles this app ships in.
+	button.style.cssText = 'background-color:#5b3df5;color:#fff;display:flex;align-items:center;justify-content:center;';
+
+	if ( icon ) {
+		const image = document.createElement( 'img' );
+
+		image.src = icon;
+		image.alt = '';
+		image.setAttribute( 'aria-hidden', 'true' );
+		image.style.cssText = 'width:20px;height:20px;display:block;pointer-events:none;';
+		button.appendChild( image );
+	}
+
+	return button;
+}
+
+/**
+ * Add the EA button to the editor's add-element row.
+ *
+ * @param {Object} settings
+ * @param {string} settings.icon  Icon URL.
+ * @param {string} settings.label Accessible name and tooltip.
+ */
+export function registerPresetButton( { icon, label } ) {
+	const attach = () => {
+		if ( ! canRegister() ) {
+			return;
+		}
+
+		const Behavior = window.Marionette.Behavior.extend( {
+			ui() {
+				return { presetButton: `.${ BUTTON_CLASS }` };
+			},
+
+			events() {
+				return { 'click @ui.presetButton': 'onPresetButtonClick' };
+			},
+
+			onRender() {
+				const inner = this.el.querySelector( '.elementor-add-section-inner' );
+
+				if ( ! inner || inner.querySelector( `.${ BUTTON_CLASS }` ) ) {
+					return;
+				}
+
+				const button = createButton( icon, label );
+				const title = inner.querySelector( '.elementor-add-section-drag-title' );
+
+				// Before the "drag widget here" caption, which is the row's last
+				// element — so the button sits at the end of the circles.
+				if ( title ) {
+					title.before( button );
+				} else {
+					inner.append( button );
+				}
+			},
+
+			onPresetButtonClick( event ) {
+				event.preventDefault();
+				event.stopPropagation();
+
+				window.dispatchEvent( new CustomEvent( OPEN_PRESETS_EVENT, {
+					// The view knows where in the document it sits; the insert
+					// needs that index to land where the user clicked.
+					detail: { options: this.view ? this.view.options : {} },
+				} ) );
+			},
+		} );
+
+		window.elementor.hooks.addFilter( 'views/add-section/behaviors', ( behaviors ) => {
+			behaviors.eaelPresets = { behaviorClass: Behavior };
+
+			return behaviors;
+		} );
+	};
+
+	if ( canRegister() ) {
+		attach();
+
+		return;
+	}
+
+	window.addEventListener( 'elementor/init', attach, { once: true } );
+}
+
+/**
+ * Insert a preset's elements into the document.
+ *
+ * @param {Array}  content Elementor elements.
+ * @param {Object} options Options captured from the add-section view.
+ *
+ * @return {boolean} True when something was inserted.
+ */
+export function insertPreset( content, options = {} ) {
+	if ( ! window.$e || ! window.elementor || ! Array.isArray( content ) || ! content.length ) {
+		return false;
+	}
+
+	const container = window.elementor.getPreviewContainer();
+	const at = options && 'undefined' !== typeof options.at ? options.at : undefined;
+	let inserted = 0;
+
+	content.forEach( ( model, index ) => {
+		try {
+			// The command returns the new container, or false when a hook blocked
+			// it — and it throws outright if the model is not something the editor
+			// can build. All three have to be caught: the picker has already
+			// closed by now, so this return value is the only way the user hears
+			// about a failure.
+			if ( window.$e.run( 'document/elements/create', {
+				container,
+				model,
+				options: 'undefined' === typeof at ? {} : { at: at + index },
+			} ) ) {
+				inserted++;
+			}
+		} catch ( error ) {
+			// Counted as not inserted; a later element may still succeed.
+		}
+	} );
+
+	// Anything on the canvas counts as inserted: a preset is a single top level
+	// element today, and telling a user nothing happened while part of it is
+	// sitting in front of them would be worse than saying nothing at all.
+	return inserted > 0;
+}

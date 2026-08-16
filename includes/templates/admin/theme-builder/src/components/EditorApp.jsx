@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ConditionsModal from './ConditionsModal';
+import PresetLibrary from './PresetLibrary';
 import { settings, strings } from '../utils/api';
 import { notify, registerPublishGate, resumePublish } from '../utils/elementor';
+import { insertPreset, OPEN_PRESETS_EVENT, registerPresetButton } from '../utils/presetButton';
 
 /**
  * The condition builder as the last step of publishing.
@@ -19,6 +21,7 @@ export default function EditorApp() {
 
 	const [ conditions, setConditions ] = useState( () => editor.conditions || [] );
 	const [ held, setHeld ] = useState( null );
+	const [ presetTarget, setPresetTarget ] = useState( null );
 
 	// The gate is registered once and outlives every render, so what it reads has
 	// to be a ref — a captured state value would be the one from mount forever.
@@ -42,6 +45,35 @@ export default function EditorApp() {
 		} );
 	}, [ editor.templateId ] );
 
+	// The EA button in the add-element row: it reports where it was clicked, and
+	// the picker opens here.
+	useEffect( () => {
+		if ( ! editor.templateId || ! Array.isArray( editor.presets ) || ! editor.presets.length ) {
+			return undefined;
+		}
+
+		registerPresetButton( {
+			icon: editor.icon,
+			label: strings.presetsButton || 'Essential Addons presets',
+		} );
+
+		const onOpen = ( event ) => setPresetTarget( ( event.detail && event.detail.options ) || {} );
+
+		window.addEventListener( OPEN_PRESETS_EVENT, onOpen );
+
+		return () => window.removeEventListener( OPEN_PRESETS_EVENT, onOpen );
+	}, [ editor.templateId, editor.icon, editor.presets ] );
+
+	const onPresetChosen = useCallback( ( content ) => {
+		const target = presetTarget || {};
+
+		setPresetTarget( null );
+
+		if ( ! insertPreset( content, target ) ) {
+			notify( strings.presetFailed || 'The preset could not be inserted.' );
+		}
+	}, [ presetTarget ] );
+
 	const onSaved = useCallback( ( payload ) => {
 		setConditions( payload.conditions || [] );
 		setHeld( null );
@@ -56,6 +88,15 @@ export default function EditorApp() {
 		setHeld( null );
 		notify( strings.publishCancelled || 'Publishing cancelled. The template is still a draft.' );
 	}, [] );
+
+	if ( presetTarget ) {
+		return (
+			<PresetLibrary
+				onClose={ () => setPresetTarget( null ) }
+				onInsert={ onPresetChosen }
+			/>
+		);
+	}
 
 	if ( ! held ) {
 		return null;
