@@ -569,7 +569,7 @@ msgstr ""
 msgid "Simple Menu"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:674, ../includes/Elements/Mega_Menu.php:52, ../includes/Traits/Admin.php:862, ../includes/MegaMenu/Renderers/Editor_Renderer.php:71, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:95
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:674, ../includes/Elements/Mega_Menu.php:52, ../includes/Traits/Admin.php:862, ../includes/MegaMenu/Renderers/Editor_Renderer.php:71, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:96
 msgid "Mega Menu"
 msgstr ""
 
@@ -1073,7 +1073,7 @@ msgstr ""
 msgid "Background Size"
 msgstr ""
 
-#: ../includes/Controls/EAEL_Background.php:586, ../includes/Controls/EAEL_Background.php:605, ../includes/Elements/Adv_Tabs.php:116, ../includes/Elements/Caldera_Forms.php:420, ../includes/Elements/Code_Snippet.php:211, ../includes/Elements/Contact_Form_7.php:334, ../includes/Elements/Contact_Form_7.php:844, ../includes/Elements/Countdown.php:94, ../includes/Elements/Creative_Button.php:284, ../includes/Elements/Cta_Box.php:207, ../includes/Elements/Cta_Box.php:1147, ../includes/Elements/Cta_Box.php:1688, ../includes/Elements/Dual_Color_Header.php:93, ../includes/Elements/Event_Calendar.php:912, ../includes/Elements/Event_Calendar.php:924, ../includes/Elements/Flip_Box.php:1046, ../includes/Elements/FluentForm.php:466, ../includes/Elements/Formstack.php:345, ../includes/Elements/GravityForms.php:358, ../includes/Elements/Login_Register.php:610, ../includes/Elements/Login_Register.php:1068, ../includes/Elements/Login_Register.php:1283, ../includes/Elements/Login_Register.php:1442, ../includes/Elements/Login_Register.php:3010, ../includes/Elements/Login_Register.php:3359, ../includes/Elements/Login_Register.php:3541, ../includes/Elements/Login_Register.php:3806, ../includes/Elements/Login_Register.php:3950, ../includes/Elements/Login_Register.php:4100, ../includes/Elements/Login_Register.php:4243, ../includes/Elements/Login_Register.php:4334, ../includes/Elements/Login_Register.php:4432, ../includes/Elements/Login_Register.php:4634, ../includes/Elements/Login_Register.php:4679, ../includes/Elements/Login_Register.php:4711, ../includes/Elements/Login_Register.php:5142, ../includes/Elements/Login_Register.php:5290, ../includes/Elements/Login_Register.php:5419, ../includes/Elements/Login_Register.php:5906, ../includes/Elements/Login_Register.php:6331, ../includes/Elements/NinjaForms.php:285, ../includes/Elements/Pricing_Table.php:91, ../includes/Elements/Pricing_Table.php:585, ../includes/Elements/Product_Grid.php:269, ../includes/Elements/Simple_Menu.php:428, ../includes/Elements/Simple_Menu.php:554, ../includes/Elements/Simple_Menu.php:916, ../includes/Elements/Simple_Menu.php:1364, ../includes/Elements/Sticky_Video.php:399, ../includes/Elements/Team_Member.php:547, ../includes/Elements/Testimonial.php:101, ../includes/Elements/Testimonial.php:293, ../includes/Elements/Testimonial.php:395, ../includes/Elements/TypeForm.php:204, ../includes/Elements/WeForms.php:165, ../includes/Elements/WeForms.php:635, ../includes/Elements/Woo_Checkout.php:130, ../includes/Elements/Woo_Product_Images.php:611, ../includes/Elements/WpForms.php:282, ../includes/Extensions/Hover_Effect.php:688, ../includes/Extensions/Hover_Effect.php:1331, ../includes/Extensions/Image_Masking.php:416, ../includes/Extensions/Image_Masking.php:467, ../includes/Traits/Controls.php:821, ../includes/Traits/Controls.php:2044, ../includes/Traits/Login_Registration.php:1747, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:4, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:6, ../includes/Template/Post-Timeline/default.php:4
+#: ../includes/Controls/EAEL_Background.php:586, ../includes/Controls/EAEL_Background.php:605, ../includes/Elements/Adv_Tabs.php:116, ../includes/Elements/Caldera_Forms.php:420, ../includes/Elements/Code_Snippet.php:211, ../includes/Elements/Contact_Form_7.php:334, ../includes/Elements/Contact_Form_7.php:844, ../includes/Elements/Countdown.php:94, ../includes/Elements/Creative_Button.php:284, ../includes/Elements/Cta_Box.php:207, ../includes/Elements/Cta_Box.php:1147, ../includes/Elements/Cta_Box.php:1688, ../includes/Elements/Dual_Color_Header.php:93, ../includes/Elements/Event_Calendar.php:912, ../includes/Elements/Event_Calendar.php:924, ../includes/Elements/Flip_Box.php:1046, ../includes/Elements/FluentForm.php:466, ../includes/Elements/Formstack.php:345, ../includes/Elements/GravityForms.php:358, ../includes/Elements/Login_Register.php:610, ../includes/Elements/Login_Register.php:1068, ../includes/Elements/Login_Register.php:1283, ../includes/Elements/Login_Register.php:1442, ../includes/Elements/Login_Register.php:3010, ../includes/Elements/Login_Register.php:3359, ../includes/Elements/Login_Register.php:3541, ../includes/Elements/Login_Register.php:3806, ../includes/Elements/Login_Register.php:3950, ../includes/Elements/Login_Register.php:4100, ../includes/Elements/Login_Register.php:4243, ../includes/Elements/Login_Register.php:4334, ../includes/Elements/Login_Register.php:4432, ../includes/Elements/Login_Register.php:4634, ../includes/Elements/Login_Register.php:4679, ../includes/Elements/Login_Register.php:4711, ../includes/Elements/Login_Register.php:5142, ../includes/Elements/Login_Register.php:5290, ../includes/Elements/Login_Register.php:5419, ../includes/Elements/Login_Register.php:5906, ../includes/Elements/Login_Register.php:6331, ../includes/Elements/NinjaForms.php:285, ../includes/Elements/Pricing_Table.php:91, ../includes/Elements/Pricing_Table.php:585, ../includes/Elements/Product_Grid.php:269, ../includes/Elements/Simple_Menu.php:428, ../includes/Elements/Simple_Menu.php:554, ../includes/Elements/Simple_Menu.php:916, ../includes/Elements/Simple_Menu.php:1364, ../includes/Elements/Sticky_Video.php:399, ../includes/Elements/Team_Member.php:547, ../includes/Elements/Testimonial.php:101, ../includes/Elements/Testimonial.php:293, ../includes/Elements/Testimonial.php:395, ../includes/Elements/TypeForm.php:204, ../includes/Elements/WeForms.php:165, ../includes/Elements/WeForms.php:635, ../includes/Elements/Woo_Checkout.php:130, ../includes/Elements/Woo_Product_Images.php:611, ../includes/Elements/WpForms.php:282, ../includes/Extensions/Hover_Effect.php:688, ../includes/Extensions/Hover_Effect.php:1331, ../includes/Extensions/Image_Masking.php:416, ../includes/Extensions/Image_Masking.php:467, ../includes/Traits/Controls.php:821, ../includes/Traits/Controls.php:2044, ../includes/Traits/Login_Registration.php:1747, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/MegaMenu/Controls/Style_Controls.php:251, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:4, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:6, ../includes/Template/Post-Timeline/default.php:4, ../includes/Theme_Builder/Core/Post_Type.php:426
 msgid "Default"
 msgstr ""
 
@@ -1865,7 +1865,7 @@ msgstr ""
 msgid "Icon Border Color"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:1280, ../includes/Elements/Adv_Accordion.php:1655, ../includes/Elements/Adv_Tabs.php:938, ../includes/Elements/Event_Calendar.php:2224, ../includes/Elements/Event_Calendar.php:2555, ../includes/Elements/Filterable_Gallery.php:1579, ../includes/Elements/Interactive_Circle.php:821, ../includes/Elements/Product_Grid.php:3047, ../includes/Elements/Simple_Menu.php:496, ../includes/Elements/Simple_Menu.php:1172, ../includes/Elements/Woo_Product_Carousel.php:3034, ../includes/Elements/Woo_Product_Gallery.php:1805, ../includes/Elements/Woo_Product_Tabs.php:350, ../includes/Extensions/Table_of_Content.php:1242, ../includes/Traits/Admin.php:105
+#: ../includes/Elements/Adv_Accordion.php:1280, ../includes/Elements/Adv_Accordion.php:1655, ../includes/Elements/Adv_Tabs.php:938, ../includes/Elements/Event_Calendar.php:2224, ../includes/Elements/Event_Calendar.php:2555, ../includes/Elements/Filterable_Gallery.php:1579, ../includes/Elements/Interactive_Circle.php:821, ../includes/Elements/Product_Grid.php:3047, ../includes/Elements/Simple_Menu.php:496, ../includes/Elements/Simple_Menu.php:1172, ../includes/Elements/Woo_Product_Carousel.php:3034, ../includes/Elements/Woo_Product_Gallery.php:1805, ../includes/Elements/Woo_Product_Tabs.php:350, ../includes/Extensions/Table_of_Content.php:1242, ../includes/Traits/Admin.php:105, ../includes/MegaMenu/Controls/Style_Controls.php:207, ../includes/MegaMenu/Controls/Style_Controls.php:441, ../includes/MegaMenu/Controls/Style_Controls.php:520, ../includes/Theme_Builder/Admin/Admin.php:637
 msgid "Active"
 msgstr ""
 
@@ -2033,7 +2033,7 @@ msgstr ""
 msgid "Vertical Layout"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:1474, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:270
+#: ../includes/Elements/Adv_Tabs.php:1474, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:333
 msgid "The provided Template matches the current page or one of its revisions!"
 msgstr ""
 
@@ -5799,7 +5799,7 @@ msgstr ""
 msgid "Link Type"
 msgstr ""
 
-#: ../includes/Elements/Flip_Box.php:847, ../includes/Theme_Builder/Presets/Preset_Library.php:205
+#: ../includes/Elements/Flip_Box.php:847, ../includes/Theme_Builder/Presets/Preset_Library.php:212
 msgid "Get Started"
 msgstr ""
 
@@ -14149,7 +14149,7 @@ msgid "Toggle menu"
 msgstr ""
 
 #. translators: %s: Menu item label.
-#: ../includes/MegaMenu/Renderers/Frontend_Renderer.php:374
+#: ../includes/MegaMenu/Renderers/Frontend_Renderer.php:437
 msgid "Show submenu for %s"
 msgstr ""
 
@@ -14470,51 +14470,39 @@ msgid "Choose a Header & Footer Preset"
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:649
-msgid "Select a preset design to get started. You can customize it later in the builder."
-msgstr ""
-
-#: ../includes/Theme_Builder/Admin/Admin.php:650
 msgid "Header Presets"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:651
+#: ../includes/Theme_Builder/Admin/Admin.php:650
 msgid "Footer Presets"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:652
+#: ../includes/Theme_Builder/Admin/Admin.php:651
 msgid "Click to Insert"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:653
+#: ../includes/Theme_Builder/Admin/Admin.php:652
 msgid "Inserting…"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:654
+#: ../includes/Theme_Builder/Admin/Admin.php:653
 msgid "No header presets are available yet."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:655
+#: ../includes/Theme_Builder/Admin/Admin.php:654
 msgid "Footer presets are on their way. Build yours from scratch in the meantime."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:656
-msgid "Fully Customizable"
-msgstr ""
-
-#: ../includes/Theme_Builder/Admin/Admin.php:657
-msgid "Every preset is 100% editable in Elementor. Change colors, typography, spacing and add your own content."
-msgstr ""
-
-#: ../includes/Theme_Builder/Admin/Admin.php:658
+#: ../includes/Theme_Builder/Admin/Admin.php:655
 msgid "The preset could not be inserted."
 msgstr ""
 
 #. translators: 1: month number (01, 02, …), 2: month abbreviation.
-#: ../includes/Theme_Builder/Admin/Admin.php:683
+#: ../includes/Theme_Builder/Admin/Admin.php:680
 msgid "%1$s-%2$s"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:697, ../includes/Theme_Builder/Admin/Requirements_Screen.php:106
+#: ../includes/Theme_Builder/Admin/Admin.php:694, ../includes/Theme_Builder/Admin/Requirements_Screen.php:106
 msgid "You do not have permission to manage Theme Builder templates."
 msgstr ""
 
@@ -14851,7 +14839,7 @@ msgstr ""
 msgid "Site name on the left, navigation and a call to action on the right. Collapses to a hamburger on mobile."
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:165
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:169
 msgid "Brand"
 msgstr ""
 

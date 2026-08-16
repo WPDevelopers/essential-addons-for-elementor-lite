@@ -767,11 +767,16 @@ const getMegaMenuHandler = () =>
 			const $item = this.getItemByIndex(index);
 			const $panel = this.getPanelByIndex(index);
 
+			// Open first, place second. A closed panel is `display: none` so that
+			// it stops inflating the page's scroll height, and a display-none box
+			// measures zero — so the alignment maths in positionPanel() has to run
+			// on a panel that is already rendered. Both happen in this one task,
+			// before the browser paints, so nothing is seen out of place.
+			$panel.addClass(classes.panelActive);
 			this.positionPanel(index);
 
 			$item.addClass(classes.itemActive);
 			$item.find("[aria-expanded]").attr("aria-expanded", "true");
-			$panel.addClass(classes.panelActive);
 			this.elements.$root.addClass(classes.active);
 
 			this.activeIndex = index;

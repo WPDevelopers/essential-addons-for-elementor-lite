@@ -268,36 +268,47 @@
           transform: none;
 }
 .eael-mega-menu {
-  /* Reveal animations.
+  /* A closed panel is taken out of layout, not merely hidden.
    *
-   * The transform is the panel's *resting* state — the offset it animates out
-   * of — so it has to stop applying the instant the panel opens. That is what
-   * `:not(--active)` is for, and it is load bearing: written as a bare
-   * `&__panel` these rules are (0,2,0) and outrank the `transform: none` on
-   * `&__panel--active` (0,1,0), so an opening panel kept its offset and
-   * animated backwards — coming to rest 12px out of place, or permanently
-   * scaled to 0.96, instead of settling into position. Excluding the open
-   * panel leaves it with no transform to fight over, and the class flip still
-   * animates it in both directions. */
+   * `visibility: hidden` hides a box but keeps it in layout, and `position:
+   * absolute` only removes it from *flow* — neither takes it out of the
+   * document's scrollable overflow. A tall submenu therefore donated its full
+   * height to the page's scroll on every view, with nothing open: measured on
+   * a header menu here, 2071px of scroll height against 1056px of content, so
+   * the page scrolled a screenful into empty space before anyone touched the
+   * menu. `display: none` is the only thing that removes it from both.
+   *
+   * This is also why the reveal below is a keyframe animation rather than the
+   * transition it used to be: a transition cannot start from `display: none`,
+   * because there is no previous rendered state to interpolate from. */
 }
-.eael-mega-menu--anim-none .eael-mega-menu__panel {
-  -webkit-transition: none;
-  transition: none;
+.eael-mega-menu__panel:not(.eael-mega-menu__panel--active) {
+  display: none;
 }
-.eael-mega-menu--anim-slide-down .eael-mega-menu__panel:not(.eael-mega-menu__panel--active) {
-  -webkit-transform: translateY(-12px);
-      -ms-transform: translateY(-12px);
-          transform: translateY(-12px);
+.eael-mega-menu {
+  /* Reveal animations, both layouts.
+   *
+   * Animations start the moment the element is rendered and matches the rule,
+   * which is exactly what a display-toggled panel needs, and a running
+   * animation outranks normal declarations so it moves the panel regardless of
+   * the `transform: none` above. Duration follows the Animation Duration
+   * control's custom property. `none` is absent by design — nothing to run. */
 }
-.eael-mega-menu--anim-slide-up .eael-mega-menu__panel:not(.eael-mega-menu__panel--active) {
-  -webkit-transform: translateY(12px);
-      -ms-transform: translateY(12px);
-          transform: translateY(12px);
+.eael-mega-menu--anim-fade .eael-mega-menu__panel--active {
+  -webkit-animation: eael-mm-reveal-fade var(--eael-mm-animation-duration, 300ms) ease;
+          animation: eael-mm-reveal-fade var(--eael-mm-animation-duration, 300ms) ease;
 }
-.eael-mega-menu--anim-zoom .eael-mega-menu__panel:not(.eael-mega-menu__panel--active) {
-  -webkit-transform: scale(0.96);
-      -ms-transform: scale(0.96);
-          transform: scale(0.96);
+.eael-mega-menu--anim-slide-down .eael-mega-menu__panel--active {
+  -webkit-animation: eael-mm-reveal-slide-down var(--eael-mm-animation-duration, 300ms) ease;
+          animation: eael-mm-reveal-slide-down var(--eael-mm-animation-duration, 300ms) ease;
+}
+.eael-mega-menu--anim-slide-up .eael-mega-menu__panel--active {
+  -webkit-animation: eael-mm-reveal-slide-up var(--eael-mm-animation-duration, 300ms) ease;
+          animation: eael-mm-reveal-slide-up var(--eael-mm-animation-duration, 300ms) ease;
+}
+.eael-mega-menu--anim-zoom .eael-mega-menu__panel--active {
+  -webkit-animation: eael-mm-reveal-zoom var(--eael-mm-animation-duration, 300ms) ease;
+          animation: eael-mm-reveal-zoom var(--eael-mm-animation-duration, 300ms) ease;
 }
 .eael-mega-menu {
   /* --------------------------------------------------------------------- */
@@ -555,50 +566,9 @@
   -webkit-transform: none;
       -ms-transform: none;
           transform: none;
-  /* The reveal is a keyframe animation here, not a transition — see the
-     `--anim-*` rules below for why. */
+  /* The reveal is a keyframe animation — see the `--anim-*` rules. */
   -webkit-transition: none;
   transition: none;
-}
-.eael-mega-menu--mobile {
-  /* Same reasoning as editing mode — never set `display` on the open
-     panel, or its own container layout stops working. */
-}
-.eael-mega-menu--mobile .eael-mega-menu__panel:not(.eael-mega-menu__panel--active) {
-  display: none;
-}
-.eael-mega-menu {
-  /* Reveal animations, collapsed layout.
-   *
-   * The bar animates its panels with a transition, but that is unavailable
-   * here: a collapsed panel is toggled with `display`, and a transition cannot
-   * run on an element that was `display: none` a moment ago — the browser has
-   * no previous rendered state to interpolate from, which is why this layout
-   * disabled transitions outright and, until now, ignored the Animation control
-   * entirely.
-   *
-   * A keyframe animation has no such limitation: it starts the moment the
-   * element is rendered and matches the rule. Running animations also outrank
-   * normal declarations in the cascade, so these move the panel despite the
-   * `transform: none` above. Duration follows the same custom property as the
-   * bar, so the Animation Duration control keeps working. `none` is absent by
-   * design — nothing to run. */
-}
-.eael-mega-menu--mobile.eael-mega-menu--anim-fade .eael-mega-menu__panel--active {
-  -webkit-animation: eael-mm-reveal-fade var(--eael-mm-animation-duration, 300ms) ease;
-          animation: eael-mm-reveal-fade var(--eael-mm-animation-duration, 300ms) ease;
-}
-.eael-mega-menu--mobile.eael-mega-menu--anim-slide-down .eael-mega-menu__panel--active {
-  -webkit-animation: eael-mm-reveal-slide-down var(--eael-mm-animation-duration, 300ms) ease;
-          animation: eael-mm-reveal-slide-down var(--eael-mm-animation-duration, 300ms) ease;
-}
-.eael-mega-menu--mobile.eael-mega-menu--anim-slide-up .eael-mega-menu__panel--active {
-  -webkit-animation: eael-mm-reveal-slide-up var(--eael-mm-animation-duration, 300ms) ease;
-          animation: eael-mm-reveal-slide-up var(--eael-mm-animation-duration, 300ms) ease;
-}
-.eael-mega-menu--mobile.eael-mega-menu--anim-zoom .eael-mega-menu__panel--active {
-  -webkit-animation: eael-mm-reveal-zoom var(--eael-mm-animation-duration, 300ms) ease;
-          animation: eael-mm-reveal-zoom var(--eael-mm-animation-duration, 300ms) ease;
 }
 .eael-mega-menu--mobile.eael-mega-menu--menu-open .eael-mega-menu__container {
   display: -webkit-box;
