@@ -102,6 +102,7 @@ class Editor {
 			'status'     => $template->get_status(),
 			'conditions' => Conditions_Manager::instance()->decorate_conditions( $template->get_conditions() ),
 			'presets'    => Preset_Library::get_presets_for_ui(),
+			'templately' => Templately::get_state_for_ui(),
 			'icon'       => EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-new-white.svg',
 		];
 	}

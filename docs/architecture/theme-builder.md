@@ -25,6 +25,7 @@ Assets: [`assets/admin/css/theme-builder.css`](../../assets/admin/css/theme-buil
 | `Admin/Templates_List_Table.php` | `WP_List_Table` — columns, views, tabs, search, month filter, pagination, row actions |
 | `Admin/Ajax.php` | Six logged-in-only endpoints behind a shared nonce + capability check |
 | `Integrations/Document.php` | Elementor document type (`ea-theme-builder`) |
+| `Integrations/Templately.php` | Reports which of Templately's three states the site is in, and where the picker's link goes |
 | `Integrations/Editor.php` | Loads the React app inside the Elementor editor and hands it the template being edited, so publishing can ask for display conditions first — and so the EA button can offer presets |
 | `Integrations/Elementor_Integration.php` | Document registration, canvas template, direct-access guard, cache busting on save |
 | `Integrations/Compatibility.php` | Polylang / WPML translation, sitemap exclusions (core, Yoast, Rank Math) |
@@ -479,6 +480,17 @@ Both classes of mistake are invisible on screen, so they are worth checking mech
 **Colours are spelled out, transparents included.** An empty colour setting emits no rule at all, which leaves the *theme's* styling in charge — a Storefront install renders the menu as a solid bar in its link colour, inside the header. Every colour the preset depends on is therefore explicit, including the "current page" link state, which is filled by default and would otherwise paint a stray block on the one link matching the current URL.
 
 **Responsiveness is split between the two layers that own it.** Container widths carry `_tablet` / `_mobile` values; the navigation widget collapses itself at its own breakpoint. Where the collapsed toggle *lands* is the container's problem, not the widget's — the Mega Menu preset sets `_flex_order_mobile` on the navigation column so the toggle sits with the other icons at the end of the bar instead of in the middle of it.
+
+#### The Templately hand-off
+
+The picker is a handful of starting points, not a catalogue, so the modal ends with a link into Templately's library. Templately can be in three states and the link works from all of them: **active** renders a plain `<a>` (so middle-click and open-in-new-tab behave like any other link), while **installed-but-inactive** and **not installed** render a button that calls `eael_theme_builder_enable_templately` and then navigates. A fourth state, **blocked**, means Templately is unusable *and* the user lacks the capability to change that — the notice renders nothing at all rather than offering an action that would be refused.
+
+`WPDeveloper_Plugin_Installer::install_plugin()` already collapses install / activate-existing / already-running into one call, so the endpoint makes one call for all three. Two things about it are load-bearing:
+
+- **The slug is a constant.** Nothing about *which* plugin gets downloaded comes from the request — that is the whole difference between this and an arbitrary-plugin installer. On top of the shared nonce and the Theme Builder capability, the endpoint checks the specific capability WordPress itself requires (`install_plugins` or `activate_plugins`, depending on what is actually needed).
+- **The end state is re-checked before replying.** `install_plugin()` reports on the download and the activation *call*, not on the result, so a plugin whose activation fatalled can still return true. The app is about to navigate somewhere that needs Templately running, so `Templately::is_active()` is asked again.
+
+Navigation is same-tab on purpose: the site's plugin set has just changed underneath a running editor, so its loaded scripts no longer match the site and leaving is the honest next step. Elementor's own unsaved-changes prompt still gets its say on the way out. Note that Templately redirects `edit.php?post_type=templately_library` to its own React library screen — the CPT URL is the entry point, not the final destination.
 
 Add one with the `eael/theme_builder/presets` filter:
 

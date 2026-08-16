@@ -9,7 +9,26 @@ use \WP_Error;
 
 class WPDeveloper_Plugin_Installer
 {
+	/**
+	 * Have this class's AJAX endpoints already been registered.
+	 *
+	 * The constructor has a global side effect, so a second instance built to
+	 * reuse install_plugin() — which is a plain method, not a static one — would
+	 * bind every endpoint a second time. add_action() keys callbacks by object
+	 * hash, so those are genuine duplicates: the handler would run twice and send
+	 * two JSON bodies. Registration belongs to whichever instance is built first.
+	 *
+	 * @var bool
+	 */
+	private static $endpoints_registered = false;
+
 	public function __construct() {
+		if ( self::$endpoints_registered ) {
+			return;
+		}
+
+		self::$endpoints_registered = true;
+
 		add_action( 'wp_ajax_wpdeveloper_auto_active_even_not_installed', [ $this, 'ajax_auto_active_even_not_installed' ] );
 		add_action( 'wp_ajax_wpdeveloper_install_plugin', [ $this, 'ajax_install_plugin' ] );
 		add_action( 'wp_ajax_wpdeveloper_upgrade_plugin', [ $this, 'ajax_upgrade_plugin' ] );

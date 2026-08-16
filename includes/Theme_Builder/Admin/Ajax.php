@@ -12,7 +12,9 @@ use Essential_Addons_Elementor\Theme_Builder\Conditions\Conditions_Manager;
 use Essential_Addons_Elementor\Theme_Builder\Conditions\Rules;
 use Essential_Addons_Elementor\Theme_Builder\Core\Post_Type;
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Cache;
+use Essential_Addons_Elementor\Classes\WPDeveloper_Plugin_Installer;
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Types;
+use Essential_Addons_Elementor\Theme_Builder\Integrations\Templately;
 use Essential_Addons_Elementor\Theme_Builder\Models\Template;
 use Essential_Addons_Elementor\Theme_Builder\Presets\Preset_Library;
 use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
@@ -49,6 +51,59 @@ class Ajax {
 		add_action( 'wp_ajax_eael_theme_builder_quick_edit', [ $this, 'quick_edit' ] );
 		add_action( 'wp_ajax_eael_theme_builder_bulk_edit', [ $this, 'bulk_edit' ] );
 		add_action( 'wp_ajax_eael_theme_builder_get_preset', [ $this, 'get_preset' ] );
+		add_action( 'wp_ajax_eael_theme_builder_enable_templately', [ $this, 'enable_templately' ] );
+	}
+
+	/**
+	 * Get Templately into a usable state, and say where to go next.
+	 *
+	 * Installing a plugin is the most privileged thing this feature does, so it is
+	 * fenced in three ways: the shared nonce, the Theme Builder capability, and
+	 * then the *specific* capability WordPress itself requires for the operation
+	 * actually needed. The slug is a constant — nothing about which plugin gets
+	 * downloaded comes from the request, which is the difference between a
+	 * convenience endpoint and an arbitrary-plugin installer.
+	 *
+	 * `install_plugin()` already collapses the three states: it activates an
+	 * existing copy, returns early for one that is already running, and otherwise
+	 * downloads and activates. So one call covers install, activate and no-op.
+	 *
+	 * @since 6.7.3
+	 */
+	public function enable_templately() {
+		$this->verify_request();
+
+		if ( Templately::is_active() ) {
+			wp_send_json_success( [ 'url' => Templately::library_url() ] );
+		}
+
+		$capability = Templately::is_installed() ? 'activate_plugins' : 'install_plugins';
+
+		if ( ! current_user_can( $capability ) ) {
+			wp_send_json_error(
+				[ 'message' => __( 'You are not allowed to install or activate plugins on this site.', 'essential-addons-for-elementor-lite' ) ],
+				403
+			);
+		}
+
+		$installer = new WPDeveloper_Plugin_Installer();
+		$result    = $installer->install_plugin( Templately::SLUG );
+
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( [ 'message' => $result->get_error_message() ] );
+		}
+
+		// `install_plugin()` reports on the download and the activation call, not
+		// on the end state — a plugin whose activation fatalled can still come
+		// back true. Asking again is the only answer worth sending back, because
+		// the app is about to navigate somewhere that needs Templately running.
+		if ( ! Templately::is_active() ) {
+			wp_send_json_error(
+				[ 'message' => __( 'Templately could not be activated. Please install it from the Plugins screen.', 'essential-addons-for-elementor-lite' ) ]
+			);
+		}
+
+		wp_send_json_success( [ 'url' => Templately::library_url() ] );
 	}
 
 	/**

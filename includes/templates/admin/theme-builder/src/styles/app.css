@@ -805,3 +805,39 @@ body.eatb-modal-open {
 	text-align: center;
 }
 
+
+/* Templately hand-off, at the foot of the preset picker. */
+.eatb-presets__note {
+	margin: 24px 0 0;
+	padding-top: 18px;
+	border-top: 1px solid var( --eatb-border, #e6e6ef );
+	font-size: 13px;
+	color: var( --eatb-muted );
+	text-align: center;
+}
+
+/* One rule for both the anchor and the button, so the two states of the link
+   are indistinguishable to the reader — only the click differs. */
+.eatb-presets__link {
+	padding: 0;
+	border: 0;
+	background: none;
+	font: inherit;
+	color: var( --eatb-accent );
+	font-weight: 600;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	cursor: pointer;
+}
+
+.eatb-presets__link:hover,
+.eatb-presets__link:focus {
+	color: var( --eatb-accent );
+	text-decoration: none;
+}
+
+.eatb-presets__link[disabled] {
+	cursor: default;
+	opacity: 0.7;
+	text-decoration: none;
+}

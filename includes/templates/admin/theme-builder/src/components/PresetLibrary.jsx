@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import Modal from './Modal';
 import Notice from './Notice';
+import TemplatelyNote from './TemplatelyNote';
 import { errorMessage, request, settings, strings } from '../utils/api';
 
 /**
@@ -124,6 +125,7 @@ export default function PresetLibrary( { onClose, onInsert } ) {
 				</p>
 			) }
 
+			<TemplatelyNote busy={ !! busy } onError={ setError } />
 		</Modal>
 	);
 }

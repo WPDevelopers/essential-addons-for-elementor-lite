@@ -653,6 +653,11 @@ class Admin {
 				'noHeaderPresets'  => __( 'No header presets are available yet.', 'essential-addons-for-elementor-lite' ),
 				'noFooterPresets'  => __( 'Footer presets are on their way. Build yours from scratch in the meantime.', 'essential-addons-for-elementor-lite' ),
 				'presetFailed'     => __( 'The preset could not be inserted.', 'essential-addons-for-elementor-lite' ),
+				/* translators: %s: Templately, rendered as a link. */
+				'templatelyNote'   => __( 'For more templates, use %s.', 'essential-addons-for-elementor-lite' ),
+				'templatelyName'   => __( 'Templately', 'essential-addons-for-elementor-lite' ),
+				'templatelyInstalling' => __( 'Installing Templately…', 'essential-addons-for-elementor-lite' ),
+				'templatelyActivating' => __( 'Activating Templately…', 'essential-addons-for-elementor-lite' ),
 			],
 		];
 
