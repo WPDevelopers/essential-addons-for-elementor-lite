@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * site's own name and the site's own menu already in it — and because element
  * IDs have to be unique per insert.
  *
- * Everything a preset uses ships with Lite: containers, heading and button are
- * Elementor core, the navigation is EA's own Simple Menu. Nothing here needs
- * Elementor Pro.
+ * Everything a preset uses ships with Lite: containers, heading, button, icon
+ * and image are Elementor core, the navigation is EA's own Simple Menu or Mega
+ * Menu. Nothing here needs Elementor Pro.
  *
  * @since 6.7.3
  */
@@ -37,16 +37,30 @@ class Preset_Library {
 	 * @return array
 	 */
 	public static function get_presets() {
-		$presets = [
-			'classic-header' => [
-				'slug'        => 'classic-header',
+		$presets = [];
+
+		// Listed first because it is the richer starting point — but only when the
+		// widget it is built on is actually registered for this editor session.
+		if ( Mega_Header::is_available() ) {
+			$presets['mega-header'] = [
+				'slug'        => 'mega-header',
 				'type'        => 'header',
-				'title'       => __( 'Classic Header', 'essential-addons-for-elementor-lite' ),
-				'badge'       => __( 'Clean & Simple', 'essential-addons-for-elementor-lite' ),
-				'description' => __( 'Site name on the left, navigation and a call to action on the right. Collapses to a hamburger on mobile.', 'essential-addons-for-elementor-lite' ),
-				'thumbnail'   => self::thumbnail_url( 'classic-header.svg' ),
-				'builder'     => [ __CLASS__, 'build_classic_header' ],
-			],
+				'title'       => __( 'Mega Menu Header', 'essential-addons-for-elementor-lite' ),
+				'badge'       => __( 'Mega Menu', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Logo, a centred mega menu with two ready-built panels, search, cart and a call to action. Collapses to a toggle on mobile.', 'essential-addons-for-elementor-lite' ),
+				'thumbnail'   => self::thumbnail_url( 'mega-header.svg' ),
+				'builder'     => [ Mega_Header::class, 'build' ],
+			];
+		}
+
+		$presets['classic-header'] = [
+			'slug'        => 'classic-header',
+			'type'        => 'header',
+			'title'       => __( 'Classic Header', 'essential-addons-for-elementor-lite' ),
+			'badge'       => __( 'Clean & Simple', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Site name on the left, navigation and a call to action on the right. Collapses to a hamburger on mobile.', 'essential-addons-for-elementor-lite' ),
+			'thumbnail'   => self::thumbnail_url( 'classic-header.svg' ),
+			'builder'     => [ __CLASS__, 'build_classic_header' ],
 		];
 
 		/**
@@ -154,16 +168,16 @@ class Preset_Library {
 	 * @return array
 	 */
 	public static function build_classic_header() {
-		$brand = self::container(
+		$brand = Elements::container(
 			[
-				'width'       => [ 'unit' => '%', 'size' => 25 ],
-				'width_tablet' => [ 'unit' => '%', 'size' => 40 ],
-				'width_mobile' => [ 'unit' => '%', 'size' => 60 ],
+				'width'       => Elements::size( 25, '%' ),
+				'width_tablet' => Elements::size( 40, '%' ),
+				'width_mobile' => Elements::size( 60, '%' ),
 				'content_width' => 'full',
 				'flex_justify_content' => 'flex-start',
 			],
 			[
-				self::widget(
+				Elements::widget(
 					'heading',
 					[
 						'title'       => get_bloginfo( 'name' ) ? get_bloginfo( 'name' ) : __( 'Brand', 'essential-addons-for-elementor-lite' ),
@@ -173,32 +187,32 @@ class Preset_Library {
 						// is rarely the right ink for a site name.
 						'title_color' => '#1D1F2B',
 						'typography_typography' => 'custom',
-						'typography_font_size'  => [ 'unit' => 'px', 'size' => 24 ],
-						'typography_font_size_mobile' => [ 'unit' => 'px', 'size' => 20 ],
+						'typography_font_size'  => Elements::size( 24 ),
+						'typography_font_size_mobile' => Elements::size( 20 ),
 						'typography_font_weight' => '700',
 					]
 				),
 			]
 		);
 
-		$navigation = self::container(
+		$navigation = Elements::container(
 			[
-				'width'        => [ 'unit' => '%', 'size' => 50 ],
-				'width_tablet' => [ 'unit' => '%', 'size' => 20 ],
-				'width_mobile' => [ 'unit' => '%', 'size' => 40 ],
+				'width'        => Elements::size( 50, '%' ),
+				'width_tablet' => Elements::size( 20, '%' ),
+				'width_mobile' => Elements::size( 40, '%' ),
 				'content_width' => 'full',
 				'flex_justify_content' => 'center',
 				'flex_justify_content_tablet' => 'flex-end',
 			],
 			[
-				self::widget( 'eael-simple-menu', self::menu_settings() ),
+				Elements::widget( 'eael-simple-menu', self::menu_settings() ),
 			]
 		);
 
-		$action = self::container(
+		$action = Elements::container(
 			[
-				'width'        => [ 'unit' => '%', 'size' => 25 ],
-				'width_tablet' => [ 'unit' => '%', 'size' => 40 ],
+				'width'        => Elements::size( 25, '%' ),
+				'width_tablet' => Elements::size( 40, '%' ),
 				'content_width' => 'full',
 				'flex_justify_content' => 'flex-end',
 				// The button is the first thing worth dropping on a phone: the
@@ -206,7 +220,7 @@ class Preset_Library {
 				'hide_mobile'  => 'hidden-mobile',
 			],
 			[
-				self::widget(
+				Elements::widget(
 					'button',
 					[
 						'text'            => __( 'Get Started', 'essential-addons-for-elementor-lite' ),
@@ -216,10 +230,10 @@ class Preset_Library {
 						// colour is rarely the one a header wants next to a logo.
 						'background_color' => '#5B3DF5',
 						'button_text_color' => '#FFFFFF',
-						'border_radius'   => self::spacing( 6, 6, 6, 6 ),
-						'text_padding'    => self::spacing( 10, 20, 10, 20 ),
+						'border_radius'   => Elements::spacing( 6, 6, 6, 6 ),
+						'text_padding'    => Elements::spacing( 10, 20, 10, 20 ),
 						'typography_typography' => 'custom',
-						'typography_font_size'  => [ 'unit' => 'px', 'size' => 14 ],
+						'typography_font_size'  => Elements::size( 14 ),
 						'typography_font_weight' => '600',
 					]
 				),
@@ -227,26 +241,20 @@ class Preset_Library {
 		);
 
 		return [
-			self::container(
+			Elements::container(
 				[
 					'content_width'        => 'boxed',
 					'flex_direction'       => 'row',
 					'flex_align_items'     => 'center',
 					'flex_justify_content' => 'space-between',
 					'flex_wrap'            => 'nowrap',
-					'flex_gap'             => [ 'unit' => 'px', 'size' => 24, 'column' => '24', 'row' => '24', 'isLinked' => true ],
-					'padding'              => self::spacing( 16, 24, 16, 24 ),
-					'padding_mobile'       => self::spacing( 12, 16, 12, 16 ),
+					'flex_gap'             => Elements::gap( 24 ),
+					'padding'              => Elements::spacing( 16, 24, 16, 24 ),
+					'padding_mobile'       => Elements::spacing( 12, 16, 12, 16 ),
 					'background_background' => 'classic',
 					'background_color'     => '#FFFFFF',
 					'box_shadow_box_shadow_type' => 'yes',
-					'box_shadow_box_shadow' => [
-						'horizontal' => 0,
-						'vertical'   => 2,
-						'blur'       => 12,
-						'spread'     => 0,
-						'color'      => 'rgba(16, 18, 32, 0.08)',
-					],
+					'box_shadow_box_shadow' => Elements::shadow( 2, 12, 'rgba(16, 18, 32, 0.08)' ),
 				],
 				[ $brand, $navigation, $action ]
 			),
@@ -291,9 +299,9 @@ class Preset_Library {
 			// column pushed against the screen edge.
 			'eael_simple_menu_item_alignment'       => 'eael-simple-menu-align-left',
 			'eael_simple_menu_dropdown_item_alignment' => 'eael-simple-menu-dropdown-align-left',
-			'eael_simple_menu_item_padding'         => self::spacing( 8, 14, 8, 14 ),
+			'eael_simple_menu_item_padding'         => Elements::spacing( 8, 14, 8, 14 ),
 			'eael_simple_menu_item_typography_typography' => 'custom',
-			'eael_simple_menu_item_typography_font_size'  => [ 'unit' => 'px', 'size' => 15 ],
+			'eael_simple_menu_item_typography_font_size'  => Elements::size( 15 ),
 			'eael_simple_menu_item_typography_font_weight' => '500',
 
 			// Hamburger: same ink as the links, no filled bar behind it, and no
@@ -326,86 +334,8 @@ class Preset_Library {
 	}
 
 	/* ---------------------------------------------------------------------
-	 * Element helpers.
+	 * Helpers.
 	 * ------------------------------------------------------------------ */
-
-	/**
-	 * A container element.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @param array $settings Container settings.
-	 * @param array $children Child elements.
-	 *
-	 * @return array
-	 */
-	protected static function container( $settings = [], $children = [] ) {
-		return [
-			'id'       => self::uid(),
-			'elType'   => 'container',
-			'settings' => $settings,
-			'elements' => $children,
-			'isInner'  => false,
-		];
-	}
-
-	/**
-	 * A widget element.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @param string $type     Widget type.
-	 * @param array  $settings Widget settings.
-	 *
-	 * @return array
-	 */
-	protected static function widget( $type, $settings = [] ) {
-		return [
-			'id'         => self::uid(),
-			'elType'     => 'widget',
-			'widgetType' => $type,
-			'settings'   => $settings,
-			'elements'   => [],
-		];
-	}
-
-	/**
-	 * A padding/margin value in Elementor's shape.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @param int $top    Top value.
-	 * @param int $right  Right value.
-	 * @param int $bottom Bottom value.
-	 * @param int $left   Left value.
-	 *
-	 * @return array
-	 */
-	protected static function spacing( $top, $right, $bottom, $left ) {
-		return [
-			'unit'     => 'px',
-			'top'      => (string) $top,
-			'right'    => (string) $right,
-			'bottom'   => (string) $bottom,
-			'left'     => (string) $left,
-			'isLinked' => false,
-		];
-	}
-
-	/**
-	 * A fresh element ID.
-	 *
-	 * Elementor keys every element by a 7 character hex ID and expects them to
-	 * be unique inside a document — so they are generated per insert rather than
-	 * baked into the preset, which would collide the second time it is used.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @return string
-	 */
-	protected static function uid() {
-		return substr( str_pad( dechex( wp_rand( 0, 0xfffffff ) ), 7, '0', STR_PAD_LEFT ), 0, 7 );
-	}
 
 	/**
 	 * URL of a preset thumbnail.

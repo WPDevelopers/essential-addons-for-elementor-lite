@@ -29,6 +29,8 @@ Assets: [`assets/admin/css/theme-builder.css`](../../assets/admin/css/theme-buil
 | `Integrations/Elementor_Integration.php` | Document registration, canvas template, direct-access guard, cache busting on save |
 | `Integrations/Compatibility.php` | Polylang / WPML translation, sitemap exclusions (core, Yoast, Rank Math) |
 | `Presets/Preset_Library.php` | Ready-made header and footer starting points: the cards the picker shows, and the Elementor elements each one inserts |
+| `Presets/Mega_Header.php` | The Mega Menu header preset — the header bar, the menu's settings, and the two mega panels it ships with |
+| `Presets/Elements.php` | The Elementor shapes a preset is assembled from: containers, widgets, repeater rows, spacing and slider values |
 | `Frontend/Frontend.php` | Resolves templates for the request and picks a render mode |
 | `Renderers/Template_Renderer.php` | Produces the markup, guarded against duplicate rendering |
 | `Templates/` | `header.php`, `footer.php`, `canvas.php` for the front end, plus `admin/dashboard.php` — the only admin view left in PHP, since the modals are React |
@@ -433,11 +435,26 @@ preview iframe                         editor window
 - The button element is created in the **preview iframe**, which has its own document and does not load this app's stylesheet — so its handful of styles are set inline.
 - The behaviour itself runs in the **editor window**, which is where the React app is, so the click is passed on as a plain `CustomEvent` rather than reaching across documents.
 
-**The elements are built per insert** (`Preset_Library::build_classic_header()`), not stored as a frozen JSON blob. A preset comes up carrying the site's own name and its own menu, and Elementor keys every element by a unique ID — inserting the same stored blob twice would collide.
+**The elements are built per insert** (`Mega_Header::build()`, `Preset_Library::build_classic_header()`), not stored as a frozen JSON blob. A preset comes up carrying the site's own name, logo and menu, and Elementor keys every element by a unique ID — inserting the same stored blob twice would collide.
 
-**Everything a preset uses ships with Lite.** Containers, Heading and Button are Elementor core; the navigation is EA's own Simple Menu, which is what makes the header responsive without Elementor Pro: links on desktop, hamburger from tablet down, full-width dropdown panel.
+**Everything a preset uses ships with Lite.** Containers, Heading, Button, Icon, Icon List, Icon Box, Image and Text Editor are Elementor core; the navigation is EA's own Simple Menu or Mega Menu, which is what makes these headers responsive without Elementor Pro.
+
+Two headers ship today:
+
+| Preset | Navigation | Collapses at | Notes |
+|--------|-----------|--------------|-------|
+| Mega Menu Header | `eael-mega-menu` | mobile | Logo, centred menu with two ready-built mega panels, search, cart, call to action |
+| Classic Header | `eael-simple-menu` | tablet | Site name, links, call to action |
+
+**A preset built on a widget has to check the widget is there.** `Mega_Header::is_available()` asks `Plugin::$instance->widgets_manager->get_widget_types( 'eael-mega-menu' )` rather than testing the nested-elements experiment: the widget can be missing because Elementor is too old, because the experiment is off, *or* because the element is switched off in EA's own settings, and the widgets manager is the one answer that covers all three. When it is missing the card is simply not offered.
+
+**A nested widget's children need `isLocked`.** Elementor's `NestedModelBase::initialize()` fills in the default children only for a widget created with none, so a preset that supplies its own panels keeps them — but `isValidChild()` then rejects any child without the `isLocked` flag that `getDefaultChildren()` would have stamped on. `Elements::nested_child()` exists to set it. The panels are also **positional**: the widget prints child *n* for repeater row *n*, so a plain link item still gets an empty container.
+
+**The panel's padding lives on the widget, not on the panel container.** The Mega Menu's *Submenu Panel > Padding* control writes the same `--padding-*` custom properties an Elementor container reads for its own padding, and it wins — so a padding set on the panel container is silently overwritten, a zero included. The Mega Menu preset therefore leaves the container's padding unset and sets the widget control instead.
 
 **Colours are spelled out, transparents included.** An empty colour setting emits no rule at all, which leaves the *theme's* styling in charge — a Storefront install renders the menu as a solid bar in its link colour, inside the header. Every colour the preset depends on is therefore explicit, including the "current page" link state, which is filled by default and would otherwise paint a stray block on the one link matching the current URL.
+
+**Responsiveness is split between the two layers that own it.** Container widths carry `_tablet` / `_mobile` values; the navigation widget collapses itself at its own breakpoint. Where the collapsed toggle *lands* is the container's problem, not the widget's — the Mega Menu preset sets `_flex_order_mobile` on the navigation column so the toggle sits with the other icons at the end of the bar instead of in the middle of it.
 
 Add one with the `eael/theme_builder/presets` filter:
 

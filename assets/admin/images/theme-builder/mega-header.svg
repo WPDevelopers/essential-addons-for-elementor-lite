@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" width="480" height="150" role="img" aria-label="Mega menu header preview: logo on the left, centred navigation with an open mega panel, icons and a button on the right">
+	<rect width="480" height="150" fill="#f4f4f8"/>
+	<rect x="0" y="0" width="480" height="40" fill="#ffffff"/>
+	<path d="M0 40h480" stroke="#e6e6ef" stroke-width="1"/>
+
+	<!-- Brand -->
+	<rect x="20" y="14" width="12" height="12" rx="3" fill="#5b3df5"/>
+	<rect x="38" y="16" width="42" height="8" rx="4" fill="#1d1f2b"/>
+
+	<!-- Navigation -->
+	<rect x="150" y="17" width="22" height="6" rx="3" fill="#5b3df5"/>
+	<path d="M176 19l3 3 3-3" stroke="#5b3df5" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+	<rect x="192" y="17" width="24" height="6" rx="3" fill="#6b6f80"/>
+	<rect x="226" y="17" width="28" height="6" rx="3" fill="#6b6f80"/>
+	<rect x="264" y="17" width="22" height="6" rx="3" fill="#6b6f80"/>
+	<rect x="296" y="17" width="26" height="6" rx="3" fill="#6b6f80"/>
+
+	<!-- Actions -->
+	<circle cx="356" cy="20" r="5" fill="none" stroke="#1d1f2b" stroke-width="1.4"/>
+	<path d="M360 24l3 3" stroke="#1d1f2b" stroke-width="1.4" stroke-linecap="round"/>
+	<path d="M374 17h10l-1 9h-8z" fill="none" stroke="#1d1f2b" stroke-width="1.4" stroke-linejoin="round"/>
+	<rect x="398" y="10" width="62" height="20" rx="6" fill="#5b3df5"/>
+	<rect x="411" y="18" width="36" height="4" rx="2" fill="#ffffff" opacity="0.85"/>
+
+	<!-- Open mega panel -->
+	<rect x="34" y="50" width="412" height="86" rx="8" fill="#ffffff"/>
+	<path d="M34 50h412v86H34z" fill="none" stroke="#e6e6ef" stroke-width="1"/>
+
+	<!-- Featured column -->
+	<rect x="50" y="64" width="20" height="20" rx="6" fill="#ede9ff"/>
+	<rect x="56" y="70" width="8" height="8" rx="2" fill="#5b3df5"/>
+	<rect x="50" y="92" width="58" height="6" rx="3" fill="#5b3df5"/>
+	<rect x="50" y="104" width="66" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="50" y="113" width="48" height="4" rx="2" fill="#d7d9e3"/>
+
+	<!-- Link columns -->
+	<rect x="142" y="64" width="38" height="6" rx="3" fill="#5b3df5"/>
+	<rect x="142" y="80" width="52" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="142" y="92" width="46" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="142" y="104" width="52" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="142" y="116" width="42" height="4" rx="2" fill="#d7d9e3"/>
+
+	<rect x="216" y="64" width="38" height="6" rx="3" fill="#5b3df5"/>
+	<rect x="216" y="80" width="48" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="216" y="92" width="54" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="216" y="104" width="44" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="216" y="116" width="50" height="4" rx="2" fill="#d7d9e3"/>
+
+	<rect x="290" y="64" width="34" height="6" rx="3" fill="#5b3df5"/>
+	<rect x="290" y="80" width="50" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="290" y="92" width="44" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="290" y="104" width="52" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="290" y="116" width="40" height="4" rx="2" fill="#d7d9e3"/>
+
+	<!-- Promo column -->
+	<rect x="364" y="64" width="66" height="34" rx="6" fill="#ede9ff"/>
+	<rect x="364" y="105" width="54" height="5" rx="2.5" fill="#5b3df5"/>
+	<rect x="364" y="117" width="66" height="4" rx="2" fill="#d7d9e3"/>
+</svg>
