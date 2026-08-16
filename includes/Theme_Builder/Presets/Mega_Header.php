@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-use Elementor\Plugin;
 use Essential_Addons_Elementor\MegaMenu\Manager;
 
 /**
@@ -74,11 +73,7 @@ class Mega_Header {
 	 * @return bool
 	 */
 	public static function is_available() {
-		if ( ! class_exists( '\Elementor\Plugin' ) || ! isset( Plugin::$instance->widgets_manager ) ) {
-			return false;
-		}
-
-		return (bool) Plugin::$instance->widgets_manager->get_widget_types( Manager::WIDGET_NAME );
+		return Elements::has_widget( Manager::WIDGET_NAME );
 	}
 
 	/**
@@ -107,7 +102,7 @@ class Mega_Header {
 					'background_color'      => self::SURFACE,
 					'box_shadow_box_shadow_type' => 'yes',
 					'box_shadow_box_shadow' => Elements::shadow( 2, 12, 'rgba(16, 18, 32, 0.08)' ),
-					'_title'                => esc_html__( 'Header Bar', 'essential-addons-for-elementor-lite' ),
+					'_title'                => __( 'Header Bar', 'essential-addons-for-elementor-lite' ),
 				],
 				[
 					self::brand(),
@@ -140,7 +135,7 @@ class Mega_Header {
 				'flex_align_items'     => 'center',
 				'flex_justify_content' => 'flex-start',
 				'flex_gap'             => Elements::gap( 10 ),
-				'_title'               => esc_html__( 'Brand', 'essential-addons-for-elementor-lite' ),
+				'_title'               => __( 'Brand', 'essential-addons-for-elementor-lite' ),
 			],
 			[ self::logo() ]
 		);
@@ -169,7 +164,7 @@ class Mega_Header {
 				// search icon reads as a third, unrelated control. Ordering the
 				// column last puts it where a hamburger is expected.
 				'_flex_order_mobile'          => 'end',
-				'_title'                      => esc_html__( 'Navigation', 'essential-addons-for-elementor-lite' ),
+				'_title'                      => __( 'Navigation', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				Elements::widget( Manager::WIDGET_NAME, self::menu_settings(), self::panels() ),
@@ -198,11 +193,11 @@ class Mega_Header {
 				'flex_gap'             => Elements::gap( 16 ),
 				'flex_gap_tablet'      => Elements::gap( 12 ),
 				'flex_gap_mobile'      => Elements::gap( 8 ),
-				'_title'               => esc_html__( 'Actions', 'essential-addons-for-elementor-lite' ),
+				'_title'               => __( 'Actions', 'essential-addons-for-elementor-lite' ),
 			],
 			[
-				self::action_icon( 'fas fa-search', esc_html__( 'Search', 'essential-addons-for-elementor-lite' ) ),
-				self::action_icon( 'fas fa-shopping-bag', esc_html__( 'Cart', 'essential-addons-for-elementor-lite' ) ),
+				self::action_icon( 'fas fa-search', __( 'Search', 'essential-addons-for-elementor-lite' ) ),
+				self::action_icon( 'fas fa-shopping-bag', __( 'Cart', 'essential-addons-for-elementor-lite' ) ),
 				self::cta_button(),
 			]
 		);
@@ -241,7 +236,7 @@ class Mega_Header {
 		return Elements::widget(
 			'heading',
 			[
-				'title'                       => get_bloginfo( 'name' ) ? get_bloginfo( 'name' ) : esc_html__( 'Brand', 'essential-addons-for-elementor-lite' ),
+				'title'                       => get_bloginfo( 'name' ) ? get_bloginfo( 'name' ) : __( 'Brand', 'essential-addons-for-elementor-lite' ),
 				'header_size'                 => 'h2',
 				'link'                        => Elements::link( home_url( '/' ) ),
 				// A linked heading inherits the theme's link colour, which is rarely
@@ -292,7 +287,7 @@ class Mega_Header {
 		return Elements::widget(
 			'button',
 			[
-				'text'                   => esc_html__( 'Get Started', 'essential-addons-for-elementor-lite' ),
+				'text'                   => __( 'Get Started', 'essential-addons-for-elementor-lite' ),
 				'link'                   => Elements::link(),
 				'size'                   => 'sm',
 				// Spelled out rather than inherited: a theme's button colour is
@@ -333,12 +328,12 @@ class Mega_Header {
 	 */
 	protected static function item_map() {
 		return [
-			[ 'label' => esc_html__( 'Home', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
-			[ 'label' => esc_html__( 'About', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
-			[ 'label' => esc_html__( 'Features', 'essential-addons-for-elementor-lite' ), 'type' => 'mega' ],
-			[ 'label' => esc_html__( 'Shop', 'essential-addons-for-elementor-lite' ), 'type' => 'mega' ],
-			[ 'label' => esc_html__( 'Blog', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
-			[ 'label' => esc_html__( 'Contact', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
+			[ 'label' => __( 'Home', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
+			[ 'label' => __( 'About', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
+			[ 'label' => __( 'Features', 'essential-addons-for-elementor-lite' ), 'type' => 'mega' ],
+			[ 'label' => __( 'Shop', 'essential-addons-for-elementor-lite' ), 'type' => 'mega' ],
+			[ 'label' => __( 'Blog', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
+			[ 'label' => __( 'Contact', 'essential-addons-for-elementor-lite' ), 'type' => 'link' ],
 		];
 	}
 
@@ -534,44 +529,44 @@ class Mega_Header {
 			[
 				self::feature_column(),
 				self::link_column(
-					esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+					__( 'Content', 'essential-addons-for-elementor-lite' ),
 					[
-						esc_html__( 'Advanced Heading', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Dual Button', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Info Box', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Call To Action', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Testimonial Carousel', 'essential-addons-for-elementor-lite' ),
+						__( 'Advanced Heading', 'essential-addons-for-elementor-lite' ),
+						__( 'Dual Button', 'essential-addons-for-elementor-lite' ),
+						__( 'Info Box', 'essential-addons-for-elementor-lite' ),
+						__( 'Call To Action', 'essential-addons-for-elementor-lite' ),
+						__( 'Testimonial Carousel', 'essential-addons-for-elementor-lite' ),
 					],
 					17,
 					30
 				),
 				self::link_column(
-					esc_html__( 'Marketing', 'essential-addons-for-elementor-lite' ),
+					__( 'Marketing', 'essential-addons-for-elementor-lite' ),
 					[
-						esc_html__( 'Price Table', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Countdown Timer', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Flip Box', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Team Member', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Logo Carousel', 'essential-addons-for-elementor-lite' ),
+						__( 'Price Table', 'essential-addons-for-elementor-lite' ),
+						__( 'Countdown Timer', 'essential-addons-for-elementor-lite' ),
+						__( 'Flip Box', 'essential-addons-for-elementor-lite' ),
+						__( 'Team Member', 'essential-addons-for-elementor-lite' ),
+						__( 'Logo Carousel', 'essential-addons-for-elementor-lite' ),
 					],
 					17,
 					30
 				),
 				self::link_column(
-					esc_html__( 'Media', 'essential-addons-for-elementor-lite' ),
+					__( 'Media', 'essential-addons-for-elementor-lite' ),
 					[
-						esc_html__( 'Image Gallery', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Image Accordion', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Video Gallery', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Advanced Slider', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Image Comparison', 'essential-addons-for-elementor-lite' ),
+						__( 'Image Gallery', 'essential-addons-for-elementor-lite' ),
+						__( 'Image Accordion', 'essential-addons-for-elementor-lite' ),
+						__( 'Video Gallery', 'essential-addons-for-elementor-lite' ),
+						__( 'Advanced Slider', 'essential-addons-for-elementor-lite' ),
+						__( 'Image Comparison', 'essential-addons-for-elementor-lite' ),
 					],
 					17,
 					30
 				),
 				self::promo_column(
-					esc_html__( 'Build Better with EA', 'essential-addons-for-elementor-lite' ),
-					esc_html__( 'Explore 100+ advanced widgets and extensions.', 'essential-addons-for-elementor-lite' ),
+					__( 'Build Better with EA', 'essential-addons-for-elementor-lite' ),
+					__( 'Explore 100+ advanced widgets and extensions.', 'essential-addons-for-elementor-lite' ),
 					'',
 					18,
 					30
@@ -594,33 +589,33 @@ class Mega_Header {
 			self::panel_settings( $title ),
 			[
 				self::link_column(
-					esc_html__( 'Shop by Category', 'essential-addons-for-elementor-lite' ),
+					__( 'Shop by Category', 'essential-addons-for-elementor-lite' ),
 					[
-						esc_html__( 'New Arrivals', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Best Sellers', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Accessories', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Footwear', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Gift Cards', 'essential-addons-for-elementor-lite' ),
+						__( 'New Arrivals', 'essential-addons-for-elementor-lite' ),
+						__( 'Best Sellers', 'essential-addons-for-elementor-lite' ),
+						__( 'Accessories', 'essential-addons-for-elementor-lite' ),
+						__( 'Footwear', 'essential-addons-for-elementor-lite' ),
+						__( 'Gift Cards', 'essential-addons-for-elementor-lite' ),
 					],
 					28,
 					30
 				),
 				self::link_column(
-					esc_html__( 'Collections', 'essential-addons-for-elementor-lite' ),
+					__( 'Collections', 'essential-addons-for-elementor-lite' ),
 					[
-						esc_html__( 'Summer Edit', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Limited Drops', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Everyday Basics', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Work & Travel', 'essential-addons-for-elementor-lite' ),
-						esc_html__( 'Clearance', 'essential-addons-for-elementor-lite' ),
+						__( 'Summer Edit', 'essential-addons-for-elementor-lite' ),
+						__( 'Limited Drops', 'essential-addons-for-elementor-lite' ),
+						__( 'Everyday Basics', 'essential-addons-for-elementor-lite' ),
+						__( 'Work & Travel', 'essential-addons-for-elementor-lite' ),
+						__( 'Clearance', 'essential-addons-for-elementor-lite' ),
 					],
 					28,
 					30
 				),
 				self::promo_column(
-					esc_html__( 'Season Sale', 'essential-addons-for-elementor-lite' ),
-					esc_html__( 'Up to 40% off across the new collection.', 'essential-addons-for-elementor-lite' ),
-					esc_html__( 'Shop Now', 'essential-addons-for-elementor-lite' ),
+					__( 'Season Sale', 'essential-addons-for-elementor-lite' ),
+					__( 'Up to 40% off across the new collection.', 'essential-addons-for-elementor-lite' ),
+					__( 'Shop Now', 'essential-addons-for-elementor-lite' ),
 					30,
 					34
 				),
@@ -711,8 +706,8 @@ class Mega_Header {
 						'shape'              => 'square',
 						'position'           => 'top',
 						'text_align'         => 'left',
-						'title_text'         => esc_html__( 'Elementor Widgets', 'essential-addons-for-elementor-lite' ),
-						'description_text'   => esc_html__( 'Powerful widgets to build anything with Elementor.', 'essential-addons-for-elementor-lite' ),
+						'title_text'         => __( 'Elementor Widgets', 'essential-addons-for-elementor-lite' ),
+						'description_text'   => __( 'Powerful widgets to build anything with Elementor.', 'essential-addons-for-elementor-lite' ),
 						'title_size'         => 'h4',
 						'link'               => Elements::link(),
 						// Stacked view: primary paints the tile, secondary the glyph.
@@ -735,7 +730,7 @@ class Mega_Header {
 				Elements::widget(
 					'button',
 					[
-						'text'                  => esc_html__( 'Explore', 'essential-addons-for-elementor-lite' ),
+						'text'                  => __( 'Explore', 'essential-addons-for-elementor-lite' ),
 						'link'                  => Elements::link(),
 						'align'                 => 'left',
 						'size'                  => 'sm',
@@ -753,7 +748,7 @@ class Mega_Header {
 					]
 				),
 			],
-			esc_html__( 'Featured', 'essential-addons-for-elementor-lite' )
+			__( 'Featured', 'essential-addons-for-elementor-lite' )
 		);
 	}
 

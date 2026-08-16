@@ -30,6 +30,7 @@ Assets: [`assets/admin/css/theme-builder.css`](../../assets/admin/css/theme-buil
 | `Integrations/Compatibility.php` | Polylang / WPML translation, sitemap exclusions (core, Yoast, Rank Math) |
 | `Presets/Preset_Library.php` | Ready-made header and footer starting points: the cards the picker shows, and the Elementor elements each one inserts |
 | `Presets/Mega_Header.php` | The Mega Menu header preset — the header bar, the menu's settings, and the two mega panels it ships with |
+| `Presets/Modern_Footer.php` | The multi-column footer preset — columns, highlights strip and legal bar |
 | `Presets/Elements.php` | The Elementor shapes a preset is assembled from: containers, widgets, repeater rows, spacing and slider values |
 | `Frontend/Frontend.php` | Resolves templates for the request and picks a render mode |
 | `Renderers/Template_Renderer.php` | Produces the markup, guarded against duplicate rendering |
@@ -439,16 +440,27 @@ preview iframe                         editor window
 
 **Everything a preset uses ships with Lite.** Containers, Heading, Button, Icon, Icon List, Icon Box, Image and Text Editor are Elementor core; the navigation is EA's own Simple Menu or Mega Menu, which is what makes these headers responsive without Elementor Pro.
 
-Two headers ship today:
+Three ship today:
 
-| Preset | Navigation | Collapses at | Notes |
-|--------|-----------|--------------|-------|
-| Mega Menu Header | `eael-mega-menu` | mobile | Logo, centred menu with two ready-built mega panels, search, cart, call to action |
-| Classic Header | `eael-simple-menu` | tablet | Site name, links, call to action |
+| Preset | Type | EA widgets | Notes |
+|--------|------|-----------|-------|
+| Mega Menu Header | header | Mega Menu | Logo, centred menu with two ready-built mega panels, search, cart, call to action. Collapses at mobile |
+| Modern Footer | footer | Info Box ×5, Feature List, Creative Button | Five columns, a highlights strip and a dark legal bar. Columns stack at tablet and mobile |
+| Classic Header | header | Simple Menu | Site name, links, call to action. Collapses at tablet |
 
-**A preset built on a widget has to check the widget is there.** `Mega_Header::is_available()` asks `Plugin::$instance->widgets_manager->get_widget_types( 'eael-mega-menu' )` rather than testing the nested-elements experiment: the widget can be missing because Elementor is too old, because the experiment is off, *or* because the element is switched off in EA's own settings, and the widgets manager is the one answer that covers all three. When it is missing the card is simply not offered.
+**A preset built on a widget has to check the widget is there.** `Elements::has_widget()` asks `Plugin::$instance->widgets_manager->get_widget_types()` rather than testing for a class or an experiment: a widget can be missing because Elementor is too old, because an experiment is off, *or* because the element is switched off in EA's own settings, and the widgets manager is the one answer that covers all three. A preset whose widgets are missing is not offered at all (`Mega_Header::is_available()`, `Modern_Footer::is_available()`); a widget that is a nicety rather than a dependency is checked at the point of use instead.
 
 **A nested widget's children need `isLocked`.** Elementor's `NestedModelBase::initialize()` fills in the default children only for a widget created with none, so a preset that supplies its own panels keeps them — but `isValidChild()` then rejects any child without the `isLocked` flag that `getDefaultChildren()` would have stamped on. `Elements::nested_child()` exists to set it. The panels are also **positional**: the widget prints child *n* for repeater row *n*, so a plain link item still gets an empty container.
+
+**Bands, not one grid.** The footer is three boxed containers stacked in one full-width wrapper, rather than one container with a background. A boxed container paints its background edge to edge while keeping its content in the site's content column, which is what lets the legal bar be dark while the rest of the footer is not — and it means each band keeps its own padding and its own wrap behaviour.
+
+**Widths plus `flex_wrap` are the whole responsive story.** Every column carries `width` / `width_tablet` / `width_mobile`; the row wraps. Nothing is hidden at a breakpoint and nothing is duplicated for one, so what the user edits is what every device shows. (The reference design collapsed the footer's link columns into an accordion on mobile. That needs a second copy of the links for the small screen to edit separately, which is exactly the kind of hidden duplicate a preset should not ship.)
+
+**Three widget quirks the footer preset works around**, each worth knowing before building on these widgets:
+
+- Info Box's *Icon Position* control for the top/bottom layouts writes `align-self`, which is **horizontal** once the box is a column — its `middle` default centres a top icon over left-aligned copy. The preset sets it to `top` (labelled "Left" in the panel for that layout).
+- Feature List prints its content paragraph whether or not the row has content, so a row left blank still takes that paragraph's margin. Every row in the contact list carries a second line for that reason.
+- Dual Color Header hangs a 50px bottom margin off its own wrapper with no control behind it. The footer uses a plain heading for the wordmark instead — a preset has to stay editable everywhere it is visible.
 
 **The panel's padding lives on the widget, not on the panel container.** The Mega Menu's *Submenu Panel > Padding* control writes the same `--padding-*` custom properties an Elementor container reads for its own padding, and it wins — so a padding set on the panel container is silently overwritten, a zero included. The Mega Menu preset therefore leaves the container's padding unset and sets the widget control instead.
 

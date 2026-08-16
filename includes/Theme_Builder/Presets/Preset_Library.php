@@ -53,6 +53,18 @@ class Preset_Library {
 			];
 		}
 
+		if ( Modern_Footer::is_available() ) {
+			$presets['modern-footer'] = [
+				'slug'        => 'modern-footer',
+				'type'        => 'footer',
+				'title'       => __( 'Modern Footer', 'essential-addons-for-elementor-lite' ),
+				'badge'       => __( 'Multi-Column', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Brand, two link columns, contact details and a newsletter card, over a strip of highlights and a dark legal bar. Stacks on smaller screens.', 'essential-addons-for-elementor-lite' ),
+				'thumbnail'   => self::thumbnail_url( 'modern-footer.svg' ),
+				'builder'     => [ Modern_Footer::class, 'build' ],
+			];
+		}
+
 		$presets['classic-header'] = [
 			'slug'        => 'classic-header',
 			'type'        => 'header',

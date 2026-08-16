@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
+use Elementor\Plugin;
 use Elementor\Utils;
 
 /**
@@ -235,6 +236,28 @@ class Elements {
 	 */
 	public static function placeholder_image() {
 		return class_exists( '\Elementor\Utils' ) ? Utils::get_placeholder_image_src() : '';
+	}
+
+	/**
+	 * Is a widget registered for this editor session.
+	 *
+	 * Asked of the widgets manager rather than answered by checking for a class:
+	 * an EA element can be switched off in the plugin's own settings, in which
+	 * case the class exists but the widget was never registered, and a preset that
+	 * inserted it would leave the user with a widget the editor cannot build.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $type Widget type, e.g. `eael-info-box`.
+	 *
+	 * @return bool
+	 */
+	public static function has_widget( $type ) {
+		if ( ! class_exists( '\Elementor\Plugin' ) || ! isset( Plugin::$instance->widgets_manager ) ) {
+			return false;
+		}
+
+		return (bool) Plugin::$instance->widgets_manager->get_widget_types( $type );
 	}
 
 	/**
