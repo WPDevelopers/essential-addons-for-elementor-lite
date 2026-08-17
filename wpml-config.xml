@@ -499,6 +499,14 @@
             <conditions>
                 <condition key="widgetType">eael-woo-checkout</condition>
             </conditions>
+            <fields-in-item items_of="ea_billing_fields_list">
+                <field type="Woo Checkout: Billing Field Label" editor_type="LINE">field_label</field>
+                <field type="Woo Checkout: Billing Field Placeholder" editor_type="LINE">field_placeholder</field>
+            </fields-in-item>
+            <fields-in-item items_of="ea_shipping_fields_list">
+                <field type="Woo Checkout: Shipping Field Label" editor_type="LINE">field_label</field>
+                <field type="Woo Checkout: Shipping Field Placeholder" editor_type="LINE">field_placeholder</field>
+            </fields-in-item>
             <fields>
                 <field type="Woo Checkout: Order Table Heading" editor_type="LINE">ea_woo_checkout_order_details_title</field>
                 <field type="Woo Checkout: Product Text" editor_type="LINE">ea_woo_checkout_table_product_text</field>
