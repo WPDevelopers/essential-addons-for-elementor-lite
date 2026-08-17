@@ -159,7 +159,7 @@ trait Helper
 	    $max_page = empty( $args['max_page'] ) ? false : $args['max_page'];
 	    unset( $args['max_page'] );
 
-        if ( isset( $args['found_posts'] ) && $args['found_posts'] <= $args['posts_per_page'] ){
+        if ( isset( $args['found_posts'], $args['posts_per_page'] ) && $args['found_posts'] <= $args['posts_per_page'] ){
 	        $this->add_render_attribute( 'load-more', [ 'class' => 'hide-load-more' ] );
 	        unset( $args['found_posts'] );
         }

@@ -2366,21 +2366,37 @@ class Helper
 	 * Renders an admin notice when ACF is not installed/activated.
 	 * Ported for ACF Repeater data-source support (Feature List, etc.).
 	 *
-	 * @param \Elementor\Widget_Base $wb        Widget instance.
-	 * @param array                  $condition Elementor control condition array.
+	 * @param \Elementor\Widget_Base $wb         Widget instance.
+	 * @param array                  $condition  Elementor control condition array.
+	 * @param string                 $control_id Control name. Defaults to 'eael_acf_notice_controls'.
 	 */
-	public static function eael_acf_notice_controls( $wb, $condition ) {
-		if ( ! function_exists( 'acf_get_field_groups' ) ) {
-			$wb->add_control(
-				'eael_acf_notice_controls',
-				[
-					'type'            => Controls_Manager::RAW_HTML,
-					'raw'             => __( '<strong>Advanced Custom Fields (ACF)</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=advanced-custom-fields&tab=search&type=term" target="_blank">ACF</a> first.', 'essential-addons-for-elementor-lite' ),
-					'content_classes' => 'eael-warning',
-					'condition'       => $condition,
-				]
-			);
+	public static function eael_acf_notice_controls( $wb, $condition, $control_id = 'eael_acf_notice_controls' ) {
+		if ( function_exists( 'acf_get_field_groups' ) ) {
+			return;
 		}
+
+		// A single widget can register the notice more than once (e.g. Advanced Accordion,
+		// where the Pro extender adds a second ACF-powered content source). Elementor throws
+		// "Cannot redeclare control with same name" in that case, so derive a unique name.
+		if ( $wb->get_controls( $control_id ) ) {
+			$suffix     = is_array( $condition ) ? (string) key( $condition ) : '';
+			$control_id .= '_' . ( $suffix ? $suffix : count( (array) $wb->get_controls() ) );
+
+			// Bail out if even the derived name is already taken.
+			if ( $wb->get_controls( $control_id ) ) {
+				return;
+			}
+		}
+
+		$wb->add_control(
+			$control_id,
+			[
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => __( '<strong>Advanced Custom Fields (ACF)</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=advanced-custom-fields&tab=search&type=term" target="_blank">ACF</a> first.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'eael-warning',
+				'condition'       => $condition,
+			]
+		);
 	}
 
 	/**
