@@ -512,6 +512,19 @@ trait Helper
 		    return $id;
 	    }
 
+   		// Never remap while Elementor Pro is reading or rebuilding its theme-builder
+	    // display conditions. Conditions_Cache::regenerate() looks a document up by id
+	    // purely to read its _elementor_conditions meta; handing it a translation
+	    // returns a document that carries no conditions of its own, so get_meta()
+	    // yields '' and Conditions_Cache::add() throws "Argument #2 ($conditions) must
+	    // be of type array, string given" — which surfaces as a critical error and
+	    // aborts every condition save on the site. The same remap in the save path
+	    // would otherwise write the condition onto the translation instead of the
+	    // template the user actually opened.
+	    if ( self::eael_is_conditions_cache_context() ) {
+		    return $id;
+	    }
+
 	    // Polylang path (independent of the translatable-post-type setting).
 	    if ( function_exists( 'pll_get_post' ) && function_exists( 'pll_current_language' ) ) {
 		    $lang = pll_current_language();
@@ -548,6 +561,38 @@ trait Helper
 
 	    return $translated;
     }
+
+	/**
+	 * Is the current call coming from Elementor Pro's theme-builder display conditions?
+	 *
+	 * Mirrors the calling-context gate WPML applies in
+	 * WPML_Elementor_Translate_IDs::should_translate_template(), but as a narrow
+	 * deny-list so every rendering context EA already translates in keeps working.
+	 *
+	 * @since 6.7.2
+	 *
+	 * @return bool
+	 */
+	public static function eael_is_conditions_cache_context() {
+		$deny = [
+			'elementorpro\modules\themebuilder\classes\conditions_cache::regenerate',
+			'elementorpro\modules\themebuilder\classes\conditions_manager::save_conditions',
+		];
+
+		$trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 20 ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
+
+		foreach ( $trace as $frame ) {
+			if ( empty( $frame['function'] ) || empty( $frame['class'] ) ) {
+				continue;
+			}
+
+			if ( in_array( strtolower( $frame['class'] . '::' . $frame['function'] ), $deny, true ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 	/**
 	 * Is this filter running inside Elementor Pro's theme-builder conditions
