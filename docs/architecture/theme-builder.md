@@ -411,9 +411,36 @@ What follows from that shape:
 
 - Holding the publish back leaves the document a **draft** — nothing was saved, so dismissing the modal is a real cancel, and the editor says so in a toast.
 - After the conditions are saved, `EditorApp` flips a ref and re-runs the same command with the arguments it was called with. The ref, not state: the gate is registered once and would otherwise keep reading the values it closed over at mount.
-- Only `document/save/publish` is gated. `update` (an already published template), `draft`, `pending` and every autosave run untouched — the conditions exist by then, and are edited from the dashboard.
+- Only `document/save/publish` is gated. `update` (an already published template), `draft`, `pending` and every autosave run untouched — the conditions exist by then, and are changed from the save menu (below) or from the dashboard.
 - The modal opens on the conditions the template already has — for a new one, **none**: an empty body with "Add Condition" under it. `Post_Type::default_meta()` seeds no conditions, and the modal no longer materializes a blank row to fill the space, because at publish time a pre-selected row decides where the header goes. Rows can be removed down to zero.
 - `Conditions_Manager::validate_conditions()` refuses an empty set and a set with no `include` row, so publishing with nothing chosen comes back with "Add at least one display condition…" and the template stays a draft.
+
+### Editing conditions from the editor
+
+Conditions are asked for once, at publish time — but where a header appears is not a decision made once. **Display Conditions** in the save menu behind the publish button opens the same modal on demand, at any point, published or draft.
+
+```text
+Publish ▾
+├─ Save Draft
+├─ Save as Template
+├─ Display Conditions ──click──▶ CustomEvent ──▶ EditorApp ──▶ ConditionsModal
+└─ View Page                                                          │
+                                          eael_theme_builder_save_conditions
+```
+
+`utils/documentMenu.js` registers the item. Elementor draws that menu in one of two places depending on which chrome is active, and both are covered — only one exists in a given session, so both registrations are attempted and whichever finds its host wins:
+
+| Chrome               | Door                                                                               | Placement                                                                                 |
+|----------------------|------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| Top bar (default)    | `elementorV2.editorAppBar.documentOptionsMenu.registerAction()`                    | Group `save`, priority 30 — after Save as Template (20), before View Page (default group) |
+| Classic panel footer | `elementor.getPanelView().footer.currentView.addSubMenuItem( 'saver-options', … )` | End of the submenu                                                                        |
+
+Details that are easy to get wrong:
+
+- `getPanelView()` is not a safe getter. Called before the panel region is built — which is when this code first runs, from the footer-enqueued bundle — it reaches into an undefined region and **throws**. It is wrapped, and the `elementor/init` listener is attached before the first attempt, so a throw cannot take the registration with it.
+- The footer view does not survive a panel rebuild, so the item is re-added on `panel:init`, guarded by a flag kept **on the view** rather than in the module.
+- The top bar renders with Elementor's own copy of React, so the icon component is built with `window.React`, and it is defined once per registration — an identity that changed between renders would remount the icon on every menu update.
+- Saving here is **not** part of a document save: the AJAX call stores the conditions on its own, nothing is resumed, and the editor confirms with a toast. The publish gate is untouched — a draft opened this way still gets asked again when it is published, with the rows it just saved already filled in.
 
 ### The CPT's own list screen
 

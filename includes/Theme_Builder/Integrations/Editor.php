@@ -104,6 +104,9 @@ class Editor {
 			'presets'    => Preset_Library::get_presets_for_ui(),
 			'templately' => Templately::get_state_for_ui(),
 			'icon'       => EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-new-white.svg',
+			// The white mark is for the purple add-element button; the loader puts
+			// the logo on a light badge, where white would be invisible.
+			'logo'       => EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-new-logo.svg',
 		];
 	}
 }

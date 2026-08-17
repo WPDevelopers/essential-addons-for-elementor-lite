@@ -3,6 +3,7 @@ import ConditionsModal from './ConditionsModal';
 import PresetLibrary from './PresetLibrary';
 import { settings, strings } from '../utils/api';
 import { notify, registerPublishGate, resumePublish } from '../utils/elementor';
+import { OPEN_CONDITIONS_EVENT, registerConditionsMenuItem } from '../utils/documentMenu';
 import { insertPreset, OPEN_PRESETS_EVENT, registerPresetButton } from '../utils/presetButton';
 
 /**
@@ -13,14 +14,17 @@ import { insertPreset, OPEN_PRESETS_EVENT, registerPresetButton } from '../utils
  * holds the publish command back, the modal saves the conditions, and the same
  * command is then run again — this time waved through.
  *
- * Updating an already published template is not gated: the conditions exist by
- * then, and are edited from the dashboard or by publishing a draft again.
+ * Updating an already published template is not gated — the conditions exist by
+ * then. Changing them afterwards is what the save menu's "Display Conditions"
+ * item is for: the same modal, opened on demand, saving on its own without
+ * touching the document.
  */
 export default function EditorApp() {
 	const editor = settings.editor || {};
 
 	const [ conditions, setConditions ] = useState( () => editor.conditions || [] );
 	const [ held, setHeld ] = useState( null );
+	const [ editing, setEditing ] = useState( false );
 	const [ presetTarget, setPresetTarget ] = useState( null );
 
 	// The gate is registered once and outlives every render, so what it reads has
@@ -43,6 +47,24 @@ export default function EditorApp() {
 
 			return false;
 		} );
+	}, [ editor.templateId ] );
+
+	// The save menu's condition item reports the click the same way the preset
+	// button does — the menu lives in Elementor's own UI, the modal lives here.
+	useEffect( () => {
+		if ( ! editor.templateId ) {
+			return undefined;
+		}
+
+		registerConditionsMenuItem( {
+			label: strings.conditionsMenu || 'Display Conditions',
+		} );
+
+		const onOpen = () => setEditing( true );
+
+		window.addEventListener( OPEN_CONDITIONS_EVENT, onOpen );
+
+		return () => window.removeEventListener( OPEN_CONDITIONS_EVENT, onOpen );
 	}, [ editor.templateId ] );
 
 	// The EA button in the add-element row: it reports where it was clicked, and
@@ -89,11 +111,34 @@ export default function EditorApp() {
 		notify( strings.publishCancelled || 'Publishing cancelled. The template is still a draft.' );
 	}, [] );
 
+	// Opened from the menu, the modal is not part of a save: the conditions are
+	// already stored by the time it closes, so nothing is resumed and nothing is
+	// left for the user to confirm.
+	const onEditSaved = useCallback( ( payload ) => {
+		setConditions( payload.conditions || [] );
+		setEditing( false );
+		notify( strings.conditionsSaved || 'Display conditions saved.' );
+	}, [] );
+
 	if ( presetTarget ) {
 		return (
 			<PresetLibrary
 				onClose={ () => setPresetTarget( null ) }
 				onInsert={ onPresetChosen }
+			/>
+		);
+	}
+
+	if ( editing ) {
+		return (
+			<ConditionsModal
+				template={ {
+					id: editor.templateId,
+					type: editor.type,
+					conditions,
+				} }
+				onClose={ () => setEditing( false ) }
+				onSaved={ onEditSaved }
 			/>
 		);
 	}
