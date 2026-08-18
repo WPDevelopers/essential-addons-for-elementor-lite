@@ -476,7 +476,7 @@ Five ship today:
 | Mega Menu Header | header | Mega Menu | Logo, centred menu with two ready-built mega panels, search, cart, call to action. Collapses at mobile |
 | Modern Footer | footer | Creative Button | Dark ground: brand and a newsletter sign-up field beside three link columns, over a centred copyright line. Columns stack at tablet, two-up at mobile |
 | Brand Footer | footer | Dual Color Header | Colour block with rounded top corners: two tone wordmark, a line of copy and social links beside three link columns, over a centred copyright. Columns stack at tablet, two-up at mobile |
-| Simple Footer | footer | none | One centred column: brand, a line of copy, links, social, copyright |
+| Simple Footer | footer | none | Tinted band, one centred column: brand under a short accent rule, a line of copy, links, social on white discs, copyright |
 | Classic Header | header | Simple Menu | Site name, links, call to action. Collapses at tablet |
 
 **A preset is allowed to use no EA widgets at all.** `Simple_Footer` uses only Elementor core, deliberately: `Asset_Builder` enqueues an EA widget's CSS on every page that widget appears on, and a footer appears on every page of the site — so a row of links and a copyright line should not pull three extra stylesheets onto the whole site. The library needs a light option as much as a rich one, and pairing it with `Modern_Footer` is what makes the choice meaningful. It is also the one preset with no breakpoint-specific layout: a single centred column reads the same at every width, so only type sizes and padding step down.

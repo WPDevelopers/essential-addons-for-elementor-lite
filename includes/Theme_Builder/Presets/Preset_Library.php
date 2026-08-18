@@ -74,9 +74,9 @@ class Preset_Library {
 				'type'        => 'footer',
 				'title'       => __( 'Simple Footer', 'essential-addons-for-elementor-lite' ),
 				'badge'       => __( 'Minimal', 'essential-addons-for-elementor-lite' ),
-				'description' => __( 'One centred column: brand, a line of copy, links, social icons and a copyright. Reads the same at every screen size.', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'One centred column on a tinted band: brand under a short accent rule, a line of copy, links, social icons and a copyright. Reads the same at every screen size.', 'essential-addons-for-elementor-lite' ),
 				'thumbnail'   => self::thumbnail_url( 'simple-footer.svg' ),
-				'widgets'     => [ 'heading', 'image', 'icon-list', 'social-icons', 'text-editor' ],
+				'widgets'     => [ 'divider', 'heading', 'image', 'icon-list', 'social-icons' ],
 				'builder'     => [ Simple_Footer::class, 'build' ],
 			],
 			'classic-header' => [

@@ -1,35 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" width="480" height="150" role="img" aria-label="Simple footer preview: a centred column with the brand name, one line of copy, a row of links, social icons and a copyright line">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" width="480" height="150" role="img" aria-label="Simple footer preview: a tinted band holding a centred column — the brand name, a short accent rule, one line of copy, a row of links, social icons on white discs, and a copyright line under a hairline">
 	<rect width="480" height="150" fill="#f4f4f8"/>
 
 	<!-- Page body placeholder -->
 	<rect x="24" y="10" width="432" height="8" rx="4" fill="#e6e6ef"/>
 	<rect x="24" y="24" width="300" height="8" rx="4" fill="#ecedf3"/>
 
-	<!-- Footer surface -->
-	<rect x="0" y="44" width="480" height="106" fill="#ffffff"/>
-	<path d="M0 44h480" stroke="#e9e7f5" stroke-width="1"/>
+	<!-- Footer band -->
+	<rect x="0" y="42" width="480" height="108" fill="#f6f5fd"/>
+	<path d="M0 42h480" stroke="#e4e1f5" stroke-width="1"/>
 
-	<!-- Brand -->
-	<rect x="207" y="60" width="66" height="9" rx="4.5" fill="#1d1f2b"/>
+	<!-- Brand and its accent rule -->
+	<rect x="207" y="56" width="66" height="9" rx="4.5" fill="#1d1f2b"/>
+	<rect x="228" y="72" width="24" height="3" rx="1.5" fill="#5b3df5"/>
 
 	<!-- Tagline -->
-	<rect x="171" y="78" width="138" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="171" y="84" width="138" height="4" rx="2" fill="#c9cbd8"/>
 
 	<!-- Link row -->
-	<rect x="128" y="93" width="26" height="4" rx="2" fill="#6b6f80"/>
-	<rect x="164" y="93" width="30" height="4" rx="2" fill="#6b6f80"/>
-	<rect x="204" y="93" width="34" height="4" rx="2" fill="#6b6f80"/>
-	<rect x="248" y="93" width="24" height="4" rx="2" fill="#6b6f80"/>
-	<rect x="282" y="93" width="32" height="4" rx="2" fill="#6b6f80"/>
-	<rect x="324" y="93" width="28" height="4" rx="2" fill="#6b6f80"/>
+	<rect x="128" y="98" width="26" height="4" rx="2" fill="#6b6f80"/>
+	<rect x="164" y="98" width="30" height="4" rx="2" fill="#6b6f80"/>
+	<rect x="204" y="98" width="34" height="4" rx="2" fill="#6b6f80"/>
+	<rect x="248" y="98" width="24" height="4" rx="2" fill="#6b6f80"/>
+	<rect x="282" y="98" width="32" height="4" rx="2" fill="#6b6f80"/>
+	<rect x="324" y="98" width="28" height="4" rx="2" fill="#6b6f80"/>
 
-	<!-- Social row -->
-	<circle cx="212" cy="112" r="6" fill="#f3f1fe"/>
-	<circle cx="228" cy="112" r="6" fill="#f3f1fe"/>
-	<circle cx="244" cy="112" r="6" fill="#f3f1fe"/>
-	<circle cx="260" cy="112" r="6" fill="#f3f1fe"/>
+	<!-- Social row, on white discs -->
+	<circle cx="210" cy="117" r="7" fill="#ffffff" stroke="#e4e1f5"/>
+	<circle cx="228" cy="117" r="7" fill="#ffffff" stroke="#e4e1f5"/>
+	<circle cx="246" cy="117" r="7" fill="#ffffff" stroke="#e4e1f5"/>
+	<circle cx="264" cy="117" r="7" fill="#ffffff" stroke="#e4e1f5"/>
 
 	<!-- Copyright, under a rule -->
-	<path d="M24 128h432" stroke="#e9e7f5" stroke-width="1"/>
-	<rect x="186" y="136" width="108" height="4" rx="2" fill="#d7d9e3"/>
+	<path d="M24 133h432" stroke="#e4e1f5" stroke-width="1"/>
+	<rect x="186" y="140" width="108" height="4" rx="2" fill="#c9cbd8"/>
 </svg>
