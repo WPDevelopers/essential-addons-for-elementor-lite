@@ -469,7 +469,7 @@ preview iframe                         editor window
 
 **Everything a preset uses ships with Lite.** Containers, Heading, Button, Icon, Icon List, Icon Box, Image and Text Editor are Elementor core; the navigation is EA's own Simple Menu or Mega Menu, which is what makes these headers responsive without Elementor Pro.
 
-Five ship today:
+Six ship today:
 
 | Preset | Type | EA widgets | Notes |
 |--------|------|-----------|-------|
@@ -477,6 +477,7 @@ Five ship today:
 | Modern Footer | footer | Creative Button | Dark ground: brand and a newsletter sign-up field beside three link columns, over a centred copyright line. Columns stack at tablet, two-up at mobile |
 | Brand Footer | footer | Dual Color Header | Colour block with rounded top corners: two tone wordmark, a line of copy and social links beside three link columns, over a centred copyright. Columns stack at tablet, two-up at mobile |
 | Simple Footer | footer | none | Tinted band, one centred column: brand under a short accent rule, a line of copy, links, social on white discs, copyright |
+| Shop Header | header | Simple Menu, Creative Button | Light bar: brand left, navigation centred, then search and cart discs and a sign-in button. Collapses to a hamburger at tablet; the button steps out at mobile |
 | Classic Header | header | Simple Menu | Dark bar: brand left, navigation centred, one call to action right. Collapses to a hamburger at tablet, and the button steps out at mobile |
 
 **A preset is allowed to use no EA widgets at all.** `Simple_Footer` uses only Elementor core, deliberately: `Asset_Builder` enqueues an EA widget's CSS on every page that widget appears on, and a footer appears on every page of the site — so a row of links and a copyright line should not pull three extra stylesheets onto the whole site. The library needs a light option as much as a rich one, and pairing it with `Modern_Footer` is what makes the choice meaningful. It is also the one preset with no breakpoint-specific layout: a single centred column reads the same at every width, so only type sizes and padding step down.
@@ -492,6 +493,8 @@ Five ship today:
 **`justify` needs a row.** A container defaults to `column`, where the main axis is vertical — so `flex_justify_content` on a column container places its children *up and down*, and every left/centre/right alignment written there does nothing at all. `Classic_Header`'s three columns are `row` containers for that reason: it is what puts the brand at the left of its column, the menu in the centre of its own, and the button hard against the right edge of the content. The same switch also stops the widgets stretching, since a widget in a row container is sized to its content rather than to the column.
 
 **Simple Menu's presets paint colours no control can reach.** `preset-1` hard codes a purple behind the panel the hamburger opens, and the widget exposes no background control for it. `Classic_Header` paints the *rows* instead — `eael_simple_menu_hamburger_top_level_item_background` — which tile the full width of the panel and leave the preset's purple with nowhere to show. The desktop submenu is a different element and does have a control (`eael_simple_menu_dropdown_background`), which wins on specificity.
+
+**Creative Button has a 150px floor.** Its stylesheet sets `min-width: 150px` with no control behind it, so a short label — `Shop_Header`'s "Login" — sits in a button wider than its padding asks for, and on a phone that is a third of the screen. That is why the sign-in steps out at mobile there. Core's Button hugs its label instead, which is the swap to make when the width matters more than the widget.
 
 **Round only the corners that are seen.** `Brand_Footer` meets the page's edges on three sides, so it rounds the top two corners and leaves the bottom two square — `Elements::spacing()` maps to border radius clockwise from the top left, which makes that `spacing( 20, 20, 0, 0 )`. Rounding an edge that runs off screen buys nothing and shows up as a sliver of page behind the corner. It also sets `overflow: hidden`, which keeps any background a user later gives one of the bands inside those two corners.
 

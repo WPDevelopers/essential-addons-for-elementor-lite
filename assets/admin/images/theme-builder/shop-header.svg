@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" width="480" height="150" role="img" aria-label="Shop header preview: a light bar with the brand on the left, navigation centred, and a search disc, a cart disc and a sign-in button on the right, over the page body">
+	<rect width="480" height="150" fill="#f4f4f8"/>
+
+	<!-- The bar -->
+	<rect x="0" y="0" width="480" height="46" fill="#ffffff"/>
+	<path d="M0 46h480" stroke="#e4e9e6" stroke-width="1"/>
+
+	<!-- Brand -->
+	<rect x="24" y="17" width="12" height="12" rx="3" fill="#146b4c"/>
+	<rect x="42" y="19" width="56" height="8" rx="3" fill="#146b4c"/>
+
+	<!-- Navigation, centred on the bar, current item in the brand's colour -->
+	<rect x="182" y="21" width="24" height="4" rx="2" fill="#146b4c"/>
+	<rect x="214" y="21" width="26" height="4" rx="2" fill="#b3b8bd"/>
+	<rect x="248" y="21" width="32" height="4" rx="2" fill="#b3b8bd"/>
+	<rect x="288" y="21" width="22" height="4" rx="2" fill="#b3b8bd"/>
+
+	<!-- Search, cart, sign-in -->
+	<circle cx="380" cy="23" r="11" fill="#eff4f1"/>
+	<circle cx="380" cy="22" r="4" fill="none" stroke="#146b4c" stroke-width="2"/>
+	<path d="M383 25l4 4" stroke="#146b4c" stroke-width="2" stroke-linecap="round"/>
+	<circle cx="408" cy="23" r="11" fill="#eff4f1"/>
+	<path d="M404 20h9l-1 8h-7z" fill="none" stroke="#146b4c" stroke-width="1.6" stroke-linejoin="round"/>
+	<path d="M406.5 20a2 2 0 0 1 4 0" fill="none" stroke="#146b4c" stroke-width="1.6"/>
+	<rect x="428" y="12" width="52" height="22" rx="4" fill="#f5dc5b"/>
+	<rect x="444" y="21" width="20" height="4" rx="2" fill="#146b4c"/>
+
+	<!-- Page body placeholder -->
+	<rect x="24" y="66" width="432" height="10" rx="5" fill="#e6e6ef"/>
+	<rect x="24" y="84" width="300" height="10" rx="5" fill="#ecedf3"/>
+	<rect x="24" y="106" width="200" height="8" rx="4" fill="#f0f0f5"/>
+</svg>
