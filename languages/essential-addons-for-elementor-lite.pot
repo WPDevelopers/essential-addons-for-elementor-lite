@@ -145,15 +145,15 @@ msgstr ""
 msgid "Edit Template"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:2378
+#: ../includes/Classes/Helper.php:2395
 msgid "<strong>Advanced Custom Fields (ACF)</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=advanced-custom-fields&tab=search&type=term\" target=\"_blank\">ACF</a> first."
 msgstr ""
 
-#: ../includes/Classes/Helper.php:2392
+#: ../includes/Classes/Helper.php:2408
 msgid "Select Repeater Field"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:2432, ../includes/Elements/Advanced_Data_Table.php:279, ../includes/Elements/Product_Grid.php:686
+#: ../includes/Classes/Helper.php:2448, ../includes/Elements/Advanced_Data_Table.php:279, ../includes/Elements/Product_Grid.php:686
 msgid "Select"
 msgstr ""
 
@@ -9270,19 +9270,19 @@ msgstr ""
 msgid "Cart Button"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:4122, ../includes/Elements/Woo_Product_Carousel.php:159, ../includes/Elements/Woo_Product_List.php:3739
+#: ../includes/Elements/Product_Grid.php:4124, ../includes/Elements/Woo_Product_Carousel.php:159, ../includes/Elements/Woo_Product_List.php:3739
 msgid "Publish"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:4123, ../includes/Elements/Woo_Product_Carousel.php:160, ../includes/Elements/Woo_Product_List.php:3740
+#: ../includes/Elements/Product_Grid.php:4125, ../includes/Elements/Woo_Product_Carousel.php:160, ../includes/Elements/Woo_Product_List.php:3740
 msgid "Draft"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:4124, ../includes/Elements/Woo_Product_Carousel.php:161, ../includes/Elements/Woo_Product_List.php:3741
+#: ../includes/Elements/Product_Grid.php:4126, ../includes/Elements/Woo_Product_Carousel.php:161, ../includes/Elements/Woo_Product_List.php:3741
 msgid "Pending Review"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:4125, ../includes/Elements/Woo_Product_Carousel.php:162, ../includes/Elements/Woo_Product_List.php:3742
+#: ../includes/Elements/Product_Grid.php:4127, ../includes/Elements/Woo_Product_Carousel.php:162, ../includes/Elements/Woo_Product_List.php:3742
 msgid "Schedule"
 msgstr ""
 
