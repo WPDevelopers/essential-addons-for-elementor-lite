@@ -228,13 +228,9 @@ class Modern_Footer {
 			);
 		}
 
-		// No logo: the site name as a plain heading.
-		//
-		// Dual Color Header would give the two tone wordmark the design draws,
-		// but its stylesheet hangs a 50px bottom margin off the widget with no
-		// control behind it, which opens a gap under the wordmark that the user
-		// cannot close from the panel. A preset has to be editable everywhere it is
-		// visible, so the plain heading wins.
+		// No logo: the site name as a plain heading. This design's wordmark is one
+		// colour, so there is nothing for Dual Color Header to do here — the two
+		// tone version lives in the Brand Footer preset.
 		$name = get_bloginfo( 'name' );
 		$name = '' !== trim( (string) $name ) ? $name : __( 'Your Brand', 'essential-addons-for-elementor-lite' );
 

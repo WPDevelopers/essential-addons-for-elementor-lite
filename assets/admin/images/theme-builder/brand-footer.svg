@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" width="480" height="150" role="img" aria-label="Brand footer preview: a coloured footer with rounded top corners holding a two tone wordmark, a line of copy and social links beside three link columns, over a centred copyright line">
+	<rect width="480" height="150" fill="#f4f4f8"/>
+
+	<!-- Page body placeholder -->
+	<rect x="24" y="10" width="432" height="8" rx="4" fill="#e6e6ef"/>
+	<rect x="24" y="24" width="300" height="8" rx="4" fill="#ecedf3"/>
+
+	<!-- The footer: flush to the sides and the bottom, rounded at the top only -->
+	<path d="M0 52a12 12 0 0 1 12-12h456a12 12 0 0 1 12 12v98H0z" fill="#6c5cab"/>
+
+	<!-- Wordmark, copy and social discs -->
+	<rect x="24" y="58" width="20" height="9" rx="2" fill="#7be0a0"/>
+	<rect x="46" y="58" width="30" height="9" rx="2" fill="#ffffff"/>
+	<rect x="24" y="76" width="118" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="24" y="85" width="96" height="4" rx="2" fill="#a99ed6"/>
+	<circle cx="31" cy="105" r="8" fill="#ffffff"/>
+	<circle cx="51" cy="105" r="8" fill="#ffffff"/>
+	<circle cx="71" cy="105" r="8" fill="#ffffff"/>
+	<circle cx="91" cy="105" r="8" fill="#ffffff"/>
+
+	<!-- Link columns, deliberately uneven -->
+	<rect x="212" y="56" width="34" height="6" rx="2" fill="#ffffff"/>
+	<rect x="212" y="70" width="28" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="212" y="80" width="36" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="212" y="90" width="30" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="212" y="100" width="38" height="4" rx="2" fill="#a99ed6"/>
+
+	<rect x="298" y="56" width="32" height="6" rx="2" fill="#ffffff"/>
+	<rect x="298" y="70" width="40" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="298" y="80" width="30" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="298" y="90" width="44" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="298" y="100" width="34" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="298" y="110" width="40" height="4" rx="2" fill="#a99ed6"/>
+
+	<rect x="386" y="56" width="36" height="6" rx="2" fill="#ffffff"/>
+	<rect x="386" y="70" width="42" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="386" y="80" width="34" height="4" rx="2" fill="#a99ed6"/>
+	<rect x="386" y="90" width="38" height="4" rx="2" fill="#a99ed6"/>
+
+	<!-- Hairline and copyright -->
+	<path d="M0 126h480" stroke="#8878bd" stroke-width="1"/>
+	<rect x="200" y="133" width="80" height="4" rx="2" fill="#a99ed6"/>
+</svg>

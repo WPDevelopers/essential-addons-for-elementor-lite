@@ -59,6 +59,16 @@ class Preset_Library {
 				'widgets'     => [ 'eael-creative-button', 'heading', 'image', 'icon-list' ],
 				'builder'     => [ Modern_Footer::class, 'build' ],
 			],
+			'brand-footer'   => [
+				'slug'        => 'brand-footer',
+				'type'        => 'footer',
+				'title'       => __( 'Brand Footer', 'essential-addons-for-elementor-lite' ),
+				'badge'       => __( 'Rounded Card', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'A coloured, rounded card: a two tone wordmark, a line about the site and social links beside three columns of links, over a centred copyright. Stacks on smaller screens.', 'essential-addons-for-elementor-lite' ),
+				'thumbnail'   => self::thumbnail_url( 'brand-footer.svg' ),
+				'widgets'     => [ 'eael-dual-color-header', 'heading', 'icon-list', 'social-icons' ],
+				'builder'     => [ Brand_Footer::class, 'build' ],
+			],
 			'simple-footer'  => [
 				'slug'        => 'simple-footer',
 				'type'        => 'footer',
