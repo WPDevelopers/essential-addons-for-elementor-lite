@@ -2076,13 +2076,18 @@ trait Admin {
 		}
 
 		if ( $this->menu_notice_should_show() ) {
+			// Scoped to the direct child anchor on purpose. WordPress repeats the
+			// menu title twice more — in `.wp-submenu-head` and in the submenu item
+			// it generates for the parent page — so a descendant selector paints the
+			// whole flyout purple and prints the badge three times.
 			$custom_css = "
-                #toplevel_page_eael-settings a ,
-                #toplevel_page_eael-settings a:hover {
+                #toplevel_page_eael-settings > a,
+                #toplevel_page_eael-settings > a:hover,
+                #toplevel_page_eael-settings > a:focus {
                     color:#f0f0f1 !important;
                     background: #7D55FF !important;
                 }
-				#toplevel_page_eael-settings .eael-menu-notice {
+				#toplevel_page_eael-settings > a .eael-menu-notice {
                     display:block !important;
                 }"
             ;
