@@ -646,6 +646,15 @@ body.eatb-modal-open {
 		padding: 24px 20px;
 	}
 
+	.eatb-modal__body--presets {
+		padding-bottom: 0;
+	}
+
+	.eatb-modal__body--presets .eatb-presets__note {
+		margin: auto -20px 0;
+		padding: 16px 20px 18px;
+	}
+
 	.eatb-hero__title {
 		font-size: 22px;
 	}
@@ -716,14 +725,23 @@ body.eatb-modal-open {
 	background: #fff;
 	border: 1px solid var(--eatb-border);
 	border-radius: 10px;
-	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .eatb-preset:hover:not(:disabled),
 .eatb-preset:focus-visible {
 	border-color: var(--eatb-accent);
-	box-shadow: 0 8px 24px rgba( 12, 14, 24, 0.1 );
+	box-shadow: 0 10px 28px rgba( 12, 14, 24, 0.12 );
+	transform: translateY( -2px );
 	outline: none;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.eatb-preset,
+	.eatb-preset:hover:not(:disabled),
+	.eatb-preset:focus-visible {
+		transform: none;
+	}
 }
 
 .eatb-preset:disabled {
@@ -742,6 +760,12 @@ body.eatb-modal-open {
 	height: auto;
 }
 
+/*
+ * The overlay softens the preview, it does not replace it. A near-opaque wash
+ * hid the very thing the card is for — what is behind the label is how the
+ * choice is made, so the scrim is light and the blur shallow, just enough to
+ * seat the label without taking the preview away.
+ */
 .eatb-preset__overlay {
 	position: absolute;
 	inset: 0;
@@ -753,9 +777,18 @@ body.eatb-modal-open {
 	align-items: center;
 	justify-content: center;
 	padding: 16px;
-	background: rgba( 244, 244, 248, 0.92 );
+	background: rgba( 29, 31, 43, 0.18 );
+	-webkit-backdrop-filter: blur( 1.5px );
+	backdrop-filter: blur( 1.5px );
 	opacity: 0;
-	transition: opacity 0.15s ease;
+	transition: opacity 0.18s ease;
+}
+
+/* Where the backdrop cannot be blurred, the scrim carries the contrast alone. */
+@supports not ( ( backdrop-filter: blur( 1.5px ) ) or ( -webkit-backdrop-filter: blur( 1.5px ) ) ) {
+	.eatb-preset__overlay {
+		background: rgba( 29, 31, 43, 0.42 );
+	}
 }
 
 .eatb-preset:hover .eatb-preset__overlay,
@@ -769,8 +802,17 @@ body.eatb-modal-open {
 	font-size: 14px;
 	font-weight: 600;
 	color: #fff;
-	background: #2b2d3a;
+	background: rgba( 23, 25, 35, 0.92 );
 	border-radius: 8px;
+	box-shadow: 0 6px 18px rgba( 12, 14, 24, 0.28 );
+	transform: translateY( 4px );
+	transition: transform 0.18s ease;
+}
+
+.eatb-preset:hover .eatb-preset__insert,
+.eatb-preset:focus-visible .eatb-preset__insert,
+.eatb-preset.is-busy .eatb-preset__insert {
+	transform: none;
 }
 
 .eatb-preset__footer {
@@ -779,6 +821,7 @@ body.eatb-modal-open {
 	align-items: center;
 	justify-content: space-between;
 	padding: 14px 16px;
+	border-top: 1px solid var(--eatb-border);
 }
 
 .eatb-preset__name {
@@ -806,6 +849,41 @@ body.eatb-modal-open {
 }
 
 
+/*
+ * The picker is the one dialog whose content does not fill it — three cards and
+ * a sentence against a 480px floor left the slack dangling under the last line,
+ * so the modal read as cut off. The body is a column instead: the grid stays at
+ * the top, the Templately hand-off is pushed onto the floor as a band, and the
+ * space in between becomes the gap between them.
+ */
+.eatb-modal__body--presets {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 0;
+}
+
+.eatb-modal__body--presets .eatb-loader {
+	flex: 1 1 auto;
+}
+
+/*
+ * The 480px floor is for dialogs that grow — the condition builder gains a row
+ * every time the user adds one. The picker never does: it is a fixed grid and a
+ * sentence, so the floor only ever showed up as slack. Where the parent can be
+ * matched on its content it is dropped, and the loader's own min-height keeps
+ * the loading state from collapsing to nothing. Without `:has()` the floor
+ * stays and the band simply sits lower — the layout does not depend on this.
+ */
+.eatb-modal--wide .eatb-modal__dialog:has( > .eatb-modal__body--presets ) {
+	min-height: 0;
+}
+
+/* The gap above the band, kept off the auto margin so it survives either way. */
+.eatb-modal__body--presets .eatb-presets__grid,
+.eatb-modal__body--presets .eatb-presets__empty {
+	margin-bottom: 32px;
+}
+
 /* Templately hand-off, at the foot of the preset picker. */
 .eatb-presets__note {
 	margin: 24px 0 0;
@@ -814,6 +892,18 @@ body.eatb-modal-open {
 	font-size: 13px;
 	color: var( --eatb-muted );
 	text-align: center;
+}
+
+/*
+ * Full bleed to the dialog's edges — the body's own padding is cancelled out —
+ * so it lands as the modal's floor rather than as a boxed-in last paragraph.
+ * The bottom corners are its own, since the dialog rounds without clipping.
+ */
+.eatb-modal__body--presets .eatb-presets__note {
+	margin: auto -40px 0;
+	padding: 18px 40px 20px;
+	background: #fafafb;
+	border-radius: 0 0 12px 12px;
 }
 
 /* One rule for both the anchor and the button, so the two states of the link

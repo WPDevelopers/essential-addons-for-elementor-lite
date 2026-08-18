@@ -139,14 +139,14 @@ export default function PresetLibrary( { onClose, onInsert } ) {
 	// would replay the opening animation behind the cards.
 	if ( ! ready ) {
 		return (
-			<Modal title={ title } size="wide" onClose={ onClose }>
+			<Modal title={ title } size="wide" onClose={ onClose } bodyClass="eatb-modal__body--presets">
 				<Loader />
 			</Modal>
 		);
 	}
 
 	return (
-		<Modal title={ title } size="wide" onClose={ onClose }>
+		<Modal title={ title } size="wide" onClose={ onClose } bodyClass="eatb-modal__body--presets">
 			<div className="eatb-presets__tabs" role="tablist">
 				{ tabs.map( ( item ) => (
 					<button

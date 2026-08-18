@@ -39,6 +39,16 @@ class Preset_Library {
 	public static function get_presets() {
 		// Richest first within each type — that is the order the picker shows.
 		$presets = [
+			'classic-header' => [
+				'slug'        => 'classic-header',
+				'type'        => 'header',
+				'title'       => __( 'Classic Header', 'essential-addons-for-elementor-lite' ),
+				'badge'       => __( 'Clean & Simple', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'A dark bar: logo on the left, navigation centred, one call to action on the right. Collapses to a hamburger on tablet.', 'essential-addons-for-elementor-lite' ),
+				'thumbnail'   => self::thumbnail_url( 'classic-header.svg' ),
+				'widgets'     => [ 'eael-simple-menu', 'heading', 'image', 'button' ],
+				'builder'     => [ Classic_Header::class, 'build' ],
+			],
 			'mega-header'    => [
 				'slug'        => 'mega-header',
 				'type'        => 'header',
@@ -48,6 +58,16 @@ class Preset_Library {
 				'thumbnail'   => self::thumbnail_url( 'mega-header.svg' ),
 				'widgets'     => [ 'eael-mega-menu', 'heading', 'image', 'icon', 'icon-box', 'icon-list', 'button', 'text-editor' ],
 				'builder'     => [ Mega_Header::class, 'build' ],
+			],
+			'shop-header'    => [
+				'slug'        => 'shop-header',
+				'type'        => 'header',
+				'title'       => __( 'Shop Header', 'essential-addons-for-elementor-lite' ),
+				'badge'       => __( 'Search & Cart', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'A light bar: brand on the left, navigation centred, then search, cart and a sign-in button. Collapses to a hamburger on tablet.', 'essential-addons-for-elementor-lite' ),
+				'thumbnail'   => self::thumbnail_url( 'shop-header.svg' ),
+				'widgets'     => [ 'eael-simple-menu', 'eael-creative-button', 'heading', 'image', 'icon' ],
+				'builder'     => [ Shop_Header::class, 'build' ],
 			],
 				'simple-footer'  => [
 				'slug'        => 'simple-footer',
@@ -78,26 +98,6 @@ class Preset_Library {
 				'thumbnail'   => self::thumbnail_url( 'brand-footer.svg' ),
 				'widgets'     => [ 'eael-dual-color-header', 'heading', 'icon-list', 'social-icons' ],
 				'builder'     => [ Brand_Footer::class, 'build' ],
-			],
-			'shop-header'    => [
-				'slug'        => 'shop-header',
-				'type'        => 'header',
-				'title'       => __( 'Shop Header', 'essential-addons-for-elementor-lite' ),
-				'badge'       => __( 'Search & Cart', 'essential-addons-for-elementor-lite' ),
-				'description' => __( 'A light bar: brand on the left, navigation centred, then search, cart and a sign-in button. Collapses to a hamburger on tablet.', 'essential-addons-for-elementor-lite' ),
-				'thumbnail'   => self::thumbnail_url( 'shop-header.svg' ),
-				'widgets'     => [ 'eael-simple-menu', 'eael-creative-button', 'heading', 'image', 'icon' ],
-				'builder'     => [ Shop_Header::class, 'build' ],
-			],
-			'classic-header' => [
-				'slug'        => 'classic-header',
-				'type'        => 'header',
-				'title'       => __( 'Classic Header', 'essential-addons-for-elementor-lite' ),
-				'badge'       => __( 'Clean & Simple', 'essential-addons-for-elementor-lite' ),
-				'description' => __( 'A dark bar: logo on the left, navigation centred, one call to action on the right. Collapses to a hamburger on tablet.', 'essential-addons-for-elementor-lite' ),
-				'thumbnail'   => self::thumbnail_url( 'classic-header.svg' ),
-				'widgets'     => [ 'eael-simple-menu', 'heading', 'image', 'button' ],
-				'builder'     => [ Classic_Header::class, 'build' ],
 			],
 		];
 

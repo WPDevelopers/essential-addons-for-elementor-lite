@@ -8,13 +8,15 @@ import { strings } from '../utils/api';
  * and keeps Tab inside the dialog while it is open.
  *
  * @param {Object}   props
- * @param {string}   props.title    Text in the title bar.
- * @param {string}   props.size     `default` or `wide`.
- * @param {Function} props.onClose  Called when the user dismisses the dialog.
- * @param {Node}     props.footer   Action bar contents.
- * @param {Node}     props.children Body contents.
+ * @param {string}   props.title       Text in the title bar.
+ * @param {string}   props.size        `default` or `wide`.
+ * @param {Function} props.onClose     Called when the user dismisses the dialog.
+ * @param {Node}     props.footer      Action bar contents.
+ * @param {string}   [props.bodyClass] Extra class on the body, for dialogs that
+ *                                     lay their content out themselves.
+ * @param {Node}     props.children    Body contents.
  */
-export default function Modal( { title, size = 'default', onClose, footer, children } ) {
+export default function Modal( { title, size = 'default', onClose, footer, bodyClass = '', children } ) {
 	const dialogRef = useRef( null );
 	const openerRef = useRef( null );
 
@@ -97,7 +99,7 @@ export default function Modal( { title, size = 'default', onClose, footer, child
 					</button>
 				</header>
 
-				<div className="eatb-modal__body">{ children }</div>
+				<div className={ `eatb-modal__body ${ bodyClass }`.trim() }>{ children }</div>
 
 				{ footer ? <footer className="eatb-modal__actions">{ footer }</footer> : null }
 			</div>
