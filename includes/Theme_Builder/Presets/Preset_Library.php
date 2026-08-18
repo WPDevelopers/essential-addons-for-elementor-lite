@@ -54,9 +54,9 @@ class Preset_Library {
 				'type'        => 'footer',
 				'title'       => __( 'Modern Footer', 'essential-addons-for-elementor-lite' ),
 				'badge'       => __( 'Multi-Column', 'essential-addons-for-elementor-lite' ),
-				'description' => __( 'Brand, two link columns, contact details and a newsletter card, over a strip of highlights and a dark legal bar. Stacks on smaller screens.', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Brand, a newsletter sign-up and three link columns on a dark ground, over a centred copyright line. Stacks on smaller screens.', 'essential-addons-for-elementor-lite' ),
 				'thumbnail'   => self::thumbnail_url( 'modern-footer.svg' ),
-				'widgets'     => [ 'eael-info-box', 'eael-feature-list', 'eael-creative-button', 'heading', 'image', 'icon-list', 'social-icons', 'text-editor' ],
+				'widgets'     => [ 'eael-creative-button', 'heading', 'image', 'icon-list' ],
 				'builder'     => [ Modern_Footer::class, 'build' ],
 			],
 			'simple-footer'  => [

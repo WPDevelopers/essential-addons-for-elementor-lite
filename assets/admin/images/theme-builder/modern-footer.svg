@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" width="480" height="150" role="img" aria-label="Modern footer preview: brand column with social links, two link columns, contact details, a newsletter card, a strip of highlights and a dark legal bar">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" width="480" height="150" role="img" aria-label="Modern footer preview: a dark footer with a brand block and newsletter sign-up field on the left, three link columns on the right, and a centred copyright line under a hairline">
 	<rect width="480" height="150" fill="#f4f4f8"/>
 
 	<!-- Page body placeholder -->
@@ -6,59 +6,35 @@
 	<rect x="24" y="24" width="300" height="8" rx="4" fill="#ecedf3"/>
 
 	<!-- Footer surface -->
-	<rect x="0" y="44" width="480" height="106" fill="#ffffff"/>
+	<rect x="0" y="42" width="480" height="108" fill="#0b1236"/>
 
-	<!-- Brand column -->
-	<rect x="24" y="56" width="10" height="10" rx="3" fill="#5b3df5"/>
-	<rect x="38" y="58" width="40" height="6" rx="3" fill="#1d1f2b"/>
-	<rect x="24" y="72" width="76" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="24" y="80" width="62" height="4" rx="2" fill="#d7d9e3"/>
-	<circle cx="28" cy="94" r="5" fill="#f3f1fe"/>
-	<circle cx="42" cy="94" r="5" fill="#f3f1fe"/>
-	<circle cx="56" cy="94" r="5" fill="#f3f1fe"/>
-	<circle cx="70" cy="94" r="5" fill="#f3f1fe"/>
+	<!-- Brand, sign-up copy and field -->
+	<rect x="24" y="58" width="46" height="9" rx="2" fill="#ffffff"/>
+	<rect x="24" y="76" width="120" height="4" rx="2" fill="#454d75"/>
+	<rect x="24" y="92" width="164" height="26" rx="1" fill="none" stroke="#3b4270"/>
+	<rect x="34" y="103" width="56" height="4" rx="2" fill="#454d75"/>
+	<rect x="134" y="97" width="48" height="16" fill="#7b5cff"/>
 
-	<!-- Quick links -->
-	<rect x="128" y="56" width="34" height="5" rx="2.5" fill="#1d1f2b"/>
-	<rect x="128" y="69" width="40" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="128" y="79" width="34" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="128" y="89" width="42" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="128" y="99" width="30" height="4" rx="2" fill="#d7d9e3"/>
+	<!-- Link columns -->
+	<rect x="230" y="58" width="38" height="6" rx="2" fill="#ffffff"/>
+	<rect x="230" y="74" width="30" height="4" rx="2" fill="#454d75"/>
+	<rect x="230" y="86" width="42" height="4" rx="2" fill="#454d75"/>
+	<rect x="230" y="98" width="34" height="4" rx="2" fill="#454d75"/>
+	<rect x="230" y="110" width="38" height="4" rx="2" fill="#454d75"/>
 
-	<!-- Resources -->
-	<rect x="196" y="56" width="32" height="5" rx="2.5" fill="#1d1f2b"/>
-	<rect x="196" y="69" width="36" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="196" y="79" width="44" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="196" y="89" width="32" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="196" y="99" width="38" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="308" y="58" width="36" height="6" rx="2" fill="#ffffff"/>
+	<rect x="308" y="74" width="40" height="4" rx="2" fill="#454d75"/>
+	<rect x="308" y="86" width="28" height="4" rx="2" fill="#454d75"/>
+	<rect x="308" y="98" width="44" height="4" rx="2" fill="#454d75"/>
+	<rect x="308" y="110" width="36" height="4" rx="2" fill="#454d75"/>
 
-	<!-- Contact -->
-	<rect x="266" y="56" width="32" height="5" rx="2.5" fill="#1d1f2b"/>
-	<circle cx="272" cy="72" r="6" fill="#f3f1fe"/>
-	<rect x="283" y="70" width="38" height="4" rx="2" fill="#d7d9e3"/>
-	<circle cx="272" cy="88" r="6" fill="#f3f1fe"/>
-	<rect x="283" y="86" width="44" height="4" rx="2" fill="#d7d9e3"/>
-	<circle cx="272" cy="104" r="6" fill="#f3f1fe"/>
-	<rect x="283" y="102" width="34" height="4" rx="2" fill="#d7d9e3"/>
+	<rect x="392" y="58" width="40" height="6" rx="2" fill="#ffffff"/>
+	<rect x="392" y="74" width="26" height="4" rx="2" fill="#454d75"/>
+	<rect x="392" y="86" width="46" height="4" rx="2" fill="#454d75"/>
+	<rect x="392" y="98" width="32" height="4" rx="2" fill="#454d75"/>
+	<rect x="392" y="110" width="36" height="4" rx="2" fill="#454d75"/>
 
-	<!-- Newsletter card -->
-	<rect x="356" y="52" width="100" height="60" rx="8" fill="#f3f1fe"/>
-	<rect x="366" y="60" width="14" height="14" rx="4" fill="#5b3df5"/>
-	<rect x="366" y="80" width="60" height="5" rx="2.5" fill="#1d1f2b"/>
-	<rect x="366" y="90" width="76" height="4" rx="2" fill="#c8c6e6"/>
-	<rect x="366" y="99" width="44" height="9" rx="4" fill="#5b3df5"/>
-
-	<!-- Highlights strip -->
-	<path d="M24 120h432" stroke="#e9e7f5" stroke-width="1"/>
-	<rect x="24" y="126" width="10" height="10" rx="3" fill="#f3f1fe"/>
-	<rect x="38" y="129" width="52" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="132" y="126" width="10" height="10" rx="3" fill="#f3f1fe"/>
-	<rect x="146" y="129" width="52" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="240" y="126" width="10" height="10" rx="3" fill="#f3f1fe"/>
-	<rect x="254" y="129" width="52" height="4" rx="2" fill="#d7d9e3"/>
-	<rect x="348" y="126" width="10" height="10" rx="3" fill="#f3f1fe"/>
-	<rect x="362" y="129" width="52" height="4" rx="2" fill="#d7d9e3"/>
-
-	<!-- Legal bar -->
-	<rect x="0" y="142" width="480" height="8" fill="#0b1033"/>
+	<!-- Hairline and copyright -->
+	<path d="M0 130h480" stroke="#2a3059" stroke-width="1"/>
+	<rect x="200" y="138" width="80" height="4" rx="2" fill="#454d75"/>
 </svg>

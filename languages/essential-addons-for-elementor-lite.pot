@@ -393,7 +393,7 @@ msgstr ""
 msgid "Rank tracking with GA4"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:315, ../includes/Theme_Builder/Admin/Admin.php:658
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:315, ../includes/Theme_Builder/Admin/Admin.php:661
 msgid "Templately"
 msgstr ""
 
@@ -14461,61 +14461,73 @@ msgstr ""
 msgid "Publishing cancelled. The template is still a draft."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:647
-msgid "Essential Addons presets"
+#: ../includes/Theme_Builder/Admin/Admin.php:647, ../includes/Theme_Builder/Admin/Templates_List_Table.php:131
+msgid "Display Conditions"
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:648
-msgid "Choose a Header & Footer Preset"
+msgid "Display conditions saved."
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:649
-msgid "Header Presets"
+msgid "Essential Addons presets"
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:650
-msgid "Footer Presets"
+msgid "Choose a Header & Footer Preset"
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:651
-msgid "Click to Insert"
+msgid "Header Presets"
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:652
-msgid "Inserting…"
+msgid "Footer Presets"
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:653
-msgid "No header presets are available yet."
+msgid "Click to Insert"
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:654
-msgid "Footer presets are on their way. Build yours from scratch in the meantime."
+msgid "Loading"
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:655
+msgid "Inserting…"
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:656
+msgid "No header presets are available yet."
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:657
+msgid "Footer presets are on their way. Build yours from scratch in the meantime."
+msgstr ""
+
+#: ../includes/Theme_Builder/Admin/Admin.php:658
 msgid "The preset could not be inserted."
 msgstr ""
 
 #. translators: %s: Templately, rendered as a link.
-#: ../includes/Theme_Builder/Admin/Admin.php:657
+#: ../includes/Theme_Builder/Admin/Admin.php:660
 msgid "For more templates, use %s."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:659
+#: ../includes/Theme_Builder/Admin/Admin.php:662
 msgid "Installing Templately…"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:660
+#: ../includes/Theme_Builder/Admin/Admin.php:663
 msgid "Activating Templately…"
 msgstr ""
 
 #. translators: 1: month number (01, 02, …), 2: month abbreviation.
-#: ../includes/Theme_Builder/Admin/Admin.php:685
+#: ../includes/Theme_Builder/Admin/Admin.php:688
 msgid "%1$s-%2$s"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:699, ../includes/Theme_Builder/Admin/Requirements_Screen.php:106
+#: ../includes/Theme_Builder/Admin/Admin.php:702, ../includes/Theme_Builder/Admin/Requirements_Screen.php:106
 msgid "You do not have permission to manage Theme Builder templates."
 msgstr ""
 
@@ -14566,10 +14578,6 @@ msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Ajax.php:551
 msgid "You are not allowed to manage Theme Builder templates."
-msgstr ""
-
-#: ../includes/Theme_Builder/Admin/Templates_List_Table.php:131
-msgid "Display Conditions"
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Templates_List_Table.php:132

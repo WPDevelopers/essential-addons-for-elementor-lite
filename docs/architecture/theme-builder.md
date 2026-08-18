@@ -474,7 +474,7 @@ Three ship today:
 | Preset | Type | EA widgets | Notes |
 |--------|------|-----------|-------|
 | Mega Menu Header | header | Mega Menu | Logo, centred menu with two ready-built mega panels, search, cart, call to action. Collapses at mobile |
-| Modern Footer | footer | Info Box ×5, Feature List, Creative Button | Five columns, a highlights strip and a dark legal bar. Columns stack at tablet and mobile |
+| Modern Footer | footer | Creative Button | Dark ground: brand and a newsletter sign-up field beside three link columns, over a centred copyright line. Columns stack at tablet, two-up at mobile |
 | Simple Footer | footer | none | One centred column: brand, a line of copy, links, social, copyright |
 | Classic Header | header | Simple Menu | Site name, links, call to action. Collapses at tablet |
 
@@ -486,7 +486,9 @@ Three ship today:
 
 **A nested widget's children need `isLocked`.** Elementor's `NestedModelBase::initialize()` fills in the default children only for a widget created with none, so a preset that supplies its own panels keeps them — but `isValidChild()` then rejects any child without the `isLocked` flag that `getDefaultChildren()` would have stamped on. `Elements::nested_child()` exists to set it. The panels are also **positional**: the widget prints child *n* for repeater row *n*, so a plain link item still gets an empty container.
 
-**Bands, not one grid.** The footer is three boxed containers stacked in one full-width wrapper, rather than one container with a background. A boxed container paints its background edge to edge while keeping its content in the site's content column, which is what lets the legal bar be dark while the rest of the footer is not — and it means each band keeps its own padding and its own wrap behaviour.
+**Bands, not one grid.** The footer is boxed containers stacked in one full-width wrapper, rather than one container with a background. A boxed container paints its background — and draws its border — edge to edge while keeping its content in the site's content column, which is what lets the hairline above `Modern_Footer`'s copyright run the full width of the screen while the line under it stays in the content column. It also means each band keeps its own padding and its own wrap behaviour.
+
+**A sign-up field is composed, not a form widget.** `Modern_Footer` draws its newsletter field as a bordered container holding a placeholder line and a Creative Button, because every form widget EA ships is an integration with a form plugin — a preset that used one would insert a broken widget on the many sites that have none. The user drops their own form widget into that box, or points the button at a sign-up page.
 
 **Widths plus `flex_wrap` are the whole responsive story.** Every column carries `width` / `width_tablet` / `width_mobile`; the row wraps. Nothing is hidden at a breakpoint and nothing is duplicated for one, so what the user edits is what every device shows. (The reference design collapsed the footer's link columns into an accordion on mobile. That needs a second copy of the links for the small screen to edit separately, which is exactly the kind of hidden duplicate a preset should not ship.)
 

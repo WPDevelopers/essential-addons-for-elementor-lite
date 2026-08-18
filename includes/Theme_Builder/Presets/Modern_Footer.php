@@ -13,21 +13,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 /**
- * A five column footer built out of Essential Addons widgets.
+ * A dark four column footer with a newsletter sign-up.
  *
- * Three bands stacked in one wrapper: the columns (brand, two link lists, contact
- * details, newsletter), a strip of selling points, and a dark legal bar. Each band
- * is its own boxed container, so a band's background runs edge to edge while its
- * content stays in the site's content column — which is what lets the legal bar be
- * dark without the rest of the footer being dark with it.
+ * Two bands in one wrapper: the columns — brand, sign-up, and three lists of
+ * links — and a centred copyright line under a hairline. Both bands sit on the
+ * same dark ground; the hairline is the only thing separating them, which is what
+ * keeps the bottom line reading as part of the footer rather than as a second bar
+ * bolted under it.
  *
- * The EA widgets are here because they fit, not to pad a list: Feature List is an
- * icon-and-text list, which is exactly what contact details are; Info Box is an
- * icon-title-description card, which is what a selling point is; Creative Button
- * and Dual Color Header cover the call to action and the wordmark. Everything else
- * — headings, link lists, copy, social icons — is Elementor core, because core
- * already does those well and a preset that reaches for a heavier widget to draw a
- * heading is a preset that costs the page more than it gives it.
+ * The sign-up field is composed, not a form widget: every form widget EA ships is
+ * an integration with a form plugin, so a preset that used one would insert a
+ * broken widget on the many sites that have none. What goes in is the field's
+ * look — a bordered box holding a placeholder line and an EA Creative Button —
+ * so the user drops their own form widget into that box, or points the button at
+ * a sign-up page, and the footer is already dressed for it either way.
  *
  * Nothing is baked in: no custom CSS, no image assets, no fixed markup. Every
  * label, link, colour, size and space is a control value, so the whole footer
@@ -38,49 +37,49 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Modern_Footer {
 
 	/**
-	 * Brand colour.
+	 * The footer ground.
 	 */
-	const ACCENT = '#5B3DF5';
+	const SURFACE = '#0B1236';
 
 	/**
-	 * Heading ink.
+	 * Brand colour, on the sign-up button.
 	 */
-	const INK = '#1D1F2B';
+	const ACCENT = '#7B5CFF';
 
 	/**
-	 * Body copy.
+	 * The button, hovered.
 	 */
-	const BODY = '#4B5563';
+	const ACCENT_HOVER = '#6A49F5';
 
 	/**
-	 * Secondary copy.
+	 * Headings and hovered links.
 	 */
-	const MUTED = '#6B7280';
+	const INK = '#FFFFFF';
 
 	/**
-	 * Footer surface.
+	 * Links and body copy.
 	 */
-	const SURFACE = '#FFFFFF';
+	const BODY = '#A7ADCE';
 
 	/**
-	 * Tinted surface, behind icons and the newsletter card.
+	 * The placeholder line in the sign-up field.
 	 */
-	const TINT = '#F3F1FE';
+	const MUTED = '#868CB4';
 
 	/**
-	 * Hairlines.
+	 * The sign-up field's border.
 	 */
-	const LINE = '#E9E7F5';
+	const FIELD_LINE = 'rgba(255, 255, 255, 0.22)';
 
 	/**
-	 * The legal bar.
+	 * The hairline above the copyright.
 	 */
-	const DARK = '#0B1033';
+	const RULE = 'rgba(255, 255, 255, 0.08)';
 
 	/**
-	 * Copy on the legal bar.
+	 * The button's label, which is the ground colour rather than white.
 	 */
-	const DARK_INK = '#C9C7E8';
+	const BUTTON_INK = '#0B1236';
 
 	/**
 	 * The elements this preset inserts.
@@ -103,8 +102,7 @@ class Modern_Footer {
 				],
 				[
 					self::columns(),
-					self::highlights(),
-					self::legal_bar(),
+					self::copyright_bar(),
 				]
 			),
 		];
@@ -115,7 +113,7 @@ class Modern_Footer {
 	 * ------------------------------------------------------------------ */
 
 	/**
-	 * Brand, links, resources, contact and newsletter.
+	 * Brand and sign-up on the left, three link columns on the right.
 	 *
 	 * @since 6.7.3
 	 *
@@ -124,59 +122,61 @@ class Modern_Footer {
 	protected static function columns() {
 		return Elements::container(
 			[
-				'content_width'    => 'boxed',
-				'flex_direction'   => 'row',
-				'flex_align_items' => 'flex-start',
-				// Wrap is what makes the stacking work: the widths below are read
-				// per breakpoint, and once they add up past a row the columns drop
-				// to the next one on their own.
-				'flex_wrap'        => 'wrap',
-				'flex_gap'         => Elements::gap( 28 ),
-				'flex_gap_tablet'  => Elements::gap( 24 ),
-				'flex_gap_mobile'  => Elements::gap( 22 ),
-				'padding'          => Elements::spacing( 56, 24, 40, 24 ),
-				'padding_tablet'   => Elements::spacing( 40, 20, 32, 20 ),
-				'padding_mobile'   => Elements::spacing( 32, 16, 24, 16 ),
-				'_title'           => __( 'Footer Columns', 'essential-addons-for-elementor-lite' ),
+				'content_width'        => 'boxed',
+				'flex_direction'       => 'row',
+				'flex_align_items'     => 'flex-start',
+				// Space between rather than a fixed gap: the four widths below add
+				// up to less than a row, and letting the leftover space fall
+				// between them is what spreads the link columns across the right
+				// hand side the way the design does.
+				'flex_justify_content' => 'space-between',
+				// Wrap is what makes the stacking work: the widths are read per
+				// breakpoint, and once they add up past a row the columns drop to
+				// the next one on their own.
+				'flex_wrap'            => 'wrap',
+				'flex_gap'             => Elements::gap( 30 ),
+				'flex_gap_tablet'      => Elements::gap( 36 ),
+				'flex_gap_mobile'      => Elements::gap( 34 ),
+				'padding'              => Elements::spacing( 100, 24, 74, 24 ),
+				'padding_tablet'       => Elements::spacing( 70, 20, 52, 20 ),
+				'padding_mobile'       => Elements::spacing( 54, 16, 40, 16 ),
+				'_title'               => __( 'Footer Columns', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				self::brand_column(),
 				self::links_column(
-					__( 'Quick Links', 'essential-addons-for-elementor-lite' ),
+					__( 'Company', 'essential-addons-for-elementor-lite' ),
 					[
-						__( 'About Us', 'essential-addons-for-elementor-lite' ),
-						__( 'Features', 'essential-addons-for-elementor-lite' ),
-						__( 'Pricing', 'essential-addons-for-elementor-lite' ),
-						__( 'Documentation', 'essential-addons-for-elementor-lite' ),
-						__( 'Changelog', 'essential-addons-for-elementor-lite' ),
-						__( 'Support Center', 'essential-addons-for-elementor-lite' ),
-					],
-					14,
-					15,
-					46
+						__( 'About', 'essential-addons-for-elementor-lite' ),
+						__( 'Privacy Policies', 'essential-addons-for-elementor-lite' ),
+						__( 'Contact Us', 'essential-addons-for-elementor-lite' ),
+						__( 'Technologies', 'essential-addons-for-elementor-lite' ),
+					]
+				),
+				self::links_column(
+					__( 'Products', 'essential-addons-for-elementor-lite' ),
+					[
+						__( 'Automated', 'essential-addons-for-elementor-lite' ),
+						__( 'Chatbot', 'essential-addons-for-elementor-lite' ),
+						__( 'Data Security', 'essential-addons-for-elementor-lite' ),
+						__( 'Virtual Reality', 'essential-addons-for-elementor-lite' ),
+					]
 				),
 				self::links_column(
 					__( 'Resources', 'essential-addons-for-elementor-lite' ),
 					[
 						__( 'Blog', 'essential-addons-for-elementor-lite' ),
-						__( 'Help & Support', 'essential-addons-for-elementor-lite' ),
-						__( 'Community', 'essential-addons-for-elementor-lite' ),
-						__( 'Templates', 'essential-addons-for-elementor-lite' ),
-						__( 'Integration', 'essential-addons-for-elementor-lite' ),
-						__( 'Affiliates', 'essential-addons-for-elementor-lite' ),
-					],
-					14,
-					16,
-					46
+						__( 'Documentation', 'essential-addons-for-elementor-lite' ),
+						__( 'Support', 'essential-addons-for-elementor-lite' ),
+						__( 'Affiliate', 'essential-addons-for-elementor-lite' ),
+					]
 				),
-				self::contact_column(),
-				self::newsletter_column(),
 			]
 		);
 	}
 
 	/**
-	 * Logo, description and social links.
+	 * Logo, the sign-up line, and the sign-up field.
 	 *
 	 * @since 6.7.3
 	 *
@@ -184,29 +184,26 @@ class Modern_Footer {
 	 */
 	protected static function brand_column() {
 		return self::column(
-			24,
-			32,
+			40,
+			100,
 			100,
 			[
 				self::wordmark(),
-				Elements::widget(
-					'text-editor',
-					[
-						'editor'                 => '<p>' . self::description() . '</p>',
-						'text_color'             => self::BODY,
-						'typography_typography'  => 'custom',
-						'typography_font_size'   => Elements::size( 15 ),
-						'typography_line_height' => Elements::size( 1.7, 'em' ),
-					]
+				self::text(
+					__( 'Subscribe to our newsletter and get the latest updates', 'essential-addons-for-elementor-lite' ),
+					self::BODY,
+					17,
+					16
 				),
-				self::social_icons(),
+				self::subscribe_field(),
 			],
-			__( 'Brand', 'essential-addons-for-elementor-lite' )
+			__( 'Brand', 'essential-addons-for-elementor-lite' ),
+			26
 		);
 	}
 
 	/**
-	 * The site's logo, or its name as a two tone wordmark.
+	 * The site's logo, or its name as a wordmark.
 	 *
 	 * @since 6.7.3
 	 *
@@ -223,8 +220,8 @@ class Modern_Footer {
 					'image'        => [ 'id' => $logo_id, 'url' => $logo ],
 					'image_size'   => 'full',
 					'align'        => 'start',
-					'width'        => Elements::size( 180 ),
-					'width_mobile' => Elements::size( 150 ),
+					'width'        => Elements::size( 190 ),
+					'width_mobile' => Elements::size( 155 ),
 					'link_to'      => 'custom',
 					'link'         => Elements::link( home_url( '/' ) ),
 				]
@@ -233,7 +230,7 @@ class Modern_Footer {
 
 		// No logo: the site name as a plain heading.
 		//
-		// Dual Color Header would give the two tone wordmark the design asks for,
+		// Dual Color Header would give the two tone wordmark the design draws,
 		// but its stylesheet hangs a 50px bottom margin off the widget with no
 		// control behind it, which opens a gap under the wordmark that the user
 		// cannot close from the panel. A preset has to be editable everywhere it is
@@ -249,74 +246,91 @@ class Modern_Footer {
 				'link'                        => Elements::link( home_url( '/' ) ),
 				'title_color'                 => self::INK,
 				'typography_typography'       => 'custom',
-				'typography_font_size'        => Elements::size( 26 ),
-				'typography_font_size_mobile' => Elements::size( 23 ),
+				'typography_font_size'        => Elements::size( 32 ),
+				'typography_font_size_mobile' => Elements::size( 27 ),
 				'typography_font_weight'      => '700',
+				'typography_letter_spacing'   => Elements::size( -0.5 ),
 			]
 		);
 	}
 
 	/**
-	 * The brand description — the site's own tagline when it has one.
+	 * The sign-up field: a placeholder line with the button inside its border.
 	 *
-	 * @since 6.7.3
-	 *
-	 * @return string
-	 */
-	protected static function description() {
-		$tagline = trim( (string) get_bloginfo( 'description' ) );
-
-		if ( '' !== $tagline ) {
-			return $tagline;
-		}
-
-		return __( 'Write a short line about what you do and who you do it for. Two sentences is usually enough for a footer.', 'essential-addons-for-elementor-lite' );
-	}
-
-	/**
-	 * The social row.
-	 *
-	 * Elementor core, not an EA widget — Lite ships no social icons widget, and
-	 * pulling one in from elsewhere for five links would cost the page more than
-	 * it saves the user.
+	 * The button is a Creative Button rather than core's, because this is the one
+	 * control the design gives the visitor and EA's button is the one with the
+	 * hover treatments a user is likely to want to reach for afterwards.
 	 *
 	 * @since 6.7.3
 	 *
 	 * @return array
 	 */
-	protected static function social_icons() {
-		$networks = [
-			[ 'fab fa-facebook-f', '#1877F2' ],
-			[ 'fab fa-x-twitter', '#1D1F2B' ],
-			[ 'fab fa-youtube', '#FF0000' ],
-			[ 'fab fa-instagram', '#E1306C' ],
-			[ 'fab fa-linkedin-in', '#0A66C2' ],
-		];
-
-		$rows = [];
-
-		foreach ( $networks as $network ) {
-			$rows[] = Elements::row( [
-				'social_icon'              => Elements::icon( $network[0], 'fa-brands' ),
-				'link'                     => Elements::link(),
-				// Per row rather than one colour for the set: a footer's social row
-				// is the one place the networks' own colours are expected.
-				'item_icon_color'          => 'custom',
-				'item_icon_primary_color'  => self::TINT,
-				'item_icon_secondary_color' => $network[1],
-			] );
-		}
-
-		return Elements::widget(
-			'social-icons',
+	protected static function subscribe_field() {
+		return Elements::container(
 			[
-				'social_icon_list' => $rows,
-				'shape'            => 'circle',
-				'align'            => 'left',
-				'icon_size'        => Elements::size( 15 ),
-				'icon_padding'     => Elements::size( 0.9, 'em' ),
-				'icon_spacing'     => Elements::size( 10 ),
-				'row_gap'          => Elements::size( 10 ),
+				'content_width'    => 'full',
+				'flex_direction'   => 'row',
+				'flex_align_items' => 'center',
+				// No wrap: the placeholder gives up width to the button rather than
+				// dropping it to a second line on a narrow screen.
+				'flex_wrap'        => 'nowrap',
+				'flex_gap'         => Elements::gap( 12 ),
+				// Full width of the brand column, which is the whole column on a
+				// tablet — and a field running the width of the screen reads as a
+				// search bar, not as a sign-up.
+				'width_tablet'     => Elements::size( 62, '%' ),
+				'width_mobile'     => Elements::size( 100, '%' ),
+				'padding'          => Elements::spacing( 8, 8, 8, 26 ),
+				'padding_mobile'   => Elements::spacing( 6, 6, 6, 18 ),
+				'margin'           => Elements::spacing( 14, 0, 0, 0 ),
+				'border_border'    => 'solid',
+				'border_width'     => Elements::spacing( 1, 1, 1, 1 ),
+				'border_color'     => self::FIELD_LINE,
+				'_title'           => __( 'Subscribe Field', 'essential-addons-for-elementor-lite' ),
+			],
+			[
+				Elements::widget(
+					'heading',
+					[
+						'title'                       => __( 'Your Email Address', 'essential-addons-for-elementor-lite' ),
+						'header_size'                 => 'p',
+						'title_color'                 => self::MUTED,
+						'typography_typography'       => 'custom',
+						'typography_font_size'        => Elements::size( 16 ),
+						'typography_font_size_mobile' => Elements::size( 15 ),
+						'typography_font_weight'      => '400',
+						// Takes whatever the button leaves, so the border box is one
+						// field rather than two elements sitting next to each other.
+						'_flex_size'                  => 'grow',
+					]
+				),
+				Elements::widget(
+					'eael-creative-button',
+					[
+						'creative_button_text'                        => __( 'Subscribe', 'essential-addons-for-elementor-lite' ),
+						'creative_button_link_url'                    => Elements::link(),
+						'creative_button_effect'                      => 'eael-creative-button--default',
+						'eael_creative_button_icon_new'               => Elements::icon( '' ),
+						// The control writes `justify-content`, so it wants a flex value.
+						'eael_creative_button_alignment'              => 'flex-start',
+						'eael_creative_button_padding'                => Elements::spacing( 16, 32, 16, 32 ),
+						'eael_creative_button_padding_mobile'         => Elements::spacing( 13, 18, 13, 18 ),
+						// A slider, not a dimensions control: the widget's own stylesheet
+						// rounds the button by 2px, and only this value squares it off.
+						'eael_creative_button_border_radius'          => Elements::size( 0 ),
+						'eael_creative_button_text_color'             => self::BUTTON_INK,
+						'eael_creative_button_background_color'       => self::ACCENT,
+						'eael_creative_button_hover_text_color'       => self::INK,
+						'eael_creative_button_hover_background_color' => self::ACCENT_HOVER,
+						'eael_creative_button_typography_typography'  => 'custom',
+						'eael_creative_button_typography_font_size'   => Elements::size( 16 ),
+						'eael_creative_button_typography_font_size_mobile' => Elements::size( 15 ),
+						'eael_creative_button_typography_font_weight' => '500',
+						// Held at its own size while the placeholder takes the rest of
+						// the row, so the button never shrinks under its label.
+						'_flex_size'                                  => 'none',
+					]
+				),
 			]
 		);
 	}
@@ -325,450 +339,99 @@ class Modern_Footer {
 	 * A column of links under a heading.
 	 *
 	 * A plain icon list rather than a menu widget: a menu widget renders whichever
-	 * menu the site already has, and a footer wants two different short lists that
-	 * the user edits in place. Swapping one for Simple Menu afterwards is a drag
-	 * away for anyone who does want the real thing.
+	 * menu the site already has, and a footer wants three different short lists
+	 * that the user edits in place. Swapping one for Simple Menu afterwards is a
+	 * drag away for anyone who does want the real thing.
 	 *
 	 * @since 6.7.3
 	 *
-	 * @param string $title  Column heading.
-	 * @param array  $links  Link labels.
-	 * @param int    $width  Desktop width, in percent.
-	 * @param int    $tablet Tablet width, in percent.
-	 * @param int    $mobile Mobile width, in percent.
+	 * @param string $title Column heading.
+	 * @param array  $links Link labels.
 	 *
 	 * @return array
 	 */
-	protected static function links_column( $title, $links, $width, $tablet, $mobile ) {
+	protected static function links_column( $title, $links ) {
 		$rows = [];
 
 		foreach ( $links as $link ) {
 			$rows[] = Elements::row( [
 				'text'          => $link,
 				'link'          => Elements::link(),
-				'selected_icon' => Elements::icon( 'fas fa-angle-right' ),
+				// Empty on purpose: the design lists the links plain, and an icon
+				// list with no icons is still the widget that edits like a list.
+				'selected_icon' => Elements::icon( '' ),
 			] );
 		}
 
 		return self::column(
-			$width,
-			$tablet,
-			$mobile,
+			13,
+			30,
+			45,
 			[
 				self::column_heading( $title ),
 				Elements::widget(
 					'icon-list',
 					[
-						'view'                       => 'traditional',
-						'icon_list'                  => $rows,
-						'space_between'              => Elements::size( 14 ),
-						'text_indent'                => Elements::size( 8 ),
-						'icon_size'                  => Elements::size( 12 ),
-						'icon_color'                 => self::ACCENT,
-						'text_color'                 => self::BODY,
-						'text_color_hover'           => self::ACCENT,
-						'icon_typography_typography' => 'custom',
-						'icon_typography_font_size'  => Elements::size( 15 ),
-						'icon_typography_font_size_tablet' => Elements::size( 14 ),
+						'view'                             => 'traditional',
+						'icon_list'                        => $rows,
+						'space_between'                    => Elements::size( 20 ),
+						'text_indent'                      => Elements::size( 0 ),
+						'text_color'                       => self::BODY,
+						'text_color_hover'                 => self::INK,
+						'icon_typography_typography'       => 'custom',
+						'icon_typography_font_size'        => Elements::size( 17 ),
+						'icon_typography_font_size_mobile' => Elements::size( 16 ),
+						'icon_typography_line_height'      => Elements::size( 1.4, 'em' ),
 					]
 				),
 			],
-			$title
-		);
-	}
-
-	/**
-	 * Address, email and phone as an EA Feature List.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @return array
-	 */
-	protected static function contact_column() {
-		$details = [
-			[
-				'icon'    => 'fas fa-map-marker-alt',
-				'title'   => __( '123 Design Street,', 'essential-addons-for-elementor-lite' ),
-				'content' => __( 'Dhaka, Bangladesh', 'essential-addons-for-elementor-lite' ),
-			],
-			[
-				'icon'    => 'fas fa-envelope',
-				'title'   => __( 'hello@example.com', 'essential-addons-for-elementor-lite' ),
-				// Every row carries a second line on purpose: the widget prints the
-				// content paragraph whether or not it has anything in it, so a row
-				// left blank still takes that paragraph's margin and the list ends up
-				// unevenly spaced.
-				'content' => __( 'Sales and support', 'essential-addons-for-elementor-lite' ),
-			],
-			[
-				'icon'    => 'fas fa-phone-alt',
-				'title'   => __( '+880 1234 567 890', 'essential-addons-for-elementor-lite' ),
-				'content' => __( 'Weekdays, 9am to 6pm', 'essential-addons-for-elementor-lite' ),
-			],
-		];
-
-		$rows = [];
-
-		foreach ( $details as $detail ) {
-			$rows[] = Elements::row( [
-				'eael_feature_list_icon_type' => 'icon',
-				'eael_feature_list_icon_new'  => Elements::icon( $detail['icon'] ),
-				'eael_feature_list_title'     => $detail['title'],
-				'eael_feature_list_content'   => $detail['content'],
-			] );
-		}
-
-		return self::column(
-			18,
-			25,
-			100,
-			[
-				self::column_heading( __( 'Contact Us', 'essential-addons-for-elementor-lite' ) ),
-				Elements::widget(
-					'eael-feature-list',
-					[
-						'eael_feature_list'                 => $rows,
-						'eael_feature_list_layout'          => 'vertical',
-						'eael_feature_list_icon_position'   => 'left',
-						'eael_feature_list_icon_shape'      => 'circle',
-						'eael_feature_list_icon_shape_view' => 'stacked',
-						// Empty, not 'no': the control is a switcher whose only "on"
-						// value is 'yes', so anything else is an out of domain value the
-						// panel cannot render.
-						'eael_feature_list_connector'       => '',
-						'eael_feature_list_title_size'      => 'h6',
-						'eael_feature_list_space_between'   => Elements::size( 18 ),
-						'eael_feature_list_icon_circle_size' => Elements::size( 40 ),
-						'eael_feature_list_icon_size'       => Elements::size( 15 ),
-						'eael_feature_list_icon_space'      => Elements::size( 14 ),
-						'eael_feature_list_icon_color'      => self::ACCENT,
-						'eael_feature_list_icon_background_background' => 'classic',
-						'eael_feature_list_icon_background_color' => self::TINT,
-						'eael_feature_list_title_color'     => self::INK,
-						'eael_feature_list_title_typography_typography' => 'custom',
-						'eael_feature_list_title_typography_font_size'  => Elements::size( 15 ),
-						'eael_feature_list_title_typography_font_weight' => '500',
-						'eael_feature_list_title_bottom_space' => Elements::size( 2 ),
-						'eael_feature_list_description_color' => self::MUTED,
-						'eael_feature_list_description_typography_typography' => 'custom',
-						'eael_feature_list_description_typography_font_size'  => Elements::size( 15 ),
-					]
-				),
-			],
-			__( 'Contact', 'essential-addons-for-elementor-lite' )
-		);
-	}
-
-	/**
-	 * The newsletter card.
-	 *
-	 * An Info Box and a Creative Button rather than a form: every form widget EA
-	 * ships is an integration with a form plugin, so a preset that used one would
-	 * insert a broken widget on the many sites that have none. The button links
-	 * out; dropping a real form widget in its place once one is installed is a
-	 * drag away.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @return array
-	 */
-	protected static function newsletter_column() {
-		$card = Elements::container(
-			[
-				'content_width'         => 'full',
-				'flex_direction'        => 'column',
-				'flex_gap'              => Elements::gap( 16 ),
-				'padding'               => Elements::spacing( 24, 24, 24, 24 ),
-				'background_background' => 'classic',
-				'background_color'      => self::TINT,
-				'border_radius'         => Elements::spacing( 14, 14, 14, 14 ),
-				'_title'                => __( 'Newsletter Card', 'essential-addons-for-elementor-lite' ),
-			],
-			[
-				Elements::widget(
-					'eael-info-box',
-					[
-						'eael_infobox_img_type'       => 'img-on-top',
-						'eael_infobox_img_or_icon'    => 'icon',
-						'eael_infobox_icon_new'       => Elements::icon( 'fas fa-envelope-open-text' ),
-						'eael_infobox_content_alignment' => 'left',
-						// Labelled "Left" in the panel for this layout: the control
-						// writes `align-self`, which is horizontal once the box is a
-						// column, and its default centres the icon over left aligned
-						// copy.
-						'icon_vertical_position_top_bottom' => 'top',
-						'eael_infobox_title'          => __( 'Subscribe to Newsletter', 'essential-addons-for-elementor-lite' ),
-						'eael_infobox_title_tag'      => 'h4',
-						'eael_show_infobox_content'   => 'yes',
-						'eael_infobox_text'           => '<p>' . __( 'Get the latest updates, tips, and exclusive offers straight to your inbox.', 'essential-addons-for-elementor-lite' ) . '</p>',
-						'eael_show_infobox_button'    => '',
-						'eael_infobox_icon_bg_shape'  => 'radius',
-						'eael_infobox_icon_color'     => self::SURFACE,
-						'eael_infobox_icon_bg_color'  => self::ACCENT,
-						'eael_infobox_icon_size'      => Elements::size( 20 ),
-						'eael_infobox_icon_bg_size'   => Elements::size( 46 ),
-						'eael_infobox_icon_margin'    => Elements::spacing( 0, 0, 14, 0 ),
-						'eael_infobox_title_color'    => self::INK,
-						'eael_infobox_title_typography_typography'  => 'custom',
-						'eael_infobox_title_typography_font_size'   => Elements::size( 18 ),
-						'eael_infobox_title_typography_font_weight' => '600',
-						'eael_infobox_title_margin'   => Elements::spacing( 0, 0, 8, 0 ),
-						'eael_infobox_content_color'  => self::BODY,
-						'eael_infobox_content_typography_hover_typography'  => 'custom',
-						'eael_infobox_content_typography_hover_font_size'   => Elements::size( 15 ),
-						'eael_infobox_content_typography_hover_line_height' => Elements::size( 1.6, 'em' ),
-					]
-				),
-				Elements::widget(
-					'eael-creative-button',
-					[
-						'creative_button_text'            => __( 'Subscribe', 'essential-addons-for-elementor-lite' ),
-						'creative_button_link_url'        => Elements::link(),
-						'creative_button_effect'          => 'eael-creative-button--default',
-						'eael_creative_button_icon_new'   => Elements::icon( 'fas fa-paper-plane' ),
-						'eael_creative_button_icon_alignment' => 'right',
-						'eael_creative_button_icon_size'  => Elements::size( 14 ),
-						'eael_creative_button_icon_indent' => Elements::size( 8 ),
-						// The control writes `justify-content`, so it wants a flex value.
-						'eael_creative_button_alignment'  => 'flex-start',
-						'eael_creative_button_padding'    => Elements::spacing( 12, 22, 12, 22 ),
-						'eael_creative_button_border_radius' => Elements::spacing( 8, 8, 8, 8 ),
-						'eael_creative_button_text_color' => self::SURFACE,
-						'eael_creative_button_icon_color' => self::SURFACE,
-						'eael_creative_button_background_color' => self::ACCENT,
-						'eael_creative_button_hover_text_color' => self::SURFACE,
-						'eael_creative_button_hover_icon_color' => self::SURFACE,
-						'eael_creative_button_hover_background_color' => '#4A2FE0',
-						'eael_creative_button_typography_typography'  => 'custom',
-						'eael_creative_button_typography_font_size'   => Elements::size( 15 ),
-						'eael_creative_button_typography_font_weight' => '600',
-					]
-				),
-			]
-		);
-
-		return self::column(
-			20,
-			100,
-			100,
-			[ $card ],
-			__( 'Newsletter', 'essential-addons-for-elementor-lite' )
+			$title,
+			28
 		);
 	}
 
 	/* ---------------------------------------------------------------------
-	 * Band 2 — the selling points.
+	 * Band 2 — the copyright.
 	 * ------------------------------------------------------------------ */
 
 	/**
-	 * Four Info Boxes above a hairline.
+	 * One centred line under a hairline.
 	 *
 	 * @since 6.7.3
 	 *
 	 * @return array
 	 */
-	protected static function highlights() {
-		$points = [
-			[
-				'icon'  => 'fas fa-rocket',
-				'title' => __( '100+ Creative Elements', 'essential-addons-for-elementor-lite' ),
-				'text'  => __( 'Build anything with powerful widgets.', 'essential-addons-for-elementor-lite' ),
-			],
-			[
-				'icon'  => 'fas fa-layer-group',
-				'title' => __( 'Lightweight & Fast', 'essential-addons-for-elementor-lite' ),
-				'text'  => __( 'Optimized for speed and better performance.', 'essential-addons-for-elementor-lite' ),
-			],
-			[
-				'icon'  => 'fas fa-mobile-alt',
-				'title' => __( 'Fully Responsive', 'essential-addons-for-elementor-lite' ),
-				'text'  => __( 'Looks perfect on all devices and screens.', 'essential-addons-for-elementor-lite' ),
-			],
-			[
-				'icon'  => 'fas fa-headset',
-				'title' => __( 'Top Notch Support', 'essential-addons-for-elementor-lite' ),
-				'text'  => __( 'Dedicated support team always here for you.', 'essential-addons-for-elementor-lite' ),
-			],
-		];
+	protected static function copyright_bar() {
+		$name = trim( (string) get_bloginfo( 'name' ) );
+		$name = '' !== $name ? $name : __( 'Your Brand', 'essential-addons-for-elementor-lite' );
 
-		$boxes = [];
+		$line = sprintf(
+			/* translators: %s: Site name. */
+			__( '&copy; Copyright by %s', 'essential-addons-for-elementor-lite' ),
+			esc_html( $name )
+		);
 
-		foreach ( $points as $point ) {
-			$boxes[] = self::column(
-				23,
-				48,
-				100,
-				[
-					Elements::widget(
-						'eael-info-box',
-						[
-							'eael_infobox_img_type'    => 'img-on-left',
-							'eael_infobox_img_or_icon' => 'icon',
-							'icon_vertical_position'   => 'top',
-							'eael_infobox_content_alignment_left_right' => 'left',
-							'eael_infobox_icon_new'    => Elements::icon( $point['icon'] ),
-							'eael_infobox_title'       => $point['title'],
-							'eael_infobox_title_tag'   => 'h4',
-							'eael_show_infobox_content' => 'yes',
-							'eael_infobox_text'        => '<p>' . $point['text'] . '</p>',
-							'eael_show_infobox_button' => '',
-							'eael_infobox_icon_bg_shape' => 'radius',
-							'eael_infobox_icon_color'  => self::ACCENT,
-							'eael_infobox_icon_bg_color' => self::TINT,
-							'eael_infobox_icon_size'   => Elements::size( 20 ),
-							'eael_infobox_icon_bg_size' => Elements::size( 46 ),
-							'eael_infobox_icon_margin' => Elements::spacing( 0, 14, 0, 0 ),
-							'eael_infobox_title_color' => self::INK,
-							'eael_infobox_title_typography_typography'  => 'custom',
-							'eael_infobox_title_typography_font_size'   => Elements::size( 16 ),
-							'eael_infobox_title_typography_font_weight' => '600',
-							'eael_infobox_title_margin' => Elements::spacing( 0, 0, 4, 0 ),
-							'eael_infobox_content_color' => self::MUTED,
-							'eael_infobox_content_typography_hover_typography' => 'custom',
-							'eael_infobox_content_typography_hover_font_size'  => Elements::size( 14 ),
-							'eael_infobox_content_typography_hover_line_height' => Elements::size( 1.6, 'em' ),
-						]
-					),
-				],
-				$point['title']
-			);
-		}
+		$copyright = self::text( $line, self::BODY, 16, 15 );
+
+		$copyright['settings']['align'] = 'center';
 
 		return Elements::container(
 			[
-				'content_width'    => 'boxed',
-				'flex_direction'   => 'row',
-				'flex_align_items' => 'flex-start',
-				'flex_wrap'        => 'wrap',
-				'flex_gap'         => Elements::gap( 24 ),
-				'flex_gap_mobile'  => Elements::gap( 20 ),
-				'padding'          => Elements::spacing( 28, 24, 36, 24 ),
-				'padding_tablet'   => Elements::spacing( 24, 20, 28, 20 ),
-				'padding_mobile'   => Elements::spacing( 22, 16, 24, 16 ),
-				'border_border'    => 'solid',
-				'border_width'     => Elements::spacing( 1, 0, 0, 0 ),
-				'border_color'     => self::LINE,
-				'_title'           => __( 'Highlights', 'essential-addons-for-elementor-lite' ),
+				'content_width'        => 'boxed',
+				'flex_direction'       => 'row',
+				'flex_align_items'     => 'center',
+				'flex_justify_content' => 'center',
+				'padding'              => Elements::spacing( 28, 24, 30, 24 ),
+				'padding_mobile'       => Elements::spacing( 22, 16, 24, 16 ),
+				// The hairline belongs to this band rather than to the one above it,
+				// so it runs the full width of the footer while the copy inside stays
+				// in the site's content column.
+				'border_border'        => 'solid',
+				'border_width'         => Elements::spacing( 1, 0, 0, 0 ),
+				'border_color'         => self::RULE,
+				'_title'               => __( 'Copyright', 'essential-addons-for-elementor-lite' ),
 			],
-			$boxes
-		);
-	}
-
-	/* ---------------------------------------------------------------------
-	 * Band 3 — the legal bar.
-	 * ------------------------------------------------------------------ */
-
-	/**
-	 * Copyright, legal links and credit on a dark bar.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @return array
-	 */
-	protected static function legal_bar() {
-		$legal = [
-			__( 'Terms of Use', 'essential-addons-for-elementor-lite' ),
-			__( 'Privacy Policy', 'essential-addons-for-elementor-lite' ),
-			__( 'Refund Policy', 'essential-addons-for-elementor-lite' ),
-		];
-
-		$rows = [];
-
-		foreach ( $legal as $item ) {
-			$rows[] = Elements::row( [
-				'text'          => $item,
-				'link'          => Elements::link(),
-				'selected_icon' => Elements::icon( '' ),
-			] );
-		}
-
-		$copyright = self::column(
-			34,
-			100,
-			100,
-			[
-				Elements::widget(
-					'text-editor',
-					[
-						'editor'                => '<p>' . sprintf(
-							/* translators: 1: Current year, 2: Site name. */
-							__( '&copy; %1$s %2$s. All rights reserved.', 'essential-addons-for-elementor-lite' ),
-							esc_html( date_i18n( 'Y' ) ),
-							esc_html( get_bloginfo( 'name' ) )
-						) . '</p>',
-						'align'                 => 'start',
-						'align_tablet'          => 'center',
-						'text_color'            => self::DARK_INK,
-						'typography_typography' => 'custom',
-						'typography_font_size'  => Elements::size( 14 ),
-					]
-				),
-			],
-			__( 'Copyright', 'essential-addons-for-elementor-lite' )
-		);
-
-		$links = self::column(
-			32,
-			100,
-			100,
-			[
-				Elements::widget(
-					'icon-list',
-					[
-						// Inline, so three short links read as a row rather than a
-						// stack sitting under the copyright line.
-						'view'                       => 'inline',
-						'icon_list'                  => $rows,
-						'space_between'              => Elements::size( 28 ),
-						'text_indent'                => Elements::size( 0 ),
-						'icon_align'                 => 'center',
-						'icon_align_tablet'          => 'center',
-						'text_color'                 => self::DARK_INK,
-						'text_color_hover'           => self::SURFACE,
-						'icon_typography_typography' => 'custom',
-						'icon_typography_font_size'  => Elements::size( 14 ),
-					]
-				),
-			],
-			__( 'Legal Links', 'essential-addons-for-elementor-lite' )
-		);
-
-		$credit = self::column(
-			30,
-			100,
-			100,
-			[
-				Elements::widget(
-					'text-editor',
-					[
-						'editor'                => '<p>' . __( 'Made with love by your team', 'essential-addons-for-elementor-lite' ) . '</p>',
-						'align'                 => 'end',
-						'align_tablet'          => 'center',
-						'text_color'            => self::DARK_INK,
-						'typography_typography' => 'custom',
-						'typography_font_size'  => Elements::size( 14 ),
-					]
-				),
-			],
-			__( 'Credit', 'essential-addons-for-elementor-lite' )
-		);
-
-		return Elements::container(
-			[
-				'content_width'         => 'boxed',
-				'flex_direction'        => 'row',
-				'flex_align_items'      => 'center',
-				'flex_justify_content'  => 'space-between',
-				'flex_wrap'             => 'wrap',
-				'flex_gap'              => Elements::gap( 16 ),
-				'flex_gap_tablet'       => Elements::gap( 10 ),
-				'padding'               => Elements::spacing( 20, 24, 20, 24 ),
-				'padding_mobile'        => Elements::spacing( 20, 16, 20, 16 ),
-				'background_background' => 'classic',
-				'background_color'      => self::DARK,
-				'_title'                => __( 'Legal Bar', 'essential-addons-for-elementor-lite' ),
-			],
-			[ $copyright, $links, $credit ]
+			[ $copyright ]
 		);
 	}
 
@@ -786,17 +449,18 @@ class Modern_Footer {
 	 * @param int    $mobile   Mobile width, in percent.
 	 * @param array  $children Child elements.
 	 * @param string $title    Navigator title.
+	 * @param int    $gap      Space between the column's children.
 	 *
 	 * @return array
 	 */
-	protected static function column( $width, $tablet, $mobile, $children, $title = '' ) {
+	protected static function column( $width, $tablet, $mobile, $children, $title = '', $gap = 24 ) {
 		$settings = [
 			'content_width'  => 'full',
 			'width'          => Elements::size( $width, '%' ),
 			'width_tablet'   => Elements::size( $tablet, '%' ),
 			'width_mobile'   => Elements::size( $mobile, '%' ),
 			'flex_direction' => 'column',
-			'flex_gap'       => Elements::gap( 16 ),
+			'flex_gap'       => Elements::gap( $gap ),
 			'padding'        => Elements::spacing( 0, 0, 0, 0 ),
 		];
 
@@ -808,7 +472,7 @@ class Modern_Footer {
 	}
 
 	/**
-	 * A column heading, with the short rule the design puts under it.
+	 * A column heading.
 	 *
 	 * @since 6.7.3
 	 *
@@ -820,12 +484,47 @@ class Modern_Footer {
 		return Elements::widget(
 			'heading',
 			[
-				'title'                  => $title,
-				'header_size'            => 'h4',
-				'title_color'            => self::INK,
-				'typography_typography'  => 'custom',
-				'typography_font_size'   => Elements::size( 18 ),
-				'typography_font_weight' => '600',
+				'title'                       => $title,
+				'header_size'                 => 'h3',
+				'title_color'                 => self::INK,
+				'typography_typography'       => 'custom',
+				'typography_font_size'        => Elements::size( 20 ),
+				'typography_font_size_mobile' => Elements::size( 18 ),
+				'typography_font_weight'      => '700',
+			]
+		);
+	}
+
+	/**
+	 * A line of copy.
+	 *
+	 * A heading widget rather than a text editor: the text editor prints a real
+	 * paragraph, which arrives carrying whatever margins the active theme puts on
+	 * `p` — and a preset that spaces its own columns cannot have a theme opening
+	 * gaps inside them. Elementor resets the heading's margins to zero, so what the
+	 * container's gap says is what the user sees.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param string $text   Copy.
+	 * @param string $color  Text colour.
+	 * @param int    $size   Desktop font size.
+	 * @param int    $mobile Mobile font size.
+	 *
+	 * @return array
+	 */
+	protected static function text( $text, $color, $size, $mobile ) {
+		return Elements::widget(
+			'heading',
+			[
+				'title'                       => $text,
+				'header_size'                 => 'p',
+				'title_color'                 => $color,
+				'typography_typography'       => 'custom',
+				'typography_font_size'        => Elements::size( $size ),
+				'typography_font_size_mobile' => Elements::size( $mobile ),
+				'typography_font_weight'      => '400',
+				'typography_line_height'      => Elements::size( 1.7, 'em' ),
 			]
 		);
 	}
