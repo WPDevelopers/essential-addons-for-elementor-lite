@@ -1,24 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" width="480" height="150" role="img" aria-label="Classic header preview: brand on the left, navigation and a button on the right">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" width="480" height="150" role="img" aria-label="Classic header preview: a dark bar with the brand on the left, navigation centred and one call to action on the right, over the page body">
 	<rect width="480" height="150" fill="#f4f4f8"/>
-	<rect x="0" y="0" width="480" height="46" fill="#ffffff"/>
-	<path d="M0 46h480" stroke="#e6e6ef" stroke-width="1"/>
+
+	<!-- The bar -->
+	<rect x="0" y="0" width="480" height="46" fill="#173b32"/>
 
 	<!-- Brand -->
-	<rect x="24" y="17" width="12" height="12" rx="3" fill="#5b3df5"/>
-	<rect x="42" y="19" width="46" height="8" rx="4" fill="#1d1f2b"/>
+	<rect x="24" y="18" width="52" height="10" rx="3" fill="#ffffff"/>
 
-	<!-- Navigation -->
-	<rect x="188" y="20" width="28" height="6" rx="3" fill="#6b6f80"/>
-	<rect x="226" y="20" width="30" height="6" rx="3" fill="#6b6f80"/>
-	<rect x="266" y="20" width="34" height="6" rx="3" fill="#6b6f80"/>
-	<rect x="310" y="20" width="24" height="6" rx="3" fill="#6b6f80"/>
+	<!-- Navigation, centred on the bar -->
+	<rect x="164" y="21" width="26" height="4" rx="2" fill="#dcece4"/>
+	<rect x="200" y="21" width="32" height="4" rx="2" fill="#dcece4"/>
+	<rect x="242" y="21" width="30" height="4" rx="2" fill="#dcece4"/>
+	<rect x="282" y="21" width="24" height="4" rx="2" fill="#dcece4"/>
 
 	<!-- Call to action -->
-	<rect x="386" y="13" width="70" height="20" rx="6" fill="#5b3df5"/>
-	<rect x="400" y="21" width="42" height="4" rx="2" fill="#ffffff" opacity="0.85"/>
+	<rect x="382" y="13" width="74" height="21" rx="3" fill="#2a4a41" stroke="#5f7d73"/>
+	<rect x="399" y="21" width="40" height="4" rx="2" fill="#ffffff"/>
 
 	<!-- Page body placeholder -->
-	<rect x="24" y="70" width="432" height="10" rx="5" fill="#e6e6ef"/>
-	<rect x="24" y="90" width="330" height="10" rx="5" fill="#ecedf3"/>
-	<rect x="24" y="110" width="380" height="10" rx="5" fill="#ecedf3"/>
+	<rect x="24" y="66" width="432" height="10" rx="5" fill="#e6e6ef"/>
+	<rect x="24" y="84" width="300" height="10" rx="5" fill="#ecedf3"/>
+	<rect x="24" y="106" width="200" height="8" rx="4" fill="#f0f0f5"/>
 </svg>
