@@ -807,7 +807,12 @@ class Mega_Header {
 			Elements::widget(
 				'image',
 				[
-					'image'               => [ 'url' => Elements::placeholder_image() ],
+					// Elementor's media control spells "no attachment" as an empty id,
+					// and the editor's image manager skips its attachment lookup on
+					// exactly that value. Leaving the key out instead sends the
+					// placeholder through the lookup as a null id, which warns twice
+					// per size on every editor load.
+					'image'               => [ 'id' => '', 'url' => Elements::placeholder_image() ],
 					'image_size'          => 'full',
 					'align'               => 'start',
 					'width'               => Elements::size( 100, '%' ),
