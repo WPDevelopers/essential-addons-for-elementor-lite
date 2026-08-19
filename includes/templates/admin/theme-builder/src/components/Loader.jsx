@@ -1,7 +1,27 @@
 import { settings, strings } from '../utils/api';
 
 /**
- * The EA loading state: the logo in a soft badge, with a caption under it.
+ * Has the user asked their system for less animation.
+ *
+ * Read per render rather than cached: the loader is short-lived, and a value
+ * captured at module load would outlive a preference changed mid-session.
+ *
+ * @return {boolean} True when reduced motion is preferred.
+ */
+function prefersReducedMotion() {
+	return (
+		typeof window !== 'undefined' &&
+		typeof window.matchMedia === 'function' &&
+		window.matchMedia( '( prefers-reduced-motion: reduce )' ).matches
+	);
+}
+
+/**
+ * The EA loading state: the animated EA mark, with a caption under it.
+ *
+ * The mark carries the wait on its own — it is a looping animation, not a still
+ * logo needing a badge to breathe around it. Under reduced motion it swaps for
+ * the static logo, since no CSS rule can pause a GIF.
  *
  * Deliberately the same shape as the editor's own loading screen, so a wait
  * inside Elementor looks like part of Elementor rather than like a plugin
@@ -9,13 +29,13 @@ import { settings, strings } from '../utils/api';
  * which keeps a dialog from resizing when the loader hands over to content.
  */
 export default function Loader() {
-	const logo = ( settings.editor || {} ).logo || '';
+	const editor = settings.editor || {};
+	const animated = prefersReducedMotion() ? '' : editor.loader;
+	const mark = animated || editor.logo || '';
 
 	return (
 		<div className="eatb-loader" role="status" aria-live="polite">
-			<span className="eatb-loader__badge">
-				{ logo ? <img className="eatb-loader__logo" src={ logo } alt="" aria-hidden="true" /> : null }
-			</span>
+			{ mark ? <img className="eatb-loader__mark" src={ mark } alt="" aria-hidden="true" /> : null }
 
 			<span className="eatb-loader__label">{ strings.loading || 'Loading' }</span>
 		</div>

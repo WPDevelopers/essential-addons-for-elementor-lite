@@ -7,7 +7,13 @@ import { OPEN_CONDITIONS_EVENT, registerConditionsMenuItem } from '../utils/docu
 import { insertPreset, OPEN_PRESETS_EVENT, registerPresetButton } from '../utils/presetButton';
 
 /**
- * The condition builder as the last step of publishing.
+ * The Theme Builder's presence inside the Elementor editor.
+ *
+ * Mounted for every document Elementor opens. The preset button is registered
+ * on all of them; the publish gate and the conditions menu item need a template
+ * to act on, so they stay unregistered on an ordinary page or post — which is
+ * also why every piece below tests `editor.templateId` for itself rather than
+ * the component returning early on it.
  *
  * Publishing a header or a footer is the moment it starts replacing the theme's
  * own, so it is the moment the user is asked where that should happen. The gate
@@ -68,9 +74,11 @@ export default function EditorApp() {
 	}, [ editor.templateId ] );
 
 	// The EA button in the add-element row: it reports where it was clicked, and
-	// the picker opens here.
+	// the picker opens here. Unlike the two above it this is not asked about the
+	// template — a preset is a section, and a page being built in Elementor takes
+	// one as readily as a header template does.
 	useEffect( () => {
-		if ( ! editor.templateId || ! Array.isArray( editor.presets ) || ! editor.presets.length ) {
+		if ( ! Array.isArray( editor.presets ) || ! editor.presets.length ) {
 			return undefined;
 		}
 
@@ -84,7 +92,7 @@ export default function EditorApp() {
 		window.addEventListener( OPEN_PRESETS_EVENT, onOpen );
 
 		return () => window.removeEventListener( OPEN_PRESETS_EVENT, onOpen );
-	}, [ editor.templateId, editor.icon, editor.presets ] );
+	}, [ editor.icon, editor.presets ] );
 
 	const onPresetChosen = useCallback( ( content ) => {
 		const target = presetTarget || {};

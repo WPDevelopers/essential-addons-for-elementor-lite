@@ -10,7 +10,10 @@ import './styles/app.css';
  *
  * On the dashboard it renders into the container the list table page prints. In
  * the Elementor editor there is no such container — and no markup of ours at all
- * — so it mounts into a node of its own at the end of the document.
+ * — so it mounts into a node of its own at the end of the document. That happens
+ * for every document Elementor opens, not only Theme Builder templates: the
+ * preset button belongs on all of them, and `EditorApp` decides which of the
+ * template-only pieces to register.
  */
 const container = document.getElementById( 'eael-theme-builder-app' );
 
@@ -20,7 +23,7 @@ if ( container ) {
 			<App />
 		</React.StrictMode>
 	);
-} else if ( settings.editor && settings.editor.templateId ) {
+} else if ( settings.editor && settings.editor.documentId ) {
 	const mount = document.createElement( 'div' );
 
 	mount.id = 'eael-theme-builder-editor-app';

@@ -95,7 +95,7 @@ body.eatb-modal-open {
 
 .eatb-modal--wide .eatb-modal__dialog {
 	max-width: 1080px;
-	min-height: 480px;
+	min-height: 560px !important;
 }
 
 /* ------------------------------------------------------------------
@@ -937,36 +937,37 @@ body.eatb-modal-open {
  * --------------------------------------------------------------- */
 
 /*
- * The logo sits in a soft badge that breathes, and the caption is spaced out
- * under it — the editor's own loading screen, in EA's colours. Only the badge
- * animates: a logo that pulsed with it would look like it was being zoomed
- * rather than waited on.
+ * The animated EA mark, with the caption spaced out under it — the editor's own
+ * loading screen, in EA's colours. The mark loops on its own, so nothing here
+ * animates it: a badge pulsing behind a mark that is already moving reads as two
+ * competing timings rather than one wait.
  */
 .eatb-loader {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 26px;
+	gap: 22px;
 	min-height: 340px;
 	height: 100%;
 }
 
-.eatb-loader__badge {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 130px;
-	height: 130px;
-	background: #f1eefe;
-	border-radius: 50%;
-	animation: eatb-loader-pulse 1.6s ease-in-out infinite;
-}
-
-.eatb-loader__logo {
+/*
+ * The artwork is a squircle on an opaque white square — the GIF declares a
+ * transparent palette index but never uses it — so it would otherwise show as a
+ * white box in the corners the squircle leaves empty. Multiplying against the
+ * surface behind it drops those pixels out exactly, since white times anything
+ * is that thing — and it holds whatever that surface is, tinted or gradient,
+ * which a matched background colour would not. Punching a transparency index
+ * into the GIF instead would fringe the squircle's edge: GIF alpha is one bit,
+ * with no room for the antialiasing.
+ */
+.eatb-loader__mark {
 	display: block;
-	width: 56px;
-	height: 56px;
+	width: 96px;
+	height: 96px;
+	mix-blend-mode: multiply;
+	animation: eatb-loader-in 0.4s ease-out both;
 }
 
 .eatb-loader__label {
@@ -975,15 +976,28 @@ body.eatb-modal-open {
 	letter-spacing: 0.32em;
 	text-transform: uppercase;
 	color: var( --eatb-muted );
+	animation:
+		eatb-loader-in 0.4s ease-out 0.08s both,
+		eatb-loader-breathe 2.4s ease-in-out 0.48s infinite;
 }
 
-@keyframes eatb-loader-pulse {
-	0%, 100% { transform: scale( 1 ); opacity: 1; }
-	50%      { transform: scale( 1.08 ); opacity: 0.72; }
+@keyframes eatb-loader-in {
+	from { opacity: 0; transform: translateY( 6px ); }
+	to   { opacity: 1; transform: none; }
 }
 
+@keyframes eatb-loader-breathe {
+	0%, 100% { opacity: 1; }
+	50%      { opacity: 0.55; }
+}
+
+/*
+ * The mark itself is swapped for the still logo in Loader.jsx — a GIF keeps
+ * looping whatever CSS says about it.
+ */
 @media ( prefers-reduced-motion: reduce ) {
-	.eatb-loader__badge {
+	.eatb-loader__mark,
+	.eatb-loader__label {
 		animation: none;
 	}
 }

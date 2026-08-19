@@ -91,7 +91,21 @@ export function registerPresetButton( { icon, label } ) {
 				return { 'click @ui.presetButton': 'onPresetButtonClick' };
 			},
 
+			// Marionette runs every behaviour's `onRender` in one unprotected loop
+			// (`_triggerEventOnBehaviors`), so a throw here would silently skip the
+			// behaviours registered after ours — other plugins' buttons in this
+			// same row included. Nothing below is expected to throw; the guard is
+			// there so that if it ever does, it costs this button and no one
+			// else's.
 			onRender() {
+				try {
+					this.addPresetButton();
+				} catch ( error ) {
+					// Swallowed on purpose: see above.
+				}
+			},
+
+			addPresetButton() {
 				const inner = this.el.querySelector( '.elementor-add-section-inner' );
 
 				if ( ! inner || inner.querySelector( `.${ BUTTON_CLASS }` ) ) {
