@@ -29,10 +29,16 @@
 	font-family: inherit;
 }
 
+// Gravity Forms 3.0 renders form buttons as <button> instead of <input>.
+// Match on the classes, which are present on both the old and the new markup.
 .eael-gravity-form .gform_wrapper .gform_footer input.button,
 .eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
+.eael-gravity-form .gform_wrapper .gform_footer .gform_button,
 .eael-gravity-form .gform_wrapper .gform_page_footer input.button,
-.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
+.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit],
+.eael-gravity-form .gform_wrapper .gform_page_footer .gform_button,
+.eael-gravity-form .gform_wrapper .gform_page_footer .gform_next_button,
+.eael-gravity-form .gform_wrapper .gform_page_footer .gform_previous_button {
 	margin: 0;
 }
 
@@ -45,8 +51,12 @@
 	display: none;
 }
 
-.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
-	width: 100%;
+.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"],
+.eael-gravity-form-button-full-width .gform_wrapper .gform_footer .gform_button,
+.eael-gravity-form-button-full-width .gform_wrapper .gform_page_footer .gform_button,
+.eael-gravity-form-button-full-width .gform_wrapper .gform-button {
+	width: 100% !important;
+	max-width: 100%;
 }
 
 .eael-gravity-form .gform_wrapper .gf_scroll_text .gsection_description {
