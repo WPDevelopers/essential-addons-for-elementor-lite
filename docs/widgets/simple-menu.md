@@ -48,7 +48,7 @@ Simple Menu reuses WordPress's `wp_nav_menu()` rather than building a custom Rep
 - **Hamburger device list is breakpoint-introspecting** — `get_dropdown_options()` at [line 1591-1618](../../includes/Elements/Simple_Menu.php#L1591) iterates `Plugin::$instance->breakpoints->get_active_breakpoints()` (so custom breakpoints from Site Settings appear), excludes `laptop` and `widescreen` because the feature is mobile-oriented, and appends two synthetic options: `desktop` (defaults to `2400px` when widescreen isn't configured) and `none` (disables the hamburger entirely). The displayed labels embed the px value inline: `"Tablet (> 767px)"`. JS extracts the numeric breakpoint by stripping non-digits from this label string with `replace(/[^0-9]/g, '')` ([JS line 188](../../src/js/view/simple-menu.js#L188)) — a brittle parsing that breaks if the label format changes.
 - **Scroll-spy for `#hash` menu links** — JS at [JS line 18-53](../../src/js/view/simple-menu.js#L18) scans every `<a>` in the menu, splits its `href` on `#`, and collects same-page hash IDs into `all_ids`. On `window.load resize scroll`, each ID's target is checked via `isInViewport()` (an EA helper); when in viewport, the corresponding menu link gets `eael-item-active` + `eael-menu-<id>` classes. `localize.page_permalink` (a localized PHP-emitted constant) is used to match same-page links versus other-page hash links.
 - **Full-width hamburger mode escapes the container** — when `eael_simple_menu_full_width == 'yes'` AND the widget is in hamburger mode, JS wraps the nav in `<nav class="eael-nav-menu-wrapper">` then sets `width: $('.elementor').width(); left: -navMenu.offset().left; position: absolute` ([JS line 120-132](../../src/js/view/simple-menu.js#L120)) — visually stretching the dropdown across the full `.elementor` parent regardless of where Simple Menu sits in the column structure. Breaks gracefully if `.elementor` isn't a positioned ancestor.
-- **Three indicator icons rendered to data attributes, injected by JS** — `Icons_Manager::render_icon()` outputs are captured via `ob_start()` / `ob_get_clean()` ([line 1652-1668](../../includes/Elements/Simple_Menu.php#L1652)) and stuffed into `data-hamburger-icon`, `data-indicator-icon`, `data-dropdown-indicator-icon`. JS reads these data attrs and appends them as `<span>` children to `.menu-item-has-children` items ([JS line 56-71, 192-210](../../src/js/view/simple-menu.js#L56)). This avoids server-side walker patching but means the indicators appear after JS initializes, briefly causing a flicker (`eael-simple-menu--loading` class hides the menu until JS removes it at [JS line 96](../../src/js/view/simple-menu.js#L96)).
+- **Three indicator icons rendered to data attributes, injected by JS** — `Icons_Manager::render_icon()` outputs are captured via `ob_start()` / `ob_get_clean()` ([line 1652-1668](../../includes/Elements/Simple_Menu.php#L1652)) and stuffed into `data-hamburger-icon`, `data-indicator-icon`, `data-dropdown-indicator-icon`. JS reads these data attrs and appends them as `<span>` children to `.menu-item-has-children` items ([JS line 56-71, 192-210](../../src/js/view/simple-menu.js#L56)). This avoids server-side walker patching but means the indicators appear after JS initializes, briefly causing a flicker. The `eael-simple-menu--loading` class carries the widget through that gap and is removed at [JS line 96](../../src/js/view/simple-menu.js#L96) — see the loading-state bullet below.
 - **Active state from THREE sources** — JS adds `eael-item-active` when (a) the menu link's href matches `localize.page_permalink` (same-page check), (b) WordPress already added `current-menu-item` or `current-menu-parent` classes server-side (covers archive, single, category pages), or (c) scroll-spy is currently observing a viewport-visible hash target. All three coexist; a single render can stack two of them.
 - **Click-on-href="#" delegates to indicator click** — JS at [JS line 238-241](../../src/js/view/simple-menu.js#L238) intercepts clicks on `<a href="#">` (the WordPress convention for dropdown parents) and forwards the click to the `.eael-simple-menu-indicator` sibling. Lets users tap the parent link itself to expand a submenu rather than only the small indicator.
 - **`get_settings()` not `get_settings_for_display()`** at [line 1622](../../includes/Elements/Simple_Menu.php#L1622) — like Post_Grid. Dynamic-tag values may not be resolved at render time. Likely a long-standing oversight.
@@ -66,8 +66,21 @@ Simple Menu reuses WordPress's `wp_nav_menu()` rather than building a custom Rep
     @media screen and (max-width: <breakpoint-px>px) {
       .eael-hamburger--<device> { … hide horizontal/vertical, show toggle … }
     }
-    .eael-simple-menu-container.eael-simple-menu--loading > ul { display: flex !important; … }
-    .eael-simple-menu-container.eael-simple-menu--loading li ul { visibility: hidden !important; }
+  </style>
+
+  <!-- INLINE <style> block — loading layout, always present, scoped to this widget -->
+  <style>
+    @media screen and (min-width: <breakpoint-px + 1>px) {   ← omitted when hamburger_device == 'none'
+      <scope> > ul.eael-simple-menu-horizontal,
+      <scope> > ul.eael-simple-menu-vertical                     { display: block; }
+      <scope>.eael-simple-menu-align-center                      { text-align: center; }
+      <scope>.eael-simple-menu-align-right                       { text-align: right; }
+      <scope>.eael-simple-menu-align-center > ul.…-horizontal,
+      <scope>.eael-simple-menu-align-right  > ul.…-horizontal    { display: inline-flex; }
+      <scope> .eael-simple-menu-toggle,
+      <scope> .eael-simple-menu-toggle-text                      { display: none; }
+    }
+    <!-- <scope> = .elementor-element-<id> .eael-simple-menu-container.eael-simple-menu--loading -->
   </style>
 
   <div class="eael-simple-menu-container
@@ -118,7 +131,7 @@ Simple Menu reuses WordPress's `wp_nav_menu()` rather than building a custom Rep
 
 Notes:
 
-- The `eael-simple-menu--loading` class is on the container at first render and removed at the end of JS init ([JS line 96](../../src/js/view/simple-menu.js#L96)) — prevents the flash-of-unstyled menu while JS injects indicator icons.
+- The `eael-simple-menu--loading` class is on the container at first render and removed at the end of JS init ([JS line 96](../../src/js/view/simple-menu.js#L96)). Its **layout** styling is emitted per widget by `render()` rather than living in the compiled CSS, because it has to mirror that widget's own settled layout: `block` for vertical and left-aligned horizontal menus (whose items float), `inline-flex` plus the matching `text-align` for centre/right-aligned horizontal menus, with the toggle and toggle-text hidden. The rules are keyed off the classes already on the markup (`eael-simple-menu-horizontal` / `-vertical`, `eael-simple-menu-align-*`) rather than off `$settings`, and every selector is scoped to `.elementor-element-<id>` — a page can hold several menus with different breakpoints, and an unscoped rule from one would out-specify another's hamburger `display: none`. When a hamburger breakpoint is set the whole block sits inside a `min-width` query, so below the breakpoint the collapsed state (menu hidden, toggle shown) is left untouched. The orientation-agnostic parts (`list-style`, submenus hidden) stay in the compiled CSS. A single forced `display: flex !important` here used to break vertical layouts and flash collapsed menus open on page load.
 - The `wp_nav_menu()` output uses WordPress core walker — third-party plugins that filter `wp_nav_menu_items`, `nav_menu_css_class`, or `walker_nav_menu_start_el` all affect this widget's output.
 - `data-hamburger-breakpoints` is a JSON map where **values are display labels with embedded px values** like `"Tablet (> 767px)"`, not raw numbers. JS parses the px out via regex. Brittle but stable.
 - When responsive mode activates, JS injects a `<span class="eael-simple-menu-toggle-text">` *before* the menu list ([JS line 75](../../src/js/view/simple-menu.js#L75)) to display the current menu item's text alongside the hamburger button.
