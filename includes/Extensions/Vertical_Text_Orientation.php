@@ -309,22 +309,10 @@ class Vertical_Text_Orientation {
 				'label'   => esc_html__( 'Choose Gradient Colors', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::REPEATER,
 				'fields'  => $repeater->get_controls(),
-				'default' => [
-					[
-						'eael_vto_writing_gradient_color' => '#7C62FF',
-                        'eael_vto_writing_gradient_color_location' => [
-                            'unit' => '%',
-                            'size' => 50,
-                        ],
-					],
-					[
-						'eael_vto_writing_gradient_color' => '#FF6464',
-                        'eael_vto_writing_gradient_color_location' => [
-                            'unit' => '%',
-                            'size' => 90,
-                        ],
-					],
-				],
+				// Default kept empty: a non-empty repeater default is serialized (with per-row _id)
+				// into every element and never stripped by Elementor. The starter gradient is applied
+				// at render time via eael_vto_default_gradient_colors() when the feature is enabled.
+				'default' => [],
 				'title_field' => '{{{ eael_vto_writing_gradient_color }}}',
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -534,11 +522,28 @@ class Vertical_Text_Orientation {
 		$element->end_controls_section();
 	}
 
+	/**
+	 * Starter gradient colours, applied at render time when the user has defined none.
+	 * Kept out of the control default so they are not serialized into every element.
+	 */
+	private function eael_vto_default_gradient_colors() {
+		return [
+			[ 'eael_vto_writing_gradient_color' => '#7C62FF', 'eael_vto_writing_gradient_color_location' => [ 'unit' => '%', 'size' => 50 ] ],
+			[ 'eael_vto_writing_gradient_color' => '#FF6464', 'eael_vto_writing_gradient_color_location' => [ 'unit' => '%', 'size' => 90 ] ],
+		];
+	}
+
 	public function before_render( $element ) {
 		$settings = $element->get_settings_for_display();
-        if ( !empty( $settings['eael_vto_writing_gradient_color_repeater'] ) && is_array( $settings['eael_vto_writing_gradient_color_repeater'] ) ) {
+        $gradient_repeater = $settings['eael_vto_writing_gradient_color_repeater'] ?? [];
+        if ( empty( $gradient_repeater )
+            && 'yes' === ( $settings['eael_vertical_text_orientation_switch'] ?? '' )
+            && 'gradient' === ( $settings['eael_vto_writing_styling_type'] ?? '' ) ) {
+            $gradient_repeater = $this->eael_vto_default_gradient_colors();
+        }
+        if ( !empty( $gradient_repeater ) && is_array( $gradient_repeater ) ) {
             $gradient_colors = [];
-            foreach ( $settings['eael_vto_writing_gradient_color_repeater'] as $value ) {
+            foreach ( $gradient_repeater as $value ) {
                 $gradient_colors[] = [
                     'color' => $value['eael_vto_writing_gradient_color'],
                     'location' => $value['eael_vto_writing_gradient_color_location']['size'] . $value['eael_vto_writing_gradient_color_location']['unit'],

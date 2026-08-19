@@ -221,7 +221,7 @@ This makes `EAELImageMaskingConfig.svg_dir_url` available to the editor JS so it
 | `eael_image_masking_type` | CHOOSE | `clip` | `image` / `clip` / `morphing` |
 | `eael_image_masking_clip_path[ _hover ]` | CHOOSE | `bavel` | Pick from `bavel`, `rabbet`, `chevron-left`, `chevron-right`, `star` |
 | `eael_image_masking_enable_custom_clip_path[ _hover ]` | SWITCHER | — | Override the choose-control with a custom polygon |
-| `eael_image_masking_custom_clip_path[ _hover ]` | TEXTAREA | `clip-path: polygon(50% 0%, 80% 10%, ...)` | Custom polygon paste-in (placeholder hint links to Clippy) |
+| `eael_image_masking_custom_clip_path[ _hover ]` | TEXTAREA | (empty) | Custom polygon paste-in (placeholder hint links to Clippy). The control default is empty so it is not serialized into every element — left blank, `before_render()` falls back to `clip-path: polygon(50% 0%, 80% 10%, ...)` |
 | `eael_image_masking_svg[ _hover ]` | CHOOSE | `polygon` | ~30 built-in SVG shapes + `upload` (upload is Pro-only) |
 | `eael_image_masking_upload_pro_message[ _hover ]` | RAW_HTML | (upsell) | Shown only on Lite, hidden behind condition `eael_image_masking_svg = upload` |
 | `eael_image_masking_hover_effect` | SWITCHER | — | Inside the Hover tab; enables the parallel `_hover` controls |

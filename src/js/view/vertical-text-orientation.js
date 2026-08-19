@@ -1,3 +1,11 @@
+// Mirrors Vertical_Text_Orientation::eael_vto_default_gradient_colors(). The repeater default is
+// kept empty so it is not serialized into every element, so the starter gradient lives here and is
+// applied at render time — the same stops the PHP side hands the frontend.
+const EAEL_VTO_DEFAULT_GRADIENT_COLORS = [
+   { attributes: { eael_vto_writing_gradient_color: "#7C62FF", eael_vto_writing_gradient_color_location: { unit: "%", size: 50 } } },
+   { attributes: { eael_vto_writing_gradient_color: "#FF6464", eael_vto_writing_gradient_color_location: { unit: "%", size: 90 } } },
+];
+
 let verticalTextOrientation = function ($scope, $) {
    let gradientColor = $scope.data("gradient_colors"),
        $scopeId = $scope.data("id");
@@ -41,6 +49,12 @@ let verticalTextOrientation = function ($scope, $) {
          if ($scopeId === key) {
             // Get gradient color from editor settings
             let editorGradientColor = eaelEditModeSettings[key]['eael_vto_writing_gradient_color_repeater'];
+
+            // Only widgets with the switch on and gradient styling reach this loop, so an empty
+            // repeater means "user defined no stops" — use the starter gradient, as the PHP does.
+            if (!editorGradientColor || editorGradientColor.length === 0) {
+               editorGradientColor = EAEL_VTO_DEFAULT_GRADIENT_COLORS;
+            }
 
             // Create array of objects like frontend format
             let gradientArray = [];
