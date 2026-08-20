@@ -14,9 +14,14 @@ import { strings } from '../utils/api';
  * @param {Node}     props.footer      Action bar contents.
  * @param {string}   [props.bodyClass] Extra class on the body, for dialogs that
  *                                     lay their content out themselves.
+ * @param {Object}   [props.brand]     `{ icon, label }` to head the dialog with
+ *                                     the product mark. With a `label` the mark
+ *                                     leads an eyebrow line and the bar loses
+ *                                     its rule; without one it simply sits
+ *                                     beside the title.
  * @param {Node}     props.children    Body contents.
  */
-export default function Modal( { title, size = 'default', onClose, footer, bodyClass = '', children } ) {
+export default function Modal( { title, size = 'default', onClose, footer, bodyClass = '', brand = null, children } ) {
 	const dialogRef = useRef( null );
 	const openerRef = useRef( null );
 
@@ -75,8 +80,12 @@ export default function Modal( { title, size = 'default', onClose, footer, bodyC
 		};
 	}, [ onClose ] );
 
+	// Two headings, one mark: the eyebrow leads a dialog that introduces the
+	// feature, the title one that is already inside it.
+	const mark = brand ? ( brand.label ? 'eatb-modal--branded' : 'eatb-modal--marked' ) : '';
+
 	return (
-		<div className={ `eatb-modal eatb-modal--${ size }` }>
+		<div className={ `eatb-modal eatb-modal--${ size } ${ mark }`.trim() }>
 			<div className="eatb-modal__overlay" onClick={ onClose } />
 
 			<div
@@ -87,7 +96,21 @@ export default function Modal( { title, size = 'default', onClose, footer, bodyC
 				ref={ dialogRef }
 			>
 				<header className="eatb-modal__bar">
-					<span className="eatb-modal__bar-title">{ title }</span>
+					{ brand ? (
+						<span className="eatb-modal__brand">
+							{ brand.icon ? (
+								<img className="eatb-modal__brand-mark" src={ brand.icon } alt="" aria-hidden="true" />
+							) : null }
+
+							{ brand.label ? (
+								<span className="eatb-modal__brand-label">{ brand.label }</span>
+							) : (
+								<span className="eatb-modal__bar-title">{ title }</span>
+							) }
+						</span>
+					) : (
+						<span className="eatb-modal__bar-title">{ title }</span>
+					) }
 
 					<button
 						type="button"

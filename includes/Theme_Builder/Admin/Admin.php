@@ -13,7 +13,9 @@ use Essential_Addons_Elementor\Theme_Builder\Conditions\Rules;
 use Essential_Addons_Elementor\Theme_Builder\Core\Post_Type;
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Cache;
 use Essential_Addons_Elementor\Theme_Builder\Core\Template_Types;
+use Essential_Addons_Elementor\Theme_Builder\Integrations\Templately;
 use Essential_Addons_Elementor\Theme_Builder\Models\Template;
+use Essential_Addons_Elementor\Theme_Builder\Presets\Preset_Library;
 use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -569,6 +571,17 @@ class Admin {
 			'topLevel'      => Rules::get_top_level_for_ui(),
 			'pageTemplates' => Post_Type::get_page_template_options(),
 			'months'        => self::get_month_options(),
+			// The brand mark the dialogs put beside their eyebrow line, and the
+			// animated one the loading state shows. Both are wanted wherever a
+			// dialog opens, which is no longer only the editor.
+			'icon'          => EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-new-logo.svg',
+			'logo'          => EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-new-logo.svg',
+			'loader'        => EAEL_PLUGIN_URL . 'assets/admin/images/ea-loading-icon.gif',
+			// Shared rather than editor-only: the preset picker is opened from the
+			// editor's add-element row and from the creation flow on this screen,
+			// and it needs the same two either way.
+			'presets'       => Preset_Library::get_presets_for_ui(),
+			'templately'    => Templately::get_state_for_ui(),
 			'i18n'          => [
 				'templatesTitle'   => __( 'Templates', 'essential-addons-for-elementor-lite' ),
 				'groupLabel'       => __( 'Condition', 'essential-addons-for-elementor-lite' ),
@@ -576,10 +589,12 @@ class Admin {
 				'targetLabel'      => __( 'Specific target', 'essential-addons-for-elementor-lite' ),
 				'allLabel'         => __( 'All', 'essential-addons-for-elementor-lite' ),
 				'chooseType'       => __( 'Please choose a valid template type.', 'essential-addons-for-elementor-lite' ),
-				'createTitle'      => __( 'Choose the type of template you want to work on', 'essential-addons-for-elementor-lite' ),
-				'typeLabel'        => __( 'Template Type', 'essential-addons-for-elementor-lite' ),
-				'typePlaceholder'  => __( 'Select', 'essential-addons-for-elementor-lite' ),
-				'nameLabel'        => __( 'Template Name', 'essential-addons-for-elementor-lite' ),
+				'brandLabel'       => __( 'Essential Addons · Theme Builder', 'essential-addons-for-elementor-lite' ),
+				'createTitle'      => __( 'Templates Help You Build Faster', 'essential-addons-for-elementor-lite' ),
+				'createIntro'      => __( 'Create reusable templates for different sections of your website and save time by using them whenever you need.', 'essential-addons-for-elementor-lite' ),
+				'typeLabel'        => __( 'Template type', 'essential-addons-for-elementor-lite' ),
+				'typePlaceholder'  => __( 'Choose a template type', 'essential-addons-for-elementor-lite' ),
+				'nameLabel'        => __( 'Template name', 'essential-addons-for-elementor-lite' ),
 				'namePlaceholder'  => __( 'Name your template', 'essential-addons-for-elementor-lite' ),
 				'createButton'     => __( 'Create Template', 'essential-addons-for-elementor-lite' ),
 				'conditionsTitle'  => __( 'Where Do You Want to Display This Template', 'essential-addons-for-elementor-lite' ),
@@ -656,8 +671,11 @@ class Admin {
 				'noHeaderPresets'  => __( 'No header presets are available yet.', 'essential-addons-for-elementor-lite' ),
 				'noFooterPresets'  => __( 'Footer presets are on their way. Build yours from scratch in the meantime.', 'essential-addons-for-elementor-lite' ),
 				'presetFailed'     => __( 'The preset could not be inserted.', 'essential-addons-for-elementor-lite' ),
+				'presetSkip'       => __( 'Start from scratch', 'essential-addons-for-elementor-lite' ),
+				'templatelyTitle'  => __( 'Want more designs?', 'essential-addons-for-elementor-lite' ),
 				/* translators: %s: Templately, rendered as a link. */
-				'templatelyNote'   => __( 'For more templates, use %s.', 'essential-addons-for-elementor-lite' ),
+				'templatelyNote'   => __( 'Access 6,500+ cloud templates with %s.', 'essential-addons-for-elementor-lite' ),
+				'templatelyAction' => __( 'Connect Templately', 'essential-addons-for-elementor-lite' ),
 				'templatelyName'   => __( 'Templately', 'essential-addons-for-elementor-lite' ),
 				'templatelyInstalling' => __( 'Installing Templately…', 'essential-addons-for-elementor-lite' ),
 				'templatelyActivating' => __( 'Activating Templately…', 'essential-addons-for-elementor-lite' ),

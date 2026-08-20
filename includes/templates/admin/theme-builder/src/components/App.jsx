@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import CreateTemplateModal from './CreateTemplateModal';
 import ConditionsModal from './ConditionsModal';
+import PresetLibrary from './PresetLibrary';
 
 /**
  * Parse the conditions payload a row action carries.
@@ -55,6 +56,7 @@ function syncRow( templateId, payload ) {
  */
 export default function App() {
 	const [ creating, setCreating ] = useState( false );
+	const [ created, setCreated ] = useState( null );
 	const [ editing, setEditing ] = useState( null );
 
 	useEffect( () => {
@@ -85,11 +87,19 @@ export default function App() {
 		return () => document.removeEventListener( 'click', onClick );
 	}, [] );
 
-	// Naming the template is the whole of step 1: it goes straight into the
-	// editor, and the conditions are asked for when it is published.
+	// The template exists from here on — it is a draft with an empty canvas — so
+	// the picker is offered rather than asked: pick a preset and land in the
+	// editor with it already laid out, or dismiss and land on the blank canvas
+	// that was always going to be there. Either way the next stop is the editor,
+	// which is what "Create Template" promised. Conditions come later, when it
+	// is published.
 	const onCreated = useCallback( ( data ) => {
 		setCreating( false );
-		window.location.href = data.edit_url;
+		setCreated( data );
+	}, [] );
+
+	const openEditor = useCallback( ( url ) => {
+		window.location.href = url;
 	}, [] );
 
 	const onSaved = useCallback( ( payload ) => {
@@ -104,6 +114,15 @@ export default function App() {
 		<>
 			{ creating ? (
 				<CreateTemplateModal onClose={ () => setCreating( false ) } onCreated={ onCreated } />
+			) : null }
+
+			{ created ? (
+				<PresetLibrary
+					type={ created.type }
+					templateId={ created.id }
+					onClose={ () => openEditor( created.edit_url ) }
+					onApplied={ ( url ) => openEditor( url || created.edit_url ) }
+				/>
 			) : null }
 
 			{ editing ? (

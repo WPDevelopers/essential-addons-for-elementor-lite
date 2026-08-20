@@ -29,9 +29,8 @@ function prefersReducedMotion() {
  * which keeps a dialog from resizing when the loader hands over to content.
  */
 export default function Loader() {
-	const editor = settings.editor || {};
-	const animated = prefersReducedMotion() ? '' : editor.loader;
-	const mark = animated || editor.logo || '';
+	const animated = prefersReducedMotion() ? '' : settings.loader;
+	const mark = animated || settings.logo || settings.icon || '';
 
 	return (
 		<div className="eatb-loader" role="status" aria-live="polite">

@@ -18,10 +18,20 @@ const MAX_LOADER_MS = 5000;
 /**
  * The header and footer preset picker.
  *
- * Opened from the EA button in the editor's add-element row. Cards are grouped
- * by template type into two tabs, and a card carries its own preview so the
- * choice is made by looking rather than by reading names — which is also why the
- * dialog carries no explainer beyond its title: the previews are the content.
+ * Opened from two places, and it behaves differently in each:
+ *
+ * - From the EA button in the editor's add-element row, with no `type`. Both
+ *   kinds are offered under tabs, and the chosen preset's elements are handed
+ *   back to the caller to drop onto the open canvas.
+ * - From the creation flow, with the `type` and `templateId` of the template
+ *   just created. There is only one kind worth showing then, so the tabs go and
+ *   the title names the type; and there is no canvas open, so the preset is
+ *   written into the template server side and `onApplied` receives the URL to
+ *   go on to.
+ *
+ * A card carries its own preview so the choice is made by looking rather than by
+ * reading names — which is also why the dialog carries no explainer beyond its
+ * title: the previews are the content.
  *
  * The elements are fetched when a card is chosen, not with the page: a preset is
  * built server side around the site's own name and menu, and every element needs
@@ -32,22 +42,33 @@ const MAX_LOADER_MS = 5000;
  * that fill in one by one — the loader turns that into one deliberate wait.
  *
  * @param {Object}   props
- * @param {Function} props.onClose  Dismiss handler.
- * @param {Function} props.onInsert Receives the fetched elements.
+ * @param {string}   [props.type]       Show only this type, and drop the tabs.
+ * @param {number}   [props.templateId] Apply the preset to this template
+ *                                      instead of handing back its elements.
+ * @param {Function} props.onClose      Dismiss handler.
+ * @param {Function} [props.onInsert]   Receives the fetched elements.
+ * @param {Function} [props.onApplied]  Receives the edit URL after a preset has
+ *                                      been written into `templateId`.
  */
-export default function PresetLibrary( { onClose, onInsert } ) {
+export default function PresetLibrary( { type = '', templateId = 0, onClose, onInsert, onApplied } ) {
 	const editor = settings.editor || {};
 
 	// Memoized because the loading effect keys off it: the fallback would be a
 	// fresh array on every render and would restart the loader forever.
 	const presets = useMemo(
-		() => ( Array.isArray( editor.presets ) ? editor.presets : [] ),
-		[ editor.presets ]
+		() => ( Array.isArray( settings.presets ) ? settings.presets : [] ),
+		[]
 	);
 
 	// Open on the tab matching the template being edited — a footer template
-	// should not open on headers.
-	const [ tab, setTab ] = useState( () => ( 'footer' === editor.type ? 'footer' : 'header' ) );
+	// should not open on headers. Scoped to one type there is no tab to pick.
+	const [ tab, setTab ] = useState( () => {
+		if ( type ) {
+			return type;
+		}
+
+		return 'footer' === editor.type ? 'footer' : 'header';
+	} );
 	const [ busy, setBusy ] = useState( '' );
 	const [ error, setError ] = useState( '' );
 	const [ ready, setReady ] = useState( false );
@@ -116,7 +137,12 @@ export default function PresetLibrary( { onClose, onInsert } ) {
 		setBusy( preset.slug );
 
 		try {
-			const response = await request( 'eael_theme_builder_get_preset', { preset: preset.slug } );
+			const response = templateId
+				? await request( 'eael_theme_builder_apply_preset', {
+					template_id: templateId,
+					preset: preset.slug,
+				} )
+				: await request( 'eael_theme_builder_get_preset', { preset: preset.slug } );
 
 			if ( ! response || ! response.success ) {
 				setError( errorMessage( response ) );
@@ -124,7 +150,11 @@ export default function PresetLibrary( { onClose, onInsert } ) {
 				return;
 			}
 
-			onInsert( response.data.content );
+			if ( templateId ) {
+				onApplied( response.data.edit_url );
+			} else {
+				onInsert( response.data.content );
+			}
 		} catch ( requestError ) {
 			setError( strings.genericError || 'Something went wrong. Please try again.' );
 		} finally {
@@ -132,21 +162,27 @@ export default function PresetLibrary( { onClose, onInsert } ) {
 		}
 	};
 
-	const title = strings.presetsTitle || 'Choose a Header & Footer Preset';
+	const scoped = tabs.find( ( item ) => item.slug === type );
+	const title = scoped ? scoped.label : ( strings.presetsTitle || 'Choose a Header & Footer Preset' );
+
+	// Headed by the mark rather than a bare title, the way the creation dialog
+	// that leads into it is.
+	const brand = { icon: settings.icon };
 
 	// The same Modal element in both branches, so the loader hands over to the
 	// grid inside a dialog that is already open — swapping in a second Modal here
 	// would replay the opening animation behind the cards.
 	if ( ! ready ) {
 		return (
-			<Modal title={ title } size="wide" onClose={ onClose } bodyClass="eatb-modal__body--presets">
+			<Modal title={ title } brand={ brand } size="wide" onClose={ onClose } bodyClass="eatb-modal__body--presets">
 				<Loader />
 			</Modal>
 		);
 	}
 
 	return (
-		<Modal title={ title } size="wide" onClose={ onClose } bodyClass="eatb-modal__body--presets">
+		<Modal title={ title } brand={ brand } size="wide" onClose={ onClose } bodyClass="eatb-modal__body--presets">
+			{ type ? null : (
 			<div className="eatb-presets__tabs" role="tablist">
 				{ tabs.map( ( item ) => (
 					<button
@@ -161,6 +197,7 @@ export default function PresetLibrary( { onClose, onInsert } ) {
 					</button>
 				) ) }
 			</div>
+			) }
 
 			{ error ? <Notice type="error">{ error }</Notice> : null }
 

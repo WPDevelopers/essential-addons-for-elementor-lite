@@ -78,12 +78,12 @@ export default function EditorApp() {
 	// template — a preset is a section, and a page being built in Elementor takes
 	// one as readily as a header template does.
 	useEffect( () => {
-		if ( ! Array.isArray( editor.presets ) || ! editor.presets.length ) {
+		if ( ! Array.isArray( settings.presets ) || ! settings.presets.length ) {
 			return undefined;
 		}
 
 		registerPresetButton( {
-			icon: editor.icon,
+			icon: settings.icon,
 			label: strings.presetsButton || 'Essential Addons presets',
 		} );
 
@@ -92,7 +92,7 @@ export default function EditorApp() {
 		window.addEventListener( OPEN_PRESETS_EVENT, onOpen );
 
 		return () => window.removeEventListener( OPEN_PRESETS_EVENT, onOpen );
-	}, [ editor.icon, editor.presets ] );
+	}, [] );
 
 	const onPresetChosen = useCallback( ( content ) => {
 		const target = presetTarget || {};

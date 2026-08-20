@@ -12,7 +12,6 @@ use Essential_Addons_Elementor\Theme_Builder\Admin\Admin;
 use Essential_Addons_Elementor\Theme_Builder\Conditions\Conditions_Manager;
 use Essential_Addons_Elementor\Theme_Builder\Core\Post_Type;
 use Essential_Addons_Elementor\Theme_Builder\Models\Template;
-use Essential_Addons_Elementor\Theme_Builder\Presets\Preset_Library;
 use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -146,16 +145,6 @@ class Editor {
 	private function get_editor_data( $post_id ) {
 		$data = [
 			'documentId' => $post_id,
-			'presets'    => Preset_Library::get_presets_for_ui(),
-			'templately' => Templately::get_state_for_ui(),
-			'icon'       => EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-new-logo.svg',
-			// The white mark is for the purple add-element button; the loader puts
-			// the logo on a light badge, where white would be invisible.
-			'logo'       => EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-new-logo.svg',
-			// The animated mark the loading screen shows. It stands in for `logo`
-			// there rather than joining it, and the loader falls back to the still
-			// logo when the user has asked for reduced motion.
-			'loader'     => EAEL_PLUGIN_URL . 'assets/admin/images/ea-loading-icon.gif',
 		];
 
 		$template = $this->get_edited_template( $post_id );

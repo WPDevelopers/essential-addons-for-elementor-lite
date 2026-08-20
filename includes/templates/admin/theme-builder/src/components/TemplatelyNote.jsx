@@ -6,7 +6,7 @@ import { errorMessage, request, settings, strings } from '../utils/api';
  *
  * The preset library is a handful of starting points, not a catalogue, so the
  * modal ends by pointing at the catalogue. Templately can be in three states and
- * the link has to work from all of them:
+ * the action has to work from all of them:
  *
  * - **active**   — a plain anchor, so the browser treats it like any other link
  *                  (middle click, new tab, status bar preview all behave).
@@ -22,8 +22,9 @@ import { errorMessage, request, settings, strings } from '../utils/api';
  * @param {Function} props.onError Receives a message when enabling fails.
  */
 export default function TemplatelyNote( { busy, onError } ) {
-	const editor = settings.editor || {};
-	const templately = editor.templately || {};
+	// The editor copy is kept as a fallback for a page still running an older
+	// bundle against a newer PHP payload, or the reverse.
+	const templately = settings.templately || ( settings.editor || {} ).templately || {};
 	const [ working, setWorking ] = useState( false );
 
 	if ( ! templately.state || 'blocked' === templately.state ) {
@@ -31,11 +32,7 @@ export default function TemplatelyNote( { busy, onError } ) {
 	}
 
 	const name = strings.templatelyName || 'Templately';
-	const note = strings.templatelyNote || 'For more templates, use %s.';
-
-	// Split rather than concatenate, so a translation can put the link anywhere in
-	// its own sentence instead of being forced into English word order.
-	const [ before, after ] = note.split( '%s' );
+	const note = strings.templatelyNote || 'Access 6,500+ cloud templates with %s.';
 
 	const enable = async ( event ) => {
 		event.preventDefault();
@@ -57,9 +54,9 @@ export default function TemplatelyNote( { busy, onError } ) {
 			}
 
 			// Same tab, deliberately: the plugin set just changed underneath this
-			// editor, so its loaded scripts no longer match the site. Leaving is
-			// the honest next step, and Elementor's own unsaved-changes prompt
-			// still gets its say on the way out.
+			// page, so its loaded scripts no longer match the site. Leaving is the
+			// honest next step, and Elementor's own unsaved-changes prompt still
+			// gets its say on the way out.
 			window.location.href = response.data.url;
 		} catch ( requestError ) {
 			onError( strings.genericError || 'Something went wrong. Please try again.' );
@@ -70,7 +67,7 @@ export default function TemplatelyNote( { busy, onError } ) {
 
 	const label = () => {
 		if ( ! working ) {
-			return name;
+			return strings.templatelyAction || 'Connect Templately';
 		}
 
 		return 'missing' === templately.state
@@ -79,21 +76,34 @@ export default function TemplatelyNote( { busy, onError } ) {
 	};
 
 	return (
-		<p className="eatb-presets__note">
-			{ before }
+		<div className="eatb-templately">
+			<div className="eatb-templately__copy">
+				<p className="eatb-templately__title">
+					{ strings.templatelyTitle || 'Want more designs?' }
+				</p>
+
+				{ /*
+				  * The product name is substituted rather than concatenated, so a
+				  * translation can put it anywhere in its own sentence instead of
+				  * being forced into English word order.
+				  */ }
+				<p className="eatb-templately__note">{ note.replace( '%s', name ) }</p>
+			</div>
+
 			{ 'active' === templately.state ? (
-				<a className="eatb-presets__link" href={ templately.url }>{ name }</a>
+				<a className="eatb-templately__action" href={ templately.url }>
+					{ strings.templatelyAction || 'Connect Templately' }
+				</a>
 			) : (
 				<button
 					type="button"
-					className="eatb-presets__link"
+					className="eatb-templately__action"
 					onClick={ enable }
 					disabled={ working || busy }
 				>
 					{ label() }
 				</button>
 			) }
-			{ after }
-		</p>
+		</div>
 	);
 }
