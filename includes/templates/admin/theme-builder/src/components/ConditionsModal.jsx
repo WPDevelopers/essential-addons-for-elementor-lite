@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Modal from './Modal';
 import ConditionRow from './ConditionRow';
 import Notice from './Notice';
-import { errorMessage, request, strings } from '../utils/api';
-import { blankCondition } from '../utils/rules';
+import { errorMessage, request, settings, strings } from '../utils/api';
+import { blankCondition, summarize } from '../utils/rules';
 
 /**
  * The condition builder — the "Edit Conditions" row action on the dashboard, and
@@ -36,6 +36,14 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 			sub_label: condition.sub_label || '',
 		} ) );
 	} );
+
+	// Whether the template arrived with conditions. The confirm button is held
+	// back on an empty set — a template with nowhere to appear is rarely what
+	// anyone means — but not when the empty set is the change: removing every row
+	// and saving is how conditions are cleared.
+	const [ hadConditions ] = useState( () => (
+		Array.isArray( template.conditions ) && template.conditions.length > 0
+	) );
 
 	const [ busy, setBusy ] = useState( false );
 	const [ error, setError ] = useState( '' );
@@ -96,16 +104,28 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 		}
 	};
 
-	const confirmLabel = primaryLabel || strings.saveOnly || 'Save Conditions';
+	const confirmLabel = primaryLabel || strings.saveOnly || 'Save & Close';
 	const workingLabel = busyLabel || strings.saving || 'Saving…';
+	const summary = summarize( conditions );
+
+	// "…where this header is used", from the type the template actually is.
+	const typeLabel = ( Array.isArray( settings.types ) ? settings.types : [] )
+		.find( ( item ) => item.slug === template.type );
+	const introText = ( intro || strings.conditionsIntro || '' )
+		.replace( '%s', typeLabel ? typeLabel.label.toLowerCase() : ( strings.templateWord || 'template' ) );
 
 	return (
 		<Modal
-			title={ strings.templatesTitle || 'Templates' }
+			title={ heading || strings.conditionsTitle || 'Where do you want to display this template?' }
 			size="wide"
+			bare={ true }
 			onClose={ onClose }
 			footer={
-				<>
+				<div className="eatb-modal__actions-split">
+					<button type="button" className="eatb-button eatb-button--ghost" onClick={ onClose }>
+						{ strings.notNow || 'Not now' }
+					</button>
+
 					{ pending ? (
 						<button type="button" className="eatb-button eatb-button--primary" onClick={ () => finish( pending ) }>
 							{ strings.continueLabel || 'Continue' }
@@ -115,19 +135,19 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 							type="button"
 							className="eatb-button eatb-button--primary"
 							onClick={ save }
-							disabled={ busy }
+							disabled={ busy || ( ! conditions.length && ! hadConditions ) }
 						>
 							{ busy ? workingLabel : confirmLabel }
 						</button>
 					) }
-				</>
+				</div>
 			}
 		>
-			<div className="eatb-hero">
+			<div className="eatb-hero eatb-hero--start">
 				<h2 className="eatb-hero__title">
-					{ heading || strings.conditionsTitle || 'Where Do You Want to Display This Template' }
+					{ heading || strings.conditionsTitle || 'Where do you want to display this template?' }
 				</h2>
-				<p className="eatb-hero__subtitle">{ intro || strings.conditionsIntro }</p>
+				<p className="eatb-hero__subtitle">{ introText }</p>
 			</div>
 
 			<div className="eatb-conditions">
@@ -142,15 +162,26 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 				) ) }
 			</div>
 
-			<div className="eatb-conditions__add">
+			{ /*
+			  * With no rows yet the button is the empty state — a dashed field the
+			  * width of the rows that will replace it, so the first click lands
+			  * where the first row appears. Once there are rows it steps back to
+			  * an outline button under them: the rows are the content by then.
+			  */ }
+			<div className={ `eatb-conditions__add ${ conditions.length ? '' : 'eatb-conditions__add--empty' }`.trim() }>
 				<button
 					type="button"
-					className="eatb-button eatb-button--primary eatb-button--add"
+					className="eatb-button eatb-button--add"
 					onClick={ () => setConditions( ( rows ) => [ ...rows, blankCondition() ] ) }
 				>
-					{ strings.addCondition || 'ADD NEW CONDITION' }
+					<span className="eatb-button__plus" aria-hidden="true">+</span>
+					{ strings.addCondition || 'Add condition' }
 				</button>
 			</div>
+
+			<p className="eatb-conditions__summary">
+				{ summary || strings.conditionsSummaryEmpty || 'No conditions yet — this template stays published but hidden until you add one.' }
+			</p>
 
 			{ error ? <Notice type="error">{ error }</Notice> : null }
 

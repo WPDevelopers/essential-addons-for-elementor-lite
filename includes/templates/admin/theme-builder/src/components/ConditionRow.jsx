@@ -1,3 +1,4 @@
+import Select from './Select';
 import TargetSelect from './TargetSelect';
 import { strings } from '../utils/api';
 import { hasTarget, isValidPair, subConditionOptions, topLevel } from '../utils/rules';
@@ -55,49 +56,41 @@ export default function ConditionRow( { condition, onChange, onRemove, canRemove
 	return (
 		<div className={ `eatb-condition ${ showTarget ? 'eatb-condition--targeted' : '' }` }>
 			{ /*
-			  * The selects share one bordered group, separated by dividers rather
-			  * than sitting in boxes of their own — one control reading
-			  * "Include · Singular · In Category · News" left to right, with the
-			  * remove button outside it.
+			  * One box per decision, each naming itself to a screen reader — the
+			  * boxes carry no visible label, and "Include · Singular · Post" only
+			  * reads as a sentence to someone who can see all three at once.
 			  */ }
 			<div className="eatb-condition__fields">
-				<label className="eatb-field eatb-field--type">
-					<span className="screen-reader-text">{ strings.include || 'Include' }</span>
-					<select
+				<div className="eatb-field eatb-field--type">
+					<Select
+						label={ strings.conditionTypeLabel || 'Include or exclude' }
+						options={ [
+							{ value: 'include', label: strings.include || 'Include' },
+							{ value: 'exclude', label: strings.exclude || 'Exclude' },
+						] }
 						value={ condition.type }
-						onChange={ ( event ) => onChange( { ...condition, type: event.target.value } ) }
-					>
-						<option value="include">{ strings.include || 'Include' }</option>
-						<option value="exclude">{ strings.exclude || 'Exclude' }</option>
-					</select>
-				</label>
+						onChange={ ( type ) => onChange( { ...condition, type } ) }
+					/>
+				</div>
 
-				<label className="eatb-field eatb-field--group">
-					<span className="screen-reader-text">{ strings.groupLabel || 'Condition' }</span>
-					<select value={ condition.name } onChange={ ( event ) => changeName( event.target.value ) }>
-						{ topLevel.map( ( item ) => (
-							<option key={ item.name } value={ item.name }>{ item.label }</option>
-						) ) }
-					</select>
-				</label>
+				<div className="eatb-field eatb-field--group">
+					<Select
+						label={ strings.groupLabel || 'Condition' }
+						options={ topLevel.map( ( item ) => ( { value: item.name, label: item.label } ) ) }
+						value={ condition.name }
+						onChange={ changeName }
+					/>
+				</div>
 
 				{ showSub ? (
-					<label className="eatb-field eatb-field--rule">
-						<span className="screen-reader-text">{ strings.ruleLabel || 'Sub condition' }</span>
-						<select value={ condition.sub_name } onChange={ ( event ) => changeSubName( event.target.value ) }>
-							{ options.map( ( option, index ) => (
-								option.type === 'group' ? (
-									<optgroup key={ `g${ index }` } label={ option.label }>
-										{ option.options.map( ( item ) => (
-											<option key={ item.value } value={ item.value }>{ item.label }</option>
-										) ) }
-									</optgroup>
-								) : (
-									<option key={ option.value || 'all' } value={ option.value }>{ option.label }</option>
-								)
-							) ) }
-						</select>
-					</label>
+					<div className="eatb-field eatb-field--rule">
+						<Select
+							label={ strings.ruleLabel || 'Sub condition' }
+							options={ options }
+							value={ condition.sub_name }
+							onChange={ changeSubName }
+						/>
+					</div>
 				) : null }
 
 				{ showTarget ? (

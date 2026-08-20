@@ -54,7 +54,7 @@ function createButton( icon, label ) {
 	// The padding is ours rather than Elementor's 12px, which leaves a 16px box —
 	// too small for a mark that carries its own rounded plate, where the artwork
 	// stops short of the edge and reads smaller than the neighbouring glyphs.
-	button.style.cssText = 'background-color:#5b3df5;color:#fff;display:flex;align-items:center;justify-content:center;padding:9px;';
+	button.style.cssText = 'background-color:#6F0AF2;color:#fff;display:flex;align-items:center;justify-content:center;padding:3px;';
 
 	if ( icon ) {
 		const image = document.createElement( 'img' );
@@ -62,7 +62,7 @@ function createButton( icon, label ) {
 		image.src = icon;
 		image.alt = '';
 		image.setAttribute( 'aria-hidden', 'true' );
-		image.style.cssText = 'width:22px;height:22px;flex-shrink:0;display:block;pointer-events:none;';
+		image.style.cssText = 'width:40px;height:40px;flex-shrink:0;display:block;pointer-events:none;';
 		button.appendChild( image );
 	}
 

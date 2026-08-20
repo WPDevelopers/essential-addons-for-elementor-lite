@@ -39,6 +39,25 @@ body.eatb-modal-open {
 }
 
 /*
+ * Carried rather than borrowed. These labels are hidden by `.screen-reader-text`
+ * from wp-admin's own stylesheet, which is loaded on the dashboard but is not
+ * something a dialog mounted into someone else's screen can count on — and when
+ * it is missing, every field label paints inside its own control.
+ */
+.eatb-modal .screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect( 1px, 1px, 1px, 1px );
+	clip-path: inset( 50% );
+	white-space: nowrap;
+	border: 0;
+}
+
+/*
  * The dialog arrives rather than appears: the ground dims first, the panel
  * follows a frame later, rising and settling. Only the opening is animated —
  * closing unmounts the component, and holding a dialog on screen to play it out
@@ -94,8 +113,8 @@ body.eatb-modal-open {
 }
 
 .eatb-modal--wide .eatb-modal__dialog {
-	max-width: 1080px;
-	min-height: 560px !important;
+	max-width: 1030px;
+	min-height: 520px !important;
 }
 
 /* ------------------------------------------------------------------
@@ -317,43 +336,51 @@ body.eatb-modal-open {
 .eatb-conditions {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	gap: 12px;
+	gap: 14px;
 }
 
 /*
- * One row = one control. The selects share a single bordered group split by
- * dividers rather than sitting in separate boxes, so a row reads left to right
- * as one sentence — "Include · Singular · In Category · News" — and a stack of
- * rows lines up like a table. Every row is the same width whether or not the
- * object picker is showing, so adding one cannot shift the rows above it.
+ * One row, one box per decision. The selects used to share a single bordered
+ * group split by dividers; separate boxes are what the row wants once it can be
+ * three or four selects wide — the group read as one long control whose parts
+ * were hard to aim at, and its dividers competed with the row below it.
+ *
+ * Widths are shared rather than fixed: Include/Exclude is the one segment whose
+ * content never changes, so it is sized to itself and the rest split what is
+ * left. That keeps every row the same width whether or not the object picker is
+ * showing, so adding one cannot shift the rows above it.
  */
 .eatb-condition {
-	position: relative;
 	display: flex;
+	gap: 12px;
 	align-items: center;
 	width: 100%;
-	max-width: 640px;
 }
 
 .eatb-condition__fields {
 	display: flex;
 	flex: 1 1 auto;
+	gap: 12px;
 	min-width: 0;
-	background: #fff;
-	border: 1px solid var(--eatb-border);
-	border-radius: var(--eatb-radius);
 }
 
 .eatb-field {
 	display: flex;
 	min-width: 0;
 	margin: 0;
+	background: var(--eatb-surface);
+	border: 1px solid var(--eatb-border);
+	border-radius: 10px;
+	transition: border-color 0.15s ease;
+}
+
+.eatb-field:hover {
+	border-color: #c4c4d4;
 }
 
 /* Include/Exclude is a fixed first segment; the rest share what is left. */
 .eatb-field--type {
-	flex: 0 0 20%;
+	flex: 0 0 22%;
 }
 
 .eatb-field--group,
@@ -362,117 +389,67 @@ body.eatb-modal-open {
 	flex: 1 1 0;
 }
 
-.eatb-field + .eatb-field {
-	border-left: 1px solid var(--eatb-border);
-}
-
 /*
- * The native arrow is replaced by one drawn as a background, together with the
- * divider in front of it: a <select> cannot hold markup, and those two marks
- * are what make a segment read as part of the group rather than as a bare word.
+ * The row's boxes are the border and the ground; the dropdown inside each one
+ * fills it. `.eatb-field` used to draw a native <select>'s chrome as well —
+ * there is no <select> in a row any more, so all that is left here is the box.
  */
-.eatb-field select,
+.eatb-field .eatb-select,
+.eatb-field .eatb-select__toggle,
 .eatb-target__toggle {
-	box-sizing: border-box;
 	width: 100%;
-	max-width: 100%;
-	height: var(--eatb-row-height);
-	margin: 0;
-	/*
-	 * Symmetric padding is what keeps the value optically centred: the right
-	 * side has to clear the divider and the chevron, so the left matches it.
-	 */
-	padding: 0 30px;
-	font-size: 13px;
-	line-height: var(--eatb-row-height);
-	color: var(--eatb-text);
-	text-align: center;
-	text-align-last: center;
-	background-color: transparent;
-	border: 0;
-	border-radius: var(--eatb-radius);
-	box-shadow: none;
-	appearance: none;
-	-webkit-appearance: none;
 }
 
-.eatb-field select {
-	background-image:
-		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%236b6f80' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E"),
-		linear-gradient( to bottom, var(--eatb-border), var(--eatb-border) );
-	background-repeat: no-repeat, no-repeat;
-	background-position: right 10px center, right 29px center;
-	background-size: 10px 7px, 1px 100%;
+.eatb-field:focus-within {
+	border-color: var(--eatb-accent);
 }
 
-.eatb-field select:focus,
 .eatb-target__toggle:focus-visible {
-	box-shadow: inset 0 0 0 2px var(--eatb-accent);
+	box-shadow: inset 0 0 0 1px var(--eatb-accent);
 	outline: none;
 }
 
-/* Rounded ends belong to the group, not to the segments inside it. */
-.eatb-field:first-child select,
-.eatb-field:first-child .eatb-target__toggle {
-	border-radius: var(--eatb-radius) 0 0 var(--eatb-radius);
-}
-
-.eatb-field:last-child select,
-.eatb-field:last-child .eatb-target__toggle {
-	border-radius: 0 var(--eatb-radius) var(--eatb-radius) 0;
-}
-
 /*
- * A <select>'s option list is painted by the browser in its own layer on top of
- * the control — page CSS cannot style it, and it does not quite cover the
- * control's own edge. So the accent border underneath shows around the popup as
- * a stray outline belonging to neither the field nor the list. While the popup
- * is up, drop back to the resting border; `:focus` takes over again the moment
- * it closes, so the field is still clearly focused afterwards.
- *
- * This has to come after *both* `:focus` rules above: `:open` and `:focus` have
- * identical specificity, so only source order decides which one wins.
+ * The one native select left in these dialogs is on the create form. Its option
+ * list is painted by the browser in its own layer on top of the control — page
+ * CSS cannot style it, and it does not quite cover the control's own edge. So
+ * the accent ring underneath shows around the popup as a stray outline
+ * belonging to neither the field nor the list. While the popup is up, drop back
+ * to the resting border; `:focus` takes over again the moment it closes.
  *
  * Kept in its own rule on purpose — `:open` is Chromium-only for now, and an
  * unsupported pseudo-class invalidates the entire selector list it appears in.
- * Browsers without it degrade to the inset ring above, not to the outward halo
- * this replaced.
  */
-.eatb-form__field select:open,
-.eatb-field select:open {
+.eatb-form__field select:open {
 	border-color: var(--eatb-border);
 	box-shadow: none;
 }
 
 /*
- * Outside the group — removing the row is not one of the row's values — and out
- * of the flow, so the group itself sits dead centre in the modal. In the flow it
- * would push every row left by half its own width.
+ * A bare glyph outside the boxes: removing the row is not one of the row's
+ * values, so it does not get a box of its own to sit in.
  */
 .eatb-condition__remove {
-	position: absolute;
-	top: 50%;
-	left: calc( 100% + 8px );
 	display: flex;
+	flex: 0 0 auto;
 	align-items: center;
 	justify-content: center;
-	width: 26px;
-	height: 26px;
-	transform: translateY( -50% );
+	width: 32px;
+	height: 32px;
 	padding: 0;
-	font-size: 14px;
+	font-size: 20px;
 	line-height: 1;
-	color: #fff;
+	color: var(--eatb-muted);
 	cursor: pointer;
-	background: #82868e;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	transition: color 0.15s ease, background-color 0.15s ease;
+	background: none;
+	border: 0;
+	transition: color 0.15s ease;
+	border-radius: 8px;
 }
 
 .eatb-condition__remove:hover:not(:disabled) {
-	color: #fff;
-	background: #d63638;
+	color: #d63638;
+	background: rgb(241, 245, 249) !important;
 }
 
 .eatb-condition__remove:disabled {
@@ -481,16 +458,61 @@ body.eatb-modal-open {
 }
 
 .eatb-conditions__add {
-	margin-top: 24px;
+	margin-top: 18px;
 	text-align: center;
 }
 
+/*
+ * An outline button rather than a filled one: adding a row is the second thing
+ * this dialog wants, and a solid accent button here would outrank the one that
+ * confirms the whole thing.
+ */
 .eatb-button--add {
-	min-height: 36px;
-	padding: 0 22px;
-	font-size: 13px;
-	letter-spacing: 0.02em;
-	text-transform: uppercase;
+	gap: 10px;
+	min-height: 48px;
+	padding: 0 26px;
+	font-size: 15px;
+	color: var(--eatb-accent);
+	background: none;
+	border: 1px solid #d8d0fb;
+	border-radius: 10px;
+}
+
+.eatb-button--add:hover {
+	background: #f7f5ff;
+	border-color: var(--eatb-accent);
+}
+
+.eatb-button__plus {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 1;
+}
+
+/* The empty state: the field the first row will take, drawn as an invitation. */
+.eatb-conditions__add--empty {
+	margin-top: 0;
+}
+
+.eatb-conditions__add--empty .eatb-button--add {
+	width: 100%;
+	min-height: 75px;
+	border-style: dashed;
+	border-radius: 12px;
+}
+
+/*
+ * What the rows add up to, under them. Deliberately quiet — it reports, it does
+ * not ask for anything — and always present, so the empty state has somewhere to
+ * explain itself instead of leaving the question hanging.
+ */
+.eatb-conditions__summary {
+	margin: 22px 0 0;
+	padding: 20px 24px;
+	font-size: 15px;
+	color: var(--eatb-muted);
+	background: #f7f7fa;
+	border-radius: 10px;
 }
 
 /* ------------------------------------------------------------------
@@ -508,21 +530,32 @@ body.eatb-modal-open {
 	width: 100%;
 }
 
+/* Sized and reset to match the plain dropdown it sits beside in a row. */
 .eatb-target__toggle {
 	display: flex;
+	box-sizing: border-box;
+	gap: 8px;
 	align-items: center;
-	justify-content: center;
-	gap: 6px;
+	width: 100%;
+	height: 52px;
+	padding: 0 38px 0 18px;
+	font-size: 15px;
+	color: var(--eatb-text);
+	text-align: left;
 	cursor: pointer;
 	background: transparent;
+	border: 0;
+	border-radius: 10px;
 }
 
 .eatb-target.is-open .eatb-target__toggle {
-	box-shadow: inset 0 0 0 2px var(--eatb-accent);
+	box-shadow: inset 0 0 0 1px var(--eatb-accent);
 	outline: none;
 }
 
 .eatb-target__value {
+	flex: 1 1 auto;
+	min-width: 0;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -547,29 +580,28 @@ body.eatb-modal-open {
 
 .eatb-target__arrow {
 	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	width: 29px;
-	border-left: 1px solid var(--eatb-border);
+	top: 50%;
+	right: 16px;
+	width: 12px;
+	height: 8px;
+	transform: translateY( -50% );
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%236b6f80' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: 10px 7px;
+	background-size: 12px 8px;
 	pointer-events: none;
 }
 
 .eatb-target__panel {
 	position: absolute;
-	z-index: 2;
-	top: calc( 100% + 4px );
+	z-index: 3;
+	top: calc( 100% + 8px );
 	right: 0;
 	left: 0;
 	padding: 8px;
-	background: #fff;
-	border: 1px solid var(--eatb-border);
-	border-radius: var(--eatb-radius);
-	box-shadow: 0 12px 28px rgba( 12, 14, 24, 0.16 );
+	background: var(--eatb-surface);
+	border-radius: 12px;
+	box-shadow: 0 18px 40px rgba( 12, 14, 24, 0.16 ), 0 0 0 1px rgba( 12, 14, 24, 0.04 );
 }
 
 .eatb-target__search {
@@ -598,27 +630,29 @@ body.eatb-modal-open {
 }
 
 .eatb-target__option {
-	display: block;
+	display: flex;
+	gap: 12px;
+	align-items: center;
 	width: 100%;
-	padding: 8px 10px;
-	font-size: 13px;
+	padding: 13px 14px;
+	font-size: 15px;
 	text-align: left;
 	color: var(--eatb-text);
 	cursor: pointer;
 	background: none;
 	border: 0;
-	border-radius: 6px;
+	border-radius: 8px;
+	transition: background-color 0.12s ease;
 }
 
 .eatb-target__option:hover,
 .eatb-target__option:focus-visible {
-	background: #f1f1f5;
+	background: #f4f4f8;
 	outline: none;
 }
 
 .eatb-target__option.is-selected {
-	color: #fff;
-	background: var(--eatb-accent);
+	background: #f4f1ff;
 }
 
 .eatb-target__empty {
@@ -1084,6 +1118,53 @@ body.eatb-modal-open {
 }
 
 /*
+ * No title bar at all, for a dialog that opens on its own headline: the close
+ * floats over the body's top right corner instead of sitting in a bar above it.
+ */
+.eatb-modal--bare .eatb-modal__close {
+	position: absolute;
+	z-index: 1;
+	top: 28px;
+	right: 28px;
+	width: 26px;
+	height: 26px;
+	font-size: 24px;
+	background: none;
+}
+
+.eatb-modal--bare .eatb-modal__close:hover,
+.eatb-modal--bare .eatb-modal__close:focus-visible {
+	background: none;
+	color: var( --eatb-text );
+}
+
+/* Clear of the floating close, which the heading would otherwise run under. */
+.eatb-modal--bare .eatb-modal__body {
+	padding: 34px 40px 32px;
+}
+
+.eatb-modal--bare .eatb-hero__title {
+	max-width: calc( 100% - 40px );
+	font-size: 26px;
+}
+
+.eatb-modal--bare .eatb-hero__subtitle {
+	max-width: 720px;
+	font-size: 16px;
+	line-height: 1.6;
+}
+
+.eatb-modal--bare .eatb-modal__actions {
+	padding: 18px 40px;
+}
+
+.eatb-modal--bare .eatb-modal__actions .eatb-button {
+	min-height: 46px;
+	padding: 0 30px;
+	border-radius: 10px;
+}
+
+/*
  * The mark beside a plain title, for a dialog already inside the feature: it
  * keeps its rule, since a grid of cards below it needs the edge.
  */
@@ -1150,7 +1231,7 @@ body.eatb-modal-open {
 	color: #9b9fb0;
 }
 
-.eatb-modal--branded .eatb-button {
+.eatb-modal--branded .eatb-modal__actions .eatb-button {
 	min-height: 46px;
 	padding: 0 30px;
 	border-radius: 10px;
@@ -1182,19 +1263,19 @@ body.eatb-modal-open {
 }
 
 /* ------------------------------------------------------------------
- * Template type picker
+ * Dropdown
  * --------------------------------------------------------------- */
 
 /*
- * A listbox rather than a `<select>`, because each type carries a glyph and the
- * native control has nowhere to put one. Everything below is the styling a
- * `<select>` would have given for free.
+ * A listbox in place of a `<select>`, wherever an option needs more than its
+ * own name: a glyph beside it, a tick against the one already chosen, a heading
+ * over a group of them. None of those can be put inside a native option.
  */
-.eatb-type {
+.eatb-select {
 	position: relative;
 }
 
-.eatb-type__toggle {
+.eatb-select__toggle {
 	display: flex;
 	box-sizing: border-box;
 	gap: 12px;
@@ -1202,7 +1283,7 @@ body.eatb-modal-open {
 	width: 100%;
 	height: 52px;
 	padding: 0 18px;
-	font-size: 14px;
+	font-size: 15px;
 	color: var( --eatb-text );
 	text-align: left;
 	cursor: pointer;
@@ -1212,23 +1293,38 @@ body.eatb-modal-open {
 	transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.eatb-type__toggle:hover {
+.eatb-select__toggle:hover {
 	border-color: #c4c4d4;
 }
 
-.eatb-type.is-open .eatb-type__toggle,
-.eatb-type__toggle:focus-visible {
+.eatb-select.is-open .eatb-select__toggle,
+.eatb-select__toggle:focus-visible {
 	border-color: var( --eatb-accent );
 	box-shadow: inset 0 0 0 1px var( --eatb-accent );
 	outline: none;
 }
 
-.eatb-type__icon {
+/*
+ * Inside a condition row the box is already drawn by the field around it, so
+ * the toggle drops its own border and fills it.
+ */
+.eatb-field .eatb-select__toggle {
+	height: 45px;
+	background: none;
+	border: 0;
+}
+
+.eatb-field .eatb-select.is-open .eatb-select__toggle,
+.eatb-field .eatb-select__toggle:focus-visible {
+	box-shadow: none;
+}
+
+.eatb-select__icon {
 	flex: 0 0 auto;
 	color: var( --eatb-muted );
 }
 
-.eatb-type__value {
+.eatb-select__value {
 	flex: 1 1 auto;
 	min-width: 0;
 	overflow: hidden;
@@ -1236,11 +1332,11 @@ body.eatb-modal-open {
 	text-overflow: ellipsis;
 }
 
-.eatb-type__value.is-placeholder {
+.eatb-select__value.is-placeholder {
 	color: #9b9fb0;
 }
 
-.eatb-type__arrow {
+.eatb-select__arrow {
 	flex: 0 0 auto;
 	width: 14px;
 	height: 9px;
@@ -1250,32 +1346,53 @@ body.eatb-modal-open {
 	transition: transform 0.15s ease;
 }
 
-.eatb-type.is-open .eatb-type__arrow {
+.eatb-select.is-open .eatb-select__arrow {
 	transform: rotate( 180deg );
 }
 
-.eatb-type__list {
-	position: absolute;
-	z-index: 2;
-	top: calc( 100% + 10px );
-	right: 0;
-	left: 0;
+/*
+ * The list floats over whatever is under it, so it carries a shadow rather than
+ * a border: an outline would draw a second edge around a panel that is already
+ * lifted off the page.
+ */
+.eatb-select__list,
+.eatb-select__sublist {
 	margin: 0;
-	padding: 8px;
+	padding: 0;
 	list-style: none;
-	background: var( --eatb-surface );
-	border: 1px solid #e8e8f0;
-	border-radius: 12px;
-	box-shadow: 0 18px 40px rgba( 12, 14, 24, 0.12 );
 }
 
-.eatb-type__option {
+.eatb-select__list {
+	position: absolute;
+	z-index: 3;
+	top: calc( 100% + 8px );
+	right: 0;
+	left: 0;
+	max-height: 280px;
+	padding: 8px;
+	overflow-y: auto;
+	background: var( --eatb-surface );
+	border-radius: 12px;
+	box-shadow: 0 18px 40px rgba( 12, 14, 24, 0.16 ), 0 0 0 1px rgba( 12, 14, 24, 0.04 );
+}
+
+.eatb-select__group {
+	margin: 10px 0 4px;
+	padding: 0 14px;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var( --eatb-muted );
+}
+
+.eatb-select__option {
 	display: flex;
-	gap: 14px;
+	gap: 12px;
 	align-items: center;
 	width: 100%;
-	padding: 14px 14px;
-	font-size: 14px;
+	padding: 13px 14px;
+	font-size: 15px;
 	color: var( --eatb-text );
 	text-align: left;
 	cursor: pointer;
@@ -1285,17 +1402,28 @@ body.eatb-modal-open {
 	transition: background-color 0.12s ease;
 }
 
-.eatb-type__option:hover,
-.eatb-type__option:focus-visible {
+.eatb-select__option-label {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.eatb-select__option:hover,
+.eatb-select__option:focus-visible {
 	background: #f4f4f8;
 	outline: none;
 }
 
-.eatb-type__option.is-selected {
-	color: var( --eatb-accent );
-	background: #f1eefe;
+/* The chosen one keeps its tint whether or not the pointer is over it. */
+.eatb-select__option.is-selected {
+	background: #f4f1ff;
 }
 
-.eatb-type__option.is-selected .eatb-type__icon {
+.eatb-select__check {
+	flex: 0 0 auto;
 	color: var( --eatb-accent );
 }
+
+.eatb-select__option.is-selected .eatb-select__icon {
+	color: var( --eatb-accent );
+}
+

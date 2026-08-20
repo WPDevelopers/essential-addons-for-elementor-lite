@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Check } from './Select';
 import { request, strings } from '../utils/api';
 
 /**
@@ -92,6 +93,15 @@ export default function TargetSelect( { condition, value, label, onChange } ) {
 					setOpen( ( wasOpen ) => ! wasOpen );
 					window.setTimeout( () => inputRef.current && inputRef.current.focus(), 0 );
 				} }
+				onKeyDown={ ( event ) => {
+					// Escape closes the list, not the dialog around it. The modal
+					// stands aside while a panel is open; closing it is this
+					// control's job.
+					if ( 'Escape' === event.key && open ) {
+						event.stopPropagation();
+						setOpen( false );
+					}
+				} }
 				aria-expanded={ open }
 			>
 				<span className={ `eatb-target__value ${ value ? '' : 'is-placeholder' }` }>
@@ -132,6 +142,14 @@ export default function TargetSelect( { condition, value, label, onChange } ) {
 						value={ search }
 						placeholder={ strings.searchPlaceholder || 'Search…' }
 						onChange={ ( event ) => setSearch( event.target.value ) }
+						onKeyDown={ ( event ) => {
+							// Focus is in here, not on the toggle, so the same
+							// escape hatch has to be offered from the field.
+							if ( 'Escape' === event.key ) {
+								event.stopPropagation();
+								setOpen( false );
+							}
+						} }
 					/>
 
 					<ul className="eatb-target__list" role="listbox">
@@ -141,7 +159,8 @@ export default function TargetSelect( { condition, value, label, onChange } ) {
 								className={ `eatb-target__option ${ value ? '' : 'is-selected' }` }
 								onClick={ () => choose( 0, '' ) }
 							>
-								{ allLabel }
+								<span className="eatb-select__option-label">{ allLabel }</span>
+								{ value ? null : <Check /> }
 							</button>
 						</li>
 
@@ -152,7 +171,8 @@ export default function TargetSelect( { condition, value, label, onChange } ) {
 									className={ `eatb-target__option ${ value === item.id ? 'is-selected' : '' }` }
 									onClick={ () => choose( item.id, item.text ) }
 								>
-									{ item.text }
+									<span className="eatb-select__option-label">{ item.text }</span>
+									{ value === item.id ? <Check /> : null }
 								</button>
 							</li>
 						) ) }
