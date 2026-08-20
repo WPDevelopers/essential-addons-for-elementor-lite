@@ -17,6 +17,21 @@ export const OPEN_PRESETS_EVENT = 'eael/theme-builder/open-presets';
 const BUTTON_CLASS = 'eael-add-preset-button';
 
 /**
+ * What the button sits after, best anchor first.
+ *
+ * Elementor's own buttons in reverse row order: Build with AI, Add Template, Add
+ * Section. The first of these that is present wins, so the button lands at the
+ * end of Elementor's own run whichever of them the editor is showing — the AI
+ * button is absent when the feature is off, and the template button on some
+ * document types.
+ */
+const ANCHORS = [
+	'.e-ai-layout-button',
+	'.elementor-add-template-button',
+	'.elementor-add-section-button',
+];
+
+/**
  * Whether the editor exposes the pieces the button needs.
  *
  * @return {boolean} True when the behaviour can be registered.
@@ -113,10 +128,28 @@ export function registerPresetButton( { icon, label } ) {
 				}
 
 				const button = createButton( icon, label );
+				// Tried in order rather than as one selector list: a list matches in
+				// document order, which would return the *first* button in the row
+				// instead of the last one we want to sit behind.
+				const anchor = ANCHORS.reduce(
+					( found, selector ) => found || inner.querySelector( selector ),
+					null
+				);
+
+				// Anchored to Elementor's own last button rather than dropped at
+				// the end of the row. Every plugin that adds a button here inserts
+				// it before the "drag widget here" caption, so the row's tail order
+				// is decided by which behaviour Marionette happens to render last —
+				// which in turn depends on script order, and moves. Sitting on the
+				// end of Elementor's own run keeps this button in one place.
+				if ( anchor ) {
+					anchor.after( button );
+
+					return;
+				}
+
 				const title = inner.querySelector( '.elementor-add-section-drag-title' );
 
-				// Before the "drag widget here" caption, which is the row's last
-				// element — so the button sits at the end of the circles.
 				if ( title ) {
 					title.before( button );
 				} else {

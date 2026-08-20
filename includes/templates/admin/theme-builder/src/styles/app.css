@@ -945,13 +945,14 @@ body.eatb-modal-open {
  */
 .eatb-templately {
 	display: flex;
-	gap: 24px;
-	align-items: center;
 	justify-content: space-between;
-	margin-top: auto;
-	padding: 26px 30px;
-	background: #f7f7fa;
-	border-radius: 14px;
+    margin-top: auto;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: rgb(248, 250, 252);
+    border-radius: 12px;
+    box-shadow: rgba(15, 23, 42, 0.18) 0px 8px 20px -6px, rgba(15, 23, 42, 0.12) 0px -6px 14px -8px;
 }
 
 .eatb-templately__copy {
