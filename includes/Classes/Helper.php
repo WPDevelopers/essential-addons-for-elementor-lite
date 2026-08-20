@@ -1187,7 +1187,7 @@ class Helper
 		eael-product-zoom-in woocommerce">
 			<div class="eael-product-modal-bg"></div>
 			<div class="eael-product-popup-details <?php echo esc_attr( implode( ' ', $popup_classes ) ); ?>">
-				<div id="product-<?php esc_attr( get_the_ID() ); ?>" <?php post_class( 'product' ); ?>>
+				<div id="product-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
