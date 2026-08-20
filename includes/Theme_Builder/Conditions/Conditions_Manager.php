@@ -162,11 +162,12 @@ class Conditions_Manager {
 	 * @return array|\WP_Error Sanitized rows, or an error explaining the problem.
 	 */
 	public function validate_conditions( $conditions ) {
-		if ( ! is_array( $conditions ) || empty( $conditions ) ) {
-			return new \WP_Error(
-				'eael_tb_no_conditions',
-				__( 'Add at least one display condition so we know where to show this template.', 'essential-addons-for-elementor-lite' )
-			);
+		// An empty set is a valid answer, not an error. A template with no
+		// conditions is published and matches nothing — which is what someone who
+		// has not decided yet wants, and what Elementor's own theme builder does.
+		// The dialog says as much rather than refusing the save.
+		if ( ! is_array( $conditions ) ) {
+			return [];
 		}
 
 		foreach ( $conditions as $condition ) {
@@ -198,7 +199,10 @@ class Conditions_Manager {
 			}
 		}
 
-		if ( ! $has_include ) {
+		// Only meaningful once there are rows. A set of nothing but exclusions can
+		// never match anything, which is a mistake worth naming — but a set of
+		// nothing at all is the "not decided yet" answer, and that one is allowed.
+		if ( ! empty( $sanitized ) && ! $has_include ) {
 			return new \WP_Error(
 				'eael_tb_no_include',
 				__( 'At least one condition must be an "Include" rule, otherwise the template can never be displayed.', 'essential-addons-for-elementor-lite' )

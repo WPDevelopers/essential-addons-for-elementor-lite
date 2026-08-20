@@ -37,14 +37,6 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 		} ) );
 	} );
 
-	// Whether the template arrived with conditions. The confirm button is held
-	// back on an empty set — a template with nowhere to appear is rarely what
-	// anyone means — but not when the empty set is the change: removing every row
-	// and saving is how conditions are cleared.
-	const [ hadConditions ] = useState( () => (
-		Array.isArray( template.conditions ) && template.conditions.length > 0
-	) );
-
 	const [ busy, setBusy ] = useState( false );
 	const [ error, setError ] = useState( '' );
 	const [ conflicts, setConflicts ] = useState( [] );
@@ -135,7 +127,7 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 							type="button"
 							className="eatb-button eatb-button--primary"
 							onClick={ save }
-							disabled={ busy || ( ! conditions.length && ! hadConditions ) }
+							disabled={ busy }
 						>
 							{ busy ? workingLabel : confirmLabel }
 						</button>
@@ -179,9 +171,13 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 				</button>
 			</div>
 
-			<p className="eatb-conditions__summary">
-				{ summary || strings.conditionsSummaryEmpty || 'No conditions yet — this template stays published but hidden until you add one.' }
-			</p>
+			{ /*
+			  * Only when there is something to report. With no rows the strip had
+			  * nothing to say but that the template would not appear anywhere —
+			  * which reads as a warning about a state that is allowed, in front of
+			  * a user who has not asked for anything yet.
+			  */ }
+			{ summary ? <p className="eatb-conditions__summary">{ summary }</p> : null }
 
 			{ error ? <Notice type="error">{ error }</Notice> : null }
 

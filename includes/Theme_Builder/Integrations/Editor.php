@@ -129,6 +129,30 @@ class Editor {
 	}
 
 	/**
+	 * Whether this editor load should open the preset picker, once.
+	 *
+	 * The creation flow leaves a flag on the template it just made; reading it
+	 * here spends it. A reload is a second opinion, not the same arrival, and a
+	 * picker that reopened on every load of a template the user had already
+	 * decided to build by hand would be a dialog they cannot get rid of.
+	 *
+	 * @since 6.7.3
+	 *
+	 * @param int $template_id Template being edited.
+	 *
+	 * @return bool
+	 */
+	private function take_preset_offer( $template_id ) {
+		if ( ! get_post_meta( $template_id, Post_Type::META_OFFER_PRESETS, true ) ) {
+			return false;
+		}
+
+		delete_post_meta( $template_id, Post_Type::META_OFFER_PRESETS );
+
+		return true;
+	}
+
+	/**
 	 * Editor context handed to the React app.
 	 *
 	 * The template half is absent on an ordinary page or post, which is how the
@@ -156,6 +180,7 @@ class Editor {
 		return array_merge(
 			$data,
 			[
+				'offerPresets' => $this->take_preset_offer( $template->get_id() ),
 				'templateId' => $template->get_id(),
 				'type'       => $template->get_type(),
 				'typeLabel'  => $template->get_type_label(),

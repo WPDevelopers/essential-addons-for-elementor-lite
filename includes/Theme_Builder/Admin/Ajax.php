@@ -51,7 +51,6 @@ class Ajax {
 		add_action( 'wp_ajax_eael_theme_builder_quick_edit', [ $this, 'quick_edit' ] );
 		add_action( 'wp_ajax_eael_theme_builder_bulk_edit', [ $this, 'bulk_edit' ] );
 		add_action( 'wp_ajax_eael_theme_builder_get_preset', [ $this, 'get_preset' ] );
-		add_action( 'wp_ajax_eael_theme_builder_apply_preset', [ $this, 'apply_preset' ] );
 		add_action( 'wp_ajax_eael_theme_builder_enable_templately', [ $this, 'enable_templately' ] );
 	}
 
@@ -428,6 +427,10 @@ class Ajax {
 			wp_send_json_error( [ 'message' => $template->get_error_message() ] );
 		}
 
+		// The presets are offered in the editor, one redirect away — see
+		// `Post_Type::META_OFFER_PRESETS`.
+		update_post_meta( $template->get_id(), Post_Type::META_OFFER_PRESETS, 1 );
+
 		Template_Cache::flush();
 
 		wp_send_json_success(
@@ -537,49 +540,6 @@ class Ajax {
 		}
 
 		wp_send_json_success( [ 'content' => $content ] );
-	}
-
-	/**
-	 * Lay a preset into a template, server side.
-	 *
-	 * The editor inserts presets itself — it has a document open and a canvas to
-	 * put them on. The creation flow has neither: the template is a draft that
-	 * nobody has opened yet, so the preset is written into it here and the user
-	 * arrives in the editor with it already on the canvas.
-	 *
-	 * @since 6.7.3
-	 */
-	public function apply_preset() {
-		$this->verify_request();
-
-		// phpcs:disable WordPress.Security.NonceVerification.Missing -- verified in verify_request().
-		$template_id = isset( $_POST['template_id'] ) ? absint( $_POST['template_id'] ) : 0;
-		$slug        = isset( $_POST['preset'] ) ? sanitize_key( wp_unslash( $_POST['preset'] ) ) : '';
-		// phpcs:enable WordPress.Security.NonceVerification.Missing
-
-		$template = Template::get( $template_id );
-
-		if ( ! $template ) {
-			wp_send_json_error( [ 'message' => __( 'This template no longer exists.', 'essential-addons-for-elementor-lite' ) ] );
-		}
-
-		if ( ! current_user_can( 'edit_post', $template_id ) ) {
-			wp_send_json_error( [ 'message' => __( 'You are not allowed to edit this template.', 'essential-addons-for-elementor-lite' ) ], 403 );
-		}
-
-		$content = Preset_Library::get_content( $slug );
-
-		if ( null === $content ) {
-			wp_send_json_error( [ 'message' => __( 'This preset is no longer available.', 'essential-addons-for-elementor-lite' ) ] );
-		}
-
-		if ( ! $template->save_content( $content ) ) {
-			wp_send_json_error( [ 'message' => __( 'The preset could not be added to this template.', 'essential-addons-for-elementor-lite' ) ] );
-		}
-
-		Template_Cache::flush();
-
-		wp_send_json_success( [ 'edit_url' => $template->get_edit_url() ] );
 	}
 
 	/**

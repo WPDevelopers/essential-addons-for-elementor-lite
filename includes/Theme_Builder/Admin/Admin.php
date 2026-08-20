@@ -601,7 +601,6 @@ class Admin {
 				'conditionsTitle'  => __( 'Where do you want to display this template?', 'essential-addons-for-elementor-lite' ),
 				/* translators: %s: template type, lowercase — "header" or "footer". */
 				'conditionsIntro'  => __( 'Set the conditions that determine where this %s is used. Choose “Entire site” to show it everywhere.', 'essential-addons-for-elementor-lite' ),
-				'conditionsSummaryEmpty' => __( 'No conditions yet — this template stays published but hidden until you add one.', 'essential-addons-for-elementor-lite' ),
 				/* translators: %s: what the row targets, e.g. "All archives". */
 				'conditionsShown'  => __( 'Shown on %s', 'essential-addons-for-elementor-lite' ),
 				/* translators: %s: what the row targets, e.g. "All archives". */

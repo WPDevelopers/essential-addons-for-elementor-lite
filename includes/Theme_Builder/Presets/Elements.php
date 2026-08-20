@@ -239,6 +239,25 @@ class Elements {
 	}
 
 	/**
+	 * The wordmark the starter presets ship with.
+	 *
+	 * A fixed image rather than the site's own logo. Two of the presets are meant
+	 * to look finished the moment they land — on a site with no logo set, the
+	 * alternative is the site title in whatever the theme's heading font is,
+	 * which is the one part of the layout that would arrive looking unmade.
+	 *
+	 * It is artwork to replace, like the placeholder above it: the user swaps in
+	 * their own from the widget's own image control.
+	 *
+	 * @since 6.7.4
+	 *
+	 * @return string
+	 */
+	public static function brand_logo() {
+		return EAEL_PLUGIN_URL . 'assets/admin/images/logo.png';
+	}
+
+	/**
 	 * Is a widget registered for this editor session.
 	 *
 	 * Asked of the widgets manager rather than answered by checking for a class:

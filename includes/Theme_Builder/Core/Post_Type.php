@@ -93,6 +93,17 @@ class Post_Type {
 	const META_ACTIVE = '_ea_template_active';
 
 	/**
+	 * Set on a template the creation flow has just made, and cleared the first
+	 * time the editor loads it.
+	 *
+	 * The flow spans a page load: the type is chosen on the dashboard and the
+	 * presets are offered in the editor, so the intent has to survive the
+	 * redirect. A flag on the post does that without putting anything in the URL
+	 * the user could bookmark, share or reload their way back into.
+	 */
+	const META_OFFER_PRESETS = '_ea_template_offer_presets';
+
+	/**
 	 * Wire up registration hooks.
 	 *
 	 * @since 6.7.3

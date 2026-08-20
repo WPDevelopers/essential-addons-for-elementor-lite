@@ -18,16 +18,16 @@ const MAX_LOADER_MS = 5000;
 /**
  * The header and footer preset picker.
  *
- * Opened from two places, and it behaves differently in each:
+ * Opened from two places, and scoped differently in each:
  *
  * - From the EA button in the editor's add-element row, with no `type`. Both
- *   kinds are offered under tabs, and the chosen preset's elements are handed
- *   back to the caller to drop onto the open canvas.
- * - From the creation flow, with the `type` and `templateId` of the template
- *   just created. There is only one kind worth showing then, so the tabs go and
- *   the title names the type; and there is no canvas open, so the preset is
- *   written into the template server side and `onApplied` receives the URL to
- *   go on to.
+ *   kinds are offered under tabs.
+ * - On arrival from the creation flow, with the `type` that was chosen there.
+ *   There is only one kind worth showing then, so the tabs go and the title
+ *   names the type instead.
+ *
+ * Either way the chosen preset's elements are handed back to the caller, which
+ * drops them onto the canvas.
  *
  * A card carries its own preview so the choice is made by looking rather than by
  * reading names — which is also why the dialog carries no explainer beyond its
@@ -42,15 +42,11 @@ const MAX_LOADER_MS = 5000;
  * that fill in one by one — the loader turns that into one deliberate wait.
  *
  * @param {Object}   props
- * @param {string}   [props.type]       Show only this type, and drop the tabs.
- * @param {number}   [props.templateId] Apply the preset to this template
- *                                      instead of handing back its elements.
- * @param {Function} props.onClose      Dismiss handler.
- * @param {Function} [props.onInsert]   Receives the fetched elements.
- * @param {Function} [props.onApplied]  Receives the edit URL after a preset has
- *                                      been written into `templateId`.
+ * @param {string}   [props.type]     Show only this type, and drop the tabs.
+ * @param {Function} props.onClose    Dismiss handler.
+ * @param {Function} props.onInsert   Receives the fetched elements.
  */
-export default function PresetLibrary( { type = '', templateId = 0, onClose, onInsert, onApplied } ) {
+export default function PresetLibrary( { type = '', onClose, onInsert } ) {
 	const editor = settings.editor || {};
 
 	// Memoized because the loading effect keys off it: the fallback would be a
@@ -137,12 +133,7 @@ export default function PresetLibrary( { type = '', templateId = 0, onClose, onI
 		setBusy( preset.slug );
 
 		try {
-			const response = templateId
-				? await request( 'eael_theme_builder_apply_preset', {
-					template_id: templateId,
-					preset: preset.slug,
-				} )
-				: await request( 'eael_theme_builder_get_preset', { preset: preset.slug } );
+			const response = await request( 'eael_theme_builder_get_preset', { preset: preset.slug } );
 
 			if ( ! response || ! response.success ) {
 				setError( errorMessage( response ) );
@@ -150,11 +141,7 @@ export default function PresetLibrary( { type = '', templateId = 0, onClose, onI
 				return;
 			}
 
-			if ( templateId ) {
-				onApplied( response.data.edit_url );
-			} else {
-				onInsert( response.data.content );
-			}
+			onInsert( response.data.content );
 		} catch ( requestError ) {
 			setError( strings.genericError || 'Something went wrong. Please try again.' );
 		} finally {

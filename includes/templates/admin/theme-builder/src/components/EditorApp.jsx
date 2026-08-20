@@ -87,15 +87,34 @@ export default function EditorApp() {
 			label: strings.presetsButton || 'Essential Addons presets',
 		} );
 
-		const onOpen = ( event ) => setPresetTarget( ( event.detail && event.detail.options ) || {} );
+		const onOpen = ( event ) => setPresetTarget( {
+			options: ( event.detail && event.detail.options ) || {},
+			// Opened by hand, from a row that could be anywhere in any document:
+			// both kinds are on offer, under tabs.
+			type: '',
+		} );
 
 		window.addEventListener( OPEN_PRESETS_EVENT, onOpen );
 
 		return () => window.removeEventListener( OPEN_PRESETS_EVENT, onOpen );
 	}, [] );
 
+	// Arriving from the creation flow, the picker opens itself.
+	//
+	// The type was chosen on the dashboard a redirect ago, so there is nothing
+	// left to ask — only that one kind is shown. There is no click to take an
+	// insertion point from either: the canvas is empty, so the preset goes where
+	// the only thing on it can go.
+	useEffect( () => {
+		if ( ! editor.offerPresets || ! Array.isArray( settings.presets ) || ! settings.presets.length ) {
+			return;
+		}
+
+		setPresetTarget( { options: {}, type: editor.type || '' } );
+	}, [ editor.offerPresets, editor.type ] );
+
 	const onPresetChosen = useCallback( ( content ) => {
-		const target = presetTarget || {};
+		const target = ( presetTarget && presetTarget.options ) || {};
 
 		setPresetTarget( null );
 
@@ -131,6 +150,7 @@ export default function EditorApp() {
 	if ( presetTarget ) {
 		return (
 			<PresetLibrary
+				type={ presetTarget.type }
 				onClose={ () => setPresetTarget( null ) }
 				onInsert={ onPresetChosen }
 			/>

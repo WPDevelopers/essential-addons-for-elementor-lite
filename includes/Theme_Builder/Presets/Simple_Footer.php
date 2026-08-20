@@ -44,11 +44,6 @@ class Simple_Footer {
 	const ACCENT = '#5B3DF5';
 
 	/**
-	 * Heading ink.
-	 */
-	const INK = '#1D1F2B';
-
-	/**
 	 * Body copy.
 	 */
 	const BODY = '#4B5563';
@@ -116,47 +111,29 @@ class Simple_Footer {
 	}
 
 	/**
-	 * The site's logo, or its name.
+	 * The preset's wordmark.
+	 *
+	 * The shipped logo, not the site's own — see `Elements::brand_logo()`.
 	 *
 	 * @since 6.7.3
 	 *
 	 * @return array
 	 */
 	protected static function brand() {
-		$logo_id = (int) get_theme_mod( 'custom_logo' );
-		$logo    = $logo_id ? wp_get_attachment_image_url( $logo_id, 'full' ) : '';
-
-		if ( $logo ) {
-			return Elements::widget(
-				'image',
-				[
-					'image'        => [ 'id' => $logo_id, 'url' => $logo ],
-					'image_size'   => 'full',
-					'align'        => 'center',
-					'width'        => Elements::size( 170 ),
-					'width_mobile' => Elements::size( 140 ),
-					'link_to'      => 'custom',
-					'link'         => Elements::link( home_url( '/' ) ),
-				]
-			);
-		}
-
-		$name = get_bloginfo( 'name' );
-		$name = '' !== trim( (string) $name ) ? $name : __( 'Your Brand', 'essential-addons-for-elementor-lite' );
-
 		return Elements::widget(
-			'heading',
+			'image',
 			[
-				'title'                       => $name,
-				'header_size'                 => 'h2',
-				'align'                       => 'center',
-				'link'                        => Elements::link( home_url( '/' ) ),
-				'title_color'                 => self::INK,
-				'typography_typography'       => 'custom',
-				'typography_font_size'        => Elements::size( 28 ),
-				'typography_font_size_mobile' => Elements::size( 24 ),
-				'typography_font_weight'      => '700',
-				'typography_letter_spacing'   => Elements::size( -0.4 ),
+				// An empty id is how Elementor's media control spells "no
+				// attachment"; the file is shipped with the plugin, not in the
+				// library. Leaving the key out entirely makes the editor look the
+				// missing attachment up and warn about it on every load.
+				'image'        => [ 'id' => '', 'url' => Elements::brand_logo() ],
+				'image_size'   => 'full',
+				'align'        => 'center',
+				'width'        => Elements::size( 170 ),
+				'width_mobile' => Elements::size( 140 ),
+				'link_to'      => 'custom',
+				'link'         => Elements::link( home_url( '/' ) ),
 			]
 		);
 	}

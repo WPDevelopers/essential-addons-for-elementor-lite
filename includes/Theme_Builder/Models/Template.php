@@ -419,37 +419,6 @@ class Template {
 	}
 
 	/**
-	 * Replace the template's canvas with a set of Elementor elements.
-	 *
-	 * Written through Elementor's own document rather than straight into
-	 * `_elementor_data`: the meta is only half of a saved document — the version
-	 * stamps, the generated CSS file and the page asset manifest are the rest,
-	 * and a canvas written past them renders from a stale stylesheet.
-	 *
-	 * Meant for a template that has just been created and has nothing to lose.
-	 * It overwrites, it does not append.
-	 *
-	 * @since 6.7.3
-	 *
-	 * @param array $elements Elementor elements array.
-	 *
-	 * @return bool True when the document accepted the save.
-	 */
-	public function save_content( $elements ) {
-		if ( ! is_array( $elements ) || ! class_exists( '\Elementor\Plugin' ) ) {
-			return false;
-		}
-
-		$document = \Elementor\Plugin::$instance->documents->get( $this->get_id() );
-
-		if ( ! $document ) {
-			return false;
-		}
-
-		return (bool) $document->save( [ 'elements' => $elements ] );
-	}
-
-	/**
 	 * Elementor edit URL.
 	 *
 	 * @since 6.7.3
