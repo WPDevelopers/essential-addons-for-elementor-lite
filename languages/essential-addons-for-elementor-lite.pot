@@ -73,11 +73,11 @@ msgstr ""
 msgid "Post Author"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:477, ../includes/Controls/Select2.php:30, ../includes/Elements/Betterdocs_Category_Box.php:632, ../includes/Elements/Betterdocs_Category_Box.php:671, ../includes/Elements/Betterdocs_Category_Grid.php:595, ../includes/Elements/Betterdocs_Category_Grid.php:1152, ../includes/Elements/Caldera_Forms.php:122, ../includes/Elements/Caldera_Forms.php:265, ../includes/Elements/Contact_Form_7.php:164, ../includes/Elements/Contact_Form_7.php:475, ../includes/Elements/Cta_Box.php:335, ../includes/Elements/Cta_Box.php:352, ../includes/Elements/Cta_Box.php:355, ../includes/Elements/Cta_Box.php:1016, ../includes/Elements/Dual_Color_Header.php:143, ../includes/Elements/Dual_Color_Header.php:198, ../includes/Elements/Dual_Color_Header.php:201, ../includes/Elements/Dual_Color_Header.php:627, ../includes/Elements/Event_Calendar.php:171, ../includes/Elements/Event_Calendar.php:1150, ../includes/Elements/Event_Calendar.php:1166, ../includes/Elements/Event_Calendar.php:1167, ../includes/Elements/Event_Calendar.php:2384, ../includes/Elements/Event_Calendar.php:3098, ../includes/Elements/Feature_List.php:193, ../includes/Elements/Feature_List.php:195, ../includes/Elements/Feature_List.php:849, ../includes/Elements/Flip_Box.php:811, ../includes/Elements/FluentForm.php:163, ../includes/Elements/FluentForm.php:299, ../includes/Elements/Formstack.php:213, ../includes/Elements/Formstack.php:487, ../includes/Elements/GravityForms.php:170, ../includes/Elements/GravityForms.php:200, ../includes/Elements/GravityForms.php:521, ../includes/Elements/GravityForms.php:601, ../includes/Elements/Image_Accordion.php:213, ../includes/Elements/Image_Accordion.php:518, ../includes/Elements/Info_Box.php:286, ../includes/Elements/Info_Box.php:1743, ../includes/Elements/Interactive_Circle.php:201, ../includes/Elements/Login_Register.php:4241, ../includes/Elements/Login_Register.php:5731, ../includes/Elements/NFT_Gallery.php:440, ../includes/Elements/NFT_Gallery.php:1250, ../includes/Elements/NinjaForms.php:127, ../includes/Elements/NinjaForms.php:143, ../includes/Elements/NinjaForms.php:450, ../includes/Elements/Post_Grid.php:254, ../includes/Elements/Post_Grid.php:897, ../includes/Elements/Post_Grid.php:1336, ../includes/Elements/Post_Timeline.php:299, ../includes/Elements/Pricing_Table.php:158, ../includes/Elements/Product_Grid.php:3149, ../includes/Elements/Progress_Bar.php:131, ../includes/Elements/Progress_Bar.php:791, ../includes/Elements/Woo_Cart.php:209, ../includes/Elements/Woo_Cart.php:473, ../includes/Elements/Woo_Cart.php:607, ../includes/Elements/Woo_Cart.php:681, ../includes/Elements/Woo_Cart.php:762, ../includes/Elements/Woo_Checkout.php:400, ../includes/Elements/Woo_Checkout.php:525, ../includes/Elements/Woo_Checkout.php:699, ../includes/Elements/Woo_Checkout.php:711, ../includes/Elements/Woo_Checkout.php:799, ../includes/Elements/Woo_Product_Carousel.php:259, ../includes/Elements/Woo_Product_Carousel.php:2059, ../includes/Elements/Woo_Product_Gallery.php:2229, ../includes/Elements/Woo_Product_List.php:349, ../includes/Elements/Woo_Product_List.php:894, ../includes/Elements/Woo_Product_List.php:1712, ../includes/Elements/Woo_Product_List.php:2394, ../includes/Elements/Woo_Product_List.php:3060, ../includes/Elements/Woo_Product_Tabs.php:107, ../includes/Elements/Woo_Product_Title.php:280, ../includes/Elements/WpForms.php:128, ../includes/Elements/WpForms.php:158, ../includes/Elements/WpForms.php:425, ../includes/Extensions/Table_of_Content.php:129, ../includes/Traits/Woo_Product_Comparable.php:41, ../includes/Traits/Woo_Product_Comparable.php:75, ../includes/Traits/Woo_Product_Comparable.php:1083, ../includes/Traits/Woo_Product_Comparable.php:1202, ../includes/Theme_Builder/Admin/Admin.php:640, ../includes/Theme_Builder/Admin/Templates_List_Table.php:129
+#: ../includes/Classes/Helper.php:477, ../includes/Controls/Select2.php:30, ../includes/Elements/Betterdocs_Category_Box.php:632, ../includes/Elements/Betterdocs_Category_Box.php:671, ../includes/Elements/Betterdocs_Category_Grid.php:595, ../includes/Elements/Betterdocs_Category_Grid.php:1152, ../includes/Elements/Caldera_Forms.php:122, ../includes/Elements/Caldera_Forms.php:265, ../includes/Elements/Contact_Form_7.php:164, ../includes/Elements/Contact_Form_7.php:475, ../includes/Elements/Cta_Box.php:335, ../includes/Elements/Cta_Box.php:352, ../includes/Elements/Cta_Box.php:355, ../includes/Elements/Cta_Box.php:1016, ../includes/Elements/Dual_Color_Header.php:143, ../includes/Elements/Dual_Color_Header.php:198, ../includes/Elements/Dual_Color_Header.php:201, ../includes/Elements/Dual_Color_Header.php:627, ../includes/Elements/Event_Calendar.php:171, ../includes/Elements/Event_Calendar.php:1150, ../includes/Elements/Event_Calendar.php:1166, ../includes/Elements/Event_Calendar.php:1167, ../includes/Elements/Event_Calendar.php:2384, ../includes/Elements/Event_Calendar.php:3098, ../includes/Elements/Feature_List.php:193, ../includes/Elements/Feature_List.php:195, ../includes/Elements/Feature_List.php:849, ../includes/Elements/Flip_Box.php:811, ../includes/Elements/FluentForm.php:163, ../includes/Elements/FluentForm.php:299, ../includes/Elements/Formstack.php:213, ../includes/Elements/Formstack.php:487, ../includes/Elements/GravityForms.php:170, ../includes/Elements/GravityForms.php:200, ../includes/Elements/GravityForms.php:521, ../includes/Elements/GravityForms.php:601, ../includes/Elements/Image_Accordion.php:213, ../includes/Elements/Image_Accordion.php:518, ../includes/Elements/Info_Box.php:286, ../includes/Elements/Info_Box.php:1743, ../includes/Elements/Interactive_Circle.php:201, ../includes/Elements/Login_Register.php:4241, ../includes/Elements/Login_Register.php:5731, ../includes/Elements/NFT_Gallery.php:440, ../includes/Elements/NFT_Gallery.php:1250, ../includes/Elements/NinjaForms.php:127, ../includes/Elements/NinjaForms.php:143, ../includes/Elements/NinjaForms.php:450, ../includes/Elements/Post_Grid.php:254, ../includes/Elements/Post_Grid.php:897, ../includes/Elements/Post_Grid.php:1336, ../includes/Elements/Post_Timeline.php:299, ../includes/Elements/Pricing_Table.php:158, ../includes/Elements/Product_Grid.php:3149, ../includes/Elements/Progress_Bar.php:131, ../includes/Elements/Progress_Bar.php:791, ../includes/Elements/Woo_Cart.php:209, ../includes/Elements/Woo_Cart.php:473, ../includes/Elements/Woo_Cart.php:607, ../includes/Elements/Woo_Cart.php:681, ../includes/Elements/Woo_Cart.php:762, ../includes/Elements/Woo_Checkout.php:400, ../includes/Elements/Woo_Checkout.php:525, ../includes/Elements/Woo_Checkout.php:699, ../includes/Elements/Woo_Checkout.php:711, ../includes/Elements/Woo_Checkout.php:799, ../includes/Elements/Woo_Product_Carousel.php:259, ../includes/Elements/Woo_Product_Carousel.php:2059, ../includes/Elements/Woo_Product_Gallery.php:2229, ../includes/Elements/Woo_Product_List.php:349, ../includes/Elements/Woo_Product_List.php:894, ../includes/Elements/Woo_Product_List.php:1712, ../includes/Elements/Woo_Product_List.php:2394, ../includes/Elements/Woo_Product_List.php:3060, ../includes/Elements/Woo_Product_Tabs.php:107, ../includes/Elements/Woo_Product_Title.php:280, ../includes/Elements/WpForms.php:128, ../includes/Elements/WpForms.php:158, ../includes/Elements/WpForms.php:425, ../includes/Extensions/Table_of_Content.php:129, ../includes/Traits/Woo_Product_Comparable.php:41, ../includes/Traits/Woo_Product_Comparable.php:75, ../includes/Traits/Woo_Product_Comparable.php:1083, ../includes/Traits/Woo_Product_Comparable.php:1202, ../includes/Theme_Builder/Admin/Admin.php:639, ../includes/Theme_Builder/Admin/Templates_List_Table.php:129
 msgid "Title"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:478, ../includes/Elements/Event_Calendar.php:1305, ../includes/Elements/Event_Calendar.php:1321, ../includes/Elements/Event_Calendar.php:1322, ../includes/Elements/Event_Calendar.php:2740, ../includes/Elements/Event_Calendar.php:3126, ../includes/Elements/Facebook_Feed.php:1000, ../includes/Elements/Post_Grid.php:674, ../includes/Elements/Product_Grid.php:149, ../includes/Elements/Woo_Product_Carousel.php:137, ../includes/Elements/Woo_Product_Gallery.php:119, ../includes/Elements/Woo_Product_List.php:151, ../includes/Traits/Controls.php:310, ../includes/Theme_Builder/Admin/Admin.php:642, ../includes/Theme_Builder/Admin/Templates_List_Table.php:134
+#: ../includes/Classes/Helper.php:478, ../includes/Elements/Event_Calendar.php:1305, ../includes/Elements/Event_Calendar.php:1321, ../includes/Elements/Event_Calendar.php:1322, ../includes/Elements/Event_Calendar.php:2740, ../includes/Elements/Event_Calendar.php:3126, ../includes/Elements/Facebook_Feed.php:1000, ../includes/Elements/Post_Grid.php:674, ../includes/Elements/Product_Grid.php:149, ../includes/Elements/Woo_Product_Carousel.php:137, ../includes/Elements/Woo_Product_Gallery.php:119, ../includes/Elements/Woo_Product_List.php:151, ../includes/Traits/Controls.php:310, ../includes/Theme_Builder/Admin/Admin.php:641, ../includes/Theme_Builder/Admin/Templates_List_Table.php:134
 msgid "Date"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgstr ""
 msgid "Buy Now"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:2238, ../includes/Theme_Builder/Core/Post_Type.php:129
+#: ../includes/Classes/Helper.php:2238, ../includes/Theme_Builder/Core/Post_Type.php:140
 msgid "Edit Template"
 msgstr ""
 
@@ -393,7 +393,7 @@ msgstr ""
 msgid "Rank tracking with GA4"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:315, ../includes/Theme_Builder/Admin/Admin.php:687
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:315, ../includes/Theme_Builder/Admin/Admin.php:686
 msgid "Templately"
 msgstr ""
 
@@ -1073,7 +1073,7 @@ msgstr ""
 msgid "Background Size"
 msgstr ""
 
-#: ../includes/Controls/EAEL_Background.php:586, ../includes/Controls/EAEL_Background.php:605, ../includes/Elements/Adv_Tabs.php:116, ../includes/Elements/Caldera_Forms.php:420, ../includes/Elements/Code_Snippet.php:211, ../includes/Elements/Contact_Form_7.php:334, ../includes/Elements/Contact_Form_7.php:844, ../includes/Elements/Countdown.php:94, ../includes/Elements/Creative_Button.php:284, ../includes/Elements/Cta_Box.php:207, ../includes/Elements/Cta_Box.php:1147, ../includes/Elements/Cta_Box.php:1688, ../includes/Elements/Dual_Color_Header.php:93, ../includes/Elements/Event_Calendar.php:912, ../includes/Elements/Event_Calendar.php:924, ../includes/Elements/Flip_Box.php:1046, ../includes/Elements/FluentForm.php:466, ../includes/Elements/Formstack.php:345, ../includes/Elements/GravityForms.php:358, ../includes/Elements/Login_Register.php:610, ../includes/Elements/Login_Register.php:1068, ../includes/Elements/Login_Register.php:1283, ../includes/Elements/Login_Register.php:1442, ../includes/Elements/Login_Register.php:3010, ../includes/Elements/Login_Register.php:3359, ../includes/Elements/Login_Register.php:3541, ../includes/Elements/Login_Register.php:3806, ../includes/Elements/Login_Register.php:3950, ../includes/Elements/Login_Register.php:4100, ../includes/Elements/Login_Register.php:4243, ../includes/Elements/Login_Register.php:4334, ../includes/Elements/Login_Register.php:4432, ../includes/Elements/Login_Register.php:4634, ../includes/Elements/Login_Register.php:4679, ../includes/Elements/Login_Register.php:4711, ../includes/Elements/Login_Register.php:5142, ../includes/Elements/Login_Register.php:5290, ../includes/Elements/Login_Register.php:5419, ../includes/Elements/Login_Register.php:5906, ../includes/Elements/Login_Register.php:6331, ../includes/Elements/NinjaForms.php:285, ../includes/Elements/Pricing_Table.php:91, ../includes/Elements/Pricing_Table.php:585, ../includes/Elements/Product_Grid.php:269, ../includes/Elements/Simple_Menu.php:428, ../includes/Elements/Simple_Menu.php:554, ../includes/Elements/Simple_Menu.php:916, ../includes/Elements/Simple_Menu.php:1364, ../includes/Elements/Sticky_Video.php:399, ../includes/Elements/Team_Member.php:547, ../includes/Elements/Testimonial.php:101, ../includes/Elements/Testimonial.php:293, ../includes/Elements/Testimonial.php:395, ../includes/Elements/TypeForm.php:204, ../includes/Elements/WeForms.php:165, ../includes/Elements/WeForms.php:635, ../includes/Elements/Woo_Checkout.php:130, ../includes/Elements/Woo_Product_Images.php:611, ../includes/Elements/WpForms.php:282, ../includes/Extensions/Hover_Effect.php:688, ../includes/Extensions/Hover_Effect.php:1331, ../includes/Extensions/Image_Masking.php:416, ../includes/Extensions/Image_Masking.php:467, ../includes/Traits/Controls.php:821, ../includes/Traits/Controls.php:2044, ../includes/Traits/Login_Registration.php:1747, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/MegaMenu/Controls/Style_Controls.php:251, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:4, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:6, ../includes/Template/Post-Timeline/default.php:4, ../includes/Theme_Builder/Core/Post_Type.php:426
+#: ../includes/Controls/EAEL_Background.php:586, ../includes/Controls/EAEL_Background.php:605, ../includes/Elements/Adv_Tabs.php:116, ../includes/Elements/Caldera_Forms.php:420, ../includes/Elements/Code_Snippet.php:211, ../includes/Elements/Contact_Form_7.php:334, ../includes/Elements/Contact_Form_7.php:844, ../includes/Elements/Countdown.php:94, ../includes/Elements/Creative_Button.php:284, ../includes/Elements/Cta_Box.php:207, ../includes/Elements/Cta_Box.php:1147, ../includes/Elements/Cta_Box.php:1688, ../includes/Elements/Dual_Color_Header.php:93, ../includes/Elements/Event_Calendar.php:912, ../includes/Elements/Event_Calendar.php:924, ../includes/Elements/Flip_Box.php:1046, ../includes/Elements/FluentForm.php:466, ../includes/Elements/Formstack.php:345, ../includes/Elements/GravityForms.php:358, ../includes/Elements/Login_Register.php:610, ../includes/Elements/Login_Register.php:1068, ../includes/Elements/Login_Register.php:1283, ../includes/Elements/Login_Register.php:1442, ../includes/Elements/Login_Register.php:3010, ../includes/Elements/Login_Register.php:3359, ../includes/Elements/Login_Register.php:3541, ../includes/Elements/Login_Register.php:3806, ../includes/Elements/Login_Register.php:3950, ../includes/Elements/Login_Register.php:4100, ../includes/Elements/Login_Register.php:4243, ../includes/Elements/Login_Register.php:4334, ../includes/Elements/Login_Register.php:4432, ../includes/Elements/Login_Register.php:4634, ../includes/Elements/Login_Register.php:4679, ../includes/Elements/Login_Register.php:4711, ../includes/Elements/Login_Register.php:5142, ../includes/Elements/Login_Register.php:5290, ../includes/Elements/Login_Register.php:5419, ../includes/Elements/Login_Register.php:5906, ../includes/Elements/Login_Register.php:6331, ../includes/Elements/NinjaForms.php:285, ../includes/Elements/Pricing_Table.php:91, ../includes/Elements/Pricing_Table.php:585, ../includes/Elements/Product_Grid.php:269, ../includes/Elements/Simple_Menu.php:428, ../includes/Elements/Simple_Menu.php:554, ../includes/Elements/Simple_Menu.php:916, ../includes/Elements/Simple_Menu.php:1364, ../includes/Elements/Sticky_Video.php:399, ../includes/Elements/Team_Member.php:547, ../includes/Elements/Testimonial.php:101, ../includes/Elements/Testimonial.php:293, ../includes/Elements/Testimonial.php:395, ../includes/Elements/TypeForm.php:204, ../includes/Elements/WeForms.php:165, ../includes/Elements/WeForms.php:635, ../includes/Elements/Woo_Checkout.php:130, ../includes/Elements/Woo_Product_Images.php:611, ../includes/Elements/WpForms.php:282, ../includes/Extensions/Hover_Effect.php:688, ../includes/Extensions/Hover_Effect.php:1331, ../includes/Extensions/Image_Masking.php:416, ../includes/Extensions/Image_Masking.php:467, ../includes/Traits/Controls.php:821, ../includes/Traits/Controls.php:2044, ../includes/Traits/Login_Registration.php:1747, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/MegaMenu/Controls/Style_Controls.php:251, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:4, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:6, ../includes/Template/Post-Timeline/default.php:4, ../includes/Theme_Builder/Core/Post_Type.php:437
 msgid "Default"
 msgstr ""
 
@@ -1865,7 +1865,7 @@ msgstr ""
 msgid "Icon Border Color"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:1280, ../includes/Elements/Adv_Accordion.php:1655, ../includes/Elements/Adv_Tabs.php:938, ../includes/Elements/Event_Calendar.php:2224, ../includes/Elements/Event_Calendar.php:2555, ../includes/Elements/Filterable_Gallery.php:1579, ../includes/Elements/Interactive_Circle.php:821, ../includes/Elements/Product_Grid.php:3047, ../includes/Elements/Simple_Menu.php:496, ../includes/Elements/Simple_Menu.php:1172, ../includes/Elements/Woo_Product_Carousel.php:3034, ../includes/Elements/Woo_Product_Gallery.php:1805, ../includes/Elements/Woo_Product_Tabs.php:350, ../includes/Extensions/Table_of_Content.php:1242, ../includes/Traits/Admin.php:105, ../includes/MegaMenu/Controls/Style_Controls.php:207, ../includes/MegaMenu/Controls/Style_Controls.php:441, ../includes/MegaMenu/Controls/Style_Controls.php:520, ../includes/Theme_Builder/Admin/Admin.php:660
+#: ../includes/Elements/Adv_Accordion.php:1280, ../includes/Elements/Adv_Accordion.php:1655, ../includes/Elements/Adv_Tabs.php:938, ../includes/Elements/Event_Calendar.php:2224, ../includes/Elements/Event_Calendar.php:2555, ../includes/Elements/Filterable_Gallery.php:1579, ../includes/Elements/Interactive_Circle.php:821, ../includes/Elements/Product_Grid.php:3047, ../includes/Elements/Simple_Menu.php:496, ../includes/Elements/Simple_Menu.php:1172, ../includes/Elements/Woo_Product_Carousel.php:3034, ../includes/Elements/Woo_Product_Gallery.php:1805, ../includes/Elements/Woo_Product_Tabs.php:350, ../includes/Extensions/Table_of_Content.php:1242, ../includes/Traits/Admin.php:105, ../includes/MegaMenu/Controls/Style_Controls.php:207, ../includes/MegaMenu/Controls/Style_Controls.php:441, ../includes/MegaMenu/Controls/Style_Controls.php:520, ../includes/Theme_Builder/Admin/Admin.php:659
 msgid "Active"
 msgstr ""
 
@@ -2281,7 +2281,7 @@ msgstr ""
 msgid "Label For Home"
 msgstr ""
 
-#: ../includes/Elements/Breadcrumbs.php:68, ../includes/MegaMenu/Manager.php:286, ../includes/Theme_Builder/Presets/Brand_Footer.php:144, ../includes/Theme_Builder/Presets/Mega_Header.php:315, ../includes/Theme_Builder/Presets/Simple_Footer.php:227
+#: ../includes/Elements/Breadcrumbs.php:68, ../includes/MegaMenu/Manager.php:286, ../includes/Theme_Builder/Presets/Brand_Footer.php:144, ../includes/Theme_Builder/Presets/Mega_Header.php:315, ../includes/Theme_Builder/Presets/Simple_Footer.php:204
 msgid "Home"
 msgstr ""
 
@@ -2511,7 +2511,7 @@ msgstr ""
 msgid "Shows grab cursor when you hover over the slider"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:579, ../includes/Elements/Content_Ticker.php:275, ../includes/Elements/Woo_Product_Carousel.php:1006, ../includes/Elements/Woo_Product_Images.php:337, ../includes/Elements/Woo_Product_Images.php:569, ../includes/Theme_Builder/Presets/Classic_Header.php:188, ../includes/Theme_Builder/Presets/Mega_Header.php:151, ../includes/Theme_Builder/Presets/Shop_Header.php:191
+#: ../includes/Elements/Business_Reviews.php:579, ../includes/Elements/Content_Ticker.php:275, ../includes/Elements/Woo_Product_Carousel.php:1006, ../includes/Elements/Woo_Product_Images.php:337, ../includes/Elements/Woo_Product_Images.php:569, ../includes/Theme_Builder/Presets/Classic_Header.php:168, ../includes/Theme_Builder/Presets/Mega_Header.php:151, ../includes/Theme_Builder/Presets/Shop_Header.php:191
 msgid "Navigation"
 msgstr ""
 
@@ -3047,7 +3047,7 @@ msgstr ""
 msgid "Appearance"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:127, ../includes/Elements/Login_Register.php:966, ../includes/Elements/Login_Register.php:6259, ../includes/Elements/Pricing_Table.php:582, ../includes/Theme_Builder/Core/Post_Type.php:431
+#: ../includes/Elements/Code_Snippet.php:127, ../includes/Elements/Login_Register.php:966, ../includes/Elements/Login_Register.php:6259, ../includes/Elements/Pricing_Table.php:582, ../includes/Theme_Builder/Core/Post_Type.php:442
 msgid "Theme"
 msgstr ""
 
@@ -3863,7 +3863,7 @@ msgstr ""
 msgid "Shadow Settings"
 msgstr ""
 
-#: ../includes/Elements/Cta_Box.php:35, ../includes/Elements/Cta_Box.php:841, ../includes/Theme_Builder/Presets/Classic_Header.php:227
+#: ../includes/Elements/Cta_Box.php:35, ../includes/Elements/Cta_Box.php:841, ../includes/Theme_Builder/Presets/Classic_Header.php:207
 msgid "Call to Action"
 msgstr ""
 
@@ -4093,7 +4093,7 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: ../includes/Elements/Data_Table.php:356, ../includes/Theme_Builder/Admin/Admin.php:586, ../includes/Theme_Builder/Core/Post_Type.php:131, ../includes/Theme_Builder/Templates/admin/dashboard.php:56
+#: ../includes/Elements/Data_Table.php:356, ../includes/Theme_Builder/Admin/Admin.php:586, ../includes/Theme_Builder/Core/Post_Type.php:142, ../includes/Theme_Builder/Templates/admin/dashboard.php:56
 msgid "Templates"
 msgstr ""
 
@@ -4365,7 +4365,7 @@ msgstr ""
 msgid "Get Events"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:440, ../includes/Elements/Filterable_Gallery.php:563, ../includes/Elements/Filterable_Gallery.php:3632, ../includes/Elements/Woo_Product_Gallery.php:310, ../includes/Extensions/Table_of_Content.php:93, ../includes/Extensions/Table_of_Content.php:374, ../includes/Theme_Builder/Admin/Admin.php:591, ../includes/Theme_Builder/Admin/Admin.php:619, ../includes/Theme_Builder/Admin/Templates_List_Table.php:212, ../includes/Theme_Builder/Templates/admin/dashboard.php:91
+#: ../includes/Elements/Event_Calendar.php:440, ../includes/Elements/Filterable_Gallery.php:563, ../includes/Elements/Filterable_Gallery.php:3632, ../includes/Elements/Woo_Product_Gallery.php:310, ../includes/Extensions/Table_of_Content.php:93, ../includes/Extensions/Table_of_Content.php:374, ../includes/Theme_Builder/Admin/Admin.php:591, ../includes/Theme_Builder/Admin/Admin.php:618, ../includes/Theme_Builder/Admin/Templates_List_Table.php:212, ../includes/Theme_Builder/Templates/admin/dashboard.php:91
 msgid "All"
 msgstr ""
 
@@ -4389,7 +4389,7 @@ msgstr ""
 msgid "Default View"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:592, ../includes/Elements/Event_Calendar.php:2628, ../includes/Theme_Builder/Admin/Admin.php:644
+#: ../includes/Elements/Event_Calendar.php:592, ../includes/Elements/Event_Calendar.php:2628, ../includes/Theme_Builder/Admin/Admin.php:643
 msgid "Day"
 msgstr ""
 
@@ -4397,7 +4397,7 @@ msgstr ""
 msgid "Week"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:594, ../includes/Theme_Builder/Admin/Admin.php:643
+#: ../includes/Elements/Event_Calendar.php:594, ../includes/Theme_Builder/Admin/Admin.php:642
 msgid "Month"
 msgstr ""
 
@@ -6353,7 +6353,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:253, ../includes/Elements/Login_Register.php:1098, ../includes/Elements/Login_Register.php:1099, ../includes/Elements/Login_Register.php:1131, ../includes/Elements/Login_Register.php:1132, ../includes/Elements/Login_Register.php:2874, ../includes/Elements/Login_Register.php:2875, ../includes/Elements/Login_Register.php:6849, ../includes/Elements/Login_Register.php:7105, ../includes/Theme_Builder/Admin/Admin.php:649, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:336
+#: ../includes/Elements/Login_Register.php:253, ../includes/Elements/Login_Register.php:1098, ../includes/Elements/Login_Register.php:1099, ../includes/Elements/Login_Register.php:1131, ../includes/Elements/Login_Register.php:1132, ../includes/Elements/Login_Register.php:2874, ../includes/Elements/Login_Register.php:2875, ../includes/Elements/Login_Register.php:6849, ../includes/Elements/Login_Register.php:7105, ../includes/Theme_Builder/Admin/Admin.php:648, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:336
 msgid "Password"
 msgstr ""
 
@@ -9065,11 +9065,11 @@ msgstr ""
 msgid "Publish"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:4123, ../includes/Elements/Woo_Product_Carousel.php:160, ../includes/Elements/Woo_Product_List.php:3740, ../includes/Theme_Builder/Admin/Admin.php:655, ../includes/Theme_Builder/Admin/Templates_List_Table.php:218, ../includes/Theme_Builder/Admin/Templates_List_Table.php:461
+#: ../includes/Elements/Product_Grid.php:4123, ../includes/Elements/Woo_Product_Carousel.php:160, ../includes/Elements/Woo_Product_List.php:3740, ../includes/Theme_Builder/Admin/Admin.php:654, ../includes/Theme_Builder/Admin/Templates_List_Table.php:218, ../includes/Theme_Builder/Admin/Templates_List_Table.php:461
 msgid "Draft"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:4124, ../includes/Elements/Woo_Product_Carousel.php:161, ../includes/Elements/Woo_Product_List.php:3741, ../includes/Theme_Builder/Admin/Admin.php:656
+#: ../includes/Elements/Product_Grid.php:4124, ../includes/Elements/Woo_Product_Carousel.php:161, ../includes/Elements/Woo_Product_List.php:3741, ../includes/Theme_Builder/Admin/Admin.php:655
 msgid "Pending Review"
 msgstr ""
 
@@ -10623,7 +10623,7 @@ msgstr ""
 msgid "Methods Info"
 msgstr ""
 
-#: ../includes/Elements/Woo_Checkout.php:2865, ../includes/Theme_Builder/Presets/Brand_Footer.php:169, ../includes/Theme_Builder/Presets/Simple_Footer.php:232
+#: ../includes/Elements/Woo_Checkout.php:2865, ../includes/Theme_Builder/Presets/Brand_Footer.php:169, ../includes/Theme_Builder/Presets/Simple_Footer.php:209
 msgid "Privacy Policy"
 msgstr ""
 
@@ -11032,7 +11032,7 @@ msgstr ""
 msgid "Uncheck the WooCommerce Settings <a href=\"%s\" target=\"_blank\">Out of stock visibility</a> option. This will not work otherwise"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_List.php:575, ../includes/Theme_Builder/Admin/Admin.php:653
+#: ../includes/Elements/Woo_Product_List.php:575, ../includes/Theme_Builder/Admin/Admin.php:652
 msgid "Status"
 msgstr ""
 
@@ -11854,7 +11854,7 @@ msgstr ""
 msgid "Table of Contents"
 msgstr ""
 
-#: ../includes/Extensions/Table_of_Content.php:185, ../includes/Traits/Controls.php:504, ../includes/Theme_Builder/Admin/Admin.php:610
+#: ../includes/Extensions/Table_of_Content.php:185, ../includes/Traits/Controls.php:504, ../includes/Theme_Builder/Admin/Admin.php:609
 msgid "Include"
 msgstr ""
 
@@ -11870,7 +11870,7 @@ msgstr ""
 msgid "Which content are searched for heading tag, Provide unique selector to replace default selector"
 msgstr ""
 
-#: ../includes/Extensions/Table_of_Content.php:242, ../includes/Traits/Controls.php:198, ../includes/Traits/Controls.php:516, ../includes/Theme_Builder/Admin/Admin.php:611
+#: ../includes/Extensions/Table_of_Content.php:242, ../includes/Traits/Controls.php:198, ../includes/Traits/Controls.php:516, ../includes/Theme_Builder/Admin/Admin.php:610
 msgid "Exclude"
 msgstr ""
 
@@ -12155,7 +12155,7 @@ msgstr ""
 msgid "%1$s (%2$s %3$dpx)"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:288, ../includes/Theme_Builder/Presets/Mega_Header.php:319, ../includes/Theme_Builder/Presets/Modern_Footer.php:168, ../includes/Theme_Builder/Presets/Simple_Footer.php:230
+#: ../includes/MegaMenu/Manager.php:288, ../includes/Theme_Builder/Presets/Mega_Header.php:319, ../includes/Theme_Builder/Presets/Modern_Footer.php:168, ../includes/Theme_Builder/Presets/Simple_Footer.php:207
 msgid "Blog"
 msgstr ""
 
@@ -12167,7 +12167,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:291, ../includes/Theme_Builder/Presets/Mega_Header.php:320, ../includes/Theme_Builder/Presets/Simple_Footer.php:231
+#: ../includes/MegaMenu/Manager.php:291, ../includes/Theme_Builder/Presets/Mega_Header.php:320, ../includes/Theme_Builder/Presets/Simple_Footer.php:208
 msgid "Contact"
 msgstr ""
 
@@ -12236,7 +12236,7 @@ msgstr ""
 msgid "Total Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:106, ../includes/Theme_Builder/Admin/Admin.php:661, ../includes/Theme_Builder/Admin/Templates_List_Table.php:482
+#: ../includes/Traits/Admin.php:106, ../includes/Theme_Builder/Admin/Admin.php:660, ../includes/Theme_Builder/Admin/Templates_List_Table.php:482
 msgid "Inactive"
 msgstr ""
 
@@ -13096,7 +13096,7 @@ msgstr ""
 msgid "Grid Per Page"
 msgstr ""
 
-#: ../includes/Traits/Controls.php:561, ../includes/Theme_Builder/Admin/Admin.php:641
+#: ../includes/Traits/Controls.php:561, ../includes/Theme_Builder/Admin/Admin.php:640
 msgid "Slug"
 msgstr ""
 
@@ -14198,7 +14198,7 @@ msgstr ""
 msgid "Posts by %s"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:122, ../includes/Theme_Builder/Admin/Admin.php:123, ../includes/Theme_Builder/Admin/Requirements_Screen.php:52, ../includes/Theme_Builder/Admin/Requirements_Screen.php:53, ../includes/Theme_Builder/Core/Post_Type.php:124
+#: ../includes/Theme_Builder/Admin/Admin.php:122, ../includes/Theme_Builder/Admin/Admin.php:123, ../includes/Theme_Builder/Admin/Requirements_Screen.php:52, ../includes/Theme_Builder/Admin/Requirements_Screen.php:53, ../includes/Theme_Builder/Core/Post_Type.php:135
 msgid "Theme Builder"
 msgstr ""
 
@@ -14275,7 +14275,7 @@ msgstr ""
 msgid "Specific target"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:592, ../includes/Theme_Builder/Admin/Ajax.php:154, ../includes/Theme_Builder/Admin/Ajax.php:291, ../includes/Theme_Builder/Models/Template.php:83
+#: ../includes/Theme_Builder/Admin/Admin.php:592, ../includes/Theme_Builder/Admin/Ajax.php:153, ../includes/Theme_Builder/Admin/Ajax.php:290, ../includes/Theme_Builder/Models/Template.php:83
 msgid "Please choose a valid template type."
 msgstr ""
 
@@ -14311,7 +14311,7 @@ msgstr ""
 msgid "Create Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:601, ../includes/Theme_Builder/Admin/Admin.php:665
+#: ../includes/Theme_Builder/Admin/Admin.php:601, ../includes/Theme_Builder/Admin/Admin.php:664
 msgid "Where do you want to display this template?"
 msgstr ""
 
@@ -14320,314 +14320,306 @@ msgstr ""
 msgid "Set the conditions that determine where this %s is used. Choose “Entire site” to show it everywhere."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:604
-msgid "No conditions yet — this template stays published but hidden until you add one."
-msgstr ""
-
 #. translators: %s: what the row targets, e.g. "All archives".
-#: ../includes/Theme_Builder/Admin/Admin.php:606
+#: ../includes/Theme_Builder/Admin/Admin.php:605
 msgid "Shown on %s"
 msgstr ""
 
 #. translators: %s: what the row targets, e.g. "All archives".
-#: ../includes/Theme_Builder/Admin/Admin.php:608
+#: ../includes/Theme_Builder/Admin/Admin.php:607
 msgid "Hidden on %s"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:609
+#: ../includes/Theme_Builder/Admin/Admin.php:608
 msgid "Not now"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:612
+#: ../includes/Theme_Builder/Admin/Admin.php:611
 msgid "Add condition"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:613
+#: ../includes/Theme_Builder/Admin/Admin.php:612
 msgid "Remove condition"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:614
+#: ../includes/Theme_Builder/Admin/Admin.php:613
 msgid "Save & Edit Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:615
+#: ../includes/Theme_Builder/Admin/Admin.php:614
 msgid "Save & Close"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:616
+#: ../includes/Theme_Builder/Admin/Admin.php:615
 msgid "Continue"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:617
+#: ../includes/Theme_Builder/Admin/Admin.php:616
 msgid "Cancel"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:618
+#: ../includes/Theme_Builder/Admin/Admin.php:617
 msgid "Close"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:620
+#: ../includes/Theme_Builder/Admin/Admin.php:619
 msgid "Search…"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:621
+#: ../includes/Theme_Builder/Admin/Admin.php:620
 msgid "No results found"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:622
+#: ../includes/Theme_Builder/Admin/Admin.php:621
 msgid "Clear selection"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:623
+#: ../includes/Theme_Builder/Admin/Admin.php:622
 msgid "Loading…"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:624
+#: ../includes/Theme_Builder/Admin/Admin.php:623
 msgid "Saving…"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:625
+#: ../includes/Theme_Builder/Admin/Admin.php:624
 msgid "Creating…"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:626
+#: ../includes/Theme_Builder/Admin/Admin.php:625
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:627
+#: ../includes/Theme_Builder/Admin/Admin.php:626
 msgid "This template will be permanently deleted. Continue?"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:628, ../includes/Theme_Builder/Admin/Templates_List_Table.php:541
+#: ../includes/Theme_Builder/Admin/Admin.php:627, ../includes/Theme_Builder/Admin/Templates_List_Table.php:541
 msgid "Quick Edit"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:629, ../includes/Theme_Builder/Admin/Templates_List_Table.php:185
+#: ../includes/Theme_Builder/Admin/Admin.php:628, ../includes/Theme_Builder/Admin/Templates_List_Table.php:185
 msgid "Bulk Edit"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:633
+#: ../includes/Theme_Builder/Admin/Admin.php:632
 msgid "— No change —"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:634
+#: ../includes/Theme_Builder/Admin/Admin.php:633
 msgid "Remove from bulk edit"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:635, ../includes/Theme_Builder/Admin/Ajax.php:283
+#: ../includes/Theme_Builder/Admin/Admin.php:634, ../includes/Theme_Builder/Admin/Ajax.php:282
 msgid "Select at least one template to edit."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:636, ../includes/Theme_Builder/Admin/Ajax.php:287
+#: ../includes/Theme_Builder/Admin/Admin.php:635, ../includes/Theme_Builder/Admin/Ajax.php:286
 msgid "Choose at least one value to change."
 msgstr ""
 
 #. translators: %s: number of templates that could not be updated.
-#: ../includes/Theme_Builder/Admin/Admin.php:638
+#: ../includes/Theme_Builder/Admin/Admin.php:637
 msgid "%s template(s) could not be updated."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:639
+#: ../includes/Theme_Builder/Admin/Admin.php:638
 msgid "Update"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:645
+#: ../includes/Theme_Builder/Admin/Admin.php:644
 msgid "Year"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:646
+#: ../includes/Theme_Builder/Admin/Admin.php:645
 msgid "Hour"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:647
+#: ../includes/Theme_Builder/Admin/Admin.php:646
 msgid "Minute"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:648
+#: ../includes/Theme_Builder/Admin/Admin.php:647
 msgid "at"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:650
+#: ../includes/Theme_Builder/Admin/Admin.php:649
 msgid "&ndash;OR&ndash;"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:651, ../includes/Theme_Builder/Admin/Templates_List_Table.php:469
+#: ../includes/Theme_Builder/Admin/Admin.php:650, ../includes/Theme_Builder/Admin/Templates_List_Table.php:469
 msgid "Private"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:652, ../includes/Theme_Builder/Core/Post_Type.php:125
+#: ../includes/Theme_Builder/Admin/Admin.php:651, ../includes/Theme_Builder/Core/Post_Type.php:136
 msgid "Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:654, ../includes/Theme_Builder/Admin/Templates_List_Table.php:217, ../includes/Theme_Builder/Admin/Templates_List_Table.php:761
+#: ../includes/Theme_Builder/Admin/Admin.php:653, ../includes/Theme_Builder/Admin/Templates_List_Table.php:217, ../includes/Theme_Builder/Admin/Templates_List_Table.php:761
 msgid "Published"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:657
+#: ../includes/Theme_Builder/Admin/Admin.php:656
 msgid "Priority"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:658
+#: ../includes/Theme_Builder/Admin/Admin.php:657
 msgid "Lower wins when two templates match a page equally well."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:662
+#: ../includes/Theme_Builder/Admin/Admin.php:661
 msgid "Inactive templates are never displayed, even when published."
 msgstr ""
 
 #. translators: %s: comma separated template titles.
-#: ../includes/Theme_Builder/Admin/Admin.php:664
+#: ../includes/Theme_Builder/Admin/Admin.php:663
 msgid "Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number, then the most recently created template."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:666
+#: ../includes/Theme_Builder/Admin/Admin.php:665
 msgid "Set the conditions that determine where this header is used. Choose “Entire site” to show it everywhere."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:667
+#: ../includes/Theme_Builder/Admin/Admin.php:666
 msgid "Save & Publish"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:668
+#: ../includes/Theme_Builder/Admin/Admin.php:667
 msgid "Publishing…"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:669
+#: ../includes/Theme_Builder/Admin/Admin.php:668
 msgid "Publishing cancelled. The template is still a draft."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:670, ../includes/Theme_Builder/Admin/Templates_List_Table.php:131
+#: ../includes/Theme_Builder/Admin/Admin.php:669, ../includes/Theme_Builder/Admin/Templates_List_Table.php:131
 msgid "Display Conditions"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:671
+#: ../includes/Theme_Builder/Admin/Admin.php:670
 msgid "Display conditions saved."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:672
+#: ../includes/Theme_Builder/Admin/Admin.php:671
 msgid "Essential Addons presets"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:673
+#: ../includes/Theme_Builder/Admin/Admin.php:672
 msgid "Choose a Header & Footer Preset"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:674
+#: ../includes/Theme_Builder/Admin/Admin.php:673
 msgid "Header Presets"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:675
+#: ../includes/Theme_Builder/Admin/Admin.php:674
 msgid "Footer Presets"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:676
+#: ../includes/Theme_Builder/Admin/Admin.php:675
 msgid "Click to Insert"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:677
+#: ../includes/Theme_Builder/Admin/Admin.php:676
 msgid "Loading"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:678
+#: ../includes/Theme_Builder/Admin/Admin.php:677
 msgid "Inserting…"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:679
+#: ../includes/Theme_Builder/Admin/Admin.php:678
 msgid "No header presets are available yet."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:680
+#: ../includes/Theme_Builder/Admin/Admin.php:679
 msgid "Footer presets are on their way. Build yours from scratch in the meantime."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:681
+#: ../includes/Theme_Builder/Admin/Admin.php:680
 msgid "The preset could not be inserted."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:682
+#: ../includes/Theme_Builder/Admin/Admin.php:681
 msgid "Start from scratch"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:683
+#: ../includes/Theme_Builder/Admin/Admin.php:682
 msgid "Want more designs?"
 msgstr ""
 
 #. translators: %s: Templately, rendered as a link.
-#: ../includes/Theme_Builder/Admin/Admin.php:685
+#: ../includes/Theme_Builder/Admin/Admin.php:684
 msgid "Access 6,500+ cloud templates with %s."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:686
+#: ../includes/Theme_Builder/Admin/Admin.php:685
 msgid "Connect Templately"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:688
+#: ../includes/Theme_Builder/Admin/Admin.php:687
 msgid "Installing Templately…"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:689
+#: ../includes/Theme_Builder/Admin/Admin.php:688
 msgid "Activating Templately…"
 msgstr ""
 
 #. translators: 1: month number (01, 02, …), 2: month abbreviation.
-#: ../includes/Theme_Builder/Admin/Admin.php:714
+#: ../includes/Theme_Builder/Admin/Admin.php:713
 msgid "%1$s-%2$s"
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Admin.php:728, ../includes/Theme_Builder/Admin/Requirements_Screen.php:106
+#: ../includes/Theme_Builder/Admin/Admin.php:727, ../includes/Theme_Builder/Admin/Requirements_Screen.php:106
 msgid "You do not have permission to manage Theme Builder templates."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:85
+#: ../includes/Theme_Builder/Admin/Ajax.php:84
 msgid "You are not allowed to install or activate plugins on this site."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:103
+#: ../includes/Theme_Builder/Admin/Ajax.php:102
 msgid "Templately could not be activated. Please install it from the Plugins screen."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:142, ../includes/Theme_Builder/Admin/Ajax.php:460, ../includes/Theme_Builder/Admin/Ajax.php:563
+#: ../includes/Theme_Builder/Admin/Ajax.php:141, ../includes/Theme_Builder/Admin/Ajax.php:463
 msgid "This template no longer exists."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:146, ../includes/Theme_Builder/Admin/Ajax.php:464, ../includes/Theme_Builder/Admin/Ajax.php:567
+#: ../includes/Theme_Builder/Admin/Ajax.php:145, ../includes/Theme_Builder/Admin/Ajax.php:467
 msgid "You are not allowed to edit this template."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:150
+#: ../includes/Theme_Builder/Admin/Ajax.php:149
 msgid "Please give the template a name."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:190
+#: ../includes/Theme_Builder/Admin/Ajax.php:189
 msgid "Please enter a valid date."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:297
+#: ../includes/Theme_Builder/Admin/Ajax.php:296
 msgid "Please choose a valid status."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:347
+#: ../includes/Theme_Builder/Admin/Ajax.php:346
 msgid "None of the selected templates could be updated."
 msgstr ""
 
 #. translators: 1: lowest allowed priority, 2: highest allowed priority.
-#: ../includes/Theme_Builder/Admin/Ajax.php:406
+#: ../includes/Theme_Builder/Admin/Ajax.php:405
 msgid "Please enter a priority between %1$d and %2$d."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:508
+#: ../includes/Theme_Builder/Admin/Ajax.php:511
 msgid "Unknown object type."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:536, ../includes/Theme_Builder/Admin/Ajax.php:573
+#: ../includes/Theme_Builder/Admin/Ajax.php:539
 msgid "This preset is no longer available."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Ajax.php:577
-msgid "The preset could not be added to this template."
-msgstr ""
-
-#: ../includes/Theme_Builder/Admin/Ajax.php:595
+#: ../includes/Theme_Builder/Admin/Ajax.php:555
 msgid "You are not allowed to manage Theme Builder templates."
 msgstr ""
 
@@ -14655,7 +14647,7 @@ msgstr ""
 msgid "No templates found. Create your first header or footer to get started."
 msgstr ""
 
-#: ../includes/Theme_Builder/Admin/Templates_List_Table.php:386, ../includes/Theme_Builder/Conditions/Conditions_Manager.php:648, ../includes/Theme_Builder/Conditions/Conditions_Manager.php:736
+#: ../includes/Theme_Builder/Admin/Templates_List_Table.php:386, ../includes/Theme_Builder/Conditions/Conditions_Manager.php:652, ../includes/Theme_Builder/Conditions/Conditions_Manager.php:740
 msgid "(no title)"
 msgstr ""
 
@@ -14717,39 +14709,35 @@ msgstr ""
 msgid "All types"
 msgstr ""
 
-#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:168
-msgid "Add at least one display condition so we know where to show this template."
-msgstr ""
-
-#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:178
+#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:179
 msgid "Please choose a display rule for every condition."
 msgstr ""
 
-#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:185
+#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:186
 msgid "One of the selected display conditions is not available. Please review your conditions."
 msgstr ""
 
-#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:204
+#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:208
 msgid "At least one condition must be an \"Include\" rule, otherwise the template can never be displayed."
 msgstr ""
 
-#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:545
+#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:549
 msgid "No conditions set"
 msgstr ""
 
 #. translators: %d: ID of the deleted object.
-#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:565
+#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:569
 msgid "deleted #%d"
 msgstr ""
 
 #. translators: 1: rule label, 2: object title.
-#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:569
+#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:573
 msgctxt "theme builder condition"
 msgid "%1$s: %2$s"
 msgstr ""
 
 #. translators: %s: condition label.
-#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:574
+#: ../includes/Theme_Builder/Conditions/Conditions_Manager.php:578
 msgid "Except %s"
 msgstr ""
 
@@ -14835,49 +14823,49 @@ msgstr ""
 msgid "All Singular"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:122
+#: ../includes/Theme_Builder/Core/Post_Type.php:133
 msgctxt "Post Type General Name"
 msgid "Theme Builder"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:123
+#: ../includes/Theme_Builder/Core/Post_Type.php:134
 msgctxt "Post Type Singular Name"
 msgid "Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:126, ../includes/Theme_Builder/Core/Post_Type.php:127, ../includes/Theme_Builder/Templates/admin/dashboard.php:60
+#: ../includes/Theme_Builder/Core/Post_Type.php:137, ../includes/Theme_Builder/Core/Post_Type.php:138, ../includes/Theme_Builder/Templates/admin/dashboard.php:60
 msgid "Add New Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:128
+#: ../includes/Theme_Builder/Core/Post_Type.php:139
 msgid "New Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:130
+#: ../includes/Theme_Builder/Core/Post_Type.php:141
 msgid "View Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:132, ../includes/Theme_Builder/Templates/admin/dashboard.php:112
+#: ../includes/Theme_Builder/Core/Post_Type.php:143, ../includes/Theme_Builder/Templates/admin/dashboard.php:112
 msgid "Search Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:133
+#: ../includes/Theme_Builder/Core/Post_Type.php:144
 msgid "No templates found."
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:134
+#: ../includes/Theme_Builder/Core/Post_Type.php:145
 msgid "No templates found in Trash."
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:139
+#: ../includes/Theme_Builder/Core/Post_Type.php:150
 msgid "Essential Addons Theme Builder templates."
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:429
+#: ../includes/Theme_Builder/Core/Post_Type.php:440
 msgid "Elementor Canvas"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:430
+#: ../includes/Theme_Builder/Core/Post_Type.php:441
 msgid "Elementor Full Width"
 msgstr ""
 
@@ -14915,7 +14903,7 @@ msgstr ""
 msgid "Explore"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Brand_Footer.php:145, ../includes/Theme_Builder/Presets/Mega_Header.php:317, ../includes/Theme_Builder/Presets/Simple_Footer.php:229
+#: ../includes/Theme_Builder/Presets/Brand_Footer.php:145, ../includes/Theme_Builder/Presets/Mega_Header.php:317, ../includes/Theme_Builder/Presets/Simple_Footer.php:206
 msgid "Features"
 msgstr ""
 
@@ -14967,11 +14955,11 @@ msgstr ""
 msgid "Refund Policy"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Brand_Footer.php:195, ../includes/Theme_Builder/Presets/Classic_Header.php:125, ../includes/Theme_Builder/Presets/Classic_Header.php:160, ../includes/Theme_Builder/Presets/Mega_Header.php:122, ../includes/Theme_Builder/Presets/Mega_Header.php:223, ../includes/Theme_Builder/Presets/Modern_Footer.php:200, ../includes/Theme_Builder/Presets/Shop_Header.php:132, ../includes/Theme_Builder/Presets/Shop_Header.php:163
+#: ../includes/Theme_Builder/Presets/Brand_Footer.php:195, ../includes/Theme_Builder/Presets/Classic_Header.php:140, ../includes/Theme_Builder/Presets/Mega_Header.php:122, ../includes/Theme_Builder/Presets/Mega_Header.php:223, ../includes/Theme_Builder/Presets/Modern_Footer.php:200, ../includes/Theme_Builder/Presets/Shop_Header.php:132, ../includes/Theme_Builder/Presets/Shop_Header.php:163
 msgid "Brand"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Brand_Footer.php:216, ../includes/Theme_Builder/Presets/Brand_Footer.php:402, ../includes/Theme_Builder/Presets/Modern_Footer.php:235, ../includes/Theme_Builder/Presets/Modern_Footer.php:402, ../includes/Theme_Builder/Presets/Simple_Footer.php:145, ../includes/Theme_Builder/Presets/Simple_Footer.php:325
+#: ../includes/Theme_Builder/Presets/Brand_Footer.php:216, ../includes/Theme_Builder/Presets/Brand_Footer.php:402, ../includes/Theme_Builder/Presets/Modern_Footer.php:235, ../includes/Theme_Builder/Presets/Modern_Footer.php:402, ../includes/Theme_Builder/Presets/Simple_Footer.php:302
 msgid "Your Brand"
 msgstr ""
 
@@ -14980,15 +14968,15 @@ msgid "Tell visitors what your team does and who it is for. A footer is a good p
 msgstr ""
 
 #. translators: 1: Current year, 2: Site name.
-#: ../includes/Theme_Builder/Presets/Brand_Footer.php:406, ../includes/Theme_Builder/Presets/Simple_Footer.php:329
+#: ../includes/Theme_Builder/Presets/Brand_Footer.php:406, ../includes/Theme_Builder/Presets/Simple_Footer.php:306
 msgid "&copy; %1$s %2$s. All rights reserved."
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Brand_Footer.php:426, ../includes/Theme_Builder/Presets/Modern_Footer.php:428, ../includes/Theme_Builder/Presets/Simple_Footer.php:344
+#: ../includes/Theme_Builder/Presets/Brand_Footer.php:426, ../includes/Theme_Builder/Presets/Modern_Footer.php:428, ../includes/Theme_Builder/Presets/Simple_Footer.php:321
 msgid "Copyright"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Classic_Header.php:233
+#: ../includes/Theme_Builder/Presets/Classic_Header.php:213
 msgid "Contact Now"
 msgstr ""
 
@@ -15004,7 +14992,7 @@ msgstr ""
 msgid "Cart"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Mega_Header.php:316, ../includes/Theme_Builder/Presets/Modern_Footer.php:150, ../includes/Theme_Builder/Presets/Simple_Footer.php:228
+#: ../includes/Theme_Builder/Presets/Mega_Header.php:316, ../includes/Theme_Builder/Presets/Modern_Footer.php:150, ../includes/Theme_Builder/Presets/Simple_Footer.php:205
 msgid "About"
 msgstr ""
 
@@ -15209,7 +15197,7 @@ msgstr ""
 msgid "A light bar: brand on the left, navigation centred, then search, cart and a sign-in button. Collapses to a hamburger on tablet."
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:75, ../includes/Theme_Builder/Presets/Simple_Footer.php:104
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:75, ../includes/Theme_Builder/Presets/Simple_Footer.php:99
 msgid "Simple Footer"
 msgstr ""
 
@@ -15245,7 +15233,7 @@ msgstr ""
 msgid "A coloured, rounded card: a two tone wordmark, a line about the site and social links beside three columns of links, over a centred copyright. Stacks on smaller screens."
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Simple_Footer.php:202
+#: ../includes/Theme_Builder/Presets/Simple_Footer.php:179
 msgid "One short line about what you do and who you do it for."
 msgstr ""
 

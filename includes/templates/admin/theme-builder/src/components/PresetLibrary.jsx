@@ -8,12 +8,17 @@ import { errorMessage, request, settings, strings } from '../utils/api';
 /**
  * How long the loader stays up at the least, and at the most, in milliseconds.
  *
- * The floor keeps a fast decode from flashing the loader for two frames, which
- * reads as a glitch rather than as loading. The ceiling is the escape hatch: a
- * thumbnail that never resolves must not hold the picker shut.
+ * The floor is deliberately longer than the work behind it. On a fast site the
+ * thumbnails are four small local SVGs and decode in a frame or two, so the
+ * loader would appear and vanish as a flicker — which reads as a glitch rather
+ * than as loading, and leaves the wait feeling less deliberate than it is.
+ *
+ * The ceiling is the escape hatch: a thumbnail that never resolves must not
+ * hold the picker shut. It has to stay clear of the floor, or the two would
+ * race and the floor would win by default.
  */
-const MIN_LOADER_MS = 600;
-const MAX_LOADER_MS = 5000;
+const MIN_LOADER_MS = 3000;
+const MAX_LOADER_MS = 6000;
 
 /**
  * The header and footer preset picker.
