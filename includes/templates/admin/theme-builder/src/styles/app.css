@@ -117,6 +117,17 @@ body.eatb-modal-open {
 	min-height: 525px !important;
 }
 
+/*
+ * Wide, but not as wide as the preset picker it shares `--wide` with: a grid of
+ * cards wants the room, four selects and a remove button do not.
+ *
+ * After that rule rather than more specific than it — both are one class deep,
+ * so source order is what lets this win.
+ */
+.eatb-modal--conditions .eatb-modal__dialog {
+	max-width: 950px;
+}
+
 /* ------------------------------------------------------------------
  * Title bar
  * --------------------------------------------------------------- */
@@ -181,35 +192,11 @@ body.eatb-modal-open {
  */
 .eatb-hero--start {
 	max-width: 640px;
-	margin-left: 0;
+	margin-left: 38px;
 	margin-right: 0;
 	text-align: left;
 }
 
-/*
- * The mark on the headline's line, for a dialog with no title bar to carry it.
- * Aligned to the top rather than centred: a headline that wraps to two lines
- * would otherwise float the mark into the middle of the block, away from the
- * word it belongs in front of.
- */
-.eatb-hero__heading {
-	display: flex;
-	gap: 14px;
-	align-items: flex-start;
-	margin-bottom: 12px;
-}
-
-.eatb-hero__heading .eatb-hero__title {
-	margin: 0;
-}
-
-.eatb-hero__mark {
-	display: block;
-	flex: 0 0 auto;
-	width: 34px;
-	height: 34px;
-	border-radius: 9px;
-}
 
 .eatb-hero__title {
 	margin: 0 0 12px;

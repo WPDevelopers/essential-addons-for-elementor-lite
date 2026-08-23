@@ -102,14 +102,21 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 	// "…where this header is used", from the type the template actually is.
 	const typeLabel = ( Array.isArray( settings.types ) ? settings.types : [] )
 		.find( ( item ) => item.slug === template.type );
-	const introText = ( intro || strings.conditionsIntro || '' )
+	const introText = ( intro || strings.publishIntro || '' )
 		.replace( '%s', typeLabel ? typeLabel.label.toLowerCase() : ( strings.templateWord || 'template' ) );
 
 	return (
 		<Modal
 			title={ heading || strings.conditionsTitle || 'Where do you want to display this template?' }
 			size="wide"
-			bare={ true }
+			// Wide, but not as wide as the preset picker: four selects and a
+			// remove button is the widest a row gets, and the grid of cards this
+			// shares `--wide` with needs the extra room that this does not.
+			className="eatb-modal--conditions"
+			brand={ {
+				icon: settings.icon,
+				label: strings.brandLabelcondi || 'Essential Addons',
+			} }
 			onClose={ onClose }
 			footer={
 				<div className="eatb-modal__actions-split">
@@ -135,20 +142,9 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 			}
 		>
 			<div className="eatb-hero eatb-hero--start">
-				{ /*
-				  * The mark leads the headline here rather than a title bar, the way
-				  * it leads the preset picker's — this dialog has no bar to put it
-				  * in, so it joins the line it would otherwise sit above.
-				  */ }
-				<div className="eatb-hero__heading">
-					{ settings.icon ? (
-						<img className="eatb-hero__mark" src={ settings.icon } alt="" aria-hidden="true" />
-					) : null }
-
-					<h2 className="eatb-hero__title">
-						{ heading || strings.conditionsTitle || 'Where do you want to display this template?' }
-					</h2>
-				</div>
+				<h2 className="eatb-hero__title">
+					{ heading || strings.conditionsTitle || 'Where do you want to display this template?' }
+				</h2>
 
 				<p className="eatb-hero__subtitle">{ introText }</p>
 			</div>

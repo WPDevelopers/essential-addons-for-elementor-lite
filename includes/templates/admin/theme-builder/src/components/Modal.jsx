@@ -14,6 +14,8 @@ import { strings } from '../utils/api';
  * @param {Node}     props.footer      Action bar contents.
  * @param {string}   [props.bodyClass] Extra class on the body, for dialogs that
  *                                     lay their content out themselves.
+ * @param {string}   [props.className] Extra class on the dialog's root, for a
+ *                                     single dialog that needs to size itself.
  * @param {boolean}  [props.bare]      Drop the title bar and float the close
  *                                     button, for a dialog whose own heading is
  *                                     the first thing in its body.
@@ -24,7 +26,7 @@ import { strings } from '../utils/api';
  *                                     beside the title.
  * @param {Node}     props.children    Body contents.
  */
-export default function Modal( { title, size = 'default', onClose, footer, bodyClass = '', brand = null, bare = false, children } ) {
+export default function Modal( { title, size = 'default', onClose, footer, bodyClass = '', brand = null, bare = false, className = '', children } ) {
 	const dialogRef = useRef( null );
 	const openerRef = useRef( null );
 
@@ -109,7 +111,7 @@ export default function Modal( { title, size = 'default', onClose, footer, bodyC
 	);
 
 	return (
-		<div className={ `eatb-modal eatb-modal--${ size } ${ mark }`.trim() }>
+		<div className={ `eatb-modal eatb-modal--${ size } ${ mark } ${ className }`.replace( /\s+/g, ' ' ).trim() }>
 			<div className="eatb-modal__overlay" onClick={ onClose } />
 
 			<div

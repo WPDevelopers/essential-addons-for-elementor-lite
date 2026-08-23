@@ -591,6 +591,7 @@ class Admin {
 				'allLabel'         => __( 'All', 'essential-addons-for-elementor-lite' ),
 				'chooseType'       => __( 'Please choose a valid template type.', 'essential-addons-for-elementor-lite' ),
 				'brandLabel'       => __( 'Essential Addons · Theme Builder', 'essential-addons-for-elementor-lite' ),
+				'brandLabelcondi'  => __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
 				'createTitle'      => __( 'Templates Help You Build Faster', 'essential-addons-for-elementor-lite' ),
 				'createIntro'      => __( 'Create reusable templates for different sections of your website and save time by using them whenever you need.', 'essential-addons-for-elementor-lite' ),
 				'typeLabel'        => __( 'Template type', 'essential-addons-for-elementor-lite' ),
