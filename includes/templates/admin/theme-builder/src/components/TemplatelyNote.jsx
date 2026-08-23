@@ -2,6 +2,39 @@ import { useState } from 'react';
 import { errorMessage, request, settings, strings } from '../utils/api';
 
 /**
+ * The library route Templately opens on.
+ */
+const LIBRARY_ROUTE = 'elementor/pages';
+
+/**
+ * Where to land once Templately is installed and active.
+ *
+ * This page, not Templately's admin screen: the user is in the middle of
+ * building a header, and the reason they clicked was to pick a template for it.
+ * Sending them to a list screen in the admin abandons the editor they were in.
+ *
+ * The two parameters are Templately's own — its bootstrap opens the library on
+ * arrival when it sees them, then strips them with `replaceState`, so reloading
+ * afterwards does not reopen the modal.
+ *
+ * @param {string} fallback Where to go if the current URL cannot be parsed.
+ *
+ * @return {string} URL to navigate to.
+ */
+function returnUrl( fallback ) {
+	try {
+		const url = new URL( window.location.href );
+
+		url.searchParams.set( 'templately_open_modal', '1' );
+		url.searchParams.set( 'path', LIBRARY_ROUTE );
+
+		return url.toString();
+	} catch ( error ) {
+		return fallback;
+	}
+}
+
+/**
  * The way out of the preset picker and into Templately's library.
  *
  * The preset library is a handful of starting points, not a catalogue, so the
@@ -20,8 +53,10 @@ import { errorMessage, request, settings, strings } from '../utils/api';
  * @param {Object}   props
  * @param {boolean}  props.busy    True while a preset is being inserted.
  * @param {Function} props.onError Receives a message when enabling fails.
+ * @param {Function} props.onLeave Dismisses the picker, for the hand-off to a
+ *                                 library that opens in this same editor.
  */
-export default function TemplatelyNote( { busy, onError } ) {
+export default function TemplatelyNote( { busy, onError, onLeave } ) {
 	// The editor copy is kept as a fallback for a page still running an older
 	// bundle against a newer PHP payload, or the reverse.
 	const templately = settings.templately || ( settings.editor || {} ).templately || {};
@@ -53,16 +88,46 @@ export default function TemplatelyNote( { busy, onError } ) {
 				return;
 			}
 
-			// Same tab, deliberately: the plugin set just changed underneath this
-			// page, so its loaded scripts no longer match the site. Leaving is the
-			// honest next step, and Elementor's own unsaved-changes prompt still
-			// gets its say on the way out.
-			window.location.href = response.data.url;
+			// Same tab, and back to this page: the plugin set just changed
+			// underneath it, so the scripts it loaded no longer match the site and
+			// a reload is owed either way. Elementor's own unsaved-changes prompt
+			// still gets its say on the way out.
+			window.location.href = returnUrl( response.data.url );
 		} catch ( requestError ) {
 			onError( strings.genericError || 'Something went wrong. Please try again.' );
 		} finally {
 			setWorking( false );
 		}
+	};
+
+	/**
+	 * Open the library where the user already is.
+	 *
+	 * With Templately active its modal is already on the page — the same one its
+	 * button in the add-element row opens — so there is nothing to navigate to.
+	 * The `href` is left in place and only a plain click is taken over, so a
+	 * middle click or a modified one still opens the admin screen in a new tab.
+	 *
+	 * @param {Object} event Click event.
+	 */
+	const browse = ( event ) => {
+		if ( event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ) {
+			return;
+		}
+
+		if ( 'function' !== typeof window.templatelyModal ) {
+			return;
+		}
+
+		event.preventDefault();
+
+		// Templately's library is a dialog in this same editor, and it opens
+		// underneath this one — so the picker has to get out of the way, or the
+		// user is left closing it by hand to reach what they just asked for.
+		// Opened first, and only then dismissed: if the call fails there is still
+		// something on screen rather than nothing.
+		window.templatelyModal( { route: LIBRARY_ROUTE }, null );
+		onLeave();
 	};
 
 	const label = () => {
@@ -91,7 +156,7 @@ export default function TemplatelyNote( { busy, onError } ) {
 			</div>
 
 			{ 'active' === templately.state ? (
-				<a className="eatb-templately__action" href={ templately.url }>
+				<a className="eatb-templately__action" href={ templately.url } onClick={ browse }>
 					{ strings.templatelyAction || 'Connect Templately' }
 				</a>
 			) : (

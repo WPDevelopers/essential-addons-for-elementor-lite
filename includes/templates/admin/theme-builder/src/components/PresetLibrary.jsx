@@ -233,7 +233,7 @@ export default function PresetLibrary( { type = '', onClose, onInsert } ) {
 				</p>
 			) }
 
-			<TemplatelyNote busy={ !! busy } onError={ setError } />
+			<TemplatelyNote busy={ !! busy } onError={ setError } onLeave={ onClose } />
 		</Modal>
 	);
 }
