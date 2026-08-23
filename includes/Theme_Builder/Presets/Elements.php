@@ -239,22 +239,26 @@ class Elements {
 	}
 
 	/**
-	 * The wordmark the starter presets ship with.
+	 * A wordmark the starter presets ship with.
 	 *
-	 * A fixed image rather than the site's own logo. Two of the presets are meant
-	 * to look finished the moment they land — on a site with no logo set, the
-	 * alternative is the site title in whatever the theme's heading font is,
+	 * A fixed image rather than the site's own logo. The presets that use one are
+	 * meant to look finished the moment they land — on a site with no logo set,
+	 * the alternative is the site title in whatever the theme's heading font is,
 	 * which is the one part of the layout that would arrive looking unmade.
 	 *
-	 * It is artwork to replace, like the placeholder above it: the user swaps in
-	 * their own from the widget's own image control.
+	 * Which file is the preset's call: a mark drawn for a dark bar is not the one
+	 * a footer wants, and the two are not the same shape either. It is artwork to
+	 * replace, like the placeholder above it — the user swaps in their own from
+	 * the widget's own image control.
 	 *
 	 * @since 6.7.4
 	 *
+	 * @param string $file File name, inside the plugin's admin image directory.
+	 *
 	 * @return string
 	 */
-	public static function brand_logo() {
-		return EAEL_PLUGIN_URL . 'assets/admin/images/logo.png';
+	public static function brand_logo( $file = 'logo.png' ) {
+		return EAEL_PLUGIN_URL . 'assets/admin/images/' . ltrim( (string) $file, '/' );
 	}
 
 	/**

@@ -113,7 +113,7 @@ class Classic_Header {
 				// attachment"; the file is shipped with the plugin, not in the
 				// library. Leaving the key out entirely makes the editor look the
 				// missing attachment up and warn about it on every load.
-				'image'        => [ 'id' => '', 'url' => Elements::brand_logo() ],
+				'image'        => [ 'id' => '', 'url' => Elements::brand_logo( 'fintech-header-logo.png' ) ],
 				'image_size'   => 'full',
 				'align'        => 'start',
 				'width'        => Elements::size( 165 ),

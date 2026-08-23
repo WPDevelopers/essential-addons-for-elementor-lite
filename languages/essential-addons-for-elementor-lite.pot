@@ -14477,7 +14477,7 @@ msgid "Heads up: some of these pages are already targeted by %s. The most specif
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:665
-msgid "Set the conditions that determine where this header is used. Choose “Entire site” to show it everywhere."
+msgid "Choose where this template should appear on your site. For example, select “Entire Site” to display it everywhere, or set specific conditions to control where it appears."
 msgstr ""
 
 #: ../includes/Theme_Builder/Admin/Admin.php:666

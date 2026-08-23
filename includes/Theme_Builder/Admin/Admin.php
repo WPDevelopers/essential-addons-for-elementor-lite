@@ -662,7 +662,7 @@ class Admin {
 				/* translators: %s: comma separated template titles. */
 				'conflictWarning'  => __( 'Heads up: some of these pages are already targeted by %s. The most specific template wins, then the lowest priority number, then the most recently created template.', 'essential-addons-for-elementor-lite' ),
 				'publishTitle'     => __( 'Where do you want to display this template?', 'essential-addons-for-elementor-lite' ),
-				'publishIntro'     => __( 'Set the conditions that determine where this header is used. Choose “Entire site” to show it everywhere.', 'essential-addons-for-elementor-lite' ),
+				'publishIntro'     => __( 'Choose where this template should appear on your site. For example, select “Entire Site” to display it everywhere, or set specific conditions to control where it appears.', 'essential-addons-for-elementor-lite' ),
 				'saveAndPublish'   => __( 'Save & Publish', 'essential-addons-for-elementor-lite' ),
 				'publishing'       => __( 'Publishing…', 'essential-addons-for-elementor-lite' ),
 				'publishCancelled' => __( 'Publishing cancelled. The template is still a draft.', 'essential-addons-for-elementor-lite' ),

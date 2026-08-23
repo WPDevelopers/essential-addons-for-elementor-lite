@@ -134,38 +134,6 @@ export function labelOf( condition ) {
 }
 
 /**
- * What the rows add up to, in one line.
- *
- * Written from the rows as they stand rather than from the last save, so the
- * line answers the question the dialog asks — where will this end up — while the
- * user is still deciding. The object a row targets is deliberately left out: the
- * line is a summary, and a row that names one already reads it back in its own
- * picker.
- *
- * @param {Array} rows Condition rows.
- *
- * @return {string} Human readable summary, empty when there is nothing to say.
- */
-export function summarize( rows ) {
-	return rows
-		.map( ( row ) => {
-			const label = labelOf( row );
-
-			if ( ! label ) {
-				return '';
-			}
-
-			const template = 'exclude' === row.type
-				? ( strings.conditionsHidden || 'Hidden on %s' )
-				: ( strings.conditionsShown || 'Shown on %s' );
-
-			return template.replace( '%s', label );
-		} )
-		.filter( Boolean )
-		.join( ' · ' );
-}
-
-/**
  * A new, empty row.
  *
  * It starts on "Entire Site" — the first option of the first select — rather

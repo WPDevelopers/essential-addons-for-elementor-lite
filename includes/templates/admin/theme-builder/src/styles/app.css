@@ -113,8 +113,8 @@ body.eatb-modal-open {
 }
 
 .eatb-modal--wide .eatb-modal__dialog {
-	max-width: 920px;
-	min-height: 480px !important;
+	max-width: 990px;
+	min-height: 525px !important;
 }
 
 /* ------------------------------------------------------------------
@@ -184,6 +184,31 @@ body.eatb-modal-open {
 	margin-left: 0;
 	margin-right: 0;
 	text-align: left;
+}
+
+/*
+ * The mark on the headline's line, for a dialog with no title bar to carry it.
+ * Aligned to the top rather than centred: a headline that wraps to two lines
+ * would otherwise float the mark into the middle of the block, away from the
+ * word it belongs in front of.
+ */
+.eatb-hero__heading {
+	display: flex;
+	gap: 14px;
+	align-items: flex-start;
+	margin-bottom: 12px;
+}
+
+.eatb-hero__heading .eatb-hero__title {
+	margin: 0;
+}
+
+.eatb-hero__mark {
+	display: block;
+	flex: 0 0 auto;
+	width: 34px;
+	height: 34px;
+	border-radius: 9px;
 }
 
 .eatb-hero__title {

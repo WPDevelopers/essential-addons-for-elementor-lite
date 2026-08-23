@@ -3,7 +3,7 @@ import Modal from './Modal';
 import ConditionRow from './ConditionRow';
 import Notice from './Notice';
 import { errorMessage, request, settings, strings } from '../utils/api';
-import { blankCondition, summarize } from '../utils/rules';
+import { blankCondition } from '../utils/rules';
 
 /**
  * The condition builder — the "Edit Conditions" row action on the dashboard, and
@@ -98,7 +98,6 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 
 	const confirmLabel = primaryLabel || strings.saveOnly || 'Save & Close';
 	const workingLabel = busyLabel || strings.saving || 'Saving…';
-	const summary = summarize( conditions );
 
 	// "…where this header is used", from the type the template actually is.
 	const typeLabel = ( Array.isArray( settings.types ) ? settings.types : [] )
@@ -136,9 +135,21 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 			}
 		>
 			<div className="eatb-hero eatb-hero--start">
-				<h2 className="eatb-hero__title">
-					{ heading || strings.conditionsTitle || 'Where do you want to display this template?' }
-				</h2>
+				{ /*
+				  * The mark leads the headline here rather than a title bar, the way
+				  * it leads the preset picker's — this dialog has no bar to put it
+				  * in, so it joins the line it would otherwise sit above.
+				  */ }
+				<div className="eatb-hero__heading">
+					{ settings.icon ? (
+						<img className="eatb-hero__mark" src={ settings.icon } alt="" aria-hidden="true" />
+					) : null }
+
+					<h2 className="eatb-hero__title">
+						{ heading || strings.conditionsTitle || 'Where do you want to display this template?' }
+					</h2>
+				</div>
+
 				<p className="eatb-hero__subtitle">{ introText }</p>
 			</div>
 
@@ -177,7 +188,7 @@ export default function ConditionsModal( { template, onClose, onSaved, heading, 
 			  * which reads as a warning about a state that is allowed, in front of
 			  * a user who has not asked for anything yet.
 			  */ }
-			{ summary ? <p className="eatb-conditions__summary">{ summary }</p> : null }
+			{/* { summary ? <p className="eatb-conditions__summary">{ summary }</p> : null } */}
 
 			{ error ? <Notice type="error">{ error }</Notice> : null }
 
