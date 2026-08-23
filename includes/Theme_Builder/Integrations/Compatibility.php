@@ -15,7 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 /**
- * Keeps the Theme Builder well behaved next to multilingual and SEO plugins.
+ * Keeps the Theme Builder well behaved next to multilingual and SEO plugins, and
+ * next to the other plugins that add to Elementor's add-element row.
  *
  * @since 6.7.3
  */
@@ -37,6 +38,111 @@ class Compatibility {
 
 		// …and out of the SEO plugins' meta boxes / indexables.
 		add_filter( 'wpseo_accessible_post_types', [ $this, 'remove_post_type_from_list' ] );
+
+		// The add-element row lives in the preview iframe, which is a front-end
+		// request — so this cannot be hooked from the editor component, which only
+		// exists in the admin.
+		add_action( 'elementor/preview/enqueue_styles', [ $this, 'even_add_element_row' ] );
+
+		// Last, so every integration that enqueues on this hook is registered by
+		// the time the order is adjusted.
+		add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'boot_editor_last' ], PHP_INT_MAX );
+	}
+
+	/**
+	 * Let editor integrations register before Elementor boots.
+	 *
+	 * `elementor.start()` lives in a script tag of its own — the editor loader —
+	 * and Elementor enqueues it *before* firing `elementor/editor/after_enqueue_scripts`,
+	 * with the comment "Must be last". So every integration that enqueues on that
+	 * hook prints after the boot, not before it.
+	 *
+	 * That matters because starting the editor dispatches `elementor:init`, once,
+	 * from a promise continuation. An integration that binds its listener when its
+	 * own script evaluates — the shape Elementor's own `EditorModule` encourages —
+	 * is only in time if that continuation has not settled yet. Whether it has
+	 * depends on whether the document config came from cache or from a request,
+	 * which is why the symptom is a button that appears on some loads and not
+	 * others rather than one that is simply missing.
+	 *
+	 * Naming those scripts as dependencies of the loader moves them in front of
+	 * the boot, where binding to a one-shot event is safe. Their own dependencies
+	 * are unaffected: `elementor-editor-modules` is queued earlier and still
+	 * prints first, so what they extend is there when they run.
+	 *
+	 * @since 6.7.4
+	 */
+	public function boot_editor_last() {
+		$scripts = wp_scripts();
+
+		/**
+		 * Filters the editor scripts that must print before Elementor boots.
+		 *
+		 * For integrations that bind to `elementor:init` as their script runs, and
+		 * so cannot be registered after the event has already fired.
+		 *
+		 * @since 6.7.4
+		 *
+		 * @param array $handles Script handles.
+		 */
+		$handles = (array) apply_filters(
+			'eael/theme_builder/before_editor_boot',
+			[ 'templately-elementor' ]
+		);
+
+		$loaders = [ 'elementor-editor-loader-v2', 'elementor-editor-loader-v1' ];
+
+		foreach ( $loaders as $loader ) {
+			if ( ! isset( $scripts->registered[ $loader ] ) ) {
+				continue;
+			}
+
+			foreach ( $handles as $handle ) {
+				if ( ! isset( $scripts->registered[ $handle ] ) ) {
+					continue;
+				}
+
+				if ( in_array( $handle, $scripts->registered[ $loader ]->deps, true ) ) {
+					continue;
+				}
+
+				// A script that already depends on the loader cannot also come
+				// before it; adding this would be a cycle, and WordPress would
+				// silently drop one of the two.
+				if ( in_array( $loader, $scripts->registered[ $handle ]->deps, true ) ) {
+					continue;
+				}
+
+				$scripts->registered[ $loader ]->deps[] = $handle;
+			}
+		}
+	}
+
+	/**
+	 * Keep Elementor's add-element row evenly spaced.
+	 *
+	 * The row is a flex container with `gap: 5px`; spacing is the container's job,
+	 * and none of Elementor's own buttons carry a margin. A plugin button that
+	 * brings its own margin adds to the gap rather than replacing it, and the row
+	 * ends up with one seam wider than the rest — Templately's button does this,
+	 * with a `margin-left` left over from before the row used `gap` at all.
+	 *
+	 * The rule is written about the row rather than about any one button, so a
+	 * second plugin doing the same would not need a second rule. `!important`
+	 * because the margins it undoes are set by more specific selectors than this
+	 * one, and it must not depend on which stylesheet happens to print last.
+	 *
+	 * @since 6.7.4
+	 */
+	public function even_add_element_row() {
+		$handle = 'eael-theme-builder-preview';
+
+		wp_register_style( $handle, false, [], EAEL_PLUGIN_VERSION );
+		wp_enqueue_style( $handle );
+		wp_add_inline_style(
+			$handle,
+			'.elementor-add-new-section .elementor-add-section-area-button { margin: 0 !important; }'
+		);
 	}
 
 	/**

@@ -113,7 +113,7 @@ body.eatb-modal-open {
 }
 
 .eatb-modal--wide .eatb-modal__dialog {
-	max-width: 990px;
+	max-width: 1100px;
 	min-height: 525px !important;
 }
 
@@ -1176,7 +1176,7 @@ body.eatb-modal-open {
 
 .eatb-modal--bare .eatb-hero__subtitle {
 	max-width: 720px;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 1.6;
 }
 
