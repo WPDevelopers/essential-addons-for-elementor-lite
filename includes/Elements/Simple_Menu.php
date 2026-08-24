@@ -664,7 +664,7 @@ class Simple_Menu extends Widget_Base
                 'options'   => [
                     'eael-simple-menu-dropdown-animate-fade'     => __('Fade', 'essential-addons-for-elementor-lite'),
                     'eael-simple-menu-dropdown-animate-to-top'   => __('To Top', 'essential-addons-for-elementor-lite'),
-                    'eael-simple-menu-dropdown-animate-zoom-in'  => __('Zoon In', 'essential-addons-for-elementor-lite'),
+                    'eael-simple-menu-dropdown-animate-zoom-in'  => __('Zoom In', 'essential-addons-for-elementor-lite'),
                     'eael-simple-menu-dropdown-animate-zoom-out' => __('Zoom Out', 'essential-addons-for-elementor-lite'),
                 ],
                 'default'   => 'eael-simple-menu-dropdown-animate-to-top',

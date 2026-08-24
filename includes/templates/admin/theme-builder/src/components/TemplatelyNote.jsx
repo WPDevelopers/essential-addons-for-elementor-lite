@@ -60,7 +60,12 @@ export default function TemplatelyNote( { busy, onError, onLeave } ) {
 	// The editor copy is kept as a fallback for a page still running an older
 	// bundle against a newer PHP payload, or the reverse.
 	const templately = settings.templately || ( settings.editor || {} ).templately || {};
-	const [ working, setWorking ] = useState( false );
+
+	// A phase rather than a boolean, because the label has to name what is
+	// actually happening. '' is idle; the rest run in order and never go back,
+	// except when an error returns the button to idle so it can be retried.
+	const [ phase, setPhase ] = useState( '' );
+	const working = '' !== phase;
 
 	if ( ! templately.state || 'blocked' === templately.state ) {
 		return null;
@@ -77,16 +82,24 @@ export default function TemplatelyNote( { busy, onError, onLeave } ) {
 		}
 
 		onError( '' );
-		setWorking( true );
+		setPhase( 'missing' === templately.state ? 'installing' : 'activating' );
 
 		try {
 			const response = await request( 'eael_theme_builder_enable_templately' );
 
 			if ( ! response || ! response.success ) {
 				onError( errorMessage( response ) );
+				setPhase( '' );
 
 				return;
 			}
+
+			// Installed and active, but the page has not moved yet. Assigning
+			// `location.href` only *schedules* the navigation, and Elementor's
+			// unsaved-changes prompt can hold it for a while — so the button says
+			// what it is doing and keeps saying it. Clearing the phase here is what
+			// made it flash back to "Connect Templately" before the page turned.
+			setPhase( 'connecting' );
 
 			// Same tab, and back to this page: the plugin set just changed
 			// underneath it, so the scripts it loaded no longer match the site and
@@ -95,8 +108,7 @@ export default function TemplatelyNote( { busy, onError, onLeave } ) {
 			window.location.href = returnUrl( response.data.url );
 		} catch ( requestError ) {
 			onError( strings.genericError || 'Something went wrong. Please try again.' );
-		} finally {
-			setWorking( false );
+			setPhase( '' );
 		}
 	};
 
@@ -130,15 +142,16 @@ export default function TemplatelyNote( { busy, onError, onLeave } ) {
 		onLeave();
 	};
 
-	const label = () => {
-		if ( ! working ) {
-			return strings.templatelyAction || 'Connect Templately';
-		}
-
-		return 'missing' === templately.state
-			? ( strings.templatelyInstalling || 'Installing Templately…' )
-			: ( strings.templatelyActivating || 'Activating Templately…' );
+	// Every label the button can show. Kept in one place because the button is
+	// sized against all of them at once — see the sizer in the markup below.
+	const labels = {
+		'':           strings.templatelyAction || 'Connect Templately',
+		installing:   strings.templatelyInstalling || 'Installing Templately…',
+		activating:   strings.templatelyActivating || 'Activating Templately…',
+		connecting:   strings.templatelyConnecting || 'Connecting…',
 	};
+
+	const label = () => labels[ phase ] || labels[ '' ];
 
 	return (
 		<div className="eatb-templately">
@@ -162,11 +175,36 @@ export default function TemplatelyNote( { busy, onError, onLeave } ) {
 			) : (
 				<button
 					type="button"
-					className="eatb-button eatb-button--primary eatb-templately__action"
+					className={ `eatb-button eatb-button--primary eatb-templately__action${ working ? ' is-busy' : '' }` }
 					onClick={ enable }
 					disabled={ working || busy }
+					aria-busy={ working ? 'true' : 'false' }
 				>
-					{ label() }
+					{ /*
+					  * Parked in the button's own left padding, so showing it moves
+					  * nothing. Purely decorative — the label below is what gets
+					  * announced.
+					  */ }
+					<span className="eatb-button__spinner" aria-hidden="true" />
+
+					<span className="eatb-button__label">
+						{ /*
+						  * The button is sized against every label it will ever
+						  * show, not just the current one. Without this it grows
+						  * and shrinks as the phase changes, and since the panel
+						  * lays out with `space-between` the whole button slides —
+						  * which reads as a shake right before the page turns.
+						  */ }
+						<span className="eatb-button__label-sizer" aria-hidden="true">
+							{ Object.values( labels ).map( ( text ) => (
+								<span key={ text }>{ text }</span>
+							) ) }
+						</span>
+
+						<span className="eatb-button__label-text" aria-live="polite">
+							{ label() }
+						</span>
+					</span>
 				</button>
 			) }
 		</div>

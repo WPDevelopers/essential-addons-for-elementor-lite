@@ -357,6 +357,16 @@ class Style_Controls {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
+		// These controls style the per-item icon, which is opt-in: a menu item only
+		// renders an icon once one is picked in Content > Menu Items > Icon. Without
+		// that there is no icon element on the page and every control in this section
+		// is a no-op, which reads as a broken Position control. Say so up front.
+		$widget->add_control( 'eael_mega_menu_icon_notice', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => esc_html__( 'These options style the menu item icons. Pick an icon for an item under Content > Menu Items to see them take effect.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-descriptor',
+		] );
+
 		$widget->add_responsive_control( 'eael_mega_menu_icon_position', [
 			'label'                => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
 			'type'                 => Controls_Manager::CHOOSE,

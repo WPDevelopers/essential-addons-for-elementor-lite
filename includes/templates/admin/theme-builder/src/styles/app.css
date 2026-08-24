@@ -994,6 +994,129 @@ body.eatb-modal-open {
 }
 
 /*
+ * Connect Templately — one button, four labels, one width.
+ *
+ * The action installs a plugin and then navigates, so its label changes two or
+ * three times over several seconds: "Connect Templately", "Installing
+ * Templately…", "Connecting…". Sized to its current text the button would
+ * resize under each of those, and because the panel is `space-between` the
+ * button's left edge is what moves — a visible jump right at the moment the
+ * user is waiting on a redirect. So it is sized once, against every label it
+ * can ever show, and only the text inside changes.
+ */
+.eatb-button__label {
+	display: grid;
+	align-items: center;
+	justify-items: center;
+}
+
+.eatb-button__label > * {
+	grid-area: 1 / 1;
+}
+
+/*
+ * Contributes width and nothing else: no height, nothing painted, nothing read
+ * out. Its own children stack in a single cell so it measures the widest of
+ * them rather than their sum.
+ */
+.eatb-button__label-sizer {
+	display: grid;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+.eatb-button__label-sizer > span {
+	grid-area: 1 / 1;
+	white-space: nowrap;
+}
+
+.eatb-button__label-text {
+	white-space: nowrap;
+	transition: opacity 0.18s ease;
+}
+
+/*
+ * The spinner sits inside the 26px of padding the button already has, absolutely
+ * positioned so that showing and hiding it costs no layout. Idle it is not just
+ * transparent but zero-scaled, so it cannot be read as a stalled control.
+ */
+.eatb-templately__action {
+	position: relative;
+}
+
+.eatb-button__spinner {
+	position: absolute;
+	top: 50%;
+	left: 9px;
+	/*
+	 * Border-box so that 18px is the whole ring, borders included, and the
+	 * centring margin below is simply half of it. Left as content-box the
+	 * borders would add 4px that the margin does not know about, and the ring
+	 * would sit 2px low.
+	 */
+	box-sizing: border-box;
+	width: 18px;
+	height: 18px;
+	/*
+	 * Centred with a negative margin rather than `translateY( -50% )`, which
+	 * leaves `transform` free for the spin alone. Sharing the property between
+	 * the two is what stops the ring turning — see the keyframes below.
+	 */
+	margin-top: -9px;
+	border: 2px solid rgba( 255, 255, 255, 0.4 );
+	border-top-color: #fff;
+	border-radius: 50%;
+	opacity: 0;
+	transition: opacity 0.18s ease;
+}
+
+.eatb-templately__action.is-busy .eatb-button__spinner {
+	opacity: 1;
+	animation: eatb-button-spin 0.7s linear infinite;
+}
+
+/*
+ * A busy button is disabled, and `.eatb-button:disabled` dims the whole thing to
+ * 0.6. That reads as "unavailable" when what is true is "working" — so the busy
+ * state takes its opacity back and says so through the spinner instead.
+ */
+.eatb-templately__action.is-busy:disabled {
+	opacity: 1;
+	cursor: progress;
+}
+
+/*
+ * Both ends declared, and with the same single transform function.
+ *
+ * With only a `to` frame the `from` is the element's own `transform`. If that
+ * is a different function list, the two are interpolated as decomposed
+ * matrices — and `rotate( 360deg )` decomposes to exactly the matrix
+ * `rotate( 0deg )` does. Every frame comes out identical, so the ring sits
+ * perfectly still while `getAnimations()` still reports it as running.
+ */
+@keyframes eatb-button-spin {
+	from { transform: rotate( 0deg ); }
+	to   { transform: rotate( 360deg ); }
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.eatb-button__label-text,
+	.eatb-button__spinner {
+		transition: none;
+	}
+
+	/*
+	 * The spin is the only cue that the button is working, so it is slowed
+	 * rather than stopped — a still ring beside a changed label would be
+	 * indistinguishable from a decoration.
+	 */
+	.eatb-templately__action.is-busy .eatb-button__spinner {
+		animation-duration: 2.4s;
+	}
+}
+
+/*
  * Stacked once the panel's two halves no longer fit side by side. This has to
  * live after the rules it overrides, not up with the other breakpoint rules:
  * both are one class deep, so the base above would otherwise win on order and

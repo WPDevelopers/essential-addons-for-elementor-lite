@@ -687,6 +687,7 @@ class Admin {
 				'templatelyName'   => __( 'Templately', 'essential-addons-for-elementor-lite' ),
 				'templatelyInstalling' => __( 'Installing Templately…', 'essential-addons-for-elementor-lite' ),
 				'templatelyActivating' => __( 'Activating Templately…', 'essential-addons-for-elementor-lite' ),
+				'templatelyConnecting' => __( 'Connecting…', 'essential-addons-for-elementor-lite' ),
 			],
 		];
 
