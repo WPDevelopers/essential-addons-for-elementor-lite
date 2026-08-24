@@ -2366,26 +2366,33 @@ class Helper
 	 * Renders an admin notice when ACF is not installed/activated.
 	 * Ported for ACF Repeater data-source support (Feature List, etc.).
 	 *
+	 * Note: this signature is a cross-plugin contract - Essential Addons Pro's
+	 * Helper extends this class and overrides this method with the two-parameter
+	 * form. Adding a parameter here makes Pro's override incompatible and fatals at
+	 * class-compile time as soon as Pro's Helper is autoloaded (e.g. when Content
+	 * Protection or the Protected Content widget loads), so do not widen it without
+	 * shipping a matching Pro release.
+	 *
 	 * @param \Elementor\Widget_Base $wb         Widget instance.
 	 * @param array                  $condition  Elementor control condition array.
-	 * @param string                 $control_id Control name. Defaults to 'eael_acf_notice_controls'.
 	 */
-	public static function eael_acf_notice_controls( $wb, $condition, $control_id = 'eael_acf_notice_controls' ) {
+	public static function eael_acf_notice_controls( $wb, $condition ) {
 		if ( function_exists( 'acf_get_field_groups' ) ) {
 			return;
 		}
 
-		// A single widget can register the notice more than once (e.g. Advanced Accordion,
-		// where the Pro extender adds a second ACF-powered content source). Elementor throws
-		// "Cannot redeclare control with same name" in that case, so derive a unique name.
-		if ( $wb->get_controls( $control_id ) ) {
-			$suffix     = is_array( $condition ) ? (string) key( $condition ) : '';
-			$control_id .= '_' . ( $suffix ? $suffix : count( (array) $wb->get_controls() ) );
+		// A single widget can end up with more than one ACF notice - Advanced Accordion
+		// registers one here and a second one through Pro's extender, which calls Pro's
+		// override of this method. That override hardcodes the bare
+		// 'eael_acf_notice_controls' name, so claiming it here would trip Elementor's
+		// "Cannot redeclare control with same name" notice on every editor load.
+		// Always derive a name from the condition instead, leaving the bare name free.
+		$suffix     = is_array( $condition ) && $condition ? (string) key( $condition ) : '';
+		$control_id = 'eael_acf_notice_controls_' . ( $suffix ? $suffix : 'notice' );
 
-			// Bail out if even the derived name is already taken.
-			if ( $wb->get_controls( $control_id ) ) {
-				return;
-			}
+		// Already registered - the widget is re-registering its controls.
+		if ( $wb->get_controls( $control_id ) ) {
+			return;
 		}
 
 		$wb->add_control(
