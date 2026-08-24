@@ -1,3 +1,18 @@
+/**
+ * Elements that make a paragraph worth keeping even with no text in it.
+ *
+ * cleanQuillHTML() strips the blank filler paragraphs Quill leaves behind, and
+ * judged emptiness by textContent alone. textContent only sees text, so a cell
+ * holding nothing but an image, an icon or an embed measured as empty and was
+ * deleted — and because the editor re-serialises the table it had just blanked,
+ * the next save wrote the loss back to the database.
+ *
+ * `i[class]` rather than bare `i`: an icon font renders through a class, while a
+ * classless <i> is only italics around text that textContent has already counted.
+ */
+const EAEL_ADT_CONTENT_ELEMENTS =
+	'a, img, svg, picture, video, audio, iframe, embed, object, canvas, input, button, select, textarea, i[class]';
+
 class advancedDataTableEdit {
 	constructor() {
 		// class props
@@ -101,7 +116,9 @@ class advancedDataTableEdit {
 			const clone = p.cloneNode(true);
 			clone.querySelectorAll('br').forEach(br => br.remove());
 
-			if (!clone.textContent.trim()) {
+			// Empty means no text *and* nothing that renders on its own.
+			// See EAEL_ADT_CONTENT_ELEMENTS above.
+			if (!clone.textContent.trim() && !clone.querySelector(EAEL_ADT_CONTENT_ELEMENTS)) {
 				p.remove();
 			}
 		});
