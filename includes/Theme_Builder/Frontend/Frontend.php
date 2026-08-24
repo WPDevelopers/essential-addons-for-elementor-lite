@@ -563,13 +563,17 @@ class Frontend {
 	/**
 	 * Whether any resolved template renders at the given location.
 	 *
+	 * Public so that compatibility code can ask what this request resolved to —
+	 * another theme builder needs to know whether to stand down before it starts
+	 * printing a header of its own.
+	 *
 	 * @since 6.7.3
 	 *
 	 * @param string $location `header`, `footer` or `content`.
 	 *
 	 * @return bool
 	 */
-	private function has_location( $location ) {
+	public function has_location( $location ) {
 		foreach ( Template_Types::instance()->get_types_by_location( $location ) as $slug => $type ) {
 			if ( ! empty( $this->active[ $slug ] ) ) {
 				return true;

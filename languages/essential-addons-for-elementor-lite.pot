@@ -569,7 +569,7 @@ msgstr ""
 msgid "Simple Menu"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:674, ../includes/Elements/Mega_Menu.php:52, ../includes/Traits/Admin.php:862, ../includes/MegaMenu/Renderers/Editor_Renderer.php:71, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:96, ../includes/Theme_Builder/Presets/Preset_Library.php:56
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:674, ../includes/Elements/Mega_Menu.php:52, ../includes/Traits/Admin.php:862, ../includes/MegaMenu/Renderers/Editor_Renderer.php:71, ../includes/MegaMenu/Renderers/Frontend_Renderer.php:96, ../includes/Theme_Builder/Presets/Preset_Library.php:55
 msgid "Mega Menu"
 msgstr ""
 
@@ -15173,64 +15173,40 @@ msgstr ""
 msgid "Clean & Simple"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:47
-msgid "A dark bar: logo on the left, navigation centred, one call to action on the right. Collapses to a hamburger on tablet."
-msgstr ""
-
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:55
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:54
 msgid "Mega Menu Header"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:57
-msgid "Logo, a centred mega menu with two ready-built panels, search, cart and a call to action. Collapses to a toggle on mobile."
-msgstr ""
-
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:65
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:63
 msgid "Shop Header"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:66
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:64
 msgid "Search & Cart"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:67
-msgid "A light bar: brand on the left, navigation centred, then search, cart and a sign-in button. Collapses to a hamburger on tablet."
-msgstr ""
-
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:75, ../includes/Theme_Builder/Presets/Simple_Footer.php:99
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:72, ../includes/Theme_Builder/Presets/Simple_Footer.php:99
 msgid "Simple Footer"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:76
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:73
 msgid "Minimal"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:77
-msgid "One centred column on a tinted band: brand under a short accent rule, a line of copy, links, social icons and a copyright. Reads the same at every screen size."
-msgstr ""
-
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:85
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:81
 msgid "Modern Footer"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:86
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:82
 msgid "Multi-Column"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:87
-msgid "Brand, a newsletter sign-up and three link columns on a dark ground, over a centred copyright line. Stacks on smaller screens."
-msgstr ""
-
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:95
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:90
 msgid "Brand Footer"
 msgstr ""
 
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:96
+#: ../includes/Theme_Builder/Presets/Preset_Library.php:91
 msgid "Rounded Card"
-msgstr ""
-
-#: ../includes/Theme_Builder/Presets/Preset_Library.php:97
-msgid "A coloured, rounded card: a two tone wordmark, a line about the site and social links beside three columns of links, over a centred copyright. Stacks on smaller screens."
 msgstr ""
 
 #: ../includes/Theme_Builder/Presets/Simple_Footer.php:179

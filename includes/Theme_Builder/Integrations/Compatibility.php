@@ -9,6 +9,7 @@
 namespace Essential_Addons_Elementor\Theme_Builder\Integrations;
 
 use Essential_Addons_Elementor\Theme_Builder\Core\Post_Type;
+use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -47,6 +48,87 @@ class Compatibility {
 		// Last, so every integration that enqueues on this hook is registered by
 		// the time the order is adjusted.
 		add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'boot_editor_last' ], PHP_INT_MAX );
+
+		// After Frontend::setup() at 5, which is what resolves the templates this
+		// asks about, and long before `get_header` fires.
+		add_action( 'template_redirect', [ $this, 'yield_theme_builders' ], 6 );
+	}
+
+	/**
+	 * Stand other theme builders down where this one is rendering.
+	 *
+	 * Templately ships a theme builder of its own, and its site imports bring a
+	 * header and a footer with them. Both it and this module answer `get_header`
+	 * by swallowing the theme's `header.php` and printing their own, so a site
+	 * with a template on each side renders two headers stacked, and two footers.
+	 *
+	 * Neither is wrong to do that — they simply cannot both be right on the same
+	 * request, and nothing has told either of them who wins. This module's own
+	 * templates are the ones the user built here, so they take precedence.
+	 *
+	 * Per location, not per request: a site with a Theme Builder header and a
+	 * Templately footer keeps both, each where the other has nothing to say.
+	 *
+	 * @since 6.7.4
+	 */
+	public function yield_theme_builders() {
+		if ( ! class_exists( '\Templately\Builder\TemplateLoader' ) ) {
+			return;
+		}
+
+		$frontend = Theme_Builder::instance()->get_component( 'frontend' );
+
+		if ( ! $frontend || ! method_exists( $frontend, 'has_location' ) ) {
+			return;
+		}
+
+		foreach ( [ 'header', 'footer' ] as $location ) {
+			if ( ! $frontend->has_location( $location ) ) {
+				continue;
+			}
+
+			$this->unhook_templately_location( 'get_' . $location );
+		}
+	}
+
+	/**
+	 * Remove Templately's handler for one of the two template hooks.
+	 *
+	 * Matched by class and method rather than removed by a handle, because the
+	 * callback is a method on an instance this module has no reference to. The
+	 * match is deliberately exact: anything else Templately hooks to the same
+	 * action is left alone.
+	 *
+	 * @since 6.7.4
+	 *
+	 * @param string $tag `get_header` or `get_footer`, and the method's own name.
+	 */
+	private function unhook_templately_location( $tag ) {
+		global $wp_filter;
+
+		if ( empty( $wp_filter[ $tag ] ) || ! isset( $wp_filter[ $tag ]->callbacks ) ) {
+			return;
+		}
+
+		foreach ( $wp_filter[ $tag ]->callbacks as $priority => $callbacks ) {
+			foreach ( $callbacks as $callback ) {
+				$function = isset( $callback['function'] ) ? $callback['function'] : null;
+
+				if ( ! is_array( $function ) || ! isset( $function[0], $function[1] ) ) {
+					continue;
+				}
+
+				if ( ! is_object( $function[0] ) || ! ( $function[0] instanceof \Templately\Builder\TemplateLoader ) ) {
+					continue;
+				}
+
+				if ( $tag !== $function[1] ) {
+					continue;
+				}
+
+				remove_action( $tag, $function, $priority );
+			}
+		}
 	}
 
 	/**
