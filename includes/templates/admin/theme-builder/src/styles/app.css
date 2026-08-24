@@ -247,7 +247,7 @@ body.eatb-modal-open {
 }
 
 .eatb-button--primary {
-	color: #fff;
+	color: #fff !important;
 	background: var(--eatb-accent);
 }
 
@@ -711,13 +711,6 @@ body.eatb-modal-open {
 	}
 
 	/* The panel keeps its own inset, but stacks once there is no room beside it. */
-	.eatb-templately {
-		flex-direction: column;
-		gap: 14px;
-		align-items: flex-start;
-		padding: 20px;
-	}
-
 	.eatb-hero__title {
 		font-size: 22px;
 	}
@@ -984,32 +977,38 @@ body.eatb-modal-open {
 	color: var( --eatb-muted );
 }
 
-/* One rule for both the anchor and the button, so the two states of the link
-   are indistinguishable to the reader — only the click differs. */
+/*
+ * The action carries `.eatb-button--primary`, so everything about how it looks
+ * comes from there and the two states of the link stay indistinguishable to the
+ * reader — only the click differs. What is left here is what the button classes
+ * cannot know: that it must not shrink, and that an anchor underlines itself.
+ */
 .eatb-templately__action {
 	flex: 0 0 auto;
-	padding: 0;
-	font: inherit;
-	font-size: 14px;
-	font-weight: 700;
-	color: var( --eatb-accent );
 	text-decoration: none;
-	cursor: pointer;
-	background: none;
-	border: 0;
 }
 
 .eatb-templately__action:hover,
 .eatb-templately__action:focus {
-	color: var( --eatb-accent-hover );
-	text-decoration: underline;
-	text-underline-offset: 3px;
+	text-decoration: none;
 }
 
-.eatb-templately__action[disabled] {
-	cursor: default;
-	opacity: 0.7;
-	text-decoration: none;
+/*
+ * Stacked once the panel's two halves no longer fit side by side. This has to
+ * live after the rules it overrides, not up with the other breakpoint rules:
+ * both are one class deep, so the base above would otherwise win on order and
+ * leave the panel centred and tight at its desktop padding.
+ */
+@media screen and ( max-width: 782px ) {
+	.eatb-templately {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 20px;
+	}
+
+	.eatb-templately__action {
+		width: 100%;
+	}
 }
 
 /* ------------------------------------------------------------------

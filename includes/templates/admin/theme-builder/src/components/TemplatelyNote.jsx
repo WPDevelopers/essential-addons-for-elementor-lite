@@ -156,13 +156,13 @@ export default function TemplatelyNote( { busy, onError, onLeave } ) {
 			</div>
 
 			{ 'active' === templately.state ? (
-				<a className="eatb-templately__action" href={ templately.url } onClick={ browse }>
+				<a className="eatb-button eatb-button--primary eatb-templately__action" href={ templately.url } onClick={ browse }>
 					{ strings.templatelyAction || 'Connect Templately' }
 				</a>
 			) : (
 				<button
 					type="button"
-					className="eatb-templately__action"
+					className="eatb-button eatb-button--primary eatb-templately__action"
 					onClick={ enable }
 					disabled={ working || busy }
 				>
