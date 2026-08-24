@@ -195,7 +195,10 @@ class Content_Controls {
 			'type'        => Control_Nested_Repeater::CONTROL_TYPE,
 			'fields'      => $repeater->get_controls(),
 			'default'     => $manager->get_default_menu_items(),
-			'title_field' => '{{{ eael_mega_menu_item_label }}}',
+			// Escaped: the row title is compiled with the same Underscore settings
+			// as the preview template and written with .html(), so the triple form
+			// would run a label's markup inside the panel.
+			'title_field' => '{{ eael_mega_menu_item_label }}',
 			'button_text' => esc_html__( 'Add Menu Item', 'essential-addons-for-elementor-lite' ),
 			// The frontend handler resolves per item submenu width / state from these rows.
 			'frontend_available' => true,

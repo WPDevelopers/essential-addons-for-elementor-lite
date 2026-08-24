@@ -87,7 +87,13 @@ class Editor_Renderer {
 					<span class="eael-mega-menu__toggle-icon eael-mega-menu__toggle-icon--close">{{{ toggleCloseIcon }}}</span>
 				<# } #>
 				<# if ( toggleText ) { #>
-					<span class="eael-mega-menu__toggle-text">{{{ toggleText }}}</span>
+					<# /*
+					 * Escaped: Toggle Text is a plain TEXT control, so anything in
+					 * it that looks like markup is content, not markup. The triple
+					 * form would run it as HTML in the editor — the front end
+					 * escapes the same value in mobile-toggle.php.
+					 */ #>
+					<span class="eael-mega-menu__toggle-text">{{ toggleText }}</span>
 				<# } #>
 			</button>
 			<# } #>
@@ -112,6 +118,18 @@ class Editor_Renderer {
 							itemClasses = [ 'eael-mega-menu__item' ],
 							tag = hasUrl ? 'a' : ( hasSubmenu ? 'button' : 'span' );
 
+						// `{{ }}` only HTML-escapes, so it would leave a
+						// `javascript:` URL intact and clickable in the preview.
+						// Elementor's own widget templates run href through
+						// helpers.sanitizeUrl(), so prefer that; the protocol test
+						// is the fallback for an Elementor old enough not to have
+						// it, where calling it would throw and blank the preview.
+						// The front end needs neither — add_link_attributes() runs
+						// esc_url() against an allowed-protocol list.
+						const safeUrl = ( elementor.helpers && 'function' === typeof elementor.helpers.sanitizeUrl )
+							? elementor.helpers.sanitizeUrl( url )
+							: ( /^\s*(javascript|data|vbscript):/i.test( url ) ? '' : url );
+
 						if ( hasSubmenu ) {
 							itemClasses.push( 'eael-mega-menu__item--has-submenu' );
 						}
@@ -123,12 +141,18 @@ class Editor_Renderer {
 					<li class="{{ itemClasses.join( ' ' ) }}" data-item-index="{{ position }}" style="--eael-mm-order: {{ position * 2 }};">
 						<{{{ tag }}} class="eael-mega-menu__link"
 							id="{{ itemId }}"
-							<# if ( hasUrl ) { #>href="{{ url }}"<# } #>
+							<# if ( hasUrl ) { #>href="{{ safeUrl }}"<# } #>
 							<# if ( ! hasUrl && hasSubmenu ) { #>type="button" aria-expanded="false" aria-controls="{{ panelId }}"<# } #>>
 							<# if ( itemIcon ) { #>
 								<span class="eael-mega-menu__item-icon">{{{ itemIcon }}}</span>
 							<# } #>
-							<span class="eael-mega-menu__item-label">{{{ item.eael_mega_menu_item_label }}}</span>
+							<# /*
+							 * Escaped, for the same reason as the toggle text above:
+							 * Label is a plain TEXT control. The icons around it stay
+							 * on the triple form because those are markup Elementor
+							 * itself built, via elementor.helpers.renderIcon().
+							 */ #>
+							<span class="eael-mega-menu__item-label">{{ item.eael_mega_menu_item_label }}</span>
 							<# if ( hasSubmenu && ! hasUrl && indicatorIcon ) { #>
 								<span class="eael-mega-menu__item-indicator">{{{ indicatorIcon }}}</span>
 							<# } #>
