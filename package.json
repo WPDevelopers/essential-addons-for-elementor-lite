@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "webpack --mode production --watch",
-    "build": "webpack --mode production && webpack --mode development",
+    "build": "webpack --mode production && webpack --mode development && npm run build:angie",
+    "build:angie": "esbuild src/js/admin/angie-integration.js --bundle --format=iife --minify --outfile=assets/admin/js/angie-integration.min.js",
     "format": "prettier --write 'src/**/*.{js,scss,css,json}'",
     "format:check": "prettier --check 'src/**/*.{js,scss,css,json}'",
     "prepare": "husky",
@@ -27,6 +28,10 @@
   "homepage": "https://github.com/rupok/essential-addons-for-elementor-lite#readme",
   "devDependencies": {
     "@babel/cli": "^7.7.7",
+    "@elementor/angie-sdk": "^1.5.2",
+    "@modelcontextprotocol/sdk": "^1.27.0",
+    "esbuild": "^0.23.0",
+    "zod": "^3.23.0",
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.6",

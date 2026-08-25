@@ -134,6 +134,11 @@ class Bootstrap
         // Compatibility Support
         new Compatibility_Support();
 
+        // Angie (Elementor AI Assistant) widget discovery; self-gates on ANGIE_VERSION
+        if ( $this->is_activate_elementor() ) {
+            new Angie_Integration();
+        }
+
 		include_once(EAEL_PLUGIN_PATH . 'includes/bfcm-pointer.php');
 
     }
