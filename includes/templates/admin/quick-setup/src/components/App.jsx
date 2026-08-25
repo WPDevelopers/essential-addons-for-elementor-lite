@@ -286,7 +286,7 @@ function App() {
             />
           </div>
 
-          { eaelQuickSetup?.thinkrank_content?.local_plugin_data === false ?
+          { eaelQuickSetup?.thinkrank_content?.all_installed === false ?
           <div
             className={`eael-setup-content eael-thinkrank-content ${
               activeTab === "thinkrank" ? "" : "eael-d-none"

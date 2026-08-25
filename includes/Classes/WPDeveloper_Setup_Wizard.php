@@ -267,11 +267,39 @@ class WPDeveloper_Setup_Wizard {
 	 */
 	public function data_thinkrank_content(){
 		$tr_icon = EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank.svg';
+
+		// The step installs both plugins: ThinkRank (SEO) + xSpeed (performance).
+		$plugins = [
+			[
+				'slug'              => 'thinkrank',
+				'basename'          => 'thinkrank/thinkrank.php',
+				'is_active'         => is_plugin_active( 'thinkrank/thinkrank.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
+			],
+			[
+				'slug'              => 'xspeed',
+				'basename'          => 'xspeed/xspeed.php',
+				'is_active'         => is_plugin_active( 'xspeed/xspeed.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'xspeed/xspeed.php' ),
+			],
+		];
+
+		$all_installed = true;
+		foreach ( $plugins as $plugin ) {
+			if ( false === $plugin['local_plugin_data'] ) {
+				$all_installed = false;
+				break;
+			}
+		}
+
 		return [
 			'slug'              => 'thinkrank',
 			'basename'          => 'thinkrank/thinkrank.php',
 			'is_active'         => is_plugin_active( 'thinkrank/thinkrank.php' ),
 			'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
+			'plugins'           => $plugins,
+			// The step is hidden only when BOTH plugins are already installed.
+			'all_installed'     => $all_installed,
 			'logo'              => $tr_icon,
 			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-promo-image.jpg',
 			'title'             => __( 'Better SEO | Faster Performance', 'essential-addons-for-elementor-lite' ),
