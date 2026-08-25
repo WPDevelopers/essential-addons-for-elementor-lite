@@ -129,7 +129,7 @@ class WPDeveloper_Setup_Wizard {
 			'configuration' => __( 'Configuration', 'essential-addons-for-elementor-lite' ),
 			'elements'      => __( 'Elements', 'essential-addons-for-elementor-lite' ),
 			'go_pro'        => __( 'Go PRO', 'essential-addons-for-elementor-lite' ),
-			'thinkrank'     => __( 'Boost SEO', 'essential-addons-for-elementor-lite' ),
+			'thinkrank'     => __( 'Boost SEO & Speed', 'essential-addons-for-elementor-lite' ),
 			'pluginspromo'  => __( 'Plugins', 'essential-addons-for-elementor-lite' ),
 			'integrations'  => __( 'Integrations', 'essential-addons-for-elementor-lite' ),
 		];
@@ -274,28 +274,28 @@ class WPDeveloper_Setup_Wizard {
 			'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
 			'logo'              => $tr_icon,
 			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-promo-image.jpg',
-			'title'             => __( 'Boost your SEO with AI', 'essential-addons-for-elementor-lite' ),
-			'subtitle'          => __( 'Get found on Google and in AI answers. Let AI optimize every page you build - automatically.', 'essential-addons-for-elementor-lite' ),
-			'install_label'     => __( 'Enable & Configure SEO', 'essential-addons-for-elementor-lite' ),
+			'title'             => __( 'Better SEO | Faster Performance', 'essential-addons-for-elementor-lite' ),
+			'subtitle'          => __( 'Get found on Google and in AI answers, while keeping your site fast and optimized, automatically.', 'essential-addons-for-elementor-lite' ),
+			'install_label'     => __( 'Boost SEO & Performance', 'essential-addons-for-elementor-lite' ),
 			'installing_label'  => __( 'Configuring…', 'essential-addons-for-elementor-lite' ),
 			'done_label'        => __( 'Configured', 'essential-addons-for-elementor-lite' ),
 			'skip_label'        => __( 'Skip for now', 'essential-addons-for-elementor-lite' ),
 			'open_url'          => admin_url( 'admin.php?page=thinkrank' ),
 			'features'          => [
 				[
-					'content' => __( 'AI-written titles, meta & descriptions', 'essential-addons-for-elementor-lite' ),
+					'content' => __( 'AI-powered SEO titles, meta & schema', 'essential-addons-for-elementor-lite' ),
 				],
 				[
-					'content' => __( 'Schema & LLM answer optimization', 'essential-addons-for-elementor-lite' ),
+					'content' => __( 'Optimize for Google & AI answers', 'essential-addons-for-elementor-lite' ),
 				],
 				[
-					'content' => __( 'Built-in MCP server for AI agents', 'essential-addons-for-elementor-lite' ),
+					'content' => __( 'Smart caching & performance optimization', 'essential-addons-for-elementor-lite' ),
 				],
 				[
-					'content' => __( 'XML sitemaps & smart indexing', 'essential-addons-for-elementor-lite' ),
+					'content' => __( 'Faster page loads & better Core Web Vitals', 'essential-addons-for-elementor-lite' ),
 				],
 				[
-					'content' => __( 'Rank tracking with GA4', 'essential-addons-for-elementor-lite' ),
+					'content' => __( 'Built-in AI tools with MCP support', 'essential-addons-for-elementor-lite' ),
 				],
 			],
 		];
