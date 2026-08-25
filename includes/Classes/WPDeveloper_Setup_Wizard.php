@@ -435,6 +435,15 @@ class WPDeveloper_Setup_Wizard {
 				'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
 			],
 			[
+				'slug'     => 'xspeed',
+				'basename' => 'xspeed/xspeed.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/xspeed.png',
+				'title'    => __( 'xSpeed Cache', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Make every page you build load faster. xSpeed handles smart caching, asset optimization & CDN, improving Core Web Vitals without touching your design.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'xspeed/xspeed.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'xspeed/xspeed.php' ),
+			],
+			[
 				'slug'     => 'betterdocs',
 				'basename' => 'betterdocs/betterdocs.php',
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/bd-new.svg',
