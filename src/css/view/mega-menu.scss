@@ -312,14 +312,58 @@
 	 * The panels wrapper only ever holds panels, so this matches exactly the
 	 * same set as the class did, just sooner. */
 	&--editing &__panels > * {
-		position: static;
-		width: auto;
-		inset-inline-start: auto;
+		/* Out of flow, exactly as on the front end.
+		 *
+		 * A panel in normal flow is a panel that adds its own height to whatever
+		 * column holds the menu bar — and in a three-column header whose row is
+		 * centred, that pushes the logo and the buttons down to the middle of an
+		 * open mega panel every time one is selected. The header stops being a
+		 * header the moment you go to edit it.
+		 *
+		 * So the editing layout keeps the front end's geometry and changes only
+		 * what has to change: the panel is visible instead of faded out, and it is
+		 * full-bleed instead of its configured width. Everything around it holds
+		 * still.
+		 *
+		 * Stated in full rather than left to the `__panel` rules above, and
+		 * matched structurally — `> *` rather than the class — because in the
+		 * editor a panel only becomes a panel once the handler has classified it.
+		 * Adding or removing a menu item re-renders the widget and re-mounts every
+		 * child container; until the handler catches up those containers carry
+		 * none of the panel rules, so all of them would paint at once, stacked in
+		 * flow under the bar. Keying to the mount point makes this true at first
+		 * paint, which is the only way to close that gap — no JS can run earlier
+		 * than the render it follows. */
+		position: absolute;
+		top: calc(100% + var(--eael-mm-panel-offset, 0px) + var(--eael-mm-panel-offset-y, 0px));
+		z-index: var(--eael-mm-panel-z-index, 999);
 		opacity: 1;
 		visibility: visible;
 		pointer-events: auto;
 		transform: none;
 		transition: none;
+
+		/* Full-bleed, so a panel is editable at the width it will be read at.
+		 *
+		 * Its real width is whatever the item's Submenu Width says, and for a menu
+		 * sitting in a narrow column that can be a strip too cramped to lay
+		 * anything out in — a mega panel built for the full page collapsing into
+		 * one so narrow its headings wrap a letter per line. Editing at full width
+		 * is the point of the editor; the front end still renders the configured
+		 * width, because none of this is in range without `--editing`.
+		 *
+		 * The inset is measured against the widget, which is the positioned
+		 * ancestor, so the panel lands on the preview's left edge from any depth
+		 * of nesting and any combination of ancestor padding — nothing has to know
+		 * how far in it started.
+		 *
+		 * `clientWidth`, not `100vw`: `vw` counts the scrollbar, and a preview
+		 * 15px too wide answers with a horizontal scrollbar on every panel the
+		 * user opens. The handler measures it; the `100%` / `0` fallbacks keep the
+		 * panel merely narrow, never broken, on the first paint before that runs. */
+		inset-inline-start: var(--eael-mm-editing-inset, 0px);
+		width: var(--eael-mm-editing-width, 100%);
+		max-width: var(--eael-mm-editing-width, 100%);
 	}
 
 	/* Hide the inactive panels only.
@@ -555,82 +599,25 @@
 
 	/* Editing the collapsed layout.
 	 *
-	 * Two things make the mobile view impossible to design otherwise: the menu
-	 * starts closed, so there is nothing to select, and an overlaying dropdown
-	 * floats across whatever follows it in the editor. While editing, keep it
-	 * expanded and in flow. Declared after the rules above so it wins the
-	 * same-specificity ties. */
+	 * The menu starts closed, so there would be nothing to select and nothing to
+	 * design; forcing it open is the whole of what editing mode has to change
+	 * here. Position, width and inset are deliberately *not* touched — they are
+	 * already right.
+	 *
+	 * `positionDropdown()` measures the widget against the viewport and writes
+	 * `--eael-mm-dropdown-*` in the editor exactly as it does on the front end,
+	 * and the overlay rules above turn those into a full-bleed sheet below the
+	 * bar. Overriding them to `static; width: 100%` — which this rule used to do,
+	 * to keep the sheet in flow — threw that measurement away and left the
+	 * dropdown as wide as the widget: inside a header column sized for a
+	 * hamburger, a strip barely wide enough for one word per line.
+	 *
+	 * In flow it also pushed the logo and the sign-in button down the page every
+	 * time the menu was opened, which is the same reason an open panel is out of
+	 * flow. The bar holds still; the sheet drops below it. */
 	&--editing#{&}--mobile {
 		.eael-mega-menu__container {
 			display: flex;
-			position: static;
-			inset-inline: auto;
-			width: 100%;
-		}
-	}
-
-	/* --------------------------------------------------------------------- */
-	/* Preset link list                                                      */
-	/* --------------------------------------------------------------------- */
-
-	/* The one piece of markup a preset writes rather than builds from widgets.
-	 *
-	 * A panel column of links is a list of links, and the widget that holds one
-	 * inside a Mega Menu preset — Advanced Tabs — takes its content as a WYSIWYG
-	 * field, not as child widgets. Left to the browser that field renders as
-	 * bulleted, theme-coloured list items; these rules are what make it arrive
-	 * looking like navigation instead.
-	 *
-	 * Every value is a custom property with its default in the fallback, so a
-	 * user who wants a different accent sets one variable on the panel rather
-	 * than fighting a fixed colour. Nothing here is required for the links to
-	 * work: strip the classes and they are still links in a list. */
-	.eael-mm-links {
-		&__title {
-			margin: 0 0 14px;
-			font-family: inherit;
-			font-size: var(--eael-mm-links-title-size, 14px);
-			font-weight: var(--eael-mm-links-title-weight, 600);
-			line-height: 1.4;
-			color: var(--eael-mm-links-title-color, inherit);
-		}
-
-		&__list {
-			display: grid;
-			gap: var(--eael-mm-links-gap, 14px);
-			margin: 0;
-			padding: 0;
-			list-style: none;
-
-			/* `inherit`, not a size of its own. The tab's Content > Typography
-			   control is what should be setting the type here, and on a theme that
-			   styles `li` or `a` — which is most of them — its value is inherited
-			   past the list and then overridden inside it. Handing the inherited
-			   value back down is what puts that control back in charge. */
-			li {
-				margin: 0;
-				font: inherit;
-				line-height: 1.4;
-			}
-
-			a {
-				display: inline-block;
-				font: inherit;
-				color: var(--eael-mm-links-color, inherit);
-				text-decoration: none;
-				transition: color 0.2s ease;
-
-				/* Repeated on the states rather than left to inherit: a theme that
-				   underlines links usually does it on `:hover` as well, from a
-				   selector at least as specific as the one it used for the base. */
-				&:hover,
-				&:focus,
-				&:focus-visible,
-				&:active {
-					color: var(--eael-mm-links-color-hover, #4d7c0f);
-					text-decoration: none;
-				}
-			}
 		}
 	}
 }

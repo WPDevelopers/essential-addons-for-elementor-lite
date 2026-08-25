@@ -80,6 +80,13 @@ class Preset_Library {
 				'widgets'   => [ 'eael-adv-tabs', 'eael-info-box', 'eael-creative-button', 'heading', 'image', 'button', 'icon' ],
 				'builder'   => [ Saas_Menu::class, 'build' ],
 			],
+			'suite' => [
+				'slug'      => 'suite',
+				'title'     => __( 'Product Suite', 'essential-addons-for-elementor-lite' ),
+				'thumbnail' => self::thumbnail_url( 'mega-menu-suite.png' ),
+				'widgets'   => [ 'eael-info-box', 'icon-list', 'heading', 'image', 'button', 'icon' ],
+				'builder'   => [ Suite_Menu::class, 'build' ],
+			],
 		];
 
 		/**
