@@ -25,6 +25,28 @@
    outline: none;
 }
 
+/* Never underlined.
+ *
+ * The button renders as an `<a>`, so a theme that underlines links underlines
+ * this too, and no control can undo it: the widget's Typography group targets
+ * the inner `.cretive-button-text` span, and a decoration set on an ancestor
+ * draws through its inline descendants — a descendant cannot switch it off.
+ *
+ * Prefixed with the Elementor widget class to reach (0,2,1), which clears the
+ * selectors themes reach for — `.entry-content a`, `.elementor a`, `body a`.
+ * The bare class is kept alongside it for any context that renders the button
+ * outside a widget wrapper. */
+.eael-creative-button,
+.eael-creative-button:hover,
+.eael-creative-button:focus,
+.eael-creative-button:active,
+.elementor-widget-eael-creative-button a.eael-creative-button,
+.elementor-widget-eael-creative-button a.eael-creative-button:hover,
+.elementor-widget-eael-creative-button a.eael-creative-button:focus,
+.elementor-widget-eael-creative-button a.eael-creative-button:active {
+   text-decoration: none;
+}
+
 /*--- Winona ---*/
 .eael-creative-button--winona {
    overflow: hidden;

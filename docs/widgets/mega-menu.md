@@ -18,6 +18,7 @@ Because children are ordinary Elementor container elements they live inside the 
 
 | Capability | Lite | Pro |
 | ---------- | ---- | --- |
+| One-click header presets (Content → Mega Menu Preset) | ✅ | — |
 | Nested menu items with per-item containers | ✅ | — |
 | Hover / click trigger, close delay, outside-click close | ✅ | — |
 | Four submenu width modes (menu, viewport, fit, custom) | ✅ | — |
@@ -25,7 +26,7 @@ Because children are ordinary Elementor container elements they live inside the 
 | Responsive collapse to toggle + accordion | ✅ | — |
 | Full style tab (bar, item states, icon, indicator, panel, toggle) | ✅ | — |
 
-Lite-only widget — Pro adds nothing and hooks nothing. The one public extension point is the `eael/mega-menu/menu_items` filter.
+Lite-only widget — Pro adds nothing and hooks nothing. The public extension points are the `eael/mega-menu/menu_items` filter and the two preset filters below.
 
 ## File Map
 
@@ -34,7 +35,9 @@ Lite-only widget — Pro adds nothing and hooks nothing. The one public extensio
 | [`includes/Elements/Mega_Menu.php`](../../includes/Elements/Mega_Menu.php) | Widget class — metadata, nested wiring, `print_child()` |
 | [`includes/MegaMenu/Conditions.php`](../../includes/MegaMenu/Conditions.php) | Availability gate — Elementor version, nested API, experiment state |
 | [`includes/MegaMenu/Manager.php`](../../includes/MegaMenu/Manager.php) | Service provider — option lists, defaults, child container shape |
-| [`includes/MegaMenu/Controls/Content_Controls.php`](../../includes/MegaMenu/Controls/Content_Controls.php) | Content tab — repeater, settings, responsive |
+| [`includes/MegaMenu/Controls/Content_Controls.php`](../../includes/MegaMenu/Controls/Content_Controls.php) | Content tab — preset picker, repeater, settings, responsive |
+| [`includes/MegaMenu/Presets/Preset_Library.php`](../../includes/MegaMenu/Presets/Preset_Library.php) | Preset registry — control options, availability gate, `get_content( $slug, $mode )` |
+| [`includes/MegaMenu/Presets/Saas_Menu.php`](../../includes/MegaMenu/Presets/Saas_Menu.php) | The **SaaS Menu** preset — header bar, widget settings, one nested container per row |
 | [`includes/MegaMenu/Controls/Style_Controls.php`](../../includes/MegaMenu/Controls/Style_Controls.php) | Style tab — six sections, all writing CSS custom properties |
 | [`includes/MegaMenu/Renderers/Frontend_Renderer.php`](../../includes/MegaMenu/Renderers/Frontend_Renderer.php) | PHP render + panel attribute decoration |
 | [`includes/MegaMenu/Renderers/Editor_Renderer.php`](../../includes/MegaMenu/Renderers/Editor_Renderer.php) | Underscore `content_template()` |
@@ -121,6 +124,7 @@ JS-written properties: `--eael-mm-panel-inset-start` and `--eael-mm-panel-width`
 
 | Control | Type | Default | Tab → Section | Affects |
 | ------- | ---- | ------- | ------------- | ------- |
+| `eael_mega_menu_preset` | Choose (image) | `custom` | Content → Mega Menu Preset | Records the applied preset; the editor script replaces the header block. `render_type: none` |
 | `eael_mega_menu_items` | Nested repeater | 4 rows | Content → Menu Items | Items + child containers; `frontend_available` |
 | `…_item_label` | Text (dynamic) | `Menu Item` | ↳ row | `.eael-mega-menu__item-label` |
 | `…_item_link` | URL (dynamic) | — | ↳ row | `<a>` vs `<button>` element choice |
@@ -200,14 +204,103 @@ elementorFrontend.elementsHandler.attachHandler("eael-mega-menu", getMegaMenuHan
 | Hook | Type | Signature | Purpose |
 | ---- | ---- | --------- | ------- |
 | `eael/mega-menu/menu_items` | filter | `( array $items, Widget_Base $widget )` | Modify, extend or reorder repeater rows immediately before render |
+| `eael/mega-menu/presets` | filter | `( array $presets )` | Add or remove presets. Each needs `title`, `thumbnail`, a `builder` taking a mode, and optionally `widgets` |
+| `eael/mega-menu/preset_content` | filter | `( array $content, string $slug, string $mode )` | Adjust the element a preset applies, before the editor inserts it |
 
 Assets are declared in `config.php` only (`type: self`, `context: view` for both CSS and JS), so `Asset_Builder` folds them into the per-page `eael-{post_id}.css` / `.js` bundle only when the widget is on the page. Nothing is enqueued globally.
+
+## Presets
+
+A preset is a ready-made **header**, applied from the first Content section, **Mega Menu Preset**. It is not a skin, and it is not only the menu: the widget's own design already lives in three places at once — the repeater rows that make the bar, the widget settings that style it, and the nested containers that fill each panel — and around it sits the third of a header nobody navigates without, the logo and whatever the site asks visitors to do. So a preset supplies all of it, and the editor **replaces the block the menu sits in** with the result.
+
+Replacing rather than patching is the point. Elementor keeps `eael_mega_menu_items` and the widget's children in a strict 1:1 index mapping and syncs them through the repeater commands; writing a new row set into the settings would leave the old panels behind it, one per row that no longer exists. A widget built from the preset arrives with its rows and its children already in agreement. It is the same route [`Theme_Builder/Presets/Mega_Header.php`](../../includes/Theme_Builder/Presets/Mega_Header.php) takes to insert a Mega Menu in the first place, and it reuses the same element builders in [`Theme_Builder/Presets/Elements.php`](../../includes/Theme_Builder/Presets/Elements.php).
+
+### What gets replaced
+
+A header on an Elementor page is a top-level block — the container the document holds directly — so `presetTarget()` climbs from the widget to the last container before the document. That lands on the right thing in both situations that matter:
+
+| Situation | Target | Mode |
+| --------- | ------ | ---- |
+| Widget just dropped on the canvas | the container Elementor created for it, holding nothing else | `header` |
+| Menu already inside a preset header | the header bar itself, two levels up | `header` |
+| Menu in a legacy column, or with no container above it | the widget | `widget` |
+
+Taking the *immediate* parent instead would have swapped the header's navigation column for a whole second header nested inside the first — that was a real bug, and the walk is what fixes it. In `widget` mode the preset returns the menu alone and the Advanced tab is carried across; in `header` mode it is not, because the widget is moving into a bar it has never been in, where a width set for a standalone menu is a leftover rather than positioning.
+
+The confirm dialog fires when the panels already hold content, or when the block being replaced holds more than the menu. A block holding only the menu is the container the widget arrived in, and turning that into a header is the whole point rather than something to warn about.
+
+### Every tile is a switch
+
+Including **Custom**, which is not a preset — there is no design behind it — but is a real choice all the same: picking it puts the widget back to the plain menu it ships as, wrapped in a bare container, which is the blank page someone asks for when they want to start over. A tile that quietly did nothing read as broken.
+
+That is also why the apply is driven by **clicks on the tiles** rather than by watching `change:eael_mega_menu_preset`. Backbone only fires `change` when the value actually moves, so a model-bound handler ignored the two presses users make most: the tile that is already lit, to start the design over, and Custom.
+
+### Flow
+
+```text
+user clicks a tile                                             (src/js/edit/mega-menu.js)
+  └── resolve the edited widget from the panel, read the tile's slug
+        ├── panels or block hold content → confirm (deferred a tick), Cancel restores the slug
+        └── POST eael_mega_menu_preset { preset, mode }         (MegaMenu\Manager::ajax_preset)
+              └── Preset_Library::get_content( $slug, $mode )   → one Elementor element
+                    └── wait out Elementor's 800ms settings-history debounce
+                          └── one history entry, "Apply Preset":
+                                document/elements/delete  (the old block)
+                                document/elements/create  (the preset's, at the same index)
+```
+
+Four details are load-bearing, and each of them cost real debugging:
+
+- **The edited widget is asked of the panel, not remembered.** `panel/open_editor/widget/<type>` hands over a view, but only reliably when a *person* opened the panel — after the reopen an apply performs itself, it arrives empty. Caching it stranded every click after the first. The handler reads `getCurrentPageView().getOption( 'editedElementView' )` instead, and keeps the recorded one only as a fallback.
+- **The confirm dialog opens on the next tick.** DialogsManager closes a dialog on a click outside it, and the press that asked for this one is still bubbling towards the document. Shown synchronously it is dismissed by the very gesture that opened it — which, again, reads as the tile doing nothing.
+- **The debounce wait.** Elementor records a settings change on a debounced timer so a run of keystrokes collapses into one undo step. A swap that beat the timer put the tile's own entry on *top* of the delete and the create, aimed at a widget those two had already replaced: undo changed nothing visible, and redo built a second header beside the first. Waiting orders the stack the way the user performed it — `Apply Preset`, then `Mega Menu / Preset`, then `Editing Started`.
+- **`end-log` needs the id `start-log` returned.** Without it the call closes whichever log the history happens to have open, and a log left open swallows every later entry — so a second apply and everything between the two collapse into a single undo step that walks the user back past work they meant to keep.
+
+A cancelled switch leaves the canvas untouched and puts the tile back, but Elementor has already logged the radio moving, so it costs one cosmetic undo entry that only moves the value. Applying is what produces the single `Apply Preset` step.
+
+`render_type: none` on the control is deliberate — the widget is about to be rebuilt by the script, and re-rendering it for the control's own sake would be a second teardown of every nested container.
+
+### Shipped presets
+
+| Slug | Title | Built from |
+| ---- | ----- | ---------- |
+| `saas` | SaaS Menu | Header: the site's own logo (core `image`, or `heading` with the site name when none is set), core `button` for Login, `eael-creative-button` for Create Account. Panels: `eael-adv-tabs` (vertical, the Product catalogue), `eael-info-box` + core `icon` in linked containers (the Resources list) |
+
+`Preset_Library::get_content()` also answers for `custom`, building the widget's own defaults through `Manager::get_default_menu_items()` / `get_default_children_elements()`, so switching back lands exactly where someone who never touched the control would have started.
+
+A preset that names its `widgets` is hidden whenever one is missing — switched off in EA's settings, disabled in Elementor's element manager — rather than applying half way and leaving the wreckage behind. When every preset is hidden the section is not registered at all.
+
+### Adding one
+
+1. Add a builder class in `includes/MegaMenu/Presets/` with a static `build( $mode )` returning **one** Elementor element: the finished header bar with a Mega Menu widget somewhere inside it for `header`, that widget alone for `widget`.
+2. The widget's `elements` are one `Elements::nested_child()` per repeater row, **including the plain-link rows** — the widget prints child *n* for row *n*, so a skipped container shifts every later panel onto the wrong item.
+3. Register it in `Preset_Library::get_presets()` (or through the `eael/mega-menu/presets` filter) with a `thumbnail` and the `widgets` it emits in either mode. `Preset_Library::get_content()` stamps the slug onto every Mega Menu in the tree, so the builder never has to know its own key.
+4. Drop a ~129×123 wireframe PNG into `assets/admin/images/layout-previews/`, in the same `#5F6367`-on-transparent language as the existing files.
+
+Nothing in a preset may be Pro, and nothing may need markup the widget alone knows how to render. The one exception is the link list inside an Advanced Tabs tab — a tab takes a WYSIWYG field rather than child widgets, so `Saas_Menu::link_list()` writes a small block of HTML whose classes the widget's own stylesheet answers (`.eael-mm-links` in [`mega-menu.scss`](../../src/css/view/mega-menu.scss)). Strip the classes and the links still work.
 
 ## Common Issues
 
 ### The widget is missing from the Elementor panel
 
 The *Nested Elements* experiment is off, or Elementor is older than 3.8. Check **Elementor → Settings → Features**; `Conditions::is_nested_elements_active()` drives `show_in_panel()`. On Elementor < 3.8 the `condition` in `config.php` skips registration entirely, so the widget also won't appear in **EA → Elements**.
+
+### Something in the header is underlined
+
+Themes underline links, and everything in this header is a link. Three different layers answer for it, because there is no one place that can:
+
+| Element | Reset by |
+| ------- | -------- |
+| Menu items, disclosure buttons, label / icon / indicator spans | [`mega-menu.scss`](../../src/css/view/mega-menu.scss), block-prefixed to (0,2,0) / (0,3,0) |
+| The link list inside a panel (`.eael-mm-links`) | same file, including `:hover` / `:focus` / `:active` |
+| **Login** (core Button) | a control — the preset sets `typography_text_decoration: none`, which writes Elementor's own per-widget rule |
+| **Create Account** (Creative Button) | [`creative-btn.scss`](../../src/css/view/creative-btn.scss) |
+
+The Creative Button is the one worth understanding. Its Typography group targets `.eael-creative-button .cretive-button-text` — the inner span — while the theme underlines the `<a class="eael-creative-button">` around it. **A decoration set on an ancestor draws through its inline descendants and cannot be switched off by them**, so no value in that control could ever have fixed it; the reset has to live on the `<a>`, which is why it is in the widget's own stylesheet rather than in the preset.
+
+That same rule is worth remembering for anything a preset puts inside a panel. It does *not* apply to the menu links themselves — `.eael-mega-menu__link` is `display: flex`, which starts its own formatting context, so decorations do not propagate into it.
+
+A theme that still wins after all this is either using `!important` or reaching past three classes; that belongs in the theme or in Custom CSS rather than another round of specificity here. One thing deliberately left alone: the logo's `<a>` picks up the underline, but it wraps an `<img>` with no text in it, so nothing is drawn.
 
 ### The active or focused item shows a colour I never set (often pink)
 

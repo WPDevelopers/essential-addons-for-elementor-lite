@@ -11,6 +11,7 @@ use Elementor\Modules\NestedElements\Controls\Control_Nested_Repeater;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\MegaMenu\Manager;
+use Essential_Addons_Elementor\MegaMenu\Presets\Preset_Library;
 
 /**
  * Content tab controls for the Mega Menu widget.
@@ -25,9 +26,60 @@ class Content_Controls {
 	 * @param Widget_Base $widget Mega Menu widget instance.
 	 */
 	public static function register( Widget_Base $widget ) {
+		self::register_preset_section( $widget );
 		self::register_menu_items_section( $widget );
 		self::register_settings_section( $widget );
 		self::register_mobile_section( $widget );
+	}
+
+	/**
+	 * Ready-made designs, applied from the panel.
+	 *
+	 * First in the tab because it is the first decision: a preset rewrites the
+	 * repeater below it, the whole Style tab, the contents of every panel and the
+	 * header block around them, so offering it after the user has filled those in
+	 * is offering to throw their work away.
+	 *
+	 * The control does not *do* anything by itself. Its value is a record of the
+	 * last preset applied — which keeps the right tile lit when the panel is
+	 * reopened — and the editor script watches it for changes and performs the
+	 * apply. Hence `render_type: none`: the widget is about to be rebuilt by that
+	 * script, and re-rendering it for the control's own sake would be a second,
+	 * pointless teardown of every nested container.
+	 *
+	 * @param Widget_Base $widget Mega Menu widget instance.
+	 */
+	protected static function register_preset_section( Widget_Base $widget ) {
+		$manager = Manager::instance();
+		$options = $manager->get_preset_options();
+
+		// One option left means every preset was filtered out — a widget it needs
+		// is switched off, or a filter emptied the list. A "Preset" section whose
+		// only choice is "Custom" is a control that cannot do anything.
+		if ( count( $options ) < 2 ) {
+			return;
+		}
+
+		$widget->start_controls_section( 'eael_mega_menu_preset_section', [
+			'label' => esc_html__( 'Mega Menu Preset', 'essential-addons-for-elementor-lite' ),
+		] );
+
+		$widget->add_control( 'eael_mega_menu_preset', [
+			'label'        => esc_html__( 'Preset', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::CHOOSE,
+			'image_choose' => true,
+			'label_block'  => true,
+			// Never toggle off: an empty value is not a state this control has —
+			// "no preset" is what the Custom tile means.
+			'toggle'       => false,
+			'default'      => Preset_Library::CUSTOM,
+			'options'      => $options,
+			'css_class'    => 'eael-mega-menu-preset-choices',
+			'description'  => esc_html__( 'A preset is a whole header — logo, menu and buttons. Choosing one replaces the block this menu sits in. Undo restores what was there.', 'essential-addons-for-elementor-lite' ),
+			'render_type'  => 'none',
+		] );
+
+		$widget->end_controls_section();
 	}
 
 	/**

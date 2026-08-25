@@ -266,6 +266,683 @@
 		};
 	}
 
+	/* ------------------------------------------------------------------
+	 * Presets.
+	 * --------------------------------------------------------------- */
+
+	/**
+	 * True from the moment a tile is acted on until the swap is done.
+	 *
+	 * An apply spans a network round trip and a deliberate wait, and the tiles
+	 * stay clickable throughout. Without a lock, an impatient second click starts
+	 * a second apply against a container the first one is about to delete.
+	 *
+	 * @type {boolean}
+	 */
+	let applyingPreset = false;
+
+	/**
+	 * How long to let Elementor's own history entry land first, in ms.
+	 *
+	 * Clicking a tile runs `document/elements/settings`, and Elementor records
+	 * that entry on a *debounced* timer — 800ms, so a run of keystrokes in a text
+	 * control collapses into one undo step. A swap that beat the timer put the
+	 * setting's entry on top of the delete and the create that followed it, aimed
+	 * at a widget those two had already replaced: undoing it changed nothing
+	 * visible, and redoing it built a second header beside the first.
+	 *
+	 * Waiting the timer out orders the stack the way the user performed it —
+	 * choose, then rebuild — so undo walks back through it in the same order.
+	 */
+	const SETTINGS_HISTORY_DEBOUNCE = 850;
+
+	/**
+	 * The Mega Menu the panel reported opening, as a fallback.
+	 *
+	 * @type {Object|null}
+	 */
+	let openMenu = null;
+
+	/**
+	 * Selector for one tile of the Preset control.
+	 */
+	const PRESET_TILE = ".elementor-control-eael_mega_menu_preset .elementor-choices-label";
+
+	/**
+	 * Wire the Preset control up.
+	 *
+	 * Driven by clicks on the tiles rather than by watching the setting change,
+	 * because a tile is a switch and a switch has to answer every press. Backbone
+	 * only fires `change` when the value actually moves, so a model-bound handler
+	 * silently ignored the two presses users make most: choosing the tile that is
+	 * already lit, to start the design over, and choosing Custom, which is a
+	 * choice like any other and now rebuilds the widget as the plain menu it
+	 * ships as.
+	 *
+	 * One delegated listener for the whole editor, and the widget is resolved from
+	 * the panel at click time. Binding per panel-open meant tracking and
+	 * unbinding handlers across views that Elementor tears down underneath us,
+	 * and the view the hook hands over is only reliable when a *person* opened
+	 * the panel — after the reopen an apply performs itself, it arrives empty,
+	 * which stranded every click after the first.
+	 */
+	function bindPresetControl() {
+		if (!window.elementor || !elementor.hooks || !presetConfig()) {
+			return;
+		}
+
+		elementor.hooks.addAction(
+			"panel/open_editor/widget/" + WIDGET_TYPE,
+			function (panel, model, view) {
+				const settings = model.get("settings");
+
+				openMenu = settings ? { view, settings } : null;
+			}
+		);
+
+		jQuery(document).on("click", PRESET_TILE, onPresetTileClick);
+	}
+
+	/**
+	 * The data the editor was handed for this feature.
+	 *
+	 * @return {Object|null} Localised config, or null when it is absent.
+	 */
+	function presetConfig() {
+		const config = window.eaelMegaMenuEditor;
+
+		return config && config.ajaxurl && config.action ? config : null;
+	}
+
+	/**
+	 * A tile was pressed.
+	 *
+	 * The handler runs during the click, before the browser's post-click
+	 * activation has moved the radio — so the model still holds the value being
+	 * switched away from, which is exactly what Cancel needs to put back.
+	 *
+	 * @param {Object} event jQuery click event.
+	 */
+	function onPresetTileClick(event) {
+		const config = presetConfig();
+		const slug = tileSlug(event.currentTarget);
+		const editedMenu = currentMenu();
+
+		if (applyingPreset || !config || !slug || !editedMenu) {
+			return;
+		}
+
+		const container = getContainer(editedMenu.view);
+
+		if (!container) {
+			return;
+		}
+
+		const fallback =
+			editedMenu.settings.get("eael_mega_menu_preset") || config.custom;
+		const target = presetTarget(container);
+		const changedAt = Date.now();
+
+		if (!needsConfirm(container, target)) {
+			applyPreset(slug, container, target, fallback, changedAt);
+
+			return;
+		}
+
+		confirmApply(
+			config,
+			slug,
+			target,
+			() => applyPreset(slug, container, target, fallback, changedAt),
+			() => revertPreset(container, fallback)
+		);
+	}
+
+	/**
+	 * The Mega Menu the panel is editing right now.
+	 *
+	 * Asked of the panel rather than remembered, because the panel is the only
+	 * thing that always knows: an apply reopens it on the widget it just built,
+	 * and a remembered view from before that swap points at a torn-down element.
+	 * The recorded one is kept as a fallback for an Elementor that ever stops
+	 * exposing the page view.
+	 *
+	 * @return {Object|null} `{ view, settings }`, or null.
+	 */
+	function currentMenu() {
+		let view = null;
+
+		try {
+			const page = elementor.getPanelView().getCurrentPageView();
+
+			view = page && "function" === typeof page.getOption ? page.getOption("editedElementView") : null;
+		} catch (error) {
+			view = null;
+		}
+
+		if (!view || !view.model || "function" !== typeof view.model.get) {
+			return openMenu;
+		}
+
+		if (WIDGET_TYPE !== view.model.get("widgetType")) {
+			return openMenu;
+		}
+
+		const settings = view.model.get("settings");
+
+		return settings ? { view, settings } : openMenu;
+	}
+
+	/**
+	 * The preset a tile stands for.
+	 *
+	 * The value lives on the radio the tile labels, which the control renders
+	 * immediately before it.
+	 *
+	 * @param {Element} tile Clicked label.
+	 *
+	 * @return {string} Preset slug, or an empty string.
+	 */
+	function tileSlug(tile) {
+		const previous = tile.previousElementSibling;
+
+		if (previous && "INPUT" === previous.tagName) {
+			return previous.value || "";
+		}
+
+		const input = tile.htmlFor ? document.getElementById(tile.htmlFor) : null;
+
+		return input ? input.value || "" : "";
+	}
+
+	/**
+	 * What the preset replaces, and therefore what it has to build.
+	 *
+	 * A preset is a finished header, and a header on an Elementor page is a
+	 * top-level block: the container the document holds directly. So the target
+	 * is found by climbing from the widget to the last container before the
+	 * document — which lands on the right thing in both situations that matter.
+	 *
+	 * Dropping the widget on the canvas puts it in a container of its own, and
+	 * that container is already top-level; it becomes the header bar. Re-applying
+	 * a preset later starts from a menu that is now two deep — inside the header's
+	 * navigation column — and climbing past it reaches the header itself. Taking
+	 * the immediate parent instead would have swapped the navigation column for a
+	 * whole second header nested inside the first.
+	 *
+	 * A menu somewhere with no container above it at all — inside a legacy column,
+	 * or directly in the document — has no block to take over, and falls back to
+	 * replacing the widget alone.
+	 *
+	 * @param {Object} container Widget container.
+	 *
+	 * @return {Object} `{ container, mode }` — what to replace, and what to ask for.
+	 */
+	function presetTarget(container) {
+		let node = container;
+		let block = null;
+
+		// Bounded: a corrupted parent chain is not worth hanging the editor over.
+		for (let depth = 0; depth < 32; depth++) {
+			const parent = node.parent;
+
+			if (
+				!parent ||
+				!parent.model ||
+				"function" !== typeof parent.model.get ||
+				"container" !== parent.model.get("elType")
+			) {
+				break;
+			}
+
+			block = parent;
+			node = parent;
+		}
+
+		return block ? { container: block, mode: "header" } : { container, mode: "widget" };
+	}
+
+	/**
+	 * Is there anything here worth asking about before it is replaced.
+	 *
+	 * Panel content always counts: menu labels and colours are a minute's work to
+	 * redo, a panel somebody laid out is not. In header mode the block being
+	 * replaced counts too, from its second child onwards — a block holding only
+	 * the menu is the container the widget arrived in, and turning that into a
+	 * header is the whole point rather than something to warn about.
+	 *
+	 * @param {Object} container Widget container.
+	 * @param {Object} target    Result of presetTarget().
+	 *
+	 * @return {boolean} True when the user should be asked first.
+	 */
+	function needsConfirm(container, target) {
+		if (hasPanelContent(container)) {
+			return true;
+		}
+
+		if ("header" !== target.mode) {
+			return false;
+		}
+
+		const siblings = target.container.children;
+
+		return !!(siblings && siblings.length > 1);
+	}
+
+	/**
+	 * Has the user built anything inside the panels yet.
+	 *
+	 * Only panel content counts. Menu labels and colours are a minute's work to
+	 * redo; a panel somebody laid out is not, and it is the only part of the
+	 * widget a preset destroys rather than overwrites.
+	 *
+	 * @param {Object} container Widget container.
+	 *
+	 * @return {boolean} True when at least one panel holds an element.
+	 */
+	function hasPanelContent(container) {
+		const children = container.children || [];
+
+		return children.some((child) => {
+			const elements = child && child.model ? child.model.get("elements") : null;
+
+			return !!(elements && elements.length);
+		});
+	}
+
+	/**
+	 * Ask before overwriting work.
+	 *
+	 * @param {Object}   config    Localised config.
+	 * @param {string}   slug      Preset being switched to; picks the wording.
+	 * @param {Object}   target    Result of presetTarget(); picks the wording.
+	 * @param {Function} onConfirm Apply callback.
+	 * @param {Function} onCancel  Revert callback.
+	 */
+	function confirmApply(config, slug, target, onConfirm, onCancel) {
+		const dialogs =
+			window.elementorCommon && elementorCommon.dialogsManager
+				? elementorCommon.dialogsManager
+				: null;
+
+		if (!dialogs) {
+			onConfirm();
+
+			return;
+		}
+
+		// Opened on the next tick, not inside the click. DialogsManager closes a
+		// dialog on a click outside it, and the press that asked for this one is
+		// still bubbling towards the document — show it here and it is dismissed
+		// by the very gesture that opened it, which reads as the tile doing
+		// nothing at all.
+		setTimeout(function () {
+			dialogs
+				.createWidget("confirm", {
+					headerMessage: config.i18n.title,
+					message: confirmMessage(config, slug, target),
+					strings: {
+						confirm: config.i18n.apply,
+						cancel: config.i18n.cancel,
+					},
+					onConfirm,
+					onCancel,
+				})
+				.show();
+		}, 0);
+	}
+
+	/**
+	 * The right warning for what is about to happen.
+	 *
+	 * @param {Object} config Localised config.
+	 * @param {string} slug   Preset being switched to.
+	 * @param {Object} target Result of presetTarget().
+	 *
+	 * @return {string} Message for the dialog.
+	 */
+	function confirmMessage(config, slug, target) {
+		if (config.custom === slug) {
+			return config.i18n.confirmCustom;
+		}
+
+		return "header" === target.mode
+			? config.i18n.confirmHeader
+			: config.i18n.confirm;
+	}
+
+	/**
+	 * Put the control back where it was, without applying anything.
+	 *
+	 * `external: true` is what makes the tile in the panel move back: without it
+	 * the value changes underneath a control that keeps showing the old one.
+	 *
+	 * @param {Object} container Widget container.
+	 * @param {string} slug      Value to restore.
+	 */
+	function revertPreset(container, slug) {
+		try {
+			$e.run("document/elements/settings", {
+				container,
+				settings: { eael_mega_menu_preset: slug },
+				options: { external: true },
+			});
+		} catch (error) {
+			// The control is cosmetic at this point — nothing was applied.
+		}
+	}
+
+	/**
+	 * Put the preset where the menu was.
+	 *
+	 * A preset is the whole widget — its repeater rows, its styling and one
+	 * nested container per row — and in header mode the bar around it as well.
+	 * Elementor keeps that repeater and those children in a strict 1:1 index
+	 * mapping and syncs them through the repeater commands, so writing a new row
+	 * set into the settings would leave the old panels behind it, misaligned, one
+	 * per row that no longer exists.
+	 *
+	 * Swapping the element sidesteps that entirely: the new widget arrives with
+	 * its rows and its children already in agreement, which is the same route the
+	 * Theme Builder presets take to insert a Mega Menu in the first place.
+	 *
+	 * Both commands run inside one history entry, so a preset the user did not
+	 * mean to apply is one Undo away rather than two.
+	 *
+	 * @param {string} slug      Preset slug.
+	 * @param {Object} container Widget container.
+	 * @param {Object} target    Result of presetTarget().
+	 * @param {string} fallback  Value to put back if nothing gets applied.
+	 * @param {number} changedAt When the tile was clicked, per Date.now().
+	 */
+	function applyPreset(slug, container, target, fallback, changedAt) {
+		const config = presetConfig();
+
+		applyingPreset = true;
+
+		fetchPreset(slug, target.mode)
+			.then((element) => settleHistory(changedAt).then(() => element))
+			.then((element) => {
+				const host = target.container.parent;
+
+				if (!host || !host.model || !element) {
+					throw new Error("nowhere to apply");
+				}
+
+				// Only the widget path carries the Advanced tab across — margins,
+				// custom classes, the element ID, responsive visibility. In header
+				// mode the widget is being moved into a bar it has never been in,
+				// where a width or a margin set for a standalone menu is not
+				// positioning any more, it is a leftover.
+				const model =
+					"widget" === target.mode
+						? withCommonSettings(element, container)
+						: element;
+
+				const at = host.model.get("elements").indexOf(target.container.model);
+
+				const historyId = startHistory(config);
+
+				try {
+					$e.run("document/elements/delete", { container: target.container });
+
+					const created = $e.run("document/elements/create", {
+						container: host,
+						model,
+						options: at < 0 ? {} : { at },
+					});
+
+					openPanel(findMenu(created));
+				} finally {
+					endHistory(historyId);
+				}
+			})
+			.catch(() => {
+				// The tile moved the moment it was clicked. Leaving it on a preset
+				// that never landed would tell the user their menu is something it
+				// is not, so it goes back with the design it describes.
+				revertPreset(container, fallback);
+				notifyFailure(config);
+			})
+			.then(() => {
+				applyingPreset = false;
+			});
+	}
+
+	/**
+	 * The Mega Menu inside whatever the preset just created.
+	 *
+	 * In header mode it is two containers down; in widget mode it is the thing
+	 * itself. Finding it is what lets the panel reopen on the control the user
+	 * just clicked, rather than on the bar that now surrounds it.
+	 *
+	 * @param {Object} created Container returned by the create command.
+	 *
+	 * @return {Object|null} The menu's container, or null.
+	 */
+	function findMenu(created) {
+		if (!created || !created.model || "function" !== typeof created.model.get) {
+			return null;
+		}
+
+		if (WIDGET_TYPE === created.model.get("widgetType")) {
+			return created;
+		}
+
+		const children = created.children || [];
+
+		for (let index = 0; index < children.length; index++) {
+			const found = findMenu(children[index]);
+
+			if (found) {
+				return found;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * The preset's widget, wearing the old one's Advanced-tab settings.
+	 *
+	 * @param {Object} element   Element the preset built.
+	 * @param {Object} container Widget container being replaced.
+	 *
+	 * @return {Object} Element model for the create command.
+	 */
+	function withCommonSettings(element, container) {
+		return Object.assign({}, element, {
+			settings: Object.assign(
+				{},
+				commonSettings(container),
+				element.settings || {}
+			),
+		});
+	}
+
+	/**
+	 * The widget's own Advanced-tab settings, carried across the swap.
+	 *
+	 * Elementor prefixes every control it adds to all widgets with an underscore,
+	 * which is what makes "everything the widget owns rather than everything the
+	 * Mega Menu owns" a rule this can express in one line.
+	 *
+	 * @param {Object} container Widget container.
+	 *
+	 * @return {Object} Settings to preserve.
+	 */
+	function commonSettings(container) {
+		const preserved = {};
+
+		if (!container.settings) {
+			return preserved;
+		}
+
+		let current;
+
+		try {
+			// `remove: default` so an untouched Advanced tab contributes nothing.
+			current = container.settings.toJSON({ remove: ["default"] });
+		} catch (error) {
+			current = container.settings.toJSON();
+		}
+
+		Object.keys(current || {}).forEach((key) => {
+			if (0 === key.indexOf("_")) {
+				preserved[key] = current[key];
+			}
+		});
+
+		return preserved;
+	}
+
+	/**
+	 * Wait for Elementor to have logged the tile click.
+	 *
+	 * See {@see SETTINGS_HISTORY_DEBOUNCE}. Usually the fetch has already covered
+	 * most of it, and a confirm dialog covers all of it.
+	 *
+	 * @param {number} changedAt When the tile was clicked, per Date.now().
+	 *
+	 * @return {Promise} Resolves once the window has passed.
+	 */
+	function settleHistory(changedAt) {
+		const left = SETTINGS_HISTORY_DEBOUNCE - (Date.now() - changedAt);
+
+		if (left <= 0) {
+			return Promise.resolve();
+		}
+
+		return new Promise((resolve) => setTimeout(resolve, left));
+	}
+
+	/**
+	 * Fetch the element one preset applies.
+	 *
+	 * @param {string} slug Preset slug.
+	 * @param {string} mode `header` or `widget`.
+	 *
+	 * @return {Promise<Object>} Resolves with one Elementor element.
+	 */
+	function fetchPreset(slug, mode) {
+		const config = presetConfig();
+
+		return new Promise((resolve, reject) => {
+			jQuery
+				.post(config.ajaxurl, {
+					action: config.action,
+					security: config.nonce,
+					preset: slug,
+					mode,
+				})
+				.done((response) => {
+					if (response && response.success && response.data) {
+						resolve(response.data);
+
+						return;
+					}
+
+					reject(new Error("preset unavailable"));
+				})
+				.fail(() => reject(new Error("request failed")));
+		});
+	}
+
+	/**
+	 * Open the panel on the widget that replaced the old one.
+	 *
+	 * @param {Object} created Container returned by the create command.
+	 */
+	function openPanel(created) {
+		if (!created || !created.view || !created.model) {
+			return;
+		}
+
+		try {
+			$e.run("panel/editor/open", {
+				model: created.model,
+				view: created.view,
+			});
+		} catch (error) {
+			// Cosmetic: the widget is already on the canvas either way.
+		}
+	}
+
+	/**
+	 * Group the delete and the create into one undo step.
+	 *
+	 * @param {Object} config Localised config.
+	 *
+	 * @return {number|null} Log id to hand back to endHistory().
+	 */
+	function startHistory(config) {
+		try {
+			return $e.internal("document/history/start-log", {
+				type: "change",
+				title: config.i18n.title,
+			});
+		} catch (error) {
+			// Without the transaction the two commands are two undo steps, which
+			// is worse but not wrong.
+			return null;
+		}
+	}
+
+	/**
+	 * Close the history transaction opened by startHistory().
+	 *
+	 * The id matters. `end-log` called without one closes whichever log the
+	 * history happens to have open, which is not necessarily this one — and a log
+	 * left open swallows every later entry, so a second apply and everything
+	 * between the two collapse into a single undo step that walks the user all
+	 * the way back past work they meant to keep.
+	 *
+	 * @param {number|null} id Value startHistory() returned.
+	 */
+	function endHistory(id) {
+		try {
+			$e.internal("document/history/end-log", null === id ? {} : { id });
+		} catch (error) {
+			// Mirrors startHistory(): if the log never opened there is nothing to
+			// close, and throwing here would swallow the apply that just worked.
+		}
+	}
+
+	/**
+	 * Tell the user the apply did not happen.
+	 *
+	 * @param {Object} config Localised config.
+	 */
+	function notifyFailure(config) {
+		if (window.elementor && elementor.notifications) {
+			elementor.notifications.showToast({ message: config.i18n.failed });
+
+			return;
+		}
+
+		window.alert(config.i18n.failed); // eslint-disable-line no-alert
+	}
+
+	/**
+	 * The Container object behind a widget view.
+	 *
+	 * @param {Object} view Widget view.
+	 *
+	 * @return {Object|null} Container, or null.
+	 */
+	function getContainer(view) {
+		if (!view) {
+			return null;
+		}
+
+		if ("function" === typeof view.getContainer) {
+			return view.getContainer();
+		}
+
+		return view.container || null;
+	}
+
 	if ("undefined" === typeof window.elementorCommon || !elementorCommon.elements) {
 		return;
 	}
@@ -274,4 +951,13 @@
 		"elementor/nested-element-type-loaded",
 		registerMegaMenuElementType
 	);
+
+	// `elementor.hooks` is built inside `elementor.init()`, which has not
+	// necessarily run by the time this file executes — the script's dependency
+	// chain guarantees the global exists, not that it is initialised.
+	if (window.elementor && elementor.hooks) {
+		bindPresetControl();
+	} else {
+		elementorCommon.elements.$window.on("elementor:init", bindPresetControl);
+	}
 })();

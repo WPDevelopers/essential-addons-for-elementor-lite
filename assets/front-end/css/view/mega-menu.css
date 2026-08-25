@@ -54,7 +54,16 @@
   -webkit-transition: background-color 0.2s ease, border-color 0.2s ease;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
-.eael-mega-menu__link, .eael-mega-menu__disclosure {
+.eael-mega-menu {
+  /* Prefixed with the block class for the same reason the state rules below
+   * are: a menu item is an `<a>` inside an `<li>`, and themes underline those
+   * from selectors like `.site-header nav a` or `li a` that beat a bare
+   * `.eael-mega-menu__link` at (0,1,0). The label and icon spans carry the
+   * reset too — a theme that underlines the anchor's *children* rather than the
+   * anchor is rarer, but the reset costs nothing and the widget has no control
+   * to undo it with. */
+}
+.eael-mega-menu .eael-mega-menu__link, .eael-mega-menu .eael-mega-menu__disclosure {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -74,6 +83,9 @@
   cursor: pointer;
   -webkit-transition: color 0.2s ease, background-color 0.2s ease;
   transition: color 0.2s ease, background-color 0.2s ease;
+}
+.eael-mega-menu .eael-mega-menu__item-label, .eael-mega-menu .eael-mega-menu__item-icon, .eael-mega-menu .eael-mega-menu__item-indicator {
+  text-decoration: none;
 }
 .eael-mega-menu__link {
   -webkit-box-flex: 1;
@@ -614,6 +626,63 @@
   position: static;
   inset-inline: auto;
   width: 100%;
+}
+.eael-mega-menu {
+  /* --------------------------------------------------------------------- */
+  /* Preset link list                                                      */
+  /* --------------------------------------------------------------------- */
+  /* The one piece of markup a preset writes rather than builds from widgets.
+   *
+   * A panel column of links is a list of links, and the widget that holds one
+   * inside a Mega Menu preset — Advanced Tabs — takes its content as a WYSIWYG
+   * field, not as child widgets. Left to the browser that field renders as
+   * bulleted, theme-coloured list items; these rules are what make it arrive
+   * looking like navigation instead.
+   *
+   * Every value is a custom property with its default in the fallback, so a
+   * user who wants a different accent sets one variable on the panel rather
+   * than fighting a fixed colour. Nothing here is required for the links to
+   * work: strip the classes and they are still links in a list. */
+}
+.eael-mega-menu .eael-mm-links__title {
+  margin: 0 0 14px;
+  font-family: inherit;
+  font-size: var(--eael-mm-links-title-size, 14px);
+  font-weight: var(--eael-mm-links-title-weight, 600);
+  line-height: 1.4;
+  color: var(--eael-mm-links-title-color, inherit);
+}
+.eael-mega-menu .eael-mm-links__list {
+  display: grid;
+  gap: var(--eael-mm-links-gap, 14px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* `inherit`, not a size of its own. The tab's Content > Typography
+     control is what should be setting the type here, and on a theme that
+     styles `li` or `a` — which is most of them — its value is inherited
+     past the list and then overridden inside it. Handing the inherited
+     value back down is what puts that control back in charge. */
+}
+.eael-mega-menu .eael-mm-links__list li {
+  margin: 0;
+  font: inherit;
+  line-height: 1.4;
+}
+.eael-mega-menu .eael-mm-links__list a {
+  display: inline-block;
+  font: inherit;
+  color: var(--eael-mm-links-color, inherit);
+  text-decoration: none;
+  -webkit-transition: color 0.2s ease;
+  transition: color 0.2s ease;
+  /* Repeated on the states rather than left to inherit: a theme that
+     underlines links usually does it on `:hover` as well, from a
+     selector at least as specific as the one it used for the base. */
+}
+.eael-mega-menu .eael-mm-links__list a:hover, .eael-mega-menu .eael-mm-links__list a:focus, .eael-mega-menu .eael-mm-links__list a:focus-visible, .eael-mega-menu .eael-mm-links__list a:active {
+  color: var(--eael-mm-links-color-hover, #4d7c0f);
+  text-decoration: none;
 }
 /* Keyframes for the collapsed layout's reveal. Kept at the top level because
    `@keyframes` are global regardless of where they are declared; the offsets
