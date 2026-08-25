@@ -301,7 +301,7 @@ class WPDeveloper_Setup_Wizard {
 			// The step is hidden only when BOTH plugins are already installed.
 			'all_installed'     => $all_installed,
 			'logo'              => $tr_icon,
-			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-promo-image.jpg',
+			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-xspeed.jpg',
 			'title'             => __( 'Better SEO | Faster Performance', 'essential-addons-for-elementor-lite' ),
 			'subtitle'          => __( 'Get found on Google and in AI answers, while keeping your site fast and optimized, automatically.', 'essential-addons-for-elementor-lite' ),
 			'install_label'     => __( 'Boost SEO & Performance', 'essential-addons-for-elementor-lite' ),
