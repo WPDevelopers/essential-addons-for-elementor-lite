@@ -116,14 +116,26 @@ function createServer() {
 	try {
 		const sdk = new AngieMcpSdk();
 
-		await sdk.waitForReady();
-
-		await sdk.registerServer({
+		// Do NOT call sdk.waitForReady() here: it blocks on appState.iframe,
+		// which is only set when the page embeds Angie's sidebar itself
+		// (loadSidebarV2). Alongside the Angie WP plugin it never resolves,
+		// silently skipping registration (issue #878). registerLocalServer
+		// queues the registration and the SDK flushes it once its detector
+		// handshake with the Angie host completes — same as Elementor's own
+		// demo plugin.
+		await sdk.registerLocalServer({
 			name: SERVER_NAME,
 			version: (window.eaelAngie && window.eaelAngie.version) || '1.0.0',
 			description: 'Essential Addons widget discovery for Elementor design generation',
 			server: createServer(),
 		});
+
+		if (window.console && console.debug) {
+			const status =
+				(sdk.getRegistrations().find((r) => r.config && r.config.name === SERVER_NAME) || {}).status ||
+				'queued';
+			console.debug(`[EA] Angie MCP server registration submitted (status: ${status})`);
+		}
 	} catch (error) {
 		// Angie not present or not ready — fail silently, EA works fine without it.
 		if (window.console && console.debug) {
