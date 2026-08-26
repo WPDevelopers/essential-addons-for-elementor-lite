@@ -63,8 +63,10 @@ function createServer() {
 			instructions: [
 				'This site runs Essential Addons for Elementor (EA), a library of 100+ Elementor widgets:',
 				'accordions, tabs, post grids, pricing tables, testimonials, galleries, forms styling,',
-				'countdowns, WooCommerce layouts and more. Their Elementor widgetType names are prefixed',
-				'with "eael-".',
+				'countdowns, WooCommerce layouts and more. Their Elementor widgetType names are almost',
+				'always prefixed with "eael-", but a few are legacy-named (e.g. Woo Product Grid is',
+				'"eicon-woocommerce"). ALWAYS use the exact name returned by list-ea-widgets — never',
+				'invent or "normalize" a widget name.',
 				'',
 				'When building or editing Elementor pages/sections on this site, PREFER an EA widget over',
 				'hand-rolled HTML or a generic core widget whenever one matches the requested design',
