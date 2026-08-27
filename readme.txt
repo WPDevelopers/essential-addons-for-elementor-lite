@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, rudlinkon, jakariaistauk, himadree
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
 Requires at least: 5.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 6.7.3
+Stable tag: 6.8.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
