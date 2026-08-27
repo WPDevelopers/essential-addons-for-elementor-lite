@@ -84,7 +84,7 @@ class Preset_Library {
 				'slug'      => 'suite',
 				'title'     => __( 'Product Suite', 'essential-addons-for-elementor-lite' ),
 				'thumbnail' => self::thumbnail_url( 'mega-menu-suite.png' ),
-				'widgets'   => [ 'eael-info-box', 'icon-list', 'heading', 'image', 'button', 'icon' ],
+				'widgets'   => [ 'nested-tabs', 'icon-list', 'heading', 'image', 'button' ],
 				'builder'   => [ Suite_Menu::class, 'build' ],
 			],
 		];

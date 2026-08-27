@@ -22,13 +22,17 @@ use Essential_Addons_Elementor\Theme_Builder\Presets\Elements;
  * Two panels doing two different jobs, as in {@see Saas_Menu}, but arranged the
  * other way round:
  *
- * - **Solutions** — the catalogue. A column of three destination cards on the
+ * - **Quick Help** — the catalogue. A column of three destination cards on the
  *   left, built from EA's Info Box inside linked containers so the whole card is
- *   the target, and three columns of icon links beside them. Everything is
- *   visible at once; the cards lead somewhere rather than switching the columns,
- *   which is what the chevron on each of them means.
- * - **Quick Help** — a plain list of five links, narrow, no icons and no
+ *   the target, and three columns of icon links beside them.
+ * - **Solutions** — a plain list of five links, narrow, no icons and no
  *   descriptions. Not every menu item needs a panel the width of the page.
+ *
+ * ## The cards are tabs
+ *
+ * Each card switches the three columns beside it, and the first is open on load.
+ * That is Elementor's Nested Tabs — see {@see category_tabs()} for why it, and
+ * not EA's Advanced Tabs, carries this one.
  *
  * ## Why the panel is transparent
  *
@@ -78,6 +82,16 @@ class Suite_Menu {
 	 * Hairlines — the rule under each column heading.
 	 */
 	const LINE = '#E9E7F3';
+
+	/**
+	 * The "NEW" chip's surface.
+	 */
+	const BADGE = '#312E81';
+
+	/**
+	 * The "NEW" chip's label, on that surface.
+	 */
+	const BADGE_INK = '#FFFFFF';
 
 	/**
 	 * The call to action's surface.
@@ -374,6 +388,14 @@ class Suite_Menu {
 			[
 				'label' => __( 'Quick Help', 'essential-addons-for-elementor-lite' ),
 				'type'  => 'mega',
+				// Viewport, not a pixel width: see the class comment. The card the
+				// user sees is the boxed container inside this panel.
+				'width' => 'viewport',
+				'align' => 'start',
+			],
+			[
+				'label'  => __( 'Solutions', 'essential-addons-for-elementor-lite' ),
+				'type'   => 'mega',
 				'width'  => 'custom',
 				// The card inside is 236 wide; the panel adds the 20px inset that
 				// every panel carries, and the nudge puts the card's left edge back
@@ -381,14 +403,6 @@ class Suite_Menu {
 				'size'   => 276,
 				'align'  => 'start',
 				'offset' => -20,
-			],
-			[
-				'label' => __( 'Solutions', 'essential-addons-for-elementor-lite' ),
-				'type'  => 'mega',
-				// Viewport, not a pixel width: see the class comment. The card the
-				// user sees is the boxed container inside this panel.
-				'width' => 'viewport',
-				'align' => 'start',
 			],
 			[
 				'label' => __( 'Contact', 'essential-addons-for-elementor-lite' ),
@@ -557,11 +571,11 @@ class Suite_Menu {
 		foreach ( self::item_map() as $index => $item ) {
 			switch ( $index ) {
 				case 1:
-					$panels[] = self::help_panel( $item['label'] );
+					$panels[] = self::catalogue_panel( $item['label'] );
 					break;
 
 				case 2:
-					$panels[] = self::solutions_panel( $item['label'] );
+					$panels[] = self::shortlist_panel( $item['label'] );
 					break;
 
 				default:
@@ -577,7 +591,7 @@ class Suite_Menu {
 	}
 
 	/**
-	 * The Quick Help panel: five links and nothing else.
+	 * The short dropdown: five links and nothing else.
 	 *
 	 * @since 6.7.5
 	 *
@@ -585,7 +599,7 @@ class Suite_Menu {
 	 *
 	 * @return array
 	 */
-	protected static function help_panel( $title ) {
+	protected static function shortlist_panel( $title ) {
 		$links = [
 			__( 'Blogs', 'essential-addons-for-elementor-lite' ),
 			__( 'Documentation', 'essential-addons-for-elementor-lite' ),
@@ -613,7 +627,7 @@ class Suite_Menu {
 	}
 
 	/**
-	 * The Solutions panel: three destination cards and three columns of links.
+	 * The catalogue panel: three destination cards and three columns of links.
 	 *
 	 * @since 6.7.5
 	 *
@@ -621,48 +635,287 @@ class Suite_Menu {
 	 *
 	 * @return array
 	 */
-	protected static function solutions_panel( $title ) {
+	protected static function catalogue_panel( $title ) {
 		return Elements::nested_child(
 			self::panel_settings( $title ),
+			[ self::card( [ self::category_tabs() ], 28 ) ]
+		);
+	}
+
+	/**
+	 * The catalogue itself: three categories, each with its own link columns.
+	 *
+	 * Elementor's own Nested Tabs, not EA's Advanced Tabs, and the reason is the
+	 * links. Advanced Tabs holds a tab's content in a WYSIWYG field, which would
+	 * turn all forty-odd links across the three categories from rows with a real
+	 * icon picker and a real link field into one block of hand-written markup per
+	 * tab. Nested Tabs gives each tab a *container*, so every column stays an Icon
+	 * List and every link stays a control — which is the whole point of shipping a
+	 * preset rather than a screenshot.
+	 *
+	 * It also takes the cards whole. The tab title is printed through
+	 * `wp_kses_post()`, so the description line under each name is a `<span>` in
+	 * the field the user already edits, and the icon beside it is the tab's own
+	 * Icon control rather than markup. The first tab is active on load — that is
+	 * Nested Tabs' own behaviour, nothing here has to ask for it.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @return array
+	 */
+	protected static function category_tabs() {
+		$categories = self::categories();
+
+		$tabs   = [];
+		$panels = [];
+
+		foreach ( $categories as $category ) {
+			$tabs[] = Elements::row( [
+				'tab_title' => self::tab_title( $category['title'], $category['text'] ),
+				'tab_icon'  => Elements::icon( $category['icon'] ),
+			] );
+
+			$panels[] = self::tab_content( $category['columns'], $category['explore'] );
+		}
+
+		return Elements::widget(
+			'nested-tabs',
 			[
-				self::card(
+				'tabs'            => $tabs,
+				// "Before" — the tab list sits inline-start of its content, which is
+				// the left-hand column of cards in the design.
+				'tabs_direction'  => 'inline-start',
+				// Stacked above the content once there is no room beside it.
+				'tabs_direction_tablet' => 'block-start',
+				'tabs_width'      => Elements::size( 30, '%' ),
+				'title_alignment' => 'start',
+				'icon_position'   => 'inline-start',
+
+				// The cards.
+				'padding'                    => Elements::spacing( 12, 14, 12, 14 ),
+				'tabs_title_space_between'   => Elements::size( 4 ),
+				'tabs_title_border_radius'   => Elements::spacing( 14, 14, 14, 14 ),
+				// Group controls, not flat colours. Each writes an
+				// `--n-tabs-title-background-color*` variable, and the rule that
+				// reads it is one Elementor sets at very high specificity — so a
+				// value that never lands leaves the widget's own default in place,
+				// which for the active tab is near-black.
+				'tabs_title_background_color_background' => 'classic',
+				'tabs_title_background_color_color'      => 'rgba(0,0,0,0)',
+				'tabs_title_background_color_hover_background' => 'classic',
+				'tabs_title_background_color_hover_color'      => self::HOVER,
+				'tabs_title_background_color_active_background' => 'classic',
+				'tabs_title_background_color_active_color'      => self::HOVER,
+				'title_text_color'           => self::INK,
+				'title_text_color_hover'     => self::INK,
+				'title_text_color_active'    => self::INK,
+				'title_typography_typography' => 'custom',
+				'title_typography_font_size' => Elements::size( 15 ),
+				'title_typography_font_weight' => '600',
+				'title_typography_line_height' => Elements::size( 1.4, 'em' ),
+
+				// The icon tile. Size and colour are controls; the rounded plate
+				// behind it is the one thing Nested Tabs has no control for, and
+				// comes from the class below.
+				'icon_size'         => Elements::size( 17 ),
+				'icon_spacing'      => Elements::size( 12 ),
+				'icon_color'        => self::ACCENT,
+				'icon_color_hover'  => self::ACCENT,
+				'icon_color_active' => self::ACCENT,
+
+				// The content box is the card the panel already draws.
+				'box_background_color_background' => 'classic',
+				'box_background_color_color'      => 'rgba(0,0,0,0)',
+				'_css_classes'         => 'eael-mm-cardtabs',
+			],
+			$panels
+		);
+	}
+
+	/**
+	 * The three categories, their cards and their columns.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @return array
+	 */
+	protected static function categories() {
+		return [
+			[
+				'icon'    => 'fas fa-shapes',
+				'title'   => __( 'Features', 'essential-addons-for-elementor-lite' ),
+				'text'    => __( 'Powerful tools and widgets to design', 'essential-addons-for-elementor-lite' ),
+				'explore' => __( 'Explore All Features', 'essential-addons-for-elementor-lite' ),
+				'columns' => [
 					[
-						self::category_column(),
-						self::link_column(
-							__( 'Core Builders', 'essential-addons-for-elementor-lite' ),
-							[
-								[ 'text' => __( 'Visual Editor', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-pen-nib' ],
-								[ 'text' => __( 'Content Engine', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-file-alt', 'new' => true ],
-								[ 'text' => __( 'Header Builder', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-window-maximize' ],
-								[ 'text' => __( 'Popup Creator', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-clone' ],
-								[ 'text' => __( 'Form Styler', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-sliders-h' ],
-							],
-							true
-						),
-						self::link_column(
-							__( 'Advanced Widgets', 'essential-addons-for-elementor-lite' ),
-							[
-								[ 'text' => __( 'Interactive Charts', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-chart-line' ],
-								[ 'text' => __( 'Filterable Galleries', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-th-large' ],
-								[ 'text' => __( 'Data Table Widget', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-table' ],
-								[ 'text' => __( 'Countdown Timer', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-clock' ],
-								[ 'text' => __( 'Progress Circle', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-spinner' ],
-							]
-						),
-						self::link_column(
-							__( 'Site Enhancements', 'essential-addons-for-elementor-lite' ),
-							[
-								[ 'text' => __( 'AJAX Search Module', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-search' ],
-								[ 'text' => __( 'Scroll Reveal Effects', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-mobile-alt' ],
-								[ 'text' => __( 'User Login Widget', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-sign-in-alt' ],
-								[ 'text' => __( 'Lightbox for Media', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-image' ],
-							]
-						),
+						'title' => __( 'Core Builders', 'essential-addons-for-elementor-lite' ),
+						'links' => [
+							[ 'text' => __( 'Visual Editor', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-pen-nib' ],
+							[ 'text' => __( 'Content Engine', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-file-alt', 'new' => true ],
+							[ 'text' => __( 'Header Builder', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-window-maximize' ],
+							[ 'text' => __( 'Popup Creator', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-clone' ],
+							[ 'text' => __( 'Form Styler', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-sliders-h' ],
+						],
 					],
-					28,
-					'row'
-				),
-			]
+					[
+						'title' => __( 'Advanced Widgets', 'essential-addons-for-elementor-lite' ),
+						'links' => [
+							[ 'text' => __( 'Interactive Charts', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-chart-line' ],
+							[ 'text' => __( 'Filterable Galleries', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-th-large' ],
+							[ 'text' => __( 'Data Table Widget', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-table' ],
+							[ 'text' => __( 'Countdown Timer', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-clock' ],
+							[ 'text' => __( 'Progress Circle', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-spinner' ],
+						],
+					],
+					[
+						'title' => __( 'Site Enhancements', 'essential-addons-for-elementor-lite' ),
+						'links' => [
+							[ 'text' => __( 'AJAX Search Module', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-search' ],
+							[ 'text' => __( 'Scroll Reveal Effects', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-mobile-alt' ],
+							[ 'text' => __( 'User Login Widget', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-sign-in-alt' ],
+							[ 'text' => __( 'Lightbox for Media', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-image' ],
+						],
+					],
+				],
+			],
+			[
+				'icon'    => 'fas fa-layer-group',
+				'title'   => __( 'Ready Solutions', 'essential-addons-for-elementor-lite' ),
+				'text'    => __( 'Pre-built functionality for popular use cases', 'essential-addons-for-elementor-lite' ),
+				'explore' => __( 'Explore All Solutions', 'essential-addons-for-elementor-lite' ),
+				'columns' => [
+					[
+						'title' => __( 'Ecommerce Kits', 'essential-addons-for-elementor-lite' ),
+						'links' => [
+							[ 'text' => __( 'Product Showcase', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-box' ],
+							[ 'text' => __( 'Checkout &amp; Cart', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-shopping-cart', 'new' => true ],
+							[ 'text' => __( 'Pricing Tables', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-tag' ],
+							[ 'text' => __( 'Booking Calendar', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-calendar-alt' ],
+							[ 'text' => __( 'Membership Area', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-user-circle' ],
+						],
+					],
+					[
+						'title' => __( 'Marketing Blocks', 'essential-addons-for-elementor-lite' ),
+						'links' => [
+							[ 'text' => __( 'Landing Pages', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-window-maximize' ],
+							[ 'text' => __( 'Lead Capture Forms', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-clipboard' ],
+							[ 'text' => __( 'Newsletter Optin', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-envelope' ],
+							[ 'text' => __( 'Countdown Offers', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-percentage' ],
+							[ 'text' => __( 'Social Proof Bar', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-star' ],
+						],
+					],
+					[
+						'title' => __( 'Support &amp; Engagement', 'essential-addons-for-elementor-lite' ),
+						'links' => [
+							[ 'text' => __( 'FAQ Accordion', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-question-circle' ],
+							[ 'text' => __( 'Testimonial Slider', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-quote-right' ],
+							[ 'text' => __( 'Live Chat Button', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-comment' ],
+							[ 'text' => __( 'Help Center', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-life-ring' ],
+						],
+					],
+				],
+			],
+			[
+				'icon'    => 'fas fa-th-large',
+				'title'   => __( 'Templates', 'essential-addons-for-elementor-lite' ),
+				'text'    => __( 'Professionally designed templates and wireframes', 'essential-addons-for-elementor-lite' ),
+				'explore' => __( 'Explore All Templates', 'essential-addons-for-elementor-lite' ),
+				'columns' => [
+					[
+						'title' => __( 'Starter Sites', 'essential-addons-for-elementor-lite' ),
+						'links' => [
+							[ 'text' => __( 'Business Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-building' ],
+							[ 'text' => __( 'Portfolio Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-images' ],
+							[ 'text' => __( 'Agency Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-briefcase' ],
+							[ 'text' => __( 'Blog Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-newspaper' ],
+							[ 'text' => __( 'Store Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-store' ],
+						],
+					],
+					[
+						'title' => __( 'Section Blocks', 'essential-addons-for-elementor-lite' ),
+						'links' => [
+							[ 'text' => __( 'Hero Sections', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-heading' ],
+							[ 'text' => __( 'Feature Grids', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-th' ],
+							[ 'text' => __( 'Pricing Blocks', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-tags' ],
+							[ 'text' => __( 'Team Blocks', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-user-friends' ],
+							[ 'text' => __( 'FAQ Blocks', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-question-circle' ],
+						],
+					],
+					[
+						'title' => __( 'Page Kits', 'essential-addons-for-elementor-lite' ),
+						'links' => [
+							[ 'text' => __( 'About Page Kit', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-id-card' ],
+							[ 'text' => __( 'Contact Page Kit', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-envelope' ],
+							[ 'text' => __( 'Services Page Kit', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-concierge-bell' ],
+							[ 'text' => __( 'Careers Page Kit', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-user-tie' ],
+						],
+					],
+				],
+			],
+		];
+	}
+
+	/**
+	 * One card, as a tab title.
+	 *
+	 * The second line is a class rather than inline styles, because the two things
+	 * it needs most cannot be expressed inline usefully: Elementor lays the title
+	 * span out as a flex *row*, so the description has to be told to stack, and its
+	 * colour has to hold in all three tab states while Title Color repaints the
+	 * name around it. Both live with the rest of the card in the widget's own
+	 * stylesheet; the title is printed through `wp_kses_post()`, so the span
+	 * survives, and stripping it leaves the name behind.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @param string $title Card name.
+	 * @param string $text  The line under it.
+	 *
+	 * @return string
+	 */
+	protected static function tab_title( $title, $text ) {
+		return sprintf(
+			'%1$s<span class="eael-mm-cardtab__text">%2$s</span>',
+			esc_html( $title ),
+			esc_html( $text )
+		);
+	}
+
+	/**
+	 * One category's columns, as a tab's content.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @param array  $columns Column definitions.
+	 * @param string $explore Label for the link that closes the first column.
+	 *
+	 * @return array
+	 */
+	protected static function tab_content( $columns, $explore ) {
+		$children = [];
+
+		foreach ( $columns as $index => $column ) {
+			$children[] = self::link_column(
+				$column['title'],
+				$column['links'],
+				0 === $index ? $explore : ''
+			);
+		}
+
+		return Elements::nested_child(
+			[
+				'content_width'    => 'full',
+				'flex_direction'   => 'row',
+				'flex_align_items' => 'flex-start',
+				// Wrap, not nowrap: the column widths stop just short of the full
+				// row, and a user who widens one or adds a fourth should get a
+				// second row rather than a squeezed first one.
+				'flex_wrap'        => 'wrap',
+				'flex_gap'         => Elements::gap( 24 ),
+				'flex_gap_tablet'  => Elements::gap( 20 ),
+				'padding'          => Elements::spacing( 0, 0, 0, 0 ),
+			],
+			$children
 		);
 	}
 
@@ -736,178 +989,17 @@ class Suite_Menu {
 	 * ------------------------------------------------------------------ */
 
 	/**
-	 * The column of destination cards.
-	 *
-	 * @since 6.7.5
-	 *
-	 * @return array
-	 */
-	protected static function category_column() {
-		$categories = [
-			[
-				'icon'  => 'fas fa-shapes',
-				'title' => __( 'Features', 'essential-addons-for-elementor-lite' ),
-				'text'  => __( 'Powerful tools and widgets to design', 'essential-addons-for-elementor-lite' ),
-			],
-			[
-				'icon'  => 'fas fa-layer-group',
-				'title' => __( 'Ready Solutions', 'essential-addons-for-elementor-lite' ),
-				'text'  => __( 'Pre-built functionality for popular use cases', 'essential-addons-for-elementor-lite' ),
-			],
-			[
-				'icon'  => 'fas fa-th-large',
-				'title' => __( 'Templates', 'essential-addons-for-elementor-lite' ),
-				'text'  => __( 'Professionally designed templates and wireframes', 'essential-addons-for-elementor-lite' ),
-			],
-		];
-
-		$rows = [];
-
-		foreach ( $categories as $category ) {
-			$rows[] = self::category_row( $category );
-		}
-
-		return Elements::container(
-			[
-				'content_width'  => 'full',
-				'width'          => Elements::size( 26, '%' ),
-				'width_tablet'   => Elements::size( 100, '%' ),
-				'width_mobile'   => Elements::size( 100, '%' ),
-				'flex_direction' => 'column',
-				'flex_gap'       => Elements::gap( 4 ),
-				'padding'        => Elements::spacing( 0, 0, 0, 0 ),
-				'_title'         => __( 'Categories', 'essential-addons-for-elementor-lite' ),
-			],
-			$rows
-		);
-	}
-
-	/**
-	 * One destination card.
-	 *
-	 * The link and the hover wash live on the container rather than on the Info
-	 * Box: a card a visitor can only click on its title is a card that misses
-	 * most of the pointer's travel, and the Info Box has no hover background of
-	 * its own to light the whole strip with.
-	 *
-	 * @since 6.7.5
-	 *
-	 * @param array $category Icon, title and description.
-	 *
-	 * @return array
-	 */
-	protected static function category_row( $category ) {
-		return Elements::container(
-			[
-				'content_width'        => 'full',
-				'flex_direction'       => 'row',
-				'flex_align_items'     => 'center',
-				'flex_justify_content' => 'space-between',
-				'flex_wrap'            => 'nowrap',
-				'flex_gap'             => Elements::gap( 10 ),
-				'padding'              => Elements::spacing( 12, 14, 12, 14 ),
-				'border_radius'        => Elements::spacing( 14, 14, 14, 14 ),
-				'link'                 => Elements::link(),
-				'background_hover_background' => 'classic',
-				'background_hover_color'      => self::HOVER,
-				'background_hover_transition' => Elements::size( 0.2 ),
-				'_title'               => $category['title'],
-			],
-			[
-				self::category_info_box( $category ),
-				self::chevron(),
-			]
-		);
-	}
-
-	/**
-	 * The icon, name and description of one destination.
-	 *
-	 * @since 6.7.5
-	 *
-	 * @param array $category Icon, title and description.
-	 *
-	 * @return array
-	 */
-	protected static function category_info_box( $category ) {
-		return Elements::widget(
-			'eael-info-box',
-			[
-				'eael_infobox_img_type'    => 'img-on-left',
-				'eael_infobox_img_or_icon' => 'icon',
-				'icon_vertical_position'   => 'middle',
-				'eael_infobox_icon_new'    => Elements::icon( $category['icon'] ),
-				'eael_infobox_title'       => $category['title'],
-				'eael_infobox_title_tag'   => 'h6',
-				'eael_infobox_text_type'   => 'content',
-				'eael_infobox_text'        => '<p>' . esc_html( $category['text'] ) . '</p>',
-				// The row's own container is the link; a button inside it would be
-				// a second target sitting on top of the first.
-				'eael_show_infobox_button' => '',
-				'eael_infobox_content_alignment_left_right' => 'left',
-
-				// Icon.
-				'eael_infobox_icon_size'     => Elements::size( 17 ),
-				'eael_infobox_icon_bg_shape' => 'radius',
-				'eael_infobox_icon_bg_size'  => Elements::size( 42 ),
-				'eael_infobox_icon_bg_color' => self::ICON_BG,
-				'eael_infobox_icon_color'    => self::ACCENT,
-				'eael_infobox_icon_margin'   => Elements::spacing( 0, 12, 0, 0 ),
-
-				// Title.
-				'eael_infobox_title_color_type' => 'classic',
-				'eael_infobox_title_color'      => self::INK,
-				'eael_infobox_title_typography_typography'  => 'custom',
-				'eael_infobox_title_typography_font_size'   => Elements::size( 15 ),
-				'eael_infobox_title_typography_font_weight' => '600',
-				'eael_infobox_title_margin'     => Elements::spacing( 0, 0, 3, 0 ),
-
-				// Description.
-				'eael_infobox_content_color'  => self::MUTED,
-				'eael_infobox_content_margin' => Elements::spacing( 0, 0, 0, 0 ),
-				'eael_infobox_content_typography_hover_typography' => 'custom',
-				'eael_infobox_content_typography_hover_font_size'  => Elements::size( 12 ),
-				'eael_infobox_content_typography_hover_line_height' => Elements::size( 1.5, 'em' ),
-
-				// Container — the row around it already supplies the inset.
-				'eael_section_infobox_container_padding' => Elements::spacing( 0, 0, 0, 0 ),
-				'eael_section_infobox_container_margin'  => Elements::spacing( 0, 0, 0, 0 ),
-			]
-		);
-	}
-
-	/**
-	 * The chevron at the end of a destination card.
-	 *
-	 * @since 6.7.5
-	 *
-	 * @return array
-	 */
-	protected static function chevron() {
-		return Elements::widget(
-			'icon',
-			[
-				'selected_icon' => Elements::icon( 'fas fa-chevron-right' ),
-				'view'          => 'default',
-				'primary_color' => self::MUTED,
-				'size'          => Elements::size( 11 ),
-				'_title'        => __( 'Chevron', 'essential-addons-for-elementor-lite' ),
-			]
-		);
-	}
-
-	/**
 	 * One column of links, under a ruled heading.
 	 *
 	 * @since 6.7.5
 	 *
 	 * @param string $title  Column heading.
 	 * @param array  $links  Rows of `text`, `icon` and optionally `new`.
-	 * @param bool   $footer Whether to close the column with the "explore" link.
+	 * @param string $footer Label for the link closing the column, empty for none.
 	 *
 	 * @return array
 	 */
-	protected static function link_column( $title, $links, $footer = false ) {
+	protected static function link_column( $title, $links, $footer = '' ) {
 		$rows = [];
 
 		foreach ( $links as $link ) {
@@ -928,14 +1020,16 @@ class Suite_Menu {
 			self::link_list( $rows, 10 ),
 		];
 
-		if ( $footer ) {
-			$children[] = self::explore_link();
+		if ( '' !== $footer ) {
+			$children[] = self::explore_link( $footer );
 		}
 
 		return Elements::container(
 			[
 				'content_width'  => 'full',
-				'width'          => Elements::size( 22, '%' ),
+				// Three to a row inside the tab's own content area, with the gap
+				// between them taken off the share.
+				'width'          => Elements::size( 31, '%' ),
 				'width_tablet'   => Elements::size( 100, '%' ),
 				'width_mobile'   => Elements::size( 100, '%' ),
 				'flex_direction' => 'column',
@@ -1032,8 +1126,8 @@ class Suite_Menu {
 	protected static function new_badge() {
 		return sprintf(
 			'<span style="display:inline-block;margin-inline-start:8px;padding:2px 6px;border-radius:5px;background:%1$s;color:%2$s;font-size:10px;font-weight:700;letter-spacing:.04em;line-height:1.4;vertical-align:middle;">%3$s</span>',
-			self::ICON_BG,
-			self::ACCENT,
+			self::BADGE,
+			self::BADGE_INK,
 			esc_html__( 'NEW', 'essential-addons-for-elementor-lite' )
 		);
 	}
@@ -1043,13 +1137,15 @@ class Suite_Menu {
 	 *
 	 * @since 6.7.5
 	 *
+	 * @param string $label Link text.
+	 *
 	 * @return array
 	 */
-	protected static function explore_link() {
+	protected static function explore_link( $label ) {
 		return Elements::widget(
 			'button',
 			[
-				'text'                          => __( 'Explore All Features', 'essential-addons-for-elementor-lite' ),
+				'text'                          => $label,
 				'link'                          => Elements::link(),
 				'size'                          => 'sm',
 				'align'                         => 'left',

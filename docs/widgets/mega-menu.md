@@ -268,7 +268,7 @@ A cancelled switch leaves the canvas untouched and puts the tile back, but Eleme
 | Slug | Title | Built from |
 | ---- | ----- | ---------- |
 | `saas` | SaaS Menu | Header: the site's own logo (core `image`, or `heading` with the site name when none is set), core `button` for Login, `eael-creative-button` for Create Account. Panels: `eael-adv-tabs` (vertical, the Product catalogue), `eael-info-box` + core `icon` in linked containers (the Resources list) |
-| `suite` | Product Suite | A floating pill header over a product catalogue. Header: the site's logo, core `button` for the compact 71×42 Login pill — Creative Button floors every instance at 150px wide with no control behind it, so it cannot render a button that size. Panels: `eael-info-box` + core `icon` in linked containers (the destination cards), core `icon-list` for the three link columns and the narrow Quick Help dropdown, core `heading` for the ruled column titles, core `button` for the "explore" link |
+| `suite` | Product Suite | A floating pill header over a product catalogue. Header: the site's logo, core `button` for the compact 71×42 Login pill — Creative Button floors every instance at 150px wide with no control behind it, so it cannot render a button that size. Panels: **Quick Help** holds the wide catalogue — core `nested-tabs` whose three tab titles *are* the destination cards, each switching three columns of core `icon-list` links under core `heading` column titles, closed by a core `button` — and **Solutions** the narrow `icon-list` dropdown |
 
 ### Laying a panel out
 
@@ -276,6 +276,20 @@ Two things bite when a panel is meant to look like a card, and both did:
 
 - **A container's own padding cannot fight the widget's.** Submenu Panel → Padding writes the very `--padding-*` variables a container reads, so its value wins over anything a panel container sets, a zero included. Anything a preset wants inset on *every* panel belongs on that control.
 - **A full-width container plus side margins is `100% + margins`.** It overflows the page. `Product Suite` needs a gutter in two places and solves it differently in each: the header bar is a full-width pill inside a **padded wrapper**, and the panel cards are inset by the widget's own Panel Padding. A boxed container is not the answer for either — boxed caps its *content* but paints its background across the whole viewport, which squares off the corners that make a bar look like a floating pill.
+
+### Tabs inside a panel
+
+`Product Suite`'s catalogue switches categories with **Elementor's Nested Tabs**, not EA's Advanced Tabs, and the reason is the links. Advanced Tabs holds a tab's content in a WYSIWYG field, which would turn all forty-odd links across three categories from rows with a real icon picker and a real link field into one block of hand-written markup per tab. Nested Tabs gives each tab a *container*, so every column stays an Icon List and every link stays a control.
+
+It takes the cards whole, too: the tab title is printed through `wp_kses_post()`, so the description line under each name is a `<span>` in the field the user already edits, and the icon beside it is the tab's own Icon control. The first tab is open on load — Nested Tabs' own behaviour, nothing asks for it. A nested widget inside a nested widget's panel works; it is verified in the editor as well as on the front end.
+
+Three of its controls are easy to get wrong, and each cost a round trip:
+
+| Control | Trap |
+| ------- | ---- |
+| `tabs_title_background_color*` | **Group** controls, not flat colours. A flat value never lands, and Elementor's own default — near-black for the active tab — stays. |
+| The tab title's second line | `.e-n-tab-title-text` is `display: flex`, so a description span sits *beside* the name until something tells it to stack. No control reaches inside the title. |
+| The active-tab mark | `tab_icon_active` **replaces** the leading icon rather than adding a trailing one, so the chevron on the open card is drawn from two rotated borders — which also avoids tying it to whichever icon font is loaded. |
 
 `Product Suite`'s wide panel is also worth copying if a preset needs a near-full-width card: the panel is set to **viewport** width and left transparent, and the card is the container inside it. A pixel width would have been an overflow waiting for the first laptop narrower than it — the handler writes a custom width through verbatim, with nothing clamping it — whereas a viewport panel always fits the screen exactly and the card inside lines up with the header bar at any width, with no breakpoint of its own.
 
@@ -297,6 +311,7 @@ Nothing in a preset may be Pro. Markup in a control value is a last resort, used
 | `Saas_Menu::link_list()` | An Advanced Tabs tab takes a WYSIWYG field, not child widgets | A plain list of links |
 | `Suite_Menu::new_badge()` | Icon List prints a row's label unescaped, and has no chip of its own. Styled inline so it needs nothing added to any stylesheet | Text after the label |
 | `.eael-mm-linklist` (a CSS class set from the widget's own CSS Classes field) | Icon List has no control that paints a row, and these designs light the whole row under the pointer | An Icon List with no hover pill |
+| `.eael-mm-cardtabs` / `Suite_Menu::tab_title()` | Nested Tabs has no control for the plate behind a tab icon, none that reaches inside the title to stack a second line, and none for a trailing active mark | Tabs that still switch, with the icons on the surface |
 
 All three are visible in the panel and removing them leaves something that still works. The two class hooks — `.eael-mm-links` and `.eael-mm-linklist` — live in [`mega-menu.scss`](../../src/css/view/mega-menu.scss), so they load with the widget and nowhere else.
 
