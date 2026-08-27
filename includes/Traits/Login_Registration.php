@@ -133,6 +133,35 @@ trait Login_Registration {
 	}
 
 	/**
+	 * Abort a login / register / lost-password / reset-password submission that failed a
+	 * security check, and terminate the request.
+	 *
+	 * Every guard in this trait used to end with:
+	 *
+	 *     if ( isset( $_SERVER['HTTP_REFERER'] ) ) { wp_safe_redirect( ... ); exit(); }
+	 *
+	 * The exit() therefore depended on a header the client controls, so simply omitting
+	 * Referer made a failed nonce / reCAPTCHA / Turnstile check fall straight through into
+	 * wp_signon(), the OTP gate and the password-reset logic. The exit() lives here now,
+	 * outside every condition, so no guard can ever be made to fall through again.
+	 *
+	 * @param int $page_id Page the form was submitted from, used to redirect the visitor
+	 *                     back so the stored error message can be shown when no Referer
+	 *                     is available.
+	 * @return void This method never returns.
+	 */
+	protected function eael_lr_abort( $page_id = 0 ) {
+		$redirect = ! empty( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		if ( empty( $redirect ) && ! empty( $page_id ) ) {
+			$redirect = get_permalink( $page_id );
+		}
+
+		wp_safe_redirect( ! empty( $redirect ) ? $redirect : home_url( '/' ) );
+		exit();
+	}
+
+	/**
 	 * It logs the user in when the login form is submitted normally without AJAX.
 	 */
 	public function log_user_in() {
@@ -158,10 +187,7 @@ trait Login_Registration {
 			}
 			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 
 
@@ -172,10 +198,7 @@ trait Login_Registration {
 			}
 			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-login-nonce'] ) ), 'essential-addons-elementor' ) ) {
 			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
@@ -184,10 +207,7 @@ trait Login_Registration {
 			}
 			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
@@ -200,10 +220,7 @@ trait Login_Registration {
 			}
 			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
-			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-				exit();
-			}
+			$this->eael_lr_abort( $page_id );
 			return;
 		}
 
@@ -214,10 +231,7 @@ trait Login_Registration {
 			}
 			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 
 		do_action( 'eael/login-register/before-login', $_POST, $settings, $this );
@@ -237,10 +251,7 @@ trait Login_Registration {
 				}
 				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
-				if (isset($_SERVER['HTTP_REFERER'])) {
-					wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-					exit();
-				} // fail early if recaptcha failed
+				$this->eael_lr_abort( $page_id ); // fail early if recaptcha failed
 			}
 		}
 
@@ -252,10 +263,7 @@ trait Login_Registration {
 				}
 				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
-				if (isset($_SERVER['HTTP_REFERER'])) {
-					wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-					exit();
-				} // fail early if cloudflare turnstile failed
+				$this->eael_lr_abort( $page_id ); // fail early if cloudflare turnstile failed
 			}
 		}
 
@@ -323,10 +331,7 @@ trait Login_Registration {
 				}
 				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
-				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-					exit();
-				}
+				$this->eael_lr_abort( $page_id );
 			}
 
 			// ============================================================
@@ -347,10 +352,7 @@ trait Login_Registration {
 						wp_send_json_error( $err_msg );
 					}
 					setcookie( 'eael_login_error_' . $widget_id, $err_msg );
-					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-						exit();
-					}
+					$this->eael_lr_abort( $page_id );
 				}
 
 				$pending_redirect_to = ! empty( $_POST['redirect_to'] ) ? sanitize_url( wp_unslash( $_POST['redirect_to'] ) ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -371,10 +373,7 @@ trait Login_Registration {
 						wp_send_json_error( $session->get_error_message() );
 					}
 					setcookie( 'eael_login_error_' . $widget_id, $session->get_error_message() );
-					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-						exit();
-					}
+					$this->eael_lr_abort( $page_id );
 				}
 
 				if ( $ajax ) {
@@ -395,10 +394,7 @@ trait Login_Registration {
 					COOKIEPATH ? COOKIEPATH : '/',
 					COOKIE_DOMAIN
 				);
-				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-					exit();
-				}
+				$this->eael_lr_abort( $page_id );
 			}
 
 			wp_set_current_user( $user_data->ID, $user_login );
@@ -426,10 +422,7 @@ trait Login_Registration {
 						wp_send_json_error( $err_msg );
 					}
 					setcookie( 'eael_login_error_' . $widget_id, $err_msg );
-					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-						exit();
-					}
+					$this->eael_lr_abort( $page_id );
 				}
 
 				$previous_page_url   = ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -448,10 +441,7 @@ trait Login_Registration {
 						wp_send_json_error( $session->get_error_message() );
 					}
 					setcookie( 'eael_login_error_' . $widget_id, $session->get_error_message() );
-					if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-						wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-						exit();
-					}
+					$this->eael_lr_abort( $page_id );
 				}
 
 				if ( $ajax ) {
@@ -472,10 +462,7 @@ trait Login_Registration {
 					COOKIEPATH ? COOKIEPATH : '/',
 					COOKIE_DOMAIN
 				);
-				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-					exit();
-				}
+				$this->eael_lr_abort( $page_id );
 			}
 
 			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
@@ -502,6 +489,9 @@ trait Login_Registration {
 				exit();
 			}
 		}
+        // Terminal redirect: no privileged work runs after this point. When there is no
+        // Referer we deliberately fall through and let the request finish rendering the
+        // current page in place, which is where the stored success/error message shows.
         if (isset($_SERVER['HTTP_REFERER'])) {
             wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
             exit();
@@ -520,24 +510,14 @@ trait Login_Registration {
 				wp_send_json_error( __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' ) );
 			}
 
-			// Fail closed: never fall through into the registration logic. Redirect
-			// back when a Referer is available, otherwise terminate unconditionally.
-			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-			}
-			exit();
+			$this->eael_lr_abort();
 		}
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-register-nonce'] ) ), 'essential-addons-elementor' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
 			}
 
-			// Fail closed: never fall through into the registration logic. Redirect
-			// back when a Referer is available, otherwise terminate unconditionally.
-			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-			}
-			exit();
+			$this->eael_lr_abort();
 		}
 		$page_id = $widget_id = 0;
 		if ( ! empty( $_POST['page_id'] ) ) {
@@ -561,10 +541,7 @@ trait Login_Registration {
 
 			setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
             return false;
         }
 
@@ -579,10 +556,7 @@ trait Login_Registration {
 			}
 			setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
 
-			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-				exit();
-			}
+			$this->eael_lr_abort( $page_id );
 			return false;
 		}
 
@@ -592,10 +566,7 @@ trait Login_Registration {
 				wp_send_json_error( $err_msg );
 			}
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 
 		do_action( 'eael/login-register/before-register' );
@@ -1157,10 +1128,7 @@ trait Login_Registration {
 				wp_safe_redirect( $custom_redirect_url );
 				exit();
 			}
-			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-				exit();
-			}
+			$this->eael_lr_abort( $page_id );
 		}
 
 		if ( in_array( 'auto_login', $register_actions ) && ! is_user_logged_in() ) {
@@ -1198,6 +1166,9 @@ trait Login_Registration {
 			exit();
 		}
 
+        // Terminal redirect: no privileged work runs after this point. When there is no
+        // Referer we deliberately fall through and let the request finish rendering the
+        // current page in place, which is where the stored success/error message shows.
         if (isset($_SERVER['HTTP_REFERER'])) {
             wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
             exit();
@@ -1235,10 +1206,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 
 
@@ -1249,10 +1217,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-lostpassword-nonce'] ) ), 'essential-addons-elementor' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
@@ -1261,10 +1226,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
@@ -1278,10 +1240,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
-			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-				exit();
-			}
+			$this->eael_lr_abort( $page_id );
 			return;
 		}
 
@@ -1293,10 +1252,7 @@ trait Login_Registration {
 				}
 				update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
-				if (isset($_SERVER['HTTP_REFERER'])) {
-					wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-					exit();
-				} // fail early if cloudflare turnstile failed
+				$this->eael_lr_abort( $page_id ); // fail early if cloudflare turnstile failed
 			}
 		}
 
@@ -1313,10 +1269,7 @@ trait Login_Registration {
 				}
 				update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
-				if (isset($_SERVER['HTTP_REFERER'])) {
-					wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-					exit();
-				} // fail early if recaptcha failed
+				$this->eael_lr_abort( $page_id ); // fail early if recaptcha failed
 			}
 		}
 
@@ -1327,10 +1280,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 
 		do_action( 'eael/login-register/before-lostpassword-email' );
@@ -1343,10 +1293,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 
 		$user_login = ! empty( $_POST['eael-user-lostpassword'] ) ? sanitize_text_field( $_POST['eael-user-lostpassword'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -1431,6 +1378,9 @@ trait Login_Registration {
 				exit();
 			}
 		}
+        // Terminal redirect: no privileged work runs after this point. When there is no
+        // Referer we deliberately fall through and let the request finish rendering the
+        // current page in place, which is where the stored success/error message shows.
         if (isset($_SERVER['HTTP_REFERER'])) {
             wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
             exit();
@@ -1464,10 +1414,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 
 		if ( empty( $_POST['eael-resetpassword-nonce'] ) ) {
@@ -1477,10 +1424,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-resetpassword-nonce'] ) ), 'essential-addons-elementor' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
@@ -1489,10 +1433,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
@@ -1505,10 +1446,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
-			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-				exit();
-			}
+			$this->eael_lr_abort( $page_id );
 			return;
 		}
 
@@ -1519,10 +1457,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-                exit();
-            }
+            $this->eael_lr_abort( $page_id );
 		}
 
 		do_action( 'eael/login-register/before-resetpassword-email' );
@@ -1599,6 +1534,9 @@ trait Login_Registration {
 					unset( $e );
 				}
 			} else {
+				// Terminal redirect: no privileged work runs after this point. When there is no
+				// Referer we deliberately fall through and let the request finish rendering the
+				// current page in place, which is where the stored success/error message shows.
 				if (isset($_SERVER['HTTP_REFERER'])) {
 					wp_safe_redirect( strtok( $_SERVER['HTTP_REFERER'], '?' ) ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 					exit();
@@ -1617,6 +1555,9 @@ trait Login_Registration {
 				}
 				update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $errors ), false );
 
+				// Terminal redirect: no privileged work runs after this point. When there is no
+				// Referer we deliberately fall through and let the request finish rendering the
+				// current page in place, which is where the stored success/error message shows.
 				if (isset( $_SERVER['HTTP_REFERER'] )) {
 					wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 					exit();
