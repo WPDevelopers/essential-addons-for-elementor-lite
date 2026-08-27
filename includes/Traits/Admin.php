@@ -1835,7 +1835,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 7.0 with new \"<b><a target='_blank' href='%1\$s'>Advanced Slider</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/advanced-slider/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing \"<b><a target='_blank' href='%1\$s'>Theme Builder</a></b>\" and \"<b><a target='_blank' href='%2\$s'>Mega Menu</a></b>\" widget. For more info, check out the <a target='_blank' href='%3\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/docs/ea-header-footer-builder' ), esc_url('https://essential-addons.com/docs/ea-mega-menu' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),

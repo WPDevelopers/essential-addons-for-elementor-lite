@@ -13115,7 +13115,7 @@ msgid "When enabled, new registrants are placed in a \"Pending\" state and canno
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1838
-msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 7.0 with new \"<b><a target='_blank' href='%1$s'>Advanced Slider</a></b>\" widget. For more info, check out the <a target='_blank' href='%2$s'>Changelog</a> 🎉</p>"
+msgid "<p> <i>📣</i> <b>NEW:</b> Introducing \"<b><a target='_blank' href='%1$s'>Theme Builder</a></b>\" and \"<b><a target='_blank' href='%2$s'>Mega Menu</a></b>\" widget. For more info, check out the <a target='_blank' href='%3$s'>Changelog</a> 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1841
