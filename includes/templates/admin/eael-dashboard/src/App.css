@@ -1,6 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
-* {
+/*
+ * The dashboard's reset, scoped to the dashboard.
+ *
+ * Unscoped, `*` reached the whole admin page — this stylesheet is enqueued on
+ * `toplevel_page_eael-settings`, so that includes the admin menu, the toolbar
+ * and the footer. The margin and padding were harmless there: wp-admin's own
+ * common.css resets those on every bare element already, and anything core
+ * styles by id or class outranks a `*` rule. `box-sizing` was not, because core
+ * never sets it globally, which left this the only declaration on elements
+ * sized as content-box. `#adminmenu div.wp-menu-image` is 34px tall with 8px of
+ * vertical padding, so border-box squeezed its content box to 18px and every
+ * plugin menu icon that paints inside it came out squashed.
+ *
+ * `:where()` contributes no specificity, so the rule still weighs the same as
+ * the bare `*` did — every class-based rule below continues to beat it, exactly
+ * as before. Written as the mount point plus its descendants: React renders the
+ * entire dashboard inside `#eael-dashboard`, and the one thing it puts outside
+ * is the throwaway input ModalStyleThree uses to copy to the clipboard.
+ */
+:where(#eael-dashboard, #eael-dashboard *) {
   margin: 0;
   padding: 0;
   box-sizing: border-box;

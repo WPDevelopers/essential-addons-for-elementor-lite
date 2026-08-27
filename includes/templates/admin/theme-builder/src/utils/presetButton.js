@@ -69,12 +69,7 @@ function createButton( icon, label ) {
 	// The padding is ours rather than Elementor's 12px, which leaves a 16px box —
 	// too small for a mark that carries its own rounded plate, where the artwork
 	// stops short of the edge and reads smaller than the neighbouring glyphs.
-	//
-	// The fill is the Essential Addons gradient — the same two layers as
-	// `--eatb-gradient` in the modals and as the dashboard's "Save Settings"
-	// button — so the one EA control in Elementor's row is painted the same way
-	// as every EA control outside it.
-	button.style.cssText = 'background:conic-gradient(from 195.22deg at 68.31% 39.29%, rgba(143,32,251,0) 0deg, #8F20FB 360deg), linear-gradient(0deg, #6F0AF2, #6F0AF2);color:#fff;display:flex;align-items:center;justify-content:center;padding:3px;';
+	button.style.cssText = 'background-color:#6F0AF2;color:#fff;display:flex;align-items:center;justify-content:center;padding:3px;';
 
 	if ( icon ) {
 		const image = document.createElement( 'img' );
