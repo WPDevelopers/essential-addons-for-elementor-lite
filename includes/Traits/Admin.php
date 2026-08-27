@@ -857,6 +857,14 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/simple-menu/',
 							    'is_activate' => boolval( $this->get_settings( 'simple-menu' ) )
 						    ],
+						    'mega-menu'            => [
+							    'key'         => 'mega-menu',
+							    'title'       => __( 'Mega Menu', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/mega-menu/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-mega-menu/',
+							    'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'mega-menu' ) )
+						    ],
 						    'advanced-search'      => [
 							    'key'         => 'advanced-search',
 							    'title'       => __( 'Advanced Search', 'essential-addons-for-elementor-lite' ),
@@ -1827,7 +1835,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 7.0 with new \"<b><a target='_blank' href='%1\$s'>Advanced Slider</a></b>\" widget. For more info, check out the <a target='_blank' href='%2\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/advanced-slider/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing \"<b><a target='_blank' href='%1\$s'>Theme Builder</a></b>\" and \"<b><a target='_blank' href='%2\$s'>Mega Menu</a></b>\" widget. For more info, check out the <a target='_blank' href='%3\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/header-footer-builder' ), esc_url('https://essential-addons.com/mega-menu' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -2078,13 +2086,18 @@ trait Admin {
 		}
 
 		if ( $this->menu_notice_should_show() ) {
+			// Scoped to the direct child anchor on purpose. WordPress repeats the
+			// menu title twice more — in `.wp-submenu-head` and in the submenu item
+			// it generates for the parent page — so a descendant selector paints the
+			// whole flyout purple and prints the badge three times.
 			$custom_css = "
-                #toplevel_page_eael-settings a ,
-                #toplevel_page_eael-settings a:hover {
+                #toplevel_page_eael-settings > a,
+                #toplevel_page_eael-settings > a:hover,
+                #toplevel_page_eael-settings > a:focus {
                     color:#f0f0f1 !important;
                     background: #7D55FF !important;
                 }
-				#toplevel_page_eael-settings .eael-menu-notice {
+				#toplevel_page_eael-settings > a .eael-menu-notice {
                     display:block !important;
                 }"
             ;

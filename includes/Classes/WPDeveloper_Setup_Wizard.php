@@ -129,7 +129,7 @@ class WPDeveloper_Setup_Wizard {
 			'configuration' => __( 'Configuration', 'essential-addons-for-elementor-lite' ),
 			'elements'      => __( 'Elements', 'essential-addons-for-elementor-lite' ),
 			'go_pro'        => __( 'Go PRO', 'essential-addons-for-elementor-lite' ),
-			'thinkrank'     => __( 'Boost SEO', 'essential-addons-for-elementor-lite' ),
+			'thinkrank'     => __( 'Boost SEO & Speed', 'essential-addons-for-elementor-lite' ),
 			'pluginspromo'  => __( 'Plugins', 'essential-addons-for-elementor-lite' ),
 			'integrations'  => __( 'Integrations', 'essential-addons-for-elementor-lite' ),
 		];
@@ -266,38 +266,104 @@ class WPDeveloper_Setup_Wizard {
 	 * TODO(design): swap $tr_icon for a proper hero image + per-feature icons.
 	 */
 	public function data_thinkrank_content(){
-		$tr_icon = EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank.svg';
+		$tr_icon = EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrankxspeed.svg';
+
+		// The step installs ThinkRank (SEO) and, when the site has room for it,
+		// xSpeed (performance).
+		$plugins = [
+			[
+				'slug'              => 'thinkrank',
+				'basename'          => 'thinkrank/thinkrank.php',
+				'is_active'         => is_plugin_active( 'thinkrank/thinkrank.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
+			],
+		];
+
+		// Never install a second page cache onto a site that already has one:
+		// two of them fight over advanced-cache.php and the loser silently
+		// stops caching. XSpeed_Setup answers "clear" only when it could read
+		// the site's state and nothing owns the page cache — an unreadable
+		// wp-config.php or an unattributable drop-in counts as occupied.
+		$offer_xspeed = XSpeed_Setup::can_offer();
+
+		if ( $offer_xspeed ) {
+			$plugins[] = [
+				'slug'              => XSpeed_Setup::SLUG,
+				'basename'          => XSpeed_Setup::BASENAME,
+				'is_active'         => is_plugin_active( XSpeed_Setup::BASENAME ),
+				'local_plugin_data' => $this->get_local_plugin_data( XSpeed_Setup::BASENAME ),
+			];
+		}
+
+		$all_installed = true;
+		foreach ( $plugins as $plugin ) {
+			if ( false === $plugin['local_plugin_data'] ) {
+				$all_installed = false;
+				break;
+			}
+		}
+
+		// Performance copy is xSpeed's promise. With xSpeed off the table the
+		// step is ThinkRank alone, so it must not keep promising caching.
+		$features = [
+			[
+				'content' => __( 'AI-powered SEO titles, meta & schema', 'essential-addons-for-elementor-lite' ),
+			],
+			[
+				'content' => __( 'Optimize for Google & AI answers', 'essential-addons-for-elementor-lite' ),
+			],
+		];
+
+		if ( $offer_xspeed ) {
+			$features[] = [
+				'content' => __( 'Smart caching & performance optimization', 'essential-addons-for-elementor-lite' ),
+			];
+			$features[] = [
+				'content' => __( 'Faster page loads & better Core Web Vitals', 'essential-addons-for-elementor-lite' ),
+			];
+		} else {
+			$features[] = [
+				'content' => __( 'Automatic sitemaps & structured data', 'essential-addons-for-elementor-lite' ),
+			];
+			$features[] = [
+				'content' => __( 'Rank tracking with GA4 integration', 'essential-addons-for-elementor-lite' ),
+			];
+		}
+
+		$features[] = [
+			'content' => __( 'Built-in AI tools with MCP support', 'essential-addons-for-elementor-lite' ),
+		];
+
 		return [
 			'slug'              => 'thinkrank',
 			'basename'          => 'thinkrank/thinkrank.php',
 			'is_active'         => is_plugin_active( 'thinkrank/thinkrank.php' ),
 			'local_plugin_data' => $this->get_local_plugin_data( 'thinkrank/thinkrank.php' ),
+			'plugins'           => $plugins,
+			// The step is hidden only when every plugin it offers is already
+			// installed — which, on a site that already has a page cache, means
+			// ThinkRank alone.
+			'all_installed'     => $all_installed,
+			'offers_xspeed'     => $offer_xspeed,
+			// What already owns the page cache, so a UI can say so rather than
+			// leave the missing row unexplained. Empty when nothing does.
+			'page_cache_owner'  => $offer_xspeed ? '' : XSpeed_Setup::page_cache_owner(),
 			'logo'              => $tr_icon,
-			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-promo-image.jpg',
-			'title'             => __( 'Boost your SEO with AI', 'essential-addons-for-elementor-lite' ),
-			'subtitle'          => __( 'Get found on Google and in AI answers. Let AI optimize every page you build - automatically.', 'essential-addons-for-elementor-lite' ),
-			'install_label'     => __( 'Enable & Configure SEO', 'essential-addons-for-elementor-lite' ),
+			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-xspeed.jpg',
+			'title'             => $offer_xspeed
+				? __( 'Better SEO | Faster Performance', 'essential-addons-for-elementor-lite' )
+				: __( 'Better SEO for Every Page You Build', 'essential-addons-for-elementor-lite' ),
+			'subtitle'          => $offer_xspeed
+				? __( 'Get found on Google and in AI answers, while keeping your site fast and optimized, automatically.', 'essential-addons-for-elementor-lite' )
+				: __( 'Get found on Google and in AI answers, automatically.', 'essential-addons-for-elementor-lite' ),
+			'install_label'     => $offer_xspeed
+				? __( 'Boost SEO & Performance', 'essential-addons-for-elementor-lite' )
+				: __( 'Boost SEO', 'essential-addons-for-elementor-lite' ),
 			'installing_label'  => __( 'Configuring…', 'essential-addons-for-elementor-lite' ),
 			'done_label'        => __( 'Configured', 'essential-addons-for-elementor-lite' ),
 			'skip_label'        => __( 'Skip for now', 'essential-addons-for-elementor-lite' ),
 			'open_url'          => admin_url( 'admin.php?page=thinkrank' ),
-			'features'          => [
-				[
-					'content' => __( 'AI-written titles, meta & descriptions', 'essential-addons-for-elementor-lite' ),
-				],
-				[
-					'content' => __( 'Schema & LLM answer optimization', 'essential-addons-for-elementor-lite' ),
-				],
-				[
-					'content' => __( 'Built-in MCP server for AI agents', 'essential-addons-for-elementor-lite' ),
-				],
-				[
-					'content' => __( 'XML sitemaps & smart indexing', 'essential-addons-for-elementor-lite' ),
-				],
-				[
-					'content' => __( 'Rank tracking with GA4', 'essential-addons-for-elementor-lite' ),
-				],
-			],
+			'features'          => $features,
 		];
 	}
 
@@ -396,7 +462,7 @@ class WPDeveloper_Setup_Wizard {
 	 * @return array
 	 */
 	public function get_plugin_list() {
-		return [
+		$plugin_list = [
 			[
 				'slug'     => 'thinkrank',
 				'basename' => 'thinkrank/thinkrank.php',
@@ -479,6 +545,25 @@ class WPDeveloper_Setup_Wizard {
 				'local_plugin_data' => $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ),
 			],
 		];
+
+		// This list's toggles install and activate, so xSpeed only earns a row
+		// when nothing else already owns the site's page cache. It sits right
+		// after ThinkRank, the other half of the "Boost SEO & Speed" pairing.
+		if ( XSpeed_Setup::can_list() ) {
+			array_splice( $plugin_list, 1, 0, [
+				[
+					'slug'     => XSpeed_Setup::SLUG,
+					'basename' => XSpeed_Setup::BASENAME,
+					'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/xspeed.png',
+					'title'    => __( 'xSpeed Cache', 'essential-addons-for-elementor-lite' ),
+					'desc'     => __( 'Make every page you build load faster. xSpeed handles smart caching, asset optimization & CDN, improving Core Web Vitals without touching your design.', 'essential-addons-for-elementor-lite' ),
+					'is_active' => is_plugin_active( XSpeed_Setup::BASENAME ),
+					'local_plugin_data' => $this->get_local_plugin_data( XSpeed_Setup::BASENAME ),
+				],
+			] );
+		}
+
+		return $plugin_list;
 	}
 
 	/**
@@ -668,6 +753,11 @@ class WPDeveloper_Setup_Wizard {
 						'key'         => 'simple-menu',
 						'title'       => __( 'Simple Menu', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
+					],
+					[
+						'key'         => 'mega-menu',
+						'title'       => __( 'Mega Menu', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
 					],
 					[
 						'key'         => 'breadcrumbs',

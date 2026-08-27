@@ -131,7 +131,7 @@ class Simple_Menu extends Widget_Base
                     'notice_type' => 'info',
                     'dismissible' => false,
                     // Translators: %s: URL to the Menus screen.
-                    'content'     => sprintf(__('Go to the <a href="%s" target="_blank">Menu screen</a> to manage your menus.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php')),
+                    'content'     => sprintf(__('Go to the <a href="%s" target="_blank">Menus screen</a> to manage your menus.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php')),
                     'separator'   => 'after',
                 ]
             );
@@ -664,8 +664,8 @@ class Simple_Menu extends Widget_Base
                 'options'   => [
                     'eael-simple-menu-dropdown-animate-fade'     => __('Fade', 'essential-addons-for-elementor-lite'),
                     'eael-simple-menu-dropdown-animate-to-top'   => __('To Top', 'essential-addons-for-elementor-lite'),
-                    'eael-simple-menu-dropdown-animate-zoom-in'  => __('ZoomIn', 'essential-addons-for-elementor-lite'),
-                    'eael-simple-menu-dropdown-animate-zoom-out' => __('ZoomOut', 'essential-addons-for-elementor-lite'),
+                    'eael-simple-menu-dropdown-animate-zoom-in'  => __('Zoom In', 'essential-addons-for-elementor-lite'),
+                    'eael-simple-menu-dropdown-animate-zoom-out' => __('Zoom Out', 'essential-addons-for-elementor-lite'),
                 ],
                 'default'   => 'eael-simple-menu-dropdown-animate-to-top',
                 'condition' => [

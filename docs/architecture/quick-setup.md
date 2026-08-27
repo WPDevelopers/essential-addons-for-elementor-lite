@@ -16,43 +16,45 @@ The wizard is a single-page React app rendered into an empty `<section id="eael-
 
 Lifecycle is option-driven via `eael_setup_wizard`:
 
-| Option value | State | Set by | Triggers |
-| ------------ | ----- | ------ | -------- |
-| (missing) | First activation, before `Core::enable_setup_wizard` runs | — | Nothing yet |
-| `'redirect'` | First activation completed, redirect pending | [`Core::enable_setup_wizard`](../../includes/Traits/Core.php#L164) on activation when both `eael_version` and `eael_setup_wizard` are absent | `wp_loaded` triggers `WPDeveloper_Setup_Wizard::redirect()` |
-| `'init'` | User has been redirected to wizard page; class will instantiate on subsequent admin requests | [`WPDeveloper_Setup_Wizard::redirect()`](../../includes/Classes/WPDeveloper_Setup_Wizard.php#L882) before `wp_safe_redirect` | `wp_loaded` instantiates `new WPDeveloper_Setup_Wizard()` so admin hooks register |
-| `'complete'` | Wizard finished | [`save_setup_wizard_data()`](../../includes/Classes/WPDeveloper_Setup_Wizard.php#L475) on final form submit | Class no longer instantiates — wizard never re-shows |
+| Option value   | State                                                                                        | Set by                                                                                                                                            | Triggers                                                                              |
+| -------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| (missing)      | First activation, before`Core::enable_setup_wizard` runs                                   | —                                                                                                                                                | Nothing yet                                                                           |
+| `'redirect'` | First activation completed, redirect pending                                                 | [`Core::enable_setup_wizard`](../../includes/Traits/Core.php#L164) on activation when both `eael_version` and `eael_setup_wizard` are absent | `wp_loaded` triggers `WPDeveloper_Setup_Wizard::redirect()`                       |
+| `'init'`     | User has been redirected to wizard page; class will instantiate on subsequent admin requests | [`WPDeveloper_Setup_Wizard::redirect()`](../../includes/Classes/WPDeveloper_Setup_Wizard.php#L882) before `wp_safe_redirect`                   | `wp_loaded` instantiates `new WPDeveloper_Setup_Wizard()` so admin hooks register |
+| `'complete'` | Wizard finished                                                                              | [`save_setup_wizard_data()`](../../includes/Classes/WPDeveloper_Setup_Wizard.php#L475) on final form submit                                      | Class no longer instantiates — wizard never re-shows                                 |
 
 Once `'complete'` is set, the only way to re-trigger the wizard is to delete the option from the database. There is no admin UI to "reset and re-run".
 
 ## Components
 
-| Path | Lines | Role |
-| ---- | ----- | ---- |
-| [`essential_adons_elementor.php`](../../essential_adons_elementor.php#L106) | 106-115 | The `wp_loaded` dispatcher that reads `eael_setup_wizard` option and triggers redirect or instantiation |
-| [`includes/Traits/Core.php`](../../includes/Traits/Core.php#L164) | 164-169 | `enable_setup_wizard()` — sets the option to `'redirect'` on first activation |
-| [`includes/Classes/WPDeveloper_Setup_Wizard.php`](../../includes/Classes/WPDeveloper_Setup_Wizard.php) | 937 | The PHP handler — admin menu, script enqueue, three AJAX endpoints, all data builders, lifecycle option transitions |
-| [`includes/templates/admin/quick-setup/`](../../includes/templates/admin/quick-setup/) | folder | React app source + Vite config + built dist |
-| [`includes/templates/admin/quick-setup/package.json`](../../includes/templates/admin/quick-setup/package.json) | 28 | npm scripts and React + Vite dependencies (separate from the plugin's root `package.json`) |
-| [`includes/templates/admin/quick-setup/vite.config.js`](../../includes/templates/admin/quick-setup/vite.config.js) | 16 | Vite + `@vitejs/plugin-react`; output names locked to `quick-setup.min.js` and `quick-setup.min.css` |
-| [`includes/templates/admin/quick-setup/src/main.jsx`](../../includes/templates/admin/quick-setup/src/main.jsx) | 9 | React entry point — `ReactDOM.createRoot(document.getElementById("eael-onboard--wrapper")).render(<App />)` |
-| [`includes/templates/admin/quick-setup/src/components/App.jsx`](../../includes/templates/admin/quick-setup/src/components/App.jsx) | 335 | Root component — state machine, tab navigation, form submission orchestration, AJAX calls |
-| `includes/templates/admin/quick-setup/src/components/MenuItems.jsx` | — | Top tab navigation (Getting Started / Configuration / Elements / Go PRO / Plugins / Integrations) |
-| `includes/templates/admin/quick-setup/src/components/GettingStartedContent.jsx` | — | Tracking opt-in screen (only shown when not already opted in) |
-| `includes/templates/admin/quick-setup/src/components/ConfigurationContent.jsx` | — | Preference selector (basic / advance / custom) |
-| `includes/templates/admin/quick-setup/src/components/ElementsContent.jsx` | — | Per-element on/off checkboxes grouped by category |
-| `includes/templates/admin/quick-setup/src/components/GoProContent.jsx` | — | Hardcoded list of Pro features as marketing slide |
-| `includes/templates/admin/quick-setup/src/components/PluginsPromo.jsx` + `PluginPromoItem.jsx` | — | Conditional sister-plugin recommendations |
-| `includes/templates/admin/quick-setup/src/components/IntegrationContent.jsx` | — | Templately + Essential Blocks install/activate switches |
-| `includes/templates/admin/quick-setup/src/components/ModalContent.jsx` | — | Privacy / data-usage modal launched from Getting Started |
-| `includes/templates/admin/quick-setup/src/utils/pluginPromoUtils.js` | — | Helpers for the plugins promo panel |
-| `includes/templates/admin/quick-setup/dist/quick-setup.min.js` | built | The bundle that PHP enqueues |
-| [`assets/admin/css/quick-setup.css`](../../assets/admin/css/quick-setup.css) | — | Wizard stylesheet (separate from the React-bundle CSS) |
-| [`assets/admin/vendor/sweetalert2/`](../../assets/admin/vendor/sweetalert2/) | vendor | SweetAlert2 used by the wizard for confirmation dialogs |
-| [`assets/admin/images/quick-setup/`](../../assets/admin/images/quick-setup/) | images | All wizard imagery (success.gif, ea-new.png, youtube-promo.png, Pro feature icons) |
-| Storage option `eael_setup_wizard` | `wp_options` | Lifecycle state (`redirect` / `init` / `complete`) |
-| Storage option `eael_save_settings` | `wp_options` | Persisted element on/off map |
-| Storage option `wpins_allow_tracking` | `wp_options` | Per-plugin tracking opt-in flag (read by `get_is_tracking_allowed`) |
+| Path                                                                                                                                | Lines          | Role                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------- |
+| [`essential_adons_elementor.php`](../../essential_adons_elementor.php#L106)                                                        | 106-115        | The`wp_loaded` dispatcher that reads `eael_setup_wizard` option and triggers redirect or instantiation           |
+| [`includes/Traits/Core.php`](../../includes/Traits/Core.php#L164)                                                                  | 164-169        | `enable_setup_wizard()` — sets the option to `'redirect'` on first activation                                   |
+| [`includes/Classes/WPDeveloper_Setup_Wizard.php`](../../includes/Classes/WPDeveloper_Setup_Wizard.php)                             | 937            | The PHP handler — admin menu, script enqueue, three AJAX endpoints, all data builders, lifecycle option transitions |
+| [`includes/templates/admin/quick-setup/`](../../includes/templates/admin/quick-setup/)                                             | folder         | React app source + Vite config + built dist                                                                          |
+| [`includes/templates/admin/quick-setup/package.json`](../../includes/templates/admin/quick-setup/package.json)                     | 28             | npm scripts and React + Vite dependencies (separate from the plugin's root`package.json`)                          |
+| [`includes/templates/admin/quick-setup/vite.config.js`](../../includes/templates/admin/quick-setup/vite.config.js)                 | 16             | Vite +`@vitejs/plugin-react`; output names locked to `quick-setup.min.js` and `quick-setup.min.css`            |
+| [`includes/templates/admin/quick-setup/src/main.jsx`](../../includes/templates/admin/quick-setup/src/main.jsx)                     | 9              | React entry point —`ReactDOM.createRoot(document.getElementById("eael-onboard--wrapper")).render(<App />)`        |
+| [`includes/templates/admin/quick-setup/src/components/App.jsx`](../../includes/templates/admin/quick-setup/src/components/App.jsx) | 335            | Root component — state machine, tab navigation, form submission orchestration, AJAX calls                           |
+| `includes/templates/admin/quick-setup/src/components/MenuItems.jsx`                                                               | —             | Top tab navigation (Getting Started / Configuration / Elements / Go PRO / Plugins / Integrations)                    |
+| `includes/templates/admin/quick-setup/src/components/GettingStartedContent.jsx`                                                   | —             | Tracking opt-in screen (only shown when not already opted in)                                                        |
+| `includes/templates/admin/quick-setup/src/components/ConfigurationContent.jsx`                                                    | —             | Preference selector (basic / advance / custom)                                                                       |
+| `includes/templates/admin/quick-setup/src/components/ElementsContent.jsx`                                                         | —             | Per-element on/off checkboxes grouped by category                                                                    |
+| `includes/templates/admin/quick-setup/src/components/GoProContent.jsx`                                                            | —             | Hardcoded list of Pro features as marketing slide                                                                    |
+| `includes/templates/admin/quick-setup/src/components/PluginsPromo.jsx` + `PluginPromoItem.jsx`                                  | —             | Conditional sister-plugin recommendations                                                                            |
+| `includes/templates/admin/quick-setup/src/components/IntegrationContent.jsx`                                                      | —             | Templately + Essential Blocks install/activate switches                                                              |
+| `includes/templates/admin/quick-setup/src/components/ModalContent.jsx`                                                            | —             | Privacy / data-usage modal launched from Getting Started                                                             |
+| `includes/templates/admin/quick-setup/src/utils/pluginPromoUtils.js`                                                              | —             | Helpers for the plugins promo panel                                                                                  |
+| `includes/templates/admin/quick-setup/dist/quick-setup.min.js`                                                                    | built          | The bundle that PHP enqueues                                                                                         |
+| [`includes/Classes/XSpeed_Setup.php`](../../includes/Classes/XSpeed_Setup.php)                                                     | —             | Gate + lifecycle for the xSpeed install — see § Installing xSpeed                                                  |
+| [`includes/page-cache-safety/`](../../includes/page-cache-safety/)                                                                 | folder         | The portable Detector + Setup pair, copied verbatim from xSpeed.**Do not edit here**                           |
+| [`assets/admin/css/quick-setup.css`](../../assets/admin/css/quick-setup.css)                                                       | —             | Wizard stylesheet (separate from the React-bundle CSS)                                                               |
+| [`assets/admin/vendor/sweetalert2/`](../../assets/admin/vendor/sweetalert2/)                                                       | vendor         | SweetAlert2 used by the wizard for confirmation dialogs                                                              |
+| [`assets/admin/images/quick-setup/`](../../assets/admin/images/quick-setup/)                                                       | images         | All wizard imagery (success.gif, ea-new.png, youtube-promo.png, Pro feature icons)                                   |
+| Storage option`eael_setup_wizard`                                                                                                 | `wp_options` | Lifecycle state (`redirect` / `init` / `complete`)                                                             |
+| Storage option`eael_save_settings`                                                                                                | `wp_options` | Persisted element on/off map                                                                                         |
+| Storage option`wpins_allow_tracking`                                                                                              | `wp_options` | Per-plugin tracking opt-in flag (read by`get_is_tracking_allowed`)                                                 |
 
 ## Architecture Diagram
 
@@ -184,16 +186,16 @@ Once `'complete'` is set, the only way to re-trigger the wizard is to delete the
 
 ## Hook Timing
 
-| Hook | Owner | When | Handler | Purpose |
-| ---- | ----- | ---- | ------- | ------- |
-| Plugin activation (one-shot trigger from Bootstrap traits) | EA Core | First-time activation | `Core::enable_setup_wizard` | Sets `eael_setup_wizard => 'redirect'` |
-| `wp_loaded` (priority 10) | EA entry file | Every request after WP fully loaded | inline closure in `essential_adons_elementor.php:106` | Reads `eael_setup_wizard` and dispatches redirect or `new` |
-| `admin_enqueue_scripts` | WordPress core | Admin page being rendered | `setup_wizard_scripts($hook)` | Enqueues stylesheets, SweetAlert2, the React bundle, and `wp_localize_script` |
-| `admin_menu` | WordPress core | Admin menu being built | `admin_menu()` | Adds the `eael-setup-wizard` hidden submenu page |
-| `in_admin_header` (priority 1000) | WordPress core | Admin header rendering | `remove_notice()` | When `?page=eael-setup-wizard`, suppresses other plugins' admin notices for a clean wizard surface |
-| `wp_ajax_save_setup_wizard_data` | WordPress core | AJAX | `save_setup_wizard_data()` | Final form submit — saves elements, marks complete, optionally fires WPInsights |
-| `wp_ajax_enable_wpins_process` | WordPress core | AJAX | `enable_wpins_process()` | Mid-flow opt-in for WPInsights without completing the wizard |
-| `wp_ajax_save_eael_elements_data` | WordPress core | AJAX | `save_eael_elements_data()` | Persist element on/off list (lighter-weight save than `save_setup_wizard_data`) |
+| Hook                                                       | Owner          | When                                | Handler                                                | Purpose                                                                                             |
+| ---------------------------------------------------------- | -------------- | ----------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| Plugin activation (one-shot trigger from Bootstrap traits) | EA Core        | First-time activation               | `Core::enable_setup_wizard`                          | Sets`eael_setup_wizard => 'redirect'`                                                             |
+| `wp_loaded` (priority 10)                                | EA entry file  | Every request after WP fully loaded | inline closure in`essential_adons_elementor.php:106` | Reads`eael_setup_wizard` and dispatches redirect or `new`                                       |
+| `admin_enqueue_scripts`                                  | WordPress core | Admin page being rendered           | `setup_wizard_scripts($hook)`                        | Enqueues stylesheets, SweetAlert2, the React bundle, and`wp_localize_script`                      |
+| `admin_menu`                                             | WordPress core | Admin menu being built              | `admin_menu()`                                       | Adds the`eael-setup-wizard` hidden submenu page                                                   |
+| `in_admin_header` (priority 1000)                        | WordPress core | Admin header rendering              | `remove_notice()`                                    | When`?page=eael-setup-wizard`, suppresses other plugins' admin notices for a clean wizard surface |
+| `wp_ajax_save_setup_wizard_data`                         | WordPress core | AJAX                                | `save_setup_wizard_data()`                           | Final form submit — saves elements, marks complete, optionally fires WPInsights                    |
+| `wp_ajax_enable_wpins_process`                           | WordPress core | AJAX                                | `enable_wpins_process()`                             | Mid-flow opt-in for WPInsights without completing the wizard                                        |
+| `wp_ajax_save_eael_elements_data`                        | WordPress core | AJAX                                | `save_eael_elements_data()`                          | Persist element on/off list (lighter-weight save than`save_setup_wizard_data`)                    |
 
 ## Data Flow
 
@@ -297,20 +299,91 @@ PHP serialises this dict into the JS global `localize.eael_quick_setup_data`. Re
 
 All three endpoints share the same security model: `check_ajax_referer('essential-addons-elementor', 'security')` + `current_user_can('manage_options')` + `wp_parse_str($_POST['fields'], $fields)`.
 
-| Action | Method | Purpose | Response |
-| ------ | ------ | ------- | -------- |
-| `save_setup_wizard_data` | `save_setup_wizard_data()` | Final wizard submit. Saves elements, marks complete, optionally fires WPInsights tracking. | `wp_send_json_success(['redirect_url' => …])` on success |
-| `enable_wpins_process` | `enable_wpins_process()` | Standalone WPInsights opt-in. Runs `wpins_process()` and returns. Used when user toggles tracking mid-flow without completing the wizard. | `wp_send_json_success()` |
-| `save_eael_elements_data` | `save_eael_elements_data()` | Persist element on/off list without changing wizard state. (Defined for completeness; the active React flow uses `save_setup_wizard_data` for the final save.) | `wp_send_json_success()` |
+| Action                      | Method                        | Purpose                                                                                                                                                         | Response                                                    |
+| --------------------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `save_setup_wizard_data`  | `save_setup_wizard_data()`  | Final wizard submit. Saves elements, marks complete, optionally fires WPInsights tracking.                                                                      | `wp_send_json_success(['redirect_url' => …])` on success |
+| `enable_wpins_process`    | `enable_wpins_process()`    | Standalone WPInsights opt-in. Runs`wpins_process()` and returns. Used when user toggles tracking mid-flow without completing the wizard.                      | `wp_send_json_success()`                                  |
+| `save_eael_elements_data` | `save_eael_elements_data()` | Persist element on/off list without changing wizard state. (Defined for completeness; the active React flow uses`save_setup_wizard_data` for the final save.) | `wp_send_json_success()`                                  |
+
+### Installing xSpeed — the page-cache guard
+
+The "Boost SEO & Speed" step installs two plugins, and one of them is a page
+cache. That makes it unlike every other install button in the wizard: a second
+page cache on a site that already has one is not a duplicate feature, it is a
+fight over `wp-content/advanced-cache.php` in which the loser silently stops
+caching. So xSpeed is the only plugin here whose offer is *conditional* and
+whose activation is *bracketed*.
+
+Both halves come from [`includes/page-cache-safety/`](../../includes/page-cache-safety/) — two
+files copied verbatim from the xSpeed Free repo
+`WPDeveloper\PageCacheSafety`, so EA's PSR-4 autoloader never resolves them.
+**Do not edit them here**: fixes go back to xSpeed and get re-copied, because
+xSpeed is the repo whose parity tests fail when the module list drifts.
+
+Everything EA-specific lives in
+[`includes/Classes/XSpeed_Setup.php`](../../includes/Classes/XSpeed_Setup.php),
+which is the only thing the rest of EA calls:
+
+| Call                                                    | Answers                                                                                                                     |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `XSpeed_Setup::can_offer()`                           | May we offer to install xSpeed? Supported PHP/WP, not already installed, and`Detector::is_field_clear()`.                 |
+| `XSpeed_Setup::can_list()`                            | May xSpeed have a row in the Integrations list? Looser — an already-installed or already-running copy still belongs there. |
+| `XSpeed_Setup::page_cache_owner()`                    | Label of whatever owns the page cache instead, or`''`.                                                                    |
+| `XSpeed_Setup::before_activation( $slug )`            | Writes the settings xSpeed should come up with. No-op for every other slug.                                                 |
+| `XSpeed_Setup::activation_failed( $slug, $prepared )` | Takes those rows back out when activation failed.                                                                           |
+| `XSpeed_Setup::after_activation( $slug )`             | Cancels xSpeed's setup-wizard redirect and confirms page caching is live.                                                   |
+
+**The order around `activate_plugin()` is the whole point.** xSpeed's activation
+*reads* what is already stored rather than stamping over it — its module seeders
+skip a row that exists, and `Cache::restore_dropin_if_enabled()` sees the
+page-cache flag already true and installs `advanced-cache.php` and `WP_CACHE`
+itself. Writing the same settings *after* activation does nothing at all **and
+reports no error**, because `Settings_Manager::update()` resolves modules
+through a `Module_Registry` that is empty for a plugin activated part-way
+through the request. All three activation sites in
+[`WPDeveloper_Plugin_Installer`](../../includes/Classes/WPDeveloper_Plugin_Installer.php)
+are bracketed accordingly:
+
+```php
+$prepared = XSpeed_Setup::before_activation( $slug );   // BEFORE
+$result   = activate_plugin( $basename, '', false, false );
+
+if ( is_wp_error( $result ) ) {
+    XSpeed_Setup::activation_failed( $slug, $prepared );  // never activated
+} else {
+    XSpeed_Setup::after_activation( $slug );              // AFTER
+}
+```
+
+What gets turned on is page caching and nothing else. Someone who accepted
+"install a cache" inside EA's wizard agreed to a page cache, not to having
+their markup rewritten, so minification, lazy loading and resource hints are
+written off explicitly — including the ones already off by default, since
+writing the settings option suppresses the first-run path that would otherwise
+seed them.
+
+Two consequences visible in the localized data: `thinkrank_content.plugins` drops
+the xSpeed entry when `can_offer()` is false (and the step's title, button label
+and feature bullets stop promising performance), and `integrations_content.plugin_list`
+drops the xSpeed row when `can_list()` is false. `thinkrank_content.offers_xspeed`
+and `thinkrank_content.page_cache_owner` carry the reason for a UI that wants to
+say what it found.
+
+Because "we could not tell" and "the field is clear" are different answers, every
+unknown resolves to *do not offer*: an unreadable `wp-config.php`, a drop-in that
+cannot be attributed, a PHP version below the portable files' 7.1 parse floor, or
+a missing `includes/page-cache-safety/` file all return false. A persistent object cache
+(`object-cache.php`) is deliberately **not** a blocker — it sits beside a page
+cache and competes for nothing.
 
 ### Storage Options
 
-| Option key | Type | Set by | Read by | Lifetime |
-| ---------- | ---- | ------ | ------- | -------- |
-| `eael_setup_wizard` | string | Activation, redirect, save | Dispatcher in entry file | Persistent |
-| `eael_save_settings` | array | `save_element_list` | `Asset_Builder` (via Library trait `get_settings`) | Persistent |
-| `wpins_allow_tracking` | array | `Plugin_Usage_Tracker` | `get_is_tracking_allowed` | Persistent |
-| `eael_version` | string | EA bootstrap | `Core::enable_setup_wizard` (used as the "fresh install?" check) | Persistent |
+| Option key               | Type   | Set by                     | Read by                                                            | Lifetime   |
+| ------------------------ | ------ | -------------------------- | ------------------------------------------------------------------ | ---------- |
+| `eael_setup_wizard`    | string | Activation, redirect, save | Dispatcher in entry file                                           | Persistent |
+| `eael_save_settings`   | array  | `save_element_list`      | `Asset_Builder` (via Library trait `get_settings`)             | Persistent |
+| `wpins_allow_tracking` | array  | `Plugin_Usage_Tracker`   | `get_is_tracking_allowed`                                        | Persistent |
+| `eael_version`         | string | EA bootstrap               | `Core::enable_setup_wizard` (used as the "fresh install?" check) | Persistent |
 
 ### Building the React Bundle
 
@@ -357,7 +430,6 @@ Recipe to add (for example) a "Welcome Tour" step between Getting Started and Co
    ```
 
    The key (`welcome_tour`) becomes the `data-next` attribute used by the React tab switcher. Use snake_case to match existing keys.
-
 2. **Add a data builder** — somewhere in `WPDeveloper_Setup_Wizard.php`:
 
    ```php
@@ -368,7 +440,6 @@ Recipe to add (for example) a "Welcome Tour" step between Getting Started and Co
        ];
    }
    ```
-
 3. **Add the data builder to `eael_quick_setup_data()`** — [line 109-123](../../includes/Classes/WPDeveloper_Setup_Wizard.php#L109):
 
    ```php
@@ -381,9 +452,7 @@ Recipe to add (for example) a "Welcome Tour" step between Getting Started and Co
        …
    ];
    ```
-
 4. **Adjust column count if needed.** `data_menu_items()` line 138 sets `wizard_column` to `'four'` or `'five'` based on Templately + Essential Blocks status. If your new step changes the visible column count, update this logic.
-
 5. **Create the React component** — `includes/templates/admin/quick-setup/src/components/WelcomeTourContent.jsx`:
 
    ```jsx
@@ -403,7 +472,6 @@ Recipe to add (for example) a "Welcome Tour" step between Getting Started and Co
 
    export default WelcomeTourContent;
    ```
-
 6. **Wire it into `App.jsx`** — [`includes/templates/admin/quick-setup/src/components/App.jsx`](../../includes/templates/admin/quick-setup/src/components/App.jsx). Import the new component and add a conditional render block matching the existing pattern:
 
    ```jsx
@@ -414,9 +482,7 @@ Recipe to add (for example) a "Welcome Tour" step between Getting Started and Co
        <WelcomeTourContent activeTab={activeTab} handleTabChange={handleTabChange} />
    </div>
    ```
-
 7. **Update the initial active-tab logic** if appropriate. `App.jsx:14` decides the starting tab. If you want users who skipped Getting Started to land on Welcome Tour first instead of Configuration, adjust here.
-
 8. **If your step needs server-side persistence** beyond the existing endpoints, register a new AJAX handler in the constructor following the existing pattern:
 
    ```php
@@ -424,7 +490,6 @@ Recipe to add (for example) a "Welcome Tour" step between Getting Started and Co
    ```
 
    Implement the handler with the standard security triad: `check_ajax_referer` + `current_user_can` + `wp_parse_str`.
-
 9. **Build and test**:
 
    ```bash
@@ -433,7 +498,6 @@ Recipe to add (for example) a "Welcome Tour" step between Getting Started and Co
    ```
 
    Then on a clean install, delete the `eael_setup_wizard` option, re-activate the plugin, and walk the wizard. Verify the new step renders, navigation works, and any new server endpoint persists data.
-
 10. **Style.** Add CSS to [`assets/admin/css/quick-setup.css`](../../assets/admin/css/quick-setup.css) following the `.eael-setup-content` + `.eael-welcome-tour-content` BEM-ish pattern.
 
 ## Common Pitfalls
@@ -518,8 +582,8 @@ The wizard mounts into `#eael-onboard--wrapper` — the id is shared across WPDe
 Concrete walkthrough of inserting a new step that asks the user for their role (Designer / Developer / Agency) and persists the answer.
 
 1. **Menu item.** In `data_menu_items()`, add `'welcome_survey' => __('Welcome Survey', '…')` between `started` and `configuration`.
-
 2. **Data builder.** Add to the class:
+
    ```php
    public function data_welcome_survey_content() {
        return [
@@ -531,10 +595,9 @@ Concrete walkthrough of inserting a new step that asks the user for their role (
        ];
    }
    ```
-
 3. **Add to localized data.** In `eael_quick_setup_data()`, add `'welcome_survey_content' => $this->data_welcome_survey_content()`.
-
 4. **AJAX handler.** Constructor: `add_action('wp_ajax_save_user_role', [$this, 'save_user_role']);`. Implement:
+
    ```php
    public function save_user_role() {
        check_ajax_referer( 'essential-addons-elementor', 'security' );
@@ -549,8 +612,8 @@ Concrete walkthrough of inserting a new step that asks the user for their role (
        wp_send_json_error();
    }
    ```
-
 5. **React component.** Create `src/components/WelcomeSurveyContent.jsx`:
+
    ```jsx
    import { React, useState } from "react";
 
@@ -589,11 +652,8 @@ Concrete walkthrough of inserting a new step that asks the user for their role (
        );
    }
    ```
-
 6. **Wire into App.jsx.** Import + add the conditional render block matching the existing pattern.
-
 7. **Build.** `npm run build` in the wizard directory.
-
 8. **Test.** `delete_option('eael_setup_wizard');` to reset, re-activate, walk through. Verify role saves to `eael_user_role` option after selection.
 
 The whole change touches: 1 PHP method (data builder) + 1 PHP method (AJAX handler) + 1 menu key + 1 React component + ~5 lines in App.jsx + 1 `eael_quick_setup_data` entry. No build pipeline changes.

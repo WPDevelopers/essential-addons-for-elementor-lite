@@ -1,0 +1,607 @@
+/**
+ * EA Mega Menu
+ *
+ * Every themable value comes from a CSS custom property that the widget's style
+ * controls write onto the Elementor wrapper. Defaults live in the `var()`
+ * fallback at the point of use — never as a declaration on `.eael-mega-menu`
+ * itself, otherwise the local declaration would beat the inherited control value.
+ */
+
+.eael-mega-menu {
+	position: relative;
+
+	/* --------------------------------------------------------------------- */
+	/* Menu bar                                                              */
+	/* --------------------------------------------------------------------- */
+
+	&__container {
+		position: relative;
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: var(--eael-mm-bar-justify, flex-start);
+		gap: var(--eael-mm-item-gap, 8px);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	&__item {
+		position: relative;
+		display: flex;
+		align-items: center;
+		/* Divider: an inline edge on the horizontal bar. The collapsed layout
+		   swaps it to a block edge further down. */
+		border-inline-end: var(--eael-mm-divider-width, 0) var(--eael-mm-divider-style, solid)
+			var(--eael-mm-divider-color, currentColor);
+		/* Driven by the "Stretch" option of the Align control. */
+		flex-grow: var(--eael-mm-item-grow, 0);
+		background-color: var(--eael-mm-item-bg, transparent);
+		border-radius: var(--eael-mm-item-radius, 0);
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	&__link,
+	&__disclosure {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		font: inherit;
+		color: var(--eael-mm-item-color, inherit);
+		text-decoration: none;
+		background: none;
+		border: 0;
+		border-radius: var(--eael-mm-item-radius, 0);
+		cursor: pointer;
+		transition: color 0.2s ease, background-color 0.2s ease;
+	}
+
+	&__link {
+		flex: 1 1 auto;
+		flex-direction: var(--eael-mm-item-direction, row);
+		gap: var(--eael-mm-icon-gap, 8px);
+		padding: var(--eael-mm-item-padding, 12px 16px);
+	}
+
+	&__disclosure {
+		padding: var(--eael-mm-item-padding, 12px 16px);
+		padding-inline-start: 0;
+	}
+
+	span.eael-mega-menu__link {
+		cursor: default;
+	}
+
+	&__item-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		order: var(--eael-mm-icon-order, 0);
+		font-size: var(--eael-mm-icon-size, 16px);
+		color: var(--eael-mm-icon-color, currentColor);
+		line-height: 1;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	&__item:last-child {
+		border-inline-end: 0;
+	}
+
+	&__item-label {
+		order: 1;
+	}
+
+	&__item-indicator {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		order: 2;
+		margin-inline-start: var(--eael-mm-indicator-gap, 6px);
+		font-size: var(--eael-mm-indicator-size, 12px);
+		color: var(--eael-mm-indicator-color, currentColor);
+		line-height: 1;
+		transition: transform var(--eael-mm-animation-duration, 300ms) ease;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	&__disclosure &__item-indicator {
+		margin-inline-start: 0;
+	}
+
+	/* Neutralise theme button resets.
+	 *
+	 * Themes commonly ship resets like
+	 * `[type=button]:hover, button:focus { background: #c36; color: #fff; }`.
+	 * The attribute form is (0,2,0) — a tie with `.eael-mega-menu__link:hover` —
+	 * so whichever stylesheet loads last would win. Our unlinked items and
+	 * disclosure buttons both carry `type="button"`, so they are squarely in
+	 * range, and no widget control could reliably override it.
+	 *
+	 * Prefixing with the block class makes these (0,3,0), which wins regardless
+	 * of load order. They are declared *before* the hover and active blocks
+	 * below, which share that specificity and therefore take precedence by
+	 * source order. The <li> keeps ownership of the background.
+	 */
+	& &__link:hover,
+	& &__link:focus,
+	& &__link:focus-visible,
+	& &__link:active,
+	& &__disclosure:hover,
+	& &__disclosure:focus,
+	& &__disclosure:focus-visible,
+	& &__disclosure:active {
+		color: var(--eael-mm-item-color, inherit);
+		background-color: transparent;
+		background-image: none;
+		box-shadow: none;
+		text-decoration: none;
+	}
+
+	/* Hover state. */
+	&__item:hover {
+		background-color: var(--eael-mm-item-bg-hover, var(--eael-mm-item-bg, transparent));
+	}
+
+	&__item:hover &__link,
+	&__item:hover &__disclosure {
+		color: var(--eael-mm-item-color-hover, var(--eael-mm-item-color, inherit));
+	}
+
+	&__item:hover &__item-icon {
+		color: var(--eael-mm-icon-color-hover, var(--eael-mm-icon-color, currentColor));
+	}
+
+	/* Active state — the item whose submenu is open. */
+	&__item--active {
+		background-color: var(--eael-mm-item-bg-active, var(--eael-mm-item-bg, transparent));
+	}
+
+	&__item--active &__link,
+	&__item--active &__disclosure {
+		color: var(--eael-mm-item-color-active, var(--eael-mm-item-color, inherit));
+	}
+
+	&__item--active &__item-icon {
+		color: var(--eael-mm-icon-color-active, var(--eael-mm-icon-color, currentColor));
+	}
+
+	&__item--active &__item-indicator {
+		color: var(--eael-mm-indicator-color-active, var(--eael-mm-indicator-color, currentColor));
+		transform: rotate(var(--eael-mm-indicator-rotate, 0deg));
+	}
+
+	&__link:focus-visible,
+	&__disclosure:focus-visible,
+	&__toggle:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+
+	/* --------------------------------------------------------------------- */
+	/* Submenu panels                                                        */
+	/* --------------------------------------------------------------------- */
+
+	&__panels {
+		position: static;
+	}
+
+	&__panel {
+		position: absolute;
+		top: calc(100% + var(--eael-mm-panel-offset, 0px) + var(--eael-mm-panel-offset-y, 0px));
+		inset-inline-start: var(--eael-mm-panel-inset-start, 0px);
+		width: var(--eael-mm-panel-width, 100%);
+		max-width: none;
+		z-index: var(--eael-mm-panel-z-index, 999);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition:
+			opacity var(--eael-mm-animation-duration, 300ms) ease,
+			transform var(--eael-mm-animation-duration, 300ms) ease,
+			visibility var(--eael-mm-animation-duration, 300ms) ease;
+
+		&[data-width-mode="item"] {
+			/* `fit-content`, never `max-content`.
+			 *
+			 * Both shrink the panel to its content, but `max-content` ignores the
+			 * space actually available, so a panel anchored part way along the bar
+			 * whose content is intrinsically wide — a section pulled in by CSS ID is
+			 * the usual case, since it was authored to span the page — resolves to
+			 * that full intrinsic width, runs past the right edge and drags a
+			 * horizontal scrollbar onto the document.
+			 *
+			 * For an absolutely positioned box, `fit-content` resolves against the
+			 * containing block *minus the inline offset*, which is exactly the room
+			 * the panel has: it stops at the menu's edge and its content wraps
+			 * inside instead of spilling out. `auto` behaves the same way here, so
+			 * browsers too old for the keyword degrade to the same layout. */
+			width: var(--eael-mm-panel-width, fit-content);
+			/* Backstop for content whose min-content width exceeds even that. */
+			max-width: min(100vw, 100%);
+		}
+	}
+
+	&__panel--active {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: none;
+	}
+
+
+	/* A closed panel is taken out of layout, not merely hidden.
+	 *
+	 * `visibility: hidden` hides a box but keeps it in layout, and `position:
+	 * absolute` only removes it from *flow* — neither takes it out of the
+	 * document's scrollable overflow. A tall submenu therefore donated its full
+	 * height to the page's scroll on every view, with nothing open: measured on
+	 * a header menu here, 2071px of scroll height against 1056px of content, so
+	 * the page scrolled a screenful into empty space before anyone touched the
+	 * menu. `display: none` is the only thing that removes it from both.
+	 *
+	 * This is also why the reveal below is a keyframe animation rather than the
+	 * transition it used to be: a transition cannot start from `display: none`,
+	 * because there is no previous rendered state to interpolate from. */
+	&__panel:not(.eael-mega-menu__panel--active) {
+		display: none;
+	}
+
+	/* Reveal animations, both layouts.
+	 *
+	 * Animations start the moment the element is rendered and matches the rule,
+	 * which is exactly what a display-toggled panel needs, and a running
+	 * animation outranks normal declarations so it moves the panel regardless of
+	 * the `transform: none` above. Duration follows the Animation Duration
+	 * control's custom property. `none` is absent by design — nothing to run. */
+	&--anim-fade &__panel--active {
+		animation: eael-mm-reveal-fade var(--eael-mm-animation-duration, 300ms) ease;
+	}
+
+	&--anim-slide-down &__panel--active {
+		animation: eael-mm-reveal-slide-down var(--eael-mm-animation-duration, 300ms) ease;
+	}
+
+	&--anim-slide-up &__panel--active {
+		animation: eael-mm-reveal-slide-up var(--eael-mm-animation-duration, 300ms) ease;
+	}
+
+	&--anim-zoom &__panel--active {
+		animation: eael-mm-reveal-zoom var(--eael-mm-animation-duration, 300ms) ease;
+	}
+
+	/* --------------------------------------------------------------------- */
+	/* Editing mode (Elementor preview only)                                 */
+	/* --------------------------------------------------------------------- */
+
+	/* Matched structurally — `> *` rather than the `__panel` class — because in
+	 * the editor a panel only becomes a panel once the handler has classified
+	 * it. Adding or removing a menu item re-renders the widget and re-mounts
+	 * every child container, and until the handler catches up those containers
+	 * are unclassified: they carry none of the panel rules, so all of them paint
+	 * at once in normal flow, stacked under the bar. Keying the editing rules to
+	 * the mount point instead makes them true at first paint, which is the only
+	 * way to close that gap — no JS can run earlier than the render it follows.
+	 *
+	 * The panels wrapper only ever holds panels, so this matches exactly the
+	 * same set as the class did, just sooner. */
+	&--editing &__panels > * {
+		position: static;
+		width: auto;
+		inset-inline-start: auto;
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: none;
+		transition: none;
+	}
+
+	/* Hide the inactive panels only.
+	 *
+	 * `display` is deliberately never set on the active panel: the panel IS an
+	 * Elementor container and owns its own display (flex, or grid for a grid
+	 * container). Forcing `display: block` here silently disabled its Direction
+	 * control — a two column layout would stack as two rows because
+	 * `flex-direction` has no effect on a block box. */
+	&--editing &__panels > *:not(.eael-mega-menu__panel--active) {
+		display: none;
+	}
+
+	/* A saved-template or section panel renders its own content on the front end,
+	   so the nested container behind it is unused. The dashed edge says "not a
+	   drop target" without hiding what is inside. */
+	&--editing &__panel--template,
+	&--editing &__panel--section {
+		outline: 1px dashed currentColor;
+		outline-offset: -1px;
+	}
+
+	/* A section panel stays empty in the editor — the element it borrows is only
+	   moved in on the front end — so it is dimmed to read as a placeholder. A
+	   template panel is not: it shows the real template. */
+	&--editing &__panel--section {
+		opacity: 0.55;
+	}
+
+	/* The container's own "Drag widget here" prompt would otherwise sit on top of
+	   the preview, inviting a drop into a container the front end ignores. */
+	&--editing &__panel--template .elementor-empty-view,
+	&--editing &__panel--template .elementor-add-section {
+		display: none;
+	}
+
+	/* Default surface for an inline built panel, so a dropped menu reads as a
+	 * panel floating over the page rather than transparent text on whatever sits
+	 * underneath. Template and section panels are excluded — they render content
+	 * that already carries its own design.
+	 *
+	 * This backs up the Submenu Panel → Background control, which carries the same
+	 * colour as its default so the value is visible and editable. The control
+	 * cannot be relied on alone: its Background *Type* field only reaches a
+	 * widget's stored settings when the editor seeds it, so a panel can end up
+	 * with the colour set but the type empty, which emits no CSS at all — exactly
+	 * what leaves existing panels transparent.
+	 *
+	 * `:where()` gives this zero specificity, so anything the user actually sets
+	 * wins: the widget's own control (0,3,0) and the nested container's Background
+	 * (0,1,0) both beat it. To make a panel genuinely transparent, set the colour
+	 * to fully transparent rather than clearing the type. */
+	:where(&__panel--inline) {
+		background-color: #f9f8f6;
+	}
+
+	&__template-preview {
+		width: 100%;
+
+		/* A preview, not an editing surface. Without this, a click inside would
+		   reach Elementor's nested element handler carrying a `data-id` from the
+		   *template's* document, which resolves to no container in the one being
+		   edited. */
+		pointer-events: none;
+	}
+
+	/* --------------------------------------------------------------------- */
+	/* Mobile toggle                                                         */
+	/* --------------------------------------------------------------------- */
+
+	&__toggle {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		margin: 0;
+		padding: var(--eael-mm-toggle-padding, 10px 14px);
+		font: inherit;
+		color: var(--eael-mm-toggle-color, inherit);
+		background-color: var(--eael-mm-toggle-bg, transparent);
+		border: 0;
+		border-radius: var(--eael-mm-toggle-radius, 0);
+		cursor: pointer;
+		transition: color 0.2s ease, background-color 0.2s ease;
+
+	}
+
+	/* Same theme-reset defence as the menu items, at matching specificity.
+	   Focus is declared first so hovering a focused toggle still shows hover. */
+	& &__toggle:focus,
+	& &__toggle:focus-visible,
+	& &__toggle:active {
+		color: var(--eael-mm-toggle-color, inherit);
+		background-color: var(--eael-mm-toggle-bg, transparent);
+		background-image: none;
+		box-shadow: none;
+	}
+
+	& &__toggle:hover {
+		color: var(--eael-mm-toggle-color-hover, var(--eael-mm-toggle-color, inherit));
+		background-color: var(--eael-mm-toggle-bg-hover, var(--eael-mm-toggle-bg, transparent));
+	}
+
+	&__toggle-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: var(--eael-mm-toggle-icon-size, 20px);
+		line-height: 1;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+		}
+	}
+
+	&__toggle-icon--close {
+		display: none;
+	}
+
+	/* --------------------------------------------------------------------- */
+	/* Collapsed (mobile) layout                                             */
+	/* --------------------------------------------------------------------- */
+
+	&--mobile {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+
+		.eael-mega-menu__toggle {
+			display: inline-flex;
+			align-self: var(--eael-mm-toggle-align, flex-start);
+		}
+
+		.eael-mega-menu__container {
+			display: none;
+			flex-direction: column;
+			width: 100%;
+			/* Sensible out-of-the-box surface. The Mobile Dropdown controls are
+			   written at higher specificity, so they win whenever they are set. */
+			padding-block: 8px;
+			background-color: #fff;
+			box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+		}
+
+		/* The list and the panels wrapper step out of the box model so that
+		   items and their panels can interleave through `order`. */
+		.eael-mega-menu__list,
+		.eael-mega-menu__panels {
+			display: contents;
+		}
+
+		.eael-mega-menu__item,
+		.eael-mega-menu__panel {
+			order: var(--eael-mm-order, 0);
+		}
+
+		.eael-mega-menu__item {
+			justify-content: space-between;
+			width: 100%;
+			border-inline-end: 0;
+			/* Defaults to a hairline so the collapsed menu reads as a list out of
+			   the box; the Divider controls override all three parts. */
+			border-block-end: var(--eael-mm-divider-width, 1px) var(--eael-mm-divider-style, solid)
+				var(--eael-mm-divider-color, rgba(0, 0, 0, 0.12));
+		}
+
+		.eael-mega-menu__item:last-child {
+			border-block-end: 0;
+		}
+
+		.eael-mega-menu__link {
+			flex: 1 1 auto;
+			justify-content: flex-start;
+		}
+
+		/* Park the indicator on the trailing edge.
+		 *
+		 * An unlinked item carries its indicator inside its own control, right
+		 * after the label; a linked one gets a separate disclosure button, which
+		 * the row's `space-between` pushes to the far edge. Side by side in a
+		 * stacked list those two read as different components — one chevron
+		 * hugging the text, the next one an inch away. Pushing the inline
+		 * indicator over lines every row up the same way, whatever the item type.
+		 * The disclosure button is already there, so it is left alone. */
+		.eael-mega-menu__link .eael-mega-menu__item-indicator {
+			margin-inline-start: auto;
+		}
+
+		.eael-mega-menu__panel {
+			position: static;
+			width: auto;
+			inset-inline-start: auto;
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+			transform: none;
+			/* The reveal is a keyframe animation — see the `--anim-*` rules. */
+			transition: none;
+		}
+	}
+
+	&--mobile#{&}--menu-open {
+		.eael-mega-menu__container {
+			display: flex;
+		}
+
+		.eael-mega-menu__toggle-icon--open {
+			display: none;
+		}
+
+		.eael-mega-menu__toggle-icon--close {
+			display: inline-flex;
+		}
+	}
+
+	/* Overlay the dropdown instead of pushing the following content down. */
+	&--mobile#{&}--stretch-dropdown {
+		.eael-mega-menu__container {
+			position: absolute;
+			top: 100%;
+			/* The handler measures the nav and writes these so the dropdown spans
+			   the viewport even when the widget itself has shrunk to its toggle —
+			   the usual "logo left, hamburger right" header. Falls back to the
+			   widget box if the handler has not run. */
+			inset-inline-start: var(--eael-mm-dropdown-inset-start, 0);
+			inset-inline-end: auto;
+			width: var(--eael-mm-dropdown-width, 100%);
+			z-index: var(--eael-mm-panel-z-index, 999);
+		}
+	}
+
+	/* Editing the collapsed layout.
+	 *
+	 * Two things make the mobile view impossible to design otherwise: the menu
+	 * starts closed, so there is nothing to select, and an overlaying dropdown
+	 * floats across whatever follows it in the editor. While editing, keep it
+	 * expanded and in flow. Declared after the rules above so it wins the
+	 * same-specificity ties. */
+	&--editing#{&}--mobile {
+		.eael-mega-menu__container {
+			display: flex;
+			position: static;
+			inset-inline: auto;
+			width: 100%;
+		}
+	}
+}
+
+/* Keyframes for the collapsed layout's reveal. Kept at the top level because
+   `@keyframes` are global regardless of where they are declared; the offsets
+   mirror the resting transforms the bar animates out of. */
+@keyframes eael-mm-reveal-fade {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes eael-mm-reveal-slide-down {
+	from {
+		opacity: 0;
+		transform: translateY(-12px);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes eael-mm-reveal-slide-up {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes eael-mm-reveal-zoom {
+	from {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}

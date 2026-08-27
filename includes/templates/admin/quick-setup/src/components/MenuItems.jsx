@@ -43,8 +43,9 @@ function MenuItems({ activeTab, handleTabChange }) {
             return null;
           }
 
-          // Hide the "Boost SEO" tab once ThinkRank is installed.
-          if ( 'thinkrank' === item && eaelQuickSetup?.thinkrank_content?.local_plugin_data !== false ) {
+          // Hide the "Boost SEO & Speed" tab once both ThinkRank and xSpeed
+          // are installed.
+          if ( 'thinkrank' === item && eaelQuickSetup?.thinkrank_content?.all_installed !== false ) {
             return null;
           }
 

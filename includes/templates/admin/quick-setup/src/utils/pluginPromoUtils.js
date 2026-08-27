@@ -46,16 +46,17 @@ export const isPluginsPromoStepVisible = () => {
 };
 
 /**
- * Check if the "Boost SEO" (ThinkRank) step is rendered in the wizard.
+ * Check if the "Boost SEO & Speed" (ThinkRank + xSpeed) step is rendered in
+ * the wizard.
  *
- * The step is hidden once ThinkRank is installed. Mirrors the skip condition
- * in MenuItems.jsx and the render guard in App.jsx.
+ * The step is hidden once both plugins are installed. Mirrors the skip
+ * condition in MenuItems.jsx and the render guard in App.jsx.
  *
  * @returns {boolean} True if the step is visible, false otherwise
  */
 export const isThinkRankStepVisible = () => {
   const eaelQuickSetup = window.localize?.eael_quick_setup_data;
-  return eaelQuickSetup?.thinkrank_content?.local_plugin_data === false;
+  return eaelQuickSetup?.thinkrank_content?.all_installed === false;
 };
 
 /**

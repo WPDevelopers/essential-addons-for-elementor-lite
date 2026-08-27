@@ -3,9 +3,10 @@ import { __ } from "@wordpress/i18n";
 import { isPluginsPromoStepVisible } from "../utils/pluginPromoUtils";
 
 /**
- * "Boost SEO" step — installs ThinkRank (AI SEO). Its own wizard tab, shown
- * before the Templately / Essential Blocks Plugins step. No Essential Addons
- * branding: pure "configure / analyze SEO" framing. Data comes from PHP
+ * "Boost SEO & Speed" step — installs ThinkRank (AI SEO) and xSpeed
+ * (caching / performance). Its own wizard tab, shown before the Templately /
+ * Essential Blocks Plugins step. No Essential Addons branding: pure
+ * "configure SEO & performance" framing. Data comes from PHP
  * (WPDeveloper_Setup_Wizard::data_thinkrank_content).
  */
 function ThinkRankContent({ activeTab, handleTabChange }) {
@@ -17,51 +18,67 @@ function ThinkRankContent({ activeTab, handleTabChange }) {
     return null;
   }
 
+  // Both plugins of this step: ThinkRank (SEO) + xSpeed (performance).
+  // Falls back to the single-plugin shape for older localized data.
+  const plugins =
+    Array.isArray(data.plugins) && data.plugins.length
+      ? data.plugins
+      : [{ slug: data.slug, basename: data.basename }];
+
+  const installOne = async (plugin) => {
+    const body = new URLSearchParams({
+      action: "wpdeveloper_install_plugin",
+      security: localize.nonce,
+      slug: plugin.slug,
+      promotype: "quick-setup",
+    });
+    const response = await fetch(localize.ajaxurl, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
+    });
+    const result = await response.json();
+
+    if (!result || !result.success) {
+      throw new Error((result && result.data) || "");
+    }
+
+    // The Integrations step rendered its plugin list from data localized
+    // before this install — tell it the plugin is now active.
+    if (plugin.slug === data.slug && localize?.eael_quick_setup_data?.thinkrank_content) {
+      localize.eael_quick_setup_data.thinkrank_content.is_active = true;
+    }
+    window.dispatchEvent(
+      new CustomEvent("eael-quick-setup:plugin-activated", {
+        detail: { slug: plugin.slug, basename: plugin.basename },
+      })
+    );
+  };
+
   const install = async () => {
     setStatus("installing");
     setError("");
     try {
-      const body = new URLSearchParams({
-        action: "wpdeveloper_install_plugin",
-        security: localize.nonce,
-        slug: data.slug,
-        promotype: "quick-setup",
-      });
-      const response = await fetch(localize.ajaxurl, {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: body.toString(),
-      });
-      const result = await response.json();
-      if (result && result.success) {
-        setStatus("done");
-        // The Integrations step rendered its plugin list from data localized
-        // before this install — tell it ThinkRank is now active.
-        if (localize?.eael_quick_setup_data?.thinkrank_content) {
-          localize.eael_quick_setup_data.thinkrank_content.is_active = true;
-        }
-        window.dispatchEvent(
-          new CustomEvent("eael-quick-setup:plugin-activated", {
-            detail: { slug: data.slug, basename: data.basename },
-          })
-        );
-        // Stay inside the wizard: advance to the next step instead of
-        // leaving for the ThinkRank dashboard.
-        window.setTimeout(() => {
-          const nextButton = document.createElement("button");
-          nextButton.setAttribute("data-next", isPluginsPromoStepVisible() ? "pluginspromo" : "integrations");
-          handleTabChange({ currentTarget: nextButton });
-        }, 900);
-      } else {
-        setStatus("idle");
-        setError(
-          (result && result.data) ||
-            __("Could not install automatically. Try Plugins → Add New.", "essential-addons-for-elementor-lite")
-        );
+      // Sequential: two Plugin_Upgrader runs in parallel fight over the same
+      // filesystem lock and the plugins cache.
+      for (const plugin of plugins) {
+        await installOne(plugin);
       }
+
+      setStatus("done");
+      // Stay inside the wizard: advance to the next step instead of
+      // leaving for the ThinkRank dashboard.
+      window.setTimeout(() => {
+        const nextButton = document.createElement("button");
+        nextButton.setAttribute("data-next", isPluginsPromoStepVisible() ? "pluginspromo" : "integrations");
+        handleTabChange({ currentTarget: nextButton });
+      }, 900);
     } catch (e) {
       setStatus("idle");
-      setError(__("Could not install automatically. Try Plugins → Add New.", "essential-addons-for-elementor-lite"));
+      setError(
+        (e && e.message) ||
+          __("Could not install automatically. Try Plugins → Add New.", "essential-addons-for-elementor-lite")
+      );
     }
   };
 
