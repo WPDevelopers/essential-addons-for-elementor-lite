@@ -18,6 +18,7 @@ use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 use Essential_Addons_Elementor\Traits\Controls;
 use Essential_Addons_Elementor\Traits\Facebook_Feed;
 use Essential_Addons_Elementor\Classes\Asset_Builder;
+use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 use Essential_Addons_Elementor\Traits\Ajax_Handler;
 use Essential_Addons_Elementor\Pro\Classes\License\LicenseManager;
 
@@ -131,8 +132,16 @@ class Bootstrap
 		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
 	    }
 
+        // Theme Builder — header & footer templates built with Elementor. Boots
+        // the requirement notice instead of the module when Elementor is off, so
+        // the admin page stays reachable and says why it is empty.
+        Theme_Builder::boot();
+
         // Compatibility Support
         new Compatibility_Support();
+
+        // Mega Menu — registers the editor-side nested element type.
+        \Essential_Addons_Elementor\MegaMenu\Manager::instance()->init();
 
 		include_once(EAEL_PLUGIN_PATH . 'includes/bfcm-pointer.php');
 
@@ -261,7 +270,26 @@ class Bootstrap
         }
 
         //templately plugin support
-        if( !class_exists('Templately\Plugin') && !get_option('eael_templately_promo_hide') ) {
+        /**
+         * Filters whether Templately is offered from Elementor's add-element row.
+         *
+         * Off by default. The button there is the Templately logo and nothing
+         * else, so on a site without Templately it reads as Templately being
+         * installed rather than as an offer to install it — and it sits directly
+         * beside the EA button, which is a real one. The same offer is made in
+         * the Theme Builder's preset picker, as a panel that says what it is.
+         *
+         * The popup, its install and activate flow and its "don't show again"
+         * dismissal are all still here; this only decides whether anything opens
+         * them from that row.
+         *
+         * @since 6.7.4
+         *
+         * @param bool $enabled Whether to show the promo button.
+         */
+        $templately_promo = apply_filters( 'eael/templately_promo', false );
+
+        if( $templately_promo && !class_exists('Templately\Plugin') && !get_option('eael_templately_promo_hide') ) {
             add_action( 'elementor/editor/before_enqueue_scripts', [$this, 'templately_promo_enqueue_scripts'] );
             add_action( 'eael/before_enqueue_styles', [$this, 'templately_promo_enqueue_style'] );
             add_action( 'elementor/editor/footer', [ $this, 'print_template_views' ] );

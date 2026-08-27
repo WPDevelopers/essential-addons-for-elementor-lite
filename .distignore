@@ -71,6 +71,15 @@ includes/templates/admin/quick-setup/src
 includes/templates/admin/quick-setup/index.html
 includes/templates/admin/quick-setup/dist/index.html
 
+includes/templates/admin/theme-builder/src
+includes/templates/admin/theme-builder/index.html
+includes/templates/admin/theme-builder/dist/index.html
+includes/templates/admin/theme-builder/package.json
+includes/templates/admin/theme-builder/package-lock.json
+includes/templates/admin/theme-builder/vite.config.js
+includes/templates/admin/theme-builder/README.md
+includes/templates/admin/theme-builder/.eslintrc.cjs
+
 includes/templates/admin/eael-dashboard/src
 includes/templates/admin/eael-dashboard/public
 includes/templates/admin/eael-dashboard/index.html

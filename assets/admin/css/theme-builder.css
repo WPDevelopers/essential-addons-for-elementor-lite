@@ -1,0 +1,356 @@
+/**
+ * Essential Addons — Theme Builder dashboard styles.
+ *
+ * @since 6.7.3
+ */
+
+/* ------------------------------------------------------------------
+ * Dashboard
+ * --------------------------------------------------------------- */
+
+.eael-tb-wrap .eael-tb-tabs {
+	margin: 16px 0 0;
+}
+
+.eael-tb-wrap .subsubsub {
+	margin-top: 12px;
+}
+
+.eael-tb-wrap .column-template_type,
+.eael-tb-wrap .column-platform {
+	width: 10%;
+}
+
+.eael-tb-wrap .column-conditions {
+	width: 24%;
+}
+
+.eael-tb-wrap .column-author,
+.eael-tb-wrap .column-date {
+	width: 12%;
+}
+
+.eael-tb-wrap .column-platform {
+	text-transform: capitalize;
+}
+
+/*
+ * A <select>'s option list is painted by the browser in its own layer on top of
+ * the control, but not on top of the focus ring WordPress draws *outside* the
+ * border (`box-shadow: 0 0 0 2px` in wp-admin/css/forms.css). The ring is left
+ * standing around the open list, where it reads as a stray shadow belonging to
+ * neither the field nor the list — most visible on the month filter, whose list
+ * is wider than the control.
+ *
+ * Only the open state is touched: a focused-but-closed select keeps wp-admin's
+ * own ring, so this screen still looks and behaves like the rest of the admin,
+ * and the ring comes straight back when the list closes.
+ *
+ * The border goes `transparent` rather than back to a grey, because the resting
+ * colour is core's to decide and it is not the same on every install (6.8 ships
+ * #8c8f94; this one computes #949494). Naming a value here would mean guessing,
+ * and guessing wrong tints the border for as long as the list is open. Nothing
+ * is lost by hiding it: the option list covers the control while it is up, and
+ * the border keeps its 1px so the field cannot shift.
+ *
+ * Kept in its own rule because `:open` is Chromium-only for now, and an
+ * unsupported pseudo-class invalidates the entire selector list it appears in —
+ * elsewhere this degrades to core's current behaviour rather than breaking.
+ */
+.eael-tb-wrap select:open {
+	border-color: transparent;
+	box-shadow: none;
+}
+
+/* ------------------------------------------------------------------
+ * Quick Edit
+ * --------------------------------------------------------------- */
+
+/*
+ * The editor row reuses core's `inline-edit-*` markup, so WordPress's own
+ * list-tables.css supplies the layout, padding and typography. What is left
+ * here is the right-hand column: core's posts screen puts one control per row
+ * there, ours pairs them up, so the label/control pairs need to be aligned into
+ * a grid rather than left to float at their natural widths.
+ */
+
+.eael-tb-inline-row .inline-edit-wrapper {
+	padding-top: 4px;
+	padding-bottom: 10px;
+}
+
+/*
+ * Core splits the row 40/39 because its right column holds one control per row.
+ * Ours pairs them up, so the right column needs the wider share — otherwise a
+ * 1fr track is too narrow and "Elementor Full Width" gets clipped.
+ * The extra class beats core's `#wpbody-content .quick-edit-row-post …` rule.
+ */
+#wpbody-content .quick-edit-row-post.eael-tb-quick-edit-row .inline-edit-col-left {
+	width: 36%;
+}
+
+#wpbody-content .quick-edit-row-post.eael-tb-quick-edit-row .inline-edit-col-right {
+	width: 60%;
+}
+
+.eael-tb-inline-row .inline-edit-col-right .inline-edit-col {
+	display: grid;
+	grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+	gap: 10px 24px;
+	align-items: center;
+	padding: 0;
+}
+
+/* Undo core's floats so the grid controls the placement. */
+.eael-tb-inline-row .inline-edit-col-right label,
+.eael-tb-inline-row .inline-edit-col-right .inline-edit-group {
+	display: flex;
+	float: none;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	max-width: none;
+	line-height: 2;
+}
+
+.eael-tb-inline-row .inline-edit-col-right label span.title {
+	flex: 0 0 7.5em;
+	width: auto;
+	padding: 0;
+	text-align: left;
+}
+
+.eael-tb-inline-row .inline-edit-col-right select,
+.eael-tb-inline-row .inline-edit-col-right input[type="number"] {
+	flex: 1 1 auto;
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+	margin: 0;
+	vertical-align: baseline;
+}
+
+/* The Active toggle has no label column, so let it span the full width. */
+.eael-tb-quick-edit-row .inline-edit-col-right .inline-edit-group {
+	grid-column: 1 / -1;
+}
+
+.eael-tb-quick-edit-row .eael-tb-active-label {
+	flex: 0 0 auto;
+	gap: 6px;
+}
+
+.eael-tb-quick-edit-row .eael-tb-active-label input {
+	margin: 0;
+}
+
+/* Line the date row's controls up with the inputs above it. */
+.eael-tb-quick-edit-row .inline-edit-date .timestamp-wrap {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-left: 7em;
+}
+
+.eael-tb-quick-edit-row .inline-edit-date legend span.title {
+	float: left;
+	width: 7em;
+}
+
+.eael-tb-quick-edit-row .inline-edit-col-left label span.title {
+	width: 7em;
+}
+
+.eael-tb-quick-edit-row .inline-edit-col-left .input-text-wrap,
+.eael-tb-quick-edit-row .inline-edit-col-left .inline-edit-group .input-text-wrap {
+	margin-left: 7em;
+}
+
+/*
+ * A 1–100 field does not need to fill the track; it still starts on the grid
+ * line, so the column stays aligned. Selector has to outrank the
+ * `input[type="number"]` rule above.
+ */
+.eael-tb-inline-row .inline-edit-col-right input[type="number"].eael-tb-priority-input {
+	flex: 0 0 5.5em;
+	width: 5.5em;
+}
+
+.eael-tb-inline-row .inline-edit-save {
+	margin-top: 6px;
+	padding: 10px 0 0;
+	border-top: 1px solid #dcdcde;
+}
+
+/* ------------------------------------------------------------------
+ * Bulk Edit
+ * --------------------------------------------------------------- */
+
+/*
+ * Quick Edit and Bulk Edit share the `.eael-tb-inline-row` rules above. Two
+ * things differ here: the left column lists the templates about to change
+ * instead of holding a form, and the four fields are stacked one per row rather
+ * than paired up — with only four of them, a single label column reads as a
+ * list of what is being changed, which is the point of the panel.
+ */
+
+#wpbody-content .bulk-edit-row.eael-tb-bulk-edit-row .inline-edit-col-left {
+	width: 40%;
+}
+
+#wpbody-content .bulk-edit-row.eael-tb-bulk-edit-row .inline-edit-col-right {
+	width: 56%;
+	/*
+	 * The legend sits above the list in the left column. Without the same offset
+	 * here the first field would line up with the legend instead of with the top
+	 * of the list, which is what made the two columns look unrelated.
+	 */
+	padding-top: 2.9em;
+}
+
+.eael-tb-bulk-edit-row .inline-edit-col-right .inline-edit-col {
+	grid-template-columns: minmax( 0, 1fr );
+	gap: 8px;
+	max-width: 26em;
+}
+
+/* One width for every control, so the field column has a single edge. */
+.eael-tb-bulk-edit-row .inline-edit-col-right label span.title {
+	flex: 0 0 8.5em;
+}
+
+.eael-tb-bulk-edit-row .inline-edit-col-right select,
+.eael-tb-bulk-edit-row .inline-edit-col-right input[type="number"].eael-tb-priority-input {
+	flex: 1 1 auto;
+	width: 100%;
+	max-width: none;
+}
+
+.eael-tb-bulk-edit-row .eael-tb-bulk-titles {
+	min-height: 10em;
+	max-height: 16em;
+	padding: 8px 12px;
+	overflow-y: auto;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+}
+
+/* One template per line, as a plain list — these are names, not tags. */
+.eael-tb-bulk-edit-row .eael-tb-bulk-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 3px 0;
+	line-height: 1.6;
+}
+
+.eael-tb-bulk-edit-row .eael-tb-bulk-title-text {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.eael-tb-bulk-edit-row .eael-tb-bulk-remove {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	padding: 0;
+	font-size: 16px;
+	line-height: 1;
+	/* Neutral until it is aimed at: the list is a summary first, a remover second. */
+	color: #50575e;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.eael-tb-bulk-edit-row .eael-tb-bulk-remove:hover,
+.eael-tb-bulk-edit-row .eael-tb-bulk-remove:focus {
+	color: #b32d2e;
+}
+
+/* The list already ends in a border; a second line under it reads as clutter. */
+.eael-tb-bulk-edit-row .inline-edit-save {
+	margin-top: 12px;
+	padding-top: 0;
+	border-top: 0;
+}
+
+/*
+ * Core stacks the two fieldsets below 782px. The width overrides above are more
+ * specific than that rule, so they have to be undone here or the panel would
+ * stay two-up and overflow on small screens.
+ */
+@media screen and ( max-width: 782px ) {
+	#wpbody-content .quick-edit-row-post.eael-tb-quick-edit-row .inline-edit-col-left,
+	#wpbody-content .quick-edit-row-post.eael-tb-quick-edit-row .inline-edit-col-right,
+	#wpbody-content .bulk-edit-row.eael-tb-bulk-edit-row .inline-edit-col-left,
+	#wpbody-content .bulk-edit-row.eael-tb-bulk-edit-row .inline-edit-col-right {
+		float: none;
+		width: 100%;
+		padding: 0;
+	}
+
+	.eael-tb-inline-row .inline-edit-col-right .inline-edit-col {
+		grid-template-columns: minmax( 0, 1fr );
+	}
+
+	.eael-tb-quick-edit-row .inline-edit-col-left label span.title,
+	.eael-tb-inline-row .inline-edit-col-right label span.title {
+		flex: 0 0 auto;
+		width: auto;
+	}
+
+	/*
+	 * Bulk Edit keeps its label column when stacked. It has four fields, all of
+	 * them one line, so there is room for it — and without it the controls no
+	 * longer share an edge, which is the whole point of the layout.
+	 */
+	.eael-tb-bulk-edit-row .inline-edit-col-right label span.title {
+		flex: 0 0 8.5em;
+	}
+
+	.eael-tb-quick-edit-row .inline-edit-col-left .input-text-wrap,
+	.eael-tb-quick-edit-row .inline-edit-col-left .inline-edit-group .input-text-wrap,
+	.eael-tb-quick-edit-row .inline-edit-date .timestamp-wrap {
+		margin-left: 0;
+	}
+}
+
+.eael-tb-quick-edit-notice {
+	display: block;
+	clear: both;
+	margin: 8px 0 0;
+}
+
+.eael-tb-quick-edit-notice.hidden {
+	display: none;
+}
+
+.eael-tb-row-updated td {
+	transition: background-color 0.6s ease-out;
+	background-color: #f0f6fc;
+}
+
+/* A condition whose target object was deleted — it can never match again. */
+.eael-tb-broken-conditions {
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 4px;
+	color: #8a6d1a;
+}
+
+.eael-tb-broken-conditions .dashicons-warning {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	line-height: 1.4;
+	color: #dba617;
+}
+
+.eael-tb-requirement .button {
+	margin-bottom: 4px;
+}
