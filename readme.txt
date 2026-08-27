@@ -335,11 +335,11 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 
 = 6.8.1 - 28/08/2026 =
 
-Fixed: EA Gravity Forms | Submit and Next/Previous button styles stopped applying after the Gravity Forms 3.0 update
-Improved: EA Login/Register Form | Strengthened nonce and CAPTCHA validation on login, registration and password reset - thanks to `Gaurav Popalghat` for the security research
-Improved: EA Login/Register Form | Hardened Custom Profile Field handling during registration - thanks to `Jakub Herman` for the security research
-Improved: EA Advanced Tabs | Strengthened URL fragment handling
-Few minor bug fixes & improvements
+- Fixed: EA Gravity Forms | Submit and Next/Previous button styles stopped applying after the Gravity Forms 3.0 update
+- Improved: EA Login/Register Form | Strengthened nonce and CAPTCHA validation on login, registration and password reset - thanks to `Gaurav Popalghat` for the security research
+- Improved: EA Login/Register Form | Hardened Custom Profile Field handling during registration - thanks to `Jakub Herman` for the security research
+- Improved: EA Advanced Tabs | Strengthened URL fragment handling
+- Few minor bug fixes & improvements
 
 = 6.8.0 - 27/08/2026 =
 
