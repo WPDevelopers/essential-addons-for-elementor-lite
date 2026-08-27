@@ -6,8 +6,18 @@
  */
 
 .eatb-modal {
-	--eatb-accent: #5b3df5;
-	--eatb-accent-hover: #4a2fe0;
+	--eatb-accent: #6F0AF2;
+	/*
+	 * The Essential Addons button, lifted verbatim from the dashboard app's
+	 * `.primary-btn.install-btn` ("Save Settings") so that a theme builder
+	 * action and a dashboard action are the same button, not two purples that
+	 * nearly agree. The conic layer is what gives it its sheen; the flat
+	 * `linear-gradient` under it is the fallback colour the cone fades into,
+	 * and the hover state only turns the cone — 195.22deg to 226deg — so the
+	 * light moves across the button rather than the colour changing.
+	 */
+	--eatb-gradient: conic-gradient( from 195.22deg at 68.31% 39.29%, rgba( 143, 32, 251, 0 ) 0deg, #8F20FB 360deg ), linear-gradient( 0deg, #6F0AF2, #6F0AF2 );
+	--eatb-gradient-hover: conic-gradient( from 226deg at 68.31% 39.29%, rgba( 143, 32, 251, 0 ) 0deg, #8F20FB 360deg ), linear-gradient( 0deg, #6F0AF2, #6F0AF2 );
 	--eatb-border: #dcdce4;
 	--eatb-text: #1d1f2b;
 	--eatb-muted: #6b6f80;
@@ -248,11 +258,12 @@ body.eatb-modal-open {
 
 .eatb-button--primary {
 	color: #fff !important;
-	background: var(--eatb-accent);
+	background: var(--eatb-gradient);
+	border-color: var(--eatb-accent);
 }
 
 .eatb-button--primary:hover:not(:disabled) {
-	background: var(--eatb-accent-hover);
+	background: var(--eatb-gradient-hover);
 }
 
 .eatb-button--secondary {
@@ -261,9 +272,14 @@ body.eatb-modal-open {
 	border-color: var(--eatb-accent);
 }
 
+/*
+ * Resolves into the same button as `--primary` on hover, rather than into a
+ * flat accent: the two sit side by side in the same action bar, and a solid
+ * purple beside a gradient one reads as a rendering fault.
+ */
 .eatb-button--secondary:hover {
 	color: #fff;
-	background: var(--eatb-accent);
+	background: var(--eatb-gradient);
 }
 
 .eatb-button:disabled {
@@ -486,12 +502,12 @@ body.eatb-modal-open {
 	font-size: 15px;
 	color: var(--eatb-accent);
 	background: none;
-	border: 1px solid #d8d0fb;
+	border: 1px solid #dbc4fd;
 	border-radius: 10px;
 }
 
 .eatb-button--add:hover {
-	background: #f7f5ff;
+	background: #f6f0ff;
 	border-color: var(--eatb-accent);
 }
 
@@ -858,9 +874,9 @@ body.eatb-modal-open {
 	font-size: 14px;
 	font-weight: 600;
 	color: #fff;
-	background: rgba( 23, 25, 35, 0.92 );
+	background: var( --eatb-gradient );
 	border-radius: 8px;
-	box-shadow: 0 6px 18px rgba( 12, 14, 24, 0.28 );
+	box-shadow: 0 6px 18px rgba( 111, 10, 242, 0.32 );
 	transform: translateY( 4px );
 	transition: transform 0.18s ease;
 }
@@ -1008,6 +1024,7 @@ body.eatb-modal-open {
 	display: grid;
 	align-items: center;
 	justify-items: center;
+	margin-left: 4px;
 }
 
 .eatb-button__label > * {
@@ -1056,8 +1073,8 @@ body.eatb-modal-open {
 	 * would sit 2px low.
 	 */
 	box-sizing: border-box;
-	width: 18px;
-	height: 18px;
+	width: 15px;
+	height: 15px;
 	/*
 	 * Centred with a negative margin rather than `translateY( -50% )`, which
 	 * leaves `transform` free for the spin alone. Sharing the property between

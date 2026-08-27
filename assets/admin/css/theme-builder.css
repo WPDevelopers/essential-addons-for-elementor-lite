@@ -354,3 +354,94 @@
 .eael-tb-requirement .button {
 	margin-bottom: 4px;
 }
+
+/* ------------------------------------------------------------------
+ * Buttons
+ * --------------------------------------------------------------- */
+
+/*
+ * The list screen is native admin chrome — a `WP_List_Table`, core's Quick Edit
+ * markup, core's `.page-title-action` — so its buttons arrive in WordPress blue
+ * while the modals mounted on the same screen are Essential Addons purple. That
+ * split is what makes the feature look bolted on, so every button that commits
+ * something here is repainted as the dashboard's "Save Settings" button.
+ *
+ * The gradient is copied verbatim from `.primary-btn.install-btn` in the
+ * dashboard app, and from `--eatb-gradient` in the modals' stylesheet: the
+ * conic layer supplies the sheen, the flat `linear-gradient` beneath it is the
+ * colour the cone fades into, and hover only turns the cone (195.22deg to
+ * 226deg) so the light travels across the button instead of the colour
+ * changing under the cursor.
+ *
+ * Scoped to `.eael-tb-wrap`, which is this screen's own wrapper, so no other
+ * admin page is touched. `!important` is needed on the paint properties alone:
+ * core's `.button-primary` rules carry `#…` ID specificity from
+ * `wp-admin/css/colors/_admin.scss`, which no class-only selector can outrank.
+ */
+.eael-tb-wrap .page-title-action,
+.eael-tb-wrap .button-primary,
+.eael-tb-wrap .button.button-primary {
+	color: #fff !important;
+	background: conic-gradient( from 195.22deg at 68.31% 39.29%, rgba( 143, 32, 251, 0 ) 0deg, #8F20FB 360deg ), linear-gradient( 0deg, #6F0AF2, #6F0AF2 ) !important;
+	border: 1px solid #6F0AF2 !important;
+	border-radius: 6px;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	transition: background 0.15s ease;
+}
+
+.eael-tb-wrap .page-title-action:hover,
+.eael-tb-wrap .page-title-action:focus,
+.eael-tb-wrap .button-primary:hover:not( :disabled ),
+.eael-tb-wrap .button-primary:focus:not( :disabled ),
+.eael-tb-wrap .button.button-primary:hover:not( :disabled ),
+.eael-tb-wrap .button.button-primary:focus:not( :disabled ) {
+	color: #fff !important;
+	background: conic-gradient( from 226deg at 68.31% 39.29%, rgba( 143, 32, 251, 0 ) 0deg, #8F20FB 360deg ), linear-gradient( 0deg, #6F0AF2, #6F0AF2 ) !important;
+	border-color: #6F0AF2 !important;
+}
+
+/*
+ * Core's focus ring is drawn as a second box-shadow in admin blue, which the
+ * rules above have just cleared along with the button's own shadow. Put back as
+ * an outline in the button's own colour — dropping it entirely would leave
+ * keyboard users with no visible focus at all.
+ */
+.eael-tb-wrap .page-title-action:focus,
+.eael-tb-wrap .button-primary:focus,
+.eael-tb-wrap .button.button-primary:focus {
+	outline: 2px solid #6F0AF2;
+	outline-offset: 2px;
+}
+
+/*
+ * A disabled primary — Quick Edit's Update while a save is in flight — keeps
+ * the gradient and dims, rather than falling back to core's grey. The button is
+ * busy, not unavailable, and the greyed-out version reads as the latter.
+ */
+.eael-tb-wrap .button-primary:disabled,
+.eael-tb-wrap .button-primary.disabled,
+.eael-tb-wrap .button.button-primary:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+
+/*
+ * The secondary next to it — Quick Edit / Bulk Edit "Cancel". Left as an
+ * outline so it cannot compete with Update, but in the same purple, so the pair
+ * reads as one set instead of a purple button beside a blue one.
+ */
+.eael-tb-wrap .inline-edit-save .button:not( .button-primary ) {
+	color: #6F0AF2;
+	background: #fff;
+	border-color: #6F0AF2;
+	border-radius: 6px;
+	box-shadow: none;
+}
+
+.eael-tb-wrap .inline-edit-save .button:not( .button-primary ):hover,
+.eael-tb-wrap .inline-edit-save .button:not( .button-primary ):focus {
+	color: #fff;
+	background: conic-gradient( from 195.22deg at 68.31% 39.29%, rgba( 143, 32, 251, 0 ) 0deg, #8F20FB 360deg ), linear-gradient( 0deg, #6F0AF2, #6F0AF2 );
+	border-color: #6F0AF2;
+}
