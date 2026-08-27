@@ -814,6 +814,14 @@ trait Login_Registration {
 			'user_email' => $email,
 		];
 
+		// Custom Profile Field values are collected in their OWN array and are NEVER
+		// merged into $user_data. $user_data is handed to wp_insert_user(), which reads
+		// keys like `role`, `user_pass`, `user_login`, and any key registered through
+		// wp_get_user_contact_methods(). Keeping custom values out of it makes a
+		// field-label -> core-key collision (e.g. a field labelled "Role" -> privilege
+		// escalation) structurally impossible, independent of the reserved-key denylist.
+		$eael_custom_profile_field_values = [];
+
 		if ( ! empty( $_POST['first_name'] ) ) {
 			$user_data['first_name'] = self::$email_options['firstname'] = sanitize_text_field( wp_unslash( $_POST['first_name'] ) );
 		}
@@ -833,7 +841,7 @@ trait Login_Registration {
 				self::$email_options[$eael_custom_profile_field_text_key] = '';
 
 				if ( ! empty( $_POST[ $eael_custom_profile_field_text_key ] ) ) {
-					$user_data[$eael_custom_profile_field_text_key] = self::$email_options[$eael_custom_profile_field_text_key] = sanitize_text_field( wp_unslash( $_POST[ $eael_custom_profile_field_text_key ] ) );
+					$eael_custom_profile_field_values[ $eael_custom_profile_field_text_key ] = self::$email_options[ $eael_custom_profile_field_text_key ] = sanitize_text_field( wp_unslash( $_POST[ $eael_custom_profile_field_text_key ] ) );
 				}
 			}
 		}
@@ -936,8 +944,8 @@ trait Login_Registration {
 
 			if ( count( $eael_custom_profile_fields_text ) ) {
 				foreach ( $eael_custom_profile_fields_text as $key => $_ ) {
-					if ( ! empty( $user_data[ $key ] ) ) {
-						$otp_payload['custom_profile_fields'][ $key ] = $user_data[ $key ];
+					if ( ! empty( $eael_custom_profile_field_values[ $key ] ) ) {
+						$otp_payload['custom_profile_fields'][ $key ] = $eael_custom_profile_field_values[ $key ];
 					}
 				}
 			}
@@ -1037,8 +1045,8 @@ trait Login_Registration {
 				if ( ! empty( $_FILES[ $eael_custom_profile_field_image_key ] ) ) {
 					$attachment_id = media_handle_upload( $eael_custom_profile_field_image_key, 0, [ 'post_author' => $user_id ] );
 					if ( ! is_wp_error( $attachment_id ) ) {
-						$user_data[ $eael_custom_profile_field_image_key ] = sanitize_text_field( $attachment_id );
-						self::$email_options[$eael_custom_profile_field_image_key] = wp_get_attachment_image_url( sanitize_text_field( $attachment_id ) );
+						$eael_custom_profile_field_values[ $eael_custom_profile_field_image_key ] = sanitize_text_field( $attachment_id );
+						self::$email_options[ $eael_custom_profile_field_image_key ] = wp_get_attachment_image_url( sanitize_text_field( $attachment_id ) );
 					}
 				}
 			}
@@ -1050,8 +1058,8 @@ trait Login_Registration {
 
 		if( count( $eael_custom_profile_fields ) ){
 			foreach( $eael_custom_profile_fields as $eael_custom_profile_field_key => $eael_custom_profile_field_value ){
-				if ( ! empty( $user_data[ $eael_custom_profile_field_key ] ) ) {
-					update_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_key, $user_data[ $eael_custom_profile_field_key ] );
+				if ( ! empty( $eael_custom_profile_field_values[ $eael_custom_profile_field_key ] ) ) {
+					update_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_key, $eael_custom_profile_field_values[ $eael_custom_profile_field_key ] );
 				}
 			}
 		}
