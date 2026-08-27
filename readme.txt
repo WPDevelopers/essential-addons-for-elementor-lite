@@ -333,6 +333,12 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 
 == Changelog ==
 
+= 6.8.0 - 27/08/2026 =
+
+- Added: EA Theme Builder to create custom headers and footers, with 6 ready-to-use presets
+- Added: EA Mega Menu | Creating flexible and engaging mega menu layouts
+- Few minor bug fixes & improvements
+
 = 6.7.3 - 09/08/2026 =
 
 - Added: EA Advanced Accordion | Image display options (object-fit: Cover, Contain, Fill, Scale Down, None) for the Tab Content image
