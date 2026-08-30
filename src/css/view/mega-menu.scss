@@ -503,6 +503,15 @@
 			display: none;
 			flex-direction: column;
 			width: 100%;
+			/* Clear of whatever the menu is sitting inside.
+			 *
+			 * The sheet is anchored to the widget, and a widget centred inside a
+			 * padded header bar has its own bottom edge some way above the bar's —
+			 * so at `top: 100%` the sheet opens over the last of the bar, its
+			 * rounded corners included. A margin rather than an inset, because it
+			 * has to mean the same thing in both layouts: the stretched dropdown is
+			 * positioned and the plain one is in flow, and a margin moves either. */
+			margin-block-start: var(--eael-mm-dropdown-offset, 0px);
 			/* Sensible out-of-the-box surface. The Mobile Dropdown controls are
 			   written at higher specificity, so they win whenever they are set. */
 			padding-block: 8px;
@@ -833,7 +842,16 @@
 	 * colour. */
 	.eael-mm-links {
 		&__title {
-			margin: 0 0 14px;
+			/* A rule under the heading, and the gap split either side of it, so
+			   the column reads as a heading over a list rather than six evenly
+			   spaced lines. The same hairline the tab column is divided by, and
+			   the same one the other preset draws under its column headings —
+			   there it is the heading widget's own border control, but a title
+			   written into a tab's field has no panel to set it from, so it lives
+			   here with the rest of this class. */
+			margin: 0 0 var(--eael-mm-links-title-gap, 10px);
+			padding-block-end: var(--eael-mm-links-title-pad, 10px);
+			border-block-end: 1px solid var(--eael-mm-links-rule, #eaece6);
 			font-family: inherit;
 			font-size: var(--eael-mm-links-title-size, 14px);
 			font-weight: var(--eael-mm-links-title-weight, 600);

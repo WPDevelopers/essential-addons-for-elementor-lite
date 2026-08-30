@@ -553,6 +553,10 @@ class Suite_Menu {
 			'eael_mega_menu_dropdown_padding'               => Elements::spacing( 10, 10, 10, 10 ),
 			'eael_mega_menu_dropdown_shadow_box_shadow_type' => 'yes',
 			'eael_mega_menu_dropdown_shadow_box_shadow'     => Elements::shadow( 16, 40, 'rgba(15, 23, 42, 0.16)' ),
+			// Clear of the header bar. The sheet hangs off the menu widget, which
+			// sits centred inside a bar with its own padding — without this it
+			// opens over the last of that padding and the bar's rounded corners.
+			'eael_mega_menu_dropdown_offset'                => Elements::size( 20 ),
 			'eael_mega_menu_dropdown_max_height'            => Elements::size( 78, 'vh' ),
 		];
 	}

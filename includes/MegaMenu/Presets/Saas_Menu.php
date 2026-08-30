@@ -61,7 +61,7 @@ class Saas_Menu {
 	/**
 	 * Brand accent — the hovered link, the panel icons.
 	 */
-	const ACCENT = '#4D7C0F';
+	const ACCENT = '#6DBB00';
 
 	/**
 	 * Panel surface.
@@ -77,11 +77,6 @@ class Saas_Menu {
 	 * Hairlines — the panel border, the divider between the two tab columns.
 	 */
 	const LINE = '#EAECE6';
-
-	/**
-	 * The tile behind a Resources icon.
-	 */
-	const ICON_BG = '#F1F4EA';
 
 	/**
 	 * The call to action's surface.
@@ -414,7 +409,11 @@ class Saas_Menu {
 			[
 				'label' => __( 'Product', 'essential-addons-for-elementor-lite' ),
 				'type'  => 'mega',
-				'width' => 760,
+				// Sized to its content rather than to the space available: the link
+				// column holds one short label per row, and the width left over
+				// after the categories is the width those labels need, not a third
+				// of the page.
+				'width' => 600,
 				'align' => 'start',
 			],
 			[
@@ -428,7 +427,10 @@ class Saas_Menu {
 			[
 				'label' => __( 'Resources', 'essential-addons-for-elementor-lite' ),
 				'type'  => 'mega',
-				'width' => 500,
+				// Wide enough for the longest description on one line, and no wider
+				// — a row whose second line wraps is a row taller than its
+				// neighbours, and the four stop reading as a set.
+				'width' => 390,
 				'align' => 'center',
 			],
 		];
@@ -572,6 +574,10 @@ class Saas_Menu {
 			'eael_mega_menu_dropdown_padding'               => Elements::spacing( 10, 10, 10, 10 ),
 			'eael_mega_menu_dropdown_shadow_box_shadow_type' => 'yes',
 			'eael_mega_menu_dropdown_shadow_box_shadow'     => Elements::shadow( 16, 40, 'rgba(16, 24, 40, 0.16)' ),
+			// Clear of the header bar. The sheet hangs off the menu widget, which
+			// sits centred inside a bar with its own padding — without this it
+			// opens over the last of that padding and the bar's rounded corners.
+			'eael_mega_menu_dropdown_offset'                => Elements::size( 20 ),
 			'eael_mega_menu_dropdown_max_height'            => Elements::size( 75, 'vh' ),
 		];
 	}
@@ -665,15 +671,21 @@ class Saas_Menu {
 				'eael_adv_tabs_tab'                => self::category_rows(),
 
 				// Wrapper.
-				'eael_adv_tabs_padding' => Elements::spacing( 14, 14, 14, 14 ),
+				'eael_adv_tabs_padding' => Elements::spacing( 16, 16, 16, 16 ),
 				'eael_adv_tabs_margin'  => Elements::spacing( 0, 0, 0, 0 ),
 
-				// Tab titles.
+				// Tab titles. A category list is read down, not across — the rows
+				// are close enough to scan as one column, and the weight is the
+				// plain one so the selected row is told apart by its wash rather
+				// than by getting heavier.
 				'eael_adv_tabs_tab_title_typography_typography'  => 'custom',
-				'eael_adv_tabs_tab_title_typography_font_size'   => Elements::size( 15 ),
-				'eael_adv_tabs_tab_title_typography_font_weight' => '500',
-				'eael_adv_tabs_title_width'   => Elements::size( 264 ),
-				'eael_adv_tabs_tab_padding'   => Elements::spacing( 11, 16, 11, 16 ),
+				'eael_adv_tabs_tab_title_typography_font_size'   => Elements::size( 14 ),
+				'eael_adv_tabs_tab_title_typography_font_weight' => '400',
+				// 200 less the 20 of inset leaves 180 for the label, which is what
+				// the longest of them needs — a category that wraps to two lines
+				// breaks the rhythm of the seven that do not.
+				'eael_adv_tabs_title_width'   => Elements::size( 200 ),
+				'eael_adv_tabs_tab_padding'   => Elements::spacing( 6, 10, 6, 10 ),
 				'eael_adv_tabs_tab_margin'    => Elements::spacing( 0, 0, 2, 0 ),
 
 				// Normal. Both the deprecated colour control and the background
@@ -708,8 +720,8 @@ class Saas_Menu {
 				// Content.
 				'adv_tabs_content_text_color'                    => self::INK,
 				'eael_adv_tabs_content_typography_typography'    => 'custom',
-				'eael_adv_tabs_content_typography_font_size'     => Elements::size( 15 ),
-				'eael_adv_tabs_content_padding'                  => Elements::spacing( 6, 10, 6, 26 ),
+				'eael_adv_tabs_content_typography_font_size'     => Elements::size( 14 ),
+				'eael_adv_tabs_content_padding'                  => Elements::spacing( 2, 10, 2, 20 ),
 				'eael_adv_tabs_content_margin'                   => Elements::spacing( 0, 0, 0, 0 ),
 				'eael_adv_tabs_content_border_border'            => 'solid',
 				'eael_adv_tabs_content_border_width'             => Elements::spacing( 0, 0, 0, 1 ),
@@ -880,25 +892,25 @@ class Saas_Menu {
 				'icon'    => 'far fa-newspaper',
 				'library' => 'fa-regular',
 				'title'   => __( 'Blog', 'essential-addons-for-elementor-lite' ),
-				'text'    => __( 'Product news, deep dives and release notes.', 'essential-addons-for-elementor-lite' ),
+				'text'    => __( 'Product news and release notes.', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'icon'    => 'far fa-user',
 				'library' => 'fa-regular',
 				'title'   => __( 'About Us', 'essential-addons-for-elementor-lite' ),
-				'text'    => __( 'Who we are and what we are building towards.', 'essential-addons-for-elementor-lite' ),
+				'text'    => __( 'Who we are and what we are building.', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'icon'    => 'far fa-envelope',
 				'library' => 'fa-regular',
 				'title'   => __( 'Contact', 'essential-addons-for-elementor-lite' ),
-				'text'    => __( 'Talk to sales, support or the team directly.', 'essential-addons-for-elementor-lite' ),
+				'text'    => __( 'Talk to sales, support or the team.', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'icon'    => 'fas fa-book-open',
 				'library' => 'fa-solid',
 				'title'   => __( 'Documentations', 'essential-addons-for-elementor-lite' ),
-				'text'    => __( 'Guides, references and everything in between.', 'essential-addons-for-elementor-lite' ),
+				'text'    => __( 'Guides, references and how-tos.', 'essential-addons-for-elementor-lite' ),
 			],
 		];
 
@@ -912,7 +924,10 @@ class Saas_Menu {
 			[
 				'content_width'  => 'full',
 				'flex_direction' => 'column',
-				'flex_gap'       => Elements::gap( 2 ),
+				// Four destinations, not a list of four — the wash under a hovered
+				// row has to read as that row being picked out, and at a two pixel
+				// gap it reads as the row above and below being pushed apart.
+				'flex_gap'       => Elements::gap( 18 ),
 				'padding'        => Elements::spacing( 12, 12, 12, 12 ),
 				'_title'         => $title,
 			],
@@ -943,8 +958,11 @@ class Saas_Menu {
 				'flex_justify_content' => 'space-between',
 				'flex_wrap'            => 'nowrap',
 				'flex_gap'             => Elements::gap( 12 ),
-				'padding'              => Elements::spacing( 10, 12, 10, 12 ),
-				'border_radius'        => Elements::spacing( 12, 12, 12, 12 ),
+				// The tile is 40 and sets the row's height; this is the margin
+				// around it, not the row's own spacing — that is the gap between
+				// rows above.
+				'padding'              => Elements::spacing( 7, 12, 7, 12 ),
+				'border_radius'        => Elements::spacing( 10, 10, 10, 10 ),
 				'link'                 => Elements::link(),
 				'background_hover_background' => 'classic',
 				'background_hover_color'      => self::HOVER,
@@ -984,12 +1002,22 @@ class Saas_Menu {
 				'eael_show_infobox_button'  => '',
 				'eael_infobox_content_alignment_left_right' => 'left',
 
-				// Icon.
+				// Icon. An outlined tile rather than a filled one, and the accent
+				// saved for the row under the pointer: four green glyphs sitting in
+				// four green tiles is four rows all claiming to be the live one.
 				'eael_infobox_icon_size'     => Elements::size( 17 ),
 				'eael_infobox_icon_bg_shape' => 'radius',
-				'eael_infobox_icon_bg_size'  => Elements::size( 42 ),
-				'eael_infobox_icon_bg_color' => self::ICON_BG,
-				'eael_infobox_icon_color'    => self::ACCENT,
+				'eael_infobox_icon_bg_size'  => Elements::size( 40 ),
+				'eael_infobox_icon_bg_color' => self::SURFACE,
+				'eael_infobox_icon_border_border' => 'solid',
+				'eael_infobox_icon_border_width'  => Elements::spacing( 1, 1, 1, 1 ),
+				'eael_infobox_icon_border_color'  => self::LINE,
+				'eael_infobox_icon_color'    => self::MUTED,
+				// Set outright rather than left alone: this control ships a #4d4d4d
+				// default, so an unset value is not "no change" — it is the glyph
+				// going grey the moment the pointer arrives, which is the opposite
+				// of what the row is meant to do.
+				'eael_infobox_icon_hover_color' => self::ACCENT,
 				'eael_infobox_icon_margin'   => Elements::spacing( 0, 14, 0, 0 ),
 
 				// Title.

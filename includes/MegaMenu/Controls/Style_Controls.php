@@ -327,6 +327,18 @@ class Style_Controls {
 			],
 		] );
 
+		$widget->add_responsive_control( 'eael_mega_menu_dropdown_offset', [
+			'label'       => esc_html__( 'Distance From Menu', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SLIDER,
+			'size_units'  => [ 'px', 'em', 'rem' ],
+			'range'       => [ 'px' => [ 'min' => 0, 'max' => 120 ] ],
+			'default'     => [ 'unit' => 'px', 'size' => 0 ],
+			'description' => esc_html__( 'Push the dropdown clear of the bar it opens under. The sheet is anchored to the menu itself, so a menu inset inside a padded header bar opens over that padding until this is set.', 'essential-addons-for-elementor-lite' ),
+			'selectors'   => [
+				'{{WRAPPER}}' => '--eael-mm-dropdown-offset: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
 		$widget->add_group_control( Group_Control_Box_Shadow::get_type(), [
 			'name'     => 'eael_mega_menu_dropdown_shadow',
 			'selector' => $dropdown,
