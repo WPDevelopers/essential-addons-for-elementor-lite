@@ -724,6 +724,28 @@
    * the icon, which is what turns a tab into a card. Strip the class and the
    * tabs still switch — the icons just sit on the surface. */
 }
+.eael-mega-menu .eael-mm-cardtabs {
+  /* The three tab states, set as the variables the widget reads rather than
+   * left to its Background controls alone.
+   *
+   * The preset sets those controls, and for the resting state that settles
+   * it — the rule they beat is a plain one. The two lit states are the
+   * problem: Nested Tabs paints them from a rule of its own carrying eight
+   * classes, and under Elementor's Optimized Markup the control's selector
+   * loses the `.elementor-widget-container` that used to put it one ahead.
+   * Equal specificity, so whichever stylesheet loads last wins — and when
+   * the widget's does, it resolves these variables, whose stock values are
+   * the kit's accent colour. A menu built on this preset would open with
+   * two near-black bars in the card column.
+   *
+   * Setting them here makes the outcome the same either way: the control
+   * wins and paints the value the preset set, or the widget wins and
+   * resolves it to the same colour. A colour picked in the panel still
+   * overrides both. */
+  --n-tabs-title-background-color: transparent;
+  --n-tabs-title-background-color-hover: var(--eael-mm-cardtab-lit, #f5f3ff);
+  --n-tabs-title-background-color-active: var(--eael-mm-cardtab-lit, #f5f3ff);
+}
 .eael-mega-menu .eael-mm-cardtabs .e-n-tab-title {
   text-align: start;
 }
@@ -777,6 +799,37 @@
   line-height: 1.5;
   color: var(--eael-mm-cardtab-text-color, #64748b);
 }
+.eael-mega-menu .eael-mm-cardtabs {
+  /* One colour per card.
+   *
+   * Nested Tabs paints every tab's icon from a single Icon Color, and the
+   * design gives each of the three its own — so this is the third thing on
+   * the card the widget has no control for, after the tile and the stacked
+   * description.
+   *
+   * Set as the widget's own variables on the tab, rather than as a colour on
+   * the glyph. A declaration on the element itself beats one inherited from
+   * an ancestor whatever that ancestor's selector weighs, so this lands
+   * without having to outrank the three state rules that read them — and it
+   * carries hover and active with it, which a colour on the glyph would have
+   * had to win separately. A fourth card added in the panel falls through to
+   * the Icon Color control, which is still what sets the default. */
+}
+.eael-mega-menu .eael-mm-cardtabs .e-n-tab-title:nth-child(1) {
+  --n-tabs-icon-color: var(--eael-mm-cardtab-icon-1, #4527cc);
+  --n-tabs-icon-color-hover: var(--eael-mm-cardtab-icon-1, #4527cc);
+  --n-tabs-icon-color-active: var(--eael-mm-cardtab-icon-1, #4527cc);
+}
+.eael-mega-menu .eael-mm-cardtabs .e-n-tab-title:nth-child(2) {
+  --n-tabs-icon-color: var(--eael-mm-cardtab-icon-2, #da54ff);
+  --n-tabs-icon-color-hover: var(--eael-mm-cardtab-icon-2, #da54ff);
+  --n-tabs-icon-color-active: var(--eael-mm-cardtab-icon-2, #da54ff);
+}
+.eael-mega-menu .eael-mm-cardtabs .e-n-tab-title:nth-child(3) {
+  --n-tabs-icon-color: var(--eael-mm-cardtab-icon-3, #ea9131);
+  --n-tabs-icon-color-hover: var(--eael-mm-cardtab-icon-3, #ea9131);
+  --n-tabs-icon-color-active: var(--eael-mm-cardtab-icon-3, #ea9131);
+}
 .eael-mega-menu .eael-mm-cardtabs .e-n-tab-icon {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
@@ -794,6 +847,59 @@
   height: var(--eael-mm-cardtab-tile, 42px);
   border-radius: var(--eael-mm-cardtab-tile-radius, 12px);
   background-color: var(--eael-mm-cardtab-tile-bg, #ede9fe);
+}
+.eael-mega-menu {
+  /* The card tabs once the menu has collapsed.
+   *
+   * Tabs Direction is set to stack the list above its content at the tablet
+   * breakpoint, and that much lands — but what it stacks is still a nowrap row
+   * of cards three hundred pixels wide, which runs off both edges of a dropdown
+   * the width of a phone. Neither control that would wrap it is reachable:
+   * Horizontal Scroll and the horizontal Alignment are both conditioned on the
+   * *desktop* value of Tabs Direction being one of the stacked ones, and this
+   * preset's is `inline-start`, so the panel hides them at every breakpoint.
+   *
+   * Written against the properties rather than the widget's own variables. The
+   * variables come from `{{WRAPPER}}`, which carries a class more than anything
+   * in this file can say; the properties are only ever read through them, so
+   * this settles it without needing to outrank anything. */
+}
+.eael-mega-menu--mobile .eael-mm-cardtabs .e-n-tabs-heading {
+  /* Auto, not the 30% the desktop layout asks for: stacked, this is the
+     list's height rather than its width. */
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.eael-mega-menu--mobile .eael-mm-cardtabs {
+  /* A width and a basis that defers to it, rather than a basis of its own:
+     below the widget's own breakpoint Nested Tabs drops the list to
+     `display: contents` and turns the tabs into an accordion in a column,
+     where a percentage basis would be read as a height. A width means the
+     same thing in both layouts. */
+}
+.eael-mega-menu--mobile .eael-mm-cardtabs .e-n-tab-title {
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+  width: 100%;
+}
+.eael-mega-menu {
+  /* The promo tile that closes a card-tab preset's link row.
+   *
+   * Two things the container it sits on has no control for. Elementor's
+   * Background group stops at two colour stops and the design runs three, and
+   * nothing in the panel paints an inward glow that is not also a border. Both
+   * are custom properties with the design's own values behind them, so a
+   * different palette is two variables rather than a fork of this rule.
+   *
+   * Only the background is claimed here — the tile's radius, padding and the
+   * type on it stay controls on the widgets inside. A background picked in the
+   * panel is written against the element's own class, which outranks this, so
+   * setting one still replaces the gradient rather than layering over it. */
+}
+.eael-mega-menu .eael-mm-promo {
+  background-image: var(--eael-mm-promo-gradient, linear-gradient(110deg, #a162d8 0%, #995efe 48%, #ffce79 100%));
 }
 .eael-mega-menu {
   /* A column of links written into an Advanced Tabs tab.

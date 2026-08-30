@@ -104,6 +104,12 @@ class Suite_Menu {
 	const BUTTON_INK = '#1E1B4B';
 
 	/**
+	 * Everything written on the promo tile, over its gradient.
+	 */
+	const PROMO_INK = '#FFFFFF';
+
+
+	/**
 	 * The element this preset applies.
 	 *
 	 * @since 6.7.5
@@ -397,10 +403,10 @@ class Suite_Menu {
 				'label'  => __( 'Solutions', 'essential-addons-for-elementor-lite' ),
 				'type'   => 'mega',
 				'width'  => 'custom',
-				// The card inside is 236 wide; the panel adds the 20px inset that
-				// every panel carries, and the nudge puts the card's left edge back
-				// on the menu item's.
-				'size'   => 276,
+				// The card inside is 155 wide; the panel adds the 20px inset that
+				// every panel carries on each side, and the nudge puts the card's
+				// left edge back on the menu item's.
+				'size'   => 195,
 				'align'  => 'start',
 				'offset' => -20,
 			],
@@ -622,7 +628,7 @@ class Suite_Menu {
 
 		return Elements::nested_child(
 			self::panel_settings( $title ),
-			[ self::card( [ self::link_list( $rows, 0 ) ], 8 ) ]
+			[ self::card( [ self::link_list( $rows, 0 ) ], 8, 'column', 12 ) ]
 		);
 	}
 
@@ -675,7 +681,11 @@ class Suite_Menu {
 				'tab_icon'  => Elements::icon( $category['icon'] ),
 			] );
 
-			$panels[] = self::tab_content( $category['columns'], $category['explore'] );
+			$panels[] = self::tab_content(
+				$category['columns'],
+				$category['explore'],
+				isset( $category['promo'] ) ? $category['promo'] : []
+			);
 		}
 
 		return Elements::widget(
@@ -685,6 +695,13 @@ class Suite_Menu {
 				// "Before" — the tab list sits inline-start of its content, which is
 				// the left-hand column of cards in the design.
 				'tabs_direction'  => 'inline-start',
+				// Top of the column, not the middle of it. Nested Tabs centres a
+				// vertical tab list against its content by default, which leaves the
+				// first card sitting a third of the way down the panel while the
+				// column headings beside it start at the top. This is the control
+				// that says otherwise — and it is a different one from
+				// `title_alignment` below, which aligns the text inside a card.
+				'tabs_justify_vertical' => 'start',
 				// Stacked above the content once there is no room beside it.
 				'tabs_direction_tablet' => 'block-start',
 				'tabs_width'      => Elements::size( 30, '%' ),
@@ -819,37 +836,35 @@ class Suite_Menu {
 				'icon'    => 'fas fa-th-large',
 				'title'   => __( 'Templates', 'essential-addons-for-elementor-lite' ),
 				'text'    => __( 'Professionally designed templates and wireframes', 'essential-addons-for-elementor-lite' ),
-				'explore' => __( 'Explore All Templates', 'essential-addons-for-elementor-lite' ),
+				'explore' => __( 'Browse All Templates', 'essential-addons-for-elementor-lite' ),
 				'columns' => [
 					[
-						'title' => __( 'Starter Sites', 'essential-addons-for-elementor-lite' ),
+						'title' => __( 'Full Site Kits', 'essential-addons-for-elementor-lite' ),
 						'links' => [
-							[ 'text' => __( 'Business Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-building' ],
-							[ 'text' => __( 'Portfolio Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-images' ],
-							[ 'text' => __( 'Agency Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-briefcase' ],
-							[ 'text' => __( 'Blog Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-newspaper' ],
-							[ 'text' => __( 'Store Starter', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-store' ],
+							[ 'text' => __( 'Business Pro', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-briefcase' ],
+							[ 'text' => __( 'Agency Studio', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-compass', 'new' => true ],
+							[ 'text' => __( 'Online Store', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-store' ],
+							[ 'text' => __( 'Portfolio Plus', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-th-large' ],
+							[ 'text' => __( 'Startup Launch', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-rocket' ],
 						],
 					],
 					[
-						'title' => __( 'Section Blocks', 'essential-addons-for-elementor-lite' ),
+						'title' => __( 'Page Templates', 'essential-addons-for-elementor-lite' ),
 						'links' => [
-							[ 'text' => __( 'Hero Sections', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-heading' ],
-							[ 'text' => __( 'Feature Grids', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-th' ],
-							[ 'text' => __( 'Pricing Blocks', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-tags' ],
-							[ 'text' => __( 'Team Blocks', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-user-friends' ],
-							[ 'text' => __( 'FAQ Blocks', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-question-circle' ],
+							[ 'text' => __( 'Landing Pages', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-window-maximize' ],
+							[ 'text' => __( 'Pricing Pages', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-file-alt' ],
+							[ 'text' => __( 'About &amp; Team', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-user-friends' ],
+							[ 'text' => __( 'Contact Forms', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-envelope' ],
 						],
 					],
-					[
-						'title' => __( 'Page Kits', 'essential-addons-for-elementor-lite' ),
-						'links' => [
-							[ 'text' => __( 'About Page Kit', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-id-card' ],
-							[ 'text' => __( 'Contact Page Kit', 'essential-addons-for-elementor-lite' ), 'icon' => 'far fa-envelope' ],
-							[ 'text' => __( 'Services Page Kit', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-concierge-bell' ],
-							[ 'text' => __( 'Careers Page Kit', 'essential-addons-for-elementor-lite' ), 'icon' => 'fas fa-user-tie' ],
-						],
-					],
+				],
+				// Two columns and this, rather than three columns: the third slot in
+				// this tab is the shop window, not another list.
+				'promo'   => [
+					'label' => __( 'What\'s New', 'essential-addons-for-elementor-lite' ),
+					'icon'  => 'fas fa-magic',
+					'title' => __( 'Multipurpose eCommerce Store Template', 'essential-addons-for-elementor-lite' ),
+					'image' => 'demo-3.png',
 				],
 			],
 		];
@@ -884,22 +899,33 @@ class Suite_Menu {
 	/**
 	 * One category's columns, as a tab's content.
 	 *
+	 * Three slots wide, whatever fills them. A category that ships a promo takes
+	 * the third for it and hands the width back to the two lists that remain, so
+	 * the row still ends where the card does.
+	 *
 	 * @since 6.7.5
 	 *
 	 * @param array  $columns Column definitions.
 	 * @param string $explore Label for the link that closes the first column.
+	 * @param array  $promo   Promo card definition, empty for none.
 	 *
 	 * @return array
 	 */
-	protected static function tab_content( $columns, $explore ) {
+	protected static function tab_content( $columns, $explore, $promo = [] ) {
 		$children = [];
+		$width    = empty( $promo ) ? 31 : 29;
 
 		foreach ( $columns as $index => $column ) {
 			$children[] = self::link_column(
 				$column['title'],
 				$column['links'],
-				0 === $index ? $explore : ''
+				0 === $index ? $explore : '',
+				$width
 			);
+		}
+
+		if ( ! empty( $promo ) ) {
+			$children[] = self::promo_card( $promo );
 		}
 
 		return Elements::nested_child(
@@ -916,6 +942,164 @@ class Suite_Menu {
 				'padding'          => Elements::spacing( 0, 0, 0, 0 ),
 			],
 			$children
+		);
+	}
+
+	/* ---------------------------------------------------------------------
+	 * The promo card.
+	 * ------------------------------------------------------------------ */
+
+	/**
+	 * The tile that closes the Templates tab: a label, a headline, a screenshot.
+	 *
+	 * Three ordinary widgets on a gradient container rather than one image with
+	 * the text baked into it — every line here is a control the user can edit, and
+	 * the artwork underneath is the one part meant to be swapped.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @param array $promo `label`, `icon`, `title` and `image`.
+	 *
+	 * @return array
+	 */
+	protected static function promo_card( $promo ) {
+		return Elements::container(
+			[
+				'content_width'                  => 'full',
+				// The third column's share plus the two points the lists beside it
+				// gave up, so the row still ends where the card does.
+				'width'                          => Elements::size( 35, '%' ),
+				'width_tablet'                   => Elements::size( 100, '%' ),
+				'width_mobile'                   => Elements::size( 100, '%' ),
+				'flex_direction'                 => 'column',
+				'flex_gap'                       => Elements::gap( 16 ),
+				// No padding at the foot: the screenshot below runs into the tile's
+				// bottom edge rather than sitting on a band of gradient.
+				'padding'                        => Elements::spacing( 20, 20, 0, 20 ),
+
+				// No Background control, on purpose: the design runs three colour
+				// stops and Elementor's group control stops at two. The gradient is
+				// the one thing the class below carries — everything else on this
+				// tile is still a control. See `.eael-mm-promo` in the widget's
+				// stylesheet.
+				//
+				// `css_classes`, not the `_css_classes` a widget takes: a container
+				// registers its own CSS Classes control under the unprefixed name,
+				// and the prefixed one it does not have is dropped in silence — the
+				// tile renders with no class, and so with no gradient.
+				'css_classes'                    => 'eael-mm-promo',
+
+				'border_radius'                  => Elements::spacing( 8, 8, 8, 8 ),
+				'_title'                         => __( 'Promo', 'essential-addons-for-elementor-lite' ),
+			],
+			[
+				self::promo_label( $promo['label'], $promo['icon'] ),
+				self::promo_heading( $promo['title'] ),
+				self::promo_image( $promo['image'] ),
+			]
+		);
+	}
+
+	/**
+	 * The eyebrow over the promo: a mark and a word.
+	 *
+	 * A one-row Icon List rather than a heading with the glyph written into it.
+	 * Core's Heading escapes markup, so an inline `<i>` would print as text; the
+	 * list keeps both halves as controls, and it is the same widget the columns
+	 * beside it already use.
+	 *
+	 * Deliberately without the `eael-mm-linklist` class the columns carry: this
+	 * row is a label, not a link, and it should not light up under the pointer.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @param string $label Eyebrow text.
+	 * @param string $icon  Font Awesome class for the mark.
+	 *
+	 * @return array
+	 */
+	protected static function promo_label( $label, $icon ) {
+		return Elements::widget(
+			'icon-list',
+			[
+				'view'                        => 'traditional',
+				// No `link` on the row, so the renderer prints a span — nothing here
+				// is meant to be clicked.
+				'icon_list'                   => [
+					Elements::row( [
+						'text'          => $label,
+						'selected_icon' => Elements::icon( $icon ),
+					] ),
+				],
+				'space_between'               => Elements::size( 0 ),
+				'text_indent'                 => Elements::size( 8 ),
+				'icon_size'                   => Elements::size( 15 ),
+				// White, both of them: this row sits on the gradient, not on the
+				// card, and the ink the columns beside it use disappears there.
+				'icon_color'                  => self::PROMO_INK,
+				'text_color'                  => self::PROMO_INK,
+				'icon_typography_typography'  => 'custom',
+				'icon_typography_font_size'   => Elements::size( 13 ),
+				'icon_typography_font_weight' => '600',
+			]
+		);
+	}
+
+	/**
+	 * The promo's headline.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @param string $title Headline text.
+	 *
+	 * @return array
+	 */
+	protected static function promo_heading( $title ) {
+		return Elements::widget(
+			'heading',
+			[
+				'title'                        => $title,
+				'header_size'                  => 'h6',
+				'title_color'                  => self::PROMO_INK,
+				'typography_typography'        => 'custom',
+				'typography_font_size'         => Elements::size( 16 ),
+				'typography_font_weight'       => '600',
+				'typography_line_height'       => Elements::size( 1.55, 'em' ),
+			]
+		);
+	}
+
+	/**
+	 * The screenshot under the headline.
+	 *
+	 * Shipped artwork, from the same accessor the starter headers use for theirs:
+	 * a promo tile with a grey placeholder in it is a promo tile that arrives
+	 * looking unmade. It is meant to be replaced, from the widget's own image
+	 * control.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @param string $file File name, inside the plugin's admin image directory.
+	 *
+	 * @return array
+	 */
+	protected static function promo_image( $file ) {
+		return Elements::widget(
+			'image',
+			[
+				'image'               => [ 'id' => '', 'url' => Elements::brand_logo( $file ) ],
+				'image_size'          => 'full',
+				'align'               => 'start',
+				'width'               => Elements::size( 100, '%' ),
+				// Out past the tile's right padding, so the screenshot runs off that
+				// edge instead of floating inside a frame of gradient. A negative
+				// margin rather than a wider image: this reaches the edge exactly, at
+				// any width, with nothing left to clip.
+				'_margin'             => Elements::spacing( 0, -20, 0, 0 ),
+				// Only the two corners still on the tile are ever seen; the other two
+				// sit past its edges.
+				'image_border_radius' => Elements::spacing( 6, 6, 0, 0 ),
+			]
 		);
 	}
 
@@ -953,10 +1137,16 @@ class Suite_Menu {
 	 * @param array  $children  Card contents.
 	 * @param int    $padding   Inset, in pixels.
 	 * @param string $direction `row` for the wide panel, `column` for the narrow one.
+	 * @param int    $radius    Corner radius, in pixels. The narrow card takes a
+	 *                          smaller one: a corner cut for a card the width of the
+	 *                          page reads as a bubble on one 155 wide.
 	 *
 	 * @return array
 	 */
-	protected static function card( $children, $padding = 28, $direction = 'column' ) {
+	protected static function card( $children, $padding = 28, $direction = 'column', $radius = 22 ) {
+		// The corner only ever shrinks on a small screen: the wide card softens to
+		// 16 there, and one already tighter than that is left as it is.
+		$mobile   = min( $radius, 16 );
 		$settings = [
 			'content_width'         => 'full',
 			'flex_direction'        => $direction,
@@ -974,8 +1164,8 @@ class Suite_Menu {
 			'border_border'         => 'solid',
 			'border_width'          => Elements::spacing( 1, 1, 1, 1 ),
 			'border_color'          => self::LINE,
-			'border_radius'         => Elements::spacing( 22, 22, 22, 22 ),
-			'border_radius_mobile'  => Elements::spacing( 16, 16, 16, 16 ),
+			'border_radius'         => Elements::spacing( $radius, $radius, $radius, $radius ),
+			'border_radius_mobile'  => Elements::spacing( $mobile, $mobile, $mobile, $mobile ),
 			'box_shadow_box_shadow_type' => 'yes',
 			'box_shadow_box_shadow' => Elements::shadow( 14, 40, 'rgba(15, 23, 42, 0.12)' ),
 			'_title'                => __( 'Card', 'essential-addons-for-elementor-lite' ),
@@ -996,10 +1186,11 @@ class Suite_Menu {
 	 * @param string $title  Column heading.
 	 * @param array  $links  Rows of `text`, `icon` and optionally `new`.
 	 * @param string $footer Label for the link closing the column, empty for none.
+	 * @param int    $width  Share of the row, as a percentage.
 	 *
 	 * @return array
 	 */
-	protected static function link_column( $title, $links, $footer = '' ) {
+	protected static function link_column( $title, $links, $footer = '', $width = 31 ) {
 		$rows = [];
 
 		foreach ( $links as $link ) {
@@ -1029,7 +1220,7 @@ class Suite_Menu {
 				'content_width'  => 'full',
 				// Three to a row inside the tab's own content area, with the gap
 				// between them taken off the share.
-				'width'          => Elements::size( 31, '%' ),
+				'width'          => Elements::size( $width, '%' ),
 				'width_tablet'   => Elements::size( 100, '%' ),
 				'width_mobile'   => Elements::size( 100, '%' ),
 				'flex_direction' => 'column',
