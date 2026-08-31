@@ -532,12 +532,12 @@ class ThinkRank_Promotion {
 			$offer[] = self::SLUG;
 		}
 
-		// xSpeed: can_offer() is false once xSpeed is on disk at all, and also
-		// whenever this site must not be handed a page cache — an incumbent
-		// cache plugin, an unreadable site state, or a PHP floor xSpeed cannot
-		// meet. Installing a second page cache silently breaks the first, so
-		// "we could not tell" has to mean "do not offer".
-		if ( XSpeed_Setup::can_offer() && ! $this->is_hidden( XSpeed_Setup::SLUG ) ) {
+		// xSpeed: can_install() is false once xSpeed is on disk at all, or when
+		// this site cannot meet its PHP/WP floor. An incumbent page cache does
+		// NOT suppress the offer — it only means before_activation() installs
+		// xSpeed with its own page cache off, leaving the incumbent's
+		// advanced-cache.php untouched.
+		if ( XSpeed_Setup::can_install() && ! $this->is_hidden( XSpeed_Setup::SLUG ) ) {
 			$offer[] = XSpeed_Setup::SLUG;
 		}
 
@@ -736,14 +736,14 @@ class ThinkRank_Promotion {
 		// that already has a page cache must never be handed a second one.
 		//
 		// Two ways to be eligible, because the CTA does two different things:
-		// install a copy that isn't here (can_offer), or switch back on one
-		// that is (can_reactivate). Gating on can_offer alone made the Speed
+		// install a copy that isn't here (can_install), or switch back on one
+		// that is (can_reactivate). Gating on the install check alone made the Speed
 		// Check widget vanish for anyone who deactivated xSpeed, while the SEO
 		// Check widget stayed put — and can_list() does not rescue that case,
 		// because a deactivated xSpeed's own leftover drop-in reads to the
 		// generic detector as a foreign cache occupying the field.
 		if ( XSpeed_Setup::SLUG === $plugin
-			&& ! XSpeed_Setup::can_offer()
+			&& ! XSpeed_Setup::can_install()
 			&& ! XSpeed_Setup::can_reactivate() ) {
 			return false;
 		}
@@ -1330,10 +1330,9 @@ class ThinkRank_Promotion {
 	/**
 	 * First finding: what owns this site's page cache.
 	 *
-	 * In practice this reads "No page cache detected" almost every time the
-	 * widget is on screen, because the promo state only survives when
-	 * XSpeed_Setup::can_offer() found the field clear. It is still asked rather
-	 * than assumed, so the line cannot drift out of step with the detector.
+	 * Now that the promo survives on a site that already has a cache plugin,
+	 * this genuinely names the incumbent — which is the honest thing to show,
+	 * since an install here leaves that incumbent's drop-in alone.
 	 *
 	 * @return string
 	 */

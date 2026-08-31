@@ -100,7 +100,11 @@ class XSpeed_Setup {
 	}
 
 	/**
-	 * May EA offer to install xSpeed on this site?
+	 * May EA offer to install xSpeed AND hand it this site's page cache?
+	 *
+	 * The strict question. Surfaces that merely offer the plugin ask
+	 * can_install() instead; this one is for anything that promises page
+	 * caching specifically, and for before_activation()'s prepare() flag.
 	 *
 	 * False whenever we cannot tell. "We could not read the site's state" and
 	 * "the field is clear" are different answers and only one of them licenses
@@ -140,6 +144,37 @@ class XSpeed_Setup {
 	}
 
 	/**
+	 * May EA offer to INSTALL xSpeed, ignoring who owns the page cache?
+	 *
+	 * Deliberately looser than can_offer(). can_offer() refuses whenever the
+	 * page-cache field is occupied, because it gates a promise of "a page
+	 * cache". This gates a promise of "xSpeed" — asset optimization, CDN,
+	 * browser caching, its own dashboard — none of which conflict with an
+	 * incumbent cache plugin. The conflict is confined to advanced-cache.php,
+	 * and that is handled at install time instead: before_activation() passes
+	 * Detector::is_field_clear() to prepare(), so on an occupied site xSpeed
+	 * comes up with its page cache switched off rather than overwriting the
+	 * drop-in it found.
+	 *
+	 * Still false when we cannot load the portable pair, when xSpeed's own
+	 * PHP/WP floor is not met (WordPress would refuse the activation), or when
+	 * xSpeed is already on disk.
+	 *
+	 * @return bool
+	 */
+	public static function can_install() {
+		if ( ! self::is_available() ) {
+			return false;
+		}
+
+		if ( ! \WPDeveloper\PageCacheSafety\Setup::is_supported() ) {
+			return false;
+		}
+
+		return ! \WPDeveloper\PageCacheSafety\Setup::is_installed();
+	}
+
+	/**
 	 * Should xSpeed appear in the Integrations plugin list?
 	 *
 	 * Looser than can_offer(), because that list manages plugins rather than
@@ -165,7 +200,12 @@ class XSpeed_Setup {
 			return false;
 		}
 
-		return \WPDeveloper\PageCacheSafety\Detector::is_field_clear();
+		// Not gated on the page-cache field, for the same reason as
+		// can_install(): an incumbent cache does not make xSpeed unlistable, it
+		// only makes before_activation() bring xSpeed up with its own page
+		// cache switched off. A PHP/WP floor xSpeed cannot meet still drops the
+		// row, since the toggle would fail.
+		return true;
 	}
 
 	/**
@@ -213,7 +253,15 @@ class XSpeed_Setup {
 		// prepare() returns false when xSpeed is already active, i.e. we were
 		// called too late. That is a bug in the caller's ordering rather than
 		// something to retry, and it must not be treated as "rows written".
-		return (bool) \WPDeveloper\PageCacheSafety\Setup::prepare();
+		// is_field_clear() decides whether xSpeed comes up OWNING the page
+		// cache — not whether it is installed at all. On a site that already
+		// has a cache drop-in this writes xSpeed's settings with page caching
+		// off, which is the whole point of prepare()'s parameter: skipping the
+		// call instead would let xSpeed's own set_defaults() seed its
+		// recommended profile on next activation and switch caching on anyway.
+		$take_page_cache = (bool) \WPDeveloper\PageCacheSafety\Detector::is_field_clear();
+
+		return (bool) \WPDeveloper\PageCacheSafety\Setup::prepare( $take_page_cache );
 	}
 
 	/**
@@ -274,14 +322,14 @@ class XSpeed_Setup {
 	 * - can_offer() is false the moment xSpeed is on disk. Right for a banner
 	 *   selling an install; wrong for a button that activates what is already
 	 *   there.
-	 * - can_list() defers to Detector::is_field_clear(), which counts ANY
-	 *   known-owner advanced-cache.php as a blocker. A deactivated xSpeed
-	 *   normally leaves its OWN drop-in behind, so the detector — generic by
-	 *   design, and blind to which plugin is asking — reports xSpeed's leftover
-	 *   as a foreign drop-in and declares the field occupied. The site is then
-	 *   permanently ineligible for the very plugin that left the file.
+	 * - can_list() and can_install() both answer false once xSpeed is on disk,
+	 *   which is exactly the state a reactivation starts from.
 	 *
-	 * So: every blocker counts except one owned by xSpeed itself. Reactivating
+	 * The blocker walk below is what keeps a reactivation honest: a deactivated
+	 * xSpeed normally leaves its OWN drop-in behind, and the detector — generic
+	 * by design, and blind to which plugin is asking — reports that leftover as
+	 * a foreign drop-in. So: every blocker counts except one owned by xSpeed
+	 * itself. Reactivating
 	 * xSpeed over xSpeed's own residue puts exactly one page cache in play,
 	 * which is the entire thing the safety check exists to guarantee. An active
 	 * competitor, an unknown or unreadable drop-in, a duplicate or dynamic

@@ -43,8 +43,9 @@ function MenuItems({ activeTab, handleTabChange }) {
             return null;
           }
 
-          // Hide the "Boost SEO & Speed" tab once both ThinkRank and xSpeed
-          // are installed.
+          // Hide the "Boost SEO & Speed" tab only once BOTH ThinkRank and
+          // xSpeed are installed. Either one alone still leaves the other
+          // half to offer, and PHP has already trimmed the copy to it.
           if ( 'thinkrank' === item && eaelQuickSetup?.thinkrank_content?.all_installed !== false ) {
             return null;
           }
@@ -59,7 +60,11 @@ function MenuItems({ activeTab, handleTabChange }) {
               key={index}
             >
               <span className="eael-nav-count">{++i}</span>
-              <span className="eael-nav-text">{items[item]}</span>
+              <span className="eael-nav-text">
+                { 'thinkrank' === item
+                  ? ( eaelQuickSetup?.thinkrank_content?.menu_label || items[item] )
+                  : items[item] }
+              </span>
             </div>
           );
         })}
