@@ -2,8 +2,9 @@
 .DS_Store
 .phpintel
 ./gulpfile.js
-package-lock.json
 pnpm-lock.yaml
+# root package-lock.json is committed (CI uses npm ci); nested app locks are not
+*/**/package-lock.json
 composer.lock
 /node_modules
 .idea/*

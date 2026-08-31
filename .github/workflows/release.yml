@@ -16,7 +16,7 @@ jobs:
             node-version: '20'
       - name: Running NPM Install & Build For Gutenberg
         run: |
-          npm install --silent && npm run build
+          npm ci --silent && npm run build
       - name: WordPress Plugin Deploy
         id: deploy
         uses: 10up/action-wordpress-plugin-deploy@stable
