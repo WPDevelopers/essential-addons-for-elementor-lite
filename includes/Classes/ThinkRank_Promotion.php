@@ -710,9 +710,13 @@ class ThinkRank_Promotion {
 	/**
 	 * Should this plugin's dashboard widget exist at all?
 	 *
-	 * Active plugin  → yes, always: the widget is functional at that point, not
-	 *                  promotional, and silencing a promo should not take away
-	 *                  a working panel.
+	 * Active ThinkRank → no: ThinkRank ships its own dashboard widgets, so EA's
+	 *                  SEO Check would only add a second panel that says the
+	 *                  plugin is on and links to it. Its whole job was getting
+	 *                  ThinkRank installed; once that is done it steps aside.
+	 * Active xSpeed  → yes: the Speed Check widget stays functional (TTFB,
+	 *                  unminified assets, legacy images), not promotional, and
+	 *                  silencing a promo should not take away a working panel.
 	 * Not active     → only while the plugin is genuinely on offer and this
 	 *                  user/site has not opted out of it.
 	 *
@@ -729,7 +733,7 @@ class ThinkRank_Promotion {
 		}
 
 		if ( $this->is_plugin_running( $plugin ) ) {
-			return true;
+			return self::SLUG !== $plugin;
 		}
 
 		// xSpeed additionally has to clear the page-cache-safety check: a site
