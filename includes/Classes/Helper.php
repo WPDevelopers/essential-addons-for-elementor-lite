@@ -2398,14 +2398,26 @@ class Helper
 	 *
 	 * A widget may need this notice in more than one section (e.g. Advanced Accordion,
 	 * where EA Pro adds a second ACF source for the media layout). Pass a distinct
-	 * $control_id in that case — reusing the default id makes Elementor bail out with
-	 * "Cannot redeclare control with same name" and drops the second notice.
+	 * control id as an optional third argument in that case — reusing the default id
+	 * makes Elementor bail out with "Cannot redeclare control with same name" and drops
+	 * the second notice.
 	 *
-	 * @param \Elementor\Widget_Base $wb         Widget instance.
-	 * @param array                  $condition  Elementor control condition array.
-	 * @param string                 $control_id Control id to register the notice under.
+	 * The third argument is deliberately NOT in the signature: EA Pro's
+	 * `Pro\Classes\Helper` extends this class and overrides this method with the
+	 * two-argument signature. PHP requires a child method to declare every parameter
+	 * the parent declares — optional ones included — so adding a third parameter here
+	 * fatals every site running an older Pro build. Read it via func_get_args() so the
+	 * inherited signature stays two arguments wide.
+	 *
+	 * @param \Elementor\Widget_Base $wb        Widget instance.
+	 * @param array                  $condition Elementor control condition array.
+	 *
+	 * @internal param string $control_id Optional third arg: control id for the notice.
 	 */
-	public static function eael_acf_notice_controls( $wb, $condition, $control_id = 'eael_acf_notice_controls' ) {
+	public static function eael_acf_notice_controls( $wb, $condition ) {
+		$args       = func_get_args();
+		$control_id = isset( $args[2] ) && is_string( $args[2] ) && '' !== $args[2] ? $args[2] : 'eael_acf_notice_controls';
+
 		if ( self::eael_control_exists( $wb, $control_id ) ) {
 			return;
 		}
