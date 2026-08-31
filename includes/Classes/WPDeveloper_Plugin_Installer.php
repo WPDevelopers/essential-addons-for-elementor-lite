@@ -36,6 +36,32 @@ class WPDeveloper_Plugin_Installer
 		add_action( 'wp_ajax_wpdeveloper_deactivate_plugin', [ $this, 'ajax_deactivate_plugin' ] );
 	}
 
+	/**
+	 * Consume a freshly activated plugin's own "go to my setup wizard" flag.
+	 *
+	 * Plugins installed from an EA surface are activated in the background over
+	 * AJAX, and EA then sends the user where its own CTA promised — ThinkRank's
+	 * dashboard, for instance. ThinkRank's activator sets a 60-second transient
+	 * that redirects the NEXT admin page load to its Setup Wizard, so without
+	 * this the promised destination is hijacked on arrival.
+	 *
+	 * Called after every successful EA-driven activation, so the guarantee holds
+	 * for the admin banner, Quick Setup and the plain activate endpoint alike.
+	 * Harmless no-op for plugins with no such flag.
+	 *
+	 * @param string $slug wp.org slug of the plugin just activated.
+	 * @return void
+	 */
+	public static function suppress_activation_redirect( $slug ) {
+		$flags = [
+			'thinkrank' => 'thinkrank_setup_wizard_redirect',
+		];
+
+		if ( isset( $flags[ $slug ] ) ) {
+			delete_transient( $flags[ $slug ] );
+		}
+	}
+
     /**
      * get_local_plugin_data
      *
@@ -143,6 +169,7 @@ class WPDeveloper_Plugin_Installer
 			}
 
 			XSpeed_Setup::after_activation( $slug );
+			self::suppress_activation_redirect( $slug );
 
 			return true;
 		}
@@ -186,6 +213,7 @@ class WPDeveloper_Plugin_Installer
             }
 
             XSpeed_Setup::after_activation( $slug );
+            self::suppress_activation_redirect( $slug );
 
             return $active === null;
         }
@@ -240,14 +268,6 @@ class WPDeveloper_Plugin_Installer
             if ( isset( $remote_urls[ $promotype ][ $slug ] ) ) {
                 wp_remote_get( $remote_urls[ $promotype ][ $slug ] );
             }
-
-			// ThinkRank schedules a one-time redirect to its own setup wizard on
-			// activation. When installed from Quick Setup the user must stay in
-			// EA's wizard, so consume that flag before it can hijack the next
-			// admin page load.
-			if ( 'quick-setup' === $promotype && 'thinkrank' === $slug && ! is_wp_error( $result ) ) {
-				delete_transient( 'thinkrank_setup_wizard_redirect' );
-			}
         }
 
 	    if ( is_wp_error( $result ) ) {
@@ -315,6 +335,7 @@ class WPDeveloper_Plugin_Installer
         }
 
         XSpeed_Setup::after_activation( $slug );
+        self::suppress_activation_redirect( $slug );
 
         wp_send_json_success(__('Plugin is activated successfully!', 'essential-addons-for-elementor-lite'));
     }
