@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 6.8.1
+Stable tag: 6.8.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -26,6 +26,9 @@ No extra resources or messy code to slow down your website. Optimized for super 
 
 ### Elements Control option
 Enable and disable individual elements adding to make your page load faster and smoother. You can deactivate unnecessary widgets to keep the site light.
+
+### Angie AI Integration
+Build faster with Elementor's agentic AI — prompt Angie to create, customize, and fine-tune your Essential Addons widgets right inside the editor.
 
 
 ### 6,500+ Ready WordPress Templates & Blocks through **Templately**
@@ -112,6 +115,7 @@ We have designed more than 65+ useful widgets to enhance your Elementor Page Bui
 55. [Woo Add to Cart](https://essential-addons.com/woo-add-to-cart/)- Make shopping easier with an ‘Add to Cart’ button
 56. [Breadcrumbs](https://essential-addons.com/breadcrumbs/)- Improve navigation with breadcrumbs for easy exploration
 57. [Code Snippet](https://essential-addons.com/code-snippet)- Display beautifully formatted code on your Elementor website
+58. [Mega Menu](https://essential-addons.com/mega-menu/)- Build rich, multi-column navigation menus visually
 
 Extensions (Free):
 
@@ -127,6 +131,7 @@ Extensions (Free):
 8. [Liquid Glass Effects](https://essential-addons.com/liquid-glass-effects/) - Give your website a sleek, futuristic feel with stunning glass effects
 9. [Image Masking with Morphing](https://essential-addons.com/image-masking-with-morphing/) -  Create seamless transformations and interactive visual effects with smooth masking & morphing
 10. [Vertical Text Orientation](https://essential-addons.com/vertical-text-orientation/) - Bring style to pages with modern, eye-catching vertical text
+11. [Header & Footer Builder](https://essential-addons.com/header-footer-builder/) - Build custom Elementor headers and footers from presets
 
 ### More elements (50+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 

@@ -579,7 +579,7 @@ class ThinkRank_Promotion {
 				'icon'       => EAEL_PLUGIN_URL . 'assets/admin/images/xspeed/icon.svg',
 				// The xSpeed mark is taller than it is wide (223x256); squaring
 				// it here would stretch it.
-				'icon_w'     => 35,
+				'icon_w'     => 40,
 				'icon_h'     => 40,
 				'open'       => admin_url( 'admin.php?page=' . self::XSPEED_ADMIN_PAGE ),
 				'title'      => __( 'Speed up every page you build', 'essential-addons-for-elementor-lite' ),

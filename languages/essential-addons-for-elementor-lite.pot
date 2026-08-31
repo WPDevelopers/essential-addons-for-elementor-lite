@@ -241,72 +241,246 @@ msgstr ""
 msgid "Just Deactivate"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:307
+#: ../includes/Classes/ThinkRank_Promotion.php:482
 msgid "Skip"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:308, ../includes/Classes/ThinkRank_Promotion.php:468
+#: ../includes/Classes/ThinkRank_Promotion.php:483, ../includes/Classes/ThinkRank_Promotion.php:918, ../includes/Classes/ThinkRank_Promotion.php:983, ../includes/Classes/ThinkRank_Promotion.php:1151
 msgid "Never show me again"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:318
-msgid "Get found on Google & AI answers - configure your SEO"
+#: ../includes/Classes/ThinkRank_Promotion.php:553
+msgid "Get found on Google & AI answers - and load fast"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:319
-msgid "Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank."
+#: ../includes/Classes/ThinkRank_Promotion.php:554
+msgid "Let AI handle titles, meta, schema & sitemaps, while smart caching and asset optimization keep every page quick. Free with ThinkRank & xSpeed."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:322, ../includes/Classes/ThinkRank_Promotion.php:338
-msgid "Enable SEO Tool"
+#: ../includes/Classes/ThinkRank_Promotion.php:555
+msgid "Enable SEO & Speed"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:335
-msgid "Enabling ThinkRank…"
+#: ../includes/Classes/ThinkRank_Promotion.php:556
+msgid "Enabling ThinkRank & xSpeed…"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:336
+#: ../includes/Classes/ThinkRank_Promotion.php:557, ../includes/Classes/ThinkRank_Promotion.php:572
 msgid "Enabled! Opening ThinkRank…"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:337
+#: ../includes/Classes/ThinkRank_Promotion.php:568
+msgid "Get found on Google & AI answers - configure your SEO"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:569
+msgid "Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:570
+msgid "Enable SEO Tool"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:571
+msgid "Enabling ThinkRank…"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:585
+msgid "Speed up every page you build"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:586
+msgid "Smart caching, asset optimization & CDN keep your pages fast and lift Core Web Vitals - without touching your design. Free with xSpeed."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:587
+msgid "Enable Speed Tool"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:588, ../includes/Classes/ThinkRank_Promotion.php:831
+msgid "Enabling xSpeed…"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:589
+msgid "Enabled! Opening xSpeed…"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:614
 msgid "Could not enable automatically. Try Plugins → Add New."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:397
+#: ../includes/Classes/ThinkRank_Promotion.php:816
+msgid "Speed Check"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:821
+msgid "Improve your website speed"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:822
+msgid "AI finds what's slowing you down and fixes it."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:826
+msgid "Activates xSpeed Cache — already installed, free from WPDeveloper"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:827
+msgid "Installs xSpeed Cache — free, from WPDeveloper"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:828
+msgid "Trusted by 6M+ websites"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:829
+msgid "xSpeed caches your pages, trims unused CSS & JS and serves assets from a CDN, then shows what it saved."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:830
+msgid "Fix this now"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:832
+msgid "xSpeed is active"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:833
+msgid "Open xSpeed to see your cache status and what each optimization saved."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:834, ../includes/Classes/ThinkRank_Promotion.php:1071
+msgid "Open xSpeed"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:835, ../includes/Classes/ThinkRank_Promotion.php:855
+msgid "Could not enable automatically. Please try from Plugins → Add New."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:845
 msgid "SEO Check"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:456
+#: ../includes/Classes/ThinkRank_Promotion.php:848
 msgid "Analyze your SEO with AI"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:458
+#: ../includes/Classes/ThinkRank_Promotion.php:849
 msgid "ThinkRank's AI reviews your titles, meta, schema and readability, then shows the quick wins. See how your pages score."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:463, ../includes/Classes/ThinkRank_Promotion.php:585, ../includes/Classes/ThinkRank_Promotion.php:590
+#: ../includes/Classes/ThinkRank_Promotion.php:850
 msgid "Analyze my SEO"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:485
-msgid "ThinkRank is active"
-msgstr ""
-
-#: ../includes/Classes/ThinkRank_Promotion.php:487
-msgid "Open ThinkRank to see your AI SEO score and page-by-page fixes."
-msgstr ""
-
-#: ../includes/Classes/ThinkRank_Promotion.php:490
-msgid "Open ThinkRank"
-msgstr ""
-
-#: ../includes/Classes/ThinkRank_Promotion.php:543
+#: ../includes/Classes/ThinkRank_Promotion.php:851
 msgid "Analyzing… enabling ThinkRank"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:544
-msgid "Could not enable automatically. Please try from Plugins → Add New."
+#: ../includes/Classes/ThinkRank_Promotion.php:852
+msgid "ThinkRank is active"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:853
+msgid "Open ThinkRank to see your AI SEO score and page-by-page fixes."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:854
+msgid "Open ThinkRank"
+msgstr ""
+
+#. translators: %s: number of unminified CSS and JS files found.
+#: ../includes/Classes/ThinkRank_Promotion.php:947
+msgid "%s unminified CSS and JS file"
+msgid_plural "%s unminified CSS and JS files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1028
+msgid "Page cache on"
+msgstr ""
+
+#. translators: %s: current time to first byte, e.g. "210ms".
+#: ../includes/Classes/ThinkRank_Promotion.php:1036
+msgid "Page cache on — TTFB down to %s"
+msgstr ""
+
+#. translators: %s: number of images not yet in a modern format.
+#: ../includes/Classes/ThinkRank_Promotion.php:1045
+msgid "%s image is still JPEG or PNG — the biggest win left."
+msgid_plural "%s images are still JPEG or PNG — the biggest win left."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1053
+msgid "Your images are already in a modern format — nothing big left to convert."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1068
+msgid "AI resizes on upload; existing images convert in the background."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1070
+msgid "Optimize images"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1073
+msgid "All xSpeed settings"
+msgstr ""
+
+#. translators: %s: time to first byte, e.g. "840ms".
+#: ../includes/Classes/ThinkRank_Promotion.php:1086
+msgid "TTFB %s"
+msgstr ""
+
+#. translators: %s: how long ago the measurement was taken, e.g. "5 mins ago".
+#: ../includes/Classes/ThinkRank_Promotion.php:1091
+msgid " · measured %s"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1101
+msgid "xSpeed is installed — caching is still off"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1105
+msgid "Setup takes a minute — AI picks the settings."
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1106
+msgid "Configure xSpeed"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1108
+msgid "Nothing is cached until setup finishes"
+msgstr ""
+
+#. translators: %s: a number of milliseconds.
+#: ../includes/Classes/ThinkRank_Promotion.php:1270
+msgid "%sms"
+msgstr ""
+
+#. translators: %s: a number of seconds, to one decimal place.
+#: ../includes/Classes/ThinkRank_Promotion.php:1274
+msgid "%ss"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1287
+msgid "just now"
+msgstr ""
+
+#. translators: %s: human-readable time difference, e.g. "5 mins".
+#. translators: %s is the time difference
+#: ../includes/Classes/ThinkRank_Promotion.php:1292, ../includes/Traits/Twitter_Feed.php:222
+msgid "%s ago"
+msgstr ""
+
+#. translators: %s: name of the plugin currently handling the page cache.
+#: ../includes/Classes/ThinkRank_Promotion.php:1346
+msgid "Page cache handled by %s"
+msgstr ""
+
+#: ../includes/Classes/ThinkRank_Promotion.php:1351
+msgid "No page cache detected"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Core_Installer.php:60
@@ -13910,11 +14084,6 @@ msgid "%d user rejected."
 msgid_plural "%d users rejected."
 msgstr[0] ""
 msgstr[1] ""
-
-#. translators: %s is the time difference
-#: ../includes/Traits/Twitter_Feed.php:222
-msgid "%s ago"
-msgstr ""
 
 #: ../includes/Traits/Woo_Product_Comparable.php:46, ../includes/Traits/Woo_Product_Comparable.php:95
 msgid "Availability"
