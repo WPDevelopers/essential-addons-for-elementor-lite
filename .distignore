@@ -61,6 +61,7 @@ postcss.config.js
 .prettierrc.json
 .prettierignore
 .stylelintrc.json
+.angie-bundle-meta.json
 
 vendor/priyomukul/wp-notice/.editorconfig
 vendor/priyomukul/wp-notice/.gitignore
