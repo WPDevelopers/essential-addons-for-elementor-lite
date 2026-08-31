@@ -553,8 +553,8 @@ class ThinkRank_Promotion {
 				'title'      => __( 'Get found on Google & AI answers - and load fast', 'essential-addons-for-elementor-lite' ),
 				'desc'       => __( 'Let AI handle titles, meta, schema & sitemaps, while smart caching and asset optimization keep every page quick. Free with ThinkRank & xSpeed.', 'essential-addons-for-elementor-lite' ),
 				'cta'        => __( 'Enable SEO & Speed', 'essential-addons-for-elementor-lite' ),
-				'installing' => __( 'Enabling ThinkRank & xSpeed…', 'essential-addons-for-elementor-lite' ),
-				'done'       => __( 'Enabled! Opening ThinkRank…', 'essential-addons-for-elementor-lite' ),
+				'installing' => __( 'Enabling SEO & Speed…', 'essential-addons-for-elementor-lite' ),
+				'done'       => __( 'Enabled! Opening SEO Tool…', 'essential-addons-for-elementor-lite' ),
 			];
 		}
 
@@ -568,8 +568,8 @@ class ThinkRank_Promotion {
 				'title'      => __( 'Get found on Google & AI answers - configure your SEO', 'essential-addons-for-elementor-lite' ),
 				'desc'       => __( 'Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank.', 'essential-addons-for-elementor-lite' ),
 				'cta'        => __( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ),
-				'installing' => __( 'Enabling ThinkRank…', 'essential-addons-for-elementor-lite' ),
-				'done'       => __( 'Enabled! Opening ThinkRank…', 'essential-addons-for-elementor-lite' ),
+				'installing' => __( 'Enabling SEO Tool…', 'essential-addons-for-elementor-lite' ),
+				'done'       => __( 'Enabled! Opening SEO Tool…', 'essential-addons-for-elementor-lite' ),
 			];
 		}
 
@@ -585,8 +585,8 @@ class ThinkRank_Promotion {
 				'title'      => __( 'Speed up every page you build', 'essential-addons-for-elementor-lite' ),
 				'desc'       => __( 'Smart caching, asset optimization & CDN keep your pages fast and lift Core Web Vitals - without touching your design. Free with xSpeed.', 'essential-addons-for-elementor-lite' ),
 				'cta'        => __( 'Enable Speed Tool', 'essential-addons-for-elementor-lite' ),
-				'installing' => __( 'Enabling xSpeed…', 'essential-addons-for-elementor-lite' ),
-				'done'       => __( 'Enabled! Opening xSpeed…', 'essential-addons-for-elementor-lite' ),
+				'installing' => __( 'Enabling Speed…', 'essential-addons-for-elementor-lite' ),
+				'done'       => __( 'Enabled! Opening Speed Tool…', 'essential-addons-for-elementor-lite' ),
 			];
 		}
 
