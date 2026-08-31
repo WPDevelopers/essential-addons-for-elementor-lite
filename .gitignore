@@ -13,3 +13,6 @@ composer.lock
 # E2E testing
 test-results/
 playwright-report/
+
+# Angie MCP bundle build artifact (baseline lives in bin/angie-bundle.allowed.json)
+.angie-bundle-meta.json
