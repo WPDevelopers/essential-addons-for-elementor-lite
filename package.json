@@ -8,13 +8,14 @@
   "scripts": {
     "dev": "webpack --mode production --watch",
     "build": "webpack --mode production && webpack --mode development && npm run build:angie",
-    "build:angie": "esbuild src/js/admin/angie-integration.js --bundle --format=iife --minify --outfile=assets/admin/js/angie-integration.min.js",
+    "build:angie": "esbuild src/js/admin/angie-integration.js --bundle --format=iife --minify --outfile=assets/admin/js/angie-integration.min.js --metafile=.angie-bundle-meta.json && npm run verify:angie",
     "format": "prettier --write 'src/**/*.{js,scss,css,json}'",
     "format:check": "prettier --check 'src/**/*.{js,scss,css,json}'",
     "prepare": "husky",
     "test:setup": "wp-env start && wp-env run cli bash /var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/tests/e2e/utils/seed.sh",
     "test:reset": "echo y | wp-env destroy && npm run test:setup",
-    "test:e2e": "playwright test --config=tests/e2e/playwright.config.ts"
+    "test:e2e": "playwright test --config=tests/e2e/playwright.config.ts",
+    "verify:angie": "node bin/verify-angie-bundle.mjs"
   },
   "repository": {
     "type": "git",
@@ -28,10 +29,10 @@
   "homepage": "https://github.com/rupok/essential-addons-for-elementor-lite#readme",
   "devDependencies": {
     "@babel/cli": "^7.7.7",
-    "@elementor/angie-sdk": "^1.5.2",
-    "@modelcontextprotocol/sdk": "^1.27.0",
-    "esbuild": "^0.23.0",
-    "zod": "^3.23.0",
+    "@elementor/angie-sdk": "1.5.2",
+    "@modelcontextprotocol/sdk": "1.27.0",
+    "esbuild": "0.23.1",
+    "zod": "3.25.76",
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.6",

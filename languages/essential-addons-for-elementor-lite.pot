@@ -13,6 +13,26 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: ../includes/Classes/Angie_Integration.php:149
+msgid "Missing widget name."
+msgstr ""
+
+#: ../includes/Classes/Angie_Integration.php:155
+msgid "Unknown Essential Addons widget."
+msgstr ""
+
+#: ../includes/Classes/Angie_Integration.php:418
+msgid "Invalid nonce."
+msgstr ""
+
+#: ../includes/Classes/Angie_Integration.php:422
+msgid "Insufficient permissions."
+msgstr ""
+
+#: ../includes/Classes/Angie_Integration.php:426
+msgid "Elementor is not active."
+msgstr ""
+
 #: ../includes/Classes/Asset_Builder.php:395
 msgid "Added "
 msgstr ""

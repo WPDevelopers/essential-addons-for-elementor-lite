@@ -8,6 +8,25 @@
  * Built standalone with esbuild (npm run build:angie) into
  * assets/admin/js/angie-integration.min.js — NOT part of the webpack pipeline.
  * Enqueued only when the Angie plugin is active (see Angie_Integration.php).
+ *
+ * Bundle composition (issue #883): the output inlines an OIDC/OAuth2 client and
+ * the ajv JSON-Schema compiler, neither of which EA's own code path reaches.
+ * Both are unavoidable from here rather than an artifact of our esbuild config:
+ *
+ *   - @elementor/angie-sdk publishes a single "." export whose dist/index.js is
+ *     already webpack-bundled with @elementor/oidc-auth inlined, so there is no
+ *     narrower subpath to import and nothing left for esbuild to tree-shake.
+ *   - ajv is a static import of @modelcontextprotocol/sdk's server/index.js,
+ *     which every MCP server needs.
+ *
+ * --external is not an option either: this runs as a plain wp-admin <script>
+ * with no module loader to resolve externals against.
+ *
+ * What we do control is drift. Every package compiled into the artifact is
+ * pinned to an exact version and recorded in bin/angie-bundle.allowed.json;
+ * bin/verify-angie-bundle.mjs fails the build if the bundled dependency set,
+ * any of their versions, or the output size moves. Worth revisiting if
+ * Elementor ever ships an MCP-only entry point for the SDK.
  */
 import { AngieMcpSdk } from '@elementor/angie-sdk';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';

@@ -136,7 +136,7 @@ class Bootstrap
 
         // Angie (Elementor AI Assistant) widget discovery; self-gates on ANGIE_VERSION
         if ( $this->is_activate_elementor() ) {
-            new Angie_Integration();
+            new Angie_Integration( $this->registered_elements );
         }
 
 		include_once(EAEL_PLUGIN_PATH . 'includes/bfcm-pointer.php');
