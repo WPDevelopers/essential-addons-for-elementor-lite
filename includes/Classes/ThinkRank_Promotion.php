@@ -10,7 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * ThinkRank cross-promotion controller.
  *
  * Surfaces WPDeveloper's AI SEO plugin (ThinkRank) inside the Essential Addons
- * admin experience. Every surface is:
+ * admin experience. The admin banner also carries xSpeed (performance) when the
+ * site can take it — see banner_copy(); every other surface is ThinkRank only.
+ * Every surface is:
  *   - native to WordPress admin,
  *   - clearly attributed to Essential Addons, so admins always know which
  *     plugin the suggestion comes from,
@@ -49,19 +51,35 @@ class ThinkRank_Promotion {
 	const ADMIN_PAGE = 'thinkrank';
 
 	/**
+	 * xSpeed top-level admin page, for the banner that offers xSpeed alone.
+	 *
+	 * The slug and basename themselves live on XSpeed_Setup, which owns every
+	 * other xSpeed decision (including whether this site may be offered a page
+	 * cache at all) — only this landing page is promo-specific.
+	 *
+	 * NOTE: confirm the final menu slug before release, as with self::SLUG.
+	 */
+	const XSPEED_ADMIN_PAGE = 'xspeed';
+
+	/**
 	 * How long "Maybe later" / "Skip for 30 days" hides the promo for, in seconds.
 	 */
 	const SNOOZE_DURATION = 30 * DAY_IN_SECONDS;
 
 	/**
-	 * Site option — permanent "Never show me again". When set, every ThinkRank
-	 * surface is hidden for all users of this installation, forever.
+	 * Site option — ThinkRank's permanent "Never show me again". When set,
+	 * every ThinkRank surface is hidden for all users of this installation,
+	 * forever. xSpeed has its own; see state_key(), which derives both.
+	 *
+	 * Kept as a constant because it is the key EA already shipped, and the one
+	 * outside code would look for.
 	 */
 	const NEVER_SHOW_OPTION = 'eael_thinkrank_never_show';
 
 	/**
-	 * Site option — timestamp until which the promo is skipped site-wide
-	 * ("Skip for 30 days" on the EA Dashboard banner).
+	 * Site option — timestamp until which ThinkRank is skipped site-wide
+	 * ("Skip for 30 days" on the EA Dashboard banner). Per plugin; see
+	 * NEVER_SHOW_OPTION.
 	 */
 	const SKIP_UNTIL_OPTION = 'eael_thinkrank_skip_until';
 
@@ -154,57 +172,163 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Has the current user permanently dismissed the ThinkRank promo banner?
+	 * Every plugin this class can promote, in banner order.
+	 *
+	 * Each has its OWN dismiss/snooze/never/skip state — skipping one must
+	 * never silence the other. See state_key().
+	 *
+	 * @return array
 	 */
-	public function is_dismissed() {
-		return (bool) get_user_meta( get_current_user_id(), 'eael_thinkrank_dismissed', true );
+	private static function promoted_plugins() {
+		return [ self::SLUG, XSpeed_Setup::SLUG ];
 	}
 
 	/**
-	 * Has the current user snoozed the promo via "Maybe later", and is that
-	 * snooze still running? Unlike is_dismissed() this expires on its own.
+	 * Option / user-meta key holding one plugin's promo state.
+	 *
+	 * Deliberately derived from the slug rather than listed per plugin,
+	 * because for 'thinkrank' the pattern reproduces the four key names EA
+	 * already shipped, byte for byte:
+	 *
+	 *     eael_thinkrank_dismissed      eael_thinkrank_never_show
+	 *     eael_thinkrank_snoozed_until  eael_thinkrank_skip_until
+	 *
+	 * That is the whole backward-compatibility story: a site that dismissed or
+	 * skipped the ThinkRank-only banner shipped in an earlier release keeps
+	 * exactly that state under exactly those keys, while xSpeed starts clean on
+	 * its own `eael_xspeed_*` keys — so those users are still eligible for the
+	 * xSpeed banner, which is the point.
+	 *
+	 * @param string $plugin Slug, one of promoted_plugins().
+	 * @param string $what   dismissed | snoozed | never | skip.
+	 * @return string
 	 */
-	public function is_snoozed() {
-		$until = (int) get_user_meta( get_current_user_id(), 'eael_thinkrank_snoozed_until', true );
+	private static function state_key( $plugin, $what ) {
+		$suffix = [
+			'dismissed' => '_dismissed',
+			'snoozed'   => '_snoozed_until',
+			'never'     => '_never_show',
+			'skip'      => '_skip_until',
+		];
+
+		return 'eael_' . $plugin . $suffix[ $what ];
+	}
+
+	/**
+	 * Normalize a plugin slug, defaulting to ThinkRank.
+	 *
+	 * Every state method defaults to ThinkRank rather than requiring a slug:
+	 * the Gutenberg panel and the dashboard widget are ThinkRank-only surfaces
+	 * and call these with no argument, and the AJAX endpoints are hit by JS
+	 * from an earlier release that sends no plugin at all. In both cases
+	 * "unspecified" has always meant ThinkRank, and must keep meaning it.
+	 *
+	 * @param string $plugin
+	 * @return string
+	 */
+	private static function plugin_or_default( $plugin ) {
+		$plugin = sanitize_key( (string) $plugin );
+
+		return in_array( $plugin, self::promoted_plugins(), true ) ? $plugin : self::SLUG;
+	}
+
+	/**
+	 * Has the current user permanently dismissed this plugin's promo banner?
+	 *
+	 * @param string $plugin Slug; defaults to ThinkRank.
+	 */
+	public function is_dismissed( $plugin = self::SLUG ) {
+		$plugin = self::plugin_or_default( $plugin );
+
+		return (bool) get_user_meta( get_current_user_id(), self::state_key( $plugin, 'dismissed' ), true );
+	}
+
+	/**
+	 * Has the current user snoozed this plugin's promo via "Maybe later", and
+	 * is that snooze still running? Unlike is_dismissed() this expires on its own.
+	 *
+	 * @param string $plugin Slug; defaults to ThinkRank.
+	 */
+	public function is_snoozed( $plugin = self::SLUG ) {
+		$plugin = self::plugin_or_default( $plugin );
+		$until  = (int) get_user_meta( get_current_user_id(), self::state_key( $plugin, 'snoozed' ), true );
 
 		return $until > time();
 	}
 
 	/**
-	 * Has ANY admin permanently hidden the ThinkRank promo for the whole site?
+	 * Has ANY admin permanently hidden this plugin's promo for the whole site?
+	 *
+	 * @param string $plugin Slug; defaults to ThinkRank.
 	 */
-	public function is_never_shown() {
-		return (bool) get_option( self::NEVER_SHOW_OPTION );
+	public function is_never_shown( $plugin = self::SLUG ) {
+		$plugin = self::plugin_or_default( $plugin );
+
+		return (bool) get_option( self::state_key( $plugin, 'never' ) );
 	}
 
 	/**
-	 * Is the site-wide "Skip for 30 days" snooze still running?
+	 * Is this plugin's site-wide "Skip for 30 days" snooze still running?
+	 *
+	 * @param string $plugin Slug; defaults to ThinkRank.
 	 */
-	public function is_skipped() {
-		return (int) get_option( self::SKIP_UNTIL_OPTION ) > time();
+	public function is_skipped( $plugin = self::SLUG ) {
+		$plugin = self::plugin_or_default( $plugin );
+
+		return (int) get_option( self::state_key( $plugin, 'skip' ) ) > time();
 	}
 
 	/**
-	 * Is the promo hidden right now, for any reason? Site-wide switches
-	 * (kill switch, never-show, skip) win over per-user state.
+	 * Is this plugin's promo hidden right now, for any reason? Site-wide
+	 * switches (kill switch, never-show, skip) win over per-user state.
+	 *
+	 * The kill switch is the only part that is not per-plugin: it turns off
+	 * every promotional surface EA has, by design.
+	 *
+	 * @param string $plugin Slug; defaults to ThinkRank.
 	 */
-	public function is_hidden() {
+	public function is_hidden( $plugin = self::SLUG ) {
+		$plugin = self::plugin_or_default( $plugin );
+
 		return self::promotions_disabled()
-			|| $this->is_never_shown()
-			|| $this->is_skipped()
-			|| $this->is_dismissed()
-			|| $this->is_snoozed();
+			|| $this->is_never_shown( $plugin )
+			|| $this->is_skipped( $plugin )
+			|| $this->is_dismissed( $plugin )
+			|| $this->is_snoozed( $plugin );
 	}
 
 	/**
-	 * Permanent per-user dismiss of the banner.
+	 * Which plugins is this dismiss/snooze/never/skip request about?
+	 *
+	 * The banner sends the slugs it actually showed, so dismissing a combined
+	 * banner silences both plugins while dismissing a single-plugin banner
+	 * silences only that one. Anything unrecognized — including the empty
+	 * request sent by the pre-xSpeed Gutenberg panel — falls back to ThinkRank,
+	 * which is what "no plugin specified" meant when those callers were written.
+	 *
+	 * @return array Slugs, always non-empty.
+	 */
+	private static function requested_plugins() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- every caller runs check_ajax_referer() first.
+		$raw = isset( $_POST['plugins'] ) ? sanitize_text_field( wp_unslash( $_POST['plugins'] ) ) : '';
+
+		$requested = array_map( 'sanitize_key', explode( ',', $raw ) );
+		$valid     = array_values( array_intersect( self::promoted_plugins(), $requested ) );
+
+		return empty( $valid ) ? [ self::SLUG ] : $valid;
+	}
+
+	/**
+	 * Permanent per-user dismiss of the banner, for the plugins it showed.
 	 */
 	public function ajax_dismiss_banner() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 		if ( ! current_user_can( 'install_plugins' ) ) {
 			wp_send_json_error();
 		}
-		update_user_meta( get_current_user_id(), 'eael_thinkrank_dismissed', 1 );
+		foreach ( self::requested_plugins() as $plugin ) {
+			update_user_meta( get_current_user_id(), self::state_key( $plugin, 'dismissed' ), 1 );
+		}
 		wp_send_json_success();
 	}
 
@@ -217,21 +341,26 @@ class ThinkRank_Promotion {
 		if ( ! current_user_can( 'install_plugins' ) ) {
 			wp_send_json_error();
 		}
-		update_user_meta( get_current_user_id(), 'eael_thinkrank_snoozed_until', time() + self::SNOOZE_DURATION );
+		foreach ( self::requested_plugins() as $plugin ) {
+			update_user_meta( get_current_user_id(), self::state_key( $plugin, 'snoozed' ), time() + self::SNOOZE_DURATION );
+		}
 		wp_send_json_success();
 	}
 
 	/**
 	 * Site-wide, permanent "Never show me again". One click by any admin hides
-	 * every ThinkRank surface (notices, Gutenberg panel, dashboard widget) for
-	 * all users of this installation, forever.
+	 * every surface for the plugins the banner showed — notices, and for
+	 * ThinkRank the Gutenberg panel and dashboard widget too — for all users of
+	 * this installation, forever. The other plugin's banner is untouched.
 	 */
 	public function ajax_never_show() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error();
 		}
-		update_option( self::NEVER_SHOW_OPTION, 1, true );
+		foreach ( self::requested_plugins() as $plugin ) {
+			update_option( self::state_key( $plugin, 'never' ), 1, true );
+		}
 		wp_send_json_success();
 	}
 
@@ -245,7 +374,9 @@ class ThinkRank_Promotion {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error();
 		}
-		update_option( self::SKIP_UNTIL_OPTION, time() + self::SNOOZE_DURATION, true );
+		foreach ( self::requested_plugins() as $plugin ) {
+			update_option( self::state_key( $plugin, 'skip' ), time() + self::SNOOZE_DURATION, true );
+		}
 		wp_send_json_success();
 	}
 
@@ -278,11 +409,12 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Dismissible, attributed "configure your SEO" prompt.
+	 * Dismissible, attributed prompt for whichever of ThinkRank / xSpeed this
+	 * site does not have yet — see banner_copy() for which that is.
 	 *
 	 * Secondary action depends on context:
 	 *  - 'content' (Posts/Pages/CPT list screens): "Never show me again" —
-	 *    permanent, SITE-WIDE. One click hides every ThinkRank surface for all
+	 *    permanent, SITE-WIDE. One click hides every promo surface for all
 	 *    users of this installation, forever.
 	 *  - 'ea' (EA Dashboard): "Skip for 30 days" — site-wide snooze; the promo
 	 *    may return after 30 days unless never-show was used.
@@ -290,7 +422,10 @@ class ThinkRank_Promotion {
 	 * Never global; see banner_context() for scope.
 	 */
 	public function render_dashboard_banner() {
-		if ( $this->is_thinkrank_active() || $this->is_hidden() ) {
+		// Kill switch only. Per-plugin dismiss/skip state is NOT checked here:
+		// each plugin carries its own, and banner_copy() drops just the ones
+		// that are hidden rather than suppressing the whole banner.
+		if ( self::promotions_disabled() ) {
 			return;
 		}
 		if ( ! current_user_can( 'install_plugins' ) ) {
@@ -302,40 +437,149 @@ class ThinkRank_Promotion {
 			return;
 		}
 
+		// Empty when nothing is left to offer — every plugin is either already
+		// in play, off the table on this site, or individually dismissed.
+		$copy = $this->banner_copy();
+		if ( ! $copy ) {
+			return;
+		}
+
 		$later_action = 'ea' === $context ? 'eael_thinkrank_skip' : 'eael_thinkrank_never_show';
 		$later_label  = 'ea' === $context
 			? __( 'Skip', 'essential-addons-for-elementor-lite' )
 			: __( 'Never show me again', 'essential-addons-for-elementor-lite' );
 
 		$nonce = wp_create_nonce( 'essential-addons-elementor' );
-		$open  = esc_url( admin_url( 'admin.php?page=' . self::ADMIN_PAGE ) );
+		$open  = esc_url( $copy['open'] );
 		?>
-		<div class="notice eael-tr-banner" data-slug="<?php echo esc_attr( self::SLUG ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-open="<?php echo $open; ?>">
+		<div class="notice eael-tr-banner" data-slug="<?php echo esc_attr( $copy['slugs'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-open="<?php echo $open; ?>">
 			<div class="eael-tr-banner__icon" aria-hidden="true">
-				<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/thinkrank/icon.svg' ); ?>" width="40" height="40" alt="">
+				<img src="<?php echo esc_url( $copy['icon'] ); ?>" width="<?php echo esc_attr( $copy['icon_w'] ); ?>" height="<?php echo esc_attr( $copy['icon_h'] ); ?>" alt="">
 			</div>
 			<div class="eael-tr-banner__body">
-				<strong class="eael-tr-banner__title"><?php esc_html_e( 'Get found on Google & AI answers - configure your SEO', 'essential-addons-for-elementor-lite' ); ?></strong>
-				<span class="eael-tr-banner__desc"><?php esc_html_e( 'Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank.', 'essential-addons-for-elementor-lite' ); ?></span>
+				<strong class="eael-tr-banner__title"><?php echo esc_html( $copy['title'] ); ?></strong>
+				<span class="eael-tr-banner__desc"><?php echo esc_html( $copy['desc'] ); ?></span>
 			</div>
 			<div class="eael-tr-banner__actions">
-				<button type="button" class="button button-primary eael-tr-banner__install"><?php esc_html_e( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ); ?></button>
+				<button type="button" class="button button-primary eael-tr-banner__install"><?php echo esc_html( $copy['cta'] ); ?></button>
 				<button type="button" class="eael-tr-banner__later" data-action="<?php echo esc_attr( $later_action ); ?>"><?php echo esc_html( $later_label ); ?></button>
 			</div>
 		</div>
 		<?php
-		$this->banner_assets();
+		$this->banner_assets( $copy );
+	}
+
+	/**
+	 * What the banner promotes right now — or an empty array when nothing is
+	 * left to promote and the banner should not render at all.
+	 *
+	 * ThinkRank (SEO) and xSpeed (performance) are decided independently: each
+	 * is on offer when the site does not have it AND that plugin's own state
+	 * (see state_key()) has not been dismissed, snoozed, skipped or
+	 * never-shown. Whatever survives decides the banner — both, one, or none —
+	 * and the copy, icon and CTA follow it, so the banner never promises
+	 * something it will not install.
+	 *
+	 * The independence is the point: skipping the combined banner's xSpeed half
+	 * must leave ThinkRank's own banner free to appear later, and a site that
+	 * dismissed the ThinkRank-only banner shipped in an earlier release is
+	 * still eligible for the xSpeed one.
+	 *
+	 * 'slugs' is what the install button walks, in order: wp.org slugs, comma
+	 * separated, one AJAX install each.
+	 *
+	 * @return array
+	 */
+	private function banner_copy() {
+		$offer = [];
+
+		// ThinkRank: on offer while it is not running. An installed-but-
+		// deactivated copy still counts as on offer — the CTA activates it.
+		if ( ! $this->is_thinkrank_active() && ! $this->is_hidden( self::SLUG ) ) {
+			$offer[] = self::SLUG;
+		}
+
+		// xSpeed: can_offer() is false once xSpeed is on disk at all, and also
+		// whenever this site must not be handed a page cache — an incumbent
+		// cache plugin, an unreadable site state, or a PHP floor xSpeed cannot
+		// meet. Installing a second page cache silently breaks the first, so
+		// "we could not tell" has to mean "do not offer".
+		if ( XSpeed_Setup::can_offer() && ! $this->is_hidden( XSpeed_Setup::SLUG ) ) {
+			$offer[] = XSpeed_Setup::SLUG;
+		}
+
+		$both = [ self::SLUG, XSpeed_Setup::SLUG ];
+
+		if ( $offer === $both ) {
+			return [
+				'slugs'      => implode( ',', $offer ),
+				'icon'       => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrankxspeed.svg',
+				'icon_w'     => 40,
+				'icon_h'     => 40,
+				'open'       => admin_url( 'admin.php?page=' . self::ADMIN_PAGE ),
+				'title'      => __( 'Get found on Google & AI answers - and load fast', 'essential-addons-for-elementor-lite' ),
+				'desc'       => __( 'Let AI handle titles, meta, schema & sitemaps, while smart caching and asset optimization keep every page quick. Free with ThinkRank & xSpeed.', 'essential-addons-for-elementor-lite' ),
+				'cta'        => __( 'Enable SEO & Speed', 'essential-addons-for-elementor-lite' ),
+				'installing' => __( 'Enabling ThinkRank & xSpeed…', 'essential-addons-for-elementor-lite' ),
+				'done'       => __( 'Enabled! Opening ThinkRank…', 'essential-addons-for-elementor-lite' ),
+			];
+		}
+
+		if ( [ self::SLUG ] === $offer ) {
+			return [
+				'slugs'      => self::SLUG,
+				'icon'       => EAEL_PLUGIN_URL . 'assets/admin/images/thinkrank/icon.svg',
+				'icon_w'     => 40,
+				'icon_h'     => 40,
+				'open'       => admin_url( 'admin.php?page=' . self::ADMIN_PAGE ),
+				'title'      => __( 'Get found on Google & AI answers - configure your SEO', 'essential-addons-for-elementor-lite' ),
+				'desc'       => __( 'Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank.', 'essential-addons-for-elementor-lite' ),
+				'cta'        => __( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ),
+				'installing' => __( 'Enabling ThinkRank…', 'essential-addons-for-elementor-lite' ),
+				'done'       => __( 'Enabled! Opening ThinkRank…', 'essential-addons-for-elementor-lite' ),
+			];
+		}
+
+		if ( [ XSpeed_Setup::SLUG ] === $offer ) {
+			return [
+				'slugs'      => XSpeed_Setup::SLUG,
+				'icon'       => EAEL_PLUGIN_URL . 'assets/admin/images/xspeed/icon.svg',
+				// The xSpeed mark is taller than it is wide (223x256); squaring
+				// it here would stretch it.
+				'icon_w'     => 35,
+				'icon_h'     => 40,
+				'open'       => admin_url( 'admin.php?page=' . self::XSPEED_ADMIN_PAGE ),
+				'title'      => __( 'Speed up every page you build', 'essential-addons-for-elementor-lite' ),
+				'desc'       => __( 'Smart caching, asset optimization & CDN keep your pages fast and lift Core Web Vitals - without touching your design. Free with xSpeed.', 'essential-addons-for-elementor-lite' ),
+				'cta'        => __( 'Enable Speed Tool', 'essential-addons-for-elementor-lite' ),
+				'installing' => __( 'Enabling xSpeed…', 'essential-addons-for-elementor-lite' ),
+				'done'       => __( 'Enabled! Opening xSpeed…', 'essential-addons-for-elementor-lite' ),
+			];
+		}
+
+		return [];
 	}
 
 	/**
 	 * Inline styles + behaviour for the banner. Reuses the shared installer
 	 * AJAX for install and the dismiss endpoint for permanent dismissal.
+	 *
+	 * The installer endpoint takes one slug per request, so a banner offering
+	 * both plugins walks its slugs one at a time and stops at the first
+	 * failure. A partial install is not a dead end: the next page load
+	 * recomputes banner_copy() and offers whatever is still missing.
+	 *
+	 * @param array $copy Return value of banner_copy().
 	 */
-	private function banner_assets() {
-		$installing = esc_js( __( 'Enabling ThinkRank…', 'essential-addons-for-elementor-lite' ) );
-		$done       = esc_js( __( 'Enabled! Opening ThinkRank…', 'essential-addons-for-elementor-lite' ) );
-		$failed     = esc_js( __( 'Could not enable automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ) );
-		$label      = esc_js( __( 'Enable SEO Tool', 'essential-addons-for-elementor-lite' ) );
+	private function banner_assets( $copy ) {
+		// JSON, not esc_js(): these labels contain "&", and esc_js() would
+		// HTML-encode it into an &amp; that a <script> block never decodes
+		// back. wp_json_encode() emits its own quotes — hence none below.
+		$flags      = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
+		$installing = wp_json_encode( $copy['installing'], $flags );
+		$done       = wp_json_encode( $copy['done'], $flags );
+		$failed     = wp_json_encode( __( 'Could not enable automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ), $flags );
+		$label      = wp_json_encode( $copy['cta'], $flags );
 		?>
 		<style>
 			.eael-tr-banner.notice { display:flex; align-items:center; gap:16px; padding:14px 16px; border-left-color:#4451ff; position:relative; }
@@ -353,21 +597,37 @@ class ThinkRank_Promotion {
 			var el = document.querySelector( '.eael-tr-banner' );
 			if ( ! el || el.dataset.bound ) { return; }
 			el.dataset.bound = '1';
-			function post( action ) {
+			function post( action, slug ) {
 				var b = new URLSearchParams();
 				b.append( 'action', action );
 				b.append( 'security', el.dataset.nonce );
-				if ( 'wpdeveloper_install_plugin' === action ) { b.append( 'slug', el.dataset.slug ); }
+				if ( slug ) { b.append( 'slug', slug ); }
+				// Which plugins this banner actually showed. Skip/never-show
+				// applies to exactly those, so silencing a combined banner
+				// never silences a plugin the user was not offered.
+				else { b.append( 'plugins', el.dataset.slug ); }
 				return window.fetch( window.ajaxurl, { method:'POST', credentials:'same-origin', headers:{ 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8' }, body:b.toString() } ).then( function(r){ return r.json(); } );
 			}
 			var later = el.querySelector( '.eael-tr-banner__later' );
 			later.addEventListener( 'click', function () { post( later.dataset.action || 'eael_thinkrank_snooze' ); el.parentNode && el.parentNode.removeChild( el ); } );
 			el.querySelector( '.eael-tr-banner__install' ).addEventListener( 'click', function () {
-				var btn = this; btn.setAttribute( 'disabled', 'disabled' ); btn.textContent = '<?php echo $installing; ?>';
-				post( 'wpdeveloper_install_plugin' ).then( function ( res ) {
-					if ( res && res.success ) { btn.textContent = '<?php echo $done; ?>'; window.setTimeout( function () { window.location.href = el.dataset.open; }, 800 ); }
-					else { btn.removeAttribute( 'disabled' ); btn.textContent = '<?php echo $label; ?>'; window.alert( ( res && res.data ) ? res.data : '<?php echo $failed; ?>' ); }
-				} ).catch( function () { btn.removeAttribute( 'disabled' ); btn.textContent = '<?php echo $label; ?>'; window.alert( '<?php echo $failed; ?>' ); } );
+				var btn = this; btn.setAttribute( 'disabled', 'disabled' ); btn.textContent = <?php echo $installing; ?>;
+				var slugs = ( el.dataset.slug || '' ).split( ',' ).filter( Boolean );
+				// One install at a time, carrying the first error forward: the
+				// endpoint takes a single slug, and a cache install must not
+				// start while the previous activation is still settling.
+				slugs.reduce( function ( chain, slug ) {
+					return chain.then( function ( err ) {
+						if ( err ) { return err; }
+						return post( 'wpdeveloper_install_plugin', slug ).then( function ( res ) {
+							if ( res && res.success ) { return ''; }
+							return ( res && res.data ) ? res.data : <?php echo $failed; ?>;
+						} );
+					} );
+				}, window.Promise.resolve( '' ) ).then( function ( err ) {
+					if ( ! err ) { btn.textContent = <?php echo $done; ?>; window.setTimeout( function () { window.location.href = el.dataset.open; }, 800 ); }
+					else { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo $label; ?>; window.alert( err ); }
+				} ).catch( function () { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo $label; ?>; window.alert( <?php echo $failed; ?> ); } );
 			} );
 		} )();
 		</script>
@@ -375,28 +635,90 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Register the "SEO Check" dashboard widget.
+	 * Register one dashboard widget per plugin — "SEO Check" (ThinkRank) and
+	 * "Speed Check" (xSpeed).
 	 *
-	 * Gated to users who can install plugins so the CTA is actionable. Being a
-	 * real dashboard widget, it is removable by the user via Screen Options.
+	 * The two are fully independent: each has its own widget id, its own
+	 * never-show state, and its own eligibility. Removing or silencing one
+	 * leaves the other alone.
 	 *
-	 * The promo (not-installed) state honors every opt-out — kill switch,
-	 * site-wide never-show/skip and per-user dismiss/snooze. Once ThinkRank is
-	 * actually active the widget is functional, not promotional, so it stays.
+	 * Gated to users who can install plugins so the CTA is actionable. Being
+	 * real dashboard widgets, both are removable by the user via Screen Options.
+	 *
+	 * A promo (not-installed) state honors every opt-out — kill switch,
+	 * site-wide never-show/skip and per-user dismiss/snooze. Once the plugin is
+	 * actually active its widget is functional, not promotional, so it stays.
 	 */
 	public function register_dashboard_widget() {
 		if ( ! current_user_can( 'install_plugins' ) ) {
 			return;
 		}
-		if ( ! $this->is_thinkrank_active() && $this->is_hidden() ) {
-			return;
+
+		foreach ( self::promoted_plugins() as $plugin ) {
+			if ( ! $this->widget_eligible( $plugin ) ) {
+				continue;
+			}
+
+			$spec = $this->widget_spec( $plugin );
+
+			// A closure, not [ $this, 'render_dashboard_widget' ]: WP invokes a
+			// dashboard callback with ( $screen, $box ), so a method taking a
+			// plugin slug would receive the screen object instead.
+			wp_add_dashboard_widget(
+				$spec['id'],
+				$spec['widget_title'],
+				function () use ( $plugin ) {
+					$this->render_dashboard_widget( $plugin );
+				}
+			);
+		}
+	}
+
+	/**
+	 * Should this plugin's dashboard widget exist at all?
+	 *
+	 * Active plugin  → yes, always: the widget is functional at that point, not
+	 *                  promotional, and silencing a promo should not take away
+	 *                  a working panel.
+	 * Not active     → only while the plugin is genuinely on offer and this
+	 *                  user/site has not opted out of it.
+	 *
+	 * @param string $plugin Slug.
+	 * @return bool
+	 */
+	private function widget_eligible( $plugin ) {
+		if ( $this->is_plugin_running( $plugin ) ) {
+			return true;
 		}
 
-		wp_add_dashboard_widget(
-			'eael_thinkrank_seo_check',
-			esc_html__( 'SEO Check', 'essential-addons-for-elementor-lite' ),
-			[ $this, 'render_dashboard_widget' ]
-		);
+		// xSpeed additionally has to clear the page-cache-safety check — a site
+		// that already has a page cache must not be offered a second one, from
+		// this widget any more than from the banner.
+		if ( XSpeed_Setup::SLUG === $plugin && ! XSpeed_Setup::can_offer() ) {
+			return false;
+		}
+
+		return ! $this->is_hidden( $plugin );
+	}
+
+	/**
+	 * Is this plugin installed AND active?
+	 *
+	 * @param string $plugin Slug.
+	 * @return bool
+	 */
+	public function is_plugin_running( $plugin ) {
+		$plugin = self::plugin_or_default( $plugin );
+
+		if ( XSpeed_Setup::SLUG === $plugin ) {
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
+			return is_plugin_active( XSpeed_Setup::BASENAME );
+		}
+
+		return $this->is_thinkrank_active();
 	}
 
 	/**
@@ -417,85 +739,142 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Absolute URL to a staged ThinkRank brand asset.
+	 * Everything that differs between the two widgets, in one place: ids, copy,
+	 * accent colour and the glyph in the ring.
+	 *
+	 * Widget ids are load-bearing and must not be renamed — WordPress keys
+	 * "hidden via Screen Options" on them per user, so a rename silently
+	 * un-hides the widget for everyone who had already dismissed it.
+	 * 'eael_thinkrank_seo_check' is the id EA already shipped.
+	 *
+	 * @param string $plugin Slug.
+	 * @return array
 	 */
-	private function asset( $file ) {
-		return EAEL_PLUGIN_URL . 'assets/admin/images/thinkrank/' . $file;
+	private function widget_spec( $plugin ) {
+		if ( XSpeed_Setup::SLUG === $plugin ) {
+			return [
+				'slug'          => XSpeed_Setup::SLUG,
+				'id'            => 'eael_xspeed_speed_check',
+				'widget_title'  => esc_html__( 'Speed Check', 'essential-addons-for-elementor-lite' ),
+				'open_url'      => admin_url( 'admin.php?page=' . self::XSPEED_ADMIN_PAGE ),
+				'prompt_title'  => __( 'Check your site speed', 'essential-addons-for-elementor-lite' ),
+				'prompt_desc'   => __( 'xSpeed caches your pages, trims unused CSS & JS and serves assets from a CDN, then shows what it saved. See how fast your pages can get.', 'essential-addons-for-elementor-lite' ),
+				'cta'           => __( 'Boost my speed', 'essential-addons-for-elementor-lite' ),
+				'installing'    => __( 'Optimizing… enabling xSpeed', 'essential-addons-for-elementor-lite' ),
+				'active_title'  => __( 'xSpeed is active', 'essential-addons-for-elementor-lite' ),
+				'active_desc'   => __( 'Open xSpeed to see your cache status and what each optimization saved.', 'essential-addons-for-elementor-lite' ),
+				'active_cta'    => __( 'Open xSpeed', 'essential-addons-for-elementor-lite' ),
+				'failed'        => __( 'Could not enable automatically. Please try from Plugins → Add New.', 'essential-addons-for-elementor-lite' ),
+				'modifier'      => 'eael-tr-widget--xspeed',
+				// Lightning bolt — performance.
+				'glyph'         => '<svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"></path></svg>',
+			];
+		}
+
+		return [
+			'slug'          => self::SLUG,
+			'id'            => 'eael_thinkrank_seo_check',
+			'widget_title'  => esc_html__( 'SEO Check', 'essential-addons-for-elementor-lite' ),
+			'open_url'      => admin_url( 'admin.php?page=' . self::ADMIN_PAGE ),
+			'prompt_title'  => __( 'Analyze your SEO with AI', 'essential-addons-for-elementor-lite' ),
+			'prompt_desc'   => __( "ThinkRank's AI reviews your titles, meta, schema and readability, then shows the quick wins. See how your pages score.", 'essential-addons-for-elementor-lite' ),
+			'cta'           => __( 'Analyze my SEO', 'essential-addons-for-elementor-lite' ),
+			'installing'    => __( 'Analyzing… enabling ThinkRank', 'essential-addons-for-elementor-lite' ),
+			'active_title'  => __( 'ThinkRank is active', 'essential-addons-for-elementor-lite' ),
+			'active_desc'   => __( 'Open ThinkRank to see your AI SEO score and page-by-page fixes.', 'essential-addons-for-elementor-lite' ),
+			'active_cta'    => __( 'Open ThinkRank', 'essential-addons-for-elementor-lite' ),
+			'failed'        => __( 'Could not enable automatically. Please try from Plugins → Add New.', 'essential-addons-for-elementor-lite' ),
+			'modifier'      => '',
+			// Magnifier with a tick — an SEO audit.
+			'glyph'         => '<svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"></circle><path d="m21 21-4.3-4.3"></path><path d="M7.4 10.2 9.4 12.2 12.8 8.6"></path></svg>',
+		];
 	}
 
 	/**
-	 * Render the dashboard widget body.
+	 * Render one widget body.
+	 *
+	 * @param string $plugin Slug; defaults to ThinkRank so any pre-existing
+	 *                       direct caller keeps the behaviour it had.
 	 */
-	public function render_dashboard_widget() {
-		$active = $this->is_thinkrank_active();
+	public function render_dashboard_widget( $plugin = self::SLUG ) {
+		$plugin = self::plugin_or_default( $plugin );
+		$spec   = $this->widget_spec( $plugin );
+
 		$this->widget_styles();
 
-		echo '<div class="eael-tr-widget">';
+		printf( '<div class="%s">', esc_attr( trim( 'eael-tr-widget ' . $spec['modifier'] ) ) );
 
-		if ( $active ) {
-			$this->render_active_state();
+		if ( $this->is_plugin_running( $plugin ) ) {
+			$this->render_active_state( $spec );
 		} else {
-			$this->render_prompt_state();
+			$this->render_prompt_state( $spec );
 		}
 
 		echo '</div>';
 	}
 
 	/**
-	 * Not-installed prompt — the acquisition state.
-	 * AI-focused copy: the primary CTA analyzes SEO, which installs ThinkRank.
+	 * Not-installed prompt — the acquisition state. The primary CTA runs the
+	 * check the widget is named for, which installs the plugin that performs it.
+	 *
+	 * @param array $spec Return value of widget_spec().
 	 */
-	private function render_prompt_state() {
+	private function render_prompt_state( $spec ) {
+		$nonce = wp_create_nonce( 'essential-addons-elementor' );
 		?>
 		<div class="eael-tr-widget__body eael-tr-widget__body--center">
 			<div class="eael-tr-ring" aria-hidden="true">
-				<svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<circle cx="10" cy="10" r="7"></circle><path d="m21 21-4.3-4.3"></path><path d="M7.4 10.2 9.4 12.2 12.8 8.6"></path>
-				</svg>
+				<?php echo $spec['glyph']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static markup from widget_spec(). ?>
 			</div>
-			<div class="eael-tr-widget__title"><?php esc_html_e( 'Analyze your SEO with AI', 'essential-addons-for-elementor-lite' ); ?></div>
+			<div class="eael-tr-widget__title"><?php echo esc_html( $spec['prompt_title'] ); ?></div>
 			<p class="eael-tr-widget__desc">
-				<?php esc_html_e( "ThinkRank's AI reviews your titles, meta, schema and readability, then shows the quick wins. See how your pages score.", 'essential-addons-for-elementor-lite' ); ?>
+				<?php echo esc_html( $spec['prompt_desc'] ); ?>
 			</p>
 			<button type="button" class="button button-primary eael-tr-cta eael-tr-install"
-				data-slug="<?php echo esc_attr( self::SLUG ); ?>"
-				data-nonce="<?php echo esc_attr( wp_create_nonce( 'essential-addons-elementor' ) ); ?>">
-				<span class="eael-tr-cta__label"><?php esc_html_e( 'Analyze my SEO', 'essential-addons-for-elementor-lite' ); ?></span>
+				data-slug="<?php echo esc_attr( $spec['slug'] ); ?>"
+				data-nonce="<?php echo esc_attr( $nonce ); ?>">
+				<span class="eael-tr-cta__label"><?php echo esc_html( $spec['cta'] ); ?></span>
 			</button>
 			<div class="eael-tr-notice" role="status" style="display:none;"></div>
 			<button type="button" class="button-link eael-tr-never"
-				data-nonce="<?php echo esc_attr( wp_create_nonce( 'essential-addons-elementor' ) ); ?>">
+				data-plugins="<?php echo esc_attr( $spec['slug'] ); ?>"
+				data-nonce="<?php echo esc_attr( $nonce ); ?>">
 				<?php esc_html_e( 'Never show me again', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
 		</div>
 		<?php
-		$this->widget_script();
+		$this->widget_script( $spec );
 	}
 
 	/**
-	 * Installed/active — ThinkRank is present, point users into it.
+	 * Installed/active — the plugin is present, point users into it.
 	 * No fabricated score: we don't invent data we can't read.
+	 *
+	 * @param array $spec Return value of widget_spec().
 	 */
-	private function render_active_state() {
+	private function render_active_state( $spec ) {
 		?>
 		<div class="eael-tr-widget__body eael-tr-widget__body--center">
 			<div class="eael-tr-ring eael-tr-ring--active" aria-hidden="true">
 				<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
 			</div>
-			<div class="eael-tr-widget__title"><?php esc_html_e( 'ThinkRank is active', 'essential-addons-for-elementor-lite' ); ?></div>
+			<div class="eael-tr-widget__title"><?php echo esc_html( $spec['active_title'] ); ?></div>
 			<p class="eael-tr-widget__desc">
-				<?php esc_html_e( 'Open ThinkRank to see your AI SEO score and page-by-page fixes.', 'essential-addons-for-elementor-lite' ); ?>
+				<?php echo esc_html( $spec['active_desc'] ); ?>
 			</p>
-			<a class="button button-primary eael-tr-cta" href="<?php echo esc_url( admin_url( 'admin.php?page=thinkrank' ) ); ?>">
-				<?php esc_html_e( 'Open ThinkRank', 'essential-addons-for-elementor-lite' ); ?>
+			<a class="button button-primary eael-tr-cta" href="<?php echo esc_url( $spec['open_url'] ); ?>">
+				<?php echo esc_html( $spec['active_cta'] ); ?>
 			</a>
 		</div>
 		<?php
 	}
 
 	/**
-	 * Scoped, native-feeling styles for the widget (light + dark aware via
-	 * the admin colour scheme body classes WP already sets).
+	 * Scoped, native-feeling styles shared by both widgets (light + dark aware
+	 * via the admin colour scheme body classes WP already sets).
+	 *
+	 * Printed once however many widgets render; per-widget differences ride on
+	 * the --eael-tr-accent / --eael-tr-ring custom properties instead.
 	 */
 	private function widget_styles() {
 		static $printed = false;
@@ -505,15 +884,17 @@ class ThinkRank_Promotion {
 		$printed = true;
 		?>
 		<style>
-			#eael_thinkrank_seo_check .inside { margin: 0; padding: 0; }
-			.eael-tr-widget { --eael-tr-accent: #4451ff; }
+			#eael_thinkrank_seo_check .inside,
+			#eael_xspeed_speed_check .inside { margin: 0; padding: 0; }
+			.eael-tr-widget { --eael-tr-accent: #4451ff; --eael-tr-accent-hover: #3742d6; --eael-tr-ring: #7c86ff; }
+			.eael-tr-widget--xspeed { --eael-tr-accent: #34c0b7; --eael-tr-accent-hover: #2aa199; --eael-tr-ring: #34c0b7; }
 			.eael-tr-widget__body { padding: 22px 20px 16px; }
 			.eael-tr-widget__body--center { text-align: center; }
 			.eael-tr-ring {
 				width: 108px; height: 108px; margin: 2px auto 14px;
 				border-radius: 50%; border: 10px solid #e6e7ea;
 				display: flex; align-items: center; justify-content: center;
-				color: #7c86ff;
+				color: var(--eael-tr-ring);
 			}
 			.eael-tr-ring--active { border-color: #edfaef; color: #00a32a; }
 			.eael-tr-widget__title { font-size: 16px; font-weight: 600; color: #1d2327; margin-bottom: 6px; }
@@ -523,7 +904,7 @@ class ThinkRank_Promotion {
 				box-shadow: none; text-shadow: none; font-weight: 600;
 			}
 			.eael-tr-cta.button.button-primary:hover,
-			.eael-tr-cta.button.button-primary:focus { background: #3742d6; border-color: #3742d6; }
+			.eael-tr-cta.button.button-primary:focus { background: var(--eael-tr-accent-hover); border-color: var(--eael-tr-accent-hover); }
 			.eael-tr-cta[disabled] { opacity: .7; cursor: default; }
 			.eael-tr-notice { margin-top: 12px; font-size: 12.5px; color: #50575e; }
 			.eael-tr-notice.is-error { color: #d63638; }
@@ -535,36 +916,59 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Inline install handler — POSTs to the shared installer AJAX and swaps the
-	 * widget into a success/open state without a page reload.
+	 * Inline install handler for ONE widget — POSTs to the shared installer
+	 * AJAX and swaps that widget into a success/open state without a reload.
+	 *
+	 * Every selector is rooted at the widget's own id, and never-show posts
+	 * only this widget's slug, so the two widgets cannot bind each other's
+	 * buttons or silence each other.
+	 *
+	 * @param array $spec Return value of widget_spec().
 	 */
-	private function widget_script() {
-		$open_url = esc_url( admin_url( 'admin.php?page=thinkrank' ) );
-		$installing = esc_js( __( 'Analyzing… enabling ThinkRank', 'essential-addons-for-elementor-lite' ) );
-		$failed     = esc_js( __( 'Could not enable automatically. Please try from Plugins → Add New.', 'essential-addons-for-elementor-lite' ) );
+	private function widget_script( $spec ) {
+		$flags    = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
+		$id       = wp_json_encode( '#' . $spec['id'], $flags );
+		$open_url = wp_json_encode( $spec['open_url'], $flags );
+		// JSON rather than esc_js(): these labels can contain "&", which
+		// esc_js() turns into an &amp; that a <script> block never decodes.
+		$installing = wp_json_encode( $spec['installing'], $flags );
+		$label      = wp_json_encode( $spec['cta'], $flags );
+		$failed     = wp_json_encode( $spec['failed'], $flags );
 		?>
 		<script>
 		( function () {
-			var never = document.querySelector( '#eael_thinkrank_seo_check .eael-tr-never' );
+			var root = document.querySelector( <?php echo $id; ?> );
+			if ( ! root ) { return; }
+			function post( body ) {
+				return window.fetch( window.ajaxurl, {
+					method: 'POST',
+					credentials: 'same-origin',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+					body: body.toString()
+				} ).then( function ( r ) { return r.json(); } );
+			}
+			var never = root.querySelector( '.eael-tr-never' );
 			if ( never && ! never.dataset.bound ) {
 				never.dataset.bound = '1';
 				never.addEventListener( 'click', function () {
+					// Permanent, SITE-WIDE opt-out — but only for THIS
+					// plugin; the other widget keeps its own state.
 					var body = new URLSearchParams();
 					body.append( 'action', 'eael_thinkrank_never_show' );
 					body.append( 'security', never.dataset.nonce );
-					window.fetch( window.ajaxurl, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }, body: body.toString() } );
-					var widget = document.getElementById( 'eael_thinkrank_seo_check' );
-					widget && widget.parentNode && widget.parentNode.removeChild( widget );
+					body.append( 'plugins', never.dataset.plugins );
+					post( body );
+					root.parentNode && root.parentNode.removeChild( root );
 				} );
 			}
-			var btn = document.querySelector( '#eael_thinkrank_seo_check .eael-tr-install' );
+			var btn = root.querySelector( '.eael-tr-install' );
 			if ( ! btn || btn.dataset.bound ) { return; }
 			btn.dataset.bound = '1';
 			btn.addEventListener( 'click', function () {
-				var notice = document.querySelector( '#eael_thinkrank_seo_check .eael-tr-notice' );
+				var notice = root.querySelector( '.eael-tr-notice' );
 				var label  = btn.querySelector( '.eael-tr-cta__label' );
 				btn.setAttribute( 'disabled', 'disabled' );
-				if ( label ) { label.textContent = '<?php echo $installing; ?>'; }
+				if ( label ) { label.textContent = <?php echo $installing; ?>; }
 				if ( notice ) { notice.style.display = 'none'; notice.className = 'eael-tr-notice'; }
 
 				var body = new URLSearchParams();
@@ -572,23 +976,18 @@ class ThinkRank_Promotion {
 				body.append( 'slug', btn.dataset.slug );
 				body.append( 'security', btn.dataset.nonce );
 
-				window.fetch( window.ajaxurl, {
-					method: 'POST',
-					credentials: 'same-origin',
-					headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-					body: body.toString()
-				} ).then( function ( r ) { return r.json(); } ).then( function ( res ) {
+				post( body ).then( function ( res ) {
 					if ( res && res.success ) {
-						window.setTimeout( function () { window.location.href = '<?php echo $open_url; ?>'; }, 900 );
+						window.setTimeout( function () { window.location.href = <?php echo $open_url; ?>; }, 900 );
 					} else {
 						btn.removeAttribute( 'disabled' );
-						if ( label ) { label.textContent = '<?php echo esc_js( __( 'Analyze my SEO', 'essential-addons-for-elementor-lite' ) ); ?>'; }
-						if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = ( res && res.data ) ? res.data : '<?php echo $failed; ?>'; }
+						if ( label ) { label.textContent = <?php echo $label; ?>; }
+						if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = ( res && res.data ) ? res.data : <?php echo $failed; ?>; }
 					}
 				} ).catch( function () {
 					btn.removeAttribute( 'disabled' );
-					if ( label ) { label.textContent = '<?php echo esc_js( __( 'Analyze my SEO', 'essential-addons-for-elementor-lite' ) ); ?>'; }
-					if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = '<?php echo $failed; ?>'; }
+					if ( label ) { label.textContent = <?php echo $label; ?>; }
+					if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = <?php echo $failed; ?>; }
 				} );
 			} );
 		} )();
