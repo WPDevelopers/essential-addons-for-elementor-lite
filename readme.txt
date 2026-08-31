@@ -338,6 +338,11 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 
 == Changelog ==
 
+= 6.8.2 - 31/08/2026 =
+
+- Added: Angie AI Integration | Elementor's agentic AI can now discover Essential Addons widgets and their control schemas, so you can prompt Angie to build and customize EA widgets right inside the editor
+- Few minor bug fixes & improvements
+
 = 6.8.1 - 28/08/2026 =
 
 - Fixed: EA Gravity Forms | Submit and Next/Previous button styles stopped applying after the Gravity Forms 3.0 update
