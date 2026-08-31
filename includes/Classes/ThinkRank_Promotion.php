@@ -584,9 +584,9 @@ class ThinkRank_Promotion {
 				'open'       => admin_url( 'admin.php?page=' . self::XSPEED_ADMIN_PAGE ),
 				'title'      => __( 'Speed up every page you build', 'essential-addons-for-elementor-lite' ),
 				'desc'       => __( 'Smart caching, asset optimization & CDN keep your pages fast and lift Core Web Vitals - without touching your design. Free with xSpeed.', 'essential-addons-for-elementor-lite' ),
-				'cta'        => __( 'Enable Speed Tool', 'essential-addons-for-elementor-lite' ),
-				'installing' => __( 'Enabling Speed…', 'essential-addons-for-elementor-lite' ),
-				'done'       => __( 'Enabled! Opening Speed Tool…', 'essential-addons-for-elementor-lite' ),
+				'cta'        => __( 'Enable xSpeed', 'essential-addons-for-elementor-lite' ),
+				'installing' => __( 'Enabling xSpeed…', 'essential-addons-for-elementor-lite' ),
+				'done'       => __( 'Enabled! Opening xSpeed…', 'essential-addons-for-elementor-lite' ),
 			];
 		}
 
