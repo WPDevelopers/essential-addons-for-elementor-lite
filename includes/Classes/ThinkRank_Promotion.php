@@ -62,6 +62,13 @@ class ThinkRank_Promotion {
 	const XSPEED_ADMIN_PAGE = 'xspeed';
 
 	/**
+	 * Hash route within xSpeed's admin page for the image/lazy-load settings —
+	 * where the Speed Check widget's "Optimize images" CTA lands, rather than
+	 * dropping the user on the dashboard to find it themselves.
+	 */
+	const XSPEED_IMAGES_ROUTE = '#/performance/lazy';
+
+	/**
 	 * How long "Maybe later" / "Skip for 30 days" hides the promo for, in seconds.
 	 */
 	const SNOOZE_DURATION = 30 * DAY_IN_SECONDS;
@@ -82,6 +89,32 @@ class ThinkRank_Promotion {
 	 * NEVER_SHOW_OPTION.
 	 */
 	const SKIP_UNTIL_OPTION = 'eael_thinkrank_skip_until';
+
+	/**
+	 * Transient holding the unminified-asset count shown in the Speed Check
+	 * widget. Cached because producing it walks the filesystem; see
+	 * unminified_asset_count().
+	 */
+	const UNMINIFIED_TRANSIENT = 'eael_xspeed_unminified_assets';
+
+	/**
+	 * How long that count stays cached.
+	 */
+	const UNMINIFIED_TTL = 12 * HOUR_IN_SECONDS;
+
+	/**
+	 * Transient holding the last front-page TTFB measurement, and option
+	 * holding the last one taken while the page cache was OFF — the "before"
+	 * the Speed Check widget compares against once caching is on.
+	 */
+	const TTFB_TRANSIENT = 'eael_xspeed_ttfb';
+	const TTFB_BASELINE_OPTION = 'eael_xspeed_ttfb_uncached';
+	const TTFB_TTL = 6 * HOUR_IN_SECONDS;
+
+	/**
+	 * Transient holding the count of images not yet in a modern format.
+	 */
+	const LEGACY_IMAGES_TRANSIENT = 'eael_xspeed_legacy_images';
 
 	public function __construct() {
 		if ( ! is_admin() ) {
@@ -687,14 +720,31 @@ class ThinkRank_Promotion {
 	 * @return bool
 	 */
 	private function widget_eligible( $plugin ) {
+		// "Never show me again" is an explicit, permanent request to remove
+		// this widget — the active-state Speed Check offers it too, so it has
+		// to win even when the plugin is running. Skip/snooze/dismiss are only
+		// ever about the promo, and stay below.
+		if ( $this->is_never_shown( $plugin ) ) {
+			return false;
+		}
+
 		if ( $this->is_plugin_running( $plugin ) ) {
 			return true;
 		}
 
-		// xSpeed additionally has to clear the page-cache-safety check — a site
-		// that already has a page cache must not be offered a second one, from
-		// this widget any more than from the banner.
-		if ( XSpeed_Setup::SLUG === $plugin && ! XSpeed_Setup::can_offer() ) {
+		// xSpeed additionally has to clear the page-cache-safety check: a site
+		// that already has a page cache must never be handed a second one.
+		//
+		// Two ways to be eligible, because the CTA does two different things:
+		// install a copy that isn't here (can_offer), or switch back on one
+		// that is (can_reactivate). Gating on can_offer alone made the Speed
+		// Check widget vanish for anyone who deactivated xSpeed, while the SEO
+		// Check widget stayed put — and can_list() does not rescue that case,
+		// because a deactivated xSpeed's own leftover drop-in reads to the
+		// generic detector as a foreign cache occupying the field.
+		if ( XSpeed_Setup::SLUG === $plugin
+			&& ! XSpeed_Setup::can_offer()
+			&& ! XSpeed_Setup::can_reactivate() ) {
 			return false;
 		}
 
@@ -755,12 +805,30 @@ class ThinkRank_Promotion {
 			return [
 				'slug'          => XSpeed_Setup::SLUG,
 				'id'            => 'eael_xspeed_speed_check',
-				'widget_title'  => esc_html__( 'Speed Check', 'essential-addons-for-elementor-lite' ),
+				// Raw HTML on purpose: WP echoes a dashboard widget title
+				// unescaped inside its <h2>, which is how the icon gets in.
+				// Wrapped in ONE element on purpose: core styles h2.hndle as a
+				// flex container with space-between, so a bare "<img> + text"
+				// title becomes two flex items and the words get shoved to the
+				// far right of the header.
+				'widget_title'  => '<span class="eael-xs-title"><img class="eael-xs-title-icon" src="'
+					. esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/xspeed/icon.svg' ) . '" width="16" height="18" alt="" />'
+					. esc_html__( 'Speed Check', 'essential-addons-for-elementor-lite' ) . '</span>',
 				'open_url'      => admin_url( 'admin.php?page=' . self::XSPEED_ADMIN_PAGE ),
-				'prompt_title'  => __( 'Check your site speed', 'essential-addons-for-elementor-lite' ),
-				'prompt_desc'   => __( 'xSpeed caches your pages, trims unused CSS & JS and serves assets from a CDN, then shows what it saved. See how fast your pages can get.', 'essential-addons-for-elementor-lite' ),
-				'cta'           => __( 'Boost my speed', 'essential-addons-for-elementor-lite' ),
-				'installing'    => __( 'Optimizing… enabling xSpeed', 'essential-addons-for-elementor-lite' ),
+				// The prompt state uses the two-column "check" layout rather
+				// than the centred ring ThinkRank uses; see render_prompt_state().
+				'layout'        => 'check',
+				'prompt_title'  => __( 'Improve your website speed', 'essential-addons-for-elementor-lite' ),
+				'ai_line'       => __( "AI finds what's slowing you down and fixes it.", 'essential-addons-for-elementor-lite' ),
+				// Already on disk? Then the button activates rather than
+				// installs, and the caption should not claim otherwise.
+				'note'          => XSpeed_Setup::is_on_disk()
+					? __( 'Activates xSpeed Cache — already installed, free from WPDeveloper', 'essential-addons-for-elementor-lite' )
+					: __( 'Installs xSpeed Cache — free, from WPDeveloper', 'essential-addons-for-elementor-lite' ),
+				'trust'         => __( 'Trusted by 6M+ websites', 'essential-addons-for-elementor-lite' ),
+				'prompt_desc'   => __( 'xSpeed caches your pages, trims unused CSS & JS and serves assets from a CDN, then shows what it saved.', 'essential-addons-for-elementor-lite' ),
+				'cta'           => __( 'Fix this now', 'essential-addons-for-elementor-lite' ),
+				'installing'    => __( 'Enabling xSpeed…', 'essential-addons-for-elementor-lite' ),
 				'active_title'  => __( 'xSpeed is active', 'essential-addons-for-elementor-lite' ),
 				'active_desc'   => __( 'Open xSpeed to see your cache status and what each optimization saved.', 'essential-addons-for-elementor-lite' ),
 				'active_cta'    => __( 'Open xSpeed', 'essential-addons-for-elementor-lite' ),
@@ -776,6 +844,7 @@ class ThinkRank_Promotion {
 			'id'            => 'eael_thinkrank_seo_check',
 			'widget_title'  => esc_html__( 'SEO Check', 'essential-addons-for-elementor-lite' ),
 			'open_url'      => admin_url( 'admin.php?page=' . self::ADMIN_PAGE ),
+			'layout'        => 'ring',
 			'prompt_title'  => __( 'Analyze your SEO with AI', 'essential-addons-for-elementor-lite' ),
 			'prompt_desc'   => __( "ThinkRank's AI reviews your titles, meta, schema and readability, then shows the quick wins. See how your pages score.", 'essential-addons-for-elementor-lite' ),
 			'cta'           => __( 'Analyze my SEO', 'essential-addons-for-elementor-lite' ),
@@ -820,6 +889,13 @@ class ThinkRank_Promotion {
 	 * @param array $spec Return value of widget_spec().
 	 */
 	private function render_prompt_state( $spec ) {
+		if ( 'check' === $spec['layout'] ) {
+			$this->render_check_prompt( $spec );
+			$this->widget_script( $spec );
+
+			return;
+		}
+
 		$nonce = wp_create_nonce( 'essential-addons-elementor' );
 		?>
 		<div class="eael-tr-widget__body eael-tr-widget__body--center">
@@ -847,12 +923,567 @@ class ThinkRank_Promotion {
 	}
 
 	/**
+	 * The "Speed Check" prompt: what we actually found on this site, next to
+	 * the one button that fixes it.
+	 *
+	 * Both findings are measured, not decorative — see page_cache_line() and
+	 * unminified_asset_count(). A finding we cannot measure is dropped rather
+	 * than guessed, which is why the list is built up instead of hardcoded.
+	 *
+	 * Keeps the .eael-tr-install / .eael-tr-never / .eael-tr-notice hooks the
+	 * shared widget_script() binds to, so only the presentation differs.
+	 *
+	 * @param array $spec Return value of widget_spec().
+	 */
+	private function render_check_prompt( $spec ) {
+		$nonce = wp_create_nonce( 'essential-addons-elementor' );
+
+		$findings = [ $this->page_cache_line() ];
+
+		$unminified = $this->unminified_asset_count();
+		if ( $unminified > 0 ) {
+			$findings[] = sprintf(
+				/* translators: %s: number of unminified CSS and JS files found. */
+				_n( '%s unminified CSS and JS file', '%s unminified CSS and JS files', $unminified, 'essential-addons-for-elementor-lite' ),
+				number_format_i18n( $unminified )
+			);
+		}
+
+		$findings = array_values( array_filter( $findings ) );
+		?>
+		<div class="eael-xs-check">
+			<h3 class="eael-xs-check__heading"><?php echo esc_html( $spec['prompt_title'] ); ?></h3>
+			<div class="eael-xs-check__cols">
+				<div class="eael-xs-check__main">
+					<ul class="eael-xs-check__list">
+						<?php foreach ( $findings as $finding ) : ?>
+							<li class="eael-xs-check__item"><?php echo esc_html( $finding ); ?></li>
+						<?php endforeach; ?>
+						<li class="eael-xs-check__item eael-xs-check__item--ai">
+							<svg class="eael-xs-check__spark" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l1.9 5.3 5.3 1.9-5.3 1.9L12 16.9l-1.9-5.3-5.3-1.9 5.3-1.9L12 2.5zM18.5 15l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9.9-2.4z"></path></svg>
+							<span><?php echo esc_html( $spec['ai_line'] ); ?></span>
+						</li>
+					</ul>
+					<p class="eael-xs-check__trust"><?php echo esc_html( $spec['trust'] ); ?></p>
+				</div>
+				<div class="eael-xs-check__aside">
+					<button type="button" class="eael-tr-cta eael-tr-install eael-xs-check__cta"
+						data-slug="<?php echo esc_attr( $spec['slug'] ); ?>"
+						data-nonce="<?php echo esc_attr( $nonce ); ?>">
+						<span class="eael-tr-cta__label"><?php echo esc_html( $spec['cta'] ); ?></span>
+					</button>
+					<p class="eael-xs-check__note"><?php echo esc_html( $spec['note'] ); ?></p>
+					<div class="eael-tr-notice" role="status" style="display:none;"></div>
+					<!-- No .button-link here: this layout resets the chrome itself,
+					     and core's class would also pull in the ring layout's
+					     .eael-tr-never.button-link rule, which outranks ours. -->
+					<button type="button" class="eael-tr-never eael-xs-check__never"
+						data-plugins="<?php echo esc_attr( $spec['slug'] ); ?>"
+						data-nonce="<?php echo esc_attr( $nonce ); ?>">
+						<?php esc_html_e( 'Never show me again', 'essential-addons-for-elementor-lite' ); ?>
+					</button>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * xSpeed is running — show what it is actually doing, not a pitch.
+	 *
+	 * Two states, chosen by whether the page cache is genuinely serving
+	 * (XSpeed_Setup::page_cache_live(), which verifies the drop-in rather than
+	 * trusting activation):
+	 *
+	 *  - cache OFF: xSpeed is installed but idle. The site's current TTFB is
+	 *    the "before" number, and the CTA finishes setup.
+	 *  - cache ON:  caching is working. The TTFB is compared against the one
+	 *    recorded while it was off, and the CTA moves on to the next win.
+	 *
+	 * Every number here is measured — see measure_ttfb() and
+	 * legacy_image_count(). A measurement we could not take is left out of the
+	 * sentence rather than filled in with a plausible one.
+	 *
+	 * @param array $spec Return value of widget_spec().
+	 */
+	private function render_xspeed_active( $spec ) {
+		/**
+		 * Which of the two active states to render.
+		 *
+		 * Filterable purely so the "caching is off" state can be previewed on a
+		 * site where caching is on — EA's own installer enables page caching
+		 * before activation, so that state is otherwise only reachable when
+		 * xSpeed arrived by some other route, or when the drop-in write was
+		 * refused. Drop this in an mu-plugin to see it:
+		 *
+		 *     add_filter( 'eael/xspeed_page_cache_live', '__return_false' );
+		 *
+		 * @param bool $live Whether xSpeed's page cache is verifiably serving.
+		 */
+		$live  = (bool) apply_filters( 'eael/xspeed_page_cache_live', XSpeed_Setup::page_cache_live() );
+		$nonce = wp_create_nonce( 'essential-addons-elementor' );
+		$ttfb  = $this->measure_ttfb( $live );
+
+		if ( $live ) {
+			$heading = __( 'Page cache on', 'essential-addons-for-elementor-lite' );
+
+			// Only claim an improvement when there is a real "before" to
+			// compare with, and it actually got faster.
+			$before = (int) get_option( self::TTFB_BASELINE_OPTION );
+			if ( $ttfb && $before > 0 && $ttfb['ms'] < $before ) {
+				$heading = sprintf(
+					/* translators: %s: current time to first byte, e.g. "210ms". */
+					__( 'Page cache on — TTFB down to %s', 'essential-addons-for-elementor-lite' ),
+					$this->format_ms( $ttfb['ms'] )
+				);
+			}
+
+			$images = $this->legacy_image_count();
+			$body   = $images > 0
+				? sprintf(
+					/* translators: %s: number of images not yet in a modern format. */
+					_n(
+						'%s image is still JPEG or PNG — the biggest win left.',
+						'%s images are still JPEG or PNG — the biggest win left.',
+						$images,
+						'essential-addons-for-elementor-lite'
+					),
+					number_format_i18n( $images )
+				)
+				: __( 'Your images are already in a modern format — nothing big left to convert.', 'essential-addons-for-elementor-lite' );
+
+			$this->render_active_shell( [
+				'spec'     => $spec,
+				'nonce'    => $nonce,
+				// Straight to the image settings when that is what the CTA
+				// offers; the plain dashboard when there is nothing to fix.
+				'cta_url'  => $images > 0
+					? $spec['open_url'] . self::XSPEED_IMAGES_ROUTE
+					: $spec['open_url'],
+				'dot'      => true,
+				'heading'  => $heading,
+				'measure'  => '',
+				'metric'   => '',
+				'body'     => $body,
+				'ai'       => __( 'AI resizes on upload; existing images convert in the background.', 'essential-addons-for-elementor-lite' ),
+				'cta'      => $images > 0
+					? __( 'Optimize images', 'essential-addons-for-elementor-lite' )
+					: __( 'Open xSpeed', 'essential-addons-for-elementor-lite' ),
+				'foot_url' => $spec['open_url'],
+				'foot'     => __( 'All xSpeed settings', 'essential-addons-for-elementor-lite' ),
+			] );
+
+			return;
+		}
+
+		// Cache off. The TTFB we just took is the honest "before" — remember it
+		// so the cache-on state has something real to compare against.
+		$metric = '';
+		$measure = '';
+		if ( $ttfb ) {
+			$measure = sprintf(
+				/* translators: %s: time to first byte, e.g. "840ms". */
+				__( 'TTFB %s', 'essential-addons-for-elementor-lite' ),
+				$this->format_ms( $ttfb['ms'] )
+			);
+			$metric = sprintf(
+				/* translators: %s: how long ago the measurement was taken, e.g. "5 mins ago". */
+				__( ' · measured %s', 'essential-addons-for-elementor-lite' ),
+				$this->measured_ago( $ttfb['at'] )
+			);
+		}
+
+		$this->render_active_shell( [
+			'spec'     => $spec,
+			'nonce'    => $nonce,
+			'cta_url'  => $spec['open_url'],
+			'dot'      => false,
+			'heading'  => __( 'xSpeed is installed — caching is still off', 'essential-addons-for-elementor-lite' ),
+			'measure'  => $measure,
+			'metric'   => $metric,
+			'body'     => '',
+			'ai'       => __( 'Setup takes a minute — AI picks the settings.', 'essential-addons-for-elementor-lite' ),
+			'cta'      => __( 'Configure xSpeed', 'essential-addons-for-elementor-lite' ),
+			'foot_url' => '',
+			'foot'     => __( 'Nothing is cached until setup finishes', 'essential-addons-for-elementor-lite' ),
+		] );
+	}
+
+	/**
+	 * Shared markup for both active states — same two-column shell as the
+	 * promo, so one stylesheet covers all three.
+	 *
+	 * @param array $v Prepared view data; see render_xspeed_active().
+	 */
+	private function render_active_shell( $v ) {
+		$spec = $v['spec'];
+		?>
+		<div class="eael-xs-check eael-xs-check--active">
+			<h3 class="eael-xs-check__heading">
+				<?php if ( $v['dot'] ) : ?>
+					<span class="eael-xs-check__dot" aria-hidden="true"></span>
+				<?php endif; ?>
+				<?php echo esc_html( $v['heading'] ); ?>
+			</h3>
+			<div class="eael-xs-check__cols">
+				<div class="eael-xs-check__main">
+					<?php if ( '' !== $v['measure'] ) : ?>
+						<p class="eael-xs-check__metric"><strong><?php echo esc_html( $v['measure'] ); ?></strong><?php echo esc_html( $v['metric'] ); ?></p>
+					<?php endif; ?>
+					<?php if ( '' !== $v['body'] ) : ?>
+						<p class="eael-xs-check__body"><?php echo esc_html( $v['body'] ); ?></p>
+					<?php endif; ?>
+					<p class="eael-xs-check__ai">
+						<svg class="eael-xs-check__spark" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l1.9 5.3 5.3 1.9-5.3 1.9L12 16.9l-1.9-5.3-5.3-1.9 5.3-1.9L12 2.5zM18.5 15l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9.9-2.4z"></path></svg>
+						<span><?php echo esc_html( $v['ai'] ); ?></span>
+					</p>
+					<?php if ( '' !== $v['foot_url'] ) : ?>
+						<p class="eael-xs-check__trust"><a class="eael-xs-check__settings" href="<?php echo esc_url( $v['foot_url'] ); ?>"><?php echo esc_html( $v['foot'] ); ?></a></p>
+					<?php else : ?>
+						<p class="eael-xs-check__trust"><?php echo esc_html( $v['foot'] ); ?></p>
+					<?php endif; ?>
+				</div>
+				<div class="eael-xs-check__aside">
+					<a class="eael-xs-check__cta" href="<?php echo esc_url( $v['cta_url'] ); ?>"><?php echo esc_html( $v['cta'] ); ?></a>
+					<button type="button" class="eael-tr-never eael-xs-check__never"
+						data-plugins="<?php echo esc_attr( $spec['slug'] ); ?>"
+						data-nonce="<?php echo esc_attr( $v['nonce'] ); ?>">
+						<?php esc_html_e( 'Never show me again', 'essential-addons-for-elementor-lite' ); ?>
+					</button>
+				</div>
+			</div>
+		</div>
+		<?php
+		// Only the never-show half of the script is needed here (there is
+		// nothing left to install), and it is a no-op without an install button.
+		$this->widget_script( $spec );
+	}
+
+	/**
+	 * Time to first byte for the site's own front page.
+	 *
+	 * Genuinely TTFB, not total response time: the two differ by however long
+	 * the body takes to stream, which on a slow page is most of the number.
+	 * cURL reports it directly, so the measurement is only taken when the cURL
+	 * transport is in play — with any other transport the metric is dropped
+	 * rather than mislabelled.
+	 *
+	 * Cached for TTFB_TTL, because this makes a real HTTP request. A failed or
+	 * unavailable measurement is cached too, so a broken loopback costs one
+	 * request every TTFB_TTL rather than one per dashboard load.
+	 *
+	 * @param bool $cache_live Whether the page cache is currently serving. When
+	 *                         it is not, the reading is also stored as the
+	 *                         uncached baseline.
+	 * @return array|false [ 'ms' => int, 'at' => int ], or false when unavailable.
+	 */
+	private function measure_ttfb( $cache_live ) {
+		$cached = get_transient( self::TTFB_TRANSIENT );
+		if ( false !== $cached ) {
+			return $this->remember_baseline(
+				( is_array( $cached ) && ! empty( $cached['ms'] ) ) ? $cached : false,
+				$cache_live
+			);
+		}
+
+		$capture = function ( $handle ) {
+			// Runs after cURL is configured but before the transfer; the handle
+			// is still valid when we read the timing back below.
+			$this->ttfb_handle = $handle;
+		};
+
+		add_action( 'http_api_curl', $capture, 10, 1 );
+
+		$response = wp_remote_get(
+			home_url( '/' ),
+			[
+				'timeout'    => 8,
+				'redirection' => 2,
+				'sslverify'  => false,
+				'headers'    => [ 'Cache-Control' => 'no-cache' ],
+				// A cache should not learn about this request, and xSpeed must
+				// not serve us a copy of our own probe.
+				'user-agent' => 'EssentialAddons-SpeedCheck/1.0',
+			]
+		);
+
+		remove_action( 'http_api_curl', $capture, 10 );
+
+		$ms = 0;
+		if ( ! is_wp_error( $response )
+			&& wp_remote_retrieve_response_code( $response ) < 400
+			&& isset( $this->ttfb_handle )
+			&& function_exists( 'curl_getinfo' ) ) {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_getinfo -- reading timing off the handle WP itself just used.
+			$seconds = @curl_getinfo( $this->ttfb_handle, CURLINFO_STARTTRANSFER_TIME );
+			$ms      = ( is_numeric( $seconds ) && $seconds > 0 ) ? (int) round( $seconds * 1000 ) : 0;
+		}
+
+		$this->ttfb_handle = null;
+
+		$reading = [ 'ms' => $ms, 'at' => time() ];
+		set_transient( self::TTFB_TRANSIENT, $reading, self::TTFB_TTL );
+
+		return $this->remember_baseline( $ms > 0 ? $reading : false, $cache_live );
+	}
+
+	/**
+	 * Keep the most recent reading taken while the page cache was OFF.
+	 *
+	 * Applied to cached readings as well as fresh ones, so the rule is simply
+	 * "any cache-off reading is the baseline". Doing it only on the fresh path
+	 * would miss the case where caching is switched off while the measurement
+	 * transient is still warm, leaving the cache-on state with nothing to
+	 * compare against for up to TTFB_TTL.
+	 *
+	 * @param array|false $reading    Measurement, or false when unavailable.
+	 * @param bool        $cache_live Whether the page cache is serving.
+	 * @return array|false The reading, unchanged — returned for chaining.
+	 */
+	private function remember_baseline( $reading, $cache_live ) {
+		if ( $reading && ! $cache_live && (int) get_option( self::TTFB_BASELINE_OPTION ) !== (int) $reading['ms'] ) {
+			update_option( self::TTFB_BASELINE_OPTION, (int) $reading['ms'], false );
+		}
+
+		return $reading;
+	}
+
+	/**
+	 * cURL handle of the in-flight TTFB probe. Held only for the duration of
+	 * measure_ttfb().
+	 *
+	 * @var resource|\CurlHandle|null
+	 */
+	private $ttfb_handle = null;
+
+	/**
+	 * Milliseconds as "840ms" or "1.4s", whichever reads better.
+	 *
+	 * @param int $ms
+	 * @return string
+	 */
+	private function format_ms( $ms ) {
+		$ms = (int) $ms;
+
+		if ( $ms < 1000 ) {
+			/* translators: %s: a number of milliseconds. */
+			return sprintf( __( '%sms', 'essential-addons-for-elementor-lite' ), number_format_i18n( $ms ) );
+		}
+
+		/* translators: %s: a number of seconds, to one decimal place. */
+		return sprintf( __( '%ss', 'essential-addons-for-elementor-lite' ), number_format_i18n( $ms / 1000, 1 ) );
+	}
+
+	/**
+	 * "just now" for a fresh reading, "5 mins ago" for a cached one.
+	 *
+	 * @param int $at Unix timestamp of the measurement.
+	 * @return string
+	 */
+	private function measured_ago( $at ) {
+		$age = time() - (int) $at;
+
+		if ( $age < MINUTE_IN_SECONDS ) {
+			return __( 'just now', 'essential-addons-for-elementor-lite' );
+		}
+
+		return sprintf(
+			/* translators: %s: human-readable time difference, e.g. "5 mins". */
+			__( '%s ago', 'essential-addons-for-elementor-lite' ),
+			human_time_diff( (int) $at )
+		);
+	}
+
+	/**
+	 * How many uploaded images are still JPEG or PNG — i.e. still convertible
+	 * to a modern format.
+	 *
+	 * One indexed COUNT against post_mime_type, cached for UNMINIFIED_TTL. No
+	 * meta unserialising and no filesystem walk, so it stays cheap on a big
+	 * media library.
+	 *
+	 * @return int
+	 */
+	private function legacy_image_count() {
+		$cached = get_transient( self::LEGACY_IMAGES_TRANSIENT );
+		if ( false !== $cached ) {
+			return (int) $cached;
+		}
+
+		global $wpdb;
+
+		$count = 0;
+
+		if ( isset( $wpdb ) && is_object( $wpdb ) ) {
+			$count = (int) $wpdb->get_var(
+				"SELECT COUNT(*) FROM {$wpdb->posts}
+				 WHERE post_type = 'attachment'
+				   AND post_mime_type IN ( 'image/jpeg', 'image/jpg', 'image/png' )"
+			);
+		}
+
+		set_transient( self::LEGACY_IMAGES_TRANSIENT, $count, self::UNMINIFIED_TTL );
+
+		return $count;
+	}
+
+	/**
+	 * First finding: what owns this site's page cache.
+	 *
+	 * In practice this reads "No page cache detected" almost every time the
+	 * widget is on screen, because the promo state only survives when
+	 * XSpeed_Setup::can_offer() found the field clear. It is still asked rather
+	 * than assumed, so the line cannot drift out of step with the detector.
+	 *
+	 * @return string
+	 */
+	private function page_cache_line() {
+		$owner = XSpeed_Setup::page_cache_owner();
+
+		if ( '' !== $owner ) {
+			return sprintf(
+				/* translators: %s: name of the plugin currently handling the page cache. */
+				__( 'Page cache handled by %s', 'essential-addons-for-elementor-lite' ),
+				$owner
+			);
+		}
+
+		return __( 'No page cache detected', 'essential-addons-for-elementor-lite' );
+	}
+
+	/**
+	 * Second finding: how many unminified CSS/JS files the active theme and
+	 * active plugins ship.
+	 *
+	 * A real count, with three deliberate limits, because a dashboard widget
+	 * has no business walking a whole wp-content:
+	 *
+	 * - Only asset-shaped directories are looked at (the package root plus
+	 *   assets/css/js/dist/build/public), not every file in every plugin.
+	 * - The walk is depth- and budget-capped, and bails the moment the budget
+	 *   runs out. A partial walk undercounts; it never invents.
+	 * - The result is cached for UNMINIFIED_TTL, so the scan runs about twice
+	 *   a day per site rather than on every dashboard load.
+	 *
+	 * Returns 0 when nothing was found or the filesystem could not be read, and
+	 * the caller drops the line entirely rather than showing a zero.
+	 *
+	 * @return int
+	 */
+	private function unminified_asset_count() {
+		$cached = get_transient( self::UNMINIFIED_TRANSIENT );
+		if ( false !== $cached ) {
+			return (int) $cached;
+		}
+
+		$roots = [];
+
+		if ( function_exists( 'get_stylesheet_directory' ) ) {
+			$roots[] = get_stylesheet_directory();
+			$roots[] = get_template_directory();
+		}
+
+		foreach ( (array) get_option( 'active_plugins', [] ) as $basename ) {
+			$dir = dirname( (string) $basename );
+
+			// Single-file plugins (dirname '.') have no asset tree to walk.
+			if ( '' === $dir || '.' === $dir ) {
+				continue;
+			}
+
+			$roots[] = WP_PLUGIN_DIR . '/' . $dir;
+		}
+
+		$budget = 4000;
+		$count  = 0;
+
+		foreach ( array_unique( array_filter( $roots ) ) as $root ) {
+			foreach ( [ '', '/assets', '/css', '/js', '/dist', '/build', '/public' ] as $sub ) {
+				if ( $budget <= 0 ) {
+					break 2;
+				}
+
+				$count += $this->count_unminified_in( $root . $sub, '' === $sub ? 0 : 3, $budget );
+			}
+		}
+
+		set_transient( self::UNMINIFIED_TRANSIENT, $count, self::UNMINIFIED_TTL );
+
+		return $count;
+	}
+
+	/**
+	 * Count unminified .css/.js files under one directory.
+	 *
+	 * @param string $dir    Absolute path.
+	 * @param int    $depth  Remaining directory levels to descend; 0 = this one only.
+	 * @param int    $budget Shared directory-entry budget, decremented by reference.
+	 * @return int
+	 */
+	private function count_unminified_in( $dir, $depth, &$budget ) {
+		if ( $budget <= 0 || $depth < 0 || ! is_dir( $dir ) ) {
+			return 0;
+		}
+
+		// Directories that hold build inputs or third-party trees rather than
+		// the assets a visitor actually downloads.
+		$skip = [ 'node_modules', 'vendor', 'test', 'tests', 'languages', 'lang', 'bin', 'docs', 'src' ];
+
+		$handle = @opendir( $dir ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- unreadable dir is a valid, expected outcome.
+		if ( ! $handle ) {
+			return 0;
+		}
+
+		$count = 0;
+
+		while ( false !== ( $entry = readdir( $handle ) ) ) {
+			if ( '.' === $entry || '..' === $entry || '.' === $entry[0] ) {
+				continue;
+			}
+
+			if ( --$budget <= 0 ) {
+				break;
+			}
+
+			$path = $dir . '/' . $entry;
+
+			if ( is_dir( $path ) ) {
+				if ( ! in_array( strtolower( $entry ), $skip, true ) ) {
+					$count += $this->count_unminified_in( $path, $depth - 1, $budget );
+				}
+
+				continue;
+			}
+
+			if ( ! preg_match( '/\.(css|js)$/i', $entry ) ) {
+				continue;
+			}
+
+			// Already minified — .min.css, -min.js and friends.
+			if ( preg_match( '/[.\-]min\.(css|js)$/i', $entry ) ) {
+				continue;
+			}
+
+			$count++;
+		}
+
+		closedir( $handle );
+
+		return $count;
+	}
+
+	/**
 	 * Installed/active — the plugin is present, point users into it.
 	 * No fabricated score: we don't invent data we can't read.
 	 *
 	 * @param array $spec Return value of widget_spec().
 	 */
 	private function render_active_state( $spec ) {
+		if ( XSpeed_Setup::SLUG === $spec['slug'] ) {
+			$this->render_xspeed_active( $spec );
+
+			return;
+		}
 		?>
 		<div class="eael-tr-widget__body eael-tr-widget__body--center">
 			<div class="eael-tr-ring eael-tr-ring--active" aria-hidden="true">
@@ -911,6 +1542,74 @@ class ThinkRank_Promotion {
 			.eael-tr-notice.is-success { color: #00a32a; }
 			.eael-tr-never.button-link { display: block; margin: 10px auto 0; color: #787c82; font-size: 12px; text-decoration: underline; cursor: pointer; }
 			.eael-tr-never.button-link:hover { color: #50575e; }
+
+			/* "Speed Check" — findings on the left, the one fix on the right.
+			   Every selector is scoped to the widget id AND names its element:
+			   core ships #dashboard-widgets h3 / p / ul rules that outrank a
+			   bare class, which silently flattens the heading and the margins. */
+			#eael_xspeed_speed_check .eael-xs-title { display: inline-flex; align-items: center; gap: 8px; margin-right: auto; }
+			#eael_xspeed_speed_check .eael-xs-title-icon { display: block; }
+			#eael_xspeed_speed_check .eael-xs-check { --eael-xs-green: #1c6b41; --eael-xs-green-hover: #155433; padding: 18px 20px 16px; }
+			#eael_xspeed_speed_check h3.eael-xs-check__heading { font-size: 16px; font-weight: 700; color: #1d2327; margin: 0 0 14px; padding: 0; line-height: 1.3; }
+			#eael_xspeed_speed_check .eael-xs-check__cols { display: flex; flex-wrap: wrap; align-items: stretch; gap: 14px 24px; }
+			#eael_xspeed_speed_check .eael-xs-check__main,
+			#eael_xspeed_speed_check .eael-xs-check__aside { display: flex; flex-direction: column; }
+			#eael_xspeed_speed_check .eael-xs-check__main { flex: 1 1 240px; min-width: 0; }
+			#eael_xspeed_speed_check .eael-xs-check__aside { flex: 1 1 190px; max-width: 100%; text-align: center; }
+			#eael_xspeed_speed_check ul.eael-xs-check__list { margin: 0 0 12px; padding: 0; list-style: none; }
+			#eael_xspeed_speed_check li.eael-xs-check__item { position: relative; padding-left: 20px; margin: 0 0 9px; font-size: 13.5px; line-height: 1.45; color: #1d2327; }
+			#eael_xspeed_speed_check li.eael-xs-check__item::before { content: ""; position: absolute; left: 4px; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: #8c8f94; }
+			#eael_xspeed_speed_check li.eael-xs-check__item--ai { color: #50575e; }
+			#eael_xspeed_speed_check li.eael-xs-check__item--ai::before { display: none; }
+			#eael_xspeed_speed_check .eael-xs-check__spark { position: absolute; left: 0; top: 3px; color: #8c8f94; }
+			#eael_xspeed_speed_check p.eael-xs-check__trust { margin: auto 0 0; padding-top: 8px; font-size: 12.5px; line-height: 1.4; color: #a7aaad; }
+			#eael_xspeed_speed_check button.eael-xs-check__cta {
+				display: block; width: 100%; box-sizing: border-box;
+				/* Capped so a full-width (1-column) dashboard doesn't stretch
+				   it across half the screen; centred so it still looks placed
+				   once the columns wrap. */
+				max-width: 420px; margin: 0 auto;
+				padding: 12px 14px; border: 0; border-radius: 6px;
+				background: var(--eael-xs-green); color: #fff;
+				font-size: 14.5px; font-weight: 600; line-height: 1.3;
+				cursor: pointer; text-align: center;
+			}
+			#eael_xspeed_speed_check button.eael-xs-check__cta:hover:not([disabled]),
+			#eael_xspeed_speed_check button.eael-xs-check__cta:focus:not([disabled]) { background: var(--eael-xs-green-hover); color: #fff; }
+			#eael_xspeed_speed_check button.eael-xs-check__cta:focus { outline: 2px solid var(--eael-xs-green); outline-offset: 2px; }
+			#eael_xspeed_speed_check button.eael-xs-check__cta[disabled] { opacity: .7; cursor: default; }
+			#eael_xspeed_speed_check p.eael-xs-check__note { margin: 10px 0 0; padding: 0; font-size: 12.5px; line-height: 1.45; color: #a7aaad; }
+			/* Chrome reset written out rather than leaning on core's
+			   .button-link, so the control looks the same wherever it lands. */
+			#eael_xspeed_speed_check button.eael-xs-check__never {
+				display: block; width: 100%; margin: auto 0 0; padding: 12px 0 0;
+				background: none; border: 0; box-shadow: none;
+				color: #50575e; font-size: 13px; line-height: 1.4;
+				text-align: center; text-decoration: none; cursor: pointer;
+			}
+			#eael_xspeed_speed_check button.eael-xs-check__never:hover,
+			#eael_xspeed_speed_check button.eael-xs-check__never:focus { background: none; color: #1d2327; text-decoration: underline; }
+			#eael_xspeed_speed_check .eael-xs-check .eael-tr-notice { margin-top: 10px; }
+
+			/* Active states — same shell, different furniture. */
+			#eael_xspeed_speed_check .eael-xs-check__dot { display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: var(--eael-xs-green); vertical-align: middle; }
+			#eael_xspeed_speed_check p.eael-xs-check__metric { margin: 0 0 8px; padding: 0; font-size: 13.5px; line-height: 1.45; color: #646970; }
+			#eael_xspeed_speed_check p.eael-xs-check__metric strong { color: var(--eael-xs-green); font-weight: 700; }
+			#eael_xspeed_speed_check p.eael-xs-check__body { margin: 0 0 8px; padding: 0; font-size: 13.5px; line-height: 1.45; color: #1d2327; }
+			#eael_xspeed_speed_check p.eael-xs-check__ai { position: relative; margin: 0 0 8px; padding: 0 0 0 20px; font-size: 13px; line-height: 1.45; color: #646970; }
+			#eael_xspeed_speed_check a.eael-xs-check__settings { color: #2271b1; text-decoration: none; }
+			#eael_xspeed_speed_check a.eael-xs-check__settings:hover { color: #135e96; text-decoration: underline; }
+			/* The active CTA is an anchor, not a button — same skin. */
+			#eael_xspeed_speed_check a.eael-xs-check__cta {
+				display: block; width: 100%; box-sizing: border-box;
+				max-width: 420px; margin: 0 auto;
+				padding: 12px 14px; border: 0; border-radius: 6px;
+				background: var(--eael-xs-green); color: #fff;
+				font-size: 14.5px; font-weight: 600; line-height: 1.3;
+				text-align: center; text-decoration: none;
+			}
+			#eael_xspeed_speed_check a.eael-xs-check__cta:hover,
+			#eael_xspeed_speed_check a.eael-xs-check__cta:focus { background: var(--eael-xs-green-hover); color: #fff; }
 		</style>
 		<?php
 	}

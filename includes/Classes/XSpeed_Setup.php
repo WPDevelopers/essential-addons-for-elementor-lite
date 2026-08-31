@@ -265,6 +265,100 @@ class XSpeed_Setup {
 	}
 
 	/**
+	 * May EA offer to switch a already-installed, currently-inactive xSpeed
+	 * back on?
+	 *
+	 * Distinct from can_offer() and can_list(), both of which answer false here
+	 * for reasons that do not apply to reactivation:
+	 *
+	 * - can_offer() is false the moment xSpeed is on disk. Right for a banner
+	 *   selling an install; wrong for a button that activates what is already
+	 *   there.
+	 * - can_list() defers to Detector::is_field_clear(), which counts ANY
+	 *   known-owner advanced-cache.php as a blocker. A deactivated xSpeed
+	 *   normally leaves its OWN drop-in behind, so the detector — generic by
+	 *   design, and blind to which plugin is asking — reports xSpeed's leftover
+	 *   as a foreign drop-in and declares the field occupied. The site is then
+	 *   permanently ineligible for the very plugin that left the file.
+	 *
+	 * So: every blocker counts except one owned by xSpeed itself. Reactivating
+	 * xSpeed over xSpeed's own residue puts exactly one page cache in play,
+	 * which is the entire thing the safety check exists to guarantee. An active
+	 * competitor, an unknown or unreadable drop-in, a duplicate or dynamic
+	 * WP_CACHE, or a drop-in belonging to any other plugin all still block.
+	 *
+	 * @return bool
+	 */
+	public static function can_reactivate() {
+		if ( ! self::is_available() ) {
+			return false;
+		}
+
+		// Nothing to switch back on, or it is already running — both are some
+		// other method's question.
+		if ( ! \WPDeveloper\PageCacheSafety\Setup::is_installed()
+			|| \WPDeveloper\PageCacheSafety\Setup::is_active() ) {
+			return false;
+		}
+
+		if ( ! \WPDeveloper\PageCacheSafety\Setup::is_supported() ) {
+			return false;
+		}
+
+		$verdict  = \WPDeveloper\PageCacheSafety\Detector::classify();
+		$blockers = isset( $verdict['blockers'] ) ? (array) $verdict['blockers'] : [];
+
+		foreach ( $blockers as $blocker ) {
+			$owner = isset( $blocker['plugin'] ) ? $blocker['plugin'] : null;
+
+			// Our own leftovers are not a competitor.
+			if ( self::BASENAME === $owner ) {
+				continue;
+			}
+
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Is xSpeed on disk at all, active or not?
+	 *
+	 * The difference between "we could install this" and "this is already here,
+	 * just switched off" — which decides whether a CTA installs or activates.
+	 *
+	 * @return bool
+	 */
+	public static function is_on_disk() {
+		if ( ! self::is_available() ) {
+			return false;
+		}
+
+		return (bool) \WPDeveloper\PageCacheSafety\Setup::is_installed();
+	}
+
+	/**
+	 * Is xSpeed's page cache actually serving, right now?
+	 *
+	 * The difference between "xSpeed is installed" and "xSpeed is working" —
+	 * activation alone does not guarantee the drop-in and WP_CACHE write were
+	 * accepted, which is the whole reason after_activation() verifies rather
+	 * than assumes. The Speed Check widget shows a different state for each.
+	 *
+	 * False whenever we cannot tell, matching the rest of this class.
+	 *
+	 * @return bool
+	 */
+	public static function page_cache_live() {
+		if ( ! self::is_available() ) {
+			return false;
+		}
+
+		return (bool) \WPDeveloper\PageCacheSafety\Setup::page_cache_is_live();
+	}
+
+	/**
 	 * Slug for a plugin file, for the activate-only path where the installer
 	 * only knows the basename.
 	 *

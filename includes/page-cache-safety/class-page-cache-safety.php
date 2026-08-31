@@ -35,7 +35,7 @@
  * Improve it there and re-copy; do not fork it per plugin.
  *
  * @package WPDeveloper\PageCacheSafety
- * @version 1.0.0
+ * @version 1.4.1
  */
 
 namespace WPDeveloper\PageCacheSafety;
@@ -52,7 +52,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 
 	final class Detector {
 
-		public const VERSION = '1.0.0';
+		public const VERSION = '1.4.1';
 
 		/* Ownership states. */
 
@@ -176,30 +176,17 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 			}
 
 			$active_page_caches = array();
-			$active_signals     = array();
 			foreach ( $report['plugins'] as $plugin ) {
 				if ( $plugin['page_cache'] && $plugin['active'] ) {
-					$active_signals = array_merge( $active_signals, (array) $plugin['signals'] );
+					$active_page_caches[] = $plugin;
 				}
 			}
-			foreach ( $report['plugins'] as $plugin ) {
-				if ( ! $plugin['page_cache'] ) {
-					continue;
-				}
-				if ( $plugin['active'] ) {
-					$active_page_caches[] = $plugin;
-				} elseif ( ! empty( $plugin['signals'] ) && array_diff( (array) $plugin['signals'], $active_signals ) ) {
-					// Only when this plugin has evidence of its own. Builds
-					// that share a signal set with an active sibling (Swift
-					// Performance Lite and the commercial build share their
-					// constants and options row) would otherwise report the
-					// uninstalled twin as having left cache files behind.
-					$notes[] = array(
-						'code'   => 'residual_cache_files',
-						'plugin' => $plugin['plugin'],
-						'label'  => $plugin['label'],
-					);
-				}
+			foreach ( self::residual_plugins( $report['plugins'] ) as $plugin ) {
+				$notes[] = array(
+					'code'   => 'residual_cache_files',
+					'plugin' => $plugin['plugin'],
+					'label'  => $plugin['label'],
+				);
 			}
 
 			if ( self::OWNER_KNOWN === $dropin['owner'] ) {
@@ -283,6 +270,18 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 			 * No drop-in, nothing active, but WP_CACHE is on. Something
 			 * enabled page caching and we cannot say what. Review, not clear.
 			 */
+			/*
+			 * A WP_CACHE we cannot rewrite is not a clear field. `duplicate` and
+			 * `dynamic` already add a blocker above, but the ladder used to fall
+			 * past them to `unclaimed` — a state the README documents as "field
+			 * clear: yes". is_field_clear() was safe (it checks blockers first),
+			 * but any host branching on the STATE, as the README invites, read a
+			 * doubly-defined or expression-valued config as a clean site.
+			 */
+			if ( in_array( $wp_cache['state'], array( 'duplicate', 'dynamic' ), true ) ) {
+				return self::verdict( self::STATE_UNKNOWN_OCCUPIED, $blockers, $notes, $report );
+			}
+
 			if ( 'true' === $wp_cache['state'] ) {
 				$blockers[] = array(
 					'code'   => self::BLOCKER_WP_CACHE_ORPHANED,
@@ -302,16 +301,66 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 		}
 
 		/**
+		 * Inactive page-cache plugins whose artifacts are their OWN.
+		 *
+		 * Builds that share a signal set (Swift Performance Lite and the
+		 * commercial build share their constants, options row and cache dir)
+		 * would otherwise each be reported as having left cache files behind,
+		 * including the one that was never on this site. A signal is credited
+		 * to a plugin only when no plugin of stronger standing also carries
+		 * it (active over installed-but-inactive over not on disk), and only a
+		 * page-cache plugin can explain a page-cache artifact. Two absent
+		 * twins cannot be told apart and are both reported.
+		 *
+		 * Mirrors the same helper in xSpeed's own detector.
+		 *
+		 * @param array<int,array> $plugins Rows from inspect_plugins().
+		 * @return array<int,array>
+		 */
+		private static function residual_plugins( array $plugins ): array {
+			$standing = static function ( array $plugin ): int {
+				if ( $plugin['active'] ) {
+					return 2;
+				}
+				return ! empty( $plugin['installed'] ) ? 1 : 0;
+			};
+
+			$out = array();
+			foreach ( $plugins as $plugin ) {
+				if ( ! $plugin['page_cache'] || $plugin['active'] || empty( $plugin['signals'] ) ) {
+					continue;
+				}
+
+				$explained = array();
+				foreach ( $plugins as $other ) {
+					if ( ! $other['page_cache'] || $other['plugin'] === $plugin['plugin'] || $standing( $other ) <= $standing( $plugin ) ) {
+						continue;
+					}
+					$explained = array_merge( $explained, (array) $other['signals'] );
+				}
+
+				if ( array_diff( (array) $plugin['signals'], $explained ) ) {
+					$out[] = $plugin;
+				}
+			}
+
+			return $out;
+		}
+
+		/**
 		 * The raw evidence, for a host that wants to render its own summary.
 		 *
-		 * @return array{plugins:array<int,array>,dropin:array,object_dropin:array,wp_cache:array,revision:string}
+		 * @return array{scope:string,multisite:bool,plugins:array<int,array>,dropin:array,object_dropin:array,wp_cache:array,revision:string}
 		 */
-		public static function inspect(): array {
-			if ( null !== self::$report ) {
+		public static function inspect( bool $fresh = true ): array {
+			if ( ! $fresh && null !== self::$report ) {
 				return self::$report;
 			}
 
+			$multisite = function_exists( 'is_multisite' ) && is_multisite();
 			$report = array(
+				'scope'         => $multisite ? 'site-and-network' : 'site',
+				'multisite'     => $multisite,
 				'plugins'       => self::inspect_plugins(),
 				'dropin'        => self::inspect_dropin(),
 				'object_dropin' => self::inspect_object_dropin(),
@@ -321,27 +370,15 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 			// Fingerprint of every fact the verdict rests on. A host that acts
 			// on a verdict can re-inspect immediately before acting and bail
 			// if this changed.
-			$report['revision'] = hash(
-				'sha256',
-				(string) wp_json_encode(
-					array(
-						array_map(
-							static function ( array $p ) {
-								return array( $p['plugin'], $p['active'], $p['signals'] );
-							},
-							$report['plugins']
-						),
-						$report['dropin']['owner'],
-						$report['dropin']['hash'],
-						$report['object_dropin']['hash'],
-						$report['wp_cache']['state'],
-						$report['wp_cache']['defines'],
-					)
-				)
-			);
+			$report['revision'] = hash( 'sha256', (string) wp_json_encode( $report ) );
 
 			self::$report = $report;
 			return $report;
+		}
+
+		/** Mandatory fresh evidence path for callers that may write afterwards. */
+		public static function inspect_fresh(): array {
+			return self::inspect( true );
 		}
 
 		/** Drop the memoized report — call after activating or deactivating a plugin. */
@@ -360,6 +397,26 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 		 */
 		public static function catalog(): array {
 			$catalog = array(
+				/*
+				 * xSpeed itself. The question this file answers is "does this
+				 * site already have a page cache, and whose is it?" — and xSpeed
+				 * is one. Leaving it out did not change any host's decision, but
+				 * a site running xSpeed reported an unattributable drop-in, so a
+				 * host rendering the reason described the plugin it installed
+				 * itself as an unidentified page cache.
+				 */
+				'xspeed/xspeed.php'                            => array(
+					'label'        => 'xSpeed Cache',
+					'capabilities' => array( self::CAP_PAGE_CACHE ),
+					// Drop-in token only, deliberately: no constants, options or
+					// paths. Those are residual-evidence signals, and xSpeed's are
+					// present on any site running it — including, awkwardly, this
+					// file's own test suite — which would report a site as holding
+					// leftovers from the very plugin asking the question. Naming
+					// the drop-in owner is all that was missing; an ACTIVE xSpeed
+					// is already caught by is_plugin_active() on the key above.
+					'dropin'       => array( 'XSPEED_DROPIN' ),
+				),
 				'wp-rocket/wp-rocket.php'                      => array(
 					'label'        => 'WP Rocket',
 					'capabilities' => array( self::CAP_PAGE_CACHE, self::CAP_MINIFY ),
@@ -398,7 +455,11 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 					'dropin'       => array( 'WpFastestCache', 'wpFastestCache' ),
 				),
 				'swift-performance-lite/performance.php'       => array(
-					'label'        => 'Swift Performance Lite',
+					// Both builds share drop-in markers, constants and options
+					// row, and identify() returns the first match — so a
+					// commercial install was reported as "Lite". Neither entry
+					// claims an edition it cannot tell apart.
+					'label'        => 'Swift Performance',
 					'capabilities' => array( self::CAP_PAGE_CACHE, self::CAP_MINIFY ),
 					'constants'    => array( 'SWIFT_PERFORMANCE_VER', 'SWIFT_PERFORMANCE_DIR' ),
 					'options'      => array( 'swift_performance_options' ),
@@ -517,22 +578,35 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 				require_once ABSPATH . 'wp-admin/includes/plugin.php';
 			}
 
+			$plugin_dir = defined( 'WP_PLUGIN_DIR' ) ? WP_PLUGIN_DIR : ( defined( 'WP_CONTENT_DIR' ) ? WP_CONTENT_DIR . '/plugins' : '' );
+
 			$out = array();
 			foreach ( self::catalog() as $file => $entry ) {
-				$signals = self::signals_for( $entry );
-				$active  = function_exists( 'is_plugin_active' ) ? (bool) is_plugin_active( $file ) : false;
+				$signals        = self::signals_for( $entry );
+				$installed      = '' !== $plugin_dir && is_file( $plugin_dir . '/' . $file );
+				$network_active = function_exists( 'is_plugin_active_for_network' ) && is_plugin_active_for_network( $file );
+				$active         = function_exists( 'is_plugin_active' ) ? (bool) is_plugin_active( $file ) : false;
+				$site_active    = function_exists( 'get_option' ) && in_array( $file, (array) get_option( 'active_plugins', array() ), true );
+				if ( $active && ! $network_active ) {
+					$site_active = true;
+				}
+				$active = $active || $site_active || $network_active;
 				if ( ! $active && empty( $signals ) ) {
 					continue;
 				}
 
 				$capabilities = (array) ( $entry['capabilities'] ?? array() );
 				$out[]        = array(
-					'plugin'       => $file,
-					'label'        => (string) ( $entry['label'] ?? $file ),
-					'active'       => $active,
-					'capabilities' => $capabilities,
-					'page_cache'   => in_array( self::CAP_PAGE_CACHE, $capabilities, true ),
-					'signals'      => $signals,
+					'plugin'           => $file,
+					'label'            => (string) ( $entry['label'] ?? $file ),
+					'active'           => $active,
+					'installed'        => $installed,
+					'site_active'      => $site_active,
+					'network_active'   => $network_active,
+					'activation_scope' => $site_active && $network_active ? 'site-and-network' : ( $network_active ? 'network' : ( $site_active ? 'site' : 'inactive' ) ),
+					'capabilities'     => $capabilities,
+					'page_cache'       => in_array( self::CAP_PAGE_CACHE, $capabilities, true ),
+					'signals'          => $signals,
 				);
 			}
 			return $out;
@@ -624,11 +698,12 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 		private static function inspect_object_dropin(): array {
 			$target = defined( 'WP_CONTENT_DIR' ) ? WP_CONTENT_DIR . '/object-cache.php' : '';
 			$state  = array(
-				'path'   => $target,
-				'exists' => false,
-				'plugin' => null,
-				'label'  => null,
-				'hash'   => null,
+				'path'     => $target,
+				'exists'   => false,
+				'readable' => true,
+				'plugin'   => null,
+				'label'    => null,
+				'hash'     => null,
 			);
 
 			if ( '' === $target || ! file_exists( $target ) ) {
@@ -638,6 +713,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 			$state['exists'] = true;
 			$contents        = self::read( $target );
 			if ( null === $contents ) {
+				$state['readable'] = false;
 				return $state;
 			}
 
@@ -659,23 +735,86 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 		}
 
 		/**
-		 * Match a drop-in body against the catalog's tokens. Case-insensitive
-		 * on a raw string — the file is never included or executed. Null means
-		 * "unknown", which is NOT the same as "safe".
+		 * Match catalog candidates only in structured, anchored locations. The
+		 * file is tokenized but never included or executed. Null means unknown.
 		 */
 		private static function identify( string $contents, string $key ): ?string {
 			if ( '' === $contents ) {
 				return null;
 			}
-			$haystack = strtolower( $contents );
+			$evidence = self::signature_evidence( $contents );
+			$owners   = array();
 			foreach ( self::catalog() as $file => $entry ) {
 				foreach ( (array) ( $entry[ $key ] ?? array() ) as $token ) {
-					if ( '' !== (string) $token && false !== strpos( $haystack, strtolower( (string) $token ) ) ) {
-						return $file;
+					if ( self::has_anchored_signature( (string) $token, $evidence ) ) {
+						$owners[ $file ] = true;
+						break;
 					}
 				}
 			}
+			if ( 1 === count( $owners ) ) {
+				return (string) array_key_first( $owners );
+			}
+			if ( count( $owners ) > 1 ) {
+				$labels = array();
+				$catalog = self::catalog();
+				foreach ( array_keys( $owners ) as $owner ) {
+					$labels[] = (string) ( $catalog[ $owner ]['label'] ?? $owner );
+				}
+				if ( 1 === count( array_unique( $labels ) ) ) {
+					return (string) array_key_first( $owners );
+				}
+			}
 			return null;
+		}
+
+		/** @return array{comment_lines:string[],identifiers:string[]} */
+		private static function signature_evidence( string $contents ): array {
+			$comments    = array();
+			$identifiers = array();
+			foreach ( token_get_all( $contents ) as $token ) {
+				if ( ! is_array( $token ) ) {
+					continue;
+				}
+				if ( in_array( $token[0], array( T_COMMENT, T_DOC_COMMENT ), true ) ) {
+					foreach ( preg_split( '/\\R/', $token[1] ) ?: array() as $line ) {
+						$line = preg_replace( '/^\\s*(?:\/\\*+|\\*|\/\/|#)\\s*/', '', $line );
+						$line = preg_replace( '/\\s*\\*\\/\\s*$/', '', (string) $line );
+						if ( '' !== trim( (string) $line ) ) {
+							$comments[] = trim( (string) $line );
+						}
+					}
+					continue;
+				}
+				if ( T_STRING === $token[0] || ( defined( 'T_NAME_QUALIFIED' ) && T_NAME_QUALIFIED === $token[0] ) || ( defined( 'T_NAME_FULLY_QUALIFIED' ) && T_NAME_FULLY_QUALIFIED === $token[0] ) ) {
+					foreach ( explode( '\\', trim( $token[1], '\\' ) ) as $identifier ) {
+						if ( '' !== $identifier ) {
+							$identifiers[] = strtolower( $identifier );
+						}
+					}
+				}
+			}
+			return array(
+				'comment_lines' => $comments,
+				'identifiers'   => array_values( array_unique( $identifiers ) ),
+			);
+		}
+
+		private static function has_anchored_signature( string $candidate, array $evidence ): bool {
+			$candidate = trim( $candidate );
+			if ( '' === $candidate ) {
+				return false;
+			}
+			if ( preg_match( '/^[A-Za-z_][A-Za-z0-9_]*$/', $candidate ) && in_array( strtolower( $candidate ), $evidence['identifiers'], true ) ) {
+				return true;
+			}
+			$pattern = '/^' . preg_quote( $candidate, '/' ) . '(?:\\s+(?:v(?:ersion)?\\s*)?\\d[A-Za-z0-9._-]*)?\\s*$/i';
+			foreach ( $evidence['comment_lines'] as $line ) {
+				if ( preg_match( $pattern, $line ) ) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		/**
@@ -686,7 +825,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 		 * on "WP_CACHE is false" without noticing it is `getenv(...)` will get
 		 * it wrong.
 		 *
-		 * @return array{state:string,runtime:?bool,defines:int}
+		 * @return array{path:string,readable:bool,state:string,runtime:?bool,defines:int,hash:?string}
 		 */
 		private static function inspect_wp_cache(): array {
 			$runtime = defined( 'WP_CACHE' ) ? (bool) constant( 'WP_CACHE' ) : null;
@@ -694,42 +833,48 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 
 			if ( '' === $path ) {
 				return array(
-					'state'   => 'unreadable',
-					'runtime' => $runtime,
-					'defines' => 0,
+					'path'     => $path,
+					'readable' => false,
+					'state'    => 'unreadable',
+					'runtime'  => $runtime,
+					'defines'  => 0,
+					'hash'     => null,
 				);
 			}
 
 			$config = self::read( $path );
 			if ( null === $config ) {
 				return array(
-					'state'   => 'unreadable',
-					'runtime' => $runtime,
-					'defines' => 0,
+					'path'     => $path,
+					'readable' => false,
+					'state'    => 'unreadable',
+					'runtime'  => $runtime,
+					'defines'  => 0,
+					'hash'     => null,
 				);
 			}
 
-			// Non-greedy up to the closing `);` so a value containing
-			// parentheses is captured whole and read as dynamic, rather than
-			// not matching at all and being reported as undefined.
-			$count = preg_match_all(
-				"/define\\s*\\(\\s*['\"]WP_CACHE['\"]\\s*,\\s*(.*?)\\s*\\)\\s*;/i",
-				$config,
-				$matches
-			);
+			$defines = self::wp_cache_defines( $config );
+			$count   = count( $defines );
 
 			if ( ! $count ) {
 				return array(
-					'state'   => 'undefined',
-					'runtime' => $runtime,
-					'defines' => 0,
+					'path'     => $path,
+					'readable' => true,
+					'state'    => 'undefined',
+					'runtime'  => $runtime,
+					'defines'  => 0,
+					'hash'     => hash( 'sha256', $config ),
 				);
 			}
 			if ( $count > 1 ) {
 				return array(
-					'state'   => 'duplicate',
-					'runtime' => $runtime,
-					'defines' => $count,
+					'path'     => $path,
+					'readable' => true,
+					'state'    => 'duplicate',
+					'runtime'  => $runtime,
+					'defines'  => $count,
+					'hash'     => hash( 'sha256', $config ),
 				);
 			}
 
@@ -738,7 +883,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 			 * TRUE — and all are literals. Only something we cannot evaluate by
 			 * reading it (a variable, a call, a ternary) is dynamic.
 			 */
-			$literal = trim( strtolower( trim( (string) $matches[1][0] ) ), "'\"" );
+			$literal = self::literal_value( $defines[0] );
 			if ( in_array( $literal, array( 'true', '1' ), true ) ) {
 				$state = 'true';
 			} elseif ( in_array( $literal, array( 'false', '0', '', 'null' ), true ) ) {
@@ -748,9 +893,12 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 			}
 
 			return array(
-				'state'   => $state,
-				'runtime' => $runtime,
-				'defines' => 1,
+				'path'     => $path,
+				'readable' => true,
+				'state'    => $state,
+				'runtime'  => $runtime,
+				'defines'  => 1,
+				'hash'     => hash( 'sha256', $config ),
 			);
 		}
 
@@ -766,6 +914,135 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 			}
 			return '';
 		}
+
+		/** @return array<int,array<int,mixed>> */
+		private static function wp_cache_defines( string $config ): array {
+			$tokens  = token_get_all( $config );
+			$defines = array();
+			$count   = count( $tokens );
+			for ( $i = 0; $i < $count; $i++ ) {
+				$token = $tokens[ $i ];
+				if ( ! self::is_global_define_call( $tokens, $i ) ) {
+					continue;
+				}
+				$open = self::next_code_index( $tokens, $i + 1 );
+				if ( null === $open || '(' !== $tokens[ $open ] ) {
+					continue;
+				}
+				$name = self::next_code_index( $tokens, $open + 1 );
+				if ( null === $name || ! is_array( $tokens[ $name ] ) || T_CONSTANT_ENCAPSED_STRING !== $tokens[ $name ][0] || 'WP_CACHE' !== self::unquote( $tokens[ $name ][1] ) ) {
+					continue;
+				}
+				$comma = self::next_code_index( $tokens, $name + 1 );
+				if ( null === $comma || ',' !== $tokens[ $comma ] ) {
+					continue;
+				}
+
+				$value = array();
+				$depth = 1;
+				for ( $k = $comma + 1; $k < $count; $k++ ) {
+					$current = $tokens[ $k ];
+					if ( '(' === $current ) {
+						$depth++;
+					} elseif ( ')' === $current ) {
+						$depth--;
+						if ( 0 === $depth ) {
+							$defines[] = $value;
+							$i         = $k;
+							break;
+						}
+					}
+					$value[] = $current;
+				}
+			}
+			return $defines;
+		}
+
+		private static function literal_value( array $tokens ): string {
+			$code = array_values(
+				array_filter(
+					$tokens,
+					static function ( $token ) {
+						return ! is_array( $token ) || ! in_array( $token[0], array( T_WHITESPACE, T_COMMENT, T_DOC_COMMENT ), true );
+					}
+				)
+			);
+			if ( 1 !== count( $code ) ) {
+				return '__dynamic__';
+			}
+			$token = $code[0];
+			if ( is_array( $token ) && T_CONSTANT_ENCAPSED_STRING === $token[0] ) {
+				return strtolower( self::unquote( $token[1] ) );
+			}
+			if ( is_array( $token ) && in_array( $token[0], array( T_STRING, T_LNUMBER ), true ) ) {
+				return strtolower( $token[1] );
+			}
+			return '__dynamic__';
+		}
+
+		private static function unquote( string $value ): string {
+			if ( strlen( $value ) < 2 ) {
+				return $value;
+			}
+			$body = substr( $value, 1, -1 );
+			return "'" === $value[0] ? str_replace( array( "\\\\", "\\'" ), array( "\\", "'" ), $body ) : stripcslashes( $body );
+		}
+
+		private static function next_code_index( array $tokens, int $start ): ?int {
+			for ( $i = $start, $count = count( $tokens ); $i < $count; $i++ ) {
+				if ( ! is_array( $tokens[ $i ] ) || ! in_array( $tokens[ $i ][0], array( T_WHITESPACE, T_COMMENT, T_DOC_COMMENT ), true ) ) {
+					return $i;
+				}
+			}
+			return null;
+		}
+
+		/**
+		 * Is the token at $i a call to the GLOBAL define()?
+		 *
+		 * `\define( 'WP_CACHE', true )` is valid and some hardened configs write it.
+		 * PHP 8 tokenizes it as one T_NAME_FULLY_QUALIFIED; PHP 7 as T_NS_SEPARATOR
+		 * then T_STRING. A namespaced `Foo\define(...)` (T_NAME_QUALIFIED, or on
+		 * PHP 7 a T_STRING preceded by `Foo\`) is some other function, as is a
+		 * method call `$x->define(...)` / `X::define(...)`.
+		 */
+		private static function is_global_define_call( array $tokens, int $i ): bool {
+			$token = $tokens[ $i ];
+			if ( ! is_array( $token ) ) {
+				return false;
+			}
+			if ( defined( 'T_NAME_FULLY_QUALIFIED' ) && T_NAME_FULLY_QUALIFIED === $token[0] ) {
+				return 0 === strcasecmp( $token[1], '\\define' );
+			}
+			if ( T_STRING !== $token[0] || 0 !== strcasecmp( $token[1], 'define' ) ) {
+				return false;
+			}
+			$previous = self::previous_code_index( $tokens, $i );
+			if ( null === $previous || ! is_array( $tokens[ $previous ] ) ) {
+				return true;
+			}
+			if ( in_array( $tokens[ $previous ][0], array( T_OBJECT_OPERATOR, T_DOUBLE_COLON ), true ) || ( defined( 'T_NULLSAFE_OBJECT_OPERATOR' ) && T_NULLSAFE_OBJECT_OPERATOR === $tokens[ $previous ][0] ) ) {
+				return false;
+			}
+			if ( T_NS_SEPARATOR === $tokens[ $previous ][0] ) {
+				$before = self::previous_code_index( $tokens, $previous );
+				// `Foo\define` on PHP 7 (T_STRING before the separator), or `namespace\define`
+				// (T_NAMESPACE before it; PHP 8 gives T_NAME_RELATIVE and never gets here).
+				return null === $before || ! is_array( $tokens[ $before ] ) || ! in_array( $tokens[ $before ][0], array( T_STRING, T_NAMESPACE ), true );
+			}
+			return true;
+		}
+
+		/** Index of the nearest code token before $before, skipping whitespace and comments. */
+		private static function previous_code_index( array $tokens, int $before ): ?int {
+			for ( $i = $before - 1; $i >= 0; $i-- ) {
+				if ( ! is_array( $tokens[ $i ] ) || ! in_array( $tokens[ $i ][0], array( T_WHITESPACE, T_COMMENT, T_DOC_COMMENT ), true ) ) {
+					return $i;
+				}
+			}
+			return null;
+		}
+
 
 		/**
 		 * Read a file for inspection. Null on any failure — callers treat null
