@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 6.8.2
+Stable tag: 6.8.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -337,6 +337,10 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 
 
 == Changelog ==
+
+= 6.8.3 - 01/09/2026 =
+
+- Fixed: Critical Hotfix | 6.8.2 changed a shared internal helper's method signature in a way that's incompatible with the currently released EA Pro, causing a fatal error across the Elementor editor and the frontend of every Elementor page on sites running EA Pro. Reverted the signature change; the underlying widget-panel notice this was meant to fix (a harmless "Cannot redeclare control" notice on Advanced Accordion) returns until a coordinated EA Pro update lands.
 
 = 6.8.2 - 31/08/2026 =
 

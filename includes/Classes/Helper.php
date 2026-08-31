@@ -2372,47 +2372,16 @@ class Helper
 	}
 
 	/**
-	 * Whether a control id is already registered on a widget's control stack.
-	 *
-	 * Lets shared control helpers stay idempotent: registering the same id twice makes
-	 * Elementor emit a `_doing_it_wrong()` notice and silently drop the second control.
-	 *
-	 * @param \Elementor\Controls_Stack $wb         Widget/controls-stack instance.
-	 * @param string                    $control_id Control id to look for.
-	 *
-	 * @return bool
-	 */
-	public static function eael_control_exists( $wb, $control_id ) {
-		if ( ! $wb instanceof \Elementor\Controls_Stack ) {
-			return false;
-		}
-
-		$stack = Plugin::$instance->controls_manager->get_element_stack( $wb );
-
-		return is_array( $stack ) && isset( $stack['controls'][ $control_id ] );
-	}
-
-	/**
 	 * Renders an admin notice when ACF is not installed/activated.
 	 * Ported for ACF Repeater data-source support (Feature List, etc.).
 	 *
-	 * A widget may need this notice in more than one section (e.g. Advanced Accordion,
-	 * where EA Pro adds a second ACF source for the media layout). Pass a distinct
-	 * $control_id in that case — reusing the default id makes Elementor bail out with
-	 * "Cannot redeclare control with same name" and drops the second notice.
-	 *
-	 * @param \Elementor\Widget_Base $wb         Widget instance.
-	 * @param array                  $condition  Elementor control condition array.
-	 * @param string                 $control_id Control id to register the notice under.
+	 * @param \Elementor\Widget_Base $wb        Widget instance.
+	 * @param array                  $condition Elementor control condition array.
 	 */
-	public static function eael_acf_notice_controls( $wb, $condition, $control_id = 'eael_acf_notice_controls' ) {
-		if ( self::eael_control_exists( $wb, $control_id ) ) {
-			return;
-		}
-
+	public static function eael_acf_notice_controls( $wb, $condition ) {
 		if ( ! function_exists( 'acf_get_field_groups' ) ) {
 			$wb->add_control(
-				$control_id,
+				'eael_acf_notice_controls',
 				[
 					'type'            => Controls_Manager::RAW_HTML,
 					'raw'             => __( '<strong>Advanced Custom Fields (ACF)</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=advanced-custom-fields&tab=search&type=term" target="_blank">ACF</a> first.', 'essential-addons-for-elementor-lite' ),
