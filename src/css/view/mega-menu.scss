@@ -648,7 +648,7 @@
 	 * light the whole row under the pointer, not just its text. */
 	.eael-mm-linklist {
 		.elementor-icon-list-item {
-			border-radius: var(--eael-mm-linklist-radius, 8px);
+			border-radius: var(--eael-mm-linklist-radius, 4px);
 		}
 
 		.elementor-icon-list-item > a,
@@ -656,7 +656,7 @@
 			display: flex;
 			align-items: center;
 			width: 100%;
-			padding: var(--eael-mm-linklist-padding, 7px 10px);
+			padding: var(--eael-mm-linklist-padding, 4px);
 			border-radius: inherit;
 			text-decoration: none;
 			transition: background-color 0.2s ease, color 0.2s ease;
@@ -664,8 +664,16 @@
 
 		.elementor-icon-list-item:hover > a,
 		.elementor-icon-list-item > a:focus-visible {
-			background-color: var(--eael-mm-linklist-hover-bg, #f5f3ff);
+			background-color: var(--eael-mm-linklist-hover-bg, #ededed);
 		}
+	}
+
+	/* The same list in a narrow dropdown of its own, where the rows are all
+	   there is and can afford to stand taller. A modifier rather than a second
+	   class, so it inherits everything above and changes the one value Icon List
+	   has no control for. */
+	.eael-mm-linklist--roomy {
+		--eael-mm-linklist-padding: 8px 16px;
 	}
 
 	/* The card a Nested Tabs tab title becomes.
@@ -730,11 +738,11 @@
 		   repaints the name above it. */
 		.eael-mm-cardtab__text {
 			display: block;
-			margin-block-start: 3px;
+			margin-block-start: var(--eael-mm-cardtab-text-gap, 4px);
 			font-size: var(--eael-mm-cardtab-text-size, 12px);
 			font-weight: 400;
-			line-height: 1.5;
-			color: var(--eael-mm-cardtab-text-color, #64748b);
+			line-height: 1.2;
+			color: var(--eael-mm-cardtab-text-color, #a3a3a3);
 		}
 
 		/* One colour per card.
@@ -769,15 +777,19 @@
 			--n-tabs-icon-color-active: var(--eael-mm-cardtab-icon-3, #ea9131);
 		}
 
+		/* The tile behind a card's icon: outlined and white, not filled. Nested
+		   Tabs sizes and colours the glyph from controls but has nothing for the
+		   plate it sits on, so all of it lives here. */
 		.e-n-tab-icon {
 			flex: 0 0 auto;
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-			width: var(--eael-mm-cardtab-tile, 42px);
-			height: var(--eael-mm-cardtab-tile, 42px);
-			border-radius: var(--eael-mm-cardtab-tile-radius, 12px);
-			background-color: var(--eael-mm-cardtab-tile-bg, #ede9fe);
+			width: var(--eael-mm-cardtab-tile, 40px);
+			height: var(--eael-mm-cardtab-tile, 40px);
+			border: 1px solid var(--eael-mm-cardtab-tile-line, #f2edf8);
+			border-radius: var(--eael-mm-cardtab-tile-radius, 8px);
+			background-color: var(--eael-mm-cardtab-tile-bg, #ffffff);
 		}
 	}
 
@@ -812,25 +824,6 @@
 			flex-basis: auto;
 			width: 100%;
 		}
-	}
-
-	/* The promo tile that closes a card-tab preset's link row.
-	 *
-	 * Two things the container it sits on has no control for. Elementor's
-	 * Background group stops at two colour stops and the design runs three, and
-	 * nothing in the panel paints an inward glow that is not also a border. Both
-	 * are custom properties with the design's own values behind them, so a
-	 * different palette is two variables rather than a fork of this rule.
-	 *
-	 * Only the background is claimed here — the tile's radius, padding and the
-	 * type on it stay controls on the widgets inside. A background picked in the
-	 * panel is written against the element's own class, which outranks this, so
-	 * setting one still replaces the gradient rather than layering over it. */
-	.eael-mm-promo {
-		background-image: var(
-			--eael-mm-promo-gradient,
-			linear-gradient(110deg, #a162d8 0%, #995efe 48%, #ffce79 100%)
-		);
 	}
 
 	/* A column of links written into an Advanced Tabs tab.

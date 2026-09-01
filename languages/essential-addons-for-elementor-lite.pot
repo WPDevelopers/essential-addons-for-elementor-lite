@@ -33,7 +33,7 @@ msgstr ""
 msgid "Invalid"
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:402, ../includes/Elements/Woo_Checkout.php:683, ../includes/MegaMenu/Presets/Saas_Menu.php:845
+#: ../includes/Classes/Asset_Builder.php:402, ../includes/Elements/Woo_Checkout.php:683, ../includes/MegaMenu/Presets/Saas_Menu.php:918
 msgid "Billing"
 msgstr ""
 
@@ -1193,7 +1193,7 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:27, ../includes/Elements/Advanced_Data_Table.php:237, ../includes/Elements/Advanced_Data_Table.php:252, ../includes/Elements/Advanced_Data_Table.php:926, ../includes/Elements/Betterdocs_Search_Form.php:162, ../includes/Elements/Event_Calendar.php:749, ../includes/Elements/Event_Calendar.php:750, ../includes/Elements/Event_Calendar.php:1080, ../includes/Elements/Event_Calendar.php:1096, ../includes/Elements/Event_Calendar.php:1097, ../includes/Elements/Event_Calendar.php:1110, ../includes/Elements/Event_Calendar.php:3878, ../includes/MegaMenu/Presets/Saas_Menu.php:804, ../includes/Theme_Builder/Presets/Mega_Header.php:183, ../includes/Theme_Builder/Presets/Shop_Header.php:238
+#: ../includes/Controls/Select2.php:27, ../includes/Elements/Advanced_Data_Table.php:237, ../includes/Elements/Advanced_Data_Table.php:252, ../includes/Elements/Advanced_Data_Table.php:926, ../includes/Elements/Betterdocs_Search_Form.php:162, ../includes/Elements/Event_Calendar.php:749, ../includes/Elements/Event_Calendar.php:750, ../includes/Elements/Event_Calendar.php:1080, ../includes/Elements/Event_Calendar.php:1096, ../includes/Elements/Event_Calendar.php:1097, ../includes/Elements/Event_Calendar.php:1110, ../includes/Elements/Event_Calendar.php:3878, ../includes/MegaMenu/Presets/Saas_Menu.php:877, ../includes/Theme_Builder/Presets/Mega_Header.php:183, ../includes/Theme_Builder/Presets/Shop_Header.php:238
 msgid "Search"
 msgstr ""
 
@@ -2281,7 +2281,7 @@ msgstr ""
 msgid "Label For Home"
 msgstr ""
 
-#: ../includes/Elements/Breadcrumbs.php:68, ../includes/MegaMenu/Manager.php:377, ../includes/MegaMenu/Presets/Saas_Menu.php:418, ../includes/MegaMenu/Presets/Suite_Menu.php:391, ../includes/Theme_Builder/Presets/Brand_Footer.php:144, ../includes/Theme_Builder/Presets/Mega_Header.php:315, ../includes/Theme_Builder/Presets/Simple_Footer.php:204
+#: ../includes/Elements/Breadcrumbs.php:68, ../includes/MegaMenu/Manager.php:377, ../includes/MegaMenu/Presets/Saas_Menu.php:424, ../includes/MegaMenu/Presets/Suite_Menu.php:418, ../includes/Theme_Builder/Presets/Brand_Footer.php:144, ../includes/Theme_Builder/Presets/Mega_Header.php:315, ../includes/Theme_Builder/Presets/Simple_Footer.php:204
 msgid "Home"
 msgstr ""
 
@@ -2511,7 +2511,7 @@ msgstr ""
 msgid "Shows grab cursor when you hover over the slider"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:579, ../includes/Elements/Content_Ticker.php:275, ../includes/Elements/Woo_Product_Carousel.php:1006, ../includes/Elements/Woo_Product_Images.php:337, ../includes/Elements/Woo_Product_Images.php:569, ../includes/MegaMenu/Presets/Saas_Menu.php:272, ../includes/MegaMenu/Presets/Suite_Menu.php:294, ../includes/Theme_Builder/Presets/Classic_Header.php:168, ../includes/Theme_Builder/Presets/Mega_Header.php:151, ../includes/Theme_Builder/Presets/Shop_Header.php:191
+#: ../includes/Elements/Business_Reviews.php:579, ../includes/Elements/Content_Ticker.php:275, ../includes/Elements/Woo_Product_Carousel.php:1006, ../includes/Elements/Woo_Product_Images.php:337, ../includes/Elements/Woo_Product_Images.php:569, ../includes/MegaMenu/Presets/Saas_Menu.php:273, ../includes/MegaMenu/Presets/Suite_Menu.php:318, ../includes/Theme_Builder/Presets/Classic_Header.php:168, ../includes/Theme_Builder/Presets/Mega_Header.php:151, ../includes/Theme_Builder/Presets/Shop_Header.php:191
 msgid "Navigation"
 msgstr ""
 
@@ -2631,7 +2631,7 @@ msgstr ""
 msgid "Container"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:1087, ../includes/Elements/Code_Snippet.php:421, ../includes/Elements/Code_Snippet.php:593, ../includes/Elements/Data_Table.php:105, ../includes/Elements/Event_Calendar.php:1000, ../includes/Elements/Event_Calendar.php:1764, ../includes/Elements/Event_Calendar.php:2908, ../includes/Elements/Pricing_Table.php:982, ../includes/Traits/Woo_Product_Comparable.php:1088, ../includes/MegaMenu/Presets/Preset_Library.php:250, ../includes/MegaMenu/Presets/Suite_Menu.php:156, ../includes/Theme_Builder/Core/Template_Types.php:239, ../includes/Theme_Builder/Presets/Classic_Header.php:92, ../includes/Theme_Builder/Presets/Shop_Header.php:99
+#: ../includes/Elements/Business_Reviews.php:1087, ../includes/Elements/Code_Snippet.php:421, ../includes/Elements/Code_Snippet.php:593, ../includes/Elements/Data_Table.php:105, ../includes/Elements/Event_Calendar.php:1000, ../includes/Elements/Event_Calendar.php:1764, ../includes/Elements/Event_Calendar.php:2908, ../includes/Elements/Pricing_Table.php:982, ../includes/Traits/Woo_Product_Comparable.php:1088, ../includes/MegaMenu/Presets/Preset_Library.php:250, ../includes/MegaMenu/Presets/Suite_Menu.php:178, ../includes/Theme_Builder/Core/Template_Types.php:239, ../includes/Theme_Builder/Presets/Classic_Header.php:92, ../includes/Theme_Builder/Presets/Shop_Header.php:99
 msgid "Header"
 msgstr ""
 
@@ -2695,7 +2695,7 @@ msgstr ""
 msgid "Double Angle"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2256, ../includes/Elements/Woo_Product_Carousel.php:3263, ../includes/Traits/Controls.php:1388, ../includes/MegaMenu/Presets/Saas_Menu.php:1105
+#: ../includes/Elements/Business_Reviews.php:2256, ../includes/Elements/Woo_Product_Carousel.php:3263, ../includes/Traits/Controls.php:1388, ../includes/MegaMenu/Presets/Saas_Menu.php:1177
 msgid "Chevron"
 msgstr ""
 
@@ -4093,7 +4093,7 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: ../includes/Elements/Data_Table.php:356, ../includes/MegaMenu/Presets/Suite_Menu.php:841, ../includes/Theme_Builder/Admin/Admin.php:586, ../includes/Theme_Builder/Core/Post_Type.php:142, ../includes/Theme_Builder/Templates/admin/dashboard.php:56
+#: ../includes/Elements/Data_Table.php:356, ../includes/MegaMenu/Presets/Suite_Menu.php:873, ../includes/Theme_Builder/Admin/Admin.php:586, ../includes/Theme_Builder/Core/Post_Type.php:142, ../includes/Theme_Builder/Templates/admin/dashboard.php:56
 msgid "Templates"
 msgstr ""
 
@@ -4845,7 +4845,7 @@ msgstr ""
 msgid "Layout Settings"
 msgstr ""
 
-#: ../includes/Elements/Facebook_Feed.php:266, ../includes/Elements/Filterable_Gallery.php:119, ../includes/MegaMenu/Presets/Suite_Menu.php:1175, ../includes/Template/Post-Timeline/card.php:4
+#: ../includes/Elements/Facebook_Feed.php:266, ../includes/Elements/Filterable_Gallery.php:119, ../includes/MegaMenu/Presets/Saas_Menu.php:721, ../includes/MegaMenu/Presets/Suite_Menu.php:1205, ../includes/Template/Post-Timeline/card.php:4
 msgid "Card"
 msgstr ""
 
@@ -6389,7 +6389,7 @@ msgstr ""
 msgid "Default Form Type"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:356, ../includes/Elements/Login_Register.php:2520, ../includes/Elements/Login_Register.php:6287, ../includes/Elements/Login_Register.php:6319, ../includes/Elements/Login_Register.php:7131, ../includes/Elements/Login_Register.php:7493, ../includes/Elements/Woo_Checkout.php:477, ../includes/Elements/Woo_Checkout.php:1445, ../includes/MegaMenu/Presets/Saas_Menu.php:325, ../includes/MegaMenu/Presets/Suite_Menu.php:348, ../includes/Theme_Builder/Presets/Shop_Header.php:284, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:349, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:349
+#: ../includes/Elements/Login_Register.php:356, ../includes/Elements/Login_Register.php:2520, ../includes/Elements/Login_Register.php:6287, ../includes/Elements/Login_Register.php:6319, ../includes/Elements/Login_Register.php:7131, ../includes/Elements/Login_Register.php:7493, ../includes/Elements/Woo_Checkout.php:477, ../includes/Elements/Woo_Checkout.php:1445, ../includes/MegaMenu/Presets/Saas_Menu.php:326, ../includes/MegaMenu/Presets/Suite_Menu.php:372, ../includes/Theme_Builder/Presets/Shop_Header.php:284, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:349, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:349
 msgid "Login"
 msgstr ""
 
@@ -8580,7 +8580,7 @@ msgstr ""
 msgid "Divider"
 msgstr ""
 
-#: ../includes/Elements/Pricing_Table.php:1243, ../includes/MegaMenu/Presets/Saas_Menu.php:428, ../includes/Theme_Builder/Presets/Brand_Footer.php:146
+#: ../includes/Elements/Pricing_Table.php:1243, ../includes/MegaMenu/Presets/Saas_Menu.php:434, ../includes/Theme_Builder/Presets/Brand_Footer.php:146
 msgid "Pricing"
 msgstr ""
 
@@ -10222,7 +10222,7 @@ msgstr ""
 msgid "Table Items"
 msgstr ""
 
-#: ../includes/Elements/Woo_Cart.php:420, ../includes/Elements/Woo_Checkout.php:230, ../includes/Elements/Woo_Product_Gallery.php:357, ../includes/MegaMenu/Presets/Saas_Menu.php:422
+#: ../includes/Elements/Woo_Cart.php:420, ../includes/Elements/Woo_Checkout.php:230, ../includes/Elements/Woo_Product_Gallery.php:357, ../includes/MegaMenu/Presets/Saas_Menu.php:428
 msgid "Product"
 msgstr ""
 
@@ -12187,7 +12187,7 @@ msgstr ""
 msgid "%1$s (%2$s %3$dpx)"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:379, ../includes/MegaMenu/Presets/Saas_Menu.php:930, ../includes/Theme_Builder/Presets/Mega_Header.php:319, ../includes/Theme_Builder/Presets/Modern_Footer.php:168, ../includes/Theme_Builder/Presets/Simple_Footer.php:207
+#: ../includes/MegaMenu/Manager.php:379, ../includes/MegaMenu/Presets/Saas_Menu.php:1003, ../includes/Theme_Builder/Presets/Mega_Header.php:319, ../includes/Theme_Builder/Presets/Modern_Footer.php:168, ../includes/Theme_Builder/Presets/Simple_Footer.php:207
 msgid "Blog"
 msgstr ""
 
@@ -12199,7 +12199,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:382, ../includes/MegaMenu/Presets/Saas_Menu.php:432, ../includes/MegaMenu/Presets/Saas_Menu.php:942, ../includes/MegaMenu/Presets/Suite_Menu.php:414, ../includes/Theme_Builder/Presets/Mega_Header.php:320, ../includes/Theme_Builder/Presets/Simple_Footer.php:208
+#: ../includes/MegaMenu/Manager.php:382, ../includes/MegaMenu/Presets/Saas_Menu.php:438, ../includes/MegaMenu/Presets/Saas_Menu.php:1015, ../includes/MegaMenu/Presets/Suite_Menu.php:441, ../includes/Theme_Builder/Presets/Mega_Header.php:320, ../includes/Theme_Builder/Presets/Simple_Footer.php:208
 msgid "Contact"
 msgstr ""
 
@@ -12668,7 +12668,7 @@ msgstr ""
 msgid "Advanced Menu"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:814, ../includes/Traits/Elements.php:307, ../includes/MegaMenu/Presets/Suite_Menu.php:832
+#: ../includes/Traits/Admin.php:814, ../includes/Traits/Elements.php:307, ../includes/MegaMenu/Presets/Suite_Menu.php:864
 msgid "Testimonial Slider"
 msgstr ""
 
@@ -14200,479 +14200,479 @@ msgstr ""
 msgid "Product Suite"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:164, ../includes/MegaMenu/Presets/Suite_Menu.php:191, ../includes/Theme_Builder/Presets/Mega_Header.php:89
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:165, ../includes/MegaMenu/Presets/Suite_Menu.php:215, ../includes/Theme_Builder/Presets/Mega_Header.php:89
 msgid "Header Bar"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:193, ../includes/MegaMenu/Presets/Saas_Menu.php:231, ../includes/MegaMenu/Presets/Suite_Menu.php:220, ../includes/MegaMenu/Presets/Suite_Menu.php:255, ../includes/Theme_Builder/Presets/Brand_Footer.php:195, ../includes/Theme_Builder/Presets/Classic_Header.php:140, ../includes/Theme_Builder/Presets/Mega_Header.php:122, ../includes/Theme_Builder/Presets/Mega_Header.php:223, ../includes/Theme_Builder/Presets/Modern_Footer.php:200, ../includes/Theme_Builder/Presets/Shop_Header.php:132, ../includes/Theme_Builder/Presets/Shop_Header.php:163
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:194, ../includes/MegaMenu/Presets/Saas_Menu.php:232, ../includes/MegaMenu/Presets/Suite_Menu.php:244, ../includes/MegaMenu/Presets/Suite_Menu.php:279, ../includes/Theme_Builder/Presets/Brand_Footer.php:195, ../includes/Theme_Builder/Presets/Classic_Header.php:140, ../includes/Theme_Builder/Presets/Mega_Header.php:122, ../includes/Theme_Builder/Presets/Mega_Header.php:223, ../includes/Theme_Builder/Presets/Modern_Footer.php:200, ../includes/Theme_Builder/Presets/Shop_Header.php:132, ../includes/Theme_Builder/Presets/Shop_Header.php:163
 msgid "Brand"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:300, ../includes/MegaMenu/Presets/Suite_Menu.php:319, ../includes/Theme_Builder/Presets/Mega_Header.php:180, ../includes/Theme_Builder/Presets/Shop_Header.php:235
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:301, ../includes/MegaMenu/Presets/Suite_Menu.php:343, ../includes/Theme_Builder/Presets/Mega_Header.php:180, ../includes/Theme_Builder/Presets/Shop_Header.php:235
 msgid "Actions"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:367
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:368
 msgid "Create Account"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:436, ../includes/Theme_Builder/Presets/Modern_Footer.php:166
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:442, ../includes/Theme_Builder/Presets/Modern_Footer.php:166
 msgid "Resources"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:779
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:852
 msgid "Engineering & Development"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:781
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:854
 msgid "Code assistants"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:782
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:855
 msgid "Developer tooling"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:783
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:856
 msgid "API platforms"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:784
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:857
 msgid "Testing & QA"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:785
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:858
 msgid "Deployment"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:789
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:862
 msgid "LLMs"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:791
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:864
 msgid "Chat interfaces"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:792
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:865
 msgid "Model providers"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:793
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:866
 msgid "Prompt libraries"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:794
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:867
 msgid "Evaluation"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:795
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:868
 msgid "Fine-tuning"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:799
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:872
 msgid "Productivity"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:801
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:874
 msgid "AI notetakers"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:802
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:875
 msgid "Note and writing apps"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:803
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:876
 msgid "Team collaboration software"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:805
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:878
 msgid "AI Workflow Automation"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:809
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:882
 msgid "Marketing & Sales"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:811
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:884
 msgid "Campaign automation"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:812
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:885
 msgid "CRM"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:813
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:886
 msgid "Content generation"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:814
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:887
 msgid "SEO tooling"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:815
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:888
 msgid "Analytics"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:819
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:892
 msgid "Design & Creative"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:821
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:894
 msgid "Image generation"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:822
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:895
 msgid "Video editing"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:823
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:896
 msgid "Design systems"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:824
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:897
 msgid "Prototyping"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:825
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:898
 msgid "Brand assets"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:829
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:902
 msgid "Social & Community"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:831
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:904
 msgid "Scheduling"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:832
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:905
 msgid "Community platforms"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:833
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:906
 msgid "Social listening"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:834
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:907
 msgid "Creator tools"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:835
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:908
 msgid "Moderation"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:839
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:912
 msgid "Finance"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:841
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:914
 msgid "Invoicing"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:842
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:915
 msgid "Expense management"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:843
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:916
 msgid "Payroll"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:844
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:917
 msgid "Forecasting"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:849
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:922
 msgid "AI Agents"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:851
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:924
 msgid "Agent frameworks"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:852
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:925
 msgid "Browser agents"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:853
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:926
 msgid "Support agents"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:854
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:927
 msgid "Research agents"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:855
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:928
 msgid "Orchestration"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:931
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:1004
 msgid "Product news and release notes."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:936
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:1009
 msgid "About Us"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:937
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:1010
 msgid "Who we are and what we are building."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:943
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:1016
 msgid "Talk to sales, support or the team."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:948
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:1021
 msgid "Documentations"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Saas_Menu.php:949
+#: ../includes/MegaMenu/Presets/Saas_Menu.php:1022
 msgid "Guides, references and how-tos."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:395
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:422
 msgid "Quick Help"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:403
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:430
 msgid "Solutions"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:614
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:643
 msgid "Blogs"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:615, ../includes/Theme_Builder/Presets/Modern_Footer.php:169
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:644, ../includes/Theme_Builder/Presets/Modern_Footer.php:169
 msgid "Documentation"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:616
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:645
 msgid "Video Tutorial"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:617
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:646
 msgid "24/7 Support"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:618
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:647
 msgid "Join Community"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:767, ../includes/Theme_Builder/Presets/Brand_Footer.php:145, ../includes/Theme_Builder/Presets/Mega_Header.php:317, ../includes/Theme_Builder/Presets/Simple_Footer.php:206
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:799, ../includes/Theme_Builder/Presets/Brand_Footer.php:145, ../includes/Theme_Builder/Presets/Mega_Header.php:317, ../includes/Theme_Builder/Presets/Simple_Footer.php:206
 msgid "Features"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:768
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:800
 msgid "Powerful tools and widgets to design"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:769
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:801
 msgid "Explore All Features"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:772
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:804
 msgid "Core Builders"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:774
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:806
 msgid "Visual Editor"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:775
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:807
 msgid "Content Engine"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:776
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:808
 msgid "Header Builder"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:777
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:809
 msgid "Popup Creator"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:778
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:810
 msgid "Form Styler"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:782
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:814
 msgid "Advanced Widgets"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:784
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:816
 msgid "Interactive Charts"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:785
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:817
 msgid "Filterable Galleries"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:786
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:818
 msgid "Data Table Widget"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:787, ../includes/Theme_Builder/Presets/Mega_Header.php:531
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:819, ../includes/Theme_Builder/Presets/Mega_Header.php:531
 msgid "Countdown Timer"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:788
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:820
 msgid "Progress Circle"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:792
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:824
 msgid "Site Enhancements"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:794
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:826
 msgid "AJAX Search Module"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:795
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:827
 msgid "Scroll Reveal Effects"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:796
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:828
 msgid "User Login Widget"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:797
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:829
 msgid "Lightbox for Media"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:804
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:836
 msgid "Ready Solutions"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:805
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:837
 msgid "Pre-built functionality for popular use cases"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:806
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:838
 msgid "Explore All Solutions"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:809
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:841
 msgid "Ecommerce Kits"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:811
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:843
 msgid "Product Showcase"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:812
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:844
 msgid "Checkout &amp; Cart"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:813
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:845
 msgid "Pricing Tables"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:814
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:846
 msgid "Booking Calendar"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:815
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:847
 msgid "Membership Area"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:819
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:851
 msgid "Marketing Blocks"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:821, ../includes/MegaMenu/Presets/Suite_Menu.php:858
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:853, ../includes/MegaMenu/Presets/Suite_Menu.php:890
 msgid "Landing Pages"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:822
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:854
 msgid "Lead Capture Forms"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:823
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:855
 msgid "Newsletter Optin"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:824
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:856
 msgid "Countdown Offers"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:825
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:857
 msgid "Social Proof Bar"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:829
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:861
 msgid "Support &amp; Engagement"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:831
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:863
 msgid "FAQ Accordion"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:833
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:865
 msgid "Live Chat Button"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:834, ../includes/Theme_Builder/Presets/Brand_Footer.php:155
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:866, ../includes/Theme_Builder/Presets/Brand_Footer.php:155
 msgid "Help Center"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:842
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:874
 msgid "Professionally designed templates and wireframes"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:843
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:875
 msgid "Browse All Templates"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:846
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:878
 msgid "Full Site Kits"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:848
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:880
 msgid "Business Pro"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:849
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:881
 msgid "Agency Studio"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:850
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:882
 msgid "Online Store"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:851
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:883
 msgid "Portfolio Plus"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:852
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:884
 msgid "Startup Launch"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:856
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:888
 msgid "Page Templates"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:859
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:891
 msgid "Pricing Pages"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:860
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:892
 msgid "About &amp; Team"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:861
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:893
 msgid "Contact Forms"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:868
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:900
 msgid "What's New"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:870
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:902
 msgid "Multipurpose eCommerce Store Template"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:997
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:1024
 msgid "Promo"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Suite_Menu.php:1326
+#: ../includes/MegaMenu/Presets/Suite_Menu.php:1367
 msgid "NEW"
 msgstr ""
 

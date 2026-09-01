@@ -49,14 +49,25 @@ use Essential_Addons_Elementor\Theme_Builder\Presets\Elements;
 class Suite_Menu {
 
 	/**
-	 * Headings, menu items and link text.
+	 * Card titles and the label of the link under the pointer.
 	 */
-	const INK = '#0F172A';
+	const INK = '#323232';
 
 	/**
-	 * Descriptions, column headings and the resting icon colour.
+	 * Menu items, resting link labels, the icons beside them.
 	 */
-	const MUTED = '#64748B';
+	const MUTED = '#686868';
+
+	/**
+	 * The line under a card's title — a step lighter again, because it explains
+	 * the title rather than competing with it.
+	 */
+	const FAINT = '#A3A3A3';
+
+	/**
+	 * A column heading, lighter still and carried by its letter-spacing.
+	 */
+	const HEADING = '#999999';
 
 	/**
 	 * Brand accent — the hovered link, the card icons.
@@ -71,22 +82,27 @@ class Suite_Menu {
 	/**
 	 * The wash behind a hovered row.
 	 */
-	const HOVER = '#F5F3FF';
-
-	/**
-	 * The tile behind a category icon.
-	 */
-	const ICON_BG = '#EDE9FE';
+	const HOVER = '#EDEDED';
 
 	/**
 	 * Hairlines — the rule under each column heading.
 	 */
-	const LINE = '#E9E7F3';
+	const LINE = '#DCDCDC';
+
+	/**
+	 * The panel's own edge, warmer than the rules inside it.
+	 */
+	const PANEL_LINE = '#E7E0F0';
+
+	/**
+	 * The outline of a category icon's tile.
+	 */
+	const TILE_LINE = '#F2EDF8';
 
 	/**
 	 * The "NEW" chip's surface.
 	 */
-	const BADGE = '#312E81';
+	const BADGE = '#B1AFB8';
 
 	/**
 	 * The "NEW" chip's label, on that surface.
@@ -96,17 +112,23 @@ class Suite_Menu {
 	/**
 	 * The call to action's surface.
 	 */
-	const BUTTON = '#C7BFFF';
+	const BUTTON = '#DADADA';
 
 	/**
 	 * The call to action's label, on that surface.
 	 */
-	const BUTTON_INK = '#1E1B4B';
+	const BUTTON_INK = '#686868';
 
 	/**
-	 * Everything written on the promo tile, over its gradient.
+	 * The call to action's edge, which is what separates it from the bar behind
+	 * it now that both are pale.
 	 */
-	const PROMO_INK = '#FFFFFF';
+	const BUTTON_LINE = '#C7C7C7';
+
+	/**
+	 * The promo tile's surface.
+	 */
+	const PROMO = '#F0F0F0';
 
 
 	/**
@@ -151,7 +173,7 @@ class Suite_Menu {
 				// floating pill; and a full-width container plus side margins is
 				// `100% + margins`, which overflows the page. Padding on a wrapper
 				// is inside its own box, so the bar simply fills what is left.
-				'padding'        => Elements::spacing( 20, 20, 0, 20 ),
+				'padding'        => Elements::spacing( 18, 16, 0, 16 ),
 				'padding_mobile' => Elements::spacing( 12, 12, 0, 12 ),
 				'_title'         => __( 'Header', 'essential-addons-for-elementor-lite' ),
 			],
@@ -179,15 +201,17 @@ class Suite_Menu {
 				'flex_gap'              => Elements::gap( 24 ),
 				'flex_gap_tablet'       => Elements::gap( 16 ),
 				'flex_gap_mobile'       => Elements::gap( 8 ),
-				'padding'               => Elements::spacing( 14, 28, 14, 28 ),
-				'padding_tablet'        => Elements::spacing( 12, 20, 12, 20 ),
+				'padding'               => Elements::spacing( 16, 24, 16, 24 ),
+				'padding_tablet'        => Elements::spacing( 14, 20, 14, 20 ),
 				'padding_mobile'        => Elements::spacing( 10, 16, 10, 16 ),
 				'background_background' => 'classic',
 				'background_color'      => self::SURFACE,
-				'border_radius'         => Elements::spacing( 26, 26, 26, 26 ),
-				'border_radius_mobile'  => Elements::spacing( 18, 18, 18, 18 ),
+				'border_radius'         => Elements::spacing( 16, 16, 16, 16 ),
+				'border_radius_mobile'  => Elements::spacing( 14, 14, 14, 14 ),
 				'box_shadow_box_shadow_type' => 'yes',
-				'box_shadow_box_shadow' => Elements::shadow( 10, 34, 'rgba(15, 23, 42, 0.10)' ),
+				// Wide and faint rather than tight and dark: the bar sits on a pale
+				// page, and a shadow with any weight to it reads as a second border.
+				'box_shadow_box_shadow' => Elements::shadow( 4, 47, 'rgba(0, 0, 0, 0.08)' ),
 				'_title'                => __( 'Header Bar', 'essential-addons-for-elementor-lite' ),
 			],
 			[
@@ -347,23 +371,26 @@ class Suite_Menu {
 			[
 				'text'                          => __( 'Login', 'essential-addons-for-elementor-lite' ),
 				'link'                          => Elements::link( wp_login_url() ),
-				// "Stretch" — fills the custom width set below.
-				'align'                         => 'justify',
-				'_element_width'                => 'initial',
-				'_element_custom_width'         => Elements::size( 71 ),
-				'_element_custom_width_mobile'  => Elements::size( 71 ),
+				// Sized by its own padding now, not held to a fixed width: the design
+				// gives it 16 either side of a 16px label and lets the shape follow.
+				'align'                         => 'right',
 
 				'background_color'              => self::BUTTON,
 				'button_text_color'             => self::BUTTON_INK,
 				'hover_color'                   => self::SURFACE,
 				'button_background_hover_color' => self::ACCENT,
+				// An edge, because the button and the bar behind it are both pale
+				// now — without it the shape has nothing to end on.
+				'border_border'                 => 'solid',
+				'border_width'                  => Elements::spacing( 1, 1, 1, 1 ),
+				'border_color'                  => self::BUTTON_LINE,
 				'border_radius'                 => Elements::spacing( 12, 12, 12, 12 ),
-				'text_padding'                  => Elements::spacing( 11, 0, 11, 0 ),
+				'text_padding'                  => Elements::spacing( 12, 16, 12, 16 ),
 
 				'typography_typography'         => 'custom',
-				'typography_font_size'          => Elements::size( 14 ),
-				'typography_font_weight'        => '600',
-				'typography_line_height'        => Elements::size( 20 ),
+				'typography_font_size'          => Elements::size( 16 ),
+				'typography_font_weight'        => '500',
+				'typography_line_height'        => Elements::size( 1.1, 'em' ),
 				'typography_text_decoration'    => 'none',
 
 				// Held at its own size: a widget in a row container grows into
@@ -406,7 +433,7 @@ class Suite_Menu {
 				// The card inside is 155 wide; the panel adds the 20px inset that
 				// every panel carries on each side, and the nudge puts the card's
 				// left edge back on the menu item's.
-				'size'   => 195,
+				'size'   => 200,
 				'align'  => 'start',
 				'offset' => -20,
 			],
@@ -488,7 +515,9 @@ class Suite_Menu {
 			// Menu bar — transparent, because the header card is the surface.
 			'eael_mega_menu_bar_background_background' => 'classic',
 			'eael_mega_menu_bar_background_color'      => 'rgba(0,0,0,0)',
-			'eael_mega_menu_bar_gap'                   => Elements::size( 8 ),
+			// 40 between two labels in the design, less the 14 of item padding on
+			// each side of the gap.
+			'eael_mega_menu_bar_gap'                   => Elements::size( 12 ),
 			'eael_mega_menu_bar_padding'               => Elements::spacing( 0, 0, 0, 0 ),
 
 			// Items.
@@ -498,7 +527,7 @@ class Suite_Menu {
 			'eael_mega_menu_item_typography_text_decoration' => 'none',
 			'eael_mega_menu_item_padding'                => Elements::spacing( 10, 14, 10, 14 ),
 			'eael_mega_menu_item_radius'                 => Elements::spacing( 10, 10, 10, 10 ),
-			'eael_mega_menu_item_color'                  => self::INK,
+			'eael_mega_menu_item_color'                  => self::MUTED,
 			'eael_mega_menu_item_bg'                     => 'rgba(0,0,0,0)',
 			'eael_mega_menu_item_color_hover'            => self::ACCENT,
 			'eael_mega_menu_item_bg_hover'               => self::HOVER,
@@ -506,10 +535,10 @@ class Suite_Menu {
 			'eael_mega_menu_item_bg_active'              => self::HOVER,
 
 			// Indicator.
-			'eael_mega_menu_indicator_size'         => Elements::size( 11 ),
-			'eael_mega_menu_indicator_gap'          => Elements::size( 6 ),
+			'eael_mega_menu_indicator_size'         => Elements::size( 12 ),
+			'eael_mega_menu_indicator_gap'          => Elements::size( 4 ),
 			'eael_mega_menu_indicator_rotate'       => 'yes',
-			'eael_mega_menu_indicator_color'        => self::INK,
+			'eael_mega_menu_indicator_color'        => self::MUTED,
 			'eael_mega_menu_indicator_color_active' => self::ACCENT,
 
 			// Panel — deliberately invisible. The card is the container inside it,
@@ -530,10 +559,10 @@ class Suite_Menu {
 			// because a full-width container plus margins overflows its parent.
 			'eael_mega_menu_panel_padding'               => Elements::spacing( 0, 20, 0, 20 ),
 			'eael_mega_menu_panel_padding_mobile'        => Elements::spacing( 0, 0, 0, 0 ),
-			// Measured from the bottom of the menu *item*, which sits 14px above the
-			// header bar's own bottom edge — so this is that padding plus the gap
-			// the design leaves between the bar and the card below it.
-			'eael_mega_menu_panel_offset'                => Elements::size( 26 ),
+			// Measured from the bottom of the menu *item*, which sits 16px above the
+			// header bar's own bottom edge once the item's own 10 is taken off — so
+			// this is that 6 plus the 4 the design leaves between bar and panel.
+			'eael_mega_menu_panel_offset'                => Elements::size( 10 ),
 			'eael_mega_menu_panel_z_index'               => 999,
 
 			// Mobile toggle.
@@ -632,7 +661,7 @@ class Suite_Menu {
 
 		return Elements::nested_child(
 			self::panel_settings( $title ),
-			[ self::card( [ self::link_list( $rows, 0 ) ], 8, 'column', 12 ) ]
+			[ self::card( [ self::link_list( $rows, 0, 0, true ) ], 8, 'column', 8 ) ]
 		);
 	}
 
@@ -648,7 +677,7 @@ class Suite_Menu {
 	protected static function catalogue_panel( $title ) {
 		return Elements::nested_child(
 			self::panel_settings( $title ),
-			[ self::card( [ self::category_tabs() ], 28 ) ]
+			[ self::card( [ self::category_tabs() ], 23, 'column', 16 ) ]
 		);
 	}
 
@@ -708,14 +737,17 @@ class Suite_Menu {
 				'tabs_justify_vertical' => 'start',
 				// Stacked above the content once there is no room beside it.
 				'tabs_direction_tablet' => 'block-start',
-				'tabs_width'      => Elements::size( 30, '%' ),
+				// 388 of the card's 1200 of inner width.
+				'tabs_width'      => Elements::size( 32, '%' ),
+				// The gap between the card column and the links beside it.
+				'tabs_title_spacing' => Elements::size( 40 ),
 				'title_alignment' => 'start',
 				'icon_position'   => 'inline-start',
 
 				// The cards.
-				'padding'                    => Elements::spacing( 12, 14, 12, 14 ),
-				'tabs_title_space_between'   => Elements::size( 4 ),
-				'tabs_title_border_radius'   => Elements::spacing( 14, 14, 14, 14 ),
+				'padding'                    => Elements::spacing( 8, 8, 8, 8 ),
+				'tabs_title_space_between'   => Elements::size( 16 ),
+				'tabs_title_border_radius'   => Elements::spacing( 8, 8, 8, 8 ),
 				// Group controls, not flat colours. Each writes an
 				// `--n-tabs-title-background-color*` variable, and the rule that
 				// reads it is one Elementor sets at very high specificity — so a
@@ -731,14 +763,14 @@ class Suite_Menu {
 				'title_text_color_hover'     => self::INK,
 				'title_text_color_active'    => self::INK,
 				'title_typography_typography' => 'custom',
-				'title_typography_font_size' => Elements::size( 15 ),
-				'title_typography_font_weight' => '600',
-				'title_typography_line_height' => Elements::size( 1.4, 'em' ),
+				'title_typography_font_size' => Elements::size( 16 ),
+				'title_typography_font_weight' => '500',
+				'title_typography_line_height' => Elements::size( 1.2, 'em' ),
 
 				// The icon tile. Size and colour are controls; the rounded plate
 				// behind it is the one thing Nested Tabs has no control for, and
 				// comes from the class below.
-				'icon_size'         => Elements::size( 17 ),
+				'icon_size'         => Elements::size( 28 ),
 				'icon_spacing'      => Elements::size( 12 ),
 				'icon_color'        => self::ACCENT,
 				'icon_color_hover'  => self::ACCENT,
@@ -868,7 +900,6 @@ class Suite_Menu {
 					'label' => __( 'What\'s New', 'essential-addons-for-elementor-lite' ),
 					'icon'  => 'fas fa-magic',
 					'title' => __( 'Multipurpose eCommerce Store Template', 'essential-addons-for-elementor-lite' ),
-					'image' => 'demo-3.png',
 				],
 			],
 		];
@@ -917,7 +948,7 @@ class Suite_Menu {
 	 */
 	protected static function tab_content( $columns, $explore, $promo = [] ) {
 		$children = [];
-		$width    = empty( $promo ) ? 31 : 29;
+		$width    = empty( $promo ) ? 30 : 30;
 
 		foreach ( $columns as $index => $column ) {
 			$children[] = self::link_column(
@@ -941,8 +972,8 @@ class Suite_Menu {
 				// row, and a user who widens one or adds a fourth should get a
 				// second row rather than a squeezed first one.
 				'flex_wrap'        => 'wrap',
-				'flex_gap'         => Elements::gap( 24 ),
-				'flex_gap_tablet'  => Elements::gap( 20 ),
+				'flex_gap'         => Elements::gap( 36 ),
+				'flex_gap_tablet'  => Elements::gap( 24 ),
 				'padding'          => Elements::spacing( 0, 0, 0, 0 ),
 			],
 			$children
@@ -972,34 +1003,36 @@ class Suite_Menu {
 				'content_width'                  => 'full',
 				// The third column's share plus the two points the lists beside it
 				// gave up, so the row still ends where the card does.
-				'width'                          => Elements::size( 35, '%' ),
+				// 244 against the link columns' 236 — the one column that is a tile
+				// rather than a list gets the extra eight.
+				'width'                          => Elements::size( 31, '%' ),
 				'width_tablet'                   => Elements::size( 100, '%' ),
 				'width_mobile'                   => Elements::size( 100, '%' ),
 				'flex_direction'                 => 'column',
 				'flex_gap'                       => Elements::gap( 16 ),
-				// No padding at the foot: the screenshot below runs into the tile's
-				// bottom edge rather than sitting on a band of gradient.
-				'padding'                        => Elements::spacing( 20, 20, 0, 20 ),
-
-				// No Background control, on purpose: the design runs three colour
-				// stops and Elementor's group control stops at two. The gradient is
-				// the one thing the class below carries — everything else on this
-				// tile is still a control. See `.eael-mm-promo` in the widget's
-				// stylesheet.
-				//
-				// `css_classes`, not the `_css_classes` a widget takes: a container
-				// registers its own CSS Classes control under the unprefixed name,
-				// and the prefixed one it does not have is dropped in silence — the
-				// tile renders with no class, and so with no gradient.
-				'css_classes'                    => 'eael-mm-promo',
-
+				// None at all. The plate at the foot spans the tile edge to edge, and
+				// an inset here would be an inset it has to be dragged back out of —
+				// a widget cannot be widened by a negative margin anyway, since
+				// Elementor caps it at the width of the box it sits in. So the tile
+				// holds nothing back and the two lines of type carry their own.
+				'padding'                        => Elements::spacing( 0, 0, 0, 0 ),
+				// The plate's corners are square and the tile's are not; this is what
+				// rounds them. Safe here because nothing inside overflows any more.
+				'overflow'                       => 'hidden',
+				// One flat colour, so it is a control again. This was a class in the
+				// stylesheet while the tile carried a three-stop gradient, which is
+				// one stop more than Elementor's Background group can hold; a single
+				// colour has no such problem, and putting it back on the panel is
+				// what lets the user recolour the tile without leaving the editor.
+				'background_background'          => 'classic',
+				'background_color'               => self::PROMO,
 				'border_radius'                  => Elements::spacing( 8, 8, 8, 8 ),
 				'_title'                         => __( 'Promo', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				self::promo_label( $promo['label'], $promo['icon'] ),
 				self::promo_heading( $promo['title'] ),
-				self::promo_image( $promo['image'] ),
+				self::promo_image(),
 			]
 		);
 	}
@@ -1035,13 +1068,15 @@ class Suite_Menu {
 						'selected_icon' => Elements::icon( $icon ),
 					] ),
 				],
+				// The tile's own inset, carried here instead — see `promo_card()`.
+				'_padding'                    => Elements::spacing( 34, 25, 0, 25 ),
 				'space_between'               => Elements::size( 0 ),
 				'text_indent'                 => Elements::size( 8 ),
 				'icon_size'                   => Elements::size( 15 ),
-				// White, both of them: this row sits on the gradient, not on the
-				// card, and the ink the columns beside it use disappears there.
-				'icon_color'                  => self::PROMO_INK,
-				'text_color'                  => self::PROMO_INK,
+				// The same grey as the columns beside it, now that the tile is a pale
+				// plate rather than a saturated one.
+				'icon_color'                  => self::MUTED,
+				'text_color'                  => self::MUTED,
 				'icon_typography_typography'  => 'custom',
 				'icon_typography_font_size'   => Elements::size( 13 ),
 				'icon_typography_font_weight' => '600',
@@ -1064,7 +1099,8 @@ class Suite_Menu {
 			[
 				'title'                        => $title,
 				'header_size'                  => 'h6',
-				'title_color'                  => self::PROMO_INK,
+				'_padding'                     => Elements::spacing( 0, 25, 0, 25 ),
+				'title_color'                  => self::MUTED,
 				'typography_typography'        => 'custom',
 				'typography_font_size'         => Elements::size( 16 ),
 				'typography_font_weight'       => '600',
@@ -1074,35 +1110,36 @@ class Suite_Menu {
 	}
 
 	/**
-	 * The screenshot under the headline.
+	 * The band under the headline.
 	 *
-	 * Shipped artwork, from the same accessor the starter headers use for theirs:
-	 * a promo tile with a grey placeholder in it is a promo tile that arrives
-	 * looking unmade. It is meant to be replaced, from the widget's own image
-	 * control.
+	 * Elementor's own placeholder, not shipped artwork. The design draws this as
+	 * an empty plate with a picture mark on it, and that is the honest thing for
+	 * a preset to arrive with: a real screenshot of somebody else's template
+	 * reads as content the user is meant to keep, where the placeholder is the
+	 * one image on the page that says "swap me" in a language they already know.
 	 *
 	 * @since 6.7.5
 	 *
-	 * @param string $file File name, inside the plugin's admin image directory.
-	 *
 	 * @return array
 	 */
-	protected static function promo_image( $file ) {
+	protected static function promo_image() {
 		return Elements::widget(
 			'image',
 			[
-				'image'               => [ 'id' => '', 'url' => Elements::brand_logo( $file ) ],
+				'image'               => [ 'id' => '', 'url' => Elements::placeholder_image() ],
 				'image_size'          => 'full',
 				'align'               => 'start',
+				// Edge to edge, which it simply is: the tile keeps no padding for it
+				// to be pulled out of.
 				'width'               => Elements::size( 100, '%' ),
-				// Out past the tile's right padding, so the screenshot runs off that
-				// edge instead of floating inside a frame of gradient. A negative
-				// margin rather than a wider image: this reaches the edge exactly, at
-				// any width, with nothing left to clip.
-				'_margin'             => Elements::spacing( 0, -20, 0, 0 ),
-				// Only the two corners still on the tile are ever seen; the other two
-				// sit past its edges.
-				'image_border_radius' => Elements::spacing( 6, 6, 0, 0 ),
+				// A band, not a square. The placeholder is square and the design's
+				// plate is not, so it is cropped to the height rather than allowed
+				// to set it — the mark sits in the middle and survives the crop.
+				'height'              => Elements::size( 167 ),
+				'object-fit'          => 'cover',
+				// Square: every corner of the plate is on one of the tile's own
+				// edges, and the tile is what rounds them.
+				'image_border_radius' => Elements::spacing( 0, 0, 0, 0 ),
 			]
 		);
 	}
@@ -1167,11 +1204,9 @@ class Suite_Menu {
 			'background_color'      => self::SURFACE,
 			'border_border'         => 'solid',
 			'border_width'          => Elements::spacing( 1, 1, 1, 1 ),
-			'border_color'          => self::LINE,
+			'border_color'          => self::PANEL_LINE,
 			'border_radius'         => Elements::spacing( $radius, $radius, $radius, $radius ),
 			'border_radius_mobile'  => Elements::spacing( $mobile, $mobile, $mobile, $mobile ),
-			'box_shadow_box_shadow_type' => 'yes',
-			'box_shadow_box_shadow' => Elements::shadow( 14, 40, 'rgba(15, 23, 42, 0.12)' ),
 			'_title'                => __( 'Card', 'essential-addons-for-elementor-lite' ),
 		];
 
@@ -1212,7 +1247,10 @@ class Suite_Menu {
 
 		$children = [
 			self::column_heading( $title ),
-			self::link_list( $rows, 10 ),
+			// 8, not the design's 4: it sits its 20px glyph in a 24px box and adds
+			// the gap to that, and Icon List has no box — only the glyph and the
+			// gap after it. 20 + 8 puts the label where 24 + 4 does.
+			self::link_list( $rows, 8 ),
 		];
 
 		if ( '' !== $footer ) {
@@ -1222,13 +1260,13 @@ class Suite_Menu {
 		return Elements::container(
 			[
 				'content_width'  => 'full',
-				// Three to a row inside the tab's own content area, with the gap
-				// between them taken off the share.
+				// 236 of the 772 the columns share, with the two 36px gaps between
+				// them taken off first.
 				'width'          => Elements::size( $width, '%' ),
 				'width_tablet'   => Elements::size( 100, '%' ),
 				'width_mobile'   => Elements::size( 100, '%' ),
 				'flex_direction' => 'column',
-				'flex_gap'       => Elements::gap( 10 ),
+				'flex_gap'       => Elements::gap( 24 ),
 				'padding'        => Elements::spacing( 0, 0, 0, 0 ),
 				'_title'         => $title,
 			],
@@ -1255,16 +1293,17 @@ class Suite_Menu {
 			[
 				'title'                       => $title,
 				'header_size'                 => 'h6',
-				'title_color'                 => self::MUTED,
+				'title_color'                 => self::HEADING,
 				'typography_typography'       => 'custom',
 				'typography_font_size'        => Elements::size( 12 ),
-				'typography_font_weight'      => '600',
+				'typography_font_weight'      => '500',
 				'typography_text_transform'   => 'uppercase',
-				'typography_letter_spacing'   => Elements::size( 1 ),
+				'typography_letter_spacing'   => Elements::size( 2.4 ),
+				'typography_line_height'      => Elements::size( 1.2, 'em' ),
 				'_border_border'              => 'solid',
 				'_border_width'               => Elements::spacing( 0, 0, 1, 0 ),
 				'_border_color'               => self::LINE,
-				'_padding'                    => Elements::spacing( 0, 0, 12, 0 ),
+				'_padding'                    => Elements::spacing( 0, 0, 8, 0 ),
 			]
 		);
 	}
@@ -1282,26 +1321,33 @@ class Suite_Menu {
 	 *
 	 * @param array $rows   Repeater rows.
 	 * @param int   $indent Gap between an icon and its label, in pixels.
+	 * @param int   $gap    Space between rows, in pixels.
+	 * @param bool  $roomy  Whether rows take the taller inset the narrow dropdown
+	 *                      uses. A modifier on the same class, because a row's
+	 *                      padding is the one part of it Icon List has no control
+	 *                      for — see the widget's own stylesheet.
 	 *
 	 * @return array
 	 */
-	protected static function link_list( $rows, $indent ) {
+	protected static function link_list( $rows, $indent, $gap = 20, $roomy = false ) {
 		return Elements::widget(
 			'icon-list',
 			[
 				'view'                      => 'traditional',
 				'icon_list'                 => $rows,
-				'space_between'             => Elements::size( 2 ),
+				// 52 of pitch in the design, less the 32 a row stands at.
+				'space_between'             => Elements::size( $gap ),
 				'text_indent'               => Elements::size( $indent ),
-				'icon_size'                 => Elements::size( 15 ),
+				'icon_size'                 => Elements::size( 20 ),
 				'icon_color'                => self::MUTED,
 				'icon_color_hover'          => self::ACCENT,
-				'text_color'                => self::INK,
+				'text_color'                => self::MUTED,
 				'text_color_hover'          => self::ACCENT,
 				'icon_typography_typography' => 'custom',
-				'icon_typography_font_size'  => Elements::size( 14 ),
-				'icon_typography_font_weight' => '500',
-				'_css_classes'              => 'eael-mm-linklist',
+				'icon_typography_font_size'  => Elements::size( 16 ),
+				'icon_typography_font_weight' => '400',
+				'icon_typography_line_height' => Elements::size( 1.2, 'em' ),
+				'_css_classes'              => $roomy ? 'eael-mm-linklist eael-mm-linklist--roomy' : 'eael-mm-linklist',
 			]
 		);
 	}
@@ -1320,7 +1366,7 @@ class Suite_Menu {
 	 */
 	protected static function new_badge() {
 		return sprintf(
-			'<span style="display:inline-block;margin-inline-start:8px;padding:2px 6px;border-radius:5px;background:%1$s;color:%2$s;font-size:10px;font-weight:700;letter-spacing:.04em;line-height:1.4;vertical-align:middle;">%3$s</span>',
+			'<span style="display:inline-block;margin-inline-start:6px;padding:2px 4px;border-radius:4px;background:%1$s;color:%2$s;font-size:12px;font-weight:500;line-height:1.2;vertical-align:middle;">%3$s</span>',
 			self::BADGE,
 			self::BADGE_INK,
 			esc_html__( 'NEW', 'essential-addons-for-elementor-lite' )
@@ -1347,15 +1393,15 @@ class Suite_Menu {
 				'selected_icon'                 => Elements::icon( 'fas fa-external-link-alt' ),
 				// `row-reverse`, not `right`: this control sets `flex-direction`.
 				'icon_align'                    => 'row-reverse',
-				'icon_indent'                   => Elements::size( 8 ),
+				'icon_indent'                   => Elements::size( 3 ),
 				'background_color'              => 'rgba(0,0,0,0)',
-				'button_text_color'             => self::ACCENT,
+				'button_text_color'             => self::MUTED,
 				'hover_color'                   => self::INK,
 				'button_background_hover_color' => 'rgba(0,0,0,0)',
-				'text_padding'                  => Elements::spacing( 0, 0, 0, 10 ),
+				'text_padding'                  => Elements::spacing( 0, 0, 0, 4 ),
 				'typography_typography'         => 'custom',
 				'typography_font_size'          => Elements::size( 14 ),
-				'typography_font_weight'        => '600',
+				'typography_font_weight'        => '500',
 				// The one underline in the design, and the reason the control is
 				// worth knowing about: it goes both ways.
 				'typography_text_decoration'    => 'underline',
