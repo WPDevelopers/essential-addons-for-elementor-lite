@@ -753,7 +753,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 				}
 			}
 			if ( 1 === count( $owners ) ) {
-				return (string) array_key_first( $owners );
+				return self::first_key( $owners );
 			}
 			if ( count( $owners ) > 1 ) {
 				$labels = array();
@@ -762,8 +762,25 @@ if ( ! class_exists( __NAMESPACE__ . '\\Detector' ) ) {
 					$labels[] = (string) ( $catalog[ $owner ]['label'] ?? $owner );
 				}
 				if ( 1 === count( array_unique( $labels ) ) ) {
-					return (string) array_key_first( $owners );
+					return self::first_key( $owners );
 				}
+			}
+			return null;
+		}
+
+		/**
+		 * First key of a non-empty array, as a string.
+		 *
+		 * array_key_first() would say the same thing, but it is PHP 7.3+ and
+		 * this file's floor is 7.1 — the syntax it uses (`public const`,
+		 * `?string`) is what sets that floor, and hosts load it behind a 7.1
+		 * check. Calling a 7.3 function from here fatals on 7.1/7.2 instead of
+		 * being skipped by that check, so the floor is kept honest here rather
+		 * than raised for one lookup.
+		 */
+		private static function first_key( array $items ): ?string {
+			foreach ( $items as $key => $unused ) {
+				return (string) $key;
 			}
 			return null;
 		}
