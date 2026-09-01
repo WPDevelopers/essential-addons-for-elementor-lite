@@ -841,6 +841,11 @@
 	 * so a different accent is one variable rather than a fight with a fixed
 	 * colour. */
 	.eael-mm-links {
+		/* The text is inset here rather than by a padding on the tab's content,
+		   because the rule below and the divider beside it both run to the card's
+		   edge — a padding out there would hold all three off it together. */
+		--eael-mm-links-inset: 16px;
+
 		&__title {
 			/* A rule under the heading, and the gap split either side of it, so
 			   the column reads as a heading over a list rather than six evenly
@@ -848,22 +853,27 @@
 			   the same one the other preset draws under its column headings —
 			   there it is the heading widget's own border control, but a title
 			   written into a tab's field has no panel to set it from, so it lives
-			   here with the rest of this class. */
-			margin: 0 0 var(--eael-mm-links-title-gap, 10px);
-			padding-block-end: var(--eael-mm-links-title-pad, 10px);
-			border-block-end: 1px solid var(--eael-mm-links-rule, #eaece6);
+			   here with the rest of this class.
+
+			   The rule spans the whole column while the words are inset, which is
+			   what a padding buys that a margin would not. */
+			margin: 0 0 var(--eael-mm-links-title-gap, 12px);
+			padding-block-end: var(--eael-mm-links-title-pad, 17px);
+			padding-inline-start: var(--eael-mm-links-inset);
+			border-block-end: 1px solid var(--eael-mm-links-rule, #e9e9e9);
 			font-family: inherit;
 			font-size: var(--eael-mm-links-title-size, 14px);
 			font-weight: var(--eael-mm-links-title-weight, 600);
-			line-height: 1.4;
+			line-height: 1.08;
 			color: var(--eael-mm-links-title-color, inherit);
 		}
 
 		&__list {
 			display: grid;
-			gap: var(--eael-mm-links-gap, 14px);
+			gap: var(--eael-mm-links-gap, 18px);
 			margin: 0;
 			padding: 0;
+			padding-inline-start: var(--eael-mm-links-inset);
 			list-style: none;
 
 			/* `inherit`, not a size of its own. The tab's Content > Typography
@@ -891,7 +901,7 @@
 				&:focus,
 				&:focus-visible,
 				&:active {
-					color: var(--eael-mm-links-color-hover, #4d7c0f);
+					color: var(--eael-mm-links-color-hover, #6dbb00);
 					text-decoration: none;
 				}
 			}

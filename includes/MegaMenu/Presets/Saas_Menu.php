@@ -51,12 +51,12 @@ class Saas_Menu {
 	/**
 	 * Menu items, headings and link text.
 	 */
-	const INK = '#101828';
+	const INK = '#444444';
 
 	/**
 	 * Descriptions and other secondary copy.
 	 */
-	const MUTED = '#667085';
+	const MUTED = '#848484';
 
 	/**
 	 * Brand accent — the hovered link, the panel icons.
@@ -71,22 +71,35 @@ class Saas_Menu {
 	/**
 	 * The wash behind a hovered or selected row.
 	 */
-	const HOVER = '#F4F5F1';
+	const HOVER = '#F7F7F7';
 
 	/**
-	 * Hairlines — the panel border, the divider between the two tab columns.
+	 * Hairlines — the divider between the two tab columns, the rule under a
+	 * column heading, the outline of a Resources icon tile.
 	 */
-	const LINE = '#EAECE6';
+	const LINE = '#E9E9E9';
+
+	/**
+	 * The Product card's own edge — a shade lighter than the rules inside it, so
+	 * the card reads as a surface and the dividers as structure.
+	 */
+	const CARD_LINE = '#F4F4F4';
+
+	/**
+	 * The chevron closing a Resources row, lighter than the copy beside it.
+	 */
+	const CHEVRON = '#9D9D9D';
 
 	/**
 	 * The call to action's surface.
 	 */
-	const BUTTON = '#1F2A0A';
+	const BUTTON = '#DADADA';
 
 	/**
-	 * The call to action's label, on that surface.
+	 * The call to action's label, on that surface — the same grey the rest of the
+	 * bar is set in.
 	 */
-	const BUTTON_INK = '#CFF34E';
+	const BUTTON_INK = '#686868';
 
 	/**
 	 * The element this preset applies.
@@ -358,19 +371,24 @@ class Saas_Menu {
 				'eael_creative_button_icon_new'               => Elements::icon( '' ),
 				// The control writes `justify-content`, so it wants a flex value.
 				'eael_creative_button_alignment'              => 'flex-end',
-				'eael_creative_button_padding'                => Elements::spacing( 12, 24, 12, 24 ),
-				'eael_creative_button_padding_mobile'         => Elements::spacing( 10, 18, 10, 18 ),
+				'eael_creative_button_padding'                => Elements::spacing( 8, 16, 8, 16 ),
+				'eael_creative_button_padding_mobile'         => Elements::spacing( 8, 14, 8, 14 ),
 				// A slider, not a dimensions control: the widget's own stylesheet
 				// rounds the button by 2px, and only this value sets the corner.
-				'eael_creative_button_border_radius'          => Elements::size( 30 ),
+				// 68 is past half the button's height, so the ends are semicircles
+				// however tall the label makes it.
+				'eael_creative_button_border_radius'          => Elements::size( 68 ),
 				'eael_creative_button_text_color'             => self::BUTTON_INK,
 				'eael_creative_button_background_color'       => self::BUTTON,
-				'eael_creative_button_hover_text_color'       => self::BUTTON_INK,
+				// The design draws no hover state; the accent is the preset's own,
+				// and white rather than the resting grey because that grey is
+				// unreadable on it.
+				'eael_creative_button_hover_text_color'       => self::SURFACE,
 				'eael_creative_button_hover_background_color' => self::ACCENT,
 				'eael_creative_button_typography_typography'  => 'custom',
-				'eael_creative_button_typography_font_size'   => Elements::size( 15 ),
-				'eael_creative_button_typography_font_size_mobile' => Elements::size( 14 ),
-				'eael_creative_button_typography_font_weight' => '600',
+				'eael_creative_button_typography_font_size'   => Elements::size( 16 ),
+				'eael_creative_button_typography_font_size_mobile' => Elements::size( 15 ),
+				'eael_creative_button_typography_font_weight' => '500',
 				// Out on a phone. Its own 150px floor is nearly half a small screen,
 				// and the logo and the menu toggle are what has to fit there;
 				// signing up lives one tap away inside the menu.
@@ -409,11 +427,7 @@ class Saas_Menu {
 			[
 				'label' => __( 'Product', 'essential-addons-for-elementor-lite' ),
 				'type'  => 'mega',
-				// Sized to its content rather than to the space available: the link
-				// column holds one short label per row, and the width left over
-				// after the categories is the width those labels need, not a third
-				// of the page.
-				'width' => 600,
+				'width' => 620,
 				'align' => 'start',
 			],
 			[
@@ -427,10 +441,10 @@ class Saas_Menu {
 			[
 				'label' => __( 'Resources', 'essential-addons-for-elementor-lite' ),
 				'type'  => 'mega',
-				// Wide enough for the longest description on one line, and no wider
-				// — a row whose second line wraps is a row taller than its
-				// neighbours, and the four stop reading as a set.
-				'width' => 390,
+				// 270 of description plus everything beside it: 16 of card inset
+				// either side, an 8/12 row inset, a 48 tile and the 16 after it, and
+				// the 16 chevron with its 8.
+				'width' => 410,
 				'align' => 'center',
 			],
 		];
@@ -541,15 +555,17 @@ class Saas_Menu {
 
 			// Panel. Padding is left at zero and owned by the container inside it,
 			// so the user styles the inset on the layout, where they can see it.
+			// Deliberately invisible, because the two panels are not the same card:
+			// the catalogue is a squared-off 8px box with a hairline edge, and the
+			// shortlist is a 16px one with no edge at all and a tighter shadow. One
+			// panel style cannot be both, so each panel's own container paints its
+			// card and this is spelled out as transparent — left empty these fall
+			// back to the stylesheet's defaults and paint a second card behind the
+			// real one.
 			'eael_mega_menu_panel_background_background' => 'classic',
-			'eael_mega_menu_panel_background_color'      => self::SURFACE,
-			'eael_mega_menu_panel_border_border'         => 'solid',
-			'eael_mega_menu_panel_border_width'          => Elements::spacing( 1, 1, 1, 1 ),
-			'eael_mega_menu_panel_border_color'          => self::LINE,
-			'eael_mega_menu_panel_radius'                => Elements::spacing( 16, 16, 16, 16 ),
+			'eael_mega_menu_panel_background_color'      => 'rgba(0,0,0,0)',
+			'eael_mega_menu_panel_radius'                => Elements::spacing( 0, 0, 0, 0 ),
 			'eael_mega_menu_panel_padding'               => Elements::spacing( 0, 0, 0, 0 ),
-			'eael_mega_menu_panel_shadow_box_shadow_type' => 'yes',
-			'eael_mega_menu_panel_shadow_box_shadow'     => Elements::shadow( 16, 40, 'rgba(16, 24, 40, 0.12)' ),
 			// A detached panel, so the corners round against the page rather than
 			// against the bar. Small enough that the pointer crosses the gap
 			// without the hover lapsing on the way down.
@@ -633,14 +649,85 @@ class Saas_Menu {
 	 */
 	protected static function product_panel( $title ) {
 		return Elements::nested_child(
+			self::panel_settings( $title ),
 			[
-				'content_width'  => 'full',
-				'flex_direction' => 'column',
-				'padding'        => Elements::spacing( 0, 0, 0, 0 ),
-				'_title'         => $title,
-			],
-			[ self::category_tabs() ]
+				self::card(
+					[ self::category_tabs() ],
+					8,
+					self::CARD_LINE,
+					Elements::shadow( 12, 36, 'rgba(0, 1, 35, 0.12)' )
+				),
+			]
 		);
+	}
+
+	/**
+	 * Settings shared by both panels.
+	 *
+	 * Nothing but layout. Everything a panel looks like belongs to the card
+	 * inside it — see {@see card()}.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @param string $title Navigator title.
+	 *
+	 * @return array
+	 */
+	protected static function panel_settings( $title ) {
+		return [
+			'content_width'  => 'full',
+			'flex_direction' => 'column',
+			'_title'         => $title,
+		];
+	}
+
+	/**
+	 * The card a panel's content sits on.
+	 *
+	 * A child of the panel rather than the panel itself, and that is not a
+	 * stylistic preference. The widget's own Submenu Panel controls are written
+	 * against `.eael-mega-menu__panel--inline` — one class deeper than the rule
+	 * Elementor writes for a container's own background — and its Radius control
+	 * writes the very `--border-radius` variable a container reads. Set the
+	 * panel's surface to transparent so the two panels can differ, and anything
+	 * this preset then puts on that same container loses to it: a white card
+	 * that never paints, which is a panel you can see the page through.
+	 *
+	 * A card one level in is out of that reach, and it is the same arrangement
+	 * the other preset uses for the same reason.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @param array  $children Card contents.
+	 * @param int    $radius   Corner radius, in pixels.
+	 * @param string $border   Edge colour, empty for no edge.
+	 * @param array  $shadow   Box shadow value.
+	 * @param int    $padding  Inset, in pixels.
+	 * @param int    $gap      Gap between children, in pixels.
+	 *
+	 * @return array
+	 */
+	protected static function card( $children, $radius, $border, $shadow, $padding = 0, $gap = 0 ) {
+		$settings = [
+			'content_width'         => 'full',
+			'flex_direction'        => 'column',
+			'flex_gap'              => Elements::gap( $gap ),
+			'padding'               => Elements::spacing( $padding, $padding, $padding, $padding ),
+			'background_background' => 'classic',
+			'background_color'      => self::SURFACE,
+			'border_radius'         => Elements::spacing( $radius, $radius, $radius, $radius ),
+			'box_shadow_box_shadow_type' => 'yes',
+			'box_shadow_box_shadow' => $shadow,
+			'_title'                => __( 'Card', 'essential-addons-for-elementor-lite' ),
+		];
+
+		if ( '' !== $border ) {
+			$settings['border_border'] = 'solid';
+			$settings['border_width']  = Elements::spacing( 1, 1, 1, 1 );
+			$settings['border_color']  = $border;
+		}
+
+		return Elements::container( $settings, $children );
 	}
 
 	/**
@@ -670,8 +757,9 @@ class Saas_Menu {
 				'eael_adv_tabs_toggle_tab'         => '',
 				'eael_adv_tabs_tab'                => self::category_rows(),
 
-				// Wrapper.
-				'eael_adv_tabs_padding' => Elements::spacing( 16, 16, 16, 16 ),
+				// Wrapper. The inset the category column sits at; the content beside
+				// it takes it back off again below.
+				'eael_adv_tabs_padding' => Elements::spacing( 15, 15, 15, 15 ),
 				'eael_adv_tabs_margin'  => Elements::spacing( 0, 0, 0, 0 ),
 
 				// Tab titles. A category list is read down, not across — the rows
@@ -681,12 +769,13 @@ class Saas_Menu {
 				'eael_adv_tabs_tab_title_typography_typography'  => 'custom',
 				'eael_adv_tabs_tab_title_typography_font_size'   => Elements::size( 14 ),
 				'eael_adv_tabs_tab_title_typography_font_weight' => '400',
-				// 200 less the 20 of inset leaves 180 for the label, which is what
-				// the longest of them needs — a category that wraps to two lines
-				// breaks the rhythm of the seven that do not.
-				'eael_adv_tabs_title_width'   => Elements::size( 200 ),
-				'eael_adv_tabs_tab_padding'   => Elements::spacing( 6, 10, 6, 10 ),
-				'eael_adv_tabs_tab_margin'    => Elements::spacing( 0, 0, 2, 0 ),
+				'eael_adv_tabs_tab_title_typography_line_height' => Elements::size( 1.12, 'em' ),
+				// This is what places the divider: the content follows the list, and
+				// its left border is the line between the two columns. 15 of wrapper
+				// inset plus 211 puts it 226 in from the card's edge.
+				'eael_adv_tabs_title_width'   => Elements::size( 211 ),
+				'eael_adv_tabs_tab_padding'   => Elements::spacing( 8, 8, 8, 8 ),
+				'eael_adv_tabs_tab_margin'    => Elements::spacing( 0, 0, 4, 0 ),
 
 				// Normal. Both the deprecated colour control and the background
 				// group are set: the group is what the panel now shows, the flat
@@ -696,7 +785,7 @@ class Saas_Menu {
 				'eael_adv_tabs_tab_color'          => 'rgba(0,0,0,0)',
 				'eael_adv_tabs_tab_bgtype_background' => 'classic',
 				'eael_adv_tabs_tab_bgtype_color'   => 'rgba(0,0,0,0)',
-				'eael_adv_tabs_tab_text_color'     => self::INK,
+				'eael_adv_tabs_tab_text_color'     => self::MUTED,
 				'eael_adv_tabs_tab_border_radius'  => Elements::spacing( 8, 8, 8, 8 ),
 
 				// Hover.
@@ -718,13 +807,33 @@ class Saas_Menu {
 				'eael_adv_tabs_tab_caret_show' => '',
 
 				// Content.
-				'adv_tabs_content_text_color'                    => self::INK,
+				// Muted, because the links inherit it — the one the visitor is over
+				// darkens to INK, and that contrast is the whole signal.
+				'adv_tabs_content_text_color'                    => self::MUTED,
 				'eael_adv_tabs_content_typography_typography'    => 'custom',
 				'eael_adv_tabs_content_typography_font_size'     => Elements::size( 14 ),
-				'eael_adv_tabs_content_padding'                  => Elements::spacing( 2, 10, 2, 20 ),
+				'eael_adv_tabs_content_typography_line_height'   => Elements::size( 1.12, 'em' ),
+				// No inset on the left, so the heading's rule starts on the divider
+				// rather than 15px inside it; the words are inset instead, from the
+				// class in the widget's stylesheet.
+				//
+				// In the design the divider and that rule are drawn past the card's
+				// edges and clipped by it. Reproducing that took a negative margin
+				// here and `overflow: hidden` on the card — and below the tab
+				// widget's own 767px breakpoint that pair cut the panel in half:
+				// the layout wraps to a column there, the content lands on a second
+				// line already 15px taller than the room its margins leave it, and
+				// the card clipped the rest. The 15px it buys is not worth a panel
+				// that loses its links on a phone.
+				'eael_adv_tabs_content_padding'                  => Elements::spacing( 15, 15, 0, 0 ),
 				'eael_adv_tabs_content_margin'                   => Elements::spacing( 0, 0, 0, 0 ),
 				'eael_adv_tabs_content_border_border'            => 'solid',
 				'eael_adv_tabs_content_border_width'             => Elements::spacing( 0, 0, 0, 1 ),
+				// Gone once the two columns stack: a line dividing left from right
+				// is a line down the left edge of nothing when the right column has
+				// moved underneath.
+				'eael_adv_tabs_content_border_width_tablet'      => Elements::spacing( 0, 0, 0, 0 ),
+				'eael_adv_tabs_content_padding_tablet'           => Elements::spacing( 12, 0, 0, 0 ),
 				'eael_adv_tabs_content_border_color'             => self::LINE,
 			]
 		);
@@ -921,17 +1030,23 @@ class Saas_Menu {
 		}
 
 		return Elements::nested_child(
+			self::panel_settings( $title ),
 			[
-				'content_width'  => 'full',
-				'flex_direction' => 'column',
-				// Four destinations, not a list of four — the wash under a hovered
-				// row has to read as that row being picked out, and at a two pixel
-				// gap it reads as the row above and below being pushed apart.
-				'flex_gap'       => Elements::gap( 18 ),
-				'padding'        => Elements::spacing( 12, 12, 12, 12 ),
-				'_title'         => $title,
-			],
-			$rows
+				// Rounder than the catalogue's card and with no edge at all, which
+				// is why each panel carries its own rather than sharing the
+				// widget's — see {@see card()}. Four destinations, not a list of
+				// four: the wash under a hovered row has to read as that row being
+				// picked out, and at a two pixel gap it reads as the row above and
+				// below being pushed apart.
+				self::card(
+					$rows,
+					16,
+					'',
+					Elements::shadow( 12, 18, 'rgba(0, 1, 35, 0.12)' ),
+					16,
+					10
+				),
+			]
 		);
 	}
 
@@ -957,12 +1072,13 @@ class Saas_Menu {
 				'flex_align_items'     => 'center',
 				'flex_justify_content' => 'space-between',
 				'flex_wrap'            => 'nowrap',
-				'flex_gap'             => Elements::gap( 12 ),
-				// The tile is 40 and sets the row's height; this is the margin
+				'flex_gap'             => Elements::gap( 8 ),
+				// The tile is 48 and sets the row's height; this is the margin
 				// around it, not the row's own spacing — that is the gap between
-				// rows above.
-				'padding'              => Elements::spacing( 7, 12, 7, 12 ),
-				'border_radius'        => Elements::spacing( 10, 10, 10, 10 ),
+				// rows above. Tighter on the side the tile sits against than on the
+				// side the chevron does, so the two end up optically level.
+				'padding'              => Elements::spacing( 8, 12, 8, 8 ),
+				'border_radius'        => Elements::spacing( 16, 16, 16, 16 ),
 				'link'                 => Elements::link(),
 				'background_hover_background' => 'classic',
 				'background_hover_color'      => self::HOVER,
@@ -1005,9 +1121,9 @@ class Saas_Menu {
 				// Icon. An outlined tile rather than a filled one, and the accent
 				// saved for the row under the pointer: four green glyphs sitting in
 				// four green tiles is four rows all claiming to be the live one.
-				'eael_infobox_icon_size'     => Elements::size( 17 ),
+				'eael_infobox_icon_size'     => Elements::size( 28 ),
 				'eael_infobox_icon_bg_shape' => 'radius',
-				'eael_infobox_icon_bg_size'  => Elements::size( 40 ),
+				'eael_infobox_icon_bg_size'  => Elements::size( 48 ),
 				'eael_infobox_icon_bg_color' => self::SURFACE,
 				'eael_infobox_icon_border_border' => 'solid',
 				'eael_infobox_icon_border_width'  => Elements::spacing( 1, 1, 1, 1 ),
@@ -1018,15 +1134,16 @@ class Saas_Menu {
 				// going grey the moment the pointer arrives, which is the opposite
 				// of what the row is meant to do.
 				'eael_infobox_icon_hover_color' => self::ACCENT,
-				'eael_infobox_icon_margin'   => Elements::spacing( 0, 14, 0, 0 ),
+				'eael_infobox_icon_margin'   => Elements::spacing( 0, 16, 0, 0 ),
 
 				// Title.
 				'eael_infobox_title_color_type' => 'classic',
 				'eael_infobox_title_color'      => self::INK,
 				'eael_infobox_title_typography_typography'  => 'custom',
-				'eael_infobox_title_typography_font_size'   => Elements::size( 15 ),
-				'eael_infobox_title_typography_font_weight' => '600',
-				'eael_infobox_title_margin'     => Elements::spacing( 0, 0, 2, 0 ),
+				'eael_infobox_title_typography_font_size'   => Elements::size( 16 ),
+				'eael_infobox_title_typography_font_weight' => '500',
+				'eael_infobox_title_typography_line_height' => Elements::size( 1.2, 'em' ),
+				'eael_infobox_title_margin'     => Elements::spacing( 0, 0, 4, 0 ),
 
 				// Description.
 				'eael_infobox_content_color'  => self::MUTED,
@@ -1055,8 +1172,8 @@ class Saas_Menu {
 			[
 				'selected_icon' => Elements::icon( 'fas fa-chevron-right' ),
 				'view'          => 'default',
-				'primary_color' => self::MUTED,
-				'size'          => Elements::size( 11 ),
+				'primary_color' => self::CHEVRON,
+				'size'          => Elements::size( 16 ),
 				'_title'        => __( 'Chevron', 'essential-addons-for-elementor-lite' ),
 			]
 		);
