@@ -99,6 +99,16 @@ class Preset_Library {
 				'widgets'   => [ 'icon-list', 'heading', 'image', 'icon' ],
 				'builder'   => [ Fashion_Menu::class, 'build' ],
 			],
+			'agency' => [
+				'slug'      => 'agency',
+				'title'     => __( 'Agency Services', 'essential-addons-for-elementor-lite' ),
+				'thumbnail' => self::thumbnail_url( 'mega-menu-agency.png' ),
+				// Elementor core only, and every row of the panel is one widget
+				// of it: Icon Box for the eleven services, Social Icons for the
+				// five accounts under them.
+				'widgets'   => [ 'icon-box', 'social-icons', 'heading', 'image', 'button' ],
+				'builder'   => [ Agency_Menu::class, 'build' ],
+			],
 		];
 
 		/**

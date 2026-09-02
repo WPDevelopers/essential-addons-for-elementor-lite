@@ -309,6 +309,17 @@
 	const PRESET_TILE = ".elementor-control-eael_mega_menu_preset .elementor-choices-label";
 
 	/**
+	 * The tile the pointer is over, if any.
+	 *
+	 * Held because a tooltip has to be closed through the element it belongs to,
+	 * and by the time the panel has been replaced that element is no longer
+	 * findable in the document — only still referenced from here.
+	 *
+	 * @type {Element|null}
+	 */
+	let hoveredTile = null;
+
+	/**
 	 * Wire the Preset control up.
 	 *
 	 * Driven by clicks on the tiles rather than by watching the setting change,
@@ -341,6 +352,99 @@
 		);
 
 		jQuery(document).on("click", PRESET_TILE, onPresetTileClick);
+
+		// Which tile the pointer is on, so a bubble can still be closed after
+		// the tile itself has been taken out of the document — see
+		// {@see hidePresetTooltip}.
+		jQuery(document).on("mouseenter", PRESET_TILE, function () {
+			hoveredTile = this;
+		});
+
+		jQuery(document).on("mouseleave", PRESET_TILE, function () {
+			hoveredTile = null;
+		});
+
+		// Any panel opening means the control that owned the bubble has been
+		// re-rendered or replaced. Both shapes are registered because selecting
+		// a container fires the first and a widget the second, and a stale
+		// tooltip does not care which the user clicked.
+		elementor.hooks.addAction("panel/open_editor/widget", hidePresetTooltip);
+		elementor.hooks.addAction("panel/open_editor/container", hidePresetTooltip);
+
+		bindOutsidePress();
+	}
+
+	/**
+	 * A press anywhere else closes a bubble the tiles left behind.
+	 *
+	 * The panel hooks above only fire when the click lands on something that
+	 * opens an editor. Plenty of the editor is not that — the panel's own
+	 * chrome, the tab bar, the top bar, an empty stretch of canvas — and a
+	 * stale bubble sat over the panel through all of it, which is what the user
+	 * sees: a tooltip that will not go away wherever they click.
+	 *
+	 * `mousedown` in the capture phase, so it runs before any handler can stop
+	 * the event, and on a press that turns into a drag as much as on a full
+	 * click. Both documents, because the preview is an iframe and a press
+	 * inside it never reaches the editor's own.
+	 */
+	function bindOutsidePress() {
+		listenForOutsidePress(document);
+
+		// The preview's document is replaced on every reload, so the listener
+		// is attached again each time rather than once.
+		try {
+			elementor.on("preview:loaded", function () {
+				const preview = elementor.$previewContents;
+
+				if (preview && preview.length) {
+					listenForOutsidePress(preview[0]);
+				}
+			});
+		} catch (error) {
+			// Without the preview listener a bubble survives a press inside the
+			// canvas — the next one anywhere else still closes it.
+		}
+	}
+
+	/**
+	 * Attach the outside-press handler to one document.
+	 *
+	 * @param {Document} doc Document to listen on.
+	 */
+	function listenForOutsidePress(doc) {
+		if (!doc || !doc.addEventListener) {
+			return;
+		}
+
+		doc.addEventListener("mousedown", onOutsidePress, true);
+	}
+
+	/**
+	 * A press landed somewhere that is not a preset tile.
+	 *
+	 * @param {Object} event Native mousedown event.
+	 */
+	function onOutsidePress(event) {
+		// Nothing is open: the common case, and this runs on every press in the
+		// editor, so it is answered before touching anything else.
+		if (!hoveredTile && !document.querySelector(".tipsy")) {
+			return;
+		}
+
+		const target = event.target;
+
+		// A press on a tile is the tile's own business — its handler closes the
+		// bubble and opens the confirmation.
+		if (
+			target &&
+			"function" === typeof target.closest &&
+			target.closest(PRESET_TILE)
+		) {
+			return;
+		}
+
+		hidePresetTooltip();
 	}
 
 	/**
@@ -364,6 +468,8 @@
 	 * @param {Object} event jQuery click event.
 	 */
 	function onPresetTileClick(event) {
+		hidePresetTooltip();
+
 		const config = presetConfig();
 		const slug = tileSlug(event.currentTarget);
 		const editedMenu = currentMenu();
@@ -431,6 +537,71 @@
 		const settings = view.model.get("settings");
 
 		return settings ? { view, settings } : openMenu;
+	}
+
+	/**
+	 * Close the tiles' tooltips.
+	 *
+	 * Elementor shows these through tipsy, which appends the bubble to the
+	 * **body** and takes it down again on the target's `mouseleave`. Applying a
+	 * preset rebuilds the header and reopens the panel on whatever it built, so
+	 * the tile the pointer is sitting on is removed from the document without
+	 * ever being left — no `mouseleave`, and a bubble reading "Agency Services"
+	 * stays on top of the panel through every widget the user selects next.
+	 *
+	 * Elementor's own control view hides its tooltips on `onAfterExternalChange`
+	 * and nowhere else; there is no teardown hook to lean on. So this is called
+	 * from the moments that bracket the problem: the click that is about to
+	 * replace the panel, the rebuild settling, any panel opening afterwards, and
+	 * a press anywhere else in the editor.
+	 *
+	 * The tiles are looked up **and** the remembered one is added, because by
+	 * the later of those moments the tile is out of the document and a selector
+	 * cannot reach it. The bubble is closed through the element either way:
+	 * tipsy keeps it on the target's own data, which outlives the detach.
+	 *
+	 * Every tile, not just the one under the pointer: a bubble left open by an
+	 * earlier interrupted hover costs nothing to close. Guarded because tipsy is
+	 * Elementor's plugin, not ours — an editor that ever stops shipping it
+	 * should cost a missing tooltip, not a broken preset.
+	 */
+	function hidePresetTooltip() {
+		const $tiles = jQuery(PRESET_TILE + ".tooltip-target").add(hoveredTile || []);
+
+		hoveredTile = null;
+
+		if ("function" !== typeof jQuery.fn.tipsy) {
+			return;
+		}
+
+		// One tile at a time. Called on a set, tipsy reads its instance off the
+		// *first* element and closes that one only — so hiding every tile in a
+		// single call closed the first tile's bubble, which is never the one
+		// that is open, and left the bubble the pointer had actually raised
+		// sitting over the panel.
+		$tiles.each(function () {
+			try {
+				jQuery(this).tipsy("hide");
+			} catch (error) {
+				// A tooltip that will not close is not a reason to refuse the
+				// click.
+			}
+		});
+
+		// A bubble whose tile has already left the document cannot be reached
+		// through the tile at all, and the remembered one only covers the tile
+		// the pointer happened to be on when the panel went. tipsy appends its
+		// bubbles to the body, where they outlive the control that opened them,
+		// and stamps each with the element it points at — this is the plugin's
+		// own sweep for exactly that, and it removes every bubble now pointing
+		// at nothing.
+		try {
+			if ("function" === typeof jQuery.fn.tipsy.revalidate) {
+				jQuery.fn.tipsy.revalidate();
+			}
+		} catch (error) {
+			// As above — cosmetic.
+		}
 	}
 
 	/**
@@ -707,6 +878,13 @@
 			})
 			.then(() => {
 				applyingPreset = false;
+
+				// The panel has just been rebuilt under the pointer, which is
+				// the one way a tile leaves the document without a
+				// `mouseleave`. Swept once the rebuild has settled, so the
+				// bubble goes on its own rather than waiting for the click that
+				// makes the user notice it is stuck.
+				setTimeout(hidePresetTooltip, 0);
 			});
 	}
 

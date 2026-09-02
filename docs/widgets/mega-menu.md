@@ -39,6 +39,7 @@ Lite-only widget — Pro adds nothing and hooks nothing. The public extension po
 | [`includes/MegaMenu/Presets/Preset_Library.php`](../../includes/MegaMenu/Presets/Preset_Library.php) | Preset registry — control options, availability gate, `get_content( $slug, $mode )` |
 | [`includes/MegaMenu/Presets/Saas_Menu.php`](../../includes/MegaMenu/Presets/Saas_Menu.php) | The **SaaS Menu** preset — header bar, widget settings, one nested container per row |
 | [`includes/MegaMenu/Presets/Fashion_Menu.php`](../../includes/MegaMenu/Presets/Fashion_Menu.php) | The **Fashion Store** preset — one panel, three columns read from the shop |
+| [`includes/MegaMenu/Presets/Agency_Menu.php`](../../includes/MegaMenu/Presets/Agency_Menu.php) | The **Agency Services** preset — one ruled panel, eleven Icon Boxes and a Social Icons row |
 | [`includes/Elements/Mega_Menu_Products.php`](../../includes/Elements/Mega_Menu_Products.php) | **Menu Products** — the menu's own product teaser. Registered by `Manager`, no `config.php` key, no stylesheet |
 | [`includes/MegaMenu/Controls/Style_Controls.php`](../../includes/MegaMenu/Controls/Style_Controls.php) | Style tab — six sections, all writing CSS custom properties |
 | [`includes/MegaMenu/Renderers/Frontend_Renderer.php`](../../includes/MegaMenu/Renderers/Frontend_Renderer.php) | PHP render + panel attribute decoration |
@@ -272,6 +273,7 @@ A cancelled switch leaves the canvas untouched and puts the tile back, but Eleme
 | `saas` | SaaS Menu | Header: the site's own logo (core `image`, or `heading` with the site name when none is set), core `button` for Login, `eael-creative-button` for Create Account. Panels: `eael-adv-tabs` (vertical, the Product catalogue), `eael-info-box` + core `icon` in linked containers (the Resources list) |
 | `fashion` | Fashion Store | A shop menu, one panel wide, that **reads the store** — products, tags and categories, with the design's labels as the fallback. Header: the site's logo, and a linked container as the "Shop the Collection" pill — core `heading` for the label, core `icon` in its **stacked / circle** view for the disc, because no button control draws a filled circle around its icon. Panel: four columns of core `icon-list` (two of plain links, two of icon-and-label departments) under core `heading` column titles, and **Menu Products**, the Mega Menu's own widget, for the best sellers. Nothing outside Elementor core and the menu itself, so no other element being switched off can empty a column |
 | `suite` | Product Suite | A floating pill header over a product catalogue. Header: the site's logo, core `button` for the compact 71×42 Login pill — Creative Button floors every instance at 150px wide with no control behind it, so it cannot render a button that size. Panels: **Quick Help** holds the wide catalogue — core `nested-tabs` whose three tab titles *are* the destination cards, each switching three columns of core `icon-list` links under core `heading` column titles, closed by a core `button` — and **Solutions** the narrow `icon-list` dropdown |
+| `agency` | Agency Services | A services menu on a ruled grid. Header: the site's logo and a core `button` pill. Panel: eleven core `icon-box` rows — four, four and three — inside linked containers that carry the hover wash and the rules, under core `heading` column titles, closed by one core `social-icons` row. **Resources** opens a second, 260px panel: six linked rows with a chevron on the one that leads further. Elementor core throughout |
 
 ### Laying a panel out
 
@@ -279,6 +281,79 @@ Two things bite when a panel is meant to look like a card, and both did:
 
 - **A container's own padding cannot fight the widget's.** Submenu Panel → Padding writes the very `--padding-*` variables a container reads, so its value wins over anything a panel container sets, a zero included. Anything a preset wants inset on *every* panel belongs on that control.
 - **A full-width container plus side margins is `100% + margins`.** It overflows the page. `Product Suite` needs a gutter in two places and solves it differently in each: the header bar is a full-width pill inside a **padded wrapper**, and the panel cards are inset by the widget's own Panel Padding. A boxed container is not the answer for either — boxed caps its *content* but paints its background across the whole viewport, which squares off the corners that make a bar look like a floating pill.
+
+### One widget per row, and why it matters
+
+`Agency Services` puts eleven rows of icon-plus-title-plus-sentence into one panel. Each is a single core **Icon Box**,
+not an Icon and two Headings, and the arithmetic is the point: three widgets a row would be thirty-three elements in
+this panel instead of eleven, in a payload the editor has to build on every apply. It also leaves less unreachable —
+the gap between the glyph and the text is `icon_space` on Icon Box and nothing at all when the two are separate
+widgets. The five accounts under the third column are one **Social Icons** widget for the same reason, and because its
+repeater already knows what a social account is.
+
+What the row's own container is still needed for is the part Icon Box has no control for: the wash under the whole
+strip on hover, and the link on all of it. A row a visitor can only click on its title misses most of the pointer's
+travel.
+
+Two things about Icon Box are easy to be caught by:
+
+- **It ships a `mobile_default` of `block-start`.** Setting `position` to `inline-start` moves the icon beside the text
+  on desktop and tablet and does nothing at all on a phone, where it jumps back above the title — eleven rows each a
+  line taller, in an accordion. `position_mobile` has to be set too.
+- **`inline-start`, not `left`.** The control writes a logical value, so the icon stays on the reading side in RTL.
+
+### The theme's line-height is where the design goes wrong
+
+Three of the four things that were off in `Agency Services`' first pass had one cause, and it is worth recognising on
+sight: **an Elementor widget's wrapper inherits the theme's `line-height`, and on a body-copy value like 32.4px that
+wrapper is far taller than what it draws.** Nothing about the widget looks wrong in the panel; the box around it is
+simply bigger than the thing inside.
+
+| Symptom | Measured | Design | Fixed by |
+| ------- | -------- | ------ | -------- |
+| "Book A Call" too tall | 54 | 40 | `typography_line_height` on the Button — height is padding + the label's leading and nothing else |
+| Header bar too tall | 84 | 72 | `eael_mega_menu_item_typography_line_height` — the menu items were the tallest thing in the bar at 52, not the 40px button |
+| Service rows too tall | 139 | 120 | Tighter title/description leading, plus `title_size: div` (see below) |
+
+The row also carried an **8px gap above every title that no control could reach**: themes give `h1`-`h6` a top margin,
+and Icon Box's Content Spacing writes only the *bottom* one. `title_size: div` removes it, and is the better tag here
+anyway — these are labels on links in a navigation menu, not document structure.
+
+Once the rows were 120, a fourth problem fixed itself: the third column is three rows plus the social block, so it only
+ends level with the four rows beside it when a row is exactly a quarter of the column. At 139 it stopped short and left
+a gap under the tiles.
+
+### A near full-bleed panel, and a narrow one beside it
+
+`Agency Services` is the one preset whose header is `content_width: full` rather than boxed. Its design runs the bar and
+the panel to within 23px of the page edge, and a boxed 1140 container makes the three columns 389 wide instead of 428 —
+enough to change where every description wraps. The trade is real: a full-width bar no longer lines up with a boxed page
+below it. It is one control to put back.
+
+Its **Resources** item opens a second, very different panel: a 260px list of six destinations, one of them marked with a
+trailing chevron. Two panels of such different shapes on one widget turn up a trap worth knowing:
+
+**Submenu Panel → Padding is per widget, not per item.** Reaching for it to inset the wide card behind the page gutter
+insets *every* panel, which left the 260px dropdown holding a 214px card floating in the middle of its own box. The
+gutter has to be a container *inside* the wide panel instead — and it cannot be padding on the panel container itself,
+because that control writes the very `--padding-*` variables a container reads and beats anything set there.
+
+The dropdown is built from linked containers rather than one Icon List, and only because of the chevron: Icon List draws
+a row's glyph at the **start**, and a disclosure mark belongs at the end. Its Divider control would otherwise have drawn
+the hairlines for free. Both `Fashion Store` and this preset show the same rule — reach for the one widget that holds
+the whole row, unless the row needs something that widget puts on the wrong side.
+
+### Two pens on one panel
+
+The design this preset follows rules its grid twice over, and measuring the mock rather than eyeballing it is what
+turned that up: the lines inside the heading band — the rule under the titles, the dividers between them — are
+`#F1F1F1`, while the dividers between service rows and the card's own edge are `#C1C1C1`, four steps darker. Drawn in
+one weight the band reads as a fourth row of the table instead of as its head.
+
+The panel itself is left **transparent** and the visible card is the boxed container inside it, which is the same
+arrangement `Product Suite` uses and for a sharper reason here: the design shows the page either side of the card. A
+panel painted white fills that margin in and the card loses its edges — so the border and the shadow live on the card,
+not on the panel.
 
 ### Matching a design that was measured, not guessed
 
