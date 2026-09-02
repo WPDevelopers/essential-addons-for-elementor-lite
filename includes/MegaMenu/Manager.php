@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Helper;
+use Essential_Addons_Elementor\Elements\Mega_Menu_Products;
 use Essential_Addons_Elementor\MegaMenu\Presets\Preset_Library;
 
 /**
@@ -99,6 +100,41 @@ class Manager {
 		// Same reasoning as the preview above: the presets are only ever applied
 		// from inside the editor, so there is no `nopriv` twin.
 		add_action( 'wp_ajax_' . self::PRESET_ACTION, [ $this, 'ajax_preset' ] );
+
+		// Priority 20: EA registers its own elements on this hook at the default
+		// priority, and the guard below asks whether the Mega Menu was one of
+		// them — a question that has no answer until that pass has run.
+		add_action( 'elementor/widgets/register', [ $this, 'register_companion_widgets' ], 20 );
+	}
+
+	/**
+	 * Widgets that belong to the Mega Menu rather than to `config.php`.
+	 *
+	 * Registered here, off the menu's own boot, and deliberately not given an
+	 * element key of their own. A key would put them in EA -> Elements as a
+	 * switch a user could turn off — and a switch somewhere else that empties a
+	 * column of a menu preset is exactly the fragility this avoids. If the Mega
+	 * Menu is available, its companions are.
+	 *
+	 * They stay out of the widget panel; see
+	 * {@see \Essential_Addons_Elementor\Elements\Mega_Menu_Products::show_in_panel()}.
+	 *
+	 * @since 6.8.4
+	 *
+	 * @param \Elementor\Widgets_Manager $widgets_manager Elementor widgets manager.
+	 */
+	public function register_companion_widgets( $widgets_manager ) {
+		// One question, asked of the thing that actually knows: did the Mega
+		// Menu get registered? That covers every reason it might not have been —
+		// Elementor older than the 3.8 nested API, the Nested Elements
+		// experiment off, the element unticked in EA -> Elements, or Elementor's
+		// own element manager hiding it — without this method having to know,
+		// or stay in sync with, any of them.
+		if ( ! $widgets_manager->get_widget_types( self::WIDGET_NAME ) ) {
+			return;
+		}
+
+		$widgets_manager->register( new Mega_Menu_Products() );
 	}
 
 	/**

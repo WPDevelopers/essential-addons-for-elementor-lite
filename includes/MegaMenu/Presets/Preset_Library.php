@@ -87,6 +87,18 @@ class Preset_Library {
 				'widgets'   => [ 'nested-tabs', 'icon-list', 'heading', 'image', 'button' ],
 				'builder'   => [ Suite_Menu::class, 'build' ],
 			],
+			'fashion' => [
+				'slug'      => 'fashion',
+				'title'     => __( 'Fashion Store', 'essential-addons-for-elementor-lite' ),
+				'thumbnail' => self::thumbnail_url( 'mega-menu-fashion.png' ),
+				// Elementor core only. The products column is the Mega Menu's
+				// own Menu Products widget, which the menu registers itself —
+				// so it is available wherever this preset is, and naming it
+				// here would be naming a certainty. Nothing in this preset can
+				// be switched off from somewhere the user is not looking.
+				'widgets'   => [ 'icon-list', 'heading', 'image', 'icon' ],
+				'builder'   => [ Fashion_Menu::class, 'build' ],
+			],
 		];
 
 		/**

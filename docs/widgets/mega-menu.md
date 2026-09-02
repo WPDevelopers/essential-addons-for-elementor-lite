@@ -38,6 +38,8 @@ Lite-only widget — Pro adds nothing and hooks nothing. The public extension po
 | [`includes/MegaMenu/Controls/Content_Controls.php`](../../includes/MegaMenu/Controls/Content_Controls.php) | Content tab — preset picker, repeater, settings, responsive |
 | [`includes/MegaMenu/Presets/Preset_Library.php`](../../includes/MegaMenu/Presets/Preset_Library.php) | Preset registry — control options, availability gate, `get_content( $slug, $mode )` |
 | [`includes/MegaMenu/Presets/Saas_Menu.php`](../../includes/MegaMenu/Presets/Saas_Menu.php) | The **SaaS Menu** preset — header bar, widget settings, one nested container per row |
+| [`includes/MegaMenu/Presets/Fashion_Menu.php`](../../includes/MegaMenu/Presets/Fashion_Menu.php) | The **Fashion Store** preset — one panel, three columns read from the shop |
+| [`includes/Elements/Mega_Menu_Products.php`](../../includes/Elements/Mega_Menu_Products.php) | **Menu Products** — the menu's own product teaser. Registered by `Manager`, no `config.php` key, no stylesheet |
 | [`includes/MegaMenu/Controls/Style_Controls.php`](../../includes/MegaMenu/Controls/Style_Controls.php) | Style tab — six sections, all writing CSS custom properties |
 | [`includes/MegaMenu/Renderers/Frontend_Renderer.php`](../../includes/MegaMenu/Renderers/Frontend_Renderer.php) | PHP render + panel attribute decoration |
 | [`includes/MegaMenu/Renderers/Editor_Renderer.php`](../../includes/MegaMenu/Renderers/Editor_Renderer.php) | Underscore `content_template()` |
@@ -268,6 +270,7 @@ A cancelled switch leaves the canvas untouched and puts the tile back, but Eleme
 | Slug | Title | Built from |
 | ---- | ----- | ---------- |
 | `saas` | SaaS Menu | Header: the site's own logo (core `image`, or `heading` with the site name when none is set), core `button` for Login, `eael-creative-button` for Create Account. Panels: `eael-adv-tabs` (vertical, the Product catalogue), `eael-info-box` + core `icon` in linked containers (the Resources list) |
+| `fashion` | Fashion Store | A shop menu, one panel wide, that **reads the store** — products, tags and categories, with the design's labels as the fallback. Header: the site's logo, and a linked container as the "Shop the Collection" pill — core `heading` for the label, core `icon` in its **stacked / circle** view for the disc, because no button control draws a filled circle around its icon. Panel: four columns of core `icon-list` (two of plain links, two of icon-and-label departments) under core `heading` column titles, and **Menu Products**, the Mega Menu's own widget, for the best sellers. Nothing outside Elementor core and the menu itself, so no other element being switched off can empty a column |
 | `suite` | Product Suite | A floating pill header over a product catalogue. Header: the site's logo, core `button` for the compact 71×42 Login pill — Creative Button floors every instance at 150px wide with no control behind it, so it cannot render a button that size. Panels: **Quick Help** holds the wide catalogue — core `nested-tabs` whose three tab titles *are* the destination cards, each switching three columns of core `icon-list` links under core `heading` column titles, closed by a core `button` — and **Solutions** the narrow `icon-list` dropdown |
 
 ### Laying a panel out
@@ -276,6 +279,25 @@ Two things bite when a panel is meant to look like a card, and both did:
 
 - **A container's own padding cannot fight the widget's.** Submenu Panel → Padding writes the very `--padding-*` variables a container reads, so its value wins over anything a panel container sets, a zero included. Anything a preset wants inset on *every* panel belongs on that control.
 - **A full-width container plus side margins is `100% + margins`.** It overflows the page. `Product Suite` needs a gutter in two places and solves it differently in each: the header bar is a full-width pill inside a **padded wrapper**, and the panel cards are inset by the widget's own Panel Padding. A boxed container is not the answer for either — boxed caps its *content* but paints its background across the whole viewport, which squares off the corners that make a bar look like a floating pill.
+
+### Matching a design that was measured, not guessed
+
+`Fashion Store`'s call to action reconciles exactly against the mock: a 198x44 pill is 21 of left inset + 129 of label +
+13 of gap + a 26 disc + 9 to the right edge. Getting there needed three things that are easy to miss:
+
+- **A full-width container is `--width: 100%`.** `content_width: full` does not mean "as wide as its contents" — the pill
+  stretched to its whole column, and the label and disc drifted apart inside it. That reads as a padding bug and is not
+  one. `width` with the **`custom`** unit writes a value through verbatim (`{{UNIT}}` resolves to nothing for that unit),
+  so `fit-content` is expressible without a stylesheet.
+- **Vertical padding is the wrong tool for a fixed height.** Elementor's Icon widget wraps its disc in a block that
+  inherits the theme's line-height, so the content is taller on some themes than others and a padding tuned on one site
+  is wrong on the next. `min_height: 44` plus `align-items: center` puts the disc 9 from each edge whatever that wrapper
+  measures.
+- **A stacked Icon's diameter is `size + 2 x icon_padding`, exactly.** Elementor sizes the glyph box at `1em` square, so
+  12 + 7 + 7 gives 26 and nothing else influences it.
+
+The pill still comes out ~210 rather than 198, because the theme's face sets "Shop the Collection" 12px wider than the
+mock's. That is the one dimension a preset should not force.
 
 ### Tabs inside a panel
 
@@ -297,6 +319,78 @@ Three of its controls are easy to get wrong, and each cost a round trip:
 
 A preset that names its `widgets` is hidden whenever one is missing — switched off in EA's settings, disabled in Elementor's element manager — rather than applying half way and leaving the wreckage behind. When every preset is hidden the section is not registered at all.
 
+### A preset that reads the shop
+
+`Fashion Store` is the first preset whose content is not all written into it. Three of its four columns come from
+WooCommerce when WooCommerce is there, and each falls back on its own:
+
+| Column | Source | Falls back to |
+| ------ | ------ | ------------- |
+| Newly Added | Newest published products | The design's labels |
+| Style | Product **tags**, busiest first | Sub-categories (any `product_cat` with a parent), then the design's labels |
+| Popular Category | **Top-level** `product_cat`, busiest first | The design's labels |
+| Most Selling Products | The Mega Menu's own Menu Products widget, which queries live | Its own placeholder cards |
+
+Style takes tags and Popular Category takes only top-level terms so the two never show the same list twice, and the
+sub-categories have somewhere to go on a shop that does not tag. A source yielding fewer than `Fashion_Menu::MIN_ROWS`
+rows is passed over — a column drawn for six entries showing one reads as a bug rather than as a small shop.
+
+This is a **snapshot**, not a query. An Icon List row holds a label and an href with nowhere for a taxonomy to live, so
+the terms are read once, in the builder, and written in as values. That is the right shape for a menu — it is curated
+either way — and the point is only that it arrives curated from the shop that exists. `Preset_Library::get_content()`
+runs on one nonce-checked, `edit_posts`-gated AJAX call, so the queries never touch a front-end request.
+
+Two things bite when reading WooCommerce taxonomies:
+
+- **`get_terms( orderby => count )` does not order `product_cat` by the count you get back.** WooCommerce replaces
+  `$term->count` with a figure that includes the term's children while the ORDER BY runs against the raw column, so the
+  list comes back visibly out of order against its own numbers — on a test shop, a 14-product category sorted below a
+  2-product one. `Fashion_Menu::terms()` fetches a bounded page and sorts in PHP.
+- **`get_price_html()` is markup, and a Heading's Title is not.** A price range ships a visually hidden
+  `<span class="screen-reader-text">Price range: … through …</span>` *inside* it, so `wp_strip_all_tags()` alone prints
+  the price twice; the currency is an entity, so a Heading escapes it back into `&#2547;` on output; and the amounts are
+  padded with non-breaking spaces, which `\s` does not match. `Fashion_Menu::price_text()` does all four in order.
+
+### The products column is the menu's own widget
+
+`Fashion Store`'s fourth column is **Menu Products**
+([`includes/Elements/Mega_Menu_Products.php`](../../includes/Elements/Mega_Menu_Products.php)) — a picture, a name and a
+price, with a Query section to decide which products those are.
+
+It started out as EA's Woo Product Grid, and that was wrong twice over:
+
+- **It made the preset contingent on a different element.** The Woo Product Grid has its own key in `config.php` and its
+  own tick-box in EA → Elements. Unticked — which it is on plenty of installs — the widget is never registered, the
+  editor cannot build it, and a quarter of the preset's layout has to fall back to placeholders for a reason the user
+  cannot see from the menu they are editing. A preset should not have a dependency a checkbox somewhere else can break.
+- **It is a shop page, not a teaser.** Style presets, badges, ratings, quick view, compare, wishlist, load more,
+  pagination and an add-to-cart button, every one of which had to be switched off to get back to three lines.
+
+Menu Products is registered by `Manager::register_companion_widgets()` on `elementor/widgets/register` at **priority
+20** — after EA's own pass — and its only guard is `get_widget_types( 'eael-mega-menu' )`. Asking whether the menu got
+registered covers every reason it might not have (Elementor below 3.8, the Nested Elements experiment off, the element
+unticked, Elementor's element manager hiding it) without that method having to know or stay in sync with any of them.
+It deliberately has **no `config.php` key**, because a key is a switch, and a switch is the thing being avoided.
+
+Two consequences worth knowing:
+
+- **It is `show_in_panel() => false`.** Its styling assumes the narrow column of a submenu panel and it has no element
+  toggle for a user to find it under, so listing it would offer a widget with none of the surrounding documentation the
+  others have. Every control still works on the instance the preset builds.
+- **It has no stylesheet.** Every rule it needs — `display: grid`, the column count, `object-fit: cover` on the image,
+  the title and price margins — is written by one of its own controls from that control's default. Nothing for
+  `Asset_Builder` to attribute, no `npm run build` between a change and seeing it, and the user can reach all of it from
+  the panel, including the parts a stylesheet would normally put out of reach.
+
+Its Query section is the answer to "which products appear here": **Filter By** (Best Selling, Featured, Recent, Sale,
+Top Rated, Manual Selection), Product Categories, Product Tags, Select / Exclude Products, Count, Offset and Order. The
+preset sets Best Selling × 2 and adds nothing of its own. Without WooCommerce the widget renders its own placeholder
+cards — same markup, same grid — so a layout built around it never develops a hole.
+
+`Order` is deliberately conditioned to Recent and Sale only. Manual Selection is already in the order the rows were
+dragged into, and Featured / Best Selling / Top Rated each *mean* a ranking — reversing one asks for the worst sellers,
+which is not what the control was reached for.
+
 ### Adding one
 
 1. Add a builder class in `includes/MegaMenu/Presets/` with a static `build( $mode )` returning **one** Elementor element: the finished header bar with a Mega Menu widget somewhere inside it for `header`, that widget alone for `widget`.
@@ -304,22 +398,42 @@ A preset that names its `widgets` is hidden whenever one is missing — switched
 3. Register it in `Preset_Library::get_presets()` (or through the `eael/mega-menu/presets` filter) with a `thumbnail` and the `widgets` it emits in either mode. `Preset_Library::get_content()` stamps the slug onto every Mega Menu in the tree, so the builder never has to know its own key.
 4. Drop a ~129×123 wireframe PNG into `assets/admin/images/layout-previews/`, in the same `#5F6367`-on-transparent language as the existing files.
 
-Nothing in a preset may be Pro. Markup in a control value is a last resort, used three times and each time because a widget offers no control for the thing:
+Nothing in a preset may be Pro. Markup in a control value is a last resort, used five times and each time because a widget offers no control for the thing:
 
 | Where | Why | Falls back to |
 | ----- | --- | ------------- |
 | `Saas_Menu::link_list()` | An Advanced Tabs tab takes a WYSIWYG field, not child widgets | A plain list of links |
 | `Suite_Menu::new_badge()` | Icon List prints a row's label unescaped, and has no chip of its own. Styled inline so it needs nothing added to any stylesheet | Text after the label |
+| `Fashion_Menu::new_badge()` | Same chip, in a *menu item's* label, which the widget prints through `wp_kses_post()`. The item repeater has no badge control | Text after the label |
 | `.eael-mm-linklist` (a CSS class set from the widget's own CSS Classes field) | Icon List has no control that paints a row, and these designs light the whole row under the pointer | An Icon List with no hover pill |
+| `.eael-mm-cta-icon` (`Fashion_Menu::cta_pill()`) | Icon has no control for the *box* it draws its plate inside. `.elementor-icon` is an inline-block, so its wrapper makes a line box and inherits the theme's line-height — measured at 32.4px around a 26px disc, which leaves the plate 9px shy of centre with no control able to reach it, and no fixed number able to cancel it. The **only rule in the stylesheet not scoped to `.eael-mega-menu`**: the pill sits in the header bar beside the menu, not in a panel | A button that works, with the disc riding high |
 | `.eael-mm-cardtabs` / `Suite_Menu::tab_title()` | Nested Tabs has no control for the plate behind a tab icon, none that reaches inside the title to stack a second line, and none for a trailing active mark | Tabs that still switch, with the icons on the surface |
 
-All three are visible in the panel and removing them leaves something that still works. The two class hooks — `.eael-mm-links` and `.eael-mm-linklist` — live in [`mega-menu.scss`](../../src/css/view/mega-menu.scss), so they load with the widget and nowhere else.
+All of them are visible in the panel and removing one leaves something that still works. The class hooks — `.eael-mm-links`, `.eael-mm-linklist`, `.eael-mm-cardtabs` and `.eael-mm-cta-icon` — live in [`mega-menu.scss`](../../src/css/view/mega-menu.scss), so they load with the widget and nowhere else.
 
 ## Common Issues
 
 ### The widget is missing from the Elementor panel
 
 The *Nested Elements* experiment is off, or Elementor is older than 3.8. Check **Elementor → Settings → Features**; `Conditions::is_nested_elements_active()` drives `show_in_panel()`. On Elementor < 3.8 the `condition` in `config.php` skips registration entirely, so the widget also won't appear in **EA → Elements**.
+
+### A menu item shows its HTML as text in the editor
+
+Fixed in 6.8.4, and worth knowing why it happened. **Label** is printed two different ways by two different renderers:
+[`menu-item.php`](../../includes/MegaMenu/Templates/menu-item.php) runs it through `wp_kses_post()` — so markup in a
+label is markup on the front end — while the editor's Underscore template used `{{ }}`, which only escapes. A label
+carrying a chip (`Sale<span style="…">NEW</span>`, as `Fashion Store` ships) therefore rendered on the page and printed
+its own tags in the preview.
+
+[`Editor_Renderer.php`](../../includes/MegaMenu/Renderers/Editor_Renderer.php) now runs the label through
+`elementor.helpers.sanitize()` — DOMPurify, the same helper core's own Heading template uses — and prints the result
+with `{{{ }}}`. Sanitised rather than passed through raw because `{{{ }}}` on a field the user types into would execute
+a `<script>` in the editor, the one place `wp_kses_post()` cannot reach; `_.escape` is the fallback for an Elementor old
+enough to lack the helper, matching the `sanitizeUrl` fallback a few lines above it.
+
+**Toggle Text is not the same case** and is still escaped in both places — [`mobile-toggle.php`](../../includes/MegaMenu/Templates/mobile-toggle.php)
+uses `esc_html()`, so markup there really is content. Before changing an escape in one renderer, check what the other
+one does with the same field.
 
 ### Something in the header is underlined
 

@@ -985,6 +985,28 @@
 /* Keyframes for the collapsed layout's reveal. Kept at the top level because
    `@keyframes` are global regardless of where they are declared; the offsets
    mirror the resting transforms the bar animates out of. */
+/* The disc a preset's call-to-action closes with.
+ *
+ * The only rule in this file that is not scoped to `.eael-mega-menu`, and it
+ * cannot be: the pill this styles sits in the header bar *beside* the menu, not
+ * inside a panel, so a nested selector would never match it.
+ *
+ * Core's Icon widget gives the plate its shape, its size, its padding and both
+ * colours as controls. What it has no control for is the box it draws that plate
+ * inside: `.elementor-icon` is an inline-block, so its wrapper generates a line
+ * box, and that wrapper inherits whatever line-height the theme sets on body
+ * text. Measured against one theme here: 32.4px of line-height around a 26px
+ * disc, so the wrapper comes out 9px taller than the plate, the plate sits at
+ * the top of it, and a disc every control agrees is centred renders four pixels
+ * high. No value in any of those controls reaches it, and the number that would
+ * cancel it is the theme's, not ours.
+ *
+ * Zeroing the line-height leaves the wrapper exactly as tall as the plate, which
+ * is what centring it in the pill then has to work with. Strip the class and the
+ * button still works — the disc just rides high. */
+.eael-mm-cta-icon .elementor-icon-wrapper {
+  line-height: 0;
+}
 @-webkit-keyframes eael-mm-reveal-fade {
   from {
     opacity: 0;
