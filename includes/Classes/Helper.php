@@ -799,6 +799,261 @@ class Helper
 
 
 
+    /**
+     * Resolve the data provider Ninja Tables will fetch a table's rows through.
+     *
+     * Mirrors ninjaTablesGetTablesDataByID(), which collapses both CSV providers
+     * onto the single `csv` row handler before firing the fetch filter.
+     *
+     * @param int $table_id
+     *
+     * @return string
+     */
+    public static function get_ninja_table_provider($table_id)
+    {
+        if (!function_exists('ninja_table_get_data_provider')) {
+            return '';
+        }
+
+        $provider = ninja_table_get_data_provider($table_id);
+
+        return in_array($provider, ['csv', 'google-csv'], true) ? 'csv' : $provider;
+    }
+
+    /**
+     * Whether Advanced Data Table can actually render a given Ninja Table.
+     *
+     * Ninja Tables returns rows through a per-provider `ninja_tables_fetching_table_rows_*`
+     * filter and falls back to an empty array when nothing is hooked to it. Drag & Drop
+     * tables never register a handler — they persist a finished markup blob rather than
+     * queryable rows — and neither do providers whose handler ships in an add-on that is
+     * not active. Both cases would otherwise render as a bare "No content found".
+     *
+     * @param int $table_id
+     *
+     * @return bool
+     */
+    public static function is_ninja_table_supported($table_id)
+    {
+        $provider = self::get_ninja_table_provider($table_id);
+
+        if (empty($provider)) {
+            return false;
+        }
+
+        // Drag & Drop tables never register a row handler — the builder persists its
+        // grid as post meta instead of queryable rows — but Advanced Data Table reads
+        // that grid directly. An empty one is a table still being built, not an
+        // unsupported one, so it reports as supported and renders "No content found".
+        if ('drag_and_drop' === $provider) {
+            return true;
+        }
+
+        return (bool) has_filter('ninja_tables_fetching_table_rows_' . $provider);
+    }
+
+    /**
+     * The saved grid of a Ninja Tables Drag & Drop table.
+     *
+     * @param int $table_id
+     *
+     * @return array Empty when the table was never built or is not a builder table.
+     */
+    public static function get_ninja_builder_table_data($table_id)
+    {
+        $table_data = get_post_meta($table_id, '_ninja_table_builder_table_data', true);
+
+        if (empty($table_data['data']) || !is_array($table_data['data'])) {
+            return [];
+        }
+
+        return $table_data;
+    }
+
+    /**
+     * The markup Ninja Tables' Drag & Drop builder saved for a table.
+     *
+     * Written by the builder on save, so it is empty for a table created from a
+     * ready-made template and never opened — callers must have a fallback.
+     *
+     * @param int $table_id
+     *
+     * @return string
+     */
+    public static function get_ninja_builder_table_html($table_id)
+    {
+        $markup = get_post_meta($table_id, '_ninja_table_builder_table_html', true);
+
+        if (!is_string($markup) || '' === trim($markup)) {
+            return '';
+        }
+
+        // The builder resolves icon masks against the Pro plugin URL in JavaScript, so
+        // on a site without Ninja Tables Pro every icon is saved pointing at the literal
+        // string "null". Repoint those at whichever plugin actually ships the icon.
+        $icons_base = defined('NINJAPROPLUGIN_URL') ? NINJAPROPLUGIN_URL : (defined('NINJA_TABLES_DIR_URL') ? NINJA_TABLES_DIR_URL : '');
+
+        if ($icons_base) {
+            $markup = str_replace('null/assets/libs/icons/', rtrim($icons_base, '/') . '/assets/libs/icons/', $markup);
+        }
+
+        return $markup;
+    }
+
+    /**
+     * URL of a Drag & Drop builder icon, by the name the builder stored.
+     *
+     * The full icon set ships with Ninja Tables Pro; the free plugin carries a small
+     * subset. An already absolute value (a custom image) is returned as-is.
+     *
+     * @param string $name
+     *
+     * @return string Empty when there is nowhere to load the icon from.
+     */
+    public static function get_ninja_builder_icon_url($name)
+    {
+        if (!is_string($name) || '' === $name) {
+            return '';
+        }
+
+        if (preg_match('#^(https?:)?//#', $name)) {
+            return $name;
+        }
+
+        $base = defined('NINJAPROPLUGIN_URL') ? NINJAPROPLUGIN_URL : (defined('NINJA_TABLES_DIR_URL') ? NINJA_TABLES_DIR_URL : '');
+
+        if (!$base) {
+            return '';
+        }
+
+        return rtrim($base, '/') . '/assets/libs/icons/' . rawurlencode($name) . '.svg';
+    }
+
+    /**
+     * Tags allowed when printing Ninja Tables Drag & Drop builder markup.
+     *
+     * Adds what the builder's own components emit on top of the widget allowlist:
+     * inline SVG for star ratings, and styled buttons.
+     *
+     * @return array
+     */
+    public static function eael_ninja_builder_allowed_tags()
+    {
+        return self::eael_allowed_tags([
+            // DOMDocument lowercases attribute names, so accept both spellings of viewBox.
+            'svg'    => [
+                'xmlns'       => [],
+                'viewbox'     => [],
+                'viewBox'     => [],
+                'width'       => [],
+                'height'      => [],
+                'fill'        => [],
+                'style'       => [],
+                'class'       => [],
+                'aria-hidden' => [],
+            ],
+            'path'   => [
+                'd'            => [],
+                'fill'         => [],
+                'stroke'       => [],
+                'stroke-width' => [],
+            ],
+            'g'      => [
+                'fill'      => [],
+                'stroke'    => [],
+                'transform' => [],
+            ],
+            'button' => [
+                'style'         => [],
+                'aria-disabled' => [],
+            ],
+            'span'   => [ 'role' => [] ],
+            'div'    => [ 'role' => [] ],
+        ]);
+    }
+
+    /**
+     * Sanitise Ninja Tables Drag & Drop builder markup for output.
+     *
+     * The builder bakes a table's whole appearance into inline styles — `mask-image`
+     * for icons, `background` and `border` written as rgb(), flex alignment — and
+     * WordPress's default CSS filter drops every one of those, which is what leaves
+     * the table unstyled and its icons invisible. Widen the CSS property allowlist for
+     * this one call while keeping the tag and attribute allowlist, so wp_kses still
+     * strips scripts and event handlers.
+     *
+     * @param string $html
+     *
+     * @return string
+     */
+    public static function eael_ninja_builder_kses($html)
+    {
+        $allowed_properties = static function ($properties) {
+            return array_merge((array) $properties, [
+                'mask', 'mask-image', 'mask-size', 'mask-repeat', 'mask-position',
+                '-webkit-mask-image', '-webkit-mask-size', '-webkit-mask-repeat', '-webkit-mask-position',
+                'display', 'flex', 'flex-direction', 'flex-wrap', 'gap', 'align-items', 'justify-content',
+                'position', 'top', 'right', 'bottom', 'left', 'z-index',
+                'transform', 'box-shadow', 'filter', 'opacity', 'transition',
+                'overflow', 'overflow-x', 'overflow-y', 'overflow-wrap', 'word-break', 'white-space',
+                'text-decoration', 'list-style-type', 'vertical-align', 'line-height',
+                'border-collapse', 'border-spacing', 'table-layout', 'stroke', 'fill',
+            ]);
+        };
+
+        // rgb()/hsl() colours and url() icon masks are the only CSS functions the builder
+        // emits that core's check rejects. Allow those, still refusing anything else and
+        // any url() that is not a plain asset reference.
+        $allow_css = static function ($allowed, $css_test_string) {
+            if ($allowed) {
+                return $allowed;
+            }
+
+            if (preg_match_all('/url\(\s*([\'"]?)([^)\'"]*)\1\s*\)/i', $css_test_string, $urls)) {
+                foreach ($urls[2] as $url) {
+                    $url = trim($url);
+
+                    if ('' === $url || wp_kses_bad_protocol($url, ['http', 'https']) !== $url) {
+                        return false;
+                    }
+                }
+            }
+
+            $stripped = preg_replace('/\b(?:rgba?|hsla?|url)\((?:[^()]|\([^()]*\))*\)/i', '', $css_test_string);
+
+            return null !== $stripped && 0 === preg_match('%[\\\(&=}]|/\*%', $stripped);
+        };
+
+        add_filter('safe_style_css', $allowed_properties);
+        add_filter('safecss_filter_attr_allow_css', $allow_css, 10, 2);
+
+        $html = wp_kses($html, self::eael_ninja_builder_allowed_tags(), self::eael_allowed_protocols());
+
+        remove_filter('safecss_filter_attr_allow_css', $allow_css, 10);
+        remove_filter('safe_style_css', $allowed_properties);
+
+        return $html;
+    }
+
+    /**
+     * Human readable name for a Ninja Tables data provider, for use in notices.
+     *
+     * @param string $provider
+     *
+     * @return string
+     */
+    public static function get_ninja_table_provider_label($provider)
+    {
+        $labels = [
+            'drag_and_drop' => __('Drag & Drop', 'essential-addons-for-elementor-lite'),
+            'csv'           => __('CSV', 'essential-addons-for-elementor-lite'),
+            'fluent-form'   => __('Fluent Forms', 'essential-addons-for-elementor-lite'),
+            'wp_fct'        => __('FluentCart', 'essential-addons-for-elementor-lite'),
+        ];
+
+        return isset($labels[$provider]) ? $labels[$provider] : $provider;
+    }
+
     public static function get_ninja_tables_list()
     {
         $tables = get_posts([
@@ -807,11 +1062,28 @@ class Helper
             'posts_per_page' => '-1',
         ]);
 
-        if (!empty($tables)) {
-            return wp_list_pluck($tables, 'post_title', 'ID');
+        if (empty($tables)) {
+            return [];
         }
 
-        return [];
+        $options = [];
+
+        foreach ($tables as $table) {
+            $title = $table->post_title;
+
+            if (!self::is_ninja_table_supported($table->ID)) {
+                $title = sprintf(
+                    /* translators: 1: Ninja Table title, 2: Ninja Tables data provider name, e.g. "Drag & Drop". */
+                    __('%1$s (%2$s, not supported)', 'essential-addons-for-elementor-lite'),
+                    $title,
+                    self::get_ninja_table_provider_label(self::get_ninja_table_provider($table->ID))
+                );
+            }
+
+            $options[$table->ID] = $title;
+        }
+
+        return $options;
     }
 
     public static function get_terms_as_list($term_type = 'category', $length = 1)
