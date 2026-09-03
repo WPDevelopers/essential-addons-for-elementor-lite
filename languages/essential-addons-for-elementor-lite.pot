@@ -165,15 +165,15 @@ msgstr ""
 msgid "Edit Template"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:2418
+#: ../includes/Classes/Helper.php:2430
 msgid "<strong>Advanced Custom Fields (ACF)</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=advanced-custom-fields&tab=search&type=term\" target=\"_blank\">ACF</a> first."
 msgstr ""
 
-#: ../includes/Classes/Helper.php:2432
+#: ../includes/Classes/Helper.php:2444
 msgid "Select Repeater Field"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:2472, ../includes/Elements/Advanced_Data_Table.php:279, ../includes/Elements/Product_Grid.php:686
+#: ../includes/Classes/Helper.php:2484, ../includes/Elements/Advanced_Data_Table.php:279, ../includes/Elements/Product_Grid.php:686
 msgid "Select"
 msgstr ""
 

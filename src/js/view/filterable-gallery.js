@@ -453,6 +453,11 @@ jQuery(window).on("elementor/frontend/init", function () {
                $isotope_gallery.imagesLoaded().progress(function () {
                   $isotope_gallery.isotope("layout");
                });
+               // fg_items holds only what is still waiting to be rendered, so searching
+               // the full gallery empties it: everything now lives in the DOM. Without
+               // this, Load More and a control's first click would both serve these
+               // items a second time and append duplicates.
+               fg_items = [];
                $(".eael-gallery-load-more", $scope).hide();
                loaded_on_search = true;
             }
