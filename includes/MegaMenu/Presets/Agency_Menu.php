@@ -423,13 +423,15 @@ class Agency_Menu {
 				'eael_mega_menu_item_type'  => $item['type'],
 			];
 
-			if ( 'link' === $item['type'] ) {
-				// Without an href the renderer falls back to a <span>, which is
-				// neither clickable nor focusable. The panel item is left
-				// unlinked on purpose so the item itself opens its panel instead
-				// of growing a separate disclosure button beside the label.
-				$row['eael_mega_menu_item_link'] = Elements::link();
-			} else {
+			// Every row carries an href, panel items included. Without one the
+			// renderer falls back to a <span>, which is neither clickable nor
+			// focusable, and the Link control in the panel reads as unfinished.
+			// A linked panel item keeps its label as the link and moves the
+			// indicator into its own disclosure button beside it — see
+			// `Templates/menu-item.php`.
+			$row['eael_mega_menu_item_link'] = Elements::link();
+
+			if ( 'link' !== $item['type'] ) {
 				// Per item, not per preset: the two panels are different shapes
 				// and want different widths — the catalogue is the page wide,
 				// the resource list is 260 and would look abandoned in the same
@@ -922,9 +924,10 @@ class Agency_Menu {
 	/**
 	 * One row of the Resources dropdown.
 	 *
-	 * The link and the hover wash live on the container, so the whole strip is
-	 * the target rather than just the words in it — the same arrangement the
-	 * service rows use, and for the same reason.
+	 * The hover wash lives on the container so the whole strip lights up, but
+	 * the link lives on the label: a container's own Link control only renders
+	 * when its HTML tag is `a`, and an anchor around a whole row is one the
+	 * widgets inside it cannot then carry links of their own.
 	 *
 	 * @since 6.8.4
 	 *
@@ -943,7 +946,6 @@ class Agency_Menu {
 			'flex_gap'              => Elements::gap( 12 ),
 			'padding'               => Elements::spacing( 15, 20, 15, 20 ),
 			'padding_tablet'        => Elements::spacing( 14, 11, 14, 11 ),
-			'link'                  => Elements::link(),
 			'background_hover_background' => 'classic',
 			'background_hover_color'      => self::WASH,
 			'background_hover_transition' => Elements::size( 0.2 ),
@@ -961,15 +963,20 @@ class Agency_Menu {
 				'heading',
 				[
 					'title'                  => $row['label'],
+					'link'                   => Elements::link(),
 					// Not a heading tag: this is a label on a link in a menu,
 					// and a theme's `h*` top margin would push it off centre
 					// against the chevron beside it.
 					'header_size'            => 'div',
+					// A linked heading inherits the theme's link colour and
+					// whatever underline it draws, neither of which belongs on a
+					// menu row.
 					'title_color'            => self::INK,
 					'typography_typography'  => 'custom',
 					'typography_font_size'   => Elements::size( 16 ),
 					'typography_font_weight' => '500',
 					'typography_line_height' => Elements::size( 1.2, 'em' ),
+					'typography_text_decoration' => 'none',
 					'_flex_size'             => 'none',
 				]
 			),
@@ -1134,10 +1141,10 @@ class Agency_Menu {
 	/**
 	 * One service row.
 	 *
-	 * The link and the hover wash live on the container rather than on the Icon
-	 * Box: a row a visitor can only click on its title is a row that misses most
-	 * of the pointer's travel, and Icon Box has no hover background of its own
-	 * to light the whole strip with.
+	 * The hover wash lives on the container — Icon Box has no hover background
+	 * of its own to light the whole strip with — while the link lives on the
+	 * Icon Box: a container renders its Link control only when its HTML tag is
+	 * `a`, and an anchor around the row would rule out the widget's own.
 	 *
 	 * @since 6.8.4
 	 *
@@ -1163,7 +1170,6 @@ class Agency_Menu {
 			// above sit, so the panel's text lines up with the labels it opened
 			// from.
 			'padding_tablet' => Elements::spacing( 20, 11, 20, 11 ),
-			'link'           => Elements::link(),
 			'_title'         => $row['title'],
 		];
 
@@ -1206,6 +1212,7 @@ class Agency_Menu {
 			[
 				'selected_icon'             => Elements::icon( $row['icon'], $library ),
 				'title_text'                => $row['title'],
+				'link'                      => Elements::link(),
 				'description_text'          => $row['text'],
 				// `div`, not a heading tag, and for two reasons that agree.
 				// Themes give `h1`-`h6` a top margin — 8px on the one measured
@@ -1229,8 +1236,8 @@ class Agency_Menu {
 				'position_mobile'           => 'inline-start',
 				'content_vertical_alignment' => 'top',
 				'text_align'                => 'start',
-				// The row's own container is the link; a link on the widget too
-				// would nest one anchor inside another.
+				// `default`: no plate or frame behind the glyph. The link above
+				// is what makes the icon and title clickable.
 				'view'                      => 'default',
 
 				// Icon.
@@ -1249,6 +1256,9 @@ class Agency_Menu {
 				'title_typography_font_size_tablet' => Elements::size( 17 ),
 				'title_typography_font_weight' => '600',
 				'title_typography_line_height' => Elements::size( 1.2, 'em' ),
+				// The title is an anchor now, and plenty of themes underline
+				// every link they can reach.
+				'title_typography_text_decoration' => 'none',
 				'title_bottom_space'        => Elements::size( 10 ),
 
 				// Description.

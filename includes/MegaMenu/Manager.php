@@ -278,7 +278,7 @@ class Manager {
 			'i18n'      => [
 				'title'   => __( 'Apply Preset', 'essential-addons-for-elementor-lite' ),
 				'confirm' => __( 'Applying a preset replaces this menu\'s items, styles and everything inside its panels. Continue?', 'essential-addons-for-elementor-lite' ),
-				'confirmHeader' => __( 'Applying a preset rebuilds the header block this menu sits in — the logo, the menu and its panels, and the buttons beside them. Anything else in that block is replaced. Continue?', 'essential-addons-for-elementor-lite' ),
+				'confirmHeader' => __( 'Applying a preset rebuilds the header block this menu sits in the logo, the menu and its panels, and the buttons beside them. Anything else in that block is replaced. Continue?', 'essential-addons-for-elementor-lite' ),
 				'confirmCustom' => __( 'Switching to Custom clears the design and leaves a plain menu to build from. Everything in this header block is replaced. Continue?', 'essential-addons-for-elementor-lite' ),
 				'apply'   => __( 'Apply', 'essential-addons-for-elementor-lite' ),
 				'cancel'  => __( 'Cancel', 'essential-addons-for-elementor-lite' ),

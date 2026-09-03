@@ -75,7 +75,7 @@ class Content_Controls {
 			'default'      => Preset_Library::CUSTOM,
 			'options'      => $options,
 			'css_class'    => 'eael-mega-menu-preset-choices',
-			'description'  => esc_html__( 'A preset is a whole header — logo, menu and buttons. Choosing one replaces the block this menu sits in. Undo restores what was there.', 'essential-addons-for-elementor-lite' ),
+			'description'  => esc_html__( 'A preset is a whole header logo, menu and buttons. Choosing one replaces the block this menu sits in. Undo restores what was there.', 'essential-addons-for-elementor-lite' ),
 			'render_type'  => 'none',
 		] );
 

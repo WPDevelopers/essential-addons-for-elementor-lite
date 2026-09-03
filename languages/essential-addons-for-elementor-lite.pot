@@ -2695,7 +2695,7 @@ msgstr ""
 msgid "Double Angle"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2256, ../includes/Elements/Woo_Product_Carousel.php:3263, ../includes/Traits/Controls.php:1388, ../includes/MegaMenu/Presets/Agency_Menu.php:994, ../includes/MegaMenu/Presets/Saas_Menu.php:1177
+#: ../includes/Elements/Business_Reviews.php:2256, ../includes/Elements/Woo_Product_Carousel.php:3263, ../includes/Traits/Controls.php:1388, ../includes/MegaMenu/Presets/Agency_Menu.php:1001, ../includes/MegaMenu/Presets/Saas_Menu.php:1177
 msgid "Chevron"
 msgstr ""
 
@@ -3935,7 +3935,7 @@ msgstr ""
 msgid "Multi-Color"
 msgstr ""
 
-#: ../includes/Elements/Cta_Box.php:430, ../includes/Elements/Dual_Color_Header.php:272, ../includes/Elements/Woo_Product_Tabs.php:475, ../includes/MegaMenu/Presets/Agency_Menu.php:767, ../includes/MegaMenu/Presets/Fashion_Menu.php:820
+#: ../includes/Elements/Cta_Box.php:430, ../includes/Elements/Dual_Color_Header.php:272, ../includes/Elements/Woo_Product_Tabs.php:475, ../includes/MegaMenu/Presets/Agency_Menu.php:769, ../includes/MegaMenu/Presets/Fashion_Menu.php:820
 msgid "Heading"
 msgstr ""
 
@@ -4845,7 +4845,7 @@ msgstr ""
 msgid "Layout Settings"
 msgstr ""
 
-#: ../includes/Elements/Facebook_Feed.php:266, ../includes/Elements/Filterable_Gallery.php:119, ../includes/MegaMenu/Presets/Agency_Menu.php:892, ../includes/MegaMenu/Presets/Saas_Menu.php:721, ../includes/MegaMenu/Presets/Suite_Menu.php:1210, ../includes/Template/Post-Timeline/card.php:4
+#: ../includes/Elements/Facebook_Feed.php:266, ../includes/Elements/Filterable_Gallery.php:119, ../includes/MegaMenu/Presets/Agency_Menu.php:894, ../includes/MegaMenu/Presets/Saas_Menu.php:721, ../includes/MegaMenu/Presets/Suite_Menu.php:1210, ../includes/Template/Post-Timeline/card.php:4
 msgid "Card"
 msgstr ""
 
@@ -11333,7 +11333,7 @@ msgstr ""
 msgid "Tabs"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Tabs.php:403, ../includes/MegaMenu/Presets/Agency_Menu.php:687, ../includes/MegaMenu/Presets/Fashion_Menu.php:702
+#: ../includes/Elements/Woo_Product_Tabs.php:403, ../includes/MegaMenu/Presets/Agency_Menu.php:689, ../includes/MegaMenu/Presets/Fashion_Menu.php:702
 msgid "Panel"
 msgstr ""
 
@@ -12176,7 +12176,7 @@ msgid "Applying a preset replaces this menu's items, styles and everything insid
 msgstr ""
 
 #: ../includes/MegaMenu/Manager.php:281
-msgid "Applying a preset rebuilds the header block this menu sits in — the logo, the menu and its panels, and the buttons beside them. Anything else in that block is replaced. Continue?"
+msgid "Applying a preset rebuilds the header block this menu sits in the logo, the menu and its panels, and the buttons beside them. Anything else in that block is replaced. Continue?"
 msgstr ""
 
 #: ../includes/MegaMenu/Manager.php:282
@@ -12240,7 +12240,7 @@ msgstr ""
 msgid "%1$s (%2$s %3$dpx)"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:415, ../includes/MegaMenu/Presets/Agency_Menu.php:917, ../includes/MegaMenu/Presets/Saas_Menu.php:1003, ../includes/Theme_Builder/Presets/Mega_Header.php:319, ../includes/Theme_Builder/Presets/Modern_Footer.php:168, ../includes/Theme_Builder/Presets/Simple_Footer.php:207
+#: ../includes/MegaMenu/Manager.php:415, ../includes/MegaMenu/Presets/Agency_Menu.php:919, ../includes/MegaMenu/Presets/Saas_Menu.php:1003, ../includes/Theme_Builder/Presets/Mega_Header.php:319, ../includes/Theme_Builder/Presets/Modern_Footer.php:168, ../includes/Theme_Builder/Presets/Simple_Footer.php:207
 msgid "Blog"
 msgstr ""
 
@@ -12248,11 +12248,11 @@ msgstr ""
 msgid "Docs"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:417, ../includes/MegaMenu/Presets/Agency_Menu.php:913, ../includes/Theme_Builder/Presets/Brand_Footer.php:153, ../includes/Theme_Builder/Presets/Modern_Footer.php:170
+#: ../includes/MegaMenu/Manager.php:417, ../includes/MegaMenu/Presets/Agency_Menu.php:915, ../includes/Theme_Builder/Presets/Brand_Footer.php:153, ../includes/Theme_Builder/Presets/Modern_Footer.php:170
 msgid "Support"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:418, ../includes/MegaMenu/Presets/Agency_Menu.php:405, ../includes/MegaMenu/Presets/Agency_Menu.php:1090, ../includes/MegaMenu/Presets/Saas_Menu.php:438, ../includes/MegaMenu/Presets/Saas_Menu.php:1015, ../includes/MegaMenu/Presets/Suite_Menu.php:441, ../includes/Theme_Builder/Presets/Mega_Header.php:320, ../includes/Theme_Builder/Presets/Simple_Footer.php:208
+#: ../includes/MegaMenu/Manager.php:418, ../includes/MegaMenu/Presets/Agency_Menu.php:405, ../includes/MegaMenu/Presets/Agency_Menu.php:1097, ../includes/MegaMenu/Presets/Saas_Menu.php:438, ../includes/MegaMenu/Presets/Saas_Menu.php:1015, ../includes/MegaMenu/Presets/Suite_Menu.php:441, ../includes/Theme_Builder/Presets/Mega_Header.php:320, ../includes/Theme_Builder/Presets/Simple_Footer.php:208
 msgid "Contact"
 msgstr ""
 
@@ -13984,7 +13984,7 @@ msgstr ""
 msgid "Column Text Color"
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1033, ../includes/Traits/Woo_Product_Comparable.php:1278, ../includes/MegaMenu/Presets/Agency_Menu.php:780
+#: ../includes/Traits/Woo_Product_Comparable.php:1033, ../includes/Traits/Woo_Product_Comparable.php:1278, ../includes/MegaMenu/Presets/Agency_Menu.php:782
 msgid "Rows"
 msgstr ""
 
@@ -14058,7 +14058,7 @@ msgid "Mega Menu Preset"
 msgstr ""
 
 #: ../includes/MegaMenu/Controls/Content_Controls.php:78
-msgid "A preset is a whole header — logo, menu and buttons. Choosing one replaces the block this menu sits in. Undo restores what was there."
+msgid "A preset is a whole header logo, menu and buttons. Choosing one replaces the block this menu sits in. Undo restores what was there."
 msgstr ""
 
 #: ../includes/MegaMenu/Controls/Content_Controls.php:94, ../includes/MegaMenu/Controls/Content_Controls.php:246, ../includes/MegaMenu/Controls/Style_Controls.php:109
@@ -14281,123 +14281,123 @@ msgstr ""
 msgid "Our Work"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:656
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:658
 msgid "Gutter"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:692
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:694
 msgid "For Enterprise Users"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:699
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:701
 msgid "Solutions For Brands"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:706
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:708
 msgid "Get In Touch"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:914
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:916
 msgid "Client handbook"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:915, ../includes/MegaMenu/Presets/Suite_Menu.php:645
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:917, ../includes/MegaMenu/Presets/Suite_Menu.php:645
 msgid "Video Tutorial"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:916
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:918
 msgid "Customer"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:918
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:920
 msgid "Portfolio"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1022
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1029
 msgid "SEO Audit"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1023
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1030
 msgid "Identify & fix SEO issues to improve search visibility and drive traffic."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1027
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1034
 msgid "UX Audit"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1028
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1035
 msgid "Evaluate your site's user experience to uncover usability issues."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1032
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1039
 msgid "Webpage Optimization"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1033
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1040
 msgid "Enhance page speed, performance, and responsiveness."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1037
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1044
 msgid "Unit Testing"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1038
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1045
 msgid "Ensure code reliability for bug-free, scalable development."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1054
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1061
 msgid "AI Solutions"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1055
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1062
 msgid "Leverage AI-driven tools to unlock smarter business insights."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1059
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1066
 msgid "Enterprise Solutions"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1060
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1067
 msgid "Scalable, secure, and custom-tailored software built."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1064
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1071
 msgid "CRM Integration"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1065
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1072
 msgid "Streamline your customer relationships that centralize data."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1069
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1076
 msgid "Email Automation"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1070
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1077
 msgid "Automate targeted email campaigns to boost engagement."
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1091
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1098
 msgid "Share your concerns, updates & reviews with us"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1096
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1103
 msgid "Slack Community"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1097
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1104
 msgid "Join our dedicated Slack channel and get live updates"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1102
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1109
 msgid "Discord"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1103
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1110
 msgid "Connect with us in our new room and follow up all details"
 msgstr ""
 
-#: ../includes/MegaMenu/Presets/Agency_Menu.php:1304
+#: ../includes/MegaMenu/Presets/Agency_Menu.php:1314
 msgid "Social"
 msgstr ""
 
