@@ -1033,11 +1033,13 @@ class Team_Member extends Widget_Base {
 		$team_member_image = $settings['eael_team_member_image'] ?? '';
 		$team_member_image = HelperClass::eael_wpml_translate_media( $team_member_image ); // WPML Media Translation compatibility
 		$image_url = $team_member_image['url'] ?? '';
-		$alt_text = $settings['eael_team_member_name'] ?? '';
 
 		if( is_array( $team_member_image ) && ! empty( $team_member_image['id'] ) ) {
 			$image_url = Group_Control_Image_Size::get_attachment_image_src( $team_member_image['id'], 'thumbnail', $settings );
-			$alt_text = get_post_meta( $team_member_image['id'], '_wp_attachment_image_alt', true );
+			$alt_text  = HelperClass::get_image_alt( $team_member_image );
+		} else {
+			// Only URL-inserted images fall back to the member name, as they always have.
+			$alt_text = HelperClass::get_image_alt( $team_member_image, $settings['eael_team_member_name'] ?? '' );
 		}
 		
 		$team_member_classes = $this->get_settings('eael_team_members_preset') . " " . $this->get_settings('eael_team_members_image_rounded');
@@ -1096,7 +1098,7 @@ class Team_Member extends Widget_Base {
 										<a <?php $this->print_render_attribute_string( 'social_link_' . $index ); ?>>
 											<?php if ($icon_is_new || $icon_migrated) { ?>
 												<?php if( isset( $item['social_new']['value']['url'] ) ) : ?>
-													<img src="<?php echo esc_url( $item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['social_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+													<img src="<?php echo esc_url( $item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(HelperClass::get_image_alt( $item['social_new']['value'] )); ?>" />
 												<?php else :
                                                     \Elementor\Icons_Manager::render_icon( $item['social_new'], [ 'aria-hidden' => 'true' ] );
                                                 endif; ?>

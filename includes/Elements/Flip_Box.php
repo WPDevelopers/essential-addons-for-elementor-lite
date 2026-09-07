@@ -2695,7 +2695,7 @@ class Flip_Box extends Widget_Base
                 'flipbox-back-icon-image-container',
                 [
                     'src' => $flipbox_back_image_url,
-                    'alt' => esc_attr(get_post_meta($flipbox_image_back['id'], '_wp_attachment_image_alt', true)),
+                    'alt' => esc_attr(Helper::get_image_alt( $flipbox_image_back )),
                 ]
             );
         }
@@ -2749,7 +2749,7 @@ class Flip_Box extends Widget_Base
                                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                             $this->render_icon($settings); ?>
                                         <?php elseif ('img' === $settings['eael_flipbox_img_or_icon']) : ?>
-                                            <img class="eael-flipbox-image-as-icon" src="<?php echo esc_url($flipbox_image_url); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
+                                            <img class="eael-flipbox-image-as-icon" src="<?php echo esc_url($flipbox_image_url); ?>" alt="<?php echo esc_attr(Helper::get_image_alt( $flipbox_image )); ?>">
                                         <?php endif; ?>
                                     </div>
                                     <?php

@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
+use Elementor\Control_Media;
 use Elementor\Icons_Manager;
 use Elementor\Plugin;
 
@@ -2369,6 +2370,44 @@ class Helper
 		}
 
 		return $media;
+	}
+
+	/**
+	 * Get the alt text for a media control value.
+	 *
+	 * Elementor stores alt text in two different places depending on how the image was
+	 * added: media library images keep it in the `_wp_attachment_image_alt` post meta,
+	 * while "Insert from URL" images have no attachment and carry it in the control
+	 * value's own `alt` key. Reading the post meta alone therefore drops the alt text
+	 * for every externally hosted image.
+	 *
+	 * Deliberately narrower than `Control_Media::get_image_alt()` for attachments: that
+	 * helper falls back to the attachment's excerpt and then its title when the alt meta
+	 * is empty, which would rewrite the alt text of library images that are already
+	 * rendering correctly. Only the "Insert from URL" gap is closed here, so output for
+	 * every image that works today stays byte-for-byte identical.
+	 *
+	 * @param array  $image    Media control value, e.g. `[ 'id' => 42, 'url' => '...', 'alt' => '...' ]`.
+	 * @param string $fallback Used when no alt text is stored anywhere.
+	 *
+	 * @return string Unescaped alt text; escape at the point of output.
+	 */
+	public static function get_image_alt( $image, $fallback = '' ) {
+		if ( ! is_array( $image ) ) {
+			return $fallback;
+		}
+
+		if ( ! empty( $image['id'] ) ) {
+			$alt = get_post_meta( $image['id'], '_wp_attachment_image_alt', true );
+		} else {
+			// Delegated so we keep following Elementor if it moves where the alt text of a
+			// URL-inserted image lives. Its return value has already been through esc_attr(),
+			// so decode it: escaping it again would render "Jane's photo" as
+			// "Jane&amp;#039;s photo" at the call sites, which all escape on output.
+			$alt = wp_specialchars_decode( Control_Media::get_image_alt( $image ), ENT_QUOTES );
+		}
+
+		return '' !== $alt ? $alt : $fallback;
 	}
 
 	/**

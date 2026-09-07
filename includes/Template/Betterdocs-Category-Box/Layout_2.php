@@ -28,7 +28,7 @@ if ($settings['show_icon']) {
     $cat_icon_id = get_term_meta($term->term_id, 'doc_category_image-id', true);
 
     if ($cat_icon_id) {
-        $cat_icon = wp_get_attachment_image($cat_icon_id, 'thumbnail', true, ['alt' => esc_attr(get_post_meta($cat_icon_id, '_wp_attachment_image_alt', true))]);
+        $cat_icon = wp_get_attachment_image($cat_icon_id, 'thumbnail', true, ['alt' => Helper::get_image_alt(['id' => $cat_icon_id])]);
     } else {
         $cat_icon = '<img src="' . EAEL_PLUGIN_URL . 'assets/front-end/img/betterdocs-cat-icon.svg" alt="betterdocs-category-box-icon">';
     }

@@ -1375,7 +1375,7 @@ class Feature_List extends Widget_Base {
             $this->add_render_attribute( 'feature_list_image' . $index, [
                 'src'   => esc_url( $item['eael_feature_list_img']['url'] ),
                 'class' => 'eael-feature-list-img',
-                'alt'   => esc_attr( get_post_meta( $item['eael_feature_list_img']['id'], '_wp_attachment_image_alt', true ) ),
+                'alt'   => esc_attr( Helper::get_image_alt( $item['eael_feature_list_img'] ) ),
             ] );
 
             echo '<img '; $this->print_render_attribute_string( 'feature_list_image' . $index); echo '>';

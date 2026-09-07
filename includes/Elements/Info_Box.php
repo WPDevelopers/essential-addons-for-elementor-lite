@@ -2553,7 +2553,7 @@ class Info_Box extends Widget_Base
         <div <?php $this->print_render_attribute_string('infobox_icon'); ?>>
 
             <?php if ('img' == $settings['eael_infobox_img_or_icon']): ?>
-                <img src="<?php echo esc_url($infobox_image_url); ?>" alt="<?php echo esc_attr(get_post_meta($infobox_image['id'], '_wp_attachment_image_alt', true)); ?>">
+                <img src="<?php echo esc_url($infobox_image_url); ?>" alt="<?php echo esc_attr(Helper::get_image_alt( $infobox_image )); ?>">
             <?php endif;?>
 
             <?php if ('icon' == $settings['eael_infobox_img_or_icon']): ?>
@@ -2667,7 +2667,7 @@ class Info_Box extends Widget_Base
                 <?php if ('left' == $settings['eael_infobox_button_icon_alignment']): ?>
                     <?php if ($button_icon_is_new || $button_icon_migrated) {?>
                         <?php if (isset($settings['eael_infobox_button_icon_new']['value']['url'])) {?>
-                            <img class="eael_infobox_button_icon_left" src="<?php echo esc_url( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                            <img class="eael_infobox_button_icon_left" src="<?php echo esc_url( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(Helper::get_image_alt( $settings['eael_infobox_button_icon_new']['value'] )); ?>" />
                         <?php } else {
                             Icons_Manager::render_icon( $settings['eael_infobox_button_icon_new'], [ 'aria-hidden' => 'true', 'class' => 'eael_infobox_button_icon_left' ] );
                         }?>
@@ -2679,7 +2679,7 @@ class Info_Box extends Widget_Base
                 <?php if ('right' == $settings['eael_infobox_button_icon_alignment']): ?>
                     <?php if ($button_icon_is_new || $button_icon_migrated) {?>
                         <?php if (isset($settings['eael_infobox_button_icon_new']['value']['url'])) {?>
-                            <img class="eael_infobox_button_icon_right" src="<?php echo esc_url( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                            <img class="eael_infobox_button_icon_right" src="<?php echo esc_url( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(Helper::get_image_alt( $settings['eael_infobox_button_icon_new']['value'] )); ?>" />
                         <?php } else {
                             Icons_Manager::render_icon( $settings['eael_infobox_button_icon_new'], [ 'aria-hidden' => 'true', 'class' => 'eael_infobox_button_icon_right' ] );
                         }?>
