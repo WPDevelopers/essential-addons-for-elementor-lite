@@ -2984,7 +2984,82 @@ class GravityForms extends Widget_Base {
 		        $eael_form_title       = $settings['form_title'] === 'yes';
 		        $eael_form_description = $settings['form_description'] === 'yes';
 		        $eael_form_ajax        = $settings['form_ajax'] === 'yes';
+		        ?>
 
+            <script type="text/javascript">
+                /* EA Gravity Forms - fallback dispatch of GF's per-form post-render event.
+                 *
+                 * GF normally fires this itself from GFFormDisplay::footer_init_scripts().
+                 * In render contexts where that never runs, GF add-ons that bind to
+                 * `gform/post_render` - e.g. the reCAPTCHA Add-On v2.2.2+, which registers
+                 * its v3 token submission filter there - are never initialised.
+                 *
+                 * Dispatching unconditionally is not safe. GF's multi-file uploader calls
+                 * `new plupload.Uploader()` on every post_render with no idempotency guard
+                 * (gravityforms/js/gravityforms.js), so a second dispatch binds a second
+                 * uploader to the same field and every selected file is submitted twice.
+                 * GF's own guard against that is function-local to the script it prints,
+                 * so it cannot be read from here - we watch for the event instead and only
+                 * step in when GF genuinely did not dispatch.
+                 *
+                 * Registered before the form markup so the listener is in place ahead of
+                 * any GF init script for this form, whether printed inline or in the footer.
+                 */
+                ( function () {
+                    var formId = <?php echo (int) $eael_form_id; ?>;
+                    var flag   = 'eaelGfPostRenderFallback_' + formId;
+
+                    if ( ! window.jQuery || window[ flag ] ) {
+                        return;
+                    }
+                    window[ flag ] = true;
+
+                    var dispatched = false;
+
+                    // gform.core.triggerPostRenderEvents() always triggers this jQuery event
+                    // first, so this sees GF's own dispatch as well as any other caller's.
+                    window.jQuery( document ).on( 'gform_post_render', function ( event, id ) {
+                        if ( parseInt( id, 10 ) === formId ) {
+                            dispatched = true;
+                        }
+                    } );
+
+                    function maybeDispatch() {
+                        if ( dispatched ) {
+                            return;
+                        }
+
+                        // GF inserts this span next to the form and removes it once it has
+                        // dispatched. Still present means GF's script did run and is waiting
+                        // for a hidden form to become visible - it will dispatch on its own.
+                        if ( document.getElementById( 'gform_visibility_test_' + formId ) ) {
+                            return;
+                        }
+
+                        if ( ! window.gform || ! window.gform.core
+                             || typeof window.gform.core.triggerPostRenderEvents !== 'function' ) {
+                            return;
+                        }
+
+                        var pageInput   = document.getElementById( 'gform_source_page_number_' + formId );
+                        var currentPage = pageInput ? parseInt( pageInput.value, 10 ) : 1;
+
+                        window.gform.core.triggerPostRenderEvents( formId, currentPage || 1 );
+                    }
+
+                    // Deferred to a macrotask after load so GF's own dispatch - which waits on
+                    // DOMContentLoaded plus its main and theme script events - happens first.
+                    if ( document.readyState === 'complete' ) {
+                        setTimeout( maybeDispatch, 0 );
+                    } else {
+                        window.addEventListener( 'load', function () {
+                            setTimeout( maybeDispatch, 0 );
+                        } );
+                    }
+                } )();
+            </script>
+
+            <?php
 		        gravity_form( $eael_form_id, $eael_form_title, $eael_form_description, $display_inactive = false, $field_values = null, $eael_form_ajax, '', $echo = true );
 		        ?>
 			</div>
@@ -2993,32 +3068,6 @@ class GravityForms extends Widget_Base {
                 <?php GFCommon::gf_global() ?>
 				<?php GFCommon::gf_vars() ?>
 			</script>
-
-            <script type="text/javascript">
-                /* EA Gravity Forms - ensure GF's per-form post-render event dispatches
-                 * even when the widget's render context prevents GF's standard
-                 * GFFormDisplay::footer_init_scripts() per-form trigger from executing.
-                 * Without this, third-party GF add-ons (e.g. Gravity Forms reCAPTCHA
-                 * Add-On v2.2.2+) that hook into `gform/post_render` to register
-                 * submission filters will never fire, breaking v3 token population.
-                 */
-                ( function () {
-                    var formId = <?php echo (int) $eael_form_id; ?>;
-                    if ( typeof window.gform === 'undefined'
-                         || typeof window.gform.initializeOnLoaded !== 'function' ) {
-                        return;
-                    }
-                    window.gform.initializeOnLoaded( function () {
-                        var flag = '__eaelGfPostRenderFired_' + formId;
-                        if ( window[ flag ] ) { return; }
-                        if ( window.gform && window.gform.core
-                             && typeof window.gform.core.triggerPostRenderEvents === 'function' ) {
-                            window[ flag ] = true;
-                            window.gform.core.triggerPostRenderEvents( formId, 1 );
-                        }
-                    } );
-                } )();
-            </script>
             <?php
         }
     }
