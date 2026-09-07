@@ -47,8 +47,7 @@ Once `'complete'` is set, the only way to re-trigger the wizard is to delete the
 | `includes/templates/admin/quick-setup/src/components/ModalContent.jsx`                                                            | —             | Privacy / data-usage modal launched from Getting Started                                                             |
 | `includes/templates/admin/quick-setup/src/utils/pluginPromoUtils.js`                                                              | —             | Helpers for the plugins promo panel                                                                                  |
 | `includes/templates/admin/quick-setup/dist/quick-setup.min.js`                                                                    | built          | The bundle that PHP enqueues                                                                                         |
-| [`includes/Classes/XSpeed_Setup.php`](../../includes/Classes/XSpeed_Setup.php)                                                     | —             | Gate + lifecycle for the xSpeed install — see § Installing xSpeed                                                  |
-| [`includes/page-cache-safety/`](../../includes/page-cache-safety/)                                                                 | folder         | The portable Detector + Setup pair, copied verbatim from xSpeed.**Do not edit here**                           |
+| [`includes/Classes/XSpeed_Setup.php`](../../includes/Classes/XSpeed_Setup.php)                                                     | —             | Everything EA knows or does about xSpeed — see § Installing xSpeed                                                 |
 | [`assets/admin/css/quick-setup.css`](../../assets/admin/css/quick-setup.css)                                                       | —             | Wizard stylesheet (separate from the React-bundle CSS)                                                               |
 | [`assets/admin/vendor/sweetalert2/`](../../assets/admin/vendor/sweetalert2/)                                                       | vendor         | SweetAlert2 used by the wizard for confirmation dialogs                                                              |
 | [`assets/admin/images/quick-setup/`](../../assets/admin/images/quick-setup/)                                                       | images         | All wizard imagery (success.gif, ea-new.png, youtube-promo.png, Pro feature icons)                                   |
@@ -305,76 +304,92 @@ All three endpoints share the same security model: `check_ajax_referer('essentia
 | `enable_wpins_process`    | `enable_wpins_process()`    | Standalone WPInsights opt-in. Runs`wpins_process()` and returns. Used when user toggles tracking mid-flow without completing the wizard.                      | `wp_send_json_success()`                                  |
 | `save_eael_elements_data` | `save_eael_elements_data()` | Persist element on/off list without changing wizard state. (Defined for completeness; the active React flow uses`save_setup_wizard_data` for the final save.) | `wp_send_json_success()`                                  |
 
-### Installing xSpeed — the page-cache guard
+### Installing xSpeed
 
 The "Boost SEO & Speed" step installs two plugins, and one of them is a page
-cache. That makes it unlike every other install button in the wizard: a second
-page cache on a site that already has one is not a duplicate feature, it is a
-fight over `wp-content/advanced-cache.php` in which the loser silently stops
-caching. So xSpeed is the only plugin here whose offer is *conditional* and
-whose activation is *bracketed*.
+cache. EA used to treat that as a special case: it carried a copy of xSpeed's
+`Detector` + `Setup` pair in `includes/page-cache-safety/`, decided for itself
+whether the site's page cache was free, refused to offer xSpeed when it was not,
+and wrote xSpeed's settings rows around `activate_plugin()`.
 
-Both halves come from [`includes/page-cache-safety/`](../../includes/page-cache-safety/) — two
-files copied verbatim from the xSpeed Free repo
-`WPDeveloper\PageCacheSafety`, so EA's PSR-4 autoloader never resolves them.
-**Do not edit them here**: fixes go back to xSpeed and get re-copied, because
-xSpeed is the repo whose parity tests fail when the module list drifts.
+**None of that is true any more.** That directory is deleted, and the guard with
+it. xSpeed installs beside anything, inspects the site itself, and picks one of
+three profiles at activation:
 
-Everything EA-specific lives in
-[`includes/Classes/XSpeed_Setup.php`](../../includes/Classes/XSpeed_Setup.php),
-which is the only thing the rest of EA calls:
+| Site                        | Installed by   | Comes up as                                       | Profile           |
+| --------------------------- | -------------- | ------------------------------------------------- | ----------------- |
+| nothing owns the page cache | EA             | every Free feature off, page caching **on**       | `host-page-cache` |
+| another cache plugin owns it| EA             | every Free feature off, page caching **refused**  | `conflict-safe`   |
+| nothing owns the page cache | the user       | the Balanced set, page caching off until the wizard | `recommended`   |
 
-| Call                                                    | Answers                                                                                                                     |
-| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `XSpeed_Setup::can_offer()`                           | May we offer to install xSpeed? Supported PHP/WP, not already installed, and`Detector::is_field_clear()`.                 |
-| `XSpeed_Setup::can_list()`                            | May xSpeed have a row in the Integrations list? Looser — an already-installed or already-running copy still belongs there. |
-| `XSpeed_Setup::page_cache_owner()`                    | Label of whatever owns the page cache instead, or`''`.                                                                    |
-| `XSpeed_Setup::before_activation( $slug )`            | Writes the settings xSpeed should come up with. No-op for every other slug.                                                 |
-| `XSpeed_Setup::activation_failed( $slug, $prepared )` | Takes those rows back out when activation failed.                                                                           |
-| `XSpeed_Setup::after_activation( $slug )`             | Cancels xSpeed's setup-wizard redirect and confirms page caching is live.                                                   |
+`conflict-safe` is a **success**, not a failed install — it means another plugin
+was already caching and xSpeed stood down, leaving its `advanced-cache.php`
+alone. A host-claimed install also skips xSpeed's own setup wizard, so it will
+not interrupt EA's.
 
-**The order around `activate_plugin()` is the whole point.** xSpeed's activation
-*reads* what is already stored rather than stamping over it — its module seeders
-skip a row that exists, and `Cache::restore_dropin_if_enabled()` sees the
-page-cache flag already true and installs `advanced-cache.php` and `WP_CACHE`
-itself. Writing the same settings *after* activation does nothing at all **and
-reports no error**, because `Settings_Manager::update()` resolves modules
-through a `Module_Registry` that is empty for a plugin activated part-way
-through the request. All three activation sites in
-[`WPDeveloper_Plugin_Installer`](../../includes/Classes/WPDeveloper_Plugin_Installer.php)
-are bracketed accordingly:
+#### The whole integration
+
+One option write, immediately before activation:
 
 ```php
-$prepared = XSpeed_Setup::before_activation( $slug );   // BEFORE
-$result   = activate_plugin( $basename, '', false, false );
-
-if ( is_wp_error( $result ) ) {
-    XSpeed_Setup::activation_failed( $slug, $prepared );  // never activated
-} else {
-    XSpeed_Setup::after_activation( $slug );              // AFTER
-}
+update_option( 'xspeed_installed_by', 'essential-addons' );
+$result = activate_plugin( $basename, '', false, false );
 ```
 
-What gets turned on is page caching and nothing else. Someone who accepted
-"install a cache" inside EA's wizard agreed to a page cache, not to having
-their markup rewritten, so minification, lazy loading and resource hints are
-written off explicitly — including the ones already off by default, since
-writing the settings option suppresses the first-run path that would otherwise
-seed them.
+No settings writes, no enable call, no rollback path. The option is a one-shot
+**trigger**, not a record: activation spends it, moving the value to
+`xspeed_installer`. That is why it must be written *immediately* before
+activating and never speculatively — an install that dies in between arms the
+*next* activation on that site, whoever starts it. It is a plain option rather
+than a constant or a filter because EA writes it at a moment when no xSpeed code
+has loaded.
 
-Two consequences visible in the localized data: `thinkrank_content.plugins` drops
-the xSpeed entry when `can_offer()` is false (and the step's title, button label
-and feature bullets stop promising performance), and `integrations_content.plugin_list`
-drops the xSpeed row when `can_list()` is false. `thinkrank_content.offers_xspeed`
-and `thinkrank_content.page_cache_owner` carry the reason for a UI that wants to
-say what it found.
+All three activation sites in
+[`WPDeveloper_Plugin_Installer`](../../includes/Classes/WPDeveloper_Plugin_Installer.php)
+call `XSpeed_Setup::before_activation( $slug )` on the line above their
+`activate_plugin()`; it is a no-op for every other slug.
 
-Because "we could not tell" and "the field is clear" are different answers, every
-unknown resolves to *do not offer*: an unreadable `wp-config.php`, a drop-in that
-cannot be attributed, a PHP version below the portable files' 7.1 parse floor, or
-a missing `includes/page-cache-safety/` file all return false. A persistent object cache
-(`object-cache.php`) is deliberately **not** a blocker — it sits beside a page
-cache and competes for nothing.
+#### `XSpeed_Setup` — the only thing the rest of EA calls
+
+[`includes/Classes/XSpeed_Setup.php`](../../includes/Classes/XSpeed_Setup.php)
+is now self-contained: local WordPress reads for "is it here / is it on", and
+guarded calls into `\XSpeed\Host` for anything only xSpeed can answer.
+
+| Call                                          | Answers                                                                                            |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `XSpeed_Setup::can_install()`                 | May we offer to install it? Supported PHP/WP and not already on disk. Nothing about the page cache. |
+| `XSpeed_Setup::can_list()`                    | May it have a row in the Integrations list? Looser — an already-installed or running copy belongs there. |
+| `XSpeed_Setup::can_reactivate()`              | On disk, switched off, and runnable — the CTA activates rather than installs.                       |
+| `XSpeed_Setup::before_activation( $slug )`    | Claims the install. The one write. No-op for every other slug.                                     |
+| `XSpeed_Setup::is_on_disk()` / `is_active()`  | Local `get_plugins()` / `is_plugin_active()` reads.                                                |
+| `XSpeed_Setup::page_cache_live()`             | Is xSpeed's cache verifiably serving? Via `Host`; false when we cannot tell.                       |
+| `XSpeed_Setup::page_cache_owner()`            | Label of whatever owns the page cache, or `''`.                                                    |
+| `XSpeed_Setup::page_cache_owner_is_knowable()`| Whether that `''` means "nothing" or "we cannot tell".                                             |
+| `XSpeed_Setup::status()`                      | `Host::status()` — profile, blocked reason, manual `wp-config.php` snippet. Null when unavailable.  |
+
+`\XSpeed\Host` exists **only once xSpeed is active**, and only from the release
+that introduced it, so every call above is guarded by `class_exists()` and
+degrades to "we cannot tell" rather than a guess. Nothing outside xSpeed calls
+`Cache` or `Page_Cache_Detector`.
+
+#### One consequence worth knowing
+
+Because `Host` is the only remaining source of page-cache knowledge, EA **cannot
+name an incumbent cache plugin before xSpeed is installed**. Both surfaces that
+used to are written to stay quiet rather than lie:
+
+- `thinkrank_content.page_cache_owner` is `''` on the wizard step (nothing reads
+  it in the React app today).
+- `ThinkRank_Promotion::page_cache_line()` returns `''` when unanswerable, and
+  `render_check_prompt()` filters empty findings out of the list. "No page cache
+  detected" is only ever printed when it was actually checked — asserting an
+  absence EA never verified would be a lie to anyone running WP Rocket.
+
+`thinkrank_content.plugins` drops the xSpeed entry when `can_install()` is false
+(and the step's title, button label and feature bullets stop promising
+performance); `integrations_content.plugin_list` drops the xSpeed row when
+`can_list()` is false. Both now turn only on the PHP/WP floor and whether xSpeed
+is already on disk.
 
 ### Storage Options
 

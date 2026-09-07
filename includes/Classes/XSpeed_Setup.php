@@ -6,34 +6,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly.
 
 /**
- * EA's adapter over the portable page-cache-safety pair in
- * `includes/page-cache-safety/`.
+ * Everything EA needs to know or do about xSpeed Cache.
  *
- * Those two files are copied verbatim from the xSpeed Free repo and must stay
- * that way — improvements go back there and get re-copied, they are not forked
- * per plugin. Everything EA-specific lives here instead:
+ * EA used to copy-vendor a `Detector` + `Setup` pair out of the xSpeed repo
+ * into `includes/page-cache-safety/`, decide for itself whether the site's page
+ * cache was free, and write xSpeed's settings rows before activating it. That
+ * directory is gone: xSpeed now owns those decisions and publishes a single
+ * integration contract in its place. See
+ * `installing-from-another-plugin.md` in the xSpeed repo.
  *
- * - Loading them. They sit under `includes/`, but they are namespaced
- *   `WPDeveloper\PageCacheSafety` rather than `Essential_Addons_Elementor\`, so
- *   EA's PSR-4 autoloader never resolves them however they are named — they
- *   need an explicit require.
- * - The PHP floor. Both files use `public const` and `?string`, which are PHP
- *   7.1 syntax — a parse error, not a catchable one, on the PHP 7.0 EA still
- *   claims to support. Requiring them behind a version check keeps that error
- *   from ever being reached; below the floor this class simply reports xSpeed
- *   as not offerable, which is the right answer anyway since xSpeed needs 7.4.
- * - Slug/basename dispatch, so the generic plugin installer can call through
- *   for every plugin and only xSpeed gets the cache-specific treatment.
+ * What replaced it:
  *
- * Two questions, two owners:
+ * - **Installing.** One option write, immediately before `activate_plugin()`:
+ *   `update_option( 'xspeed_installed_by', 'essential-addons' )`. No settings
+ *   writes, no enable call, no rollback. xSpeed reads that one-shot trigger on
+ *   activation and brings itself up with every Free feature off and page
+ *   caching on — or, when another plugin already owns the page cache, off and
+ *   refused. Either outcome is a success, and a host-claimed install also skips
+ *   xSpeed's own setup wizard so it will not interrupt EA's.
+ * - **Asking.** `\XSpeed\Host`, once xSpeed is active. It exists only from the
+ *   release that introduced it, so every call is guarded and every answer
+ *   degrades to "we cannot tell" rather than a guess.
+ * - **Gating.** There is none left. xSpeed installs beside anything, so an
+ *   incumbent cache plugin no longer suppresses the offer — it only changes
+ *   which profile xSpeed picks for itself.
  *
- * - `Detector` (read-only) answers "does anything already own this site's page
- *   cache?" — that gates whether EA may OFFER xSpeed at all.
- * - `Setup` (writes) answers "what state should xSpeed come up in?" — that runs
- *   around activation, and the ORDER MATTERS: settings before `activate_plugin()`,
- *   because xSpeed's activation reads what is already stored rather than
- *   stamping over it. Configuring afterwards silently does nothing.
- *
+ * The PHP floor here is xSpeed's own (7.4 / WP 6.0), not a parse floor: nothing
+ * in this file needs more than PHP 7.0, and `\XSpeed\Host` is only ever reached
+ * through `class_exists()`.
  */
 class XSpeed_Setup {
 
@@ -44,330 +44,174 @@ class XSpeed_Setup {
 	const BASENAME = 'xspeed/xspeed.php';
 
 	/**
-	 * Parse floor of the portable files, not of xSpeed. See the class docblock.
+	 * xSpeed's own requirements. WordPress refuses an activation that fails a
+	 * plugin's requirements, and promising a cache then failing mid-wizard is
+	 * worse than never offering — so EA checks them before it offers.
 	 */
-	const REQUIRES_PHP = '7.1';
+	const REQUIRES_PHP = '7.4';
+	const REQUIRES_WP  = '6.0';
 
 	/**
-	 * Tri-state load result: null = not attempted, bool = the answer.
+	 * The one-shot trigger xSpeed reads on activation, and the slug EA claims
+	 * the install with.
 	 *
-	 * @var bool|null
+	 * A plain option rather than a constant, a filter or a class, because it is
+	 * written at a moment when no xSpeed code has loaded and none can be relied
+	 * on to exist.
 	 */
-	private static $available = null;
+	const INSTALLED_BY_OPTION = 'xspeed_installed_by';
+	const INSTALLER_SLUG      = 'essential-addons';
 
 	/**
-	 * Memoized offer decision. Detector memoizes its own inspection per request,
-	 * but `can_offer()` is asked once per wizard surface and each miss walks
-	 * `get_plugins()` as well.
+	 * May EA offer to INSTALL xSpeed?
 	 *
-	 * @var bool|null
-	 */
-	private static $can_offer = null;
-
-	/**
-	 * Load the portable pair, once per request.
+	 * Nothing about the site's page cache enters into this. xSpeed installs
+	 * beside anything and works out for itself how to come up: on an occupied
+	 * site it takes the `conflict-safe` profile — everything off, page caching
+	 * refused, the incumbent's drop-in untouched — which is a correct outcome
+	 * rather than a failed one.
 	 *
-	 * @return bool True when both classes are usable.
-	 */
-	public static function is_available() {
-		if ( null !== self::$available ) {
-			return self::$available;
-		}
-
-		self::$available = false;
-
-		if ( version_compare( PHP_VERSION, self::REQUIRES_PHP, '<' ) ) {
-			return self::$available;
-		}
-
-		$dir = EAEL_PLUGIN_PATH . 'includes/page-cache-safety/';
-
-		foreach ( [ 'class-page-cache-safety.php', 'class-page-cache-setup.php' ] as $file ) {
-			if ( ! file_exists( $dir . $file ) ) {
-				return self::$available;
-			}
-
-			// Both files self-guard with class_exists(), so a sibling
-			// WPDeveloper plugin that already loaded its own copy wins and this
-			// require is a no-op rather than a redeclaration fatal.
-			require_once $dir . $file;
-		}
-
-		self::$available = class_exists( '\WPDeveloper\PageCacheSafety\Detector' )
-			&& class_exists( '\WPDeveloper\PageCacheSafety\Setup' );
-
-		return self::$available;
-	}
-
-	/**
-	 * May EA offer to install xSpeed AND hand it this site's page cache?
-	 *
-	 * The strict question. Surfaces that merely offer the plugin ask
-	 * can_install() instead; this one is for anything that promises page
-	 * caching specifically, and for before_activation()'s prepare() flag.
-	 *
-	 * False whenever we cannot tell. "We could not read the site's state" and
-	 * "the field is clear" are different answers and only one of them licenses
-	 * an install — so an unreadable wp-config.php, an unattributable drop-in or
-	 * a missing portable file all land here as "do not offer".
-	 *
-	 * @return bool
-	 */
-	public static function can_offer() {
-		if ( null !== self::$can_offer ) {
-			return self::$can_offer;
-		}
-
-		self::$can_offer = false;
-
-		if ( ! self::is_available() ) {
-			return self::$can_offer;
-		}
-
-		// WordPress refuses an activation that fails the plugin's own
-		// requirements. Promising a cache and then failing mid-wizard is worse
-		// than never offering.
-		if ( ! \WPDeveloper\PageCacheSafety\Setup::is_supported() ) {
-			return self::$can_offer;
-		}
-
-		// On disk at all, active or not. A site that already has xSpeed has
-		// made its own decision about it; re-offering one the user deactivated
-		// is nagging.
-		if ( \WPDeveloper\PageCacheSafety\Setup::is_installed() ) {
-			return self::$can_offer;
-		}
-
-		self::$can_offer = \WPDeveloper\PageCacheSafety\Detector::is_field_clear();
-
-		return self::$can_offer;
-	}
-
-	/**
-	 * May EA offer to INSTALL xSpeed, ignoring who owns the page cache?
-	 *
-	 * Deliberately looser than can_offer(). can_offer() refuses whenever the
-	 * page-cache field is occupied, because it gates a promise of "a page
-	 * cache". This gates a promise of "xSpeed" — asset optimization, CDN,
-	 * browser caching, its own dashboard — none of which conflict with an
-	 * incumbent cache plugin. The conflict is confined to advanced-cache.php,
-	 * and that is handled at install time instead: before_activation() passes
-	 * Detector::is_field_clear() to prepare(), so on an occupied site xSpeed
-	 * comes up with its page cache switched off rather than overwriting the
-	 * drop-in it found.
-	 *
-	 * Still false when we cannot load the portable pair, when xSpeed's own
-	 * PHP/WP floor is not met (WordPress would refuse the activation), or when
-	 * xSpeed is already on disk.
+	 * So only two things say no: a PHP/WP floor xSpeed cannot meet, and xSpeed
+	 * already being on disk (active or not — a site that has it has made its own
+	 * decision, and re-offering an install is nagging).
 	 *
 	 * @return bool
 	 */
 	public static function can_install() {
-		if ( ! self::is_available() ) {
-			return false;
-		}
-
-		if ( ! \WPDeveloper\PageCacheSafety\Setup::is_supported() ) {
-			return false;
-		}
-
-		return ! \WPDeveloper\PageCacheSafety\Setup::is_installed();
+		return self::is_supported() && ! self::is_on_disk();
 	}
 
 	/**
 	 * Should xSpeed appear in the Integrations plugin list?
 	 *
-	 * Looser than can_offer(), because that list manages plugins rather than
+	 * Looser than can_install(), because that list manages plugins rather than
 	 * promoting them: an xSpeed already installed but switched off belongs there
 	 * even though re-offering an install would be nagging, and one already
-	 * running stays listed so the user can switch it back off. What the list
-	 * must not do is hand someone a toggle that would put a second page cache
-	 * in play — so an incumbent cache, an unreadable site state, or a PHP/WP
-	 * floor xSpeed cannot meet all drop the row.
+	 * running stays listed so the user can switch it back off. Only a PHP/WP
+	 * floor xSpeed cannot meet drops the row, since the toggle would fail.
 	 *
 	 * @return bool
 	 */
 	public static function can_list() {
-		if ( ! self::is_available() ) {
-			return false;
-		}
-
-		if ( \WPDeveloper\PageCacheSafety\Setup::is_active() ) {
-			return true;
-		}
-
-		if ( ! \WPDeveloper\PageCacheSafety\Setup::is_supported() ) {
-			return false;
-		}
-
-		// Not gated on the page-cache field, for the same reason as
-		// can_install(): an incumbent cache does not make xSpeed unlistable, it
-		// only makes before_activation() bring xSpeed up with its own page
-		// cache switched off. A PHP/WP floor xSpeed cannot meet still drops the
-		// row, since the toggle would fail.
-		return true;
+		return self::is_active() || self::is_supported();
 	}
 
 	/**
-	 * Label of whatever already owns the page cache, for a UI that wants to say
-	 * what it found instead of silently dropping the row.
-	 *
-	 * @return string Empty when nothing owns it, or when we cannot name the owner.
-	 */
-	public static function page_cache_owner() {
-		if ( ! self::is_available() ) {
-			return '';
-		}
-
-		$owner = \WPDeveloper\PageCacheSafety\Detector::dropin_owner_label();
-
-		if ( is_string( $owner ) && '' !== $owner ) {
-			return $owner;
-		}
-
-		$active = \WPDeveloper\PageCacheSafety\Detector::active_page_caches();
-
-		return empty( $active ) ? '' : (string) reset( $active );
-	}
-
-	/**
-	 * Write the state xSpeed should come up in. Call immediately BEFORE
-	 * `activate_plugin()`.
-	 *
-	 * Not a style choice: xSpeed's activation seeds only the option rows that do
-	 * not already exist, and `Cache::restore_dropin_if_enabled()` sees the
-	 * page-cache flag already true and installs `advanced-cache.php` and the
-	 * `WP_CACHE` constant itself. Writing the same settings after activation
-	 * instead does nothing at all and reports no error, because
-	 * `Settings_Manager::update()` resolves modules through a `Module_Registry`
-	 * that is empty for a plugin activated part-way through the request.
-	 *
-	 * @param string $slug Plugin slug being installed/activated.
-	 * @return bool True when settings were written — pass this to rollback().
-	 */
-	public static function before_activation( $slug ) {
-		if ( self::SLUG !== $slug || ! self::is_available() ) {
-			return false;
-		}
-
-		// prepare() returns false when xSpeed is already active, i.e. we were
-		// called too late. That is a bug in the caller's ordering rather than
-		// something to retry, and it must not be treated as "rows written".
-		// is_field_clear() decides whether xSpeed comes up OWNING the page
-		// cache — not whether it is installed at all. On a site that already
-		// has a cache drop-in this writes xSpeed's settings with page caching
-		// off, which is the whole point of prepare()'s parameter: skipping the
-		// call instead would let xSpeed's own set_defaults() seed its
-		// recommended profile on next activation and switch caching on anyway.
-		$take_page_cache = (bool) \WPDeveloper\PageCacheSafety\Detector::is_field_clear();
-
-		return (bool) \WPDeveloper\PageCacheSafety\Setup::prepare( $take_page_cache );
-	}
-
-	/**
-	 * Take the rows back out when the activation never happened.
-	 *
-	 * A stranded `cache_enabled => true` on a site with no xSpeed is worse than
-	 * litter: it would tell a later hand-install to bring up page caching nobody
-	 * asked for.
-	 *
-	 * @param string $slug     Plugin slug that failed to activate.
-	 * @param bool   $prepared Return value of before_activation().
-	 * @return void
-	 */
-	public static function activation_failed( $slug, $prepared ) {
-		if ( self::SLUG !== $slug || ! $prepared || ! self::is_available() ) {
-			return;
-		}
-
-		\WPDeveloper\PageCacheSafety\Setup::rollback();
-	}
-
-	/**
-	 * Finish up. Call AFTER a successful activation.
-	 *
-	 * Cancels the setup-wizard redirect xSpeed arms unconditionally on
-	 * activation — someone who accepted a cache inside EA's Quick Setup did not
-	 * ask to be dropped into xSpeed's onboarding on their next page load — and
-	 * verifies page caching actually took rather than merely being requested,
-	 * falling back to the long way if the drop-in or wp-config.php write was
-	 * refused.
-	 *
-	 * @param string $slug Plugin slug that was just activated.
-	 * @return bool True when xSpeed is active and page caching is live.
-	 */
-	public static function after_activation( $slug ) {
-		if ( self::SLUG !== $slug || ! self::is_available() ) {
-			return false;
-		}
-
-		$live = \WPDeveloper\PageCacheSafety\Setup::finish();
-
-		// Site state just changed under Detector's feet; drop the per-request
-		// memo so a later question in this request does not get the
-		// pre-install answer. Also invalidates the memo above.
-		\WPDeveloper\PageCacheSafety\Detector::invalidate();
-		self::$can_offer = null;
-
-		return $live;
-	}
-
-	/**
-	 * May EA offer to switch a already-installed, currently-inactive xSpeed
+	 * May EA offer to switch an already-installed, currently-inactive xSpeed
 	 * back on?
 	 *
-	 * Distinct from can_offer() and can_list(), both of which answer false here
-	 * for reasons that do not apply to reactivation:
+	 * Distinct from can_install(), which answers false the moment xSpeed is on
+	 * disk — right for a banner selling an install, wrong for a button that
+	 * activates what is already there.
 	 *
-	 * - can_offer() is false the moment xSpeed is on disk. Right for a banner
-	 *   selling an install; wrong for a button that activates what is already
-	 *   there.
-	 * - can_list() and can_install() both answer false once xSpeed is on disk,
-	 *   which is exactly the state a reactivation starts from.
-	 *
-	 * The blocker walk below is what keeps a reactivation honest: a deactivated
-	 * xSpeed normally leaves its OWN drop-in behind, and the detector — generic
-	 * by design, and blind to which plugin is asking — reports that leftover as
-	 * a foreign drop-in. So: every blocker counts except one owned by xSpeed
-	 * itself. Reactivating
-	 * xSpeed over xSpeed's own residue puts exactly one page cache in play,
-	 * which is the entire thing the safety check exists to guarantee. An active
-	 * competitor, an unknown or unreadable drop-in, a duplicate or dynamic
-	 * WP_CACHE, or a drop-in belonging to any other plugin all still block.
+	 * No blocker walk any more. The old one existed to keep a reactivation from
+	 * putting a second page cache in play; xSpeed decides that for itself now,
+	 * and a deactivated xSpeed's own leftover drop-in — which the generic
+	 * detector used to read as a foreign cache and refuse — is no longer
+	 * anybody's problem here.
 	 *
 	 * @return bool
 	 */
 	public static function can_reactivate() {
-		if ( ! self::is_available() ) {
+		return self::is_on_disk() && ! self::is_active() && self::is_supported();
+	}
+
+	/**
+	 * Claim the install, immediately BEFORE `activate_plugin()`.
+	 *
+	 * This is the entire integration. The option is a one-shot **trigger**, not
+	 * a record: activation spends it, moving the value to `xspeed_installer`.
+	 * That is why it must be written immediately before activating and never
+	 * speculatively — an install that dies in between arms the *next*
+	 * activation on this site, whoever starts it.
+	 *
+	 * Refuses when xSpeed is already active, i.e. we were called too late.
+	 * That is a bug in the caller's ordering rather than something to retry.
+	 *
+	 * @param string $slug Plugin slug being installed/activated.
+	 * @return bool True when the install was claimed.
+	 */
+	public static function before_activation( $slug ) {
+		if ( self::SLUG !== $slug || self::is_active() ) {
 			return false;
 		}
 
-		// Nothing to switch back on, or it is already running — both are some
-		// other method's question.
-		if ( ! \WPDeveloper\PageCacheSafety\Setup::is_installed()
-			|| \WPDeveloper\PageCacheSafety\Setup::is_active() ) {
-			return false;
-		}
-
-		if ( ! \WPDeveloper\PageCacheSafety\Setup::is_supported() ) {
-			return false;
-		}
-
-		$verdict  = \WPDeveloper\PageCacheSafety\Detector::classify();
-		$blockers = isset( $verdict['blockers'] ) ? (array) $verdict['blockers'] : [];
-
-		foreach ( $blockers as $blocker ) {
-			$owner = isset( $blocker['plugin'] ) ? $blocker['plugin'] : null;
-
-			// Our own leftovers are not a competitor.
-			if ( self::BASENAME === $owner ) {
-				continue;
-			}
-
-			return false;
-		}
+		update_option( self::INSTALLED_BY_OPTION, self::INSTALLER_SLUG );
 
 		return true;
+	}
+
+	/**
+	 * Label of whatever owns this site's page cache, for a UI that wants to say
+	 * what it found.
+	 *
+	 * Only answerable once xSpeed is active — `\XSpeed\Host` is the only place
+	 * this knowledge lives now, and EA does not carry a second copy of it.
+	 * Callers must treat `''` as "we cannot tell", NOT as "nothing owns it":
+	 * on a site with WP Rocket and no xSpeed, both look identical from here.
+	 *
+	 * @return string Empty when xSpeed is not active, or when nothing owns it.
+	 */
+	public static function page_cache_owner() {
+		if ( ! self::host_available() ) {
+			return '';
+		}
+
+		$owner = \XSpeed\Host::page_cache_owner();
+
+		return is_string( $owner ) ? $owner : '';
+	}
+
+	/**
+	 * Can we name the page cache's owner at all?
+	 *
+	 * The companion to page_cache_owner()'s ambiguous `''`: false means the
+	 * question is unanswerable and the caller should stay quiet rather than
+	 * report an absence it did not verify.
+	 *
+	 * @return bool
+	 */
+	public static function page_cache_owner_is_knowable() {
+		return self::host_available();
+	}
+
+	/**
+	 * Is xSpeed's page cache actually serving, right now?
+	 *
+	 * The difference between "xSpeed is installed" and "xSpeed is working" —
+	 * activation alone does not guarantee the drop-in and the `WP_CACHE` write
+	 * were accepted. The Speed Check widget shows a different state for each.
+	 *
+	 * False whenever we cannot tell, matching the rest of this class.
+	 *
+	 * @return bool
+	 */
+	public static function page_cache_live() {
+		return self::host_available() && (bool) \XSpeed\Host::page_cache_is_live();
+	}
+
+	/**
+	 * Everything xSpeed can say about how the install came up, or null.
+	 *
+	 * One call rather than four, for a surface reporting the outcome. Keys:
+	 * `installed`, `active`, `installed_by`, `profile`, `page_cache_live`,
+	 * `page_cache_owner`, `page_cache_blocked_reason`, `page_cache_manual_snippet`.
+	 *
+	 * `profile` records a decision made once at activation — `host-page-cache`
+	 * when EA claimed the install on a clear site, `conflict-safe` when
+	 * something else owned the page cache, `recommended` when the user
+	 * installed it by hand. `conflict-safe` is a success: render
+	 * `page_cache_owner` and `page_cache_blocked_reason` and leave it there.
+	 *
+	 * `page_cache_manual_snippet` is not tied to `page_cache_live` — a managed
+	 * host with a read-only `wp-config.php` serves every hit while `WP_CACHE`
+	 * never landed, so the cache is live AND there is still a line to paste.
+	 * Render either whenever it is non-null.
+	 *
+	 * @return array|null Null when xSpeed is not active, or predates Host.
+	 */
+	public static function status() {
+		return self::host_available() ? (array) \XSpeed\Host::status() : null;
 	}
 
 	/**
@@ -376,34 +220,30 @@ class XSpeed_Setup {
 	 * The difference between "we could install this" and "this is already here,
 	 * just switched off" — which decides whether a CTA installs or activates.
 	 *
+	 * Reads the plugin list rather than asking xSpeed, because the question is
+	 * asked precisely when xSpeed is not loaded.
+	 *
 	 * @return bool
 	 */
 	public static function is_on_disk() {
-		if ( ! self::is_available() ) {
+		self::load_plugin_functions();
+
+		if ( ! function_exists( 'get_plugins' ) ) {
 			return false;
 		}
 
-		return (bool) \WPDeveloper\PageCacheSafety\Setup::is_installed();
+		return array_key_exists( self::BASENAME, (array) get_plugins() );
 	}
 
 	/**
-	 * Is xSpeed's page cache actually serving, right now?
-	 *
-	 * The difference between "xSpeed is installed" and "xSpeed is working" —
-	 * activation alone does not guarantee the drop-in and WP_CACHE write were
-	 * accepted, which is the whole reason after_activation() verifies rather
-	 * than assumes. The Speed Check widget shows a different state for each.
-	 *
-	 * False whenever we cannot tell, matching the rest of this class.
+	 * Is xSpeed active — on this site, or network-wide?
 	 *
 	 * @return bool
 	 */
-	public static function page_cache_live() {
-		if ( ! self::is_available() ) {
-			return false;
-		}
+	public static function is_active() {
+		self::load_plugin_functions();
 
-		return (bool) \WPDeveloper\PageCacheSafety\Setup::page_cache_is_live();
+		return function_exists( 'is_plugin_active' ) && (bool) is_plugin_active( self::BASENAME );
 	}
 
 	/**
@@ -415,5 +255,54 @@ class XSpeed_Setup {
 	 */
 	public static function slug_for_basename( $basename ) {
 		return self::BASENAME === $basename ? self::SLUG : '';
+	}
+
+	/**
+	 * Can this site run xSpeed at all?
+	 *
+	 * EA's own check against xSpeed's published floor, rather than a call into
+	 * xSpeed — which by definition is not loaded when the question matters.
+	 *
+	 * @return bool
+	 */
+	private static function is_supported() {
+		global $wp_version;
+
+		return version_compare( (string) $wp_version, self::REQUIRES_WP, '>=' )
+			&& version_compare( PHP_VERSION, self::REQUIRES_PHP, '>=' );
+	}
+
+	/**
+	 * Is `\XSpeed\Host` there to be called?
+	 *
+	 * Guarded on every use: it exists only once xSpeed is active, and only from
+	 * the release that introduced it, so an older xSpeed is the same answer as
+	 * no xSpeed at all.
+	 *
+	 * @return bool
+	 */
+	private static function host_available() {
+		return class_exists( '\XSpeed\Host' );
+	}
+
+	/**
+	 * Pull in get_plugins()/is_plugin_active(), which are admin-only.
+	 *
+	 * These get asked from front-end and AJAX requests where the file is not
+	 * loaded; the callers above degrade rather than fatal if it is not there at
+	 * all, because a missing answer must not take the site down.
+	 *
+	 * @return void
+	 */
+	private static function load_plugin_functions() {
+		if ( function_exists( 'get_plugins' ) && function_exists( 'is_plugin_active' ) ) {
+			return;
+		}
+
+		$file = ABSPATH . 'wp-admin/includes/plugin.php';
+
+		if ( file_exists( $file ) ) {
+			require_once $file;
+		}
 	}
 }

@@ -534,9 +534,9 @@ class ThinkRank_Promotion {
 
 		// xSpeed: can_install() is false once xSpeed is on disk at all, or when
 		// this site cannot meet its PHP/WP floor. An incumbent page cache does
-		// NOT suppress the offer — it only means before_activation() installs
-		// xSpeed with its own page cache off, leaving the incumbent's
-		// advanced-cache.php untouched.
+		// NOT suppress the offer — it only means xSpeed comes up on its
+		// conflict-safe profile, with its own page cache refused and the
+		// incumbent's advanced-cache.php untouched.
 		if ( XSpeed_Setup::can_install() && ! $this->is_hidden( XSpeed_Setup::SLUG ) ) {
 			$offer[] = XSpeed_Setup::SLUG;
 		}
@@ -736,16 +736,11 @@ class ThinkRank_Promotion {
 			return self::SLUG !== $plugin;
 		}
 
-		// xSpeed additionally has to clear the page-cache-safety check: a site
-		// that already has a page cache must never be handed a second one.
-		//
-		// Two ways to be eligible, because the CTA does two different things:
-		// install a copy that isn't here (can_install), or switch back on one
-		// that is (can_reactivate). Gating on the install check alone made the Speed
-		// Check widget vanish for anyone who deactivated xSpeed, while the SEO
-		// Check widget stayed put — and can_list() does not rescue that case,
-		// because a deactivated xSpeed's own leftover drop-in reads to the
-		// generic detector as a foreign cache occupying the field.
+		// Two ways for xSpeed to be eligible, because the CTA does two different
+		// things: install a copy that isn't here (can_install), or switch back
+		// on one that is (can_reactivate). Gating on the install check alone
+		// made the Speed Check widget vanish for anyone who deactivated xSpeed,
+		// while the SEO Check widget stayed put.
 		if ( XSpeed_Setup::SLUG === $plugin
 			&& ! XSpeed_Setup::can_install()
 			&& ! XSpeed_Setup::can_reactivate() ) {
@@ -1015,10 +1010,11 @@ class ThinkRank_Promotion {
 		 * Which of the two active states to render.
 		 *
 		 * Filterable purely so the "caching is off" state can be previewed on a
-		 * site where caching is on — EA's own installer enables page caching
-		 * before activation, so that state is otherwise only reachable when
-		 * xSpeed arrived by some other route, or when the drop-in write was
-		 * refused. Drop this in an mu-plugin to see it:
+		 * site where caching is on — an EA-claimed install comes up with page
+		 * caching already serving, so that state is otherwise only reachable
+		 * when xSpeed arrived by some other route, when another plugin already
+		 * owned the page cache, or when the drop-in write was refused. Drop
+		 * this in an mu-plugin to see it:
 		 *
 		 *     add_filter( 'eael/xspeed_page_cache_live', '__return_false' );
 		 *
@@ -1334,13 +1330,24 @@ class ThinkRank_Promotion {
 	/**
 	 * First finding: what owns this site's page cache.
 	 *
-	 * Now that the promo survives on a site that already has a cache plugin,
-	 * this genuinely names the incumbent — which is the honest thing to show,
-	 * since an install here leaves that incumbent's drop-in alone.
+	 * The promo survives on a site that already has a cache plugin, so naming
+	 * the incumbent is the honest thing to show — an install here leaves that
+	 * incumbent's drop-in alone.
 	 *
-	 * @return string
+	 * Only xSpeed can answer this now, and the prompt state this feeds renders
+	 * precisely when xSpeed is NOT active. So the usual answer is silence:
+	 * render_check_prompt() filters an empty finding out of the list rather
+	 * than showing a blank bullet. "No page cache detected" is only ever
+	 * claimed when it was actually checked — asserting an absence we never
+	 * verified would be a lie to anyone running WP Rocket.
+	 *
+	 * @return string Empty when unanswerable.
 	 */
 	private function page_cache_line() {
+		if ( ! XSpeed_Setup::page_cache_owner_is_knowable() ) {
+			return '';
+		}
+
 		$owner = XSpeed_Setup::page_cache_owner();
 
 		if ( '' !== $owner ) {

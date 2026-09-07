@@ -274,12 +274,13 @@ class WPDeveloper_Setup_Wizard {
 	 * - Both installed → nothing left to offer, so the tab is hidden.
 	 *
 	 * An incumbent page cache (a foreign advanced-cache.php drop-in, another
-	 * cache plugin) deliberately does NOT suppress the xSpeed half any more.
-	 * It only changes what the install DOES: XSpeed_Setup::before_activation()
-	 * passes Detector::is_field_clear() to prepare(), so on an occupied site
-	 * xSpeed installs and configures itself with its page cache left off rather
-	 * than overwriting the incumbent's drop-in. 'page_cache_owner' carries who
-	 * that incumbent is, so the UI can say so.
+	 * cache plugin) deliberately does NOT suppress the xSpeed half. It only
+	 * changes what the install DOES: EA claims the install and xSpeed inspects
+	 * the site for itself, taking its `conflict-safe` profile — everything off,
+	 * page caching refused — rather than overwriting the drop-in it found.
+	 * 'page_cache_owner' names that incumbent when it can be named at all;
+	 * xSpeed is the only thing that knows, so it is empty until xSpeed is
+	 * active. Empty means "we cannot tell", not "nothing owns it".
 	 *
 	 * TODO(design): swap $tr_icon for a proper hero image + per-feature icons.
 	 */
@@ -408,7 +409,8 @@ class WPDeveloper_Setup_Wizard {
 			'offers_thinkrank'  => $offer_thinkrank,
 			'offers_xspeed'     => $offer_xspeed,
 			// What already owns the page cache, so a UI can say the install
-			// will leave it alone. Empty when nothing does.
+			// will leave it alone. Empty when nothing does OR when we cannot
+			// tell — only xSpeed knows, and it is not active on this step.
 			'page_cache_owner'  => XSpeed_Setup::page_cache_owner(),
 			'logo'              => $logo,
 			'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/thinkrank-xspeed.jpg',
@@ -603,9 +605,10 @@ class WPDeveloper_Setup_Wizard {
 			],
 		];
 
-		// This list's toggles install and activate, so xSpeed only earns a row
-		// when nothing else already owns the site's page cache. It sits right
-		// after ThinkRank, the other half of the "Boost SEO & Speed" pairing.
+		// xSpeed earns a row whenever this site can run it — installed or not,
+		// active or not, incumbent cache or not: xSpeed installs beside
+		// anything and picks its own profile. It sits right after ThinkRank,
+		// the other half of the "Boost SEO & Speed" pairing.
 		if ( XSpeed_Setup::can_list() ) {
 			array_splice( $plugin_list, 1, 0, [
 				[
