@@ -39,10 +39,21 @@ use Essential_Addons_Elementor\Theme_Builder\Presets\Elements;
  * The visible card is the *container inside* each panel, not the panel itself.
  * That is what makes the wide one responsive without a single breakpoint of its
  * own: the panel is set to viewport width, so it always fits the screen exactly,
- * and the boxed container inside it lines its card up with the header bar above
- * at whatever width the site is being read at. A fixed pixel width would have
- * been an overflow waiting for the first laptop narrower than it — the widget
- * writes a custom width through verbatim, with nothing clamping it.
+ * and it is *boxed*, so the card on it stops at the site's content width and is
+ * centred there — the same width the header bar above is laid out against, which
+ * is how the two line up without either being told the other's size. A fixed
+ * pixel width would have been an overflow waiting for the first laptop narrower
+ * than it — the widget writes a custom width through verbatim, with nothing
+ * clamping it.
+ *
+ * Viewport width alone was not enough. It has to be that wide to escape the
+ * middle column of the bar the menu sits in, but left `full` the card inside
+ * then ran to within a few pixels of both screen edges — past the bar on either
+ * side on any window wider than the content width, which is most of them. The
+ * header wrapper is boxed for the same reason, and to the same number: those two
+ * containers are the only place the bar and the panel can be made to agree, the
+ * widget positioning a panel in viewport coordinates that know nothing of the
+ * bar above it.
  *
  * @since 6.7.5
  */
@@ -165,14 +176,30 @@ class Suite_Menu {
 	protected static function header( $menu ) {
 		return Elements::container(
 			[
-				'content_width'  => 'full',
+				// Boxed, and this is the width the whole preset is laid out
+				// against: the bar takes it here, the wide submenu panel takes the
+				// same number from its own boxed container, and that is the only
+				// reason the two line up — a panel is positioned by the widget, in
+				// viewport coordinates, and can never be told how wide the bar
+				// above it is. Full-width was what let the panel run past the bar
+				// on both sides the moment the bar sat anywhere narrower than the
+				// screen, which is every site with a content width set.
+				//
+				// The background stays off this container. A boxed container caps
+				// its *content* but paints its background across the whole
+				// viewport, which would square off the two corners that make the
+				// bar a floating pill — so the surface is the bar's, and this is
+				// only the box it is centred in.
+				'content_width'  => 'boxed',
 				'flex_direction' => 'column',
-				// The gutter, and the only place it can live. A boxed container
-				// caps its *content* but paints its background across the whole
-				// viewport, which squares off the two corners that make the bar a
-				// floating pill; and a full-width container plus side margins is
-				// `100% + margins`, which overflows the page. Padding on a wrapper
-				// is inside its own box, so the bar simply fills what is left.
+				// The gutter below the content width, where the bar is the width
+				// of the screen and needs holding off its edges. Padding rather
+				// than a margin: a full-width container plus side margins is
+				// `100% + margins`, which overflows the page, while padding on a
+				// wrapper is inside its own box and the bar simply fills what is
+				// left. The submenu panel carries the same 16 — see
+				// `eael_mega_menu_panel_padding` — so the two agree at every width,
+				// not just above the content width.
 				'padding'        => Elements::spacing( 18, 16, 0, 16 ),
 				'padding_mobile' => Elements::spacing( 12, 12, 0, 12 ),
 				'_title'         => __( 'Header', 'essential-addons-for-elementor-lite' ),
@@ -430,12 +457,12 @@ class Suite_Menu {
 				'label'  => __( 'Solutions', 'essential-addons-for-elementor-lite' ),
 				'type'   => 'mega',
 				'width'  => 'custom',
-				// The card inside is 155 wide; the panel adds the 20px inset that
-				// every panel carries on each side, and the nudge puts the card's
-				// left edge back on the menu item's.
-				'size'   => 200,
+				// The card inside is 160 wide; the panel adds the 16px inset that
+				// every panel carries on each side, and the nudge takes that inset
+				// back off so the card's left edge lands on the menu item's.
+				'size'   => 192,
 				'align'  => 'start',
-				'offset' => -20,
+				'offset' => -16,
 			],
 			[
 				'label' => __( 'Contact', 'essential-addons-for-elementor-lite' ),
@@ -550,14 +577,16 @@ class Suite_Menu {
 			'eael_mega_menu_panel_background_background' => 'classic',
 			'eael_mega_menu_panel_background_color'      => 'rgba(0,0,0,0)',
 			'eael_mega_menu_panel_radius'                => Elements::spacing( 0, 0, 0, 0 ),
-			// This is what holds every card off the screen edges, by the same 20px
-			// the header bar is inset — so the wide panel's card lines up with the
-			// bar at any width, without either knowing the other's size. It has to
-			// be here rather than on the panel containers: this control writes the
-			// very `--padding-*` variables a container reads, so its value wins
-			// over anything they set. Padding rather than a margin on the card,
-			// because a full-width container plus margins overflows its parent.
-			'eael_mega_menu_panel_padding'               => Elements::spacing( 0, 20, 0, 20 ),
+			// The same 16 the header wrapper is inset by, and it has to be the
+			// same number: below the content width neither box is capped, so the
+			// wide panel's card lines up with the bar only if both are held off the
+			// screen edges by the same amount. Above it the boxed cap does the
+			// aligning and this is just the floor. It has to be here rather than on
+			// the panel containers: this control writes the very `--padding-*`
+			// variables a container reads, so its value wins over anything they
+			// set. Padding rather than a margin on the card, because a full-width
+			// container plus margins overflows its parent.
+			'eael_mega_menu_panel_padding'               => Elements::spacing( 0, 16, 0, 16 ),
 			'eael_mega_menu_panel_padding_mobile'        => Elements::spacing( 0, 0, 0, 0 ),
 			// Measured from the bottom of the menu *item*, which sits 16px above the
 			// header bar's own bottom edge once the item's own 10 is taken off — so
@@ -676,7 +705,7 @@ class Suite_Menu {
 	 */
 	protected static function catalogue_panel( $title ) {
 		return Elements::nested_child(
-			self::panel_settings( $title ),
+			self::panel_settings( $title, true ),
 			[ self::card( [ self::category_tabs() ], 23, 'column', 16 ) ]
 		);
 	}
@@ -1151,16 +1180,30 @@ class Suite_Menu {
 	 *
 	 * No padding here, and none is possible: the widget's Submenu Panel > Padding
 	 * control writes the very `--padding-*` variables a container reads, so its
-	 * value wins over anything set on this one — including a zero. What holds the
-	 * wide card off the screen edges is a *margin* on the card itself.
+	 * value wins over anything set on this one — including a zero. That padding is
+	 * what holds a card off the screen edges on a screen narrower than the site's
+	 * content width; wider than that, `$boxed` is what holds it to the page.
 	 *
 	 * @param string $title Navigator title.
+	 * @param bool   $boxed Whether the panel caps its content at the site's content
+	 *                      width. The viewport-wide panel does; the narrow one has
+	 *                      no need, being far inside that width already.
 	 *
 	 * @return array
 	 */
-	protected static function panel_settings( $title ) {
+	protected static function panel_settings( $title, $boxed = false ) {
 		return [
-			'content_width'  => 'full',
+			// Boxed, for the panel that spans the viewport: the panel has to be
+			// that wide to escape the menu column it is anchored in, but the card
+			// on it belongs on the page, not on the screen. Boxed is the only
+			// thing here that knows the page's width — Elementor caps a boxed
+			// container's inner box at `--content-width` and centres it, which is
+			// the same number the header wrapper above is laid out against, so the
+			// two line up at any window size and on any site without either being
+			// told the other's width. Full would leave the card the width of the
+			// viewport less the panel's own 16px inset, which is the bar's width
+			// only while the screen is narrower than the content width.
+			'content_width'  => $boxed ? 'boxed' : 'full',
 			'flex_direction' => 'column',
 			'_title'         => $title,
 		];
