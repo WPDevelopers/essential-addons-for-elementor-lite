@@ -3874,7 +3874,9 @@ class Product_Grid extends Widget_Base
                     echo "</div>";
                 }
 
-                if ( $found_posts > $args['posts_per_page'] && 'source_archive' !== $settings['post_type'] ) {
+                // On the source_archive path $args comes from $wp_query->query, which has no
+                // posts_per_page key, so check the post type before touching it.
+                if ( 'source_archive' !== $settings['post_type'] && $found_posts > absint( $args['posts_per_page'] ?? 0 ) ) {
 	                $this->print_load_more_button( $settings, $args, $dir_name );
                 }
 

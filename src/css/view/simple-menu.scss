@@ -3,9 +3,13 @@
     transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 
     &.eael-simple-menu--loading {
+        // No `display` is forced here on purpose: the correct pre-JS layout depends on
+        // the menu's orientation, alignment and hamburger breakpoint, so it is emitted
+        // per widget by Simple_Menu::render(). Forcing `flex !important` broke vertical
+        // menus and out-specified the hamburger `display: none`, leaving collapsed
+        // menus expanded until JS ran.
         >ul {
-            display: flex !important;
-            list-style: none !important;
+            list-style: none;
         }
 
         li ul {

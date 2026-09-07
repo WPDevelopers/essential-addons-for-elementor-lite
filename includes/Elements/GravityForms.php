@@ -3008,14 +3008,46 @@ class GravityForms extends Widget_Base {
                          || typeof window.gform.initializeOnLoaded !== 'function' ) {
                         return;
                     }
-                    window.gform.initializeOnLoaded( function () {
-                        var flag = '__eaelGfPostRenderFired_' + formId;
-                        if ( window[ flag ] ) { return; }
-                        if ( window.gform && window.gform.core
-                             && typeof window.gform.core.triggerPostRenderEvents === 'function' ) {
-                            window[ flag ] = true;
-                            window.gform.core.triggerPostRenderEvents( formId, 1 );
+
+                    var firedFlag = '__eaelGfPostRenderFired_' + formId; // shim already ran
+                    var seenFlag  = '__eaelGfPostRenderSeen_'  + formId; // per-form event already dispatched by anyone
+
+                    if ( window[ firedFlag ] ) { return; }
+                    window[ firedFlag ] = true;
+
+                    /* Record whenever the per-form post-render event is observed for this
+                     * form, from ANY source — Gravity Forms core's own
+                     * GFFormDisplay::footer_init_scripts() trigger, or this shim. Attached
+                     * synchronously (before GF core's deferred dispatch runs) so it reliably
+                     * catches a core dispatch and lets us avoid firing a second one. */
+                    var markSeen = function ( event, gfFormId ) {
+                        var fid = ( typeof gfFormId !== 'undefined' ) ? gfFormId : formId;
+                        if ( parseInt( fid, 10 ) === formId ) {
+                            window[ seenFlag ] = true;
                         }
+                    };
+                    if ( window.jQuery ) {
+                        window.jQuery( document ).on( 'gform_post_render', markSeen );
+                    }
+                    if ( window.gform.utils && typeof window.gform.utils.addEventListener === 'function' ) {
+                        window.gform.utils.addEventListener( 'gform/post_render', function ( e ) {
+                            var fid = ( e && e.detail && typeof e.detail.formId !== 'undefined' ) ? e.detail.formId : formId;
+                            if ( parseInt( fid, 10 ) === formId ) { window[ seenFlag ] = true; }
+                        } );
+                    }
+
+                    window.gform.initializeOnLoaded( function () {
+                        /* Defer past the current initializeOnLoaded flush so GF core's own
+                         * per-form trigger (registered the same way) dispatches first when
+                         * this render context DOES run it. Only fill the gap when GF never
+                         * fired it — firing again on top of GF core is the double-dispatch bug. */
+                        setTimeout( function () {
+                            if ( window[ seenFlag ] ) { return; } // GF core already dispatched -> don't duplicate
+                            if ( window.gform && window.gform.core
+                                 && typeof window.gform.core.triggerPostRenderEvents === 'function' ) {
+                                window.gform.core.triggerPostRenderEvents( formId, 1 );
+                            }
+                        }, 0 );
                     } );
                 } )();
             </script>

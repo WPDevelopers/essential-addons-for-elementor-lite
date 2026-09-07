@@ -131,7 +131,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                     <?php if ( $woo_product_list['total_sold_show'] ) : ?>
                     <div class="eael-product-list-progress">
                         <div class="eael-product-list-progress-info">
-                            <h4 class="eael-product-list-progress-count"><?php esc_html( $woo_product_list['total_sold_text'] ); ?> <span><?php echo esc_html( $woo_product_list_loop['total_sales_count'] ); ?></span> <?php esc_html_e('Item', 'essential-addons-for-elementor-lite'); ?></h4>
+                            <h4 class="eael-product-list-progress-count"><?php echo esc_html( $woo_product_list['total_sold_text'] ); ?> <span><?php echo esc_html( $woo_product_list_loop['total_sales_count'] ); ?></span> <?php esc_html_e('Item', 'essential-addons-for-elementor-lite'); ?></h4>
                         </div>
                         <div class="eael-product-list-progress-bar-outer">
                             <div style="width: <?php echo esc_attr( $woo_product_list_loop['total_sold_progress_percentage'] ); ?>%;" class="eael-product-list-progress-bar-inner"></div>

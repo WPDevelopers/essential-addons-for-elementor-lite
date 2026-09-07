@@ -6,6 +6,10 @@ let ImageMaskingHandler = function ($scope, $) {
         return;
     }
 
+    // Mirrors the render-time fallback in Image_Masking::before_render(). The control default is
+    // kept empty so it is not serialized into every element, so the starter shape lives here.
+    const DEFAULT_CUSTOM_CLIP_PATH = 'clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);';
+
     function get_clip_path(shape) {
         let shapes = {
             'bavel': 'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)',
@@ -31,7 +35,7 @@ let ImageMaskingHandler = function ($scope, $) {
             if ('clip' === settings?.eael_image_masking_type) {
                 let clipPath = '';
                 if ('yes' === settings?.eael_image_masking_enable_custom_clip_path) {
-                    clipPath = settings?.eael_image_masking_custom_clip_path;
+                    clipPath = settings?.eael_image_masking_custom_clip_path || DEFAULT_CUSTOM_CLIP_PATH;
                     clipPath = clipPath.replace('clip-path: ', '');
                 } else {
                     clipPath = get_clip_path(settings?.eael_image_masking_clip_path)
@@ -43,7 +47,7 @@ let ImageMaskingHandler = function ($scope, $) {
                 if ('yes' === settings?.eael_image_masking_hover_effect) {
                     let hoverClipPath = '';
                     if ('yes' === settings?.eael_image_masking_enable_custom_clip_path_hover) {
-                        hoverClipPath = settings?.eael_image_masking_custom_clip_path_hover;
+                        hoverClipPath = settings?.eael_image_masking_custom_clip_path_hover || DEFAULT_CUSTOM_CLIP_PATH;
                         hoverClipPath = hoverClipPath.replace('clip-path: ', '');
                     } else {
                         hoverClipPath = get_clip_path(settings?.eael_image_masking_clip_path_hover)

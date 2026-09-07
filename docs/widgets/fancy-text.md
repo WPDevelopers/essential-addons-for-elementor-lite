@@ -171,10 +171,11 @@ End-to-end sequence from "user drops widget on canvas" to "user sees animated te
 - **Trigger:** `elementorFrontend.hooks.addAction('frontend/element_ready/eael-fancy-text.default', FancyText)`
 - **Guard:** `if (eael.elementStatusCheck('eaelFancyTextLoad')) return false;` — blocks re-registration on re-fired `elementor/frontend/init`
 - **Reads on init:** all `data-*` attributes from `.eael-fancy-text-container` (id, strings, transition type, speed, delay, cursor, loop, action)
-- **Sanitization:** `DOMPurify.sanitize(rawString || "")` then `.split("|")` → array of safe strings
+- **Sanitization:** `DOMPurify.sanitize(rawString || "")` then `.split("|")` → array of safe strings. Morphext re-sanitizes each phrase before writing it with `innerHTML`, so inline tags (`<br>`, `<strong>`, `<span>`, `&nbsp;`) survive while scripts and event handlers do not.
 - **Engine branch:**
   - `transitionType === 'typing'` → `new Typed("#eael-fancy-text-<id>", { strings, typeSpeed, backDelay, showCursor, loop })`
-  - else → `$("#eael-fancy-text-<id>").Morphext({ animation, separator: ", ", speed, complete })`
+  - else → `$("#eael-fancy-text-<id>").Morphext({ animation, separator: ", ", phrases, speed, complete })`
+  - **Both engines are fed the same sanitized array.** `phrases` is what makes Morphext use it; without that option Morphext falls back to reading the element's own text, i.e. the `<noscript>` block, which flattens the author's inline markup to literal characters and splits any phrase containing `, `.
 - **Action branch:**
   - `page_load` → init immediately
   - `view_port` → `$(window).on('scroll', ...)` with `isInViewport(1)` check; once triggered, adds `.eael-animated` class so it doesn't re-init

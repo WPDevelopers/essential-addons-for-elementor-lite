@@ -42,6 +42,10 @@ var FancyText = function ($scope, $) {
         $("#eael-fancy-text-" + config.id).Morphext({
             animation: config.transitionType,
             separator: ", ",
+            // Hand the sanitized strings over directly. Left to itself Morphext
+            // reads the rendered <noscript> fallback, which strips the author's
+            // inline markup and splits any phrase containing the separator.
+            phrases: config.text,
             speed: config.delay,
             complete: function () {
                 if (!config.loop && ($(this)[0].index + 1) === $(this)[0].phrases.length) {

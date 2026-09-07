@@ -178,7 +178,9 @@ class Image_Masking {
                 'ai' => [
 					'active' => false,
 				],
-                'default'     => 'clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);',
+                // Default kept empty so this is not serialized into every element; the starter
+                // shape is applied at render time when custom clip path is enabled but left blank.
+                'default'     => '',
                 'placeholder' => 'clip-path: polygon(50% 0%, 0% 100%, 100% 100%);',
                 'description' => __( 'Enter your custom clip path value. You can use <a href = "https://bennettfeely.com/clippy/" target = "_blank">Clippy</a> to generate your custom clip path.', 'essential-addons-for-elementor-lite' ),
                 'condition'   => array_merge( $condition, [ 'eael_image_masking_enable_custom_clip_path' . $tab => 'yes' ] ),
@@ -563,7 +565,7 @@ class Image_Masking {
 			if( 'clip' === $type ){
                 $clip_path_value = '';
                 if( 'yes' === $settings['eael_image_masking_enable_custom_clip_path'] ){
-                    $clip_path_value = $settings['eael_image_masking_custom_clip_path'];
+                    $clip_path_value = ! empty( $settings['eael_image_masking_custom_clip_path'] ) ? $settings['eael_image_masking_custom_clip_path'] : 'clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);';
                     $clip_path_value = str_replace( 'clip-path: ', '', $clip_path_value );
                     $clip_path_value = self::sanitize_css_fragment( $clip_path_value );
                 } else {
@@ -577,7 +579,7 @@ class Image_Masking {
                 if( 'yes' === $settings['eael_image_masking_hover_effect'] ){
                     $hover_clip_path_value = '';
                     if( 'yes' === $settings['eael_image_masking_enable_custom_clip_path_hover'] ){
-                        $hover_clip_path_value = $settings['eael_image_masking_custom_clip_path_hover'];
+                        $hover_clip_path_value = ! empty( $settings['eael_image_masking_custom_clip_path_hover'] ) ? $settings['eael_image_masking_custom_clip_path_hover'] : 'clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);';
                         $hover_clip_path_value = str_replace( 'clip-path: ', '', $hover_clip_path_value );
                         $hover_clip_path_value = self::sanitize_css_fragment( $hover_clip_path_value );
                     } else {

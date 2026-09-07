@@ -2907,9 +2907,11 @@ class Woo_Product_Gallery extends Widget_Base {
 					if( $settings['post_type'] === 'archive' && is_archive() && $is_product_archive ){
                         global $wp_query;
                         $query = $wp_query;
-                        $args  = $wp_query->query_vars;
                         $found_posts = $query->found_posts;
                         $max_page = $query->max_num_pages;
+                        // The first page is rendered from the real main query above, but Load More
+                        // must not inherit its raw query_vars — see build_archive_load_more_args().
+                        $args  = $this->build_archive_load_more_args( $wp_query );
                     } else {
 	                    $query = new \WP_Query( $args );
                     }
@@ -2984,6 +2986,122 @@ class Woo_Product_Gallery extends Widget_Base {
 			});
         </script>
 		<?php
+	}
+
+	/**
+	 * Build a clean, self-contained query for Load More / Infinity Scroll when the
+	 * widget is sourced from the current WooCommerce archive.
+	 *
+	 * The archive branch of render() draws page one straight from the main query, but
+	 * its raw `query_vars` must never be serialized into `data-args`: WP fills 50+
+	 * defaults there as empty strings (`menu_order`, `hour`, `minute`, `second`,
+	 * `post_parent`, …). Round-tripping those through the Load More request turns them
+	 * into integer `0`, and WP_Query treats `0` as a real filter — the page-two query
+	 * ends up with `menu_order = 0 AND DATE_FORMAT( post_date, '%H.%i%s' ) = 0` in its
+	 * WHERE clause, which matches nothing, so the loader reports "No posts found!" and
+	 * infinity scroll halts after the first page.
+	 *
+	 * Only what the archive actually needs is rebuilt here: the product post type, the
+	 * page size, the catalog ordering, WooCommerce's visibility exclusions and the
+	 * archive's own term / search phrase.
+	 *
+	 * @since 6.7.4
+	 *
+	 * @param \WP_Query $query The current archive main query.
+	 *
+	 * @return array WP_Query arguments that are safe to serialize into `data-args`.
+	 */
+	protected function build_archive_load_more_args( $query ) {
+		$posts_per_page = (int) $query->get( 'posts_per_page' );
+
+		if ( $posts_per_page < 1 ) {
+			$posts_per_page = (int) apply_filters( 'loop_shop_per_page', 12 );
+		}
+
+		$args = [
+			'post_type'      => 'product',
+			'post_status'    => 'publish',
+			'posts_per_page' => $posts_per_page,
+			'offset'         => 0,
+		];
+
+		// Catalog ordering as WooCommerce resolved it for this archive.
+		$orderby  = $query->get( 'orderby' );
+		$order    = $query->get( 'order' );
+		$meta_key = $query->get( 'meta_key' );
+
+		if ( ! empty( $order ) ) {
+			$args['order'] = $order;
+		}
+
+		if ( ! empty( $meta_key ) ) {
+			$args['meta_key'] = $meta_key;
+		}
+
+		// price / popularity / rating are not WP_Query orderby values — WooCommerce
+		// implements them with `posts_clauses` filters that only attach to the archive's
+		// own main query. Copying the raw token into a plain WP_Query would silently
+		// degrade to date order, so page two would re-serve products the visitor already
+		// scrolled past. Hand it to ajax_load_more() instead, which re-applies the real
+		// WooCommerce ordering for the Load More query.
+		if ( in_array( $orderby, [ 'price', 'popularity', 'rating' ], true ) ) {
+			$args['eael_wc_catalog_orderby'] = $orderby;
+		} elseif ( ! empty( $orderby ) ) {
+			$args['orderby'] = $orderby;
+		}
+
+		// Keep WooCommerce's catalog visibility exclusions (hidden / out-of-stock terms).
+		$tax_query      = [];
+		$main_tax_query = $query->get( 'tax_query' );
+
+		if ( $main_tax_query instanceof \WP_Tax_Query ) {
+			$main_tax_query = $main_tax_query->queries;
+		}
+
+		if ( is_array( $main_tax_query ) ) {
+			foreach ( $main_tax_query as $key => $clause ) {
+				if ( 'relation' === $key || ! is_array( $clause ) ) {
+					continue;
+				}
+
+				if ( isset( $clause['taxonomy'] ) && 'product_visibility' === $clause['taxonomy'] ) {
+					$tax_query[] = $clause;
+				}
+			}
+		}
+
+		// The archive term itself — the main query derives it from a rewrite var
+		// (product_cat / product_tag / attribute), which is not portable to AJAX.
+		$queried_object = $query->get_queried_object();
+
+		if ( $queried_object instanceof \WP_Term && ! empty( $queried_object->taxonomy ) ) {
+			$tax_query[] = [
+				'taxonomy' => $queried_object->taxonomy,
+				'field'    => 'term_id',
+				'terms'    => [ (int) $queried_object->term_id ],
+			];
+		}
+
+		if ( ! empty( $tax_query ) ) {
+			$tax_query['relation'] = 'AND';
+			$args['tax_query']     = $tax_query;
+		}
+
+		$search = $query->get( 's' );
+
+		if ( ! empty( $search ) ) {
+			$args['s'] = $search;
+		}
+
+		/**
+		 * Filters the Load More query built for a Woo Product Gallery archive.
+		 *
+		 * @since 6.7.4
+		 *
+		 * @param array     $args  WP_Query arguments serialized into `data-args`.
+		 * @param \WP_Query $query The current archive main query.
+		 */
+		return apply_filters( 'eael/woo-product-gallery/archive_load_more_args', $args, $query );
 	}
 
 	/**

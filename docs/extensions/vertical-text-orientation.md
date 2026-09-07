@@ -197,7 +197,7 @@ N/A — Vertical Text Orientation has no entry in `eael_global_settings`. All co
 | `eael_vto_writing_styling_heading` | HEADING | — | Section divider |
 | `eael_vto_writing_styling_type` | SELECT | `normal` | `normal` / `background` / `gradient` — gates the styling sub-controls |
 | `eael_vto_writing_styling_background` (group) | Group Control Background | — | Classic background image / color picker, applied with `background-clip: text` |
-| `eael_vto_writing_gradient_color_repeater` | REPEATER | 2 default stops (`#7C62FF` @ 50%, `#FF6464` @ 90%) | Gradient stops; each row has color + location |
+| `eael_vto_writing_gradient_color_repeater` | REPEATER | (empty) | Gradient stops; each row has color + location. The control default is empty so the rows are not serialized into every element — when the user defines none, `eael_vto_default_gradient_colors()` supplies the starter stops (`#7C62FF` @ 50%, `#FF6464` @ 90%) at render time |
 | `eael_vto_writing_styling_text_clip` | SWITCHER | `yes` | When on, `background-clip: text; color: transparent` (only for background style + classic background) |
 | `eael_vto_writing_styling_text_animation_bg` | SWITCHER | (off) | When on for background style, applies `eaelAnimationVTO` 30s loop |
 | `eael_vto_writing_text_animation_control` | CHOOSE | `vertical` | Gradient direction: `horizontal` / `vertical` |
@@ -317,7 +317,7 @@ add_filter( 'eael/registered_extensions', function ( $exts ) {
 2. **Confirm constructor ran.** Add `error_log('VTO ctor')` at line 14 of the class file. Refresh any Elementor editor page; log line should fire.
 3. **Confirm hook is wired to the right widget.** Open a Heading widget in the editor → Style tab. The "Vertical Text Orientation" panel should appear at the bottom. If it doesn't, the `after_section_end` hook name is wrong (compare with the actual hook your Elementor version fires — these are stable in Elementor 3.x but worth verifying).
 4. **Confirm writing mode applies.** Toggle the switcher + writing-mode select on a Heading widget. The widget wrapper should gain `eael_vto-vertical-lr` (or `-rl`) class. If the class doesn't appear, `prefix_class` resolution failed — check Elementor version.
-5. **Confirm `before_render` ran.** View page source on frontend; the wrapper should have `data-gradient_colors` if gradient mode is on. If missing, `before_render` either didn't fire (priority 100 hook conflict?) or the `eael_vto_writing_gradient_color_repeater` settings array is empty.
+5. **Confirm `before_render` ran.** View page source on frontend; the wrapper should have `data-gradient_colors` if gradient mode is on — with an empty repeater it carries the `eael_vto_default_gradient_colors()` stops. If missing, `before_render` either didn't fire (priority 100 hook conflict?) or the switcher / styling type is not set to gradient.
 6. **Confirm frontend JS runs.** Browser console; `verticalTextOrientation` is a function variable. Type `window.eael` and check `elementStatusCheck` resolves. The `frontend/element_ready/widget` hook should fire for each widget render.
 7. **Confirm gradient inline style applied.** Inspect the Heading title element → Computed → Background — should be `linear-gradient(95deg, #7C62FF 50%, #FF6464 90%)` -100% / 200%.
 8. **Editor mode debug.** `window.elementor.elements.models[0].attributes.elements.models` — walk this tree to find your widget's id, then check `attributes.settings.attributes.eael_vto_writing_gradient_color_repeater`.

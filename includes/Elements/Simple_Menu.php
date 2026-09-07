@@ -1699,6 +1699,8 @@ class Simple_Menu extends Widget_Base
             ];
 
 	        //Check breakpoint form hamburger options
+	        $hamburger_breakpoint = 0;
+
 	        if ( ! empty( $hamburger_device ) && 'none' !== $hamburger_device ) {
 		        if ( 'desktop' === $hamburger_device ) {
 			        $breakpoints                     = method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : [];
@@ -1706,6 +1708,8 @@ class Simple_Menu extends Widget_Base
 		        } else {
 			        $eael_get_breakpoint_from_option = Plugin::$instance->breakpoints->get_breakpoints( $hamburger_device )->get_value();
 		        }
+
+		        $hamburger_breakpoint = absint( $eael_get_breakpoint_from_option );
 
 		        echo "<style>
                         @media screen and (max-width: " . esc_html( $eael_get_breakpoint_from_option ) . "px) {
@@ -1721,18 +1725,66 @@ class Simple_Menu extends Widget_Base
                                 }
                             }
                         }
-                        .eael-simple-menu-container.eael-simple-menu--loading > ul {
-                            display: -webkit-box !important;
-                            display: -ms-flexbox !important;
-                            display: flex !important;
-                            list-style: none !important;
-                        }
-                        .eael-simple-menu-container.eael-simple-menu--loading li ul {
-                            visibility: hidden !important;
-                            opacity: 0 !important;
-                        }
                     </style>";
 	        }
+
+	        /**
+	         * Loading state.
+	         *
+	         * The real layout rules sit behind `.eael-hamburger--responsive` /
+	         * `.eael-hamburger--not-responsive`, which only JS adds, so between first
+	         * paint and init these rules stand in for the settled layout and have to
+	         * mirror it per orientation and per alignment - otherwise the menu visibly
+	         * re-flows the moment the loading class comes off.
+	         *
+	         * Keyed off the classes already on the markup rather than off $settings, and
+	         * scoped to this widget instance: a page can hold several menus with
+	         * different breakpoints, and an unscoped rule from one of them would
+	         * out-specify another's hamburger `display: none`.
+	         */
+
+	        // A CSS context, not an HTML one - entities are not decoded inside <style>,
+	        // so whitelist to a valid CSS identifier instead of using an HTML escaper.
+	        $menu_id      = preg_replace( '/[^a-zA-Z0-9_-]/', '', (string) $this->get_id() );
+	        $menu_scope   = '.elementor-element-' . $menu_id . ' .eael-simple-menu-container.eael-simple-menu--loading';
+
+	        $loading_layout_css = "
+                        /* Left aligned horizontal menus lay out with `float: left` on the
+                           items, so their list stays `block` - forcing flex here would
+                           take the items out of flow and break the row. Only centre and
+                           right aligned horizontal menus are inline-flex. */
+                        {$menu_scope} > ul.eael-simple-menu-horizontal,
+                        {$menu_scope} > ul.eael-simple-menu-vertical {
+                            display: block;
+                        }
+                        {$menu_scope}.eael-simple-menu-align-center {
+                            text-align: center;
+                        }
+                        {$menu_scope}.eael-simple-menu-align-right {
+                            text-align: right;
+                        }
+                        {$menu_scope}.eael-simple-menu-align-center > ul.eael-simple-menu-horizontal,
+                        {$menu_scope}.eael-simple-menu-align-right > ul.eael-simple-menu-horizontal {
+                            display: -webkit-inline-box;
+                            display: -ms-inline-flexbox;
+                            display: inline-flex;
+                        }
+                        {$menu_scope} .eael-simple-menu-toggle,
+                        {$menu_scope} .eael-simple-menu-toggle-text {
+                            display: none;
+                        }";
+
+	        // Below the hamburger breakpoint the menu is collapsed and the toggle is
+	        // shown, so the layout rules must not reach there - otherwise they
+	        // out-specify that state and the menu flashes open on small screens.
+	        if ( $hamburger_breakpoint ) {
+		        $loading_layout_css = "
+                        @media screen and (min-width: " . ( $hamburger_breakpoint + 1 ) . "px) {" . $loading_layout_css . "
+                        }";
+	        }
+
+	        echo "<style>" . $loading_layout_css . "
+                    </style>";
             ?>
             <div <?php $this->print_render_attribute_string('eael-simple-menu'); ?>>
                 <?php echo wp_nav_menu( $args ); ?>

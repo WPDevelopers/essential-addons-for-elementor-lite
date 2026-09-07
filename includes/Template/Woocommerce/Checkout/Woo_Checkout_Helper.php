@@ -277,7 +277,7 @@ trait Woo_Checkout_Helper {
                     <p><?php echo esc_html( $settings['ea_woo_checkout_coupon_form_content'] ); ?></p>
 
                     <p class="form-row form-row-first">
-                        <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr( $settings['ea_woo_checkout_coupon_placeholder_text'] ); ?>" id="coupon_code" value="" />
+                        <input type="text" name="coupon_code" class="input-text" placeholder="<?php echo esc_attr( $settings['ea_woo_checkout_coupon_placeholder_text'] ); ?>" id="coupon_code" value="" />
                     </p>
 
                     <p class="form-row form-row-last">
