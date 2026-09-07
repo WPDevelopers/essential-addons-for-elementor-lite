@@ -16,9 +16,59 @@ use Essential_Addons_Elementor\Classes\Helper;
 
 class Advanced_Data_Table extends Widget_Base
 {
+    /**
+     * Whether the rendered content came from a Ninja Tables Drag & Drop builder table,
+     * whose markup carries builder styling that needs a wider sanitiser allowlist.
+     *
+     * @var bool
+     */
+    protected $is_ninja_builder = false;
+
+    /**
+     * The inline style the Drag & Drop builder put on its own <table> element — the
+     * table border, fixed layout and font it was designed with.
+     *
+     * @var string
+     */
+    protected $ninja_builder_table_style = '';
+
     public function get_name()
     {
         return 'eael-advanced-data-table';
+    }
+
+    /**
+     * A Ninja Tables Drag & Drop table needs Ninja's own stylesheet for the parts of its
+     * design that are class-based rather than inline: star ratings, ribbons, progress
+     * bars, buttons and the icon masks.
+     *
+     * Enqueuing it while rendering only reaches the front end. In the editor Elementor
+     * collects style dependencies from widget prototypes, before any settings exist
+     * (see Elementor's `Preview::enqueue_styles()`), so the editor has to be given the
+     * dependency for the widget as a whole or the table renders there unstyled.
+     *
+     * @return array
+     */
+    public function get_style_depends()
+    {
+        if ( ! defined( 'NINJA_TABLES_DIR_URL' ) || ! defined( 'NINJA_TABLES_VERSION' ) ) {
+            return [];
+        }
+
+        $collected_without_settings = Plugin::$instance->editor->is_edit_mode() || Plugin::$instance->preview->is_preview_mode();
+
+        if ( ! $collected_without_settings ) {
+            $settings = $this->get_settings_for_display();
+
+            if ( empty( $settings['ea_adv_data_table_source'] ) || 'ninja' !== $settings['ea_adv_data_table_source'] ) {
+                return [];
+            }
+        }
+
+        // Registered under Ninja's own handle, so this is a no-op once Ninja has done it.
+        wp_register_style( 'ninja_table_builder_style', NINJA_TABLES_DIR_URL . 'assets/css/ninja-table-builder-public.css', [], NINJA_TABLES_VERSION );
+
+        return [ 'ninja_table_builder_style' ];
     }
 
     public function get_title()
@@ -398,6 +448,9 @@ class Advanced_Data_Table extends Widget_Base
                     'unit' => '%',
                     'size' => 100,
                 ],
+                // The builder's own table style is filtered against this control while
+                // rendering, so the markup has to be rebuilt when it changes.
+                'render_type' => 'template',
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table' => 'width: {{SIZE}}{{UNIT}}',
                 ],
@@ -410,6 +463,9 @@ class Advanced_Data_Table extends Widget_Base
                 'name' => 'ea_adv_data_table_border',
                 'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'fields_options' => [
+                    // The builder's own table style is filtered against this control
+                    // while rendering, so the markup has to be rebuilt when it changes.
+                    '__all' => [ 'render_type' => 'template' ],
                     'border' => [
                         'default' => 'solid',
                     ],
@@ -467,7 +523,11 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name' => 'ea_adv_data_table_head_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} th',
+                                'fields_options' => [
+                    // See the note on the colour controls: the markup depends on this too.
+                    '__all' => [ 'render_type' => 'template' ],
+                ],
+'selector' => '{{WRAPPER}} th',
             ]
         );
 
@@ -491,7 +551,12 @@ class Advanced_Data_Table extends Widget_Base
                     ],
                 ],
                 'default' => 'left',
-                'selectors' => [
+                                // A Ninja Tables Drag & Drop table drops the builder's competing inline
+                // declaration when this control is set, and that happens while rendering.
+                // Elementor only regenerates CSS for a style control, so ask for the markup
+                // to be rebuilt too or the change would not show until the page is reloaded.
+                'render_type' => 'template',
+'selectors' => [
                     '{{WRAPPER}} th' => 'text-align: {{VALUE}};',
                     '{{WRAPPER}} th .ql-editor' => 'text-align: {{VALUE}};',
                 ],
@@ -504,7 +569,12 @@ class Advanced_Data_Table extends Widget_Base
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
-                'selectors' => [
+                                // A Ninja Tables Drag & Drop table drops the builder's competing inline
+                // declaration when this control is set, and that happens while rendering.
+                // Elementor only regenerates CSS for a style control, so ask for the markup
+                // to be rebuilt too or the change would not show until the page is reloaded.
+                'render_type' => 'template',
+'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table th' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table th:before' => 'border-bottom-color: {{VALUE}};',
                     '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table th:after' => 'border-top-color: {{VALUE}};',
@@ -518,7 +588,12 @@ class Advanced_Data_Table extends Widget_Base
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fbfbfb',
-                'selectors' => [
+                                // A Ninja Tables Drag & Drop table drops the builder's competing inline
+                // declaration when this control is set, and that happens while rendering.
+                // Elementor only regenerates CSS for a style control, so ask for the markup
+                // to be rebuilt too or the change would not show until the page is reloaded.
+                'render_type' => 'template',
+'selectors' => [
                     '{{WRAPPER}} thead' => 'background-color: {{VALUE}};',
                 ],
             ]
@@ -530,6 +605,9 @@ class Advanced_Data_Table extends Widget_Base
                 'name' => 'ea_adv_data_table_head_cell_border',
                 'label' => __('Cell Border', 'essential-addons-for-elementor-lite'),
                 'fields_options' => [
+                    // See the note on the colour controls: the markup depends on this too.
+                    '__all' => [ 'render_type' => 'template' ],
+
                     'border' => [
                         'default' => 'solid',
                     ],
@@ -565,7 +643,12 @@ class Advanced_Data_Table extends Widget_Base
                     'left' => '10',
                     'isLinked' => true,
                 ],
-                'selectors' => [
+                                // A Ninja Tables Drag & Drop table drops the builder's competing inline
+                // declaration when this control is set, and that happens while rendering.
+                // Elementor only regenerates CSS for a style control, so ask for the markup
+                // to be rebuilt too or the change would not show until the page is reloaded.
+                'render_type' => 'template',
+'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table th' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -586,7 +669,11 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name' => 'ea_adv_data_table_body_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} td',
+                                'fields_options' => [
+                    // See the note on the colour controls: the markup depends on this too.
+                    '__all' => [ 'render_type' => 'template' ],
+                ],
+'selector' => '{{WRAPPER}} td',
             ]
         );
 
@@ -610,7 +697,12 @@ class Advanced_Data_Table extends Widget_Base
                     ],
                 ],
                 'default' => 'left',
-                'selectors' => [
+                                // A Ninja Tables Drag & Drop table drops the builder's competing inline
+                // declaration when this control is set, and that happens while rendering.
+                // Elementor only regenerates CSS for a style control, so ask for the markup
+                // to be rebuilt too or the change would not show until the page is reloaded.
+                'render_type' => 'template',
+'selectors' => [
                     '{{WRAPPER}} td' => 'text-align: {{VALUE}};',
                     '{{WRAPPER}} td .ql-editor' => 'text-align: {{VALUE}};',
                 ],
@@ -623,7 +715,12 @@ class Advanced_Data_Table extends Widget_Base
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#666666',
-                'selectors' => [
+                                // A Ninja Tables Drag & Drop table drops the builder's competing inline
+                // declaration when this control is set, and that happens while rendering.
+                // Elementor only regenerates CSS for a style control, so ask for the markup
+                // to be rebuilt too or the change would not show until the page is reloaded.
+                'render_type' => 'template',
+'selectors' => [
                     '{{WRAPPER}} td' => 'color: {{VALUE}};',
                 ],
             ]
@@ -659,7 +756,12 @@ class Advanced_Data_Table extends Widget_Base
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
-                'selectors' => [
+                                // A Ninja Tables Drag & Drop table drops the builder's competing inline
+                // declaration when this control is set, and that happens while rendering.
+                // Elementor only regenerates CSS for a style control, so ask for the markup
+                // to be rebuilt too or the change would not show until the page is reloaded.
+                'render_type' => 'template',
+'selectors' => [
                     '{{WRAPPER}} tbody' => 'background-color: {{VALUE}};',
                 ],
             ]
@@ -671,6 +773,9 @@ class Advanced_Data_Table extends Widget_Base
                 'name' => 'ea_adv_data_table_body_cell_border',
                 'label' => __('Cell Border', 'essential-addons-for-elementor-lite'),
                 'fields_options' => [
+                    // See the note on the colour controls: the markup depends on this too.
+                    '__all' => [ 'render_type' => 'template' ],
+
                     'border' => [
                         'default' => 'solid',
                     ],
@@ -912,7 +1017,12 @@ class Advanced_Data_Table extends Widget_Base
                     'left' => '10',
                     'isLinked' => true,
                 ],
-                'selectors' => [
+                                // A Ninja Tables Drag & Drop table drops the builder's competing inline
+                // declaration when this control is set, and that happens while rendering.
+                // Elementor only regenerates CSS for a style control, so ask for the markup
+                // to be rebuilt too or the change would not show until the page is reloaded.
+                'render_type' => 'template',
+'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -1600,6 +1710,10 @@ class Advanced_Data_Table extends Widget_Base
 
 
         $content = $this->get_table_content();
+
+        if ( $this->ninja_builder_table_style ) {
+            $this->add_render_attribute( 'ea-adv-data-table', 'style', $this->ninja_builder_table_style );
+        }
         if ( Plugin::$instance->editor->is_edit_mode() ) {
             $this->add_render_attribute('ea-adv-data-table', [
                 'class' => "ea-advanced-data-table-editable",
@@ -1667,8 +1781,20 @@ class Advanced_Data_Table extends Widget_Base
                 echo '<div '; $this->print_render_attribute_string('ea-adv-data-table-search-wrap'); echo '><input type="search" placeholder="' . esc_attr( $settings['ea_adv_data_table_search_placeholder'] ). '" class="ea-advanced-data-table-search"></div>';
             }
 
-            echo '<div class="ea-advanced-data-table-wrap-inner">
-                <table '; $this->print_render_attribute_string('ea-adv-data-table'); echo '>' . wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() ) . '</table>
+            // Builder tables carry Ninja's own styling, so they need its stylesheet and
+            // the wrapper class its rules are scoped to, plus a sanitiser that keeps the
+            // inline CSS that styling is made of.
+            if ( $this->is_ninja_builder ) {
+                $inner_class = 'ea-advanced-data-table-wrap-inner ntb_table_wrapper';
+                $safe_content = Helper::eael_ninja_builder_kses( $content );
+                wp_enqueue_style( 'ninja_table_builder_style', NINJA_TABLES_DIR_URL . 'assets/css/ninja-table-builder-public.css', [], NINJA_TABLES_VERSION );
+            } else {
+                $inner_class = 'ea-advanced-data-table-wrap-inner';
+                $safe_content = wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() );
+            }
+
+            echo '<div class="' . esc_attr( $inner_class ) . '">
+                <table '; $this->print_render_attribute_string('ea-adv-data-table'); echo '>' . $safe_content . '</table>
             </div>';
 
             if ($settings['ea_adv_data_table_pagination'] == 'yes') {
@@ -1693,11 +1819,37 @@ class Advanced_Data_Table extends Widget_Base
                 }
             }
         } else {
-	        $no_content = apply_filters( 'eael/advanced-data-table/no-content-found-text', __( 'No content found', 'essential-addons-for-elementor-lite' ) );
+	        $no_content = apply_filters( 'eael/advanced-data-table/no-content-found-text', $this->get_no_content_message( $settings ) );
 	        echo esc_html( $no_content );
         }
 
         echo '</div>';
+    }
+
+    /**
+     * Message shown when the table renders no rows.
+     *
+     * A Ninja Table whose data provider has no row handler — a Drag & Drop table most
+     * commonly — always yields zero rows, so say why instead of leaving the generic
+     * "No content found" to look like an empty table.
+     *
+     * @param array $settings
+     *
+     * @return string
+     */
+    public function get_no_content_message( $settings )
+    {
+        $table_id = ! empty( $settings['ea_adv_data_table_source_ninja_table_id'] ) ? $settings['ea_adv_data_table_source_ninja_table_id'] : '';
+
+        if ( 'ninja' === $settings['ea_adv_data_table_source'] && $table_id && ! Helper::is_ninja_table_supported( $table_id ) ) {
+            return sprintf(
+                /* translators: %s: Ninja Tables data provider name, e.g. "CSV". */
+                __( 'Advanced Data Table cannot read this Ninja Table, because its %s data source needs an add-on that is not active on this site. Please select a different Ninja Table.', 'essential-addons-for-elementor-lite' ),
+                Helper::get_ninja_table_provider_label( Helper::get_ninja_table_provider( $table_id ) )
+            );
+        }
+
+        return __( 'No content found', 'essential-addons-for-elementor-lite' );
     }
 
     public function get_table_content()
@@ -1738,6 +1890,10 @@ class Advanced_Data_Table extends Widget_Base
 
         if (empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
             return;
+        }
+
+        if ('drag_and_drop' === Helper::get_ninja_table_provider($settings['ea_adv_data_table_source_ninja_table_id'])) {
+            return $this->ninja_builder_integration($settings['ea_adv_data_table_source_ninja_table_id'], $settings);
         }
 
         $html = '';
@@ -1788,6 +1944,645 @@ class Advanced_Data_Table extends Widget_Base
         }
 
         return $html;
+    }
+
+    /**
+     * Build the table markup for a Ninja Tables Drag & Drop table.
+     *
+     * These tables register no `ninja_tables_fetching_table_rows_*` handler — the
+     * builder persists its grid as post meta rather than as queryable rows — so read
+     * that grid directly instead of going through ninjaTablesGetTablesDataByID().
+     *
+     * `headers` carries the authoritative left-to-right column order. That is NOT the
+     * key order of each row's cells: reordering a column in the builder rewrites the
+     * rows edited afterwards but leaves earlier ones in their original key order, so
+     * iterating a row's own keys would silently shuffle columns between rows.
+     *
+     * @param int   $table_id
+     * @param array $settings
+     *
+     * @return string
+     */
+    protected function ninja_builder_integration( $table_id, $settings )
+    {
+        // Rebuilding the cells from the saved grid drops the builder's inline styling,
+        // which is what lets this widget's own Style controls reach the table. Keeping
+        // the builder's markup is the opposite trade: an exact copy of the designed
+        // table, whose inline styles necessarily outrank those controls.
+        if ( ! isset( $settings['ea_adv_data_table_ninja_keep_builder_design'] ) || 'yes' === $settings['ea_adv_data_table_ninja_keep_builder_design'] ) {
+            $this->is_ninja_builder = true;
+
+            $html = $this->ninja_builder_saved_markup( $table_id, $settings );
+
+            if ( '' !== $html ) {
+                return $html;
+            }
+
+            // Nothing saved to copy, so fall through and build from the grid instead.
+            $this->is_ninja_builder          = false;
+            $this->ninja_builder_table_style = '';
+        }
+
+        return $this->ninja_builder_grid( $table_id, $settings );
+    }
+
+    /**
+     * Reshape the builder's saved markup into this widget's table structure.
+     *
+     * Ninja renders the saved table as one <tbody> of <tr>s. Promote its first row to
+     * <thead> so sorting and search have column headers, and keep every cell's inner
+     * markup and inline styling untouched so the result looks like the built table.
+     *
+     * @param int   $table_id
+     * @param array $settings
+     *
+     * @return string Empty when the builder has not saved markup for this table yet.
+     */
+    protected function ninja_builder_saved_markup( $table_id, $settings )
+    {
+        $markup = Helper::get_ninja_builder_table_html( $table_id );
+
+        if ( '' === $markup ) {
+            return '';
+        }
+
+        // Ninja runs the saved markup through the shortcode parser before printing it.
+        $markup = do_shortcode( $markup );
+
+        $dom = new \DOMDocument( '1.0', 'UTF-8' );
+        $libxml_previous = libxml_use_internal_errors( true );
+        $dom->loadHTML( '<?xml encoding="UTF-8">' . $markup, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+        libxml_clear_errors();
+        libxml_use_internal_errors( $libxml_previous );
+
+        $xpath = new \DOMXPath( $dom );
+        $rows  = $xpath->query( '//tr' );
+
+        if ( ! $rows->length ) {
+            return '';
+        }
+
+        // The <table> itself is this widget's, so carry over the border, layout mode and
+        // font the table was built with; without them only the cells look designed.
+        $table = $xpath->query( '//table' )->item( 0 );
+
+        if ( $table instanceof \DOMElement ) {
+            // The Table section's own controls draw on the same element, so they get the
+            // same treatment as the Head and Body ones.
+            $this->ninja_builder_table_style = $this->ninja_builder_filter_declarations(
+                $table->getAttribute( 'style' ),
+                $this->ninja_builder_table_overridden_properties( $settings )
+            );
+        }
+
+        // A designed table often merges a cell downwards out of its first row — a label
+        // column spanning every row, say. A rowspan cannot cross the thead/tbody
+        // boundary, so promoting that row would drop the cell and shift the whole grid.
+        // Keep such a table in one body, exactly as Ninja prints it.
+        $use_thead = ! $xpath->query( '(//tr)[1]/*[@rowspan][number(@rowspan) > 1]' )->length;
+
+        // The builder writes its design as inline styles, which outrank the CSS this
+        // widget's Style controls generate. Wherever a control has actually been set,
+        // drop the declaration it competes with so the control wins; everything the user
+        // left alone keeps the design it was built with.
+        $head_overrides = $this->ninja_builder_overridden_properties( $settings, 'head' );
+        $body_overrides = $this->ninja_builder_overridden_properties( $settings, 'body' );
+
+        $html         = '';
+        $row_count    = 0;
+        $is_edit_mode = Plugin::$instance->editor->is_edit_mode();
+        $body         = '';
+
+        foreach ( $rows as $index => $row ) {
+            $cells = $xpath->query( './td|./th', $row );
+
+            if ( ! $cells->length ) {
+                continue;
+            }
+
+            $is_header = ( 0 === $index && $use_thead );
+            $cell_tag  = $is_header ? 'th' : 'td';
+            $overrides = $is_header ? $head_overrides : $body_overrides;
+
+            if ( $overrides ) {
+                $this->ninja_builder_strip_styles( $row, $overrides );
+            }
+
+            $row_markup = '<tr' . $this->ninja_builder_attributes( $row, [ 'class', 'style' ] ) . '>';
+
+            foreach ( $cells as $key => $cell ) {
+                $attributes = $this->ninja_builder_attributes( $cell, [ 'class', 'style', 'colspan', 'rowspan' ] );
+
+                if ( $is_header && isset( $settings['ea_adv_data_table_dynamic_th_width'][ $key ] ) ) {
+                    $attributes .= ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][ $key ] . '"';
+                }
+
+                $row_markup .= '<' . $cell_tag . $attributes . '>' . $this->ninja_builder_inner_html( $cell ) . '</' . $cell_tag . '>';
+            }
+
+            $row_markup .= '</tr>';
+
+            if ( $is_header ) {
+                $html .= '<thead>' . $row_markup . '</thead>';
+                continue;
+            }
+
+            if ( $is_edit_mode && 'yes' === $settings['ea_adv_data_table_pagination'] ) {
+                $row_count++;
+                $pagination_count = $settings['ea_adv_data_table_items_per_page'] > 0 ? $settings['ea_adv_data_table_items_per_page'] : 10;
+                if ( $row_count > $pagination_count ) {
+                    break;
+                }
+            }
+
+            $body .= $row_markup;
+        }
+
+        if ( '' === $body ) {
+            return $html;
+        }
+
+        return $html . '<tbody>' . $body . '</tbody>';
+    }
+
+    /**
+     * CSS properties a Style control has taken ownership of for one table region.
+     *
+     * Only controls the user actually set are listed: an untouched control generates no
+     * CSS, so stripping for it would strip the builder's design and put nothing back.
+     *
+     * @param array  $settings
+     * @param string $region   `head` or `body`.
+     *
+     * @return array Property names, matched as prefixes (`border` covers `border-top`).
+     */
+    protected function ninja_builder_overridden_properties( $settings, $region )
+    {
+        $controls = [
+            [ 'setting' => "ea_adv_data_table_{$region}_background", 'properties' => [ 'background' ] ],
+            [ 'setting' => "ea_adv_data_table_{$region}_color", 'properties' => [ 'color' ] ],
+            [ 'setting' => "ea_adv_data_table_{$region}_horizontal_alignment", 'properties' => [ 'text-align' ] ],
+            [ 'setting' => "ea_adv_data_table_{$region}_cell_padding", 'properties' => [ 'padding' ] ],
+            [ 'group' => "ea_adv_data_table_{$region}_cell_border", 'properties' => [ 'border' ] ],
+            [ 'group' => "ea_adv_data_table_{$region}_typography", 'properties' => [ 'font', 'line-height', 'letter-spacing', 'text-transform', 'text-decoration', 'word-spacing' ] ],
+        ];
+
+        $properties = [];
+
+        foreach ( $controls as $control ) {
+            $is_set = isset( $control['group'] )
+                ? $this->ninja_builder_group_is_customised( $settings, $control['group'] )
+                : $this->ninja_builder_setting_is_customised( $settings, $control['setting'] );
+
+            if ( $is_set ) {
+                $properties = array_merge( $properties, $control['properties'] );
+            }
+        }
+
+        return $properties;
+    }
+
+    /**
+     * CSS properties a Table-section control has taken ownership of.
+     *
+     * These controls draw on the table element itself and are named without the region
+     * prefix the Head and Body ones use, so they are listed separately.
+     *
+     * @param array $settings
+     *
+     * @return array
+     */
+    protected function ninja_builder_table_overridden_properties( $settings )
+    {
+        $properties = [];
+
+        // Named exactly rather than by prefix: `ea_adv_data_table_border_radius` is a
+        // separate control that shares the border group's prefix but styles the wrapper.
+        foreach ( [ 'ea_adv_data_table_border_border', 'ea_adv_data_table_border_width', 'ea_adv_data_table_border_color' ] as $key ) {
+            if ( $this->ninja_builder_setting_is_customised( $settings, $key ) ) {
+                $properties[] = 'border';
+                break;
+            }
+        }
+
+        if ( $this->ninja_builder_setting_is_customised( $settings, 'ea_adv_data_table_width' ) ) {
+            $properties[] = 'width';
+        }
+
+        return $properties;
+    }
+
+    /**
+     * Whether a style control has been moved off its default.
+     *
+     * Emptiness is not the test: these controls ship with real defaults (a head colour
+     * of #444444, a 1px #eeeeee cell border), and the editor hands over the full control
+     * stack while the front end drops style controls it has not been given values for.
+     * Testing for a value would therefore strip the builder's design in the editor and
+     * keep it on the front end — the same table rendered two different ways.
+     *
+     * @param array  $settings
+     * @param string $key
+     *
+     * @return bool
+     */
+    protected function ninja_builder_setting_is_customised( $settings, $key )
+    {
+        if ( ! isset( $settings[ $key ] ) || $this->ninja_builder_value_is_empty( $settings[ $key ] ) ) {
+            return false;
+        }
+
+        $control = $this->get_controls( $key );
+        $default = isset( $control['default'] ) ? $control['default'] : '';
+
+        // Loose comparison: dimension and slider controls arrive as arrays.
+        return $settings[ $key ] != $default;
+    }
+
+    /**
+     * Whether a control value amounts to "nothing set".
+     *
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    protected function ninja_builder_value_is_empty( $value )
+    {
+        if ( ! is_array( $value ) ) {
+            return '' === $value || null === $value;
+        }
+
+        // Slider controls carry a size, dimension controls carry per-side values.
+        if ( array_key_exists( 'size', $value ) ) {
+            return '' === $value['size'] || null === $value['size'];
+        }
+
+        foreach ( [ 'top', 'right', 'bottom', 'left' ] as $side ) {
+            if ( isset( $value[ $side ] ) && '' !== $value[ $side ] ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Whether any control of a group (typography, border) has been moved off its default.
+     *
+     * @param array  $settings
+     * @param string $prefix
+     *
+     * @return bool
+     */
+    protected function ninja_builder_group_is_customised( $settings, $prefix )
+    {
+        foreach ( array_keys( $settings ) as $key ) {
+            if ( 0 !== strpos( $key, $prefix ) ) {
+                continue;
+            }
+
+            // Skip a group's popover toggle: it opens the panel section rather than
+            // producing a declaration, so on its own it overrides nothing.
+            $control = $this->get_controls( $key );
+
+            if ( isset( $control['render_type'] ) && 'ui' === $control['render_type'] ) {
+                continue;
+            }
+
+            if ( $this->ninja_builder_setting_is_customised( $settings, $key ) ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Drop the listed CSS properties from an element and everything inside it.
+     *
+     * The builder puts colour and font on wrappers deep inside a cell, not on the cell
+     * itself, so a shallow pass would leave the control still visibly ignored.
+     *
+     * @param \DOMElement $element
+     * @param array       $properties
+     *
+     * @return void
+     */
+    protected function ninja_builder_strip_styles( $element, $properties )
+    {
+        $nodes = [ $element ];
+
+        foreach ( $element->getElementsByTagName( '*' ) as $descendant ) {
+            $nodes[] = $descendant;
+        }
+
+        foreach ( $nodes as $node ) {
+            if ( ! $node instanceof \DOMElement || ! $node->hasAttribute( 'style' ) ) {
+                continue;
+            }
+
+            $style = $this->ninja_builder_filter_declarations( $node->getAttribute( 'style' ), $properties );
+
+            if ( '' !== $style ) {
+                $node->setAttribute( 'style', $style );
+            } else {
+                $node->removeAttribute( 'style' );
+            }
+        }
+    }
+
+    /**
+     * Remove the listed properties from one inline style string.
+     *
+     * Matching is by prefix, so `border` covers `border-top-color`. Three descendants of
+     * `border` are spared: they set table layout rather than the visible edge a border
+     * control draws, and dropping them would reflow the table.
+     *
+     * @param string $style
+     * @param array  $properties
+     *
+     * @return string
+     */
+    protected function ninja_builder_filter_declarations( $style, $properties )
+    {
+        $layout_properties = [ 'border-collapse', 'border-spacing', 'border-radius' ];
+        $kept              = [];
+
+        foreach ( explode( ';', $style ) as $declaration ) {
+            if ( '' === trim( $declaration ) ) {
+                continue;
+            }
+
+            $parts    = explode( ':', $declaration, 2 );
+            $property = strtolower( trim( $parts[0] ) );
+
+            if ( ! in_array( $property, $layout_properties, true ) ) {
+                foreach ( $properties as $overridden ) {
+                    if ( $property === $overridden || 0 === strpos( $property, $overridden . '-' ) ) {
+                        continue 2;
+                    }
+                }
+            }
+
+            $kept[] = trim( $declaration );
+        }
+
+        return implode( '; ', $kept );
+    }
+
+    /**
+     * Copy through the listed attributes of a saved builder element.
+     *
+     * @param \DOMElement $element
+     * @param array       $names
+     *
+     * @return string
+     */
+    protected function ninja_builder_attributes( $element, $names )
+    {
+        $attributes = '';
+
+        foreach ( $names as $name ) {
+            if ( ! $element->hasAttribute( $name ) ) {
+                continue;
+            }
+
+            $value = $element->getAttribute( $name );
+
+            if ( '' === $value ) {
+                continue;
+            }
+
+            $attributes .= ' ' . $name . '="' . esc_attr( $value ) . '"';
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * The inner markup of a saved builder cell.
+     *
+     * @param \DOMElement $element
+     *
+     * @return string
+     */
+    protected function ninja_builder_inner_html( $element )
+    {
+        $inner = '';
+
+        foreach ( $element->childNodes as $child ) {
+            $inner .= $element->ownerDocument->saveHTML( $child );
+        }
+
+        return $inner;
+    }
+
+    /**
+     * Build the table from the builder's saved grid.
+     *
+     * The fallback for a table whose markup the builder has not written yet — one
+     * created from a ready-made template and never opened, whose `table_html` is null.
+     *
+     * @param int   $table_id
+     * @param array $settings
+     *
+     * @return string
+     */
+    protected function ninja_builder_grid( $table_id, $settings )
+    {
+        $table_data = Helper::get_ninja_builder_table_data( $table_id );
+
+        if ( empty( $table_data ) ) {
+            return '';
+        }
+
+        $rows    = array_values( $table_data['data'] );
+        $columns = ! empty( $table_data['headers'] ) && is_array( $table_data['headers'] )
+            ? $table_data['headers']
+            : array_keys( (array) $rows[0]['rows'] );
+
+        $html = '';
+
+        // The builder paints its first row with the header background, so promote that
+        // row to <thead> — the widget's sorting and search key off the header cells.
+        $header_row = array_shift( $rows );
+
+        if ( ! empty( $header_row['rows'] ) ) {
+            $html .= '<thead><tr>';
+
+            foreach ( array_values( $columns ) as $key => $column ) {
+                if ( ! isset( $header_row['rows'][ $column ] ) ) {
+                    continue;
+                }
+
+                $style = isset( $settings['ea_adv_data_table_dynamic_th_width'][ $key ] ) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][ $key ] . '"' : '';
+                $html .= '<th' . $style . $this->ninja_builder_cell_span( $header_row['rows'][ $column ] ) . '>' . $this->ninja_builder_cell_content( $header_row['rows'][ $column ] ) . '</th>';
+            }
+
+            $html .= '</tr></thead>';
+        }
+
+        $html .= '<tbody>';
+
+        $row_count    = 0;
+        $is_edit_mode = Plugin::$instance->editor->is_edit_mode();
+
+        foreach ( $rows as $row ) {
+            if ( $is_edit_mode && 'yes' === $settings['ea_adv_data_table_pagination'] ) {
+                $row_count++;
+                $pagination_count = $settings['ea_adv_data_table_items_per_page'] > 0 ? $settings['ea_adv_data_table_items_per_page'] : 10;
+                if ( $row_count > $pagination_count ) {
+                    break;
+                }
+            }
+
+            $html .= '<tr>';
+
+            foreach ( $columns as $column ) {
+                // A missing cell was swallowed by a neighbouring row/col span.
+                if ( ! isset( $row['rows'][ $column ] ) ) {
+                    continue;
+                }
+
+                $html .= '<td' . $this->ninja_builder_cell_span( $row['rows'][ $column ] ) . '>' . $this->ninja_builder_cell_content( $row['rows'][ $column ] ) . '</td>';
+            }
+
+            $html .= '</tr>';
+        }
+
+        $html .= '</tbody>';
+
+        return $html;
+    }
+
+    /**
+     * Render the `colspan`/`rowspan` attributes of a merged builder cell.
+     *
+     * @param array $cell
+     *
+     * @return string
+     */
+    protected function ninja_builder_cell_span( $cell )
+    {
+        $attributes = '';
+
+        foreach ( [ 'colspan', 'rowspan' ] as $span ) {
+            $value = isset( $cell['style'][ $span ] ) ? absint( $cell['style'][ $span ] ) : 1;
+
+            if ( $value > 1 ) {
+                $attributes .= ' ' . $span . '="' . esc_attr( $value ) . '"';
+            }
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * Render every content component stacked inside one builder cell.
+     *
+     * @param array $cell
+     *
+     * @return string
+     */
+    protected function ninja_builder_cell_content( $cell )
+    {
+        if ( empty( $cell['columns'] ) || ! is_array( $cell['columns'] ) ) {
+            return '';
+        }
+
+        $content = '';
+
+        foreach ( $cell['columns'] as $item ) {
+            if ( empty( $item['data'] ) ) {
+                continue;
+            }
+
+            $content .= $this->ninja_builder_component( $item['data'] );
+        }
+
+        return $content;
+    }
+
+    /**
+     * Render a single Drag & Drop builder component as plain table-cell markup.
+     *
+     * The builder's own output is a nest of positioned wrappers carrying inline colours
+     * tuned to its canvas, which would fight this widget's style controls. Emit the
+     * content itself and let the widget's own styling apply.
+     *
+     * @param array $data
+     *
+     * @return string
+     */
+    protected function ninja_builder_component( $data )
+    {
+        $type  = isset( $data['type'] ) ? $data['type'] : 'text';
+        $value = isset( $data['value'] ) ? $data['value'] : '';
+        $style = isset( $data['style'] ) ? (array) $data['style'] : [];
+
+        switch ( $type ) {
+            case 'button':
+                if ( empty( $style['url'] ) ) {
+                    return wp_kses_post( $value );
+                }
+
+                return '<a href="' . esc_url( $style['url'] ) . '" class="button"' . ( ! empty( $style['newTab'] ) ? ' target="_blank" rel="noopener"' : '' ) . '>' . wp_kses_post( $value ) . '</a>';
+
+            case 'image':
+                if ( empty( $value ) ) {
+                    return '';
+                }
+
+                $image = '<img src="' . esc_url( $value ) . '" alt="' . esc_attr( isset( $style['alt'] ) ? $style['alt'] : '' ) . '">';
+
+                if ( ! empty( $style['link'] ) ) {
+                    $image = '<a href="' . esc_url( $style['link'] ) . '"' . ( ! empty( $style['target'] ) ? ' target="_blank" rel="noopener"' : '' ) . '>' . $image . '</a>';
+                }
+
+                return $image;
+
+            case 'list':
+            case 'stylist_list':
+                $items = array_filter( (array) $value, 'strlen' );
+
+                if ( empty( $items ) ) {
+                    return '';
+                }
+
+                $tag  = ( isset( $style['listType'] ) && 'ol' === $style['listType'] ) ? 'ol' : 'ul';
+                $list = '';
+
+                foreach ( $items as $item ) {
+                    $list .= '<li>' . wp_kses_post( $item ) . '</li>';
+                }
+
+                return '<' . $tag . '>' . $list . '</' . $tag . '>';
+
+            case 'star_rating':
+                $max = isset( $style['maxStar'] ) ? absint( $style['maxStar'] ) : 5;
+
+                return esc_html( sprintf( '%s/%s', (float) $value, $max ) );
+
+            case 'progress':
+                $percentage = isset( $style['percentage'] ) ? $style['percentage'] : $value;
+
+                return esc_html( $percentage . '%' );
+
+            case 'shortcode':
+                return do_shortcode( $value );
+
+            case 'custom_html':
+                return wp_kses_post( $value );
+
+            case 'icon':
+                $icon = Helper::get_ninja_builder_icon_url( $value );
+
+                return $icon ? '<img src="' . esc_url( $icon ) . '" alt="" width="' . esc_attr( isset( $style['fontSize'] ) ? absint( $style['fontSize'] ) : 20 ) . '">' : '';
+
+            default:
+                // text, ribbon, text_icon, and any component added by a later release.
+                return wp_kses_post( is_array( $value ) ? implode( ', ', $value ) : (string) $value );
+        }
     }
 
 }

@@ -9,14 +9,30 @@
 		}
 	}
 
+	// Cells stay transparent so the table and row background controls show through.
+	// A Ninja Tables Drag & Drop table is the exception: it paints its own cell colours
+	// inline, and no override could win them back once `!important` has taken them away,
+	// so scope the reset out of those tables rather than fighting it afterwards.
+	.ea-advanced-data-table-wrap-inner:not(.ntb_table_wrapper) .ea-advanced-data-table {
+		th,
+		td {
+			background-color: transparent !important;
+		}
+	}
+
+	// Ninja's builder stylesheet turns the body into a block so its own wrapper can
+	// scroll. Here the table owns the layout, and a block body stops a promoted header
+	// row from sharing column widths with the rows beneath it.
+	.ntb_table_wrapper .ea-advanced-data-table tbody {
+		display: table-row-group;
+	}
+
 	.ea-advanced-data-table {
 		width: 100%;
 		border-collapse: collapse;
 
 		th,
 		td {
-			background-color: transparent !important;
-
 			.inline-editor {
 				&.ql-container {
 					font-family: inherit;
