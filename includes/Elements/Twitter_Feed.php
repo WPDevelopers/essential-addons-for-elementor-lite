@@ -1550,7 +1550,7 @@ class Twitter_Feed extends Widget_Base
                     <?php if ($settings['button_icon_position'] == 'before') { ?>
                         <?php if ($icon_is_new || $icon_migrated) { ?>
                             <?php if (isset($settings['load_more_icon_new']['value']['url'])) : ?>
-                                <img class="eael-twitter-feed-load-more-icon fg-load-more-icon-left" src="<?php echo esc_url($settings['load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['load_more_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                                <img class="eael-twitter-feed-load-more-icon fg-load-more-icon-left" src="<?php echo esc_url($settings['load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(Helper::get_image_alt( $settings['load_more_icon_new']['value'] )); ?>" />
                             <?php else : ?>
                                 <span class="eael-twitter-feed-load-more-icon fg-load-more-icon-left <?php echo esc_attr($settings['load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
                             <?php endif; ?>
@@ -1564,7 +1564,7 @@ class Twitter_Feed extends Widget_Base
                     <?php if ($settings['button_icon_position'] == 'after') { ?>
                         <?php if ($icon_is_new || $icon_migrated) { ?>
                             <?php if (isset($settings['load_more_icon_new']['value']['url'])) : ?>
-                                <img class="eael-twitter-feed-load-more-icon fg-load-more-icon-right" src="<?php echo esc_url($settings['load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['load_more_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                                <img class="eael-twitter-feed-load-more-icon fg-load-more-icon-right" src="<?php echo esc_url($settings['load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(Helper::get_image_alt( $settings['load_more_icon_new']['value'] )); ?>" />
                             <?php else : ?>
                                 <span class="eael-twitter-feed-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
                             <?php endif; ?>

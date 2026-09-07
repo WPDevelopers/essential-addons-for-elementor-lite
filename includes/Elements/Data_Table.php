@@ -1406,7 +1406,7 @@ class Data_Table extends Widget_Base {
 							<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) : ?>
 								<?php if (empty($header_title['eael_data_table_header_col_icon']) || isset($header_title['__fa4_migrated']['eael_data_table_header_col_icon_new'])) { ?>
 									<?php if( isset($header_title['eael_data_table_header_col_icon_new']['value']['url']) ) : ?>
-										<img class="data-header-icon data-table-header-svg-icon" src="<?php echo esc_url( $header_title['eael_data_table_header_col_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($header_title['eael_data_table_header_col_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+										<img class="data-header-icon data-table-header-svg-icon" src="<?php echo esc_url( $header_title['eael_data_table_header_col_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(Helper::get_image_alt( $header_title['eael_data_table_header_col_icon_new']['value'] )); ?>" />
 									<?php else : ?>
 										<i class="<?php echo esc_attr( $header_title['eael_data_table_header_col_icon_new']['value'] ); ?> data-header-icon"></i>
 									<?php endif; ?>
@@ -1421,7 +1421,7 @@ class Data_Table extends Widget_Base {
 										'src'	=> esc_url( $header_title['eael_data_table_header_col_img']['url'] ),
 										'class'	=> 'eael-data-table-th-img',
 										'style'	=> "width:{$header_title['eael_data_table_header_col_img_size']}px;",
-										'alt'	=> esc_attr(get_post_meta($header_title['eael_data_table_header_col_img']['id'], '_wp_attachment_image_alt', true))
+										'alt'	=> esc_attr(Helper::get_image_alt( $header_title['eael_data_table_header_col_img'] ))
 									]);
 							?><img <?php $this->print_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><span class="data-table-header-text"><?php echo wp_kses( $header_title['eael_data_table_header_col'], Helper::eael_allowed_tags() ); ?></span></th>
 			        	<?php $i++; endforeach; ?>

@@ -836,7 +836,7 @@ class Content_Ticker extends Widget_Base
 
             $html .= '<div class="swiper-button-next swiper-button-next-' . esc_attr( $this->get_id() ) . '">';
             if (isset($arrow['url'])) {
-                $html .= '<img src="' . esc_url($arrow['url']) . '" alt="' . esc_attr(get_post_meta($arrow['id'], '_wp_attachment_image_alt', true)) . '" />';
+                $html .= '<img src="' . esc_url($arrow['url']) . '" alt="' . esc_attr(Helper::get_image_alt( $arrow )) . '" />';
             } else {
                 $html .= $arrow;
             }
@@ -844,7 +844,7 @@ class Content_Ticker extends Widget_Base
 
             $html .= '<div class="swiper-button-prev swiper-button-prev-' . esc_attr( $this->get_id() ) . '">';
             if (isset($settings['prev_arrow']['value']['url'])) {
-                $html .= '<img src="' . esc_url($settings['prev_arrow']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
+                $html .= '<img src="' . esc_url($settings['prev_arrow']['value']['url']) . '" alt="' . esc_attr(Helper::get_image_alt( $settings['prev_arrow']['value'] )) . '" />';
             } else {
                 $html .= Helper::get_render_icon( $settings['prev_arrow'] );
             }
