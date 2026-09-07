@@ -403,6 +403,15 @@
    * control — a two column layout would stack as two rows because
    * `flex-direction` has no effect on a block box. */
 }
+.eael-mega-menu {
+  /* Hide the inactive panels only.
+   *
+   * `display` is deliberately never set on the active panel: the panel IS an
+   * Elementor container and owns its own display (flex, or grid for a grid
+   * container). Forcing `display: block` here silently disabled its Direction
+   * control — a two column layout would stack as two rows because
+   * `flex-direction` has no effect on a block box. */
+}
 .eael-mega-menu--editing .eael-mega-menu__panels > *:not(.eael-mega-menu__panel--active) {
   display: none;
 }
@@ -665,6 +674,7 @@
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .eael-mega-menu {
   /* Editing the collapsed layout.
@@ -688,6 +698,8 @@
 }
 >>>>>>> mega-menu-preset
 =======
+=======
+>>>>>>> 84511
 .eael-mega-menu {
   /* Editing the collapsed layout.
    *
@@ -697,7 +709,10 @@
    * expanded and in flow. Declared after the rules above so it wins the
    * same-specificity ties. */
 }
+<<<<<<< HEAD
 >>>>>>> 84527
+=======
+>>>>>>> 84511
 .eael-mega-menu--editing.eael-mega-menu--mobile .eael-mega-menu__container {
   display: -webkit-box;
   display: -ms-flexbox;
