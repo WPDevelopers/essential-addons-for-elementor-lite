@@ -44,8 +44,15 @@
 		transition: background-color 0.2s ease, border-color 0.2s ease;
 	}
 
-	&__link,
-	&__disclosure {
+	/* Prefixed with the block class for the same reason the state rules below
+	 * are: a menu item is an `<a>` inside an `<li>`, and themes underline those
+	 * from selectors like `.site-header nav a` or `li a` that beat a bare
+	 * `.eael-mega-menu__link` at (0,1,0). The label and icon spans carry the
+	 * reset too — a theme that underlines the anchor's *children* rather than the
+	 * anchor is rarer, but the reset costs nothing and the widget has no control
+	 * to undo it with. */
+	& &__link,
+	& &__disclosure {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -58,6 +65,12 @@
 		border-radius: var(--eael-mm-item-radius, 0);
 		cursor: pointer;
 		transition: color 0.2s ease, background-color 0.2s ease;
+	}
+
+	& &__item-label,
+	& &__item-icon,
+	& &__item-indicator {
+		text-decoration: none;
 	}
 
 	&__link {
@@ -299,14 +312,58 @@
 	 * The panels wrapper only ever holds panels, so this matches exactly the
 	 * same set as the class did, just sooner. */
 	&--editing &__panels > * {
-		position: static;
-		width: auto;
-		inset-inline-start: auto;
+		/* Out of flow, exactly as on the front end.
+		 *
+		 * A panel in normal flow is a panel that adds its own height to whatever
+		 * column holds the menu bar — and in a three-column header whose row is
+		 * centred, that pushes the logo and the buttons down to the middle of an
+		 * open mega panel every time one is selected. The header stops being a
+		 * header the moment you go to edit it.
+		 *
+		 * So the editing layout keeps the front end's geometry and changes only
+		 * what has to change: the panel is visible instead of faded out, and it is
+		 * full-bleed instead of its configured width. Everything around it holds
+		 * still.
+		 *
+		 * Stated in full rather than left to the `__panel` rules above, and
+		 * matched structurally — `> *` rather than the class — because in the
+		 * editor a panel only becomes a panel once the handler has classified it.
+		 * Adding or removing a menu item re-renders the widget and re-mounts every
+		 * child container; until the handler catches up those containers carry
+		 * none of the panel rules, so all of them would paint at once, stacked in
+		 * flow under the bar. Keying to the mount point makes this true at first
+		 * paint, which is the only way to close that gap — no JS can run earlier
+		 * than the render it follows. */
+		position: absolute;
+		top: calc(100% + var(--eael-mm-panel-offset, 0px) + var(--eael-mm-panel-offset-y, 0px));
+		z-index: var(--eael-mm-panel-z-index, 999);
 		opacity: 1;
 		visibility: visible;
 		pointer-events: auto;
 		transform: none;
 		transition: none;
+
+		/* Full-bleed, so a panel is editable at the width it will be read at.
+		 *
+		 * Its real width is whatever the item's Submenu Width says, and for a menu
+		 * sitting in a narrow column that can be a strip too cramped to lay
+		 * anything out in — a mega panel built for the full page collapsing into
+		 * one so narrow its headings wrap a letter per line. Editing at full width
+		 * is the point of the editor; the front end still renders the configured
+		 * width, because none of this is in range without `--editing`.
+		 *
+		 * The inset is measured against the widget, which is the positioned
+		 * ancestor, so the panel lands on the preview's left edge from any depth
+		 * of nesting and any combination of ancestor padding — nothing has to know
+		 * how far in it started.
+		 *
+		 * `clientWidth`, not `100vw`: `vw` counts the scrollbar, and a preview
+		 * 15px too wide answers with a horizontal scrollbar on every panel the
+		 * user opens. The handler measures it; the `100%` / `0` fallbacks keep the
+		 * panel merely narrow, never broken, on the first paint before that runs. */
+		inset-inline-start: var(--eael-mm-editing-inset, 0px);
+		width: var(--eael-mm-editing-width, 100%);
+		max-width: var(--eael-mm-editing-width, 100%);
 	}
 
 	/* Hide the inactive panels only.
@@ -446,6 +503,15 @@
 			display: none;
 			flex-direction: column;
 			width: 100%;
+			/* Clear of whatever the menu is sitting inside.
+			 *
+			 * The sheet is anchored to the widget, and a widget centred inside a
+			 * padded header bar has its own bottom edge some way above the bar's —
+			 * so at `top: 100%` the sheet opens over the last of the bar, its
+			 * rounded corners included. A margin rather than an inset, because it
+			 * has to mean the same thing in both layouts: the stretched dropdown is
+			 * positioned and the plain one is in flow, and a margin moves either. */
+			margin-block-start: var(--eael-mm-dropdown-offset, 0px);
 			/* Sensible out-of-the-box surface. The Mobile Dropdown controls are
 			   written at higher specificity, so they win whenever they are set. */
 			padding-block: 8px;
@@ -542,17 +608,296 @@
 
 	/* Editing the collapsed layout.
 	 *
-	 * Two things make the mobile view impossible to design otherwise: the menu
-	 * starts closed, so there is nothing to select, and an overlaying dropdown
-	 * floats across whatever follows it in the editor. While editing, keep it
-	 * expanded and in flow. Declared after the rules above so it wins the
-	 * same-specificity ties. */
+	 * The menu starts closed, so there would be nothing to select and nothing to
+	 * design; forcing it open is the whole of what editing mode has to change
+	 * here. Position, width and inset are deliberately *not* touched — they are
+	 * already right.
+	 *
+	 * `positionDropdown()` measures the widget against the viewport and writes
+	 * `--eael-mm-dropdown-*` in the editor exactly as it does on the front end,
+	 * and the overlay rules above turn those into a full-bleed sheet below the
+	 * bar. Overriding them to `static; width: 100%` — which this rule used to do,
+	 * to keep the sheet in flow — threw that measurement away and left the
+	 * dropdown as wide as the widget: inside a header column sized for a
+	 * hamburger, a strip barely wide enough for one word per line.
+	 *
+	 * In flow it also pushed the logo and the sign-in button down the page every
+	 * time the menu was opened, which is the same reason an open panel is out of
+	 * flow. The bar holds still; the sheet drops below it. */
 	&--editing#{&}--mobile {
 		.eael-mega-menu__container {
 			display: flex;
-			position: static;
-			inset-inline: auto;
+		}
+	}
+
+	/* --------------------------------------------------------------------- */
+	/* Preset link lists                                                     */
+	/* --------------------------------------------------------------------- */
+
+	/* The two hooks a preset is allowed to reach for, and the only markup-shaped
+	 * thing in this file. Both are set from a control the user can see — a CSS
+	 * Classes field, or the classes inside a WYSIWYG tab — so removing either
+	 * leaves a plain list of working links behind rather than a broken one. Both
+	 * live here, inside the widget's own stylesheet, so they load with the widget
+	 * and nowhere else. */
+
+	/* A column of links built from core's Icon List.
+	 *
+	 * Icon List gives a row its icon, its label and both colours as controls, but
+	 * nothing that paints the row itself — and the designs these presets follow
+	 * light the whole row under the pointer, not just its text. */
+	.eael-mm-linklist {
+		.elementor-icon-list-item {
+			border-radius: var(--eael-mm-linklist-radius, 4px);
+		}
+
+		.elementor-icon-list-item > a,
+		.elementor-icon-list-item > span {
+			display: flex;
+			align-items: center;
 			width: 100%;
+			padding: var(--eael-mm-linklist-padding, 4px);
+			border-radius: inherit;
+			text-decoration: none;
+			transition: background-color 0.2s ease, color 0.2s ease;
+		}
+
+		.elementor-icon-list-item:hover > a,
+		.elementor-icon-list-item > a:focus-visible {
+			background-color: var(--eael-mm-linklist-hover-bg, #ededed);
+		}
+	}
+
+	/* The same list in a narrow dropdown of its own, where the rows are all
+	   there is and can afford to stand taller. A modifier rather than a second
+	   class, so it inherits everything above and changes the one value Icon List
+	   has no control for. */
+	.eael-mm-linklist--roomy {
+		--eael-mm-linklist-padding: 8px 16px;
+	}
+
+	/* The card a Nested Tabs tab title becomes.
+	 *
+	 * Nested Tabs gives the tab its icon, its label, both colours and its padding
+	 * as controls; the one thing it has no control for is the rounded plate behind
+	 * the icon, which is what turns a tab into a card. Strip the class and the
+	 * tabs still switch — the icons just sit on the surface. */
+	.eael-mm-cardtabs {
+		/* The three tab states, set as the variables the widget reads rather than
+		 * left to its Background controls alone.
+		 *
+		 * The preset sets those controls, and for the resting state that settles
+		 * it — the rule they beat is a plain one. The two lit states are the
+		 * problem: Nested Tabs paints them from a rule of its own carrying eight
+		 * classes, and under Elementor's Optimized Markup the control's selector
+		 * loses the `.elementor-widget-container` that used to put it one ahead.
+		 * Equal specificity, so whichever stylesheet loads last wins — and when
+		 * the widget's does, it resolves these variables, whose stock values are
+		 * the kit's accent colour. A menu built on this preset would open with
+		 * two near-black bars in the card column.
+		 *
+		 * Setting them here makes the outcome the same either way: the control
+		 * wins and paints the value the preset set, or the widget wins and
+		 * resolves it to the same colour. A colour picked in the panel still
+		 * overrides both. */
+		--n-tabs-title-background-color: transparent;
+		--n-tabs-title-background-color-hover: var(--eael-mm-cardtab-lit, #f5f3ff);
+		--n-tabs-title-background-color-active: var(--eael-mm-cardtab-lit, #f5f3ff);
+
+		.e-n-tab-title {
+			text-align: start;
+		}
+
+		/* The name and the line under it stack. Elementor lays this span out as a
+		   flex *row*, which puts the description beside the name instead of below
+		   it — and no control on the widget reaches inside the title. */
+		.e-n-tab-title-text {
+			display: block;
+			flex: 1 1 auto;
+		}
+
+		/* The mark on the open card.
+		 *
+		 * Drawn from two borders rather than set as an icon: Nested Tabs' Active
+		 * Icon control *replaces* the leading icon rather than adding a trailing
+		 * one, and a glyph from `content` would tie the card to whichever icon
+		 * font happened to be loaded. Two rotated edges need neither. */
+		.e-n-tab-title[aria-selected="true"]::after {
+			content: "";
+			flex: 0 0 auto;
+			width: 6px;
+			height: 6px;
+			margin-inline-start: auto;
+			border-block-start: 1.5px solid currentColor;
+			border-inline-end: 1.5px solid currentColor;
+			transform: rotate(45deg);
+			opacity: 0.5;
+		}
+
+		/* Holds its colour through all three tab states, while Title Color
+		   repaints the name above it. */
+		.eael-mm-cardtab__text {
+			display: block;
+			margin-block-start: var(--eael-mm-cardtab-text-gap, 4px);
+			font-size: var(--eael-mm-cardtab-text-size, 12px);
+			font-weight: 400;
+			line-height: 1.2;
+			color: var(--eael-mm-cardtab-text-color, #a3a3a3);
+		}
+
+		/* One colour per card.
+		 *
+		 * Nested Tabs paints every tab's icon from a single Icon Color, and the
+		 * design gives each of the three its own — so this is the third thing on
+		 * the card the widget has no control for, after the tile and the stacked
+		 * description.
+		 *
+		 * Set as the widget's own variables on the tab, rather than as a colour on
+		 * the glyph. A declaration on the element itself beats one inherited from
+		 * an ancestor whatever that ancestor's selector weighs, so this lands
+		 * without having to outrank the three state rules that read them — and it
+		 * carries hover and active with it, which a colour on the glyph would have
+		 * had to win separately. A fourth card added in the panel falls through to
+		 * the Icon Color control, which is still what sets the default. */
+		.e-n-tab-title:nth-child(1) {
+			--n-tabs-icon-color: var(--eael-mm-cardtab-icon-1, #4527cc);
+			--n-tabs-icon-color-hover: var(--eael-mm-cardtab-icon-1, #4527cc);
+			--n-tabs-icon-color-active: var(--eael-mm-cardtab-icon-1, #4527cc);
+		}
+
+		.e-n-tab-title:nth-child(2) {
+			--n-tabs-icon-color: var(--eael-mm-cardtab-icon-2, #da54ff);
+			--n-tabs-icon-color-hover: var(--eael-mm-cardtab-icon-2, #da54ff);
+			--n-tabs-icon-color-active: var(--eael-mm-cardtab-icon-2, #da54ff);
+		}
+
+		.e-n-tab-title:nth-child(3) {
+			--n-tabs-icon-color: var(--eael-mm-cardtab-icon-3, #ea9131);
+			--n-tabs-icon-color-hover: var(--eael-mm-cardtab-icon-3, #ea9131);
+			--n-tabs-icon-color-active: var(--eael-mm-cardtab-icon-3, #ea9131);
+		}
+
+		/* The tile behind a card's icon: outlined and white, not filled. Nested
+		   Tabs sizes and colours the glyph from controls but has nothing for the
+		   plate it sits on, so all of it lives here. */
+		.e-n-tab-icon {
+			flex: 0 0 auto;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: var(--eael-mm-cardtab-tile, 40px);
+			height: var(--eael-mm-cardtab-tile, 40px);
+			border: 1px solid var(--eael-mm-cardtab-tile-line, #f2edf8);
+			border-radius: var(--eael-mm-cardtab-tile-radius, 8px);
+			background-color: var(--eael-mm-cardtab-tile-bg, #ffffff);
+		}
+	}
+
+	/* The card tabs once the menu has collapsed.
+	 *
+	 * Tabs Direction is set to stack the list above its content at the tablet
+	 * breakpoint, and that much lands — but what it stacks is still a nowrap row
+	 * of cards three hundred pixels wide, which runs off both edges of a dropdown
+	 * the width of a phone. Neither control that would wrap it is reachable:
+	 * Horizontal Scroll and the horizontal Alignment are both conditioned on the
+	 * *desktop* value of Tabs Direction being one of the stacked ones, and this
+	 * preset's is `inline-start`, so the panel hides them at every breakpoint.
+	 *
+	 * Written against the properties rather than the widget's own variables. The
+	 * variables come from `{{WRAPPER}}`, which carries a class more than anything
+	 * in this file can say; the properties are only ever read through them, so
+	 * this settles it without needing to outrank anything. */
+	&--mobile .eael-mm-cardtabs {
+		.e-n-tabs-heading {
+			/* Auto, not the 30% the desktop layout asks for: stacked, this is the
+			   list's height rather than its width. */
+			flex-basis: auto;
+			flex-wrap: wrap;
+		}
+
+		/* A width and a basis that defers to it, rather than a basis of its own:
+		   below the widget's own breakpoint Nested Tabs drops the list to
+		   `display: contents` and turns the tabs into an accordion in a column,
+		   where a percentage basis would be read as a height. A width means the
+		   same thing in both layouts. */
+		.e-n-tab-title {
+			flex-basis: auto;
+			width: 100%;
+		}
+	}
+
+	/* A column of links written into an Advanced Tabs tab.
+	 *
+	 * A tab takes a WYSIWYG field rather than child widgets, so the list is
+	 * markup; left to the browser it renders as bulleted, theme-coloured list
+	 * items. Every value is a custom property with its default in the fallback,
+	 * so a different accent is one variable rather than a fight with a fixed
+	 * colour. */
+	.eael-mm-links {
+		/* The text is inset here rather than by a padding on the tab's content,
+		   because the rule below and the divider beside it both run to the card's
+		   edge — a padding out there would hold all three off it together. */
+		--eael-mm-links-inset: 16px;
+
+		&__title {
+			/* A rule under the heading, and the gap split either side of it, so
+			   the column reads as a heading over a list rather than six evenly
+			   spaced lines. The same hairline the tab column is divided by, and
+			   the same one the other preset draws under its column headings —
+			   there it is the heading widget's own border control, but a title
+			   written into a tab's field has no panel to set it from, so it lives
+			   here with the rest of this class.
+
+			   The rule spans the whole column while the words are inset, which is
+			   what a padding buys that a margin would not. */
+			margin: 0 0 var(--eael-mm-links-title-gap, 12px);
+			padding-block-end: var(--eael-mm-links-title-pad, 17px);
+			padding-inline-start: var(--eael-mm-links-inset);
+			border-block-end: 1px solid var(--eael-mm-links-rule, #e9e9e9);
+			font-family: inherit;
+			font-size: var(--eael-mm-links-title-size, 14px);
+			font-weight: var(--eael-mm-links-title-weight, 600);
+			line-height: 1.08;
+			color: var(--eael-mm-links-title-color, inherit);
+		}
+
+		&__list {
+			display: grid;
+			gap: var(--eael-mm-links-gap, 18px);
+			margin: 0;
+			padding: 0;
+			padding-inline-start: var(--eael-mm-links-inset);
+			list-style: none;
+
+			/* `inherit`, not a size of its own. The tab's Content > Typography
+			   control is what should be setting the type here, and on a theme that
+			   styles `li` or `a` — which is most of them — its value is inherited
+			   past the list and then overridden inside it. Handing the inherited
+			   value back down is what puts that control back in charge. */
+			li {
+				margin: 0;
+				font: inherit;
+				line-height: 1.4;
+			}
+
+			a {
+				display: inline-block;
+				font: inherit;
+				color: var(--eael-mm-links-color, inherit);
+				text-decoration: none;
+				transition: color 0.2s ease;
+
+				/* Repeated on the states rather than left to inherit: a theme that
+				   underlines links usually does it on `:hover` as well, from a
+				   selector at least as specific as the one it used for the base. */
+				&:hover,
+				&:focus,
+				&:focus-visible,
+				&:active {
+					color: var(--eael-mm-links-color-hover, #6dbb00);
+					text-decoration: none;
+				}
+			}
 		}
 	}
 }
@@ -560,6 +905,29 @@
 /* Keyframes for the collapsed layout's reveal. Kept at the top level because
    `@keyframes` are global regardless of where they are declared; the offsets
    mirror the resting transforms the bar animates out of. */
+/* The disc a preset's call-to-action closes with.
+ *
+ * The only rule in this file that is not scoped to `.eael-mega-menu`, and it
+ * cannot be: the pill this styles sits in the header bar *beside* the menu, not
+ * inside a panel, so a nested selector would never match it.
+ *
+ * Core's Icon widget gives the plate its shape, its size, its padding and both
+ * colours as controls. What it has no control for is the box it draws that plate
+ * inside: `.elementor-icon` is an inline-block, so its wrapper generates a line
+ * box, and that wrapper inherits whatever line-height the theme sets on body
+ * text. Measured against one theme here: 32.4px of line-height around a 26px
+ * disc, so the wrapper comes out 9px taller than the plate, the plate sits at
+ * the top of it, and a disc every control agrees is centred renders four pixels
+ * high. No value in any of those controls reaches it, and the number that would
+ * cancel it is the theme's, not ours.
+ *
+ * Zeroing the line-height leaves the wrapper exactly as tall as the plate, which
+ * is what centring it in the pill then has to work with. Strip the class and the
+ * button still works — the disc just rides high. */
+.eael-mm-cta-icon .elementor-icon-wrapper {
+	line-height: 0;
+}
+
 @keyframes eael-mm-reveal-fade {
 	from {
 		opacity: 0;

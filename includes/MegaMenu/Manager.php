@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Helper;
+use Essential_Addons_Elementor\Elements\Mega_Menu_Products;
+use Essential_Addons_Elementor\MegaMenu\Presets\Preset_Library;
 
 /**
  * Service provider for the Mega Menu feature.
@@ -46,6 +48,20 @@ class Manager {
 	const TEMPLATE_PREVIEW_ACTION = 'eael_mega_menu_template_preview';
 
 	/**
+	 * admin-ajax action that returns the elements of one preset.
+	 */
+	const PRESET_ACTION = 'eael_mega_menu_preset';
+
+	/**
+	 * Nonce action shared by both editor endpoints.
+	 *
+	 * The plugin-wide one: EA already prints it for every editor request, so the
+	 * two handlers below verify what the editor is already carrying instead of
+	 * minting a second token for the same session.
+	 */
+	const NONCE_ACTION = 'essential-addons-elementor';
+
+	/**
 	 * @var Manager|null
 	 */
 	private static $instance = null;
@@ -80,6 +96,95 @@ class Manager {
 		// for the editor and returns rendered post content, so it stays behind the
 		// capability check in the handler.
 		add_action( 'wp_ajax_' . self::TEMPLATE_PREVIEW_ACTION, [ $this, 'ajax_template_preview' ] );
+
+		// Same reasoning as the preview above: the presets are only ever applied
+		// from inside the editor, so there is no `nopriv` twin.
+		add_action( 'wp_ajax_' . self::PRESET_ACTION, [ $this, 'ajax_preset' ] );
+
+		// Priority 20: EA registers its own elements on this hook at the default
+		// priority, and the guard below asks whether the Mega Menu was one of
+		// them — a question that has no answer until that pass has run.
+		add_action( 'elementor/widgets/register', [ $this, 'register_companion_widgets' ], 20 );
+	}
+
+	/**
+	 * Widgets that belong to the Mega Menu rather than to `config.php`.
+	 *
+	 * Registered here, off the menu's own boot, and deliberately not given an
+	 * element key of their own. A key would put them in EA -> Elements as a
+	 * switch a user could turn off — and a switch somewhere else that empties a
+	 * column of a menu preset is exactly the fragility this avoids. If the Mega
+	 * Menu is available, its companions are.
+	 *
+	 * They stay out of the widget panel; see
+	 * {@see \Essential_Addons_Elementor\Elements\Mega_Menu_Products::show_in_panel()}.
+	 *
+	 * @since 6.8.4
+	 *
+	 * @param \Elementor\Widgets_Manager $widgets_manager Elementor widgets manager.
+	 */
+	public function register_companion_widgets( $widgets_manager ) {
+		// One question, asked of the thing that actually knows: did the Mega
+		// Menu get registered? That covers every reason it might not have been —
+		// Elementor older than the 3.8 nested API, the Nested Elements
+		// experiment off, the element unticked in EA -> Elements, or Elementor's
+		// own element manager hiding it — without this method having to know,
+		// or stay in sync with, any of them.
+		if ( ! $widgets_manager->get_widget_types( self::WIDGET_NAME ) ) {
+			return;
+		}
+
+		$widgets_manager->register( new Mega_Menu_Products() );
+	}
+
+	/**
+	 * The element of one preset, ready for the editor to apply.
+	 *
+	 * Built per request rather than shipped with the editor page: every element
+	 * needs a fresh ID, so applying the same preset twice cannot collide, and a
+	 * header's worth of containers and widgets is a payload no editor load should
+	 * carry for a control most sessions never touch. The mode comes from the
+	 * editor because only it can see where the menu sits — see the `header` /
+	 * `widget` split in {@see Presets\Preset_Library}.
+	 *
+	 * @since 6.7.5
+	 */
+	public function ajax_preset() {
+		check_ajax_referer( self::NONCE_ACTION, 'security' );
+
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You are not allowed to apply presets.', 'essential-addons-for-elementor-lite' ) ], 403 );
+		}
+
+		// The action is registered on every request — Bootstrap boots this feature
+		// without checking Elementor, and it cannot: `plugins_loaded` runs before
+		// `elementor/loaded`. The preset library asks the widgets manager whether
+		// each widget it emits is registered, which is not a question that can be
+		// answered without Elementor.
+		if ( ! Conditions::has_elementor() ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Elementor is not available.', 'essential-addons-for-elementor-lite' ) ], 400 );
+		}
+
+		$slug    = isset( $_POST['preset'] ) ? sanitize_key( wp_unslash( $_POST['preset'] ) ) : '';
+		$mode    = isset( $_POST['mode'] ) ? sanitize_key( wp_unslash( $_POST['mode'] ) ) : Preset_Library::MODE_HEADER;
+		$content = Preset_Library::get_content( $slug, $mode );
+
+		if ( null === $content ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'This preset is no longer available.', 'essential-addons-for-elementor-lite' ) ], 404 );
+		}
+
+		wp_send_json_success( $content );
+	}
+
+	/**
+	 * Options for the widget's Preset control.
+	 *
+	 * @since 6.7.5
+	 *
+	 * @return array
+	 */
+	public function get_preset_options() {
+		return Preset_Library::get_control_options();
 	}
 
 	/**
@@ -158,6 +263,28 @@ class Manager {
 			EAEL_PLUGIN_VERSION,
 			true
 		);
+
+		wp_localize_script( 'eael-mega-menu-editor', 'eaelMegaMenuEditor', [
+			'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+			'nonce'     => wp_create_nonce( self::NONCE_ACTION ),
+			'action'    => self::PRESET_ACTION,
+			'widget'    => self::WIDGET_NAME,
+			// The value that means "no preset". Sent rather than hard coded in
+			// the script so the two cannot drift apart.
+			'custom'    => Preset_Library::CUSTOM,
+			// Unescaped on purpose. `wp_localize_script()` only entity-decodes
+			// scalar members, so an escaped string nested one level down would
+			// reach the dialog still carrying its entities.
+			'i18n'      => [
+				'title'   => __( 'Apply Preset', 'essential-addons-for-elementor-lite' ),
+				'confirm' => __( 'Applying a preset replaces this menu\'s items, styles and everything inside its panels. Continue?', 'essential-addons-for-elementor-lite' ),
+				'confirmHeader' => __( 'Applying a preset rebuilds the header block this menu sits in the logo, the menu and its panels, and the buttons beside them. Anything else in that block is replaced. Continue?', 'essential-addons-for-elementor-lite' ),
+				'confirmCustom' => __( 'Switching to Custom clears the design and leaves a plain menu to build from. Everything in this header block is replaced. Continue?', 'essential-addons-for-elementor-lite' ),
+				'apply'   => __( 'Apply', 'essential-addons-for-elementor-lite' ),
+				'cancel'  => __( 'Cancel', 'essential-addons-for-elementor-lite' ),
+				'failed'  => __( 'The preset could not be applied.', 'essential-addons-for-elementor-lite' ),
+			],
+		] );
 	}
 
 	/**

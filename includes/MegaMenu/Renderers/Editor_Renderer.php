@@ -137,6 +137,25 @@ class Editor_Renderer {
 						if ( item.eael_mega_menu_item_css_classes ) {
 							itemClasses.push( item.eael_mega_menu_item_css_classes );
 						}
+
+						// The front end prints Label through wp_kses_post(), so
+						// markup in it — a "New" chip beside the word, a <br>, a
+						// styled span — is markup there. Escaping it here showed
+						// the tags as text in the preview and made the editor
+						// disagree with the page it is previewing.
+						//
+						// Sanitised rather than passed through raw: `{{{ }}}` on
+						// a field the user types into would run a <script> in the
+						// editor, which is the one place kses cannot reach.
+						// elementor.helpers.sanitize is DOMPurify, the same tool
+						// core's own Heading template uses for the same job; the
+						// escape is the fallback for an Elementor old enough not
+						// to have it, where calling it would throw and blank the
+						// preview — the same shape as safeUrl above.
+						const label = item.eael_mega_menu_item_label || '';
+						const safeLabel = ( elementor.helpers && 'function' === typeof elementor.helpers.sanitize )
+							? elementor.helpers.sanitize( label, { ALLOW_DATA_ATTR: false } )
+							: _.escape( label );
 					#>
 					<li class="{{ itemClasses.join( ' ' ) }}" data-item-index="{{ position }}" style="--eael-mm-order: {{ position * 2 }};">
 						<{{{ tag }}} class="eael-mega-menu__link"
@@ -147,12 +166,11 @@ class Editor_Renderer {
 								<span class="eael-mega-menu__item-icon">{{{ itemIcon }}}</span>
 							<# } #>
 							<# /*
-							 * Escaped, for the same reason as the toggle text above:
-							 * Label is a plain TEXT control. The icons around it stay
-							 * on the triple form because those are markup Elementor
-							 * itself built, via elementor.helpers.renderIcon().
+							 * Sanitised above, not escaped — unlike the toggle
+							 * text, which the front end really does escape. This
+							 * one matches menu-item.php's wp_kses_post().
 							 */ #>
-							<span class="eael-mega-menu__item-label">{{ item.eael_mega_menu_item_label }}</span>
+							<span class="eael-mega-menu__item-label">{{{ safeLabel }}}</span>
 							<# if ( hasSubmenu && ! hasUrl && indicatorIcon ) { #>
 								<span class="eael-mega-menu__item-indicator">{{{ indicatorIcon }}}</span>
 							<# } #>

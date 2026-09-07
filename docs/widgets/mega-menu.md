@@ -18,6 +18,7 @@ Because children are ordinary Elementor container elements they live inside the 
 
 | Capability | Lite | Pro |
 | ---------- | ---- | --- |
+| One-click header presets (Content → Mega Menu Preset) | ✅ | — |
 | Nested menu items with per-item containers | ✅ | — |
 | Hover / click trigger, close delay, outside-click close | ✅ | — |
 | Four submenu width modes (menu, viewport, fit, custom) | ✅ | — |
@@ -25,7 +26,7 @@ Because children are ordinary Elementor container elements they live inside the 
 | Responsive collapse to toggle + accordion | ✅ | — |
 | Full style tab (bar, item states, icon, indicator, panel, toggle) | ✅ | — |
 
-Lite-only widget — Pro adds nothing and hooks nothing. The one public extension point is the `eael/mega-menu/menu_items` filter.
+Lite-only widget — Pro adds nothing and hooks nothing. The public extension points are the `eael/mega-menu/menu_items` filter and the two preset filters below.
 
 ## File Map
 
@@ -34,7 +35,12 @@ Lite-only widget — Pro adds nothing and hooks nothing. The one public extensio
 | [`includes/Elements/Mega_Menu.php`](../../includes/Elements/Mega_Menu.php) | Widget class — metadata, nested wiring, `print_child()` |
 | [`includes/MegaMenu/Conditions.php`](../../includes/MegaMenu/Conditions.php) | Availability gate — Elementor version, nested API, experiment state |
 | [`includes/MegaMenu/Manager.php`](../../includes/MegaMenu/Manager.php) | Service provider — option lists, defaults, child container shape |
-| [`includes/MegaMenu/Controls/Content_Controls.php`](../../includes/MegaMenu/Controls/Content_Controls.php) | Content tab — repeater, settings, responsive |
+| [`includes/MegaMenu/Controls/Content_Controls.php`](../../includes/MegaMenu/Controls/Content_Controls.php) | Content tab — preset picker, repeater, settings, responsive |
+| [`includes/MegaMenu/Presets/Preset_Library.php`](../../includes/MegaMenu/Presets/Preset_Library.php) | Preset registry — control options, availability gate, `get_content( $slug, $mode )` |
+| [`includes/MegaMenu/Presets/Saas_Menu.php`](../../includes/MegaMenu/Presets/Saas_Menu.php) | The **SaaS Menu** preset — header bar, widget settings, one nested container per row |
+| [`includes/MegaMenu/Presets/Fashion_Menu.php`](../../includes/MegaMenu/Presets/Fashion_Menu.php) | The **Fashion Store** preset — one panel, three columns read from the shop |
+| [`includes/MegaMenu/Presets/Agency_Menu.php`](../../includes/MegaMenu/Presets/Agency_Menu.php) | The **Agency Services** preset — one ruled panel, eleven Icon Boxes and a Social Icons row |
+| [`includes/Elements/Mega_Menu_Products.php`](../../includes/Elements/Mega_Menu_Products.php) | **Menu Products** — the menu's own product teaser. Registered by `Manager`, no `config.php` key, no stylesheet |
 | [`includes/MegaMenu/Controls/Style_Controls.php`](../../includes/MegaMenu/Controls/Style_Controls.php) | Style tab — six sections, all writing CSS custom properties |
 | [`includes/MegaMenu/Renderers/Frontend_Renderer.php`](../../includes/MegaMenu/Renderers/Frontend_Renderer.php) | PHP render + panel attribute decoration |
 | [`includes/MegaMenu/Renderers/Editor_Renderer.php`](../../includes/MegaMenu/Renderers/Editor_Renderer.php) | Underscore `content_template()` |
@@ -55,6 +61,9 @@ Lite-only widget — Pro adds nothing and hooks nothing. The one public extensio
 - **Availability is gated in `config.php`, not in the class** — the `condition` entry (`class_exists` on `Widget_Nested_Base`, skip when false) means that on Elementor < 3.8 the widget is never instantiated and `Mega_Menu.php` is never autoloaded, so extending a missing base class cannot fatal. `show_in_panel()` additionally hides the widget when the *Nested Elements* experiment is off.
 - **No separate Assets or Documents layer** — apart from the editor script above, asset loading goes through the existing `config.php` registry + `Asset_Builder`, which already gives per-page conditional loading plus popup / shortcode / Theme-Builder coverage; a parallel asset layer would double-load the files. Submenu content is stored as child elements in `_elementor_data`, so a custom document type would create exactly the duplicate storage that should be avoided.
 - **CSS custom properties with fallbacks at the point of use** — every style control writes a `--eael-mm-*` variable onto `{{WRAPPER}}`. Defaults live in the `var()` fallback (`var(--eael-mm-item-gap, 8px)`), never as a declaration on `.eael-mega-menu`, because a declaration on the descendant would beat the value inherited from the Elementor wrapper.
+- **Editing changes what a panel looks like, never where it sits** — an open panel stays out of flow in the editor exactly as on the front end, and `&--editing &__panels > *` changes only two things: it is visible instead of faded out, and it is full-bleed instead of its configured width. Both halves are load-bearing and each was a bug first:
+  - *Out of flow.* A panel in normal flow adds its height to whatever column holds the menu bar, and in a centred three-column header that pushes the logo and the buttons down to the middle of an open mega panel every time one is selected — the header stops being a header the moment you go to edit it.
+  - *Full-bleed.* A panel's real width is whatever its Submenu Width says, and for a menu in a narrow column that can be a strip too cramped to lay anything out in: a mega panel built for the full page collapsing into one so narrow its headings wrap a letter per line. The inset is measured against the widget, the positioned ancestor, so the panel lands on the preview's left edge from any depth of nesting and any ancestor padding. The width comes from `measureEditingWidth()` rather than `100vw`, because `vw` counts the scrollbar and a preview 15px too wide answers with a horizontal scrollbar on every panel the user opens. That helper measures the **widget root**, never anything those values size — pointing it at the container fed the result straight back into its own input, and the second pass moved a box already pulled to the page edge.
 - **A panel's `display` is never overridden** — the panel *is* an Elementor container and owns its own display (flex, or grid for a grid container). Hiding is therefore expressed as `…__panel:not(.…__panel--active) { display: none }` rather than `display: none` on all panels plus `display: block` on the active one. Forcing `block` silently disabled the container's own Direction control: a two-column layout stacked as two rows, because `flex-direction` has no effect on a block box.
 - **One panels wrapper, `order`-based interleaving on mobile** — the editor mounts every child into a single placeholder, so the frontend uses the same single wrapper. Below the breakpoint, `.eael-mega-menu__list` and `.eael-mega-menu__panels` become `display: contents` and each item/panel carries `--eael-mm-order` (`2n` / `2n+1`) so they interleave into an accordion. Same technique Elementor's nested tabs uses.
 - **A handler class, not the usual jQuery callback** — most EA widgets register `function ($scope, $)`. Mega Menu extends `elementorModules.frontend.handlers.Base` because a nested widget must react to `onEditSettingsChange('activeItemIndex')` so selecting a repeater row switches the previewed panel. Registered through `elementorFrontend.elementsHandler.attachHandler()` with a factory function (Elementor accepts class or factory).
@@ -65,7 +74,7 @@ Lite-only widget — Pro adds nothing and hooks nothing. The one public extensio
 - **State colours never chain into each other** — `--eael-mm-*-active` falls back to the *normal* value, never to the hover value. Chaining them meant setting a hover colour silently repainted the active state, which reads as "I can't change this colour".
 - **The collapsed dropdown is measured against the viewport, not the widget** — in a "logo left, hamburger right" header the widget shrinks to the toggle, and an overlay dropdown anchored to that box would render as a narrow strip. `positionDropdown()` writes `--eael-mm-dropdown-inset-start` (minus the nav's distance from the viewport edge, RTL aware) and `--eael-mm-dropdown-width`, giving a full-bleed sheet at any widget width. It falls back to the widget box if the handler has not run, and is reset in editing mode where the dropdown is in flow.
 - **The collapsed layout ships styled, the bar does not** — the mobile dropdown defaults to a white surface with a soft shadow and hairline dividers between items, so it reads as a proper mobile menu with zero configuration, while the desktop bar stays completely unstyled. This is done with `var()` fallbacks per layout rather than control defaults: the Divider controls default to *empty*, which writes no custom property and lets the stylesheet decide (`0` on the bar, `1px solid rgba(0,0,0,.12)` when collapsed). Setting any Divider or Mobile Dropdown control writes the property at higher specificity and wins.
-- **The collapsed layout is force-expanded while editing** — at a mobile breakpoint the menu starts closed and, with Overlay Dropdown on, floats over whatever follows it. Both make the mobile view impossible to design, so `--editing` + `--mobile` together pin the dropdown to `display: flex; position: static`. Front-end behaviour is untouched.
+- **The collapsed layout is force-expanded while editing, and nothing else** — at a mobile breakpoint the menu starts closed, so there is nothing to select and nothing to design; `--editing` + `--mobile` set `display: flex` and stop there. Position, width and inset are deliberately untouched, because they are already right: `positionDropdown()` measures the widget against the viewport and writes `--eael-mm-dropdown-*` in the editor just as it does on the front end, and the overlay rules turn those into a full-bleed sheet below the bar. Pinning it to `static; width: 100%` — which this rule used to do, to keep the sheet in flow — threw that measurement away and left the dropdown as wide as the widget: inside a header column sized for a hamburger, a strip barely wide enough for one word per line. It pushed the logo and the sign-in button down the page too, for the same reason an in-flow panel did.
 - **JS-driven breakpoint, not a media query** — the collapse breakpoint is compared against `elementorFrontend.getCurrentDeviceMode()` and toggles `.eael-mega-menu--mobile`. Static media queries could not honour custom breakpoint values set in Site Settings.
 
 ## Render Output
@@ -121,6 +130,7 @@ JS-written properties: `--eael-mm-panel-inset-start` and `--eael-mm-panel-width`
 
 | Control | Type | Default | Tab → Section | Affects |
 | ------- | ---- | ------- | ------------- | ------- |
+| `eael_mega_menu_preset` | Choose (image) | `custom` | Content → Mega Menu Preset | Records the applied preset; the editor script replaces the header block. `render_type: none` |
 | `eael_mega_menu_items` | Nested repeater | 4 rows | Content → Menu Items | Items + child containers; `frontend_available` |
 | `…_item_label` | Text (dynamic) | `Menu Item` | ↳ row | `.eael-mega-menu__item-label` |
 | `…_item_link` | URL (dynamic) | — | ↳ row | `<a>` vs `<button>` element choice |
@@ -200,14 +210,328 @@ elementorFrontend.elementsHandler.attachHandler("eael-mega-menu", getMegaMenuHan
 | Hook | Type | Signature | Purpose |
 | ---- | ---- | --------- | ------- |
 | `eael/mega-menu/menu_items` | filter | `( array $items, Widget_Base $widget )` | Modify, extend or reorder repeater rows immediately before render |
+| `eael/mega-menu/presets` | filter | `( array $presets )` | Add or remove presets. Each needs `title`, `thumbnail`, a `builder` taking a mode, and optionally `widgets` |
+| `eael/mega-menu/preset_content` | filter | `( array $content, string $slug, string $mode )` | Adjust the element a preset applies, before the editor inserts it |
 
 Assets are declared in `config.php` only (`type: self`, `context: view` for both CSS and JS), so `Asset_Builder` folds them into the per-page `eael-{post_id}.css` / `.js` bundle only when the widget is on the page. Nothing is enqueued globally.
+
+## Presets
+
+A preset is a ready-made **header**, applied from the first Content section, **Mega Menu Preset**. It is not a skin, and it is not only the menu: the widget's own design already lives in three places at once — the repeater rows that make the bar, the widget settings that style it, and the nested containers that fill each panel — and around it sits the third of a header nobody navigates without, the logo and whatever the site asks visitors to do. So a preset supplies all of it, and the editor **replaces the block the menu sits in** with the result.
+
+Replacing rather than patching is the point. Elementor keeps `eael_mega_menu_items` and the widget's children in a strict 1:1 index mapping and syncs them through the repeater commands; writing a new row set into the settings would leave the old panels behind it, one per row that no longer exists. A widget built from the preset arrives with its rows and its children already in agreement. It is the same route [`Theme_Builder/Presets/Mega_Header.php`](../../includes/Theme_Builder/Presets/Mega_Header.php) takes to insert a Mega Menu in the first place, and it reuses the same element builders in [`Theme_Builder/Presets/Elements.php`](../../includes/Theme_Builder/Presets/Elements.php).
+
+### What gets replaced
+
+A header on an Elementor page is a top-level block — the container the document holds directly — so `presetTarget()` climbs from the widget to the last container before the document. That lands on the right thing in both situations that matter:
+
+| Situation | Target | Mode |
+| --------- | ------ | ---- |
+| Widget just dropped on the canvas | the container Elementor created for it, holding nothing else | `header` |
+| Menu already inside a preset header | the header bar itself, two levels up | `header` |
+| Menu in a legacy column, or with no container above it | the widget | `widget` |
+
+Taking the *immediate* parent instead would have swapped the header's navigation column for a whole second header nested inside the first — that was a real bug, and the walk is what fixes it. In `widget` mode the preset returns the menu alone and the Advanced tab is carried across; in `header` mode it is not, because the widget is moving into a bar it has never been in, where a width set for a standalone menu is a leftover rather than positioning.
+
+The confirm dialog fires when the panels already hold content, or when the block being replaced holds more than the menu. A block holding only the menu is the container the widget arrived in, and turning that into a header is the whole point rather than something to warn about.
+
+### Every tile is a switch
+
+Including **Custom**, which is not a preset — there is no design behind it — but is a real choice all the same: picking it puts the widget back to the plain menu it ships as, wrapped in a bare container, which is the blank page someone asks for when they want to start over. A tile that quietly did nothing read as broken.
+
+That is also why the apply is driven by **clicks on the tiles** rather than by watching `change:eael_mega_menu_preset`. Backbone only fires `change` when the value actually moves, so a model-bound handler ignored the two presses users make most: the tile that is already lit, to start the design over, and Custom.
+
+### Flow
+
+```text
+user clicks a tile                                             (src/js/edit/mega-menu.js)
+  └── resolve the edited widget from the panel, read the tile's slug
+        ├── panels or block hold content → confirm (deferred a tick), Cancel restores the slug
+        └── POST eael_mega_menu_preset { preset, mode }         (MegaMenu\Manager::ajax_preset)
+              └── Preset_Library::get_content( $slug, $mode )   → one Elementor element
+                    └── wait out Elementor's 800ms settings-history debounce
+                          └── one history entry, "Apply Preset":
+                                document/elements/delete  (the old block)
+                                document/elements/create  (the preset's, at the same index)
+```
+
+Four details are load-bearing, and each of them cost real debugging:
+
+- **The edited widget is asked of the panel, not remembered.** `panel/open_editor/widget/<type>` hands over a view, but only reliably when a *person* opened the panel — after the reopen an apply performs itself, it arrives empty. Caching it stranded every click after the first. The handler reads `getCurrentPageView().getOption( 'editedElementView' )` instead, and keeps the recorded one only as a fallback.
+- **The confirm dialog opens on the next tick.** DialogsManager closes a dialog on a click outside it, and the press that asked for this one is still bubbling towards the document. Shown synchronously it is dismissed by the very gesture that opened it — which, again, reads as the tile doing nothing.
+- **The debounce wait.** Elementor records a settings change on a debounced timer so a run of keystrokes collapses into one undo step. A swap that beat the timer put the tile's own entry on *top* of the delete and the create, aimed at a widget those two had already replaced: undo changed nothing visible, and redo built a second header beside the first. Waiting orders the stack the way the user performed it — `Apply Preset`, then `Mega Menu / Preset`, then `Editing Started`.
+- **`end-log` needs the id `start-log` returned.** Without it the call closes whichever log the history happens to have open, and a log left open swallows every later entry — so a second apply and everything between the two collapse into a single undo step that walks the user back past work they meant to keep.
+
+A cancelled switch leaves the canvas untouched and puts the tile back, but Elementor has already logged the radio moving, so it costs one cosmetic undo entry that only moves the value. Applying is what produces the single `Apply Preset` step.
+
+`render_type: none` on the control is deliberate — the widget is about to be rebuilt by the script, and re-rendering it for the control's own sake would be a second teardown of every nested container.
+
+### Shipped presets
+
+| Slug | Title | Built from |
+| ---- | ----- | ---------- |
+| `saas` | SaaS Menu | Header: the site's own logo (core `image`, or `heading` with the site name when none is set), core `button` for Login, `eael-creative-button` for Create Account. Panels: `eael-adv-tabs` (vertical, the Product catalogue), `eael-info-box` + core `icon` in linked containers (the Resources list) |
+| `fashion` | Fashion Store | A shop menu, one panel wide, that **reads the store** — products, tags and categories, with the design's labels as the fallback. Header: the site's logo, and a linked container as the "Shop the Collection" pill — core `heading` for the label, core `icon` in its **stacked / circle** view for the disc, because no button control draws a filled circle around its icon. Panel: four columns of core `icon-list` (two of plain links, two of icon-and-label departments) under core `heading` column titles, and **Menu Products**, the Mega Menu's own widget, for the best sellers. Nothing outside Elementor core and the menu itself, so no other element being switched off can empty a column |
+| `suite` | Product Suite | A floating pill header over a product catalogue. Header: the site's logo, core `button` for the compact 71×42 Login pill — Creative Button floors every instance at 150px wide with no control behind it, so it cannot render a button that size. Panels: **Quick Help** holds the wide catalogue — core `nested-tabs` whose three tab titles *are* the destination cards, each switching three columns of core `icon-list` links under core `heading` column titles, closed by a core `button` — and **Solutions** the narrow `icon-list` dropdown |
+| `agency` | Agency Services | A services menu on a ruled grid. Header: the site's logo and a core `button` pill. Panel: eleven core `icon-box` rows — four, four and three — inside linked containers that carry the hover wash and the rules, under core `heading` column titles, closed by one core `social-icons` row. **Resources** opens a second, 260px panel: six linked rows with a chevron on the one that leads further. Elementor core throughout |
+
+### Laying a panel out
+
+Two things bite when a panel is meant to look like a card, and both did:
+
+- **A container's own padding cannot fight the widget's.** Submenu Panel → Padding writes the very `--padding-*` variables a container reads, so its value wins over anything a panel container sets, a zero included. Anything a preset wants inset on *every* panel belongs on that control.
+- **A full-width container plus side margins is `100% + margins`.** It overflows the page. `Product Suite` needs a gutter in two places and solves it differently in each: the header bar is a full-width pill inside a **padded wrapper**, and the panel cards are inset by the widget's own Panel Padding. A boxed container is not the answer for either — boxed caps its *content* but paints its background across the whole viewport, which squares off the corners that make a bar look like a floating pill.
+
+### One widget per row, and why it matters
+
+`Agency Services` puts eleven rows of icon-plus-title-plus-sentence into one panel. Each is a single core **Icon Box**,
+not an Icon and two Headings, and the arithmetic is the point: three widgets a row would be thirty-three elements in
+this panel instead of eleven, in a payload the editor has to build on every apply. It also leaves less unreachable —
+the gap between the glyph and the text is `icon_space` on Icon Box and nothing at all when the two are separate
+widgets. The five accounts under the third column are one **Social Icons** widget for the same reason, and because its
+repeater already knows what a social account is.
+
+What the row's own container is still needed for is the part Icon Box has no control for: the wash under the whole
+strip on hover, and the link on all of it. A row a visitor can only click on its title misses most of the pointer's
+travel.
+
+Two things about Icon Box are easy to be caught by:
+
+- **It ships a `mobile_default` of `block-start`.** Setting `position` to `inline-start` moves the icon beside the text
+  on desktop and tablet and does nothing at all on a phone, where it jumps back above the title — eleven rows each a
+  line taller, in an accordion. `position_mobile` has to be set too.
+- **`inline-start`, not `left`.** The control writes a logical value, so the icon stays on the reading side in RTL.
+
+### The theme's line-height is where the design goes wrong
+
+Three of the four things that were off in `Agency Services`' first pass had one cause, and it is worth recognising on
+sight: **an Elementor widget's wrapper inherits the theme's `line-height`, and on a body-copy value like 32.4px that
+wrapper is far taller than what it draws.** Nothing about the widget looks wrong in the panel; the box around it is
+simply bigger than the thing inside.
+
+| Symptom | Measured | Design | Fixed by |
+| ------- | -------- | ------ | -------- |
+| "Book A Call" too tall | 54 | 40 | `typography_line_height` on the Button — height is padding + the label's leading and nothing else |
+| Header bar too tall | 84 | 72 | `eael_mega_menu_item_typography_line_height` — the menu items were the tallest thing in the bar at 52, not the 40px button |
+| Service rows too tall | 139 | 120 | Tighter title/description leading, plus `title_size: div` (see below) |
+
+The row also carried an **8px gap above every title that no control could reach**: themes give `h1`-`h6` a top margin,
+and Icon Box's Content Spacing writes only the *bottom* one. `title_size: div` removes it, and is the better tag here
+anyway — these are labels on links in a navigation menu, not document structure.
+
+Once the rows were 120, a fourth problem fixed itself: the third column is three rows plus the social block, so it only
+ends level with the four rows beside it when a row is exactly a quarter of the column. At 139 it stopped short and left
+a gap under the tiles.
+
+### A near full-bleed panel, and a narrow one beside it
+
+`Agency Services` is the one preset whose header is `content_width: full` rather than boxed. Its design runs the bar and
+the panel to within 23px of the page edge, and a boxed 1140 container makes the three columns 389 wide instead of 428 —
+enough to change where every description wraps. The trade is real: a full-width bar no longer lines up with a boxed page
+below it. It is one control to put back.
+
+Its **Resources** item opens a second, very different panel: a 260px list of six destinations, one of them marked with a
+trailing chevron. Two panels of such different shapes on one widget turn up a trap worth knowing:
+
+**Submenu Panel → Padding is per widget, not per item.** Reaching for it to inset the wide card behind the page gutter
+insets *every* panel, which left the 260px dropdown holding a 214px card floating in the middle of its own box. The
+gutter has to be a container *inside* the wide panel instead — and it cannot be padding on the panel container itself,
+because that control writes the very `--padding-*` variables a container reads and beats anything set there.
+
+The dropdown is built from linked containers rather than one Icon List, and only because of the chevron: Icon List draws
+a row's glyph at the **start**, and a disclosure mark belongs at the end. Its Divider control would otherwise have drawn
+the hairlines for free. Both `Fashion Store` and this preset show the same rule — reach for the one widget that holds
+the whole row, unless the row needs something that widget puts on the wrong side.
+
+### Two pens on one panel
+
+The design this preset follows rules its grid twice over, and measuring the mock rather than eyeballing it is what
+turned that up: the lines inside the heading band — the rule under the titles, the dividers between them — are
+`#F1F1F1`, while the dividers between service rows and the card's own edge are `#C1C1C1`, four steps darker. Drawn in
+one weight the band reads as a fourth row of the table instead of as its head.
+
+The panel itself is left **transparent** and the visible card is the boxed container inside it, which is the same
+arrangement `Product Suite` uses and for a sharper reason here: the design shows the page either side of the card. A
+panel painted white fills that margin in and the card loses its edges — so the border and the shadow live on the card,
+not on the panel.
+
+### Matching a design that was measured, not guessed
+
+`Fashion Store`'s call to action reconciles exactly against the mock: a 198x44 pill is 21 of left inset + 129 of label +
+13 of gap + a 26 disc + 9 to the right edge. Getting there needed three things that are easy to miss:
+
+- **A full-width container is `--width: 100%`.** `content_width: full` does not mean "as wide as its contents" — the pill
+  stretched to its whole column, and the label and disc drifted apart inside it. That reads as a padding bug and is not
+  one. `width` with the **`custom`** unit writes a value through verbatim (`{{UNIT}}` resolves to nothing for that unit),
+  so `fit-content` is expressible without a stylesheet.
+- **Vertical padding is the wrong tool for a fixed height.** Elementor's Icon widget wraps its disc in a block that
+  inherits the theme's line-height, so the content is taller on some themes than others and a padding tuned on one site
+  is wrong on the next. `min_height: 44` plus `align-items: center` puts the disc 9 from each edge whatever that wrapper
+  measures.
+- **A stacked Icon's diameter is `size + 2 x icon_padding`, exactly.** Elementor sizes the glyph box at `1em` square, so
+  12 + 7 + 7 gives 26 and nothing else influences it.
+
+The pill still comes out ~210 rather than 198, because the theme's face sets "Shop the Collection" 12px wider than the
+mock's. That is the one dimension a preset should not force.
+
+### Tabs inside a panel
+
+`Product Suite`'s catalogue switches categories with **Elementor's Nested Tabs**, not EA's Advanced Tabs, and the reason is the links. Advanced Tabs holds a tab's content in a WYSIWYG field, which would turn all forty-odd links across three categories from rows with a real icon picker and a real link field into one block of hand-written markup per tab. Nested Tabs gives each tab a *container*, so every column stays an Icon List and every link stays a control.
+
+It takes the cards whole, too: the tab title is printed through `wp_kses_post()`, so the description line under each name is a `<span>` in the field the user already edits, and the icon beside it is the tab's own Icon control. The first tab is open on load — Nested Tabs' own behaviour, nothing asks for it. A nested widget inside a nested widget's panel works; it is verified in the editor as well as on the front end.
+
+Three of its controls are easy to get wrong, and each cost a round trip:
+
+| Control | Trap |
+| ------- | ---- |
+| `tabs_title_background_color*` | **Group** controls, not flat colours. A flat value never lands, and Elementor's own default — near-black for the active tab — stays. |
+| The tab title's second line | `.e-n-tab-title-text` is `display: flex`, so a description span sits *beside* the name until something tells it to stack. No control reaches inside the title. |
+| The active-tab mark | `tab_icon_active` **replaces** the leading icon rather than adding a trailing one, so the chevron on the open card is drawn from two rotated borders — which also avoids tying it to whichever icon font is loaded. |
+
+`Product Suite`'s wide panel is also worth copying if a preset needs a near-full-width card: the panel is set to **viewport** width and left transparent, and the card is the container inside it. A pixel width would have been an overflow waiting for the first laptop narrower than it — the handler writes a custom width through verbatim, with nothing clamping it — whereas a viewport panel always fits the screen exactly and the card inside lines up with the header bar at any width, with no breakpoint of its own.
+
+`Preset_Library::get_content()` also answers for `custom`, building the widget's own defaults through `Manager::get_default_menu_items()` / `get_default_children_elements()`, so switching back lands exactly where someone who never touched the control would have started.
+
+A preset that names its `widgets` is hidden whenever one is missing — switched off in EA's settings, disabled in Elementor's element manager — rather than applying half way and leaving the wreckage behind. When every preset is hidden the section is not registered at all.
+
+### A preset that reads the shop
+
+`Fashion Store` is the first preset whose content is not all written into it. Three of its four columns come from
+WooCommerce when WooCommerce is there, and each falls back on its own:
+
+| Column | Source | Falls back to |
+| ------ | ------ | ------------- |
+| Newly Added | Newest published products | The design's labels |
+| Style | Product **tags**, busiest first | Sub-categories (any `product_cat` with a parent), then the design's labels |
+| Popular Category | **Top-level** `product_cat`, busiest first | The design's labels |
+| Most Selling Products | The Mega Menu's own Menu Products widget, which queries live | Its own placeholder cards |
+
+Style takes tags and Popular Category takes only top-level terms so the two never show the same list twice, and the
+sub-categories have somewhere to go on a shop that does not tag. A source yielding fewer than `Fashion_Menu::MIN_ROWS`
+rows is passed over — a column drawn for six entries showing one reads as a bug rather than as a small shop.
+
+This is a **snapshot**, not a query. An Icon List row holds a label and an href with nowhere for a taxonomy to live, so
+the terms are read once, in the builder, and written in as values. That is the right shape for a menu — it is curated
+either way — and the point is only that it arrives curated from the shop that exists. `Preset_Library::get_content()`
+runs on one nonce-checked, `edit_posts`-gated AJAX call, so the queries never touch a front-end request.
+
+Two things bite when reading WooCommerce taxonomies:
+
+- **`get_terms( orderby => count )` does not order `product_cat` by the count you get back.** WooCommerce replaces
+  `$term->count` with a figure that includes the term's children while the ORDER BY runs against the raw column, so the
+  list comes back visibly out of order against its own numbers — on a test shop, a 14-product category sorted below a
+  2-product one. `Fashion_Menu::terms()` fetches a bounded page and sorts in PHP.
+- **`get_price_html()` is markup, and a Heading's Title is not.** A price range ships a visually hidden
+  `<span class="screen-reader-text">Price range: … through …</span>` *inside* it, so `wp_strip_all_tags()` alone prints
+  the price twice; the currency is an entity, so a Heading escapes it back into `&#2547;` on output; and the amounts are
+  padded with non-breaking spaces, which `\s` does not match. `Fashion_Menu::price_text()` does all four in order.
+
+### The products column is the menu's own widget
+
+`Fashion Store`'s fourth column is **Menu Products**
+([`includes/Elements/Mega_Menu_Products.php`](../../includes/Elements/Mega_Menu_Products.php)) — a picture, a name and a
+price, with a Query section to decide which products those are.
+
+It started out as EA's Woo Product Grid, and that was wrong twice over:
+
+- **It made the preset contingent on a different element.** The Woo Product Grid has its own key in `config.php` and its
+  own tick-box in EA → Elements. Unticked — which it is on plenty of installs — the widget is never registered, the
+  editor cannot build it, and a quarter of the preset's layout has to fall back to placeholders for a reason the user
+  cannot see from the menu they are editing. A preset should not have a dependency a checkbox somewhere else can break.
+- **It is a shop page, not a teaser.** Style presets, badges, ratings, quick view, compare, wishlist, load more,
+  pagination and an add-to-cart button, every one of which had to be switched off to get back to three lines.
+
+Menu Products is registered by `Manager::register_companion_widgets()` on `elementor/widgets/register` at **priority
+20** — after EA's own pass — and its only guard is `get_widget_types( 'eael-mega-menu' )`. Asking whether the menu got
+registered covers every reason it might not have (Elementor below 3.8, the Nested Elements experiment off, the element
+unticked, Elementor's element manager hiding it) without that method having to know or stay in sync with any of them.
+It deliberately has **no `config.php` key**, because a key is a switch, and a switch is the thing being avoided.
+
+Two consequences worth knowing:
+
+- **It is `show_in_panel() => false`.** Its styling assumes the narrow column of a submenu panel and it has no element
+  toggle for a user to find it under, so listing it would offer a widget with none of the surrounding documentation the
+  others have. Every control still works on the instance the preset builds.
+- **It has no stylesheet.** Every rule it needs — `display: grid`, the column count, `object-fit: cover` on the image,
+  the title and price margins — is written by one of its own controls from that control's default. Nothing for
+  `Asset_Builder` to attribute, no `npm run build` between a change and seeing it, and the user can reach all of it from
+  the panel, including the parts a stylesheet would normally put out of reach.
+
+Its Query section is the answer to "which products appear here": **Filter By** (Best Selling, Featured, Recent, Sale,
+Top Rated, Manual Selection), Product Categories, Product Tags, Select / Exclude Products, Count, Offset and Order. The
+preset sets Best Selling × 2 and adds nothing of its own. Without WooCommerce the widget renders its own placeholder
+cards — same markup, same grid — so a layout built around it never develops a hole.
+
+`Order` is deliberately conditioned to Recent and Sale only. Manual Selection is already in the order the rows were
+dragged into, and Featured / Best Selling / Top Rated each *mean* a ranking — reversing one asks for the worst sellers,
+which is not what the control was reached for.
+
+### Adding one
+
+1. Add a builder class in `includes/MegaMenu/Presets/` with a static `build( $mode )` returning **one** Elementor element: the finished header bar with a Mega Menu widget somewhere inside it for `header`, that widget alone for `widget`.
+2. The widget's `elements` are one `Elements::nested_child()` per repeater row, **including the plain-link rows** — the widget prints child *n* for row *n*, so a skipped container shifts every later panel onto the wrong item.
+3. Register it in `Preset_Library::get_presets()` (or through the `eael/mega-menu/presets` filter) with a `thumbnail` and the `widgets` it emits in either mode. `Preset_Library::get_content()` stamps the slug onto every Mega Menu in the tree, so the builder never has to know its own key.
+4. Drop a ~129×123 wireframe PNG into `assets/admin/images/layout-previews/`, in the same `#5F6367`-on-transparent language as the existing files.
+
+Nothing in a preset may be Pro. Markup in a control value is a last resort, used five times and each time because a widget offers no control for the thing:
+
+| Where | Why | Falls back to |
+| ----- | --- | ------------- |
+| `Saas_Menu::link_list()` | An Advanced Tabs tab takes a WYSIWYG field, not child widgets | A plain list of links |
+| `Suite_Menu::new_badge()` | Icon List prints a row's label unescaped, and has no chip of its own. Styled inline so it needs nothing added to any stylesheet | Text after the label |
+| `Fashion_Menu::new_badge()` | Same chip, in a *menu item's* label, which the widget prints through `wp_kses_post()`. The item repeater has no badge control | Text after the label |
+| `.eael-mm-linklist` (a CSS class set from the widget's own CSS Classes field) | Icon List has no control that paints a row, and these designs light the whole row under the pointer | An Icon List with no hover pill |
+| `.eael-mm-cta-icon` (`Fashion_Menu::cta_pill()`) | Icon has no control for the *box* it draws its plate inside. `.elementor-icon` is an inline-block, so its wrapper makes a line box and inherits the theme's line-height — measured at 32.4px around a 26px disc, which leaves the plate 9px shy of centre with no control able to reach it, and no fixed number able to cancel it. The **only rule in the stylesheet not scoped to `.eael-mega-menu`**: the pill sits in the header bar beside the menu, not in a panel | A button that works, with the disc riding high |
+| `.eael-mm-cardtabs` / `Suite_Menu::tab_title()` | Nested Tabs has no control for the plate behind a tab icon, none that reaches inside the title to stack a second line, and none for a trailing active mark | Tabs that still switch, with the icons on the surface |
+
+All of them are visible in the panel and removing one leaves something that still works. The class hooks — `.eael-mm-links`, `.eael-mm-linklist`, `.eael-mm-cardtabs` and `.eael-mm-cta-icon` — live in [`mega-menu.scss`](../../src/css/view/mega-menu.scss), so they load with the widget and nowhere else.
 
 ## Common Issues
 
 ### The widget is missing from the Elementor panel
 
 The *Nested Elements* experiment is off, or Elementor is older than 3.8. Check **Elementor → Settings → Features**; `Conditions::is_nested_elements_active()` drives `show_in_panel()`. On Elementor < 3.8 the `condition` in `config.php` skips registration entirely, so the widget also won't appear in **EA → Elements**.
+
+### A menu item shows its HTML as text in the editor
+
+Fixed in 6.8.4, and worth knowing why it happened. **Label** is printed two different ways by two different renderers:
+[`menu-item.php`](../../includes/MegaMenu/Templates/menu-item.php) runs it through `wp_kses_post()` — so markup in a
+label is markup on the front end — while the editor's Underscore template used `{{ }}`, which only escapes. A label
+carrying a chip (`Sale<span style="…">NEW</span>`, as `Fashion Store` ships) therefore rendered on the page and printed
+its own tags in the preview.
+
+[`Editor_Renderer.php`](../../includes/MegaMenu/Renderers/Editor_Renderer.php) now runs the label through
+`elementor.helpers.sanitize()` — DOMPurify, the same helper core's own Heading template uses — and prints the result
+with `{{{ }}}`. Sanitised rather than passed through raw because `{{{ }}}` on a field the user types into would execute
+a `<script>` in the editor, the one place `wp_kses_post()` cannot reach; `_.escape` is the fallback for an Elementor old
+enough to lack the helper, matching the `sanitizeUrl` fallback a few lines above it.
+
+**Toggle Text is not the same case** and is still escaped in both places — [`mobile-toggle.php`](../../includes/MegaMenu/Templates/mobile-toggle.php)
+uses `esc_html()`, so markup there really is content. Before changing an escape in one renderer, check what the other
+one does with the same field.
+
+### Something in the header is underlined
+
+Themes underline links, and everything in this header is a link. Three different layers answer for it, because there is no one place that can:
+
+| Element | Reset by |
+| ------- | -------- |
+| Menu items, disclosure buttons, label / icon / indicator spans | [`mega-menu.scss`](../../src/css/view/mega-menu.scss), block-prefixed to (0,2,0) / (0,3,0) |
+| The link list inside a panel (`.eael-mm-links`) | same file, including `:hover` / `:focus` / `:active` |
+| **Login** (core Button) | a control — the preset sets `typography_text_decoration: none`, which writes Elementor's own per-widget rule |
+| **Create Account** (Creative Button) | [`creative-btn.scss`](../../src/css/view/creative-btn.scss) |
+
+The Creative Button is the one worth understanding. Its Typography group targets `.eael-creative-button .cretive-button-text` — the inner span — while the theme underlines the `<a class="eael-creative-button">` around it. **A decoration set on an ancestor draws through its inline descendants and cannot be switched off by them**, so no value in that control could ever have fixed it; the reset has to live on the `<a>`, which is why it is in the widget's own stylesheet rather than in the preset.
+
+That same rule is worth remembering for anything a preset puts inside a panel. It does *not* apply to the menu links themselves — `.eael-mega-menu__link` is `display: flex`, which starts its own formatting context, so decorations do not propagate into it.
+
+A theme that still wins after all this is either using `!important` or reaching past three classes; that belongs in the theme or in Custom CSS rather than another round of specificity here. One thing deliberately left alone: the logo's `<a>` picks up the underline, but it wraps an `<img>` with no text in it, so nothing is drawn.
+
+### In the editor a panel is unusably narrow, or opening one shifts the header
+
+Two symptoms of the same rule, both fixed — see the editing notes under Architecture. The geometry comes from `--eael-mm-editing-width` and `--eael-mm-editing-inset`, written on the widget root by `measureEditingWidth()` and used by both the panels and the collapsed dropdown. They fall back to `100%` / `0`, which is the old narrow-but-working layout, so an empty value means the handler has not run yet.
+
+If the header shifts again, check that nothing has put a panel back in flow: out of flow is what keeps the row still. An ancestor with `overflow: hidden` will clip the bleed — that is the one layout this cannot escape.
 
 ### The active or focused item shows a colour I never set (often pink)
 

@@ -552,6 +552,14 @@ const getMegaMenuHandler = () =>
 
 			this.positionDropdown();
 
+			// The editing full-bleed covers the collapsed dropdown as well as the
+			// panels, and that sheet is laid out before anything is opened — so
+			// the numbers have to be there from the first device-mode pass, not
+			// only once a panel is selected.
+			if (this.isEdit) {
+				this.measureEditingWidth();
+			}
+
 			if (null !== this.activeIndex) {
 				this.positionPanel(this.activeIndex);
 			}
@@ -641,6 +649,16 @@ const getMegaMenuHandler = () =>
 				return;
 			}
 
+			// Editing mode has its own geometry: the stylesheet full-bleeds the
+			// panel out of whatever column holds the menu bar so it can be edited
+			// at the width it will be read at. Nothing below applies — its inset
+			// and width are exactly what the editing rules override.
+			if (this.isEdit) {
+				this.measureEditingWidth();
+
+				return;
+			}
+
 			// Per item vertical nudge, applied in every width mode.
 			panel.style.setProperty("--eael-mm-panel-offset-y", `${this.getItemOffset(index, "y")}px`);
 
@@ -718,6 +736,43 @@ const getMegaMenuHandler = () =>
 			}
 
 			panel.style.setProperty("--eael-mm-panel-inset-start", `${start + offsetX}px`);
+		}
+
+		/**
+		 * Hand the stylesheet the two numbers its editing full-bleed needs.
+		 *
+		 * Measured rather than expressed in `vw` because `vw` counts the
+		 * scrollbar: a preview 15px wider than its content area answers with a
+		 * horizontal scrollbar on every panel the user opens. `clientWidth` is
+		 * the content area exactly.
+		 *
+		 * Written on the root so every panel inherits them — including the ones
+		 * the handler has not classified yet, which is the window right after a
+		 * menu item is added and each container is re-mounted.
+		 *
+		 * The widget root is what gets measured, never anything these values size.
+		 * The collapsed dropdown is one of the things they size, and it *is* the
+		 * container — measuring that fed the result straight back into its own
+		 * input, and the second pass read a box already pulled to the page edge
+		 * and moved it again. The root is width-constrained by the layout above
+		 * it and cannot be moved by anything inside it.
+		 */
+		measureEditingWidth() {
+			const root = this.elements.$root[0];
+
+			if (!root) {
+				return;
+			}
+
+			const width = document.documentElement.clientWidth;
+			const rect = root.getBoundingClientRect();
+
+			// `margin-inline-start` is the right edge in RTL, so the distance to
+			// pull back by is measured from whichever edge the margin sits on.
+			const inset = this.isRtl() ? width - rect.right : rect.left;
+
+			root.style.setProperty("--eael-mm-editing-width", `${width}px`);
+			root.style.setProperty("--eael-mm-editing-inset", `${-inset}px`);
 		}
 
 		/**

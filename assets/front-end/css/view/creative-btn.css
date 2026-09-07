@@ -1,13 +1,12 @@
+@charset "UTF-8";
 .eael-creative-button-align-center {
   text-align: center;
 }
-
 .eael-creative-button-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
-
 .eael-creative-button {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
@@ -25,13 +24,31 @@
   backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .eael-creative-button:focus {
   outline: none;
 }
-
+/* Never underlined.
+ *
+ * The button renders as an `<a>`, so a theme that underlines links underlines
+ * this too, and no control can undo it: the widget's Typography group targets
+ * the inner `.cretive-button-text` span, and a decoration set on an ancestor
+ * draws through its inline descendants — a descendant cannot switch it off.
+ *
+ * Prefixed with the Elementor widget class to reach (0,2,1), which clears the
+ * selectors themes reach for — `.entry-content a`, `.elementor a`, `body a`.
+ * The bare class is kept alongside it for any context that renders the button
+ * outside a widget wrapper. */
+.eael-creative-button,
+.eael-creative-button:hover,
+.eael-creative-button:focus,
+.eael-creative-button:active,
+.elementor-widget-eael-creative-button a.eael-creative-button,
+.elementor-widget-eael-creative-button a.eael-creative-button:hover,
+.elementor-widget-eael-creative-button a.eael-creative-button:focus,
+.elementor-widget-eael-creative-button a.eael-creative-button:active {
+  text-decoration: none;
+}
 /*--- Winona ---*/
-
 .eael-creative-button--winona {
   overflow: hidden;
   padding: 0 !important;
@@ -40,7 +57,6 @@
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-
 .eael-creative-button--winona::after {
   content: attr(data-text);
   position: absolute;
@@ -61,7 +77,6 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
-
 .eael-creative-button--winona::after,
 .eael-creative-button--winona > .creative-button-inner {
   padding: 1em 2em;
@@ -73,34 +88,27 @@
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-
 .eael-creative-button--winona:hover::after {
   opacity: 1;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-
 .eael-creative-button--winona:hover .eael-creative-button-icon-left,
 .eael-creative-button--winona:hover .eael-creative-button-icon-right {
   opacity: 1;
 }
-
 .eael-creative-button--winona:hover > .creative-button-inner {
   -webkit-transform: translate3d(0, -25%, 0);
   transform: translate3d(0, 0%, 0);
 }
-
 .eael-creative-button--winona:hover .cretive-button-text {
   opacity: 0;
 }
-
 /*--- Ujarak ---*/
-
 .eael-creative-button--ujarak {
   -webkit-transition: border-color 0.4s, color 0.4s;
   transition: border-color 0.4s, color 0.4s;
 }
-
 .eael-creative-button--ujarak::before {
   content: "";
   position: absolute;
@@ -120,21 +128,17 @@
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-
 .eael-creative-button--ujarak,
 .eael-creative-button--ujarak::before {
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-
 .eael-creative-button--ujarak:hover::before {
   opacity: 1;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-
 /*--- Wayra ---*/
-
 .eael-creative-button--wayra {
   overflow: hidden;
   -webkit-transition: border-color 0.3s, color 0.3s;
@@ -142,7 +146,6 @@
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-
 .eael-creative-button--wayra::before {
   content: "";
   position: absolute;
@@ -162,7 +165,6 @@
   transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
   transition: transform 0.3s, opacity 0.3s, background-color 0.3s, -webkit-transform 0.3s;
 }
-
 .eael-creative-button--wayra:hover::before {
   opacity: 1;
   -webkit-transform: rotate3d(0, 0, 1, 0deg);
@@ -170,9 +172,7 @@
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-
 /* Tamaya */
-
 .eael-creative-button--tamaya {
   float: left;
   min-width: 150px;
@@ -192,12 +192,10 @@
   color: #7986cb;
   min-width: 180px;
 }
-
 .eael-creative-button--tamaya.button--inverted {
   color: #37474f;
   border-color: #37474f;
 }
-
 .eael-creative-button--tamaya-before,
 .eael-creative-button--tamaya-after {
   position: absolute;
@@ -210,17 +208,14 @@
   transition: transform 0.3s;
   transition: transform 0.3s, -webkit-transform 0.3s;
 }
-
 .eael-creative-button--tamaya.button--inverted .eael-creative-button--tamaya-before,
 .eael-creative-button--tamaya.button--inverted .eael-creative-button--tamaya-after {
   background: #fff;
   color: #37474f;
 }
-
 .eael-creative-button--tamaya .eael-creative-button--tamaya-before {
   bottom: 50%;
 }
-
 .eael-creative-button--tamaya .eael-creative-button--tamaya-before span {
   -webkit-transform: translateY(50%);
       -ms-transform: translateY(50%);
@@ -228,11 +223,9 @@
   display: block;
   opacity: 1 !important;
 }
-
 .eael-creative-button--tamaya .eael-creative-button--tamaya-after {
   top: 50%;
 }
-
 .eael-creative-button--tamaya .eael-creative-button--tamaya-after span {
   -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
@@ -240,7 +233,6 @@
   display: block;
   opacity: 1 !important;
 }
-
 .eael-creative-button--tamaya span {
   display: block;
   -webkit-transform: scale3d(0.2, 0.2, 1);
@@ -253,45 +245,37 @@
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
           transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-
 .eael-creative-button--tamaya:hover .eael-creative-button--tamaya-before {
   -webkit-transform: translate3d(0, -100%, 0);
           transform: translate3d(0, -100%, 0);
 }
-
 .eael-creative-button--tamaya:hover .eael-creative-button--tamaya-after {
   -webkit-transform: translate3d(0, 100%, 0);
           transform: translate3d(0, 100%, 0);
 }
-
 .eael-creative-button--tamaya:hover .eael-creative-button--tamaya-before {
   bottom: 50%;
   -webkit-transform: translateY(-750%);
       -ms-transform: translateY(-750%);
           transform: translateY(-750%);
 }
-
 .eael-creative-button--tamaya:hover .eael-creative-button--tamaya-after {
   top: 50%;
   -webkit-transform: translateY(750%);
       -ms-transform: translateY(750%);
           transform: translateY(750%);
 }
-
 .eael-creative-button--tamaya:hover span {
   opacity: 1;
   -webkit-transform: scale3d(1, 1, 1);
           transform: scale3d(1, 1, 1);
   content: "Bangladesh";
 }
-
 /*--- Rayen ---*/
-
 .eael-creative-button--rayen {
   overflow: hidden;
   padding: 0 !important;
 }
-
 .eael-creative-button--rayen > .creative-button-inner {
   padding: 1em 2em;
   -webkit-transition: -webkit-transform 0.3s;
@@ -301,7 +285,6 @@
   -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
           transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
-
 .eael-creative-button--rayen::before {
   content: attr(data-text);
   position: absolute;
@@ -328,17 +311,14 @@
   -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
           transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
-
 .eael-creative-button--rayen:hover::before {
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
 }
-
 .eael-creative-button--rayen:hover > .creative-button-inner {
   -webkit-transform: translate3d(0, 100%, 0);
           transform: translate3d(0, 100%, 0);
 }
-
 .creative-button-inner {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -354,15 +334,12 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
-
 .eael-creative-button-icon-left {
   margin-right: 5px;
 }
-
 .eael-creative-button-icon-right {
   margin-left: 5px;
 }
-
 .rtl .eael-creative-button-wrapper {
   direction: ltr;
 }
