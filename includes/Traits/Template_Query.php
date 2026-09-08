@@ -99,7 +99,17 @@ trait Template_Query {
      */
     private function get_pro_template_dir()
     {
-        if (!apply_filters('eael/is_plugin_active', 'essential-addons-elementor/essential_adons_elementor.php')) {
+        /**
+         * Ask whether Pro is loaded, not where it lives. `eael/is_plugin_active` maps to
+         * WP's is_plugin_active(), an exact `folder/file.php` match, so a hard-coded
+         * folder name reported Pro as inactive whenever it was installed anywhere else -
+         * a repo checkout, a re-download suffixed " 2", a manual rename. Every Pro
+         * template preset then vanished with no notice. EA Pro registers
+         * `eael/pro_enabled` from its own bootstrap regardless of directory, and
+         * EAEL_PRO_PLUGIN_PATH is derived from __FILE__, so both follow the real
+         * install location. See issue #895.
+         */
+        if (!apply_filters('eael/pro_enabled', false)) {
             return false;
         }
 
