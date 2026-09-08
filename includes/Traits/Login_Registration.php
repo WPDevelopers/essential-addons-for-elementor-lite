@@ -3036,6 +3036,10 @@ trait Login_Registration {
 	 * @return array
 	 */
 	public function eael_add_user_status_column( $columns ) {
+		if ( ! $this->eael_is_admin_approval_active() ) {
+			return $columns;
+		}
+
 		$columns['eael_status'] = __( 'Status', 'essential-addons-for-elementor-lite' );
 		return $columns;
 	}
@@ -3051,7 +3055,7 @@ trait Login_Registration {
 	 * @return string
 	 */
 	public function eael_render_user_status_column( $output, $column_name, $user_id ) {
-		if ( 'eael_status' !== $column_name ) {
+		if ( 'eael_status' !== $column_name || ! $this->eael_is_admin_approval_active() ) {
 			return $output;
 		}
 
@@ -3069,8 +3073,18 @@ trait Login_Registration {
 				. '</span>';
 		}
 
-		return '<span style="display:inline-block;background:#46b450;color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">'
-			. esc_html__( 'Approved', 'essential-addons-for-elementor-lite' )
+		if ( 'approved' === $status ) {
+			return '<span style="display:inline-block;background:#46b450;color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">'
+				. esc_html__( 'Approved', 'essential-addons-for-elementor-lite' )
+				. '</span>';
+		}
+
+		// No status recorded, so this user never went through the approval flow - they
+		// registered before it was switched on, or outside the Login/Register widget.
+		// Nobody reviewed them, so badging them "Approved" would be a false claim.
+		return '<span aria-hidden="true" style="color:#a7aaad;">&mdash;</span>'
+			. '<span class="screen-reader-text">'
+			. esc_html__( 'Not applicable', 'essential-addons-for-elementor-lite' )
 			. '</span>';
 	}
 
@@ -3082,7 +3096,7 @@ trait Login_Registration {
 	 * @param \WP_User $user Profile user object.
 	 */
 	public function eael_show_approve_user_button( $user ) {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_options' ) || ! $this->eael_is_admin_approval_active() ) {
 			return;
 		}
 
@@ -3126,9 +3140,14 @@ trait Login_Registration {
 							   value="<?php esc_attr_e( 'Delete', 'essential-addons-for-elementor-lite' ); ?>"
 							   onclick="return confirm('<?php esc_attr_e( 'Permanently delete this user? This cannot be undone.', 'essential-addons-for-elementor-lite' ); ?>');">
 
-					<?php else : ?>
+					<?php elseif ( 'approved' === $status ) : ?>
 						<span style="color:#46b450;font-weight:bold;">
 							<?php esc_html_e( 'Approved', 'essential-addons-for-elementor-lite' ); ?>
+						</span>
+
+					<?php else : ?>
+						<span style="color:#646970;">
+							<?php esc_html_e( 'Not applicable — this account did not go through admin approval.', 'essential-addons-for-elementor-lite' ); ?>
 						</span>
 					<?php endif; ?>
 				</td>
