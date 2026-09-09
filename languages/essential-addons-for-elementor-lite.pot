@@ -14714,7 +14714,7 @@ msgid "Open Submenu On"
 msgstr ""
 
 #: ../includes/MegaMenu/Controls/Content_Controls.php:296
-msgid "Touch devices always use tap, regardless of this setting."
+msgid "Applies on the front end. Touch devices always use tap, and the editor always uses click so a panel stays open while you build in it."
 msgstr ""
 
 #: ../includes/MegaMenu/Controls/Content_Controls.php:302

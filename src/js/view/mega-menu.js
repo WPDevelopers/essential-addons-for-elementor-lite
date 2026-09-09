@@ -614,6 +614,21 @@ const getMegaMenuHandler = () =>
 			return "true" === this.elements.$root.attr("data-touch-mode");
 		}
 
+		/**
+		 * Does opening a panel take a click rather than a hover.
+		 *
+		 * `isEdit` is first and deliberate: the Trigger setting is a front-end
+		 * setting, and the editor ignores it whichever way it is set.
+		 *
+		 * An open panel in the editor is a *drop target* — the user drags widgets
+		 * into it from the panel on the left — and it is bound to the repeater row
+		 * they have selected. Hover breaks both. The pointer leaves the bar the
+		 * moment it travels to the widget panel, so the target closes before the
+		 * drag begins; and sweeping across the bar on the way anywhere swaps the
+		 * panel away from the row still open in the editor. Elementor's own nested
+		 * widgets take the same line: Nested Tabs and Accordion are driven by
+		 * selection in the editor, never by the pointer.
+		 */
 		usesClickTrigger() {
 			return (
 				this.isEdit ||
@@ -935,7 +950,25 @@ const getMegaMenuHandler = () =>
 
 			if (this.isEdit) {
 				event.preventDefault();
-				this.setEditActiveItem(index);
+
+				// Toggle, not set. The disclosure button beside a linked item has
+				// always toggled — it goes straight to togglePanel() below — and a
+				// label that only ever opened made the two halves of the same item
+				// behave differently: a panel opened from the label could not be
+				// put away again without selecting some other row.
+				//
+				// Only the click path toggles. `activeItemIndex` still *sets*
+				// through setEditActiveItem(), because that one mirrors the row
+				// selected in the panel: picking a row has to show that row's
+				// panel, never hide it because it happened to be the open one.
+				if (this.itemHasSubmenu(index)) {
+					this.togglePanel(index);
+				} else {
+					// A link-only row owns no panel, so whatever is open belongs to
+					// a different item — see setEditActiveItem() for why leaving it
+					// up is worse than closing it.
+					this.closeAll();
+				}
 
 				return;
 			}

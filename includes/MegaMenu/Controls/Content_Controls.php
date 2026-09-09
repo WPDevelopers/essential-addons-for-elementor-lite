@@ -293,7 +293,7 @@ class Content_Controls {
 			'type'               => Controls_Manager::SELECT,
 			'default'            => 'hover',
 			'options'            => $manager->get_trigger_options(),
-			'description'        => esc_html__( 'Touch devices always use tap, regardless of this setting.', 'essential-addons-for-elementor-lite' ),
+			'description'        => esc_html__( 'Applies on the front end. Touch devices always use tap, and the editor always uses click so a panel stays open while you build in it.', 'essential-addons-for-elementor-lite' ),
 			'frontend_available' => true,
 			'render_type'        => 'ui',
 		] );
