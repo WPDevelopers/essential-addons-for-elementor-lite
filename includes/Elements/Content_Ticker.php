@@ -797,7 +797,7 @@ class Content_Ticker extends Widget_Base
                             } else {
                                 echo '<div class="swiper-slide"><a href="#" class="ticker-content">' . esc_html__('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
                             }
-                        } elseif ('custom' === $settings['eael_ticker_type'] && apply_filters('eael/is_plugin_active', 'essential-addons-elementor/essential_adons_elementor.php')) {
+                        } elseif ('custom' === $settings['eael_ticker_type'] && apply_filters('eael/pro_enabled', false)) {
                             if (\file_exists($this->get_template($settings['eael_dynamic_template_Layout']))) {
                                 foreach ($settings['eael_ticker_custom_contents'] as $content) {
                                     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
