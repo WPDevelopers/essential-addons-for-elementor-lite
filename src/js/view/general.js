@@ -271,8 +271,28 @@ jQuery(window).on("elementor/frontend/init", function () {
 	});
 
 	$(document).on('click', '.e-n-tab-title', function () {
+		/*
+		 * The resize below exists so EA widgets that measure themselves relayout when a
+		 * previously hidden tab panel is revealed. Elementor also listens on resize and
+		 * re-runs setHorizontalScrollAlignment(), which calls initialScrollPosition() and
+		 * sets the tab bar's scrollLeft back to 0 - so with Horizontal Scroll enabled and
+		 * overflowing titles, every tab click snapped the bar back to the start.
+		 *
+		 * Read the position immediately before the dispatch, not at click time, so any
+		 * scrolling Elementor does while activating the tab is kept; then put it back.
+		 * Elementor's resize handlers are bound directly with no debounce, so they have
+		 * already run by the time dispatchEvent() returns.
+		 */
+		var heading = this.closest('.e-n-tabs-heading');
+
 		setTimeout(function () {
+			var scrollLeft = heading ? heading.scrollLeft : null;
+
 			window.dispatchEvent(new Event('resize'));
+
+			if (heading && null !== scrollLeft) {
+				heading.scrollLeft = scrollLeft;
+			}
 		}, 100);
 	});
 })(jQuery);
