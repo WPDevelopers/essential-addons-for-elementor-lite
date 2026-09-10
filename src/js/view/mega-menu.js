@@ -681,6 +681,12 @@ const getMegaMenuHandler = () =>
 			const $item = this.getItemByIndex(index);
 			const container = this.elements.$container[0];
 
+			// Only "custom" sets a cap, and it does so at the end once its inline
+			// offset is known. Clearing here rather than in that branch covers the
+			// modes that return early, so a panel that changes mode in the editor
+			// cannot keep a stale one.
+			panel.style.removeProperty("--eael-mm-panel-max-width");
+
 			if (!container) {
 				return;
 			}
@@ -750,7 +756,32 @@ const getMegaMenuHandler = () =>
 						: itemOffset + itemWidth - panelWidth;
 			}
 
-			panel.style.setProperty("--eael-mm-panel-inset-start", `${start + offsetX}px`);
+			const inset = start + offsetX;
+
+			panel.style.setProperty("--eael-mm-panel-inset-start", `${inset}px`);
+
+			// A fixed pixel width is the one mode that can be wider than the room
+			// it sits in. `full` tracks the menu and `viewport` is measured to the
+			// viewport, while `item` shrinks to fit — but a 620px panel anchored
+			// part way along the bar runs past the right edge and drags a
+			// horizontal scrollbar onto the document (issue #898).
+			//
+			// Measured, not `100vw`: `vw` counts the scrollbar, so capping with it
+			// on a page that already has one leaves the panel a scrollbar's width
+			// too wide — the same reason measureEditingWidth() reads clientWidth.
+			//
+			// `inset-inline-start` is the RIGHT edge in RTL, where the panel grows
+			// leftward, so the room is measured from whichever edge it starts at.
+			if ("custom" === mode) {
+				const rect = container.getBoundingClientRect();
+				const room = this.isRtl()
+					? rect.right - inset
+					: document.documentElement.clientWidth - (rect.left + inset);
+
+				if (room > 0) {
+					panel.style.setProperty("--eael-mm-panel-max-width", `${room}px`);
+				}
+			}
 		}
 
 		/**

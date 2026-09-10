@@ -217,7 +217,11 @@
 		top: calc(100% + var(--eael-mm-panel-offset, 0px) + var(--eael-mm-panel-offset-y, 0px));
 		inset-inline-start: var(--eael-mm-panel-inset-start, 0px);
 		width: var(--eael-mm-panel-width, 100%);
-		max-width: none;
+		/* Only the modes that can overrun set this. `viewport` is measured to
+		 * the viewport already and `full` tracks the menu, so both leave it
+		 * unset; `custom` is a fixed pixel width and has the handler measure a
+		 * cap for it. The `item` rule below overrides this outright. */
+		max-width: var(--eael-mm-panel-max-width, none);
 		z-index: var(--eael-mm-panel-z-index, 999);
 		opacity: 0;
 		visibility: hidden;
