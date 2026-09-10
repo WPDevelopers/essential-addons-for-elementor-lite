@@ -240,7 +240,11 @@
   top: calc(100% + var(--eael-mm-panel-offset, 0px) + var(--eael-mm-panel-offset-y, 0px));
   inset-inline-start: var(--eael-mm-panel-inset-start, 0px);
   width: var(--eael-mm-panel-width, 100%);
-  max-width: none;
+  /* Uncapped by default — `full` and `viewport` are already sized to something
+   * that fits. `custom` is the one mode that takes a raw author-supplied width
+   * with no relation to the viewport, so positionPanel() measures the room the
+   * panel actually has and hands it back through this property. See #898. */
+  max-width: var(--eael-mm-panel-max-width, none);
   z-index: var(--eael-mm-panel-z-index, 999);
   opacity: 0;
   visibility: hidden;

@@ -11571,7 +11571,7 @@ msgstr ""
 msgid "Uncheck the WooCommerce Settings <a href=\"%s\" target=\"_blank\">Out of stock visibility</a> option. This will not work otherwise"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_List.php:575, ../includes/Traits/Login_Registration.php:3039, ../includes/Theme_Builder/Admin/Admin.php:653
+#: ../includes/Elements/Woo_Product_List.php:575, ../includes/Traits/Login_Registration.php:3043, ../includes/Theme_Builder/Admin/Admin.php:653
 msgid "Status"
 msgstr ""
 
@@ -14157,72 +14157,80 @@ msgstr ""
 msgid "Your registration request has been rejected. Please contact the site administrator."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3062, ../includes/Traits/Login_Registration.php:3380, ../includes/Theme_Builder/Admin/Templates_List_Table.php:465
+#: ../includes/Traits/Login_Registration.php:3066, ../includes/Traits/Login_Registration.php:3399, ../includes/Theme_Builder/Admin/Templates_List_Table.php:465
 msgid "Pending"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3068, ../includes/Traits/Login_Registration.php:3117, ../includes/Traits/Login_Registration.php:3382
+#: ../includes/Traits/Login_Registration.php:3072, ../includes/Traits/Login_Registration.php:3131, ../includes/Traits/Login_Registration.php:3401
 msgid "Rejected"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3073, ../includes/Traits/Login_Registration.php:3131, ../includes/Traits/Login_Registration.php:3381
+#: ../includes/Traits/Login_Registration.php:3078, ../includes/Traits/Login_Registration.php:3145, ../includes/Traits/Login_Registration.php:3400
 msgid "Approved"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3094
-msgid "Account Status"
-msgstr ""
-
-#: ../includes/Traits/Login_Registration.php:3122, ../includes/Traits/Login_Registration.php:3103
-msgid "Approve"
-msgstr ""
-
-#: ../includes/Traits/Login_Registration.php:3126, ../includes/Traits/Login_Registration.php:3112
-msgid "Delete"
-msgstr ""
-
-#: ../includes/Traits/Login_Registration.php:3127, ../includes/Traits/Login_Registration.php:3113
-msgid "Permanently delete this user? This cannot be undone."
-msgstr ""
-
-#: ../includes/Traits/Login_Registration.php:3098
-msgid "Pending Approval"
-msgstr ""
-
-#: ../includes/Traits/Login_Registration.php:3107
-msgid "Reject"
+#: ../includes/Traits/Login_Registration.php:3087
+msgid "Not applicable"
 msgstr ""
 
 #: ../includes/Traits/Login_Registration.php:3108
+msgid "Account Status"
+msgstr ""
+
+#: ../includes/Traits/Login_Registration.php:3150
+msgid "Not applicable — this account did not go through admin approval."
+msgstr ""
+
+#: ../includes/Traits/Login_Registration.php:3136, ../includes/Traits/Login_Registration.php:3117
+msgid "Approve"
+msgstr ""
+
+#: ../includes/Traits/Login_Registration.php:3140, ../includes/Traits/Login_Registration.php:3126
+msgid "Delete"
+msgstr ""
+
+#: ../includes/Traits/Login_Registration.php:3141, ../includes/Traits/Login_Registration.php:3127
+msgid "Permanently delete this user? This cannot be undone."
+msgstr ""
+
+#: ../includes/Traits/Login_Registration.php:3112
+msgid "Pending Approval"
+msgstr ""
+
+#: ../includes/Traits/Login_Registration.php:3121
+msgid "Reject"
+msgstr ""
+
+#: ../includes/Traits/Login_Registration.php:3122
 msgid "Reject this user? They will be marked as rejected and unable to log in."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3180, ../includes/Traits/Login_Registration.php:3259
+#: ../includes/Traits/Login_Registration.php:3199, ../includes/Traits/Login_Registration.php:3278
 msgid "Your account has been approved"
 msgstr ""
 
 #. translators: %s: user display name
-#: ../includes/Traits/Login_Registration.php:3181, ../includes/Traits/Login_Registration.php:3262
+#: ../includes/Traits/Login_Registration.php:3200, ../includes/Traits/Login_Registration.php:3281
 msgid "Hello %s, your account has been approved. You can now log in."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3212
+#: ../includes/Traits/Login_Registration.php:3231
 msgid "EA: Approve"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3213
+#: ../includes/Traits/Login_Registration.php:3232
 msgid "EA: Reject"
 msgstr ""
 
 #. translators: %d: number of approved users
-#: ../includes/Traits/Login_Registration.php:3327
+#: ../includes/Traits/Login_Registration.php:3346
 msgid "%d user approved."
 msgid_plural "%d users approved."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of rejected users
-#: ../includes/Traits/Login_Registration.php:3338
+#: ../includes/Traits/Login_Registration.php:3357
 msgid "%d user rejected."
 msgid_plural "%d users rejected."
 msgstr[0] ""

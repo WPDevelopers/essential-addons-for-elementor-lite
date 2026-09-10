@@ -659,6 +659,7 @@ const getMegaMenuHandler = () =>
 			if (this.isMobileMode()) {
 				panel.style.removeProperty("--eael-mm-panel-inset-start");
 				panel.style.removeProperty("--eael-mm-panel-width");
+				panel.style.removeProperty("--eael-mm-panel-max-width");
 				panel.style.removeProperty("--eael-mm-panel-offset-y");
 
 				return;
@@ -676,6 +677,10 @@ const getMegaMenuHandler = () =>
 
 			// Per item vertical nudge, applied in every width mode.
 			panel.style.setProperty("--eael-mm-panel-offset-y", `${this.getItemOffset(index, "y")}px`);
+
+			// Only `custom` sets a cap below; clear it so a mode change in the editor
+			// cannot leave the previous mode's value behind.
+			panel.style.removeProperty("--eael-mm-panel-max-width");
 
 			const mode = $panel.attr("data-width-mode") || "full";
 			const $item = this.getItemByIndex(index);
@@ -750,7 +755,32 @@ const getMegaMenuHandler = () =>
 						: itemOffset + itemWidth - panelWidth;
 			}
 
-			panel.style.setProperty("--eael-mm-panel-inset-start", `${start + offsetX}px`);
+			const inlineStart = start + offsetX;
+
+			panel.style.setProperty("--eael-mm-panel-inset-start", `${inlineStart}px`);
+
+			/* A `custom` panel is a raw pixel width the author typed, anchored to its
+			 * menu item. Nothing else bounds it, so once the item sits far enough along
+			 * the bar the panel runs past the right edge of the document and drags a
+			 * horizontal scrollbar onto the page — the SaaS preset's 620px Product panel
+			 * does exactly that in the ~1024-1090px range. Cap it to the room between
+			 * where it starts and the edge of the viewport.
+			 *
+			 * Measured rather than expressed in CSS: the panel's containing block is
+			 * `.eael-mega-menu__container`, which is usually far narrower than the space
+			 * available, so a `max-width: min(100vw, 100%)` backstop of the kind the
+			 * `item` mode carries would shrink panels that fit perfectly well. This is
+			 * the same reason `viewport` mode is computed from `clientWidth` here. */
+			if ("custom" === mode) {
+				const containerRect = container.getBoundingClientRect();
+				const available = this.isRtl()
+					? containerRect.right - inlineStart
+					: document.documentElement.clientWidth - (containerRect.left + inlineStart);
+
+				if (available > 0) {
+					panel.style.setProperty("--eael-mm-panel-max-width", `${available}px`);
+				}
+			}
 		}
 
 		/**
