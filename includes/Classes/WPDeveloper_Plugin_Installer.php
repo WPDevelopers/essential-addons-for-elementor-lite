@@ -263,7 +263,14 @@ class WPDeveloper_Plugin_Installer
                 ]
             ];
         
-            if ( isset( $remote_urls[ $promotype ][ $slug ] ) ) {
+            // Install-attribution beacon. It reaches essential-addons.com with the
+            // server's IP and user agent, so it is sent only when the site has
+            // opted in to usage tracking (Guideline 7) — the same consent record
+            // Plugin_Usage_Tracker and the setup wizard read.
+            $tracking_consent = get_option( 'wpins_allow_tracking' );
+            $has_consent      = is_array( $tracking_consent ) && isset( $tracking_consent[ basename( EAEL_PLUGIN_FILE, '.php' ) ] );
+
+            if ( $has_consent && isset( $remote_urls[ $promotype ][ $slug ] ) ) {
                 wp_remote_get( $remote_urls[ $promotype ][ $slug ] );
             }
         }

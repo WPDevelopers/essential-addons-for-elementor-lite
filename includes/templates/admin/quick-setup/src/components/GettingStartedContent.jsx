@@ -33,7 +33,7 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
           <div className="eael-next-step-wrapper" id="eael-dashboard--wrapper">
             <p>
               {__(
-                "By proceeding, you grant permission for this plugin to collect your information.",
+                "Help improve Essential Addons by sharing non-sensitive usage data with WPDeveloper. Nothing is sent unless you choose “Allow & Continue”.",
                 "essential-addons-for-elementor-lite"
               )}
               <span className="collect-info eael-what-we-collect" onClick={handleModalChange} data-target="what-we-collect">
@@ -48,26 +48,26 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
               name="eael_user_email_address"
             />
 
-            <button
-              className="primary-btn install-btn eael-setup-next-btn eael-user-email-address"
-              type="button"
-              data-next="configuration"
-              onClick={handleTabChange}
-            >
-              {__(
-                "Proceed to Next Step",
-                "essential-addons-for-elementor-lite"
-              )}
-              <i className="ea-dash-icon ea-right-arrow-long"></i>
-            </button>
-            <span
-              className="skip-item eael-setup-next-btn"
-              type="button"
-              data-next="configuration"
-              onClick={handleTabChange}
-            >
-              {__("Skip This Step", "essential-addons-for-elementor-lite")}
-            </span>
+            {/* Two equal-weight choices. Only "Allow & Continue" carries the
+                eael-user-email-address class that App.jsx treats as consent. */}
+            <div className="eael-consent-actions">
+              <button
+                className="primary-btn eael-setup-next-btn eael-user-email-address"
+                type="button"
+                data-next="configuration"
+                onClick={handleTabChange}
+              >
+                {__("Allow & Continue", "essential-addons-for-elementor-lite")}
+              </button>
+              <button
+                className="primary-btn eael-setup-next-btn"
+                type="button"
+                data-next="configuration"
+                onClick={handleTabChange}
+              >
+                {__("Continue without sharing", "essential-addons-for-elementor-lite")}
+              </button>
+            </div>
           </div>
         </div>
       </div>
