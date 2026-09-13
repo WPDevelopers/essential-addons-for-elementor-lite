@@ -154,6 +154,11 @@ class WPDeveloper_Plugin_Installer
 				continue;
 			}
 
+			// The user just asked for xSpeed by name and its files are here:
+			// record `accepted` in the shared offer record, so a later removal
+			// reads as a removal to every WPDeveloper plugin. No-op otherwise.
+			XSpeed_Setup::after_install( $slug );
+
 			if ( ! $active || is_plugin_active( $installed_basename ) ) {
 				return true;
 			}
@@ -191,6 +196,13 @@ class WPDeveloper_Plugin_Installer
 
         if (is_wp_error($install)) {
             return $install;
+        }
+
+        // xSpeed's `accepted` goes into the shared offer record only now that
+        // the files are on disk — see XSpeed_Setup::after_install(). No-op for
+        // every other plugin.
+        if ( true === $install ) {
+            XSpeed_Setup::after_install( $slug );
         }
 
         // activate plugin

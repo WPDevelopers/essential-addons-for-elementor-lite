@@ -362,7 +362,24 @@ class ThinkRank_Promotion {
 		foreach ( self::requested_plugins() as $plugin ) {
 			update_user_meta( get_current_user_id(), self::state_key( $plugin, 'dismissed' ), 1 );
 		}
+		self::record_xspeed_decline();
 		wp_send_json_success();
+	}
+
+	/**
+	 * A permanent opt-out that covered xSpeed's install promo is a `declined`
+	 * in the shared offer record, so EmbedPress and Templately stop asking too.
+	 *
+	 * Only while xSpeed is absent: with it on disk the only thing on screen was
+	 * the working Speed Check panel, and hiding a panel is not saying no to
+	 * xSpeed. Snoozes and skips are pacing, not answers, and never land here.
+	 *
+	 * @return void
+	 */
+	private static function record_xspeed_decline() {
+		if ( in_array( XSpeed_Setup::SLUG, self::requested_plugins(), true ) && ! XSpeed_Setup::is_on_disk() ) {
+			XSpeed_Setup::record_outcome( XSpeed_Setup::OUTCOME_DECLINED );
+		}
 	}
 
 	/**
@@ -394,6 +411,7 @@ class ThinkRank_Promotion {
 		foreach ( self::requested_plugins() as $plugin ) {
 			update_option( self::state_key( $plugin, 'never' ), 1, true );
 		}
+		self::record_xspeed_decline();
 		wp_send_json_success();
 	}
 
@@ -475,6 +493,10 @@ class ThinkRank_Promotion {
 		$copy = $this->banner_copy();
 		if ( ! $copy ) {
 			return;
+		}
+
+		if ( in_array( XSpeed_Setup::SLUG, explode( ',', $copy['slugs'] ), true ) ) {
+			XSpeed_Setup::record_offered();
 		}
 
 		$later_action = 'ea' === $context ? 'eael_thinkrank_skip' : 'eael_thinkrank_never_show';
@@ -936,6 +958,11 @@ class ThinkRank_Promotion {
 	 */
 	private function render_check_prompt( $spec ) {
 		$nonce = wp_create_nonce( 'essential-addons-elementor' );
+
+		// An install offer, not the reactivate one for a copy already on disk.
+		if ( ! XSpeed_Setup::is_on_disk() ) {
+			XSpeed_Setup::record_offered();
+		}
 
 		$findings = [ $this->page_cache_line() ];
 

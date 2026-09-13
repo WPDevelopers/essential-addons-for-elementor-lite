@@ -297,8 +297,14 @@ class WPDeveloper_Setup_Wizard {
 		$offer_thinkrank = false === $thinkrank_data;
 
 		// Not gated on the page cache being free. can_install() answers "xSpeed
-		// is absent and this site can run it" only.
+		// is absent, this site can run it, and the shared offer record says
+		// nobody has answered yet" — a decline or a removal from any
+		// WPDeveloper plugin keeps it out of this step.
 		$offer_xspeed = XSpeed_Setup::can_install();
+
+		if ( $offer_xspeed ) {
+			XSpeed_Setup::record_offered();
+		}
 
 		$plugins = [];
 

@@ -349,6 +349,45 @@ All three activation sites in
 call `XSpeed_Setup::before_activation( $slug )` on the line above their
 `activate_plugin()`; it is a no-op for every other slug.
 
+#### The shared offer record — `wpdeveloper_xspeed_offer`
+
+EmbedPress, Essential Addons and Templately all offer xSpeed. Before this record,
+each kept its own answer, so a user who installed xSpeed from one plugin and
+deleted it would be offered it again by the next — and deleting xSpeed runs its
+uninstaller, which wipes `xspeed_options`, so nothing xSpeed owned could remember
+it had been here.
+
+`wpdeveloper_xspeed_offer` is one per-site option, never autoloaded, shaped
+`[ offered_by, offered_at, outcome, outcome_at ]` with `outcome` one of
+`offered | accepted | declined`. It sits outside the `xspeed_` prefix on purpose,
+so it survives xSpeed's uninstaller.
+
+**Reading** — `XSpeed_Setup::may_offer()`, copied from the xSpeed contract:
+
+| Record says                     | xSpeed (Free or Pro) on disk | Offer?                     |
+| ------------------------------- | ---------------------------- | -------------------------- |
+| anything                        | yes                          | no                         |
+| `accepted`                      | no                           | no — they removed it       |
+| `declined`                      | either                       | no                         |
+| `offered` / absent / unreadable | no                           | EA's own snooze/skip rules |
+
+`can_install()` includes it, so the admin banner, the Speed Check dashboard
+widget and the Quick Setup "Boost SEO & Speed" step all withhold xSpeed on any of
+the first three rows. The Integrations toggle does **not** check it: a user who
+switches xSpeed on by name has answered again, and that wins.
+
+**Writing:**
+
+| Outcome    | Written by                                                                                                  |
+| ---------- | ----------------------------------------------------------------------------------------------------------- |
+| `offered`  | `record_offered()` — banner render, Speed Check install prompt, Quick Setup step. `add_option`, so it never overwrites an existing row. |
+| `accepted` | `after_install()` once the installer has put the files on disk (never before: `accepted` with no files means "removed"); the `activated_plugin` and `deleted_plugin` listeners, for installs and removals by any route. |
+| `declined` | "Never show me again" and the permanent per-user dismiss, when they covered xSpeed and xSpeed is not on disk. Skip / Maybe later are pacing and write nothing. |
+
+`record_outcome()` never downgrades: nothing goes back to `offered`, `declined`
+never overwrites `accepted`, and `offered_at` is kept. `accepted` may overwrite
+`declined` because it only comes from the user installing or activating xSpeed.
+
 #### `XSpeed_Setup` — the only thing the rest of EA calls
 
 [`includes/Classes/XSpeed_Setup.php`](../../includes/Classes/XSpeed_Setup.php)

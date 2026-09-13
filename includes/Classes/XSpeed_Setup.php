@@ -63,6 +63,202 @@ class XSpeed_Setup {
 	const INSTALLER_SLUG      = 'essential-addons';
 
 	/**
+	 * The site's answer about xSpeed, shared by every WPDeveloper plugin that
+	 * offers it (EmbedPress, Essential Addons, Templately).
+	 *
+	 * Shape: [ offered_by, offered_at, outcome, outcome_at ], outcome one of
+	 * `offered` | `accepted` | `declined`. Per site (get_option, not
+	 * get_site_option), never autoloaded.
+	 *
+	 * Deliberately outside the `xspeed_` namespace: xSpeed's uninstaller owns
+	 * that prefix, and this row has to survive xSpeed being deleted — that is
+	 * the whole point of it. `accepted` with nothing on disk is how every
+	 * plugin reads "they had it and removed it".
+	 */
+	const OFFER_OPTION     = 'wpdeveloper_xspeed_offer';
+	const OUTCOME_OFFERED  = 'offered';
+	const OUTCOME_ACCEPTED = 'accepted';
+	const OUTCOME_DECLINED = 'declined';
+
+	/**
+	 * Plugin files whose presence means "this site has xSpeed", Free or Pro.
+	 */
+	const PRESENCE_BASENAMES = [ 'xspeed/xspeed.php', 'xspeed-pro/xspeed-pro.php' ];
+
+	/**
+	 * Register the listeners that keep the shared record honest for installs
+	 * and removals EA did not drive itself.
+	 *
+	 * @return void
+	 */
+	public static function register_hooks() {
+		add_action( 'activated_plugin', [ __CLASS__, 'on_activated_plugin' ] );
+		add_action( 'deleted_plugin', [ __CLASS__, 'on_deleted_plugin' ], 10, 2 );
+	}
+
+	/**
+	 * xSpeed was activated — by EA, a sibling plugin, or by hand. The site has
+	 * it, so the answer is `accepted`; that is what lets a later deletion read
+	 * as a removal instead of as "never asked".
+	 *
+	 * @param string $basename Plugin basename.
+	 * @return void
+	 */
+	public static function on_activated_plugin( $basename ) {
+		if ( in_array( $basename, self::PRESENCE_BASENAMES, true ) ) {
+			self::record_outcome( self::OUTCOME_ACCEPTED );
+		}
+	}
+
+	/**
+	 * xSpeed was deleted from the Plugins screen. Its uninstaller has just
+	 * wiped `xspeed_options`, so without this a site that installed xSpeed
+	 * before this record existed would look like one that was never asked.
+	 *
+	 * @param string $basename Plugin basename.
+	 * @param bool   $deleted  Whether the files were actually removed.
+	 * @return void
+	 */
+	public static function on_deleted_plugin( $basename, $deleted = true ) {
+		if ( $deleted && in_array( $basename, self::PRESENCE_BASENAMES, true ) ) {
+			self::record_outcome( self::OUTCOME_ACCEPTED );
+		}
+	}
+
+	/**
+	 * May ANY promotional surface put an xSpeed offer in front of this site?
+	 *
+	 * Copied from the integration contract on purpose — three plugins reading
+	 * one table must read it identically:
+	 *
+	 * | Record says                     | On disk | Offer?            |
+	 * |---------------------------------|---------|-------------------|
+	 * | anything                        | yes     | no                |
+	 * | `accepted`                      | no      | no — they removed it |
+	 * | `declined`                      | either  | no                |
+	 * | `offered` / absent / unreadable | no      | our own pacing    |
+	 *
+	 * This governs promos only. An explicit user action — the Integrations
+	 * toggle — always proceeds and records `accepted`.
+	 *
+	 * @return bool
+	 */
+	public static function may_offer() {
+		// Presence beats any record. Free or Pro, active or not.
+		foreach ( self::PRESENCE_BASENAMES as $basename ) {
+			if ( file_exists( WP_PLUGIN_DIR . '/' . $basename ) ) {
+				return false;
+			}
+		}
+
+		$outcome = self::offer_outcome();
+
+		// 'accepted' with nothing on disk is a removal. Anything unrecognised,
+		// or a corrupt row, counts as no answer at all.
+		return ! in_array( $outcome, [ self::OUTCOME_ACCEPTED, self::OUTCOME_DECLINED ], true );
+	}
+
+	/**
+	 * Note that an offer went up — only when the site has no record at all.
+	 *
+	 * add_option() rather than update_option(): it fails when the row exists,
+	 * so two promos racing on one page load cannot clobber each other, and a
+	 * stale read can never bury a sibling's `declined`.
+	 *
+	 * @return void
+	 */
+	public static function record_offered() {
+		$now = time();
+
+		add_option(
+			self::OFFER_OPTION,
+			[
+				'offered_by' => self::INSTALLER_SLUG,
+				'offered_at' => $now,
+				'outcome'    => self::OUTCOME_OFFERED,
+				'outcome_at' => $now,
+			],
+			'',
+			false
+		);
+	}
+
+	/**
+	 * Record the site's answer: `accepted` or `declined`.
+	 *
+	 * - Never downgrades: nothing takes a terminal answer back to `offered`,
+	 *   and a `declined` never overwrites an `accepted`.
+	 * - `accepted` does overwrite `declined`, because it only ever comes from
+	 *   the user acting — installing or activating xSpeed — which answers the
+	 *   question again.
+	 * - Keeps `offered_at`: it is when the site was first asked, and a sibling
+	 *   pacing itself off it needs it to age.
+	 *
+	 * @param string $outcome One of the OUTCOME_ACCEPTED / OUTCOME_DECLINED constants.
+	 * @return bool True when the record changed.
+	 */
+	public static function record_outcome( $outcome ) {
+		if ( ! in_array( $outcome, [ self::OUTCOME_ACCEPTED, self::OUTCOME_DECLINED ], true ) ) {
+			return false;
+		}
+
+		$record  = get_option( self::OFFER_OPTION, [] );
+		$record  = is_array( $record ) ? $record : [];
+		$current = self::offer_outcome();
+
+		if ( $current === $outcome
+			|| ( self::OUTCOME_DECLINED === $outcome && self::OUTCOME_ACCEPTED === $current ) ) {
+			return false;
+		}
+
+		$now = time();
+
+		return update_option(
+			self::OFFER_OPTION,
+			[
+				'offered_by' => self::INSTALLER_SLUG,
+				'offered_at' => ( isset( $record['offered_at'] ) && is_numeric( $record['offered_at'] ) && $record['offered_at'] > 0 )
+					? (int) $record['offered_at']
+					: $now,
+				'outcome'    => $outcome,
+				'outcome_at' => $now,
+			],
+			false
+		);
+	}
+
+	/**
+	 * Record `accepted` once an install has put xSpeed's files on disk.
+	 *
+	 * Never before: `accepted` with nothing on disk reads as "the user removed
+	 * it", so writing it ahead of a download that 404s would leave the site
+	 * permanently unaskable, by every sibling plugin, having never been asked.
+	 *
+	 * @param string $slug Plugin slug that was just installed.
+	 * @return void
+	 */
+	public static function after_install( $slug ) {
+		if ( self::SLUG !== $slug || ! file_exists( WP_PLUGIN_DIR . '/' . self::BASENAME ) ) {
+			return;
+		}
+
+		self::record_outcome( self::OUTCOME_ACCEPTED );
+	}
+
+	/**
+	 * The stored outcome, or '' for an absent or corrupt record.
+	 *
+	 * @return string
+	 */
+	private static function offer_outcome() {
+		$record = get_option( self::OFFER_OPTION, [] );
+
+		return ( is_array( $record ) && isset( $record['outcome'] ) && is_scalar( $record['outcome'] ) )
+			? (string) $record['outcome']
+			: '';
+	}
+
+	/**
 	 * May EA offer to INSTALL xSpeed?
 	 *
 	 * Nothing about the site's page cache enters into this. xSpeed installs
@@ -71,14 +267,16 @@ class XSpeed_Setup {
 	 * refused, the incumbent's drop-in untouched — which is a correct outcome
 	 * rather than a failed one.
 	 *
-	 * So only two things say no: a PHP/WP floor xSpeed cannot meet, and xSpeed
+	 * So only three things say no: a PHP/WP floor xSpeed cannot meet, xSpeed
 	 * already being on disk (active or not — a site that has it has made its own
-	 * decision, and re-offering an install is nagging).
+	 * decision, and re-offering an install is nagging), and the shared offer
+	 * record saying the site already answered — declined, or accepted and then
+	 * removed it. See may_offer().
 	 *
 	 * @return bool
 	 */
 	public static function can_install() {
-		return self::is_supported() && ! self::is_on_disk();
+		return self::is_supported() && ! self::is_on_disk() && self::may_offer();
 	}
 
 	/**
