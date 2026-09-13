@@ -336,6 +336,10 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 17. Creative Buttons Widget
 
 
+== Development ==
+
+Essential Addons is developed in the open. The unminified source for every minified JavaScript and CSS file, the React admin apps and the build scripts are in the public GitHub repository: [WPDevelopers/essential-addons-for-elementor-lite](https://github.com/WPDevelopers/essential-addons-for-elementor-lite). Bug reports and pull requests are welcome there.
+
 == Changelog ==
 
 = 6.8.3 - 01/09/2026 =
