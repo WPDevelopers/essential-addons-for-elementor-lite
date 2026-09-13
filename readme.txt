@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.0
 Stable tag: 6.8.3
 License: GPLv3
-License URI: https://opensource.org/licenses/GPL-3.0
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Elementor addon offering 120+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
 
