@@ -1,5 +1,7 @@
 # Admin Notices
 
+> **Update — issue #897 (WordPress.org Guideline 11):** `includes/bfcm-pointer.php` (BFCM 2025, ended 2025-12-04) and the `summer_campaign_2026_notice` in `Traits/Admin.php` (ended 2026-06-25) have been **removed**. Both targeted the WP Dashboard home (`index.php`) and re-armed after dismissal, which reviewers flag as dashboard hijacking. Everything below that describes them is historical. New campaigns must render only on Essential Addons' own screens and use permanent, per-user dismissal.
+
 How admin-area notices, campaign banners, and the Black Friday / Cyber Monday pointer reach the user — what's currently active, what's dormant, where the copy is stored, how dismissals work, and how to add a new campaign.
 
 This doc answers the four sub-questions in [issue #806](https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues/806):
