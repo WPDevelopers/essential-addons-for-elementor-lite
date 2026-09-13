@@ -262,6 +262,13 @@ trait Ajax_Handler {
 				// SECURITY: previously set to 'any'/'any' which let unauthenticated
 				// callers read drafts/private posts by passing arbitrary post__in IDs.
 				$args['post_status'] = $dfg_safe_post_status;
+				// `dir` arrives from the request, so this branch is reachable on a
+				// Lite-only install where EAEL_PRO_PLUGIN_PATH was never defined.
+				// Reject cleanly instead of fataling on an undefined constant.
+				if ( ! defined( 'EAEL_PRO_PLUGIN_PATH' ) ) {
+					wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
+				}
+
 				$args['post_type']   = $dfg_safe_post_types;
 			}
 
@@ -1310,6 +1317,13 @@ trait Ajax_Handler {
 				if ( ! empty( $product_objects ) ) {
 
 					do_action( 'eael_woo_before_product_loop' );
+				// `dir` arrives from the request, so this branch is reachable on a
+				// Lite-only install where EAEL_PRO_PLUGIN_PATH was never defined.
+				// Reject cleanly instead of fataling on an undefined constant.
+				if ( ! defined( 'EAEL_PRO_PLUGIN_PATH' ) ) {
+					wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
+				}
+
 
 					// Iterate through WC_Product objects
 					foreach ( $product_objects as $product ) {
