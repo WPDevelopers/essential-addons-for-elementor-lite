@@ -124,7 +124,7 @@ class ThinkRank_Promotion {
 		// Surface 3 — WP Dashboard "SEO Check" widget.
 		add_action( 'wp_dashboard_setup', [ $this, 'register_dashboard_widget' ] );
 
-		// Attributed, dismissible banner on EA's own pages + content list screens.
+		// Attributed, dismissible banner on EA's own admin pages only.
 		add_action( 'admin_notices', [ $this, 'render_dashboard_banner' ] );
 		// On the EA Dashboard (toplevel_page_eael-settings) EA strips all
 		// admin_notices and re-dispatches its own via `eael_admin_notices`, so
@@ -415,27 +415,18 @@ class ThinkRank_Promotion {
 
 	/**
 	 * Which context should the banner render in?
-	 *  - 'ea'      : Essential Addons' own admin pages (page slug starts eael).
-	 *  - 'content' : Posts / Pages / CPT list screens.
-	 *  - ''        : nowhere (keeps it off unrelated admin screens).
+	 *  - 'ea' : Essential Addons' own admin pages (page slug starts eael).
+	 *  - ''   : nowhere.
 	 *
-	 * Scoped to LIST screens (screen base 'edit') on purpose: classic admin
-	 * notices don't render reliably inside the block editor (post.php), and the
-	 * editor itself is already covered by the Gutenberg "Configure SEO" panel.
+	 * Posts / Pages / CPT list screens are deliberately excluded: promoting
+	 * another plugin on unrelated admin screens is what Guideline 11 ("no
+	 * dashboard hijacking") warns against. See issue #897.
 	 */
 	private function banner_context() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
 		if ( 0 === strpos( $page, 'eael' ) ) {
 			return 'ea';
-		}
-
-		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		if ( $screen && 'edit' === $screen->base && ! empty( $screen->post_type ) ) {
-			$obj = get_post_type_object( $screen->post_type );
-			if ( $obj && ! empty( $obj->public ) && 'attachment' !== $screen->post_type ) {
-				return 'content';
-			}
 		}
 
 		return '';
@@ -446,9 +437,6 @@ class ThinkRank_Promotion {
 	 * site does not have yet — see banner_copy() for which that is.
 	 *
 	 * Secondary action depends on context:
-	 *  - 'content' (Posts/Pages/CPT list screens): "Never show me again" —
-	 *    permanent, SITE-WIDE. One click hides every promo surface for all
-	 *    users of this installation, forever.
 	 *  - 'ea' (EA Dashboard): "Skip for 30 days" — site-wide snooze; the promo
 	 *    may return after 30 days unless never-show was used.
 	 *
@@ -704,7 +692,41 @@ class ThinkRank_Promotion {
 					$this->render_dashboard_widget( $plugin );
 				}
 			);
+
+			// Opens collapsed the first time; see collapse_widget_by_default().
+			$this->collapse_widget_by_default( $spec['id'] );
 		}
+	}
+
+	/**
+	 * Start a promo dashboard widget collapsed, once per user.
+	 *
+	 * WordPress remembers collapsed dashboard boxes per user in the
+	 * `closedpostboxes_dashboard` user option. The first time a user sees one of
+	 * these widgets it is added to that list, so it appears as a header bar they
+	 * can expand; after that the user's own toggle wins. Keeps a cross-promotion
+	 * from taking full-size space on the WP Dashboard by default (Guideline 11,
+	 * issue #897).
+	 *
+	 * @param string $widget_id Dashboard widget ID.
+	 */
+	private function collapse_widget_by_default( $widget_id ) {
+		$user_id = get_current_user_id();
+		$flag    = 'eael_dashboard_widget_collapsed_' . $widget_id;
+
+		if ( ! $user_id || get_user_meta( $user_id, $flag, true ) ) {
+			return;
+		}
+
+		$closed = get_user_option( 'closedpostboxes_dashboard', $user_id );
+		$closed = is_array( $closed ) ? $closed : [];
+
+		if ( ! in_array( $widget_id, $closed, true ) ) {
+			$closed[] = $widget_id;
+			update_user_meta( $user_id, 'closedpostboxes_dashboard', $closed );
+		}
+
+		update_user_meta( $user_id, $flag, 1 );
 	}
 
 	/**
