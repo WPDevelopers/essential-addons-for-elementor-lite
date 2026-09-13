@@ -93,12 +93,12 @@ trait Login_Registration {
 		}
 
 		if ( ! is_user_logged_in() ) {
-			wp_redirect( $redirect_to );
+			wp_redirect( $redirect_to ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- External logout targets are supported by design; the nonce above is bound to this exact URL.
 			exit;
 		}
 
 		wp_logout();
-		wp_redirect( $redirect_to );
+		wp_redirect( $redirect_to ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- External logout targets are supported by design; the nonce above is bound to this exact URL.
 		exit;
 	}
 
@@ -2082,7 +2082,7 @@ trait Login_Registration {
 			return false;
 		}
 
-		$endpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+		$endpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'; // phpcs:ignore PluginCheck.CodeAnalysis.Offloading.OffloadedContent -- Server-side Cloudflare Turnstile verification API for a site-configured service, not an offloaded asset.
 		$data     = [
 			'secret'   => $secret,
 			'response' => !empty( $_REQUEST['cf-turnstile-response'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['cf-turnstile-response'] ) ) : '', //phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -2962,11 +2962,12 @@ trait Login_Registration {
 
 		foreach ( array_keys( $fields ) as $type ) {
 			$post_key = 'eael_mya_' . $type;
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Runs on woocommerce_save_account_details, which WC_Form_Handler::save_account_details() fires only after verifying its nonce.
 			if ( ! isset( $_POST[ $post_key ] ) ) {
 				continue;
 			}
 
-			$value = sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) );
+			$value = sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- See above: nonce verified by WooCommerce.
 
 			if ( 'website' === $type ) {
 				wp_update_user( [ 'ID' => $user_id, 'user_url' => esc_url_raw( $value ) ] );
@@ -3193,10 +3194,10 @@ trait Login_Registration {
 		if ( 'eael_approve_user' === $action ) {
 			update_user_meta( $user_id, 'eael_registration_status', 'approved' );
 			if ( $user ) {
-				/* translators: %s: user display name */
 				wp_mail(
 					$user->user_email,
 					__( 'Your account has been approved', 'essential-addons-for-elementor-lite' ),
+					/* translators: %s: user display name */
 					sprintf( __( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ), $user->display_name )
 				);
 			}
@@ -3276,8 +3277,8 @@ trait Login_Registration {
 			$user = get_userdata( $user_id );
 			if ( $user ) {
 				$subject = __( 'Your account has been approved', 'essential-addons-for-elementor-lite' );
-				/* translators: %s: user display name */
 				$message = sprintf(
+					/* translators: %s: user display name */
 					__( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ),
 					$user->display_name
 				);
