@@ -722,9 +722,50 @@ Source: [WPDevelopers/essential-addons-for-elementor-lite#897](https://github.co
 ### New findings the issue did not cover
 
 - **T1 — Typeform SDK is unlicensed.** `embed/embed.js` is `@typeform/embed` **0.16.0** (exact literal match), published with no licence. Loaded by the live TypeForm widget, so it cannot simply be deleted. Path: move to 0.17.x (LGPL-3.0-only, same 0.x API — verify) or 1.26+ (MIT, new API).
-- **`marquee.js` is a Pro asset living in Lite** — Pro loads it through `EAEL_PLUGIN_PATH`. Moving it needs a coordinated Lite + Pro release with a version gate.
+- ~~**`marquee.js` is a Pro asset living in Lite**~~ — **Resolved 2026-09-13:** Pro ships and loads its own copy (and `three.min.js`); Lite keeps both only for Pro ≤ 7.0.3.
 - **`issue-wpml.md` was shipping** in the zip — now in `.distignore`. **`composer.json`** now ships alongside `vendor/`.
 - **`vendor/priyomukul/wp-notice` declares no licence** — declare one upstream.
 - **No external-services section in the readme** for reCAPTCHA, Cloudflare Turnstile, the Facebook/Twitter feeds, Business Reviews, NFT Gallery and Typeform. WP.org reviewers routinely require one (Guidelines 6/7).
 - **`Interactive_Circle.php:123` unordered placeholders** — left as is, because changing the msgid drops existing translations.
 - **Changelog is 4,798 of 5,000 words** — it will start being trimmed within a few releases; move old entries to `changelog.txt`.
+
+---
+
+## 10. Status — 2026-09-14
+
+Commits on `wporg-compliance`: Free `57050c8eb…b192e534c` (14), Pro `d03a99dde…54110d303` (3). Tested on the dev site — see [`TEST-CASES.md`](TEST-CASES.md). Plugin Check on the built package: **131 rows / 72 errors** (was 207 / 151).
+
+### Done
+S1, S2, S3, S4, S8, S9, S10, S11 · issue #897 items 1–8 and its Plugin Check items (except the deferred ones below) · Pro-only load-more logic moved to Pro `Traits/Load_More.php` · `marquee.min.js` and `three.min.js` loaded from Pro · Woo_Product_Compare docblock.
+
+### Changed after the commits (uncommitted)
+- Lite `includes/Traits/Ajax_Handler.php`, Pro `includes/Traits/Load_More.php`: `phpcs:disable/enable WordPress.Security.NonceVerification.Missing` around the Dynamic Gallery `$_POST` reads. The refactor moved them out of `ajax_load_more()`, so Plugin Check reported 6 new warnings. Comment only.
+- Docs that still described the old behaviour: `docs/architecture/dynamic-data/load-more-and-pagination.md`, `docs/architecture/dynamic-data/third-party-integrations.md` (also corrected the outdated `'any'` post status note), `docs/widgets/woo-product-carousel.md`.
+
+### Still open
+| Item | Status | Next step |
+|---|---|---|
+| S5 dead Pro hook listeners | Won't do (owner, BC) | — |
+| S6 14 `nopriv` AJAX handlers | Won't do (owner, BC) | — |
+| S7 escaping (71 Plugin Check errors) | Won't do (owner, BC) | — |
+| S12 65 shared function names | Won't do (owner, BC) | — |
+| S13 readme **External services** section (reCAPTCHA, Turnstile, Facebook, X, Business Reviews, NFT Gallery, Typeform, usage tracking) | Open | Write the section; reviewers routinely ask for it |
+| S14 readme title ≠ plugin header name (`mismatched_plugin_name`) | Open | Marketing decision |
+| S15 18 assets shipped by both plugins | Open | Check both copies on every CSS/JS fix |
+| S16 / #897-9 bundled `imagesloaded` vs core handle | Deferred | Needs Asset_Builder handle dependencies + cache regeneration |
+| #897-0 `LicenseManager` shim | Deferred | Keeps Pro 6.2.2–6.2.3 updating |
+| T1 Typeform embed SDK 0.16.0 has no licence | Open | Upgrade SDK (0.17+ LGPL or 1.26+ MIT) and retest TypeForm widget |
+| `vendor/priyomukul/wp-notice` declares no licence | Open | Add a licence upstream |
+| `Interactive_Circle.php:123` unordered placeholders | Open | Changing it drops existing translations |
+| Changelog 4,798 / 5,000 words | Open | Move old entries to `changelog.txt` |
+| ThinkRank Gutenberg "Configure SEO" panel | Open | Product decision (same class as the removed list-screen banner) |
+| Lite `src/js/view/load-more.js` Dynamic Gallery branches | Open | JS hook + rebuild of both plugins |
+| Advanced Search promo card name | Skipped (owner) | — |
+| Release | Open | Changelog + version bump (Lite 6.8.4, Pro 7.0.4); Lite `42a30e485` and Pro `47875f818` can ship in either order |
+| Phase 2 cleanup | Later | When Pro ≤ 7.0.3 is unsupported: remove Lite `legacy_pro_load_more_prepare()`, `build_dfg_acf_taxonomy_map()`, `get_dfg_post_taxonomy_classes()`, legacy `found_posts` branch, `lib-view/marquee/`, `lib-view/three/` |
+
+### Found while testing (pre-existing, not caused by this work)
+- PHP warning `Undefined array key "orderby"` — `Ajax_Handler.php:180` (Post Grid load more when `orderby` was never saved). Code from 2025-05.
+- Setup wizard page JS errors — WooCommerce `wc-entities.js` and core `svg-painter.js`; identical with the pre-change bundle.
+- Asset bundles cached in `uploads/essential-addons-elementor/` reflect the plugin set active when they were built; `Migration` empties that folder on plugin activation/upgrade.
+

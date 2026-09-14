@@ -162,8 +162,8 @@ Both JS and PHP branch on `data-class` (the widget's PHP class FQN). This is the
 | `\…\Elements\Product_Grid` | Filters `li` from response, appends to `.eael-product-grid .products`, masonry isotope, re-init `.wc_product_gallery()` for any new items | Fires `eael_woo_before_product_loop` |
 | `\…\Elements\Woo_Product_List` | Default-ish branch | Fires `eael/woo-product-list/before-product-loop` |
 | `\…\Elements\Woo_Product_Gallery` | Reads active category-tab data, paginates per-tab via `data("page")` on the tab; on empty response, hides load-more and removes infinite-scroll wrapper | tax_query rebuilt from `$_REQUEST['taxonomy']`, sanitized via `sanitize_taxonomy_data` |
-| `\…\Pro\Elements\Dynamic_Filterable_Gallery` | Collects `data-itemid` from already-rendered items into `exclude_ids`, sends `active_term_id` + `active_taxonomy`. Page flag is fixed to 1 since exclusion drives pagination. Filter-button "no more posts" UI on empty | Hybrid ACF + taxonomy query, attachment taxonomy map computed, post__in / post__not_in juggling |
-| `\…\Pro\Elements\Post_Block` | Default branch | Old → new control-name compat (e.g. `eael_post_block_hover_animation` → `post_block_hover_animation`), FA4-migrated icon resolution |
+| `\…\Pro\Elements\Dynamic_Filterable_Gallery` | Collects `data-itemid` from already-rendered items into `exclude_ids`, sends `active_term_id` + `active_taxonomy`. Page flag is fixed to 1 since exclusion drives pagination. Filter-button "no more posts" UI on empty | **Owned by Pro** (`Pro\Traits\Load_More`, via `eael/load_more/prepare_query` + `eael/load_more/before_items_html`): hybrid ACF + taxonomy query, attachment taxonomy map, post__in / post__not_in juggling, hidden `found_posts` marker. Lite's `legacy_pro_load_more_prepare()` runs only with Pro ≤ 7.0.3 |
+| `\…\Pro\Elements\Post_Block` | Default branch | **Owned by Pro** (`Pro\Traits\Load_More`): old → new control-name compat (e.g. `eael_post_block_hover_animation` → `post_block_hover_animation`), FA4-migrated icon resolution. Lite's legacy copy runs only with Pro ≤ 7.0.3 |
 
 ## Configuration & Extension Points
 
@@ -173,6 +173,9 @@ Both JS and PHP branch on `data-class` (the widget's PHP class FQN). This is the
 | ------ | ------- |
 | `eael_load_more_args` | Last chance to mutate `$args` before `WP_Query` runs in `ajax_load_more` |
 | `eael_pagination_link` | Customise pagination link output (used by WC pagination handlers) |
+| `eael/load_more/prepare_query` | `[ 'settings' => array, 'args' => array ]`, `$class` — the plugin that owns a widget adjusts its load-more settings and query args (Pro: Post Block, Dynamic Gallery) |
+| `eael/load_more/before_items_html` | `''`, `$class`, `$found_posts`, `$settings` — markup placed before the loaded items (Pro: Dynamic Gallery's hidden `found_posts` marker) |
+| `eael/load_more/pro_prepares_own_widgets` | `false` by default; Pro returns `true` so Lite skips `legacy_pro_load_more_prepare()` |
 
 ### Actions
 
@@ -224,7 +227,7 @@ Inside `ajax_load_more`, several class-specific code blocks run between settings
 
 ### Dynamic Filterable Gallery's hybrid query is fragile
 
-The Pro Dynamic_Filterable_Gallery branch ([Ajax_Handler:212](../../../includes/Traits/Ajax_Handler.php#L212)) computes a hybrid ACF-image + standard-post query map. It depends on multiple flags (`fetch_acf_image`, `eael_dfg_enable_combined_query`, `fetch_acf_image_gallery`) being mutually consistent. When debugging, log all three plus the resulting `taxonomy_map` to confirm the branch took the expected path.
+The Dynamic_Filterable_Gallery preparation — owned by Pro in `Traits/Load_More.php` (`eael_pro_load_more_prepare_query()`), with Lite's `legacy_pro_load_more_prepare()` as the copy used by Pro ≤ 7.0.3 — computes a hybrid ACF-image + standard-post query map. It depends on multiple flags (`fetch_acf_image`, `eael_dfg_enable_combined_query`, `fetch_acf_image_gallery`) being mutually consistent. When debugging, log all three plus the resulting `taxonomy_map` to confirm the branch took the expected path.
 
 ## Debugging Guide
 
