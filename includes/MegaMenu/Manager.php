@@ -277,7 +277,7 @@ class Manager {
 			// reach the dialog still carrying its entities.
 			'i18n'      => [
 				'title'   => __( 'Apply Preset', 'essential-addons-for-elementor-lite' ),
-				'confirm' => __( 'Applying a preset replaces this menu\'s items, styles and everything inside its panels. Continue?', 'essential-addons-for-elementor-lite' ),
+				'confirm' => __( 'Applying a preset will replace this menu’s items, styles, and all content inside its panels. Continue?', 'essential-addons-for-elementor-lite' ),
 				'confirmHeader' => __( 'Applying a preset will replace this menu’s items, styles, and all content inside its panels. Continue?', 'essential-addons-for-elementor-lite' ),
 				'confirmCustom' => __( 'Switching to Custom clears the design and leaves a plain menu to build from. Everything in this header block is replaced. Continue?', 'essential-addons-for-elementor-lite' ),
 				'apply'   => __( 'Apply', 'essential-addons-for-elementor-lite' ),

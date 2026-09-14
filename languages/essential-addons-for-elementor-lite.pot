@@ -12661,11 +12661,7 @@ msgstr ""
 msgid "Apply Preset"
 msgstr ""
 
-#: ../includes/MegaMenu/Manager.php:280
-msgid "Applying a preset replaces this menu's items, styles and everything inside its panels. Continue?"
-msgstr ""
-
-#: ../includes/MegaMenu/Manager.php:281
+#: ../includes/MegaMenu/Manager.php:280, ../includes/MegaMenu/Manager.php:281
 msgid "Applying a preset will replace this menu’s items, styles, and all content inside its panels. Continue?"
 msgstr ""
 

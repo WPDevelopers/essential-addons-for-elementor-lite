@@ -309,6 +309,13 @@
 	const PRESET_TILE = ".elementor-control-eael_mega_menu_preset .elementor-choices-label";
 
 	/**
+	 * Element types a preset treats as layout blocks it may climb through.
+	 *
+	 * The classic container, plus Editor V4's Flexbox and Div Block.
+	 */
+	const CONTAINER_TYPES = ["container", "e-flexbox", "e-div-block"];
+
+	/**
 	 * The tile the pointer is over, if any.
 	 *
 	 * Held because a tooltip has to be closed through the element it belongs to,
@@ -645,6 +652,12 @@
 	 * or directly in the document — has no block to take over, and falls back to
 	 * replacing the widget alone.
 	 *
+	 * "Container" includes Editor V4's Flexbox and Div Block. With V4 on, adding a
+	 * container or picking a structure builds those instead of the classic
+	 * `container`, and a menu dropped into one used to stop the climb at once —
+	 * applying a preset then swapped the widget alone, leaving the header without
+	 * its logo and actions.
+	 *
 	 * @param {Object} container Widget container.
 	 *
 	 * @return {Object} `{ container, mode }` — what to replace, and what to ask for.
@@ -661,7 +674,7 @@
 				!parent ||
 				!parent.model ||
 				"function" !== typeof parent.model.get ||
-				"container" !== parent.model.get("elType")
+				-1 === CONTAINER_TYPES.indexOf(parent.model.get("elType"))
 			) {
 				break;
 			}
