@@ -151,7 +151,6 @@ class Bootstrap
             new Angie_Integration( $this->registered_elements );
         }
 
-		include_once(EAEL_PLUGIN_PATH . 'includes/bfcm-pointer.php');
 
     }
 

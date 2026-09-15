@@ -631,7 +631,7 @@ trait Helper
 			}
 		}
 
-		$frames = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 20 ); // phpcs:ignore PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.NeedsInspection
+		$frames = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 20 ); // phpcs:ignore PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.NeedsInspection, WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace -- Detects an Elementor Pro Theme Builder conditions call, which exposes no public signal.
 
 		foreach ( $frames as $frame ) {
 			if ( ! empty( $frame['class'] ) && false !== stripos( $frame['class'], 'ThemeBuilder\\Classes\\Conditions' ) ) {

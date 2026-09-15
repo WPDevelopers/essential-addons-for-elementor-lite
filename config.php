@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
+
 // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $config = [
     'elements' => [
@@ -1200,17 +1204,6 @@ $config = [
 				    ],
 			    ],
 			    'js'  => [
-                    //gsap
-				    // [
-					//     'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/gsap.min.js',
-					//     'type' => 'lib',
-					//     'context' => 'view',
-				    // ],
-                    // [
-					//     'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/Draggable.min.js',
-					//     'type' => 'lib',
-					//     'context' => 'view',
-				    // ],
                     // //marquee
                     // [
                     //     'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/marquee/marquee.min.js',

@@ -330,7 +330,7 @@ class Admin {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserving the active view only.
 		if ( ! empty( $_REQUEST['template_type'] ) ) {
-			$args['template_type'] = sanitize_key( wp_unslash( $_REQUEST['template_type'] ) );
+			$args['template_type'] = sanitize_key( wp_unslash( $_REQUEST['template_type'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only view parameter, sanitized.
 		}
 
 		wp_safe_redirect( Theme_Builder::page_url( $args ) );

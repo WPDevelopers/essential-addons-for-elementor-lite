@@ -124,7 +124,7 @@ class ThinkRank_Promotion {
 		// Surface 3 — WP Dashboard "SEO Check" widget.
 		add_action( 'wp_dashboard_setup', [ $this, 'register_dashboard_widget' ] );
 
-		// Attributed, dismissible banner on EA's own pages + content list screens.
+		// Attributed, dismissible banner on EA's own admin pages only.
 		add_action( 'admin_notices', [ $this, 'render_dashboard_banner' ] );
 		// On the EA Dashboard (toplevel_page_eael-settings) EA strips all
 		// admin_notices and re-dispatches its own via `eael_admin_notices`, so
@@ -193,7 +193,7 @@ class ThinkRank_Promotion {
 			'openUrl' => admin_url( 'admin.php?page=' . self::ADMIN_PAGE ),
 		] );
 
-		wp_register_style( 'eael-thinkrank-gb', false );
+		wp_register_style( 'eael-thinkrank-gb', false, [], EAEL_PLUGIN_VERSION );
 		wp_enqueue_style( 'eael-thinkrank-gb' );
 		wp_add_inline_style( 'eael-thinkrank-gb',
 			'.eael-tr-gb__desc{font-size:12.5px;line-height:1.5;color:#3c434a;margin:0 0 10px;}'
@@ -433,27 +433,18 @@ class ThinkRank_Promotion {
 
 	/**
 	 * Which context should the banner render in?
-	 *  - 'ea'      : Essential Addons' own admin pages (page slug starts eael).
-	 *  - 'content' : Posts / Pages / CPT list screens.
-	 *  - ''        : nowhere (keeps it off unrelated admin screens).
+	 *  - 'ea' : Essential Addons' own admin pages (page slug starts eael).
+	 *  - ''   : nowhere.
 	 *
-	 * Scoped to LIST screens (screen base 'edit') on purpose: classic admin
-	 * notices don't render reliably inside the block editor (post.php), and the
-	 * editor itself is already covered by the Gutenberg "Configure SEO" panel.
+	 * Posts / Pages / CPT list screens are deliberately excluded: promoting
+	 * another plugin on unrelated admin screens is what Guideline 11 ("no
+	 * dashboard hijacking") warns against. See issue #897.
 	 */
 	private function banner_context() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
 		if ( 0 === strpos( $page, 'eael' ) ) {
 			return 'ea';
-		}
-
-		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		if ( $screen && 'edit' === $screen->base && ! empty( $screen->post_type ) ) {
-			$obj = get_post_type_object( $screen->post_type );
-			if ( $obj && ! empty( $obj->public ) && 'attachment' !== $screen->post_type ) {
-				return 'content';
-			}
 		}
 
 		return '';
@@ -464,9 +455,6 @@ class ThinkRank_Promotion {
 	 * site does not have yet — see banner_copy() for which that is.
 	 *
 	 * Secondary action depends on context:
-	 *  - 'content' (Posts/Pages/CPT list screens): "Never show me again" —
-	 *    permanent, SITE-WIDE. One click hides every promo surface for all
-	 *    users of this installation, forever.
 	 *  - 'ea' (EA Dashboard): "Skip for 30 days" — site-wide snooze; the promo
 	 *    may return after 30 days unless never-show was used.
 	 *
@@ -505,9 +493,8 @@ class ThinkRank_Promotion {
 			: __( 'Never show me again', 'essential-addons-for-elementor-lite' );
 
 		$nonce = wp_create_nonce( 'essential-addons-elementor' );
-		$open  = esc_url( $copy['open'] );
 		?>
-		<div class="notice eael-tr-banner" data-slug="<?php echo esc_attr( $copy['slugs'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-open="<?php echo $open; ?>">
+		<div class="notice eael-tr-banner" data-slug="<?php echo esc_attr( $copy['slugs'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-open="<?php echo esc_url( $copy['open'] ); ?>">
 			<div class="eael-tr-banner__icon" aria-hidden="true">
 				<img src="<?php echo esc_url( $copy['icon'] ); ?>" width="<?php echo esc_attr( $copy['icon_w'] ); ?>" height="<?php echo esc_attr( $copy['icon_h'] ); ?>" alt="">
 			</div>
@@ -631,10 +618,6 @@ class ThinkRank_Promotion {
 		// HTML-encode it into an &amp; that a <script> block never decodes
 		// back. wp_json_encode() emits its own quotes — hence none below.
 		$flags      = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
-		$installing = wp_json_encode( $copy['installing'], $flags );
-		$done       = wp_json_encode( $copy['done'], $flags );
-		$failed     = wp_json_encode( __( 'Could not enable automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ), $flags );
-		$label      = wp_json_encode( $copy['cta'], $flags );
 		?>
 		<style>
 			.eael-tr-banner.notice { display:flex; align-items:center; gap:16px; padding:14px 16px; border-left-color:#4451ff; position:relative; }
@@ -666,7 +649,7 @@ class ThinkRank_Promotion {
 			var later = el.querySelector( '.eael-tr-banner__later' );
 			later.addEventListener( 'click', function () { post( later.dataset.action || 'eael_thinkrank_snooze' ); el.parentNode && el.parentNode.removeChild( el ); } );
 			el.querySelector( '.eael-tr-banner__install' ).addEventListener( 'click', function () {
-				var btn = this; btn.setAttribute( 'disabled', 'disabled' ); btn.textContent = <?php echo $installing; ?>;
+				var btn = this; btn.setAttribute( 'disabled', 'disabled' ); btn.textContent = <?php echo wp_json_encode( $copy['installing'], $flags ); ?>;
 				var slugs = ( el.dataset.slug || '' ).split( ',' ).filter( Boolean );
 				// One install at a time, carrying the first error forward: the
 				// endpoint takes a single slug, and a cache install must not
@@ -676,13 +659,13 @@ class ThinkRank_Promotion {
 						if ( err ) { return err; }
 						return post( 'wpdeveloper_install_plugin', slug ).then( function ( res ) {
 							if ( res && res.success ) { return ''; }
-							return ( res && res.data ) ? res.data : <?php echo $failed; ?>;
+							return ( res && res.data ) ? res.data : <?php echo wp_json_encode( __( 'Could not enable automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ), $flags ); ?>;
 						} );
 					} );
 				}, window.Promise.resolve( '' ) ).then( function ( err ) {
-					if ( ! err ) { btn.textContent = <?php echo $done; ?>; window.setTimeout( function () { window.location.href = el.dataset.open; }, 800 ); }
-					else { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo $label; ?>; window.alert( err ); }
-				} ).catch( function () { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo $label; ?>; window.alert( <?php echo $failed; ?> ); } );
+					if ( ! err ) { btn.textContent = <?php echo wp_json_encode( $copy['done'], $flags ); ?>; window.setTimeout( function () { window.location.href = el.dataset.open; }, 800 ); }
+					else { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo wp_json_encode( $copy['cta'], $flags ); ?>; window.alert( err ); }
+				} ).catch( function () { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo wp_json_encode( $copy['cta'], $flags ); ?>; window.alert( <?php echo wp_json_encode( __( 'Could not enable automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ), $flags ); ?> ); } );
 			} );
 		} )();
 		</script>
@@ -726,7 +709,41 @@ class ThinkRank_Promotion {
 					$this->render_dashboard_widget( $plugin );
 				}
 			);
+
+			// Opens collapsed the first time; see collapse_widget_by_default().
+			$this->collapse_widget_by_default( $spec['id'] );
 		}
+	}
+
+	/**
+	 * Start a promo dashboard widget collapsed, once per user.
+	 *
+	 * WordPress remembers collapsed dashboard boxes per user in the
+	 * `closedpostboxes_dashboard` user option. The first time a user sees one of
+	 * these widgets it is added to that list, so it appears as a header bar they
+	 * can expand; after that the user's own toggle wins. Keeps a cross-promotion
+	 * from taking full-size space on the WP Dashboard by default (Guideline 11,
+	 * issue #897).
+	 *
+	 * @param string $widget_id Dashboard widget ID.
+	 */
+	private function collapse_widget_by_default( $widget_id ) {
+		$user_id = get_current_user_id();
+		$flag    = 'eael_dashboard_widget_collapsed_' . $widget_id;
+
+		if ( ! $user_id || get_user_meta( $user_id, $flag, true ) ) {
+			return;
+		}
+
+		$closed = get_user_option( 'closedpostboxes_dashboard', $user_id );
+		$closed = is_array( $closed ) ? $closed : [];
+
+		if ( ! in_array( $widget_id, $closed, true ) ) {
+			$closed[] = $widget_id;
+			update_user_meta( $user_id, 'closedpostboxes_dashboard', $closed );
+		}
+
+		update_user_meta( $user_id, $flag, 1 );
 	}
 
 	/**
@@ -1342,7 +1359,7 @@ class ThinkRank_Promotion {
 		$count = 0;
 
 		if ( isset( $wpdb ) && is_object( $wpdb ) ) {
-			$count = (int) $wpdb->get_var(
+			$count = (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Result is cached in a transient.
 				"SELECT COUNT(*) FROM {$wpdb->posts}
 				 WHERE post_type = 'attachment'
 				   AND post_mime_type IN ( 'image/jpeg', 'image/jpg', 'image/png' )"
@@ -1663,17 +1680,12 @@ class ThinkRank_Promotion {
 	 */
 	private function widget_script( $spec ) {
 		$flags    = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
-		$id       = wp_json_encode( '#' . $spec['id'], $flags );
-		$open_url = wp_json_encode( $spec['open_url'], $flags );
 		// JSON rather than esc_js(): these labels can contain "&", which
 		// esc_js() turns into an &amp; that a <script> block never decodes.
-		$installing = wp_json_encode( $spec['installing'], $flags );
-		$label      = wp_json_encode( $spec['cta'], $flags );
-		$failed     = wp_json_encode( $spec['failed'], $flags );
 		?>
 		<script>
 		( function () {
-			var root = document.querySelector( <?php echo $id; ?> );
+			var root = document.querySelector( <?php echo wp_json_encode( '#' . $spec['id'], $flags ); ?> );
 			if ( ! root ) { return; }
 			function post( body ) {
 				return window.fetch( window.ajaxurl, {
@@ -1704,7 +1716,7 @@ class ThinkRank_Promotion {
 				var notice = root.querySelector( '.eael-tr-notice' );
 				var label  = btn.querySelector( '.eael-tr-cta__label' );
 				btn.setAttribute( 'disabled', 'disabled' );
-				if ( label ) { label.textContent = <?php echo $installing; ?>; }
+				if ( label ) { label.textContent = <?php echo wp_json_encode( $spec['installing'], $flags ); ?>; }
 				if ( notice ) { notice.style.display = 'none'; notice.className = 'eael-tr-notice'; }
 
 				var body = new URLSearchParams();
@@ -1714,16 +1726,16 @@ class ThinkRank_Promotion {
 
 				post( body ).then( function ( res ) {
 					if ( res && res.success ) {
-						window.setTimeout( function () { window.location.href = <?php echo $open_url; ?>; }, 900 );
+						window.setTimeout( function () { window.location.href = <?php echo wp_json_encode( $spec['open_url'], $flags ); ?>; }, 900 );
 					} else {
 						btn.removeAttribute( 'disabled' );
-						if ( label ) { label.textContent = <?php echo $label; ?>; }
-						if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = ( res && res.data ) ? res.data : <?php echo $failed; ?>; }
+						if ( label ) { label.textContent = <?php echo wp_json_encode( $spec['cta'], $flags ); ?>; }
+						if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = ( res && res.data ) ? res.data : <?php echo wp_json_encode( $spec['failed'], $flags ); ?>; }
 					}
 				} ).catch( function () {
 					btn.removeAttribute( 'disabled' );
-					if ( label ) { label.textContent = <?php echo $label; ?>; }
-					if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = <?php echo $failed; ?>; }
+					if ( label ) { label.textContent = <?php echo wp_json_encode( $spec['cta'], $flags ); ?>; }
+					if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = <?php echo wp_json_encode( $spec['failed'], $flags ); ?>; }
 				} );
 			} );
 		} )();

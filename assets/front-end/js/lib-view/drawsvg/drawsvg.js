@@ -1,3 +1,11 @@
+/*!
+ * jQuery DrawSVG
+ * https://github.com/lcdsantos/jquery-drawsvg
+ *
+ * Copyright (c) Leonardo Santos
+ * Released under the MIT License.
+ * https://github.com/lcdsantos/jquery-drawsvg/blob/master/LICENSE
+ */
 (function(factory) {
     /* global define */
     if ( typeof define === 'function' && define.amd ) {

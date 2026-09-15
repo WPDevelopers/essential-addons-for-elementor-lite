@@ -120,7 +120,7 @@ class Interactive_Circle extends Widget_Base {
 			[
 				'type'            => Controls_Manager::RAW_HTML,
 				/* translators: %d: maximum number of circle items. */
-				'raw'             => sprintf( __( '<strong>Circle Item limit max %d.</strong> Only the first %d rows of the ACF Repeater are used — extra rows are ignored so the preset layout is not broken.', 'essential-addons-for-elementor-lite' ), self::EAEL_IC_MAX_ITEMS, self::EAEL_IC_MAX_ITEMS ),
+				'raw'             => sprintf( __( '<strong>Circle Item limit max %d.</strong> Only the first %d rows of the ACF Repeater are used — extra rows are ignored so the preset layout is not broken.', 'essential-addons-for-elementor-lite' ), self::EAEL_IC_MAX_ITEMS, self::EAEL_IC_MAX_ITEMS ), // phpcs:ignore WordPress.WP.I18n.UnorderedPlaceholdersText -- Both placeholders receive the same value; changing the string would drop existing translations.
 				'content_classes' => 'eael-warning',
 				'condition'       => [ 'eael_ic_data_source' => 'acf_repeater' ],
 			]

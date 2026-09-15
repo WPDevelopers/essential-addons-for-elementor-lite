@@ -1,0 +1,160 @@
+Essential Addons for Elementor — Third-Party Libraries and Licences
+===================================================================
+
+Essential Addons for Elementor is licensed under the GNU General Public License
+v3 (see the plugin header and readme.txt). It bundles the third-party code and
+assets listed below. Each is distributed under its own licence, all of which are
+compatible with GPLv3 except where an entry is marked "ATTENTION".
+
+Unminified source for Essential Addons' own code, and the build scripts, are in
+the public repository:
+https://github.com/WPDevelopers/essential-addons-for-elementor-lite
+
+Format: path (relative to the plugin root) — library, version — licence — upstream
+
+
+FRONT-END JAVASCRIPT  (assets/front-end/js/lib-view/)
+-----------------------------------------------------
+
+code-snippet/highlight.min.js
+    highlight.js 10.7.0 — BSD-3-Clause
+    https://github.com/highlightjs/highlight.js
+
+countdown/countdown.js, countdown.min.js
+    Countdown jQuery plugin by Fengyuan Chen (plugin registered as $.fn.eacountdown)
+    — MIT (per the upstream package metadata)
+    https://fengyuanchen.github.io/countdown/
+
+dom-purify/purify.min.js
+    DOMPurify 3.2.6 — Apache-2.0 OR MPL-2.0 — Cure53 and contributors
+    https://github.com/cure53/DOMPurify
+
+drawsvg/drawsvg.js, drawsvg.min.js
+    jQuery DrawSVG — MIT — Leonardo Santos
+    https://github.com/lcdsantos/jquery-drawsvg
+
+embed/embed.js, embed.min.js
+    Typeform Embed SDK, @typeform/embed 0.16.0 (identified by exact content match)
+    ATTENTION: version 0.16.0 was published to npm with no licence field and no
+    LICENSE file. Typeform licensed later releases as LGPL-3.0-only (0.17.0+) and
+    MIT (1.26.0+). Replacing this copy with a licensed release is tracked
+    separately; it is not swapped here because it changes live widget behaviour.
+    https://github.com/Typeform/embed
+
+fancy-table/fancy-table.js, fancy-table.min.js
+    jQuery fancyTable 1.0.34 — MIT — Johan Johansson
+    https://github.com/myspace-nu/jquery.fancyTable
+
+full-calendar/*.js
+    FullCalendar 5.11.3 standard packages (core, daygrid, timegrid, list, locales)
+    — MIT
+    https://github.com/fullcalendar/fullcalendar
+
+image-zoom/zoom-lense.js, zoom-lense.min.js
+    Essential Addons code adapted from the public CodePen Pen "poyoRKQ" by HckKiu
+    — MIT (CodePen licenses all public Pens under MIT)
+    https://codepen.io/hckkiu/pen/poyoRKQ
+    https://blog.codepen.io/documentation/licensing/
+
+imagesloaded/imagesloaded.pkgd.js, imagesloaded.pkgd.min.js
+    imagesLoaded 4.1.4 — MIT — Metafizzy
+    https://github.com/desandro/imagesloaded
+
+inview/inview.js, inview.min.js
+    jquery.inview — WTFPL (repository LICENSE) / ISC (package.json, 1.1.2)
+    https://github.com/protonet/jquery.inview
+
+isotope/isotope.pkgd.js, isotope.pkgd.min.js
+    Isotope 3.0.6 — GPLv3 (open-source option of Metafizzy's GPLv3/commercial
+    dual licence). This is one reason the plugin itself is GPLv3.
+    https://isotope.metafizzy.co
+
+magnific-popup/jquery.magnific-popup.js, .min.js
+    Magnific Popup — MIT — Dmytro Semenov
+    https://github.com/dimsemenov/Magnific-Popup
+
+marquee/marquee.js, marquee.min.js
+    Essential Addons marquee ($.fn.eaelmarque), built around GreenSock's
+    horizontalLoop() helper. Requires GSAP, which this plugin does not ship.
+    Current Essential Addons Pro ships and loads its own copy; this copy remains
+    only for older Pro releases.
+    ATTENTION: confirm the licence terms of the GreenSock helper with GreenSock.
+    https://gsap.com/docs/v3/HelperFunctions/
+
+morphext/morphext.js, morphext.min.js
+    Morphext — MIT — Ian Lai
+    https://github.com/MrSaints/Morphext
+
+plyr/plyr.js, plyr.min.js
+    Plyr 3.7.8 — MIT — Sam Potts
+    https://github.com/sampotts/plyr
+
+three/three.js, three.min.js
+    three.js — MIT
+    Used by Essential Addons Pro's 360 Degree Photo Viewer. Current Pro ships its
+    own copy; this copy remains only for older Pro releases.
+    https://github.com/mrdoob/three.js
+
+tooltipster/tooltipster.bundle.js, .min.js
+    Tooltipster 4 — MIT — Caleb Jacob and Louis Ameline
+    https://github.com/calebjacob/tooltipster
+
+typed/typed.js, typed.min.js
+    Typed.js — MIT — Matt Boldt
+    https://github.com/mattboldt/typed.js
+
+waypoint/waypoints.js, waypoints.min.js
+    Waypoints 4.0.1 — MIT — Caleb Troughton
+    https://github.com/imakewebthings/waypoints
+
+blob-animation/polygon-morphing-animation.js, .min.js
+    Essential Addons original code, 2.0.0 — GPLv3 (part of this plugin)
+
+icons/brands.json, regular.json, solid.json
+    Font Awesome Free 5 icon data — icons: CC BY 4.0 — Fonticons, Inc.
+    https://fontawesome.com/license/free
+
+
+FRONT-END CSS  (assets/front-end/css/lib-view/)
+-----------------------------------------------
+
+code-snippet/github.min.css, github-dark.min.css   highlight.js styles — BSD-3-Clause
+full-calendar/*.css                                FullCalendar 5.11.3 — MIT
+magnific-popup/*.css                               Magnific Popup — MIT
+plyr/*.css                                         Plyr 3.7.8 — MIT
+swiper/swiper-bundle.min.css                       Swiper 6.8.4 — MIT — Vladimir Kharlampidi
+tooltipster/*.css                                  Tooltipster 4 — MIT
+
+
+ADMIN  (assets/admin/vendor/)
+-----------------------------
+
+sweetalert2/js/sweetalert2.min.js, css/sweetalert2.min.css
+    SweetAlert2 8.8.7 — MIT
+    https://github.com/sweetalert2/sweetalert2
+
+sweetalert2/js/core.js
+    core-js 2.x client build (polyfills) — MIT
+    https://github.com/zloirock/core-js
+
+
+PHP  (vendor/)
+--------------
+
+vendor/composer/
+    Composer autoloader — MIT (vendor/composer/LICENSE)
+
+vendor/priyomukul/wp-notice/  (v2.x-dev)
+    Admin notice library by an Essential Addons contributor.
+    ATTENTION: the package declares no licence (no "license" key in composer.json
+    and no LICENSE file). A GPL-compatible licence should be declared upstream.
+    https://github.com/priyomukul/wp-notice
+
+
+BUILT BUNDLES
+-------------
+
+Built admin applications (for example includes/templates/admin/quick-setup/dist/
+and assets/admin/js/angie-integration.min.js) bundle npm dependencies such as
+React (MIT). Their dependency trees and licences are recorded in the
+package.json / package-lock.json files in the public repository above.

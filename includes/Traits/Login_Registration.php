@@ -93,12 +93,12 @@ trait Login_Registration {
 		}
 
 		if ( ! is_user_logged_in() ) {
-			wp_redirect( $redirect_to );
+			wp_redirect( $redirect_to ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- External logout targets are supported by design; the nonce above is bound to this exact URL.
 			exit;
 		}
 
 		wp_logout();
-		wp_redirect( $redirect_to );
+		wp_redirect( $redirect_to ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- External logout targets are supported by design; the nonce above is bound to this exact URL.
 		exit;
 	}
 
@@ -729,7 +729,7 @@ trait Login_Registration {
 		}
 
 		if ( isset( $_POST['confirm_email'] ) ) {
-			$confirm_email_raw = wp_unslash( $_POST['confirm_email'] );
+			$confirm_email_raw = wp_unslash( $_POST['confirm_email'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Raw value is only passed to is_email(); sanitize_email() is applied on the next line.
 			$confirm_email = sanitize_email( $confirm_email_raw );
 			if ( empty( $confirm_email ) || ! is_email( $confirm_email_raw ) ) {
 				$errors['confirm_email'] = isset( $settings['err_conf_email'] ) ? Helper::eael_wp_kses( $settings['err_conf_email'] ) : __( 'Your confirmed email did not match', 'essential-addons-for-elementor-lite' );
@@ -2082,7 +2082,7 @@ trait Login_Registration {
 			return false;
 		}
 
-		$endpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+		$endpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'; // phpcs:ignore PluginCheck.CodeAnalysis.Offloading.OffloadedContent -- Server-side Cloudflare Turnstile verification API for a site-configured service, not an offloaded asset.
 		$data     = [
 			'secret'   => $secret,
 			'response' => !empty( $_REQUEST['cf-turnstile-response'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['cf-turnstile-response'] ) ) : '', //phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -2393,7 +2393,7 @@ trait Login_Registration {
 		check_ajax_referer( 'eael_lr_otp', '_eael_otp_nonce' );
 
 		$token = ! empty( $_POST['otp_token'] ) ? sanitize_text_field( wp_unslash( $_POST['otp_token'] ) ) : '';
-		$code  = ! empty( $_POST['otp_code'] ) ? preg_replace( '/[^0-9]/', '', wp_unslash( $_POST['otp_code'] ) ) : '';
+		$code  = ! empty( $_POST['otp_code'] ) ? preg_replace( '/[^0-9]/', '', wp_unslash( $_POST['otp_code'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reduced to digits by preg_replace().
 
 		if ( empty( $token ) || empty( $code ) ) {
 			wp_send_json_error( [ 'message' => __( 'Please enter the verification code.', 'essential-addons-for-elementor-lite' ) ] );
@@ -2511,7 +2511,7 @@ trait Login_Registration {
 
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
-		do_action( 'register_new_user', $user_id );
+		do_action( 'register_new_user', $user_id ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core hook.
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		$response = [
@@ -2929,11 +2929,11 @@ trait Login_Registration {
 
 		foreach ( $fields as $type => $label ) {
 			if ( 'website' === $type ) {
-				$value = esc_attr( get_userdata( $user_id )->user_url ?? '' );
+				$value = get_userdata( $user_id )->user_url ?? '';
 			} elseif ( 'eael_phone_number' === $type ) {
-				$value = esc_attr( get_user_meta( $user_id, 'eael_phone_number', true ) );
+				$value = get_user_meta( $user_id, 'eael_phone_number', true );
 			} else {
-				$value = esc_attr( get_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, true ) );
+				$value = get_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, true );
 			}
 			?>
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -2942,7 +2942,7 @@ trait Login_Registration {
 				       class="woocommerce-Input woocommerce-Input--text input-text"
 				       name="eael_mya_<?php echo esc_attr( $type ); ?>"
 				       id="eael_mya_<?php echo esc_attr( $type ); ?>"
-				       value="<?php echo $value; ?>">
+				       value="<?php echo esc_attr( $value ); ?>">
 			</p>
 			<?php
 		}
@@ -2962,11 +2962,12 @@ trait Login_Registration {
 
 		foreach ( array_keys( $fields ) as $type ) {
 			$post_key = 'eael_mya_' . $type;
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Runs on woocommerce_save_account_details, which WC_Form_Handler::save_account_details() fires only after verifying its nonce.
 			if ( ! isset( $_POST[ $post_key ] ) ) {
 				continue;
 			}
 
-			$value = sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) );
+			$value = sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- See above: nonce verified by WooCommerce.
 
 			if ( 'website' === $type ) {
 				wp_update_user( [ 'ID' => $user_id, 'user_url' => esc_url_raw( $value ) ] );
@@ -3193,10 +3194,10 @@ trait Login_Registration {
 		if ( 'eael_approve_user' === $action ) {
 			update_user_meta( $user_id, 'eael_registration_status', 'approved' );
 			if ( $user ) {
-				/* translators: %s: user display name */
 				wp_mail(
 					$user->user_email,
 					__( 'Your account has been approved', 'essential-addons-for-elementor-lite' ),
+					/* translators: %s: user display name */
 					sprintf( __( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ), $user->display_name )
 				);
 			}
@@ -3276,8 +3277,8 @@ trait Login_Registration {
 			$user = get_userdata( $user_id );
 			if ( $user ) {
 				$subject = __( 'Your account has been approved', 'essential-addons-for-elementor-lite' );
-				/* translators: %s: user display name */
 				$message = sprintf(
+					/* translators: %s: user display name */
 					__( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ),
 					$user->display_name
 				);
@@ -3378,7 +3379,7 @@ trait Login_Registration {
 
 		// One direct SQL query gives all three counts and bypasses pre_get_users entirely.
 		// meta_key is hardcoded literal — passed through prepare() for WPCS compliance only.
-		$rows = $wpdb->get_results(
+		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Prepared count query for the admin Users screen; bypasses pre_get_users by design.
 			$wpdb->prepare(
 				"SELECT meta_value AS status, COUNT(*) AS total
 				 FROM {$wpdb->usermeta}

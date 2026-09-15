@@ -8,6 +8,8 @@
  * Author URI: https://wpdeveloper.com/
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
+ * License: GPLv3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  *
  * WC tested up to: 10.8
  * Elementor tested up to: 4.1

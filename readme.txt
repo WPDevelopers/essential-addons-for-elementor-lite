@@ -1,12 +1,12 @@
 === Essential Addons for Elementor - Popular Elementor Templates & Widgets ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, rudlinkon, jakariaistauk, himadree
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
-Requires at least: 5.0
+Requires at least: 5.3
 Tested up to: 7.1
 Requires PHP: 7.0
 Stable tag: 6.8.4
 License: GPLv3
-License URI: https://opensource.org/licenses/GPL-3.0
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Elementor addon offering 120+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
 
@@ -335,6 +335,10 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 16. Flip Box Widget
 17. Creative Buttons Widget
 
+
+== Development ==
+
+Essential Addons is developed in the open. The unminified source for every minified JavaScript and CSS file, the React admin apps and the build scripts are in the public GitHub repository: [WPDevelopers/essential-addons-for-elementor-lite](https://github.com/WPDevelopers/essential-addons-for-elementor-lite). Bug reports and pull requests are welcome there.
 
 == Changelog ==
 

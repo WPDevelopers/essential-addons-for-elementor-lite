@@ -38,8 +38,8 @@ class Wrapper_Link {
             return;
         }
 
-        $lang = apply_filters( 'wpml_current_language', null );
-        $url = apply_filters( 'wpml_permalink', $settings['eael_wrapper_link']['url'], $lang, true );
+        $lang = apply_filters( 'wpml_current_language', null ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WPML hook.
+        $url = apply_filters( 'wpml_permalink', $settings['eael_wrapper_link']['url'], $lang, true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WPML hook.
 
         $settings['eael_wrapper_link']['url'] = $url;
         $element->set_settings( 'eael_wrapper_link', $settings['eael_wrapper_link'] );

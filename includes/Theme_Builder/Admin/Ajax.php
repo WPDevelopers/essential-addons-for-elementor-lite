@@ -269,7 +269,7 @@ class Ajax {
 		$this->verify_request();
 
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- verified in verify_request().
-		$ids      = isset( $_POST['template_ids'] ) ? (array) wp_unslash( $_POST['template_ids'] ) : [];
+		$ids      = isset( $_POST['template_ids'] ) ? (array) wp_unslash( $_POST['template_ids'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Cast with absint() below.
 		$type     = isset( $_POST['type'] ) ? sanitize_key( wp_unslash( $_POST['type'] ) ) : '';
 		$status   = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : '';
 		$priority = isset( $_POST['priority'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['priority'] ) ) ) : '';
@@ -454,7 +454,7 @@ class Ajax {
 
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- verified in verify_request().
 		$template_id = isset( $_POST['template_id'] ) ? absint( $_POST['template_id'] ) : 0;
-		$raw         = isset( $_POST['conditions'] ) ? wp_unslash( $_POST['conditions'] ) : [];
+		$raw         = isset( $_POST['conditions'] ) ? wp_unslash( $_POST['conditions'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Validated and sanitized by Conditions_Manager::validate_conditions().
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
 
 		$template = Template::get( $template_id );

@@ -20,7 +20,6 @@ behat.yml
 bitbucket-pipelines.yml
 bin
 .circleci/config.yml
-composer.json
 composer.lock
 dependencies.yml
 Gruntfile.js
@@ -41,6 +40,9 @@ README.md
 .husky
 .nvmrc
 CLAUDE.md
+org-rules
+issue-wpml.md
+essential-addons-for-elementor-lite-essential_adons_elementor-php-*.md
 webpack.config.js
 wp-cli.local.yml
 yarn.lock

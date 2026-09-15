@@ -6465,6 +6465,13 @@ section.eael-onboard-main-wrapper {
     cursor: pointer;
 }
 
+.eael-consent-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
 .peer:checked~.peer-checked {
     --tw-border-opacity: 1;
     border-color: rgb(20 122 255 / var(--tw-border-opacity));

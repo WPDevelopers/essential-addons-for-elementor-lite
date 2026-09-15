@@ -227,7 +227,7 @@ class Woo_Product_Description extends Widget_Base {
 			<?php
 			if ( $has_content ) {
 				setup_postdata( $post_object );
-				echo apply_filters( 'the_content', $post_object->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo apply_filters( 'the_content', $post_object->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core hook.
 				wp_reset_postdata();
 			} elseif ( $is_editor ) {
 				echo wp_kses_post( $this->get_editor_placeholder() );

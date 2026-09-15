@@ -3015,7 +3015,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		$posts_per_page = (int) $query->get( 'posts_per_page' );
 
 		if ( $posts_per_page < 1 ) {
-			$posts_per_page = (int) apply_filters( 'loop_shop_per_page', 12 );
+			$posts_per_page = (int) apply_filters( 'loop_shop_per_page', 12 ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core filter.
 		}
 
 		$args = [
