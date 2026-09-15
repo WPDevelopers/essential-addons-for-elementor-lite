@@ -31,7 +31,7 @@
     "@babel/cli": "^7.7.7",
     "@elementor/angie-sdk": "1.5.2",
     "@modelcontextprotocol/sdk": "1.27.0",
-    "esbuild": "0.23.1",
+    "esbuild": "0.28.1",
     "zod": "3.25.76",
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
