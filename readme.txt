@@ -338,6 +338,28 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 
 == Changelog ==
 
+= 6.8.4 - 15/09/2026 =
+
+- Added: EA Mega Menu | Ready-made presets for easier menu customization
+- Fixed: EA Gravity Forms | File uploads were duplicated on form submission
+- Fixed: EA Gravity Forms | `gform_post_render` fired twice and caused duplicate JavaScript bindings
+- Fixed: EA Fancy Text | HTML tags such as `<br>` and `&nbsp;` displayed as literal text during Fade, Zoom and Bounce animations
+- Fixed: EA Filterable Gallery | Items repeated after using the search box with Load More enabled
+- Fixed: EA Advanced Data Table | Unsupported Ninja Tables appeared in the source picker
+- Fixed: EA Advanced Data Table | Image-only and icon-only cells were removed from the editor
+- Fixed: EA Post Timeline | Layout issues when using the External CSS print method
+- Fixed: EA Simple Menu | Background flashed and layout broke during page load
+- Fixed: EA Advanced Tabs | Nested tab clicks reset the Elementor horizontal tab scroll
+- Fixed: EA Woo Checkout | WPML translations were not applied correctly on the frontend
+- Fixed: EA Woo Product Gallery | Infinite Scroll and Load More stopped after the first page on WooCommerce archives
+- Fixed: EA Woo Product Grid | PHP warnings on archive templates
+- Fixed: EA Login/Register Form | Account status incorrectly showed as Active when Admin Approval is disabled
+- Fixed: Alt text was not applied to images loaded from external URLs
+- Fixed: Duplicate WPML widget keys caused translatable fields to be dropped
+- Fixed: Large extension control defaults caused HTTP 413 errors when saving Elementor content
+- Fixed: Pro Template Presets were unavailable when Essential Addons Pro uses a different folder name
+- Few minor bug fixes & improvements
+
 = 6.8.3 - 01/09/2026 =
 
 - Fixed: A fatal error that could break the site or the Elementor editor when Essential Addons Pro was active alongside the latest Lite update
