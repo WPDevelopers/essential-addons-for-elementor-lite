@@ -357,7 +357,6 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 - Fixed: Alt text was not applied to images loaded from external URLs
 - Fixed: Duplicate WPML widget keys caused translatable fields to be dropped
 - Fixed: Large extension control defaults caused HTTP 413 errors when saving Elementor content
-- Fixed: Pro Template Presets were unavailable when Essential Addons Pro uses a different folder name
 - Few minor bug fixes & improvements
 
 = 6.8.3 - 01/09/2026 =
