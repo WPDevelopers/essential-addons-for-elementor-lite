@@ -193,7 +193,7 @@ class ThinkRank_Promotion {
 			'openUrl' => admin_url( 'admin.php?page=' . self::ADMIN_PAGE ),
 		] );
 
-		wp_register_style( 'eael-thinkrank-gb', false );
+		wp_register_style( 'eael-thinkrank-gb', false, [], EAEL_PLUGIN_VERSION );
 		wp_enqueue_style( 'eael-thinkrank-gb' );
 		wp_add_inline_style( 'eael-thinkrank-gb',
 			'.eael-tr-gb__desc{font-size:12.5px;line-height:1.5;color:#3c434a;margin:0 0 10px;}'
@@ -471,9 +471,8 @@ class ThinkRank_Promotion {
 			: __( 'Never show me again', 'essential-addons-for-elementor-lite' );
 
 		$nonce = wp_create_nonce( 'essential-addons-elementor' );
-		$open  = esc_url( $copy['open'] );
 		?>
-		<div class="notice eael-tr-banner" data-slug="<?php echo esc_attr( $copy['slugs'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-open="<?php echo $open; ?>">
+		<div class="notice eael-tr-banner" data-slug="<?php echo esc_attr( $copy['slugs'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-open="<?php echo esc_url( $copy['open'] ); ?>">
 			<div class="eael-tr-banner__icon" aria-hidden="true">
 				<img src="<?php echo esc_url( $copy['icon'] ); ?>" width="<?php echo esc_attr( $copy['icon_w'] ); ?>" height="<?php echo esc_attr( $copy['icon_h'] ); ?>" alt="">
 			</div>
@@ -597,10 +596,6 @@ class ThinkRank_Promotion {
 		// HTML-encode it into an &amp; that a <script> block never decodes
 		// back. wp_json_encode() emits its own quotes — hence none below.
 		$flags      = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
-		$installing = wp_json_encode( $copy['installing'], $flags );
-		$done       = wp_json_encode( $copy['done'], $flags );
-		$failed     = wp_json_encode( __( 'Could not enable automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ), $flags );
-		$label      = wp_json_encode( $copy['cta'], $flags );
 		?>
 		<style>
 			.eael-tr-banner.notice { display:flex; align-items:center; gap:16px; padding:14px 16px; border-left-color:#4451ff; position:relative; }
@@ -632,7 +627,7 @@ class ThinkRank_Promotion {
 			var later = el.querySelector( '.eael-tr-banner__later' );
 			later.addEventListener( 'click', function () { post( later.dataset.action || 'eael_thinkrank_snooze' ); el.parentNode && el.parentNode.removeChild( el ); } );
 			el.querySelector( '.eael-tr-banner__install' ).addEventListener( 'click', function () {
-				var btn = this; btn.setAttribute( 'disabled', 'disabled' ); btn.textContent = <?php echo $installing; ?>;
+				var btn = this; btn.setAttribute( 'disabled', 'disabled' ); btn.textContent = <?php echo wp_json_encode( $copy['installing'], $flags ); ?>;
 				var slugs = ( el.dataset.slug || '' ).split( ',' ).filter( Boolean );
 				// One install at a time, carrying the first error forward: the
 				// endpoint takes a single slug, and a cache install must not
@@ -642,13 +637,13 @@ class ThinkRank_Promotion {
 						if ( err ) { return err; }
 						return post( 'wpdeveloper_install_plugin', slug ).then( function ( res ) {
 							if ( res && res.success ) { return ''; }
-							return ( res && res.data ) ? res.data : <?php echo $failed; ?>;
+							return ( res && res.data ) ? res.data : <?php echo wp_json_encode( __( 'Could not enable automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ), $flags ); ?>;
 						} );
 					} );
 				}, window.Promise.resolve( '' ) ).then( function ( err ) {
-					if ( ! err ) { btn.textContent = <?php echo $done; ?>; window.setTimeout( function () { window.location.href = el.dataset.open; }, 800 ); }
-					else { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo $label; ?>; window.alert( err ); }
-				} ).catch( function () { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo $label; ?>; window.alert( <?php echo $failed; ?> ); } );
+					if ( ! err ) { btn.textContent = <?php echo wp_json_encode( $copy['done'], $flags ); ?>; window.setTimeout( function () { window.location.href = el.dataset.open; }, 800 ); }
+					else { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo wp_json_encode( $copy['cta'], $flags ); ?>; window.alert( err ); }
+				} ).catch( function () { btn.removeAttribute( 'disabled' ); btn.textContent = <?php echo wp_json_encode( $copy['cta'], $flags ); ?>; window.alert( <?php echo wp_json_encode( __( 'Could not enable automatically. Try Plugins → Add New.', 'essential-addons-for-elementor-lite' ), $flags ); ?> ); } );
 			} );
 		} )();
 		</script>
@@ -1337,7 +1332,7 @@ class ThinkRank_Promotion {
 		$count = 0;
 
 		if ( isset( $wpdb ) && is_object( $wpdb ) ) {
-			$count = (int) $wpdb->get_var(
+			$count = (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Result is cached in a transient.
 				"SELECT COUNT(*) FROM {$wpdb->posts}
 				 WHERE post_type = 'attachment'
 				   AND post_mime_type IN ( 'image/jpeg', 'image/jpg', 'image/png' )"
@@ -1658,17 +1653,12 @@ class ThinkRank_Promotion {
 	 */
 	private function widget_script( $spec ) {
 		$flags    = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
-		$id       = wp_json_encode( '#' . $spec['id'], $flags );
-		$open_url = wp_json_encode( $spec['open_url'], $flags );
 		// JSON rather than esc_js(): these labels can contain "&", which
 		// esc_js() turns into an &amp; that a <script> block never decodes.
-		$installing = wp_json_encode( $spec['installing'], $flags );
-		$label      = wp_json_encode( $spec['cta'], $flags );
-		$failed     = wp_json_encode( $spec['failed'], $flags );
 		?>
 		<script>
 		( function () {
-			var root = document.querySelector( <?php echo $id; ?> );
+			var root = document.querySelector( <?php echo wp_json_encode( '#' . $spec['id'], $flags ); ?> );
 			if ( ! root ) { return; }
 			function post( body ) {
 				return window.fetch( window.ajaxurl, {
@@ -1699,7 +1689,7 @@ class ThinkRank_Promotion {
 				var notice = root.querySelector( '.eael-tr-notice' );
 				var label  = btn.querySelector( '.eael-tr-cta__label' );
 				btn.setAttribute( 'disabled', 'disabled' );
-				if ( label ) { label.textContent = <?php echo $installing; ?>; }
+				if ( label ) { label.textContent = <?php echo wp_json_encode( $spec['installing'], $flags ); ?>; }
 				if ( notice ) { notice.style.display = 'none'; notice.className = 'eael-tr-notice'; }
 
 				var body = new URLSearchParams();
@@ -1709,16 +1699,16 @@ class ThinkRank_Promotion {
 
 				post( body ).then( function ( res ) {
 					if ( res && res.success ) {
-						window.setTimeout( function () { window.location.href = <?php echo $open_url; ?>; }, 900 );
+						window.setTimeout( function () { window.location.href = <?php echo wp_json_encode( $spec['open_url'], $flags ); ?>; }, 900 );
 					} else {
 						btn.removeAttribute( 'disabled' );
-						if ( label ) { label.textContent = <?php echo $label; ?>; }
-						if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = ( res && res.data ) ? res.data : <?php echo $failed; ?>; }
+						if ( label ) { label.textContent = <?php echo wp_json_encode( $spec['cta'], $flags ); ?>; }
+						if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = ( res && res.data ) ? res.data : <?php echo wp_json_encode( $spec['failed'], $flags ); ?>; }
 					}
 				} ).catch( function () {
 					btn.removeAttribute( 'disabled' );
-					if ( label ) { label.textContent = <?php echo $label; ?>; }
-					if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = <?php echo $failed; ?>; }
+					if ( label ) { label.textContent = <?php echo wp_json_encode( $spec['cta'], $flags ); ?>; }
+					if ( notice ) { notice.className = 'eael-tr-notice is-error'; notice.style.display = 'block'; notice.textContent = <?php echo wp_json_encode( $spec['failed'], $flags ); ?>; }
 				} );
 			} );
 		} )();

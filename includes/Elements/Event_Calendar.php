@@ -4015,7 +4015,7 @@ class Event_Calendar extends Widget_Base
 					$tr_inner_html .= '<td class="eael-ec-event-date" ' . $row_style . '>' . $date . '</td>';
 				}
                 if( $tr_inner_html ){
-                    echo eael_neutralize_shortcodes( wp_kses( $tr_inner_html, Helper::eael_allowed_tags() ) );
+                    echo eael_neutralize_shortcodes( wp_kses( $tr_inner_html, Helper::eael_allowed_tags() ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped inside; eael_neutralize_shortcodes() only encodes [ and ].
                 }
 				echo "</tr>";
 			}

@@ -142,8 +142,8 @@ class Angie_Integration {
 	public function ajax_widget_schema() {
 		$this->verify_request();
 
-		$widget_name = isset( $_POST['widget'] ) ? sanitize_text_field( wp_unslash( $_POST['widget'] ) ) : '';
-		$tab         = isset( $_POST['tab'] ) ? sanitize_key( wp_unslash( $_POST['tab'] ) ) : 'content';
+		$widget_name = isset( $_POST['widget'] ) ? sanitize_text_field( wp_unslash( $_POST['widget'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in verify_request().
+		$tab         = isset( $_POST['tab'] ) ? sanitize_key( wp_unslash( $_POST['tab'] ) ) : 'content'; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in verify_request().
 
 		if ( '' === $widget_name ) {
 			wp_send_json_error( [ 'message' => __( 'Missing widget name.', 'essential-addons-for-elementor-lite' ) ], 400 );

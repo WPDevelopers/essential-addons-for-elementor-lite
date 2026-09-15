@@ -1847,7 +1847,7 @@ trait Ajax_Handler {
 		$added = false;
 
 		if ( 'grouped' === $product_type ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verified above; every key and value is absint()-ed below.
 			$quantities = isset( $_POST['quantity'] ) && is_array( $_POST['quantity'] ) ? $_POST['quantity'] : [];
 			foreach ( $quantities as $child_id => $qty ) {
 				$child_id = absint( $child_id );

@@ -729,7 +729,7 @@ trait Login_Registration {
 		}
 
 		if ( isset( $_POST['confirm_email'] ) ) {
-			$confirm_email_raw = wp_unslash( $_POST['confirm_email'] );
+			$confirm_email_raw = wp_unslash( $_POST['confirm_email'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Raw value is only passed to is_email(); sanitize_email() is applied on the next line.
 			$confirm_email = sanitize_email( $confirm_email_raw );
 			if ( empty( $confirm_email ) || ! is_email( $confirm_email_raw ) ) {
 				$errors['confirm_email'] = isset( $settings['err_conf_email'] ) ? Helper::eael_wp_kses( $settings['err_conf_email'] ) : __( 'Your confirmed email did not match', 'essential-addons-for-elementor-lite' );
@@ -2393,7 +2393,7 @@ trait Login_Registration {
 		check_ajax_referer( 'eael_lr_otp', '_eael_otp_nonce' );
 
 		$token = ! empty( $_POST['otp_token'] ) ? sanitize_text_field( wp_unslash( $_POST['otp_token'] ) ) : '';
-		$code  = ! empty( $_POST['otp_code'] ) ? preg_replace( '/[^0-9]/', '', wp_unslash( $_POST['otp_code'] ) ) : '';
+		$code  = ! empty( $_POST['otp_code'] ) ? preg_replace( '/[^0-9]/', '', wp_unslash( $_POST['otp_code'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reduced to digits by preg_replace().
 
 		if ( empty( $token ) || empty( $code ) ) {
 			wp_send_json_error( [ 'message' => __( 'Please enter the verification code.', 'essential-addons-for-elementor-lite' ) ] );
@@ -2511,7 +2511,7 @@ trait Login_Registration {
 
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
-		do_action( 'register_new_user', $user_id );
+		do_action( 'register_new_user', $user_id ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core hook.
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		$response = [
@@ -2929,11 +2929,11 @@ trait Login_Registration {
 
 		foreach ( $fields as $type => $label ) {
 			if ( 'website' === $type ) {
-				$value = esc_attr( get_userdata( $user_id )->user_url ?? '' );
+				$value = get_userdata( $user_id )->user_url ?? '';
 			} elseif ( 'eael_phone_number' === $type ) {
-				$value = esc_attr( get_user_meta( $user_id, 'eael_phone_number', true ) );
+				$value = get_user_meta( $user_id, 'eael_phone_number', true );
 			} else {
-				$value = esc_attr( get_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, true ) );
+				$value = get_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, true );
 			}
 			?>
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -2942,7 +2942,7 @@ trait Login_Registration {
 				       class="woocommerce-Input woocommerce-Input--text input-text"
 				       name="eael_mya_<?php echo esc_attr( $type ); ?>"
 				       id="eael_mya_<?php echo esc_attr( $type ); ?>"
-				       value="<?php echo $value; ?>">
+				       value="<?php echo esc_attr( $value ); ?>">
 			</p>
 			<?php
 		}
@@ -3379,7 +3379,7 @@ trait Login_Registration {
 
 		// One direct SQL query gives all three counts and bypasses pre_get_users entirely.
 		// meta_key is hardcoded literal — passed through prepare() for WPCS compliance only.
-		$rows = $wpdb->get_results(
+		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Prepared count query for the admin Users screen; bypasses pre_get_users by design.
 			$wpdb->prepare(
 				"SELECT meta_value AS status, COUNT(*) AS total
 				 FROM {$wpdb->usermeta}

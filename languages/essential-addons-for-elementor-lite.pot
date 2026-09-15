@@ -262,245 +262,245 @@ msgstr ""
 msgid "Just Deactivate"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:482
+#: ../includes/Classes/ThinkRank_Promotion.php:470
 msgid "Skip"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:483, ../includes/Classes/ThinkRank_Promotion.php:917, ../includes/Classes/ThinkRank_Promotion.php:982, ../includes/Classes/ThinkRank_Promotion.php:1151
+#: ../includes/Classes/ThinkRank_Promotion.php:471, ../includes/Classes/ThinkRank_Promotion.php:934, ../includes/Classes/ThinkRank_Promotion.php:999, ../includes/Classes/ThinkRank_Promotion.php:1168
 msgid "Never show me again"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:553
+#: ../includes/Classes/ThinkRank_Promotion.php:540
 msgid "Get found on Google & AI answers - and load fast"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:554
+#: ../includes/Classes/ThinkRank_Promotion.php:541
 msgid "Let AI handle titles, meta, schema & sitemaps, while smart caching and asset optimization keep every page quick. Free with ThinkRank & xSpeed."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:555
+#: ../includes/Classes/ThinkRank_Promotion.php:542
 msgid "Enable SEO & Speed"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:556
+#: ../includes/Classes/ThinkRank_Promotion.php:543
 msgid "Enabling SEO & Speed…"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:557, ../includes/Classes/ThinkRank_Promotion.php:572
+#: ../includes/Classes/ThinkRank_Promotion.php:544, ../includes/Classes/ThinkRank_Promotion.php:559
 msgid "Enabled! Opening SEO Tool…"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:568
+#: ../includes/Classes/ThinkRank_Promotion.php:555
 msgid "Get found on Google & AI answers - configure your SEO"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:569
+#: ../includes/Classes/ThinkRank_Promotion.php:556
 msgid "Let AI handle titles, meta, schema, LLM answers & sitemaps so every page ranks. Free with ThinkRank."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:570
+#: ../includes/Classes/ThinkRank_Promotion.php:557
 msgid "Enable SEO Tool"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:571
+#: ../includes/Classes/ThinkRank_Promotion.php:558
 msgid "Enabling SEO Tool…"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:585
+#: ../includes/Classes/ThinkRank_Promotion.php:572
 msgid "Speed up every page you build"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:586
+#: ../includes/Classes/ThinkRank_Promotion.php:573
 msgid "Smart caching, asset optimization & CDN keep your pages fast and lift Core Web Vitals - without touching your design. Free with xSpeed."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:587
+#: ../includes/Classes/ThinkRank_Promotion.php:574
 msgid "Enable xSpeed"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:588, ../includes/Classes/ThinkRank_Promotion.php:830
+#: ../includes/Classes/ThinkRank_Promotion.php:575, ../includes/Classes/ThinkRank_Promotion.php:847
 msgid "Enabling xSpeed…"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:589
+#: ../includes/Classes/ThinkRank_Promotion.php:576
 msgid "Enabled! Opening xSpeed…"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:614
+#: ../includes/Classes/ThinkRank_Promotion.php:640, ../includes/Classes/ThinkRank_Promotion.php:646
 msgid "Could not enable automatically. Try Plugins → Add New."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:815
+#: ../includes/Classes/ThinkRank_Promotion.php:832
 msgid "Speed Check"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:820
+#: ../includes/Classes/ThinkRank_Promotion.php:837
 msgid "Improve your website speed"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:821
+#: ../includes/Classes/ThinkRank_Promotion.php:838
 msgid "AI finds what's slowing you down and fixes it."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:825
+#: ../includes/Classes/ThinkRank_Promotion.php:842
 msgid "Activates xSpeed Cache — already installed, free from WPDeveloper"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:826
+#: ../includes/Classes/ThinkRank_Promotion.php:843
 msgid "Installs xSpeed Cache — free, from WPDeveloper"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:827
+#: ../includes/Classes/ThinkRank_Promotion.php:844
 msgid "Trusted by 6M+ websites"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:828
+#: ../includes/Classes/ThinkRank_Promotion.php:845
 msgid "xSpeed caches your pages, trims unused CSS & JS and serves assets from a CDN, then shows what it saved."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:829
+#: ../includes/Classes/ThinkRank_Promotion.php:846
 msgid "Fix this now"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:831
+#: ../includes/Classes/ThinkRank_Promotion.php:848
 msgid "xSpeed is active"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:832
+#: ../includes/Classes/ThinkRank_Promotion.php:849
 msgid "Open xSpeed to see your cache status and what each optimization saved."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:833, ../includes/Classes/ThinkRank_Promotion.php:1071
+#: ../includes/Classes/ThinkRank_Promotion.php:850, ../includes/Classes/ThinkRank_Promotion.php:1088
 msgid "Open xSpeed"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:834, ../includes/Classes/ThinkRank_Promotion.php:854
+#: ../includes/Classes/ThinkRank_Promotion.php:851, ../includes/Classes/ThinkRank_Promotion.php:871
 msgid "Could not enable automatically. Please try from Plugins → Add New."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:844
+#: ../includes/Classes/ThinkRank_Promotion.php:861
 msgid "SEO Check"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:847
+#: ../includes/Classes/ThinkRank_Promotion.php:864
 msgid "Analyze your SEO with AI"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:848
+#: ../includes/Classes/ThinkRank_Promotion.php:865
 msgid "ThinkRank's AI reviews your titles, meta, schema and readability, then shows the quick wins. See how your pages score."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:849
+#: ../includes/Classes/ThinkRank_Promotion.php:866
 msgid "Analyze my SEO"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:850
+#: ../includes/Classes/ThinkRank_Promotion.php:867
 msgid "Analyzing… enabling ThinkRank"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:851
+#: ../includes/Classes/ThinkRank_Promotion.php:868
 msgid "ThinkRank is active"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:852
+#: ../includes/Classes/ThinkRank_Promotion.php:869
 msgid "Open ThinkRank to see your AI SEO score and page-by-page fixes."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:853
+#: ../includes/Classes/ThinkRank_Promotion.php:870
 msgid "Open ThinkRank"
 msgstr ""
 
 #. translators: %s: number of unminified CSS and JS files found.
-#: ../includes/Classes/ThinkRank_Promotion.php:946
+#: ../includes/Classes/ThinkRank_Promotion.php:963
 msgid "%s unminified CSS and JS file"
 msgid_plural "%s unminified CSS and JS files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1028
+#: ../includes/Classes/ThinkRank_Promotion.php:1045
 msgid "Page cache on"
 msgstr ""
 
 #. translators: %s: current time to first byte, e.g. "210ms".
-#: ../includes/Classes/ThinkRank_Promotion.php:1036
+#: ../includes/Classes/ThinkRank_Promotion.php:1053
 msgid "Page cache on — TTFB down to %s"
 msgstr ""
 
 #. translators: %s: number of images not yet in a modern format.
-#: ../includes/Classes/ThinkRank_Promotion.php:1045
+#: ../includes/Classes/ThinkRank_Promotion.php:1062
 msgid "%s image is still JPEG or PNG — the biggest win left."
 msgid_plural "%s images are still JPEG or PNG — the biggest win left."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1053
+#: ../includes/Classes/ThinkRank_Promotion.php:1070
 msgid "Your images are already in a modern format — nothing big left to convert."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1068
+#: ../includes/Classes/ThinkRank_Promotion.php:1085
 msgid "AI resizes on upload; existing images convert in the background."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1070
+#: ../includes/Classes/ThinkRank_Promotion.php:1087
 msgid "Optimize images"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1073
+#: ../includes/Classes/ThinkRank_Promotion.php:1090
 msgid "All xSpeed settings"
 msgstr ""
 
 #. translators: %s: time to first byte, e.g. "840ms".
-#: ../includes/Classes/ThinkRank_Promotion.php:1086
+#: ../includes/Classes/ThinkRank_Promotion.php:1103
 msgid "TTFB %s"
 msgstr ""
 
 #. translators: %s: how long ago the measurement was taken, e.g. "5 mins ago".
-#: ../includes/Classes/ThinkRank_Promotion.php:1091
+#: ../includes/Classes/ThinkRank_Promotion.php:1108
 msgid " · measured %s"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1101
+#: ../includes/Classes/ThinkRank_Promotion.php:1118
 msgid "xSpeed is installed — caching is still off"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1105
+#: ../includes/Classes/ThinkRank_Promotion.php:1122
 msgid "Setup takes a minute — AI picks the settings."
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1106
+#: ../includes/Classes/ThinkRank_Promotion.php:1123
 msgid "Configure xSpeed"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1108
+#: ../includes/Classes/ThinkRank_Promotion.php:1125
 msgid "Nothing is cached until setup finishes"
 msgstr ""
 
 #. translators: %s: a number of milliseconds.
-#: ../includes/Classes/ThinkRank_Promotion.php:1270
+#: ../includes/Classes/ThinkRank_Promotion.php:1287
 msgid "%sms"
 msgstr ""
 
 #. translators: %s: a number of seconds, to one decimal place.
-#: ../includes/Classes/ThinkRank_Promotion.php:1274
+#: ../includes/Classes/ThinkRank_Promotion.php:1291
 msgid "%ss"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1287
+#: ../includes/Classes/ThinkRank_Promotion.php:1304
 msgid "just now"
 msgstr ""
 
 #. translators: %s: human-readable time difference, e.g. "5 mins".
 #. translators: %s is the time difference
-#: ../includes/Classes/ThinkRank_Promotion.php:1292, ../includes/Traits/Twitter_Feed.php:222
+#: ../includes/Classes/ThinkRank_Promotion.php:1309, ../includes/Traits/Twitter_Feed.php:222
 msgid "%s ago"
 msgstr ""
 
 #. translators: %s: name of the plugin currently handling the page cache.
-#: ../includes/Classes/ThinkRank_Promotion.php:1356
+#: ../includes/Classes/ThinkRank_Promotion.php:1373
 msgid "Page cache handled by %s"
 msgstr ""
 
-#: ../includes/Classes/ThinkRank_Promotion.php:1361
+#: ../includes/Classes/ThinkRank_Promotion.php:1378
 msgid "No page cache detected"
 msgstr ""
 
@@ -524,31 +524,31 @@ msgstr ""
 msgid "Could not retrieve plugin information."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:249, ../includes/Classes/WPDeveloper_Plugin_Installer.php:289, ../includes/Classes/WPDeveloper_Plugin_Installer.php:308, ../includes/Classes/WPDeveloper_Plugin_Installer.php:341, ../includes/Classes/WPDeveloper_Setup_Wizard.php:662, ../includes/Classes/WPDeveloper_Setup_Wizard.php:686, ../includes/Classes/WPDeveloper_Setup_Wizard.php:707, ../includes/Traits/Ajax_Handler.php:1523, ../includes/Traits/Ajax_Handler.php:1720, ../includes/Traits/Ajax_Handler.php:1752, ../includes/Traits/Ajax_Handler.php:1769, ../includes/Traits/Helper.php:441
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:249, ../includes/Classes/WPDeveloper_Plugin_Installer.php:296, ../includes/Classes/WPDeveloper_Plugin_Installer.php:315, ../includes/Classes/WPDeveloper_Plugin_Installer.php:348, ../includes/Classes/WPDeveloper_Setup_Wizard.php:662, ../includes/Classes/WPDeveloper_Setup_Wizard.php:686, ../includes/Classes/WPDeveloper_Setup_Wizard.php:707, ../includes/Traits/Ajax_Handler.php:1576, ../includes/Traits/Ajax_Handler.php:1773, ../includes/Traits/Ajax_Handler.php:1805, ../includes/Traits/Ajax_Handler.php:1822, ../includes/Traits/Helper.php:441
 msgid "you are not allowed to do this action"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:278
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:285
 msgid "Plugin could not be installed."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:281
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:288
 msgid "Plugin is installed successfully!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:299
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:306
 msgid "Plugin is updated successfully!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:328
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:335
 msgid "Plugin couldn't be activated."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:333
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:340
 msgid "Plugin is activated successfully!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:347
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:354
 msgid "Plugin is deactivated successfully!"
 msgstr ""
 
@@ -1825,11 +1825,11 @@ msgid "Hover"
 msgstr ""
 
 #. translators: %s: Ninja Tables data provider name, e.g. "CSV".
-#: ../includes/Elements/Advanced_Data_Table.php:1847
+#: ../includes/Elements/Advanced_Data_Table.php:1849
 msgid "Advanced Data Table cannot read this Ninja Table, because its %s data source needs an add-on that is not active on this site. Please select a different Ninja Table."
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:1852
+#: ../includes/Elements/Advanced_Data_Table.php:1854
 msgid "No content found"
 msgstr ""
 
@@ -2217,7 +2217,7 @@ msgstr ""
 msgid "Caret Color"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:2285, ../includes/Elements/Betterdocs_Category_Box.php:1178, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1691, ../includes/Elements/Betterdocs_Category_Grid.php:1661, ../includes/Elements/Post_Grid.php:1851, ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3857, ../includes/Traits/Ajax_Handler.php:416
+#: ../includes/Elements/Adv_Accordion.php:2285, ../includes/Elements/Betterdocs_Category_Box.php:1178, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1691, ../includes/Elements/Betterdocs_Category_Grid.php:1661, ../includes/Elements/Post_Grid.php:1851, ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3857, ../includes/Traits/Ajax_Handler.php:344
 msgid "No posts found!"
 msgstr ""
 
@@ -4493,7 +4493,7 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: ../includes/Elements/Data_Table.php:356, ../includes/MegaMenu/Presets/Suite_Menu.php:902, ../includes/Theme_Builder/Admin/Admin.php:586, ../includes/Theme_Builder/Core/Post_Type.php:142, ../includes/Theme_Builder/Templates/admin/dashboard.php:56
+#: ../includes/Elements/Data_Table.php:356, ../includes/MegaMenu/Presets/Suite_Menu.php:902, ../includes/Theme_Builder/Admin/Admin.php:586, ../includes/Theme_Builder/Core/Post_Type.php:142, ../includes/Theme_Builder/Templates/admin/dashboard.php:57
 msgid "Templates"
 msgstr ""
 
@@ -4765,7 +4765,7 @@ msgstr ""
 msgid "Get Events"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:440, ../includes/Elements/Filterable_Gallery.php:1016, ../includes/Elements/Filterable_Gallery.php:4103, ../includes/Elements/Woo_Product_Gallery.php:310, ../includes/Extensions/Table_of_Content.php:93, ../includes/Extensions/Table_of_Content.php:374, ../includes/Theme_Builder/Admin/Admin.php:591, ../includes/Theme_Builder/Admin/Admin.php:619, ../includes/Theme_Builder/Admin/Templates_List_Table.php:212, ../includes/Theme_Builder/Templates/admin/dashboard.php:91
+#: ../includes/Elements/Event_Calendar.php:440, ../includes/Elements/Filterable_Gallery.php:1016, ../includes/Elements/Filterable_Gallery.php:4116, ../includes/Elements/Woo_Product_Gallery.php:310, ../includes/Extensions/Table_of_Content.php:93, ../includes/Extensions/Table_of_Content.php:374, ../includes/Theme_Builder/Admin/Admin.php:591, ../includes/Theme_Builder/Admin/Admin.php:619, ../includes/Theme_Builder/Admin/Templates_List_Table.php:212, ../includes/Theme_Builder/Templates/admin/dashboard.php:92
 msgid "All"
 msgstr ""
 
@@ -9852,7 +9852,7 @@ msgstr ""
 msgid "Desktop (> 2400px)"
 msgstr ""
 
-#: ../includes/Elements/Simple_Menu.php:1792
+#: ../includes/Elements/Simple_Menu.php:1793
 msgid "Hamburger Toggle Menu"
 msgstr ""
 
@@ -11571,7 +11571,7 @@ msgstr ""
 msgid "Uncheck the WooCommerce Settings <a href=\"%s\" target=\"_blank\">Out of stock visibility</a> option. This will not work otherwise"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_List.php:575, ../includes/Traits/Login_Registration.php:3043, ../includes/Theme_Builder/Admin/Admin.php:653
+#: ../includes/Elements/Woo_Product_List.php:575, ../includes/Traits/Login_Registration.php:3044, ../includes/Theme_Builder/Admin/Admin.php:653
 msgid "Status"
 msgstr ""
 
@@ -13499,55 +13499,43 @@ msgstr ""
 msgid "Never show again"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1994
-msgid "<strong>🏖️</strong> Your Elementor site deserves a Summer glow-up. Get 110+ advanced elements and build faster, smarter <strong>- up to $120 OFF</strong>"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:1998
-msgid "Upgrade To PRO Now"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:2001
-msgid "I Don't Want Any Discount"
-msgstr ""
-
-#: ../includes/Traits/Ajax_Handler.php:113, ../includes/Traits/Ajax_Handler.php:1167, ../includes/Traits/Login_Registration.php:195, ../includes/Traits/Login_Registration.php:510, ../includes/Traits/Login_Registration.php:1222, ../includes/Traits/Login_Registration.php:1429
+#: ../includes/Traits/Ajax_Handler.php:113, ../includes/Traits/Ajax_Handler.php:1213, ../includes/Traits/Login_Registration.php:195, ../includes/Traits/Login_Registration.php:510, ../includes/Traits/Login_Registration.php:1222, ../includes/Traits/Login_Registration.php:1429
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:122, ../includes/Traits/Ajax_Handler.php:1176, ../includes/Traits/Login_Registration.php:204, ../includes/Traits/Login_Registration.php:517, ../includes/Traits/Login_Registration.php:1231, ../includes/Traits/Login_Registration.php:1438, ../includes/Traits/Woo_Product_Comparable.php:2189
+#: ../includes/Traits/Ajax_Handler.php:122, ../includes/Traits/Ajax_Handler.php:1222, ../includes/Traits/Login_Registration.php:204, ../includes/Traits/Login_Registration.php:517, ../includes/Traits/Login_Registration.php:1231, ../includes/Traits/Login_Registration.php:1438, ../includes/Traits/Woo_Product_Comparable.php:2189
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:133, ../includes/Traits/Ajax_Handler.php:648, ../includes/Traits/Ajax_Handler.php:900, ../includes/Traits/Ajax_Handler.php:1187, ../includes/Traits/Login_Registration.php:174, ../includes/Traits/Login_Registration.php:529, ../includes/Traits/Login_Registration.php:1201, ../includes/Traits/Login_Registration.php:1407, ../includes/Traits/Woo_Product_Comparable.php:2147
+#: ../includes/Traits/Ajax_Handler.php:133, ../includes/Traits/Ajax_Handler.php:694, ../includes/Traits/Ajax_Handler.php:946, ../includes/Traits/Ajax_Handler.php:1233, ../includes/Traits/Login_Registration.php:174, ../includes/Traits/Login_Registration.php:529, ../includes/Traits/Login_Registration.php:1201, ../includes/Traits/Login_Registration.php:1407, ../includes/Traits/Woo_Product_Comparable.php:2147
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:144, ../includes/Traits/Ajax_Handler.php:655, ../includes/Traits/Ajax_Handler.php:907, ../includes/Traits/Ajax_Handler.php:1198, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:181, ../includes/Traits/Login_Registration.php:534, ../includes/Traits/Login_Registration.php:1208, ../includes/Traits/Login_Registration.php:1414, ../includes/Traits/Woo_Product_Comparable.php:2152
+#: ../includes/Traits/Ajax_Handler.php:144, ../includes/Traits/Ajax_Handler.php:701, ../includes/Traits/Ajax_Handler.php:953, ../includes/Traits/Ajax_Handler.php:1244, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:181, ../includes/Traits/Login_Registration.php:534, ../includes/Traits/Login_Registration.php:1208, ../includes/Traits/Login_Registration.php:1414, ../includes/Traits/Woo_Product_Comparable.php:2152
 msgid "Widget ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:155, ../includes/Traits/Ajax_Handler.php:661, ../includes/Traits/Ajax_Handler.php:914, ../includes/Traits/Ajax_Handler.php:1208
+#: ../includes/Traits/Ajax_Handler.php:155, ../includes/Traits/Ajax_Handler.php:707, ../includes/Traits/Ajax_Handler.php:960, ../includes/Traits/Ajax_Handler.php:1254
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:1119, ../includes/Traits/Ajax_Handler.php:1125, ../includes/Traits/Ajax_Handler.php:1130
+#: ../includes/Traits/Ajax_Handler.php:1165, ../includes/Traits/Ajax_Handler.php:1171, ../includes/Traits/Ajax_Handler.php:1176
 msgid "Product not found or not accessible"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:1386, ../includes/Traits/Ajax_Handler.php:1456
+#: ../includes/Traits/Ajax_Handler.php:1439, ../includes/Traits/Ajax_Handler.php:1509
 msgid "Unauthorized"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:1566
+#: ../includes/Traits/Ajax_Handler.php:1619
 msgid "Login | Register Settings updated"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:1782
+#: ../includes/Traits/Ajax_Handler.php:1835
 msgid "WooCommerce is not active."
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:1791
+#: ../includes/Traits/Ajax_Handler.php:1844
 msgid "Invalid product."
 msgstr ""
 
@@ -13844,7 +13832,7 @@ msgstr ""
 msgid "%1$sEssential Addons for Elementor%2$s requires %1$sElementor%2$s plugin to be installed and activated. Please install Elementor to continue."
 msgstr ""
 
-#: ../includes/Traits/Core.php:115, ../includes/Theme_Builder/Templates/admin/dashboard.php:49
+#: ../includes/Traits/Core.php:115, ../includes/Theme_Builder/Templates/admin/dashboard.php:50
 msgid "Install Elementor"
 msgstr ""
 
@@ -13852,7 +13840,7 @@ msgstr ""
 msgid "%1$sEssential Addons for Elementor%2$s requires %1$sElementor%2$s plugin to be active. Please activate Elementor to continue."
 msgstr ""
 
-#: ../includes/Traits/Core.php:109, ../includes/Theme_Builder/Templates/admin/dashboard.php:42
+#: ../includes/Traits/Core.php:109, ../includes/Theme_Builder/Templates/admin/dashboard.php:43
 msgid "Activate Elementor"
 msgstr ""
 
@@ -14149,88 +14137,88 @@ msgstr ""
 msgid "Above, input the ID of the attachment."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3016
+#: ../includes/Traits/Login_Registration.php:3017
 msgid "Your account is awaiting administrator approval."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3023
+#: ../includes/Traits/Login_Registration.php:3024
 msgid "Your registration request has been rejected. Please contact the site administrator."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3066, ../includes/Traits/Login_Registration.php:3399, ../includes/Theme_Builder/Admin/Templates_List_Table.php:465
+#: ../includes/Traits/Login_Registration.php:3067, ../includes/Traits/Login_Registration.php:3400, ../includes/Theme_Builder/Admin/Templates_List_Table.php:465
 msgid "Pending"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3072, ../includes/Traits/Login_Registration.php:3131, ../includes/Traits/Login_Registration.php:3401
+#: ../includes/Traits/Login_Registration.php:3073, ../includes/Traits/Login_Registration.php:3132, ../includes/Traits/Login_Registration.php:3402
 msgid "Rejected"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3078, ../includes/Traits/Login_Registration.php:3145, ../includes/Traits/Login_Registration.php:3400
+#: ../includes/Traits/Login_Registration.php:3079, ../includes/Traits/Login_Registration.php:3146, ../includes/Traits/Login_Registration.php:3401
 msgid "Approved"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3087
+#: ../includes/Traits/Login_Registration.php:3088
 msgid "Not applicable"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3108
+#: ../includes/Traits/Login_Registration.php:3109
 msgid "Account Status"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3150
+#: ../includes/Traits/Login_Registration.php:3151
 msgid "Not applicable — this account did not go through admin approval."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3136, ../includes/Traits/Login_Registration.php:3117
+#: ../includes/Traits/Login_Registration.php:3137, ../includes/Traits/Login_Registration.php:3118
 msgid "Approve"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3140, ../includes/Traits/Login_Registration.php:3126
+#: ../includes/Traits/Login_Registration.php:3141, ../includes/Traits/Login_Registration.php:3127
 msgid "Delete"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3141, ../includes/Traits/Login_Registration.php:3127
+#: ../includes/Traits/Login_Registration.php:3142, ../includes/Traits/Login_Registration.php:3128
 msgid "Permanently delete this user? This cannot be undone."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3112
+#: ../includes/Traits/Login_Registration.php:3113
 msgid "Pending Approval"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3121
+#: ../includes/Traits/Login_Registration.php:3122
 msgid "Reject"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3122
+#: ../includes/Traits/Login_Registration.php:3123
 msgid "Reject this user? They will be marked as rejected and unable to log in."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3199, ../includes/Traits/Login_Registration.php:3278
+#: ../includes/Traits/Login_Registration.php:3199, ../includes/Traits/Login_Registration.php:3279
 msgid "Your account has been approved"
 msgstr ""
 
 #. translators: %s: user display name
-#: ../includes/Traits/Login_Registration.php:3200, ../includes/Traits/Login_Registration.php:3281
+#: ../includes/Traits/Login_Registration.php:3201, ../includes/Traits/Login_Registration.php:3282
 msgid "Hello %s, your account has been approved. You can now log in."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3231
+#: ../includes/Traits/Login_Registration.php:3232
 msgid "EA: Approve"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:3232
+#: ../includes/Traits/Login_Registration.php:3233
 msgid "EA: Reject"
 msgstr ""
 
 #. translators: %d: number of approved users
-#: ../includes/Traits/Login_Registration.php:3346
+#: ../includes/Traits/Login_Registration.php:3347
 msgid "%d user approved."
 msgid_plural "%d users approved."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of rejected users
-#: ../includes/Traits/Login_Registration.php:3357
+#: ../includes/Traits/Login_Registration.php:3358
 msgid "%d user rejected."
 msgid_plural "%d users rejected."
 msgstr[0] ""
@@ -15561,7 +15549,7 @@ msgstr ""
 msgid "Promo"
 msgstr ""
 
-#: ../includes/MegaMenu/Renderers/Editor_Renderer.php:82, ../includes/MegaMenu/Templates/mobile-toggle.php:28
+#: ../includes/MegaMenu/Renderers/Editor_Renderer.php:82, ../includes/MegaMenu/Templates/mobile-toggle.php:29
 msgid "Toggle menu"
 msgstr ""
 
@@ -16242,7 +16230,7 @@ msgctxt "Post Type Singular Name"
 msgid "Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:137, ../includes/Theme_Builder/Core/Post_Type.php:138, ../includes/Theme_Builder/Templates/admin/dashboard.php:60
+#: ../includes/Theme_Builder/Core/Post_Type.php:137, ../includes/Theme_Builder/Core/Post_Type.php:138, ../includes/Theme_Builder/Templates/admin/dashboard.php:61
 msgid "Add New Template"
 msgstr ""
 
@@ -16254,7 +16242,7 @@ msgstr ""
 msgid "View Template"
 msgstr ""
 
-#: ../includes/Theme_Builder/Core/Post_Type.php:143, ../includes/Theme_Builder/Templates/admin/dashboard.php:112
+#: ../includes/Theme_Builder/Core/Post_Type.php:143, ../includes/Theme_Builder/Templates/admin/dashboard.php:113
 msgid "Search Template"
 msgstr ""
 
@@ -16671,6 +16659,6 @@ msgstr ""
 msgid "Create an account?"
 msgstr ""
 
-#: ../includes/Theme_Builder/Templates/admin/dashboard.php:68
+#: ../includes/Theme_Builder/Templates/admin/dashboard.php:69
 msgid "Theme Builder needs Elementor to be installed and activated. Your templates and their display conditions are kept safe in the meantime — they come back as soon as Elementor is active again."
 msgstr ""

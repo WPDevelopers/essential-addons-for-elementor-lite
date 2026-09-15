@@ -675,9 +675,9 @@ class Woo_Product_Title extends Widget_Base {
 
 		printf(
 			'<div class="eael-woo-product-title">%1$s%2$s%3$s</div>',
-			$prefix_html,
-			$title_element,
-			$suffix_html
+			$prefix_html, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Built from esc_html()/esc_attr()/esc_url()/wp_kses() parts and Elementor's escaped icon output.
+			$title_element, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Built from esc_html()/esc_attr()/esc_url()/wp_kses() parts and Elementor's escaped icon output.
+			$suffix_html // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Built from esc_html()/esc_attr()/esc_url()/wp_kses() parts and Elementor's escaped icon output.
 		);
 	}
 

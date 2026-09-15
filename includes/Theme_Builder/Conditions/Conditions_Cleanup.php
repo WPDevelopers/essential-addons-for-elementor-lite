@@ -253,7 +253,7 @@ class Conditions_Cleanup {
 				'no_found_rows'          => true,
 				'ignore_sticky_posts'    => true,
 				'update_post_term_cache' => false,
-				'suppress_filters'       => true,
+				'suppress_filters'       => true, // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.SuppressFilters_suppress_filters -- The cleanup must see every template, unaffected by other plugins' query filters.
 			]
 		);
 
