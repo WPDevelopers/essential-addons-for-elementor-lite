@@ -8,7 +8,7 @@ Stable tag: 6.8.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Elementor addon offering 120+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
+Elementor addon: 120+ widgets & templates — Elementor Gallery, Mega Menu, Slider, Form, Post Grid, Accordion, Header Footer Builder & WooCommerce.
 
 == Description ==
 
