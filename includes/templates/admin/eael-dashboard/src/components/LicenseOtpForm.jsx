@@ -17,6 +17,10 @@ function LicenseOtpForm() {
 
             const request = eaAjax(params, true);
             request.onreadystatechange = () => {
+                if (request.readyState !== 4) {
+                    return;
+                }
+
                 const response = request.responseText ? JSON.parse(request.responseText) : {};
                 let otp,
                     licenseStatus,
@@ -50,6 +54,10 @@ function LicenseOtpForm() {
 
             const request = eaAjax(params, true);
             request.onreadystatechange = () => {
+                if (request.readyState !== 4) {
+                    return;
+                }
+
                 const response = request.responseText ? JSON.parse(request.responseText) : {};
                 let toastType, toastMessage;
 

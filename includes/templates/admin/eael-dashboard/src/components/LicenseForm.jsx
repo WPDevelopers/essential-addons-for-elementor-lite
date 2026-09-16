@@ -18,6 +18,10 @@ function LicenseForm() {
 
                 const request = eaAjax(params, true);
                 request.onreadystatechange = () => {
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+
                     const response = request.responseText ? JSON.parse(request.responseText) : {};
                     let licenseError = false,
                         otp = false,
@@ -71,6 +75,10 @@ function LicenseForm() {
 
                 const request = eaAjax(params, true);
                 request.onreadystatechange = () => {
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+
                     const response = request.responseText ? JSON.parse(request.responseText) : {};
                     let licenseError = false,
                         licenseStatus,
@@ -83,6 +91,11 @@ function LicenseForm() {
                     } else {
                         licenseError = true;
                         errorMessage = response?.data?.message;
+                        // The request failed, so the licence is still active on the
+                        // store — keep showing it as active instead of flipping the
+                        // form to the deactivated state.
+                        licenseStatus = eaState.licenseStatus;
+                        hiddenLicenseKey = eaState.hiddenLicenseKey;
 
                         if ( ( ! errorMessage ) && ( request.status !== 200 ) ) {
                             errorMessage = (
