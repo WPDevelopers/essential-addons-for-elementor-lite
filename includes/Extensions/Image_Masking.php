@@ -31,6 +31,12 @@ class Image_Masking {
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_filter( 'elementor/document/element/replace_id', [ $this, 'cleanup_settings_data' ] );
 		add_filter( 'elementor/document/save/data', [ $this, 'cleanup_settings_data' ] );
+		// The save filter only runs AFTER the payload reached PHP. Pages saved by a pre-fix
+		// build still carry the polygon clip-path defaults in every element, so the first
+		// POST stays huge - large enough for host POST limits (413) and for OWASP CRS 942151
+		// to match `polygon(` and reject the save (406). Pruning on load lets the editor's
+		// in-memory model arrive clean, so that first save is small whatever the DB holds.
+		add_filter( 'elementor/document/load/data', [ $this, 'cleanup_settings_data' ] );
 	}
 
 	public function cleanup_settings_data( $element_data ) {
@@ -80,7 +86,26 @@ class Image_Masking {
 			}
 		};
 
-		$walk( $element_data );
+		// `elementor/document/save/data` and `elementor/document/element/replace_id` pass a
+		// wrapper array - `[ 'elements' => [...], 'settings' => [...] ]` - while
+		// `elementor/document/load/data` passes a bare list of top level elements, which a
+		// wrapper-shape-only walker would silently skip.
+		if ( ! is_array( $element_data ) ) {
+			return $element_data;
+		}
+
+		if ( isset( $element_data['elements'] ) || isset( $element_data['settings'] ) || isset( $element_data['page_settings'] ) ) {
+			$walk( $element_data );
+
+			return $element_data;
+		}
+
+		foreach ( $element_data as &$top_element ) {
+			if ( is_array( $top_element ) ) {
+				$walk( $top_element );
+			}
+		}
+		unset( $top_element );
 
 		return $element_data;
 	}
