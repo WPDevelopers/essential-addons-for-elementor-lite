@@ -60,6 +60,35 @@ trait Login_Registration {
 		return apply_filters( 'eael_recaptcha_threshold', $score_threshold );
 	}
 
+	/**
+	 * Verifies the security nonce of a Login | Register form submission.
+	 *
+	 * The widget renders every form with its own nonce action
+	 * ("eael-{$form_type}-action"), and the front-end script replaces it with a
+	 * fresh 'essential-addons-elementor' nonce fetched over AJAX so cached pages
+	 * keep working. Only the second action used to be accepted, so any submission
+	 * where that swap did not happen — JavaScript disabled, blocked, or stopped by
+	 * an error from another script on the page — failed with "Security token did
+	 * not match". Both actions are valid WordPress nonces for the current session,
+	 * so accepting either keeps the check equally strict.
+	 *
+	 * @param string $form_type One of 'login', 'register', 'lostpassword', 'resetpassword'.
+	 *
+	 * @return bool
+	 */
+	private function eael_lr_verify_form_nonce( $form_type ) {
+		$field = "eael-{$form_type}-nonce";
+
+		if ( empty( $_POST[ $field ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- This is the nonce check.
+			return false;
+		}
+
+		$nonce = sanitize_text_field( wp_unslash( $_POST[ $field ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- This is the nonce check.
+
+		return (bool) wp_verify_nonce( $nonce, "eael-{$form_type}-action" )
+			|| (bool) wp_verify_nonce( $nonce, 'essential-addons-elementor' );
+	}
+
 	public function login_or_register_user() {
 		do_action( 'eael/login-register/before-processing-login-register', $_POST ); //phpcs:ignore WordPress.Security.NonceVerification.Missing
 		// login or register form?
@@ -200,7 +229,7 @@ trait Login_Registration {
 
             $this->eael_lr_abort( $page_id );
 		}
-		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-login-nonce'] ) ), 'essential-addons-elementor' ) ) {
+		if ( ! $this->eael_lr_verify_form_nonce( 'login' ) ) {
 			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -512,7 +541,7 @@ trait Login_Registration {
 
 			$this->eael_lr_abort();
 		}
-		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-register-nonce'] ) ), 'essential-addons-elementor' ) ) {
+		if ( ! $this->eael_lr_verify_form_nonce( 'register' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
 			}
@@ -1227,7 +1256,7 @@ trait Login_Registration {
 
             $this->eael_lr_abort( $page_id );
 		}
-		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-lostpassword-nonce'] ) ), 'essential-addons-elementor' ) ) {
+		if ( ! $this->eael_lr_verify_form_nonce( 'lostpassword' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -1434,7 +1463,7 @@ trait Login_Registration {
 
             $this->eael_lr_abort( $page_id );
 		}
-		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-resetpassword-nonce'] ) ), 'essential-addons-elementor' ) ) {
+		if ( ! $this->eael_lr_verify_form_nonce( 'resetpassword' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
