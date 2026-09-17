@@ -1053,10 +1053,10 @@ class Saas_Menu {
 	/**
 	 * One resource row.
 	 *
-	 * The link and the hover wash live on the container rather than on the Info
-	 * Box: a row a visitor can only click on its title is a row that misses most
-	 * of the pointer's travel, and the Info Box has no hover background of its
-	 * own to light the whole strip with.
+	 * The hover wash lives on the container, because the Info Box has no hover
+	 * background of its own to light the whole strip with. The link lives on the
+	 * Info Box, made clickable as a whole so the row is not a title-only target:
+	 * a container's own Link control only renders when its HTML tag is `a`.
 	 *
 	 * @since 6.7.5
 	 *
@@ -1079,7 +1079,6 @@ class Saas_Menu {
 				// side the chevron does, so the two end up optically level.
 				'padding'              => Elements::spacing( 8, 12, 8, 8 ),
 				'border_radius'        => Elements::spacing( 16, 16, 16, 16 ),
-				'link'                 => Elements::link(),
 				'background_hover_background' => 'classic',
 				'background_hover_color'      => self::HOVER,
 				'background_hover_transition' => Elements::size( 0.2 ),
@@ -1113,9 +1112,16 @@ class Saas_Menu {
 				'eael_infobox_title_tag'    => 'h6',
 				'eael_infobox_text_type'    => 'content',
 				'eael_infobox_text'         => '<p>' . esc_html( $resource['text'] ) . '</p>',
-				// The row's own container is the link; a button inside it would be
-				// a second target sitting on top of the first.
-				'eael_show_infobox_button'  => '',
+				// The link lives on the box, not on the row around it: a container's
+				// Link control only renders when its HTML tag is `a`, so a link set on
+				// this `div` row never reached the page (#905). The whole box is the
+				// target, so a button inside it would be a second one on top of it.
+				'eael_show_infobox_button'         => '',
+				'eael_show_infobox_clickable'      => 'yes',
+				'eael_show_infobox_clickable_link' => Elements::link(),
+				// Keeps the panel's own typography on the link — see
+				// `.eael-mm-resource` in mega-menu.scss.
+				'_css_classes'                     => 'eael-mm-resource',
 				'eael_infobox_content_alignment_left_right' => 'left',
 
 				// Icon. An outlined tile rather than a filled one, and the accent
