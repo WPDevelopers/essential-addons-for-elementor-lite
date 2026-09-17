@@ -614,7 +614,9 @@ class Fancy_Text extends Widget_Base {
 		$fancy_text = array("");
 		foreach ( $settings as $item ) {
 			if ( ! empty( $item['eael_fancy_text_strings_text_field'] ) ) {
-				$fancy_text[] = HelperClass::eael_wp_kses( html_entity_decode( $item['eael_fancy_text_strings_text_field'] ) );
+				// "|" separates the phrases below, so a literal one inside a phrase is
+				// sent as its entity; the script splits first, then decodes it.
+				$fancy_text[] = str_replace( '|', '&#124;', HelperClass::eael_wp_kses( html_entity_decode( $item['eael_fancy_text_strings_text_field'] ) ) );
 			}
 		}
 
