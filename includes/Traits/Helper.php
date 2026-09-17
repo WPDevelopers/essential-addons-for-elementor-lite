@@ -39,6 +39,14 @@ trait Helper
      * @since  4.0.2
      */
     public function typeform_auth_handle() {
+	    // admin_init also fires on admin-ajax.php, where it runs for logged-out
+	    // visitors and skips the menu page's capability check. The OAuth provider
+	    // only ever redirects back to admin.php, so refuse AJAX requests outright,
+	    // and require the capability that manages the plugin's settings.
+	    if ( wp_doing_ajax() || ! current_user_can( 'manage_options' ) ) {
+		    return;
+	    }
+
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	    if ( !empty($_GET[ 'page' ]) && 'eael-settings' === sanitize_text_field( wp_unslash( $_GET[ 'page' ] ) ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
