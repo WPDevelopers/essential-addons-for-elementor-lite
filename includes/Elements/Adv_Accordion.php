@@ -125,8 +125,13 @@ class Adv_Accordion extends Widget_Base
     protected function eael_register_acf_controls() {
         $acf_condition = [ 'eael_adv_accordion_content_source' => 'acf_repeater' ];
 
-        // ACF inactive notice (no-op when ACF is active).
-        Helper::eael_acf_notice_controls( $this, $acf_condition );
+        // ACF inactive notice (no-op when ACF is active). It gets an id of its own
+        // rather than the helper's default: EA Pro 7.0.3's Extender adds a notice with
+        // the default id to this same widget for its media accordion, without checking
+        // whether the id is taken, so sharing it makes Elementor log "Cannot redeclare
+        // control" and drop Pro's notice. A RAW_HTML notice stores no value, so saved
+        // pages are unaffected, and every Pro version still finds its own id free.
+        Helper::eael_acf_notice_controls( $this, $acf_condition, 'eael_adv_accordion_acf_notice' );
 
         $this->add_control(
             'eael_ac_acf_repeater_field',
