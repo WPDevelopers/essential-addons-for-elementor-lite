@@ -513,6 +513,13 @@ trait Helper
 		    return $id;
 	    }
 
+	    // Never remap a document that is being edited rather than displayed — the
+	    // editor save, its render round-trips, the editor page and its preview. See
+	    // eael_is_elementor_editor_context() for why.
+	    if ( self::eael_is_elementor_editor_context( $id ) ) {
+		    return $id;
+	    }
+
 	    // Never remap while Elementor Pro is fetching the document for its own
 	    // theme-builder bookkeeping rather than to render it. See
 	    // eael_is_theme_builder_conditions_context() for why this is required.
@@ -569,6 +576,59 @@ trait Helper
 
 	    return $translated;
     }
+
+	/**
+	 * Is this document lookup part of editing it rather than displaying it?
+	 *
+	 * Elementor resolves a document through `elementor/documents/get/post_id`
+	 * before it writes: `Documents_Manager::ajax_save()` looks up the id the
+	 * editor sent and saves into whatever comes back. The same lookup opens the
+	 * editor and renders the edited document in its preview. Remapping there does
+	 * not translate anything for a visitor — it swaps the document being edited,
+	 * so Publish writes the elements and title into the translation and leaves
+	 * the template the user opened untouched (#910). The language behind that
+	 * remap is not the editor's either: on admin-ajax.php Polylang reads it from
+	 * a cookie shared by every tab.
+	 *
+	 * Deny-list, like the conditions guards below, so every display context EA
+	 * already translates in (front-end pages, AJAX-loaded content) keeps working.
+	 *
+	 * @since 6.8.4
+	 *
+	 * @param int $id Document id being resolved.
+	 *
+	 * @return bool
+	 */
+	public static function eael_is_elementor_editor_context( $id ) {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Read-only request routing checks; nothing is processed or stored.
+		$action = isset( $_REQUEST['action'] ) ? sanitize_key( wp_unslash( $_REQUEST['action'] ) ) : '';
+
+		// Editor round-trips: save, autosave, discard, document config, widget renders.
+		if ( wp_doing_ajax() && 'elementor_ajax' === $action ) {
+			return true;
+		}
+
+		// The editor page itself (post.php?action=elementor).
+		if ( is_admin() && 'elementor' === $action ) {
+			return true;
+		}
+
+		// The preview frame rendering the document being edited. Templates embedded
+		// in it are other ids and still resolve to the current language.
+		if ( isset( $_GET['elementor-preview'] ) && absint( $_GET['elementor-preview'] ) === absint( $id ) ) {
+			return true;
+		}
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+		// Elementor's own REST routes, which load a document in order to change it.
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST && isset( $GLOBALS['wp'] ) && ! empty( $GLOBALS['wp']->query_vars['rest_route'] ) ) {
+			if ( 0 === strpos( ltrim( (string) $GLOBALS['wp']->query_vars['rest_route'], '/' ), 'elementor/' ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 	/**
 	 * Is the current call coming from Elementor Pro's theme-builder display conditions?
