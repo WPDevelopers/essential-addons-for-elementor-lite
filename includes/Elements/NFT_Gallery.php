@@ -2943,7 +2943,7 @@ class NFT_Gallery extends Widget_Base {
 
 			if ( 'collections' === $nft_gallery['opensea_type'] ) {
 				$url .= "/collection/";
-				$url .= sanitize_text_field( $nft_gallery['filterby_wallet'] )."/nfts";
+				$url .= rawurlencode( sanitize_text_field( $nft_gallery['filterby_wallet'] ) ) . "/nfts";
 
 				$args = array(
 					'limit'  => $nft_gallery['item_limit'],
@@ -2951,7 +2951,7 @@ class NFT_Gallery extends Widget_Base {
 				);
 
 				if ( ! empty( $nft_gallery['filterby_wallet'] ) ) {
-					$args['asset_owner'] = sanitize_text_field( $nft_gallery['filterby_wallet'] );
+					$args['asset_owner'] = rawurlencode( sanitize_text_field( $nft_gallery['filterby_wallet'] ) );
 				}
 
 				$param = array_merge( $param, $args );
@@ -2964,11 +2964,11 @@ class NFT_Gallery extends Widget_Base {
 				);
 
 				if ( ! empty( $nft_gallery['filterby_slug'] ) && 'collection-slug' === $nft_gallery['opensea_filterby'] ) {
-					$args['collection_slug'] = sanitize_text_field( $nft_gallery['filterby_slug'] );
+					$args['collection_slug'] = rawurlencode( sanitize_text_field( $nft_gallery['filterby_slug'] ) );
 				}
 
 				if ( ! empty( $nft_gallery['filterby_wallet'] ) && 'wallet-address' === $nft_gallery['opensea_filterby'] ) {
-					$args['owner'] = sanitize_text_field( $nft_gallery['filterby_wallet'] );
+					$args['owner'] = rawurlencode( sanitize_text_field( $nft_gallery['filterby_wallet'] ) );
 				}
 
 				$param = array_merge( $param, $args );
@@ -3045,7 +3045,7 @@ class NFT_Gallery extends Widget_Base {
 				if ( empty( $nft_gallery['magiceden_collection_symbol'] ) ) {
 					$error_message = esc_html__( 'Please provide a valid collection symbol!', 'essential-addons-for-elementor-lite' );
 				} else {
-					$url .= "/collections/" . sanitize_text_field( $nft_gallery['magiceden_collection_symbol'] ) . "/listings";
+					$url .= "/collections/" . rawurlencode( sanitize_text_field( $nft_gallery['magiceden_collection_symbol'] ) ) . "/listings";
 					$args = array(
 						'limit'  => $nft_gallery['item_limit'],
 						'offset' => 0,
@@ -3056,7 +3056,7 @@ class NFT_Gallery extends Widget_Base {
 				if ( empty( $nft_gallery['magiceden_wallet_address'] ) ) {
 					$error_message = esc_html__( 'Please provide a valid wallet address!', 'essential-addons-for-elementor-lite' );
 				} else {
-					$url .= "/wallets/" . sanitize_text_field( $nft_gallery['magiceden_wallet_address'] ) . "/tokens";
+					$url .= "/wallets/" . rawurlencode( sanitize_text_field( $nft_gallery['magiceden_wallet_address'] ) ) . "/tokens";
 					$args = array(
 						'limit'  => $nft_gallery['item_limit'],
 						'offset' => 0,

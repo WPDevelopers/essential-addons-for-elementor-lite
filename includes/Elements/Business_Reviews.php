@@ -2896,7 +2896,7 @@ class Business_Reviews extends Widget_Base {
 		$response         = false;
 
 		if ( 'places-new' === $business_reviews['google_api_type'] ) {
-			$url = "https://places.googleapis.com/v1/places/" . sanitize_text_field( $business_reviews['place_id'] );
+			$url = "https://places.googleapis.com/v1/places/" . rawurlencode( sanitize_text_field( $business_reviews['place_id'] ) );
 
 			if ( ! empty( $business_reviews['language_code'] ) ) {
 				$url = add_query_arg( 'languageCode', $business_reviews['language_code'], $url );
@@ -2908,7 +2908,7 @@ class Business_Reviews extends Widget_Base {
 				'X-Goog-FieldMask'   => 'id,displayName,formattedAddress,internationalPhoneNumber,rating,userRatingCount,websiteUri,googleMapsUri,photos,reviews',
 			);
 
-			$response = wp_remote_get( $url, array(
+			$response = wp_remote_get( esc_url_raw( $url ), array(
 				'headers' => $headers,
 				'timeout' => 240,
 			) );
