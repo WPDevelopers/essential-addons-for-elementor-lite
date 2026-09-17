@@ -406,44 +406,12 @@ class Bootstrap
 			// update admin menu notice flag once visit EA settings page
 	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
-		    if ( ! current_user_can( 'administrator' ) ) {
-			    add_filter( 'elementor/document/save/data', function ( $data ) {
-				    if ( isset( $data['settings']['eael_custom_js'] ) ) {
-					    $data['settings']['eael_custom_js'] = get_post_meta( get_the_ID(), '_eael_custom_js', true );
-				    }
-
-				    if ( empty( $data['elements'] ) ) {
-					    return $data;
-				    }
-
-				    $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
-					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
-						    if ( ! empty( $element['settings']['register_user_role'] ) ) {
-							    $element['settings']['register_user_role'] = '';
-						    }
-					    }
-
-					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eicon-woocommerce' ) {
-						    if ( ! empty( $element['settings']['eael_product_grid_products_status'] ) ) {
-							    $element['settings']['eael_product_grid_products_status'] = [ 'publish' ];
-						    }
-					    }
-
-                        if ( ! current_user_can( 'install_plugins' ) && isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-advanced-data-table' ) {
-						    if ( ! empty( $element['settings']['ea_adv_data_table_source'] ) ) {
-							    $element['settings']['ea_adv_data_table_source'] = 'static';
-						    }
-					    }
-
-					    return $element;
-				    } );
-
-				    return $data;
-			    } );
-		    }
         } else {
 	        add_action( 'wp', [ $this, 'eael_post_view_count' ] );
         }
+
+	    // Registered on every request and checked at save time — see the method.
+	    add_filter( 'elementor/document/save/data', [ $this, 'eael_restrict_document_save_data' ], 10, 2 );
 
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
@@ -465,5 +433,66 @@ class Bootstrap
 			$license_manager = LicenseManager::get_instance( [] );
 			$license_manager->plugin_updater();
 		}
+	}
+	/**
+	 * Drops document settings a non-administrator must not be able to save.
+	 *
+	 * Resets the Custom JS extension's code to what is already stored, the
+	 * Login | Register widget's new-user role, the Product Grid's post status
+	 * and, without `install_plugins`, the Advanced Data Table's source.
+	 *
+	 * Elementor applies this filter inside `Document::save()`, which runs for
+	 * the editor's AJAX save and also outside wp-admin — REST routes such as the
+	 * MCP update-settings ability or Components, template sources and imports.
+	 * The check used to be registered only when `is_admin()` was true and
+	 * decided once when the plugin loaded, so every one of those other paths
+	 * skipped it (#904). It is now registered on every request and the current
+	 * user is checked when the document is actually saved.
+	 *
+	 * @param array                          $data     Document data about to be saved.
+	 * @param \Elementor\Core\Base\Document|null $document Document being saved.
+	 *
+	 * @return array
+	 */
+	public function eael_restrict_document_save_data( $data, $document = null ) {
+		if ( current_user_can( 'administrator' ) ) {
+			return $data;
+		}
+
+		if ( isset( $data['settings']['eael_custom_js'] ) ) {
+			// The document's own ID: outside the editor there is no global post,
+			// and get_the_ID() would read the stored code from post 0.
+			$post_id = ( is_object( $document ) && method_exists( $document, 'get_main_id' ) ) ? $document->get_main_id() : get_the_ID();
+
+			$data['settings']['eael_custom_js'] = get_post_meta( $post_id, '_eael_custom_js', true );
+		}
+
+		if ( empty( $data['elements'] ) ) {
+			return $data;
+		}
+
+		$data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
+			if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
+				if ( ! empty( $element['settings']['register_user_role'] ) ) {
+					$element['settings']['register_user_role'] = '';
+				}
+			}
+
+			if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eicon-woocommerce' ) {
+				if ( ! empty( $element['settings']['eael_product_grid_products_status'] ) ) {
+					$element['settings']['eael_product_grid_products_status'] = [ 'publish' ];
+				}
+			}
+
+			if ( ! current_user_can( 'install_plugins' ) && isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-advanced-data-table' ) {
+				if ( ! empty( $element['settings']['ea_adv_data_table_source'] ) ) {
+					$element['settings']['ea_adv_data_table_source'] = 'static';
+				}
+			}
+
+			return $element;
+		} );
+
+		return $data;
 	}
 }
