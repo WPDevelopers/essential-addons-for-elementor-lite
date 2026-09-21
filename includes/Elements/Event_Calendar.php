@@ -2961,7 +2961,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-event:nth-child(even)' => 'background-color: {{VALUE}} !important;',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-event:nth-child(even) td' => 'background-color: {{VALUE}} !important;',
                 ],
             ]
         );
