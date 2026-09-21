@@ -2693,12 +2693,78 @@ trait Login_Registration {
 		<?php
 	}
 
+	/**
+	 * Resolves an Elementor Pro global widget reference to the widget it stands for.
+	 *
+	 * A widget saved as global is stored on the page as
+	 * { "widgetType": "global", "templateID": N }, but it renders — and so submits its
+	 * form — under the page element's own id. Looking that id up on the page therefore
+	 * returns the global wrapper instead of the Login | Register widget, and the widget
+	 * type check below then rejected every submission from such a widget with "Invalid
+	 * form submission.". Following templateID gives back the widget's real data, so the
+	 * check still sees an actual Login | Register widget and keeps rejecting spoofed ids.
+	 *
+	 * @param array|false $widget_data Element data found on the page.
+	 *
+	 * @return array|false
+	 */
+	protected function lr_resolve_global_widget( $widget_data ) {
+		if ( empty( $widget_data['widgetType'] ) || 'global' !== $widget_data['widgetType'] || empty( $widget_data['templateID'] ) ) {
+			return $widget_data;
+		}
+
+		$template = Plugin::$instance->documents->get( (int) $widget_data['templateID'] );
+
+		if ( ! $template ) {
+			return false;
+		}
+
+		$global_widget = $this->find_widget_type_recursive( $template->get_elements_data(), 'eael-login-register' );
+
+		if ( empty( $global_widget ) ) {
+			return false;
+		}
+
+		// Elementor renders a global widget under the page element's id, which is the id
+		// the form posted, so carry it over instead of the one stored in the template.
+		$global_widget['id'] = $widget_data['id'];
+
+		return $global_widget;
+	}
+
+	/**
+	 * Get the first widget of a given type from an element tree.
+	 *
+	 * @param array  $elements    Element array.
+	 * @param string $widget_type Widget type to look for.
+	 *
+	 * @return bool|array
+	 */
+	protected function find_widget_type_recursive( $elements, $widget_type ) {
+		foreach ( (array) $elements as $element ) {
+			if ( isset( $element['widgetType'] ) && $widget_type === $element['widgetType'] ) {
+				return $element;
+			}
+
+			if ( ! empty( $element['elements'] ) ) {
+				$found = $this->find_widget_type_recursive( $element['elements'], $widget_type );
+
+				if ( $found ) {
+					return $found;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	public function lr_get_widget_settings( $page_id, $widget_id ) {
 		$document = Plugin::$instance->documents->get( $page_id );
 		$settings = [];
 		if ( $document ) {
 			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
 			$widget_data = $this->find_element_recursive( $elements, $widget_id );
+			$widget_data = $this->lr_resolve_global_widget( $widget_data );
 
 			// Enforce widget type. Without this check, a spoofed page_id / widget_id
 			// returns an empty settings array, causing OTP, reCAPTCHA, and Cloudflare
