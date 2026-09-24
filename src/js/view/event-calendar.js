@@ -27,13 +27,20 @@ var EventCalendar = function ($scope, $) {
 				month: { // will produce something like "Tuesday, September 18, 2018"
 					dayHeaderContent: (args) => {
 						if (args.view.type === 'dayGridMonth' && monthColumnHeaderFormat) {
-							return moment(args.date).format(monthColumnHeaderFormat)
+							// Month headers are generic weekday slots, so FullCalendar hands us a
+							// synthetic marker from the epoch week pinned to UTC midnight
+							// (1970-01-04T00:00:00Z for Sunday). Reading it in local time moves it
+							// to the previous evening wherever the 1970 offset was negative, which
+							// shifted every label one column back. Format it in UTC.
+							return moment.utc(args.date).format(monthColumnHeaderFormat)
 						}
 					},
 				},
 				week: {
 					dayHeaderContent: (args) => {
 						if (weekColumnHeaderFormat) {
+							// Week headers get real local dates, not epoch markers, so these must
+							// stay in local time.
 							return moment(args.date).format(weekColumnHeaderFormat);
 						}
 					},
