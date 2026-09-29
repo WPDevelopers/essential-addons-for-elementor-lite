@@ -688,7 +688,7 @@ class Woo_Product_Tabs extends Widget_Base {
 		// Product preview). Set $GLOBALS['post'] too, so the Description tab's the_content
 		// resolves. The static mock below is only reached when the store has no products.
 		if ( ! $product && $is_editor ) {
-			$product = $this->get_editor_preview_product();
+			$product = $this->get_editor_preview_product(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Intentionally sets the WooCommerce global product for the editor preview.
 			if ( $product ) {
 				$GLOBALS['post'] = get_post( $product->get_id() ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			}

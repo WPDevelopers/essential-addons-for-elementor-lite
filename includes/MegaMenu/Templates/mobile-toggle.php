@@ -13,6 +13,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template included inside a method; these variables are local to it.
 
 $settings     = $args['settings'];
 $container_id = $args['container_id'];

@@ -273,10 +273,10 @@ The most complex third-party path. Walking through it end-to-end:
 2. **Widget config.** User enables hybrid mode (`eael_dfg_enable_combined_query = 'yes'`), sets ACF field keys (`eael_acf_gallery_keys = ['portfolio_images']`).
 3. **First render.** Widget render walks the 5 posts, for each calls `get_field('portfolio_images', $post_id)`, collects all attachment IDs into a flat list. Builds a `taxonomy_map` mapping each attachment id to its parent post's categories. Renders gallery items with the parent's category as the filter key on each item.
 4. **User clicks load more.** Frontend JS reads existing `data-itemid` attributes (the displayed attachment ids), sends them as `exclude_ids` to AJAX.
-5. **Server handler `ajax_load_more` fires.** Detects Pro `Dynamic_Filterable_Gallery` class branch.
-6. **Hybrid block runs.** [`Ajax_Handler.php:212`](../../../includes/Traits/Ajax_Handler.php#L212): confirms `is_hybrid_query`, `class_exists('ACF')`, `eael_acf_gallery_keys` non-empty.
-7. **`build_dfg_acf_taxonomy_map` runs.** Walks parent posts again, calls `get_field` for each ACF key, merges results, computes attachment-to-taxonomy map.
-8. **`$args` adjustment.** `$args['post__in']` becomes the new attachment ids (filtered against `exclude_ids`). `$args['post_type'] = 'any'`. `$args['post_status'] = 'any'` (attachments use `inherit` status — `'any'` is needed to find them). `$args['orderby'] = 'post__in'` to preserve the order of the post__in array.
+5. **Server handler `ajax_load_more` fires.** It applies `eael/load_more/prepare_query`; Pro's `Traits/Load_More.php` handles the `Dynamic_Filterable_Gallery` class (with Pro ≤ 7.0.3, Lite's `legacy_pro_load_more_prepare()` does the same work).
+6. **Hybrid block runs.** Confirms `is_hybrid_query`, `class_exists('ACF')`, `eael_acf_gallery_keys` non-empty.
+7. **`eael_pro_dfg_acf_taxonomy_map()` (Pro) / `build_dfg_acf_taxonomy_map()` (Lite legacy) runs.** Walks parent posts again, calls `get_field` for each ACF key, merges results, computes attachment-to-taxonomy map.
+8. **`$args` adjustment.** `$args['post__in']` becomes the new attachment ids (filtered against `exclude_ids`). `$args['post_type']` and `$args['post_status']` are set to server-side whitelists (`attachment` plus the widget's post type; `publish` + `inherit`) — never `'any'`, which would expose drafts and private posts to unauthenticated requests. `$args['orderby'] = 'post__in'` to preserve the order of the post__in array.
 9. **WP_Query runs.** Returns the requested attachment posts.
 10. **Template renders.** Each item gets the parent's category data attribute for filter targeting.
 11. **Response.** JSON with rendered HTML.

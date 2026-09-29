@@ -1783,6 +1783,7 @@ class Simple_Menu extends Widget_Base
                         }";
 	        }
 
+	        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS from a CSS-identifier-whitelisted widget ID and absint() breakpoint; HTML escaping would break the selectors.
 	        echo "<style>" . $loading_layout_css . "
                     </style>";
             ?>

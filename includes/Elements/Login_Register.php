@@ -161,7 +161,7 @@ class Login_Register extends Widget_Base {
 		$this->pro_enabled       = apply_filters( 'eael/pro_enabled', false );
 
 		if( ! empty( $this->cloudflare_turnstile_sitekey ) ){
-			//phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent
+			//phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent, WordPress.WP.EnqueuedResourceParameters.MissingVersion, WordPress.WP.EnqueuedResourceParameters.NotInFooter -- Cloudflare Turnstile URL must load unmodified; header placement kept for existing forms.
 			wp_register_script( 'eael-cloudflare', 'https://challenges.cloudflare.com/turnstile/v0/api.js' );
 		}
 
@@ -7828,8 +7828,8 @@ class Login_Register extends Widget_Base {
 							?>
 
 							<div class="eael-lr-footer">
-								<input type="hidden" name="rp_key" value="<?php echo eael_neutralize_shortcodes( esc_attr( !empty( $rp_data['rp_key'] ) ? esc_html( $rp_data['rp_key'] ) : '' ) ); ?>" />
-								<input type="hidden" name="rp_login" value="<?php echo eael_neutralize_shortcodes( esc_attr( !empty( $rp_data['rp_login'] ) ? esc_html( $rp_data['rp_login'] ) : '' ) ); ?>" />
+								<input type="hidden" name="rp_key" value="<?php echo eael_neutralize_shortcodes( esc_attr( !empty( $rp_data['rp_key'] ) ? esc_html( $rp_data['rp_key'] ) : '' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped inside; eael_neutralize_shortcodes() only encodes [ and ]. ?>" />
+								<input type="hidden" name="rp_login" value="<?php echo eael_neutralize_shortcodes( esc_attr( !empty( $rp_data['rp_login'] ) ? esc_html( $rp_data['rp_login'] ) : '' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped inside; eael_neutralize_shortcodes() only encodes [ and ]. ?>" />
 
 								<input type="submit"
 									   name="eael-resetpassword-submit"
@@ -7988,7 +7988,7 @@ class Login_Register extends Widget_Base {
 			 data-ajax-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
 			<h3 class="eael-lr-otp-title"><?php echo esc_html( $title ); ?></h3>
 			<p class="eael-lr-otp-subtitle"><?php echo esc_html( $subtitle ); ?></p>
-			<input type="hidden" class="eael-lr-otp-token" value="<?php echo eael_neutralize_shortcodes( esc_attr( $cookie_token ) ); ?>">
+			<input type="hidden" class="eael-lr-otp-token" value="<?php echo eael_neutralize_shortcodes( esc_attr( $cookie_token ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped inside; eael_neutralize_shortcodes() only encodes [ and ]. ?>">
 			<div class="eael-lr-otp-input-row">
 				<input type="text"
 					   inputmode="numeric"

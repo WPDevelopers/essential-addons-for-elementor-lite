@@ -4089,7 +4089,20 @@ class Filterable_Gallery extends Widget_Base
         if ( function_exists('mb_convert_encoding') ) {
             $sorter_class = mb_convert_encoding( $sorter_class, 'UTF-8' );
         } else {
-            $sorter_class = utf8_encode( $sorter_class );
+            // Byte-for-byte equivalent of utf8_encode() (ISO-8859-1 to UTF-8),
+            // which PHP 8.2 deprecated. Only reached when mbstring is missing.
+            $latin1       = $sorter_class;
+            $sorter_class = '';
+            for ( $i = 0, $len = strlen( $latin1 ); $i < $len; $i++ ) {
+                $byte = ord( $latin1[ $i ] );
+                if ( $byte < 0x80 ) {
+                    $sorter_class .= $latin1[ $i ];
+                } elseif ( $byte < 0xC0 ) {
+                    $sorter_class .= "\xC2" . $latin1[ $i ];
+                } else {
+                    $sorter_class .= "\xC3" . chr( $byte - 0x40 );
+                }
+            }
         }
 
 		return $sorter_class;

@@ -16,6 +16,7 @@ use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template included inside a method; these variables are local to it.
 
 $current_type   = $list_table ? $list_table->get_request_type() : '';
 $current_status = $list_table ? $list_table->get_request_status() : '';

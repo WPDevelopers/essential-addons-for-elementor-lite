@@ -54,7 +54,7 @@
 .eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"],
 .eael-gravity-form-button-full-width .gform_wrapper .gform_footer .gform_button,
 .eael-gravity-form-button-full-width .gform_wrapper .gform_page_footer .gform_button,
-.eael-gravity-form-button-full-width .gform_wrapper .gform-button {
+.eael-gravity-form-button-full-width .gform_wrapper .gform-button:not(.gform-datepicker-toggle) {
 	width: 100% !important;
 	max-width: 100%;
 }

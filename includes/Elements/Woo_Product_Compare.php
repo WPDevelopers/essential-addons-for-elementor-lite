@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Woo_Product_Compare
- * @package namespace Essential_Addons_Elementor\Pro\Elements;
+ * @package Essential_Addons_Elementor\Elements
  */
 class Woo_Product_Compare extends Widget_Base {
 	use Woo_Product_Comparable;

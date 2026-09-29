@@ -83,7 +83,7 @@ If you're tracing a bug, identify which phase / flow the failure lives in first 
 | --- | ------ | ------ |
 | [`asset-loading.md`](asset-loading.md) | ✅ | `Asset_Builder` lifecycle, `config.php` registry, detection in popups/templates/shortcodes, hook timing, caching, CSS print modes |
 | [`editor-data-flow.md`](editor-data-flow.md) | ✅ | Settings persistence, `$settings` shape, `get_settings_for_display()`, Repeater / Group / Responsive control data, `condition` vs `conditions`, dynamic tags, `eael_e_optimized_markup()` |
-| [`admin-notices.md`](admin-notices.md) | ✅ | Active `bfcm-pointer.php` campaign + dormant `WPDeveloper_Notice` class infrastructure, dismissal lifecycle, how to add a new campaign |
+| [`admin-notices.md`](admin-notices.md) | ✅ | `bfcm-pointer.php` campaign (removed in #897, historical) + dormant `WPDeveloper_Notice` class infrastructure, dismissal lifecycle, how to add a new campaign |
 | [`quick-setup.md`](quick-setup.md) | ✅ | React-based onboarding wizard (`eael-setup-wizard`), Vite build pipeline separate from root webpack, three AJAX endpoints, lifecycle option states, how to add a new wizard step |
 | [`extensions.md`](extensions.md) | ✅ | The 11-extension subsystem — plain PHP classes that augment Elementor elements, registration loop, `'context' => 'edit'` vs `'view'`, the `Promotion` upsell pattern, how to author a new extension |
 | [`theme-builder.md`](theme-builder.md) | ✅ | The Theme Builder module — `ea_theme_builder` CPT, three-layer condition registry (core + dynamic post types/taxonomies + third-party), specificity ordering, render modes (`replace` / `hooks` / `theme`), Elementor document type, asset enqueue, the React modals vs the PHP list table, how to add a template type or rule |

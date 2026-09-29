@@ -347,7 +347,7 @@ class Compatibility {
 		}
 
 		if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
-			$translated = apply_filters( 'wpml_object_id', $template_id, Post_Type::CPT, true );
+			$translated = apply_filters( 'wpml_object_id', $template_id, Post_Type::CPT, true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WPML hook.
 
 			if ( $translated ) {
 				return (int) $translated;

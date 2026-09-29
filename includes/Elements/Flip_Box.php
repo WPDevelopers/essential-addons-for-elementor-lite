@@ -2625,7 +2625,7 @@ class Flip_Box extends Widget_Base
 
         // WPML Media Translation compatibility
         if ( ! empty( $flipbox_image['id'] ) ) {
-            $flipbox_image['id'] = apply_filters( 'wpml_object_id', $flipbox_image['id'], 'attachment', true );
+            $flipbox_image['id'] = apply_filters( 'wpml_object_id', $flipbox_image['id'], 'attachment', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WPML hook.
             if ( $flipbox_image['id'] ) {
                 $flipbox_image['url'] = wp_get_attachment_url( $flipbox_image['id'] );
             }
@@ -2680,7 +2680,7 @@ class Flip_Box extends Widget_Base
 
         // WPML Media Translation compatibility
         if ( ! empty( $flipbox_image_back['id'] ) ) {
-            $flipbox_image_back['id'] = apply_filters( 'wpml_object_id', $flipbox_image_back['id'], 'attachment', true );
+            $flipbox_image_back['id'] = apply_filters( 'wpml_object_id', $flipbox_image_back['id'], 'attachment', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WPML hook.
             if ( $flipbox_image_back['id'] ) {
                 $flipbox_image_back['url'] = wp_get_attachment_url( $flipbox_image_back['id'] );
             }

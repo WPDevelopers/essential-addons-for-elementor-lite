@@ -226,15 +226,172 @@ trait Ajax_Handler {
 
 			unset( $args['eael_wc_catalog_orderby'] );
 		}
+		if ( $class === '\Essential_Addons_Elementor\Elements\Post_Timeline' ) {
+			$settings ['expanison_indicator'] = $settings['excerpt_expanison_indicator'];
+		}
+		// Load-more preparation for widgets that belong to Essential Addons Pro
+		// (Post Block, Dynamic Gallery) is owned by Pro and runs through the
+		// `eael/load_more/prepare_query` filter. Pro releases that do this declare it
+		// with `eael/load_more/pro_prepares_own_widgets`. For older Pro releases the
+		// legacy copy keeps load-more working on sites that update only Lite.
+		$pro_prepares_own_widgets = (bool) apply_filters( 'eael/load_more/pro_prepares_own_widgets', false );
+		if ( ! $pro_prepares_own_widgets ) {
+			list( $settings, $args ) = $this->legacy_pro_load_more_prepare( $settings, $args, $class );
+		}
+
+		$prepared = apply_filters( 'eael/load_more/prepare_query', [ 'settings' => $settings, 'args' => $args ], $class );
+		if ( is_array( $prepared ) && isset( $prepared['settings'], $prepared['args'] ) && is_array( $prepared['settings'] ) && is_array( $prepared['args'] ) ) {
+			$settings = $prepared['settings'];
+			$args     = $prepared['args'];
+		}
+
+		$link_settings = [
+			'image_link_nofollow'         => ! empty( $settings['image_link_nofollow'] ) ? 'rel="nofollow"' : '',
+			'image_link_target_blank'     => ! empty( $settings['image_link_target_blank'] ) ? 'target="_blank"' : '',
+			'title_link_nofollow'         => ! empty( $settings['title_link_nofollow'] ) ? 'rel="nofollow"' : '',
+			'title_link_target_blank'     => ! empty( $settings['title_link_target_blank'] ) ? 'target="_blank"' : '',
+			'read_more_link_nofollow'     => ! empty( $settings['read_more_link_nofollow'] ) ? 'rel="nofollow"' : '',
+			'read_more_link_target_blank' => ! empty( $settings['read_more_link_target_blank'] ) ? 'target="_blank"' : '',
+		];
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
+
+		if ( $template_info ) {
+
+			if ( $template_info['dir'] === 'theme' ) {
+				$dir_path = $this->retrive_theme_path();
+			} else if ( $template_info['dir'] === 'pro' ) {
+				// `dir` arrives from the request, so this branch is reachable on a
+				// Lite-only install where EAEL_PRO_PLUGIN_PATH was never defined.
+				// Reject cleanly instead of fataling on an undefined constant.
+				if ( ! defined( 'EAEL_PRO_PLUGIN_PATH' ) ) {
+					wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
+				}
+
+				$dir_path = sprintf( "%sincludes", EAEL_PRO_PLUGIN_PATH );
+			} else {
+				$dir_path = sprintf( "%sincludes", EAEL_PLUGIN_PATH );
+			}
+
+			$file_path = realpath( sprintf(
+				'%s/Template/%s/%s',
+				$dir_path,
+				$template_info['name'],
+				$template_info['file_name']
+			) );
+
+			if ( ! $file_path || 0 !== strpos( $file_path, realpath( $dir_path ) ) ) {
+				wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
+			}
+
+			if ( $file_path ) {
+				// wp_send_json( $args );
+				$query = new \WP_Query( $args );
+
+				// The catalog ordering above works through `posts_clauses`; detach it as
+				// soon as the SQL is built so it cannot leak into any later query.
+				if ( $wc_catalog_ordering_applied ) {
+					WC()->query->remove_ordering_args();
+					$wc_catalog_ordering_applied = false;
+				}
+
+				$found_posts = $query->found_posts;
+				$iterator = 0;
+
+				if ( $query->have_posts() ) {
+					if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' && boolval( $settings['show_add_to_cart_custom_text'] ) ) {
+
+						$add_to_cart_text = [
+							'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
+							'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
+							'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
+							'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
+							'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
+						];
+						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+					}
+
+					// Handle custom add to cart text for Woo_Product_List
+					if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' && boolval( $settings['eael_product_list_content_footer_add_to_cart_custom_text_show'] ) ) {
+						$add_to_cart_text = [
+							'add_to_cart_simple_product_button_text'   => $settings['eael_product_list_content_footer_add_to_cart_simple_text'],
+							'add_to_cart_variable_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_variable_text'],
+							'add_to_cart_grouped_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_grouped_text'],
+							'add_to_cart_external_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_external_text'],
+							'add_to_cart_default_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_default_text'],
+						];
+						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+					}
+
+					$html .= (string) apply_filters( 'eael/load_more/before_items_html', '', $class, $found_posts, $settings );
+					// Legacy: older Pro releases do not add this marker themselves.
+					if ( ! $pro_prepares_own_widgets && $class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
+						$html .= "<div class='found_posts' style='display: none;'>{$found_posts}</div>";
+					}
+
+					while ( $query->have_posts() ) {
+						$query->the_post();
+
+						$html .= HelperClass::include_with_variable( $file_path, [
+							'settings'      => $settings,
+							'link_settings' => $link_settings,
+							'iterator'      => $iterator
+						] );
+						$iterator ++;
+					}
+				} else {
+					$html .= '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
+				}
+			}
+		}
+
+		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
+			do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
+		if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
+			do_action( 'eael/woo-product-list/after-product-loop' );
+		}
+		while ( ob_get_status() ) {
+			ob_end_clean();
+		}
+		if ( function_exists( 'gzencode' ) ) {
+			$response = gzencode( wp_json_encode( $html ) );
+
+			header( 'Content-Type: application/json; charset=utf-8' );
+			header( 'Content-Encoding: gzip' );
+			header( 'Content-Length: ' . strlen( $response ) );
+
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $response;
+		} else {
+			echo wp_kses_post( $html );
+		}
+		wp_die();
+	}
+
+	/**
+	 * Legacy load-more preparation for Essential Addons Pro widgets.
+	 *
+	 * Pro owns this logic and ships it in Pro\Traits\Load_More, hooked to
+	 * `eael/load_more/prepare_query`. This copy runs only when the active Pro release
+	 * does not declare `eael/load_more/pro_prepares_own_widgets`, so sites that update
+	 * Lite but stay on an older Pro keep working. Remove it (together with
+	 * build_dfg_acf_taxonomy_map() and get_dfg_post_taxonomy_classes()) once those
+	 * Pro releases are no longer supported.
+	 *
+	 * @param array  $settings Widget settings.
+	 * @param array  $args     WP_Query args.
+	 * @param string $class    Widget class named by the load-more request.
+	 * @return array { 0: array $settings, 1: array $args }
+	 */
+	protected function legacy_pro_load_more_prepare( $settings, $args, $class ) {
 		// ensure control name compatibility to old code if it is post block
 		if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_Block' ) {
 			$settings ['post_block_hover_animation']    = $settings['eael_post_block_hover_animation'];
 			$settings ['show_read_more_button']         = $settings['eael_show_read_more_button'];
 			$settings ['eael_post_block_bg_hover_icon'] = ( isset( $settings['__fa4_migrated']['eael_post_block_bg_hover_icon_new'] ) || empty( $settings['eael_post_block_bg_hover_icon'] ) ) ? $settings['eael_post_block_bg_hover_icon_new']['value'] : $settings['eael_post_block_bg_hover_icon'];
 			$settings ['expanison_indicator']           = $settings['excerpt_expanison_indicator'];
-		}
-		if ( $class === '\Essential_Addons_Elementor\Elements\Post_Timeline' ) {
-			$settings ['expanison_indicator'] = $settings['excerpt_expanison_indicator'];
 		}
 		if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
 			$settings['eael_section_fg_zoom_icon'] = ( isset( $settings['__fa4_migrated']['eael_section_fg_zoom_icon_new'] ) || empty( $settings['eael_section_fg_zoom_icon'] ) ? $settings['eael_section_fg_zoom_icon_new']['value'] : $settings['eael_section_fg_zoom_icon'] );
@@ -265,11 +422,13 @@ trait Ajax_Handler {
 				$args['post_type']   = $dfg_safe_post_types;
 			}
 
+			// phpcs:disable WordPress.Security.NonceVerification.Missing -- Only reached from ajax_load_more(), after its nonce check.
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			$exclude_ids = json_decode( html_entity_decode( stripslashes ( $_POST['exclude_ids'] ) ) );
 			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique( (array) $exclude_ids ) ) : array();
 			$active_term_id = ( !empty( $_POST['active_term_id'] ) ) ? intval( $_POST['active_term_id'] ) : 0;
 			$active_taxonomy = ( !empty( $_POST['active_taxonomy'] ) ) ? sanitize_text_field( wp_unslash( $_POST['active_taxonomy'] ) ) : '';
+			// phpcs:enable WordPress.Security.NonceVerification.Missing
 
 			// Check if this is a hybrid/combined query with ACF gallery
 			// Also check settings for hybrid query flag as backup (in case args encoding failed)
@@ -326,120 +485,7 @@ trait Ajax_Handler {
 			}
 		}
 
-		$link_settings = [
-			'image_link_nofollow'         => ! empty( $settings['image_link_nofollow'] ) ? 'rel="nofollow"' : '',
-			'image_link_target_blank'     => ! empty( $settings['image_link_target_blank'] ) ? 'target="_blank"' : '',
-			'title_link_nofollow'         => ! empty( $settings['title_link_nofollow'] ) ? 'rel="nofollow"' : '',
-			'title_link_target_blank'     => ! empty( $settings['title_link_target_blank'] ) ? 'target="_blank"' : '',
-			'read_more_link_nofollow'     => ! empty( $settings['read_more_link_nofollow'] ) ? 'rel="nofollow"' : '',
-			'read_more_link_target_blank' => ! empty( $settings['read_more_link_target_blank'] ) ? 'target="_blank"' : '',
-		];
-
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
-		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
-
-		if ( $template_info ) {
-
-			if ( $template_info['dir'] === 'theme' ) {
-				$dir_path = $this->retrive_theme_path();
-			} else if ( $template_info['dir'] === 'pro' ) {
-				$dir_path = sprintf( "%sincludes", EAEL_PRO_PLUGIN_PATH );
-			} else {
-				$dir_path = sprintf( "%sincludes", EAEL_PLUGIN_PATH );
-			}
-
-			$file_path = realpath( sprintf(
-				'%s/Template/%s/%s',
-				$dir_path,
-				$template_info['name'],
-				$template_info['file_name']
-			) );
-
-			if ( ! $file_path || 0 !== strpos( $file_path, realpath( $dir_path ) ) ) {
-				wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
-			}
-
-			if ( $file_path ) {
-				// wp_send_json( $args );
-				$query = new \WP_Query( $args );
-
-				// The catalog ordering above works through `posts_clauses`; detach it as
-				// soon as the SQL is built so it cannot leak into any later query.
-				if ( $wc_catalog_ordering_applied ) {
-					WC()->query->remove_ordering_args();
-					$wc_catalog_ordering_applied = false;
-				}
-
-				$found_posts = $query->found_posts;
-				$iterator = 0;
-
-				if ( $query->have_posts() ) {
-					if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' && boolval( $settings['show_add_to_cart_custom_text'] ) ) {
-
-						$add_to_cart_text = [
-							'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
-							'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
-							'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
-							'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
-							'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
-						];
-						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
-					}
-
-					// Handle custom add to cart text for Woo_Product_List
-					if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' && boolval( $settings['eael_product_list_content_footer_add_to_cart_custom_text_show'] ) ) {
-						$add_to_cart_text = [
-							'add_to_cart_simple_product_button_text'   => $settings['eael_product_list_content_footer_add_to_cart_simple_text'],
-							'add_to_cart_variable_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_variable_text'],
-							'add_to_cart_grouped_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_grouped_text'],
-							'add_to_cart_external_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_external_text'],
-							'add_to_cart_default_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_default_text'],
-						];
-						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
-					}
-
-					if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
-						$html .= "<div class='found_posts' style='display: none;'>{$found_posts}</div>";
-					}
-
-					while ( $query->have_posts() ) {
-						$query->the_post();
-
-						$html .= HelperClass::include_with_variable( $file_path, [
-							'settings'      => $settings,
-							'link_settings' => $link_settings,
-							'iterator'      => $iterator
-						] );
-						$iterator ++;
-					}
-				} else {
-					$html .= '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
-				}
-			}
-		}
-
-		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
-			do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
-		}
-		if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
-			do_action( 'eael/woo-product-list/after-product-loop' );
-		}
-		while ( ob_get_status() ) {
-			ob_end_clean();
-		}
-		if ( function_exists( 'gzencode' ) ) {
-			$response = gzencode( wp_json_encode( $html ) );
-
-			header( 'Content-Type: application/json; charset=utf-8' );
-			header( 'Content-Encoding: gzip' );
-			header( 'Content-Length: ' . strlen( $response ) );
-
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $response;
-		} else {
-			echo wp_kses_post( $html );
-		}
-		wp_die();
+		return [ $settings, $args ];
 	}
 
 	/**
@@ -1273,6 +1319,13 @@ trait Ajax_Handler {
 			if ( $template_info['dir'] === 'theme' ) {
 				$dir_path = $this->retrive_theme_path();
 			} else if ( $template_info['dir'] === 'pro' ) {
+				// `dir` arrives from the request, so this branch is reachable on a
+				// Lite-only install where EAEL_PRO_PLUGIN_PATH was never defined.
+				// Reject cleanly instead of fataling on an undefined constant.
+				if ( ! defined( 'EAEL_PRO_PLUGIN_PATH' ) ) {
+					wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
+				}
+
 				$dir_path = sprintf( "%sincludes", EAEL_PRO_PLUGIN_PATH );
 			} else {
 				$dir_path = sprintf( "%sincludes", EAEL_PLUGIN_PATH );
@@ -1794,7 +1847,7 @@ trait Ajax_Handler {
 		$added = false;
 
 		if ( 'grouped' === $product_type ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verified above; every key and value is absint()-ed below.
 			$quantities = isset( $_POST['quantity'] ) && is_array( $_POST['quantity'] ) ? $_POST['quantity'] : [];
 			foreach ( $quantities as $child_id => $qty ) {
 				$child_id = absint( $child_id );

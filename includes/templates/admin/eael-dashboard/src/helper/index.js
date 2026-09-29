@@ -1,3 +1,5 @@
+import {createElement, Fragment} from "react";
+
 const debouncer = (callback, delay) => {
         let timer
         return function () {
@@ -178,3 +180,73 @@ export const eaAjax = eaXMLHttpRequest;
 export const eaAjaxFetch = eaFetchRequest;
 export const getLsData = getData;
 export const setLsData = setData;
+
+/**
+ * Licence messages built by the store and by Pro's Manager::maybe_error() carry
+ * markup — <strong> around the product name, and an <a> link in the "Verify your
+ * License Key" notice. React renders a string as a text node, so those messages
+ * used to show their tags literally ("Your <strong>Essential Addons…</strong>").
+ *
+ * Parse the message into React elements through a small allowlist instead of
+ * handing it to dangerouslySetInnerHTML: anything not listed is dropped while its
+ * text is kept, and a link keeps its href only when it is plain http(s).
+ */
+const LICENSE_MESSAGE_TAGS = {
+        a: 'a',
+        b: 'strong',
+        br: 'br',
+        em: 'em',
+        i: 'em',
+        span: 'span',
+        strong: 'strong'
+    },
+    nodeToElement = (node, key) => {
+        if (node.nodeType === 3) {
+            return node.nodeValue;
+        }
+
+        if (node.nodeType !== 1) {
+            return null;
+        }
+
+        const tag = LICENSE_MESSAGE_TAGS[node.tagName.toLowerCase()],
+            children = Array.from(node.childNodes).map((child, index) => nodeToElement(child, index));
+
+        if (!tag) {
+            return createElement(Fragment, {key}, ...children);
+        }
+
+        if (tag === 'br') {
+            return createElement('br', {key});
+        }
+
+        const props = {key};
+
+        if (tag === 'a') {
+            const href = node.getAttribute('href') || '';
+
+            if (/^https?:\/\//i.test(href)) {
+                props.href = href;
+                props.target = '_blank';
+                props.rel = 'noopener noreferrer';
+            }
+        }
+
+        return createElement(tag, props, ...children);
+    },
+    htmlMessage = (message) => {
+        // Already a React element (the local request-failed fallbacks), or nothing.
+        if (typeof message !== 'string') {
+            return message;
+        }
+
+        if (!/[<&]/.test(message)) {
+            return message;
+        }
+
+        const body = new DOMParser().parseFromString(message, 'text/html').body;
+
+        return Array.from(body.childNodes).map((node, index) => nodeToElement(node, index));
+    };
+
+export const renderHtmlMessage = htmlMessage;

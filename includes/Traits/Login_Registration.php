@@ -60,6 +60,35 @@ trait Login_Registration {
 		return apply_filters( 'eael_recaptcha_threshold', $score_threshold );
 	}
 
+	/**
+	 * Verifies the security nonce of a Login | Register form submission.
+	 *
+	 * The widget renders every form with its own nonce action
+	 * ("eael-{$form_type}-action"), and the front-end script replaces it with a
+	 * fresh 'essential-addons-elementor' nonce fetched over AJAX so cached pages
+	 * keep working. Only the second action used to be accepted, so any submission
+	 * where that swap did not happen — JavaScript disabled, blocked, or stopped by
+	 * an error from another script on the page — failed with "Security token did
+	 * not match". Both actions are valid WordPress nonces for the current session,
+	 * so accepting either keeps the check equally strict.
+	 *
+	 * @param string $form_type One of 'login', 'register', 'lostpassword', 'resetpassword'.
+	 *
+	 * @return bool
+	 */
+	private function eael_lr_verify_form_nonce( $form_type ) {
+		$field = "eael-{$form_type}-nonce";
+
+		if ( empty( $_POST[ $field ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- This is the nonce check.
+			return false;
+		}
+
+		$nonce = sanitize_text_field( wp_unslash( $_POST[ $field ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- This is the nonce check.
+
+		return (bool) wp_verify_nonce( $nonce, "eael-{$form_type}-action" )
+			|| (bool) wp_verify_nonce( $nonce, 'essential-addons-elementor' );
+	}
+
 	public function login_or_register_user() {
 		do_action( 'eael/login-register/before-processing-login-register', $_POST ); //phpcs:ignore WordPress.Security.NonceVerification.Missing
 		// login or register form?
@@ -93,12 +122,12 @@ trait Login_Registration {
 		}
 
 		if ( ! is_user_logged_in() ) {
-			wp_redirect( $redirect_to );
+			wp_redirect( $redirect_to ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- External logout targets are supported by design; the nonce above is bound to this exact URL.
 			exit;
 		}
 
 		wp_logout();
-		wp_redirect( $redirect_to );
+		wp_redirect( $redirect_to ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- External logout targets are supported by design; the nonce above is bound to this exact URL.
 		exit;
 	}
 
@@ -200,7 +229,7 @@ trait Login_Registration {
 
             $this->eael_lr_abort( $page_id );
 		}
-		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-login-nonce'] ) ), 'essential-addons-elementor' ) ) {
+		if ( ! $this->eael_lr_verify_form_nonce( 'login' ) ) {
 			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -512,7 +541,7 @@ trait Login_Registration {
 
 			$this->eael_lr_abort();
 		}
-		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-register-nonce'] ) ), 'essential-addons-elementor' ) ) {
+		if ( ! $this->eael_lr_verify_form_nonce( 'register' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
 			}
@@ -729,7 +758,7 @@ trait Login_Registration {
 		}
 
 		if ( isset( $_POST['confirm_email'] ) ) {
-			$confirm_email_raw = wp_unslash( $_POST['confirm_email'] );
+			$confirm_email_raw = wp_unslash( $_POST['confirm_email'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Raw value is only passed to is_email(); sanitize_email() is applied on the next line.
 			$confirm_email = sanitize_email( $confirm_email_raw );
 			if ( empty( $confirm_email ) || ! is_email( $confirm_email_raw ) ) {
 				$errors['confirm_email'] = isset( $settings['err_conf_email'] ) ? Helper::eael_wp_kses( $settings['err_conf_email'] ) : __( 'Your confirmed email did not match', 'essential-addons-for-elementor-lite' );
@@ -1227,7 +1256,7 @@ trait Login_Registration {
 
             $this->eael_lr_abort( $page_id );
 		}
-		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-lostpassword-nonce'] ) ), 'essential-addons-elementor' ) ) {
+		if ( ! $this->eael_lr_verify_form_nonce( 'lostpassword' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -1434,7 +1463,7 @@ trait Login_Registration {
 
             $this->eael_lr_abort( $page_id );
 		}
-		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eael-resetpassword-nonce'] ) ), 'essential-addons-elementor' ) ) {
+		if ( ! $this->eael_lr_verify_form_nonce( 'resetpassword' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -2082,7 +2111,7 @@ trait Login_Registration {
 			return false;
 		}
 
-		$endpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+		$endpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'; // phpcs:ignore PluginCheck.CodeAnalysis.Offloading.OffloadedContent -- Server-side Cloudflare Turnstile verification API for a site-configured service, not an offloaded asset.
 		$data     = [
 			'secret'   => $secret,
 			'response' => !empty( $_REQUEST['cf-turnstile-response'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['cf-turnstile-response'] ) ) : '', //phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -2393,7 +2422,7 @@ trait Login_Registration {
 		check_ajax_referer( 'eael_lr_otp', '_eael_otp_nonce' );
 
 		$token = ! empty( $_POST['otp_token'] ) ? sanitize_text_field( wp_unslash( $_POST['otp_token'] ) ) : '';
-		$code  = ! empty( $_POST['otp_code'] ) ? preg_replace( '/[^0-9]/', '', wp_unslash( $_POST['otp_code'] ) ) : '';
+		$code  = ! empty( $_POST['otp_code'] ) ? preg_replace( '/[^0-9]/', '', wp_unslash( $_POST['otp_code'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reduced to digits by preg_replace().
 
 		if ( empty( $token ) || empty( $code ) ) {
 			wp_send_json_error( [ 'message' => __( 'Please enter the verification code.', 'essential-addons-for-elementor-lite' ) ] );
@@ -2511,7 +2540,7 @@ trait Login_Registration {
 
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
-		do_action( 'register_new_user', $user_id );
+		do_action( 'register_new_user', $user_id ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core hook.
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		$response = [
@@ -2664,12 +2693,78 @@ trait Login_Registration {
 		<?php
 	}
 
+	/**
+	 * Resolves an Elementor Pro global widget reference to the widget it stands for.
+	 *
+	 * A widget saved as global is stored on the page as
+	 * { "widgetType": "global", "templateID": N }, but it renders — and so submits its
+	 * form — under the page element's own id. Looking that id up on the page therefore
+	 * returns the global wrapper instead of the Login | Register widget, and the widget
+	 * type check below then rejected every submission from such a widget with "Invalid
+	 * form submission.". Following templateID gives back the widget's real data, so the
+	 * check still sees an actual Login | Register widget and keeps rejecting spoofed ids.
+	 *
+	 * @param array|false $widget_data Element data found on the page.
+	 *
+	 * @return array|false
+	 */
+	protected function lr_resolve_global_widget( $widget_data ) {
+		if ( empty( $widget_data['widgetType'] ) || 'global' !== $widget_data['widgetType'] || empty( $widget_data['templateID'] ) ) {
+			return $widget_data;
+		}
+
+		$template = Plugin::$instance->documents->get( (int) $widget_data['templateID'] );
+
+		if ( ! $template ) {
+			return false;
+		}
+
+		$global_widget = $this->find_widget_type_recursive( $template->get_elements_data(), 'eael-login-register' );
+
+		if ( empty( $global_widget ) ) {
+			return false;
+		}
+
+		// Elementor renders a global widget under the page element's id, which is the id
+		// the form posted, so carry it over instead of the one stored in the template.
+		$global_widget['id'] = $widget_data['id'];
+
+		return $global_widget;
+	}
+
+	/**
+	 * Get the first widget of a given type from an element tree.
+	 *
+	 * @param array  $elements    Element array.
+	 * @param string $widget_type Widget type to look for.
+	 *
+	 * @return bool|array
+	 */
+	protected function find_widget_type_recursive( $elements, $widget_type ) {
+		foreach ( (array) $elements as $element ) {
+			if ( isset( $element['widgetType'] ) && $widget_type === $element['widgetType'] ) {
+				return $element;
+			}
+
+			if ( ! empty( $element['elements'] ) ) {
+				$found = $this->find_widget_type_recursive( $element['elements'], $widget_type );
+
+				if ( $found ) {
+					return $found;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	public function lr_get_widget_settings( $page_id, $widget_id ) {
 		$document = Plugin::$instance->documents->get( $page_id );
 		$settings = [];
 		if ( $document ) {
 			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
 			$widget_data = $this->find_element_recursive( $elements, $widget_id );
+			$widget_data = $this->lr_resolve_global_widget( $widget_data );
 
 			// Enforce widget type. Without this check, a spoofed page_id / widget_id
 			// returns an empty settings array, causing OTP, reCAPTCHA, and Cloudflare
@@ -2929,11 +3024,11 @@ trait Login_Registration {
 
 		foreach ( $fields as $type => $label ) {
 			if ( 'website' === $type ) {
-				$value = esc_attr( get_userdata( $user_id )->user_url ?? '' );
+				$value = get_userdata( $user_id )->user_url ?? '';
 			} elseif ( 'eael_phone_number' === $type ) {
-				$value = esc_attr( get_user_meta( $user_id, 'eael_phone_number', true ) );
+				$value = get_user_meta( $user_id, 'eael_phone_number', true );
 			} else {
-				$value = esc_attr( get_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, true ) );
+				$value = get_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $type, true );
 			}
 			?>
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -2942,7 +3037,7 @@ trait Login_Registration {
 				       class="woocommerce-Input woocommerce-Input--text input-text"
 				       name="eael_mya_<?php echo esc_attr( $type ); ?>"
 				       id="eael_mya_<?php echo esc_attr( $type ); ?>"
-				       value="<?php echo $value; ?>">
+				       value="<?php echo esc_attr( $value ); ?>">
 			</p>
 			<?php
 		}
@@ -2962,11 +3057,12 @@ trait Login_Registration {
 
 		foreach ( array_keys( $fields ) as $type ) {
 			$post_key = 'eael_mya_' . $type;
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Runs on woocommerce_save_account_details, which WC_Form_Handler::save_account_details() fires only after verifying its nonce.
 			if ( ! isset( $_POST[ $post_key ] ) ) {
 				continue;
 			}
 
-			$value = sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) );
+			$value = sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- See above: nonce verified by WooCommerce.
 
 			if ( 'website' === $type ) {
 				wp_update_user( [ 'ID' => $user_id, 'user_url' => esc_url_raw( $value ) ] );
@@ -3193,10 +3289,10 @@ trait Login_Registration {
 		if ( 'eael_approve_user' === $action ) {
 			update_user_meta( $user_id, 'eael_registration_status', 'approved' );
 			if ( $user ) {
-				/* translators: %s: user display name */
 				wp_mail(
 					$user->user_email,
 					__( 'Your account has been approved', 'essential-addons-for-elementor-lite' ),
+					/* translators: %s: user display name */
 					sprintf( __( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ), $user->display_name )
 				);
 			}
@@ -3276,8 +3372,8 @@ trait Login_Registration {
 			$user = get_userdata( $user_id );
 			if ( $user ) {
 				$subject = __( 'Your account has been approved', 'essential-addons-for-elementor-lite' );
-				/* translators: %s: user display name */
 				$message = sprintf(
+					/* translators: %s: user display name */
 					__( 'Hello %s, your account has been approved. You can now log in.', 'essential-addons-for-elementor-lite' ),
 					$user->display_name
 				);
@@ -3378,7 +3474,7 @@ trait Login_Registration {
 
 		// One direct SQL query gives all three counts and bypasses pre_get_users entirely.
 		// meta_key is hardcoded literal — passed through prepare() for WPCS compliance only.
-		$rows = $wpdb->get_results(
+		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Prepared count query for the admin Users screen; bypasses pre_get_users by design.
 			$wpdb->prepare(
 				"SELECT meta_value AS status, COUNT(*) AS total
 				 FROM {$wpdb->usermeta}

@@ -144,7 +144,7 @@ class WPDeveloper_Notice {
         // if( current_user_can( 'install_plugins' ) ) {
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             if( isset( $_GET['plugin'] ) &&  sanitize_text_field( wp_unslash( $_GET['plugin'] ) ) == $this->plugin_name ) {
-                do_action( 'wpdeveloper_notice_clicked_for_' . $this->plugin_name );
+                do_action( 'wpdeveloper_notice_clicked_for_' . $this->plugin_name ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
                 /**
                  * Redirect User To the Current URL, but without set query arguments.
                  */
@@ -387,17 +387,17 @@ class WPDeveloper_Notice {
 
         switch( $notice ) {
             case 'opt_in' :
-                do_action('wpdeveloper_optin_notice_for_' . $this->plugin_name );
+                do_action('wpdeveloper_optin_notice_for_' . $this->plugin_name ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
                 break;
             case 'first_install' :
                 if( $options_data[ $this->plugin_name ]['first_install'] !== 'deactivated' ) {
-                    do_action( 'wpdeveloper_first_install_notice_for_' . $this->plugin_name );
+                    do_action( 'wpdeveloper_first_install_notice_for_' . $this->plugin_name ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
                     $this->get_thumbnail( 'first_install' );
                     $this->get_message( 'first_install' );
                 }
                 break;
             case 'update' :
-                do_action( 'wpdeveloper_update_notice_for_' . $this->plugin_name );
+                do_action( 'wpdeveloper_update_notice_for_' . $this->plugin_name ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
                 $this->dismiss_button_scripts();
                 $this->get_thumbnail( 'update' );
                 $this->get_message( 'update' );
@@ -409,7 +409,7 @@ class WPDeveloper_Notice {
             //     $this->get_message( 'update_400k' );
             //     break;
             case 'review' :
-                do_action( 'wpdeveloper_review_notice_for_' . $this->plugin_name );
+                do_action( 'wpdeveloper_review_notice_for_' . $this->plugin_name ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
                 $this->get_thumbnail( 'review' );
                 $this->get_message( 'review' );
                 break;
@@ -430,11 +430,11 @@ class WPDeveloper_Notice {
      * Upsale Notice
      */
     public function upsale_notice(){
-        do_action( 'wpdeveloper_before_upsale_notice_for_' . $this->plugin_name );
-            do_action('wpdeveloper_upsale_notice_for_' . $this->plugin_name);
+        do_action( 'wpdeveloper_before_upsale_notice_for_' . $this->plugin_name ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
+            do_action('wpdeveloper_upsale_notice_for_' . $this->plugin_name); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
             $this->get_thumbnail( 'upsale' );
             $this->get_message( 'upsale' );
-        do_action( 'wpdeveloper_after_upsale_notice_for_' . $this->plugin_name );
+        do_action( 'wpdeveloper_after_upsale_notice_for_' . $this->plugin_name ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
         $this->upsale_button_script();
     }
     /**
@@ -562,11 +562,11 @@ class WPDeveloper_Notice {
             do_action( $this->do_notice_action );
             return;
         } 
-        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
         do_action( 'wpdeveloper_before_notice_for_' . $this->plugin_name );
         // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
         do_action( $this->do_notice_action );
-        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Shared WPDeveloper notice hook; renaming would break existing listeners.
         do_action( 'wpdeveloper_after_notice_for_' . $this->plugin_name );
     }
     /**

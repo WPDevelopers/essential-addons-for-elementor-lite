@@ -15,7 +15,12 @@ var FancyText = function ($scope, $) {
 
     var config = {
         id: $fancyText.data("fancy-text-id"),
-        text: DOMPurify.sanitize($fancyText.data("fancy-text") || "").split("|"),
+        // Split before sanitizing: a literal "|" inside a phrase arrives as the
+        // entity &#124;, and sanitizing turns it back into "|", so splitting
+        // afterwards would cut that phrase in two.
+        text: String($fancyText.data("fancy-text") || "").split("|").map(function (phrase) {
+            return DOMPurify.sanitize(phrase);
+        }),
         transitionType: transitionType,
         speed: $fancyText.data("fancy-text-speed"),
         delay: $fancyText.data("fancy-text-delay"),

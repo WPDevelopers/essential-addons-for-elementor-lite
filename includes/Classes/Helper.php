@@ -1374,15 +1374,18 @@ class Helper
 			'name'      => $settings['eael_widget_name']
 		];
 
-        if ( ! empty( $settings['eael_dynamic_template_Layout'] ) ) {
+        // Template file names are simple slugs. Only accept slug-safe values so an
+        // untrusted saved setting cannot inject characters into the data-template attribute below.
+        $eael_template_slug = '/^[A-Za-z0-9_-]+$/';
+        if ( ! empty( $settings['eael_dynamic_template_Layout'] ) && preg_match( $eael_template_slug, $settings['eael_dynamic_template_Layout'] ) ) {
             $template_info['file_name'] = $settings['eael_dynamic_template_Layout'];
-        } else if ( ! empty( $settings['eael_product_grid_template'] ) ) {
+        } else if ( ! empty( $settings['eael_product_grid_template'] ) && preg_match( $eael_template_slug, $settings['eael_product_grid_template'] ) ) {
             $template_info['file_name'] = $settings['eael_product_grid_template'];
         }
 
 		if( $pagination_Paginationlist > 0 ){
 
-			$setPagination .="<nav id='{$widget_id}-eael-pagination' class='eael-woo-pagination' data-plimit='$paginationLimit' data-totalpage ='{$args['total_post']}' data-widgetid='{$widget_id}' data-pageid='$page_id' data-args='".http_build_query( $args )."'  data-template='".json_encode( $template_info, 1 )."'>";
+			$setPagination .="<nav id='{$widget_id}-eael-pagination' class='eael-woo-pagination' data-plimit='$paginationLimit' data-totalpage ='{$args['total_post']}' data-widgetid='{$widget_id}' data-pageid='$page_id' data-args='".http_build_query( $args )."'  data-template='".esc_attr( wp_json_encode( $template_info ) )."'>";
 			    $setPagination .="<ul class='page-numbers'>";
 
                     if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){

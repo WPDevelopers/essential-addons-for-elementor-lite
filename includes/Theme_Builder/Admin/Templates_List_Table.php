@@ -639,7 +639,7 @@ class Templates_List_Table extends \WP_List_Table {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only list filter.
 		if ( ! empty( $_REQUEST['s'] ) ) {
-			$args['s'] = sanitize_text_field( wp_unslash( $_REQUEST['s'] ) );
+			$args['s'] = sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only view parameter, sanitized.
 		}
 
 		return Theme_Builder::page_url( $args );

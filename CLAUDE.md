@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Essential Addons for Elementor (Lite) — a WordPress plugin providing 110+ widgets and extensions for the Elementor page builder. Main plugin file: `essential_adons_elementor.php`. Current version: 6.x.x. Requires PHP 7.0+, WordPress 5.0+, Elementor.
+Essential Addons for Elementor (Lite) — a WordPress plugin providing 110+ widgets and extensions for the Elementor page builder. Main plugin file: `essential_adons_elementor.php`. Current version: 6.x.x. Requires PHP 7.0+, WordPress 5.3+, Elementor.
 
 ## Build Commands
 
@@ -80,7 +80,7 @@ Deep-dive subsystem documentation lives in [`docs/architecture/`](docs/architect
 - [`docs/architecture/README.md`](docs/architecture/README.md) — system map (4 render phases + AJAX flow) and per-doc index
 - [`docs/architecture/asset-loading.md`](docs/architecture/asset-loading.md) — `Asset_Builder` lifecycle, `config.php` registry, popup/template/shortcode detection, caching, CSS print modes
 - [`docs/architecture/editor-data-flow.md`](docs/architecture/editor-data-flow.md) — settings persistence, `$settings` shape (Repeater / Group / Responsive), `condition` vs `conditions`, dynamic tags, `eael_e_optimized_markup()`
-- [`docs/architecture/admin-notices.md`](docs/architecture/admin-notices.md) — active `bfcm-pointer.php` campaign and dormant `WPDeveloper_Notice` class infrastructure, dismissal lifecycle, how to add a new campaign notice
+- [`docs/architecture/admin-notices.md`](docs/architecture/admin-notices.md) — `bfcm-pointer.php` campaign (removed: expired, see issue #897) and dormant `WPDeveloper_Notice` class infrastructure, dismissal lifecycle, how to add a new campaign notice
 - [`docs/architecture/quick-setup.md`](docs/architecture/quick-setup.md) — React-based onboarding wizard (`eael-setup-wizard`), Vite build pipeline, three AJAX endpoints, lifecycle option states, how to add a new wizard step
 - [`docs/architecture/theme-builder.md`](docs/architecture/theme-builder.md) — `includes/Theme_Builder/` (header & footer builder): `ea_theme_builder` CPT + meta, three-layer condition registry and specificity ordering, the three render modes and how `replace` swallows the theme's `header.php`, Elementor document type, asset enqueue timing, the React modal app in `includes/templates/admin/theme-builder/`, extension hooks
 - [`docs/architecture/extensions.md`](docs/architecture/extensions.md) — `includes/Extensions/` subsystem (11 plain PHP classes that augment Elementor elements), registration loop, `'context' => 'edit'` vs `'view'`, the Promotion upsell pattern, how to author a new extension. Per-extension docs live in [`docs/extensions/`](docs/extensions/) (canonical example: [`docs/extensions/promotion.md`](docs/extensions/promotion.md))

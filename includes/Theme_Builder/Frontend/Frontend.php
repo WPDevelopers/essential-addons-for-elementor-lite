@@ -638,7 +638,7 @@ class Frontend {
 
 		foreach ( $this->active as $template_id ) {
 			/** This action is documented in elementor/includes/frontend.php */
-			do_action( 'elementor/post/render', $template_id );
+			do_action( 'elementor/post/render', $template_id ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Elementor core hook.
 
 			$this->enable_conditional_assets( $template_id );
 		}
