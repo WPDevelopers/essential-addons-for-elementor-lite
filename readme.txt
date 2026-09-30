@@ -344,6 +344,20 @@ Essential Addons is developed in the open. The unminified source for every minif
 
 = 6.8.5 - 30/09/2026 =
 
+- Improved: EA Quick Setup | Usage data is now shared only when you choose "Allow & Continue"
+- Improved: EA Mega Menu | Clearer Apply Preset warning about which block will be replaced
+- Improved: EA Dashboard | Clearer wording on the license verification screen
+- Fixed: EA Login/Register Form | Login, registration and password reset failed when the form was saved as a Global Widget
+- Fixed: EA Login/Register Form | Form submissions could fail when another script on the page stopped the form script from running
+- Fixed: EA Mega Menu | Resources links in the SaaS preset were not clickable
+- Fixed: EA Fancy Text | A "|" inside a phrase split it into two phrases during animations
+- Fixed: EA Event Calendar | Month View weekday headers were shifted by one day in some time zones
+- Fixed: EA Gravity Forms | Submit button styles were applied to the Date field's calendar icon
+- Fixed: EA Advanced Accordion | Control conflict with Essential Addons Pro's ACF notice
+- Fixed: EA Dashboard | License messages displayed raw HTML tags
+- Fixed: EA Dashboard | License form switched to deactivated before the request finished, even when deactivation failed
+- Fixed: Editing a translated Elementor template with WPML or Polylang could save changes into the wrong language
+- Fixed: A PHP fatal error in Load More requests on sites without Essential Addons Pro
 - Improved: Security Enhancement
 - Few minor bug fixes & improvements
 
