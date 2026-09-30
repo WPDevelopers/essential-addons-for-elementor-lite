@@ -1,5 +1,5 @@
 === Essential Addons for Elementor - Popular Elementor Templates & Widgets ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, rudlinkon, jakariaistauk, himadree
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, rudlinkon, hasandev
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
 Requires at least: 5.3
 Tested up to: 7.1
@@ -341,6 +341,11 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 Essential Addons is developed in the open. The unminified source for every minified JavaScript and CSS file, the React admin apps and the build scripts are in the public GitHub repository: [WPDevelopers/essential-addons-for-elementor-lite](https://github.com/WPDevelopers/essential-addons-for-elementor-lite). Bug reports and pull requests are welcome there.
 
 == Changelog ==
+
+= 6.8.5 - 30/09/2026 =
+
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
 
 = 6.8.4 - 15/09/2026 =
 
