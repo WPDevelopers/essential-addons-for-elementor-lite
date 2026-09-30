@@ -344,7 +344,6 @@ Essential Addons is developed in the open. The unminified source for every minif
 
 = 6.8.5 - 30/09/2026 =
 
-- Improved: EA Quick Setup | Usage data is now shared only when you choose "Allow & Continue"
 - Improved: EA Mega Menu | Clearer Apply Preset warning about which block will be replaced
 - Improved: EA Dashboard | Clearer wording on the license verification screen
 - Fixed: EA Login/Register Form | Login, registration and password reset failed when the form was saved as a Global Widget
