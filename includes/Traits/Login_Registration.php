@@ -887,32 +887,18 @@ trait Login_Registration {
 			if ( ! empty( $settings['register_user_role'] ) ) {
 				$requested_role = sanitize_text_field( $settings['register_user_role'] );
 
-				// Verify the post was last saved by an administrator before trusting
-				$last_editor_id = (int) get_post_meta( $page_id, '_edit_last', true );
-				if ( ! $last_editor_id ) {
-					$last_editor_id = (int) get_post_field( 'post_author', $page_id );
-				}
-				$last_editor    = $last_editor_id ? get_userdata( $last_editor_id ) : false;
-				$saved_by_admin = $last_editor && in_array( 'administrator', (array) $last_editor->roles, true );
-
-				if ( $saved_by_admin ) {
-					// Reject any role that carries privileged capabilities,
-					$wp_role         = get_role( $requested_role );
-					$privileged_caps = [ 'manage_options', 'edit_users', 'delete_users', 'promote_users' ];
-					$is_safe_role    = ( $wp_role !== null );
-
-					if ( $is_safe_role ) {
-						foreach ( $privileged_caps as $cap ) {
-							if ( ! empty( $wp_role->capabilities[ $cap ] ) ) {
-								$is_safe_role = false;
-								break;
-							}
-						}
-					}
-
-					if ( $is_safe_role ) {
-						$user_data['role'] = $requested_role;
-					}
+				// SECURITY: the role to assign lives in the widget's _elementor_data,
+				// which is editable by ANY user who can edit this page — the post author
+				// directly, or others through the REST post-meta endpoint / Elementor's
+				// AJAX save. None of those write paths update _edit_last, so "the post was
+				// last saved by an administrator" is NOT a trustworthy signal: a lower-
+				// privileged author can set register_user_role to an elevated role while an
+				// administrator stays recorded in _edit_last. Only honour the configured
+				// role when it is actually safe to assign to a self-registrant and every
+				// user who controls this page is permitted to create it; otherwise fall
+				// through to the site default role.
+				if ( $this->eael_can_assign_registration_role( $requested_role, $page_id ) ) {
+					$user_data['role'] = $requested_role;
 				}
 			}
 
@@ -1787,6 +1773,86 @@ trait Login_Registration {
 		}
 
 		return apply_filters( 'eael/login-register/new-user-roles', $user_roles );
+	}
+
+	/**
+	 * Decide whether the public registration form may assign $requested_role to a
+	 * brand-new, self-registered account.
+	 *
+	 * The role comes from the widget's _elementor_data, which is editable by anyone with
+	 * edit access to the page (the post author directly; others via the REST post-meta
+	 * endpoint or Elementor's AJAX save). Those write paths do NOT touch _edit_last, so it
+	 * cannot be trusted as a proxy for "an administrator approved this role". A role is
+	 * honoured only when ALL of the following hold:
+	 *   1. the role exists;
+	 *   2. it carries none of a denylist of privilege-escalating capabilities — a
+	 *      self-registrant must never receive site-management power (defence in depth); and
+	 *   3. every user who controls this page's content is allowed to create users, i.e. is
+	 *      effectively an administrator. The post author can always rewrite the page, and
+	 *      _edit_last is the other recorded editor; if either is a lower-privileged user,
+	 *      the configured role is untrusted and ignored.
+	 *
+	 * Behaviour note: registration pages intended to assign a custom role must be owned by
+	 * an administrator. A page owned by a non-admin falls back to the site default role,
+	 * which is the safe direction.
+	 *
+	 * @param string $requested_role Role slug from the widget settings.
+	 * @param int    $page_id        Page/post holding the Login|Register widget.
+	 *
+	 * @return bool True only when the role is safe to assign.
+	 */
+	protected function eael_can_assign_registration_role( $requested_role, $page_id ) {
+		$requested_role = (string) $requested_role;
+		$page_id        = (int) $page_id;
+
+		if ( '' === $requested_role || ! $page_id ) {
+			return false;
+		}
+
+		// 1. The role must exist.
+		$wp_role = get_role( $requested_role );
+		if ( null === $wp_role ) {
+			return false;
+		}
+
+		// 2. Never allow self-registration to grant user-management or site-infrastructure
+		//    capabilities. This list is deliberately limited to true site-takeover caps —
+		//    none of which the standard editor/author/contributor roles hold — so an
+		//    administrator can still legitimately configure those roles (step 3) while a
+		//    role that could manage users, plugins, themes or core is always rejected.
+		$privileged_caps = [
+			'manage_options', 'edit_users', 'create_users', 'delete_users',
+			'promote_users', 'remove_users', 'list_users', 'activate_plugins',
+			'install_plugins', 'update_plugins', 'edit_plugins', 'install_themes',
+			'switch_themes', 'edit_themes', 'edit_theme_options', 'update_core',
+			'edit_files', 'manage_network', 'manage_sites',
+		];
+		foreach ( $privileged_caps as $cap ) {
+			if ( ! empty( $wp_role->capabilities[ $cap ] ) ) {
+				return false;
+			}
+		}
+
+		// 3. Every user who can control this page's content must be allowed to create
+		//    users. The post author can always edit the page; _edit_last is the other
+		//    recorded editor. Both must be create_users-capable (administrators).
+		$responsible_ids = array_unique( array_filter( array_map( 'intval', [
+			get_post_meta( $page_id, '_edit_last', true ),
+			get_post_field( 'post_author', $page_id ),
+		] ) ) );
+
+		if ( empty( $responsible_ids ) ) {
+			return false;
+		}
+
+		foreach ( $responsible_ids as $uid ) {
+			$user = get_userdata( $uid );
+			if ( ! $user || ! user_can( $user, 'create_users' ) ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
