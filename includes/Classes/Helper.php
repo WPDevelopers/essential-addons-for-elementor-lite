@@ -2283,6 +2283,13 @@ class Helper
 
         $icon_name  = str_replace( [ 'fas fa-', 'fab fa-', 'far fa-' ], '', $icon['value'] );
         $library    = str_replace( 'fa-', '', $icon['library'] );
+        // The library name is interpolated into a filesystem path, so strip anything
+        // that is not a plain icon-set token. This blocks "../" traversal from a
+        // settings-derived value (the path read is otherwise an existence/read oracle).
+        $library    = preg_replace( '/[^A-Za-z0-9_-]/', '', (string) $library );
+        if ( '' === $library ) {
+            return $svg_html;
+        }
         $svg_object = file_get_contents( EAEL_PLUGIN_PATH . "assets/front-end/js/lib-view/icons/{$library}.json" );
         $svg_object = json_decode( $svg_object, true );
         $i_class    = str_replace(' ', '-', $icon['value']);
