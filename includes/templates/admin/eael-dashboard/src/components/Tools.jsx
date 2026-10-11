@@ -16,7 +16,11 @@ function Tools() {
         },
         clickHandler = () => {
             asyncDispatch({eaState, eaDispatch}, 'REGENERATE_ASSETS');
-        };
+        },
+        // Boxes added through the eael/admin/tools filter (e.g. by EA Pro).
+        extraBoxes = Object.keys(eaData)
+            .filter((key) => !['box_1', 'box_2', 'box_3'].includes(key))
+            .map((key) => ({key, ...eaData[key]}));
 
     return (
         <>
@@ -49,6 +53,22 @@ function Tools() {
                             <a className="primary-btn changelog-btn" target="_blank"
                                href={eaData.box_2.button.url}>{eaData.box_2.button.label}</a>
                         </div>
+                        {extraBoxes.map((box) => (
+                            <div className="ea__connect-others flex gap-4 justify-between items-start" key={box.key}>
+                                <div className="ea__connect--info flex gap-4 flex-1">
+                                    <div className="ea__others-icon eaicon-1">
+                                        <i className={"ea-dash-icon " + box.icon}></i>
+                                    </div>
+                                    <div>
+                                        <h5>{box.heading}</h5>
+                                        <p>{box.content}</p>
+                                    </div>
+                                </div>
+                                {box.button &&
+                                    <a className="primary-btn changelog-btn" target={box.button.target}
+                                       href={box.button.url}>{box.button.label}</a>}
+                            </div>
+                        ))}
                         <div className="ea__connect-others flex gap-6 justify-between items-start">
                             <label>{eaData.box_3.heading}</label>
                             <div className="flex-1">

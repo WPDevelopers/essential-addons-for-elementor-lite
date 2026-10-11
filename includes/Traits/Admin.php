@@ -508,7 +508,12 @@ trait Admin {
 					    ]
 				    ]
 			    ],
-			    'tools'                   => [
+			    /**
+			     * Boxes on the dashboard's Tools tab. Boxes after box_3 are
+			     * shown between Assets Embed Method and JS Print Method, each
+			     * with a heading, content, icon and a link button (label, url).
+			     */
+			    'tools'                   => apply_filters( 'eael/admin/tools', [
 				    'box_1' => [
 					    'heading' => __( "Regenerate Assets", 'essential-addons-for-elementor-lite' ),
 					    'content' => __( "Essential Addons styles & scripts are saved in Uploads folder. This option will clear all those generated files.", 'essential-addons-for-elementor-lite' ),
@@ -536,7 +541,7 @@ trait Admin {
 					    'name'    => 'eael-js-print-method',
 					    'value'   => get_option( 'eael_js_print_method', 'external' )
 				    ]
-			    ],
+			    ] ),
 			    'extensions'              => [
 				    'heading' => __( 'Extensions', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
