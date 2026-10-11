@@ -510,8 +510,9 @@ trait Admin {
 			    ],
 			    /**
 			     * Boxes on the dashboard's Tools tab. Boxes after box_3 are
-			     * shown between Assets Embed Method and JS Print Method, each
-			     * with a heading, content, icon and a link button (label, url).
+			     * shown between Assets Embed Method and JS Print Method: a
+			     * heading, content and icon, plus optional status badge, detail
+			     * rows, notices and link buttons. Shape: ToolBox.jsx.
 			     */
 			    'tools'                   => apply_filters( 'eael/admin/tools', [
 				    'box_1' => [
