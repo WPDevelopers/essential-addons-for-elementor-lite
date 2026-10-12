@@ -20,22 +20,22 @@ This plugin has 2M active sites and years of accumulated behaviour. **A complian
 
 ### Required test matrix for every step
 
-| Scenario | Why it matters |
-|---|---|
-| Free only, clean install, `WP_DEBUG=true` | This is exactly what the WP.org reviewer runs |
-| Free only, existing site with Pro widgets already on pages | The 2M-user upgrade path |
-| Free current + Pro current | Normal paid user |
-| Free current + Pro **one major behind** | The realistic skew — most Pro users update late |
-| Free current + Pro **deactivated mid-session** | What happens when a licence lapses |
+| Scenario                                                   | Why it matters                                   |
+| ---------------------------------------------------------- | ------------------------------------------------ |
+| Free only, clean install,`WP_DEBUG=true`                 | This is exactly what the WP.org reviewer runs    |
+| Free only, existing site with Pro widgets already on pages | The 2M-user upgrade path                         |
+| Free current + Pro current                                 | Normal paid user                                 |
+| Free current + Pro**one major behind**               | The realistic skew — most Pro users update late |
+| Free current + Pro**deactivated mid-session**        | What happens when a licence lapses               |
 
 ### Risk legend
 
-| Grade | Meaning |
-|---|---|
-| 🟢 **ZERO** | Cannot affect a running site. Ship immediately. |
-| 🟡 **LOW** | Behaviour changes only on a currently-broken path. |
-| 🟠 **MEDIUM** | Touches a live code path. Needs the full test matrix. |
-| 🔴 **HIGH** | Touches shared API or output. Needs deprecation + two-release runway. |
+| Grade              | Meaning                                                               |
+| ------------------ | --------------------------------------------------------------------- |
+| 🟢**ZERO**   | Cannot affect a running site. Ship immediately.                       |
+| 🟡**LOW**    | Behaviour changes only on a currently-broken path.                    |
+| 🟠**MEDIUM** | Touches a live code path. Needs the full test matrix.                 |
+| 🔴**HIGH**   | Touches shared API or output. Needs deprecation + two-release runway. |
 
 ---
 
@@ -43,12 +43,12 @@ This plugin has 2M active sites and years of accumulated behaviour. **A complian
 
 **Status (2026-09-11): all 3 blockers closed; issue #897 verified and fixed — see §9.** S5, S6, S7 and S12 are **won't do** by owner decision (risk to ~2M live sites). Plugin Check on the built package: **207 → 131 rows, 151 → 72 errors** (71 of the remaining 72 are the deferred escaping pass). Nothing found is unfixable, and the two most serious items are both zero-BC-risk deletions.
 
-| Bucket | Count | Items |
-|---|---|---|
-| 🔴 Blocker — WP.org removal risk | 3 | S1, S2, S4 |
-| 🟠 High — fatal / security | 5 | S5, S6, S7, S9, S10 |
-| 🟡 Medium — separation / hygiene | 6 | S3, S8, S11, S12, S13, S14 |
-| ✅ Verified clean | 12 | see §4 |
+| Bucket                            | Count | Items                      |
+| --------------------------------- | ----- | -------------------------- |
+| 🔴 Blocker — WP.org removal risk | 3     | S1, S2, S4                 |
+| 🟠 High — fatal / security       | 5     | S5, S6, S7, S9, S10        |
+| 🟡 Medium — separation / hygiene | 6     | S3, S8, S11, S12, S13, S14 |
+| ✅ Verified clean                 | 12    | see §4                    |
 
 **The good news up front:** namespaces, autoloader guards, version alignment, AJAX action uniqueness, the Pro licence updater's deserialization hardening, and the widget registry are all already correct. The separation architecture is fundamentally sound — the failures are localised, not structural.
 
@@ -217,8 +217,8 @@ This changes behaviour **only** on the path that currently fatals. Pro users are
 
 **Finding.** Free fires **434** hooks; Pro subscribes to **211**; **120** overlap and form the real API surface. But **22 hooks Pro listens for are never fired by Free.** Confirmed example:
 
-| Pro listens for | Free actually fires | File |
-|---|---|---|
+| Pro listens for                          | Free actually fires                       | File                                                                  |
+| ---------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------- |
 | `eael/product_gallery/layout/controls` | `eael/product_**grid**/layout/controls` | [`Product_Grid.php:444`](../includes/Elements/Product_Grid.php#L444) |
 
 **gallery** vs **grid**. WordPress fails silently on a mismatched hook name — no error, no warning, just a Pro feature that quietly does nothing. Users may have been paying for a broken feature for a long time.
@@ -253,6 +253,7 @@ eael_ticker_options
 - [ ] Add a CI check that diffs Pro's listeners against Free's emitters and fails on a new orphan
 
 **Verify:**
+
 ```bash
 comm -13 <(grep -rhoE "(do_action|apply_filters)\(\s*'[a-z0-9_/-]+'" ../../includes --include="*.php" | sed "s/.*'\(.*\)'/\1/" | sort -u) \
          <(grep -rhoE "(add_action|add_filter)\(\s*'eael[a-z0-9_/-]*'" ../../../essential-addons-elementor/includes --include="*.php" | sed "s/.*'\(.*\)'/\1/" | sort -u)
@@ -308,13 +309,13 @@ Not all 77 are vulnerabilities — many will be pre-escaped or integer-typed. Bu
 
 **Fix strategy for 2M users — do not bulk-sed this.** Wrapping output in `esc_html()` where `wp_kses_post()` was intended will **strip HTML users have deliberately entered** and visibly break their pages. Choose the escaper per context:
 
-| Context | Escaper |
-|---|---|
-| Plain text | `esc_html()` |
-| Attribute | `esc_attr()` |
-| URL | `esc_url()` |
+| Context                                           | Escaper                                            |
+| ------------------------------------------------- | -------------------------------------------------- |
+| Plain text                                        | `esc_html()`                                     |
+| Attribute                                         | `esc_attr()`                                     |
+| URL                                               | `esc_url()`                                      |
 | **Rich text a user intentionally authored** | `wp_kses_post()` — **not** `esc_html()` |
-| JS value | `wp_json_encode()` |
+| JS value                                          | `wp_json_encode()`                               |
 
 - [ ] Triage all 77 into: already-safe / needs-escaping / needs-`wp_kses_post`
 - [ ] Fix the `needs-escaping` set first — those are real
@@ -488,12 +489,12 @@ JS:  advanced-accordion  advanced-tabs  data-table  filterable-gallery
 
 **This is not accidental duplication — it is by design.** Pro's copies are *additive supplements*, not replacements:
 
-| Asset | Free | Pro | Reading |
-|---|---|---|---|
-| `filterable-gallery.min.css` | 26,808 b | 8,433 b | Pro adds Pro-only styles |
-| `login-register.min.css` | 13,004 b | 6,577 b | same |
-| `progress-bar.min.css` | 5,277 b | 1,546 b | same |
-| `advanced-tabs.min.css` | 4,623 b | 5,582 b | Pro's is **larger** — verify why |
+| Asset                          | Free     | Pro     | Reading                                |
+| ------------------------------ | -------- | ------- | -------------------------------------- |
+| `filterable-gallery.min.css` | 26,808 b | 8,433 b | Pro adds Pro-only styles               |
+| `login-register.min.css`     | 13,004 b | 6,577 b | same                                   |
+| `progress-bar.min.css`       | 5,277 b  | 1,546 b | same                                   |
+| `advanced-tabs.min.css`      | 4,623 b  | 5,582 b | Pro's is**larger** — verify why |
 
 Pro's `config.php:549` loads **Free's** copy via `EAEL_PLUGIN_PATH`, then layers its own on top. That is the correct extender pattern.
 
@@ -506,7 +507,6 @@ Pro's `config.php:549` loads **Free's** copy via `EAEL_PLUGIN_PATH`, then layers
 - [ ] Investigate `advanced-tabs.min.css` — Pro's copy is larger than Free's, inverting the supplement pattern; may be a full copy
 - [ ] When fixing a bug in any of these 18, **check both sides in the same PR**
 - [ ] Add the pair list to the API surface doc so it is visible at review time
-
 
 ---
 
@@ -551,20 +551,19 @@ $gallery.imagesLoaded().progress( function () { … } )            // src/js/vie
 
 **Interim option:** if the migration cannot be scheduled soon, document in `readme.txt` why the bundled copy exists. That does not satisfy Guideline 13, but it shows intent if a reviewer asks.
 
-
 ---
 
 ## 3. Suggested release sequencing
 
 Do not ship all of this at once. For 2M installs, batch by risk:
 
-| Release | Contents | Rationale |
-|---|---|---|
-| **Patch — this week** | S1, S2, S8, S9, S10 | All 🟢 ZERO risk. Closes both licensing blockers and removes dead weight. Nothing can regress. |
-| **Patch — next** | S4, S11 | 🟡 LOW. Closes the fatal path. Guard-only, additive. |
-| **Minor** | S3 (verify), S13, S14 | Packaging + disclosure. No code-path change. |
-| **Minor + runway** | S5, S6, S7 | 🟠 MEDIUM. Needs the full test matrix and a staged rollout. |
-| **Major / scheduled** | S12, S4 long-term refactor | 🔴 Needs deprecation cycle and coordinated Free+Pro release. |
+| Release                      | Contents                   | Rationale                                                                                      |
+| ---------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Patch — this week** | S1, S2, S8, S9, S10        | All 🟢 ZERO risk. Closes both licensing blockers and removes dead weight. Nothing can regress. |
+| **Patch — next**      | S4, S11                    | 🟡 LOW. Closes the fatal path. Guard-only, additive.                                           |
+| **Minor**              | S3 (verify), S13, S14      | Packaging + disclosure. No code-path change.                                                   |
+| **Minor + runway**     | S5, S6, S7                 | 🟠 MEDIUM. Needs the full test matrix and a staged rollout.                                    |
+| **Major / scheduled**  | S12, S4 long-term refactor | 🔴 Needs deprecation cycle and coordinated Free+Pro release.                                   |
 
 **Ship S1 and S2 first.** They are the two genuine WP.org removal risks, and both are zero-regression.
 
@@ -576,18 +575,18 @@ The structural audit above says *how* the two plugins connect. This section answ
 
 **Result: the widget-level separation is architecturally correct.** One stranded asset (S8), one drift risk (S15), nothing else.
 
-| # | Check | Result |
-|---|---|---|
-| **W1** | Widget class files: Free 67 · Pro 43 | ✅ **Zero filename overlap** — no widget is implemented twice |
-| **W2** | Does Free's `config.php` name a class that lives only in Pro? | ✅ **Zero.** Every class Free declares exists in Free |
-| **W3** | How do Pro widgets register? | ✅ Free publishes `apply_filters('eael/registered_elements', …)` ([`Bootstrap.php:115`](../includes/Classes/Bootstrap.php#L115)); Pro injects via `add_filter` ([Pro `Bootstrap.php:52`](../../essential-addons-elementor/includes/Classes/Bootstrap.php#L52)). **Textbook extension-point pattern** |
-| **W4** | 7 config keys appear in both (`adv-tabs`, `adv-accordion`, `filter-gallery`, `image-accordion`, `image-masking`, `info-box`, `svg-draw`) | ✅ Pro declares **assets only, no `class`** — legitimate enrichment of Free widgets |
-| **W5** | Free `Template/` directories (11) | ✅ **All in use.** Resolved at runtime by `process_directory_name()` from `get_name()`, not by config key |
-| **W6** | Free view assets not owned by any Free widget | ⚠️ **Exactly one** — `woo-product-slider.min.css` → **S8** |
-| **W7** | Assets shipped by both Free and Pro | ⚠️ **18 pairs** — additive supplements, not copies → **S15** |
-| **W8** | Pro's `config.php` references Free's `EAEL_PLUGIN_PATH` 35× | ✅ Safe — Pro's config loads **only** inside `eael/before_init`, a hook Free fires. Never evaluated when Free is absent |
-| **W9** | Free's promo catalog advertises 41 Pro widgets | ✅ All 41 exist in Pro. **No phantom features advertised** |
-| **W10** | Pro without Free | ✅ Bootstrap gated behind Free's hook + `Notice::failed_to_load()` admin notice. **Degrades cleanly, no fatal** |
+| #             | Check                                                                                                                                                  | Result                                                                                                                                                                                                                                                                                                           |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **W1**  | Widget class files: Free 67 · Pro 43                                                                                                                  | ✅**Zero filename overlap** — no widget is implemented twice                                                                                                                                                                                                                                              |
+| **W2**  | Does Free's`config.php` name a class that lives only in Pro?                                                                                         | ✅**Zero.** Every class Free declares exists in Free                                                                                                                                                                                                                                                       |
+| **W3**  | How do Pro widgets register?                                                                                                                           | ✅ Free publishes`apply_filters('eael/registered_elements', …)` ([`Bootstrap.php:115`](../includes/Classes/Bootstrap.php#L115)); Pro injects via `add_filter` ([Pro `Bootstrap.php:52`](../../essential-addons-elementor/includes/Classes/Bootstrap.php#L52)). **Textbook extension-point pattern** |
+| **W4**  | 7 config keys appear in both (`adv-tabs`, `adv-accordion`, `filter-gallery`, `image-accordion`, `image-masking`, `info-box`, `svg-draw`) | ✅ Pro declares**assets only, no `class`** — legitimate enrichment of Free widgets                                                                                                                                                                                                                      |
+| **W5**  | Free`Template/` directories (11)                                                                                                                     | ✅**All in use.** Resolved at runtime by `process_directory_name()` from `get_name()`, not by config key                                                                                                                                                                                               |
+| **W6**  | Free view assets not owned by any Free widget                                                                                                          | ⚠️**Exactly one** — `woo-product-slider.min.css` → **S8**                                                                                                                                                                                                                                      |
+| **W7**  | Assets shipped by both Free and Pro                                                                                                                    | ⚠️**18 pairs** — additive supplements, not copies → **S15**                                                                                                                                                                                                                                      |
+| **W8**  | Pro's`config.php` references Free's `EAEL_PLUGIN_PATH` 35×                                                                                        | ✅ Safe — Pro's config loads**only** inside `eael/before_init`, a hook Free fires. Never evaluated when Free is absent                                                                                                                                                                                  |
+| **W9**  | Free's promo catalog advertises 41 Pro widgets                                                                                                         | ✅ All 41 exist in Pro.**No phantom features advertised**                                                                                                                                                                                                                                                  |
+| **W10** | Pro without Free                                                                                                                                       | ✅ Bootstrap gated behind Free's hook +`Notice::failed_to_load()` admin notice. **Degrades cleanly, no fatal**                                                                                                                                                                                           |
 
 ### Two traps this inventory exposed
 
@@ -603,20 +602,20 @@ Both nearly produced false findings, and both matter for anyone re-running this 
 
 These were checked and passed. Recording them stops the next audit spending time here.
 
-| Item | Result |
-|---|---|
-| **A1** Namespace separation | ✅ Free `Essential_Addons_Elementor\` · Pro `Essential_Addons_Elementor\Pro\` — distinct |
-| **A2** Autoloader guards | ✅ Both `file_exists()`-guarded ([`autoload.php:30`](../autoload.php#L30)). Prefix shadowing is harmless |
-| **A3** Text domains | ✅ Distinct, each matching its own slug |
-| **A4** Constant prefixes | ✅ `EAEL_*` vs `EAEL_PRO_*`, no collisions |
-| **B7** Registry integrity | ✅ Every class named in `config.php` exists in Free — zero missing |
-| **C5** AJAX name uniqueness | ✅ No duplicate action names across the pair |
-| **D1–D3** Detection contract | ✅ Free reads `apply_filters('eael/pro_enabled', false)`; Pro is sole setter ([`Bootstrap.php:49`](../../essential-addons-elementor/includes/Classes/Bootstrap.php#L49)) |
-| **D5** Dependency direction | ✅ Pro imports Free's `Helper` rather than copying it — correct direction, correct mechanism |
-| **G15** Version alignment | ✅ Header `6.8.3` = `Stable tag 6.8.3` = `EAEL_PLUGIN_VERSION 6.8.3` |
-| **§8.5** Pro deserialization | ✅ `Updater::safe_unserialize()` uses `allowed_classes => false` — already hardened |
-| **§5.2** Remote code in Free | ✅ No CDN-loaded executables, no self-updater in Free, no `eval`/`base64_decode` chains |
-| **Free ABSPATH** | ✅ Clean — the 16 flagged files are `index.php` stubs + `node_modules`, all false positives |
+| Item                                | Result                                                                                                                                                                     |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **A1** Namespace separation   | ✅ Free`Essential_Addons_Elementor\` · Pro `Essential_Addons_Elementor\Pro\` — distinct                                                                              |
+| **A2** Autoloader guards      | ✅ Both`file_exists()`-guarded ([`autoload.php:30`](../autoload.php#L30)). Prefix shadowing is harmless                                                                 |
+| **A3** Text domains           | ✅ Distinct, each matching its own slug                                                                                                                                    |
+| **A4** Constant prefixes      | ✅`EAEL_*` vs `EAEL_PRO_*`, no collisions                                                                                                                              |
+| **B7** Registry integrity     | ✅ Every class named in`config.php` exists in Free — zero missing                                                                                                       |
+| **C5** AJAX name uniqueness   | ✅ No duplicate action names across the pair                                                                                                                               |
+| **D1–D3** Detection contract | ✅ Free reads`apply_filters('eael/pro_enabled', false)`; Pro is sole setter ([`Bootstrap.php:49`](../../essential-addons-elementor/includes/Classes/Bootstrap.php#L49)) |
+| **D5** Dependency direction   | ✅ Pro imports Free's`Helper` rather than copying it — correct direction, correct mechanism                                                                             |
+| **G15** Version alignment     | ✅ Header`6.8.3` = `Stable tag 6.8.3` = `EAEL_PLUGIN_VERSION 6.8.3`                                                                                                  |
+| **§8.5** Pro deserialization | ✅`Updater::safe_unserialize()` uses `allowed_classes => false` — already hardened                                                                                    |
+| **§5.2** Remote code in Free | ✅ No CDN-loaded executables, no self-updater in Free, no`eval`/`base64_decode` chains                                                                                 |
+| **Free ABSPATH**              | ✅ Clean — the 16 flagged files are`index.php` stubs + `node_modules`, all false positives                                                                            |
 
 ---
 
@@ -659,16 +658,16 @@ done
 
 The earlier table in this section contained errors, now corrected:
 
-| Library | Earlier entry | Verified |
-|---|---|---|
-| code-snippet | MIT | **highlight.js 10.7.0 — BSD-3-Clause** |
-| dom-purify | ISC | **DOMPurify 3.2.6 — Apache-2.0 OR MPL-2.0** |
-| embed | 15.1.0, MIT | **@typeform/embed 0.16.0 — published with no licence** (see §9, T1) |
-| typeform | 15.1.0, MIT | Unreferenced duplicate of `embed/` in Lite and Pro — **deleted** |
-| marquee | no banner | EA code built on GreenSock's `horizontalLoop()`; **loaded by Pro** via `EAEL_PLUGIN_PATH` (Pro `config.php:1036`) — do **not** delete |
-| image-zoom | no banner | EA code adapted from a public CodePen Pen — **MIT** under CodePen's licence terms |
-| morphext | no banner | MIT — copyright holder is **Ian Lai** |
-| inview | no banner | WTFPL (LICENSE) / ISC (package.json) |
+| Library      | Earlier entry | Verified                                                                                                                                                |
+| ------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| code-snippet | MIT           | **highlight.js 10.7.0 — BSD-3-Clause**                                                                                                           |
+| dom-purify   | ISC           | **DOMPurify 3.2.6 — Apache-2.0 OR MPL-2.0**                                                                                                      |
+| embed        | 15.1.0, MIT   | **@typeform/embed 0.16.0 — published with no licence** (see §9, T1)                                                                             |
+| typeform     | 15.1.0, MIT   | Unreferenced duplicate of`embed/` in Lite and Pro — **deleted**                                                                                |
+| marquee      | no banner     | EA code built on GreenSock's`horizontalLoop()`; **loaded by Pro** via `EAEL_PLUGIN_PATH` (Pro `config.php:1036`) — do **not** delete |
+| image-zoom   | no banner     | EA code adapted from a public CodePen Pen —**MIT** under CodePen's licence terms                                                                 |
+| morphext     | no banner     | MIT — copyright holder is**Ian Lai**                                                                                                             |
+| inview       | no banner     | WTFPL (LICENSE) / ISC (package.json)                                                                                                                    |
 
 ---
 
@@ -678,46 +677,46 @@ Source: [WPDevelopers/essential-addons-for-elementor-lite#897](https://github.co
 
 ### Plugin Check, built package
 
-| | Before | After |
-|---|---|---|
-| Total rows | 207 | **131** |
-| Errors | 151 | **72** |
-| `wp_function_not_compatible_with_requires_wp` | 75 | **0** |
-| `missing_direct_file_access_protection` | 1 | **0** |
-| `OffloadedContent` | 1 | **0** |
-| `MissingTranslatorsComment` | 2 | **0** |
-| `SafeRedirect` / `error_log_debug_backtrace` | 2 / 1 | **0 / 0** |
-| `unexpected_markdown_file` / `missing_composer_json_file` | 1 / 1 | **0 / 0** |
-| `EscapeOutput.OutputNotEscaped` | 71 | 71 — deferred (S7 decision) |
+|                                                               | Before | After                        |
+| ------------------------------------------------------------- | ------ | ---------------------------- |
+| Total rows                                                    | 207    | **131**                |
+| Errors                                                        | 151    | **72**                 |
+| `wp_function_not_compatible_with_requires_wp`               | 75     | **0**                  |
+| `missing_direct_file_access_protection`                     | 1      | **0**                  |
+| `OffloadedContent`                                          | 1      | **0**                  |
+| `MissingTranslatorsComment`                                 | 2      | **0**                  |
+| `SafeRedirect` / `error_log_debug_backtrace`              | 2 / 1  | **0 / 0**              |
+| `unexpected_markdown_file` / `missing_composer_json_file` | 1 / 1  | **0 / 0**              |
+| `EscapeOutput.OutputNotEscaped`                             | 71     | 71 — deferred (S7 decision) |
 
 `NonPrefixedHooknameFound` rose 9 → 19. **Not a regression:** the 10 new rows are unchanged `wpdeveloper_*_for_` hooks in `WPDeveloper_Notice.php`. Plugin Check auto-detects allowed prefixes from the code, and the deleted `bfcm-pointer.php` was what supplied `wpdeveloper`. Renaming those hooks would break listeners.
 
 ### Per item
 
-| # | PM claim | Verified | Action | BC risk |
-|---|---|---|---|---|
-| G5 | Trialware clean | ✅ Spot-checked `enableProSorter` (Pro-only), `Woo_Cart` early return, no licence endpoints | None | — |
-| 0 | Remove `LicenseManager` shim | ✅ Exists (`Bootstrap.php`), only runs for Pro 6.2.2–6.2.3 | **Deferred** — added 2025-05-20 so those Pro versions receive updates; removing it strands them | Would affect paying users |
-| 1 | No `License:` header | ✅ (fixed earlier, S1) | URI aligned to `gnu.org` in header **and** readme | None |
-| 2 | GSAP non-GPL, dead | ✅ (deleted earlier, S2). Confirmed Pro never loads Lite's GSAP | — | None |
-| 3 | 12 libs lack licence headers | ✅ | `third-party-licenses.txt` added (`.txt`, because Plugin Check flags unexpected root `.md`). **PM's CodePen concern is incorrect** — public Pens are MIT | None |
-| 4 | Wizard consent implicit | ✅ "Proceed" doubled as consent; opt-out was a text link | Two equal-weight buttons, **Allow & Continue** / **Continue without sharing**; disclosure rewritten; bundle rebuilt (fresh build verified content-identical to committed dist before the change) | New-install onboarding only |
-| 5 | Install beacon un-consented | ✅ | Gated on the same `wpins_allow_tracking` consent the tracker uses | None |
-| 6 | Expired campaigns | ✅ BFCM ended 2025-12-04, summer ended 2026-06-25 | Removed `bfcm-pointer.php`, its include, the summer notice, its CSS and logo | None — neither could display |
-| 7 | ThinkRank on dashboard / list screens | ✅ | Implemented the PM's "at minimum": list-screen banner removed; dashboard widgets open collapsed once per user. **Unreported:** the Gutenberg "Configure SEO" panel is the same class of surface — needs a product decision | Promo only |
-| PCP | `Requires at least` | ✅ Only `wp_date`/`wp_timezone` (5.3) | **5.0 → 5.3**, not the suggested 6.0, which would also stop updates for working 5.3–5.9 sites | Sites < 5.3 already fatal in Event Calendar |
-| PCP | `utf8_encode()` | ✅ (already behind an mbstring check) | Replaced with a byte-identical conversion, proven equal to `utf8_encode`/`mb_convert_encoding`/`iconv` over all 256 bytes + 5,000 random strings | None |
-| PCP | Escaping, 7 files | ✅ 71 rows on the current tree | **Deferred** (S7 decision) | Output could change |
-| PCP | `config.php` ABSPATH | ✅ | Guard added | None |
-| PCP | `Tested up to` | Already 7.1 | — | — |
-| PCP | Plugin name mismatch | ✅ | **Deferred** — the readme title is the WP.org listing name; marketing decision | — |
-| PCP | Description trimmed | ❌ Not on current readme: 2,225 words vs a **2,500-word** limit (the parser counts words) | None | — |
-| PCP | Angie nonce | ✅ | Left for #877 as assigned | — |
-| PCP | Login/Registration nonce | ✅ False positive — WooCommerce verifies its nonce before `woocommerce_save_account_details` | Justified `phpcs:ignore` | None |
-| PCP | `wp_redirect` → `wp_safe_redirect` | ✅ Flagged, **but the suggested fix breaks sites** — external logout URLs are a feature and the nonce is bound to the exact URL | Kept `wp_redirect`, justified `phpcs:ignore` | Fix as written would break users |
-| PCP | `debug_backtrace` | ✅ now at `Helper.php:634` | Justified `phpcs:ignore` | None |
-| 8 | No source link | ✅ | `== Development ==` added (merged into the description by the parser; still under the word limit) | None |
-| 9 | `imagesloaded` → core handle | ✅ Duplicate confirmed | **Deferred** — see the S16 correction | Asset pipeline on all sites |
+| #   | PM claim                                | Verified                                                                                                                              | Action                                                                                                                                                                                                                           | BC risk                                     |
+| --- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| G5  | Trialware clean                         | ✅ Spot-checked`enableProSorter` (Pro-only), `Woo_Cart` early return, no licence endpoints                                        | None                                                                                                                                                                                                                             | —                                          |
+| 0   | Remove`LicenseManager` shim           | ✅ Exists (`Bootstrap.php`), only runs for Pro 6.2.2–6.2.3                                                                         | **Deferred** — added 2025-05-20 so those Pro versions receive updates; removing it strands them                                                                                                                           | Would affect paying users                   |
+| 1   | No`License:` header                   | ✅ (fixed earlier, S1)                                                                                                                | URI aligned to`gnu.org` in header **and** readme                                                                                                                                                                         | None                                        |
+| 2   | GSAP non-GPL, dead                      | ✅ (deleted earlier, S2). Confirmed Pro never loads Lite's GSAP                                                                       | —                                                                                                                                                                                                                               | None                                        |
+| 3   | 12 libs lack licence headers            | ✅                                                                                                                                    | `third-party-licenses.txt` added (`.txt`, because Plugin Check flags unexpected root `.md`). **PM's CodePen concern is incorrect** — public Pens are MIT                                                            | None                                        |
+| 4   | Wizard consent implicit                 | ✅ "Proceed" doubled as consent; opt-out was a text link                                                                              | Two equal-weight buttons,**Allow & Continue** / Skip; disclosure rewritten; bundle rebuilt (fresh build verified content-identical to committed dist before the change)                                                    | New-install onboarding only                 |
+| 5   | Install beacon un-consented             | ✅                                                                                                                                    | Gated on the same`wpins_allow_tracking` consent the tracker uses                                                                                                                                                               | None                                        |
+| 6   | Expired campaigns                       | ✅ BFCM ended 2025-12-04, summer ended 2026-06-25                                                                                     | Removed`bfcm-pointer.php`, its include, the summer notice, its CSS and logo                                                                                                                                                    | None — neither could display               |
+| 7   | ThinkRank on dashboard / list screens   | ✅                                                                                                                                    | Implemented the PM's "at minimum": list-screen banner removed; dashboard widgets open collapsed once per user.**Unreported:** the Gutenberg "Configure SEO" panel is the same class of surface — needs a product decision | Promo only                                  |
+| PCP | `Requires at least`                   | ✅ Only`wp_date`/`wp_timezone` (5.3)                                                                                              | **5.0 → 5.3**, not the suggested 6.0, which would also stop updates for working 5.3–5.9 sites                                                                                                                            | Sites < 5.3 already fatal in Event Calendar |
+| PCP | `utf8_encode()`                       | ✅ (already behind an mbstring check)                                                                                                 | Replaced with a byte-identical conversion, proven equal to`utf8_encode`/`mb_convert_encoding`/`iconv` over all 256 bytes + 5,000 random strings                                                                            | None                                        |
+| PCP | Escaping, 7 files                       | ✅ 71 rows on the current tree                                                                                                        | **Deferred** (S7 decision)                                                                                                                                                                                                 | Output could change                         |
+| PCP | `config.php` ABSPATH                  | ✅                                                                                                                                    | Guard added                                                                                                                                                                                                                      | None                                        |
+| PCP | `Tested up to`                        | Already 7.1                                                                                                                           | —                                                                                                                                                                                                                               | —                                          |
+| PCP | Plugin name mismatch                    | ✅                                                                                                                                    | **Deferred** — the readme title is the WP.org listing name; marketing decision                                                                                                                                            | —                                          |
+| PCP | Description trimmed                     | ❌ Not on current readme: 2,225 words vs a**2,500-word** limit (the parser counts words)                                        | None                                                                                                                                                                                                                             | —                                          |
+| PCP | Angie nonce                             | ✅                                                                                                                                    | Left for#877 as assigned                                                                                                                                                                                                         | —                                          |
+| PCP | Login/Registration nonce                | ✅ False positive — WooCommerce verifies its nonce before`woocommerce_save_account_details`                                        | Justified`phpcs:ignore`                                                                                                                                                                                                        | None                                        |
+| PCP | `wp_redirect` → `wp_safe_redirect` | ✅ Flagged,**but the suggested fix breaks sites** — external logout URLs are a feature and the nonce is bound to the exact URL | Kept`wp_redirect`, justified `phpcs:ignore`                                                                                                                                                                                  | Fix as written would break users            |
+| PCP | `debug_backtrace`                     | ✅ now at`Helper.php:634`                                                                                                           | Justified`phpcs:ignore`                                                                                                                                                                                                        | None                                        |
+| 8   | No source link                          | ✅                                                                                                                                    | `== Development ==` added (merged into the description by the parser; still under the word limit)                                                                                                                              | None                                        |
+| 9   | `imagesloaded` → core handle         | ✅ Duplicate confirmed                                                                                                                | **Deferred** — see the S16 correction                                                                                                                                                                                     | Asset pipeline on all sites                 |
 
 ### New findings the issue did not cover
 
@@ -736,36 +735,39 @@ Source: [WPDevelopers/essential-addons-for-elementor-lite#897](https://github.co
 Commits on `wporg-compliance`: Free `57050c8eb…b192e534c` (14), Pro `d03a99dde…54110d303` (3). Tested on the dev site — see [`TEST-CASES.md`](TEST-CASES.md). Plugin Check on the built package: **131 rows / 72 errors** (was 207 / 151).
 
 ### Done
+
 S1, S2, S3, S4, S8, S9, S10, S11 · issue #897 items 1–8 and its Plugin Check items (except the deferred ones below) · Pro-only load-more logic moved to Pro `Traits/Load_More.php` · `marquee.min.js` and `three.min.js` loaded from Pro · Woo_Product_Compare docblock.
 
 ### Changed after the commits (uncommitted)
+
 - Lite `includes/Traits/Ajax_Handler.php`, Pro `includes/Traits/Load_More.php`: `phpcs:disable/enable WordPress.Security.NonceVerification.Missing` around the Dynamic Gallery `$_POST` reads. The refactor moved them out of `ajax_load_more()`, so Plugin Check reported 6 new warnings. Comment only.
 - Docs that still described the old behaviour: `docs/architecture/dynamic-data/load-more-and-pagination.md`, `docs/architecture/dynamic-data/third-party-integrations.md` (also corrected the outdated `'any'` post status note), `docs/widgets/woo-product-carousel.md`.
 
 ### Still open
-| Item | Status | Next step |
-|---|---|---|
-| S5 dead Pro hook listeners | Won't do (owner, BC) | — |
-| S6 14 `nopriv` AJAX handlers | Won't do (owner, BC) | — |
-| S7 escaping (71 Plugin Check errors) | Won't do (owner, BC) | — |
-| S12 65 shared function names | Won't do (owner, BC) | — |
-| S13 readme **External services** section (reCAPTCHA, Turnstile, Facebook, X, Business Reviews, NFT Gallery, Typeform, usage tracking) | Open | Write the section; reviewers routinely ask for it |
-| S14 readme title ≠ plugin header name (`mismatched_plugin_name`) | Open | Marketing decision |
-| S15 18 assets shipped by both plugins | Open | Check both copies on every CSS/JS fix |
-| S16 / #897-9 bundled `imagesloaded` vs core handle | Deferred | Needs Asset_Builder handle dependencies + cache regeneration |
-| #897-0 `LicenseManager` shim | Deferred | Keeps Pro 6.2.2–6.2.3 updating |
-| T1 Typeform embed SDK 0.16.0 has no licence | Open | Upgrade SDK (0.17+ LGPL or 1.26+ MIT) and retest TypeForm widget |
-| `vendor/priyomukul/wp-notice` declares no licence | Open | Add a licence upstream |
-| `Interactive_Circle.php:123` unordered placeholders | Open | Changing it drops existing translations |
-| Changelog 4,798 / 5,000 words | Open | Move old entries to `changelog.txt` |
-| ThinkRank Gutenberg "Configure SEO" panel | Open | Product decision (same class as the removed list-screen banner) |
-| Lite `src/js/view/load-more.js` Dynamic Gallery branches | Open | JS hook + rebuild of both plugins |
-| Advanced Search promo card name | Skipped (owner) | — |
-| Release | Open | Changelog + version bump (Lite 6.8.4, Pro 7.0.4); Lite `42a30e485` and Pro `47875f818` can ship in either order |
-| Phase 2 cleanup | Later | When Pro ≤ 7.0.3 is unsupported: remove Lite `legacy_pro_load_more_prepare()`, `build_dfg_acf_taxonomy_map()`, `get_dfg_post_taxonomy_classes()`, legacy `found_posts` branch, `lib-view/marquee/`, `lib-view/three/` |
+
+| Item                                                                                                                                       | Status               | Next step                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| S5 dead Pro hook listeners                                                                                                                 | Won't do (owner, BC) | —                                                                                                                                                                                                                                |
+| S6 14`nopriv` AJAX handlers                                                                                                              | Won't do (owner, BC) | —                                                                                                                                                                                                                                |
+| S7 escaping (71 Plugin Check errors)                                                                                                       | Won't do (owner, BC) | —                                                                                                                                                                                                                                |
+| S12 65 shared function names                                                                                                               | Won't do (owner, BC) | —                                                                                                                                                                                                                                |
+| S13 readme**External services** section (reCAPTCHA, Turnstile, Facebook, X, Business Reviews, NFT Gallery, Typeform, usage tracking) | Open                 | Write the section; reviewers routinely ask for it                                                                                                                                                                                 |
+| S14 readme title ≠ plugin header name (`mismatched_plugin_name`)                                                                        | Open                 | Marketing decision                                                                                                                                                                                                                |
+| S15 18 assets shipped by both plugins                                                                                                      | Open                 | Check both copies on every CSS/JS fix                                                                                                                                                                                             |
+| S16 /#897-9 bundled `imagesloaded` vs core handle                                                                                        | Deferred             | Needs Asset_Builder handle dependencies + cache regeneration                                                                                                                                                                      |
+| #897-0 `LicenseManager` shim                                                                                                             | Deferred             | Keeps Pro 6.2.2–6.2.3 updating                                                                                                                                                                                                   |
+| T1 Typeform embed SDK 0.16.0 has no licence                                                                                                | Open                 | Upgrade SDK (0.17+ LGPL or 1.26+ MIT) and retest TypeForm widget                                                                                                                                                                  |
+| `vendor/priyomukul/wp-notice` declares no licence                                                                                        | Open                 | Add a licence upstream                                                                                                                                                                                                            |
+| `Interactive_Circle.php:123` unordered placeholders                                                                                      | Open                 | Changing it drops existing translations                                                                                                                                                                                           |
+| Changelog 4,798 / 5,000 words                                                                                                              | Open                 | Move old entries to`changelog.txt`                                                                                                                                                                                              |
+| ThinkRank Gutenberg "Configure SEO" panel                                                                                                  | Open                 | Product decision (same class as the removed list-screen banner)                                                                                                                                                                   |
+| Lite`src/js/view/load-more.js` Dynamic Gallery branches                                                                                  | Open                 | JS hook + rebuild of both plugins                                                                                                                                                                                                 |
+| Advanced Search promo card name                                                                                                            | Skipped (owner)      | —                                                                                                                                                                                                                                |
+| Release                                                                                                                                    | Open                 | Changelog + version bump (Lite 6.8.4, Pro 7.0.4); Lite`42a30e485` and Pro `47875f818` can ship in either order                                                                                                                |
+| Phase 2 cleanup                                                                                                                            | Later                | When Pro ≤ 7.0.3 is unsupported: remove Lite`legacy_pro_load_more_prepare()`, `build_dfg_acf_taxonomy_map()`, `get_dfg_post_taxonomy_classes()`, legacy `found_posts` branch, `lib-view/marquee/`, `lib-view/three/` |
 
 ### Found while testing (pre-existing, not caused by this work)
+
 - PHP warning `Undefined array key "orderby"` — `Ajax_Handler.php:180` (Post Grid load more when `orderby` was never saved). Code from 2025-05.
 - Setup wizard page JS errors — WooCommerce `wc-entities.js` and core `svg-painter.js`; identical with the pre-change bundle.
 - Asset bundles cached in `uploads/essential-addons-elementor/` reflect the plugin set active when they were built; `Migration` empties that folder on plugin activation/upgrade.
-
