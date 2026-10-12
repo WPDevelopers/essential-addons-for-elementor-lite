@@ -340,6 +340,19 @@ Nothing is sent unless you explicitly opt in. If you do opt in, we send: your si
 
 Essential Addons is developed in the open. The unminified source for every minified JavaScript and CSS file, the React admin apps and the build scripts are in the public GitHub repository: [WPDevelopers/essential-addons-for-elementor-lite](https://github.com/WPDevelopers/essential-addons-for-elementor-lite). Bug reports and pull requests are welcome there.
 
+== External services ==
+
+Nothing below is contacted until you set up the widget or option that uses it.
+
+* **Google reCAPTCHA / Cloudflare Turnstile** (Login | Register, if enabled): the visitor's browser loads the challenge; its token and the visitor IP are verified with the provider. Google [terms](https://policies.google.com/terms), [privacy](https://policies.google.com/privacy); Cloudflare [terms](https://www.cloudflare.com/website-terms/), [privacy](https://www.cloudflare.com/privacypolicy/).
+* **Google Places / Google Calendar** (Business Reviews, Event Calendar): your API key and place or calendar ID fetch reviews or events. Google terms and privacy as above.
+* **X and Facebook** (Twitter Feed, Facebook Feed): your credentials and account or page ID fetch posts. X [terms](https://x.com/tos), [privacy](https://x.com/privacy); Meta [terms](https://www.facebook.com/terms.php), [privacy](https://www.facebook.com/privacy/policy/).
+* **Typeform** (Typeform): forms load from typeform.com; your token lists your forms. Connecting sends your admin URL to app.essential-addons.com. [Terms](https://www.typeform.com/terms-service/), [privacy](https://www.typeform.com/privacy-policy/).
+* **Formstack** (Formstack): your server fetches the form URL you enter. [Terms](https://www.formstack.com/legal/terms-of-service), [privacy](https://www.formstack.com/privacy).
+* **OpenSea / Magic Eden** (NFT Gallery): your key and wallet or collection fetch NFTs. OpenSea [terms](https://opensea.io/tos), [privacy](https://opensea.io/privacy); Magic Eden [terms](https://magiceden.io/terms-of-service), [privacy](https://magiceden.io/privacy-policy).
+* **Google Fonts**: the EA admin dashboard loads the Rubik font. Google terms and privacy as above.
+* **WPDeveloper** (opt-in usage data, see the FAQ): sent to send.wpinsight.com and essential-addons.com. [Privacy](https://wpdeveloper.com/privacy-policy/).
+
 == Changelog ==
 
 = 6.8.5 - 30/09/2026 =
