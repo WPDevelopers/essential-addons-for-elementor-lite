@@ -56,10 +56,6 @@ image-zoom/zoom-lense.js, zoom-lense.min.js
     https://codepen.io/hckkiu/pen/poyoRKQ
     https://blog.codepen.io/documentation/licensing/
 
-imagesloaded/imagesloaded.pkgd.js, imagesloaded.pkgd.min.js
-    imagesLoaded 4.1.4 — MIT — Metafizzy
-    https://github.com/desandro/imagesloaded
-
 inview/inview.js, inview.min.js
     jquery.inview — WTFPL (repository LICENSE) / ISC (package.json, 1.1.2)
     https://github.com/protonet/jquery.inview
