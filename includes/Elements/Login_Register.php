@@ -7479,13 +7479,76 @@ class Login_Register extends Widget_Base {
 				if ( $repeated || $email_field_missing || $confirm_email_missing || $pass_missing ) {
 					return false; // error found, exit, dont show form.
 				}
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo $form_markup; //XSS OK, data sanitized already.
-			} else {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo $form_markup; //XSS OK, data sanitized already.
 			}
+
+			echo wp_kses( $form_markup, $this->get_register_form_allowed_html() );
 		}
+	}
+
+	/**
+	 * Tags and attributes the register form may print.
+	 *
+	 * The form is buffered and passed through the
+	 * `eael/login-register/register-form-markup` filter, so it is escaped as a
+	 * whole on output. The list covers the post allowlist, form controls,
+	 * Elementor icons (inline SVG) and the markup Pro and other extensions add
+	 * through the form's actions (social login, password meter, consent).
+	 *
+	 * @return array
+	 */
+	protected function get_register_form_allowed_html() {
+		$allowed = wp_kses_allowed_html( 'post' );
+
+		$extra = [
+			'form'           => [ 'action', 'method', 'enctype', 'name', 'novalidate', 'autocomplete', 'target', 'accept-charset' ],
+			'input'          => [ 'type', 'name', 'value', 'placeholder', 'required', 'checked', 'disabled', 'readonly', 'autocomplete', 'autofocus', 'min', 'max', 'minlength', 'maxlength', 'pattern', 'size', 'step', 'accept', 'multiple', 'inputmode', 'form', 'list' ],
+			'select'         => [ 'name', 'required', 'disabled', 'multiple', 'size', 'autocomplete', 'form' ],
+			'option'         => [ 'value', 'selected', 'disabled', 'label' ],
+			'optgroup'       => [ 'label', 'disabled' ],
+			'textarea'       => [ 'name', 'rows', 'cols', 'placeholder', 'required', 'disabled', 'readonly', 'minlength', 'maxlength', 'autocomplete', 'form' ],
+			'button'         => [ 'type', 'name', 'value', 'disabled', 'form' ],
+			'label'          => [ 'for', 'form' ],
+			'fieldset'       => [ 'name', 'disabled', 'form' ],
+			'legend'         => [],
+			'datalist'       => [],
+			'meter'          => [ 'value', 'min', 'max', 'low', 'high', 'optimum' ],
+			'progress'       => [ 'value', 'max' ],
+			'svg'            => [ 'xmlns', 'xmlns:xlink', 'viewbox', 'width', 'height', 'fill', 'stroke', 'stroke-width', 'preserveaspectratio', 'version', 'x', 'y', 'focusable' ],
+			'g'              => [ 'fill', 'stroke', 'stroke-width', 'transform', 'opacity', 'clip-path', 'fill-rule' ],
+			'path'           => [ 'd', 'fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'transform', 'opacity', 'fill-rule', 'clip-rule' ],
+			'circle'         => [ 'cx', 'cy', 'r', 'fill', 'stroke', 'stroke-width', 'transform', 'opacity' ],
+			'ellipse'        => [ 'cx', 'cy', 'rx', 'ry', 'fill', 'stroke', 'stroke-width', 'transform', 'opacity' ],
+			'rect'           => [ 'x', 'y', 'width', 'height', 'rx', 'ry', 'fill', 'stroke', 'stroke-width', 'transform', 'opacity' ],
+			'line'           => [ 'x1', 'y1', 'x2', 'y2', 'stroke', 'stroke-width', 'stroke-linecap', 'transform', 'opacity' ],
+			'polyline'       => [ 'points', 'fill', 'stroke', 'stroke-width', 'transform', 'opacity' ],
+			'polygon'        => [ 'points', 'fill', 'stroke', 'stroke-width', 'transform', 'opacity' ],
+			'defs'           => [],
+			'clippath'       => [ 'clippathunits' ],
+			'lineargradient' => [ 'x1', 'y1', 'x2', 'y2', 'gradientunits', 'gradienttransform' ],
+			'radialgradient' => [ 'cx', 'cy', 'r', 'fx', 'fy', 'gradientunits', 'gradienttransform' ],
+			'stop'           => [ 'offset', 'stop-color', 'stop-opacity' ],
+			'title'          => [],
+			'section'        => [],
+		];
+
+		// wp_kses() only understands the `data-*` wildcard, so ARIA attributes are listed one by one.
+		$global = [
+			'id', 'class', 'style', 'title', 'role', 'tabindex', 'hidden', 'lang', 'dir', 'data-*',
+			'aria-atomic', 'aria-busy', 'aria-checked', 'aria-controls', 'aria-current', 'aria-describedby', 'aria-details',
+			'aria-disabled', 'aria-errormessage', 'aria-expanded', 'aria-haspopup', 'aria-hidden', 'aria-invalid', 'aria-label',
+			'aria-labelledby', 'aria-live', 'aria-pressed', 'aria-required', 'aria-selected', 'aria-valuemax', 'aria-valuemin',
+			'aria-valuenow', 'aria-valuetext',
+		];
+
+		foreach ( $extra as $tag => $attributes ) {
+			$allowed[ $tag ] = array_merge( isset( $allowed[ $tag ] ) ? $allowed[ $tag ] : [], array_fill_keys( $attributes, true ) );
+		}
+
+		foreach ( $allowed as $tag => $attributes ) {
+			$allowed[ $tag ] = array_merge( is_array( $attributes ) ? $attributes : [], array_fill_keys( $global, true ) );
+		}
+
+		return apply_filters( 'eael/login-register/register-form-allowed-html', $allowed );
 	}
 
 	protected function print_lostpassword_form(){
@@ -7979,7 +8042,7 @@ class Login_Register extends Widget_Base {
 			}
 		}
 		?>
-		<div class="eael-lr-otp-wrapper<?php echo $visible ? '' : ' eael-d-none'; ?><?php echo $editor_preview ? ' eael-lr-otp-editor-preview' : ''; ?>"
+		<div class="eael-lr-otp-wrapper<?php echo esc_attr( $visible ? '' : ' eael-d-none' ); ?><?php echo esc_attr( $editor_preview ? ' eael-lr-otp-editor-preview' : '' ); ?>"
 			 data-remaining-cooldown="<?php echo esc_attr( $initial_remaining_cooldown ); ?>"
 			 data-flow="<?php echo esc_attr( $form_type ); ?>"
 			 data-widget-id="<?php echo esc_attr( $widget_id ); ?>"
