@@ -299,7 +299,7 @@ You can use the official documentation, tutorials, community resources, and supp
 
 = How do I turn off recommendations and promotional notices? =
 
-Any administrator can click "Never show me again" on a recommendation. That is site-wide and permanent: it hides that recommendation everywhere on the installation, for every user, including the WordPress Dashboard widget and the block editor panel. It is not a per-user dismissal.
+Recommendations only appear on Essential Addons' own admin pages. Any administrator can click "Never show me again" on one. That is site-wide and permanent: it hides that recommendation everywhere on the installation, for every user. It is not a per-user dismissal.
 
 If you manage many sites and want every Essential Addons recommendation switched off up front, add this to `wp-config.php`:
 
