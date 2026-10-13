@@ -3862,8 +3862,7 @@ class Event_Calendar extends Widget_Base
             data-thumbnail_position = "' . ( !empty( $settings['eael_event_show_thumbnail'] ) ? esc_attr( $settings['eael_event_thumbnail_position'] ) : '') . '"
             data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>';
 
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo $this->eaelec_load_event_details();
+            echo wp_kses_post( $this->eaelec_load_event_details() );
 	    } else {
 		    $this->eaelec_display_table( $data, $settings );
 	    }

@@ -41,7 +41,7 @@ Pro does not extend Twitter_Feed itself — it ships an independent Carousel wid
 | [`src/css/view/twitter-feed.scss`](../../src/css/view/twitter-feed.scss) | Source styles — card layout, masonry, list view, hover effects |
 | [`src/js/view/twitter-feed.js`](../../src/js/view/twitter-feed.js) | Frontend logic (87 lines) — Isotope masonry init, page-batch Load More handler, editor Clear-Cache AJAX |
 | [`config.php`](../../config.php#L274) entry `'twitter-feed'` | Asset declaration: twitter-feed.min.css + imagesLoaded + Isotope + twitter-feed.min.js |
-| `assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js` | Vendor — image-load coordination for Isotope reflow |
+| WordPress core `imagesloaded` script handle (`'handle' => 'imagesloaded'`) | Vendor (core) — image-load coordination for Isotope reflow |
 | `assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js` | Vendor — Isotope masonry layout |
 
 ## Architecture

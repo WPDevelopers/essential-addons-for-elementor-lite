@@ -20,7 +20,6 @@ use Essential_Addons_Elementor\Traits\Facebook_Feed;
 use Essential_Addons_Elementor\Classes\Asset_Builder;
 use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 use Essential_Addons_Elementor\Traits\Ajax_Handler;
-use Essential_Addons_Elementor\Pro\Classes\License\LicenseManager;
 
 class Bootstrap
 {
@@ -417,22 +416,50 @@ class Bootstrap
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
 
 
-	    // init plugin updater with version check
-	    if ( defined( 'EAEL_PRO_PLUGIN_VERSION' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.2', '>=' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.3', '<=' ) ) {
-		    add_action( 'init', [ $this, 'eael_init_plugin_updater' ], 99 );
+	    // Pro 6.2.2–6.2.3 cannot check for its own updates; tell those users how to update manually.
+	    if ( defined( 'EAEL_PRO_PLUGIN_VERSION' ) && defined( 'EAEL_PRO_PLUGIN_BASENAME' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.2', '>=' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.3', '<=' ) ) {
+		    add_action( 'after_plugin_row_' . EAEL_PRO_PLUGIN_BASENAME, [ $this, 'eael_pro_manual_update_row' ], 10, 2 );
 	    }
     }
 
-    /**
-     * Initialize plugin updater
-     *
-     * @since 6.1.14
-     */
-	function eael_init_plugin_updater() {
-		if ( is_admin() ) {
-			$license_manager = LicenseManager::get_instance( [] );
-			$license_manager->plugin_updater();
+	/**
+	 * Plugins-screen row under Essential Addons Pro 6.2.2–6.2.3.
+	 *
+	 * Those two Pro releases register their updater too late, so WordPress never
+	 * offers them an update. Lite used to work around that by calling Pro's
+	 * licence updater itself; a free plugin must not run a paid plugin's
+	 * licence code (WordPress.org Guideline 5, issue #897), so the user is
+	 * pointed to a manual update instead. Pro 6.3.0 and later are unaffected.
+	 *
+	 * @param string $plugin_file Plugin basename.
+	 * @param array  $plugin_data Plugin header data.
+	 */
+	public function eael_pro_manual_update_row( $plugin_file, $plugin_data ) {
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			return;
 		}
+
+		$columns = function_exists( 'get_current_screen' ) && get_current_screen() ? get_column_headers( get_current_screen() ) : [];
+		$colspan = $columns ? count( $columns ) : 4;
+		?>
+		<tr class="plugin-update-tr active">
+			<td colspan="<?php echo esc_attr( $colspan ); ?>" class="plugin-update colspanchange">
+				<div class="update-message notice inline notice-warning notice-alt">
+					<p>
+						<?php
+						printf(
+							/* translators: 1: Essential Addons Pro version, 2: opening link tag, 3: closing link tag */
+							esc_html__( 'Essential Addons Pro %1$s cannot check for updates automatically. Download the latest version from %2$syour WPDeveloper account%3$s and upload it to update.', 'essential-addons-for-elementor-lite' ),
+							esc_html( EAEL_PRO_PLUGIN_VERSION ),
+							'<a href="' . esc_url( 'https://wpdeveloper.com/account' ) . '" target="_blank" rel="noopener noreferrer">',
+							'</a>'
+						);
+						?>
+					</p>
+				</div>
+			</td>
+		</tr>
+		<?php
 	}
 	/**
 	 * Drops document settings a non-administrator must not be able to save.

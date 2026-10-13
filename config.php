@@ -29,7 +29,7 @@ $config = [
                 ],
                 'js' => [
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'handle' => 'imagesloaded',
                         'type' => 'lib',
                         'context' => 'view',
                     ],
@@ -292,7 +292,7 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'handle' => 'imagesloaded',
                         'type' => 'lib',
                         'context' => 'view',
                     ],
@@ -326,7 +326,7 @@ $config = [
                 ],
                 'js' => [
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'handle' => 'imagesloaded',
                         'type' => 'lib',
                         'context' => 'view',
                     ],
@@ -428,7 +428,7 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'handle' => 'imagesloaded',
                         'type' => 'lib',
                         'context' => 'view',
                     ],
@@ -597,7 +597,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'handle' => 'imagesloaded',
                         'type' => 'lib',
                         'context' => 'view',
                     ],
@@ -646,7 +646,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'handle' => 'imagesloaded',
                         'type' => 'lib',
                         'context' => 'view',
                     ],
@@ -993,7 +993,7 @@ $config = [
                 ],
                 'js' => [
 	                [
-		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+		                'handle' => 'imagesloaded',
 		                'type' => 'lib',
 		                'context' => 'view',
 	                ],
@@ -1296,7 +1296,7 @@ $config = [
 		        ],
 		        'js'  => [
 			        [
-				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+				        'handle' => 'imagesloaded',
 				        'type' => 'lib',
 				        'context' => 'view',
 			        ],

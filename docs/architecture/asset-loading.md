@@ -171,6 +171,9 @@ Every widget and extension that needs assets has an entry under the top-level `e
 | `type` | `self` / `lib` | `self` = built file from `src/` (we built it); `lib` = vendor library in `assets/front-end/js/lib-view/` |
 | `context` | `view` / `edit` | `view` enqueues on frontend; `edit` enqueues only inside Elementor editor |
 | `file` | absolute path | Use `EAEL_PLUGIN_PATH` constant; trailing slash semantics matter (don't accidentally double-slash) |
+| `handle` | WordPress script handle | Use instead of `file` for a library WordPress core already ships (Guideline 13), e.g. `'handle' => 'imagesloaded'`. It is not concatenated; `Asset_Builder::enqueue_asset()` adds it as a dependency of the per-post bundle (or enqueues it in `internal` mode) |
+
+`Elements_Manager::CORE_LIBRARY_FILES` maps removed bundled copies to their core handle, because Essential Addons Pro still lists Lite's old `lib-view/imagesloaded/imagesloaded.pkgd.min.js` path in its own config. For imagesloaded, `Asset_Builder` also prints a one-line bridge before the bundle that calls `imagesLoaded.makeJQueryPlugin( jQuery )` if `$.fn.imagesLoaded` is missing: core's handle has no jQuery dependency, so it only registers the jQuery plugin when jQuery happens to load first.
 
 JS `lib` entries should be listed **before** the widget's own `self` entry, since `Asset_Builder` concatenates in declaration order and the widget JS depends on the libs being defined first.
 

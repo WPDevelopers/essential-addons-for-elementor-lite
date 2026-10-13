@@ -5,7 +5,7 @@
 **Class file:** [`includes/Elements/Fancy_Text.php`](../../includes/Elements/Fancy_Text.php)
 **Slug:** `fancy-text` (widget id `eael-fancy-text`)
 **Public docs:** <https://essential-addons.com/elementor/docs/fancy-text/>
-**Pro-shared:** ✅ Yes — Pro injects `style-2` via the `fancy_text_style_types` filter and provides additional gradient / background treatments.
+**Pro-shared:** ✅ Yes — Pro relabels the style options via the `fancy_text_style_types` filter and loads its own `fancy-text.min.css` on top of Lite's.
 
 ---
 
@@ -32,13 +32,13 @@ Most pages drop it into a hero section or service introduction. The widget reads
 | Capability | Lite | Pro |
 | ---------- | ---- | --- |
 | Style 1 (default) | ✅ | ✅ |
-| Style 2 (extra background / gradient treatment) | ❌ — falls back to Style 1 | ✅ |
+| Style 2 (extra background / gradient treatment) | ✅ | ✅ |
 | All nine transition types | ✅ | ✅ |
 | Solid / gradient color picker on fancy strings | ✅ (Style 1) | ✅ (both styles) |
 | Inject custom style options via filter | ❌ | ✅ via `fancy_text_style_types` |
 | Pro upsell section in panel | shown | hidden |
 
-When the Pro plugin is not active, selecting Style 2 in the panel still renders Style 1 — see Architecture Decisions for the rationale.
+Style 2 is implemented entirely in Lite (a CSS class in `fancy-text.min.css`), so it renders with or without Pro. It used to be forced back to Style 1 without Pro, which WordPress.org Guideline 5 does not allow for code that ships in the free plugin (issue #932).
 
 ## Use Cases
 
@@ -67,7 +67,7 @@ When the Pro plugin is not active, selecting Style 2 in the panel still renders 
 
 - **Two animation engines (Typed.js + Morphext)** — Typed.js drives the typing transition because it gives precise per-character timing with cursor support. Morphext drives every other transition because it's CSS-keyframe-based and handles fade / zoom / swing cleanly. Combining them in one library was rejected; each does its job better than a single-library solution would.
 - **DOMPurify on the JS side** — strings flow PHP → `data-fancy-text` attribute → JS split → DOM insertion. PHP-side `eael_wp_kses` sanitizes once. DOMPurify re-sanitizes before DOM insertion as defense-in-depth, since attribute-to-JS-to-DOM is a classic XSS vector if upstream sanitization is ever bypassed.
-- **Force-fallback in `render()` when Pro is disabled** — if the user picked `style-2` in the panel but Pro is not active, [`render()`](../../includes/Elements/Fancy_Text.php#L628) resets the setting to `style-1` before output. The user sees a working Lite render rather than a broken Style 2.
+- **No Pro gate on the style** — `render()` outputs the saved `eael_fancy_text_style` as is. An earlier force-fallback to `style-1` without Pro was removed because Style 2 ships in Lite (WordPress.org Guideline 5, issue #932).
 - **`elementStatusCheck` guard in JS init** — wraps the `addAction` registration so re-fired `elementor/frontend/init` events (popups, SPA-style nav) don't double-register the handler and double-init Typed/Morphext on the same widget instance.
 - **`<noscript>` fallback** — for SEO and no-JS clients, the strings are also rendered comma-separated inside a `<noscript>` block so search engines and screen-readers see all rotating values.
 
@@ -134,7 +134,6 @@ Plus three Group_Control_Typography blocks (one each for prefix, fancy strings, 
 A control hidden by a condition still saves its value. This map answers "why doesn't option X show in my panel?" without reading the source.
 
 ```text
-eael_fancy_text_style_pro_alert        → visible when style == 'style-2'
 eael_fancy_text_speed                  → visible when transition_type == 'typing'
 eael_fancy_text_cursor                 → visible when transition_type == 'typing'
 eael_fancy_text_cursor_color           → visible when cursor == 'yes'
