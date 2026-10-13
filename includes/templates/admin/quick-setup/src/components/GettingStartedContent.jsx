@@ -65,7 +65,7 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
                 data-next="configuration"
                 onClick={handleTabChange}
               >
-                {__("Continue without sharing", "essential-addons-for-elementor-lite")}
+                {__("Skip", "essential-addons-for-elementor-lite")}
               </button>
             </div>
           </div>
