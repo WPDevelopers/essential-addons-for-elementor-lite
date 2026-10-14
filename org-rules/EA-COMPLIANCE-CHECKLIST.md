@@ -771,3 +771,27 @@ S1, S2, S3, S4, S8, S9, S10, S11 · issue #897 items 1–8 and its Plugin Check 
 - PHP warning `Undefined array key "orderby"` — `Ajax_Handler.php:180` (Post Grid load more when `orderby` was never saved). Code from 2025-05.
 - Setup wizard page JS errors — WooCommerce `wc-entities.js` and core `svg-painter.js`; identical with the pre-change bundle.
 - Asset bundles cached in `uploads/essential-addons-elementor/` reflect the plugin set active when they were built; `Migration` empties that folder on plugin activation/upgrade.
+<<<<<<< HEAD
+
+
+---
+
+## 11. Status — 2026-10-12 (issue #933, branch `933` → `release-three`)
+
+Closed the #897 items the PM re-flagged, plus new findings from a fresh sweep. Plugin Check 2.1.0 on the `.distignore`-built package: **0 errors / 292 warnings before and after** (`release-three` had already reached 0 errors via annotations in `3bcf4ccf9`).
+
+| Item | Was | Now |
+|---|---|---|
+| T1 Typeform SDK 0.16.0, no licence | Open | Replaced with @typeform/embed **0.17.0 (LGPL-3.0-only)**, same `typeformEmbed` global and API; `LICENSE.txt` ships beside it |
+| #897-0 `LicenseManager` shim | Deferred | **Removed.** Pro 6.2.2–6.2.3 get a Plugins-screen row pointing to a manual update instead |
+| S16 / #897-9 bundled `imagesloaded` | Deferred | **Core `imagesloaded` handle.** `config.php` entries use `'handle'`; `Elements_Manager::CORE_LIBRARY_FILES` maps the old path Pro still lists; `Asset_Builder` adds a `$.fn.imagesLoaded` bridge |
+| Escaping: Event Calendar modal, Login/Register form buffer + OTP class | `phpcs:ignore` | Escaped (`wp_kses_post`, form-aware `wp_kses`, `esc_attr`); DOM verified identical |
+| ThinkRank "SEO Check" / xSpeed "Speed Check" install prompts on the WP Dashboard, Gutenberg "Configure SEO" panel | Collapsed / open | **Removed.** A dashboard widget only exists for an active xSpeed (functional panel) |
+| G5 Fancy Text Style 2 forced to Style 1 (#932 item 1) | Open | Unlocked in Lite |
+| G5 Creative Button "Remove Default SVG Color" registered under a `_dummy` id without Pro | New | Unlocked in Lite |
+| S13 readme External services section | Open | Added; fits the 2,500-word Description budget |
+| Quill 1.3.6 missing from `third-party-licenses.txt` | New | Credited |
+
+Still open by decision: #932 items 2–3 (Pro-only render branches / CSS in Lite — need a coordinated Pro release), React bundled in admin apps (needs min-WP ≥ 6.2), `wp-notice` licence (owner action), readme title ≠ plugin name (marketing), Pro's GreenSock-licensed GSAP plugins (Pro licensing review).
+=======
+>>>>>>> dev
