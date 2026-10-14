@@ -1984,8 +1984,97 @@ trait Admin {
 		    ]
 	    );
 
+	    ob_start(); ?>
+		<div class="eael-summer-campaign-logo">
+			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" alt="">
+		</div>
+		<div class="eael-summer-campaign-content">
+			<p><?php
+			echo wp_kses( __( '<strong>👻 Halloween Sale:</strong> Get 110+ advanced elements to build faster & smarter in Elementor <strong>- up to 35% OFF</strong>', 'essential-addons-for-elementor-lite' ), [ 'strong' => [] ] );
+			?></p>
+            <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
+                <a href="https://essential-addons.com/halloween2026/admin-notice" target="_blank" class="button-primary">
+                    <?php esc_html_e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?>
+                </a>
+                <span class="eael-action-dismiss-btn">
+                    <?php esc_html_e( "I Don't Want Any Discount", 'essential-addons-for-elementor-lite' ); ?>
+                </span>
+            </div>
+		</div>
+
+		<script>
+            jQuery(document).ready(function ($) {
+                setTimeout(function () {
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-halloween_campaign_2026_notice .notice-dismiss');
+
+                    function wpNoticeDismissFunc(event) {
+                        event.preventDefault();
+
+                        var httpRequest = new XMLHttpRequest(),
+                            postData = '',
+                            dismiss = event.target.dataset?.hasOwnProperty('dismiss') && event.target.dataset.dismiss || false,
+                            later = event.target.dataset?.hasOwnProperty('later') && event.target.dataset.later || false;
+
+                        if (dismiss || later) {
+                            jQuery(event.target.offsetParent).slideUp(200);
+                        }
+
+                        postData += 'id=halloween_campaign_2026_notice';
+                        postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
+                        if (dismiss) {
+                            postData += '&dismiss=' + dismiss;
+                        }
+                        if (later) {
+                            postData += '&later=' + later;
+                        }
+
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_halloween_campaign_2026_notice' ) );?>';
+
+                        httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
+                        httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        httpRequest.send(postData);
+                    }
+
+                    dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
+
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-halloween_campaign_2026_notice .eael-action-dismiss-btn');
+                    if (customDismissBtn && dismissBtn) {
+                        customDismissBtn.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            dismissBtn.click();
+                        });
+                    }
+                }, 1);
+            });
+		</script>
+	    <?php
+	    $b_message                     = ob_get_clean();
+	    $_halloween_campaign_2026_notice  = [
+		    'html' => $b_message,
+	    ];
+
+	    $notices->add(
+			'halloween_campaign_2026_notice',
+			$_halloween_campaign_2026_notice,
+			[
+				'start'       => strtotime( '12:00:00am 13th October, 2026' ),
+				'recurrence'  => false,
+				'dismissible' => true,
+				'refresh'     => EAEL_PLUGIN_VERSION,
+				'expire'      => strtotime( '12:00:00am 5th November, 2026' ),
+				// WP Dashboard, Plugins screen and EA's own pages only (Guideline 11).
+				'display_if'  => ! $this->pro_enabled
+					&& ( in_array( $GLOBALS['pagenow'], [ 'index.php', 'plugins.php' ], true )
+						|| ( isset( $_GET['page'] ) && 0 === strpos( sanitize_key( wp_unslash( $_GET['page'] ) ), 'eael' ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					&& time() < strtotime( '11:59:59pm 2nd November, 2026' ),
+			]
+		);
+
 	    self::$cache_bank->create_account( $notices );
 	    self::$cache_bank->calculate_deposits( $notices );
+
+	    // The EA Dashboard strips `admin_notices` and fires `eael_admin_notices` instead.
+	    add_action( 'eael_admin_notices', [ self::$cache_bank, 'notices' ] );
     }
 
 	/**
