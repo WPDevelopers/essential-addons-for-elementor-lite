@@ -21,11 +21,11 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
               />
             </a>
             <h3>
-              {__("Get Started with Essential Addons", "essential-addons-for-elementor-lite")}
+              {__("Welcome to Essential Addons for Elementor!", "essential-addons-for-elementor-lite")}
             </h3>
             <p>
               {__(
-                "Thank you for choosing Essential Addons for Elementor. Follow these simple steps of easy setup wizard & enjoy your Elementor web-building experience now!",
+                "Follow the simple steps in this quick setup wizard to start building with Elementor!",
                 "essential-addons-for-elementor-lite"
               )}
             </p>
@@ -33,11 +33,11 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
           <div className="eael-next-step-wrapper" id="eael-dashboard--wrapper">
             <p>
               {__(
-                "Help improve Essential Addons by sharing non-sensitive usage data with WPDeveloper. Nothing is sent unless you choose “Allow & Continue”.",
+                "Help us improve Essential Addons by sharing usage data with WPDeveloper. Nothing is sent unless you choose “Allow & Continue”.",
                 "essential-addons-for-elementor-lite"
-              )}
+              )}{" "}
               <span className="collect-info eael-what-we-collect" onClick={handleModalChange} data-target="what-we-collect">
-                {__("Find out what we collect.", "essential-addons-for-elementor-lite")}
+                {__("Find out what we collect", "essential-addons-for-elementor-lite")}
               </span>
             </p>
 
@@ -65,7 +65,7 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
                 data-next="configuration"
                 onClick={handleTabChange}
               >
-                {__("Skip", "essential-addons-for-elementor-lite")}
+                {__("Skip and Continue", "essential-addons-for-elementor-lite")}
               </button>
             </div>
           </div>

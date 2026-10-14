@@ -280,7 +280,7 @@ trait Admin {
 						    'basename' => 'embedpress/embedpress.php',
 						    'logo'     => 'images/EP.svg',
 						    'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'Embed videos, images, gifs, charts, docs, maps, audio, live streams, pdf & more from 150+ sources into your WordPress site and get seamless customization options.', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Embed videos, images, gifs, charts, docs, maps, audio, live streams, PDFs, and more from 150+ sources into your WordPress site and get seamless customization options.', 'essential-addons-for-elementor-lite' ),
 						    'status'   => is_plugin_active( 'embedpress/embedpress.php' )
 					    ],
 					    'eb' => [
