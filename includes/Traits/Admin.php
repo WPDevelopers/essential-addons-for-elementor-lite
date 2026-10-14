@@ -2061,12 +2061,12 @@ trait Admin {
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				'expire'      => strtotime( '12:00:00am 5th November, 2026' ),
+				'expire'      => strtotime( '11:59:59pm 5th November, 2026' ),
 				// WP Dashboard, Plugins screen and EA's own pages only (Guideline 11).
 				'display_if'  => ! $this->pro_enabled
 					&& ( in_array( $GLOBALS['pagenow'], [ 'index.php', 'plugins.php' ], true )
 						|| ( isset( $_GET['page'] ) && 0 === strpos( sanitize_key( wp_unslash( $_GET['page'] ) ), 'eael' ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					&& time() < strtotime( '11:59:59pm 2nd November, 2026' ),
+					&& time() < strtotime( '11:59:59pm 5th November, 2026' ),
 			]
 		);
 
