@@ -33,7 +33,7 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
           <div className="eael-next-step-wrapper" id="eael-dashboard--wrapper">
             <p>
               {__(
-                "Help us improve Essential Addons by sharing usage data with WPDeveloper. Nothing is sent unless you choose “Allow & Continue”.",
+                "Help us improve Essential Addons by sharing usage data with WPDeveloper. No personal or sensitive data is ever collected.",
                 "essential-addons-for-elementor-lite"
               )}{" "}
               <span className="collect-info eael-what-we-collect" onClick={handleModalChange} data-target="what-we-collect">
@@ -79,16 +79,28 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
               {__("What We Collect?", "essential-addons-for-elementor-lite")}
             </h5>
             <p>
-              {__(
-                "Nothing is sent unless you allow it. If you do: your site URL and name; WordPress, PHP and server versions; language and charset; your active plugins and theme (and how many inactive); which Essential Addons elements you use; and your admin email, for the coupon.",
-                "essential-addons-for-elementor-lite"
-              )}
+              {__("We only collect usage data if you choose to share it.", "essential-addons-for-elementor-lite")}
             </p>
             <p>
-              {__(
-                "We never collect your content, your visitors' data, or your inactive plugin names. No spam, we promise.",
-                "essential-addons-for-elementor-lite"
-              )}
+              {__("Here is what is included:", "essential-addons-for-elementor-lite")}
+            </p>
+            <ul className="eael-collect-list">
+              <li>
+                <strong>{__("System Specs:", "essential-addons-for-elementor-lite")}</strong>{" "}
+                {__("WordPress, PHP, and server versions, plus site language and charset.", "essential-addons-for-elementor-lite")}
+              </li>
+              <li>
+                <strong>{__("Plugin Data:", "essential-addons-for-elementor-lite")}</strong>{" "}
+                {__("Active plugins, active theme, total count of inactive plugins, and which Essential Addons widgets you use.", "essential-addons-for-elementor-lite")}
+              </li>
+              <li>
+                <strong>{__("Site Info & Contact:", "essential-addons-for-elementor-lite")}</strong>{" "}
+                {__("Site URL, site name, and admin email (used to send your discount coupon).", "essential-addons-for-elementor-lite")}
+              </li>
+            </ul>
+            <p>
+              <strong>{__("What we NEVER collect:", "essential-addons-for-elementor-lite")}</strong>{" "}
+              {__("Your website content, visitor data, or the names of your inactive plugins. We promise zero spam.", "essential-addons-for-elementor-lite")}
             </p>
           </div>
           <div class="eael-modal-close-btn" onClick={closeModal}>
