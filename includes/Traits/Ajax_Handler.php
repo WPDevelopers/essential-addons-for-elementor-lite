@@ -106,6 +106,12 @@ trait Ajax_Handler {
 			unset( $args[ $key ] );
 		}
 
+		// Unsigned requests also cannot ask for an unbounded page size (#947).
+		$max_per_page           = max( 1, (int) apply_filters( 'eael/load_more/unsigned_posts_per_page_max', 50 ) );
+		$per_page               = isset( $args['posts_per_page'] ) ? (int) $args['posts_per_page'] : 10;
+		$args['posts_per_page'] = ( $per_page < 1 || $per_page > $max_per_page ) ? $max_per_page : $per_page;
+		unset( $args['nopaging'], $args['numberposts'] );
+
 		return $args;
 	}
 
