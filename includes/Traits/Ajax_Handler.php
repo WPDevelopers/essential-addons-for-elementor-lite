@@ -81,6 +81,34 @@ trait Ajax_Handler {
 	 * @return array of content and found posts count without AJAX call.
 	 * @since 3.1.0
 	 */
+	/**
+	 * Limit load-more query args that do not carry a valid server signature.
+	 *
+	 * Only post types a visitor can view are queried, and meta query vars are
+	 * dropped: without the signature they come from the visitor, and a meta
+	 * query can be used to read private custom fields one test at a time.
+	 *
+	 * @param array $args Query args from the request.
+	 * @return array
+	 */
+	protected function eael_restrict_unsigned_load_more_args( $args ) {
+		$viewable  = array_values( array_filter( get_post_types( [ 'public' => true ] ), 'is_post_type_viewable' ) );
+		$requested = isset( $args['post_type'] ) ? array_map( 'strval', (array) $args['post_type'] ) : [ 'post' ];
+
+		if ( in_array( 'any', $requested, true ) ) {
+			$requested = $viewable;
+		}
+
+		$post_types        = array_values( array_intersect( $requested, $viewable ) );
+		$args['post_type'] = $post_types ? $post_types : 'post';
+
+		foreach ( [ 'meta_query', 'meta_key', 'meta_value', 'meta_value_num', 'meta_compare', 'meta_compare_key', 'meta_type', 'meta_type_key' ] as $key ) {
+			unset( $args[ $key ] );
+		}
+
+		return $args;
+	}
+
 	public function ajax_load_more() {
 		$ajax = wp_doing_ajax();
 		//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
@@ -88,6 +116,15 @@ trait Ajax_Handler {
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Missing
 		wp_parse_str( $_POST['args'], $args );
+
+		// Args the widget rendered carry a server signature (Helper::eael_signed_load_more_args()).
+		// Anything else (edited by the client, or a page cached before signing existed) is
+		// limited to viewable post types and loses client-supplied meta queries.
+		$signed_args = HelperClass::eael_verify_load_more_args( $args );
+		unset( $args[ HelperClass::LOAD_MORE_ARGS_SIGNATURE_KEY ] );
+		if ( ! $signed_args ) {
+			$args = $this->eael_restrict_unsigned_load_more_args( $args );
+		}
 
 		// $args comes from the client; coerce ID-list query vars (author__not_in, post__in, …)
 		// to int arrays before they reach WP_Query, else a string payload injects raw SQL.

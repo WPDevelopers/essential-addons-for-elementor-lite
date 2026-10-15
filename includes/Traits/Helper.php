@@ -187,7 +187,7 @@ trait Helper
 		    'data-class'     => get_class( $this ),
 		    'data-layout'    => isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : "",
 		    'data-page'      => 1,
-		    'data-args'      => http_build_query( $args ),
+		    'data-args'      => HelperClass::eael_signed_load_more_args( $args ),
 	    ]);
 
 	    if ( $max_page ) {
