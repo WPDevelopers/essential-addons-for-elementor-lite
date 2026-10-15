@@ -355,6 +355,14 @@ Nothing below is contacted until you set up the widget or option that uses it.
 
 == Changelog ==
 
+= 6.8.6 - 15/10/2026 =
+
+- Fixed: EA Advanced Data Table | Fatal error on PHP 8 when a Ninja Tables selection column was used
+- Fixed: EA Event Calendar | "Hide Old Events" hid events that were still in progress or scheduled for later today
+- Fixed: EA Post Grid | Displayed the post creator instead of the author assigned by PublishPress Authors / Co-Authors Plus
+- Fixed: EA Woo Cart | Notice style controls now also apply to the empty cart message
+- Few minor bug fixes & improvements
+
 = 6.8.5 - 30/09/2026 =
 
 - Improved: EA Mega Menu | Clearer Apply Preset warning about which block will be replaced
