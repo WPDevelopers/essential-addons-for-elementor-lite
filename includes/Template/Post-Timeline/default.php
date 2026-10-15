@@ -43,7 +43,7 @@ echo '<article class="eael-timeline-post eael-timeline-column">
             if ($settings['eael_show_title']) {
                 // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
                 $title_html = '<div class="eael-timeline-post-title">
-                    <' .  $settings['title_tag'] . ' class="eael-timeline-post-title-text">' . get_the_title() . '</' . $settings['title_tag'] . '>
+                    <' . $title_tag . ' class="eael-timeline-post-title-text">' . get_the_title() . '</' . $title_tag . '>
                 </div>';
                 echo wp_kses( $title_html, Helper::eael_allowed_tags() );
             }
