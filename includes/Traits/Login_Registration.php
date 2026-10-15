@@ -3430,22 +3430,21 @@ trait Login_Registration {
 	 * May the current user change this account's approval state?
 	 *
 	 * `manage_options` is site-level; on a multisite network that does not cover
-	 * accounts on other sites. Require the same per-user check core applies to
-	 * the profile screen, and membership of the current site.
+	 * accounts on other sites. On Multisite, core never grants `edit_users` to
+	 * site administrators, so `edit_user` cannot be used there: a site admin may
+	 * manage members of their own site, and only network user managers may manage
+	 * anyone. On a single site the per-user `edit_user` check applies.
 	 *
 	 * @param int $user_id Target user.
 	 * @return bool
 	 */
 	protected function eael_can_manage_user_approval( $user_id ) {
-		if ( ! current_user_can( 'edit_user', $user_id ) ) {
-			return false;
+		if ( is_multisite() ) {
+			return current_user_can( 'manage_network_users' )
+				|| ( current_user_can( 'manage_options' ) && is_user_member_of_blog( $user_id ) );
 		}
 
-		if ( is_multisite() && ! is_user_member_of_blog( $user_id ) && ! current_user_can( 'manage_network_users' ) ) {
-			return false;
-		}
-
-		return true;
+		return current_user_can( 'edit_user', $user_id );
 	}
 
 	public function eael_handle_bulk_approve_action( $redirect_url, $action, $user_ids ) {
