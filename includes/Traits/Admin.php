@@ -1990,7 +1990,8 @@ trait Admin {
 		</div>
 		<div class="eael-summer-campaign-content">
 			<p><?php
-			echo wp_kses( __( '<strong>👻 Halloween Sale:</strong> Get 110+ advanced elements to build faster & smarter in Elementor <strong>- up to 35% OFF</strong>', 'essential-addons-for-elementor-lite' ), [ 'strong' => [] ] );
+			// `wp-exclude-emoji` stops WordPress replacing the emoji with a Twemoji SVG.
+			echo wp_kses( __( '<strong><span class="wp-exclude-emoji">👻</span> Halloween Sale:</strong> Get 110+ advanced elements to build faster & smarter in Elementor <strong>- up to 35% OFF</strong>', 'essential-addons-for-elementor-lite' ), [ 'strong' => [], 'span' => [ 'class' => [] ] ] );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
                 <a href="https://essential-addons.com/halloween2026/admin-notice" target="_blank" class="button-primary">
