@@ -945,6 +945,17 @@ trait Login_Registration {
 		// Email OTP Verification gate (Registration)
 		// ============================================================
 		if ( ! empty( $settings['enable_register_otp'] ) && 'yes' === $settings['enable_register_otp'] ) {
+			// Limit new OTP sessions per recipient and per IP before anything is created (#946).
+			if ( $this->eael_otp_register_rate_limited( $user_data['user_email'] ) ) {
+				$err_msg = __( 'Too many verification requests. Please wait a few minutes and try again.', 'essential-addons-for-elementor-lite' );
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
+				wp_safe_redirect( esc_url_raw( $url ) );
+				exit();
+			}
+
 			$otp_payload = [
 				'user_data'              => $user_data,
 				'plain_password'         => $password,
@@ -2348,6 +2359,43 @@ trait Login_Registration {
 	 * @param string $direct_url Absolute URL of the page hosting the widget.
 	 * @return array { token, expiry, cooldown } or WP_Error on failure.
 	 */
+	/**
+	 * Count a new registration OTP request and report whether it is over the limit.
+	 *
+	 * The resend cooldown only applies to an existing session, so without this every
+	 * new registration request sent another email. Defaults: 3 per recipient and
+	 * 10 per IP address in 15 minutes, filterable through
+	 * `eael/login-register/otp_register_rate_limit`.
+	 *
+	 * @param string $email Recipient address.
+	 * @return bool True when the request must be refused.
+	 */
+	protected function eael_otp_register_rate_limited( $email ) {
+		$limits = apply_filters( 'eael/login-register/otp_register_rate_limit', [
+			'per_email' => 3,
+			'per_ip'    => 10,
+			'window'    => 15 * MINUTE_IN_SECONDS,
+		] );
+
+		$ip      = ! empty( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+		$buckets = [
+			'eael_otp_rl_e_' . md5( strtolower( (string) $email ) ) => (int) $limits['per_email'],
+			'eael_otp_rl_i_' . md5( $ip )                           => (int) $limits['per_ip'],
+		];
+
+		foreach ( $buckets as $key => $max ) {
+			if ( $max > 0 && (int) get_transient( $key ) >= $max ) {
+				return true;
+			}
+		}
+
+		foreach ( $buckets as $key => $max ) {
+			set_transient( $key, (int) get_transient( $key ) + 1, (int) $limits['window'] );
+		}
+
+		return false;
+	}
+
 	protected function eael_otp_create_session( $flow, $payload, $email, $widget_id, $page_id, $settings, $direct_url = '' ) {
 		$prefix         = ( 'login' === $flow ) ? 'login' : 'register';
 		$expiry_minutes = ! empty( $settings[ "{$prefix}_otp_expiry" ] ) ? max( 1, (int) $settings[ "{$prefix}_otp_expiry" ] ) : 5;
