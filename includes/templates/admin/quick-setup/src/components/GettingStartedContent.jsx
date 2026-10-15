@@ -33,7 +33,7 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
           <div className="eael-next-step-wrapper" id="eael-dashboard--wrapper">
             <p>
               {__(
-                "Help us improve Essential Addons by sharing usage data with WPDeveloper. No personal or sensitive data is ever collected.",
+                "Help us improve Essential Addons by sharing usage data with WPDeveloper. We never track your site visitors or content.",
                 "essential-addons-for-elementor-lite"
               )}{" "}
               <span className="collect-info eael-what-we-collect" onClick={handleModalChange} data-target="what-we-collect">
@@ -95,12 +95,12 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
               </li>
               <li>
                 <strong>{__("Site Info & Contact:", "essential-addons-for-elementor-lite")}</strong>{" "}
-                {__("Site URL, site name, and admin email (used to send your discount coupon).", "essential-addons-for-elementor-lite")}
+                {__("Site URL, site name, and admin email for the coupon.", "essential-addons-for-elementor-lite")}
               </li>
             </ul>
             <p>
               <strong>{__("What we NEVER collect:", "essential-addons-for-elementor-lite")}</strong>{" "}
-              {__("Your website content, visitor data, or the names of your inactive plugins. We promise zero spam.", "essential-addons-for-elementor-lite")}
+              {__("Your website content, visitor data, or the names of your inactive plugins. Zero spam promise.", "essential-addons-for-elementor-lite")}
             </p>
           </div>
           <div class="eael-modal-close-btn" onClick={closeModal}>
