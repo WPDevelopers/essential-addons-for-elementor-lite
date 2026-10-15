@@ -2622,7 +2622,8 @@ class Pricing_Table extends Widget_Base
                 </div>
                 <div class="header">
                     <?php 
-                    $header_html = '<' . $settings['eael_pricing_table_title_tag'] . ' class="title">' . $settings['eael_pricing_table_title'] . '</' . $settings['eael_pricing_table_title_tag'] . '>';
+                    $eael_pricing_table_title_tag = HelperClass::eael_validate_html_tag( $settings['eael_pricing_table_title_tag'] );
+                    $header_html = '<' . $eael_pricing_table_title_tag . ' class="title">' . $settings['eael_pricing_table_title'] . '</' . $eael_pricing_table_title_tag . '>';
                     $header_html .= '<span class="subtitle">' . $settings['eael_pricing_table_sub_title'] . '</span>';
                     echo wp_kses( $header_html, HelperClass::eael_allowed_tags() );
                     ?>

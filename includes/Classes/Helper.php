@@ -1521,6 +1521,49 @@ class Helper
     }
 
 	/**
+	 * Query-string key that carries the signature of load-more query args.
+	 */
+	const LOAD_MORE_ARGS_SIGNATURE_KEY = 'eael_args_sig';
+
+	/**
+	 * Serialise WP_Query args for a load-more button's `data-args`, signed so the
+	 * `load_more` AJAX handler can tell server-built args from client-edited ones.
+	 *
+	 * @param array $args WP_Query args built from the widget's settings.
+	 * @return string
+	 */
+	public static function eael_signed_load_more_args( $args ) {
+		$query = http_build_query( (array) $args );
+
+		return $query . '&' . self::LOAD_MORE_ARGS_SIGNATURE_KEY . '=' . self::eael_load_more_args_signature( $query );
+	}
+
+	/**
+	 * Is the signature inside these parsed load-more args valid?
+	 *
+	 * @param array $args Args parsed from the request, signature key included.
+	 * @return bool
+	 */
+	public static function eael_verify_load_more_args( $args ) {
+		if ( ! is_array( $args ) || empty( $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ] ) || ! is_string( $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ] ) ) {
+			return false;
+		}
+
+		$signature = $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ];
+		unset( $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ] );
+
+		return hash_equals( self::eael_load_more_args_signature( http_build_query( $args ) ), $signature );
+	}
+
+	/**
+	 * @param string $query Serialised query args.
+	 * @return string
+	 */
+	private static function eael_load_more_args_signature( $query ) {
+		return hash_hmac( 'sha256', 'eael_load_more|' . $query, wp_salt( 'nonce' ) );
+	}
+
+	/**
      *
      * Strip tag based on allowed html tag
 	 * eael_wp_kses
