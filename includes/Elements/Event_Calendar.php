@@ -3862,8 +3862,7 @@ class Event_Calendar extends Widget_Base
             data-thumbnail_position = "' . ( !empty( $settings['eael_event_show_thumbnail'] ) ? esc_attr( $settings['eael_event_thumbnail_position'] ) : '') . '"
             data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>';
 
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo $this->eaelec_load_event_details();
+            echo wp_kses_post( $this->eaelec_load_event_details() );
 	    } else {
 		    $this->eaelec_display_table( $data, $settings );
 	    }
@@ -4160,7 +4159,7 @@ class Event_Calendar extends Widget_Base
                 }
 
                 if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
-                    $is_old_event = $this->is_old_event($start);
+                    $is_old_event = $this->is_old_event( $start, '', false, $_end );
                     if($is_old_event) {
                         continue;
                     }
@@ -4168,7 +4167,7 @@ class Event_Calendar extends Widget_Base
 
                 if( $settings['eael_old_events_hide'] === 'start' ){
                     $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : wp_date( 'Y-m-d' );
-                    $should_show  = $this->is_old_event( $start, $default_date );
+                    $should_show  = $this->is_old_event( $start, $default_date, false, $_end );
 
                     if ( $should_show ) {
                         continue;
@@ -4316,7 +4315,7 @@ class Event_Calendar extends Widget_Base
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
 
                 if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
-                    $is_old_event = $this->is_old_event($ev_start_date, '', 'yes' === $all_day);
+                    $is_old_event = $this->is_old_event( $ev_start_date, '', 'yes' === $all_day, $ev_end_date );
                     
                     if($is_old_event) {
                         continue;
@@ -4325,7 +4324,7 @@ class Event_Calendar extends Widget_Base
 
 	            if( $settings['eael_old_events_hide'] === 'start' ){
                     $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : wp_date( 'Y-m-d' );
-                    $should_show  = $this->is_old_event( $ev_start_date, $default_date, 'yes' === $all_day );
+                    $should_show  = $this->is_old_event( $ev_start_date, $default_date, 'yes' === $all_day, $ev_end_date );
 
                     if ( $should_show ) {
                         continue;
@@ -4427,9 +4426,13 @@ class Event_Calendar extends Widget_Base
             }
 
             $start = tribe_get_start_date($event->ID, true, $date_format);
+            // Use a datetime-formatted end for the old-event comparison. The existing
+            // all-day $end goes through wp_date( strtotime(...) ) and is shifted by the
+            // site GMT offset, so read a clean end here instead.
+            $compare_end = tribe_get_end_date( $event->ID, true, 'Y-m-d H:i' );
 
             if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
-                $is_old_event = $this->is_old_event($start);
+                $is_old_event = $this->is_old_event( $start, '', false, $compare_end );
                 if($is_old_event) {
                     continue;
                 }
@@ -4437,7 +4440,7 @@ class Event_Calendar extends Widget_Base
 
             if( $settings['eael_old_events_hide'] === 'start' ){
                 $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : wp_date( 'Y-m-d' );
-                $should_show  = $this->is_old_event( $start, $default_date );
+                $should_show  = $this->is_old_event( $start, $default_date, false, $compare_end );
 
                 if ( $should_show ) {
                     continue;
@@ -4469,26 +4472,44 @@ class Event_Calendar extends Widget_Base
         return $calendar_data;
     }
 
-	public function is_old_event( $start_date, $date_to_comp = '', $is_all_day = false ) {
+	public function is_old_event( $start_date, $date_to_comp = '', $is_all_day = false, $end_date = '' ) {
 
         // Use WP timezone correctly
         $tz = wp_timezone();
 
-        // Default comparison date = today (site timezone)
-        if ( $date_to_comp === '' ) {
-            $date_to_comp = current_time( 'Y-m-d' );
-        }
-
         // ✅ All-day event: compare dates only
         if ( $is_all_day ) {
+            if ( $date_to_comp === '' ) {
+                $date_to_comp = current_time( 'Y-m-d' );
+            }
             return strtotime( $start_date ) < strtotime( $date_to_comp );
         }
 
-        // ✅ Timed event: compare full datetime with timezone
-        $start = new \DateTime( $start_date, $tz );
-        $now   = new \DateTime( 'now', $tz );
+        // ✅ Timed event: decide "old" from the event's END, not its start, so an
+        // in-progress event stays visible until it actually finishes. Date-only
+        // values (no time component) are treated as running until 23:59:59 that day.
+        $event_end = $end_date !== '' ? $end_date : $start_date;
 
-        return $start < $now;
+        if ( ! preg_match( '/\d{1,2}:\d{2}/', $event_end ) ) {
+            $event_end .= ' 23:59:59';
+        }
+
+        try {
+            $end = new \DateTime( $event_end, $tz );
+
+            // Till Current Date: compare against now. Till Start Date: compare
+            // against the start of the calendar's default date.
+            if ( $date_to_comp === '' ) {
+                $compare = new \DateTime( 'now', $tz );
+            } else {
+                $compare = new \DateTime( $date_to_comp, $tz );
+                $compare->setTime( 0, 0, 0 );
+            }
+        } catch ( \Exception $e ) {
+            return false;
+        }
+
+        return $end < $compare;
     }
 
 

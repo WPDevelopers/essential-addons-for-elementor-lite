@@ -6335,6 +6335,29 @@ section.eael-modal-wrapper {
     line-height: 1.5em;
 }
 
+/* "What We Collect?" modal */
+.eael-what-we-collect-modal .eael-onboard-modal p {
+    margin: 0 0 12px;
+}
+
+.eael-what-we-collect-modal .eael-onboard-modal strong {
+    font-weight: 600;
+}
+
+.eael-what-we-collect-modal .eael-collect-list {
+    list-style: disc;
+    margin: 0 0 16px;
+    padding-left: 24px;
+}
+
+.eael-what-we-collect-modal .eael-collect-list li {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5em;
+    color: var(--text-color-100);
+    margin: 0 0 6px;
+}
+
 /*-------- Onboard ------------*/
 
 #eael-onboard--wrapper {

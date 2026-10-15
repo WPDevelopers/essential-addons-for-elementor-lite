@@ -330,14 +330,15 @@ If activated, the class would expose this set of extension points:
 
 ## ThinkRank Promotion (6.7.1+) — surfaces & opt-out controls
 
-[`includes/Classes/ThinkRank_Promotion.php`](../../includes/Classes/ThinkRank_Promotion.php) (instantiated unconditionally from `Bootstrap`, self-gates to `is_admin()`) promotes WPDeveloper's ThinkRank SEO plugin on four surfaces:
+[`includes/Classes/ThinkRank_Promotion.php`](../../includes/Classes/ThinkRank_Promotion.php) (instantiated unconditionally from `Bootstrap`, self-gates to `is_admin()`) promotes WPDeveloper's ThinkRank SEO and xSpeed plugins on EA's own admin pages only:
 
 | Surface | Hook | Notes |
 | ------- | ---- | ----- |
-| WP Dashboard "SEO Check" widget | `wp_dashboard_setup` | Promo state only renders when no opt-out applies; once ThinkRank is active the widget is functional and stays |
-| Banner on Posts/Pages/public-CPT **list** screens | `admin_notices` | Secondary action is **"Never show me again"** (site-wide, permanent) |
+| Banner on EA's own pages (`page=eael*`) | `admin_notices` | Secondary action is **"Never show me again"** (site-wide, permanent) |
 | Banner on the EA Dashboard | `eael_admin_notices` | Secondary action is **"Skip for 30 days"** (site-wide snooze) |
-| Gutenberg "Configure SEO" document panel | `enqueue_block_editor_assets` | Its "Never show me again" is also the site-wide permanent opt-out |
+| WP Dashboard "Speed Check" widget | `wp_dashboard_setup` | Only while xSpeed is **active** — a functional panel, never an install prompt |
+
+Removed for WordPress.org Guideline 11 (issue #897): the Posts/Pages list-screen banner, the WP Dashboard "SEO Check" / "Speed Check" install prompts, and the Gutenberg "Configure SEO" panel — each advertised another plugin outside EA's own screens.
 
 The post-update admin redirect that shipped in 6.7.1 was **removed** — promo surfaces must never navigate the user anywhere on their own.
 

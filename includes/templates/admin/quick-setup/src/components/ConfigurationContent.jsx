@@ -24,7 +24,7 @@ function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed, se
             </h3>
             <p>
               {__(
-                "Select any mode you desire to start with; you can also easily access features of all modes at any point later.",
+                "Select any mode to get started. You can customize or change these settings at any time.",
                 "essential-addons-for-elementor-lite"
               )}{" "}
               🔥
@@ -52,7 +52,7 @@ function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed, se
                 </h4>
                 <p>
                   {__(
-                    "Use the basic features of Essential Addons and keep your site lightweight. Most basic elements are activated in this option.",
+                    "Use essential features while keeping your site lightweight. Most basic elements will be activated.",
                     "essential-addons-for-elementor-lite"
                   )}
                 </p>
@@ -73,7 +73,7 @@ function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed, se
                 <h4>{__("Advanced", "essential-addons-for-elementor-lite")}</h4>
                 <p>
                   {__(
-                    "Build complex websites with the advanced functionalities of Essential Addons. All dynamic elements will be activated in this option.",
+                    "Build complex websites with advanced capabilities. All dynamic elements will be activated.",
                     "essential-addons-for-elementor-lite"
                   )}
                 </p>
@@ -94,7 +94,7 @@ function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed, se
                 <h4>{__("Custom", "essential-addons-for-elementor-lite")}</h4>
                 <p>
                   {__(
-                    "Configure the elements of Essential Addons according to your preferences to make your website engaging, captivate, and stand out.",
+                    "Configure elements based on your preferences to make your website engaging, captivating, and unique.",
                     "essential-addons-for-elementor-lite"
                   )}
                 </p>

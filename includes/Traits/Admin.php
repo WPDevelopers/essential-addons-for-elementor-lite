@@ -280,7 +280,7 @@ trait Admin {
 						    'basename' => 'embedpress/embedpress.php',
 						    'logo'     => 'images/EP.svg',
 						    'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'Embed videos, images, gifs, charts, docs, maps, audio, live streams, pdf & more from 150+ sources into your WordPress site and get seamless customization options.', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Embed videos, images, gifs, charts, docs, maps, audio, live streams, PDFs, and more from 150+ sources into your WordPress site and get seamless customization options.', 'essential-addons-for-elementor-lite' ),
 						    'status'   => is_plugin_active( 'embedpress/embedpress.php' )
 					    ],
 					    'eb' => [
@@ -1834,8 +1834,8 @@ trait Admin {
 				    ]
 			    ],
 			    'admin_screen_promo'      => [
-				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing \"<b><a target='_blank' href='%1\$s'>Theme Builder</a></b>\" and \"<b><a target='_blank' href='%2\$s'>Mega Menu</a></b>\" widget. For more info, check out the <a target='_blank' href='%3\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/header-footer-builder' ), esc_url('https://essential-addons.com/mega-menu' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    // 'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
+				    // 'content' => sprintf( __("<p> <i>📣</i> <b>NEW:</b> Introducing \"<b><a target='_blank' href='%1\$s'>Theme Builder</a></b>\" and \"<b><a target='_blank' href='%2\$s'>Mega Menu</a></b>\" widget. For more info, check out the <a target='_blank' href='%3\$s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url('https://essential-addons.com/header-footer-builder' ), esc_url('https://essential-addons.com/mega-menu' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -1984,8 +1984,98 @@ trait Admin {
 		    ]
 	    );
 
+	    ob_start(); ?>
+		<div class="eael-summer-campaign-logo">
+			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" alt="">
+		</div>
+		<div class="eael-summer-campaign-content">
+			<p><?php
+			// `wp-exclude-emoji` stops WordPress replacing the emoji with a Twemoji SVG.
+			echo wp_kses( __( '<strong><span class="wp-exclude-emoji">👻</span> Halloween Sale:</strong> Get 110+ advanced elements to build faster & smarter in Elementor <strong>- up to 35% OFF</strong>', 'essential-addons-for-elementor-lite' ), [ 'strong' => [], 'span' => [ 'class' => [] ] ] );
+			?></p>
+            <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
+                <a href="https://essential-addons.com/halloween2026/admin-notice" target="_blank" class="button-primary">
+                    <?php esc_html_e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?>
+                </a>
+                <span class="eael-action-dismiss-btn">
+                    <?php esc_html_e( "I Don't Want Any Discount", 'essential-addons-for-elementor-lite' ); ?>
+                </span>
+            </div>
+		</div>
+
+		<script>
+            jQuery(document).ready(function ($) {
+                setTimeout(function () {
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-halloween_campaign_2026_notice .notice-dismiss');
+
+                    function wpNoticeDismissFunc(event) {
+                        event.preventDefault();
+
+                        var httpRequest = new XMLHttpRequest(),
+                            postData = '',
+                            dismiss = event.target.dataset?.hasOwnProperty('dismiss') && event.target.dataset.dismiss || false,
+                            later = event.target.dataset?.hasOwnProperty('later') && event.target.dataset.later || false;
+
+                        if (dismiss || later) {
+                            jQuery(event.target.offsetParent).slideUp(200);
+                        }
+
+                        postData += 'id=halloween_campaign_2026_notice';
+                        postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
+                        if (dismiss) {
+                            postData += '&dismiss=' + dismiss;
+                        }
+                        if (later) {
+                            postData += '&later=' + later;
+                        }
+
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_halloween_campaign_2026_notice' ) );?>';
+
+                        httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
+                        httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        httpRequest.send(postData);
+                    }
+
+                    dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
+
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-halloween_campaign_2026_notice .eael-action-dismiss-btn');
+                    if (customDismissBtn && dismissBtn) {
+                        customDismissBtn.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            dismissBtn.click();
+                        });
+                    }
+                }, 1);
+            });
+		</script>
+	    <?php
+	    $b_message                     = ob_get_clean();
+	    $_halloween_campaign_2026_notice  = [
+		    'html' => $b_message,
+	    ];
+
+	    $notices->add(
+			'halloween_campaign_2026_notice',
+			$_halloween_campaign_2026_notice,
+			[
+				'start'       => strtotime( '12:00:00am 13th October, 2026' ),
+				'recurrence'  => false,
+				'dismissible' => true,
+				'refresh'     => EAEL_PLUGIN_VERSION,
+				'expire'      => strtotime( '11:59:59pm 5th November, 2026' ),
+				// WP Dashboard, Plugins screen and EA's own pages only (Guideline 11).
+				'display_if'  => ! $this->pro_enabled
+					&& ( in_array( $GLOBALS['pagenow'], [ 'index.php', 'plugins.php' ], true )
+						|| ( isset( $_GET['page'] ) && 0 === strpos( sanitize_key( wp_unslash( $_GET['page'] ) ), 'eael' ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					&& time() < strtotime( '11:59:59pm 5th November, 2026' ),
+			]
+		);
+
 	    self::$cache_bank->create_account( $notices );
 	    self::$cache_bank->calculate_deposits( $notices );
+
+	    // The EA Dashboard strips `admin_notices` and fires `eael_admin_notices` instead.
+	    add_action( 'eael_admin_notices', [ self::$cache_bank, 'notices' ] );
     }
 
 	/**
