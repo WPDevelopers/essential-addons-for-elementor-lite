@@ -40,7 +40,7 @@
     "@wordpress/env": "^11.2.0",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.0.6",
-    "css-loader": "^3.5.2",
+    "css-loader": "^7.1.5",
     "glob": "^7.1.6",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
