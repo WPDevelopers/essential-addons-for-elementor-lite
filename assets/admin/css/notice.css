@@ -190,6 +190,8 @@ span.coupon-code {
     border: 0;
     border-left: 3px solid #5252dc;
     background: #fff;
+    /* Gap between this banner and the EA dashboard below it (only applies while the banner exists). */
+    margin-bottom: 10px;
 }
 .notice-essential-addons-for-elementor-lite-halloween_campaign_2026_notice .wpnotice-content-wrapper {
     display: flex;
