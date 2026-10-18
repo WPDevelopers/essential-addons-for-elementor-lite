@@ -26,7 +26,7 @@ countdown/countdown.js, countdown.min.js
     https://fengyuanchen.github.io/countdown/
 
 dom-purify/purify.min.js
-    DOMPurify 3.2.6 — Apache-2.0 OR MPL-2.0 — Cure53 and contributors
+    DOMPurify 3.4.17 — Apache-2.0 OR MPL-2.0 — Cure53 and contributors
     https://github.com/cure53/DOMPurify
 
 drawsvg/drawsvg.js, drawsvg.min.js
