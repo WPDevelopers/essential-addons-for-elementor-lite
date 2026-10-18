@@ -240,6 +240,10 @@ class Bootstrap
             add_action( 'edit_user_profile_update', [ $this, 'eael_save_extra_user_profile_fields' ] );
         }
 
+        // Record who wrote Login | Register widget settings, on every write path.
+        add_action( 'added_post_meta', [ $this, 'eael_record_register_settings_author' ], 10, 4 );
+        add_action( 'updated_post_meta', [ $this, 'eael_record_register_settings_author' ], 10, 4 );
+
         // Admin Approval hooks registered unconditionally so option/widget checks
         // happen at call time (correct site context in Multisite) rather than at init.
         add_filter( 'wp_authenticate_user', [ $this, 'eael_block_pending_user_login' ], 10, 2 );

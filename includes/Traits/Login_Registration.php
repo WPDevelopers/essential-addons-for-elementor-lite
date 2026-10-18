@@ -1814,6 +1814,32 @@ trait Login_Registration {
 	 *
 	 * @return bool True only when the role is safe to assign.
 	 */
+	/**
+	 * Remember who last wrote a post's Elementor data (widget settings).
+	 *
+	 * Hooked to `added_post_meta` / `updated_post_meta`, so it covers every path that
+	 * stores `_elementor_data` — Elementor's save, the REST API, imports — unlike
+	 * `_edit_last`, which only the wp-admin edit screen updates. Writes without a
+	 * logged-in user (cron, Elementor data migrations, WP-CLI) keep the last recorded
+	 * user. The key is protected (leading underscore, not registered for REST), so it
+	 * cannot be set directly. Read through Helper::eael_page_responsible_user_ids().
+	 *
+	 * @param int    $meta_id    Meta row ID.
+	 * @param int    $post_id    Post ID.
+	 * @param string $meta_key   Meta key.
+	 * @param mixed  $meta_value Meta value.
+	 */
+	public function eael_record_register_settings_author( $meta_id, $post_id, $meta_key, $meta_value ) {
+		if ( '_elementor_data' !== $meta_key ) {
+			return;
+		}
+
+		$user_id = get_current_user_id();
+		if ( $user_id ) {
+			update_post_meta( $post_id, Helper::ELEMENTOR_DATA_AUTHOR_KEY, $user_id );
+		}
+	}
+
 	protected function eael_can_assign_registration_role( $requested_role, $page_id ) {
 		$requested_role = (string) $requested_role;
 		$page_id        = (int) $page_id;
@@ -1847,12 +1873,10 @@ trait Login_Registration {
 		}
 
 		// 3. Every user who can control this page's content must be allowed to create
-		//    users. The post author can always edit the page; _edit_last is the other
-		//    recorded editor. Both must be create_users-capable (administrators).
-		$responsible_ids = array_unique( array_filter( array_map( 'intval', [
-			get_post_meta( $page_id, '_edit_last', true ),
-			get_post_field( 'post_author', $page_id ),
-		] ) ) );
+		//    users: the post author, the last wp-admin editor and whoever last wrote the
+		//    widget settings on any path (Elementor, REST, import), which _edit_last
+		//    misses. All must be create_users-capable (administrators).
+		$responsible_ids = Helper::eael_page_responsible_user_ids( $page_id );
 
 		if ( empty( $responsible_ids ) ) {
 			return false;

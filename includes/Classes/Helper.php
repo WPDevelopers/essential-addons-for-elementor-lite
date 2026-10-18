@@ -1521,6 +1521,34 @@ class Helper
     }
 
 	/**
+	 * Post meta holding the last logged-in user who wrote the post's `_elementor_data`.
+	 * Set by Login_Registration::eael_record_register_settings_author().
+	 */
+	const ELEMENTOR_DATA_AUTHOR_KEY = '_eael_elementor_data_author';
+
+	/**
+	 * Users who control a post's widget settings: the post author, the last wp-admin
+	 * editor (`_edit_last`) and the last user who wrote `_elementor_data` on any path
+	 * (REST and imports do not update `_edit_last`). Features that act on widget
+	 * settings with elevated trust must require a capability of every one of them.
+	 *
+	 * @param int $page_id Post ID.
+	 * @return int[] Empty when nobody can be identified.
+	 */
+	public static function eael_page_responsible_user_ids( $page_id ) {
+		$page_id = (int) $page_id;
+		if ( ! $page_id ) {
+			return [];
+		}
+
+		return array_values( array_unique( array_filter( array_map( 'intval', [
+			get_post_meta( $page_id, '_edit_last', true ),
+			get_post_field( 'post_author', $page_id ),
+			get_post_meta( $page_id, self::ELEMENTOR_DATA_AUTHOR_KEY, true ),
+		] ) ) ) );
+	}
+
+	/**
 	 * Query-string key that carries the signature of load-more query args.
 	 */
 	const LOAD_MORE_ARGS_SIGNATURE_KEY = 'eael_args_sig';
