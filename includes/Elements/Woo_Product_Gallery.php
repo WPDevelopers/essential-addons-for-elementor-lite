@@ -3386,7 +3386,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'data-widget-id' => $this->get_id(),
 			'data-widget'    => $this->get_id(),
 			'data-class'     => get_class( $this ),
-			'data-args'      => http_build_query( $args ),
+			'data-args'      => HelperClass::eael_signed_load_more_args( $args ),
 			'data-page'      => 1
 		] );
 

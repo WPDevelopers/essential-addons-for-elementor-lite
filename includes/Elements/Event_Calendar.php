@@ -4373,7 +4373,9 @@ class Event_Calendar extends Widget_Base
             'posts_per_page' => $settings['eael_the_events_calendar_max_result'],
         ];
 
-	    if ( $settings['eael_the_events_calendar_fetch'] == 'date_range' && 'table' === $settings['eael_event_display_layout'] ) {
+	    // The chosen Date Range applies to every layout (#955); only the default-date
+	    // fallback below stays table-only, so the calendar can still show past events.
+	    if ( $settings['eael_the_events_calendar_fetch'] == 'date_range' ) {
 		    $arg['start_date'] = $settings['eael_the_events_calendar_start_date'];
 		    $arg['end_date']   = $settings['eael_the_events_calendar_end_date'];
 	    }

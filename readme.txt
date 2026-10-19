@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.3
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 6.8.6
+Stable tag: 6.8.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -354,6 +354,12 @@ Nothing below is contacted until you set up the widget or option that uses it.
 * **WPDeveloper** (opt-in usage data, see the FAQ): sent to send.wpinsight.com and essential-addons.com. [Privacy](https://wpdeveloper.com/privacy-policy/).
 
 == Changelog ==
+
+= 6.8.7 - 19/10/2026 =
+
+- Updated: DOMPurify library to version 3.4.17.
+- Fixed: EA Event Calendar | "Get Events: Date Range" was ignored in Calendar layout for The Events Calendar source
+- Few minor bug fixes & improvements
 
 = 6.8.6 - 15/10/2026 =
 
