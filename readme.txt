@@ -358,6 +358,7 @@ Nothing below is contacted until you set up the widget or option that uses it.
 = 6.8.7 - 19/10/2026 =
 
 - Updated: DOMPurify library to version 3.4.17.
+- Fixed: EA Event Calendar | "Get Events: Date Range" was ignored in Calendar layout for The Events Calendar source
 - Few minor bug fixes & improvements
 
 = 6.8.6 - 15/10/2026 =
