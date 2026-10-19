@@ -1478,7 +1478,8 @@ trait Ajax_Handler {
 	 * @since 4.0.0
 	 */
 	public function select2_ajax_posts_filter_autocomplete() {
-		if ( empty( $_POST['nonce'] ) ||  ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'eael_select2' ) ) {
+		// These back an Elementor editor control, so only users who can edit content may use them (#956).
+		if ( empty( $_POST['nonce'] ) ||  ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'eael_select2' ) || ! current_user_can( 'edit_posts' ) ) {
 			wp_send_json_error( ['error'=> esc_html__( 'Unauthorized', 'essential-addons-for-elementor-lite' )] );
 		}
 		$post_type   = 'post';
@@ -1548,7 +1549,8 @@ trait Ajax_Handler {
 	 */
 	public function select2_ajax_get_posts_value_titles() {
 
-		if ( empty( $_POST['nonce'] ) ||  ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'eael_select2' ) ) {
+		// These back an Elementor editor control, so only users who can edit content may use them (#956).
+		if ( empty( $_POST['nonce'] ) ||  ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'eael_select2' ) || ! current_user_can( 'edit_posts' ) ) {
 			wp_send_json_error( ['error'=> esc_html__( 'Unauthorized', 'essential-addons-for-elementor-lite' )] );
 		}
 
@@ -1579,6 +1581,11 @@ trait Ajax_Handler {
 				$response = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
 				break;
 			case 'user':
+				if ( ! current_user_can( 'list_users' ) ) {
+					$response = [];
+					break;
+				}
+
 				$users = [];
 
 				foreach ( get_users( [ 'include' => $ids ] ) as $user ) {
