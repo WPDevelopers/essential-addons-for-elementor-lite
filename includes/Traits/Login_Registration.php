@@ -1872,11 +1872,24 @@ trait Login_Registration {
 			}
 		}
 
+		//    Capabilities can also be granted at run time through `user_has_cap` (role and
+		//    membership plugins), so test a stand-in user holding only this role as well.
+		$probe          = new \WP_User();
+		$probe->roles   = [ $requested_role ];
+		$probe->caps    = [ $requested_role => true ];
+		$probe->allcaps = array_merge( (array) $wp_role->capabilities, [ $requested_role => true ] );
+		foreach ( $privileged_caps as $cap ) {
+			if ( $probe->has_cap( $cap ) ) {
+				return false;
+			}
+		}
+
 		// 3. Every user who can control this page's content must be allowed to create
 		//    users: the post author, the last wp-admin editor and whoever last wrote the
 		//    widget settings on any path (Elementor, REST, import), which _edit_last
-		//    misses. All must be create_users-capable (administrators).
-		$responsible_ids = Helper::eael_page_responsible_user_ids( $page_id );
+		//    misses. When the form is a global widget, its settings live in the template,
+		//    so the template's users count too. All must be create_users-capable.
+		$responsible_ids = Helper::eael_widget_settings_responsible_user_ids( $page_id, 'eael-login-register' );
 
 		if ( empty( $responsible_ids ) ) {
 			return false;

@@ -1549,6 +1549,59 @@ class Helper
 	}
 
 	/**
+	 * Users who control the settings of a widget type rendered on a page.
+	 *
+	 * The page's own responsible users, plus those of every Elementor Pro global widget
+	 * template the page embeds that contains this widget type: a global widget's
+	 * settings are stored in its template, not in the page (#345 follow-up).
+	 *
+	 * @param int    $page_id     Page the widget is rendered on.
+	 * @param string $widget_type Widget type, e.g. `eael-login-register`.
+	 * @return int[] Empty when some contributing post has nobody identifiable.
+	 */
+	public static function eael_widget_settings_responsible_user_ids( $page_id, $widget_type ) {
+		$post_ids = [ (int) $page_id ];
+		$document = class_exists( '\Elementor\Plugin' ) ? Plugin::$instance->documents->get( (int) $page_id ) : null;
+
+		if ( $document ) {
+			self::eael_collect_global_template_ids( $document->get_elements_data(), (string) $widget_type, $post_ids );
+		}
+
+		$user_ids = [];
+		foreach ( $post_ids as $post_id ) {
+			$ids = self::eael_page_responsible_user_ids( $post_id );
+			if ( empty( $ids ) ) {
+				return [];
+			}
+			$user_ids = array_merge( $user_ids, $ids );
+		}
+
+		return array_values( array_unique( $user_ids ) );
+	}
+
+	/**
+	 * Collect IDs of global widget templates in an element tree that contain a widget type.
+	 *
+	 * @param array  $elements    Element tree.
+	 * @param string $widget_type Widget type to look for in each template.
+	 * @param int[]  $post_ids    Collected IDs (by reference).
+	 */
+	private static function eael_collect_global_template_ids( $elements, $widget_type, &$post_ids ) {
+		foreach ( (array) $elements as $element ) {
+			if ( isset( $element['widgetType'] ) && 'global' === $element['widgetType'] && ! empty( $element['templateID'] ) ) {
+				$template_id = (int) $element['templateID'];
+				if ( ! in_array( $template_id, $post_ids, true ) && false !== strpos( (string) get_post_meta( $template_id, '_elementor_data', true ), $widget_type ) ) {
+					$post_ids[] = $template_id;
+				}
+			}
+
+			if ( ! empty( $element['elements'] ) ) {
+				self::eael_collect_global_template_ids( $element['elements'], $widget_type, $post_ids );
+			}
+		}
+	}
+
+	/**
 	 * Query-string key that carries the signature of load-more query args.
 	 */
 	const LOAD_MORE_ARGS_SIGNATURE_KEY = 'eael_args_sig';
