@@ -1521,6 +1521,77 @@ class Helper
     }
 
 	/**
+	 * Post meta holding the last logged-in user who wrote the post's `_elementor_data`.
+	 * Set by Login_Registration::eael_record_register_settings_author().
+	 */
+	const ELEMENTOR_DATA_AUTHOR_KEY = '_eael_elementor_data_author';
+
+	/**
+	 * Users who control a post's widget settings: the post author, the last wp-admin
+	 * editor (`_edit_last`) and the last user who wrote `_elementor_data` on any path
+	 * (REST and imports do not update `_edit_last`). Features that act on widget
+	 * settings with elevated trust must require a capability of every one of them.
+	 *
+	 * @param int $page_id Post ID.
+	 * @return int[] Empty when nobody can be identified.
+	 */
+	public static function eael_page_responsible_user_ids( $page_id ) {
+		$page_id = (int) $page_id;
+		if ( ! $page_id ) {
+			return [];
+		}
+
+		return array_values( array_unique( array_filter( array_map( 'intval', [
+			get_post_meta( $page_id, '_edit_last', true ),
+			get_post_field( 'post_author', $page_id ),
+			get_post_meta( $page_id, self::ELEMENTOR_DATA_AUTHOR_KEY, true ),
+		] ) ) ) );
+	}
+
+	/**
+	 * Query-string key that carries the signature of load-more query args.
+	 */
+	const LOAD_MORE_ARGS_SIGNATURE_KEY = 'eael_args_sig';
+
+	/**
+	 * Serialise WP_Query args for a load-more button's `data-args`, signed so the
+	 * `load_more` AJAX handler can tell server-built args from client-edited ones.
+	 *
+	 * @param array $args WP_Query args built from the widget's settings.
+	 * @return string
+	 */
+	public static function eael_signed_load_more_args( $args ) {
+		$query = http_build_query( (array) $args );
+
+		return $query . '&' . self::LOAD_MORE_ARGS_SIGNATURE_KEY . '=' . self::eael_load_more_args_signature( $query );
+	}
+
+	/**
+	 * Is the signature inside these parsed load-more args valid?
+	 *
+	 * @param array $args Args parsed from the request, signature key included.
+	 * @return bool
+	 */
+	public static function eael_verify_load_more_args( $args ) {
+		if ( ! is_array( $args ) || empty( $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ] ) || ! is_string( $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ] ) ) {
+			return false;
+		}
+
+		$signature = $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ];
+		unset( $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ] );
+
+		return hash_equals( self::eael_load_more_args_signature( http_build_query( $args ) ), $signature );
+	}
+
+	/**
+	 * @param string $query Serialised query args.
+	 * @return string
+	 */
+	private static function eael_load_more_args_signature( $query ) {
+		return hash_hmac( 'sha256', 'eael_load_more|' . $query, wp_salt( 'nonce' ) );
+	}
+
+	/**
      *
      * Strip tag based on allowed html tag
 	 * eael_wp_kses
