@@ -513,6 +513,15 @@ trait Helper
 		    return $id;
 	    }
 
+	    // Never remap the Site Kit. Its global colors, fonts and V4 variables are
+	    // site-wide and live only on the original kit — WPML skips kits on this same
+	    // hook for that reason. Swapping in a translated kit loads its post-{id}.css,
+	    // which lacks the variables (never copied) and holds a stale copy of the
+	    // globals, so every var(--e-global-*) in the translated page goes unresolved.
+	    if ( 'kit' === get_post_meta( $id, '_elementor_template_type', true ) ) {
+		    return $id;
+	    }
+
 	    // Never remap a document that is being edited rather than displayed — the
 	    // editor save, its render round-trips, the editor page and its preview. See
 	    // eael_is_elementor_editor_context() for why.
