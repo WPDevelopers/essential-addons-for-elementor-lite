@@ -83,11 +83,9 @@ class Migration
 	/**
 	 * One-time removal of Login | Register lost / reset password message options.
 	 *
-	 * Older releases let logged-out requests create these rows for any posted
-	 * widget_id, so a site can carry a very large number of them. They only hold
-	 * one-time form messages, so deleting them all is safe; at worst a visitor
-	 * misses a pending notice. Runs in batches over WP-Cron and stops for good
-	 * once nothing is left.
+	 * These only hold one-time form messages, so deleting them all is safe; at
+	 * worst a visitor misses a pending notice. Runs in batches over WP-Cron and
+	 * stops for good once nothing is left.
 	 */
 	public function cleanup_lr_form_messages() {
 		global $wpdb;

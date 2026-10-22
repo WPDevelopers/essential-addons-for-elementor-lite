@@ -182,9 +182,8 @@ trait Login_Registration {
 	/**
 	 * Saves one-time messages for a non-AJAX lost / reset password submission.
 	 *
-	 * The option names end in the posted widget_id, so they are only written when
-	 * page_id + widget_id resolve to a real Login | Register widget. Writing them
-	 * for any posted id let logged-out requests add unlimited rows to wp_options.
+	 * The option names end in the widget_id, so they are only written when
+	 * page_id + widget_id resolve to a real Login | Register widget.
 	 *
 	 * @param array      $options   Option name prefix => value.
 	 * @param int        $page_id   Posted page ID.
@@ -1666,9 +1665,8 @@ trait Login_Registration {
 		}
 
 		if ( ! $user || is_wp_error( $user ) ) {
-			// The "link expired" notice is carried in the redirect URL for this widget,
-			// not stored in wp_options: this runs for logged-out GET requests with any
-			// widget_id, and storing it let anyone add unlimited option rows.
+			// The "link expired" notice is carried in the redirect URL for this widget
+			// rather than stored in wp_options.
 			wp_safe_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey&eael-lr-expired=' . rawurlencode( $this->widget_id ) );
 
 			exit;
