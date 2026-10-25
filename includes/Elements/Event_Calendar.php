@@ -19,6 +19,14 @@ use \Essential_Addons_Elementor\Classes\Helper;
 
 class Event_Calendar extends Widget_Base
 {
+    /**
+     * Default colors of canceled / postponed events: event background, event text, label.
+     */
+    const EVENT_STATUS_COLORS = [
+        'canceled'  => [ 'bg' => '#FDE8E8', 'text' => '#7A1C1C', 'label' => '#D63638' ],
+        'postponed' => [ 'bg' => '#FFF3E0', 'text' => '#7A4A00', 'label' => '#E07B00' ],
+    ];
+
     
 
     public function get_name()
@@ -303,6 +311,35 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
                 'label_block' => true,
+                'description' => __('Separate several categories with commas.', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_event_status',
+            [
+                'label'   => __('Status', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    ''          => __('Scheduled', 'essential-addons-for-elementor-lite'),
+                    'canceled'  => __('Canceled', 'essential-addons-for-elementor-lite'),
+                    'postponed' => __('Postponed', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_event_status_reason',
+            [
+                'label'       => __('Status Reason', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
+                'label_block' => true,
+                'description' => __('Shown in the event popup.', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'eael_event_status!' => '',
+                ],
             ]
         );
 
@@ -346,6 +383,82 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->end_controls_tabs();
+
+        $this->add_control(
+            'eael_event_show_category',
+            [
+                'label'        => __('Show Category', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default'      => '',
+                'separator'    => 'before',
+                'description'  => __('Show each event\'s categories as labels on the event and in the popup.', 'essential-addons-for-elementor-lite'),
+                'condition'    => [
+                    'eael_event_calendar_type' => [ 'manual', 'the_events_calendar' ],
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_manual_category_colors',
+            [
+                'label'        => __('Color Events by Category', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default'      => '',
+                'description'  => __('Events whose category is in the list below use that category\'s colors instead of their own.', 'essential-addons-for-elementor-lite'),
+                'condition'    => [
+                    'eael_event_calendar_type' => 'manual',
+                ],
+            ]
+        );
+
+        $category_repeater = new Repeater;
+
+        $category_repeater->add_control(
+            'eael_event_category_name',
+            [
+                'label'       => __('Category', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => true,
+                'description' => __('The Category typed on the events (not case sensitive).', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $category_repeater->add_control(
+            'eael_event_category_bg_color',
+            [
+                'label'   => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::COLOR,
+                'default' => '#5725ff',
+            ]
+        );
+
+        $category_repeater->add_control(
+            'eael_event_category_text_color',
+            [
+                'label'       => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::COLOR,
+                'description' => __('Leave empty to use black or white, whichever reads better.', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_category_color_items',
+            [
+                'label'       => __('Category Colors', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::REPEATER,
+                'fields'      => $category_repeater->get_controls(),
+                'default'     => [
+                    [ 'eael_event_category_name' => __('Category', 'essential-addons-for-elementor-lite') ],
+                ],
+                'title_field' => '{{ eael_event_category_name }}',
+                'condition'   => [
+                    'eael_event_calendar_type'          => 'manual',
+                    'eael_event_manual_category_colors' => 'yes',
+                ],
+            ]
+        );
 
         $this->end_controls_section();
 
@@ -487,6 +600,42 @@ class Event_Calendar extends Widget_Base
                     'type' => Controls_Manager::NUMBER,
                     'min' => 1,
                     'default' => 100,
+                ]
+            );
+
+            $this->add_control(
+                'eael_the_events_calendar_show_status',
+                [
+                    'label'        => __('Show Event Status', 'essential-addons-for-elementor-lite'),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'return_value' => 'yes',
+                    'default'      => '',
+                    'separator'    => 'before',
+                    'description'  => __('Mark Canceled and Postponed events, as set in The Events Calendar.', 'essential-addons-for-elementor-lite'),
+                ]
+            );
+
+            $this->add_control(
+                'eael_the_events_calendar_canceled_events',
+                [
+                    'label'   => __('Canceled Events', 'essential-addons-for-elementor-lite'),
+                    'type'    => Controls_Manager::SELECT,
+                    'default' => 'show',
+                    'options' => [
+                        'show' => __('Show', 'essential-addons-for-elementor-lite'),
+                        'hide' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'eael_the_events_calendar_category_colors',
+                [
+                    'label'        => __('Use Category Colors', 'essential-addons-for-elementor-lite'),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'return_value' => 'yes',
+                    'default'      => '',
+                    'description'  => __('Color each event with its category\'s colors from Events > Event Categories (The Events Calendar 6.14+). Events without a colored category keep the default colors.', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
@@ -3800,6 +3949,178 @@ class Event_Calendar extends Widget_Base
 	    );
 
         $this->end_controls_section();
+
+        $this->register_event_status_style_controls();
+        $this->register_event_category_style_controls();
+    }
+
+    /**
+     * Style > Event Status: canceled / postponed events (Manual, and The Events Calendar with Show Event Status on).
+     */
+    protected function register_event_status_style_controls() {
+        $this->start_controls_section(
+            'eael_event_status_style_section',
+            [
+                'label'      => __( 'Event Status', 'essential-addons-for-elementor-lite' ),
+                'tab'        => Controls_Manager::TAB_STYLE,
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms'    => [
+                        [
+                            'name'     => 'eael_event_calendar_type',
+                            'operator' => '===',
+                            'value'    => 'manual',
+                        ],
+                        [
+                            'relation' => 'and',
+                            'terms'    => [
+                                [
+                                    'name'     => 'eael_event_calendar_type',
+                                    'operator' => '===',
+                                    'value'    => 'the_events_calendar',
+                                ],
+                                [
+                                    'name'     => 'eael_the_events_calendar_show_status',
+                                    'operator' => '===',
+                                    'value'    => 'yes',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_event_status_label_typography',
+                'label'    => __( 'Label Typography', 'essential-addons-for-elementor-lite' ),
+                'selector' => '{{WRAPPER}} .eael-event-status-label',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_status_label_radius',
+            [
+                'label'      => __( 'Label Border Radius', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range'      => [ 'px' => [ 'min' => 0, 'max' => 30 ] ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-event-status-label' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_status_strike_canceled',
+            [
+                'label'        => __( 'Strike Through Canceled Title', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default'      => 'yes',
+                'prefix_class' => 'eael-ec-strike-canceled-',
+            ]
+        );
+
+        foreach ( self::EVENT_STATUS_COLORS as $status => $colors ) {
+            $this->add_control(
+                "eael_event_status_{$status}_heading",
+                [
+                    'label'     => 'canceled' === $status ? __( 'Canceled', 'essential-addons-for-elementor-lite' ) : __( 'Postponed', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::HEADING,
+                    'separator' => 'before',
+                ]
+            );
+
+            $this->add_control(
+                "eael_event_status_{$status}_bg_color",
+                [
+                    'label'   => __( 'Event Background', 'essential-addons-for-elementor-lite' ),
+                    'type'    => Controls_Manager::COLOR,
+                    'default' => $colors['bg'],
+                ]
+            );
+
+            $this->add_control(
+                "eael_event_status_{$status}_text_color",
+                [
+                    'label'   => __( 'Event Text Color', 'essential-addons-for-elementor-lite' ),
+                    'type'    => Controls_Manager::COLOR,
+                    'default' => $colors['text'],
+                ]
+            );
+
+            $this->add_control(
+                "eael_event_status_{$status}_label_bg_color",
+                [
+                    'label'     => __( 'Label Background', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::COLOR,
+                    'default'   => $colors['label'],
+                    'selectors' => [
+                        "{{WRAPPER}} .eael-event-status-label-{$status}" => 'background-color: {{VALUE}}; border-color: {{VALUE}};',
+                        "{{WRAPPER}} .eaelec-event-status-reason-{$status}" => 'color: {{VALUE}};',
+                        "{{WRAPPER}} .eael-event-status-{$status} .fc-list-event-dot" => 'border-color: {{VALUE}} !important;',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                "eael_event_status_{$status}_label_text_color",
+                [
+                    'label'     => __( 'Label Text Color', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::COLOR,
+                    'default'   => '#ffffff',
+                    'selectors' => [
+                        "{{WRAPPER}} .eael-event-status-label-{$status}" => 'color: {{VALUE}};',
+                    ],
+                ]
+            );
+        }
+
+        $this->end_controls_section();
+    }
+
+    /**
+     * Style > Event Category: the category labels (Show Category).
+     */
+    protected function register_event_category_style_controls() {
+        $this->start_controls_section(
+            'eael_event_category_style_section',
+            [
+                'label'     => __( 'Event Category', 'essential-addons-for-elementor-lite' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_event_calendar_type' => [ 'manual', 'the_events_calendar' ],
+                    'eael_event_show_category' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_event_category_label_typography',
+                'label'    => __( 'Label Typography', 'essential-addons-for-elementor-lite' ),
+                'selector' => '{{WRAPPER}} .eael-event-category-label',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_category_label_radius',
+            [
+                'label'      => __( 'Label Border Radius', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range'      => [ 'px' => [ 'min' => 0, 'max' => 30 ] ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-event-category-label' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render() {
@@ -3959,8 +4280,12 @@ class Event_Calendar extends Widget_Base
 
 				$item_count ++;
 
+				$row_classes = ! empty( $event['eaelStatus'] ) ? [ 'eael-event-status-' . $event['eaelStatus'] ] : [];
+				$row_classes = ! empty( $event['classNames'] ) ? array_merge( $row_classes, $event['classNames'] ) : $row_classes;
+				$row_class   = $row_classes ? ' class="' . esc_attr( implode( ' ', $row_classes ) ) . '"' : '';
+
                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo '<tr ' . $style . ' >';
+				echo '<tr ' . $style . $row_class . ' >';
                 $tr_inner_html = '';
 				if ( $settings['eael_ec_show_title'] === 'yes' ) {
 					if ( $settings['eael_ec_event_details_link'] === 'yes' && $event['url'] ){
@@ -3972,7 +4297,7 @@ class Event_Calendar extends Widget_Base
 	                    $this->add_link_attributes( 'eael_event_link_'.$item_count, $event['event_link'] );
 	                    $event['title'] = '<a ' . $this->get_render_attribute_string( 'eael_event_link_'.$item_count ) . ' >' . $event['title'] . '</a>';
                     }
-					$tr_inner_html .= '<td class="eael-ec-event-title" ' . $row_style . '>' . $event['title'] . '</td>';
+					$tr_inner_html .= '<td class="eael-ec-event-title" ' . $row_style . '>' . $this->get_event_labels_html( $event ) . $event['title'] . '</td>';
 				}
 				if ( $settings['eael_ec_show_description'] === 'yes' ) {
 					$link = '';
@@ -4144,6 +4469,8 @@ class Event_Calendar extends Widget_Base
     {
         $events = $settings['eael_event_items'];
         $data = [];
+        $category_color_map = $this->get_manual_category_color_map( $settings );
+        $show_category      = isset( $settings['eael_event_show_category'] ) && 'yes' === $settings['eael_event_show_category'];
         if ($events) {
             $i = 0;
             foreach ($events as $event) {
@@ -4178,6 +4505,28 @@ class Event_Calendar extends Widget_Base
                 $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($event, 'eael_event_text_color');
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($event, 'eael_event_border_color');
 
+                // Category colors replace the event's own colors; a status color (below) still wins.
+                $event_categories = $this->split_event_categories( isset( $event['eael_event_category'] ) ? $event['eael_event_category'] : '' );
+                $category_color   = [];
+                foreach ( $event_categories as $category_name ) {
+                    $category_key = $this->get_category_key( $category_name );
+                    if ( isset( $category_color_map[ $category_key ] ) ) {
+                        $category_color = $category_color_map[ $category_key ];
+                        break;
+                    }
+                }
+
+                if ( $category_color ) {
+                    $settings_eael_event_global_bg_color           = $category_color['color'];
+                    $settings_eael_event_global_text_color         = $category_color['textColor'];
+                    $settings_eael_event_global_popup_ribbon_color = $category_color['color'];
+                }
+
+                $event_status = isset( $event['eael_event_status'] ) && isset( self::EVENT_STATUS_COLORS[ $event['eael_event_status'] ] ) ? $event['eael_event_status'] : '';
+                if ( $event_status ) {
+                    list( $settings_eael_event_global_bg_color, $settings_eael_event_global_text_color ) = $this->get_event_status_colors( $settings, $event_status );
+                }
+
 	            $_custom_attributes = Utils::parse_custom_attributes( $event['eael_event_link']['custom_attributes'] );
                 $custom_attributes  = [];
 
@@ -4211,6 +4560,31 @@ class Event_Calendar extends Widget_Base
                     'category'          => sanitize_text_field( $event['eael_event_category'] ),
                     'event_link'        => $event['eael_event_link']
 	            ];
+
+                $last = count( $data ) - 1;
+
+                if ( $event_status ) {
+                    $data[ $last ]['eaelStatus']       = $event_status;
+                    $data[ $last ]['eaelStatusLabel']  = $this->get_event_status_label( $event_status );
+                    $data[ $last ]['eaelStatusReason'] = isset( $event['eael_event_status_reason'] ) ? trim( wp_strip_all_tags( (string) $event['eael_event_status_reason'] ) ) : '';
+                }
+
+                if ( $category_color ) {
+                    $data[ $last ]['classNames'] = [ $category_color['class'] ];
+                }
+
+                if ( $show_category && $event_categories ) {
+                    $data[ $last ]['eaelCategories'] = [];
+                    foreach ( $event_categories as $category_name ) {
+                        $colors = isset( $category_color_map[ $this->get_category_key( $category_name ) ] ) ? $category_color_map[ $this->get_category_key( $category_name ) ] : [];
+
+                        $data[ $last ]['eaelCategories'][] = [
+                            'name'      => $category_name,
+                            'color'     => $colors ? $colors['color'] : '',
+                            'textColor' => $colors ? $colors['textColor'] : '',
+                        ];
+                    }
+                }
 
                 $i++;
             }
@@ -4399,6 +4773,10 @@ class Event_Calendar extends Widget_Base
         $random_colors = $this->get_random_colors();
         $random_color_enabled = isset( $settings['eael_event_random_bg_color'] ) && 'yes' == $settings['eael_event_random_bg_color'];
         $random_color_index = 0;
+        $show_status         = isset( $settings['eael_the_events_calendar_show_status'] ) && 'yes' === $settings['eael_the_events_calendar_show_status'];
+        $hide_canceled       = isset( $settings['eael_the_events_calendar_canceled_events'] ) && 'hide' === $settings['eael_the_events_calendar_canceled_events'];
+        $use_category_colors = isset( $settings['eael_the_events_calendar_category_colors'] ) && 'yes' === $settings['eael_the_events_calendar_category_colors'];
+        $show_category       = isset( $settings['eael_event_show_category'] ) && 'yes' === $settings['eael_event_show_category'];
 
         $calendar_data = [];
         foreach ($events as $key => $event) {
@@ -4451,6 +4829,24 @@ class Event_Calendar extends Widget_Base
             
             $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
 
+            $event_status = $show_status || $hide_canceled ? $this->get_tec_event_status( $event->ID ) : [];
+            if ( $hide_canceled && $event_status && 'canceled' === $event_status['status'] ) {
+                continue;
+            }
+            $event_status = $show_status ? $event_status : [];
+
+            // Category colors replace the default / random colors; a status color (below) still wins.
+            $category_colors = $use_category_colors ? $this->get_tec_category_colors( $event->ID ) : [];
+            if ( $category_colors ) {
+                $settings_eael_event_global_bg_color           = $category_colors['background'] ? $category_colors['background'] : $category_colors['primary'];
+                $settings_eael_event_global_text_color         = $category_colors['text'] ? $category_colors['text'] : $this->get_readable_text_color( $settings_eael_event_global_bg_color );
+                $settings_eael_event_global_popup_ribbon_color = $category_colors['primary'];
+            }
+
+            if ( $event_status ) {
+                list( $settings_eael_event_global_bg_color, $settings_eael_event_global_text_color ) = $this->get_event_status_colors( $settings, $event_status['status'] );
+            }
+
             $calendar_data[] = [
                 'id' => ++$key,
                 'title' => !empty($event->post_title) ? $event->post_title : __('No Title',
@@ -4469,6 +4865,25 @@ class Event_Calendar extends Widget_Base
                 'location' => function_exists('tribe_get_venue') ? tribe_get_venue($event->ID) : '',
                 'category' => function_exists('tribe_get_event_categories') ? wp_strip_all_tags(tribe_get_event_categories($event->ID, ['label' => '', 'label_before' => '', 'label_after' => ''])) : '',
             ];
+
+            $last = count( $calendar_data ) - 1;
+
+            if ( $event_status ) {
+                $calendar_data[ $last ]['eaelStatus']       = $event_status['status'];
+                $calendar_data[ $last ]['eaelStatusLabel']  = $event_status['label'];
+                $calendar_data[ $last ]['eaelStatusReason'] = $event_status['reason'];
+            }
+
+            if ( $category_colors ) {
+                $calendar_data[ $last ]['classNames'] = [ $category_colors['class'] ];
+            }
+
+            if ( $show_category ) {
+                $event_categories = $this->get_tec_event_categories( $event->ID, $use_category_colors );
+                if ( $event_categories ) {
+                    $calendar_data[ $last ]['eaelCategories'] = $event_categories;
+                }
+            }
         }
         
         return $calendar_data;
@@ -4514,6 +4929,205 @@ class Event_Calendar extends Widget_Base
         return $end < $compare;
     }
 
+
+    /**
+     * Status and category labels shown before an event title in the Table layout.
+     */
+    protected function get_event_labels_html( $event ) {
+        $html = '';
+
+        if ( ! empty( $event['eaelStatus'] ) && ! empty( $event['eaelStatusLabel'] ) ) {
+            $html .= '<span class="eael-event-status-label eael-event-status-label-' . esc_attr( $event['eaelStatus'] ) . '">' . esc_html( $event['eaelStatusLabel'] ) . '</span>';
+        }
+
+        if ( ! empty( $event['eaelCategories'] ) ) {
+            foreach ( $event['eaelCategories'] as $category ) {
+                $html .= '<span class="eael-event-category-label">' . esc_html( $category['name'] ) . '</span>';
+            }
+        }
+
+        return $html;
+    }
+
+    /**
+     * The Events Calendar status of an event: [ status, label, reason ], or [] when scheduled.
+     */
+    protected function get_tec_event_status( $event_id ) {
+        $status = (string) get_post_meta( $event_id, '_tribe_events_status', true );
+
+        if ( ! isset( self::EVENT_STATUS_COLORS[ $status ] ) ) {
+            return [];
+        }
+
+        return [
+            'status' => $status,
+            'label'  => $this->get_event_status_label( $status ),
+            'reason' => wp_strip_all_tags( (string) get_post_meta( $event_id, '_tribe_events_status_reason', true ) ),
+        ];
+    }
+
+    /**
+     * Label for a canceled / postponed status. Uses The Events Calendar's labels when it is active, so
+     * translations and its tec_event_status_*_label filters match its own views.
+     */
+    protected function get_event_status_label( $status ) {
+        if ( class_exists( '\Tribe\Events\Event_Status\Status_Labels' ) && function_exists( 'tribe' ) ) {
+            $labels = tribe( \Tribe\Events\Event_Status\Status_Labels::class );
+
+            return wp_strip_all_tags( 'canceled' === $status ? $labels->get_canceled_label() : $labels->get_postponed_label() );
+        }
+
+        return 'canceled' === $status ? __( 'Canceled', 'essential-addons-for-elementor-lite' ) : __( 'Postponed', 'essential-addons-for-elementor-lite' );
+    }
+
+    /**
+     * Event background and text color for a status (Style > Event Status), as [ bg, text ].
+     */
+    protected function get_event_status_colors( $settings, $status ) {
+        $bg   = $this->fetch_color_or_global_color( $settings, "eael_event_status_{$status}_bg_color" );
+        $text = $this->fetch_color_or_global_color( $settings, "eael_event_status_{$status}_text_color" );
+
+        return [
+            $bg ? $bg : self::EVENT_STATUS_COLORS[ $status ]['bg'],
+            $text ? $text : self::EVENT_STATUS_COLORS[ $status ]['text'],
+        ];
+    }
+
+    /**
+     * Category Colors (The Events Calendar 6.14+) of an event, or [] when none of its categories has one.
+     * With several categories the highest TEC priority wins and ties go to the first, as in TEC itself.
+     */
+    protected function get_tec_category_colors( $event_id ) {
+        $best = [];
+
+        foreach ( $this->get_tec_event_terms( $event_id ) as $term ) {
+            $colors = $this->get_tec_term_colors( $term );
+
+            if ( ! $colors || ( $best && $colors['priority'] <= $best['priority'] ) ) {
+                continue;
+            }
+
+            $best = $colors + [ 'class' => 'eael-event-cat-' . sanitize_html_class( $term->slug, (string) $term->term_id ) ];
+        }
+
+        return $best;
+    }
+
+    /**
+     * Categories of a The Events Calendar event for the labels, with the category colors when enabled.
+     */
+    protected function get_tec_event_categories( $event_id, $with_colors ) {
+        $categories = [];
+
+        foreach ( $this->get_tec_event_terms( $event_id ) as $term ) {
+            $colors = $with_colors ? $this->get_tec_term_colors( $term ) : [];
+            $color  = $colors ? ( $colors['background'] ? $colors['background'] : $colors['primary'] ) : '';
+
+            $categories[] = [
+                'name'      => wp_strip_all_tags( $term->name ),
+                'color'     => $color,
+                'textColor' => $color ? ( $colors['text'] ? $colors['text'] : $this->get_readable_text_color( $color ) ) : '',
+            ];
+        }
+
+        return $categories;
+    }
+
+    /**
+     * @return \WP_Term[]
+     */
+    protected function get_tec_event_terms( $event_id ) {
+        $terms = get_the_terms( $event_id, 'tribe_events_cat' );
+
+        return empty( $terms ) || is_wp_error( $terms ) ? [] : $terms;
+    }
+
+    /**
+     * A TEC category's colors: primary, background, text and priority, or [] when it has no primary color.
+     */
+    protected function get_tec_term_colors( $term ) {
+        $primary = sanitize_hex_color( (string) get_term_meta( $term->term_id, 'tec-events-cat-colors-primary', true ) );
+
+        if ( ! $primary ) {
+            return [];
+        }
+
+        $priority = get_term_meta( $term->term_id, 'tec-events-cat-colors-priority', true );
+
+        return [
+            'primary'    => $primary,
+            'background' => sanitize_hex_color( (string) get_term_meta( $term->term_id, 'tec-events-cat-colors-secondary', true ) ),
+            'text'       => sanitize_hex_color( (string) get_term_meta( $term->term_id, 'tec-events-cat-colors-text', true ) ),
+            'priority'   => is_numeric( $priority ) ? (int) $priority : -1,
+        ];
+    }
+
+    /**
+     * Manual source Category Colors as lower-case category name => colors, or [] when the option is off.
+     * A name listed twice keeps its first colors.
+     */
+    protected function get_manual_category_color_map( $settings ) {
+        if ( empty( $settings['eael_event_manual_category_colors'] ) || 'yes' !== $settings['eael_event_manual_category_colors'] || empty( $settings['eael_event_category_color_items'] ) ) {
+            return [];
+        }
+
+        $map = [];
+        foreach ( $settings['eael_event_category_color_items'] as $item ) {
+            $name  = trim( wp_strip_all_tags( isset( $item['eael_event_category_name'] ) ? (string) $item['eael_event_category_name'] : '' ) );
+            $key   = $this->get_category_key( $name );
+            $color = $this->fetch_color_or_global_color( $item, 'eael_event_category_bg_color' );
+
+            if ( '' === $name || ! $color || isset( $map[ $key ] ) ) {
+                continue;
+            }
+
+            $text = $this->fetch_color_or_global_color( $item, 'eael_event_category_text_color' );
+            if ( ! $text ) {
+                $text = sanitize_hex_color( $color ) ? $this->get_readable_text_color( $color ) : '#ffffff';
+            }
+
+            $map[ $key ] = [
+                'class'     => 'eael-event-cat-' . sanitize_html_class( sanitize_title( $name ), substr( md5( $key ), 0, 8 ) ),
+                'color'     => $color,
+                'textColor' => $text,
+            ];
+        }
+
+        return $map;
+    }
+
+    /**
+     * "Music, Sport" => [ 'Music', 'Sport' ]. Plain text: labels are printed with .text() / esc_html().
+     */
+    protected function split_event_categories( $categories ) {
+        $categories = array_map( 'trim', explode( ',', wp_strip_all_tags( (string) $categories ) ) );
+
+        return array_values( array_unique( array_filter( $categories, 'strlen' ) ) );
+    }
+
+    /**
+     * Case-insensitive, multibyte-safe key for matching category names.
+     */
+    protected function get_category_key( $name ) {
+        return function_exists( 'mb_strtolower' ) ? mb_strtolower( $name, 'UTF-8' ) : strtolower( $name );
+    }
+
+    /**
+     * Black or white, whichever reads better on a hex background.
+     */
+    protected function get_readable_text_color( $hex ) {
+        $hex = ltrim( (string) $hex, '#' );
+        if ( 3 === strlen( $hex ) ) {
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        }
+        if ( ! preg_match( '/^[0-9a-f]{6}$/i', $hex ) ) {
+            return '#ffffff';
+        }
+
+        list( $r, $g, $b ) = array_map( 'hexdec', str_split( $hex, 2 ) );
+
+        return ( $r * 299 + $g * 587 + $b * 114 ) / 1000 >= 150 ? '#1d1d1d' : '#ffffff';
+    }
 
     public function fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
