@@ -179,6 +179,31 @@ trait Login_Registration {
 	 *                     is available.
 	 * @return void This method never returns.
 	 */
+	/**
+	 * Saves one-time messages for a non-AJAX lost / reset password submission.
+	 *
+	 * The option names end in the widget_id, so they are only written when
+	 * page_id + widget_id resolve to a real Login | Register widget.
+	 *
+	 * @param array      $options   Option name prefix => value.
+	 * @param int        $page_id   Posted page ID.
+	 * @param string     $widget_id Posted widget ID.
+	 * @param array|null $settings  Widget settings when already resolved.
+	 */
+	private function eael_lr_save_form_messages( $options, $page_id, $widget_id, $settings = null ) {
+		if ( null === $settings ) {
+			$settings = ( $page_id && $widget_id ) ? $this->lr_get_widget_settings( $page_id, $widget_id ) : [];
+		}
+
+		if ( empty( $settings ) ) {
+			return;
+		}
+
+		foreach ( $options as $prefix => $value ) {
+			update_option( $prefix . $widget_id, $value, false );
+		}
+	}
+
 	protected function eael_lr_abort( $page_id = 0 ) {
 		$redirect = ! empty( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
@@ -1240,7 +1265,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+			$this->eael_lr_save_form_messages( [ 'eael_lostpassword_error_' => $err_msg ], $page_id, $widget_id );
 
             $this->eael_lr_abort( $page_id );
 		}
@@ -1251,7 +1276,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+			$this->eael_lr_save_form_messages( [ 'eael_lostpassword_error_' => $err_msg ], $page_id, $widget_id );
 
             $this->eael_lr_abort( $page_id );
 		}
@@ -1260,7 +1285,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+			$this->eael_lr_save_form_messages( [ 'eael_lostpassword_error_' => $err_msg ], $page_id, $widget_id );
 
             $this->eael_lr_abort( $page_id );
 		}
@@ -1274,7 +1299,6 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
 			$this->eael_lr_abort( $page_id );
 			return;
@@ -1442,13 +1466,18 @@ trait Login_Registration {
 			$err_msg = esc_html__( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 
-		update_option( 'eael_show_reset_password_on_form_submit_' . $widget_id, true, false );
-
 		if (!empty( $err_msg )){
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
+			$this->eael_lr_save_form_messages(
+				[
+					'eael_show_reset_password_on_form_submit_' => true,
+					'eael_resetpassword_error_'                => wp_json_encode( $err_msg ),
+				],
+				$page_id,
+				$widget_id
+			);
 
             $this->eael_lr_abort( $page_id );
 		}
@@ -1458,7 +1487,14 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
+			$this->eael_lr_save_form_messages(
+				[
+					'eael_show_reset_password_on_form_submit_' => true,
+					'eael_resetpassword_error_'                => wp_json_encode( $err_msg ),
+				],
+				$page_id,
+				$widget_id
+			);
 
             $this->eael_lr_abort( $page_id );
 		}
@@ -1467,7 +1503,14 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
+			$this->eael_lr_save_form_messages(
+				[
+					'eael_show_reset_password_on_form_submit_' => true,
+					'eael_resetpassword_error_'                => wp_json_encode( $err_msg ),
+				],
+				$page_id,
+				$widget_id
+			);
 
             $this->eael_lr_abort( $page_id );
 		}
@@ -1480,11 +1523,13 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
 			$this->eael_lr_abort( $page_id );
 			return;
 		}
+
+		// Only now — nonce checked and widget confirmed — keep the reset form open after submit.
+		update_option( 'eael_show_reset_password_on_form_submit_' . $widget_id, true, false );
 
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );
@@ -1620,13 +1665,9 @@ trait Login_Registration {
 		}
 
 		if ( ! $user || is_wp_error( $user ) ) {
-			update_option( 'eael_lostpassword_error_' . esc_attr( $this->widget_id ) . '_show', 1, false );
-
-			if ( $user && $user->get_error_code() === 'expired_key' ) {
-				wp_safe_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
-			} else {
-				wp_safe_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
-			}
+			// The "link expired" notice is carried in the redirect URL for this widget
+			// rather than stored in wp_options.
+			wp_safe_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey&eael-lr-expired=' . rawurlencode( $this->widget_id ) );
 
 			exit;
 		}

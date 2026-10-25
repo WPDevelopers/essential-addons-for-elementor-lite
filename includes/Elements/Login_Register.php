@@ -8209,7 +8209,11 @@ class Login_Register extends Widget_Base {
 
 		$success_key = 'eael_lostpassword_success_' . esc_attr( $this->get_id() );
 
-		if ( intval( get_option( $error_key_show ) ) ) {
+		// Set by the reset-link redirect (eael-lr-expired=<widget id>). The option is
+		// how older releases did it and is still honoured once for stored rows.
+		$expired_link = isset( $_GET['eael-lr-expired'] ) && sanitize_text_field( wp_unslash( $_GET['eael-lr-expired'] ) ) === (string) $this->get_id(); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		if ( $expired_link || intval( get_option( $error_key_show ) ) ) {
 			$rp_err_msg = isset( $this->ds['err_reset_password_key_expired'] ) ? esc_html( $this->ds['err_reset_password_key_expired'] ) : esc_html__( 'Hey Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
 			?>
             <p class="eael-form-msg invalid">
