@@ -345,6 +345,18 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_event_manual_large_notice',
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => esc_html__( 'Tip: every event here adds its own controls to this panel, so the panel opens more slowly as the list grows. For more than about 100 events, use the Google or The Events Calendar source instead.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'elementor-descriptor',
+                'condition'       => [
+                    'eael_event_calendar_type' => 'manual',
+                ],
+            ]
+        );
+
         $this->end_controls_tabs();
 
         $this->end_controls_section();
