@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.3
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 6.8.7
+Stable tag: 6.8.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -354,6 +354,18 @@ Nothing below is contacted until you set up the widget or option that uses it.
 * **WPDeveloper** (opt-in usage data, see the FAQ): sent to send.wpinsight.com and essential-addons.com. [Privacy](https://wpdeveloper.com/privacy-policy/).
 
 == Changelog ==
+
+= 6.8.8 - 27/10/2026 =
+
+- Added: EA Event Calendar | Category colors and category labels for the Manual and The Events Calendar sources
+- Added: EA Event Calendar | Canceled / Postponed event status, with an option to hide canceled events from The Events Calendar
+- Improved: EA Event Calendar | The editor panel opens much faster for calendars with many Manual events
+- Improved: EA Advanced Tabs & EA Mega Menu | Much lower memory use on pages with many revisions
+- Fixed: EA Filterable Gallery | Closing a self-hosted video's fullscreen player on iOS took visitors off the page
+- Fixed: EA Dual Color Header | Default Multiple Titles all shared the same color and gradient
+- Fixed: EA Woo Product Compare | PHP 8.2+ deprecation notice about a dynamic property
+- Fixed: EA Business Reviews | JavaScript error on pages where the Google API key was not set yet
+- Few minor bug fixes & improvements
 
 = 6.8.7 - 19/10/2026 =
 
