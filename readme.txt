@@ -365,6 +365,7 @@ Nothing below is contacted until you set up the widget or option that uses it.
 - Fixed: EA Dual Color Header | Default Multiple Titles all shared the same color and gradient
 - Fixed: EA Woo Product Compare | PHP 8.2+ deprecation notice about a dynamic property
 - Fixed: EA Business Reviews | JavaScript error on pages where the Google API key was not set yet
+- Fixed: EA Woo Checkout | Server file path was exposed in the page's loading-spinner styles
 - Few minor bug fixes & improvements
 
 = 6.8.7 - 19/10/2026 =
