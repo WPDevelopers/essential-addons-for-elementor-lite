@@ -1305,7 +1305,9 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/typeform/',
 							    'setting'     => [
 								    'link' => esc_url( add_query_arg( [
-									    'pr_code'      => wp_hash( 'eael_typeform' ),
+									    // Per-user, expiring token (#typeform-csrf). The callback service
+									    // echoes pr_code back, so wp_verify_nonce() validates it on return.
+									    'pr_code'      => wp_create_nonce( 'eael_typeform_connect' ),
 									    'redirect_uri' => esc_url( admin_url( 'admin.php?page=eael-settings' ) ),
 								    ], esc_url( 'https://app.essential-addons.com/typeform/index.php' ) ) ),
 							    ],

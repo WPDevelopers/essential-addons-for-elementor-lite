@@ -416,6 +416,12 @@ class Bootstrap
 	    // Registered on every request and checked at save time — see the method.
 	    add_filter( 'elementor/document/save/data', [ $this, 'eael_restrict_document_save_data' ], 10, 2 );
 
+	    // Custom JS reaches every visitor unescaped, so only administrators may store it.
+	    // Document::save is covered above; this also catches direct post-meta writes
+	    // (REST, WP-CLI, other plugins) to the two keys the Custom JS code lives in.
+	    add_filter( 'update_post_metadata', [ $this, 'eael_guard_custom_js_meta' ], 10, 5 );
+	    add_filter( 'add_post_metadata', [ $this, 'eael_guard_custom_js_meta' ], 10, 5 );
+
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
 
@@ -485,6 +491,52 @@ class Bootstrap
 	 *
 	 * @return array
 	 */
+	/**
+	 * Blocks a non-administrator from storing Custom JS through a direct post-meta write.
+	 *
+	 * The Custom JS extension's code is printed unescaped into every visitor's page
+	 * (Asset_Builder), so it is administrator-only. Document::save is already guarded by
+	 * eael_restrict_document_save_data(); this short-circuits writes to the two meta keys
+	 * the code lives in — `_eael_custom_js` and the `eael_custom_js` entry inside
+	 * `_elementor_page_settings` — on any other path (REST, WP-CLI, other plugins).
+	 *
+	 * @param null|bool $check     Short-circuit value; null means "continue".
+	 * @param int       $object_id Post ID.
+	 * @param string    $meta_key  Meta key being written.
+	 * @param mixed     $meta_value New value.
+	 *
+	 * @return null|bool Null to allow, false to block the write.
+	 */
+	public function eael_guard_custom_js_meta( $check, $object_id, $meta_key, $meta_value ) {
+		static $busy = false;
+
+		if ( $busy || current_user_can( 'administrator' ) ) {
+			return $check;
+		}
+
+		if ( '_eael_custom_js' === $meta_key ) {
+			// A non-admin never writes the compiled Custom JS meta directly.
+			return false;
+		}
+
+		if ( '_elementor_page_settings' === $meta_key && is_array( $meta_value ) && isset( $meta_value['eael_custom_js'] ) ) {
+			// Keep whatever Custom JS an administrator already stored for this page.
+			$stored = get_post_meta( $object_id, '_elementor_page_settings', true );
+			$meta_value['eael_custom_js'] = ( is_array( $stored ) && isset( $stored['eael_custom_js'] ) ) ? $stored['eael_custom_js'] : '';
+
+			// Re-dispatch the write with the sanitised value, then block the original so
+			// the author-supplied code is never stored. $busy stops this write from
+			// re-entering the filter.
+			$busy = true;
+			update_post_meta( $object_id, '_elementor_page_settings', $meta_value );
+			$busy = false;
+
+			return false;
+		}
+
+		return $check;
+	}
+
 	public function eael_restrict_document_save_data( $data, $document = null ) {
 		if ( current_user_can( 'administrator' ) ) {
 			return $data;

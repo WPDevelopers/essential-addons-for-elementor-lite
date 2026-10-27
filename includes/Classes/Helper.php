@@ -1304,7 +1304,42 @@ class Helper
         return $data;
     }
 
+    /**
+     * Whether a page's widget settings may be served to the current request.
+     *
+     * The settings can hold secrets (API tokens, keys) and private-page content, so a
+     * public (nopriv) request must only reach a published, non-password page; anything
+     * else requires edit access to that page. Guards the AJAX settings lookups that
+     * take a client-supplied page_id (#settings-disclosure).
+     *
+     * @param int $page_id Post ID.
+     *
+     * @return bool
+     */
+    public static function eael_widget_settings_readable( $page_id ) {
+        $page_id = (int) $page_id;
+        if ( ! $page_id ) {
+            return false;
+        }
+
+        if ( current_user_can( 'edit_post', $page_id ) ) {
+            return true;
+        }
+
+        $post = get_post( $page_id );
+        if ( ! $post ) {
+            return false;
+        }
+
+        $public_status = in_array( get_post_status( $post ), [ 'publish', 'inherit' ], true );
+
+        return $public_status && ! post_password_required( $post );
+    }
+
     public static function eael_get_widget_settings( $page_id, $widget_id ) {
+        if ( ! self::eael_widget_settings_readable( $page_id ) ) {
+            return [];
+        }
         $document = Plugin::$instance->documents->get( $page_id );
         $settings = [];
         if ( $document ) {
