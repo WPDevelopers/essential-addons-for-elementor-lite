@@ -264,16 +264,22 @@ class Dual_Color_Header extends Widget_Base
 				'label'   => '',
 				'type'    => Controls_Manager::REPEATER,
 				'fields'  => $multiple_titles->get_controls(),
+				// Each default item needs its own fixed _id: per-item styles target
+				// .elementor-repeater-item-{_id}, and a random id would differ between
+				// the cached CSS file and the rendered markup.
 				'default' => [
 					[
+						'_id'            => 'dch_title_1',
 						'eael_dch_title' => esc_html__('Multiple', 'essential-addons-for-elementor-lite'),
 					],
 					[
-						'eael_dch_title' => esc_html__('Heading', 'essential-addons-for-elementor-lite'),
+						'_id'                  => 'dch_title_2',
+						'eael_dch_title'       => esc_html__('Heading', 'essential-addons-for-elementor-lite'),
 						'eael_dch_title_color' => '#4d4d4d'
 					],
 					[
-						'eael_dch_title' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
+						'_id'                               => 'dch_title_3',
+						'eael_dch_title'                    => esc_html__('Example', 'essential-addons-for-elementor-lite'),
 						'eael_dch_title_use_gradient_color' => 'yes'
 					],
 				],
@@ -1103,8 +1109,8 @@ class Dual_Color_Header extends Widget_Base
 
 		if( ! empty( $settings['eael_dch_enable_multiple_titles'] ) && 'yes' == $settings['eael_dch_enable_multiple_titles'] ) {
 			foreach( $settings['eael_dch_multiple_titles'] as $title ) {
-				$classes = 'eael-dch-title-text elementor-repeater-item-' . esc_attr( $title['_id'] );
-				if( 'yes' == $title['eael_dch_title_use_gradient_color'] ) {
+				$classes = 'eael-dch-title-text elementor-repeater-item-' . esc_attr( $title['_id'] ?? '' );
+				if( ! empty( $title['eael_dch_title_use_gradient_color'] ) && 'yes' == $title['eael_dch_title_use_gradient_color'] ) {
 					$classes .= ' eael-dch-title-gradient';
 				}		
 				$title_html .= '<span class="' . $classes . '">' . $title['eael_dch_title'] . '</span> ';

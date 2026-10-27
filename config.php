@@ -1095,6 +1095,11 @@ $config = [
                         'type' => 'self',
                         'context' => 'view',
                     ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/event-calendar.min.js',
+                        'type' => 'self',
+                        'context' => 'edit',
+                    ],
                 ],
             ],
         ],
