@@ -922,7 +922,7 @@ trait Login_Registration {
 				// role when it is actually safe to assign to a self-registrant and every
 				// user who controls this page is permitted to create it; otherwise fall
 				// through to the site default role.
-				if ( $this->eael_can_assign_registration_role( $requested_role, $page_id ) ) {
+				if ( $this->eael_registration_role_approved( $page_id, $widget_id, $requested_role ) ) {
 					$user_data['role'] = $requested_role;
 				}
 			}
@@ -1879,71 +1879,207 @@ trait Login_Registration {
 		if ( $user_id ) {
 			update_post_meta( $post_id, Helper::ELEMENTOR_DATA_AUTHOR_KEY, $user_id );
 		}
+
+		$this->eael_update_lr_role_snapshot( $post_id, $meta_value );
 	}
 
-	protected function eael_can_assign_registration_role( $requested_role, $page_id ) {
-		$requested_role = (string) $requested_role;
-		$page_id        = (int) $page_id;
+	/** Protected meta holding, per Login | Register widget, the role that was approved when it was written. */
+	const LR_ROLE_STATE_KEY = '_eael_lr_role_state';
 
-		if ( '' === $requested_role || ! $page_id ) {
+	/**
+	 * Records, at the moment a page or template's _elementor_data is written, which
+	 * new-user role each Login | Register widget configures and whether the person doing
+	 * the write is actually allowed to assign it.
+	 *
+	 * The approval is frozen here instead of re-checked at registration, so it cannot be
+	 * laundered later: an unrelated admin re-save keeps a role that was never approved,
+	 * a role stored before this tracking existed has no entry and is not honoured, and a
+	 * promotion of the person who set it changes nothing.
+	 *
+	 * @param int   $post_id    Post whose _elementor_data was written.
+	 * @param mixed $meta_value The new _elementor_data (slashed JSON string).
+	 */
+	protected function eael_update_lr_role_snapshot( $post_id, $meta_value ) {
+		$data = json_decode( is_string( $meta_value ) ? wp_unslash( $meta_value ) : wp_json_encode( $meta_value ), true );
+		if ( ! is_array( $data ) ) {
+			return;
+		}
+
+		$writer = wp_get_current_user();
+		$prior  = (array) get_post_meta( $post_id, self::LR_ROLE_STATE_KEY, true );
+		$state  = [];
+
+		foreach ( $this->eael_collect_lr_widgets( $data ) as $widget_id => $role ) {
+			if ( '' === $role ) {
+				continue; // No role configured on this widget.
+			}
+
+			if ( isset( $prior[ $widget_id ]['role'] ) && $prior[ $widget_id ]['role'] === $role ) {
+				// Same role value as before: keep the earlier decision, so re-saving the
+				// page for an unrelated reason can neither grant nor revoke it.
+				$state[ $widget_id ] = $prior[ $widget_id ];
+				continue;
+			}
+
+			$state[ $widget_id ] = [
+				'role'     => $role,
+				'approved' => $this->eael_role_assignable_by_user( $role, $writer ),
+			];
+		}
+
+		if ( $state ) {
+			update_post_meta( $post_id, self::LR_ROLE_STATE_KEY, $state );
+		} else {
+			delete_post_meta( $post_id, self::LR_ROLE_STATE_KEY );
+		}
+	}
+
+	/**
+	 * widget_id => configured register_user_role, for every Login | Register widget
+	 * directly in this element tree. Global widgets live in their own template, which is
+	 * snapshotted when that template is saved, so they are skipped here.
+	 *
+	 * @param array $elements Element tree.
+	 *
+	 * @return array
+	 */
+	protected function eael_collect_lr_widgets( $elements ) {
+		$found = [];
+
+		$walk = function ( $nodes ) use ( &$walk, &$found ) {
+			foreach ( (array) $nodes as $node ) {
+				if ( isset( $node['widgetType'], $node['id'] ) && 'eael-login-register' === $node['widgetType'] ) {
+					$found[ $node['id'] ] = isset( $node['settings']['register_user_role'] ) ? sanitize_text_field( (string) $node['settings']['register_user_role'] ) : '';
+				}
+				if ( ! empty( $node['elements'] ) ) {
+					$walk( $node['elements'] );
+				}
+			}
+		};
+		$walk( $elements );
+
+		return $found;
+	}
+
+	/**
+	 * Whether $user may configure a self-registration role of $requested_role.
+	 *
+	 * Decided from the capabilities $user holds at this moment, which is correct because
+	 * this runs when $user writes the setting. A role is assignable only when $user can
+	 * create users at all, the role carries none of the capabilities that would make a
+	 * self-registrant a site/network takeover or RCE risk, and every capability the role
+	 * grants is one $user already holds (so a lower-privileged writer can never hand out
+	 * more than they have).
+	 *
+	 * @param string    $requested_role Role slug.
+	 * @param \WP_User $user           The user writing the setting.
+	 *
+	 * @return bool
+	 */
+	protected function eael_role_assignable_by_user( $requested_role, $user ) {
+		$requested_role = (string) $requested_role;
+
+		if ( '' === $requested_role || ! ( $user instanceof \WP_User ) || ! $user->exists() ) {
 			return false;
 		}
 
-		// 1. The role must exist.
 		$wp_role = get_role( $requested_role );
 		if ( null === $wp_role ) {
 			return false;
 		}
 
-		// 2. Never allow self-registration to grant user-management or site-infrastructure
-		//    capabilities. This list is deliberately limited to true site-takeover caps —
-		//    none of which the standard editor/author/contributor roles hold — so an
-		//    administrator can still legitimately configure those roles (step 3) while a
-		//    role that could manage users, plugins, themes or core is always rejected.
-		$privileged_caps = [
-			'manage_options', 'edit_users', 'create_users', 'delete_users',
-			'promote_users', 'remove_users', 'list_users', 'activate_plugins',
-			'install_plugins', 'update_plugins', 'edit_plugins', 'install_themes',
-			'switch_themes', 'edit_themes', 'edit_theme_options', 'update_core',
-			'edit_files', 'manage_network', 'manage_sites',
-		];
-		foreach ( $privileged_caps as $cap ) {
-			if ( ! empty( $wp_role->capabilities[ $cap ] ) ) {
-				return false;
-			}
-		}
-
-		//    Capabilities can also be granted at run time through `user_has_cap` (role and
-		//    membership plugins), so test a stand-in user holding only this role as well.
-		$probe          = new \WP_User();
-		$probe->roles   = [ $requested_role ];
-		$probe->caps    = [ $requested_role => true ];
-		$probe->allcaps = array_merge( (array) $wp_role->capabilities, [ $requested_role => true ] );
-		foreach ( $privileged_caps as $cap ) {
-			if ( $probe->has_cap( $cap ) ) {
-				return false;
-			}
-		}
-
-		// 3. Every user who can control this page's content must be allowed to create
-		//    users: the post author, the last wp-admin editor and whoever last wrote the
-		//    widget settings on any path (Elementor, REST, import), which _edit_last
-		//    misses. When the form is a global widget, its settings live in the template,
-		//    so the template's users count too. All must be create_users-capable.
-		$responsible_ids = Helper::eael_widget_settings_responsible_user_ids( $page_id, 'eael-login-register' );
-
-		if ( empty( $responsible_ids ) ) {
+		// The writer must be able to create users in the first place.
+		if ( ! ( user_can( $user, 'create_users' ) || ( is_multisite() && is_super_admin( $user->ID ) ) ) ) {
 			return false;
 		}
 
-		foreach ( $responsible_ids as $uid ) {
-			$user = get_userdata( $uid );
-			if ( ! $user || ! user_can( $user, 'create_users' ) ) {
+		// Capabilities a self-registration role must never carry, whoever sets it —
+		// user/site/network management, file editing, raw upload/HTML, privacy data.
+		$blocked = [
+			'manage_options', 'edit_users', 'create_users', 'delete_users', 'promote_users',
+			'remove_users', 'list_users', 'add_users', 'activate_plugins', 'install_plugins',
+			'update_plugins', 'edit_plugins', 'delete_plugins', 'install_themes', 'switch_themes',
+			'edit_themes', 'delete_themes', 'update_themes', 'edit_theme_options', 'update_core',
+			'edit_files', 'edit_css', 'unfiltered_upload', 'unfiltered_html', 'import', 'export',
+			'manage_network', 'manage_sites', 'manage_network_users', 'manage_network_plugins',
+			'manage_network_themes', 'manage_network_options', 'setup_network', 'upgrade_network',
+			'delete_site', 'edit_dashboard', 'export_others_personal_data',
+			'erase_others_personal_data', 'manage_privacy_options',
+		];
+
+		$role_caps = array_keys( array_filter( (array) $wp_role->capabilities ) );
+
+		// Build a probe user carrying only this role, so run-time user_has_cap grants
+		// (role / membership plugins) are caught as well as the stored capabilities.
+		$probe          = new \WP_User();
+		$probe->ID      = 0;
+		$probe->roles   = [ $requested_role ];
+		$probe->caps    = [ $requested_role => true ];
+		$probe->allcaps = array_merge( (array) $wp_role->capabilities, [ $requested_role => true ] );
+
+		foreach ( $blocked as $cap ) {
+			if ( in_array( $cap, $role_caps, true ) || $probe->has_cap( $cap ) ) {
+				return false;
+			}
+		}
+
+		// Every capability the role grants must be one the writer already holds.
+		foreach ( $role_caps as $cap ) {
+			if ( ! user_can( $user, $cap ) ) {
 				return false;
 			}
 		}
 
 		return true;
+	}
+
+	protected function eael_registration_role_approved( $page_id, $widget_id, $requested_role ) {
+		$requested_role = (string) $requested_role;
+		$widget_id      = (string) $widget_id;
+
+		if ( '' === $requested_role || '' === $widget_id || ! (int) $page_id ) {
+			return false;
+		}
+
+		list( $snapshot_post_id, $snapshot_widget_id ) = $this->eael_lr_snapshot_location( (int) $page_id, $widget_id );
+
+		$state = (array) get_post_meta( $snapshot_post_id, self::LR_ROLE_STATE_KEY, true );
+		$entry = isset( $state[ $snapshot_widget_id ] ) ? $state[ $snapshot_widget_id ] : null;
+
+		// Honour the role only when the frozen snapshot approved this exact role. No
+		// snapshot (e.g. data stored before this tracking existed) means not approved.
+		return is_array( $entry ) && ! empty( $entry['approved'] ) && isset( $entry['role'] ) && $entry['role'] === $requested_role;
+	}
+
+	/**
+	 * The post and widget id under which a Login | Register widget's role snapshot lives.
+	 *
+	 * For a widget placed directly on the page that is the page and the posted widget id.
+	 * For a global widget the role is stored in its template, so the snapshot is on the
+	 * template post under the widget id it has there.
+	 *
+	 * @param int    $page_id   Posted page id.
+	 * @param string $widget_id Posted widget id.
+	 *
+	 * @return array [ post_id, widget_id ]
+	 */
+	protected function eael_lr_snapshot_location( $page_id, $widget_id ) {
+		$document = Plugin::$instance->documents->get( $page_id );
+		if ( $document ) {
+			$element = $this->find_element_recursive( $document->get_elements_data(), $widget_id );
+
+			if ( is_array( $element ) && isset( $element['widgetType'] ) && 'global' === $element['widgetType'] && ! empty( $element['templateID'] ) ) {
+				$template = Plugin::$instance->documents->get( (int) $element['templateID'] );
+				if ( $template ) {
+					$global_widget = $this->find_widget_type_recursive( $template->get_elements_data(), 'eael-login-register' );
+					if ( ! empty( $global_widget['id'] ) ) {
+						return [ (int) $element['templateID'], (string) $global_widget['id'] ];
+					}
+				}
+			}
+		}
+
+		return [ (int) $page_id, (string) $widget_id ];
 	}
 
 	/**
@@ -2959,6 +3095,9 @@ trait Login_Registration {
 	}
 
 	public function lr_get_widget_settings( $page_id, $widget_id ) {
+		if ( ! Helper::eael_widget_settings_readable( $page_id ) ) {
+			return [];
+		}
 		$document = Plugin::$instance->documents->get( $page_id );
 		$settings = [];
 		if ( $document ) {
