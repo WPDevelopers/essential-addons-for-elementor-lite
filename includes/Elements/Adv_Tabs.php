@@ -1765,8 +1765,8 @@ class Adv_Tabs extends Widget_Base
 				        elseif ('template' == $tab['eael_adv_tabs_text_type']) :
 					        if ( ! empty( $tab['eael_primary_templates'] ) ) {
 						        $current_page_id = get_the_ID();
-						        $revisions       = wp_get_post_revisions( $current_page_id );
-						        $revision_ids    = wp_list_pluck( $revisions, 'ID' );
+						        // IDs only: the default call loads every revision with its meta (#966).
+						        $revision_ids    = wp_get_post_revisions( $current_page_id, [ 'fields' => 'ids' ] );
 
 						        if ( absint( $tab['eael_primary_templates'] ) === $current_page_id || in_array( absint( $tab['eael_primary_templates'] ), $revision_ids, true ) ) {
                                     echo '<p>' . esc_html__( 'The provided Template matches the current page or one of its revisions!', 'essential-addons-for-elementor-lite' ) . '</p>';
