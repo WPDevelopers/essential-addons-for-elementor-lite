@@ -355,7 +355,7 @@ Nothing below is contacted until you set up the widget or option that uses it.
 
 == Changelog ==
 
-= 6.8.8 - 27/10/2026 =
+= 6.8.8 - 28/10/2026 =
 
 - Added: EA Event Calendar | Category colors and category labels for the Manual and The Events Calendar sources
 - Added: EA Event Calendar | Canceled / Postponed event status, with an option to hide canceled events from The Events Calendar
