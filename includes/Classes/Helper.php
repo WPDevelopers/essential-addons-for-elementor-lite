@@ -1322,6 +1322,16 @@ class Helper
             return false;
         }
 
+        // SECURITY: never serve widget settings read from a revision to a public
+        // request. A revision keeps post_status='inherit' and a copy of the parent's
+        // _elementor_data, so a prior-but-reverted value (e.g. an elevated
+        // register_user_role, or disabled OTP/reCAPTCHA/Turnstile gates) survives in it.
+        // The Login|Register form always posts the main page id (get_main_id()), never a
+        // revision, so this cannot reject a legitimate submission. (#settings-disclosure)
+        if ( wp_is_post_revision( $page_id ) ) {
+            return current_user_can( 'edit_post', $page_id );
+        }
+
         if ( current_user_can( 'edit_post', $page_id ) ) {
             return true;
         }
