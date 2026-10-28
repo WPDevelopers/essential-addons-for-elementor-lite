@@ -576,7 +576,11 @@ trait Login_Registration {
 		$page_id = $widget_id = 0;
 		if ( ! empty( $_POST['page_id'] ) ) {
 			$page_id = intval( $_POST['page_id'] );
-			if ( in_array( get_post_status( $page_id ), [ 'future', 'draft', 'pending' ] ) ) {
+			// Defence in depth: reject a revision id at the entry point too. The settings
+			// readability guard already stops a revision's settings (and thus the role)
+			// from being read, but the role must never be sourced from a revision, so
+			// refuse it here as well. A legitimate form always posts the main page id.
+			if ( wp_is_post_revision( $page_id ) || in_array( get_post_status( $page_id ), [ 'future', 'draft', 'pending' ] ) ) {
 				$err_msg = __( 'You have to publish the page first.', 'essential-addons-for-elementor-lite' );
 			}
 		} else {
