@@ -1887,9 +1887,6 @@ trait Login_Registration {
 		$this->eael_update_lr_role_snapshot( $post_id, $meta_value );
 	}
 
-	/** Protected meta holding, per Login | Register widget, the role that was approved when it was written. */
-	const LR_ROLE_STATE_KEY = '_eael_lr_role_state';
-
 	/**
 	 * Records, at the moment a page or template's _elementor_data is written, which
 	 * new-user role each Login | Register widget configures and whether the person doing
@@ -1910,7 +1907,7 @@ trait Login_Registration {
 		}
 
 		$writer = wp_get_current_user();
-		$prior  = (array) get_post_meta( $post_id, self::LR_ROLE_STATE_KEY, true );
+		$prior  = (array) get_post_meta( $post_id, Helper::LR_ROLE_STATE_KEY, true );
 		$state  = [];
 
 		foreach ( $this->eael_collect_lr_widgets( $data ) as $widget_id => $role ) {
@@ -1932,9 +1929,9 @@ trait Login_Registration {
 		}
 
 		if ( $state ) {
-			update_post_meta( $post_id, self::LR_ROLE_STATE_KEY, $state );
+			update_post_meta( $post_id, Helper::LR_ROLE_STATE_KEY, $state );
 		} else {
-			delete_post_meta( $post_id, self::LR_ROLE_STATE_KEY );
+			delete_post_meta( $post_id, Helper::LR_ROLE_STATE_KEY );
 		}
 	}
 
@@ -2047,7 +2044,7 @@ trait Login_Registration {
 
 		list( $snapshot_post_id, $snapshot_widget_id ) = $this->eael_lr_snapshot_location( (int) $page_id, $widget_id );
 
-		$state = (array) get_post_meta( $snapshot_post_id, self::LR_ROLE_STATE_KEY, true );
+		$state = (array) get_post_meta( $snapshot_post_id, Helper::LR_ROLE_STATE_KEY, true );
 		$entry = isset( $state[ $snapshot_widget_id ] ) ? $state[ $snapshot_widget_id ] : null;
 
 		// Honour the role only when the frozen snapshot approved this exact role. No

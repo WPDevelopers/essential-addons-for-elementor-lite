@@ -1572,6 +1572,13 @@ class Helper
 	const ELEMENTOR_DATA_AUTHOR_KEY = '_eael_elementor_data_author';
 
 	/**
+	 * Protected meta holding, per Login | Register widget, the role that was approved
+	 * when it was written. Lives here rather than on the Login_Registration trait because
+	 * PHP only allows constants in traits from 8.2 onward, and the plugin supports 7.0+.
+	 */
+	const LR_ROLE_STATE_KEY = '_eael_lr_role_state';
+
+	/**
 	 * Users who control a post's widget settings: the post author, the last wp-admin
 	 * editor (`_edit_last`) and the last user who wrote `_elementor_data` on any path
 	 * (REST and imports do not update `_edit_last`). Features that act on widget
