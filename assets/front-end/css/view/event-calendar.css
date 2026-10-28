@@ -723,3 +723,84 @@ span.fc-day-number {
             transform: translateY(0);
   }
 }
+.eael-event-status-label,
+.eael-event-category-label {
+  display: inline-block;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  margin-right: 4px;
+  padding: 0 5px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-size: 0.8em;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+.eael-event-status-label {
+  color: #fff;
+  text-transform: uppercase;
+}
+.eael-event-status-label-canceled {
+  background-color: #d63638;
+  border-color: #d63638;
+}
+.eael-event-status-label-postponed {
+  background-color: #e07b00;
+  border-color: #e07b00;
+}
+.eael-event-category-label {
+  border-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.3);
+  color: inherit;
+}
+.fc-list-event .eael-event-category-label,
+.eaelec-modal-header .eael-event-category-label {
+  background-color: #eee;
+  color: #333;
+}
+.eael-event-status-canceled .fc-list-event-dot {
+  border-color: #d63638 !important;
+}
+.eael-event-status-postponed .fc-list-event-dot {
+  border-color: #e07b00 !important;
+}
+.eael-ec-strike-canceled-yes .eael-event-status-canceled .fc-event-title,
+.eael-ec-strike-canceled-yes .eael-event-status-canceled .fc-list-event-title a,
+.eael-ec-strike-canceled-yes tr.eael-event-status-canceled td.eael-ec-event-title {
+  text-decoration: line-through;
+}
+.eaelec-modal-header h2 .eael-event-status-label {
+  margin-right: 8px;
+  font-size: 13px;
+  vertical-align: middle;
+}
+.eaelec-modal-header .eaelec-event-status-reason {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.eaelec-modal-header .eaelec-event-status-reason-canceled {
+  color: #d63638;
+}
+.eaelec-modal-header .eaelec-event-status-reason-postponed {
+  color: #e07b00;
+}
+.eaelec-modal-header .eaelec-event-categories {
+  margin-top: 6px;
+}
+.eaelec-modal-header .eaelec-event-categories .eael-event-category-label {
+  font-size: 12px;
+}
+.fc-daygrid-event.eael-event-has-categories,
+.fc-daygrid-event[class*=eael-event-status-] {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.fc-daygrid-event.eael-event-has-categories > .fc-event-title,
+.fc-daygrid-event[class*=eael-event-status-] > .fc-event-title {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+}

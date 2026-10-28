@@ -1304,7 +1304,52 @@ class Helper
         return $data;
     }
 
+    /**
+     * Whether a page's widget settings may be served to the current request.
+     *
+     * The settings can hold secrets (API tokens, keys) and private-page content, so a
+     * public (nopriv) request must only reach a published, non-password page; anything
+     * else requires edit access to that page. Guards the AJAX settings lookups that
+     * take a client-supplied page_id (#settings-disclosure).
+     *
+     * @param int $page_id Post ID.
+     *
+     * @return bool
+     */
+    public static function eael_widget_settings_readable( $page_id ) {
+        $page_id = (int) $page_id;
+        if ( ! $page_id ) {
+            return false;
+        }
+
+        // SECURITY: never serve widget settings read from a revision to a public
+        // request. A revision keeps post_status='inherit' and a copy of the parent's
+        // _elementor_data, so a prior-but-reverted value (e.g. an elevated
+        // register_user_role, or disabled OTP/reCAPTCHA/Turnstile gates) survives in it.
+        // The Login|Register form always posts the main page id (get_main_id()), never a
+        // revision, so this cannot reject a legitimate submission. (#settings-disclosure)
+        if ( wp_is_post_revision( $page_id ) ) {
+            return current_user_can( 'edit_post', $page_id );
+        }
+
+        if ( current_user_can( 'edit_post', $page_id ) ) {
+            return true;
+        }
+
+        $post = get_post( $page_id );
+        if ( ! $post ) {
+            return false;
+        }
+
+        $public_status = in_array( get_post_status( $post ), [ 'publish', 'inherit' ], true );
+
+        return $public_status && ! post_password_required( $post );
+    }
+
     public static function eael_get_widget_settings( $page_id, $widget_id ) {
+        if ( ! self::eael_widget_settings_readable( $page_id ) ) {
+            return [];
+        }
         $document = Plugin::$instance->documents->get( $page_id );
         $settings = [];
         if ( $document ) {
@@ -1525,6 +1570,13 @@ class Helper
 	 * Set by Login_Registration::eael_record_register_settings_author().
 	 */
 	const ELEMENTOR_DATA_AUTHOR_KEY = '_eael_elementor_data_author';
+
+	/**
+	 * Protected meta holding, per Login | Register widget, the role that was approved
+	 * when it was written. Lives here rather than on the Login_Registration trait because
+	 * PHP only allows constants in traits from 8.2 onward, and the plugin supports 7.0+.
+	 */
+	const LR_ROLE_STATE_KEY = '_eael_lr_role_state';
 
 	/**
 	 * Users who control a post's widget settings: the post author, the last wp-admin

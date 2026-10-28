@@ -119,6 +119,15 @@ class Asset_Builder {
 	 * @return false|void
 	 */
 	public function frontend_asset_load() {
+		// The Customizer fires wp_enqueue_scripts from wp_die() during setup_theme
+		// (e.g. a logged-out request with a non-existent changeset UUID) — long before
+		// elementor/init runs, so Plugin::$instance->breakpoints / editor / preview are
+		// still null and the calls below fatal on PHP 8. There are no Elementor elements
+		// to enqueue assets for at that point anyway, so bail out. (#970)
+		if ( ! did_action( 'elementor/init' ) ) {
+			return;
+		}
+
 		$handle        = 'eael-general';
 		$this->post_id = get_the_ID();
 
@@ -412,7 +421,7 @@ class Asset_Builder {
 			'page_permalink'     => get_the_permalink(),
 			'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
 			'cart_page_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
-			'el_breakpoints'     => method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : '',
+			'el_breakpoints'     => ( isset( Plugin::$instance->breakpoints ) && method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : '',
 		] );
 	}
 

@@ -52,7 +52,7 @@ trait Helper
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		    if ( !empty( $_GET[ 'typeform_tk' ] ) && !empty( $_GET[ 'pr_code' ] ) ) {
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			    if ( wp_hash( 'eael_typeform' ) === sanitize_text_field( wp_unslash( $_GET[ 'pr_code' ] ) ) ) {
+			    if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET[ 'pr_code' ] ) ), 'eael_typeform_connect' ) ) {
 					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				    update_option( 'eael_save_typeform_personal_token', sanitize_text_field( wp_unslash( $_GET[ 'typeform_tk' ] ) ), false );
 			    }
@@ -126,6 +126,9 @@ trait Helper
 	 * @return array
 	 */
 	public function eael_get_widget_settings( $page_id, $widget_id ) {
+		if ( ! \Essential_Addons_Elementor\Classes\Helper::eael_widget_settings_readable( $page_id ) ) {
+			return [];
+		}
 		$document = Plugin::$instance->documents->get( $page_id );
 		$settings = [];
 		if ( $document ) {

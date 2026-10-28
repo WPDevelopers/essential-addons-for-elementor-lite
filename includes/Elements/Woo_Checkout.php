@@ -3308,7 +3308,7 @@ class Woo_Checkout extends Widget_Base {
             <div class="woocommerce">
                 <style>
                     .woocommerce .blockUI.blockOverlay:before {
-                        background-image: url('<?php echo esc_url( WC_ABSPATH . 'assets/images/icons/loader.svg' ); ?>') center center !important;
+                        background-image: url('<?php echo esc_url( WC()->plugin_url() . '/assets/images/icons/loader.svg' ); ?>') center center !important;
                     }
                 </style>
 				<?php
