@@ -584,7 +584,10 @@ class Betterdocs_Search_Form extends Widget_Base
         if (!defined('BETTERDOCS_URL')) return;
         $settings = $this->get_settings_for_display();
         $placeholder = isset( $settings['section_search_field_placeholder'] ) ? $settings['section_search_field_placeholder'] : '';
-        $shortcode  = sprintf('[betterdocs_search_form placeholder="' . esc_html( $placeholder ) . '"]', apply_filters('eael_betterdocs_search_form_params', []));
+        // `[` and `]` would start another shortcode inside the attribute (#945).
+        $placeholder = str_replace( [ '[', ']' ], '', esc_html( $placeholder ) );
+        apply_filters( 'eael_betterdocs_search_form_params', [] ); // Kept firing for existing listeners.
+        $shortcode  = '[betterdocs_search_form placeholder="' . $placeholder . '"]';
         echo do_shortcode(shortcode_unautop($shortcode));
     }
 

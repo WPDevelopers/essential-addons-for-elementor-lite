@@ -44,7 +44,7 @@ Filterable Gallery is the largest Lite widget by code size (4719-line PHP class,
 | [`config.php`](../../config.php#L395) entry `'filter-gallery'` | Asset declaration: load-more.min.css + magnific-popup.min.css + filterable-gallery.min.css + DOMPurify + imagesLoaded + Isotope + magnific-popup.min.js + filterable-gallery.min.js |
 | `assets/front-end/js/lib-view/dom-purify/purify.min.js` | Vendor — DOMPurify (sanitizes the base64-decoded item HTML before injection) |
 | `assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js` | Vendor — Isotope (grid + masonry layout + filter) |
-| `assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js` | Vendor — coordinates layout reflow after images load |
+| WordPress core `imagesloaded` script handle (`'handle' => 'imagesloaded'`) | Vendor (core) — coordinates layout reflow after images load |
 | `assets/front-end/js/lib-view/magnific-popup/jquery.magnific-popup.min.js` + CSS | Vendor — lightbox |
 | `assets/admin/images/layout-previews/filterable-gallery-*.png` | Image-picker thumbnails for layout chooser |
 

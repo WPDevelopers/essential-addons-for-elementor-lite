@@ -313,8 +313,8 @@ class Frontend_Renderer {
 		}
 
 		$page_id      = get_the_ID();
-		$revisions    = wp_get_post_revisions( $page_id );
-		$revision_ids = wp_list_pluck( $revisions, 'ID' );
+		// IDs only: the default call loads every revision with its meta (#966).
+		$revision_ids = wp_get_post_revisions( $page_id, [ 'fields' => 'ids' ] );
 
 		$key = 'eael_mega_menu_template_panel_' . $prepared['index'];
 

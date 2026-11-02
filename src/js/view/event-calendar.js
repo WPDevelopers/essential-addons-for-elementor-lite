@@ -1,3 +1,27 @@
+// Event data arrives HTML-escaped (and with [ ] encoded). A <textarea> decodes the
+// entities without parsing any markup; the result is then only ever set as text.
+var eaelDecodeText = function (value) {
+	return jQuery("<textarea></textarea>").html(String(value || "")).text();
+};
+
+// Canceled / Postponed label.
+var eaelStatusLabel = function (props) {
+	return jQuery('<span class="eael-event-status-label"></span>')
+		.addClass("eael-event-status-label-" + props.eaelStatus)
+		.text(eaelDecodeText(props.eaelStatusLabel));
+};
+
+// Category label; colored with the category's colors where asked (list view, popup).
+var eaelCategoryLabel = function (category, useColors) {
+	var label = jQuery('<span class="eael-event-category-label"></span>').text(eaelDecodeText(category.name));
+
+	if (useColors && category.color) {
+		label.css({ "background-color": category.color, "border-color": category.color, color: category.textColor });
+	}
+
+	return label;
+};
+
 var EventCalendar = function ($scope, $) {
 	var Calendar = FullCalendar.Calendar;
 	var element = $(".eael-event-calendar-cls", $scope),
@@ -96,6 +120,26 @@ var EventCalendar = function ($scope, $) {
 				element.attr("style", "color:" + event.textColor + ";background:" + event.backgroundColor + ";");
 				element.find(".fc-list-event-dot").attr("style", "border-color:" + event.backgroundColor + ";");
 				element.find(".fc-daygrid-event-dot").remove();
+
+				// Status (Canceled / Postponed) and category labels go before the title as
+				// siblings of .fc-event-title, so the search's title match and the
+				// strike-through on canceled titles leave them alone.
+				var eventProps = event.extendedProps || {},
+					listTitle = element.find(".fc-list-event-title a"),
+					labelTarget = listTitle.length ? listTitle : element.find(".fc-event-title").first();
+
+				if (eventProps.eaelStatus && eventProps.eaelStatusLabel) {
+					element.addClass("eael-event-status-" + eventProps.eaelStatus);
+					labelTarget.before(eaelStatusLabel(eventProps));
+				}
+
+				if (eventProps.eaelCategories && eventProps.eaelCategories.length) {
+					element.addClass("eael-event-has-categories");
+					$.each(eventProps.eaelCategories, function (i, category) {
+						// List view rows are white, so there the label takes the category color.
+						labelTarget.before(eaelCategoryLabel(category, listTitle.length > 0));
+					});
+				}
 
 				if (event?.extendedProps?.google_event_id) {
 					element.addClass("eael-google-event-" + event.extendedProps.google_event_id);
@@ -268,6 +312,29 @@ var EventCalendar = function ($scope, $) {
 						startSelector.html('<i class="eicon-calendar"></i> ' + DOMPurify.sanitize(startView));
 
 						$(".eaelec-modal-header h2").html(DOMPurify.sanitize(event.title));
+
+						var popupProps = event.extendedProps || {};
+						$(".eaelec-modal-header .eaelec-event-status-reason, .eaelec-modal-header .eaelec-event-categories").remove();
+
+						if (popupProps.eaelStatus && popupProps.eaelStatusLabel) {
+							$(".eaelec-modal-header h2").prepend(eaelStatusLabel(popupProps));
+
+							if (popupProps.eaelStatusReason) {
+								$(".eaelec-modal-header h2").after(
+									$('<div class="eaelec-event-status-reason"></div>')
+										.addClass("eaelec-event-status-reason-" + popupProps.eaelStatus)
+										.text(eaelDecodeText(popupProps.eaelStatusReason))
+								);
+							}
+						}
+
+						if (popupProps.eaelCategories && popupProps.eaelCategories.length) {
+							var popupCategories = $('<div class="eaelec-event-categories"></div>');
+							$.each(popupProps.eaelCategories, function (i, category) {
+								popupCategories.append(eaelCategoryLabel(category, true));
+							});
+							$(".eaelec-modal-header h2").after(popupCategories);
+						}
 						$(".eaelec-modal-body").html(DOMPurify.sanitize(event.extendedProps.description));
 						if (thumbnailPosition) {
 							if (event.extendedProps.imageUrl) {
@@ -443,7 +510,8 @@ var EventCalendar = function ($scope, $) {
 
 									if (eventElement.length === 0) {
 										eventElement = $scope.find('.fc-list-event-title').filter(function() {
-											return $(this).text() === match.title;
+											// The cell also holds status / category labels.
+											return $(this).find('a').text() === match.title;
 										}).closest('.fc-list-event');
 									}
 

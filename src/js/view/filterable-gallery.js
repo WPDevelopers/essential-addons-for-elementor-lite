@@ -240,18 +240,47 @@ jQuery(window).on("elementor/frontend/init", function () {
 							}
 						}
 
+                  var $player = template.find('.mfp-iframe');
+                  if (!$player.length) {
+                     return;
+                  }
+
+                  // iOS turns an iframe pointing at a video file into a standalone
+                  // media page; closing its native fullscreen player then runs a
+                  // history back and leaves the site. Self-hosted videos therefore
+                  // always play in a <video> tag on iOS.
                   var useVideoTag = $scope.find('.eael-filter-gallery-container').attr('data-use-video-tag');
                   var isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);
-                  if (useVideoTag === 'yes' && isMobile && item.src && item.src.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
-                     var iframeHtml = template.html();
-                     if (iframeHtml && iframeHtml.indexOf('<iframe') > -1) {
-                         var videoHtml = iframeHtml.replace(
-                             /<iframe([^>]*)><\/iframe>/,
-                             '<video$1 autoplay controls playsinline style="position:absolute; top:0; left:0; width:100%; height:100%;"></video>'
-                         );
-                         template.html(videoHtml);
-                         template.find('video').attr('src', item.src);
-                     }
+                  var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+                     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+                  var isSelfHosted = !!(item.src && item.src.match(/\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i));
+                  var wantVideo = isSelfHosted && (isIOS || (useVideoTag === 'yes' && isMobile));
+
+                  // The popup reuses one template for every iframe item, so swap the
+                  // player both ways: a YouTube or Vimeo item after a self-hosted one
+                  // needs the iframe back.
+                  if ($player.is('video')) {
+                     $player[0].pause();
+                  }
+                  if (wantVideo && !$player.is('video')) {
+                     $player.replaceWith(
+                        $('<video autoplay controls playsinline style="position:absolute; top:0; left:0; width:100%; height:100%;"></video>')
+                           .attr('class', $player.attr('class'))
+                     );
+                  } else if (!wantVideo && $player.is('video')) {
+                     $player.replaceWith(
+                        $('<iframe frameborder="0" allowfullscreen></iframe>').attr('class', $player.attr('class'))
+                     );
+                  }
+               },
+               close: function () {
+                  // Magnific only blanks iframes on close; stop a <video> player too.
+                  var $video = $.magnificPopup.instance.currTemplate.iframe;
+                  $video = $video && $video.find ? $video.find('video.mfp-iframe') : $();
+                  if ($video.length) {
+                     $video[0].pause();
+                     $video.removeAttr('src');
+                     $video[0].load();
                   }
                },
                open: function () {

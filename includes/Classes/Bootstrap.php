@@ -20,7 +20,6 @@ use Essential_Addons_Elementor\Traits\Facebook_Feed;
 use Essential_Addons_Elementor\Classes\Asset_Builder;
 use Essential_Addons_Elementor\Theme_Builder\Theme_Builder;
 use Essential_Addons_Elementor\Traits\Ajax_Handler;
-use Essential_Addons_Elementor\Pro\Classes\License\LicenseManager;
 
 class Bootstrap
 {
@@ -241,6 +240,10 @@ class Bootstrap
             add_action( 'edit_user_profile_update', [ $this, 'eael_save_extra_user_profile_fields' ] );
         }
 
+        // Record who wrote Login | Register widget settings, on every write path.
+        add_action( 'added_post_meta', [ $this, 'eael_record_register_settings_author' ], 10, 4 );
+        add_action( 'updated_post_meta', [ $this, 'eael_record_register_settings_author' ], 10, 4 );
+
         // Admin Approval hooks registered unconditionally so option/widget checks
         // happen at call time (correct site context in Multisite) rather than at init.
         add_filter( 'wp_authenticate_user', [ $this, 'eael_block_pending_user_login' ], 10, 2 );
@@ -413,26 +416,60 @@ class Bootstrap
 	    // Registered on every request and checked at save time — see the method.
 	    add_filter( 'elementor/document/save/data', [ $this, 'eael_restrict_document_save_data' ], 10, 2 );
 
+	    // Custom JS reaches every visitor unescaped, so only administrators may store it.
+	    // Document::save is covered above; this also catches direct post-meta writes
+	    // (REST, WP-CLI, other plugins) to the two keys the Custom JS code lives in.
+	    add_filter( 'update_post_metadata', [ $this, 'eael_guard_custom_js_meta' ], 10, 5 );
+	    add_filter( 'add_post_metadata', [ $this, 'eael_guard_custom_js_meta' ], 10, 5 );
+
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
 
 
-	    // init plugin updater with version check
-	    if ( defined( 'EAEL_PRO_PLUGIN_VERSION' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.2', '>=' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.3', '<=' ) ) {
-		    add_action( 'init', [ $this, 'eael_init_plugin_updater' ], 99 );
+	    // Pro 6.2.2–6.2.3 cannot check for its own updates; tell those users how to update manually.
+	    if ( defined( 'EAEL_PRO_PLUGIN_VERSION' ) && defined( 'EAEL_PRO_PLUGIN_BASENAME' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.2', '>=' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.3', '<=' ) ) {
+		    add_action( 'after_plugin_row_' . EAEL_PRO_PLUGIN_BASENAME, [ $this, 'eael_pro_manual_update_row' ], 10, 2 );
 	    }
     }
 
-    /**
-     * Initialize plugin updater
-     *
-     * @since 6.1.14
-     */
-	function eael_init_plugin_updater() {
-		if ( is_admin() ) {
-			$license_manager = LicenseManager::get_instance( [] );
-			$license_manager->plugin_updater();
+	/**
+	 * Plugins-screen row under Essential Addons Pro 6.2.2–6.2.3.
+	 *
+	 * Those two Pro releases register their updater too late, so WordPress never
+	 * offers them an update. Lite used to work around that by calling Pro's
+	 * licence updater itself; a free plugin must not run a paid plugin's
+	 * licence code (WordPress.org Guideline 5, issue #897), so the user is
+	 * pointed to a manual update instead. Pro 6.3.0 and later are unaffected.
+	 *
+	 * @param string $plugin_file Plugin basename.
+	 * @param array  $plugin_data Plugin header data.
+	 */
+	public function eael_pro_manual_update_row( $plugin_file, $plugin_data ) {
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			return;
 		}
+
+		$columns = function_exists( 'get_current_screen' ) && get_current_screen() ? get_column_headers( get_current_screen() ) : [];
+		$colspan = $columns ? count( $columns ) : 4;
+		?>
+		<tr class="plugin-update-tr active">
+			<td colspan="<?php echo esc_attr( $colspan ); ?>" class="plugin-update colspanchange">
+				<div class="update-message notice inline notice-warning notice-alt">
+					<p>
+						<?php
+						printf(
+							/* translators: 1: Essential Addons Pro version, 2: opening link tag, 3: closing link tag */
+							esc_html__( 'Essential Addons Pro %1$s cannot check for updates automatically. Download the latest version from %2$syour WPDeveloper account%3$s and upload it to update.', 'essential-addons-for-elementor-lite' ),
+							esc_html( EAEL_PRO_PLUGIN_VERSION ),
+							'<a href="' . esc_url( 'https://wpdeveloper.com/account' ) . '" target="_blank" rel="noopener noreferrer">',
+							'</a>'
+						);
+						?>
+					</p>
+				</div>
+			</td>
+		</tr>
+		<?php
 	}
 	/**
 	 * Drops document settings a non-administrator must not be able to save.
@@ -454,6 +491,52 @@ class Bootstrap
 	 *
 	 * @return array
 	 */
+	/**
+	 * Blocks a non-administrator from storing Custom JS through a direct post-meta write.
+	 *
+	 * The Custom JS extension's code is printed unescaped into every visitor's page
+	 * (Asset_Builder), so it is administrator-only. Document::save is already guarded by
+	 * eael_restrict_document_save_data(); this short-circuits writes to the two meta keys
+	 * the code lives in — `_eael_custom_js` and the `eael_custom_js` entry inside
+	 * `_elementor_page_settings` — on any other path (REST, WP-CLI, other plugins).
+	 *
+	 * @param null|bool $check     Short-circuit value; null means "continue".
+	 * @param int       $object_id Post ID.
+	 * @param string    $meta_key  Meta key being written.
+	 * @param mixed     $meta_value New value.
+	 *
+	 * @return null|bool Null to allow, false to block the write.
+	 */
+	public function eael_guard_custom_js_meta( $check, $object_id, $meta_key, $meta_value ) {
+		static $busy = false;
+
+		if ( $busy || current_user_can( 'administrator' ) ) {
+			return $check;
+		}
+
+		if ( '_eael_custom_js' === $meta_key ) {
+			// A non-admin never writes the compiled Custom JS meta directly.
+			return false;
+		}
+
+		if ( '_elementor_page_settings' === $meta_key && is_array( $meta_value ) && isset( $meta_value['eael_custom_js'] ) ) {
+			// Keep whatever Custom JS an administrator already stored for this page.
+			$stored = get_post_meta( $object_id, '_elementor_page_settings', true );
+			$meta_value['eael_custom_js'] = ( is_array( $stored ) && isset( $stored['eael_custom_js'] ) ) ? $stored['eael_custom_js'] : '';
+
+			// Re-dispatch the write with the sanitised value, then block the original so
+			// the author-supplied code is never stored. $busy stops this write from
+			// re-entering the filter.
+			$busy = true;
+			update_post_meta( $object_id, '_elementor_page_settings', $meta_value );
+			$busy = false;
+
+			return false;
+		}
+
+		return $check;
+	}
+
 	public function eael_restrict_document_save_data( $data, $document = null ) {
 		if ( current_user_can( 'administrator' ) ) {
 			return $data;

@@ -42,7 +42,7 @@ The widget has no widget-specific Pro extension. Pro's `Post_Carousel` is a sepa
 | [`src/js/view/post-grid.js`](../../src/js/view/post-grid.js) | Frontend logic (26 lines) — Isotope init when `layout-mode === 'masonry'` |
 | [`src/js/view/load-more.js`](../../src/js/view/load-more.js) | **Shared** AJAX pagination handler (Post_Grid + Product_Grid + Pro Filterable Gallery) |
 | [`config.php`](../../config.php#L6) entry `'post-grid'` | Asset declaration: load-more.min.css + post-grid.min.css + product-grid.min.css + imagesLoaded + Isotope + load-more.min.js + post-grid.min.js |
-| `assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js` | Vendor — image-load coordination for Isotope reflow |
+| WordPress core `imagesloaded` script handle (`'handle' => 'imagesloaded'`) | Vendor (core) — image-load coordination for Isotope reflow |
 | `assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js` | Vendor — Isotope (masonry / filter / sort) |
 
 ## Architecture

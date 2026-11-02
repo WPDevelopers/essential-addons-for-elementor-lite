@@ -1258,7 +1258,7 @@ class Filterable_Gallery extends Widget_Base
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => '',
-                'description'  => __( 'Enable this to use an HTML5 video tag instead of iframe for self-hosted videos. Recommended for iOS devices.', 'essential-addons-for-elementor-lite' ),
+                'description'  => __( 'Enable this to use an HTML5 video tag instead of iframe for self-hosted videos on mobile devices. iOS devices always use the video tag.', 'essential-addons-for-elementor-lite' ),
                 'condition'    => [
                     'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ],
                 ],

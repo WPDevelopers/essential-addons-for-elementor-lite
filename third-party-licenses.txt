@@ -26,7 +26,7 @@ countdown/countdown.js, countdown.min.js
     https://fengyuanchen.github.io/countdown/
 
 dom-purify/purify.min.js
-    DOMPurify 3.2.6 — Apache-2.0 OR MPL-2.0 — Cure53 and contributors
+    DOMPurify 3.4.17 — Apache-2.0 OR MPL-2.0 — Cure53 and contributors
     https://github.com/cure53/DOMPurify
 
 drawsvg/drawsvg.js, drawsvg.min.js
@@ -34,11 +34,9 @@ drawsvg/drawsvg.js, drawsvg.min.js
     https://github.com/lcdsantos/jquery-drawsvg
 
 embed/embed.js, embed.min.js
-    Typeform Embed SDK, @typeform/embed 0.16.0 (identified by exact content match)
-    ATTENTION: version 0.16.0 was published to npm with no licence field and no
-    LICENSE file. Typeform licensed later releases as LGPL-3.0-only (0.17.0+) and
-    MIT (1.26.0+). Replacing this copy with a licensed release is tracked
-    separately; it is not swapped here because it changes live widget behaviour.
+    Typeform Embed SDK, @typeform/embed 0.17.0 — LGPL-3.0-only (embed/LICENSE.txt)
+    — Typeform. The package's lib/api.js, wrapped so it exposes the same
+    window.typeformEmbed global as the unlicensed 0.16.0 copy it replaces.
     https://github.com/Typeform/embed
 
 fancy-table/fancy-table.js, fancy-table.min.js
@@ -55,10 +53,6 @@ image-zoom/zoom-lense.js, zoom-lense.min.js
     — MIT (CodePen licenses all public Pens under MIT)
     https://codepen.io/hckkiu/pen/poyoRKQ
     https://blog.codepen.io/documentation/licensing/
-
-imagesloaded/imagesloaded.pkgd.js, imagesloaded.pkgd.min.js
-    imagesLoaded 4.1.4 — MIT — Metafizzy
-    https://github.com/desandro/imagesloaded
 
 inview/inview.js, inview.min.js
     jquery.inview — WTFPL (repository LICENSE) / ISC (package.json, 1.1.2)
@@ -113,6 +107,14 @@ blob-animation/polygon-morphing-animation.js, .min.js
 icons/brands.json, regular.json, solid.json
     Font Awesome Free 5 icon data — icons: CC BY 4.0 — Fonticons, Inc.
     https://fontawesome.com/license/free
+
+
+EDITOR JAVASCRIPT  (assets/front-end/js/lib-edit/)
+--------------------------------------------------
+
+quill/quill.js, quill.min.js
+    Quill Editor 1.3.6 — BSD-3-Clause — Jason Chen, salesforce.com
+    https://github.com/quilljs/quill
 
 
 FRONT-END CSS  (assets/front-end/css/lib-view/)

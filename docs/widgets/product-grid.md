@@ -53,7 +53,7 @@ The widget has no standard upsell panel; Pro extends inline via `eael/pro_enable
 | [`src/js/view/load-more.js`](../../src/js/view/load-more.js) | **Shared** Load More AJAX handler (also used by Post_Grid, Woo_Product_List) |
 | [`src/js/view/quick-view.js`](../../src/js/view/quick-view.js) | **Shared** Quick View popup (loaded via `quick-view.min.js` in config) |
 | [`config.php`](../../config.php#L569) entry `'product-grid'` | Asset declaration: load-more.min.css + quick-view.min.css + product-grid.min.css + imagesLoaded + Isotope + load-more.min.js + quick-view.min.js + product-grid.min.js |
-| `assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js` | Vendor — defer Isotope until images load |
+| WordPress core `imagesloaded` script handle (`'handle' => 'imagesloaded'`) | Vendor (core) — defer Isotope until images load |
 | `assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js` | Vendor — masonry layout |
 
 ## Architecture
@@ -281,7 +281,7 @@ For shared patterns (Liquid Glass / FA4 / WPML / `has_pro` / `eael_section_pro`)
 
 - **Likely cause:** Isotope `layout()` ran before images settled; or the `$(window).trigger('resize')` on `ajaxComplete` ([line 70-72 of product-grid.js](../../src/js/view/product-grid.js#L70)) fired before append completed
 - **Diagnose:** browser console for Isotope errors; check that `data-layout-mode="masonry"` is on `.products`
-- **Fix:** hard refresh; if persistent, verify `imagesloaded.pkgd.min.js` loaded (look in network panel). The inline `<script>` from render() may re-init and conflict with `product-grid.js` — if a regression appears, check which one fires last
+- **Fix:** hard refresh; if persistent, verify core `wp-includes/js/imagesloaded.min.js` loaded (look in network panel). The inline `<script>` from render() may re-init and conflict with `product-grid.js` — if a regression appears, check which one fires last
 
 ### Compare button doesn't open modal / modal stuck open
 

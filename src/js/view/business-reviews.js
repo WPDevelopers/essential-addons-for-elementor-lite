@@ -6,8 +6,15 @@ var BusinessReviewsHandler = function ($scope, $) {
 	if(	source === 'google-reviews' ){
 		// Slider or Grid
 		if( layout === 'slider' ){
-			let businessReviewsSlider = $scope.find('.eael-google-reviews-content').eq(0),
-				pagination		= businessReviewsSlider.attr('data-pagination'),
+			let businessReviewsSlider = $scope.find('.eael-google-reviews-content').eq(0);
+
+			// Nothing to slide when the API returned no reviews (e.g. no API key yet):
+			// only the error message is rendered then.
+			if ( ! businessReviewsSlider.length ) {
+				return;
+			}
+
+			let pagination		= businessReviewsSlider.attr('data-pagination'),
 				arrowNext		= businessReviewsSlider.attr('data-arrow-next'),
 				arrowPrev		= businessReviewsSlider.attr('data-arrow-prev'),
 				effect 			= businessReviewsSlider.attr('data-effect'),

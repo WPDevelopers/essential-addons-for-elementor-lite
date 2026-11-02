@@ -73,6 +73,12 @@ class Asset_Builder {
 	protected $main_page;
 
 	/**
+	 * Script handles that already carry the imagesLoaded jQuery bridge.
+	 * @var array
+	 */
+	protected $imagesloaded_bridged = [];
+
+	/**
 	 * construct
 	 *
 	 * @param array $registered_elements
@@ -113,6 +119,15 @@ class Asset_Builder {
 	 * @return false|void
 	 */
 	public function frontend_asset_load() {
+		// The Customizer fires wp_enqueue_scripts from wp_die() during setup_theme
+		// (e.g. a logged-out request with a non-existent changeset UUID) — long before
+		// elementor/init runs, so Plugin::$instance->breakpoints / editor / preview are
+		// still null and the calls below fatal on PHP 8. There are no Elementor elements
+		// to enqueue assets for at that point anyway, so bail out. (#970)
+		if ( ! did_action( 'elementor/init' ) ) {
+			return;
+		}
+
 		$handle        = 'eael-general';
 		$this->post_id = get_the_ID();
 
@@ -406,7 +421,7 @@ class Asset_Builder {
 			'page_permalink'     => get_the_permalink(),
 			'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
 			'cart_page_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
-			'el_breakpoints'     => method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : '',
+			'el_breakpoints'     => ( isset( Plugin::$instance->breakpoints ) && method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : '',
 		] );
 	}
 
@@ -439,21 +454,53 @@ class Asset_Builder {
 			);
 		}
 
+		// Libraries WordPress core already ships (e.g. imagesloaded) load by handle.
+		$js_handles = $this->elements_manager->generate_handle_dependency( $elements, $context, 'js' );
+
 		if ( $this->js_print_method == 'internal' ) {
+			foreach ( $js_handles as $js_handle ) {
+				wp_enqueue_script( $js_handle );
+			}
+
+			if ( in_array( 'imagesloaded', $js_handles, true ) && ! in_array( 'internal', $this->imagesloaded_bridged, true ) ) {
+				$this->imagesloaded_bridged[] = 'internal';
+				$this->custom_js             .= $this->imagesloaded_jquery_bridge();
+			}
+
 			$this->custom_js .= $this->elements_manager->generate_strings( $elements, $context, 'js' );
 		} else {
 			if ( ! $this->has_asset( $post_id, 'js' ) ) {
 				$this->elements_manager->generate_script( $post_id, $elements, $context, 'js' );
 			}
 
+			$handle = 'eael' . $dynamic_asset_id;
+
 			wp_enqueue_script(
-				'eael' . $dynamic_asset_id,
+				$handle,
 				$this->safe_url( EAEL_ASSET_URL . '/' . 'eael' . $dynamic_asset_id . '.js' ),
-				[ 'eael-general' ],
+				array_merge( [ 'eael-general' ], $js_handles ),
 				get_post_modified_time(),
 				true
 			);
+
+			if ( in_array( 'imagesloaded', $js_handles, true ) && ! in_array( $handle, $this->imagesloaded_bridged, true ) ) {
+				$this->imagesloaded_bridged[] = $handle;
+				wp_add_inline_script( $handle, $this->imagesloaded_jquery_bridge(), 'before' );
+			}
 		}
+	}
+
+	/**
+	 * imagesloaded_jquery_bridge
+	 *
+	 * Core's imagesloaded only adds `$.fn.imagesLoaded` when jQuery is already
+	 * on the page as it loads, and its handle does not depend on jQuery. EA's
+	 * scripts call the jQuery form, so register it once both are loaded.
+	 *
+	 * @return string
+	 */
+	protected function imagesloaded_jquery_bridge() {
+		return 'window.jQuery&&window.imagesLoaded&&!jQuery.fn.imagesLoaded&&imagesLoaded.makeJQueryPlugin&&imagesLoaded.makeJQueryPlugin(jQuery);';
 	}
 
 	/**

@@ -121,7 +121,7 @@ class ThinkRank_Promotion {
 			return;
 		}
 
-		// Surface 3 — WP Dashboard "SEO Check" widget.
+		// WP Dashboard panel for an xSpeed install that is already active — never an install prompt.
 		add_action( 'wp_dashboard_setup', [ $this, 'register_dashboard_widget' ] );
 
 		// Attributed, dismissible banner on EA's own admin pages only.
@@ -135,9 +135,6 @@ class ThinkRank_Promotion {
 		add_action( 'wp_ajax_eael_thinkrank_snooze', [ $this, 'ajax_snooze_banner' ] );
 		add_action( 'wp_ajax_eael_thinkrank_never_show', [ $this, 'ajax_never_show' ] );
 		add_action( 'wp_ajax_eael_thinkrank_skip', [ $this, 'ajax_skip' ] );
-
-		// Surface 5 — Gutenberg editor "Configure SEO" document panel.
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_gutenberg_panel' ] );
 	}
 
 	/**
@@ -161,47 +158,6 @@ class ThinkRank_Promotion {
 		}
 
 		return (bool) apply_filters( 'eael/disable_promotions', false );
-	}
-
-	/**
-	 * Should any editor-context promo render for the current user?
-	 */
-	private function can_promote() {
-		return ! $this->is_thinkrank_active() && ! $this->is_hidden() && current_user_can( 'install_plugins' );
-	}
-
-	/**
-	 * Enqueue the build-free Gutenberg panel (uses the wp.* editor globals).
-	 */
-	public function enqueue_gutenberg_panel() {
-		if ( ! $this->can_promote() ) {
-			return;
-		}
-
-		wp_enqueue_script(
-			'eael-thinkrank-gutenberg',
-			EAEL_PLUGIN_URL . 'assets/admin/js/thinkrank-gutenberg.js',
-			[ 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-i18n' ],
-			defined( 'EAEL_PLUGIN_VERSION' ) ? EAEL_PLUGIN_VERSION : false,
-			true
-		);
-
-		wp_localize_script( 'eael-thinkrank-gutenberg', 'eaelThinkRank', [
-			'ajaxurl' => admin_url( 'admin-ajax.php' ),
-			'nonce'   => wp_create_nonce( 'essential-addons-elementor' ),
-			'slug'    => self::SLUG,
-			'openUrl' => admin_url( 'admin.php?page=' . self::ADMIN_PAGE ),
-		] );
-
-		wp_register_style( 'eael-thinkrank-gb', false, [], EAEL_PLUGIN_VERSION );
-		wp_enqueue_style( 'eael-thinkrank-gb' );
-		wp_add_inline_style( 'eael-thinkrank-gb',
-			'.eael-tr-gb__desc{font-size:12.5px;line-height:1.5;color:#3c434a;margin:0 0 10px;}'
-			. '.eael-tr-gb__err{font-size:12px;color:#d63638;margin:0 0 8px;}'
-			. '.eael-tr-gb__cta.components-button.is-primary{background:#4451ff;justify-content:center;width:100%;}'
-			. '.eael-tr-gb__cta.components-button.is-primary:hover:not(:disabled){background:#3742d6;}'
-			. '.eael-tr-gb__later.components-button.is-link{display:block;margin:8px 0 2px;color:#50575e;font-size:12px;}'
-		);
 	}
 
 	/**
@@ -251,10 +207,10 @@ class ThinkRank_Promotion {
 	 * Normalize a plugin slug, defaulting to ThinkRank.
 	 *
 	 * Every state method defaults to ThinkRank rather than requiring a slug:
-	 * the Gutenberg panel and the dashboard widget are ThinkRank-only surfaces
-	 * and call these with no argument, and the AJAX endpoints are hit by JS
-	 * from an earlier release that sends no plugin at all. In both cases
-	 * "unspecified" has always meant ThinkRank, and must keep meaning it.
+	 * earlier ThinkRank-only surfaces called these with no argument, and the
+	 * AJAX endpoints are hit by JS from an earlier release that sends no plugin
+	 * at all. In both cases "unspecified" has always meant ThinkRank, and must
+	 * keep meaning it.
 	 *
 	 * @param string $plugin
 	 * @return string
@@ -399,9 +355,9 @@ class ThinkRank_Promotion {
 
 	/**
 	 * Site-wide, permanent "Never show me again". One click by any admin hides
-	 * every surface for the plugins the banner showed — notices, and for
-	 * ThinkRank the Gutenberg panel and dashboard widget too — for all users of
-	 * this installation, forever. The other plugin's banner is untouched.
+	 * every surface for the plugins the banner showed — notices and dashboard
+	 * widgets — for all users of this installation, forever. The other
+	 * plugin's banner is untouched.
 	 */
 	public function ajax_never_show() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
@@ -673,19 +629,11 @@ class ThinkRank_Promotion {
 	}
 
 	/**
-	 * Register one dashboard widget per plugin — "SEO Check" (ThinkRank) and
-	 * "Speed Check" (xSpeed).
+	 * Register the dashboard widget of each promoted plugin that is already
+	 * active — in practice xSpeed's "Speed Check" panel; see widget_eligible().
 	 *
-	 * The two are fully independent: each has its own widget id, its own
-	 * never-show state, and its own eligibility. Removing or silencing one
-	 * leaves the other alone.
-	 *
-	 * Gated to users who can install plugins so the CTA is actionable. Being
-	 * real dashboard widgets, both are removable by the user via Screen Options.
-	 *
-	 * A promo (not-installed) state honors every opt-out — kill switch,
-	 * site-wide never-show/skip and per-user dismiss/snooze. Once the plugin is
-	 * actually active its widget is functional, not promotional, so it stays.
+	 * Each widget has its own id and never-show state. Being real dashboard
+	 * widgets, they are removable by the user via Screen Options.
 	 */
 	public function register_dashboard_widget() {
 		if ( ! current_user_can( 'install_plugins' ) ) {
@@ -749,44 +697,25 @@ class ThinkRank_Promotion {
 	/**
 	 * Should this plugin's dashboard widget exist at all?
 	 *
-	 * Active ThinkRank → no: ThinkRank ships its own dashboard widgets, so EA's
-	 *                  SEO Check would only add a second panel that says the
-	 *                  plugin is on and links to it. Its whole job was getting
-	 *                  ThinkRank installed; once that is done it steps aside.
-	 * Active xSpeed  → yes: the Speed Check widget stays functional (TTFB,
-	 *                  unminified assets, legacy images), not promotional, and
-	 *                  silencing a promo should not take away a working panel.
-	 * Not active     → only while the plugin is genuinely on offer and this
-	 *                  user/site has not opted out of it.
+	 * Active xSpeed  → yes: the Speed Check widget is functional (TTFB,
+	 *                  unminified assets, legacy images), not promotional.
+	 * Active ThinkRank → no: ThinkRank ships its own dashboard widgets.
+	 * Not active     → no: an install prompt for another plugin on the WP
+	 *                  Dashboard home is advertising outside EA's own screens,
+	 *                  which Guideline 11 rules out (issue #897). The offer
+	 *                  stays on EA's own pages (render_dashboard_banner()).
 	 *
 	 * @param string $plugin Slug.
 	 * @return bool
 	 */
 	private function widget_eligible( $plugin ) {
 		// "Never show me again" is an explicit, permanent request to remove
-		// this widget — the active-state Speed Check offers it too, so it has
-		// to win even when the plugin is running. Skip/snooze/dismiss are only
-		// ever about the promo, and stay below.
+		// this widget, so it wins even when the plugin is running.
 		if ( $this->is_never_shown( $plugin ) ) {
 			return false;
 		}
 
-		if ( $this->is_plugin_running( $plugin ) ) {
-			return self::SLUG !== $plugin;
-		}
-
-		// Two ways for xSpeed to be eligible, because the CTA does two different
-		// things: install a copy that isn't here (can_install), or switch back
-		// on one that is (can_reactivate). Gating on the install check alone
-		// made the Speed Check widget vanish for anyone who deactivated xSpeed,
-		// while the SEO Check widget stayed put.
-		if ( XSpeed_Setup::SLUG === $plugin
-			&& ! XSpeed_Setup::can_install()
-			&& ! XSpeed_Setup::can_reactivate() ) {
-			return false;
-		}
-
-		return ! $this->is_hidden( $plugin );
+		return self::SLUG !== $plugin && $this->is_plugin_running( $plugin );
 	}
 
 	/**

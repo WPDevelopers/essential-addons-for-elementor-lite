@@ -36,7 +36,7 @@ The widget has zero Pro extension surface and zero upsell panel — clean Lite-o
 | [`src/css/view/facebook-feed.scss`](../../src/css/view/facebook-feed.scss) | Source styles — card layout, header, image, comments, hover |
 | [`src/js/view/facebook-feed.js`](../../src/js/view/facebook-feed.js) | Frontend logic (81 lines) — Isotope init, AJAX Load More, cross-widget reflow hooks |
 | [`config.php`](../../config.php#L303) entry `'facebook-feed'` | Asset declaration: load-more.min.css + facebook-feed.min.css + imagesLoaded + Isotope + facebook-feed.min.js |
-| `assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js` | Vendor — image-load coordination |
+| WordPress core `imagesloaded` script handle (`'handle' => 'imagesloaded'`) | Vendor (core) — image-load coordination |
 | `assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js` | Vendor — Isotope masonry layout |
 
 ## Architecture

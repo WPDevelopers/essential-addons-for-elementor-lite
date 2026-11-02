@@ -114,8 +114,8 @@ trait Facebook_Feed {
                     <div class="eael-facebook-feed-item-inner">
                         <header class="eael-facebook-feed-item-header clearfix">
                             <div class="eael-facebook-feed-item-user clearfix">
-                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $current_page_id . '/picture" alt="' . eael_neutralize_shortcodes( esc_attr( $item_form_name ) ) . '" class="eael-facebook-feed-avatar"></a>
-                                <a href="https://www.facebook.com/' . $current_page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . eael_neutralize_shortcodes( esc_html( $item_form_name ) ) . '</p></a>
+                                <a href="' . esc_url( 'https://www.facebook.com/' . $current_page_id ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="' . esc_url( 'https://graph.facebook.com/v4.0/' . $current_page_id . '/picture' ) . '" alt="' . eael_neutralize_shortcodes( esc_attr( $item_form_name ) ) . '" class="eael-facebook-feed-avatar"></a>
+                                <a href="' . esc_url( 'https://www.facebook.com/' . $current_page_id ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . eael_neutralize_shortcodes( esc_html( $item_form_name ) ) . '</p></a>
                             </div>';
 
 				if ( $settings['eael_facebook_feed_date'] ) {

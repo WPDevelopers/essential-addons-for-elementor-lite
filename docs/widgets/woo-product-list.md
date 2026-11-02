@@ -48,7 +48,7 @@ Differs from other WC widgets architecturally on three points:
 | [`src/js/view/load-more.js`](../../src/js/view/load-more.js) | **Shared** Load More AJAX (Post_Grid + Product_Grid + this widget + Pro Filterable_Gallery) |
 | [`src/js/view/quick-view.js`](../../src/js/view/quick-view.js) | **Shared** Quick View popup |
 | [`config.php`](../../config.php#L618) entry `'woo-product-list'` | Asset declaration: load-more.min.css + quick-view.min.css + woo-product-list.min.css + imagesLoaded + Isotope + load-more.min.js + quick-view.min.js + woo-product-list.min.js |
-| `assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js` | Vendor — loaded for shared `load-more.js` compatibility |
+| WordPress core `imagesloaded` script handle (`'handle' => 'imagesloaded'`) | Vendor (core) — loaded for shared `load-more.js` compatibility |
 | `assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js` | Vendor — loaded for shared `load-more.js`; **not used** by this widget's own JS |
 
 `get_style_depends() = ['font-awesome-5-all', 'font-awesome-4-shim']` + `get_script_depends() = ['font-awesome-4-shim']` (deprecated FA4 shim handle).

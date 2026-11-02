@@ -30,25 +30,27 @@ if ( $settings['eael_show_image'] == 'yes' ) {
 }
 
 
-global $authordata;
 $author_link = $author_name = $author_url = '';
-if ( is_object( $authordata ) ) {
-    $author_name = $authordata->display_name;
 
-    if ( ! $author_name && isset( $authordata->first_name ) ) {
-        $author_name = $authordata->first_name;
-		if ( isset( $authordata->last_name ) ) {
-			$author_name .= ' ' . $authordata->last_name;
-		}
-	}
+// Resolve the author through the filterable template tags (get_the_author_meta),
+// not a raw $authordata property read, so author plugins such as PublishPress Authors
+// and Co-Authors Plus (which filter these tags rather than touching post_author) show
+// the assigned author. With no such plugin this returns exactly the previous values.
+$author_id   = (int) get_the_author_meta( 'ID' );
+$author_name = get_the_author_meta( 'display_name' );
 
-    $author_url = get_author_posts_url( $authordata->ID, $authordata->user_nicename );
+if ( ! $author_name ) {
+	$author_name = trim( get_the_author_meta( 'first_name' ) . ' ' . get_the_author_meta( 'last_name' ) );
+}
+
+if ( $author_name ) {
+    $author_url = get_author_posts_url( $author_id );
     $author_link = sprintf(
 		'<a href="%1$s" title="%2$s" rel="author">%3$s</a>',
 		esc_url( $author_url ),
 		/* translators: %s: Author's display name. */
-		esc_attr( sprintf( __( 'Posts by %s', 'essential-addons-for-elementor-lite' ), $author_name ) ),
-		$author_name
+		esc_attr( sprintf( __( 'Posts by %s', 'essential-addons-for-elementor-lite' ), esc_html( $author_name ) ) ),
+		esc_html( $author_name )
 	);
 }
 $enable_ratio = $settings['enable_postgrid_image_ratio'] == 'yes' ? 'eael-image-ratio':'';

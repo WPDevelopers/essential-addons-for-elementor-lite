@@ -25,7 +25,7 @@ The contract: **page 2..N is constructed from the widget's saved settings, ident
 | `Helper::eael_get_widget_settings( $page_id, $widget_id )` | — | Walks `Plugin::$instance->documents->get($page_id)->get_elements_data()` to find the widget by id and return its saved settings |
 | [`Helper::get_query_args`](../../../includes/Classes/Helper.php#L179) | ~95 | Same shared query builder used by first-render — see [`wp-query-construction.md`](wp-query-construction.md) |
 | `assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js` | vendor | Masonry layout engine — re-run on append for grids configured `layout=masonry` |
-| `assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js` | vendor | Triggers isotope layout pass once images settle |
+| WordPress core `imagesloaded` handle | vendor (core) | Triggers isotope layout pass once images settle |
 
 ## Architecture Diagram
 

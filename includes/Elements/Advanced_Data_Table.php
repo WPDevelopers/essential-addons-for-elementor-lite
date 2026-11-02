@@ -1933,7 +1933,7 @@ class Advanced_Data_Table extends Widget_Base
                     if ($th['data_type'] == 'image') {
                         $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . esc_url( $tr[$th['key']]['image_full'] ) . '"><img src="' . esc_url( $tr[$th['key']]['image_thumb'] ) . '"></a>' : '') . '</td>';
                     } elseif ($th['data_type'] == 'selection') {
-                        $html .= '<td>' . (!empty($tr[$th['key']]) ? implode((array) $tr[$th['key']], ', ') : '') . '</td>';
+                        $html .= '<td>' . (!empty($tr[$th['key']]) ? implode(', ', (array) $tr[$th['key']]) : '') . '</td>';
                     } elseif ($th['data_type'] == 'button') {
                         $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . esc_url( $tr[$th['key']] ) . '" class="button" target="' . esc_attr( $th['link_target'] ) . '">' . $th['button_text'] . '</a>' : '') . '</td>';
                     } else {

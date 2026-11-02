@@ -179,12 +179,8 @@ use HelperTrait;
         );
 
 
-        $svg_btn_controller_id = 'eael_creative_button_remove_svg_color_dummy';
-        if ( apply_filters( 'eael/pro_enabled', false ) ) {
-            $svg_btn_controller_id = 'eael_creative_button_remove_svg_color';
-        }
         $this->add_control(
-            $svg_btn_controller_id,
+            'eael_creative_button_remove_svg_color',
             [
                 'label'        => esc_html__( 'Remove Default SVG Color', 'essential-addons-for-elementor-lite' ),
                 'type'         => Controls_Manager::SWITCHER,

@@ -1541,7 +1541,8 @@ class Caldera_Forms extends Widget_Base
                         <?php }?>
                     </div>
                 <?php }?>
-                <?php echo do_shortcode('[caldera_form id="' . esc_attr( $settings['contact_form_list'] ) . '" ]'); ?>
+                <?php // Caldera form IDs are strings such as "CF5c8e...", so allow only ID characters. ?>
+                <?php echo do_shortcode('[caldera_form id="' . preg_replace( '/[^A-Za-z0-9_-]/', '', (string) $settings['contact_form_list'] ) . '" ]'); ?>
             </div>
             <?php
         }

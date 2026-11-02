@@ -1304,7 +1304,52 @@ class Helper
         return $data;
     }
 
+    /**
+     * Whether a page's widget settings may be served to the current request.
+     *
+     * The settings can hold secrets (API tokens, keys) and private-page content, so a
+     * public (nopriv) request must only reach a published, non-password page; anything
+     * else requires edit access to that page. Guards the AJAX settings lookups that
+     * take a client-supplied page_id (#settings-disclosure).
+     *
+     * @param int $page_id Post ID.
+     *
+     * @return bool
+     */
+    public static function eael_widget_settings_readable( $page_id ) {
+        $page_id = (int) $page_id;
+        if ( ! $page_id ) {
+            return false;
+        }
+
+        // SECURITY: never serve widget settings read from a revision to a public
+        // request. A revision keeps post_status='inherit' and a copy of the parent's
+        // _elementor_data, so a prior-but-reverted value (e.g. an elevated
+        // register_user_role, or disabled OTP/reCAPTCHA/Turnstile gates) survives in it.
+        // The Login|Register form always posts the main page id (get_main_id()), never a
+        // revision, so this cannot reject a legitimate submission. (#settings-disclosure)
+        if ( wp_is_post_revision( $page_id ) ) {
+            return current_user_can( 'edit_post', $page_id );
+        }
+
+        if ( current_user_can( 'edit_post', $page_id ) ) {
+            return true;
+        }
+
+        $post = get_post( $page_id );
+        if ( ! $post ) {
+            return false;
+        }
+
+        $public_status = in_array( get_post_status( $post ), [ 'publish', 'inherit' ], true );
+
+        return $public_status && ! post_password_required( $post );
+    }
+
     public static function eael_get_widget_settings( $page_id, $widget_id ) {
+        if ( ! self::eael_widget_settings_readable( $page_id ) ) {
+            return [];
+        }
         $document = Plugin::$instance->documents->get( $page_id );
         $settings = [];
         if ( $document ) {
@@ -1519,6 +1564,137 @@ class Helper
     public static function eael_validate_html_tag( $tag ){
 	    return in_array( strtolower( (string) $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
     }
+
+	/**
+	 * Post meta holding the last logged-in user who wrote the post's `_elementor_data`.
+	 * Set by Login_Registration::eael_record_register_settings_author().
+	 */
+	const ELEMENTOR_DATA_AUTHOR_KEY = '_eael_elementor_data_author';
+
+	/**
+	 * Protected meta holding, per Login | Register widget, the role that was approved
+	 * when it was written. Lives here rather than on the Login_Registration trait because
+	 * PHP only allows constants in traits from 8.2 onward, and the plugin supports 7.0+.
+	 */
+	const LR_ROLE_STATE_KEY = '_eael_lr_role_state';
+
+	/**
+	 * Users who control a post's widget settings: the post author, the last wp-admin
+	 * editor (`_edit_last`) and the last user who wrote `_elementor_data` on any path
+	 * (REST and imports do not update `_edit_last`). Features that act on widget
+	 * settings with elevated trust must require a capability of every one of them.
+	 *
+	 * @param int $page_id Post ID.
+	 * @return int[] Empty when nobody can be identified.
+	 */
+	public static function eael_page_responsible_user_ids( $page_id ) {
+		$page_id = (int) $page_id;
+		if ( ! $page_id ) {
+			return [];
+		}
+
+		return array_values( array_unique( array_filter( array_map( 'intval', [
+			get_post_meta( $page_id, '_edit_last', true ),
+			get_post_field( 'post_author', $page_id ),
+			get_post_meta( $page_id, self::ELEMENTOR_DATA_AUTHOR_KEY, true ),
+		] ) ) ) );
+	}
+
+	/**
+	 * Users who control the settings of a widget type rendered on a page.
+	 *
+	 * The page's own responsible users, plus those of every Elementor Pro global widget
+	 * template the page embeds that contains this widget type: a global widget's
+	 * settings are stored in its template, not in the page (#345 follow-up).
+	 *
+	 * @param int    $page_id     Page the widget is rendered on.
+	 * @param string $widget_type Widget type, e.g. `eael-login-register`.
+	 * @return int[] Empty when some contributing post has nobody identifiable.
+	 */
+	public static function eael_widget_settings_responsible_user_ids( $page_id, $widget_type ) {
+		$post_ids = [ (int) $page_id ];
+		$document = class_exists( '\Elementor\Plugin' ) ? Plugin::$instance->documents->get( (int) $page_id ) : null;
+
+		if ( $document ) {
+			self::eael_collect_global_template_ids( $document->get_elements_data(), (string) $widget_type, $post_ids );
+		}
+
+		$user_ids = [];
+		foreach ( $post_ids as $post_id ) {
+			$ids = self::eael_page_responsible_user_ids( $post_id );
+			if ( empty( $ids ) ) {
+				return [];
+			}
+			$user_ids = array_merge( $user_ids, $ids );
+		}
+
+		return array_values( array_unique( $user_ids ) );
+	}
+
+	/**
+	 * Collect IDs of global widget templates in an element tree that contain a widget type.
+	 *
+	 * @param array  $elements    Element tree.
+	 * @param string $widget_type Widget type to look for in each template.
+	 * @param int[]  $post_ids    Collected IDs (by reference).
+	 */
+	private static function eael_collect_global_template_ids( $elements, $widget_type, &$post_ids ) {
+		foreach ( (array) $elements as $element ) {
+			if ( isset( $element['widgetType'] ) && 'global' === $element['widgetType'] && ! empty( $element['templateID'] ) ) {
+				$template_id = (int) $element['templateID'];
+				if ( ! in_array( $template_id, $post_ids, true ) && false !== strpos( (string) get_post_meta( $template_id, '_elementor_data', true ), $widget_type ) ) {
+					$post_ids[] = $template_id;
+				}
+			}
+
+			if ( ! empty( $element['elements'] ) ) {
+				self::eael_collect_global_template_ids( $element['elements'], $widget_type, $post_ids );
+			}
+		}
+	}
+
+	/**
+	 * Query-string key that carries the signature of load-more query args.
+	 */
+	const LOAD_MORE_ARGS_SIGNATURE_KEY = 'eael_args_sig';
+
+	/**
+	 * Serialise WP_Query args for a load-more button's `data-args`, signed so the
+	 * `load_more` AJAX handler can tell server-built args from client-edited ones.
+	 *
+	 * @param array $args WP_Query args built from the widget's settings.
+	 * @return string
+	 */
+	public static function eael_signed_load_more_args( $args ) {
+		$query = http_build_query( (array) $args );
+
+		return $query . '&' . self::LOAD_MORE_ARGS_SIGNATURE_KEY . '=' . self::eael_load_more_args_signature( $query );
+	}
+
+	/**
+	 * Is the signature inside these parsed load-more args valid?
+	 *
+	 * @param array $args Args parsed from the request, signature key included.
+	 * @return bool
+	 */
+	public static function eael_verify_load_more_args( $args ) {
+		if ( ! is_array( $args ) || empty( $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ] ) || ! is_string( $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ] ) ) {
+			return false;
+		}
+
+		$signature = $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ];
+		unset( $args[ self::LOAD_MORE_ARGS_SIGNATURE_KEY ] );
+
+		return hash_equals( self::eael_load_more_args_signature( http_build_query( $args ) ), $signature );
+	}
+
+	/**
+	 * @param string $query Serialised query args.
+	 * @return string
+	 */
+	private static function eael_load_more_args_signature( $query ) {
+		return hash_hmac( 'sha256', 'eael_load_more|' . $query, wp_salt( 'nonce' ) );
+	}
 
 	/**
      *
@@ -2283,6 +2459,13 @@ class Helper
 
         $icon_name  = str_replace( [ 'fas fa-', 'fab fa-', 'far fa-' ], '', $icon['value'] );
         $library    = str_replace( 'fa-', '', $icon['library'] );
+        // The library name is interpolated into a filesystem path, so strip anything
+        // that is not a plain icon-set token. This blocks "../" traversal from a
+        // settings-derived value (the path read is otherwise an existence/read oracle).
+        $library    = preg_replace( '/[^A-Za-z0-9_-]/', '', (string) $library );
+        if ( '' === $library ) {
+            return $svg_html;
+        }
         $svg_object = file_get_contents( EAEL_PLUGIN_PATH . "assets/front-end/js/lib-view/icons/{$library}.json" );
         $svg_object = json_decode( $svg_object, true );
         $i_class    = str_replace(' ', '-', $icon['value']);
