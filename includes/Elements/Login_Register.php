@@ -2310,8 +2310,8 @@ class Login_Register extends Widget_Base {
 			'label'       => __( 'Already Used Email', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => true,
-			'placeholder' => __( 'Eg. Your email is already in use..', 'essential-addons-for-elementor-lite' ),
-			'default'     => __( 'The provided email is already registered with other account. Please login or reset password or use another email.', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'Eg. Invalid email provided or the email already registered.', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Invalid email provided or the email already registered.', 'essential-addons-for-elementor-lite' ),
 			'ai' => [
 				'active' => true,
 			],
