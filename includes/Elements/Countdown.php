@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 
@@ -816,13 +817,16 @@ class Countdown extends Widget_Base {
             [
                 'label'     => esc_html__( 'Label Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                // The frontend stylesheet sets this label to white for use on dark
-                // countdown backgrounds; on a plain/light background that leaves it
-                // invisible, so give it a readable default instead of leaving it to
-                // the stylesheet's white.
-                'default'   => '#333333',
+                'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-countdown-label' => 'color: {{VALUE}};',
+                ],
+                // The frontend stylesheet sets this label to white for use on dark
+                // countdown backgrounds; on a plain/light background that leaves it
+                // invisible. Default to the kit's text color instead of a fixed hex,
+                // same as this plugin's other label/description color controls.
+                'global'    => [
+                    'default' => Global_Colors::COLOR_TEXT,
                 ],
             ]
         );
