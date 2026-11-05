@@ -302,15 +302,16 @@ trait Woo_Product_Comparable {
 			'label'   => __( 'Fields Icon', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::ICONS,
 		] );
-        if ( 'eael-woo-product-compare' === $this->get_name()) {
-            $this->add_control( "no_products_found_text", [
-                'label'       => __( 'Text for "No products are found to compare"', 'essential-addons-for-elementor-lite' ),
-                'default' => __( 'No products are added to Compare. Please add products to compare.', 'essential-addons-for-elementor-lite' ),
-                'type'        => Controls_Manager::TEXTAREA,
-                'label_block' => true,
-                'placeholder' => __( 'Eg. No products are added to Compare.', 'essential-addons-for-elementor-lite' ),
-            ] );
-		}
+        // Both widgets that use this trait (the standalone Compare widget, and
+        // Product Grid's own "Add to Compare" table) can show an empty list,
+        // so both need this message, not just one of them.
+        $this->add_control( "no_products_found_text", [
+            'label'       => __( 'Text for "No products are found to compare"', 'essential-addons-for-elementor-lite' ),
+            'default' => __( 'No products are added to Compare. Please add products to compare.', 'essential-addons-for-elementor-lite' ),
+            'type'        => Controls_Manager::TEXTAREA,
+            'label_block' => true,
+            'placeholder' => __( 'Eg. No products are added to Compare.', 'essential-addons-for-elementor-lite' ),
+        ] );
 
 		$this->end_controls_section();
 	}
