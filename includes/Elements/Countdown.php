@@ -816,7 +816,11 @@ class Countdown extends Widget_Base {
             [
                 'label'     => esc_html__( 'Label Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '',
+                // The frontend stylesheet sets this label to white for use on dark
+                // countdown backgrounds; on a plain/light background that leaves it
+                // invisible, so give it a readable default instead of leaving it to
+                // the stylesheet's white.
+                'default'   => '#333333',
                 'selectors' => [
                     '{{WRAPPER}} .eael-countdown-label' => 'color: {{VALUE}};',
                 ],
