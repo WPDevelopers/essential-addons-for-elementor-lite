@@ -302,7 +302,7 @@ trait Woo_Product_Comparable {
 			'label'   => __( 'Fields Icon', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::ICONS,
 		] );
-        if ( 'eicon-woocommerce' === $this->get_name()) {
+        if ( 'eael-woo-product-compare' === $this->get_name()) {
             $this->add_control( "no_products_found_text", [
                 'label'       => __( 'Text for "No products are found to compare"', 'essential-addons-for-elementor-lite' ),
                 'default' => __( 'No products are added to Compare. Please add products to compare.', 'essential-addons-for-elementor-lite' ),
