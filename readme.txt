@@ -355,12 +355,14 @@ Nothing below is contacted until you set up the widget or option that uses it.
 
 == Changelog ==
 
-= 6.8.8 - 27/10/2026 =
+= 6.8.8 - 28/10/2026 =
 
 - Added: EA Event Calendar | Category colors and category labels for the Manual and The Events Calendar sources
 - Added: EA Event Calendar | Canceled / Postponed event status, with an option to hide canceled events from The Events Calendar
 - Improved: EA Event Calendar | The editor panel opens much faster for calendars with many Manual events
 - Improved: EA Advanced Tabs & EA Mega Menu | Much lower memory use on pages with many revisions
+- Improved: Security Enhancement
+- Improved: EA Login/Register Form | Custom New User Role now needs the page to be re-saved once after updating
 - Fixed: EA Filterable Gallery | Closing a self-hosted video's fullscreen player on iOS took visitors off the page
 - Fixed: EA Dual Color Header | Default Multiple Titles all shared the same color and gradient
 - Fixed: EA Woo Product Compare | PHP 8.2+ deprecation notice about a dynamic property
