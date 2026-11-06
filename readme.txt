@@ -778,3 +778,6 @@ Nothing below is contacted until you set up the widget or option that uses it.
 
 
 == Upgrade Notice ==
+
+= 6.8.8 =
+Important security update for all users. Please update now. If your registration form uses a custom New User Role, open that page in Elementor and click Update once after updating.
