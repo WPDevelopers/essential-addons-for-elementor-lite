@@ -383,6 +383,18 @@ class Team_Member extends Widget_Base {
                 'placeholder' => esc_html__( 'Place URL here', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        $repeater->add_control(
+            'social_label',
+            [
+                'label'       => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
+                'ai'          => [ 'active' => false ],
+                'placeholder' => esc_html__( 'e.g. Facebook', 'essential-addons-for-elementor-lite' ),
+                'description' => esc_html__( 'Read out by screen readers. When empty, the name is taken from the icon.', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
 		
 		$this->add_control(
 			'eael_team_member_social_profile_links',
@@ -1027,6 +1039,52 @@ class Team_Member extends Widget_Base {
 
 	}
 
+	/**
+	 * Accessible name for a social profile link: the item's Label, or a name
+	 * derived from its icon class (fab fa-facebook-f gives "Facebook").
+	 *
+	 * @param array $item Social profile repeater item.
+	 * @return string
+	 */
+	public static function get_social_link_label( $item ) {
+		if ( ! empty( $item['social_label'] ) ) {
+			return wp_strip_all_tags( $item['social_label'] );
+		}
+
+		// Same choice as render(): a legacy FA4 icon wins until it has been migrated.
+		$icon = '';
+		if ( ! empty( $item['social'] ) && is_string( $item['social'] ) && ! isset( $item['__fa4_migrated']['social_new'] ) ) {
+			$icon = $item['social'];
+		} elseif ( ! empty( $item['social_new']['value'] ) && is_string( $item['social_new']['value'] ) ) {
+			$icon = $item['social_new']['value'];
+		}
+
+		$names = [
+			'x-twitter' => 'X',
+			'twitter'   => 'X',
+			'linkedin'  => 'LinkedIn',
+			'youtube'   => 'YouTube',
+			'github'    => 'GitHub',
+			'tiktok'    => 'TikTok',
+			'whatsapp'  => 'WhatsApp',
+			'wordpress' => 'WordPress',
+			'google-plus' => 'Google+',
+			'envelope'  => __( 'Email', 'essential-addons-for-elementor-lite' ),
+		];
+
+		if ( preg_match( '/\bfa-([a-z0-9-]+)/', $icon, $match ) ) {
+			$slug = preg_replace( [ '/^square-/', '/-(square|official|f|in|alt|circle|p|b)$/' ], '', $match[1] );
+			if ( isset( $names[ $slug ] ) ) {
+				return $names[ $slug ];
+			}
+			if ( '' !== $slug ) {
+				return ucwords( str_replace( '-', ' ', $slug ) );
+			}
+		}
+
+		return __( 'Social profile', 'essential-addons-for-elementor-lite' );
+	}
+
 	protected function render( ) {
 
         $settings = $this->get_settings_for_display();
@@ -1094,6 +1152,7 @@ class Team_Member extends Widget_Base {
 								$icon_is_new = empty($item['social']); ?>
 								<?php if ( ! empty( $item['social'] ) || !empty($item['social_new'])) : ?>
 									<?php $this->add_link_attributes( 'social_link_' . $index, $item['link'] ); ?>
+									<?php $this->add_render_attribute( 'social_link_' . $index, 'aria-label', self::get_social_link_label( $item ) ); ?>
 									<li class="eael-team-member-social-link">
 										<a <?php $this->print_render_attribute_string( 'social_link_' . $index ); ?>>
 											<?php if ($icon_is_new || $icon_migrated) { ?>
