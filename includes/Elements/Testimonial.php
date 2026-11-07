@@ -1100,8 +1100,12 @@ class Testimonial extends Widget_Base {
 						$this->render_testimonial_rating();
 					}
 				?>
-				<h3 class="eael-testimonial-user"><?php echo wp_kses( $settings['eael_testimonial_name'], HelperClass::eael_allowed_tags() ); ?></h3>
-				<p class="eael-testimonial-user-company"><?php echo wp_kses( $settings['eael_testimonial_company_title'], HelperClass::eael_allowed_tags() ); ?></p>
+				<?php if ( ! empty( $settings['eael_testimonial_name'] ) ) : ?>
+					<h3 class="eael-testimonial-user"><?php echo wp_kses( $settings['eael_testimonial_name'], HelperClass::eael_allowed_tags() ); ?></h3>
+				<?php endif; ?>
+				<?php if ( ! empty( $settings['eael_testimonial_company_title'] ) ) : ?>
+					<p class="eael-testimonial-user-company"><?php echo wp_kses( $settings['eael_testimonial_company_title'], HelperClass::eael_allowed_tags() ); ?></p>
+				<?php endif; ?>
 				<?php
 				if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
 					$this->render_testimonial_rating();
