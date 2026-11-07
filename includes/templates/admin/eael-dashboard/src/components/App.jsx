@@ -6,6 +6,7 @@ import Extensions from "./Extensions.jsx";
 import Tools from "./Tools.jsx";
 import Integrations from "./Integrations.jsx";
 import Premium from "./Premium.jsx";
+import Panel from "./Panel.jsx";
 import consumer from "../context";
 import Modal from "./Modal.jsx";
 import ModalGoPremium from "./ModalGoPremium.jsx";
@@ -29,7 +30,8 @@ function App() {
 
 	// Deep link: sync hash route → menu/modal state (handles page load, back/forward)
 	useEffect(() => {
-		const validTabs = ["general", "elements", "extensions", "tools", "integrations", "go-premium"];
+		// Every tab in the menu, including ones another plugin adds.
+		const validTabs = Object.keys(localize.eael_dashboard.menu);
 		const modalMatch = location.pathname.match(/^\/(elements|extensions)\/(.+)$/);
 		const tabMatch = location.pathname.match(/^\/([^/]+)$/);
 
@@ -140,6 +142,7 @@ function App() {
 					{eaState.menu === "tools" ? <Tools /> : ""}
 					{eaState.menu === "integrations" ? <Integrations /> : ""}
 					{eaState.menu === "go-premium" ? <Premium /> : ""}
+					{localize.eael_dashboard.menu[eaState.menu]?.html ? <Panel item={eaState.menu} /> : ""}
 				</section>
 				{eaState.modal === "open" && <Modal />}
 				{eaState.modalGoPremium === "open" && <ModalGoPremium />}

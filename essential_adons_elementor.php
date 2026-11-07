@@ -30,6 +30,8 @@ define( 'EAEL_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'EAEL_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'EAEL_PLUGIN_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
 define( 'EAEL_PLUGIN_VERSION', '6.8.8' );
+// The dashboard renders tabs other plugins add through eael/admin/dashboard/menu.
+define( 'EAEL_DASHBOARD_PANELS', true );
 define( 'EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor' );
 define( 'EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor' );
 /**
