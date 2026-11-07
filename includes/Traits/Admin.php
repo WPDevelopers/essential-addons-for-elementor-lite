@@ -63,7 +63,15 @@ trait Admin {
 			    'reactPath'               => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
 			    'is_eapro_activate'       => $this->pro_enabled,
 			    'is_templately_installed' => $this->installer->get_local_plugin_data( 'templately/templately.php' ),
-			    'menu'                    => [
+			    /**
+			     * Tabs down the dashboard's side. Pro adds its own here, e.g.
+			     * FigWP: an item may carry 'badge' (shown as the dashboard's
+			     * NEW/BETA label), 'html' (a panel rendered on the server,
+			     * shown as the tab's content) and 'url_flag' (a query
+			     * parameter dropped from the address once the tab has shown
+			     * it). EAEL_DASHBOARD_PANELS says this Lite renders them.
+			     */
+			    'menu'                    => apply_filters( 'eael/admin/dashboard/menu', [
 				    'general'      => [
 					    'label' => __( 'General', 'essential-addons-for-elementor-lite' ),
 					    'icon'  => 'ea-home'
@@ -88,7 +96,7 @@ trait Admin {
 					    'label' => __( 'Go Premium', 'essential-addons-for-elementor-lite' ),
 					    'icon'  => 'ea-lock'
 				    ],
-			    ],
+			    ] ),
 			    'i18n'                    => [
 				    'enable_all'           => __( 'Enable All', 'essential-addons-for-elementor-lite' ),
 				    'disable_all'          => __( 'Disable All', 'essential-addons-for-elementor-lite' ),

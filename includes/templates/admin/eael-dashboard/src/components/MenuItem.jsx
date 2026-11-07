@@ -21,6 +21,7 @@ function MenuItem(props) {
                             <i className={icon + ' ea-dash-icon'}></i>
                         </span>
                 <span className="ea__nav-text">{label}</span>
+                {eaData.badge && <span className={"content-btn ea__nav-badge " + eaData.badge.toLowerCase()}>{eaData.badge}</span>}
             </div>
         </>
     );
