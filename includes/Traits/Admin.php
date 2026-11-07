@@ -65,7 +65,8 @@ trait Admin {
 			    'is_templately_installed' => $this->installer->get_local_plugin_data( 'templately/templately.php' ),
 			    /**
 			     * Tabs down the dashboard's side. Pro adds its own here, e.g.
-			     * FigWP: an item may carry 'badge' (shown as the dashboard's
+			     * FigWP: an item may carry 'icon_url' (an image in place of the
+			     * icon font glyph, e.g. a product logo), 'badge' (shown as the dashboard's
 			     * NEW/BETA label), 'html' (a panel rendered on the server,
 			     * shown as the tab's content) and 'url_flag' (a query
 			     * parameter dropped from the address once the tab has shown
