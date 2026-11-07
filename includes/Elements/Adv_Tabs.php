@@ -1770,10 +1770,9 @@ class Adv_Tabs extends Widget_Base
 
 						        if ( absint( $tab['eael_primary_templates'] ) === $current_page_id || in_array( absint( $tab['eael_primary_templates'] ), $revision_ids, true ) ) {
                                     echo '<p>' . esc_html__( 'The provided Template matches the current page or one of its revisions!', 'essential-addons-for-elementor-lite' ) . '</p>';
-						        } else {
-							        if ( ! Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
-								        return;
-							        }
+						        } elseif ( Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
+							        // An unpublished or missing template leaves this tab empty. Never
+							        // return here: the loop must finish so the wrapper divs get closed.
 
 							        // WPML Compatibility
 							        if ( ! is_array( $tab['eael_primary_templates'] ) ) {
