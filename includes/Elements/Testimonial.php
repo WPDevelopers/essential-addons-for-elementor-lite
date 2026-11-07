@@ -118,11 +118,11 @@ class Testimonial extends Widget_Base {
 						'image' => $image_path . 'icon-img-right-content.png'
 					],
 					'content-top-icon-title-inline' => [
-						'title' => esc_html__('Content Top | Icon Title Inline', 'essential-addons-for-elementor-lite'),
+						'title' => esc_html__('Content Bottom | Icon Title Inline', 'essential-addons-for-elementor-lite'),
 						'image' => $image_path . 'content-bottom-icon-title-inline.png'
 					],
 					'content-bottom-icon-title-inline' => [
-						'title' => esc_html__('Content Bottom | Icon Title Inline', 'essential-addons-for-elementor-lite'),
+						'title' => esc_html__('Content Top | Icon Title Inline', 'essential-addons-for-elementor-lite'),
 						'image' => $image_path . 'content-top-icon-title-inline.png'
 					],
 					'simple-layout' => [
