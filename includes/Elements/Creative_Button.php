@@ -1169,8 +1169,15 @@ use HelperTrait;
         $icon_migrated = isset($settings['__fa4_migrated']['eael_creative_button_icon_new']);
         $icon_is_new = empty($settings['eael_creative_button_icon']);
 
+        // Icon Position is hidden until the new icon control is set, so a button saved
+        // with only the legacy FA4 icon has no position. Fall back to the default, "Before".
+        $icon_alignment = $settings['eael_creative_button_icon_alignment'];
+        if ( empty( $icon_alignment ) && ! $icon_is_new ) {
+            $icon_alignment = 'left';
+        }
+
         $this->add_render_attribute('eael_creative_button', [
-            'class' => ['eael-creative-button', esc_attr($settings['creative_button_effect']) , 'eael-cb-icon-position-' . $settings['eael_creative_button_icon_alignment'] ],
+            'class' => ['eael-creative-button', esc_attr($settings['creative_button_effect']) , 'eael-cb-icon-position-' . $icon_alignment ],
         ]);
 
         if ( ! empty( $settings['creative_button_link_url']['url'] ) ) {
@@ -1201,7 +1208,7 @@ use HelperTrait;
 
                 <div class="creative-button-inner">
 
-                    <?php if ($settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $settings['eael_creative_button_icon_alignment'] == 'left') : ?>
+                    <?php if ($settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $icon_alignment === 'left') : ?>
                         <?php if ($icon_migrated || $icon_is_new) {
 		                    echo '<span class="eael-creative-button-icon-left">';
 		                    Icons_Manager::render_icon( $settings['eael_creative_button_icon_new'], [ 'aria-hidden' => 'true' ] );
@@ -1213,7 +1220,7 @@ use HelperTrait;
 
                     <span class="cretive-button-text"><?php echo wp_kses( $settings['creative_button_text'], Helper::eael_allowed_tags() ); ?></span>
 
-                    <?php if ($settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $settings['eael_creative_button_icon_alignment'] == 'right') : ?>
+                    <?php if ($settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $icon_alignment === 'right') : ?>
                         <?php if ($icon_migrated || $icon_is_new) {
                             echo '<span class="eael-creative-button-icon-right">';
 		                    Icons_Manager::render_icon( $settings['eael_creative_button_icon_new'], [ 'aria-hidden' => 'true' ] );
