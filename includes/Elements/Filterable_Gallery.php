@@ -82,7 +82,11 @@ class Filterable_Gallery extends Widget_Base
     }
 
     protected function is_dynamic_content():bool {
-        return false;
+        // ACF Repeater reads rows from the post being viewed, so a render cached on a
+        // shared template would show the first post's rows on every post.
+        $settings = $this->get_data( 'settings' );
+
+        return is_array( $settings ) && 'acf_repeater' === ( $settings['eael_fg_data_source'] ?? '' );
     }
 
     public function has_widget_inner_wrapper(): bool {
