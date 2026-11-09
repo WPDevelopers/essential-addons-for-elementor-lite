@@ -1184,14 +1184,6 @@ use HelperTrait;
           $this->add_link_attributes( 'eael_creative_button', $settings['creative_button_link_url'] );
         }
 
-        if ($settings['creative_button_link_url']['is_external']) {
-            $this->add_render_attribute('eael_creative_button', 'target');
-        }
-
-        if ( $settings['creative_button_link_url']['nofollow'] ) {
-            $this->add_render_attribute('eael_creative_button', 'rel', 'nofollow');
-        }
-
         if ( isset( $settings['eael_creative_button_remove_svg_color'] ) && 'yes' === $settings['eael_creative_button_remove_svg_color'] ) {
             $this->add_render_attribute('eael_creative_button', 'class', 'csvg-use-color');
         }
