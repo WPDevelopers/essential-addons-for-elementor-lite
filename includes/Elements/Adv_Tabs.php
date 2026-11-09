@@ -85,6 +85,13 @@ class Adv_Tabs extends Widget_Base
                     $is_dynamic_content = true;
                     break;
                 }
+
+                // "Active as Scheduled" picks the active tab from the current time at render,
+                // so a cached render would switch only when the element cache expires.
+                if( isset( $tab['eael_adv_tabs_tab_show_as_scheduled'] ) && 'yes' === $tab['eael_adv_tabs_tab_show_as_scheduled'] ) {
+                    $is_dynamic_content = true;
+                    break;
+                }
             }
         }
 
