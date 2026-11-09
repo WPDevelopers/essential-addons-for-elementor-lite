@@ -38,7 +38,7 @@ class Post_Timeline extends Widget_Base
 
     public function get_categories()
     {
-        return ['essential-addons-for-elementor-lite'];
+        return ['essential-addons-elementor'];
     }
 
     public function get_keywords()
