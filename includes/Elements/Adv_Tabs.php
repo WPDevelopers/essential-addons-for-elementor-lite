@@ -1640,6 +1640,22 @@ class Adv_Tabs extends Widget_Base
         <div <?php $this->print_render_attribute_string('eael_tab_wrapper'); ?>>
             <div <?php $this->print_render_attribute_string('eael_tab_glassey'); ?>>
                 <ul <?php $this->print_render_attribute_string('eael_tab_icon_position'); ?>>
+                    <?php
+                    // The tab announced as selected must be the one shown on load:
+                    // the scheduled tab, else the first "Active as Default" tab, else the first tab.
+                    $selected_tab_index = 0;
+                    if ( $scheduled_active_tab_index !== null ) {
+                        $selected_tab_index = $scheduled_active_tab_index;
+                    } else {
+                        foreach ( $settings['eael_adv_tabs_tab'] as $default_index => $default_tab ) {
+                            // The switch's off value is 'inactive', so test for the on value.
+                            if ( 'active-default' === ( $default_tab['eael_adv_tabs_tab_show_as_default'] ?? '' ) ) {
+                                $selected_tab_index = $default_index;
+                                break;
+                            }
+                        }
+                    }
+                    ?>
                     <?php foreach ($settings['eael_adv_tabs_tab'] as $index => $tab) :
 	                    $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );
 	                    $tab_id = $tab_id === 'safari' ? 'eael-safari' : $tab_id;
@@ -1659,12 +1675,12 @@ class Adv_Tabs extends Widget_Base
                         $this->add_render_attribute( $tab_title_setting_key, [
                             'id' => $tab_id,
                             'class' => [ $tab_active_class, 'eael-tab-item-trigger', 'eael-tab-nav-item' ],
-                            'aria-selected' => 1 === $tab_count ? 'true' : 'false',
+                            'aria-selected' => $index === $selected_tab_index ? 'true' : 'false',
                             'data-tab' => $tab_count,
                             'role' => 'tab',
-                            'tabindex' => 1 === $tab_count ? '0' : '-1',
+                            'tabindex' => $index === $selected_tab_index ? '0' : '-1',
                             'aria-controls' => $tab_id . '-tab',
-                            'aria-expanded' => 'false',
+                            'aria-expanded' => $index === $selected_tab_index ? 'true' : 'false',
                         ] );
 
 	                    $repeater_html_tag = ! empty( $tab['eael_adv_tabs_tab_title_html_tag'] ) ? Helper::eael_validate_html_tag( $tab['eael_adv_tabs_tab_title_html_tag'] ) : 'span';
@@ -1747,6 +1763,7 @@ class Adv_Tabs extends Widget_Base
 		        <?php foreach ($settings['eael_adv_tabs_tab'] as $content_index => $tab) :
 			        $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default'];
 			        $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );
+			        $tab_nav_id = $tab_id === 'safari' ? 'eael-safari' : $tab_id;
 			        $tab_id = $tab_id === 'safari' ? 'eael-safari-tab' : $tab_id . '-tab';
 
                     $content_active_class = '';
@@ -1759,7 +1776,7 @@ class Adv_Tabs extends Widget_Base
                     }
 			        ?>
 
-                    <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($content_active_class); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
+                    <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($content_active_class); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>" role="tabpanel" aria-labelledby="<?php echo esc_attr( $tab_nav_id ); ?>">
 				        <?php
                         if ('content' == $tab['eael_adv_tabs_text_type']) :
                             $tab_content = $tab['eael_adv_tabs_tab_content'];
