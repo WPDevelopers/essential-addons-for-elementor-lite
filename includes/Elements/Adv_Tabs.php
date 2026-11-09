@@ -1641,7 +1641,8 @@ class Adv_Tabs extends Widget_Base
                         $selected_tab_index = $scheduled_active_tab_index;
                     } else {
                         foreach ( $settings['eael_adv_tabs_tab'] as $default_index => $default_tab ) {
-                            if ( ! empty( $default_tab['eael_adv_tabs_tab_show_as_default'] ) ) {
+                            // The switch's off value is 'inactive', so test for the on value.
+                            if ( 'active-default' === ( $default_tab['eael_adv_tabs_tab_show_as_default'] ?? '' ) ) {
                                 $selected_tab_index = $default_index;
                                 break;
                             }
