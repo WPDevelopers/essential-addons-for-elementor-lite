@@ -921,9 +921,14 @@ class Testimonial extends Widget_Base {
 		$settings = $this->get_settings_for_display('eael_testimonial_enable_rating');
 
 		if ( $settings == 'yes' ) :
+			$ratings = [ 'rating-one' => 1, 'rating-two' => 2, 'rating-three' => 3, 'rating-four' => 4, 'rating-five' => 5 ];
+			$rating  = $this->get_settings_for_display( 'eael_testimonial_rating_number' );
+			$rating  = isset( $ratings[ $rating ] ) ? $ratings[ $rating ] : 5;
+			/* translators: %d: star rating, from 1 to 5. */
+			$rating_label = sprintf( __( 'Rated %d out of 5', 'essential-addons-for-elementor-lite' ), $rating );
 			ob_start();
 		?>
-		<ul class="testimonial-star-rating">
+		<ul class="testimonial-star-rating" role="img" aria-label="<?php echo esc_attr( $rating_label ); ?>">
 			<li><i class="fas fa-star" aria-hidden="true"></i></li>
 			<li><i class="fas fa-star" aria-hidden="true"></i></li>
 			<li><i class="fas fa-star" aria-hidden="true"></i></li>
