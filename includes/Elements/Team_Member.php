@@ -572,7 +572,7 @@ class Team_Member extends Widget_Base {
 						'icon' => 'eicon-text-align-right',
 					],
 				],
-				'default' => 'eael-team-align-default',
+				'default' => 'default',
 				'prefix_class' => 'eael-team-align-',
 			]
 		);
