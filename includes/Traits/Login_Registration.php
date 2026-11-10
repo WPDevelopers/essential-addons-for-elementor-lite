@@ -1594,6 +1594,7 @@ trait Login_Registration {
 			if( $user && ! is_wp_error( $user ) ){
 				try {
 					reset_password( $user, sanitize_text_field( $_POST['eael-pass1'] ) ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+					$this->eael_expire_wc_reset_cookie();
 					$data['message'] = isset( $settings['success_resetpassword'] ) ? Helper::eael_wp_kses( $settings['success_resetpassword'] ) : esc_html__( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
 
 					$error_key = 'eael_resetpassword_error_' . esc_attr( $widget_id );
@@ -1651,6 +1652,20 @@ trait Login_Registration {
 			}
 		}
 
+	}
+
+	/**
+	 * After a reset, forget WooCommerce's reset cookie as its own form does, so a
+	 * reload doesn't show the reset form again for a key that's now used. The
+	 * cookie lives on the lost-password endpoint's path, so it's expired there
+	 * even when this request (an AJAX submit) came from somewhere else.
+	 */
+	protected function eael_expire_wc_reset_cookie() {
+		if ( ! function_exists( 'wc_get_endpoint_url' ) || ! function_exists( 'wc_get_page_permalink' ) || headers_sent() ) {
+			return;
+		}
+		$path = wp_parse_url( wc_get_endpoint_url( 'lost-password', '', wc_get_page_permalink( 'myaccount' ) ), PHP_URL_PATH );
+		setcookie( 'wp-resetpass-' . COOKIEHASH, ' ', time() - YEAR_IN_SECONDS, $path ? $path : '/', COOKIE_DOMAIN, is_ssl(), true );
 	}
 
 	public function eael_redirect_to_reset_password(){
