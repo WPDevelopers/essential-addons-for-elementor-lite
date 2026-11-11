@@ -272,6 +272,10 @@ class Bootstrap
             add_filter( 'elementor/documents/get/post_id', [ $this, 'eael_wpml_template_translation' ] );
         }
 
+        // WPML translates the popup id in a Creative Button's dynamic "Open Popup"
+        // link only when told which setting holds it.
+        add_filter( 'wpml_pb_elementor_widget_dynamic_id_converters', [ $this, 'eael_wpml_dynamic_id_converters' ] );
+
         // Polylang has no Elementor integration, so the template library is not
         // translatable by default. Opt it in so saved templates can be mapped to the
         // current language (and managed from Polylang's UI).

@@ -498,6 +498,35 @@ trait Helper
 	}
 
 	/**
+	 * Tell WPML where our widgets keep a dynamic popup id, so a translated page
+	 * opens the translated popup instead of the original one.
+	 *
+	 * WPML converts the ids in Elementor's own dynamic links, but not in a
+	 * custom widget's link control. Each converter is
+	 * [ widget matcher, path to the dynamic setting, dynamic tag name, id key ],
+	 * the format WPML documents for this filter.
+	 *
+	 * @param array $converters WPML's converters.
+	 *
+	 * @return array
+	 */
+	public function eael_wpml_dynamic_id_converters( $converters ) {
+		if ( ! class_exists( '\WPML\FP\Relation' ) || ! class_exists( '\WPML\FP\Obj' ) ) {
+			return $converters;
+		}
+
+		$converters   = (array) $converters;
+		$converters[] = [
+			\WPML\FP\Relation::propEq( 'widgetType', 'eael-creative-button' ),
+			\WPML\FP\Obj::lensPath( [ 'settings', '__dynamic__', 'creative_button_link_url' ] ),
+			'popup',
+			'popup',
+		];
+
+		return $converters;
+	}
+
+	/**
 	 * eael_wpml_template_translation
 	 *
 	 * Resolve an Elementor template/library id to its translation in the current
