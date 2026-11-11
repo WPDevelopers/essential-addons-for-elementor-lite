@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.3
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 6.8.8
+Stable tag: 6.8.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -354,6 +354,30 @@ Nothing below is contacted until you set up the widget or option that uses it.
 * **WPDeveloper** (opt-in usage data, see the FAQ): sent to send.wpinsight.com and essential-addons.com. [Privacy](https://wpdeveloper.com/privacy-policy/).
 
 == Changelog ==
+
+= 6.8.9 - 11/11/2026 =
+
+- Added: EA Dashboard | Essential Addons Pro can now add its own tabs to the dashboard, starting with the new FigWP tab
+- Improved: EA Team Member | Screen readers announce each social profile link by name, and a new optional Label field sets that name
+- Improved: EA Testimonial | Screen readers announce the star rating, for example "Rated 4 out of 5"
+- Improved: EA Advanced Tabs | Screen readers announce the tab that is shown as the selected one
+- Improved: Security Enhancement
+- Fixed: EA Advanced Tabs | A tab using an unpublished or deleted template hid the widgets that came after it
+- Fixed: EA Advanced Tabs | "Active as Scheduled" switched tabs up to 24 hours late
+- Fixed: EA Feature List & EA Filterable Gallery | With an ACF Repeater source, every post using the same template showed the first post's items
+- Fixed: EA Creative Button | Buttons saved with an older Font Awesome 4 icon lost their icon
+- Fixed: EA Creative Button | Links with "Add nofollow" were printed as rel="nofollow nofollow"
+- Fixed: EA Creative Button | A dynamic Open Popup link did nothing on WPML translated pages
+- Fixed: EA Team Member, EA Post Timeline & EA Woo Product Carousel | The widgets were missing from the Essential Addons category in the Elementor panel
+- Fixed: EA Team Member | No Alignment option was selected by default
+- Fixed: EA Testimonial | The "Content Top" and "Content Bottom" skin labels were swapped
+- Fixed: EA Testimonial | Simple Layout left an empty gap when Name and Company were blank
+- Fixed: EA Countdown | The Days, Hours, Minutes and Seconds labels were invisible by default
+- Fixed: EA Woo Product Compare | Showed a blank table instead of its "no products" message
+- Fixed: EA Login/Register Form | WooCommerce's "set your new password" link opened the Login form instead of the reset form
+- Fixed: EA Business Reviews | The Local Business Schema switch label was cut off
+- Fixed: A page could fail to load when a global widget's template contained itself
+- Few minor bug fixes & improvements
 
 = 6.8.8 - 28/10/2026 =
 
