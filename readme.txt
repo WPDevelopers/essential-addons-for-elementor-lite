@@ -355,7 +355,7 @@ Nothing below is contacted until you set up the widget or option that uses it.
 
 == Changelog ==
 
-= 6.8.9 - 11/11/2026 =
+= 6.8.9 - 12/11/2026 =
 
 - Added: EA Dashboard | Essential Addons Pro can now add its own tabs to the dashboard, starting with the new FigWP tab
 - Improved: EA Team Member | Screen readers announce each social profile link by name, and a new optional Label field sets that name
