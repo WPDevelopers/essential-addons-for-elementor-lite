@@ -117,3 +117,4 @@ Site: `http://localhost:8888` — WP admin: `admin` / `password`
 @.claude/rules/php-standards.md
 @.claude/rules/asset-pipeline.md
 @.claude/rules/testing.md
+@.claude/rules/security-release.md

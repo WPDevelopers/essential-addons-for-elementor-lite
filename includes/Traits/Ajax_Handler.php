@@ -1129,7 +1129,16 @@ trait Ajax_Handler {
 			foreach ( $_POST['product_data'] as $item ) {
 				$product_id   = isset( $item['product_id'] ) ? sanitize_text_field( wp_unslash( $item['product_id'] ) ) : 0;
 				$variation_id = isset( $item['variation_id'] ) ? sanitize_text_field( wp_unslash( $item['variation_id'] ) ) : 0;
-				$quantity     = isset( $item['quantity'] ) ? sanitize_text_field( wp_unslash( $item['quantity'] ) ) : 0;
+
+				// SECURITY: normalise the client-supplied quantity the way WooCommerce's own
+				// add-to-cart callers do (wc_stock_amount()), and refuse anything that is not a
+				// positive amount. sanitize_text_field() alone keeps a fractional value such as
+				// "0.01" intact, and WC()->cart->add_to_cart() rejects only quantities <= 0, so
+				// the line would be priced at a fraction of the product price (0.01 => 1%).
+				$quantity = isset( $item['quantity'] ) ? wc_stock_amount( wp_unslash( $item['quantity'] ) ) : 0;
+				if ( ! is_numeric( $quantity ) || $quantity <= 0 ) {
+					continue;
+				}
 
 				if ( $variation_id ) {
 					WC()->cart->add_to_cart( $product_id, $quantity, $variation_id, $variation );

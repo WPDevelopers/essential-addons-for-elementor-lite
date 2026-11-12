@@ -80,15 +80,17 @@ class Elements_Manager {
 	 * get_widget_list
 	 * get widget names
 	 * @param array $data
+	 * @param array $visited_templates Global widget templates already being scanned
+	 *                                 on this path, keyed by id.
 	 *
 	 * @return array
 	 */
-	public function get_widget_list( $data ) {
+	public function get_widget_list( $data, $visited_templates = [] ) {
 		$widget_list = [];
 		$replace     = $this->replace_widget_name();
 
 		if ( is_object( Plugin::$instance->db ) ) {
-			Plugin::$instance->db->iterate_data( $data, function ( $element ) use ( &$widget_list, $replace ) {
+			Plugin::$instance->db->iterate_data( $data, function ( $element ) use ( &$widget_list, $replace, $visited_templates ) {
 
 				if ( empty( $element['widgetType'] ) ) {
 					$type = $element['elType'];
@@ -97,8 +99,17 @@ class Elements_Manager {
 				}
 
 				if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
-					$document = Plugin::$instance->documents->get( $element['templateID'] );
-					$type     = is_object( $document ) ? current( $this->get_widget_list( $document->get_elements_data() ) ) : $type;
+					$template_id = isset( $element['templateID'] ) ? absint( $element['templateID'] ) : 0;
+
+					// A global widget can resolve back to a template already being
+					// scanned; following it again would recurse until PHP crashes.
+					if ( ! $template_id || isset( $visited_templates[ $template_id ] ) ) {
+						return;
+					}
+					$visited_templates[ $template_id ] = true;
+
+					$document = Plugin::$instance->documents->get( $template_id );
+					$type     = is_object( $document ) ? current( $this->get_widget_list( $document->get_elements_data(), $visited_templates ) ) : $type;
 
 					if ( ! empty( $type ) ) {
 						$type = 'eael-' . $type;

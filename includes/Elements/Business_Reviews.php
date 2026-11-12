@@ -241,8 +241,8 @@ class Business_Reviews extends Widget_Base {
 			[
 				'label'        => __( 'Local Business Schema', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Enable', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Disable', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'On', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Off', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => '',
 			]
