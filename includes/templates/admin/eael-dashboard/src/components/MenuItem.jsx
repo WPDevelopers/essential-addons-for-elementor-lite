@@ -18,9 +18,12 @@ function MenuItem(props) {
             <div className={eaState.menu === props.item ? 'ea__sidebar-nav active' : 'ea__sidebar-nav'}
                  onClick={changeHandler}>
                         <span className="ea__nav-icon">
-                            <i className={icon + ' ea-dash-icon'}></i>
+                            {eaData.icon_url
+                                ? <img className="ea__nav-logo" src={eaData.icon_url} alt="" width="18" height="18"/>
+                                : <i className={icon + ' ea-dash-icon'}></i>}
                         </span>
                 <span className="ea__nav-text">{label}</span>
+                {eaData.badge && <span className={"content-btn ea__nav-badge " + eaData.badge.toLowerCase()}>{eaData.badge}</span>}
             </div>
         </>
     );

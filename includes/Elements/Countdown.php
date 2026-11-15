@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 
@@ -56,6 +57,11 @@ class Countdown extends Widget_Base {
     }
 
     protected function is_dynamic_content():bool {
+        // The editor also asks each widget type, which has no settings, when it
+        // builds the widget list: get_data() fails on that.
+        if ( $this->is_type_instance() ) {
+            return false;
+        }
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
         }
@@ -819,6 +825,13 @@ class Countdown extends Widget_Base {
                 'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-countdown-label' => 'color: {{VALUE}};',
+                ],
+                // The frontend stylesheet sets this label to white for use on dark
+                // countdown backgrounds; on a plain/light background that leaves it
+                // invisible. Default to the kit's text color instead of a fixed hex,
+                // same as this plugin's other label/description color controls.
+                'global'    => [
+                    'default' => Global_Colors::COLOR_TEXT,
                 ],
             ]
         );

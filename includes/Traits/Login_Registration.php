@@ -780,7 +780,8 @@ trait Login_Registration {
 		if ( ! empty( $_POST['email'] ) && is_email( wp_unslash( $_POST['email'] ) ) ) {
 			$email = sanitize_email( wp_unslash( $_POST['email'] ) );
 			if ( email_exists( $email ) ) {
-				$errors['email'] = isset( $settings['err_email_used'] ) ? Helper::eael_wp_kses( $settings['err_email_used'] ) : __( 'The provided email is already registered with other account. Please login or reset password or use another email.', 'essential-addons-for-elementor-lite' );
+				// Keep this vague, like the username check below: a public form must not state outright that an address has an account.
+				$errors['email'] = isset( $settings['err_email_used'] ) ? Helper::eael_wp_kses( $settings['err_email_used'] ) : __( 'Invalid email provided or the email already registered.', 'essential-addons-for-elementor-lite' );
 			}
 		} else {
 			$errors['email'] = isset( $settings['err_email_missing'] ) ? Helper::eael_wp_kses( $settings['err_email_missing'] ) : __( 'Email is missing or Invalid', 'essential-addons-for-elementor-lite' );
@@ -802,7 +803,7 @@ trait Login_Registration {
 			if ( ! validate_username( $username ) || mb_strlen( $username ) > 60 ) {
 				$errors['user_name'] = isset( $settings['err_username'] ) ? Helper::eael_wp_kses( $settings['err_username'] ) : __( 'Invalid username provided.', 'essential-addons-for-elementor-lite' );
 			}elseif(username_exists( $username )){
-				$errors['user_name'] = isset( $settings['err_username_used'] ) ? Helper::eael_wp_kses( $settings['err_username_used'] ) : __( 'The username already registered.', 'essential-addons-for-elementor-lite' );
+				$errors['user_name'] = isset( $settings['err_username_used'] ) ? Helper::eael_wp_kses( $settings['err_username_used'] ) : __( 'Invalid username provided or the username already registered.', 'essential-addons-for-elementor-lite' );
 
 			}
 		} else {
@@ -1593,6 +1594,7 @@ trait Login_Registration {
 			if( $user && ! is_wp_error( $user ) ){
 				try {
 					reset_password( $user, sanitize_text_field( $_POST['eael-pass1'] ) ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+					$this->eael_expire_wc_reset_cookie();
 					$data['message'] = isset( $settings['success_resetpassword'] ) ? Helper::eael_wp_kses( $settings['success_resetpassword'] ) : esc_html__( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
 
 					$error_key = 'eael_resetpassword_error_' . esc_attr( $widget_id );
@@ -1650,6 +1652,20 @@ trait Login_Registration {
 			}
 		}
 
+	}
+
+	/**
+	 * After a reset, forget WooCommerce's reset cookie as its own form does, so a
+	 * reload doesn't show the reset form again for a key that's now used. The
+	 * cookie lives on the lost-password endpoint's path, so it's expired there
+	 * even when this request (an AJAX submit) came from somewhere else.
+	 */
+	protected function eael_expire_wc_reset_cookie() {
+		if ( ! function_exists( 'wc_get_endpoint_url' ) || ! function_exists( 'wc_get_page_permalink' ) || headers_sent() ) {
+			return;
+		}
+		$path = wp_parse_url( wc_get_endpoint_url( 'lost-password', '', wc_get_page_permalink( 'myaccount' ) ), PHP_URL_PATH );
+		setcookie( 'wp-resetpass-' . COOKIEHASH, ' ', time() - YEAR_IN_SECONDS, $path ? $path : '/', COOKIE_DOMAIN, is_ssl(), true );
 	}
 
 	public function eael_redirect_to_reset_password(){

@@ -63,7 +63,16 @@ trait Admin {
 			    'reactPath'               => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
 			    'is_eapro_activate'       => $this->pro_enabled,
 			    'is_templately_installed' => $this->installer->get_local_plugin_data( 'templately/templately.php' ),
-			    'menu'                    => [
+			    /**
+			     * Tabs down the dashboard's side. Pro adds its own here, e.g.
+			     * FigWP: an item may carry 'icon_url' (an image in place of the
+			     * icon font glyph, e.g. a product logo), 'badge' (shown as the dashboard's
+			     * NEW/BETA label), 'html' (a panel rendered on the server,
+			     * shown as the tab's content) and 'url_flag' (a query
+			     * parameter dropped from the address once the tab has shown
+			     * it). EAEL_DASHBOARD_PANELS says this Lite renders them.
+			     */
+			    'menu'                    => apply_filters( 'eael/admin/dashboard/menu', [
 				    'general'      => [
 					    'label' => __( 'General', 'essential-addons-for-elementor-lite' ),
 					    'icon'  => 'ea-home'
@@ -88,7 +97,7 @@ trait Admin {
 					    'label' => __( 'Go Premium', 'essential-addons-for-elementor-lite' ),
 					    'icon'  => 'ea-lock'
 				    ],
-			    ],
+			    ] ),
 			    'i18n'                    => [
 				    'enable_all'           => __( 'Enable All', 'essential-addons-for-elementor-lite' ),
 				    'disable_all'          => __( 'Disable All', 'essential-addons-for-elementor-lite' ),
@@ -1993,14 +2002,14 @@ trait Admin {
 		<div class="eael-summer-campaign-content">
 			<p><?php
 			// `wp-exclude-emoji` stops WordPress replacing the emoji with a Twemoji SVG.
-			echo wp_kses( __( '<strong><span class="wp-exclude-emoji">👻</span> Halloween Sale:</strong> Get 110+ advanced elements to build faster & smarter in Elementor <strong>- up to 35% OFF</strong>', 'essential-addons-for-elementor-lite' ), [ 'strong' => [], 'span' => [ 'class' => [] ] ] );
+			echo wp_kses( __( '<strong><span class="wp-exclude-emoji">🛍️</span> Black Friday Sale:</strong> Design standout Elementor pages with 120+ advanced widgets & extensions, 3,000+ ready templates – <strong>now up to 40% OFF!</strong>', 'essential-addons-for-elementor-lite' ), [ 'strong' => [], 'span' => [ 'class' => [] ] ] );
 			?></p>
             <div class="eael-notice-action-button" style='display: inline-flex; column-gap: 12px; align-items: center;'>
-                <a href="https://essential-addons.com/halloween2026/admin-notice" target="_blank" class="button-primary">
+                <a href="https://essential-addons.com/bfcm2026/admin-notice" target="_blank" class="button-primary">
                     <?php esc_html_e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
                 <span class="eael-action-dismiss-btn">
-                    <?php esc_html_e( "I Don't Want Any Discount", 'essential-addons-for-elementor-lite' ); ?>
+                    <?php esc_html_e( 'I Want To Pay Full Price', 'essential-addons-for-elementor-lite' ); ?>
                 </span>
             </div>
 		</div>
@@ -2008,7 +2017,7 @@ trait Admin {
 		<script>
             jQuery(document).ready(function ($) {
                 setTimeout(function () {
-                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-halloween_campaign_2026_notice .notice-dismiss');
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_campaign_2026_notice .notice-dismiss');
 
                     function wpNoticeDismissFunc(event) {
                         event.preventDefault();
@@ -2022,7 +2031,7 @@ trait Admin {
                             jQuery(event.target.offsetParent).slideUp(200);
                         }
 
-                        postData += 'id=halloween_campaign_2026_notice';
+                        postData += 'id=bfcm_campaign_2026_notice';
                         postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
                         if (dismiss) {
                             postData += '&dismiss=' + dismiss;
@@ -2031,7 +2040,7 @@ trait Admin {
                             postData += '&later=' + later;
                         }
 
-                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_halloween_campaign_2026_notice' ) );?>';
+                        postData += '&nonce=<?php echo esc_attr( wp_create_nonce( 'wpnotice_dismiss_notice_bfcm_campaign_2026_notice' ) );?>';
 
                         httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
                         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -2040,7 +2049,7 @@ trait Admin {
 
                     dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
 
-                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-halloween_campaign_2026_notice .eael-action-dismiss-btn');
+                    var customDismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-bfcm_campaign_2026_notice .eael-action-dismiss-btn');
                     if (customDismissBtn && dismissBtn) {
                         customDismissBtn.addEventListener('click', function(event) {
                             event.preventDefault();
@@ -2052,24 +2061,24 @@ trait Admin {
 		</script>
 	    <?php
 	    $b_message                     = ob_get_clean();
-	    $_halloween_campaign_2026_notice  = [
+	    $_bfcm_campaign_2026_notice      = [
 		    'html' => $b_message,
 	    ];
 
 	    $notices->add(
-			'halloween_campaign_2026_notice',
-			$_halloween_campaign_2026_notice,
+			'bfcm_campaign_2026_notice',
+			$_bfcm_campaign_2026_notice,
 			[
-				'start'       => strtotime( '12:00:00am 13th October, 2026' ),
+				'start'       => strtotime( '12:00:00am 14th November, 2026' ),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				'expire'      => strtotime( '11:59:59pm 5th November, 2026' ),
+				'expire'      => strtotime( '11:59:59pm 14th December, 2026' ),
 				// WP Dashboard, Plugins screen and EA's own pages only (Guideline 11).
 				'display_if'  => ! $this->pro_enabled
 					&& ( in_array( $GLOBALS['pagenow'], [ 'index.php', 'plugins.php' ], true )
 						|| ( isset( $_GET['page'] ) && 0 === strpos( sanitize_key( wp_unslash( $_GET['page'] ) ), 'eael' ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					&& time() < strtotime( '11:59:59pm 5th November, 2026' ),
+					&& time() < strtotime( '11:59:59pm 14th December, 2026' ),
 			]
 		);
 

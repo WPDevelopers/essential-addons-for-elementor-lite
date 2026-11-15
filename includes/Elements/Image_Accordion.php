@@ -54,6 +54,11 @@ class Image_Accordion extends Widget_Base {
     }
 
     protected function is_dynamic_content():bool {
+        // The editor also asks each widget type, which has no settings, when it
+        // builds the widget list: get_data() fails on that.
+        if ( $this->is_type_instance() ) {
+            return false;
+        }
         if ( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
         }

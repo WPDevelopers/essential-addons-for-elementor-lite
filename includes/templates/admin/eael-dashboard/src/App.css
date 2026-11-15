@@ -1624,6 +1624,16 @@ span.ea__tooltip {
 .content-btn.beta {
   background: var(--background-18);
 }
+.ea__nav-icon img.ea__nav-logo {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.ea__sidebar-nav .content-btn.ea__nav-badge {
+  margin-left: auto;
+  flex-shrink: 0;
+}
 
 .content-icons {
   display: flex;

@@ -150,6 +150,7 @@ class Bootstrap
             new Angie_Integration( $this->registered_elements );
         }
 
+		include_once(EAEL_PLUGIN_PATH . 'includes/bfcm-pointer.php');
 
     }
 
@@ -271,6 +272,10 @@ class Bootstrap
         if ( defined( 'WPML_TM_VERSION' ) || defined( 'POLYLANG_VERSION' ) || function_exists( 'pll_get_post_language' ) ) {
             add_filter( 'elementor/documents/get/post_id', [ $this, 'eael_wpml_template_translation' ] );
         }
+
+        // WPML translates the popup id in a Creative Button's dynamic "Open Popup"
+        // link only when told which setting holds it.
+        add_filter( 'wpml_pb_elementor_widget_dynamic_id_converters', [ $this, 'eael_wpml_dynamic_id_converters' ] );
 
         // Polylang has no Elementor integration, so the template library is not
         // translatable by default. Opt it in so saved templates can be mapped to the

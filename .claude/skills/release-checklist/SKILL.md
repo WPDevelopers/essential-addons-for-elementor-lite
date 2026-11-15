@@ -64,6 +64,8 @@ Rules:
 - User-visible language only — no "refactored trait X". The end user reads this on wordpress.org
 - For breaking changes (renamed hook, removed widget, changed control id), add a leading note: `**Breaking:** ...`
 
+**Security fixes:** follow [.claude/rules/security-release.md](../../rules/security-release.md). Any security fix → `- Improved: Security Enhancement`, never more specific. High or Critical (CVSS ≥ 7.0) → also add a vague `= X.Y.Z =` entry under `== Upgrade Notice ==`.
+
 **`.pot` regeneration:** confirmed by Phase 2's `npm run build` (CLAUDE.md line 12 — build command emits `.pot`). Verify the `.pot` file mtime is fresh: `ls -la languages/*.pot`.
 
 ## Phase 5 — Distribution Prep

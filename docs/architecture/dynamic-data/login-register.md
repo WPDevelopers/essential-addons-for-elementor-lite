@@ -135,6 +135,8 @@ These are populated when the widget renders (so its settings reach the form-hand
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
+WooCommerce's own set/reset links (the New Account email's "set your new password") work too when the widget is on the My Account page: WooCommerce moves the key into the `wp-resetpass-{COOKIEHASH}` cookie and redirects to the `lost-password` endpoint with `show-reset-form`. `Login_Register::get_wc_reset_request()` reads that cookie the way `[woocommerce_my_account]` does, and `reset_password()` expires it after a successful reset.
+
 ## Hook Timing
 
 The trait emits a rich set of `eael/login-register/*` hooks at every meaningful point. External integrations (custom redirects, mailchimp, marketing automation, audit logs) hook into these instead of forking the trait.

@@ -255,8 +255,8 @@ eael.hooks.addAction("init", "ea", () => {
                 }
             });
 
-			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).attr('tabindex', '-1');
-			$($currentTabId + ' > .eael-tabs-nav ul li.active', $scope).attr('tabindex', '0');
+			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).attr('tabindex', '-1').attr('aria-selected', 'false').attr('aria-expanded', 'false');
+			$($currentTabId + ' > .eael-tabs-nav ul li.active', $scope).attr('tabindex', '0').attr('aria-selected', 'true').attr('aria-expanded', 'true');
 
 			// If hashTag is not null then scroll to that hashTag smoothly
 			// $hashTarget is resolved by literal id (not as a selector) and may be empty
