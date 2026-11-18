@@ -664,6 +664,8 @@ trait Login_Registration {
 		$eael_custom_profile_fields = array_merge( $eael_custom_profile_fields_text, $eael_custom_profile_fields_image );
 
 		$eael_custom_profile_fields_image_keys = array_keys( $eael_custom_profile_fields_image );
+		// Image fields of this form whose upload passed the checks below.
+		$profile_images_to_save = [];
 
 		if( count($settings_register_fields) ){
 			foreach($settings_register_fields as $register_field){
@@ -683,8 +685,16 @@ trait Login_Registration {
 				}
 
 				if( isset( $register_field['field_type'] ) && in_array( $register_field['field_type'], $eael_custom_profile_fields_image_keys )	){
+					$profile_image_key   = $register_field['field_type'];
+					$profile_image_file  = isset( $_FILES[ $profile_image_key ] ) && is_array( $_FILES[ $profile_image_key ] ) ? $_FILES[ $profile_image_key ] : []; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+					$profile_image_error = isset( $profile_image_file['error'] ) && is_numeric( $profile_image_file['error'] ) ? (int) $profile_image_file['error'] : UPLOAD_ERR_NO_FILE;
 
-					if ( ! empty( $_FILES[ $register_field['field_type'] ] ) && ! empty( $_FILES[ $register_field['field_type'] ]["error"] ) && 4 !== $_FILES[ $register_field['field_type'] ]["error"] ) {
+					// No file chosen is fine here; any other upload error stops the registration.
+					if ( $profile_image_file && UPLOAD_ERR_NO_FILE !== $profile_image_error && UPLOAD_ERR_OK !== $profile_image_error ) {
+						$errors[ $profile_image_key ] = __( 'Sorry, this file could not be uploaded. Please try again.', 'essential-addons-for-elementor-lite' );
+					}
+
+					if ( $profile_image_file && UPLOAD_ERR_OK === $profile_image_error ) {
 						$custom_field_file_name 		= !empty( $_FILES[ $register_field['field_type'] ]["name"] ) ? sanitize_text_field( $_FILES[ $register_field['field_type'] ]["name"] ) : '';
 						$_custom_field_file_extension 	= explode( ".", $custom_field_file_name );
 						$custom_field_file_extension 	= end( $_custom_field_file_extension ); # extra () to prevent notice
@@ -692,7 +702,7 @@ trait Login_Registration {
 
 						$unsupported_extensions = ['svg', 'php', 'js', 'aiff', 'psd', 'exr', 'wma', 'sql', 'm2v', 'swf', 'py', 'java', 'json', 'html', 'yaml', 'css', 'rb', 'cpp', 'c', 'cs', 'swift', 'kt', 'go', 'ts'];
 
-						if( ! empty ( $register_field['field_type_custom_image_extensions'] ) ||  in_array($custom_field_file_extension, $unsupported_extensions) ){
+						if( ! empty ( $register_field['field_type_custom_image_extensions'] ) ||  in_array( strtolower( $custom_field_file_extension ), $unsupported_extensions ) ){
 							$field_type_custom_image_extensions_trimmed = trim( sanitize_text_field( $register_field['field_type_custom_image_extensions'] ), ' ,\n\r\0\x0B' );
 							$field_type_custom_image_extensions_array 	= array_unique( explode( ',', $field_type_custom_image_extensions_trimmed ) );
 
@@ -725,6 +735,16 @@ trait Login_Registration {
 								// translators: %d is the maximum length of the filename
                                 $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filename_length_error'] ) ? $settings['field_type_custom_image_filename_length_error'] : sprintf( __( 'Filename length exceeded. Maximum length is %d', 'essential-addons-for-elementor-lite' ), intval( $field_type_custom_image_filename_length ) );
                             }
+						}
+
+						// The file must really be an image of a type this field accepts, by its contents too.
+						if ( empty( $errors[ $profile_image_key ] ) && ! $this->eael_lr_is_profile_image( $profile_image_file ) ) {
+							$errors[ $profile_image_key ] = isset( $settings['field_type_custom_image_extensions_error'] ) ? $settings['field_type_custom_image_extensions_error'] : __( 'Sorry, you are not allowed to upload this file type.', 'essential-addons-for-elementor-lite' );
+						}
+
+						// Only a file that passed every check is saved after the user is created.
+						if ( empty( $errors[ $profile_image_key ] ) ) {
+							$profile_images_to_save[ $profile_image_key ] = true;
 						}
 					}
 				}
@@ -1100,8 +1120,17 @@ trait Login_Registration {
 			foreach( $eael_custom_profile_fields_image as $eael_custom_profile_field_image_key => $eael_custom_profile_field_value ){
 				self::$email_options[$eael_custom_profile_field_image_key] = '';
 
-				if ( ! empty( $_FILES[ $eael_custom_profile_field_image_key ] ) ) {
-					$attachment_id = media_handle_upload( $eael_custom_profile_field_image_key, 0, [ 'post_author' => $user_id ] );
+				// Only this form's image fields, and only files that passed the checks above.
+				if ( ! empty( $profile_images_to_save[ $eael_custom_profile_field_image_key ] ) ) {
+					$attachment_id = media_handle_upload(
+						$eael_custom_profile_field_image_key,
+						0,
+						[ 'post_author' => $user_id ],
+						[
+							'test_form' => false,
+							'mimes'     => $this->eael_lr_profile_image_mimes(),
+						]
+					);
 					if ( ! is_wp_error( $attachment_id ) ) {
 						$eael_custom_profile_field_values[ $eael_custom_profile_field_image_key ] = sanitize_text_field( $attachment_id );
 						self::$email_options[ $eael_custom_profile_field_image_key ] = wp_get_attachment_image_url( sanitize_text_field( $attachment_id ) );
@@ -3256,6 +3285,40 @@ trait Login_Registration {
 
 	public function eael_wp_login_url(){
 		return apply_filters( 'eael/login-register/wp-login-url', wp_login_url() );
+	}
+
+	/**
+	 * Image types a custom profile image field accepts: the site's allowed
+	 * image types, without SVG.
+	 *
+	 * @return array Extension pattern => MIME type, as get_allowed_mime_types() returns them.
+	 */
+	public function eael_lr_profile_image_mimes() {
+		$mimes = [];
+		foreach ( get_allowed_mime_types() as $extensions => $mime ) {
+			if ( 0 === strpos( $mime, 'image/' ) && false === strpos( $mime, 'svg' ) ) {
+				$mimes[ $extensions ] = $mime;
+			}
+		}
+
+		return $mimes;
+	}
+
+	/**
+	 * Whether an uploaded file is an image this field accepts, judged by its
+	 * name and by its contents.
+	 *
+	 * @param array $file One entry of $_FILES.
+	 * @return bool
+	 */
+	public function eael_lr_is_profile_image( $file ) {
+		if ( empty( $file['tmp_name'] ) || empty( $file['name'] ) || ! is_string( $file['tmp_name'] ) || ! is_uploaded_file( $file['tmp_name'] ) ) {
+			return false;
+		}
+
+		$checked = wp_check_filetype_and_ext( $file['tmp_name'], sanitize_file_name( $file['name'] ), $this->eael_lr_profile_image_mimes() );
+
+		return ! empty( $checked['ext'] ) && ! empty( $checked['type'] ) && 0 === strpos( $checked['type'], 'image/' );
 	}
 
 	public function get_eael_custom_profile_fields( $type = 'text' ){
