@@ -216,6 +216,23 @@ trait Login_Registration {
 	}
 
 	/**
+	 * Keep an AJAX redirect target on this site.
+	 *
+	 * The non-AJAX login / register / password flows redirect with wp_safe_redirect(),
+	 * which only allows same-host targets. The AJAX flow instead returns the URL to the
+	 * browser in the JSON response for the front-end script to follow, so it must apply
+	 * the same host allow-list here. Without it, a target derived from the Referer header
+	 * (the "redirect to previous page" option) could send the user to an unrelated
+	 * external site right after a successful submission.
+	 *
+	 * @param string $url Candidate redirect URL.
+	 * @return string A same-host URL, or the site home when the target is off-site or empty.
+	 */
+	protected function eael_lr_safe_redirect_url( $url ) {
+		return wp_validate_redirect( esc_url_raw( (string) $url ), home_url( '/' ) );
+	}
+
+	/**
 	 * It logs the user in when the login form is submitted normally without AJAX.
 	 */
 	public function log_user_in() {
@@ -533,7 +550,7 @@ trait Login_Registration {
 				];
 
 				if ( ! empty( $custom_redirect_url ) ) {
-					$data['redirect_to'] = esc_url_raw( $custom_redirect_url );
+					$data['redirect_to'] = $this->eael_lr_safe_redirect_url( $custom_redirect_url );
 				}
 				wp_send_json_success( $data );
 			}
@@ -1236,7 +1253,7 @@ trait Login_Registration {
 
 			if ( $ajax ) {
 				if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
-					$data['redirect_to'] = $custom_redirect_url;
+					$data['redirect_to'] = $this->eael_lr_safe_redirect_url( $custom_redirect_url );
 				}
 				wp_send_json_success( $data );
 			}
@@ -1251,7 +1268,7 @@ trait Login_Registration {
 		// custom redirect?
 		if ( $ajax ) {
 			if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
-				$data['redirect_to'] = $custom_redirect_url;
+				$data['redirect_to'] = $this->eael_lr_safe_redirect_url( $custom_redirect_url );
 			}
 			wp_send_json_success( $data );
 		}
@@ -1460,7 +1477,7 @@ trait Login_Registration {
 
 			if ( $ajax ) {
 				if ( ! empty( $_POST['redirect_to'] ) ) {
-					$data['redirect_to'] = esc_url_raw( $_POST['redirect_to'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+					$data['redirect_to'] = $this->eael_lr_safe_redirect_url( wp_unslash( $_POST['redirect_to'] ) ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				}
 				wp_send_json_success( $data );
 			} else {
@@ -1633,7 +1650,7 @@ trait Login_Registration {
 					if($ajax){
 						// $custom_redirect_url = ! empty( $settings['resetpassword_redirect_url']['url'] ) ? $settings['resetpassword_redirect_url']['url'] : '/';
 						if( ! empty( $_POST['resetpassword_redirect_to'] ) ){
-							$data['redirect_to'] = esc_url_raw( $_POST['resetpassword_redirect_to'] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+							$data['redirect_to'] = $this->eael_lr_safe_redirect_url( wp_unslash( $_POST['resetpassword_redirect_to'] ) ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 						}
 
 						wp_send_json_success( $data );
@@ -2949,7 +2966,7 @@ trait Login_Registration {
 		}
 
 		if ( in_array( 'redirect', $register_actions, true ) && ! empty( $payload['redirect_url'] ) ) {
-			$response['redirect_to'] = esc_url_raw( $payload['redirect_url'] );
+			$response['redirect_to'] = $this->eael_lr_safe_redirect_url( $payload['redirect_url'] );
 		}
 
 		return $response;
@@ -2996,7 +3013,7 @@ trait Login_Registration {
 		];
 
 		if ( ! empty( $payload['redirect_url'] ) ) {
-			$response['redirect_to'] = esc_url_raw( $payload['redirect_url'] );
+			$response['redirect_to'] = $this->eael_lr_safe_redirect_url( $payload['redirect_url'] );
 		}
 
 		return $response;
