@@ -196,6 +196,18 @@ const getMegaMenuHandler = () =>
 
 			this.onDocumentClick = this.handleDocumentClick.bind(this);
 			this.onWindowResize = this.handleResize.bind(this);
+			this.onPointerModeChange = this.updatePointerMode.bind(this);
+
+			// Ahead of everything else: a hybrid device's mouse/touch mode has to be
+			// settled before the mouseenter/click handlers below read it. pointerenter
+			// fires once per entry into the root's box (not per nested item), and
+			// pointerdown bubbles from wherever the user pressed — together they catch
+			// every way a pointer can start interacting with the menu, ahead of the
+			// browser's synthetic mouse event for the same interaction. pointermove is
+			// the backstop for the one case those two miss: a mouse that was already
+			// resting inside the box when touch mode turned on, which never re-crosses
+			// the boundary and so never fires another pointerenter.
+			$root.on("pointerenter pointerdown pointermove", this.onPointerModeChange);
 
 			$root.on("click", selectors.toggle, this.handleToggleClick.bind(this));
 			$root.on("click", selectors.link, this.handleLinkClick.bind(this));
@@ -608,6 +620,44 @@ const getMegaMenuHandler = () =>
 				navigator.maxTouchPoints > 0;
 
 			this.elements.$root.attr("data-touch-mode", isTouch ? "true" : "false");
+		}
+
+		/**
+		 * Capability detection (setTouchMode) answers "can this device hover,"
+		 * not "is the user hovering right now" — a touchscreen laptop answers
+		 * "no" to the first question even while being driven entirely by a
+		 * mouse. Each real interaction updates the same shared attribute so the
+		 * mouseenter/click handler that follows it reads the pointer that is
+		 * actually in use, not the device's static hardware capabilities.
+		 *
+		 * Pen is treated like touch deliberately: without that, a pen's first
+		 * contact would be read as a hover-opened panel (per the mouse row)
+		 * instead of the tap-to-open behaviour authors expect from a stylus.
+		 *
+		 * `pointermove` is only trusted for `mouse`: it fires continuously
+		 * while a finger drags or a pen hovers, and neither of those should
+		 * ever flip the mode back to hover — only a boundary crossing or a
+		 * tap (pointerenter/pointerdown, both still bound) does that for
+		 * touch/pen. Reading the current value before writing keeps a
+		 * stationary mouse's constant stream of `pointermove` events from
+		 * touching the DOM at all once the mode already matches.
+		 */
+		updatePointerMode(event) {
+			const pointerType = (event.originalEvent || event).pointerType;
+			let next = null;
+
+			if ("mouse" === pointerType) {
+				next = "false";
+			} else if (
+				"pointermove" !== event.type &&
+				("touch" === pointerType || "pen" === pointerType)
+			) {
+				next = "true";
+			}
+
+			if (null !== next && next !== this.elements.$root.attr("data-touch-mode")) {
+				this.elements.$root.attr("data-touch-mode", next);
+			}
 		}
 
 		isTouchMode() {
