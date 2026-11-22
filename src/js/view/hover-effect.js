@@ -316,6 +316,16 @@ let HoverEffectHandler = function ($scope, $) {
             }
         );
 
+        // Keyboard equivalent: .hover() only fires for a mouse pointer, so a
+        // keyboard-focused element (or one focused inside it, since focusin
+        // bubbles unlike focus) never saw this effect at all. Apply/remove the
+        // same styles on focus, matching the hover behaviour exactly.
+        $hoverSelector.on('focusin', function () {
+            $(this).css(hoverStyles);
+        }).on('focusout', function () {
+            $(this).css(normalStyles);
+        });
+
         $hoverSelector.css(normalStyles);
     }
 
@@ -328,10 +338,25 @@ let HoverEffectHandler = function ($scope, $) {
                 $(this).css( 'transform','perspective(500px) rotateY('+cox+'deg) rotateX('+coy+'deg)' );
             }
         });
-    
+
         $(`.elementor-element-${$scopeId}`).mouseleave(function( e ) {
             if( $(this).hasClass( 'eael_hover_effect' ) ) {
                 $(this).css( 'transform','rotateY(0) rotateX(0)' );
+            }
+        });
+
+        // Keyboard equivalent: tilt has no pointer position to react to on
+        // focus, so apply a fixed representative tilt instead of trying to
+        // fake mouse-position math - enough to signal "this is interactive
+        // and currently focused," reverting to flat on blur exactly like
+        // mouseleave does.
+        $(`.elementor-element-${$scopeId}`).on('focusin', function () {
+            if( $(this).hasClass( 'eael_hover_effect' ) ) {
+                $(this).css( 'transform', 'perspective(500px) rotateY(5deg) rotateX(5deg)' );
+            }
+        }).on('focusout', function () {
+            if( $(this).hasClass( 'eael_hover_effect' ) ) {
+                $(this).css( 'transform', 'rotateY(0) rotateX(0)' );
             }
         });
     }
