@@ -892,6 +892,16 @@ trait Ajax_Handler {
 	 * @return array WC_Product_Query compatible arguments
 	 */
 	private function convert_pagination_args_to_wc_product_query( $args, $settings ) {
+		// The pagination / product-gallery requests that reach here are unsigned: $args is
+		// parsed straight from the visitor's own request and carries no server signature.
+		// Drop every meta query var so a visitor cannot filter products by arbitrary custom
+		// fields — a meta query can be used to read private meta (cost prices, supplier SKUs,
+		// other plugins' data) one guess at a time. This mirrors the removal that
+		// eael_restrict_unsigned_load_more_args() already performs for unsigned Load More.
+		foreach ( [ 'meta_query', 'meta_key', 'meta_value', 'meta_value_num', 'meta_compare', 'meta_compare_key', 'meta_type', 'meta_type_key' ] as $meta_key ) {
+			unset( $args[ $meta_key ] );
+		}
+
 		$wc_args = [
 			'paginate' => true,
 			'return' => 'objects',
