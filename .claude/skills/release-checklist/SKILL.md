@@ -45,6 +45,8 @@ Version must match in **all three** locations or wordpress.org will show stale d
 
 Also verify (no edit needed unless changing): `Tested up to: 7.0` ([readme.txt:5](../../../readme.txt#L5)) — bump only when a new WP major is released and tested.
 
+Also verify: `Elementor tested up to:` and `Elementor Pro tested up to:` in the plugin header ([essential_adons_elementor.php](../../../essential_adons_elementor.php)). Elementor's own `Compatibility_Tag` class flags the plugin "incompatible" in System Info whenever the running Elementor version is newer than this declared value — a stale header here caused a real customer-facing incompatible flag (#1039). Bump to match the latest Elementor/Elementor Pro version this release was actually tested against, every release, not just when something changes.
+
 ## Phase 4 — Changelog & i18n
 
 **Changelog entry** at top of `== Changelog ==` section in `readme.txt`:
@@ -117,3 +119,4 @@ Never `git push --force` to the release tag — cut a new patch version.
 3. **Changelog entries are user-facing.** If a non-developer can't understand the line, rewrite it.
 4. **Test the zip, not the dev tree.** Many bugs are `.distignore` leaks visible only in the built artifact.
 5. **Breaking changes flagged at the top** of the changelog with `**Breaking:**` — don't bury them.
+6. **Elementor/Elementor Pro "tested up to" headers checked every release**, not just when they change — a stale one silently flags the plugin "incompatible" in Elementor's System Info (#1039).
