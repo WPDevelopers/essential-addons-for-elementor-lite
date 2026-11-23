@@ -842,7 +842,16 @@ trait Helper
 		$widget_id   = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( wp_unslash( $_POST['widget_id'] ) ) : '';
 		$permalink   = ! empty( $_POST['page_permalink'] ) ?  sanitize_text_field( wp_unslash( $_POST['page_permalink'] ) ) : '';
         $page_id     = url_to_postid($permalink);
-        
+
+        // The nonce checked above is minted by eael_get_token, which is handed out to anyone
+        // (logged in or not), so it proves nothing about the caller. Require edit rights:
+        // the only legitimate trigger is the "Clear" button inside the Elementor editor panel,
+        // whose users can always edit the page. Without this, any logged-in user (even a
+        // Subscriber) could force-clear a widget's cache repeatedly as a minor DoS.
+        if ( $page_id ? ! current_user_can( 'edit_post', $page_id ) : ! current_user_can( 'edit_posts' ) ) {
+            wp_send_json_error( [ 'message' => __( 'You are not allowed to clear this cache.', 'essential-addons-for-elementor-lite' ) ], 403 );
+        }
+
         $settings = $this->eael_get_widget_settings($page_id, $widget_id);
         $twitter_v2 = ! empty( $settings['eael_twitter_api_v2'] ) && 'yes' === $settings['eael_twitter_api_v2'] ? true : false;
 

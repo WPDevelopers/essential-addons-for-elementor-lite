@@ -200,10 +200,6 @@ class Manager {
 	public function ajax_template_preview() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		if ( ! current_user_can( 'edit_posts' ) ) {
-			wp_send_json_error( [ 'message' => esc_html__( 'You are not allowed to preview templates.', 'essential-addons-for-elementor-lite' ) ], 403 );
-		}
-
 		// The action is registered on every request — Bootstrap boots this feature
 		// without checking Elementor, and it cannot: `plugins_loaded` runs before
 		// `elementor/loaded`. So the dependency is asserted here instead, where it
@@ -224,6 +220,15 @@ class Manager {
 
 		// WPML compatibility, mirroring Frontend_Renderer::render_template_panel().
 		$template_id = apply_filters( 'wpml_object_id', $template_id, 'elementor_library', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
+		// Per-object capability check: the primitive `edit_posts` only asks whether the user
+		// can edit posts at all, not whether they may edit *this* template. Without the meta
+		// capability, any Contributor+ could preview the full HTML of a published template they
+		// neither own nor can access. `edit_post` enforces the same per-template rule WordPress
+		// uses for editing. (The Theme_Builder admin AJAX handlers already use this form.)
+		if ( ! current_user_can( 'edit_post', $template_id ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You are not allowed to preview templates.', 'essential-addons-for-elementor-lite' ) ], 403 );
+		}
 
 		if ( ! Helper::is_elementor_publish_template( $template_id ) ) {
 			wp_send_json_error( [ 'message' => esc_html__( 'Template not found.', 'essential-addons-for-elementor-lite' ) ], 404 );
