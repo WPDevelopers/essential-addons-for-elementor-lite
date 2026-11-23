@@ -28,6 +28,14 @@ class Asset_Builder {
 	protected $custom_js = '';
 
 	/**
+	 * How many bytes of $custom_js have already been handed to the eael-general
+	 * handle by enqueue_inline_js(); the rest is printed the legacy way.
+	 *
+	 * @var int
+	 */
+	protected $inline_js_offset = 0;
+
+	/**
 	 * @var string
 	 */
 	protected $css_strings = '';
@@ -103,6 +111,7 @@ class Asset_Builder {
 	 * Load Hook
 	 */
 	protected function init_hook() {
+		add_action( 'wp_footer', [ $this, 'enqueue_inline_js' ], 9 );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ], 15 );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ] );
@@ -278,19 +287,65 @@ class Asset_Builder {
 	}
 
 	/**
+	 * enqueue_inline_js
+	 * Hand the combined "Internal" JS to the jQuery-dependent eael-general handle.
+	 */
+	public function enqueue_inline_js() {
+		// Front end only: the editor preview iframe keeps the self-contained print below,
+		// and nothing to attach means nothing to do.
+		if ( $this->is_edit_mode() || ! $this->custom_js ) {
+			return;
+		}
+
+		// Attach the combined "Internal" JS to the already-enqueued, jQuery-dependent
+		// `eael-general` handle instead of echoing a raw <script> with no declared
+		// dependency. WordPress then prints it after jQuery, and JS delay/optimization
+		// plugins (e.g. WP Rocket "Delay JavaScript Execution") keep the two together
+		// rather than letting the blob run before jQuery exists and throw
+		// "jQuery is not defined", which silently breaks every widget later in the blob
+		// (#1038). Runs at wp_footer:9, before footer scripts print at :20.
+		if ( ! wp_script_is( 'eael-general', 'enqueued' ) || wp_script_is( 'eael-general', 'done' ) ) {
+			return;
+		}
+
+		wp_add_inline_script( 'eael-general', $this->custom_js, 'after' );
+		$this->inline_js_offset = strlen( $this->custom_js );
+	}
+
+	/**
 	 * add_inline_js
 	 * Load inline js data
 	 */
 	public function add_inline_js() {
 
-		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
-			if ( $this->custom_js ) {
+		if ( ! $this->custom_js ) {
+			return;
+		}
 
-                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				printf( '<script>%1$s</script>', 'var localize =' . wp_json_encode( $this->localize_objects ) );
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				printf( '<script id="eael-inline-js">%s</script>', $this->custom_js );
-			}
+		// Editor preview iframe (?elementor-preview): no optimization plugins run there,
+		// so keep the original self-contained inline print, including its own localize
+		// object (the front end already localizes `eael-general`).
+		if ( $this->is_edit_mode() ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			printf( '<script>%1$s</script>', 'var localize =' . wp_json_encode( $this->localize_objects ) );
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			printf( '<script id="eael-inline-js">%s</script>', $this->custom_js );
+			return;
+		}
+
+		if ( ! $this->is_preview_mode() ) {
+			return;
+		}
+
+		// Front end: enqueue_inline_js() already handed everything accumulated up to
+		// wp_footer:9 to the eael-general handle. Print only whatever arrived afterwards
+		// (rare — e.g. a Theme Builder footer rendered later) the legacy way so those
+		// late widgets keep working.
+		$remainder = (string) substr( $this->custom_js, $this->inline_js_offset );
+
+		if ( '' !== $remainder ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			printf( '<script id="eael-inline-js">%s</script>', $remainder );
 		}
 	}
 
