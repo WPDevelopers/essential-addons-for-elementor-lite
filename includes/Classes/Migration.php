@@ -78,6 +78,120 @@ class Migration
 		if ( ! get_option( 'eael_lr_form_messages_cleaned' ) && ! wp_next_scheduled( 'eael_cleanup_lr_form_messages' ) ) {
 			wp_schedule_single_event( time() + MINUTE_IN_SECONDS, 'eael_cleanup_lr_form_messages' );
 		}
+
+		add_action( 'eael_migrate_adv_tabs_responsive_layout', [ $this, 'migrate_adv_tabs_responsive_vertical_layout' ] );
+		if ( ! get_option( 'eael_adv_tabs_responsive_layout_migrated' ) && ! wp_next_scheduled( 'eael_migrate_adv_tabs_responsive_layout' ) ) {
+			// Stamped once, the moment this fix's migration is first scheduled on a site —
+			// NOT the time each batch runs. Without a fixed cutoff, a widget created or
+			// resaved mid-migration (the batches can take a while on a large site) would be
+			// indistinguishable from a genuine pre-fix post and get wrongly backfilled to
+			// the legacy value on a later pass. See the method docblock.
+			if ( false === get_option( 'eael_adv_tabs_responsive_layout_cutoff', false ) ) {
+				update_option( 'eael_adv_tabs_responsive_layout_cutoff', gmdate( 'Y-m-d H:i:s' ) );
+			}
+			wp_schedule_single_event( time() + MINUTE_IN_SECONDS, 'eael_migrate_adv_tabs_responsive_layout' );
+		}
+	}
+
+	/**
+	 * Backfill Advanced Tabs' `responsive_vertical_layout` control on existing posts (#1043).
+	 *
+	 * The render condition used to add the `responsive-vertical-layout` class when the
+	 * value was != 'yes', the opposite of what the "Vertical Layout" label promises. The
+	 * condition is now `== 'yes'`. A post saved before this fix never wrote an explicit
+	 * value for a widget instance that was left at its default, so its settings array is
+	 * missing the key entirely — Elementor fills in the (now-flipped) default at render
+	 * time, which would silently flip that post's mobile tab layout.
+	 *
+	 * Explicitly writing 'no' into every pre-existing Advanced Tabs element that lacks the
+	 * key freezes its current (wrapped/side-by-side) mobile appearance under the new
+	 * condition. Posts that already have an explicit value (the user touched the control)
+	 * are left untouched either way. Runs once, in batches over WP-Cron, same pattern as
+	 * cleanup_lr_form_messages() above.
+	 */
+	public function migrate_adv_tabs_responsive_vertical_layout() {
+		global $wpdb;
+
+		// Fixed at the moment this migration was first scheduled (see migrator()) — a post
+		// last modified after that point is excluded, whether it's a brand-new widget or an
+		// existing page resaved post-upgrade; either way it's not a "silently affected by
+		// this fix" case this migration needs to protect.
+		$cutoff = get_option( 'eael_adv_tabs_responsive_layout_cutoff' );
+
+		if ( ! $cutoff ) {
+			return;
+		}
+
+		// NOT EXISTS against the "done" marker is the pagination: already-migrated posts drop
+		// out of the result set, so repeated runs advance through the table instead of
+		// reprocessing the same first 50 rows forever.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- static LIKE pattern, no user input.
+		$rows = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT pm.post_id, pm.meta_value FROM {$wpdb->postmeta} pm
+				INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id AND p.post_modified_gmt <= %s
+				WHERE pm.meta_key = '_elementor_data' AND pm.meta_value LIKE %s
+				AND NOT EXISTS (
+					SELECT 1 FROM {$wpdb->postmeta} done
+					WHERE done.post_id = pm.post_id AND done.meta_key = '_eael_1043_adv_tabs_migrated'
+				)
+				LIMIT 50",
+				$cutoff,
+				'%eael-adv-tabs%'
+			)
+		);
+
+		if ( empty( $rows ) ) {
+			update_option( 'eael_adv_tabs_responsive_layout_migrated', 1 );
+			return;
+		}
+
+		foreach ( $rows as $row ) {
+			$elements = json_decode( $row->meta_value, true );
+
+			if ( ! is_array( $elements ) ) {
+				continue;
+			}
+
+			$changed = false;
+			$this->backfill_adv_tabs_responsive_layout( $elements, $changed );
+
+			if ( $changed ) {
+				update_post_meta( $row->post_id, '_elementor_data', wp_slash( wp_json_encode( $elements ) ) );
+			}
+
+			// Marker so a post already processed (e.g. its data still matches 'eael-adv-tabs'
+			// after the pass) isn't picked up by every subsequent batch run.
+			update_post_meta( $row->post_id, '_eael_1043_adv_tabs_migrated', 1 );
+		}
+
+		wp_schedule_single_event( time() + MINUTE_IN_SECONDS, 'eael_migrate_adv_tabs_responsive_layout' );
+	}
+
+	/**
+	 * Recursively walk an Elementor element tree, backfilling 'no' into every
+	 * eael-adv-tabs widget's settings that doesn't already have an explicit
+	 * responsive_vertical_layout value.
+	 *
+	 * @param array $elements Element tree (by reference).
+	 * @param bool  $changed  Set true if any element was modified (by reference).
+	 */
+	private function backfill_adv_tabs_responsive_layout( &$elements, &$changed ) {
+		foreach ( $elements as &$element ) {
+			if (
+				isset( $element['widgetType'], $element['settings'] )
+				&& 'eael-adv-tabs' === $element['widgetType']
+				&& is_array( $element['settings'] )
+				&& ! array_key_exists( 'responsive_vertical_layout', $element['settings'] )
+			) {
+				$element['settings']['responsive_vertical_layout'] = 'no';
+				$changed                                           = true;
+			}
+
+			if ( ! empty( $element['elements'] ) && is_array( $element['elements'] ) ) {
+				$this->backfill_adv_tabs_responsive_layout( $element['elements'], $changed );
+			}
+		}
 	}
 
 	/**

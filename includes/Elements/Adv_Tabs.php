@@ -1619,7 +1619,11 @@ class Adv_Tabs extends Widget_Base
             $this->add_render_attribute('eael_tab_wrapper', 'class', 'active-caret-on');
         }
 
-        if ($settings['responsive_vertical_layout'] != 'yes') {
+        // "Vertical Layout: Yes" means tabs should stack on mobile, so the class that
+        // forces stacking belongs on 'yes', not '!= yes' (#1043). Posts saved before this
+        // fix are explicitly backfilled to 'no' by Migration::migrate_adv_tabs_responsive_vertical_layout()
+        // so their current (wrapped) mobile layout doesn't change under the new condition.
+        if ($settings['responsive_vertical_layout'] == 'yes') {
             $this->add_render_attribute('eael_tab_wrapper', 'class', 'responsive-vertical-layout');
         }
 
