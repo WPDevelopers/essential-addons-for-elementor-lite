@@ -81,11 +81,8 @@ class Migration
 
 		add_action( 'eael_migrate_adv_tabs_responsive_layout', [ $this, 'migrate_adv_tabs_responsive_vertical_layout' ] );
 		if ( ! get_option( 'eael_adv_tabs_responsive_layout_migrated' ) && ! wp_next_scheduled( 'eael_migrate_adv_tabs_responsive_layout' ) ) {
-			// Stamped once, the moment this fix's migration is first scheduled on a site —
-			// NOT the time each batch runs. Without a fixed cutoff, a widget created
-			// mid-migration (the batches can take a while on a large site) would be
-			// indistinguishable from a genuine pre-fix post and get wrongly backfilled to
-			// the legacy value on a later pass. See the method docblock.
+			// Stamped once here, not recomputed per batch — see the cutoff explanation in
+			// migrate_adv_tabs_responsive_vertical_layout()'s docblock.
 			if ( false === get_option( 'eael_adv_tabs_responsive_layout_cutoff', false ) ) {
 				update_option( 'eael_adv_tabs_responsive_layout_cutoff', gmdate( 'Y-m-d H:i:s' ) );
 			}
@@ -96,53 +93,38 @@ class Migration
 	/**
 	 * Backfill Advanced Tabs' `responsive_vertical_layout` control on existing posts (#1043).
 	 *
-	 * The render condition used to add the `responsive-vertical-layout` class when the
-	 * value was != 'yes', the opposite of what the "Vertical Layout" label promises. The
-	 * condition is now `== 'yes'`. A post saved before this fix never wrote an explicit
-	 * value for a widget instance that was left at its default, so its settings array is
-	 * missing the key entirely — Elementor fills in the (now-flipped) default at render
-	 * time, which would silently flip that post's mobile tab layout.
+	 * The render condition used to add the `responsive-vertical-layout` class when the value
+	 * was != 'yes' — the opposite of what the "Vertical Layout" label promises. The condition
+	 * is now `== 'yes'`. Since the control defaults to 'yes' and Elementor only persists a
+	 * control once a user touches it, every pre-fix widget has the key missing, so the
+	 * corrected condition would silently flip its mobile layout.
 	 *
-	 * Explicitly writing 'no' into every pre-existing Advanced Tabs element that lacks the
-	 * key freezes its current (wrapped/side-by-side) mobile appearance under the new
-	 * condition. Posts that already have an explicit value (the user touched the control)
-	 * are left untouched either way. Runs once, in batches over WP-Cron, same pattern as
-	 * cleanup_lr_form_messages() above.
+	 * Explicitly backfilling 'no' into every pre-existing widget that lacks the key freezes
+	 * its current (wrapped/side-by-side) mobile appearance. A widget created after the fix
+	 * shipped must NOT be touched, so eligibility is decided by a fixed cutoff timestamp
+	 * (stamped once, in migrator()) compared against:
+	 *   - post_date_gmt (creation time), for most posts — not post_modified_gmt, which any
+	 *     unrelated wp_update_post() call bumps regardless of whether this widget was touched.
+	 *   - post_modified_gmt, as a fallback only when post_date_gmt is still the WordPress
+	 *     zero-date ('0000-00-00 00:00:00'), which is how a draft/pending/auto-draft post is
+	 *     stored before first publish. post_modified_gmt is reliable there because the widget
+	 *     data can't exist yet without at least one real wp_update_post() call.
+	 *
+	 * Runs once, in batches over WP-Cron, same pattern as cleanup_lr_form_messages() above. A
+	 * row that fails to json_decode() (corrupted/legacy data) is still marked done so it can't
+	 * block the migration from ever completing.
 	 */
 	public function migrate_adv_tabs_responsive_vertical_layout() {
 		global $wpdb;
 
-		// Fixed at the moment this migration was first scheduled (see migrator()) — a post
-		// CREATED after that point is excluded, whether it's a brand-new widget or an
-		// existing page resaved post-upgrade; either way it's not a "silently affected by
-		// this fix" case this migration needs to protect.
-		//
-		// Compared against post_date_gmt (creation time) first, not post_modified_gmt:
-		// modified time is bumped by any wp_update_post() call for any reason — an unrelated
-		// plugin's housekeeping touch, a quick-edit, a status transition — none of which mean
-		// the Advanced Tabs widget itself was resaved. Using modified time would wrongly
-		// exclude a genuine pre-fix post whose unrelated fields happened to be touched inside
-		// the migration's window.
-		//
-		// post_date_gmt alone isn't enough, though: WordPress zeroes it to
-		// '0000-00-00 00:00:00' for any post still in draft/pending/auto-draft status (no
-		// real creation date is stamped until first publish). That zero date is "<=" any
-		// real cutoff, so a brand-new draft created after the fix shipped would otherwise
-		// look pre-fix for as long as it stays unpublished — plausible, since authors can
-		// leave a page in Draft for days while composing it in Elementor. post_modified_gmt
-		// IS set correctly even pre-publish, so it's the right fallback specifically for that
-		// zero-date case; it's not reliable for already-dated posts (that's the problem the
-		// post_date_gmt comparison above exists to avoid), but there's no "unrelated touch"
-		// to worry about on a post that has no real date yet in the first place.
 		$cutoff = get_option( 'eael_adv_tabs_responsive_layout_cutoff' );
 
 		if ( ! $cutoff ) {
 			return;
 		}
 
-		// NOT EXISTS against the "done" marker is the pagination: already-migrated posts drop
-		// out of the result set, so repeated runs advance through the table instead of
-		// reprocessing the same first 50 rows forever.
+		// NOT EXISTS against the "done" marker paginates: already-migrated posts drop out of
+		// the result set, so repeated runs advance instead of reprocessing the same 50 rows.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- static LIKE pattern, no user input.
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
@@ -155,7 +137,7 @@ class Migration
 				WHERE pm.meta_key = '_elementor_data' AND pm.meta_value LIKE %s
 				AND NOT EXISTS (
 					SELECT 1 FROM {$wpdb->postmeta} done
-					WHERE done.post_id = pm.post_id AND done.meta_key = '_eael_1043_adv_tabs_migrated'
+					WHERE done.post_id = pm.post_id AND done.meta_key = '_eael_adv_tabs_responsive_layout_migrated'
 				)
 				LIMIT 50",
 				$cutoff,
@@ -173,12 +155,10 @@ class Migration
 			$elements = json_decode( $row->meta_value, true );
 
 			if ( ! is_array( $elements ) ) {
-				// Not valid JSON (legacy serialized data, a corrupted/truncated blob) — still
-				// mark it done. Without this, a row that will never decode keeps matching the
-				// LIKE scan forever, the NOT EXISTS pagination never drops it, $rows is never
-				// empty, and the migration reschedules itself indefinitely instead of
-				// completing.
-				update_post_meta( $row->post_id, '_eael_1043_adv_tabs_migrated', 1 );
+				// Not valid JSON (legacy serialized data, a corrupted/truncated blob) — mark
+				// done anyway, or this row would keep matching the LIKE scan forever and the
+				// migration would never complete.
+				update_post_meta( $row->post_id, '_eael_adv_tabs_responsive_layout_migrated', 1 );
 				continue;
 			}
 
@@ -189,9 +169,8 @@ class Migration
 				update_post_meta( $row->post_id, '_elementor_data', wp_slash( wp_json_encode( $elements ) ) );
 			}
 
-			// Marker so a post already processed (e.g. its data still matches 'eael-adv-tabs'
-			// after the pass) isn't picked up by every subsequent batch run.
-			update_post_meta( $row->post_id, '_eael_1043_adv_tabs_migrated', 1 );
+			// Marker so this post isn't re-selected by a later batch.
+			update_post_meta( $row->post_id, '_eael_adv_tabs_responsive_layout_migrated', 1 );
 		}
 
 		wp_schedule_single_event( time() + MINUTE_IN_SECONDS, 'eael_migrate_adv_tabs_responsive_layout' );

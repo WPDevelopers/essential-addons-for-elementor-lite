@@ -26,7 +26,7 @@ const TEMPLATE = 'adv-tabs-no-layout-key.json';
 
 const CUTOFF_OPTION = 'eael_adv_tabs_responsive_layout_cutoff';
 const MIGRATED_OPTION = 'eael_adv_tabs_responsive_layout_migrated';
-const MIGRATED_META_KEY = '_eael_1043_adv_tabs_migrated';
+const MIGRATED_META_KEY = '_eael_adv_tabs_responsive_layout_migrated';
 
 /** Run a wp-cli command inside the wp-env `cli` container and return trimmed stdout. */
 function wp( args: string ): string {
