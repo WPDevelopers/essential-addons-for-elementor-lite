@@ -82,8 +82,8 @@ class Migration
 		add_action( 'eael_migrate_adv_tabs_responsive_layout', [ $this, 'migrate_adv_tabs_responsive_vertical_layout' ] );
 		if ( ! get_option( 'eael_adv_tabs_responsive_layout_migrated' ) && ! wp_next_scheduled( 'eael_migrate_adv_tabs_responsive_layout' ) ) {
 			// Stamped once, the moment this fix's migration is first scheduled on a site —
-			// NOT the time each batch runs. Without a fixed cutoff, a widget created or
-			// resaved mid-migration (the batches can take a while on a large site) would be
+			// NOT the time each batch runs. Without a fixed cutoff, a widget created
+			// mid-migration (the batches can take a while on a large site) would be
 			// indistinguishable from a genuine pre-fix post and get wrongly backfilled to
 			// the legacy value on a later pass. See the method docblock.
 			if ( false === get_option( 'eael_adv_tabs_responsive_layout_cutoff', false ) ) {
@@ -113,9 +113,18 @@ class Migration
 		global $wpdb;
 
 		// Fixed at the moment this migration was first scheduled (see migrator()) — a post
-		// last modified after that point is excluded, whether it's a brand-new widget or an
+		// CREATED after that point is excluded, whether it's a brand-new widget or an
 		// existing page resaved post-upgrade; either way it's not a "silently affected by
 		// this fix" case this migration needs to protect.
+		//
+		// Compared against post_date_gmt (creation time), not post_modified_gmt: modified
+		// time is bumped by any wp_update_post() call for any reason — an unrelated plugin's
+		// housekeeping touch, a quick-edit, a status transition — none of which mean the
+		// Advanced Tabs widget itself was resaved. Using modified time would wrongly exclude
+		// a genuine pre-fix post whose unrelated fields happened to be touched inside the
+		// migration's window, leaving it with the missing key and the very mobile-layout
+		// flip this migration exists to prevent. Creation date doesn't move on an unrelated
+		// touch, so it's the reliable signal for "did this post already exist".
 		$cutoff = get_option( 'eael_adv_tabs_responsive_layout_cutoff' );
 
 		if ( ! $cutoff ) {
@@ -129,7 +138,7 @@ class Migration
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT pm.post_id, pm.meta_value FROM {$wpdb->postmeta} pm
-				INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id AND p.post_modified_gmt <= %s
+				INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id AND p.post_date_gmt <= %s
 				WHERE pm.meta_key = '_elementor_data' AND pm.meta_value LIKE %s
 				AND NOT EXISTS (
 					SELECT 1 FROM {$wpdb->postmeta} done
@@ -150,6 +159,12 @@ class Migration
 			$elements = json_decode( $row->meta_value, true );
 
 			if ( ! is_array( $elements ) ) {
+				// Not valid JSON (legacy serialized data, a corrupted/truncated blob) — still
+				// mark it done. Without this, a row that will never decode keeps matching the
+				// LIKE scan forever, the NOT EXISTS pagination never drops it, $rows is never
+				// empty, and the migration reschedules itself indefinitely instead of
+				// completing.
+				update_post_meta( $row->post_id, '_eael_1043_adv_tabs_migrated', 1 );
 				continue;
 			}
 
