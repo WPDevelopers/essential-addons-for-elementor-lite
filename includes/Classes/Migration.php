@@ -117,14 +117,23 @@ class Migration
 		// existing page resaved post-upgrade; either way it's not a "silently affected by
 		// this fix" case this migration needs to protect.
 		//
-		// Compared against post_date_gmt (creation time), not post_modified_gmt: modified
-		// time is bumped by any wp_update_post() call for any reason — an unrelated plugin's
-		// housekeeping touch, a quick-edit, a status transition — none of which mean the
-		// Advanced Tabs widget itself was resaved. Using modified time would wrongly exclude
-		// a genuine pre-fix post whose unrelated fields happened to be touched inside the
-		// migration's window, leaving it with the missing key and the very mobile-layout
-		// flip this migration exists to prevent. Creation date doesn't move on an unrelated
-		// touch, so it's the reliable signal for "did this post already exist".
+		// Compared against post_date_gmt (creation time) first, not post_modified_gmt:
+		// modified time is bumped by any wp_update_post() call for any reason — an unrelated
+		// plugin's housekeeping touch, a quick-edit, a status transition — none of which mean
+		// the Advanced Tabs widget itself was resaved. Using modified time would wrongly
+		// exclude a genuine pre-fix post whose unrelated fields happened to be touched inside
+		// the migration's window.
+		//
+		// post_date_gmt alone isn't enough, though: WordPress zeroes it to
+		// '0000-00-00 00:00:00' for any post still in draft/pending/auto-draft status (no
+		// real creation date is stamped until first publish). That zero date is "<=" any
+		// real cutoff, so a brand-new draft created after the fix shipped would otherwise
+		// look pre-fix for as long as it stays unpublished — plausible, since authors can
+		// leave a page in Draft for days while composing it in Elementor. post_modified_gmt
+		// IS set correctly even pre-publish, so it's the right fallback specifically for that
+		// zero-date case; it's not reliable for already-dated posts (that's the problem the
+		// post_date_gmt comparison above exists to avoid), but there's no "unrelated touch"
+		// to worry about on a post that has no real date yet in the first place.
 		$cutoff = get_option( 'eael_adv_tabs_responsive_layout_cutoff' );
 
 		if ( ! $cutoff ) {
@@ -138,13 +147,18 @@ class Migration
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT pm.post_id, pm.meta_value FROM {$wpdb->postmeta} pm
-				INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id AND p.post_date_gmt <= %s
+				INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id AND (
+					( p.post_date_gmt != '0000-00-00 00:00:00' AND p.post_date_gmt <= %s )
+					OR
+					( p.post_date_gmt = '0000-00-00 00:00:00' AND p.post_modified_gmt <= %s )
+				)
 				WHERE pm.meta_key = '_elementor_data' AND pm.meta_value LIKE %s
 				AND NOT EXISTS (
 					SELECT 1 FROM {$wpdb->postmeta} done
 					WHERE done.post_id = pm.post_id AND done.meta_key = '_eael_1043_adv_tabs_migrated'
 				)
 				LIMIT 50",
+				$cutoff,
 				$cutoff,
 				'%eael-adv-tabs%'
 			)
