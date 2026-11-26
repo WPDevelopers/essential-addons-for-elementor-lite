@@ -1087,6 +1087,30 @@ class Helper
         return $options;
     }
 
+    /**
+     * Point the Post Grid "Terms From" setting at the taxonomy the selected source uses.
+     *
+     * A custom post type keeps its taxonomy in its own `eael_{post_type}_terms` control,
+     * and products use product_cat / product_tag. The first render and Load More both
+     * run this, so the cards Load More adds show the same terms as the first ones.
+     *
+     * @param array $settings Post Grid widget settings.
+     *
+     * @return array
+     */
+    public static function eael_post_grid_terms_settings( $settings ) {
+        $post_type = isset( $settings['post_type'] ) ? $settings['post_type'] : '';
+
+        if ( ! in_array( $post_type, [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ] ) ) {
+            $settings['eael_post_terms'] = empty( $settings["eael_{$post_type}_terms"] ) ? '' : $settings["eael_{$post_type}_terms"];
+        } elseif ( 'product' === $post_type ) {
+            $terms_from                  = isset( $settings['eael_post_terms'] ) ? $settings['eael_post_terms'] : '';
+            $settings['eael_post_terms'] = 'category' === $terms_from ? 'product_cat' : ( 'tags' === $terms_from ? 'product_tag' : $terms_from );
+        }
+
+        return $settings;
+    }
+
     public static function get_terms_as_list($term_type = 'category', $length = 1)
     {
 	    $terms = get_the_terms( get_the_ID(), $term_type );
