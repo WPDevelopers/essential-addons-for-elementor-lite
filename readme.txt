@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.3
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 6.8.9
+Stable tag: 6.8.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -354,6 +354,15 @@ Nothing below is contacted until you set up the widget or option that uses it.
 * **WPDeveloper** (opt-in usage data, see the FAQ): sent to send.wpinsight.com and essential-addons.com. [Privacy](https://wpdeveloper.com/privacy-policy/).
 
 == Changelog ==
+
+= 6.8.10 - 26/11/2026 =
+
+- Improved: EA Hover Effect | The reveal content can now be opened with the keyboard, not only with a mouse hover
+- Improved: Security Enhancement
+- Fixed: EA Mega Menu | The menu did not open on tap on touchscreen laptops
+- Fixed: Widgets could stop working on a page using a JavaScript delay or optimization plugin when JS Print Method was set to "Internal"
+- Fixed: Elementor's System Info marked the plugin as incompatible after updating to a newer Elementor version, even though nothing was broken
+- Few minor bug fixes & improvements
 
 = 6.8.9 - 15/11/2026 =
 
@@ -802,6 +811,9 @@ Nothing below is contacted until you set up the widget or option that uses it.
 
 
 == Upgrade Notice ==
+
+= 6.8.10 =
+Important security update for all users. Please update now.
 
 = 6.8.8 =
 Important security update for all users. Please update now. If your registration form uses a custom New User Role, open that page in Elementor and click Update once after updating.
