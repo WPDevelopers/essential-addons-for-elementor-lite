@@ -216,6 +216,9 @@ trait Ajax_Handler {
 		}
 
 		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
+			// Same "Terms From" mapping as Post_Grid::render(), so Load More cards show the same terms.
+			$settings = HelperClass::eael_post_grid_terms_settings( $settings );
+
 			$eael_lang_suffix = HelperClass::eael_lang_suffix( $page_id );
 			$settings['read_more_button_text']       = get_transient( 'eael_post_grid_read_more_button_text_' . $widget_id . $eael_lang_suffix );
 			$settings['excerpt_expanison_indicator'] = get_transient( 'eael_post_grid_excerpt_expanison_indicator_' . $widget_id . $eael_lang_suffix );
