@@ -1,0 +1,37 @@
+[
+  {
+    "id": "eat00001",
+    "elType": "section",
+    "settings": [],
+    "elements": [
+      {
+        "id": "eat00002",
+        "elType": "column",
+        "settings": { "_column_size": 100 },
+        "elements": [
+          {
+            "id": "eat00003",
+            "elType": "widget",
+            "widgetType": "eael-adv-tabs",
+            "settings": {
+              "eael_adv_tabs_tab": [
+                {
+                  "_id": "eat_tab1",
+                  "eael_adv_tabs_tab_title": "Tab One",
+                  "eael_adv_tabs_text_type": "content",
+                  "eael_adv_tabs_tab_content": "Tab one content."
+                },
+                {
+                  "_id": "eat_tab2",
+                  "eael_adv_tabs_tab_title": "Tab Two",
+                  "eael_adv_tabs_text_type": "content",
+                  "eael_adv_tabs_tab_content": "Tab two content."
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
